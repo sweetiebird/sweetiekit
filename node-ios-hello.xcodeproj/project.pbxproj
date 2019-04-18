@@ -7,15 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
+		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
+		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
+		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
+		A19E9101225D7F2A004FC391 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9100225D7F29004FC391 /* hello.js */; };
+		A19E9105225EC2C3004FC391 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A19E9102225EC2C2004FC391 /* package.json */; };
+		A19E9106225EC2C3004FC391 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A19E9103225EC2C2004FC391 /* yarn.lock */; };
+		A19E9109225EC394004FC391 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9108225EC394004FC391 /* server.js */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
 		A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FC1A07225C65DC00085571 /* Main.storyboard */; };
 		A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FC1A0A225C65DD00085571 /* Assets.xcassets */; };
 		A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FC1A0C225C65DD00085571 /* LaunchScreen.storyboard */; };
+		A1FC1A17225C66D000085571 /* hello.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A16225C66D000085571 /* hello.mm */; };
+		A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A18225C6A4A00085571 /* hello-v8.cpp */; };
+		A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1C225C6AB200085571 /* libhttp_parser.a */; };
+		A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1D225C6AB200085571 /* libbrotli.a */; };
+		A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1E225C6AB200085571 /* libv8_init.a */; };
+		A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1F225C6AB200085571 /* libllhttp.a */; };
+		A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A20225C6AB200085571 /* libnode.a */; };
+		A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */; };
+		A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A22225C6AB200085571 /* libzlib.a */; };
+		A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A23225C6AB200085571 /* libopenssl.a */; };
+		A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A24225C6AB200085571 /* libuv.a */; };
+		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; };
+		A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A26225C6AB200085571 /* libv8_libplatform.a */; };
+		A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A27225C6AB200085571 /* libv8_libsampler.a */; };
+		A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A28225C6AB200085571 /* libnghttp2.a */; };
+		A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A29225C6AB200085571 /* libhistogram.a */; };
+		A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2A225C6AB200085571 /* libv8_initializers.a */; };
+		A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2B225C6AB200085571 /* libv8_libbase.a */; };
+		A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2C225C6AB200085571 /* libcares.a */; };
+		A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A3E225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp */; };
+		A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E5F225C9A97004D7C82 /* test-v8-serialize.cpp */; };
+		A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E62225CD7FB004D7C82 /* mksnapshot.cpp */; };
+		A1FF9E66225CD994004D7C82 /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E65225CD994004D7C82 /* embedded-file-writer.cc */; };
+		A1FF9E69225D36BB004D7C82 /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E67225D36BB004D7C82 /* embedded.S */; };
+		A1FF9E6A225D36BB004D7C82 /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E68225D36BB004D7C82 /* snapshot.cc */; };
+		A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E6B225D3CEB004D7C82 /* hello-node.mm */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A19E90FD225D7EDC004FC391 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1FC19F6225C65DC00085571 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A19E90F6225D7EA8004FC391;
+			remoteInfo = Scripts;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
+		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
+		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
+		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A19E90F9225D7EA8004FC391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A19E9100225D7F29004FC391 /* hello.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
+		A19E9102225EC2C2004FC391 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		A19E9103225EC2C2004FC391 /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
+		A19E9108225EC394004FC391 /* server.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +77,39 @@
 		A1FC1A0A225C65DD00085571 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1FC1A0D225C65DD00085571 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1FC1A0F225C65DD00085571 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "node-ios-hello-Bridging-Header.h"; sourceTree = "<group>"; };
+		A1FC1A16225C66D000085571 /* hello.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = hello.mm; sourceTree = "<group>"; };
+		A1FC1A18225C6A4A00085571 /* hello-v8.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "hello-v8.cpp"; sourceTree = "<group>"; };
+		A1FC1A19225C6A4A00085571 /* hello-v8.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "hello-v8.hpp"; sourceTree = "<group>"; };
+		A1FC1A1C225C6AB200085571 /* libhttp_parser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhttp_parser.a; path = "../../node-ios-full/out/Debug/libhttp_parser.a"; sourceTree = "<group>"; };
+		A1FC1A1D225C6AB200085571 /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = "../../node-ios-full/out/Debug/libbrotli.a"; sourceTree = "<group>"; };
+		A1FC1A1E225C6AB200085571 /* libv8_init.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_init.a; path = "../../node-ios-full/out/Debug/libv8_init.a"; sourceTree = "<group>"; };
+		A1FC1A1F225C6AB200085571 /* libllhttp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libllhttp.a; path = "../../node-ios-full/out/Debug/libllhttp.a"; sourceTree = "<group>"; };
+		A1FC1A20225C6AB200085571 /* libnode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnode.a; path = "../../node-ios-full/out/Debug/libnode.a"; sourceTree = "<group>"; };
+		A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_nosnapshot.a; path = "../../node-ios-full/out/Debug/libv8_nosnapshot.a"; sourceTree = "<group>"; };
+		A1FC1A22225C6AB200085571 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = "../../node-ios-full/out/Debug/libzlib.a"; sourceTree = "<group>"; };
+		A1FC1A23225C6AB200085571 /* libopenssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenssl.a; path = "../../node-ios-full/out/Debug/libopenssl.a"; sourceTree = "<group>"; };
+		A1FC1A24225C6AB200085571 /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuv.a; path = "../../node-ios-full/out/Debug/libuv.a"; sourceTree = "<group>"; };
+		A1FC1A25225C6AB200085571 /* libv8_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base.a; path = "../../node-ios-full/out/Debug/libv8_base.a"; sourceTree = "<group>"; };
+		A1FC1A26225C6AB200085571 /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libplatform.a; path = "../../node-ios-full/out/Debug/libv8_libplatform.a"; sourceTree = "<group>"; };
+		A1FC1A27225C6AB200085571 /* libv8_libsampler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libsampler.a; path = "../../node-ios-full/out/Debug/libv8_libsampler.a"; sourceTree = "<group>"; };
+		A1FC1A28225C6AB200085571 /* libnghttp2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnghttp2.a; path = "../../node-ios-full/out/Debug/libnghttp2.a"; sourceTree = "<group>"; };
+		A1FC1A29225C6AB200085571 /* libhistogram.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhistogram.a; path = "../../node-ios-full/out/Debug/libhistogram.a"; sourceTree = "<group>"; };
+		A1FC1A2A225C6AB200085571 /* libv8_initializers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_initializers.a; path = "../../node-ios-full/out/Debug/libv8_initializers.a"; sourceTree = "<group>"; };
+		A1FC1A2B225C6AB200085571 /* libv8_libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libbase.a; path = "../../node-ios-full/out/Debug/libv8_libbase.a"; sourceTree = "<group>"; };
+		A1FC1A2C225C6AB200085571 /* libcares.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcares.a; path = "../../node-ios-full/out/Debug/libcares.a"; sourceTree = "<group>"; };
+		A1FC1A3E225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "v8-snapshot-blob-arm64-debug.cpp"; sourceTree = "<group>"; };
+		A1FC1A3F225C82AC00085571 /* v8-snapshot-blob-arm64-debug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "v8-snapshot-blob-arm64-debug.hpp"; sourceTree = "<group>"; };
+		A1FF9E5F225C9A97004D7C82 /* test-v8-serialize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "test-v8-serialize.cpp"; sourceTree = "<group>"; };
+		A1FF9E60225C9A97004D7C82 /* test-v8-serialize.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "test-v8-serialize.hpp"; sourceTree = "<group>"; };
+		A1FF9E62225CD7FB004D7C82 /* mksnapshot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mksnapshot.cpp; sourceTree = "<group>"; };
+		A1FF9E63225CD7FB004D7C82 /* mksnapshot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mksnapshot.hpp; sourceTree = "<group>"; };
+		A1FF9E65225CD994004D7C82 /* embedded-file-writer.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "../../node-ios-full/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
+		A1FF9E67225D36BB004D7C82 /* embedded.S */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = embedded.S; path = "node-ios-hello/embedded.S"; sourceTree = "<group>"; };
+		A1FF9E68225D36BB004D7C82 /* snapshot.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = "node-ios-hello/snapshot.cc"; sourceTree = "<group>"; };
+		A1FF9E6B225D3CEB004D7C82 /* hello-node.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "hello-node.mm"; sourceTree = "<group>"; };
+		A1FF9E6C225D3CEB004D7C82 /* hello-node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "hello-node.hpp"; sourceTree = "<group>"; };
+		A1FF9E6E225D7BB9004D7C82 /* shell.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shell.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +117,55 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
+				A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */,
+				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
+				A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */,
+				A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */,
+				A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */,
+				A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */,
+				A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */,
+				A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */,
+				A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */,
+				A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */,
+				A18E802222657B6C000438E0 /* Client.framework in Frameworks */,
+				A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */,
+				A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */,
+				A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */,
+				A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */,
+				A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */,
+				A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A19E90F8225D7EA8004FC391 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				A1296B05225F77330058C23D /* js-blockchain */,
+				A1296B06225F77330058C23D /* node_modules */,
+				A19E9102225EC2C2004FC391 /* package.json */,
+				A19E9103225EC2C2004FC391 /* yarn.lock */,
+				A19E90F9225D7EA8004FC391 /* Info.plist */,
+				A19E9100225D7F29004FC391 /* hello.js */,
+				A19E9108225EC394004FC391 /* server.js */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A1FF9E6E225D7BB9004D7C82 /* shell.cc */,
+				A1FF9E67225D36BB004D7C82 /* embedded.S */,
+				A1FF9E68225D36BB004D7C82 /* snapshot.cc */,
+				A1FF9E65225CD994004D7C82 /* embedded-file-writer.cc */,
 				A1FC1A00225C65DC00085571 /* node-ios-hello */,
+				A19E90F8225D7EA8004FC391 /* Scripts */,
 				A1FC19FF225C65DC00085571 /* Products */,
+				A1FC1A1B225C6AB100085571 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -49,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				A1FC19FE225C65DC00085571 /* node-ios-hello.app */,
+				A19E90F7225D7EA8004FC391 /* Scripts.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,13 +188,65 @@
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0C225C65DD00085571 /* LaunchScreen.storyboard */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
+				A1FC1A16225C66D000085571 /* hello.mm */,
+				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
+				A1FC1A18225C6A4A00085571 /* hello-v8.cpp */,
+				A1FC1A19225C6A4A00085571 /* hello-v8.hpp */,
+				A1FC1A3E225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp */,
+				A1FC1A3F225C82AC00085571 /* v8-snapshot-blob-arm64-debug.hpp */,
+				A1FF9E5F225C9A97004D7C82 /* test-v8-serialize.cpp */,
+				A1FF9E60225C9A97004D7C82 /* test-v8-serialize.hpp */,
+				A1FF9E62225CD7FB004D7C82 /* mksnapshot.cpp */,
+				A1FF9E63225CD7FB004D7C82 /* mksnapshot.hpp */,
+				A1FF9E6B225D3CEB004D7C82 /* hello-node.mm */,
+				A1FF9E6C225D3CEB004D7C82 /* hello-node.hpp */,
 			);
 			path = "node-ios-hello";
+			sourceTree = "<group>";
+		};
+		A1FC1A1B225C6AB100085571 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A18E802122657B6C000438E0 /* Client.framework */,
+				A1FC1A1D225C6AB200085571 /* libbrotli.a */,
+				A1FC1A2C225C6AB200085571 /* libcares.a */,
+				A1FC1A29225C6AB200085571 /* libhistogram.a */,
+				A1FC1A1C225C6AB200085571 /* libhttp_parser.a */,
+				A1FC1A1F225C6AB200085571 /* libllhttp.a */,
+				A1FC1A28225C6AB200085571 /* libnghttp2.a */,
+				A1FC1A20225C6AB200085571 /* libnode.a */,
+				A1FC1A23225C6AB200085571 /* libopenssl.a */,
+				A1FC1A24225C6AB200085571 /* libuv.a */,
+				A1FC1A25225C6AB200085571 /* libv8_base.a */,
+				A1FC1A1E225C6AB200085571 /* libv8_init.a */,
+				A1FC1A2A225C6AB200085571 /* libv8_initializers.a */,
+				A1FC1A2B225C6AB200085571 /* libv8_libbase.a */,
+				A1FC1A26225C6AB200085571 /* libv8_libplatform.a */,
+				A1FC1A27225C6AB200085571 /* libv8_libsampler.a */,
+				A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */,
+				A1FC1A22225C6AB200085571 /* libzlib.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A19E90F6225D7EA8004FC391 /* Scripts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A19E90FC225D7EA8004FC391 /* Build configuration list for PBXNativeTarget "Scripts" */;
+			buildPhases = (
+				A19E90F5225D7EA8004FC391 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Scripts;
+			productName = Scripts;
+			productReference = A19E90F7225D7EA8004FC391 /* Scripts.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		A1FC19FD225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1FC1A12225C65DD00085571 /* Build configuration list for PBXNativeTarget "node-ios-hello" */;
@@ -81,6 +258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A19E90FE225D7EDC004FC391 /* PBXTargetDependency */,
 			);
 			name = "node-ios-hello";
 			productName = "node-ios-hello";
@@ -97,8 +275,12 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = sweetiebird;
 				TargetAttributes = {
+					A19E90F6225D7EA8004FC391 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					A1FC19FD225C65DC00085571 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -116,15 +298,30 @@
 			projectRoot = "";
 			targets = (
 				A1FC19FD225C65DC00085571 /* node-ios-hello */,
+				A19E90F6225D7EA8004FC391 /* Scripts */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A19E90F5225D7EA8004FC391 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A19E9106225EC2C3004FC391 /* yarn.lock in Resources */,
+				A19E9105225EC2C3004FC391 /* package.json in Resources */,
+				A19E9101225D7F2A004FC391 /* hello.js in Resources */,
+				A1296B07225F77340058C23D /* js-blockchain in Resources */,
+				A1296B08225F77340058C23D /* node_modules in Resources */,
+				A19E9109225EC394004FC391 /* server.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1FC19FC225C65DC00085571 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
@@ -138,13 +335,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FF9E66225CD994004D7C82 /* embedded-file-writer.cc in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
+				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
+				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
+				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
+				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
+				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
+				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A1FF9E6A225D36BB004D7C82 /* snapshot.cc in Sources */,
+				A1FF9E69225D36BB004D7C82 /* embedded.S in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A19E90FE225D7EDC004FC391 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A19E90F6225D7EA8004FC391 /* Scripts */;
+			targetProxy = A19E90FD225D7EDC004FC391 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A1FC1A07225C65DC00085571 /* Main.storyboard */ = {
@@ -166,6 +380,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A19E90FA225D7EA8004FC391 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				INFOPLIST_FILE = Scripts/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		A19E90FB225D7EA8004FC391 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				INFOPLIST_FILE = Scripts/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		A1FC1A10225C65DD00085571 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -286,15 +532,43 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"/Users/emily/node-ios-full/src",
+					"/Users/emily/node-ios-full/deps/uv/include",
+					"/Users/emily/node-ios-full/deps/v8/include",
+					"/Users/emily/node-ios-full/deps/v8",
+					"/Users/emily/node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
+					"/Users/emily/node-ios-full/out/Debug/obj/gen/torque-output-root",
+				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "/Users/emily/node-ios-full/out/Debug";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fmodules",
+					"-fcxx-modules",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "node-ios-hello/node-ios-hello-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -304,15 +578,42 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"/Users/emily/node-ios-full/src",
+					"/Users/emily/node-ios-full/deps/uv/include",
+					"/Users/emily/node-ios-full/deps/v8/include",
+					"/Users/emily/node-ios-full/deps/v8",
+					"/Users/emily/node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
+					"/Users/emily/node-ios-full/out/Debug/obj/gen/torque-output-root",
+				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "/Users/emily/node-ios-full/out/Release";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fmodules",
+					"-fcxx-modules",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "node-ios-hello/node-ios-hello-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -321,6 +622,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A19E90FC225D7EA8004FC391 /* Build configuration list for PBXNativeTarget "Scripts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A19E90FA225D7EA8004FC391 /* Debug */,
+				A19E90FB225D7EA8004FC391 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A1FC19F9225C65DC00085571 /* Build configuration list for PBXProject "node-ios-hello" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
