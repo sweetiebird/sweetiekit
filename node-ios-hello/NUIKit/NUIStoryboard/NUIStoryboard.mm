@@ -61,15 +61,10 @@ NAN_METHOD(NUIStoryboard::InstantiateViewController) {
   NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
   UIViewController* vc = [sb->storyboard instantiateViewControllerWithIdentifier:result];
   
-  
-  Local<Function> uiViewControllerCons = Local<Function>::Cast(
-    //JS_OBJ(Local<Object>::Cast(info.This())->Get(JS_STR("constructor")))->Get(JS_STR("UIViewController"))
-    info[1]
-  );
   Local<Value> argv[] = {
     Nan::New<v8::External>((__bridge void*)vc)
   };
-  Local<Object> storyboardObj = uiViewControllerCons->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+  Local<Object> storyboardObj = JS_TYPE(NUIViewController)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 
   info.GetReturnValue().Set(storyboardObj);
 }

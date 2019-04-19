@@ -23,6 +23,7 @@ extern Local<Object> makeUIViewController();
 
 class NUIViewController : public ObjectWrap {
 public:
+  static Nan::Persistent<FunctionTemplate> type;
   static Local<Object> Initialize(Isolate *isolate);
 //  unsigned int GetWidth();
 //  unsigned int GetHeight();
@@ -30,9 +31,7 @@ public:
 
 //protected:
   static NAN_METHOD(New);
-//  static NAN_GETTER(View);
-//  static NAN_GETTER(HeightGetter);
-  static NAN_METHOD(View);
+  static NAN_GETTER(ViewGetter);
   static NAN_METHOD(SetViewControllers);
 
   NUIViewController();
