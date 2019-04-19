@@ -10,10 +10,24 @@
 #define NUITabBarController_h
 
 #import <UIKit/UIKit.h>
+#include "NUIViewController.h"
 #include "defines.h"
 
-JS_WRAP_CLASS(UITabBarController);
+using namespace v8;
+using namespace node;
+
+class NUITabBarController : public NUIViewController {
+public:
+
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUITabBarController();
+  virtual ~NUITabBarController();
+
+  static NAN_METHOD(New);
+  static NAN_METHOD(Destroy);
   static NAN_METHOD(SetViewControllers);
-JS_WRAP_CLASS_END(UITabBarController);
+};
 
 #endif /* NUITabBarController_h */

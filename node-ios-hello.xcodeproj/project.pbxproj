@@ -182,8 +182,8 @@
 		211E76982269B10A00B838AF /* NUIWindow */ = {
 			isa = PBXGroup;
 			children = (
-				211E76992269B10A00B838AF /* NUIWindow.mm */,
 				211E769A2269B10A00B838AF /* NUIWindow.h */,
+				211E76992269B10A00B838AF /* NUIWindow.mm */,
 			);
 			path = NUIWindow;
 			sourceTree = "<group>";
@@ -192,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */,
-				211E76A12269F41D00B838AF /* NNSObject.mm */,
 				211E76A32269F42B00B838AF /* NNSObject.h */,
+				211E76A12269F41D00B838AF /* NNSObject.mm */,
 			);
 			path = NNSObject;
 			sourceTree = "<group>";

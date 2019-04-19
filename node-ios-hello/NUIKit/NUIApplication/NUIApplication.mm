@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUIApplication.h"
+#include "NUIWindow.h"
 
 Nan::Persistent<FunctionTemplate> NUIApplication::type;
+UIWindow* NUIApplication::tmp_UIWindow;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Isolate *isolate)
 {
@@ -25,6 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Iso
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetAccessor(proto, JS_STR("keyWindow"), KeyWindowGetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -47,6 +50,26 @@ NAN_METHOD(NUIApplication::New) {
   app->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_GETTER(NUIApplication::KeyWindowGetter)
+{
+  NUIApplication *app = ObjectWrap::Unwrap<NUIApplication>(Local<Object>::Cast(info.This()));
+
+  tmp_UIWindow = nullptr;
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      tmp_UIWindow = [app->As<UIApplication>() keyWindow];
+    });
+  }
+
+  Local<Value> argv[] = {
+    Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
+  };
+  Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+  
+  info.GetReturnValue().Set(winObj);
 }
 
 NUIApplication::NUIApplication () {}

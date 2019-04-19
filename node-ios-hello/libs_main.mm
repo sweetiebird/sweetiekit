@@ -136,13 +136,13 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIWindow = NUIWindow::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIWindow").ToLocalChecked(), N_UIWindow.first);
-
-        Local<Value> controller = makeUIViewController();
-        exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);
-      
-        Local<Value> uiTabBarController = makeUITabBarController();
-        exports->Set(Nan::New("UITabBarController").ToLocalChecked(), uiTabBarController);
-
+  
+        auto N_UIViewController = NUIViewController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIViewController").ToLocalChecked(), N_UIViewController.first);
+  
+        auto N_UITabBarController = NUITabBarController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITabBarController").ToLocalChecked(), N_UITabBarController.first);
+  
         Local<Value> uiView = makeUIView();
         exports->Set(Nan::New("UIView").ToLocalChecked(), uiView);
         

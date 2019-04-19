@@ -1211,6 +1211,8 @@ process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
 const sweetiekit = require('std:sweetiekit.node');
 const {
+  UIApplication,
+  UIWindow,
   UIStoryboard,
   UIViewController,
   UIView,
@@ -1219,7 +1221,7 @@ const {
   UITabBarController,
   UIImage,
 } = sweetiekit;
-                                                            
+                
 console.log(sweetiekit);
 
 //const vc = new UIViewController();
@@ -1250,22 +1252,30 @@ function randi(n) {
   return Math.floor(Math.random()*n);
 }
 
-process.nextTick(async () => {
-  const sb = new UIStoryboard('Main');
-  const vc = sb.instantiateViewController('tabVC', UITabBarController);
+class MyUITabBarViewController extends UITabBarController
+{
+}
 
+process.nextTick(async () => {
+  const app = new UIApplication();
+  console.log(app, app.keyWindow);
+  
+  const sb = new UIStoryboard('Main');
+  const vc = sb.instantiateViewController('tabVC', MyUITabBarViewController);
+  console.log(vc);
 
   const firstVC = sb.instantiateViewController('firstVC');
   const subview = new UIView(0, 0, 20, 20);
   firstVC.view.addSubview(subview);
   //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
 
-
   const secondVC = sb.instantiateViewController('secondVC');
   vc.setViewControllers([firstVC, secondVC], false);
+  
+  app.keyWindow.setRootViewController(vc);
 
   console.log('pre-button');
-  const button = await UIButton.alloc("Tap me!", 0, 500, 100, 100, () => {
+  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
   
     const x = randi(400);
     const y = randi(400);

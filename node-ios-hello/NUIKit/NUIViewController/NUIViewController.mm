@@ -13,22 +13,16 @@
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
 
-Local<Object> makeUIViewController() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUIViewController::Initialize(isolate));
-}
-
 NUIViewController::NUIViewController () {}
 NUIViewController::~NUIViewController () {}
 
-Local<Object> NUIViewController::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(Isolate *isolate)
+{
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIViewController"));
   type.Reset(ctor);
@@ -38,7 +32,10 @@ Local<Object> NUIViewController::Initialize(Isolate *isolate) {
 
   Nan::SetAccessor(proto, JS_STR("view"), ViewGetter);
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIViewController::New) {
@@ -50,7 +47,7 @@ NAN_METHOD(NUIViewController::New) {
   
   UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
 
-  ctrl->me = vc;
+  ctrl->SetNSObject(vc);
   ctrl->Wrap(controllerObj);
 
   info.GetReturnValue().Set(controllerObj);
@@ -62,7 +59,7 @@ NAN_GETTER(NUIViewController::ViewGetter) {
   NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
   
   Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)[ctrl->me view])
+    Nan::New<v8::External>((__bridge void*)[ctrl->As<UIViewController>() view])
   };
   Local<Object> viewObj = JS_TYPE(NUIView)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 

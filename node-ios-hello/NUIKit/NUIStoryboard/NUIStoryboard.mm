@@ -70,13 +70,21 @@ NAN_METHOD(NUIStoryboard::InstantiateViewController) {
   }
   NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
   UIViewController* vc = [sb->me instantiateViewControllerWithIdentifier:result];
-  
+
   Local<Value> argv[] = {
     Nan::New<v8::External>((__bridge void*)vc)
   };
-  Local<Object> storyboardObj = JS_FUNC(Nan::New(info[1]->IsUndefined() ? NUIViewController::type : NUITabBarController::type))->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  info.GetReturnValue().Set(storyboardObj);
+  
+  Local<Function> ctor;
+  if (info[1]->IsFunction()) {
+    ctor = Local<Function>::Cast(info[1]);
+  } else if ([vc isKindOfClass:UITabBarController.class]) {
+    ctor = JS_FUNC(Nan::New(NUITabBarController::type));
+  } else {
+    ctor = JS_FUNC(Nan::New(NUIViewController::type));
+  }
+  Local<Object> vcObj = ctor->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+  info.GetReturnValue().Set(vcObj);
 }
 
 

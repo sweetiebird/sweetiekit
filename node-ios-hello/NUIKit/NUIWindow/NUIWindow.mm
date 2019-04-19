@@ -26,6 +26,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIWindow::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetMethod(proto, "setRootViewController", SetRootViewController);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -43,17 +44,7 @@ NAN_METHOD(NUIWindow::New) {
   if (info[0]->IsExternal()) {
     view->SetNSObject((__bridge UIWindow *)(info[0].As<External>()->Value()));
   } else {
-  /*
-      double x = TO_DOUBLE(info[0]);
-      double y = TO_DOUBLE(info[1]);
-      double width = TO_DOUBLE(info[2]);
-      double height = TO_DOUBLE(info[3]);
-
-      @autoreleasepool {
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            view->me = [[UIWindow alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        });
-      }*/
+    Nan::ThrowError("NUIWindow::New must receive a UIWindow");
   }
   view->Wrap(viewObj);
 
@@ -71,12 +62,10 @@ NUIWindow::~NUIWindow () {}
 NAN_METHOD(NUIWindow::SetRootViewController) {
   NUIWindow *win = ObjectWrap::Unwrap<NUIWindow>(Local<Object>::Cast(info.This()));
   NNSObject *vc = ObjectWrap::Unwrap<NNSObject>(Local<Object>::Cast(info[0]));
-
-  UITabBarController* c = vc->As<UITabBarController>();
   
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
-      [win->As<UIWindow>() setRootViewController:c];
+      [win->As<UIWindow>() setRootViewController:vc->As<UITabBarController>()];
     });
   }
 }

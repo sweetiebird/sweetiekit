@@ -13,11 +13,13 @@
 
 Nan::Persistent<FunctionTemplate> NUITabBarController::type;
 
-Local<Object> NUITabBarController::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUITabBarController::Initialize(Isolate *isolate)
+{
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NUIViewController::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UITabBarController"));
   ctor->Inherit(Nan::New(NUIViewController::type));
@@ -27,7 +29,10 @@ Local<Object> NUITabBarController::Initialize(Isolate *isolate) {
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUITabBarController::New) {
@@ -39,20 +44,12 @@ NAN_METHOD(NUITabBarController::New) {
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-        ctrl->me = [UITabBarController alloc];
+        ctrl->SetNSObject([UITabBarController alloc]);
     });
   }
   ctrl->Wrap(ctrlObj);
 
   info.GetReturnValue().Set(ctrlObj);
-}
-
-Local<Object> makeUITabBarController() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUITabBarController::Initialize(isolate));
 }
 
 NUITabBarController::NUITabBarController () {}
@@ -71,16 +68,15 @@ NAN_METHOD(NUITabBarController::SetViewControllers) {
   for (unsigned int i = 0; i < array->Length(); i++ ) {
     if (Nan::Has(array, i).FromJust()) {
       NUIViewController *view = ObjectWrap::Unwrap<NUIViewController>(JS_OBJ(array->Get(i)));
-      [controllers addObject:view->me];
+      [controllers addObject:view->As<UIViewController>()];
     }
   }
   
-  UITabBarController* c = (UITabBarController*)vc->me;
+  UITabBarController* c = vc->As<UITabBarController>();
   
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       [c setViewControllers:controllers animated:animated];
-      [[[UIApplication sharedApplication] keyWindow] setRootViewController:c];
     });
   }
 }

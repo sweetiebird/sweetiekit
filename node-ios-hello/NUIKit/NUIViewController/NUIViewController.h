@@ -10,10 +10,24 @@
 #define NUIViewController_h
 
 #import <UIKit/UIKit.h>
+#include "NNSObject.h"
 #include "defines.h"
 
-JS_WRAP_CLASS(UIViewController);
+using namespace v8;
+using namespace node;
+
+class NUIViewController : public NNSObject {
+public:
+
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUIViewController();
+  virtual ~NUIViewController();
+
+  static NAN_METHOD(New);
+  static NAN_METHOD(Destroy);
   static NAN_GETTER(ViewGetter);
-JS_WRAP_CLASS_END(UIViewController);
+};
 
 #endif /* NUIViewController_h */
