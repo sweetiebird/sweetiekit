@@ -1249,6 +1249,13 @@ console.log(sb, vc, view, subview);
         window?.rootViewController = vc;
 */
 
+function buildUI() {
+  const app = new UIApplication();
+  const sb = new UIStoryboard('Main');
+  const vc = sb.instantiateViewController('loginVC');
+  app.keyWindow.setRootViewController(vc);
+}
+
 function randi(n) {
   return Math.floor(Math.random()*n);
 }
@@ -1264,83 +1271,84 @@ function makeUIView(x, y, w, h) {
 }
 
 process.nextTick(async () => {
-  const app = new UIApplication();
-  console.log(app, app.keyWindow);
-  
-  const sb = new UIStoryboard('Main'); // update to take 2 named args: ({ name, bundle })
-  const vc = sb.instantiateViewController('tabVC', MyUITabBarViewController);
-  console.log(vc);
-
-  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
-  console.log("TKTK", firstVC.view.backgroundColor);
-  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
-  
-  const subview = makeUIView(0, 0, 20, 20);
-  firstVC.view.addSubview(subview);
-  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
-
-  const secondVC = sb.instantiateViewController('secondVC');
-  vc.setViewControllers([firstVC, secondVC], false);
-  
-  app.keyWindow.setRootViewController(vc); // update to { get, set }
-
-  const img = new UIImage('first');
-  
-  console.log('pre-button');
-  // update alloc to init
-  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
-  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
-  
-    const x = randi(400);
-    const y = randi(400);
-  
-    const subview = new UIImageView(img); // named argument ({ image })
-    subview.x = x;
-    subview.y = y;
-    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
-    firstVC.view.addSubview(subview);
-   //const subview = makeUIView(x, y, 20, 20);
-    //firstVC.view.addSubview(subview);
-    
-    console.log(`Added a new UIView at ${x},${y}`);
-  });
-  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
-  console.log('post-button', button, button.frame);
-  firstVC.view.addSubview(button);
-  
-  const tf = UITextField.alloc(0, 0, 140, 50, () => {
-    console.log("Done editing text!", tf.text);
-    button.title = tf.text;
-  });
-  tf.text = button.title;
-  tf.delegate = firstVC;
-  tf.backgroundColor = ({red: 1.0, green: 1.0, blue: 1.0})
-  firstVC.view.addSubview(tf);
-  
-  const tabCtrl = new UITabBarController();
-  const imgView1 = new UIImageView(img);
-  {
-    let p = firstVC.view.center;
-    p.x -= 2*(imgView1.width + 5) + 5/2;
-    p.y -= 100;
-    for (let i = 0; i < 5; i++) {
-      const imgView = new UIImageView(img);
-      imgView.center = p;
-      firstVC.view.addSubview(imgView);
-      p.x += imgView.width + 5;
-      // frame and bounds get x/y/w/h, but it's nonsensical for view to have these properties
-      console.log(imgView.x, imgView.y, imgView.width, imgView.height, imgView.center, imgView.size);
-    }
-  }
-  {
-    imgView1.width *= 4;
-    imgView1.height *= 4;
-    imgView1.center = firstVC.view.center;
-    imgView1.y -= imgView1.height * 2;
-    firstVC.view.addSubview(imgView1);
-  }
-
-  console.log(button, tabCtrl, tf, img);
+  buildUI();
+//  const app = new UIApplication();
+//  console.log(app, app.keyWindow);
+//
+//  const sb = new UIStoryboard('Main'); // update to take 2 named args: ({ name, bundle })
+//  const vc = sb.instantiateViewController('tabVC', MyUITabBarViewController);
+//  console.log(vc);
+//
+//  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
+//  console.log("TKTK", firstVC.view.backgroundColor);
+//  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
+//
+//  const subview = makeUIView(0, 0, 20, 20);
+//  firstVC.view.addSubview(subview);
+//  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
+//
+//  const secondVC = sb.instantiateViewController('secondVC');
+//  vc.setViewControllers([firstVC, secondVC], false);
+//
+//  app.keyWindow.setRootViewController(vc); // update to { get, set }
+//
+//  const img = new UIImage('first');
+//
+//  console.log('pre-button');
+//  // update alloc to init
+//  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
+//  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
+//
+//    const x = randi(400);
+//    const y = randi(400);
+//
+//    const subview = new UIImageView(img); // named argument ({ image })
+//    subview.x = x;
+//    subview.y = y;
+//    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
+//    firstVC.view.addSubview(subview);
+//   //const subview = makeUIView(x, y, 20, 20);
+//    //firstVC.view.addSubview(subview);
+//
+//    console.log(`Added a new UIView at ${x},${y}`);
+//  });
+//  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
+//  console.log('post-button', button, button.frame);
+//  firstVC.view.addSubview(button);
+//
+//  const tf = UITextField.alloc(0, 0, 140, 50, () => {
+//    console.log("Done editing text!", tf.text);
+//    button.title = tf.text;
+//  });
+//  tf.text = button.title;
+//  tf.delegate = firstVC;
+//  tf.backgroundColor = ({red: 1.0, green: 1.0, blue: 1.0})
+//  firstVC.view.addSubview(tf);
+//
+//  const tabCtrl = new UITabBarController();
+//  const imgView1 = new UIImageView(img);
+//  {
+//    let p = firstVC.view.center;
+//    p.x -= 2*(imgView1.width + 5) + 5/2;
+//    p.y -= 100;
+//    for (let i = 0; i < 5; i++) {
+//      const imgView = new UIImageView(img);
+//      imgView.center = p;
+//      firstVC.view.addSubview(imgView);
+//      p.x += imgView.width + 5;
+//      // frame and bounds get x/y/w/h, but it's nonsensical for view to have these properties
+//      console.log(imgView.x, imgView.y, imgView.width, imgView.height, imgView.center, imgView.size);
+//    }
+//  }
+//  {
+//    imgView1.width *= 4;
+//    imgView1.height *= 4;
+//    imgView1.center = firstVC.view.center;
+//    imgView1.y -= imgView1.height * 2;
+//    firstVC.view.addSubview(imgView1);
+//  }
+//
+//  console.log(button, tabCtrl, tf, img);
  
  /*
   setInterval(() => {
