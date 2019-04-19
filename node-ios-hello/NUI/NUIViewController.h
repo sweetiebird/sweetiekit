@@ -30,9 +30,9 @@ public:
 
 protected:
   static NAN_METHOD(New);
-//  static NAN_GETTER(WidthGetter);
+//  static NAN_GETTER(View);
 //  static NAN_GETTER(HeightGetter);
-//  static NAN_GETTER(ViewGetter);
+  static NAN_METHOD(View);
 
   NUIViewController();
   ~NUIViewController();

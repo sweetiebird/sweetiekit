@@ -33,15 +33,21 @@ NAN_METHOD(NUIView::New) {
 
   NUIView *view = new NUIView();
 
-  double width = TO_DOUBLE(info[0]);
-  double height = TO_DOUBLE(info[1]);
-  double x = TO_DOUBLE(info[2]);
-  double y = TO_DOUBLE(info[3]);
+//  UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
 
-  @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        view->me = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    });
+  if (info[0]->IsExternal()) {
+    view->me = (__bridge UIView *)(info[0].As<External>()->Value());
+  } else {
+      double width = TO_DOUBLE(info[0]);
+      double height = TO_DOUBLE(info[1]);
+      double x = TO_DOUBLE(info[2]);
+      double y = TO_DOUBLE(info[3]);
+
+      @autoreleasepool {
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            view->me = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+        });
+      }
   }
   view->Wrap(viewObj);
 

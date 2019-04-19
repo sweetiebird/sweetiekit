@@ -23,6 +23,7 @@ Local<Object> NUIViewController::Initialize(Isolate *isolate) {
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
   //Nan::SetMethod(proto, "init", InitMethod);
+  Nan::SetMethod(proto, "view", View);
 
   return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
 }
@@ -52,12 +53,22 @@ NAN_METHOD(NUIViewController::New) {
 //  info.GetReturnValue().Set(JS_INT(ctrl->GetWidth()));
 //}
 
-//NAN_GETTER(NUIViewController::ViewGetter) {
-//  Nan::HandleScope scope;
-//
-//  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
-//  info.GetReturnValue().Set(JS_OBJ(ctrl->GetView()));
-//}
+NAN_METHOD(NUIViewController::View) {
+  Nan::HandleScope scope;
+
+  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
+  
+  Local<Function> uiViewCons = Local<Function>::Cast(
+    //JS_OBJ(Local<Object>::Cast(info.This())->Get(JS_STR("constructor")))->Get(JS_STR("UIView"))
+    info[0]
+  );
+  Local<Value> argv[] = {
+    Nan::New<v8::External>((__bridge void*)[ctrl->controller view])
+  };
+  Local<Object> viewObj = uiViewCons->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  info.GetReturnValue().Set(viewObj);
+}
 
 //unsigned int NUIViewController::GetWidth() {
 //  if (controller) {

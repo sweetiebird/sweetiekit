@@ -1220,7 +1220,8 @@ console.log(exokit);
 
 const sb = new exokit.UIStoryboard('Main');
 const vc = sb.instantiateViewController('firstVC', exokit.UIViewController);
-console.log(sb, vc);
+const view = vc.view(exokit.UIView);
+console.log(sb, vc, view);
 
 setInterval(() => {
     exokit.setRandomBackgroundColor();
