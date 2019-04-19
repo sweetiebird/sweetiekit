@@ -666,13 +666,13 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					"/Users/emily/node-ios-full/src",
-					"/Users/emily/node-ios-full/deps/uv/include",
-					"/Users/emily/node-ios-full/deps/v8/include",
-					"/Users/emily/node-ios-full/deps/v8",
-					"/Users/emily/node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"/Users/emily/node-ios-full/out/Debug/obj/gen/torque-output-root",
-					/users/emily/nan,
+					"../node-ios-full/src",
+					"../node-ios-full/deps/uv/include",
+					"../node-ios-full/deps/v8/include",
+					"../node-ios-full/deps/v8",
+					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
+					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					/users/bb/nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -681,7 +681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "/Users/emily/node-ios-full/out/Debug";
+				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Debug";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -713,13 +713,13 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					"/Users/emily/node-ios-full/src",
-					"/Users/emily/node-ios-full/deps/uv/include",
-					"/Users/emily/node-ios-full/deps/v8/include",
-					"/Users/emily/node-ios-full/deps/v8",
-					"/Users/emily/node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"/Users/emily/node-ios-full/out/Debug/obj/gen/torque-output-root",
-					/users/emily/nan,
+					"../node-ios-full/src",
+					"../node-ios-full/deps/uv/include",
+					"../node-ios-full/deps/v8/include",
+					"../node-ios-full/deps/v8",
+					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
+					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					/users/bb/nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -728,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "/Users/emily/node-ios-full/out/Release";
+				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Release";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
