@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if (false) {
           hellov8async("node-ios-hello");
         } else if (true) {
+            if window?.rootViewController is UITabBarController {
+                if let firstChild = window?.rootViewController?.children.first {
+                     rootViewController = firstChild
+                }
+            }
+            lolok()
             chdir(getenv("HOME"))
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }

@@ -12,9 +12,20 @@ class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let vc = UIViewController()
+//        present(vc, animated: true, completion: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
 
 }
 
+@objc
+extension UIViewController {
+    @objc func setRandomBackgroundColor() {
+        let hue = CGFloat( arc4random() % 256) / 256.0;  //  0.0 to 1.0
+        let saturation = CGFloat( arc4random() % 128) / 256.0 + 0.5;  //  0.5 to 1.0, away from white
+        let brightness = CGFloat( arc4random() % 128) / 256.0 + 0.5;  //  0.5 to 1.0, away from black
+        self.view.backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    }
+}

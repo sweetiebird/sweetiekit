@@ -1209,13 +1209,24 @@ leftpad = require('leftpad')
 
 process.stderr.write(leftpad(' exokit-node\n', 30, '='));
 
-httpServer = require('./server.js')
+exokit = require('/package/build/Release/exokit.node');
+                                                            
+console.log(exokit);
 
-server = httpServer({port: 8080, _: [process.env.HOME]})
+const vc = new exokit.UIViewController();
+console.log(vc, vc.width);
 
-//require('./js-blockchain/index.js');
-
-process.stderr.write(leftpad(' exokit-done\n', 30, '='));
-setTimeout(() => {
-  console.log('prevent exit');
-}, 1000 * 60 * 60 * 24)
+setInterval(() => {
+    exokit.setRandomBackgroundColor();
+}, 2000);
+                                                            
+//httpServer = require('./server.js')
+//
+//server = httpServer({port: 8080, _: [process.env.HOME]})
+//
+////require('./js-blockchain/index.js');
+//
+//process.stderr.write(leftpad(' exokit-done\n', 30, '='));
+//setTimeout(() => {
+//  console.log('prevent exit');
+//}, 1000 * 60 * 60 * 24)

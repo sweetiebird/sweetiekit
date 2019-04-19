@@ -3,11 +3,13 @@
 //
 
 #include <stdarg.h>
-
+#import <UIKit/UIKit.h>
 
 extern void iOSLog0(const char* msg);
 extern void iOSTrap();
+extern void lolok();
 
 #include "hello-v8.hpp"
 #include "hello-node.hpp"
 #include "mksnapshot.hpp"
+#include "libs_main.hpp"
