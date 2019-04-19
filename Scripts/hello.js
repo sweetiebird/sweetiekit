@@ -1256,7 +1256,7 @@ vc.setViewControllers([firstVC, secondVC], false);
 
 
 setInterval(() => {
-    sweetiekit.setRandomBackgroundColor();
+    //sweetiekit.setRandomBackgroundColor();
 }, 2000);
                                                             
 //httpServer = require('./server.js')
