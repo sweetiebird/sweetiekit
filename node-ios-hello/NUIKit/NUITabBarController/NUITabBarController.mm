@@ -42,10 +42,14 @@ NAN_METHOD(NUITabBarController::New) {
 
   NUITabBarController *ctrl = new NUITabBarController();
 
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-        ctrl->SetNSObject([UITabBarController alloc]);
-    });
+  if (info[0]->IsExternal()) {
+    ctrl->SetNSObject((__bridge UITabBarController *)(info[0].As<External>()->Value()));
+  } else {
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          ctrl->SetNSObject([UITabBarController alloc]);
+      });
+    }
   }
   ctrl->Wrap(ctrlObj);
 

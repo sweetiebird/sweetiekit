@@ -39,19 +39,23 @@ NAN_METHOD(NUIImage::New) {
 
   NUIImage *img = new NUIImage();
 
-  std::string imageName;
-  if (info[0]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-    imageName = *utf8Value;
+  if (info[0]->IsExternal()) {
+    img->SetNSObject((__bridge UIImage *)(info[0].As<External>()->Value()));
   } else {
-    // throw
-  }
-  NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
+    std::string imageName;
+    if (info[0]->IsString()) {
+      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+      imageName = *utf8Value;
+    } else {
+      // throw
+    }
+    NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
 
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-        img->SetNSObject([UIImage imageNamed:result]);
-    });
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          img->SetNSObject([UIImage imageNamed:result]);
+      });
+    }
   }
   img->Wrap(imgObj);
 

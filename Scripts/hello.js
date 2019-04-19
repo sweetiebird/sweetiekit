@@ -1221,6 +1221,7 @@ const {
   UITabBarController,
   UIImage,
   UIImageView,
+  UILabel,
 } = sweetiekit;
                 
 console.log(sweetiekit);
@@ -1280,6 +1281,7 @@ process.nextTick(async () => {
 //  console.log(vc);
 //
 //  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
+//  console.log(firstVC.view.subviews.filter(x => (x instanceof UILabel)).map(x => [x.center, x.text]));
 //  console.log("TKTK", firstVC.view.backgroundColor);
 //  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
 //
@@ -1306,6 +1308,7 @@ process.nextTick(async () => {
 //    subview.x = x;
 //    subview.y = y;
 //    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
+//    console.log(firstVC.view.subviews.filter(x => (x instanceof UIImageView)).map(x => [x.center, x.backgroundColor]));
 //    firstVC.view.addSubview(subview);
 //   //const subview = makeUIView(x, y, 20, 20);
 //    //firstVC.view.addSubview(subview);

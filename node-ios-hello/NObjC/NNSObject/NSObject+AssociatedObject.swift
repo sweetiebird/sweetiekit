@@ -23,6 +23,14 @@
 //------------------------------------------------------------------------------
 import Foundation
 
+
+
+class NSObjectWrapper : NSObject {
+  
+  @objc var ptr: UnsafeRawPointer?
+  
+}
+
 extension NSObject {
 
   //----------------------------------------------------------------------------
@@ -39,7 +47,12 @@ extension NSObject {
   
   /// Associates an object with this object by assignment.
   @objc public func assignAssociatedWrapper(ptr: UnsafeRawPointer, forKey key: String) {
-    objc_setAssociatedObject(self, associatedObjectKey(key), ptr, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+    //objc_setAssociatedObject(self, associatedObjectKey(key), NSObjectWrapper(ptr:ptr), objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+  }
+
+  @objc public func associatedWrapper(forKey key: String) -> UnsafeRawPointer? {
+    let obj = self.associatedObject(forKey: key);
+    return (obj is NSObjectWrapper) ? (obj as! NSObjectWrapper).ptr : nil;
   }
 
   /// Associates an object with this object by assignment.

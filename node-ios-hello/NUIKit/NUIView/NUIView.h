@@ -38,6 +38,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_SETTER(HeightSetter);
   static NAN_GETTER(AutoresizesSubviewsGetter);
   static NAN_SETTER(AutoresizesSubviewsSetter);
+  static NAN_GETTER(SubviewsGetter);
   static NAN_METHOD(SizeThatFits);
   static NAN_METHOD(SizeToFit);
   static NAN_GETTER(BackgroundColorGetter);

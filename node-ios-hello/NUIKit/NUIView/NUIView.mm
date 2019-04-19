@@ -36,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetAccessor(proto, JS_STR("width"), WidthGetter, WidthSetter);
   Nan::SetAccessor(proto, JS_STR("height"), HeightGetter, HeightSetter);
   Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
+  Nan::SetAccessor(proto, JS_STR("subviews"), SubviewsGetter);
   Nan::SetMethod(proto, "addSubview", AddSubview);
   Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
@@ -296,6 +297,31 @@ NAN_SETTER(NUIView::AutoresizesSubviewsSetter) {
   
   [view->As<UIView>() setAutoresizesSubviews:TO_BOOL(value)];
 }
+
+NAN_GETTER(NUIView::SubviewsGetter) {
+  Nan::HandleScope scope;
+
+  NUIView* view = ObjectWrap::Unwrap<NUIView>(info.This());
+  UIView* pView = view->As<UIView>();
+  auto subviews = [pView subviews];
+  NSInteger count = [subviews count];
+  
+  auto result = Nan::New<Array>();
+
+  for (NSInteger i = 0; i < count; i++) {
+    UIView* pSubview = [subviews objectAtIndex:i];
+    if (pSubview != nullptr) {
+      Local<Value> argv[] = {
+        Nan::New<v8::External>((__bridge void*)pSubview)
+      };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pSubview, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      Nan::Set(result, static_cast<uint32_t>(i), value);
+    }
+  }
+
+  info.GetReturnValue().Set(result);
+}
+
 
 CGRect NUIView::GetFrame() {
   if (As<UIView>()) {

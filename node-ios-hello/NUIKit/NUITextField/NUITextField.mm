@@ -44,6 +44,10 @@ NAN_METHOD(NUITextField::New) {
 
   NUITextField *txt = new NUITextField();
   
+  if (info[0]->IsExternal()) {
+    txt->SetNSObject((__bridge UITextField *)(info[0].As<External>()->Value()));
+  }
+  
   txt->Wrap(txtObj);
 
   info.GetReturnValue().Set(txtObj);
@@ -63,9 +67,6 @@ NAN_METHOD(NUITextField::Alloc) {
   double y = TO_DOUBLE(info[1]);
   double width = TO_DOUBLE(info[2]);
   double height = TO_DOUBLE(info[3]);
-/*
-  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[4]));
-  auto delegate = ctrl->As<NodeUIViewController>();*/
   
   Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
 
@@ -81,7 +82,6 @@ NAN_METHOD(NUITextField::Alloc) {
       [txt setReturnKeyType:UIReturnKeyDone];
       [txt setClearButtonMode:UITextFieldViewModeWhileEditing];
       [txt setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-      //[txt setDelegate:delegate];
       [txt setTargetClosureWithClosure:^(UITextField*){
         sweetiekit::Resolve(cb);
         return true;

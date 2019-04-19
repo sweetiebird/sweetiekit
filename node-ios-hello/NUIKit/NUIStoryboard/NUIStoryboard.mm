@@ -45,19 +45,23 @@ NAN_METHOD(NUIStoryboard::New) {
 
   NUIStoryboard *sb = new NUIStoryboard();
 
-  std::string type;
-  if (info[0]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-    type = *utf8Value;
+  if (info[0]->IsExternal()) {
+    sb->SetNSObject((__bridge UIStoryboard *)(info[0].As<External>()->Value()));
   } else {
-    type = "Main";
-  }
-  NSString* result = [NSString stringWithUTF8String:type.c_str()];
+    std::string type;
+    if (info[0]->IsString()) {
+      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+      type = *utf8Value;
+    } else {
+      type = "Main";
+    }
+    NSString* result = [NSString stringWithUTF8String:type.c_str()];
 
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      sb->SetNSObject([UIStoryboard storyboardWithName:result bundle:nil]);
-    });
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+        sb->SetNSObject([UIStoryboard storyboardWithName:result bundle:nil]);
+      });
+    }
   }
 
   sb->Wrap(storyboardObj);

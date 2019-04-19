@@ -42,6 +42,10 @@ NAN_METHOD(NUIButton::New) {
 
   NUIButton *btn = new NUIButton();
   
+  if (info[0]->IsExternal()) {
+    btn->SetNSObject((__bridge UIButton *)(info[0].As<External>()->Value()));
+  }
+  
   btn->Wrap(btnObj);
 
   info.GetReturnValue().Set(btnObj);
@@ -82,7 +86,6 @@ NAN_METHOD(NUIButton::Alloc) {
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
       btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-      [btn->As<UIButton>() assignAssociatedWrapperWithPtr:btn forKey:@"sweetiekit.wrapper"];
       [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
       [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
@@ -111,9 +114,18 @@ NAN_GETTER(NUIButton::TitleGetter) {
   Nan::HandleScope scope;
 
   NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
-  auto result = JS_STR([[view->As<UIButton>() currentTitle] UTF8String]);
+  __block NSString* str = nullptr;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      str = [view->As<UIButton>() currentTitle];
+    });
+  }
+
+  if (str != nullptr) {
+    auto result = JS_STR([str UTF8String]);
+    info.GetReturnValue().Set(result);
+  }
   
-  info.GetReturnValue().Set(result);
 }
 
 NAN_SETTER(NUIButton::TitleSetter) {

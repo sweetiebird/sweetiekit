@@ -42,10 +42,14 @@ NAN_METHOD(NUIApplication::New) {
 
   NUIApplication *app = new NUIApplication();
 
-  @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        app->SetNSObject([UIApplication sharedApplication]);
-    });
+  if (info[0]->IsExternal()) {
+    app->SetNSObject((__bridge UIApplication *)(info[0].As<External>()->Value()));
+  } else {
+    @autoreleasepool {
+      dispatch_async(dispatch_get_main_queue(), ^ {
+          app->SetNSObject([UIApplication sharedApplication]);
+      });
+    }
   }
   app->Wrap(obj);
 

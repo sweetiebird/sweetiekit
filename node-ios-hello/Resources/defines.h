@@ -76,6 +76,7 @@ public: \
   ~N##name(); \
  \
   static Nan::Persistent<FunctionTemplate> type; \
+  virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; } \
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate); \
   static NAN_METHOD(New);
   

@@ -19,6 +19,7 @@
 #include "NUITabBarController.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
+#include "NUILabel.h"
 #include "NUITextField.h"
 #include <unistd.h>
 
@@ -168,6 +169,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIImageView = NUIImageView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImageView").ToLocalChecked(), N_UIImageView.first);
+  
+        auto N_UILabel = NUILabel::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UILabel").ToLocalChecked(), N_UILabel.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
