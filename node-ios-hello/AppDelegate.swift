@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if (false) {
           hellov8async("node-ios-hello");
         } else if (true) {
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+//        let first = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "first") as! FirstViewController
+//        vc.setViewControllers([first], animated: false)
+//        window?.rootViewController = vc
             if window?.rootViewController is UITabBarController {
                 if let firstChild = window?.rootViewController?.children.first {
                      rootViewController = firstChild

@@ -1,13 +1,13 @@
 //
-//  NUIView.h
+//  NUIStoryboard.h
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUIView_h
-#define NUIView_h
+#ifndef NUIStoryboard_h
+#define NUIStoryboard_h
 
 #import <UIKit/UIKit.h>
 
@@ -17,25 +17,22 @@
 using namespace v8;
 using namespace node;
 
-//class NUIViewController;
+extern Local<Object> makeUIStoryboard();
 
-extern Local<Object> makeUIView();
-
-class NUIView : public ObjectWrap {
+class NUIStoryboard : public ObjectWrap {
 public:
   static Local<Object> Initialize(Isolate *isolate);
-  CGRect GetFrame();
 
 protected:
   static NAN_METHOD(New);
-  static NAN_GETTER(FrameGetter);
+  static NAN_METHOD(InstantiateViewController);
 
-  NUIView();
-  ~NUIView();
+  NUIStoryboard();
+  ~NUIStoryboard();
 
 private:
-//  friend class NUIViewController;
-  UIView* me;
+  UIStoryboard* storyboard;
 };
 
-#endif /* NUIView_h */
+
+#endif /* NUIStoryboard_h */

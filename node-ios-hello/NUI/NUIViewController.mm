@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUIViewController.h"
+#include "NUIView.h"
 
 Local<Object> NUIViewController::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
@@ -33,47 +34,49 @@ NAN_METHOD(NUIViewController::New) {
 
   NUIViewController *ctrl = new NUIViewController();
   
-  
-  ctrl->controller = [UIViewController alloc];
+  UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
+
+  ctrl->controller = vc;
   ctrl->Wrap(controllerObj);
 
-  Nan::SetAccessor(controllerObj, JS_STR("width"), WidthGetter);
-  Nan::SetAccessor(controllerObj, JS_STR("height"), HeightGetter);
+//  Nan::SetAccessor(controllerObj, JS_STR("width"), WidthGetter);
+//  Nan::SetAccessor(controllerObj, JS_STR("height"), HeightGetter);
 
   info.GetReturnValue().Set(controllerObj);
 }
 
-NAN_GETTER(NUIViewController::WidthGetter) {
-  Nan::HandleScope scope;
+//NAN_GETTER(NUIViewController::WidthGetter) {
+//  Nan::HandleScope scope;
+//
+//  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
+//  info.GetReturnValue().Set(JS_INT(ctrl->GetWidth()));
+//}
 
-  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
-  info.GetReturnValue().Set(JS_INT(ctrl->GetWidth()));
-}
+//NAN_GETTER(NUIViewController::ViewGetter) {
+//  Nan::HandleScope scope;
+//
+//  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
+//  info.GetReturnValue().Set(JS_OBJ(ctrl->GetView()));
+//}
 
-NAN_GETTER(NUIViewController::HeightGetter) {
-  Nan::HandleScope scope;
+//unsigned int NUIViewController::GetWidth() {
+//  if (controller) {
+//    return 42;
+////    return [[[controller view] frame] width];
+//  } else {
+//    return 0;
+//  }
+//}
 
-  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
-  info.GetReturnValue().Set(JS_INT(ctrl->GetHeight()));
-}
-
-unsigned int NUIViewController::GetWidth() {
-  if (controller) {
-    return 42;
-//    return [[[controller view] frame] width];
-  } else {
-    return 0;
-  }
-}
-
-unsigned int NUIViewController::GetHeight() {
-  if (controller) {
-  return 42;
-//    return controller->view.frame.height;
-  } else {
-    return 0;
-  }
-}
+//NUIView* NUIViewController::GetView() {
+//  if (controller) {
+//   viewWrapper->me = [controller view];
+//   return viewWrapper;
+////    return controller->view.frame.height;
+//  } else {
+//    return nullptr;
+//  }
+//}
 
 Local<Object> makeUIViewController() {
   Isolate *isolate = Isolate::GetCurrent();
@@ -83,6 +86,8 @@ Local<Object> makeUIViewController() {
   return scope.Escape(NUIViewController::Initialize(isolate));
 }
 
-NUIViewController::NUIViewController () {}
+NUIViewController::NUIViewController () {
+//    viewWrapper = new NUIView();
+}
 NUIViewController::~NUIViewController () {}
 

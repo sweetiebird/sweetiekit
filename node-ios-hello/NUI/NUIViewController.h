@@ -17,23 +17,28 @@
 using namespace v8;
 using namespace node;
 
+//class NUIView;
+
 extern Local<Object> makeUIViewController();
 
 class NUIViewController : public ObjectWrap {
 public:
   static Local<Object> Initialize(Isolate *isolate);
-  unsigned int GetWidth();
-  unsigned int GetHeight();
+//  unsigned int GetWidth();
+//  unsigned int GetHeight();
+//  NUIView* GetView();
 
 protected:
   static NAN_METHOD(New);
-  static NAN_GETTER(WidthGetter);
-  static NAN_GETTER(HeightGetter);
+//  static NAN_GETTER(WidthGetter);
+//  static NAN_GETTER(HeightGetter);
+//  static NAN_GETTER(ViewGetter);
 
   NUIViewController();
   ~NUIViewController();
 
 private:
+//  NUIView* viewWrapper;
   UIViewController* controller;
 };
 

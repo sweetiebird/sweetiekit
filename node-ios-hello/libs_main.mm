@@ -10,6 +10,7 @@
 
 #include "NUIViewController.h"
 #include "NUIView.h"
+#include "NUIStoryboard.h"
 #include <unistd.h>
 // #include <stdio.h>
 // #include <fcntl.h>
@@ -200,6 +201,9 @@ namespace exokit {
         
         Local<Value> uiView = makeUIView();
         exports->Set(Nan::New("UIView").ToLocalChecked(), uiView);
+        
+        Local<Value> uiStoryboard = makeUIStoryboard();
+        exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), uiStoryboard);
 #if 0
         std::pair<Local<Value>, Local<FunctionTemplate>> glResult = makeGl();
         exports->Set(Nan::New("nativeGl").ToLocalChecked(), glResult.first);

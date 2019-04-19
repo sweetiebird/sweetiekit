@@ -1213,10 +1213,14 @@ exokit = require('/package/build/Release/exokit.node');
                                                             
 console.log(exokit);
 
-const vc = new exokit.UIViewController();
-console.log(vc, vc.width);
-const view = new exokit.UIView(0, 0, 200, 200);
-console.log(view, view.frame);
+//const vc = new exokit.UIViewController();
+//console.log(vc);
+//const view = new exokit.UIView(0, 0, 200, 200);
+//console.log(view, view.frame);
+
+const sb = new exokit.UIStoryboard('Main');
+const vc = sb.instantiateViewController('firstVC', exokit.UIViewController);
+console.log(sb, vc);
 
 setInterval(() => {
     exokit.setRandomBackgroundColor();
