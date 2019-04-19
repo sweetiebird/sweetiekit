@@ -1271,8 +1271,10 @@ function buildUI() {
   console.log(sv[1].subviews)
   const userField = sv[1].subviews[2];
   const passField = sv[1].subviews[3];
+  userField.text = kv.stringForKey("me") || "";
   userField.callback = () => {
     console.log('username', userField.text);
+    kv.setValueForKey(userField.text, "me");
   }
   passField.callback = () => {
     console.log('password', passField.text);
