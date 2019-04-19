@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUIView.h"
+#include "NUIButton.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
 
@@ -96,13 +97,26 @@ CGRect NUIView::GetFrame() {
 
 NAN_METHOD(NUIView::AddSubview) {
   NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-  NUIView *subview = ObjectWrap::Unwrap<NUIView>(JS_OBJ(info[0]));
+  Local<Object> obj = JS_OBJ(info[0]);
+  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIView)).FromJust()) {
+    NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
 
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [subview->me setBackgroundColor:[UIColor purpleColor]];
-      [view->me addSubview:subview->me];
-    });
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+        [subview->me setBackgroundColor:[UIColor purpleColor]];
+        [view->me addSubview:subview->me];
+      });
+    }
+  } else if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIButton)).FromJust()) {
+    NUIButton *subview = ObjectWrap::Unwrap<NUIButton>(obj);
+
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+        [view->me addSubview:subview->me];
+      });
+    }
+  } else {
+    Nan::ThrowError("Unknown addSubview type");
   }
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #include "NUIApplication.h"
+#include "NUIWindow.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
 #include "NUIStoryboard.h"
@@ -38,12 +39,99 @@ namespace node {
 using namespace v8;
 
 
+#include <array>
+#include <deque>
+#include <mutex>
+#include <thread>
+
+
 namespace sweetiekit {
-    void InitExports(Local<Object> exports) {
-        iOSLog("InitExports\n");
+  uv_sem_t reqSem;
+  uv_async_t resAsync;
+  std::mutex reqMutex;
+  std::mutex resMutex;
+  std::deque<std::function<void()>> reqCbs;
+  std::deque<std::function<void()>> resCbs;
+  std::thread reqThead;
+
+  void RunResInMainThread(uv_async_t *handle) {
+    Nan::HandleScope scope;
+
+    std::function<void()> resCb;
+    {
+      std::lock_guard<std::mutex> lock(reqMutex);
+
+      resCb = resCbs.front();
+      resCbs.pop_front();
+    }
+    if (resCb) {
+      resCb();
+    }
+  }
+  
+  void Resolve(Nan::Persistent<Function>* cb) {
+    {
+        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
+        sweetiekit::resCbs.push_back([cb]() -> void {
+
+          if (cb != nullptr)
+          {
+            Local<Object> asyncObject = Nan::New<Object>();
+            AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
+            Local<Function> callback = Nan::New(*cb);
+            asyncResource.MakeCallback(callback, 0, nullptr);
+          }
+      });
+    }
+    uv_async_send(&sweetiekit::resAsync);
+  }
+  
+  Nan::Callback tickKicker;
+  
+  void Kick() {
+    tickKicker();
+  }
+};
+
+
+namespace sweetiekit {
+void InitExports(Local<Object> exports) {
+  iOSLog("InitExports\n");
+      
+  tickKicker.SetFunction(v8::Function::New(JS_CONTEXT(), [](const FunctionCallbackInfo<Value>& info) -> void {
+}).ToLocalChecked());
+
+  
+  uv_sem_init(&sweetiekit::reqSem, 0);
+  uv_async_init(uv_default_loop(), &sweetiekit::resAsync, sweetiekit::RunResInMainThread);
+  sweetiekit::reqThead = std::thread([]() -> void {
+    for (;;) {
+      uv_sem_wait(&sweetiekit::reqSem);
+
+      std::function<void()> reqCb;
+      {
+        std::lock_guard<std::mutex> lock(sweetiekit::reqMutex);
+
+        if (sweetiekit::reqCbs.size() > 0) {
+          reqCb = sweetiekit::reqCbs.front();
+          sweetiekit::reqCbs.pop_front();
+        }
+      }
+      if (reqCb) {
+        reqCb();
+      } else {
+        break;
+      }
+    }
+  });
+
+
       
         Local<Value> app = makeUIApplication();
         exports->Set(Nan::New("UIApplication").ToLocalChecked(), app);
+      
+        Local<Value> win = makeUIWindow();
+        exports->Set(Nan::New("UIWindow").ToLocalChecked(), win);
 
         Local<Value> controller = makeUIViewController();
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);

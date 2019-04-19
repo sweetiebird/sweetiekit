@@ -21,7 +21,9 @@ using namespace v8;
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
-#define JS_FUNC(x) (Nan::GetFunction(x).ToLocalChecked())
+#define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
+
+#define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
@@ -83,5 +85,26 @@ public: \
   
 #define JS_WRAP_CLASS_END(name) \
 };
+
+#include <array>
+#include <deque>
+#include <mutex>
+#include <thread>
+
+namespace sweetiekit {
+  extern uv_sem_t reqSem;
+  extern uv_async_t resAsync;
+  extern std::mutex reqMutex;
+  extern std::mutex resMutex;
+  extern std::deque<std::function<void()>> reqCbs;
+  extern std::deque<std::function<void()>> resCbs;
+  extern std::thread reqThead;
+
+  void RunResInMainThread(uv_async_t *handle);
+  void Resolve(Nan::Persistent<Function>* cb);
+  void Kick();
+}
+
+extern "C" void iOSLog0(const char* msg);
 
 #endif /* defines_h */

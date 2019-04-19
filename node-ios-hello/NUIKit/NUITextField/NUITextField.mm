@@ -20,6 +20,7 @@ Local<Object> NUITextField::Initialize(Isolate *isolate) {
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetAccessor(proto, JS_STR("frame"), FrameGetter, FrameSetter);
 
   return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
 }
@@ -42,8 +43,6 @@ NAN_METHOD(NUITextField::New) {
     });
   }
   field->Wrap(tfObj);
-
-  Nan::SetAccessor(tfObj, JS_STR("frame"), FrameGetter, FrameSetter);
 
   info.GetReturnValue().Set(tfObj);
 }

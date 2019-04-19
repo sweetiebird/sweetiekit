@@ -10,30 +10,14 @@
 #define NUIButton_h
 
 #import <UIKit/UIKit.h>
+#include "defines.h"
 
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
-using namespace v8;
-using namespace node;
-
-extern Local<Object> makeUIButton();
-
-class NUIButton : public ObjectWrap {
-public:
-  static Local<Object> Initialize(Isolate *isolate);
-  CGRect GetFrame();
-
-protected:
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIButton);
+  const CGRect& GetFrame();
+  static NAN_METHOD(Alloc);
   static NAN_GETTER(FrameGetter);
   static NAN_SETTER(FrameSetter);
-
-  NUIButton();
-  ~NUIButton();
-
-private:
-  UIButton* button;
-};
+  CGRect _rect;
+JS_WRAP_CLASS_END(UIButton);
 
 #endif /* NUIButton_h */

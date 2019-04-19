@@ -1245,27 +1245,49 @@ console.log(sb, vc, view, subview);
         vc.setViewControllers([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;
 */
-const sb = new UIStoryboard('Main');
-const vc = sb.instantiateViewController('tabVC', UITabBarController);
+
+function randi(n) {
+  return Math.floor(Math.random()*n);
+}
+
+process.nextTick(async () => {
+  const sb = new UIStoryboard('Main');
+  const vc = sb.instantiateViewController('tabVC', UITabBarController);
 
 
-const firstVC = sb.instantiateViewController('firstVC');
-const subview = new UIView(0, 0, 200, 200);
-firstVC.view.addSubview(subview);
+  const firstVC = sb.instantiateViewController('firstVC');
+  const subview = new UIView(0, 0, 20, 20);
+  firstVC.view.addSubview(subview);
+  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
 
 
-const secondVC = sb.instantiateViewController('secondVC');
-vc.setViewControllers([firstVC, secondVC], false);
+  const secondVC = sb.instantiateViewController('secondVC');
+  vc.setViewControllers([firstVC, secondVC], false);
 
-const button = new UIButton(0, 0, 100, 100);
-const tf = new UITextField(0, 0, 50, 140);
-const tabCtrl = new UITabBarController();
-const img = new UIImage('second');
+  console.log('pre-button');
+  const button = await UIButton.alloc("Tap me!", 0, 500, 100, 100, () => {
+  
+    const x = randi(400);
+    const y = randi(400);
+    const subview = new UIView(x, y, 20, 20);
+    firstVC.view.addSubview(subview);
+    
+    console.log(`Added a new UIView at ${x},${y}`);
+  });
+  console.log('post-button', button, button.frame);
+  firstVC.view.addSubview(button);
+  
+  const tf = new UITextField(0, 0, 50, 140);
+  const tabCtrl = new UITabBarController();
+  const img = new UIImage('second');
 
-console.log(button, tabCtrl, tf, img);
-setInterval(() => {
-    //sweetiekit.setRandomBackgroundColor();
-}, 2000);
+  console.log(button, tabCtrl, tf, img);
+ 
+ /*
+  setInterval(() => {
+      //sweetiekit.setRandomBackgroundColor();
+  }, 2000);*/
+});
                                                             
 //httpServer = require('./server.js')
 //
