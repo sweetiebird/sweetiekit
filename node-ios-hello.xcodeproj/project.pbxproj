@@ -25,6 +25,7 @@
 		A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672A4226994BD00562A42 /* NUIButton.mm */; };
 		A1D672B722699DB300562A42 /* NUITextField.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672B622699DB300562A42 /* NUITextField.mm */; };
 		A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672B922699DB900562A42 /* NUITabBarController.mm */; };
+		A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672BF2269A06F00562A42 /* NUIImage.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -94,6 +95,8 @@
 		A1D672B622699DB300562A42 /* NUITextField.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextField.mm; sourceTree = "<group>"; };
 		A1D672B922699DB900562A42 /* NUITabBarController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarController.mm; sourceTree = "<group>"; };
 		A1D672BA22699DB900562A42 /* NUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarController.h; sourceTree = "<group>"; };
+		A1D672BE2269A06500562A42 /* NUIImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImage.h; sourceTree = "<group>"; };
+		A1D672BF2269A06F00562A42 /* NUIImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImage.mm; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1D672BD2269A05700562A42 /* NUIImage */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
@@ -280,6 +284,15 @@
 				A1D672B922699DB900562A42 /* NUITabBarController.mm */,
 			);
 			path = NUITabBarController;
+			sourceTree = "<group>";
+		};
+		A1D672BD2269A05700562A42 /* NUIImage */ = {
+			isa = PBXGroup;
+			children = (
+				A1D672BE2269A06500562A42 /* NUIImage.h */,
+				A1D672BF2269A06F00562A42 /* NUIImage.mm */,
+			);
+			path = NUIImage;
 			sourceTree = "<group>";
 		};
 		A1FC19F5225C65DC00085571 = {
@@ -460,6 +473,7 @@
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
+				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,

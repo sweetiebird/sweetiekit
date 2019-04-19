@@ -13,6 +13,7 @@
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
 #include "NUITabBarController.h"
+#include "NUIImage.h"
 #include <unistd.h>
 
 #include <string>
