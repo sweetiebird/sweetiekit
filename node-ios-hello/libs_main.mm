@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #include "NNSObject.h"
+#include "NNSUserDefaults.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
 #include "NUIViewController.h"
@@ -134,6 +135,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_NSObject = NNSObject::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSObject").ToLocalChecked(), N_NSObject.first);
+  
+        auto N_NSUserDefaults = NNSUserDefaults::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSUserDefaults").ToLocalChecked(), N_NSUserDefaults.first);
   
         auto N_UIApplication = NUIApplication::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIApplication").ToLocalChecked(), N_UIApplication.first);
