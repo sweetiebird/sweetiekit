@@ -269,7 +269,6 @@
 				211E76AC226A1BF100B838AF /* NUIImageView */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
 				211E76A4226A0CE600B838AF /* NUIResponder */,
-				211E769E2269EF5E00B838AF /* NNSObject */,
 				211E76982269B10A00B838AF /* NUIWindow */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672BD2269A05700562A42 /* NUIImage */,
@@ -388,6 +387,14 @@
 			path = NUIImage;
 			sourceTree = "<group>";
 		};
+		A1E2D7A5226A500100FA1562 /* NObjC */ = {
+			isa = PBXGroup;
+			children = (
+				211E769E2269EF5E00B838AF /* NNSObject */,
+			);
+			path = NObjC;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +424,7 @@
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A1D672A02269942100562A42 /* Resources */,
+				A1E2D7A5226A500100FA1562 /* NObjC */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
