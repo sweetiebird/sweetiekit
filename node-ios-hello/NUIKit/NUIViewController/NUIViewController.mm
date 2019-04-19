@@ -53,9 +53,6 @@ NAN_METHOD(NUIViewController::New) {
   ctrl->me = vc;
   ctrl->Wrap(controllerObj);
 
-//  Nan::SetAccessor(controllerObj, JS_STR("width"), WidthGetter);
-//  Nan::SetAccessor(controllerObj, JS_STR("height"), HeightGetter);
-
   info.GetReturnValue().Set(controllerObj);
 }
 
@@ -71,23 +68,3 @@ NAN_GETTER(NUIViewController::ViewGetter) {
 
   info.GetReturnValue().Set(viewObj);
 }
-
-//unsigned int NUIViewController::GetWidth() {
-//  if (controller) {
-//    return 42;
-////    return [[[controller view] frame] width];
-//  } else {
-//    return 0;
-//  }
-//}
-
-//NUIView* NUIViewController::GetView() {
-//  if (controller) {
-//   viewWrapper->me = [controller view];
-//   return viewWrapper;
-////    return controller->view.frame.height;
-//  } else {
-//    return nullptr;
-//  }
-//}
-

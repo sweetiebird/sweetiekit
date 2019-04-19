@@ -46,7 +46,13 @@ NAN_METHOD(NUIStoryboard::New) {
     type = "Main";
   }
   NSString* result = [NSString stringWithUTF8String:type.c_str()];
-  sb->me = [UIStoryboard storyboardWithName:result bundle:nil];
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      sb->me = [UIStoryboard storyboardWithName:result bundle:nil];
+    });
+  }
+
   sb->Wrap(storyboardObj);
 
   info.GetReturnValue().Set(storyboardObj);

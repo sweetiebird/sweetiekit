@@ -37,8 +37,10 @@ NAN_METHOD(NUIButton::New) {
   double height = TO_DOUBLE(info[3]);
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       btn->button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)];
+      
+      // return to background queue and finish method
     });
   }
 
@@ -73,7 +75,7 @@ NAN_SETTER(NUIButton::FrameSetter) {
   double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       [btn->button frame] = CGRectMake(x, y, width, height);
     });
   }

@@ -1212,7 +1212,6 @@ process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 const sweetiekit = require('std:sweetiekit.node');
 const {
   UIStoryboard,
-  UITabBarController,
   UIViewController,
   UIView,
   UIButton,

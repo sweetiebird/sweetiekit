@@ -43,7 +43,7 @@ NAN_METHOD(NUIView::New) {
       double height = TO_DOUBLE(info[3]);
 
       @autoreleasepool {
-        dispatch_async(dispatch_get_main_queue(), ^ {
+        dispatch_sync(dispatch_get_main_queue(), ^ {
             view->me = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
         });
       }
@@ -80,7 +80,7 @@ NAN_SETTER(NUIView::FrameSetter) {
   double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       [view->me frame] = CGRectMake(x, y, width, height);
     });
   }
@@ -99,7 +99,7 @@ NAN_METHOD(NUIView::AddSubview) {
   NUIView *subview = ObjectWrap::Unwrap<NUIView>(JS_OBJ(info[0]));
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       [subview->me setBackgroundColor:[UIColor purpleColor]];
       [view->me addSubview:subview->me];
     });

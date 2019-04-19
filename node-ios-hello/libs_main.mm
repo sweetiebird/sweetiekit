@@ -63,9 +63,6 @@ namespace sweetiekit {
         Local<Value> uiTextField = makeUITextField();
         exports->Set(Nan::New("UITextField").ToLocalChecked(), uiTextField);
 
-        Local<Value> uiTabTabBarController = makeUITabBarController();
-        exports->Set(Nan::New("UITabBarController").ToLocalChecked(), uiTabTabBarController);
-
         Local<Value> uiImage = makeUIImage();
         exports->Set(Nan::New("UIImage").ToLocalChecked(), uiImage);
 

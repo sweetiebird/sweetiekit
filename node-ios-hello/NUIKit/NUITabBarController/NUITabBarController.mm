@@ -19,7 +19,7 @@ Local<Object> NUITabBarController::Initialize(Isolate *isolate) {
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITabController"));
+  ctor->SetClassName(JS_STR("UITabBarController"));
   ctor->Inherit(Nan::New(NUIViewController::type));
   type.Reset(ctor);
 
@@ -38,7 +38,7 @@ NAN_METHOD(NUITabBarController::New) {
   NUITabBarController *ctrl = new NUITabBarController();
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
         ctrl->me = [UITabBarController alloc];
     });
   }
@@ -78,7 +78,7 @@ NAN_METHOD(NUITabBarController::SetViewControllers) {
   UITabBarController* c = (UITabBarController*)vc->me;
   
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       [c setViewControllers:controllers animated:animated];
       [[[UIApplication sharedApplication] keyWindow] setRootViewController:c];
     });
