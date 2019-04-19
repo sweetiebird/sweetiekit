@@ -51,7 +51,7 @@ NAN_METHOD(NUIView::New) {
   }
   view->Wrap(viewObj);
 
-  Nan::SetAccessor(viewObj, JS_STR("frame"), FrameGetter);
+  Nan::SetAccessor(viewObj, JS_STR("frame"), FrameGetter, FrameSetter);
 
   info.GetReturnValue().Set(viewObj);
 }
@@ -67,6 +67,23 @@ NAN_GETTER(NUIView::FrameGetter) {
   result->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
 
   info.GetReturnValue().Set(result);
+}
+
+NAN_SETTER(NUIView::FrameSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+
+  @autoreleasepool {
+    dispatch_async(dispatch_get_main_queue(), ^ {
+      [view->me frame] = CGRectMake(x, y, width, height);
+    });
+  }
 }
 
 CGRect NUIView::GetFrame() {

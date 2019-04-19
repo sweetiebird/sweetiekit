@@ -17,8 +17,6 @@
 using namespace v8;
 using namespace node;
 
-//class NUIViewController;
-
 extern Local<Object> makeUIView();
 
 class NUIView : public ObjectWrap {
@@ -28,13 +26,14 @@ public:
 
 protected:
   static NAN_METHOD(New);
+  static NAN_METHOD(AddSubview);
   static NAN_GETTER(FrameGetter);
+  static NAN_SETTER(FrameSetter);
 
   NUIView();
   ~NUIView();
 
 private:
-//  friend class NUIViewController;
   UIView* me;
 };
 

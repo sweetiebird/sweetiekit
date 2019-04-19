@@ -1221,6 +1221,8 @@ console.log(exokit);
 const sb = new exokit.UIStoryboard('Main');
 const vc = sb.instantiateViewController('firstVC', exokit.UIViewController);
 const view = vc.view(exokit.UIView);
+view.frame = { x: 0, y: 0, width: 100, height: view.frame.height };
+
 console.log(sb, vc, view);
 
 setInterval(() => {
