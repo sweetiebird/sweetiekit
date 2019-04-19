@@ -12,6 +12,7 @@
 #include "NUIView.h"
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
+#include "NUITabBarController.h"
 #include <unistd.h>
 
 #include <string>
@@ -40,7 +41,10 @@ namespace sweetiekit {
 
         Local<Value> controller = makeUIViewController();
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);
-        
+      
+        Local<Value> uiTabBarController = makeUITabBarController();
+        exports->Set(Nan::New("UITabBarController").ToLocalChecked(), uiTabBarController);
+
         Local<Value> uiView = makeUIView();
         exports->Set(Nan::New("UIView").ToLocalChecked(), uiView);
         
