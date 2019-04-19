@@ -28,16 +28,17 @@ public:
 //  unsigned int GetHeight();
 //  NUIView* GetView();
 
-protected:
+//protected:
   static NAN_METHOD(New);
 //  static NAN_GETTER(View);
 //  static NAN_GETTER(HeightGetter);
   static NAN_METHOD(View);
+  static NAN_METHOD(SetViewControllers);
 
   NUIViewController();
   ~NUIViewController();
 
-private:
+//private:
 //  NUIView* viewWrapper;
   UIViewController* controller;
 };

@@ -1209,22 +1209,51 @@ leftpad = require('leftpad')
 
 process.stderr.write(leftpad(' exokit-node\n', 30, '='));
 
-exokit = require('/package/build/Release/exokit.node');
+const exokit = require('/package/build/Release/exokit.node');
+const {
+  UIStoryboard,
+  UIViewController,
+  UIView,
+} = exokit;
                                                             
 console.log(exokit);
 
-//const vc = new exokit.UIViewController();
+//const vc = new UIViewController();
 //console.log(vc);
-//const view = new exokit.UIView(0, 0, 200, 200);
+//const view = new UIView(0, 0, 200, 200);
 //console.log(view, view.frame);
 
-const sb = new exokit.UIStoryboard('Main');
-const vc = sb.instantiateViewController('firstVC', exokit.UIViewController);
-const view = vc.view(exokit.UIView);
-const subview = new exokit.UIView(0, 0, 200, 200);
+/*
+const sb = new UIStoryboard('Main');
+const vc = sb.instantiateViewController('firstVC', UIViewController);
+const view = vc.view(UIView);
+const subview = new UIView(0, 0, 200, 200);
 view.addSubview(subview);
 
 console.log(sb, vc, view, subview);
+*/
+
+/*
+
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+        let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
+        let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "secondVC") as! SecondViewController
+        vc.setViewControllers([firstVC, secondVC], animated: false)
+        window?.rootViewController = vc;
+*/
+const sb = new UIStoryboard('Main');
+const vc = sb.instantiateViewController('tabVC', UIViewController);
+
+
+const firstVC = sb.instantiateViewController('firstVC', UIViewController);
+const view = firstVC.view(UIView);
+const subview = new UIView(0, 0, 200, 200);
+view.addSubview(subview);
+
+
+const secondVC = sb.instantiateViewController('secondVC', UIViewController);
+vc.setViewControllers([firstVC, secondVC], false);
+
 
 setInterval(() => {
     exokit.setRandomBackgroundColor();

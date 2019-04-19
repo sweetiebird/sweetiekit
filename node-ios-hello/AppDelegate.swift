@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        /*
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+        let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
+        let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "secondVC") as! SecondViewController
+        vc.setViewControllers([firstVC, secondVC], animated: false)
+        window?.rootViewController = vc;*/
+        
         iOSLog0("Finished launching\n");
         if (false) {
             run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");

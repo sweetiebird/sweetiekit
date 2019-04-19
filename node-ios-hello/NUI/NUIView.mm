@@ -97,6 +97,7 @@ NAN_METHOD(NUIView::AddSubview) {
 
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
+      [subview->me setBackgroundColor:[UIColor purpleColor]];
       [view->me addSubview:subview->me];
     });
   }

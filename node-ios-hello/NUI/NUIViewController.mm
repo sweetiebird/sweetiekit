@@ -24,6 +24,7 @@ Local<Object> NUIViewController::Initialize(Isolate *isolate) {
 
   //Nan::SetMethod(proto, "init", InitMethod);
   Nan::SetMethod(proto, "view", View);
+  Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
 
   return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
 }
@@ -88,6 +89,33 @@ NAN_METHOD(NUIViewController::View) {
 //    return nullptr;
 //  }
 //}
+
+
+NAN_METHOD(NUIViewController::SetViewControllers) {
+  NUIViewController *vc = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info.This()));
+
+
+  Local<Array> array = Local<Array>::Cast(info[0]);
+  bool animated = TO_BOOL(info[1]);
+  
+  NSMutableArray *controllers = [NSMutableArray array];
+
+  for (unsigned int i = 0; i < array->Length(); i++ ) {
+    if (Nan::Has(array, i).FromJust()) {
+      NUIViewController *view = ObjectWrap::Unwrap<NUIViewController>(JS_OBJ(array->Get(i)));
+      [controllers addObject:view->controller];
+    }
+  }
+  
+  UITabBarController* c = (UITabBarController*)vc->controller;
+  
+  @autoreleasepool {
+    dispatch_async(dispatch_get_main_queue(), ^ {
+      [c setViewControllers:controllers animated:animated];
+      [[[UIApplication sharedApplication] keyWindow] setRootViewController:c];
+    });
+  }
+}
 
 Local<Object> makeUIViewController() {
   Isolate *isolate = Isolate::GetCurrent();
