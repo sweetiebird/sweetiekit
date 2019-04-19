@@ -331,11 +331,15 @@ NAN_GETTER(NUIView::SubviewsGetter) {
 
 
 CGRect NUIView::GetFrame() {
-  if (As<UIView>()) {
-   return [As<UIView>() frame];
-  } else {
-    return CGRectMake(0, 0, 0, 0);
+  __block CGRect frame = CGRectMake(0,0,0,0);
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      if (As<UIView>()) {
+        frame = [As<UIView>() frame];
+      }
+    });
   }
+  return frame;
 }
 
 NAN_METHOD(NUIView::SizeThatFits) {
