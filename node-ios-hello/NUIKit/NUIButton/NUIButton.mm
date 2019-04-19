@@ -26,7 +26,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("frame"), FrameGetter, FrameSetter);
+  Nan::SetAccessor(proto, JS_STR("title"), TitleGetter, TitleSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -107,33 +107,31 @@ NAN_METHOD(NUIButton::Alloc) {
   info.GetReturnValue().Set(scope.Escape(resolver->GetPromise()));
 }
 
-NAN_GETTER(NUIButton::FrameGetter) {
+NAN_GETTER(NUIButton::TitleGetter) {
   Nan::HandleScope scope;
 
   NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  auto frame = view->GetFrame();
-  result->Set(JS_STR("width"), JS_FLOAT(frame.size.width));
-  result->Set(JS_STR("height"), JS_FLOAT(frame.size.height));
-  result->Set(JS_STR("x"), JS_FLOAT(frame.origin.x));
-  result->Set(JS_STR("y"), JS_FLOAT(frame.origin.y));
+  auto result = JS_STR([[view->As<UIButton>() currentTitle] UTF8String]);
   
   info.GetReturnValue().Set(result);
 }
 
-NAN_SETTER(NUIButton::FrameSetter) {
+NAN_SETTER(NUIButton::TitleSetter) {
   Nan::HandleScope scope;
 
   NUIButton *btn = ObjectWrap::Unwrap<NUIButton>(info.This());
 
-  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-
+  std::string title;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    title = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [btn->As<UIButton>() frame] = CGRectMake(x, y, width, height);
+      [btn->As<UIButton>() setTitle:[NSString stringWithUTF8String:title.c_str()] forState:[btn->As<UIButton>() state]];
     });
   }
 }

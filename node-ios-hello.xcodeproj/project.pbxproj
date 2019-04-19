@@ -15,6 +15,9 @@
 		211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76A8226A0DE400B838AF /* NUIResponder.mm */; };
 		211E76AB226A11E200B838AF /* NUIControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76AA226A11E200B838AF /* NUIControl.mm */; };
 		211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B2226A1C3600B838AF /* NUIImageView.mm */; };
+		211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B4226A332D00B838AF /* NodeUIViewController.swift */; };
+		211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B6226A3E4D00B838AF /* NodeUITabBarController.swift */; };
+		211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
@@ -90,6 +93,9 @@
 		211E76AA226A11E200B838AF /* NUIControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIControl.mm; sourceTree = "<group>"; };
 		211E76B1226A1C3600B838AF /* NUIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIImageView.h; sourceTree = "<group>"; };
 		211E76B2226A1C3600B838AF /* NUIImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImageView.mm; sourceTree = "<group>"; };
+		211E76B4226A332D00B838AF /* NodeUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeUIViewController.swift; sourceTree = "<group>"; };
+		211E76B6226A3E4D00B838AF /* NodeUITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeUITabBarController.swift; sourceTree = "<group>"; };
+		211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddTargetClosure.swift"; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "../node-ios-full/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 			children = (
 				A1D67291226953B100562A42 /* NUIViewController.h */,
 				A1D67292226953BB00562A42 /* NUIViewController.mm */,
+				211E76B4226A332D00B838AF /* NodeUIViewController.swift */,
 			);
 			path = NUIViewController;
 			sourceTree = "<group>";
@@ -357,6 +364,7 @@
 			children = (
 				A1D672B522699DB300562A42 /* NUITextField.h */,
 				A1D672B622699DB300562A42 /* NUITextField.mm */,
+				211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */,
 			);
 			path = NUITextField;
 			sourceTree = "<group>";
@@ -366,6 +374,7 @@
 			children = (
 				A1D672BA22699DB900562A42 /* NUITabBarController.h */,
 				A1D672B922699DB900562A42 /* NUITabBarController.mm */,
+				211E76B6226A3E4D00B838AF /* NodeUITabBarController.swift */,
 			);
 			path = NUITabBarController;
 			sourceTree = "<group>";
@@ -556,7 +565,9 @@
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
+				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
+				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
@@ -564,6 +575,7 @@
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
+				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,

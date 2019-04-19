@@ -8,16 +8,11 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: NodeUIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let vc = UIViewController()
-//        present(vc, animated: true, completion: nil)
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-
 }
 
 @objc
@@ -29,3 +24,42 @@ extension UIViewController {
         self.view.backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
     }
 }
+/*
+extension FirstViewController: UITextFieldDelegate {
+
+  private func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("TextField did begin editing method called")
+    }
+
+  private func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextField did end editing method called")
+    }
+
+  private func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
+    }
+
+  private func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+
+  private func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+
+  private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true;
+    }
+
+  private func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("TextField should return method called")
+        textField.resignFirstResponder();
+        return true;
+    }
+
+}
+*/

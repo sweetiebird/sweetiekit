@@ -22,11 +22,27 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_METHOD(AddSubview);
   static NAN_GETTER(FrameGetter);
   static NAN_SETTER(FrameSetter);
+  static NAN_GETTER(OriginGetter);
+  static NAN_SETTER(OriginSetter);
+  static NAN_GETTER(CenterGetter);
+  static NAN_SETTER(CenterSetter);
+  static NAN_GETTER(SizeGetter);
+  static NAN_SETTER(SizeSetter);
   static NAN_GETTER(XGetter);
   static NAN_SETTER(XSetter);
   static NAN_GETTER(YGetter);
   static NAN_SETTER(YSetter);
+  static NAN_GETTER(WidthGetter);
+  static NAN_SETTER(WidthSetter);
+  static NAN_GETTER(HeightGetter);
+  static NAN_SETTER(HeightSetter);
+  static NAN_GETTER(AutoresizesSubviewsGetter);
+  static NAN_SETTER(AutoresizesSubviewsSetter);
+  static NAN_METHOD(SizeThatFits);
+  static NAN_METHOD(SizeToFit);
   static NAN_METHOD(SetBackgroundColor);
+private:
+  static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);
 
 #endif /* NUIView_h */

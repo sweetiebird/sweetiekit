@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
@@ -48,6 +49,12 @@ NAN_METHOD(NUIViewController::New) {
   UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
 
   ctrl->SetNSObject(vc);
+  [ctrl->As<UIViewController>() addTargetClosureWithClosure:^(UITextField* field){
+    const char* text = [[field text] UTF8String];
+    iOSLog0(text);
+    //sweetiekit::Resolve(cb);
+    return true;
+  }];
   ctrl->Wrap(controllerObj);
 
   info.GetReturnValue().Set(controllerObj);

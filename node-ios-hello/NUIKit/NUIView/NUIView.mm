@@ -13,6 +13,7 @@
 #include "NUIResponder.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
+CGSize NUIView::tmp_Size;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
@@ -27,9 +28,17 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("frame"), FrameGetter, FrameSetter);
+  Nan::SetAccessor(proto, JS_STR("origin"), OriginGetter, OriginSetter);
+  Nan::SetAccessor(proto, JS_STR("center"), CenterGetter, CenterSetter);
+  Nan::SetAccessor(proto, JS_STR("size"), SizeGetter, SizeSetter);
   Nan::SetAccessor(proto, JS_STR("x"), XGetter, XSetter);
   Nan::SetAccessor(proto, JS_STR("y"), YGetter, YSetter);
+  Nan::SetAccessor(proto, JS_STR("width"), WidthGetter, WidthSetter);
+  Nan::SetAccessor(proto, JS_STR("height"), HeightGetter, HeightSetter);
+  Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
   Nan::SetMethod(proto, "addSubview", AddSubview);
+  Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
+  Nan::SetMethod(proto, "sizeToFit", SizeToFit);
   Nan::SetMethod(proto, "setBackgroundColor", SetBackgroundColor);
 
   // ctor
@@ -68,11 +77,15 @@ NAN_GETTER(NUIView::FrameGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-   Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
-  result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
-  result->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
-  result->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  Local<Object> origin = Object::New(Isolate::GetCurrent());
+  origin->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
+  origin->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
+  result->Set(JS_STR("origin"), JS_OBJ(origin));
+  Local<Object> size = Object::New(Isolate::GetCurrent());
+  size->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
+  size->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
+  result->Set(JS_STR("size"), JS_OBJ(size));
 
   info.GetReturnValue().Set(result);
 }
@@ -82,14 +95,100 @@ NAN_SETTER(NUIView::FrameSetter) {
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
 
-  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
+  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
+  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
+  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       [view->As<UIView>() setFrame:CGRectMake(x, y, width, height)];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::OriginGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
+  result->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
+
+  info.GetReturnValue().Set(result);
+}
+
+NAN_SETTER(NUIView::OriginSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.origin.x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+  frame.origin.y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::CenterGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  CGRect frame(view->GetFrame());
+  result->Set(JS_STR("x"), JS_FLOAT(frame.origin.x + frame.size.width/2));
+  result->Set(JS_STR("y"), JS_FLOAT(frame.origin.y + frame.size.height/2));
+
+  info.GetReturnValue().Set(result);
+}
+
+NAN_SETTER(NUIView::CenterSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+  double dx = x - (frame.origin.x + frame.size.width/2);
+  double dy = y - (frame.origin.y + frame.size.height/2);
+  frame.origin.x += dx;
+  frame.origin.y += dy;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::SizeGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+   Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
+  result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
+
+  info.GetReturnValue().Set(result);
+}
+
+NAN_SETTER(NUIView::SizeSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.size.width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+  frame.size.height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
     });
   }
 }
@@ -138,12 +237,103 @@ NAN_SETTER(NUIView::YSetter) {
   }
 }
 
+NAN_GETTER(NUIView::WidthGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  info.GetReturnValue().Set(JS_NUM(view->GetFrame().size.width));
+}
+
+NAN_SETTER(NUIView::WidthSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.size.width = TO_DOUBLE(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::HeightGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  info.GetReturnValue().Set(JS_NUM(view->GetFrame().size.height));
+}
+
+NAN_SETTER(NUIView::HeightSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.size.height = TO_DOUBLE(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::AutoresizesSubviewsGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  info.GetReturnValue().Set(JS_BOOL([view->As<UIView>() autoresizesSubviews]));
+}
+
+NAN_SETTER(NUIView::AutoresizesSubviewsSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  
+  [view->As<UIView>() setAutoresizesSubviews:TO_BOOL(value)];
+}
 
 CGRect NUIView::GetFrame() {
   if (As<UIView>()) {
    return [As<UIView>() frame];
   } else {
     return CGRectMake(0, 0, 0, 0);
+  }
+}
+
+NAN_METHOD(NUIView::SizeThatFits) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  
+  tmp_Size.width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+  tmp_Size.height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      CGSize size = [view->As<UIView>() sizeThatFits:tmp_Size];
+      tmp_Size.width = size.width;
+      tmp_Size.height = size.height;
+    });
+  }
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("width"), JS_FLOAT(tmp_Size.width));
+  result->Set(JS_STR("height"), JS_FLOAT(tmp_Size.height));
+
+  info.GetReturnValue().Set(result);
+}
+
+NAN_METHOD(NUIView::SizeToFit) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() sizeToFit];
+    });
   }
 }
 

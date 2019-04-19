@@ -14,8 +14,8 @@
 JS_WRAP_CLASS(UIButton, UIControl);
   const CGRect& GetFrame();
   static NAN_METHOD(Alloc);
-  static NAN_GETTER(FrameGetter);
-  static NAN_SETTER(FrameSetter);
+  static NAN_GETTER(TitleGetter);
+  static NAN_SETTER(TitleSetter);
   CGRect _rect;
 JS_WRAP_CLASS_END(UIButton);
 
