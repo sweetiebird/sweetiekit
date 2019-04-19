@@ -1212,6 +1212,7 @@ process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 const sweetiekit = require('std:sweetiekit.node');
 const {
   UIStoryboard,
+  UITabBarController,
   UIViewController,
   UIView,
 } = sweetiekit;
@@ -1242,7 +1243,7 @@ console.log(sb, vc, view, subview);
         window?.rootViewController = vc;
 */
 const sb = new UIStoryboard('Main');
-const vc = sb.instantiateViewController('tabVC');
+const vc = sb.instantiateViewController('tabVC', UITabBarController);
 
 
 const firstVC = sb.instantiateViewController('firstVC');

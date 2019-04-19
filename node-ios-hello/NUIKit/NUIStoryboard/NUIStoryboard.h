@@ -10,29 +10,11 @@
 #define NUIStoryboard_h
 
 #import <UIKit/UIKit.h>
+#include "defines.h"
 
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
-using namespace v8;
-using namespace node;
-
-extern Local<Object> makeUIStoryboard();
-
-class NUIStoryboard : public ObjectWrap {
-public:
-  static Local<Object> Initialize(Isolate *isolate);
-
-protected:
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIStoryboard);
   static NAN_METHOD(InstantiateViewController);
-
-  NUIStoryboard();
-  ~NUIStoryboard();
-
-private:
-  UIStoryboard* storyboard;
-};
+JS_WRAP_CLASS_END(UIStoryboard);
 
 
 #endif /* NUIStoryboard_h */

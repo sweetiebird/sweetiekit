@@ -11,31 +11,13 @@
 
 #import <UIKit/UIKit.h>
 
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
-using namespace v8;
-using namespace node;
+#include "defines.h"
 
-extern Local<Object> makeUIView();
-
-class NUIView : public ObjectWrap {
-public:
-  static Nan::Persistent<FunctionTemplate> type;
-  static Local<Object> Initialize(Isolate *isolate);
+JS_WRAP_CLASS(UIView);
   CGRect GetFrame();
-
-protected:
-  static NAN_METHOD(New);
   static NAN_METHOD(AddSubview);
   static NAN_GETTER(FrameGetter);
   static NAN_SETTER(FrameSetter);
-
-  NUIView();
-  ~NUIView();
-
-private:
-  UIView* me;
-};
+JS_WRAP_CLASS_END(UIView);
 
 #endif /* NUIView_h */
