@@ -1214,6 +1214,10 @@ const {
   UIStoryboard,
   UIViewController,
   UIView,
+  UIButton,
+  UITextField,
+  UITabBarController,
+  UIImage,
 } = sweetiekit;
                                                             
 console.log(sweetiekit);
@@ -1253,7 +1257,12 @@ firstVC.view.addSubview(subview);
 const secondVC = sb.instantiateViewController('secondVC');
 vc.setViewControllers([firstVC, secondVC], false);
 
+const button = new UIButton(0, 0, 100, 100);
+const tf = new UITextField(0, 0, 50, 140);
+const tabCtrl = new UITabBarController();
+const img = new UIImage('second');
 
+console.log(button, tabCtrl, tf, img);
 setInterval(() => {
     //sweetiekit.setRandomBackgroundColor();
 }, 2000);

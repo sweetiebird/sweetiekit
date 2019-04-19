@@ -53,7 +53,7 @@ NAN_GETTER(NUIButton::FrameGetter) {
   Nan::HandleScope scope;
 
   NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
-   Local<Object> result = Object::New(Isolate::GetCurrent());
+  Local<Object> result = Object::New(Isolate::GetCurrent());
   result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
   result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
   result->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));

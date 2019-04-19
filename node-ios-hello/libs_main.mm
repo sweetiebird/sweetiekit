@@ -14,6 +14,7 @@
 #include "NUIButton.h"
 #include "NUITabBarController.h"
 #include "NUIImage.h"
+#include "NUITextField.h"
 #include <unistd.h>
 
 #include <string>
@@ -54,6 +55,15 @@ namespace sweetiekit {
 
         Local<Value> uiButton = makeUIButton();
         exports->Set(Nan::New("UIButton").ToLocalChecked(), uiButton);
+
+        Local<Value> uiTextField = makeUITextField();
+        exports->Set(Nan::New("UITextField").ToLocalChecked(), uiTextField);
+
+        Local<Value> uiTabTabBarController = makeUITabBarController();
+        exports->Set(Nan::New("UITabBarController").ToLocalChecked(), uiTabTabBarController);
+
+        Local<Value> uiImage = makeUIImage();
+        exports->Set(Nan::New("UIImage").ToLocalChecked(), uiImage);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
