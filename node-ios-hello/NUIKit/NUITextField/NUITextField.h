@@ -21,6 +21,9 @@ JS_WRAP_CLASS(UITextField, UIControl);
   static NAN_SETTER(TextSetter);
   static NAN_GETTER(DelegateGetter);
   static NAN_SETTER(DelegateSetter);
+  static NAN_GETTER(CallbackGetter);
+  static NAN_SETTER(CallbackSetter);
+  Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 
 #endif /* NUITextField_h */

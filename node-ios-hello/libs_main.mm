@@ -77,13 +77,14 @@ namespace sweetiekit {
     {
         std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
         sweetiekit::resCbs.push_back([cb]() -> void {
-
           if (cb != nullptr)
           {
-            Local<Object> asyncObject = Nan::New<Object>();
-            AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
             Local<Function> callback = Nan::New(*cb);
-            asyncResource.MakeCallback(callback, 0, nullptr);
+            if (!callback.IsEmpty()) {
+              Local<Object> asyncObject = Nan::New<Object>();
+              AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
+              asyncResource.MakeCallback(callback, 0, nullptr);
+            }
           }
       });
     }

@@ -29,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITextField::Initialize(Isola
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
   Nan::SetAccessor(proto, JS_STR("delegate"), DelegateGetter, DelegateSetter);
+  Nan::SetAccessor(proto, JS_STR("callback"), CallbackGetter, CallbackSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -68,7 +69,7 @@ NAN_METHOD(NUITextField::Alloc) {
   double width = TO_DOUBLE(info[2]);
   double height = TO_DOUBLE(info[3]);
   
-  Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
+  field->_callback->Reset(Local<Function>::Cast(info[4]));
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
@@ -83,7 +84,7 @@ NAN_METHOD(NUITextField::Alloc) {
       [txt setClearButtonMode:UITextFieldViewModeWhileEditing];
       [txt setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
       [txt setTargetClosureWithClosure:^(UITextField*){
-        sweetiekit::Resolve(cb);
+        sweetiekit::Resolve(field->_callback);
         return true;
       }];
     });
@@ -96,8 +97,15 @@ NAN_GETTER(NUITextField::TextGetter) {
   Nan::HandleScope scope;
 
   NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
-
-  info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+  __block NSString* str = nullptr;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      str = [view->As<UITextField>() text];
+    });
+  }
+  if (str != nullptr) {
+    info.GetReturnValue().Set(JS_STR([str UTF8String]));
+  }
 }
 
 NAN_SETTER(NUITextField::TextSetter) {
@@ -125,7 +133,7 @@ NAN_GETTER(NUITextField::DelegateGetter) {
 
   NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
 
-  info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
 }
 
 NAN_SETTER(NUITextField::DelegateSetter) {
@@ -142,6 +150,31 @@ NAN_SETTER(NUITextField::DelegateSetter) {
   }
 }
 
-NUITextField::NUITextField () {}
-NUITextField::~NUITextField () {}
+NAN_GETTER(NUITextField::CallbackGetter) {
+  Nan::HandleScope scope;
+
+  NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
+
+  info.GetReturnValue().Set(Nan::New(view->_callback));
+}
+
+NAN_SETTER(NUITextField::CallbackSetter) {
+  Nan::HandleScope scope;
+
+  NUITextField *field = ObjectWrap::Unwrap<NUITextField>(info.This());
+  field->_callback->Reset(Local<Function>::Cast(value));
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      UITextField* txt = field->As<UITextField>();
+      [txt setTargetClosureWithClosure:^(UITextField*){
+        sweetiekit::Resolve(field->_callback);
+        return true;
+      }];
+    });
+  }
+}
+
+NUITextField::NUITextField () : _callback(new Nan::Persistent<Function>()) {}
+NUITextField::~NUITextField () { delete _callback; }
 
