@@ -1211,6 +1211,8 @@ process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
 const sweetiekit = require('std:sweetiekit.node');
 const {
+  NSObject,
+  NSUserDefaults,
   UIApplication,
   UIWindow,
   UIStoryboard,
@@ -1252,6 +1254,13 @@ console.log(sb, vc, view, subview);
 
 function buildUI() {
   const app = new UIApplication();
+  const kv = NSUserDefaults.standardUserDefaults;
+  console.log(kv);
+  console.log(kv.stringForKey("Foo"));
+  console.log(kv.stringForKey("Foo2"));
+  console.log(kv.setValueForKey("Asdf", "Foo"));
+  console.log(kv.synchronize());
+  console.log(kv.stringForKey("Foo"));
   const sb = new UIStoryboard('Main');
   const vc = sb.instantiateViewController('loginVC');
   app.keyWindow.setRootViewController(vc);
