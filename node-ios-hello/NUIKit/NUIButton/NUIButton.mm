@@ -82,6 +82,7 @@ NAN_METHOD(NUIButton::Alloc) {
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
       btn->me = [[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)];
+      [btn->me assignAssociatedWrapperWithPtr:btn forKey:@"sweetiekit.wrapper"];
       [btn->me setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [btn->me setTitle:label forState:UIControlStateNormal];
       [btn->me addTargetClosureWithClosure:^(UIButton*){

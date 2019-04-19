@@ -65,10 +65,10 @@ Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::val
 #include <v8.h>
 #include <node.h>
 #include <nan.h>
+using namespace v8;
+using namespace node;
 
 #define JS_WRAP_CLASS(name) \
-using namespace v8; \
-using namespace node; \
 \
 extern Local<Object> make##name(); \
 \

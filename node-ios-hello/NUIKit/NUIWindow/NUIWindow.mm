@@ -13,11 +13,13 @@
 
 Nan::Persistent<FunctionTemplate> NUIWindow::type;
 
-Local<Object> NUIWindow::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUIWindow::Initialize(Isolate *isolate)
+{
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIWindow"));
   type.Reset(ctor);
@@ -25,7 +27,10 @@ Local<Object> NUIWindow::Initialize(Isolate *isolate) {
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIWindow::New) {
@@ -36,7 +41,7 @@ NAN_METHOD(NUIWindow::New) {
   NUIWindow *view = new NUIWindow();
 
   if (info[0]->IsExternal()) {
-    view->me = (__bridge UIWindow *)(info[0].As<External>()->Value());
+    view->SetNSObject((__bridge UIWindow *)(info[0].As<External>()->Value()));
   } else {
   /*
       double x = TO_DOUBLE(info[0]);
@@ -59,40 +64,19 @@ NAN_METHOD(NUIWindow::New) {
   info.GetReturnValue().Set(viewObj);
 }
 
-Local<Object> makeUIWindow() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUIWindow::Initialize(isolate));
-}
-
 NUIWindow::NUIWindow () {}
 NUIWindow::~NUIWindow () {}
 
 
 NAN_METHOD(NUIWindow::SetRootViewController) {
   NUIWindow *win = ObjectWrap::Unwrap<NUIWindow>(Local<Object>::Cast(info.This()));
+  NNSObject *vc = ObjectWrap::Unwrap<NNSObject>(Local<Object>::Cast(info[0]));
 
-/*
-  Local<Array> array = Local<Array>::Cast(info[0]);
-  bool animated = TO_BOOL(info[1]);
-  
-  NSMutableArray *controllers = [NSMutableArray array];
-
-  for (unsigned int i = 0; i < array->Length(); i++ ) {
-    if (Nan::Has(array, i).FromJust()) {
-      NUIViewController *view = ObjectWrap::Unwrap<NUIViewController>(JS_OBJ(array->Get(i)));
-      [controllers addObject:view->me];
-    }
-  }
-  
-  UITabBarController* c = (UITabBarController*)vc->me;
+  UITabBarController* c = vc->As<UITabBarController>();
   
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
-      [c setViewControllers:controllers animated:animated];
-      [[[UIApplication sharedApplication] keyWindow] setRootViewController:c];
+      [win->As<UIWindow>() setRootViewController:c];
     });
-  }*/
+  }
 }

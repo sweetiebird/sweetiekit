@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#include "NNSObject.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
 #include "NUIViewController.h"
@@ -126,12 +127,15 @@ void InitExports(Local<Object> exports) {
   });
 
 
-      
-        Local<Value> app = makeUIApplication();
-        exports->Set(Nan::New("UIApplication").ToLocalChecked(), app);
-      
-        Local<Value> win = makeUIWindow();
-        exports->Set(Nan::New("UIWindow").ToLocalChecked(), win);
+  
+        auto N_NSObject = NNSObject::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSObject").ToLocalChecked(), N_NSObject.first);
+  
+        auto N_UIApplication = NUIApplication::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIApplication").ToLocalChecked(), N_UIApplication.first);
+  
+        auto N_UIWindow = NUIWindow::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIWindow").ToLocalChecked(), N_UIWindow.first);
 
         Local<Value> controller = makeUIViewController();
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);

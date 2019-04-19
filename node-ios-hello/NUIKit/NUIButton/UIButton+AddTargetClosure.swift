@@ -34,11 +34,14 @@ extension UIButton {
         }
     }
   
-    @objc func addTargetClosure(closure: @escaping UIButtonTargetClosure) {
+    @objc func addTargetClosure(closure: @escaping UIButtonTargetClosure, forEvent: UIControl.Event) {
         targetClosure = closure
-        addTarget(self, action: #selector(UIButton.closureAction), for: .touchUpInside)
+        addTarget(self, action: #selector(UIButton.closureAction), for:forEvent)
     }
   
+    @objc func addTargetClosure(closure: @escaping UIButtonTargetClosure) {
+        return addTargetClosure(closure: closure, forEvent: .touchUpInside)
+    }
     @objc func closureAction() {
         guard let targetClosure = targetClosure else { return }
         targetClosure(self)

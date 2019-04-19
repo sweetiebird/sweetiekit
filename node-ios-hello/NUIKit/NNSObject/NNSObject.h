@@ -1,33 +1,41 @@
 //
-//  NUIApplication.h
+//  NNSObject.h
 //  node-ios-hello
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUIApplication_h
-#define NUIApplication_h
+#ifndef NNSObject_h
+#define NNSObject_h
 
-#import <UIKit/UIKit.h>
-#include "NNSObject.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NUIApplication : public NNSObject {
+class NNSObject : public ObjectWrap {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NUIApplication();
-  virtual ~NUIApplication();
+  NNSObject();
+  virtual ~NNSObject();
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+
+  template<typename T>
+  T* As() {
+    return (T*)_NSObject;
+  }
+
+  void SetNSObject(NSObject* obj) {
+    _NSObject = obj;
+  }
+private:
+  NSObject* _NSObject;
 };
 
-
-#endif /* NUIApplication_h */
+#endif /* NNSObject_h */

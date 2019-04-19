@@ -12,11 +12,13 @@
 
 Nan::Persistent<FunctionTemplate> NUIApplication::type;
 
-Local<Object> NUIApplication::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Isolate *isolate)
+{
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIApplication"));
   type.Reset(ctor);
@@ -24,7 +26,10 @@ Local<Object> NUIApplication::Initialize(Isolate *isolate) {
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIApplication::New) {
@@ -36,20 +41,12 @@ NAN_METHOD(NUIApplication::New) {
 
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
-        app->me = [UIApplication sharedApplication];
+        app->SetNSObject([UIApplication sharedApplication]);
     });
   }
   app->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
-}
-
-Local<Object> makeUIApplication() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUIApplication::Initialize(isolate));
 }
 
 NUIApplication::NUIApplication () {}

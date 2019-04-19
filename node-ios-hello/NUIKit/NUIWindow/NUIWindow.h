@@ -10,11 +10,24 @@
 #define NUIWindow_h
 
 #import <UIKit/UIKit.h>
-
+#include "NNSObject.h"
 #include "defines.h"
 
-JS_WRAP_CLASS(UIWindow);
+using namespace v8;
+using namespace node;
+
+class NUIWindow : public NNSObject {
+public:
+
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUIWindow();
+  virtual ~NUIWindow();
+
+  static NAN_METHOD(New);
+  static NAN_METHOD(Destroy);
   static NAN_METHOD(SetRootViewController);
-JS_WRAP_CLASS_END(UIWindow);
+};
 
 #endif /* NUIWindow_h */
