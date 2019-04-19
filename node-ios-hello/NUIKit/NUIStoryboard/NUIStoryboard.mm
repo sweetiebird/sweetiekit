@@ -10,6 +10,9 @@
 #include "defines.h"
 #include "NUIStoryboard.h"
 #include "NUIViewController.h"
+#include "NUITabBarController.h"
+
+Nan::Persistent<FunctionTemplate> NUIStoryboard::type;
 
 Local<Object> NUIStoryboard::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
@@ -18,6 +21,7 @@ Local<Object> NUIStoryboard::Initialize(Isolate *isolate) {
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIStoryboard"));
+  type.Reset(ctor);
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
@@ -42,7 +46,7 @@ NAN_METHOD(NUIStoryboard::New) {
     type = "Main";
   }
   NSString* result = [NSString stringWithUTF8String:type.c_str()];
-  sb->storyboard = [UIStoryboard storyboardWithName:result bundle:nil];
+  sb->me = [UIStoryboard storyboardWithName:result bundle:nil];
   sb->Wrap(storyboardObj);
 
   info.GetReturnValue().Set(storyboardObj);
@@ -59,12 +63,12 @@ NAN_METHOD(NUIStoryboard::InstantiateViewController) {
     // throw
   }
   NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
-  UIViewController* vc = [sb->storyboard instantiateViewControllerWithIdentifier:result];
+  UIViewController* vc = [sb->me instantiateViewControllerWithIdentifier:result];
   
   Local<Value> argv[] = {
     Nan::New<v8::External>((__bridge void*)vc)
   };
-  Local<Object> storyboardObj = JS_TYPE(NUIViewController)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+  Local<Object> storyboardObj = JS_FUNC(Nan::New(info[1]->IsUndefined() ? NUIViewController::type : NUITabBarController::type))->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 
   info.GetReturnValue().Set(storyboardObj);
 }

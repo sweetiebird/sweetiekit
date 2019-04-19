@@ -10,36 +10,10 @@
 #define NUIViewController_h
 
 #import <UIKit/UIKit.h>
+#include "defines.h"
 
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
-using namespace v8;
-using namespace node;
-
-//class NUIView;
-
-extern Local<Object> makeUIViewController();
-
-class NUIViewController : public ObjectWrap {
-public:
-  static Nan::Persistent<FunctionTemplate> type;
-  static Local<Object> Initialize(Isolate *isolate);
-//  unsigned int GetWidth();
-//  unsigned int GetHeight();
-//  NUIView* GetView();
-
-//protected:
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIViewController);
   static NAN_GETTER(ViewGetter);
-  static NAN_METHOD(SetViewControllers);
-
-  NUIViewController();
-  ~NUIViewController();
-
-//private:
-//  NUIView* viewWrapper;
-  UIViewController* controller;
-};
+JS_WRAP_CLASS_END(UIViewController);
 
 #endif /* NUIViewController_h */

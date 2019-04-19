@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#include "NUIApplication.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
 #include "NUIStoryboard.h"
@@ -40,6 +41,9 @@ using namespace v8;
 namespace sweetiekit {
     void InitExports(Local<Object> exports) {
         iOSLog("InitExports\n");
+      
+        Local<Value> app = makeUIApplication();
+        exports->Set(Nan::New("UIApplication").ToLocalChecked(), app);
 
         Local<Value> controller = makeUIViewController();
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);

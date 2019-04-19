@@ -21,6 +21,7 @@ using namespace v8;
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
+#define JS_FUNC(x) (Nan::GetFunction(x).ToLocalChecked())
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
@@ -57,6 +58,30 @@ Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::val
     }
   }
   return result;
+};
+
+#include <v8.h>
+#include <node.h>
+#include <nan.h>
+
+#define JS_WRAP_CLASS(name) \
+using namespace v8; \
+using namespace node; \
+\
+extern Local<Object> make##name(); \
+\
+class N##name : public ObjectWrap { \
+public: \
+  N##name(); \
+  ~N##name(); \
+ \
+  name* me; \
+  static Nan::Persistent<FunctionTemplate> type; \
+  static Local<Object> Initialize(Isolate *isolate); \
+  static NAN_METHOD(New);
+  
+  
+#define JS_WRAP_CLASS_END(name) \
 };
 
 #endif /* defines_h */
