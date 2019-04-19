@@ -11,6 +11,4 @@
 
 #import <UIKit/UIKit.h>
 
-extern UIViewController* rootViewController;
-
 #endif /* libs_main_h */

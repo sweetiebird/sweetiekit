@@ -20,11 +20,10 @@
 #include <node.h>
 #include "nan.h"
 
-
-#include <stdarg.h>
-
 #import <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
+#import "node_ios_hello-Swift.h"
+#import "libs_main.hpp"
 
 extern "C" void iOSLog(const char* format, ...);
 
@@ -32,48 +31,6 @@ namespace node {
     extern std::map<std::string, std::pair<void *, bool>> dlibs;
 }
 using namespace v8;
-
-//#import "FirstViewController.h"
-#import "node_ios_hello-Swift.h"
-#import "libs_main.hpp"
-
-UIViewController* rootViewController;
-
-void Hello(const FunctionCallbackInfo<Value>& args) {
-    iOSLog("Hello, world!\n");
-    Isolate* isolate = args.GetIsolate();
-    args.GetReturnValue().Set(String::NewFromUtf8(isolate, "world", NewStringType::kNormal).ToLocalChecked());
-}
-
-
-void SetRandomBackgroundColor(const FunctionCallbackInfo<Value>& args) {
-    Isolate* isolate = args.GetIsolate();
-
-    @autoreleasepool {
-
-        dispatch_queue_t downloadQueue = dispatch_queue_create("image loader", NULL);
-        dispatch_async(downloadQueue, ^{
-            //NSData *imageData = [NSData dataWithContentsOfURL:networkURL]; // long time!
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                if (rootViewController != nullptr) {
-                    [rootViewController setRandomBackgroundColor];
-                }
-//                [g_ViewController randomize];
-                //[[ViewController2 me] randomize];
-                //[g_UIViewController setRandomBackgroundColor];
-                /*
-                 UIImage *image = [UIImage imageWithData:imageData];
-                 self.imageView.image = image;
-                 self.imageView.frame = CGRectMake(0,0, image.size.width, image.size.height);
-                 self.scrollView.contentSize = image.size;*/
-            });
-        });
-
-    }
-    args.GetReturnValue().Set(String::NewFromUtf8(
-                                                  isolate, "world", NewStringType::kNormal).ToLocalChecked());
-}
-
 
 
 namespace sweetiekit {
@@ -95,8 +52,6 @@ namespace sweetiekit {
         initFunctionAddressArray->Set(1, Nan::New<Integer>((uint32_t)(initFunctionAddress & 0xFFFFFFFF)));
         exports->Set(Nan::New("initFunctionAddress").ToLocalChecked(), initFunctionAddressArray);
         
-        NODE_SET_METHOD(exports, "hello", Hello);
-        NODE_SET_METHOD(exports, "setRandomBackgroundColor", SetRandomBackgroundColor);
         iOSLog("initialized!\n");
     }
     

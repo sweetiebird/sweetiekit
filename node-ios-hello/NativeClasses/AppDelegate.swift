@@ -36,11 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let first = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "first") as! FirstViewController
 //        vc.setViewControllers([first], animated: false)
 //        window?.rootViewController = vc
+/*
             if window?.rootViewController is UITabBarController {
                 if let firstChild = window?.rootViewController?.children.first {
                      rootViewController = firstChild
                 }
-            }
+            }*/
             registerNodeDLibs()
             chdir(getenv("HOME"))
             chdir("Documents")
@@ -1230,7 +1231,7 @@ https.get(options, function(res) {
   console.log("Got error: " + e.message);
 });
 
-process.stderr.write('exokit-node\\n');
+process.stderr.write('sweetiekit-node\\n');
 
 \0\0
 """);
