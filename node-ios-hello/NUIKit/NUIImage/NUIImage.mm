@@ -6,17 +6,19 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUIImage.h"
 
 Nan::Persistent<FunctionTemplate> NUIImage::type;
 
-Local<Object> NUIImage::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIImage"));
   type.Reset(ctor);
@@ -24,7 +26,10 @@ Local<Object> NUIImage::Initialize(Isolate *isolate) {
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIImage::New) {
@@ -45,20 +50,12 @@ NAN_METHOD(NUIImage::New) {
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-        img->image = [UIImage imageNamed:result];
+        img->SetNSObject([UIImage imageNamed:result]);
     });
   }
   img->Wrap(imgObj);
 
   info.GetReturnValue().Set(imgObj);
-}
-
-Local<Object> makeUIImage() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUIImage::Initialize(isolate));
 }
 
 NUIImage::NUIImage () {}

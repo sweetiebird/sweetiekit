@@ -9,31 +9,13 @@
 #ifndef NUITextField_h
 #define NUITextField_h
 
-#import <UIKit/UIKit.h>
-
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
+#include "defines.h"
 using namespace v8;
 using namespace node;
 
-extern Local<Object> makeUITextField();
+#include "NUIControl.h"
 
-class NUITextField : public ObjectWrap {
-public:
-  static Local<Object> Initialize(Isolate *isolate);
-  CGRect GetFrame();
-
-protected:
-  static NAN_METHOD(New);
-  static NAN_GETTER(FrameGetter);
-  static NAN_SETTER(FrameSetter);
-
-  NUITextField();
-  ~NUITextField();
-
-private:
-  UITextField* textField;
-};
+JS_WRAP_CLASS(UITextField, UIControl);
+JS_WRAP_CLASS_END(UITextField);
 
 #endif /* NUITextField_h */

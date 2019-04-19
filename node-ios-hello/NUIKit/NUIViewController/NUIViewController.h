@@ -10,13 +10,9 @@
 #define NUIViewController_h
 
 #import <UIKit/UIKit.h>
-#include "NNSObject.h"
-#include "defines.h"
+#include "NUIResponder.h"
 
-using namespace v8;
-using namespace node;
-
-class NUIViewController : public NNSObject {
+class NUIViewController : public NUIResponder {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;

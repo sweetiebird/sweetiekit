@@ -22,7 +22,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
+  ctor->Inherit(Nan::New(NUIResponder::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIViewController"));
   type.Reset(ctor);

@@ -13,10 +13,12 @@
 #include "NUIWindow.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
+#include "NUIControl.h"
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
 #include "NUITabBarController.h"
 #include "NUIImage.h"
+#include "NUIImageView.h"
 #include "NUITextField.h"
 #include <unistd.h>
 
@@ -137,26 +139,35 @@ void InitExports(Local<Object> exports) {
         auto N_UIWindow = NUIWindow::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIWindow").ToLocalChecked(), N_UIWindow.first);
   
+        auto N_UIResponder = NUIResponder::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIResponder").ToLocalChecked(), N_UIResponder.first);
+  
         auto N_UIViewController = NUIViewController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), N_UIViewController.first);
   
         auto N_UITabBarController = NUITabBarController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITabBarController").ToLocalChecked(), N_UITabBarController.first);
   
-        Local<Value> uiView = makeUIView();
-        exports->Set(Nan::New("UIView").ToLocalChecked(), uiView);
-        
-        Local<Value> uiStoryboard = makeUIStoryboard();
-        exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), uiStoryboard);
-
-        Local<Value> uiButton = makeUIButton();
-        exports->Set(Nan::New("UIButton").ToLocalChecked(), uiButton);
-
-        Local<Value> uiTextField = makeUITextField();
-        exports->Set(Nan::New("UITextField").ToLocalChecked(), uiTextField);
-
-        Local<Value> uiImage = makeUIImage();
-        exports->Set(Nan::New("UIImage").ToLocalChecked(), uiImage);
+        auto N_UIView = NUIView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIView").ToLocalChecked(), N_UIView.first);
+  
+        auto N_UIControl = NUIControl::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIControl").ToLocalChecked(), N_UIControl.first);
+  
+        auto N_UIStoryboard = NUIStoryboard::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), N_UIStoryboard.first);
+  
+        auto N_UIButton = NUIButton::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIButton").ToLocalChecked(), N_UIButton.first);
+  
+        auto N_UITextField = NUITextField::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITextField").ToLocalChecked(), N_UITextField.first);
+  
+        auto N_UIImage = NUIImage::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIImage").ToLocalChecked(), N_UIImage.first);
+  
+        auto N_UIImageView = NUIImageView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIImageView").ToLocalChecked(), N_UIImageView.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

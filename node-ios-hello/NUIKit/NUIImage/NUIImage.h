@@ -9,29 +9,12 @@
 #ifndef NUIImage_h
 #define NUIImage_h
 
-#import <UIKit/UIKit.h>
-
-#include <v8.h>
-#include <node.h>
-#include <nan.h>
+#include "defines.h"
 using namespace v8;
 using namespace node;
+#include "NNSObject.h"
 
-extern Local<Object> makeUIImage();
-
-class NUIImage : public ObjectWrap {
-public:
-  static Nan::Persistent<FunctionTemplate> type;
-  static Local<Object> Initialize(Isolate *isolate);
-
-protected:
-  static NAN_METHOD(New);
-
-  NUIImage();
-  ~NUIImage();
-
-private:
-  UIImage* image;
-};
+JS_WRAP_CLASS(UIImage, NSObject);
+JS_WRAP_CLASS_END(UIImage);
 
 #endif /* NUIImage_h */

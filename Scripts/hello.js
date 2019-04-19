@@ -1220,6 +1220,7 @@ const {
   UITextField,
   UITabBarController,
   UIImage,
+  UIImageView,
 } = sweetiekit;
                 
 console.log(sweetiekit);
@@ -1256,6 +1257,12 @@ class MyUITabBarViewController extends UITabBarController
 {
 }
 
+function makeUIView(x, y, w, h) {
+  const view = new UIView(x,y,w,h);
+  view.setBackgroundColor({red: 1.0, green: 0.0, blue: 0.0});
+  return view;
+}
+
 process.nextTick(async () => {
   const app = new UIApplication();
   console.log(app, app.keyWindow);
@@ -1265,7 +1272,9 @@ process.nextTick(async () => {
   console.log(vc);
 
   const firstVC = sb.instantiateViewController('firstVC');
-  const subview = new UIView(0, 0, 20, 20);
+  firstVC.view.setBackgroundColor({red: 1.0, green: 0.0, blue: 1.0})
+  
+  const subview = makeUIView(0, 0, 20, 20);
   firstVC.view.addSubview(subview);
   //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
 
@@ -1274,22 +1283,44 @@ process.nextTick(async () => {
   
   app.keyWindow.setRootViewController(vc);
 
+  const img = new UIImage('first');
+  
   console.log('pre-button');
   const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
   
     const x = randi(400);
     const y = randi(400);
-    const subview = new UIView(x, y, 20, 20);
+  
+    const subview = new UIImageView(img);
+    subview.x = x;
+    subview.y = y;
     firstVC.view.addSubview(subview);
+   //const subview = makeUIView(x, y, 20, 20);
+    //firstVC.view.addSubview(subview);
     
     console.log(`Added a new UIView at ${x},${y}`);
   });
+  button.setBackgroundColor({red: 0.0, green: 1.0, blue: 0.0});
   console.log('post-button', button, button.frame);
   firstVC.view.addSubview(button);
   
-  const tf = new UITextField(0, 0, 50, 140);
+  const tf = new UITextField(0, 0, 140, 50);
+  tf.setBackgroundColor({red: 1.0, green: 1.0, blue: 1.0})
+  //firstVC.view.addSubview(tf);
+  
   const tabCtrl = new UITabBarController();
-  const img = new UIImage('second');
+  {
+    let x = firstVC.view.frame.width / 2 - 100;
+    let y = firstVC.view.frame.height / 2 - 100;
+    for (let i = 0; i < 5; i++) {
+      const imgView = new UIImageView(img);
+      imgView.x = x;
+      imgView.y = y;
+      firstVC.view.addSubview(imgView);
+      x += imgView.frame.width + 5;
+    }
+  }
+  //console.log(img, imgView, imgView.frame, imgView.x, imgView.y);
 
   console.log(button, tabCtrl, tf, img);
  

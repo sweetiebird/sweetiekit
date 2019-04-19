@@ -48,10 +48,6 @@ NAN_METHOD(NUIWindow::New) {
   }
   view->Wrap(viewObj);
 
-/*
-  Nan::SetAccessor(viewObj, JS_STR("frame"), FrameGetter, FrameSetter);
-  Nan::SetMethod(viewObj, "addSubview", AddSubview);*/
-
   info.GetReturnValue().Set(viewObj);
 }
 

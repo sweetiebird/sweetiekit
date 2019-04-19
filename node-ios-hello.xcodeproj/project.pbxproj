@@ -12,6 +12,9 @@
 		211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E769C2269E1DD00B838AF /* UIButton+AddTargetClosure.swift */; };
 		211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */; };
 		211E76A22269F41D00B838AF /* NNSObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76A12269F41D00B838AF /* NNSObject.mm */; };
+		211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76A8226A0DE400B838AF /* NUIResponder.mm */; };
+		211E76AB226A11E200B838AF /* NUIControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76AA226A11E200B838AF /* NUIControl.mm */; };
+		211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B2226A1C3600B838AF /* NUIImageView.mm */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
@@ -81,6 +84,12 @@
 		211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+AssociatedObject.swift"; sourceTree = "<group>"; };
 		211E76A12269F41D00B838AF /* NNSObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSObject.mm; sourceTree = "<group>"; };
 		211E76A32269F42B00B838AF /* NNSObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSObject.h; sourceTree = "<group>"; };
+		211E76A5226A0CF900B838AF /* NUIResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIResponder.h; sourceTree = "<group>"; };
+		211E76A7226A0D1100B838AF /* NUIControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIControl.h; sourceTree = "<group>"; };
+		211E76A8226A0DE400B838AF /* NUIResponder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIResponder.mm; sourceTree = "<group>"; };
+		211E76AA226A11E200B838AF /* NUIControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIControl.mm; sourceTree = "<group>"; };
+		211E76B1226A1C3600B838AF /* NUIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIImageView.h; sourceTree = "<group>"; };
+		211E76B2226A1C3600B838AF /* NUIImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImageView.mm; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "../node-ios-full/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
@@ -198,6 +207,33 @@
 			path = NNSObject;
 			sourceTree = "<group>";
 		};
+		211E76A4226A0CE600B838AF /* NUIResponder */ = {
+			isa = PBXGroup;
+			children = (
+				211E76A5226A0CF900B838AF /* NUIResponder.h */,
+				211E76A8226A0DE400B838AF /* NUIResponder.mm */,
+			);
+			path = NUIResponder;
+			sourceTree = "<group>";
+		};
+		211E76A6226A0CFE00B838AF /* NUIControl */ = {
+			isa = PBXGroup;
+			children = (
+				211E76A7226A0D1100B838AF /* NUIControl.h */,
+				211E76AA226A11E200B838AF /* NUIControl.mm */,
+			);
+			path = NUIControl;
+			sourceTree = "<group>";
+		};
+		211E76AC226A1BF100B838AF /* NUIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				211E76B1226A1C3600B838AF /* NUIImageView.h */,
+				211E76B2226A1C3600B838AF /* NUIImageView.mm */,
+			);
+			path = NUIImageView;
+			sourceTree = "<group>";
+		};
 		21F5520E2269AE0500D8516A /* NUIApplication */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +260,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				211E76AC226A1BF100B838AF /* NUIImageView */,
+				211E76A6226A0CFE00B838AF /* NUIControl */,
+				211E76A4226A0CE600B838AF /* NUIResponder */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				211E76982269B10A00B838AF /* NUIWindow */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -519,6 +558,7 @@
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
+				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
@@ -526,10 +566,12 @@
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
+				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
+				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,

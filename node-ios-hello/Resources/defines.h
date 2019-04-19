@@ -68,18 +68,15 @@ Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::val
 using namespace v8;
 using namespace node;
 
-#define JS_WRAP_CLASS(name) \
+#define JS_WRAP_CLASS(name, base) \
 \
-extern Local<Object> make##name(); \
-\
-class N##name : public ObjectWrap { \
+class N##name : public N##base { \
 public: \
   N##name(); \
   ~N##name(); \
  \
-  name* me; \
   static Nan::Persistent<FunctionTemplate> type; \
-  static Local<Object> Initialize(Isolate *isolate); \
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate); \
   static NAN_METHOD(New);
   
   

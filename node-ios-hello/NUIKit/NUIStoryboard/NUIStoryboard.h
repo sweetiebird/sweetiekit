@@ -11,8 +11,12 @@
 
 #import <UIKit/UIKit.h>
 #include "defines.h"
+#include "NNSObject.h"
 
-JS_WRAP_CLASS(UIStoryboard);
+using namespace v8;
+using namespace node;
+
+JS_WRAP_CLASS(UIStoryboard, NSObject);
   static NAN_METHOD(InstantiateViewController);
 JS_WRAP_CLASS_END(UIStoryboard);
 

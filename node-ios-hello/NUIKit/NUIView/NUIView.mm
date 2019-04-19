@@ -10,22 +10,32 @@
 #include "defines.h"
 #include "NUIView.h"
 #include "NUIButton.h"
+#include "NUIResponder.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
 
-Local<Object> NUIView::Initialize(Isolate *isolate) {
+std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NUIResponder::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIView"));
   type.Reset(ctor);
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetAccessor(proto, JS_STR("frame"), FrameGetter, FrameSetter);
+  Nan::SetAccessor(proto, JS_STR("x"), XGetter, XSetter);
+  Nan::SetAccessor(proto, JS_STR("y"), YGetter, YSetter);
+  Nan::SetMethod(proto, "addSubview", AddSubview);
+  Nan::SetMethod(proto, "setBackgroundColor", SetBackgroundColor);
 
-  return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIView::New) {
@@ -36,7 +46,7 @@ NAN_METHOD(NUIView::New) {
   NUIView *view = new NUIView();
 
   if (info[0]->IsExternal()) {
-    view->me = (__bridge UIView *)(info[0].As<External>()->Value());
+    view->SetNSObject((__bridge UIView *)(info[0].As<External>()->Value()));
   } else {
       double x = TO_DOUBLE(info[0]);
       double y = TO_DOUBLE(info[1]);
@@ -45,15 +55,12 @@ NAN_METHOD(NUIView::New) {
 
       @autoreleasepool {
         dispatch_sync(dispatch_get_main_queue(), ^ {
-            view->me = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+            view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
         });
       }
   }
   view->Wrap(viewObj);
-
-  Nan::SetAccessor(viewObj, JS_STR("frame"), FrameGetter, FrameSetter);
-  Nan::SetMethod(viewObj, "addSubview", AddSubview);
-
+  
   info.GetReturnValue().Set(viewObj);
 }
 
@@ -82,19 +89,80 @@ NAN_SETTER(NUIView::FrameSetter) {
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->me frame] = CGRectMake(x, y, width, height);
+      [view->As<UIView>() setFrame:CGRectMake(x, y, width, height)];
     });
   }
 }
 
+NAN_GETTER(NUIView::XGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  info.GetReturnValue().Set(JS_NUM(view->GetFrame().origin.x));
+}
+
+NAN_SETTER(NUIView::XSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.origin.x = TO_DOUBLE(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+NAN_GETTER(NUIView::YGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  info.GetReturnValue().Set(JS_NUM(view->GetFrame().origin.y));
+}
+
+NAN_SETTER(NUIView::YSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  CGRect frame(view->GetFrame());
+  frame.origin.y = TO_DOUBLE(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setFrame:frame];
+    });
+  }
+}
+
+
 CGRect NUIView::GetFrame() {
-  if (me) {
-   return [me frame];
+  if (As<UIView>()) {
+   return [As<UIView>() frame];
   } else {
     return CGRectMake(0, 0, 0, 0);
   }
 }
 
+NAN_METHOD(NUIView::SetBackgroundColor) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+
+  double red = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("blue")));
+  double alpha = JS_OBJ(info[0])->Has(JS_CONTEXT(), JS_STR("alpha")).FromJust() ? TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("alpha"))) : 1.0;
+  
+  UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setBackgroundColor:color];
+    });
+  }
+}
 NAN_METHOD(NUIView::AddSubview) {
   NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
   Local<Object> obj = JS_OBJ(info[0]);
@@ -103,29 +171,12 @@ NAN_METHOD(NUIView::AddSubview) {
 
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
-        [subview->me setBackgroundColor:[UIColor purpleColor]];
-        [view->me addSubview:subview->me];
-      });
-    }
-  } else if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIButton)).FromJust()) {
-    NUIButton *subview = ObjectWrap::Unwrap<NUIButton>(obj);
-
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        [view->me addSubview:subview->me];
+        [view->As<UIView>() addSubview:subview->As<UIView>()];
       });
     }
   } else {
     Nan::ThrowError("Unknown addSubview type");
   }
-}
-
-Local<Object> makeUIView() {
-  Isolate *isolate = Isolate::GetCurrent();
-
-  Nan::EscapableHandleScope scope;
-
-  return scope.Escape(NUIView::Initialize(isolate));
 }
 
 NUIView::NUIView () {}

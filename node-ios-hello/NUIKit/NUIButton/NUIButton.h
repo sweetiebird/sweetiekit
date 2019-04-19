@@ -9,10 +9,9 @@
 #ifndef NUIButton_h
 #define NUIButton_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
+#include "NUIControl.h"
 
-JS_WRAP_CLASS(UIButton);
+JS_WRAP_CLASS(UIButton, UIControl);
   const CGRect& GetFrame();
   static NAN_METHOD(Alloc);
   static NAN_GETTER(FrameGetter);
