@@ -1215,6 +1215,8 @@ console.log(exokit);
 
 const vc = new exokit.UIViewController();
 console.log(vc, vc.width);
+const view = new exokit.UIView(0, 0, 200, 200);
+console.log(view, view.frame);
 
 setInterval(() => {
     exokit.setRandomBackgroundColor();

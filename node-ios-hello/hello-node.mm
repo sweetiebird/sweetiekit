@@ -23,7 +23,7 @@ void* grok_PosixThreadMainRoutine(void* args)
 {
     // Do some work here.
     iOSLog0("pre-grok\n");
-    ClientMain();
+    //ClientMain();
     iOSLog0("post-grok\n");
     
     return NULL;

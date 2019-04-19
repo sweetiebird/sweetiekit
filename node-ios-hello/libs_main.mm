@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #include "NUIViewController.h"
+#include "NUIView.h"
 #include <unistd.h>
 // #include <stdio.h>
 // #include <fcntl.h>
@@ -196,6 +197,9 @@ namespace exokit {
 
         Local<Value> controller = makeUIViewController();
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), controller);
+        
+        Local<Value> uiView = makeUIView();
+        exports->Set(Nan::New("UIView").ToLocalChecked(), uiView);
 #if 0
         std::pair<Local<Value>, Local<FunctionTemplate>> glResult = makeGl();
         exports->Set(Nan::New("nativeGl").ToLocalChecked(), glResult.first);
