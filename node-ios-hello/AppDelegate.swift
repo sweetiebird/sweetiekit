@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      rootViewController = firstChild
                 }
             }
-            lolok()
+            registerNodeDLibs()
             chdir(getenv("HOME"))
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }

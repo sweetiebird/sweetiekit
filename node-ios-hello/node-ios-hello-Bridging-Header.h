@@ -7,7 +7,7 @@
 
 extern void iOSLog0(const char* msg);
 extern void iOSTrap();
-extern void lolok();
+extern void registerNodeDLibs();
 
 #include "hello-v8.hpp"
 #include "hello-node.hpp"

@@ -324,6 +324,6 @@ inline void registerDlibs(std::map<std::string, std::pair<void *, bool>> &dlibs)
 //    }
 //}
 
-extern "C" void lolok() {
+extern "C" void registerNodeDLibs() {
     registerDlibs(node::dlibs);
 }
