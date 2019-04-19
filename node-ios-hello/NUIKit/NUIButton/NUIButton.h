@@ -26,12 +26,14 @@ public:
 
 protected:
   static NAN_METHOD(New);
+  static NAN_GETTER(FrameGetter);
+  static NAN_SETTER(FrameSetter);
 
   NUIButton();
   ~NUIButton();
 
 private:
-  NUIButton* button;
+  UIButton* button;
 };
 
 #endif /* NUIButton_h */
