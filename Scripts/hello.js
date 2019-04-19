@@ -1287,12 +1287,14 @@ process.nextTick(async () => {
   const img = new UIImage('first');
   
   console.log('pre-button');
+  // update alloc to init
+  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
   const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
   
     const x = randi(400);
     const y = randi(400);
   
-    const subview = new UIImageView(img);
+    const subview = new UIImageView(img); // named argument ({ image })
     subview.x = x;
     subview.y = y;
     subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
@@ -1326,6 +1328,7 @@ process.nextTick(async () => {
       imgView.center = p;
       firstVC.view.addSubview(imgView);
       p.x += imgView.width + 5;
+      // frame and bounds get x/y/w/h, but it's nonsensical for view to have these properties
       console.log(imgView.x, imgView.y, imgView.width, imgView.height, imgView.center, imgView.size);
     }
   }
