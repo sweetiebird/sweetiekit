@@ -1207,16 +1207,16 @@ https.get(options, function(res) {
 
 leftpad = require('leftpad')
 
-process.stderr.write(leftpad(' exokit-node\n', 30, '='));
+process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
-const exokit = require('/package/build/Release/exokit.node');
+const sweetiekit = require('std:sweetiekit.node');
 const {
   UIStoryboard,
   UIViewController,
   UIView,
-} = exokit;
+} = sweetiekit;
                                                             
-console.log(exokit);
+console.log(sweetiekit);
 
 //const vc = new UIViewController();
 //console.log(vc);
@@ -1256,7 +1256,7 @@ vc.setViewControllers([firstVC, secondVC], false);
 
 
 setInterval(() => {
-    exokit.setRandomBackgroundColor();
+    sweetiekit.setRandomBackgroundColor();
 }, 2000);
                                                             
 //httpServer = require('./server.js')
@@ -1265,7 +1265,7 @@ setInterval(() => {
 //
 ////require('./js-blockchain/index.js');
 //
-//process.stderr.write(leftpad(' exokit-done\n', 30, '='));
+//process.stderr.write(leftpad(' sweetiekit-done\n', 30, '='));
 //setTimeout(() => {
 //  console.log('prevent exit');
 //}, 1000 * 60 * 60 * 24)
