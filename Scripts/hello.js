@@ -1259,7 +1259,7 @@ class MyUITabBarViewController extends UITabBarController
 
 function makeUIView(x, y, w, h) {
   const view = new UIView(x,y,w,h);
-  view.setBackgroundColor({red: 1.0, green: 0.0, blue: 0.0});
+  view.backgroundColor = ({red: 1.0, green: 0.0, blue: 0.0});
   return view;
 }
 
@@ -1272,7 +1272,8 @@ process.nextTick(async () => {
   console.log(vc);
 
   const firstVC = sb.instantiateViewController('firstVC');
-  firstVC.view.setBackgroundColor({red: 1.0, green: 0.0, blue: 1.0})
+  console.log("TKTK", firstVC.view.backgroundColor);
+  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
   
   const subview = makeUIView(0, 0, 20, 20);
   firstVC.view.addSubview(subview);
@@ -1294,14 +1295,14 @@ process.nextTick(async () => {
     const subview = new UIImageView(img);
     subview.x = x;
     subview.y = y;
-    subview.setBackgroundColor({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
+    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
     firstVC.view.addSubview(subview);
    //const subview = makeUIView(x, y, 20, 20);
     //firstVC.view.addSubview(subview);
     
     console.log(`Added a new UIView at ${x},${y}`);
   });
-  button.setBackgroundColor({red: 0.0, green: 1.0, blue: 0.0});
+  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
   console.log('post-button', button, button.frame);
   firstVC.view.addSubview(button);
   
@@ -1311,7 +1312,7 @@ process.nextTick(async () => {
   });
   tf.text = button.title;
   tf.delegate = firstVC;
-  tf.setBackgroundColor({red: 1.0, green: 1.0, blue: 1.0})
+  tf.backgroundColor = ({red: 1.0, green: 1.0, blue: 1.0})
   firstVC.view.addSubview(tf);
   
   const tabCtrl = new UITabBarController();

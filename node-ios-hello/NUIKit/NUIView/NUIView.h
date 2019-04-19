@@ -40,7 +40,8 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_SETTER(AutoresizesSubviewsSetter);
   static NAN_METHOD(SizeThatFits);
   static NAN_METHOD(SizeToFit);
-  static NAN_METHOD(SetBackgroundColor);
+  static NAN_GETTER(BackgroundColorGetter);
+  static NAN_SETTER(BackgroundColorSetter);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);

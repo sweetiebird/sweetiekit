@@ -39,7 +39,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetMethod(proto, "addSubview", AddSubview);
   Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
-  Nan::SetMethod(proto, "setBackgroundColor", SetBackgroundColor);
+  Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -337,13 +337,36 @@ NAN_METHOD(NUIView::SizeToFit) {
   }
 }
 
-NAN_METHOD(NUIView::SetBackgroundColor) {
+NAN_GETTER(NUIView::BackgroundColorGetter) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+  
+  __block CGFloat red = 0;
+  __block CGFloat green = 0;
+  __block CGFloat blue = 0;
+  __block CGFloat alpha = 1;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(),  ^ {
+      UIColor* color = [view->As<UIView>() backgroundColor];
+      [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    });
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
+
+  info.GetReturnValue().Set(result);
+}
+
+NAN_SETTER(NUIView::BackgroundColorSetter) {
   NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
 
-  double red = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("red")));
-  double green = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("green")));
-  double blue = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("blue")));
-  double alpha = JS_OBJ(info[0])->Has(JS_CONTEXT(), JS_STR("alpha")).FromJust() ? TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("alpha"))) : 1.0;
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_OBJ(value)->Has(JS_CONTEXT(), JS_STR("alpha")).FromJust() ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
   
   UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 
