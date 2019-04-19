@@ -1279,6 +1279,10 @@ function buildUI() {
   passField.callback = () => {
     console.log('password', passField.text);
   }
+  const loginBtn = sv[2];
+  loginBtn.callback = () => {
+    console.log(`Try to login with ${userField.text} / ${passField.text}`);
+  }
 }
 
 function randi(n) {

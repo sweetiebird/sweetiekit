@@ -69,7 +69,9 @@ NAN_METHOD(NUITextField::Alloc) {
   double width = TO_DOUBLE(info[2]);
   double height = TO_DOUBLE(info[3]);
   
-  field->_callback->Reset(Local<Function>::Cast(info[4]));
+  if (info[4]->IsFunction()) {
+    field->_callback->Reset(Local<Function>::Cast(info[4]));
+  }
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {

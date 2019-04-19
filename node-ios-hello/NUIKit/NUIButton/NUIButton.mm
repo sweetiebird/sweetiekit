@@ -27,6 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("title"), TitleGetter, TitleSetter);
+  Nan::SetAccessor(proto, JS_STR("callback"), CallbackGetter, CallbackSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -81,7 +82,9 @@ NAN_METHOD(NUIButton::Alloc) {
   Nan::Persistent<Promise::Resolver>* pResolver = new Nan::Persistent<Promise::Resolver>(resolver);
   Nan::Persistent<Object>* pBtnObj = new Nan::Persistent<Object>(btnObj);
   
-  Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[5]));
+  if (info[5]->IsFunction()) {
+    btn->_callback->Reset(Local<Function>::Cast(info[5]));
+  }
   
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -89,7 +92,7 @@ NAN_METHOD(NUIButton::Alloc) {
       [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
       [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
-        sweetiekit::Resolve(cb);
+        sweetiekit::Resolve(btn->_callback);
       }];
      {
         std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
@@ -161,5 +164,29 @@ const CGRect& NUIButton::GetFrame() {
   }
 }
 
-NUIButton::NUIButton () {}
-NUIButton::~NUIButton () {}
+NAN_GETTER(NUIButton::CallbackGetter) {
+  Nan::HandleScope scope;
+
+  NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
+
+  info.GetReturnValue().Set(Nan::New(view->_callback));
+}
+
+NAN_SETTER(NUIButton::CallbackSetter) {
+  Nan::HandleScope scope;
+
+  NUIButton *field = ObjectWrap::Unwrap<NUIButton>(info.This());
+  field->_callback->Reset(Local<Function>::Cast(value));
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      UIButton* txt = field->As<UIButton>();
+      [txt addTargetClosureWithClosure:^(UIButton*){
+        sweetiekit::Resolve(field->_callback);
+      }];
+    });
+  }
+}
+
+NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
+NUIButton::~NUIButton () { delete _callback; }

@@ -16,6 +16,9 @@ JS_WRAP_CLASS(UIButton, UIControl);
   static NAN_METHOD(Alloc);
   static NAN_GETTER(TitleGetter);
   static NAN_SETTER(TitleSetter);
+  static NAN_GETTER(CallbackGetter);
+  static NAN_SETTER(CallbackSetter);
+  Nan::Persistent<Function>* _callback;
   CGRect _rect;
 JS_WRAP_CLASS_END(UIButton);
 
