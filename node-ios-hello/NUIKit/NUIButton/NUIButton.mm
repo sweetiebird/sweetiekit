@@ -47,6 +47,7 @@ NAN_METHOD(NUIButton::New) {
   btn->Wrap(btnObj);
 
   Nan::SetAccessor(btnObj, JS_STR("frame"), FrameGetter, FrameSetter);
+  Nan::SetAccessor(btnObj, JS_STR("title"), CurrentTitleGetter);
 
   info.GetReturnValue().Set(btnObj);
 }
@@ -87,6 +88,51 @@ CGRect NUIButton::GetFrame() {
   } else {
     return CGRectMake(0, 0, 0, 0);
   }
+}
+
+NAN_METHOD(NUIButton::SetTitle) {
+  NUIButton *btn = ObjectWrap::Unwrap<NUIButton>(Local<Object>::Cast(info.This()));
+
+  std::string type;
+  if (info[0]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    type = *utf8Value;
+  } else {
+    type = "";
+  }
+  NSString* result = [NSString stringWithUTF8String:type.c_str()];
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [btn->button setTitle:result forState:UIControlStateNormal];
+    });
+  }
+}
+
+//NAN_GETTER(NUIView::CurrentTitleGetter) {
+//  Nan::HandleScope scope;
+//
+//  NUIButton *btn = ObjectWrap::Unwrap<NUIButton>(info.This());
+//  Local<Object> result = Object::New(Isolate::GetCurrent());
+//  result->Set(JS_STR("title"), JS_FLOAT(view->GetFrame().size.width));
+//
+//  info.GetReturnValue().Set(result);
+//}
+
+NSString* NUIButton::GetCurrentTitle() {
+  if (button) {
+   return [button currentTitle];
+  } else {
+    return @"";
+  }
+}
+
+Local<Object> makeUIView() {
+  Isolate *isolate = Isolate::GetCurrent();
+
+  Nan::EscapableHandleScope scope;
+
+  return scope.Escape(NUIButton::Initialize(isolate));
 }
 
 Local<Object> makeUIButton() {

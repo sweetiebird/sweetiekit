@@ -26,8 +26,10 @@ public:
 
 protected:
   static NAN_METHOD(New);
+  static NAN_METHOD(SetTitle);
   static NAN_GETTER(FrameGetter);
   static NAN_SETTER(FrameSetter);
+//  static NAN_GETTER(CurrentTitleGetter);
 
   NUIButton();
   ~NUIButton();
