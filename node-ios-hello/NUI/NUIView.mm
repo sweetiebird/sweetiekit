@@ -21,8 +21,6 @@ Local<Object> NUIView::Initialize(Isolate *isolate) {
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
-  //Nan::SetMethod(proto, "init", InitMethod);
-
   return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
 }
 
@@ -33,15 +31,13 @@ NAN_METHOD(NUIView::New) {
 
   NUIView *view = new NUIView();
 
-//  UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
-
   if (info[0]->IsExternal()) {
     view->me = (__bridge UIView *)(info[0].As<External>()->Value());
   } else {
-      double width = TO_DOUBLE(info[0]);
-      double height = TO_DOUBLE(info[1]);
-      double x = TO_DOUBLE(info[2]);
-      double y = TO_DOUBLE(info[3]);
+      double x = TO_DOUBLE(info[0]);
+      double y = TO_DOUBLE(info[1]);
+      double width = TO_DOUBLE(info[2]);
+      double height = TO_DOUBLE(info[3]);
 
       @autoreleasepool {
         dispatch_async(dispatch_get_main_queue(), ^ {
@@ -52,6 +48,7 @@ NAN_METHOD(NUIView::New) {
   view->Wrap(viewObj);
 
   Nan::SetAccessor(viewObj, JS_STR("frame"), FrameGetter, FrameSetter);
+  Nan::SetMethod(viewObj, "addSubview", AddSubview);
 
   info.GetReturnValue().Set(viewObj);
 }
@@ -91,6 +88,17 @@ CGRect NUIView::GetFrame() {
    return [me frame];
   } else {
     return CGRectMake(0, 0, 0, 0);
+  }
+}
+
+NAN_METHOD(NUIView::AddSubview) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+  NUIView *subview = ObjectWrap::Unwrap<NUIView>(JS_OBJ(info[0]));
+
+  @autoreleasepool {
+    dispatch_async(dispatch_get_main_queue(), ^ {
+      [view->me addSubview:subview->me];
+    });
   }
 }
 
