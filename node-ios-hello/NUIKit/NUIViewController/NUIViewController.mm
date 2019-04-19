@@ -65,8 +65,16 @@ NAN_GETTER(NUIViewController::ViewGetter) {
 
   NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
   
+  __block UIView* view = nullptr;
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      view = [ctrl->As<UIViewController>() view];
+    });
+  }
+
   Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)[ctrl->As<UIViewController>() view])
+    Nan::New<v8::External>((__bridge void*)view)
   };
   Local<Object> viewObj = JS_TYPE(NUIView)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 

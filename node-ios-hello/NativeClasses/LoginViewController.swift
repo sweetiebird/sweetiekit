@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: NodeUIViewController {
 
   @IBOutlet weak var container: UIView!
   weak var emailField: EmailTextField!

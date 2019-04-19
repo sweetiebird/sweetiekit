@@ -303,8 +303,15 @@ NAN_GETTER(NUIView::SubviewsGetter) {
 
   NUIView* view = ObjectWrap::Unwrap<NUIView>(info.This());
   UIView* pView = view->As<UIView>();
-  auto subviews = [pView subviews];
-  NSInteger count = [subviews count];
+  __block NSArray* subviews = nullptr;
+  __block NSInteger count = 0;
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      subviews = [pView subviews];
+      count = [subviews count];
+    });
+  }
   
   auto result = Nan::New<Array>();
 

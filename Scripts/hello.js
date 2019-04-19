@@ -1255,6 +1255,11 @@ function buildUI() {
   const sb = new UIStoryboard('Main');
   const vc = sb.instantiateViewController('loginVC');
   app.keyWindow.setRootViewController(vc);
+  console.log(vc, vc.view);
+  const sv = vc.view.subviews;
+  console.log(sv);
+  console.log(sv[0].subviews)
+  console.log(sv[1].subviews)
 }
 
 function randi(n) {
