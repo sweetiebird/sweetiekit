@@ -11,6 +11,8 @@
 #include "NUIViewController.h"
 #include "NUIView.h"
 
+Nan::Persistent<FunctionTemplate> NUIViewController::type;
+
 Local<Object> NUIViewController::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
 
@@ -18,12 +20,13 @@ Local<Object> NUIViewController::Initialize(Isolate *isolate) {
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIViewController"));
+  type.Reset(ctor);
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
 
   //Nan::SetMethod(proto, "init", InitMethod);
-  Nan::SetMethod(proto, "view", View);
+  Nan::SetAccessor(proto, JS_STR("view"), ViewGetter);
   Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
 
   return scope.Escape(Nan::GetFunction(ctor).ToLocalChecked());
@@ -54,19 +57,15 @@ NAN_METHOD(NUIViewController::New) {
 //  info.GetReturnValue().Set(JS_INT(ctrl->GetWidth()));
 //}
 
-NAN_METHOD(NUIViewController::View) {
+NAN_GETTER(NUIViewController::ViewGetter) {
   Nan::HandleScope scope;
 
   NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
   
-  Local<Function> uiViewCons = Local<Function>::Cast(
-    //JS_OBJ(Local<Object>::Cast(info.This())->Get(JS_STR("constructor")))->Get(JS_STR("UIView"))
-    info[0]
-  );
   Local<Value> argv[] = {
     Nan::New<v8::External>((__bridge void*)[ctrl->controller view])
   };
-  Local<Object> viewObj = uiViewCons->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+  Local<Object> viewObj = JS_TYPE(NUIView)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 
   info.GetReturnValue().Set(viewObj);
 }

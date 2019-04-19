@@ -10,6 +10,8 @@
 #include "defines.h"
 #include "NUIView.h"
 
+Nan::Persistent<FunctionTemplate> NUIView::type;
+
 Local<Object> NUIView::Initialize(Isolate *isolate) {
   Nan::EscapableHandleScope scope;
 
@@ -17,6 +19,7 @@ Local<Object> NUIView::Initialize(Isolate *isolate) {
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UIView"));
+  type.Reset(ctor);
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();

@@ -1242,16 +1242,15 @@ console.log(sb, vc, view, subview);
         window?.rootViewController = vc;
 */
 const sb = new UIStoryboard('Main');
-const vc = sb.instantiateViewController('tabVC', UIViewController);
+const vc = sb.instantiateViewController('tabVC');
 
 
-const firstVC = sb.instantiateViewController('firstVC', UIViewController);
-const view = firstVC.view(UIView);
+const firstVC = sb.instantiateViewController('firstVC');
 const subview = new UIView(0, 0, 200, 200);
-view.addSubview(subview);
+firstVC.view.addSubview(subview);
 
 
-const secondVC = sb.instantiateViewController('secondVC', UIViewController);
+const secondVC = sb.instantiateViewController('secondVC');
 vc.setViewControllers([firstVC, secondVC], false);
 
 

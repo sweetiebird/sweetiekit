@@ -21,6 +21,7 @@ extern Local<Object> makeUIView();
 
 class NUIView : public ObjectWrap {
 public:
+  static Nan::Persistent<FunctionTemplate> type;
   static Local<Object> Initialize(Isolate *isolate);
   CGRect GetFrame();
 
