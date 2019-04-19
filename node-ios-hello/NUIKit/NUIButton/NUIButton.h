@@ -17,7 +17,7 @@
 using namespace v8;
 using namespace node;
 
-extern Local<Object> makeUIView();
+extern Local<Object> makeUIButton();
 
 class NUIButton : public ObjectWrap {
 public:

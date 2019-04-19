@@ -11,6 +11,7 @@
 #include "NUIViewController.h"
 #include "NUIView.h"
 #include "NUIStoryboard.h"
+#include "NUIButton.h"
 #include <unistd.h>
 
 #include <string>
@@ -45,6 +46,9 @@ namespace sweetiekit {
         
         Local<Value> uiStoryboard = makeUIStoryboard();
         exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), uiStoryboard);
+
+        Local<Value> uiButton = makeUIButton();
+        exports->Set(Nan::New("UIButton").ToLocalChecked(), uiButton);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
