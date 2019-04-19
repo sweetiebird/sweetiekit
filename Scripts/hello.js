@@ -1258,7 +1258,7 @@ class MyUITabBarViewController extends UITabBarController
 }
 
 function makeUIView(x, y, w, h) {
-  const view = new UIView(x,y,w,h);
+  const view = new UIView(x,y,w,h); // update to named arg ({ frame: { x, y, width, height } })
   view.backgroundColor = ({red: 1.0, green: 0.0, blue: 0.0});
   return view;
 }
@@ -1267,11 +1267,11 @@ process.nextTick(async () => {
   const app = new UIApplication();
   console.log(app, app.keyWindow);
   
-  const sb = new UIStoryboard('Main');
+  const sb = new UIStoryboard('Main'); // update to take 2 named args: ({ name, bundle })
   const vc = sb.instantiateViewController('tabVC', MyUITabBarViewController);
   console.log(vc);
 
-  const firstVC = sb.instantiateViewController('firstVC');
+  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
   console.log("TKTK", firstVC.view.backgroundColor);
   firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
   
@@ -1282,7 +1282,7 @@ process.nextTick(async () => {
   const secondVC = sb.instantiateViewController('secondVC');
   vc.setViewControllers([firstVC, secondVC], false);
   
-  app.keyWindow.setRootViewController(vc);
+  app.keyWindow.setRootViewController(vc); // update to { get, set }
 
   const img = new UIImage('first');
   
