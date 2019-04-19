@@ -1260,6 +1260,14 @@ function buildUI() {
   console.log(sv);
   console.log(sv[0].subviews)
   console.log(sv[1].subviews)
+  const userField = sv[1].subviews[2];
+  const passField = sv[1].subviews[3];
+  userField.callback = () => {
+    console.log('username', userField.text);
+  }
+  passField.callback = () => {
+    console.log('password', passField.text);
+  }
 }
 
 function randi(n) {
