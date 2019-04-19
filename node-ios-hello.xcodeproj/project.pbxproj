@@ -672,7 +672,7 @@
 					"../node-ios-full/deps/v8",
 					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
 					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
-					/users/bb/nan,
+					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -719,7 +719,7 @@
 					"../node-ios-full/deps/v8",
 					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
 					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
-					/users/bb/nan,
+					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
