@@ -1349,8 +1349,8 @@ async function buildUI() {
   console.log(sv);
   console.log(sv[0].subviews)
   console.log(sv[1].subviews)
-  const userField = sv[1].subviews[2];
-  const passField = sv[1].subviews[3];
+  const userField = vc.view.viewWithStringTag("txtEmail");
+  const passField = vc.view.viewWithStringTag("txtPassword");
   userField.text = kv.stringForKey("me") || "";
   userField.callback = () => {
     console.log('username', userField.text);

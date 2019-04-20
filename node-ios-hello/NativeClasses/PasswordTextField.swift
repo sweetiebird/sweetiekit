@@ -13,6 +13,7 @@ class PasswordTextField: UITextField {
   // the ideal would be the ability to define this is JS somehow
   class func instanceFromNib(frame: CGRect) -> PasswordTextField {
     let me = UINib(nibName: "PasswordTextField", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! PasswordTextField
+    me.stringTag = "txtPassword"
     me.layer.cornerRadius = 6
     me.layer.borderColor = UIColor(red: 111/255, green: 174/255, blue: 175/255, alpha: 1).cgColor
     me.layer.borderWidth = 1
