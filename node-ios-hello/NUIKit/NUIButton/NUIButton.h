@@ -12,14 +12,10 @@
 #include "NUIControl.h"
 
 JS_WRAP_CLASS(UIButton, UIControl);
-  const CGRect& GetFrame();
   static NAN_METHOD(Alloc);
-  static NAN_GETTER(TitleGetter);
-  static NAN_SETTER(TitleSetter);
-  static NAN_GETTER(CallbackGetter);
-  static NAN_SETTER(CallbackSetter);
+  JS_PROP(Title);
+  JS_PROP(Callback);
   Nan::Persistent<Function>* _callback;
-  CGRect _rect;
 JS_WRAP_CLASS_END(UIButton);
 
 #endif /* NUIButton_h */

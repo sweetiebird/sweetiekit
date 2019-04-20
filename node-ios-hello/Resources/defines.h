@@ -68,6 +68,33 @@ Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::val
 using namespace v8;
 using namespace node;
 
+#define JS_SET_RETURN(x) \
+  info.GetReturnValue().Set(x)
+
+#define JS_PROP(name) \
+  static NAN_GETTER(name##Getter); \
+  static NAN_SETTER(name##Setter)
+
+#define JS_UNWRAP(type, name) \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  type* name = n##name->As<type>(); name = name;
+/*
+#define JS_GETTER(type, name) \
+NAN_GETTER(N##type::name##Getter) { \
+  Nan::HandleScope scope; \
+  N##type* nui = ObjectWrap::Unwrap<N##type>(info.This()); nui = nui; \
+  type* ui = nui->As<type>(); ui = ui;
+
+#define JS_GETTER_END(type, name) \
+}*/
+
+#define JS_SET_PROP(proto, jsName, cppName) \
+  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter, cppName##Setter);
+
+#define JS_SET_PROP_READONLY(proto, jsName, cppName) \
+  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter);
+
+
 #define JS_WRAP_CLASS(name, base) \
 \
 class N##name : public N##base { \
