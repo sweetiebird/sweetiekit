@@ -24,6 +24,8 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
   static NAN_GETTER(ViewGetter);
+  static NAN_METHOD(PresentViewController);
+  static NAN_METHOD(DismissViewController);
 };
 
 #endif /* NUIViewController_h */

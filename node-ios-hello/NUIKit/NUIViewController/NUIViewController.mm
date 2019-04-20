@@ -30,8 +30,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
   Nan::SetAccessor(proto, JS_STR("view"), ViewGetter);
+  Nan::SetMethod(proto, "present", PresentViewController);
+  Nan::SetMethod(proto, "dismiss", DismissViewController);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -79,4 +80,48 @@ NAN_GETTER(NUIViewController::ViewGetter) {
   Local<Object> viewObj = JS_TYPE(NUIView)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 
   info.GetReturnValue().Set(viewObj);
+}
+
+NAN_METHOD(NUIViewController::PresentViewController)
+{
+  Nan::HandleScope scope;
+
+  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
+  Nan::Persistent<Function>* cb = new Nan::Persistent<Function>();
+  
+  NUIViewController *vc = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
+  double animated = info[1]->IsBoolean() ? TO_BOOL(info[1]) : true;
+  if (info[2]->IsFunction()) {
+    cb->Reset(Local<Function>::Cast(info[2]));
+  }
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [ctrl->As<UIViewController>() presentViewController:vc->As<UIViewController>() animated:animated completion:^{
+        sweetiekit::Resolve(cb, true);
+      }];
+    });
+  }
+}
+
+NAN_METHOD(NUIViewController::DismissViewController)
+{
+  Nan::HandleScope scope;
+
+  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
+  Nan::Persistent<Function>* cb = new Nan::Persistent<Function>();
+  
+  double animated = info[0]->IsBoolean() ? TO_BOOL(info[0]) : true;
+  if (info[1]->IsFunction()) {
+    cb->Reset(Local<Function>::Cast(info[1]));
+  }
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [ctrl->As<UIViewController>() dismissViewControllerAnimated:animated
+       completion:^{
+        sweetiekit::Resolve(cb, true);
+      }];
+    });
+  }
 }
