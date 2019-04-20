@@ -23,6 +23,7 @@
 #include "NUILabel.h"
 #include "NUITextField.h"
 #include "NUINavigationController.h"
+#include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include <unistd.h>
 
@@ -158,7 +159,13 @@ void InitExports(Local<Object> exports) {
   
         auto N_UITabBarController = NUITabBarController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITabBarController").ToLocalChecked(), N_UITabBarController.first);
-  
+
+        auto N_UINavigationController = NUINavigationController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UINavigationController").ToLocalChecked(), N_UINavigationController.first);
+
+        auto N_UIImagePickerController = NUIImagePickerController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIImagePickerController").ToLocalChecked(), N_UIImagePickerController.first);
+
         auto N_UIView = NUIView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIView").ToLocalChecked(), N_UIView.first);
   
@@ -182,9 +189,6 @@ void InitExports(Local<Object> exports) {
   
         auto N_UILabel = NUILabel::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UILabel").ToLocalChecked(), N_UILabel.first);
-
-        auto N_UINavigationController = NUINavigationController::Initialize(Isolate::GetCurrent());
-        exports->Set(Nan::New("UINavigationController").ToLocalChecked(), N_UINavigationController.first);
 
         // delegates ========
   

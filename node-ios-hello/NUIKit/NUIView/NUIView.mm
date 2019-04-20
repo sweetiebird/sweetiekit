@@ -97,11 +97,14 @@ NAN_SETTER(NUIView::FrameSetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
-  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
-  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
-  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
+  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+//  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
+//  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
+//  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
+//  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {

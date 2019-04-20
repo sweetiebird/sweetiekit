@@ -195,6 +195,21 @@
             </objects>
             <point key="canvasLocation" x="750" y="360"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="HCp-bx-jjf">
+            <objects>
+                <viewController storyboardIdentifier="imageVC" id="hpm-SC-Fm0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4QW-E8-qHb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.43529411759999997" green="0.68235294120000001" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <viewLayoutGuide key="safeArea" id="HhK-Gw-okQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Cg-WJ-cmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1136" y="-178"/>
+        </scene>
         <!--NodeUI Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>

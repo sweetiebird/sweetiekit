@@ -1225,6 +1225,7 @@ const {
   UIImageView,
   UILabel,
   UINavigationController,
+  UIImagePickerController,
   UIImagePickerControllerDelegate,
 } = sweetiekit;
                 
@@ -1254,170 +1255,236 @@ console.log(sb, vc, view, subview);
         window?.rootViewController = vc;
 */
 
-async function buildMainUI() {
-  const app = new UIApplication();
-  const sb = new UIStoryboard('Main');
-  const vc = sb.instantiateViewController('tabVC');
-  console.log(vc);
+//async function buildMainUI() {
+//  const app = new UIApplication();
+//  const sb = new UIStoryboard('Main');
+//  const vc = sb.instantiateViewController('tabVC');
+//  console.log(vc);
+//
+//  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
+//  console.log(firstVC.view.subviews.filter(x => (x instanceof UILabel)).map(x => [x.center, x.text]));
+//  console.log("TKTK", firstVC.view.backgroundColor);
+//  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
+//
+//  const subview = makeUIView(0, 0, 20, 20);
+//  firstVC.view.addSubview(subview);
+//  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
+//
+//  const secondVC = sb.instantiateViewController('secondVC');
+//  vc.setViewControllers([firstVC, secondVC], false);
+//
+//  app.keyWindow.setRootViewController(vc); // update to { get, set }
+//
+//  const img = new UIImage('first');
+//
+//  console.log('pre-button');
+//  // update alloc to init
+//  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
+//  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
+//
+//    const x = randi(400);
+//    const y = randi(400);
+//
+//    const subview = new UIImageView(img); // named argument ({ image })
+//    subview.x = x;
+//    subview.y = y;
+//    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
+//    console.log(firstVC.view.subviews.filter(x => (x instanceof UIImageView)).map(x => [x.center, x.backgroundColor]));
+//    firstVC.view.addSubview(subview);
+//   //const subview = makeUIView(x, y, 20, 20);
+//    //firstVC.view.addSubview(subview);
+//
+//    console.log(`Added a new UIView at ${x},${y}`);
+//  });
+//  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
+//  console.log('post-button', button, button.frame);
+//  firstVC.view.addSubview(button);
+//
+//  const tf = UITextField.alloc(0, 0, 140, 50, () => {
+//    console.log("Done editing text!", tf.text);
+//    button.title = tf.text;
+//  });
+//  tf.text = button.title;
+//  tf.delegate = firstVC;
+//  tf.backgroundColor = ({red: 1.0, green: 1.0, blue: 1.0})
+//  firstVC.view.addSubview(tf);
+//
+//  const tabCtrl = new UITabBarController();
+//  const imgView1 = new UIImageView(img);
+//  {
+//    let p = firstVC.view.center;
+//    p.x -= 2*(imgView1.width + 5) + 5/2;
+//    p.y -= 100;
+//    for (let i = 0; i < 5; i++) {
+//      const imgView = new UIImageView(img);
+//      imgView.center = p;
+//      firstVC.view.addSubview(imgView);
+//      p.x += imgView.width + 5;
+//      // frame and bounds get x/y/w/h, but it's nonsensical for view to have these properties
+//      console.log(imgView.x, imgView.y, imgView.width, imgView.height, imgView.center, imgView.size);
+//    }
+//  }
+//  {
+//    imgView1.width *= 4;
+//    imgView1.height *= 4;
+//    imgView1.center = firstVC.view.center;
+//    imgView1.y -= imgView1.height * 2;
+//    firstVC.view.addSubview(imgView1);
+//  }
+//
+//  console.log(button, tabCtrl, tf, img);
+//}
 
-  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
-  console.log(firstVC.view.subviews.filter(x => (x instanceof UILabel)).map(x => [x.center, x.text]));
-  console.log("TKTK", firstVC.view.backgroundColor);
-  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
+//async function makeNav(nav) {
+//  const app = new UIApplication();
+//  const sb = new UIStoryboard('Main');
+//  const vc = sb.instantiateViewController('loginVC');
+//  if (!nav) {
+//    nav = new UINavigationController(vc);
+//    app.keyWindow.setRootViewController(nav);
+//  }
+//  const btnLogin = vc.view.viewWithStringTag("btnLogin");
+//  btnLogin.callback = async () => {
+//    const del = new UIImagePickerControllerDelegate();
+//    del.onInfo = (picker, info) => {
+//      let img = del.result
+//      console.log(img);
+//      if (img) {
+//        const subview = new UIImageView(img); // named argument ({ image })
+//        const viewWidth = vc.view.width;
+//        const newHeight = (subview.height / subview.width) * viewWidth;
+//        subview.frame = { x: 0, y: 0, width: viewWidth, height: newHeight };
+//        vc.view.addSubview(subview);
+//      }
+//    };
+//    del.onCancel = (picker) => {
+//      console.log(picker);
+//    };
+//    console.log(del, del.onInfo);
+//    const imgVC = new UIImagePickerController();
+//    imgVC.delegate = del;
+//    vc.present(imgVC, true, () => {});
+//  }
+//  return vc;
+//}
 
-  const subview = makeUIView(0, 0, 20, 20);
-  firstVC.view.addSubview(subview);
-  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
+//async function createDelegates() {
+//  const del = new UIImagePickerControllerDelegate();
+//  del.onInfo = (picker, info) => {
+//    console.log(picker, info);
+//  };
+//  del.onCancel = (picker) => {
+//    console.log(picker);
+//  };
+//  console.log(del, del.onInfo);
+//}
 
-  const secondVC = sb.instantiateViewController('secondVC');
-  vc.setViewControllers([firstVC, secondVC], false);
-
-  app.keyWindow.setRootViewController(vc); // update to { get, set }
-
-  const img = new UIImage('first');
-
-  console.log('pre-button');
-  // update alloc to init
-  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
-  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
-
-    const x = randi(400);
-    const y = randi(400);
-
-    const subview = new UIImageView(img); // named argument ({ image })
-    subview.x = x;
-    subview.y = y;
-    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
-    console.log(firstVC.view.subviews.filter(x => (x instanceof UIImageView)).map(x => [x.center, x.backgroundColor]));
-    firstVC.view.addSubview(subview);
-   //const subview = makeUIView(x, y, 20, 20);
-    //firstVC.view.addSubview(subview);
-
-    console.log(`Added a new UIView at ${x},${y}`);
-  });
-  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
-  console.log('post-button', button, button.frame);
-  firstVC.view.addSubview(button);
-
-  const tf = UITextField.alloc(0, 0, 140, 50, () => {
-    console.log("Done editing text!", tf.text);
-    button.title = tf.text;
-  });
-  tf.text = button.title;
-  tf.delegate = firstVC;
-  tf.backgroundColor = ({red: 1.0, green: 1.0, blue: 1.0})
-  firstVC.view.addSubview(tf);
-
-  const tabCtrl = new UITabBarController();
-  const imgView1 = new UIImageView(img);
-  {
-    let p = firstVC.view.center;
-    p.x -= 2*(imgView1.width + 5) + 5/2;
-    p.y -= 100;
-    for (let i = 0; i < 5; i++) {
-      const imgView = new UIImageView(img);
-      imgView.center = p;
-      firstVC.view.addSubview(imgView);
-      p.x += imgView.width + 5;
-      // frame and bounds get x/y/w/h, but it's nonsensical for view to have these properties
-      console.log(imgView.x, imgView.y, imgView.width, imgView.height, imgView.center, imgView.size);
-    }
-  }
-  {
-    imgView1.width *= 4;
-    imgView1.height *= 4;
-    imgView1.center = firstVC.view.center;
-    imgView1.y -= imgView1.height * 2;
-    firstVC.view.addSubview(imgView1);
-  }
-
-  console.log(button, tabCtrl, tf, img);
-}
-
-async function makeNav(nav) {
-  const app = new UIApplication();
-  const sb = new UIStoryboard('Main');
-  const vc = sb.instantiateViewController('loginVC');
-  if (!nav) {
-    nav = new UINavigationController(vc);
-    app.keyWindow.setRootViewController(nav);
-  }
-  const btnLogin = vc.view.viewWithStringTag("btnLogin");
-  btnLogin.callback = async () => {
-    nav.pushViewController(await makeNav(nav), true);
-  }
-  return vc;
-}
-
-async function createDelegates() {
-  const del = new UIImagePickerControllerDelegate();
-  del.onInfo = (picker, info) => {
-    console.log(picker, info);
-  };
-  console.log(del, del.onInfo);
-}
-
-async function buildUI() {
-  const app = new UIApplication();
-  const kv = NSUserDefaults.standardUserDefaults;
-  console.log(kv);
-  console.log(kv.stringForKey("Foo"));
-  console.log(kv.stringForKey("Foo2"));
-  console.log(kv.setValueForKey("Asdf", "Foo"));
-  console.log(kv.synchronize());
-  console.log(kv.stringForKey("Foo"));
-  const sb = new UIStoryboard('Main');
-  const vc = sb.instantiateViewController('loginVC');
-  app.keyWindow.setRootViewController(vc);
-  console.log(vc, vc.view);
-  const sv = vc.view.subviews;
-  console.log(sv);
-  console.log(sv[0].subviews)
-  console.log(sv[1].subviews)
-  const userField = vc.view.viewWithStringTag("txtEmail");
-  const passField = vc.view.viewWithStringTag("txtPassword");
-  userField.text = kv.stringForKey("me") || "";
-  userField.callback = () => {
-    console.log('username', userField.text);
-  }
-  passField.callback = () => {
-    console.log('password', passField.text);
-  }
-  //const lblHeader = vc.view.viewWithStringTag("lblHeader");
-  //lblHeader.text = "SweetieKit"
-  const btnLogin = vc.view.viewWithStringTag("btnLogin");
-  btnLogin.callback = async () => {
-    console.log(`Try to login with ${userField.text} / ${passField.text}`);
-    kv.setValueForKey(userField.text, "me");
-    //await buildMainUI();
-    const vc2 = sb.instantiateViewController('loginVC');
-    vc.present(vc2, true, (success) => {
-      console.log("Finsihed!", success)
-      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
-      btnLogin.callback = async () => {
-        vc2.dismiss();
-      }
-    })
-  }
-}
+//async function buildUI() {
+//  const app = new UIApplication();
+//  const kv = NSUserDefaults.standardUserDefaults;
+//  console.log(kv);
+//  console.log(kv.stringForKey("Foo"));
+//  console.log(kv.stringForKey("Foo2"));
+//  console.log(kv.setValueForKey("Asdf", "Foo"));
+//  console.log(kv.synchronize());
+//  console.log(kv.stringForKey("Foo"));
+//  const sb = new UIStoryboard('Main');
+//  const vc = sb.instantiateViewController('loginVC');
+//  app.keyWindow.setRootViewController(vc);
+//  console.log(vc, vc.view);
+//  const sv = vc.view.subviews;
+//  console.log(sv);
+//  console.log(sv[0].subviews)
+//  console.log(sv[1].subviews)
+//  const userField = vc.view.viewWithStringTag("txtEmail");
+//  const passField = vc.view.viewWithStringTag("txtPassword");
+//  userField.text = kv.stringForKey("me") || "";
+//  userField.callback = () => {
+//    console.log('username', userField.text);
+//  }
+//  passField.callback = () => {
+//    console.log('password', passField.text);
+//  }
+//  //const lblHeader = vc.view.viewWithStringTag("lblHeader");
+//  //lblHeader.text = "SweetieKit"
+//  const btnLogin = vc.view.viewWithStringTag("btnLogin");
+//  btnLogin.callback = async () => {
+//    console.log(`Try to login with ${userField.text} / ${passField.text}`);
+//    kv.setValueForKey(userField.text, "me");
+//    //await buildMainUI();
+//    const vc2 = sb.instantiateViewController('loginVC');
+//    vc.present(vc2, true, (success) => {
+//      console.log("Finsihed!", success)
+//      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
+//      btnLogin.callback = async () => {
+//        vc2.dismiss();
+//      }
+//    })
+//  }
+//}
 
 function randi(n) {
   return Math.floor(Math.random()*n);
 }
 
-class MyUITabBarViewController extends UITabBarController
-{
-}
+//class MyUITabBarViewController extends UITabBarController
+//{
+//}
 
-function makeUIView(x, y, w, h) {
-  const view = new UIView(x,y,w,h); // update to named arg ({ frame: { x, y, width, height } })
-  view.backgroundColor = ({red: 1.0, green: 0.0, blue: 0.0});
-  return view;
+//function makeUIView(x, y, w, h) {
+//  const view = new UIView(x,y,w,h); // update to named arg ({ frame: { x, y, width, height } })
+//  view.backgroundColor = ({red: 1.0, green: 0.0, blue: 0.0});
+//  return view;
+//}
+
+function iosApp() {
+  const app = new UIApplication();
+  const sb = new UIStoryboard('Main');
+  const vc = sb.instantiateViewController('loginVC');
+  const nav = new UINavigationController(vc);
+
+  app.keyWindow.setRootViewController(nav);
+
+  const btnLogin = vc.view.viewWithStringTag("btnLogin");
+
+  async function handleButtonPress() {
+    //btnLogin.callback = handleButtonPress;
+
+    const del = new UIImagePickerControllerDelegate();
+    const imgVC = new UIImagePickerController();
+
+    del.onInfo = (picker, info) => {
+      let img = del.result
+
+      if (img) {
+        const vc2 = sb.instantiateViewController('imageVC');
+
+        const imgView = new UIImageView(img); // named argument ({ image })
+        const viewWidth = vc2.view.width;
+        const viewHeight = vc2.view.height;
+        const newHeight = (imgView.height / imgView.width) * viewWidth;
+        const x = 0;
+        const y = (viewHeight - newHeight) / 2;
+
+        imgView.frame = { x: x, y: y, width: viewWidth, height: newHeight };
+
+        vc2.view.addSubview(imgView);
+        
+        nav.pushViewController(vc2);
+      }
+    };
+
+    del.onCancel = (picker) => {};
+
+    imgVC.delegate = del;
+    vc.present(imgVC, true, () => {});
+  }
+
+  btnLogin.callback = handleButtonPress;
 }
 
 process.nextTick(async () => {
-  await makeNav();
-  await createDelegates();
+  await iosApp();
 });
 
 //httpServer = require('./server.js')

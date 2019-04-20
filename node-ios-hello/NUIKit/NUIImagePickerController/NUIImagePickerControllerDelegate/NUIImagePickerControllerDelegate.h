@@ -23,9 +23,13 @@ public:
   
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  static NAN_GETTER(ResultGetter);
   static NAN_GETTER(OnInfoGetter);
   static NAN_SETTER(OnInfoSetter);
+  static NAN_GETTER(OnCancelGetter);
+  static NAN_SETTER(OnCancelSetter);
   Nan::Persistent<Function>* _onInfo;
+  Nan::Persistent<Function>* _onCancel;
 };
 
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUIImagePickerController.h"
+#include "NUIImagePickerControllerDelegate.h"
 #include "NUINavigationController.h"
 #include "NUIViewController.h"
 #import "node_ios_hello-Swift.h"
@@ -28,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImagePickerController::Init
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetAccessor(proto, JS_STR("delegate"), DelegateGetter, DelegateSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -48,12 +50,36 @@ NAN_METHOD(NUIImagePickerController::New) {
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
         ctrl->SetNSObject([[UIImagePickerController alloc] init]);
+        [ctrl->As<UIImagePickerController>() setAllowsEditing:YES];
+        [ctrl->As<UIImagePickerController>() setSourceType:UIImagePickerControllerSourceTypeCamera];
       });
     }
   }
   ctrl->Wrap(ctrlObj);
 
   info.GetReturnValue().Set(ctrlObj);
+}
+
+NAN_GETTER(NUIImagePickerController::DelegateGetter) {
+  Nan::HandleScope scope;
+
+  NUIImagePickerController *view = ObjectWrap::Unwrap<NUIImagePickerController>(info.This());
+
+  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+}
+
+NAN_SETTER(NUIImagePickerController::DelegateSetter) {
+  Nan::HandleScope scope;
+
+  NUIImagePickerController *ctrl = ObjectWrap::Unwrap<NUIImagePickerController>(info.This());
+  NUIImagePickerControllerDelegate *d = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(Local<Object>::Cast(value));
+  auto delegate = d->As<SUIImagePickerControllerDelegate>();
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [ctrl->As<UIImagePickerController>() setDelegate:delegate];
+    });
+  }
 }
 
 NUIImagePickerController::NUIImagePickerController () {}

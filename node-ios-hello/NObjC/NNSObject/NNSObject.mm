@@ -74,6 +74,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUITabBarController.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
+#include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -122,6 +123,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIResponder::type;
       }
       // ======== controllers
+      if ([obj isKindOfClass:[UIImagePickerController class]]) {
+        return NUIImagePickerController::type;
+      }
       if ([obj isKindOfClass:[UINavigationController class]]) {
         return NUINavigationController::type;
       }

@@ -74,44 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.397191"
+            timestampString = "577433132.77345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "NAN_METHOD(NUIButton::New)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.3972549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "NAN_GETTER(NUIButton::FrameGetter)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.397303"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "NUIButton::GetFrame()"
+            landmarkName = "NUIButton::Initialize(Isolate *isolate)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +90,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.397349"
+            timestampString = "577433132.773784"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "NAN_METHOD(NUIButton::Alloc)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
+            timestampString = "577433132.773985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "NAN_METHOD(NUIButton::Alloc)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
+            timestampString = "577433132.774179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "NUIButton::GetFrame()"
+            landmarkName = "NAN_METHOD(NUIButton::Alloc)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
+            timestampString = "577433132.774369"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "NUIButton::Initialize(Isolate *isolate)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,23 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.3973939"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "NAN_METHOD(NUIButton::New)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "node-ios-hello/NUIKit/NUIButton/NUIButton.mm"
-            timestampString = "577352636.397438"
+            timestampString = "577433132.774557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -166,11 +166,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577423137.110352"
+            timestampString = "577424739.26477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
@@ -182,11 +182,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577423137.110446"
+            timestampString = "577424739.264845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -198,17 +198,113 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577423137.11052"
+            timestampString = "577424739.2649029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "NUINavigationController::Initialize(Isolate *isolate)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+            timestampString = "577433132.774791"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "NAN_GETTER(NUIImagePickerControllerDelegate::OnInfoGetter)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+            timestampString = "577433132.774846"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "NAN_METHOD(NUIImagePickerControllerDelegate::New)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+            timestampString = "577433132.774892"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "NAN_GETTER(NUIImagePickerControllerDelegate::OnInfoGetter)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+            timestampString = "577433132.774938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "___ZN32NUIImagePickerControllerDelegate14OnCancelSetterEN2v85LocalINS0_6StringEEENS1_INS0_5ValueEEERKN3Nan20PropertyCallbackInfoIvEE_block_invoke"
+                  moduleName = "node-ios-hello"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emily/hello-ios/node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+                  timestampString = "577425542.744652"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "___ZN32NUIImagePickerControllerDelegate14OnCancelSetterEN2v85LocalINS0_6StringEEENS1_INS0_5ValueEEERKN3Nan20PropertyCallbackInfoIvEE_block_invoke_2"
+                  moduleName = "node-ios-hello"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emily/hello-ios/node-ios-hello/NUIKit/NUIImagePickerController/NUIImagePickerControllerDelegate/NUIImagePickerControllerDelegate.mm"
+                  timestampString = "577425542.746691"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

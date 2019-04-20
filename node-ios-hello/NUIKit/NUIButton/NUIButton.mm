@@ -178,11 +178,15 @@ NAN_SETTER(NUIButton::CallbackSetter) {
   NUIButton *field = ObjectWrap::Unwrap<NUIButton>(info.This());
   field->_callback->Reset(Local<Function>::Cast(value));
   
+  dispatch_queue_t q = dispatch_queue_create_with_target(DISPATCH_CURRENT_QUEUE_LABEL, nullptr, nullptr);
+  
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       UIButton* txt = field->As<UIButton>();
       [txt addTargetClosureWithClosure:^(UIButton*){
-        sweetiekit::Resolve(field->_callback);
+        dispatch_sync(q, ^ {
+          sweetiekit::Resolve(field->_callback);
+        });
       }];
     });
   }

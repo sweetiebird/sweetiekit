@@ -28,8 +28,8 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
-//  static NAN_GETTER(DelegateGetter);
-//  static NAN_SETTER(DelegateSetter);
+  static NAN_GETTER(DelegateGetter);
+  static NAN_SETTER(DelegateSetter);
 };
 
 #endif /* NUIImagePickerController_h */

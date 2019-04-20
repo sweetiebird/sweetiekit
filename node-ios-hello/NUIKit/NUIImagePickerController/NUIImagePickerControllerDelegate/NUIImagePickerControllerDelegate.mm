@@ -27,7 +27,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImagePickerControllerDelega
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetAccessor(proto, JS_STR("result"), ResultGetter);
   Nan::SetAccessor(proto, JS_STR("onInfo"), OnInfoGetter, OnInfoSetter);
+  Nan::SetAccessor(proto, JS_STR("onCancel"), OnCancelGetter, OnCancelSetter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -44,7 +46,7 @@ NAN_METHOD(NUIImagePickerControllerDelegate::New) {
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      ctrl->As<SUIImagePickerControllerDelegate>();
+      ctrl->SetNSObject([[SUIImagePickerControllerDelegate alloc] init]);
     });
   }
   ctrl->Wrap(ctrlObj);
@@ -62,11 +64,30 @@ NAN_SETTER(NUIImagePickerControllerDelegate::OnInfoSetter) {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
       [d setOnInfoClosureWithClosure:^(UIImagePickerController * _Nonnull, NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull) {
+        
         sweetiekit::Resolve(del->_onInfo);
         return true;
       }];
     });
   }
+}
+
+
+NAN_GETTER(NUIImagePickerControllerDelegate::ResultGetter) {
+  Nan::HandleScope scope;
+
+  NUIImagePickerControllerDelegate *view = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
+  auto obj = [view->As<SUIImagePickerControllerDelegate>() infoResult];
+  if (obj != nullptr) {
+      Local<Value> argv[] = {
+        Nan::New<v8::External>((__bridge void*)obj)
+      };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      info.GetReturnValue().Set(value);
+  }
+  
+
+  //info.GetReturnValue().Set(Nan::New(view->_onInfo));
 }
 
 NAN_GETTER(NUIImagePickerControllerDelegate::OnInfoGetter) {
@@ -77,5 +98,33 @@ NAN_GETTER(NUIImagePickerControllerDelegate::OnInfoGetter) {
   info.GetReturnValue().Set(Nan::New(view->_onInfo));
 }
 
-NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate () : _onInfo(new Nan::Persistent<Function>()) {}
-NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate () { delete _onInfo; }
+NAN_SETTER(NUIImagePickerControllerDelegate::OnCancelSetter) {
+  Nan::HandleScope scope;
+
+  NUIImagePickerControllerDelegate *del = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
+  del->_onCancel->Reset(Local<Function>::Cast(value));
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
+      [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
+        sweetiekit::Resolve(del->_onCancel);
+        return true;
+      }];
+    });
+  }
+}
+
+NAN_GETTER(NUIImagePickerControllerDelegate::OnCancelGetter) {
+  Nan::HandleScope scope;
+
+  NUIImagePickerControllerDelegate *view = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
+
+  info.GetReturnValue().Set(Nan::New(view->_onCancel));
+}
+
+NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate ()
+: _onInfo(new Nan::Persistent<Function>())
+, _onCancel(new Nan::Persistent<Function>())
+{}
+NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate () { delete _onInfo; delete _onCancel; }
