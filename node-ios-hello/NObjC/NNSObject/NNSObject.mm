@@ -73,6 +73,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUIStoryboard.h"
 #include "NUITabBarController.h"
 #include "NUIViewController.h"
+#include "NUINavigationController.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -119,12 +120,17 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIResponder class]]) {
         return NUIResponder::type;
       }
+      // controllers
+      if ([obj isKindOfClass:[UINavigationController class]]) {
+        return NUINavigationController::type;
+      }
       if ([obj isKindOfClass:[UITabBarController class]]) {
         return NUITabBarController::type;
       }
       if ([obj isKindOfClass:[UIViewController class]]) {
         return NUIViewController::type;
       }
+      // !- controllers
       if ([obj isKindOfClass:[NSUserDefaults class]]) {
         return NNSUserDefaults::type;
       }

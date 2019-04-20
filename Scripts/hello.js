@@ -1224,6 +1224,7 @@ const {
   UIImage,
   UIImageView,
   UILabel,
+  UINavigationController,
 } = sweetiekit;
                 
 console.log(sweetiekit);
@@ -1332,6 +1333,19 @@ async function buildMainUI() {
   console.log(button, tabCtrl, tf, img);
 }
 
+async function makeNav() {
+  const app = new UIApplication();
+  const sb = new UIStoryboard('Main');
+  const vc = sb.instantiateViewController('loginVC');
+  const nav = new UINavigationController(vc);
+  app.keyWindow.setRootViewController(nav);
+  const btnLogin = vc.view.viewWithStringTag("btnLogin");
+  btnLogin.callback = async () => {
+    const vc2 = sb.instantiateViewController('loginVC');
+    nav.pushViewController(vc2, true);
+  }
+}
+
 async function buildUI() {
   const app = new UIApplication();
   const kv = NSUserDefaults.standardUserDefaults;
@@ -1383,7 +1397,7 @@ function makeUIView(x, y, w, h) {
 }
 
 process.nextTick(async () => {
-  await buildUI();
+  await makeNav();
 });
                                                             
 //httpServer = require('./server.js')

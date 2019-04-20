@@ -22,6 +22,7 @@
 #include "NUIImageView.h"
 #include "NUILabel.h"
 #include "NUITextField.h"
+#include "NUINavigationController.h"
 #include <unistd.h>
 
 #include <string>
@@ -177,6 +178,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UILabel = NUILabel::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UILabel").ToLocalChecked(), N_UILabel.first);
+
+        auto N_UINavigationController = NUINavigationController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UINavigationController").ToLocalChecked(), N_UINavigationController.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

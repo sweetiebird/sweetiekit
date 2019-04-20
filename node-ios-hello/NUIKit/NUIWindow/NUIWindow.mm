@@ -62,6 +62,7 @@ NAN_METHOD(NUIWindow::SetRootViewController) {
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
       [win->As<UIWindow>() setRootViewController:vc->As<UITabBarController>()];
+      [win->As<UIWindow>() makeKeyAndVisible];
     });
   }
 }
