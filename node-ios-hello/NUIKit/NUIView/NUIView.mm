@@ -38,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetAccessor(proto, JS_STR("height"), HeightGetter, HeightSetter);
   Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
   Nan::SetAccessor(proto, JS_STR("subviews"), SubviewsGetter);
+  Nan::SetAccessor(proto, JS_STR("layer"), LayerGetter);
   Nan::SetMethod(proto, "addSubview", AddSubview);
   Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
@@ -73,7 +74,7 @@ NAN_METHOD(NUIView::New) {
   }
   view->Wrap(viewObj);
   
-  info.GetReturnValue().Set(viewObj);
+  JS_SET_RETURN(viewObj);
 }
 
 NAN_GETTER(NUIView::FrameGetter) {
@@ -90,7 +91,7 @@ NAN_GETTER(NUIView::FrameGetter) {
   size->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
   result->Set(JS_STR("size"), JS_OBJ(size));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NUIView::FrameSetter) {
@@ -121,7 +122,7 @@ NAN_GETTER(NUIView::OriginGetter) {
   result->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
   result->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NUIView::OriginSetter) {
@@ -149,7 +150,7 @@ NAN_GETTER(NUIView::CenterGetter) {
   result->Set(JS_STR("x"), JS_FLOAT(frame.origin.x + frame.size.width/2));
   result->Set(JS_STR("y"), JS_FLOAT(frame.origin.y + frame.size.height/2));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NUIView::CenterSetter) {
@@ -180,7 +181,7 @@ NAN_GETTER(NUIView::SizeGetter) {
   result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
   result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NUIView::SizeSetter) {
@@ -203,7 +204,7 @@ NAN_GETTER(NUIView::XGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  info.GetReturnValue().Set(JS_NUM(view->GetFrame().origin.x));
+  JS_SET_RETURN(JS_NUM(view->GetFrame().origin.x));
 }
 
 NAN_SETTER(NUIView::XSetter) {
@@ -225,7 +226,7 @@ NAN_GETTER(NUIView::YGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  info.GetReturnValue().Set(JS_NUM(view->GetFrame().origin.y));
+  JS_SET_RETURN(JS_NUM(view->GetFrame().origin.y));
 }
 
 NAN_SETTER(NUIView::YSetter) {
@@ -247,7 +248,7 @@ NAN_GETTER(NUIView::WidthGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  info.GetReturnValue().Set(JS_NUM(view->GetFrame().size.width));
+  JS_SET_RETURN(JS_NUM(view->GetFrame().size.width));
 }
 
 NAN_SETTER(NUIView::WidthSetter) {
@@ -269,7 +270,7 @@ NAN_GETTER(NUIView::HeightGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  info.GetReturnValue().Set(JS_NUM(view->GetFrame().size.height));
+  JS_SET_RETURN(JS_NUM(view->GetFrame().size.height));
 }
 
 NAN_SETTER(NUIView::HeightSetter) {
@@ -292,7 +293,7 @@ NAN_GETTER(NUIView::AutoresizesSubviewsGetter) {
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
 
-  info.GetReturnValue().Set(JS_BOOL([view->As<UIView>() autoresizesSubviews]));
+  JS_SET_RETURN(JS_BOOL([view->As<UIView>() autoresizesSubviews]));
 }
 
 NAN_SETTER(NUIView::AutoresizesSubviewsSetter) {
@@ -331,7 +332,7 @@ NAN_GETTER(NUIView::SubviewsGetter) {
     }
   }
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 
@@ -367,7 +368,7 @@ NAN_METHOD(NUIView::SizeThatFits) {
   result->Set(JS_STR("width"), JS_FLOAT(tmp_Size.width));
   result->Set(JS_STR("height"), JS_FLOAT(tmp_Size.height));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_METHOD(NUIView::SizeToFit) {
@@ -399,7 +400,7 @@ NAN_GETTER(NUIView::BackgroundColorGetter) {
   result->Set(JS_STR("blue"), JS_NUM(blue));
   result->Set(JS_STR("alpha"), JS_NUM(alpha));
 
-  info.GetReturnValue().Set(result);
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NUIView::BackgroundColorSetter) {
@@ -408,7 +409,7 @@ NAN_SETTER(NUIView::BackgroundColorSetter) {
   double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
   double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
   double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
-  double alpha = JS_OBJ(value)->Has(JS_CONTEXT(), JS_STR("alpha")).FromJust() ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
   
   UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 
@@ -457,7 +458,27 @@ NAN_METHOD(NUIView::ViewWithStringTag) {
       Nan::New<v8::External>((__bridge void*)obj)
     };
     Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    info.GetReturnValue().Set(value);
+    JS_SET_RETURN(value);
+  }
+}
+
+NAN_GETTER(NUIView::LayerGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIView, ui);
+  __block CALayer* theLayer = nullptr;
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      theLayer = [ui layer];
+    });
+  }
+  
+  if (theLayer != nullptr) {
+    Local<Value> argv[] = {
+      Nan::New<v8::External>((__bridge void*)theLayer)
+    };
+    Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(theLayer, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+    JS_SET_RETURN(JS_OBJ(value));
   }
 }
 

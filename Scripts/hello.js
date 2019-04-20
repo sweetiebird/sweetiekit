@@ -1227,6 +1227,7 @@ const {
   UINavigationController,
   UIImagePickerController,
   UIImagePickerControllerDelegate,
+  CALayer,
 } = sweetiekit;
                 
 console.log(sweetiekit);
@@ -1444,6 +1445,30 @@ function iosApp() {
   const nav = new UINavigationController(vc);
 
   app.keyWindow.setRootViewController(nav);
+  
+  
+  console.log(vc, vc.view);
+  const sv = vc.view.subviews;
+  console.log(sv);
+  console.log(sv[0].subviews)
+  console.log(sv[1].subviews)
+  
+  const userField = vc.view.viewWithStringTag("txtEmail");
+  const passField = vc.view.viewWithStringTag("txtPassword");
+  /*
+  userField.text = kv.stringForKey("me") || "";
+  userField.callback = () => {
+    console.log('username', userField.text);
+  }
+  passField.callback = () => {
+    console.log('password', passField.text);
+  }*/
+  
+  console.log({
+    cornerRadius: userField.layer.cornerRadius,
+    borderColor: userField.layer.borderColor,
+    borderWidth: userField.layer.borderWidth,
+  })
 
   const btnLogin = vc.view.viewWithStringTag("btnLogin");
 

@@ -24,6 +24,7 @@ using namespace v8;
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 
 #define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
+#define JS_HAS(obj, name) (obj)->Has(JS_CONTEXT(), name).FromJust()
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
