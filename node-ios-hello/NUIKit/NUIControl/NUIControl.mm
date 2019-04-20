@@ -33,6 +33,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
   JS_SET_PROP(proto, "selected", Selected);
   JS_SET_PROP(proto, "enabled", Enabled);
   JS_SET_PROP(proto, "highlighted", Highlighted);
+  JS_SET_PROP_READONLY(proto, "tracking", Tracking)
+  JS_SET_PROP_READONLY(proto, "touchInside", TouchInside);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -173,4 +175,34 @@ NAN_SETTER(NUIControl::HighlightedSetter) {
       [ui setHighlighted:isHighlighted];
     });
   }
+}
+
+NAN_GETTER(NUIControl::TrackingGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isTracking = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isTracking = [ui isTracking];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isTracking));
+}
+
+NAN_GETTER(NUIControl::TouchInsideGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isTouchInside = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isTouchInside = [ui isTouchInside];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isTouchInside));
 }

@@ -30,6 +30,8 @@ public:
   JS_PROP(Enabled);
   JS_PROP(Selected);
   JS_PROP(Highlighted);
+  JS_PROP(Tracking);
+  JS_PROP(TouchInside);
 };
 
 
