@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIView.h"
 #include "NUIButton.h"
@@ -41,6 +42,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
   Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
+  Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -413,6 +415,7 @@ NAN_SETTER(NUIView::BackgroundColorSetter) {
     });
   }
 }
+
 NAN_METHOD(NUIView::AddSubview) {
   NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
   Local<Object> obj = JS_OBJ(info[0]);
@@ -426,6 +429,32 @@ NAN_METHOD(NUIView::AddSubview) {
     }
   } else {
     Nan::ThrowError("Unknown addSubview type");
+  }
+}
+
+NAN_METHOD(NUIView::ViewWithStringTag) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+
+  std::string key;
+  if (info[0]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    key = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  __block UIView* obj = nullptr;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      obj = [view->As<UIView>() viewWithStringTagWithStrTag:[NSString stringWithUTF8String:key.c_str()]];
+    });
+  }
+  if (obj != nullptr) {
+    Local<Value> argv[] = {
+      Nan::New<v8::External>((__bridge void*)obj)
+    };
+    Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+    info.GetReturnValue().Set(value);
   }
 }
 

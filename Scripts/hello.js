@@ -1358,8 +1358,10 @@ async function buildUI() {
   passField.callback = () => {
     console.log('password', passField.text);
   }
-  const loginBtn = sv[2];
-  loginBtn.callback = async () => {
+  //const lblHeader = vc.view.viewWithStringTag("lblHeader");
+  //lblHeader.text = "SweetieKit"
+  const btnLogin = vc.view.viewWithStringTag("btnLogin");
+  btnLogin.callback = async () => {
     console.log(`Try to login with ${userField.text} / ${passField.text}`);
     kv.setValueForKey(userField.text, "me");
     await buildMainUI();

@@ -20,6 +20,7 @@
 		211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */; };
 		211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76BB226A52AC00B838AF /* NUILabel.mm */; };
 		21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21C872CD226A87C500B5192B /* NNSUserDefaults.mm */; };
+		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
@@ -107,6 +108,7 @@
 		211E76BC226A52AC00B838AF /* NUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILabel.h; sourceTree = "<group>"; };
 		21C872CD226A87C500B5192B /* NNSUserDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserDefaults.mm; sourceTree = "<group>"; };
 		21C872CE226A87C500B5192B /* NNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserDefaults.h; sourceTree = "<group>"; };
+		21C872D0226A989400B5192B /* UIView+stringTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+stringTag.swift"; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "../node-ios-full/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			children = (
 				A1D6729622695CB800562A42 /* NUIView.h */,
 				A1D6729722695D0200562A42 /* NUIView.mm */,
+				21C872D0226A989400B5192B /* UIView+stringTag.swift */,
 			);
 			path = NUIView;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
+				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
