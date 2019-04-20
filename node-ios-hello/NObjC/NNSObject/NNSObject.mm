@@ -76,6 +76,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
+#include "NCALayer.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -89,6 +90,15 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
     }
     if (wrapper == nullptr) {
+    
+      // CoreAnimation
+      
+      if ([obj isKindOfClass:[CALayer class]]) {
+        return NCALayer::type;
+      }
+      
+      // UIKit
+      
       if ([obj isKindOfClass:[UIApplication class]]) {
         return NUIApplication::type;
       }

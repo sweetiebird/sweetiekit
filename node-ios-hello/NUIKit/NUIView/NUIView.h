@@ -44,6 +44,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_GETTER(BackgroundColorGetter);
   static NAN_SETTER(BackgroundColorSetter);
   static NAN_METHOD(ViewWithStringTag);
+  JS_PROP(Layer);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);

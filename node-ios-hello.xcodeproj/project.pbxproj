@@ -19,6 +19,8 @@
 		211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B6226A3E4D00B838AF /* NodeUITabBarController.swift */; };
 		211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */; };
 		211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76BB226A52AC00B838AF /* NUILabel.mm */; };
+		216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A5226BD48A00051DE0 /* NCALayer.mm */; };
+		216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A8226BDBF000051DE0 /* ColorHelper.mm */; };
 		21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21C872CD226A87C500B5192B /* NNSUserDefaults.mm */; };
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
@@ -112,6 +114,10 @@
 		211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddTargetClosure.swift"; sourceTree = "<group>"; };
 		211E76BB226A52AC00B838AF /* NUILabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILabel.mm; sourceTree = "<group>"; };
 		211E76BC226A52AC00B838AF /* NUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILabel.h; sourceTree = "<group>"; };
+		216392A4226BD48A00051DE0 /* NCALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCALayer.h; sourceTree = "<group>"; };
+		216392A5226BD48A00051DE0 /* NCALayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCALayer.mm; sourceTree = "<group>"; };
+		216392A7226BDBD900051DE0 /* ColorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
+		216392A8226BDBF000051DE0 /* ColorHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorHelper.mm; sourceTree = "<group>"; };
 		21C872CD226A87C500B5192B /* NNSUserDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserDefaults.mm; sourceTree = "<group>"; };
 		21C872CE226A87C500B5192B /* NNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserDefaults.h; sourceTree = "<group>"; };
 		21C872D0226A989400B5192B /* UIView+stringTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+stringTag.swift"; sourceTree = "<group>"; };
@@ -283,6 +289,23 @@
 			path = NUILabel;
 			sourceTree = "<group>";
 		};
+		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				216392A3226BD48A00051DE0 /* NCALayer */,
+			);
+			path = NCoreAnimation;
+			sourceTree = "<group>";
+		};
+		216392A3226BD48A00051DE0 /* NCALayer */ = {
+			isa = PBXGroup;
+			children = (
+				216392A4226BD48A00051DE0 /* NCALayer.h */,
+				216392A5226BD48A00051DE0 /* NCALayer.mm */,
+			);
+			path = NCALayer;
+			sourceTree = "<group>";
+		};
 		21C872CC226A87C500B5192B /* NNSUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +415,8 @@
 				A1FF9E6C225D3CEB004D7C82 /* hello-node.hpp */,
 				A1FC1A16225C66D000085571 /* hello.mm */,
 				A1D67294226954C000562A42 /* defines.h */,
+				216392A7226BDBD900051DE0 /* ColorHelper.h */,
+				216392A8226BDBF000051DE0 /* ColorHelper.mm */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -527,6 +552,7 @@
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A1D672A02269942100562A42 /* Resources */,
 				A1E2D7A5226A500100FA1562 /* NObjC */,
+				216392A2226BD43600051DE0 /* NCoreAnimation */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
@@ -696,6 +722,8 @@
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
+				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
+				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,

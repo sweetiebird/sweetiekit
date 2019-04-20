@@ -25,6 +25,7 @@
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
+#include "NCALayer.h"
 #include <unistd.h>
 
 #include <string>
@@ -145,6 +146,8 @@ void InitExports(Local<Object> exports) {
         auto N_NSUserDefaults = NNSUserDefaults::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSUserDefaults").ToLocalChecked(), N_NSUserDefaults.first);
   
+        // UIKit
+  
         auto N_UIApplication = NUIApplication::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIApplication").ToLocalChecked(), N_UIApplication.first);
   
@@ -190,10 +193,15 @@ void InitExports(Local<Object> exports) {
         auto N_UILabel = NUILabel::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UILabel").ToLocalChecked(), N_UILabel.first);
 
-        // delegates ========
+        // UIKit delegates ========
   
         auto N_UIImagePickerControllerDelegate = NUIImagePickerControllerDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImagePickerControllerDelegate").ToLocalChecked(), N_UIImagePickerControllerDelegate.first);
+  
+        // CoreAnimation
+  
+        auto N_CALayer = NCALayer::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CALayer").ToLocalChecked(), N_CALayer.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
