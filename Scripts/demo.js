@@ -34,10 +34,13 @@ let img;
 const ctrls = {
   NAME: 'nameVC',
   PHOTO: 'photoVC',
+  DASH: 'dashVC',
 };
 
 async function demo() {
-
+  const dashboardVC = sb.instantiateViewController(ctrls.DASH);
+  dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
+  nav.setViewControllers([dashboardVC], false);
 }
 
 async function userPhoto() {
@@ -48,17 +51,35 @@ async function userPhoto() {
   const elemW = viewW - 24;
   const imgY = ((viewH - 100) / 2) - 40;
   const imgX = (viewW - 100) / 2;
-  const imgView = new UIImageView();
-  imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
-  imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
 
-  const nextBtn = await UIButton.alloc("👍 Next", 12, imgY + 124, elemW, 50, async () => {
-    if (img) demo();
+  const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
+    if (img === undefined) {
+      const imgDel = new UIImagePickerControllerDelegate();
+      const imgCtrl = new UIImagePickerController();
+
+      imgDel.onInfo = () => {
+        let i = imgDel.result;
+
+        if (i) {
+          img = i;
+          const imgView = new UIImageView(img);
+          imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
+          imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+          photoVC.view.addSubview(imgView);
+          nextBtn.title = '✅ Lovely';
+        }
+      };
+
+      imgDel.onCancel = (picker) => {};
+      imgCtrl.delegate = imgDel;
+      photoVC.present(imgCtrl, true, () => {});
+    } else {
+      demo();
+    }
   });
 
   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
 
-  photoVC.view.addSubview(imgView);
   photoVC.view.addSubview(nextBtn);
 
   nav.pushViewController(photoVC);
@@ -82,7 +103,7 @@ async function setupApp() {
   });
   nameField.delegate = nameVC;
 
-  const nextBtn = await UIButton.alloc("👍 Next", 12, buttonY, elemW, 50, async () => {
+  const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
     username = nameField.text;
     if (username) userPhoto();
   });
