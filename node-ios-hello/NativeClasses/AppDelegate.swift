@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }
             guard let bundle = Bundle(url: bundleURL) else { iOSLog0("Scripts bundle url not found"); iOSTrap(); return false; }
-            guard let scriptURL = bundle.url(forResource: "hello", withExtension: "js") else { iOSLog0("hello.js not found"); iOSTrap(); return false; }
+            guard let scriptURL = bundle.url(forResource: "demo", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
 
             //iOSLog0(scriptURL.path);
             #if true

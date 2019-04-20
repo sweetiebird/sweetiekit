@@ -25,6 +25,7 @@
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
+		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
 		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
 		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
@@ -117,6 +118,7 @@
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
+		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				A11CB495226BC0660006A0D4 /* demo.js */,
 				A1296B05225F77330058C23D /* js-blockchain */,
 				A1296B06225F77330058C23D /* node_modules */,
 				A19E9102225EC2C2004FC391 /* package.json */,
@@ -631,6 +634,7 @@
 				A1296B07225F77340058C23D /* js-blockchain in Resources */,
 				A1296B08225F77340058C23D /* node_modules in Resources */,
 				A19E9109225EC394004FC391 /* server.js in Resources */,
+				A11CB496226BC0660006A0D4 /* demo.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
