@@ -29,9 +29,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "selected", Selected);
-  JS_SET_PROP(proto, "enabled", Enabled);
-  JS_SET_PROP(proto, "highlighted", Highlighted);
+  JS_SET_PROP_READONLY(proto, "state", State);
+  JS_SET_PROP(proto, "isSelected", Selected);
+  JS_SET_PROP(proto, "isEnabled", Enabled);
+  JS_SET_PROP(proto, "isHighlighted", Highlighted);
+  JS_SET_PROP_READONLY(proto, "isTracking", Tracking)
+  JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -82,6 +85,40 @@ NAN_SETTER(NUIControl::EnabledSetter) {
       [ui setEnabled:isEnabled];
     });
   }
+}
+
+NAN_GETTER(NUIControl::StateGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block const char* theState = "normal";
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      UIControlState state = [ui state];
+      if (state == UIControlStateNormal) {
+        theState = "normal";
+      }
+      else if (state == UIControlStateHighlighted) {
+        theState = "highlighted";
+      }
+      else if (state == UIControlStateDisabled) {
+        theState = "disabled";
+      }
+      else if (state == UIControlStateSelected) {
+        theState = "selected";
+      }
+      else if (state == UIControlStateFocused) {
+        theState = "focused";
+      }
+      else if (state == UIControlStateApplication) {
+        theState = "application";
+      } else {
+        iOSLog0("Unknown UIControlState");
+      }
+    });
+  }
+  JS_SET_RETURN(JS_STR(theState));
 }
 
 NAN_GETTER(NUIControl::SelectedGetter) {
@@ -138,4 +175,34 @@ NAN_SETTER(NUIControl::HighlightedSetter) {
       [ui setHighlighted:isHighlighted];
     });
   }
+}
+
+NAN_GETTER(NUIControl::TrackingGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isTracking = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isTracking = [ui isTracking];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isTracking));
+}
+
+NAN_GETTER(NUIControl::TouchInsideGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isTouchInside = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isTouchInside = [ui isTouchInside];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isTouchInside));
 }

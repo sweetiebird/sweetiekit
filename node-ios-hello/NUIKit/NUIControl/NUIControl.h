@@ -26,9 +26,12 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  JS_PROP(State);
   JS_PROP(Enabled);
   JS_PROP(Selected);
   JS_PROP(Highlighted);
+  JS_PROP(Tracking);
+  JS_PROP(TouchInside);
 };
 
 
