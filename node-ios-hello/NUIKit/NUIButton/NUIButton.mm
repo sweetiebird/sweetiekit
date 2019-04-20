@@ -26,8 +26,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("title"), TitleGetter, TitleSetter);
-  Nan::SetAccessor(proto, JS_STR("callback"), CallbackGetter, CallbackSetter);
+  JS_SET_PROP(proto, "title", Title);
+  JS_SET_PROP(proto, "callback", Callback);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,7 +49,7 @@ NAN_METHOD(NUIButton::New) {
   
   btn->Wrap(btnObj);
 
-  info.GetReturnValue().Set(btnObj);
+  JS_SET_RETURN(btnObj);
 }
 
 NAN_METHOD(NUIButton::Alloc) {
@@ -110,31 +110,30 @@ NAN_METHOD(NUIButton::Alloc) {
     });
   }
 
-  info.GetReturnValue().Set(scope.Escape(resolver->GetPromise()));
+  JS_SET_RETURN(scope.Escape(resolver->GetPromise()));
 }
 
 NAN_GETTER(NUIButton::TitleGetter) {
   Nan::HandleScope scope;
-
-  NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
+  JS_UNWRAP(UIButton, ui);
+  
   __block NSString* str = nullptr;
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      str = [view->As<UIButton>() currentTitle];
+      str = [ui currentTitle];
     });
   }
 
   if (str != nullptr) {
     auto result = JS_STR([str UTF8String]);
-    info.GetReturnValue().Set(result);
+    JS_SET_RETURN(result);
   }
   
 }
 
 NAN_SETTER(NUIButton::TitleSetter) {
   Nan::HandleScope scope;
-
-  NUIButton *btn = ObjectWrap::Unwrap<NUIButton>(info.This());
+  JS_UNWRAP(UIButton, ui);
 
   std::string title;
   if (value->IsString()) {
@@ -146,46 +145,30 @@ NAN_SETTER(NUIButton::TitleSetter) {
   
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [btn->As<UIButton>() setTitle:[NSString stringWithUTF8String:title.c_str()] forState:[btn->As<UIButton>() state]];
+      [ui setTitle:[NSString stringWithUTF8String:title.c_str()] forState:[ui state]];
     });
-  }
-}
-
-const CGRect& NUIButton::GetFrame() {
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      auto frame = [As<UIButton>() frame];
-      this->_rect.origin.x = frame.origin.x;
-      this->_rect.origin.y = frame.origin.y;
-      this->_rect.size.width = frame.size.width;
-      this->_rect.size.height = frame.size.height;
-    });
-    return this->_rect;
   }
 }
 
 NAN_GETTER(NUIButton::CallbackGetter) {
   Nan::HandleScope scope;
+  JS_UNWRAP(UIButton, ui);
 
-  NUIButton *view = ObjectWrap::Unwrap<NUIButton>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_callback));
+  JS_SET_RETURN(Nan::New(nui->_callback));
 }
 
 NAN_SETTER(NUIButton::CallbackSetter) {
   Nan::HandleScope scope;
-
-  NUIButton *field = ObjectWrap::Unwrap<NUIButton>(info.This());
-  field->_callback->Reset(Local<Function>::Cast(value));
+  JS_UNWRAP(UIButton, ui);
+  
+  nui->_callback->Reset(Local<Function>::Cast(value));
   
   dispatch_queue_t q = dispatch_queue_create_with_target(DISPATCH_CURRENT_QUEUE_LABEL, nullptr, nullptr);
-  
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      UIButton* txt = field->As<UIButton>();
-      [txt addTargetClosureWithClosure:^(UIButton*){
+      [ui addTargetClosureWithClosure:^(UIButton*){
         dispatch_sync(q, ^ {
-          sweetiekit::Resolve(field->_callback);
+          sweetiekit::Resolve(nui->_callback);
         });
       }];
     });

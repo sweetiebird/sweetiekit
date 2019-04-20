@@ -29,6 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP(proto, "selected", Selected);
+  JS_SET_PROP(proto, "enabled", Enabled);
+  JS_SET_PROP(proto, "highlighted", Highlighted);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -50,5 +53,89 @@ NAN_METHOD(NUIControl::New) {
   }
   view->Wrap(viewObj);
 
-  info.GetReturnValue().Set(viewObj);
+  JS_SET_RETURN(viewObj);
+}
+
+NAN_GETTER(NUIControl::EnabledGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isEnabled = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isEnabled = [ui isEnabled];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isEnabled));
+}
+
+NAN_SETTER(NUIControl::EnabledSetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  bool isEnabled = value->IsBoolean() ? TO_BOOL(value) : true;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [ui setEnabled:isEnabled];
+    });
+  }
+}
+
+NAN_GETTER(NUIControl::SelectedGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isSelected = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isSelected = [ui isSelected];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isSelected));
+}
+
+NAN_SETTER(NUIControl::SelectedSetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  bool isSelected = value->IsBoolean() ? TO_BOOL(value) : true;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [ui setSelected:isSelected];
+    });
+  }
+}
+
+NAN_GETTER(NUIControl::HighlightedGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  __block bool isHighlighted = false;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      isHighlighted = [ui isHighlighted];
+    });
+  }
+  
+  JS_SET_RETURN(JS_BOOL(isHighlighted));
+}
+
+NAN_SETTER(NUIControl::HighlightedSetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(UIControl, ui);
+  
+  bool isHighlighted = value->IsBoolean() ? TO_BOOL(value) : true;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [ui setHighlighted:isHighlighted];
+    });
+  }
 }

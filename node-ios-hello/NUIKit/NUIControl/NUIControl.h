@@ -26,6 +26,9 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  JS_PROP(Enabled);
+  JS_PROP(Selected);
+  JS_PROP(Highlighted);
 };
 
 
