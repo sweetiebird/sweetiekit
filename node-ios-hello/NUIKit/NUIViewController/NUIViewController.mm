@@ -90,7 +90,7 @@ NAN_METHOD(NUIViewController::PresentViewController)
   Nan::Persistent<Function>* cb = new Nan::Persistent<Function>();
   
   NUIViewController *vc = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
-  double animated = info[1]->IsBoolean() ? TO_BOOL(info[1]) : true;
+  bool animated = info[1]->IsBoolean() ? TO_BOOL(info[1]) : true;
   if (info[2]->IsFunction()) {
     cb->Reset(Local<Function>::Cast(info[2]));
   }
@@ -111,7 +111,7 @@ NAN_METHOD(NUIViewController::DismissViewController)
   NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(info.This());
   Nan::Persistent<Function>* cb = new Nan::Persistent<Function>();
   
-  double animated = info[0]->IsBoolean() ? TO_BOOL(info[0]) : true;
+  bool animated = info[0]->IsBoolean() ? TO_BOOL(info[0]) : true;
   if (info[1]->IsFunction()) {
     cb->Reset(Local<Function>::Cast(info[1]));
   }

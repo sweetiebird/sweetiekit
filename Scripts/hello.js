@@ -1368,9 +1368,10 @@ async function buildUI() {
     const vc2 = sb.instantiateViewController('loginVC');
     vc.present(vc2, true, (success) => {
       console.log("Finsihed!", success)
-      setTimeout(() => {
+      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
+      btnLogin.callback = async () => {
         vc2.dismiss();
-      }, 1000)
+      }
     })
   }
 }
