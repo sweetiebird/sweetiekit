@@ -30,11 +30,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "state", State);
-  JS_SET_PROP(proto, "selected", Selected);
-  JS_SET_PROP(proto, "enabled", Enabled);
-  JS_SET_PROP(proto, "highlighted", Highlighted);
-  JS_SET_PROP_READONLY(proto, "tracking", Tracking)
-  JS_SET_PROP_READONLY(proto, "touchInside", TouchInside);
+  JS_SET_PROP(proto, "isSelected", Selected);
+  JS_SET_PROP(proto, "isEnabled", Enabled);
+  JS_SET_PROP(proto, "isHighlighted", Highlighted);
+  JS_SET_PROP_READONLY(proto, "isTracking", Tracking)
+  JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
