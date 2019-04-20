@@ -1378,7 +1378,15 @@ async function buildUI() {
   btnLogin.callback = async () => {
     console.log(`Try to login with ${userField.text} / ${passField.text}`);
     kv.setValueForKey(userField.text, "me");
-    await buildMainUI();
+    //await buildMainUI();
+    const vc2 = sb.instantiateViewController('loginVC');
+    vc.present(vc2, true, (success) => {
+      console.log("Finsihed!", success)
+      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
+      btnLogin.callback = async () => {
+        vc2.dismiss();
+      }
+    })
   }
 }
 
@@ -1399,7 +1407,7 @@ function makeUIView(x, y, w, h) {
 process.nextTick(async () => {
   await makeNav();
 });
-                                                            
+
 //httpServer = require('./server.js')
 //
 //server = httpServer({port: 8080, _: [process.env.HOME]})

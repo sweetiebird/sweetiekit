@@ -99,7 +99,7 @@ namespace sweetiekit {
   extern std::thread reqThead;
 
   void RunResInMainThread(uv_async_t *handle);
-  void Resolve(Nan::Persistent<Function>* cb);
+  void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete = false);
   void Kick();
 }
 

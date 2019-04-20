@@ -75,10 +75,10 @@ namespace sweetiekit {
     }
   }
   
-  void Resolve(Nan::Persistent<Function>* cb) {
+  void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete) {
     {
         std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-        sweetiekit::resCbs.push_back([cb]() -> void {
+        sweetiekit::resCbs.push_back([cb, shouldDelete]() -> void {
           if (cb != nullptr)
           {
             Local<Function> callback = Nan::New(*cb);
@@ -86,6 +86,9 @@ namespace sweetiekit {
               Local<Object> asyncObject = Nan::New<Object>();
               AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
               asyncResource.MakeCallback(callback, 0, nullptr);
+            }
+            if (shouldDelete) {
+              delete cb;
             }
           }
       });
