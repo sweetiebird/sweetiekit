@@ -26,6 +26,7 @@
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
+		A11CB49A226BE0420006A0D4 /* NUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.m */; };
 		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
 		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
@@ -119,6 +120,8 @@
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
 		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
+		A11CB499226BE0420006A0D4 /* NUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NUITableViewController.m; sourceTree = "<group>"; };
 		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
@@ -298,6 +301,15 @@
 			path = NUIApplication;
 			sourceTree = "<group>";
 		};
+		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A11CB498226BE0390006A0D4 /* NUITableViewController.h */,
+				A11CB499226BE0420006A0D4 /* NUITableViewController.m */,
+			);
+			path = NUITableViewController;
+			sourceTree = "<group>";
+		};
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +328,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
@@ -678,6 +691,7 @@
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
+				A11CB49A226BE0420006A0D4 /* NUITableViewController.m in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
