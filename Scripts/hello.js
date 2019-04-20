@@ -1333,17 +1333,19 @@ async function buildMainUI() {
   console.log(button, tabCtrl, tf, img);
 }
 
-async function makeNav() {
+async function makeNav(nav) {
   const app = new UIApplication();
   const sb = new UIStoryboard('Main');
   const vc = sb.instantiateViewController('loginVC');
-  const nav = new UINavigationController(vc);
-  app.keyWindow.setRootViewController(nav);
+  if (!nav) {
+    nav = new UINavigationController(vc);
+    app.keyWindow.setRootViewController(nav);
+  }
   const btnLogin = vc.view.viewWithStringTag("btnLogin");
   btnLogin.callback = async () => {
-    const vc2 = sb.instantiateViewController('loginVC');
-    nav.pushViewController(vc2, true);
+    nav.pushViewController(await makeNav(nav), true);
   }
+  return vc;
 }
 
 async function buildUI() {
