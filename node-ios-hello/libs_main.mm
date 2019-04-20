@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "node_ios_hello-Swift.h"
+
 
 #include "NNSObject.h"
 #include "NNSUserDefaults.h"
@@ -215,8 +217,39 @@ extern "C" {
     }
 }
 
+
+
+#include <node_api.h>
+namespace hello {
+napi_value Method(napi_env env, napi_callback_info info) {
+  napi_status status;
+  napi_value world;
+  status = napi_create_string_utf8(env, "world", 5, &world);
+  (__builtin_expect(!(status == napi_ok), 0) ? __assert_rtn(__func__, "../hello.cc", 8, "status == napi_ok") : (void)0);
+  return world;
+}
+
+napi_value Init(napi_env env, napi_value exports) {
+  napi_status status;
+  napi_property_descriptor desc = { "hello", 0, Method, 0, 0, 0, napi_default, 0 };
+  status = napi_define_properties(env, exports, 1, &desc);
+  (__builtin_expect(!(status == napi_ok), 0) ? __assert_rtn(__func__, "../hello.cc", 19, "status == napi_ok") : (void)0);
+  return exports;
+}
+
+extern "C" {
+    static napi_module _module = { 1, 0, "../hello.cc", Init, "hello", __null, {0}, };
+    napi_value _register_hello(napi_env env, napi_value exports) {
+        napi_module_register(&_module);
+        //return Init(env, exports);
+        return [LibsMain InitWithEnv:env exports:exports];
+    }
+}
+}
+
 inline void registerDlibs(std::map<std::string, std::pair<void *, bool>> &dlibs) {
     dlibs["std:sweetiekit.node"] = std::pair<void *, bool>((void *)&node_register_module_sweetiekit, false);
+    dlibs["std:hello.node"] = std::pair<void *, bool>((void *)&hello::_register_hello, true);
 }
 
 extern "C" void registerNodeDLibs() {

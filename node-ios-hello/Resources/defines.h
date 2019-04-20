@@ -103,6 +103,6 @@ namespace sweetiekit {
   void Kick();
 }
 
-extern "C" void iOSLog0(const char* msg);
+extern void iOSLog0(const char* msg);
 
 #endif /* defines_h */

@@ -1208,6 +1208,9 @@ https.get(options, function(res) {
 leftpad = require('leftpad')
 
 process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
+console.log(require('std:hello.node').hello());
+console.log(require('std:hello.node').add(1,2));
+process.exit(1);
 
 const sweetiekit = require('std:sweetiekit.node');
 const {
