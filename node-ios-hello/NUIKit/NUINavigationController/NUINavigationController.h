@@ -9,7 +9,6 @@
 #ifndef NUINavigationController_h
 #define NUINavigationController_h
 
-
 #import <UIKit/UIKit.h>
 #include "NUIViewController.h"
 #include "defines.h"

@@ -46,6 +46,9 @@
 		A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */; };
 		A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E2D7BE226A63C900FA1562 /* PasswordTextField.xib */; };
 		A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48223226AA259002AF96F /* NUINavigationController.mm */; };
+		A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */; };
+		A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */; };
+		A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -146,6 +149,11 @@
 		A1E2D7BE226A63C900FA1562 /* PasswordTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordTextField.xib; sourceTree = "<group>"; };
 		A1E48223226AA259002AF96F /* NUINavigationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationController.mm; sourceTree = "<group>"; };
 		A1E48225226AA261002AF96F /* NUINavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUINavigationController.h; sourceTree = "<group>"; };
+		A1E48227226AB0C5002AF96F /* NUIImagePickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImagePickerController.h; sourceTree = "<group>"; };
+		A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerController.mm; sourceTree = "<group>"; };
+		A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImagePickerControllerDelegate.h; sourceTree = "<group>"; };
+		A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerControllerDelegate.mm; sourceTree = "<group>"; };
+		A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +313,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1E48226226AB0AE002AF96F /* NUIImagePickerController */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
@@ -450,6 +459,26 @@
 				A1E48223226AA259002AF96F /* NUINavigationController.mm */,
 			);
 			path = NUINavigationController;
+			sourceTree = "<group>";
+		};
+		A1E48226226AB0AE002AF96F /* NUIImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				A1E4822A226AB40E002AF96F /* NUIImagePickerControllerDelegate */,
+				A1E48227226AB0C5002AF96F /* NUIImagePickerController.h */,
+				A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */,
+			);
+			path = NUIImagePickerController;
+			sourceTree = "<group>";
+		};
+		A1E4822A226AB40E002AF96F /* NUIImagePickerControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */,
+				A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */,
+				A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */,
+			);
+			path = NUIImagePickerControllerDelegate;
 			sourceTree = "<group>";
 		};
 		A1FC19F5225C65DC00085571 = {
@@ -630,6 +659,7 @@
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
 				A1058B45226810B700CEAA5C /* embedded.S in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
+				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
@@ -648,7 +678,9 @@
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
+				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
+				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,

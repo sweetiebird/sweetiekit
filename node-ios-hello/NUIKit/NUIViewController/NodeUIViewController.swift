@@ -78,3 +78,7 @@ class NodeUIViewController: UIViewController, UITextFieldDelegate {
 
 
 }
+
+@objc extension NodeUIViewController: UIImagePickerControllerDelegate {
+
+}

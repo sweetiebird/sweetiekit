@@ -1225,6 +1225,7 @@ const {
   UIImageView,
   UILabel,
   UINavigationController,
+  UIImagePickerControllerDelegate,
 } = sweetiekit;
                 
 console.log(sweetiekit);
@@ -1348,6 +1349,14 @@ async function makeNav(nav) {
   return vc;
 }
 
+async function createDelegates() {
+  const del = new UIImagePickerControllerDelegate();
+  del.onInfo = (picker, info) => {
+    console.log(picker, info);
+  };
+  console.log(del, del.onInfo);
+}
+
 async function buildUI() {
   const app = new UIApplication();
   const kv = NSUserDefaults.standardUserDefaults;
@@ -1408,6 +1417,7 @@ function makeUIView(x, y, w, h) {
 
 process.nextTick(async () => {
   await makeNav();
+  await createDelegates();
 });
 
 //httpServer = require('./server.js')

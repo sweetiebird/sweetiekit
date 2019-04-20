@@ -22,7 +22,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITabBarController::Initializ
   ctor->Inherit(Nan::New(NUIViewController::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UITabBarController"));
-  ctor->Inherit(Nan::New(NUIViewController::type));
   type.Reset(ctor);
 
   // prototype

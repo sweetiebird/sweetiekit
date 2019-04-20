@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577416279.425738"
+            timestampString = "577423137.110352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "NAN_METHOD(NUINavigationController::New)"
             landmarkType = "9">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577416279.425801"
+            timestampString = "577423137.110446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "NAN_METHOD(NUINavigationController::New)"
             landmarkType = "9">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "node-ios-hello/NUIKit/NUINavigationController/NUINavigationController.mm"
-            timestampString = "577416279.425846"
+            timestampString = "577423137.11052"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "NUINavigationController::Initialize(Isolate *isolate)"
             landmarkType = "7">
          </BreakpointContent>

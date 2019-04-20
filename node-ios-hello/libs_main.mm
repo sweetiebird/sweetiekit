@@ -23,6 +23,7 @@
 #include "NUILabel.h"
 #include "NUITextField.h"
 #include "NUINavigationController.h"
+#include "NUIImagePickerControllerDelegate.h"
 #include <unistd.h>
 
 #include <string>
@@ -184,6 +185,11 @@ void InitExports(Local<Object> exports) {
 
         auto N_UINavigationController = NUINavigationController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UINavigationController").ToLocalChecked(), N_UINavigationController.first);
+
+        // delegates ========
+  
+        auto N_UIImagePickerControllerDelegate = NUIImagePickerControllerDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIImagePickerControllerDelegate").ToLocalChecked(), N_UIImagePickerControllerDelegate.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

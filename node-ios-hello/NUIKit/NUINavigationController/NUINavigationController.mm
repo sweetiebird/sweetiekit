@@ -22,7 +22,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationController::Initi
   ctor->Inherit(Nan::New(NUIViewController::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UINavigationController"));
-  ctor->Inherit(Nan::New(NUIViewController::type));
   type.Reset(ctor);
 
   // prototype
