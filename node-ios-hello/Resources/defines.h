@@ -23,6 +23,7 @@ using namespace v8;
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 
+#define JS_ISOLATE() (Isolate::GetCurrent())
 #define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
 #define JS_HAS(obj, name) (obj)->Has(JS_CONTEXT(), name).FromJust()
 
@@ -31,6 +32,7 @@ using namespace v8;
 #define TO_UINT32(x) (Nan::To<unsigned int>(x).FromJust())
 #define TO_INT32(x) (Nan::To<int>(x).FromJust())
 #define TO_FLOAT(x) static_cast<float>((Nan::To<double>(x).FromJust()))
+#define TO_FUNC(x) (Nan::To<Function>(x).ToLocalChecked())
 
 template <typename T>
 class shared_ptr_release_deleter {
@@ -79,6 +81,11 @@ using namespace node;
 #define JS_UNWRAP(type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type* name = n##name->As<type>(); name = name;
+
+#define JS_UNWRAPPED(info, type, name) \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info); n##name = n##name; \
+  type* name = n##name->As<type>(); name = name;
+
 /*
 #define JS_GETTER(type, name) \
 NAN_GETTER(N##type::name##Getter) { \
@@ -118,6 +125,7 @@ public: \
 #include <thread>
 
 namespace sweetiekit {
+  extern uv_sem_t resSem;
   extern uv_sem_t reqSem;
   extern uv_async_t resAsync;
   extern std::mutex reqMutex;
@@ -128,6 +136,7 @@ namespace sweetiekit {
 
   void RunResInMainThread(uv_async_t *handle);
   void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete = false);
+  void CallAsync(Nan::Global<Function>& cb, const char* methodName);
   void Kick();
 }
 

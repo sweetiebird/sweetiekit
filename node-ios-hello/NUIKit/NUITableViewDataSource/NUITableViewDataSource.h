@@ -9,11 +9,13 @@
 #ifndef NUITableViewDataSource_h
 #define NUITableViewDataSource_h
 
-#import <UIKit/UIKit.h>
+#include "NNSObject.h"
 
-@interface SUITableViewDataSource : NSObject <UITableViewDataSource>
-
-@end
-
+JS_WRAP_CLASS(UITableViewDataSource, NSObject);
+  JS_PROP(NumberOfRowsInSection);
+  JS_PROP(CellForRowAt);
+  Nan::Persistent<Function>* _numberRowsCallback;
+  Nan::Persistent<Function>* _cellCallback;
+JS_WRAP_CLASS_END(UITableViewDataSource);
 
 #endif /* NUITableViewDataSource_h */

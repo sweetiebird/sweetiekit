@@ -16,6 +16,10 @@ const {
   UINavigationController,
   UIImagePickerController,
   UIImagePickerControllerDelegate,
+  UITableView,
+  UITableViewDataSource,
+  UITableViewCell,
+  UIRefreshControl,
 } = sweetiekit;
 
 console.log(sweetiekit);
@@ -37,9 +41,85 @@ const ctrls = {
   DASH: 'dashVC',
 };
 
+const myData = [
+  ['Dinosaurs', [{
+    name: 'Stegosaurus',
+    cell: new UITableViewCell(),
+  }]],
+];
+
+function CGRect(x, y, width, height) {
+  return {x, y, width, height}
+}
+
+function createTable() {
+  const tbl = new UITableView(0, 0, 300, 400);
+  const label = UILabel.alloc(0, 0, 200, 40);
+  label.text = "Esimate";
+  label.sizeToFit()
+  tbl.estimatedRowHeight = label.frame.height;
+  tbl.rowHeight = label.frame.height;
+  //tbl.rowHeight = 100;
+  
+  const refresh = UIRefreshControl.alloc();
+  refresh.addTargetFor(tbl, () => {
+    console.log('Refresh!')
+    tbl.reloadData();
+    refresh.endRefreshing();
+  });
+  tbl.refreshControl = refresh;
+  
+  const dataSrc = new UITableViewDataSource();
+  dataSrc.numberOfRowsInSection = (id, section) => {
+    const count = myData[section][1].length;
+    console.log('numberOfRowsInSection', id, section, count)
+    return count
+  };
+  dataSrc.cellForRowAt = (id, { section, row }, cell) => {
+    console.log('cellForRowAt', id, section, row, cell)
+    const data = myData[section][1][row];
+    console.log(data)
+    if (!cell) {
+      return data.cell
+    } else {
+      console.log(cell)
+      //const label = UILabel.alloc();
+      const label = cell.textLabel;
+      label.text = data.name;
+      //label.sizeToFit();
+      //const cell = new UITableViewCell(0, 0, 300, 40);
+      //cell.frame = label.frame
+      cell.addSubview(label);
+      //cell.sizeToFit();
+      console.log(cell.frame);
+      //cell.frame = label.frame;
+      console.log(cell.frame);
+    }
+    return cell;
+  };
+  tbl.dataSource = dataSrc;
+  return tbl;
+  // const tblView = new UITableView();
+  // const dataSrc = new UITableViewDataSource();
+  // dataSrc.numberOfSectionsInRow = () => Object.keys(myData).length;
+  // dataSrc.cellForRowAt = async (stringId, { section, row }) => {
+  //   const c = tblView.dequeueReusableCell("id");
+  //   const data = myData[Object.keys(myData)[section]];
+  //   const dino = data[row];
+  //   const cell = await UITableCell.initWithFrame(CGRect(0, 0, 100, 40));
+  //   const label = await UILabel.initWithFrame(CGRect(0, 0, 100, 40));
+  //   label.text = dino.name;
+  //   cell.addSubview(label);
+  //   return cell;
+  // };
+  // tblView.dataSource = dataSrc;
+}
+
 async function demo() {
   const dashboardVC = sb.instantiateViewController(ctrls.DASH);
   dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
+  const table = createTable();
+  dashboardVC.view.addSubview(table);
   nav.setViewControllers([dashboardVC], false);
 }
 
@@ -109,9 +189,12 @@ async function setupApp() {
   });
 
   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
-  nameVC.view.addSubview(nameField);
-  nameVC.view.addSubview(nextBtn);
+  // nameVC.view.addSubview(nameField);
+  // nameVC.view.addSubview(nextBtn);
 
+  const table = createTable();
+  console.log(table);
+  nameVC.view.addSubview(table);
   nav = new UINavigationController(nameVC);
 
   app.keyWindow.setRootViewController(nav);

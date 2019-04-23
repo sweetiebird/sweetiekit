@@ -36,6 +36,8 @@
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
 		A19476BD226E9469003BB393 /* NUITableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476BC226E9469003BB393 /* NUITableView.mm */; };
+		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
+		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A19E9101225D7F2A004FC391 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9100225D7F29004FC391 /* hello.js */; };
 		A19E9105225EC2C3004FC391 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A19E9102225EC2C2004FC391 /* package.json */; };
@@ -142,6 +144,9 @@
 		A19476B8226E9109003BB393 /* NUITableViewCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewCell.mm; sourceTree = "<group>"; };
 		A19476BB226E9461003BB393 /* NUITableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableView.h; sourceTree = "<group>"; };
 		A19476BC226E9469003BB393 /* NUITableView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableView.mm; sourceTree = "<group>"; };
+		A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIRefreshControl.mm; sourceTree = "<group>"; };
+		A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIRefreshControl.h; sourceTree = "<group>"; };
+		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19E90F9225D7EA8004FC391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19E9100225D7F29004FC391 /* hello.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
@@ -347,8 +352,8 @@
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */,
 				A19476B3226E9066003BB393 /* NUITableViewDataSource.h */,
+				A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */,
 				A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */,
 			);
 			path = NUITableViewDataSource;
@@ -372,6 +377,16 @@
 			path = NUITableView;
 			sourceTree = "<group>";
 		};
+		A19476C0226F5BCD003BB393 /* NUIRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */,
+				A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */,
+				A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */,
+			);
+			path = NUIRefreshControl;
+			sourceTree = "<group>";
+		};
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +405,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
@@ -755,6 +771,7 @@
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
@@ -777,6 +794,7 @@
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
+				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,

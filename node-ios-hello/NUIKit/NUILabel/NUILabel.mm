@@ -60,18 +60,30 @@ NAN_METHOD(NUILabel::Alloc) {
 
   NUILabel *field = ObjectWrap::Unwrap<NUILabel>(tfObj);
 
-  double x = TO_DOUBLE(info[0]);
-  double y = TO_DOUBLE(info[1]);
-  double width = TO_DOUBLE(info[2]);
-  double height = TO_DOUBLE(info[3]);
+  double x = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
+  double y = info[0]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
+  double width = info[0]->IsNumber() ? TO_DOUBLE(info[2]) : 0.0;
+  double height = info[0]->IsNumber() ? TO_DOUBLE(info[3]) : 0.0;
   
   //Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      UILabel* txt = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-      field->SetNSObject(txt);
-      [txt setFont:[UIFont systemFontOfSize:15]];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+      UIFont * customFont = [UIFont systemFontOfSize:15]; //custom font
+
+      UILabel* fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
+      field->SetNSObject(fromLabel);
+      fromLabel.text = @"";
+      fromLabel.font = customFont;
+      fromLabel.numberOfLines = 1;
+      fromLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
+      fromLabel.adjustsFontSizeToFitWidth = YES;
+      //fromLabel.adjustsLetterSpacingToFitWidth = YES;
+      fromLabel.minimumScaleFactor = 10.0f/12.0f;
+      fromLabel.clipsToBounds = YES;
+      fromLabel.backgroundColor = [UIColor clearColor];
+      fromLabel.textColor = [UIColor blackColor];
+      fromLabel.textAlignment = NSTextAlignmentLeft;
       /*
       [txt setPlaceholder:@"Enter text here"];
       [txt setBorderStyle:UITextBorderStyleRoundedRect];
@@ -122,7 +134,7 @@ NAN_SETTER(NUILabel::TextSetter) {
   }
   
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
+    dispatch_async(dispatch_get_main_queue(), ^ {
       [btn->As<UILabel>() setText:[NSString stringWithUTF8String:title.c_str()]];
     });
   }

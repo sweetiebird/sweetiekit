@@ -8,67 +8,46 @@
 
 import Foundation
 import UIKit
-//
-//class TotesNSObject {
-//
-//  @objc func isEqual(_ object: Any?) -> Bool {
-//    return false
-//  }
-//
-//  @objc var hash: Int = 0
-//
-//  @objc var superclass: AnyClass?
-//
-//  @objc func `self`() -> NSObject {
-//    return nil
-//
-//  }
-//
-//  @objc func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-//
-//  }
-//
-//  @objc func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-//
-//  }
-//
-//  @objc func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-//
-//  }
-//
-//  @objc func isProxy() -> Bool {
-//
-//  }
-//
-//  @objc func isKind(of aClass: AnyClass) -> Bool {
-//
-//  }
-//
-//  @objc func isMember(of aClass: AnyClass) -> Bool {
-//
-//  }
-//
-//  @objc func conforms(to aProtocol: Protocol) -> Bool {
-//
-//  }
-//
-//  @objc func responds(to aSelector: Selector!) -> Bool {
-//
-//  }
-//
-//  @objc var description: String = ""
-//}
 
-/*
+typealias UITableViewDataSourceNumberOfRowsInSectionClosure = (UITableView, Int) -> (Int)
+typealias UITableViewDataSourceCellForRowAtClosure = (UITableView, IndexPath, UITableViewCell?) -> (UITableViewCell?)
 
 class SUITableViewDataSource: NSObject, UITableViewDataSource {
+  
+  var numberRowsCallback: UITableViewDataSourceNumberOfRowsInSectionClosure!
+  var cellCallback: UITableViewDataSourceCellForRowAtClosure!
+
+  @objc func setNumberRowsClosure(closure: @escaping UITableViewDataSourceNumberOfRowsInSectionClosure) {
+      numberRowsCallback = closure
+  }
+
+  @objc func setCellClosure(closure: @escaping UITableViewDataSourceCellForRowAtClosure) {
+      cellCallback = closure
+  }
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    let group = DispatchGroup();
+    var result: Int = 0
+    group.enter();
+    AppDelegate.queue.async {
+      result = self.numberRowsCallback(tableView, section)
+      group.leave()
+    }
+    group.wait()
+    return result
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell.init()
+    //let group = DispatchGroup();
+    let result: UITableViewCell! = self.cellCallback(tableView, indexPath, nil)
+    //group.enter();
+    //let cell = UITableViewCell.init(frame: CGRect(x: 0, y: 0, width: 300, height: 40))
+    AppDelegate.queue.async {
+      self.cellCallback(tableView, indexPath, result)
+      //group.leave()
+    }
+    //group.wait()
+    //return result!
+    return result
   }
-  
 }
-*/

@@ -14,6 +14,7 @@ extension String: Error {}
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    @objc static var queue: DispatchQueue! = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -50,7 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let scriptURL = bundle.url(forResource: "demo", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
 
             //iOSLog0(scriptURL.path);
-            #if true
+            #if false
+            //AppDelegate.queue = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
+            AppDelegate.queue.async {
+              hello_node("node\0--jitless\0\(scriptURL.path)\0\0");
+            }
+            #elseif true
             hello_node_async("node\0--jitless\0\(scriptURL.path)\0\0");
             #else
           hello_node("""

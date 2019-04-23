@@ -80,16 +80,26 @@ NAN_METHOD(NUIView::New) {
 NAN_GETTER(NUIView::FrameGetter) {
   Nan::HandleScope scope;
 
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  JS_UNWRAP(UIView, ui);
   Local<Object> result = Object::New(Isolate::GetCurrent());
+#if 1
+  Local<Object> origin = result;
+  Local<Object> size = result;
+#else
   Local<Object> origin = Object::New(Isolate::GetCurrent());
-  origin->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
-  origin->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
-  result->Set(JS_STR("origin"), JS_OBJ(origin));
   Local<Object> size = Object::New(Isolate::GetCurrent());
-  size->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
-  size->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
+  result->Set(JS_STR("origin"), JS_OBJ(origin));
   result->Set(JS_STR("size"), JS_OBJ(size));
+#endif
+  CGRect frame(nui->GetFrame());
+  double width = frame.size.width;
+  double height = frame.size.height;
+  double x = frame.origin.x;
+  double y = frame.origin.y;
+  origin->Set(JS_STR("x"), JS_FLOAT(x));
+  origin->Set(JS_STR("y"), JS_FLOAT(y));
+  size->Set(JS_STR("width"), JS_FLOAT(width));
+  size->Set(JS_STR("height"), JS_FLOAT(height));
 
   JS_SET_RETURN(result);
 }

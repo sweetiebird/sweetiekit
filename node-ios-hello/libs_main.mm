@@ -14,6 +14,7 @@
 #include "NUIWindow.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
+#include "NUIRefreshControl.h"
 #include "NUIControl.h"
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
@@ -28,6 +29,7 @@
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
+#include "NUITableViewDataSource.h"
 #include "NCALayer.h"
 #include <unistd.h>
 
@@ -58,6 +60,7 @@ using namespace v8;
 
 
 namespace sweetiekit {
+  uv_sem_t resSem;
   uv_sem_t reqSem;
   uv_async_t resAsync;
   std::mutex reqMutex;
@@ -102,6 +105,24 @@ namespace sweetiekit {
     uv_async_send(&sweetiekit::resAsync);
   }
   
+  void CallAsync(Nan::Global<Function>& cb, const char* methodName) {
+    {
+        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
+        sweetiekit::resCbs.push_back([&cb, &methodName]() -> void {
+          if (!cb.IsEmpty())
+          {
+            Local<Function> callback = Nan::New(cb);
+            if (!callback.IsEmpty()) {
+              Local<Object> asyncObject = Nan::New<Object>();
+              AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, methodName);
+              asyncResource.MakeCallback(callback, 0, nullptr);
+            }
+          }
+      });
+    }
+    uv_async_send(&sweetiekit::resAsync);
+  }
+  
   Nan::Callback tickKicker;
   
   void Kick() {
@@ -118,6 +139,7 @@ void InitExports(Local<Object> exports) {
 }).ToLocalChecked());
 
   
+  uv_sem_init(&sweetiekit::resSem, 0);
   uv_sem_init(&sweetiekit::reqSem, 0);
   uv_async_init(uv_default_loop(), &sweetiekit::resAsync, sweetiekit::RunResInMainThread);
   sweetiekit::reqThead = std::thread([]() -> void {
@@ -181,6 +203,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIControl = NUIControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIControl").ToLocalChecked(), N_UIControl.first);
   
+        auto N_UIRefreshControl = NUIRefreshControl::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIRefreshControl").ToLocalChecked(), N_UIRefreshControl.first);
+  
         auto N_UIStoryboard = NUIStoryboard::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), N_UIStoryboard.first);
   
@@ -209,6 +234,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIImagePickerControllerDelegate = NUIImagePickerControllerDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImagePickerControllerDelegate").ToLocalChecked(), N_UIImagePickerControllerDelegate.first);
+
+        auto N_UITableViewDataSource = NUITableViewDataSource::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITableViewDataSource").ToLocalChecked(), N_UITableViewDataSource.first);
   
         // CoreAnimation
   

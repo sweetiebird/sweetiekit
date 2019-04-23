@@ -11,13 +11,13 @@
 #define NUITableViewCell_h
 
 #import <UIKit/UIKit.h>
-#include "NUIViewController.h"
+#include "NUIView.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NUITableViewCell : public NUIViewController {
+class NUITableViewCell : public NUIView {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
@@ -28,6 +28,8 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  JS_PROP(TextLabel);
+  JS_PROP(DetailTextLabel);
 };
 
 #endif /* NUITableViewCell_h */
