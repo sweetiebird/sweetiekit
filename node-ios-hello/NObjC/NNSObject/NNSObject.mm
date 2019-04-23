@@ -76,6 +76,9 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
+#include "NUITableViewController.h"
+#include "NUITableView.h"
+#include "NUITableViewCell.h"
 #include "NCALayer.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -105,6 +108,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIWindow class]]) {
         return NUIWindow::type;
       }
+      // ========= views
+      if ([obj isKindOfClass:[UITableViewCell class]]) {
+        return NUITableViewCell::type;
+      }
+      if ([obj isKindOfClass:[UITableView class]]) {
+        return NUITableView::type;
+      }
       if ([obj isKindOfClass:[UILabel class]]) {
         return NUILabel::type;
       }
@@ -133,6 +143,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIResponder::type;
       }
       // ======== controllers
+      if ([obj isKindOfClass:[UITableViewController class]]) {
+        return NUITableViewController::type;
+      }
       if ([obj isKindOfClass:[UIImagePickerController class]]) {
         return NUIImagePickerController::type;
       }

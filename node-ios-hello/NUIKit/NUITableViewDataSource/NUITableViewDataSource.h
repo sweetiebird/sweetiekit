@@ -9,5 +9,11 @@
 #ifndef NUITableViewDataSource_h
 #define NUITableViewDataSource_h
 
+#import <UIKit/UIKit.h>
+
+@interface SUITableViewDataSource : NSObject <UITableViewDataSource>
+
+@end
+
 
 #endif /* NUITableViewDataSource_h */

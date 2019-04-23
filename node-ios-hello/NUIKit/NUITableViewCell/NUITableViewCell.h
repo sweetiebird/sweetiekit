@@ -1,3 +1,4 @@
+
 //
 //  NUITableViewCell.h
 //  node-ios-hello
@@ -9,5 +10,24 @@
 #ifndef NUITableViewCell_h
 #define NUITableViewCell_h
 
+#import <UIKit/UIKit.h>
+#include "NUIViewController.h"
+#include "defines.h"
+
+using namespace v8;
+using namespace node;
+
+class NUITableViewCell : public NUIViewController {
+public:
+
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUITableViewCell();
+  virtual ~NUITableViewCell();
+
+  static NAN_METHOD(New);
+  static NAN_METHOD(Destroy);
+};
 
 #endif /* NUITableViewCell_h */
