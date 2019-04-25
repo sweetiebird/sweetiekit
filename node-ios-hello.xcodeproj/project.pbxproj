@@ -27,13 +27,22 @@
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
-		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
-		A126498D227178E200D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A126498C227178E200D3DF47 /* index.js */; };
-		A126499122717A4000D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A126498E22717A4000D3DF47 /* app.js */; };
-		A126499222717A4000D3DF47 /* sweetiekit.js in Resources */ = {isa = PBXBuildFile; fileRef = A126499022717A4000D3DF47 /* sweetiekit.js */; };
-		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
-		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
+		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
+		A12655FA22719CE400D3DF47 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A12655EA22719CE300D3DF47 /* yarn.lock */; };
+		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
+		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
+		A12655FD22719CE400D3DF47 /* package-lock.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655ED22719CE300D3DF47 /* package-lock.json */; };
+		A12655FE22719CE400D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EE22719CE300D3DF47 /* app.js */; };
+		A12655FF22719CE400D3DF47 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A12655F022719CE300D3DF47 /* node_modules */; };
+		A126560022719CE400D3DF47 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = A12655F122719CE300D3DF47 /* dist */; };
+		A126560122719CE400D3DF47 /* old in Resources */ = {isa = PBXBuildFile; fileRef = A12655F222719CE300D3DF47 /* old */; };
+		A126560222719CE400D3DF47 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F322719CE300D3DF47 /* hello.js */; };
+		A126560322719CE400D3DF47 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F422719CE300D3DF47 /* server.js */; };
+		A126560422719CE400D3DF47 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A12655F522719CE300D3DF47 /* src */; };
+		A126560522719CE400D3DF47 /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A12655F622719CE400D3DF47 /* js-blockchain */; };
+		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
+		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
@@ -43,10 +52,6 @@
 		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
-		A19E9101225D7F2A004FC391 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9100225D7F29004FC391 /* hello.js */; };
-		A19E9105225EC2C3004FC391 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A19E9102225EC2C2004FC391 /* package.json */; };
-		A19E9106225EC2C3004FC391 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A19E9103225EC2C2004FC391 /* yarn.lock */; };
-		A19E9109225EC394004FC391 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9108225EC394004FC391 /* server.js */; };
 		A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D67292226953BB00562A42 /* NUIViewController.mm */; };
 		A1D6729822695D0200562A42 /* NUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729722695D0200562A42 /* NUIView.mm */; };
 		A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729A22696D7A00562A42 /* NUIStoryboard.mm */; };
@@ -135,15 +140,24 @@
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
-		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
-		A126498C227178E200D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
-		A126498E22717A4000D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
-		A126498F22717A4000D3DF47 /* sweetiekit.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = sweetiekit.js.map; sourceTree = "<group>"; };
-		A126499022717A4000D3DF47 /* sweetiekit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sweetiekit.js; sourceTree = "<group>"; };
-		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
-		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
+		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
+		A12655EA22719CE300D3DF47 /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
+		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
+		A12655ED22719CE300D3DF47 /* package-lock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
+		A12655EE22719CE300D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		A12655EF22719CE300D3DF47 /* index.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = index.js.map; sourceTree = "<group>"; };
+		A12655F022719CE300D3DF47 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
+		A12655F122719CE300D3DF47 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dist; sourceTree = "<group>"; };
+		A12655F222719CE300D3DF47 /* old */ = {isa = PBXFileReference; lastKnownFileType = folder; path = old; sourceTree = "<group>"; };
+		A12655F322719CE300D3DF47 /* hello.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
+		A12655F422719CE300D3DF47 /* server.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
+		A12655F522719CE300D3DF47 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		A12655F622719CE400D3DF47 /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
+		A12655F722719CE400D3DF47 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
@@ -157,11 +171,6 @@
 		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
 		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		A19E90F9225D7EA8004FC391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A19E9100225D7F29004FC391 /* hello.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
-		A19E9102225EC2C2004FC391 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		A19E9103225EC2C2004FC391 /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
-		A19E9108225EC394004FC391 /* server.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
 		A1D6729022694E7000562A42 /* libs_main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libs_main.hpp; sourceTree = "<group>"; };
 		A1D67291226953B100562A42 /* NUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewController.h; sourceTree = "<group>"; };
 		A1D67292226953BB00562A42 /* NUIViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewController.mm; sourceTree = "<group>"; };
@@ -399,18 +408,22 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				A126498E22717A4000D3DF47 /* app.js */,
-				A126499022717A4000D3DF47 /* sweetiekit.js */,
-				A126498F22717A4000D3DF47 /* sweetiekit.js.map */,
-				A126498C227178E200D3DF47 /* index.js */,
-				A11CB495226BC0660006A0D4 /* demo.js */,
-				A1296B05225F77330058C23D /* js-blockchain */,
-				A1296B06225F77330058C23D /* node_modules */,
-				A19E9102225EC2C2004FC391 /* package.json */,
-				A19E9103225EC2C2004FC391 /* yarn.lock */,
-				A19E90F9225D7EA8004FC391 /* Info.plist */,
-				A19E9100225D7F29004FC391 /* hello.js */,
-				A19E9108225EC394004FC391 /* server.js */,
+				A12655EE22719CE300D3DF47 /* app.js */,
+				A12655F722719CE400D3DF47 /* demo.js */,
+				A12655F122719CE300D3DF47 /* dist */,
+				A12655F322719CE300D3DF47 /* hello.js */,
+				A12655EB22719CE300D3DF47 /* index.js */,
+				A12655EF22719CE300D3DF47 /* index.js.map */,
+				A12655F622719CE400D3DF47 /* js-blockchain */,
+				A12655F022719CE300D3DF47 /* node_modules */,
+				A12655F222719CE300D3DF47 /* old */,
+				A12655ED22719CE300D3DF47 /* package-lock.json */,
+				A12655F822719CE400D3DF47 /* package.json */,
+				A12655F422719CE300D3DF47 /* server.js */,
+				A12655F522719CE300D3DF47 /* src */,
+				A12655EC22719CE300D3DF47 /* tsconfig.json */,
+				A12655E922719CE300D3DF47 /* tslint.json */,
+				A12655EA22719CE300D3DF47 /* yarn.lock */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -739,16 +752,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A19E9106225EC2C3004FC391 /* yarn.lock in Resources */,
-				A19E9105225EC2C3004FC391 /* package.json in Resources */,
-				A126499222717A4000D3DF47 /* sweetiekit.js in Resources */,
-				A19E9101225D7F2A004FC391 /* hello.js in Resources */,
-				A126498D227178E200D3DF47 /* index.js in Resources */,
-				A1296B07225F77340058C23D /* js-blockchain in Resources */,
-				A1296B08225F77340058C23D /* node_modules in Resources */,
-				A126499122717A4000D3DF47 /* app.js in Resources */,
-				A19E9109225EC394004FC391 /* server.js in Resources */,
-				A11CB496226BC0660006A0D4 /* demo.js in Resources */,
+				A126560122719CE400D3DF47 /* old in Resources */,
+				A126560222719CE400D3DF47 /* hello.js in Resources */,
+				A126560322719CE400D3DF47 /* server.js in Resources */,
+				A126560422719CE400D3DF47 /* src in Resources */,
+				A126560022719CE400D3DF47 /* dist in Resources */,
+				A12655FE22719CE400D3DF47 /* app.js in Resources */,
+				A12655FB22719CE400D3DF47 /* index.js in Resources */,
+				A12655FA22719CE400D3DF47 /* yarn.lock in Resources */,
+				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
+				A12655FF22719CE400D3DF47 /* node_modules in Resources */,
+				A12655FD22719CE400D3DF47 /* package-lock.json in Resources */,
+				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
+				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
+				A126560622719CE400D3DF47 /* demo.js in Resources */,
+				A126560722719CE400D3DF47 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,9 +879,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				DEVELOPMENT_TEAM = B9452FEMTF;
 				INFOPLIST_FILE = Scripts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -877,9 +896,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				DEVELOPMENT_TEAM = B9452FEMTF;
 				INFOPLIST_FILE = Scripts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

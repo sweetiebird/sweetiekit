@@ -1,21 +1,27 @@
-type Optional<T> = T | null;
-type DelegateGet<T1, T2, T3> = (arg0: T2, arg1: T2) => T3;
-type Completion = () => void;
-type Identifier = string;
-type Section = number;
-type Row = number;
-type Point = { x: number, y: number };
-type Size = { width: number, height: number };
-type Rect = Size & Point;
-type IndexPath = { section: Section, row: Row };
-type Color = {
-  red: number;
-  green: number;
-  blue: number;
-  alpha: number;
-};
 
-declare module SweetieKit {
+
+// {
+
+  export type Optional<T> = T | null;
+  export type DelegateGet<T1, T2, T3> = (arg0: T2, arg1: T2) => T3;
+  export type DelegateGet3<T1, T2, T3, T4> = (arg0: T2, arg1: T2, arg2: T3) => T4;
+  export type NumberRowsFn = (id: string, section: number) => number;
+  export type CellForRowFn = (id: string, indexPath: IndexPath, cell?: UIKit.UITableViewCell) => UIKit.UITableViewCell;
+  export type Completion = () => void;
+  export type Identifier = string;
+  export type Section = number;
+  export type Row = number;
+  export type Point = { x: number, y: number };
+  export type Size = { width: number, height: number };
+  export type Rect = Size & Point;
+  export type IndexPath = { section: Section, row: Row };
+  export type Color = {
+    red: number;
+    green: number;
+    blue: number;
+    alpha?: number;
+  };
+
   export namespace CoreGraphics {
     export class CGSize implements Size {
       constructor(size: Size);
@@ -40,7 +46,8 @@ declare module SweetieKit {
   }
 
   export namespace ObjC {
-    export class NSObject {}
+    export class NSObject {
+    }
 
     export class NSIndexPath extends NSObject implements IndexPath {
       constructor(indexPath: IndexPath);
@@ -51,8 +58,11 @@ declare module SweetieKit {
 
     export class NSUserDefaults extends NSObject {
       synchronize(): void;
+
       setValueForKey(value: any, key: string): void;
+
       objectForKey(key: string): Object;
+
       stringForKey(key: string): string;
     }
   }
@@ -68,7 +78,7 @@ declare module SweetieKit {
     }
   }
 
-  export namespace UIKit {
+  export module UIKit {
     export enum UIControlState {
       normal = 'normal',
       highlighted = 'highlighted',
@@ -90,7 +100,7 @@ declare module SweetieKit {
       red: number;
       green: number;
       blue: number;
-      alpha: number;
+      alpha?: number;
     }
 
     export class UIResponder extends ObjC.NSObject {
@@ -109,15 +119,17 @@ declare module SweetieKit {
       result: Optional<UIImage>;
 
       onInfo: Function;
-      onCancel: Function;
+
+      onCancel(picker: UIImagePickerController): void;
     }
 
     export class UITableViewDataSource extends ObjC.NSObject {
-      numberOfRowsInSection: DelegateGet<Identifier, Section, number>;
-      cellForRowAt: DelegateGet<Identifier, ObjC.NSIndexPath, UITableViewCell>;
+      numberOfRowsInSection: NumberRowsFn
+      cellForRowAt: CellForRowFn;
     }
 
-    export class UITextFieldDelegate extends ObjC.NSObject {}
+    export class UITextFieldDelegate extends ObjC.NSObject {
+    }
 
     export class UIStoryboard extends ObjC.NSObject {
       constructor(name: string);
@@ -129,6 +141,7 @@ declare module SweetieKit {
       view: UIView;
 
       present(viewController: UIViewController, animated: Boolean, completion: Completion): void;
+
       dismiss(animated: Boolean, completion: Completion): void;
     }
 
@@ -144,19 +157,24 @@ declare module SweetieKit {
       constructor(viewController: UIViewController);
 
       pushViewController(viewController: UIViewController, animated: Boolean): void;
+
       popViewController(animated: Boolean): Optional<UIViewController>;
+
       popToRootViewController(animated: Boolean): Optional<UIViewController[]>;
+
       popToViewController(animated: Boolean): Optional<UIViewController[]>;
+
       setViewControllers(viewControllers: UIViewController[], animated: Boolean): void;
     }
 
-    export class UIImagePickerController extends UINavigationController {
+    export class UIImagePickerController extends UIViewController {
       delegate: Optional<UIImagePickerControllerDelegate>;
     }
 
     export class UIView extends UIResponder {
       constructor(frame: CoreGraphics.CGRect);
       constructor(frame: Rect);
+      constructor(x: number, y: number, width: number, height: number);
 
       layer: CoreAnimation.CALayer;
       frame: Rect;
@@ -164,9 +182,15 @@ declare module SweetieKit {
       subviews: UIView[];
       backgroundColor: UIColor;
 
+      width: number;
+      height: number;
+
       addSubview(subview: UIView): void;
+
       sizeThatFits(size: CoreGraphics.CGSize): CoreGraphics.CGSize;
+
       sizeToFit(): void;
+
       viewWithStringTag(tag: string): Optional<UIView>;
     }
 
@@ -183,15 +207,18 @@ declare module SweetieKit {
       title: string;
 
       callback: Completion;
+
       // @ts-ignore
       addTarget(
         target: Optional<any>,
         selector: Function,
-        controlEvents: UIControlEvent[]|UIControlEvent,
+        controlEvents: UIControlEvent[] | UIControlEvent,
       ): void;
     }
 
     export class UITextField extends UIView {
+      static alloc(x: number, y: number, width: number, height: number, callback: Function): UITextField;
+
       text: Optional<string>;
       delegate: Optional<UITextFieldDelegate>;
       callback: Completion;
@@ -223,8 +250,8 @@ declare module SweetieKit {
     }
 
     export class UITableViewCell extends UIView {
-      textLabel: Optional<string>;
-      detailTextLabel: Optional<string>;
+      textLabel: Optional<UILabel>;
+      detailTextLabel: Optional<UILabel>;
     }
 
     export class UIControl extends UIView {
@@ -236,10 +263,17 @@ declare module SweetieKit {
       isTouchInside: Boolean;
     }
 
-    export class UIRefreshControl extends UIControl {}
+    export class UIRefreshControl extends UIControl {
+      static alloc(): UIRefreshControl;
+
+      addTargetFor(table: UITableView, callback: Function): void;
+
+      endRefreshing(): void;
+    }
 
     export class UIImage extends ObjC.NSObject {
       constructor(name: string);
     }
   }
-}
+
+// }
