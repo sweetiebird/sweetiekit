@@ -30,8 +30,6 @@ const {
 
 const { CALayer } = CoreAnimation;
 
-// console.log(sweetiekit);
-//
 // app main
 let app;
 // root navigation controller
