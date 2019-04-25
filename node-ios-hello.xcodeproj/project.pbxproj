@@ -29,6 +29,7 @@
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
+		A12649892271741900D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12649882271741800D3DF47 /* index.js */; };
 		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
 		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
@@ -38,6 +39,7 @@
 		A19476BD226E9469003BB393 /* NUITableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476BC226E9469003BB393 /* NUITableView.mm */; };
 		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
 		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
+		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A19E9101225D7F2A004FC391 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9100225D7F29004FC391 /* hello.js */; };
 		A19E9105225EC2C3004FC391 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A19E9102225EC2C2004FC391 /* package.json */; };
@@ -134,6 +136,7 @@
 		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
+		A12649882271741800D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.js; path = dist/index.js; sourceTree = "<group>"; };
 		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIRefreshControl.mm; sourceTree = "<group>"; };
 		A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIRefreshControl.h; sourceTree = "<group>"; };
 		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
+		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19E90F9225D7EA8004FC391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19E9100225D7F29004FC391 /* hello.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				A12649882271741800D3DF47 /* index.js */,
 				A11CB495226BC0660006A0D4 /* demo.js */,
 				A1296B05225F77330058C23D /* js-blockchain */,
 				A1296B06225F77330058C23D /* node_modules */,
@@ -488,6 +493,7 @@
 				A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */,
 				A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */,
 				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
+				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
 			);
 			path = NativeClasses;
 			sourceTree = "<group>";
@@ -728,6 +734,7 @@
 				A19E9106225EC2C3004FC391 /* yarn.lock in Resources */,
 				A19E9105225EC2C3004FC391 /* package.json in Resources */,
 				A19E9101225D7F2A004FC391 /* hello.js in Resources */,
+				A12649892271741900D3DF47 /* index.js in Resources */,
 				A1296B07225F77340058C23D /* js-blockchain in Resources */,
 				A1296B08225F77340058C23D /* node_modules in Resources */,
 				A19E9109225EC394004FC391 /* server.js in Resources */,
@@ -771,6 +778,7 @@
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,

@@ -4,8 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w"
+  },
   "dependencies": {
     "http-server": "^0.11.1",
     "leftpad": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.7",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   }
 }

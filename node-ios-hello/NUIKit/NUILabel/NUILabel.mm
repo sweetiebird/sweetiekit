@@ -61,10 +61,10 @@ NAN_METHOD(NUILabel::Alloc) {
   NUILabel *field = ObjectWrap::Unwrap<NUILabel>(tfObj);
 
   double x = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
-  double y = info[0]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
-  double width = info[0]->IsNumber() ? TO_DOUBLE(info[2]) : 0.0;
-  double height = info[0]->IsNumber() ? TO_DOUBLE(info[3]) : 0.0;
-  
+  double y = info[1]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
+  double width = info[2]->IsNumber() ? TO_DOUBLE(info[2]) : 0.0;
+  double height = info[3]->IsNumber() ? TO_DOUBLE(info[3]) : 0.0;
+
   //Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
 
   @autoreleasepool {
