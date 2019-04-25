@@ -29,7 +29,9 @@
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
-		A12649892271741900D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12649882271741800D3DF47 /* index.js */; };
+		A126498D227178E200D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A126498C227178E200D3DF47 /* index.js */; };
+		A126499122717A4000D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A126498E22717A4000D3DF47 /* app.js */; };
+		A126499222717A4000D3DF47 /* sweetiekit.js in Resources */ = {isa = PBXBuildFile; fileRef = A126499022717A4000D3DF47 /* sweetiekit.js */; };
 		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
 		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
@@ -136,7 +138,10 @@
 		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
-		A12649882271741800D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.js; path = dist/index.js; sourceTree = "<group>"; };
+		A126498C227178E200D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		A126498E22717A4000D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		A126498F22717A4000D3DF47 /* sweetiekit.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = sweetiekit.js.map; sourceTree = "<group>"; };
+		A126499022717A4000D3DF47 /* sweetiekit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sweetiekit.js; sourceTree = "<group>"; };
 		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
@@ -394,7 +399,10 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				A12649882271741800D3DF47 /* index.js */,
+				A126498E22717A4000D3DF47 /* app.js */,
+				A126499022717A4000D3DF47 /* sweetiekit.js */,
+				A126498F22717A4000D3DF47 /* sweetiekit.js.map */,
+				A126498C227178E200D3DF47 /* index.js */,
 				A11CB495226BC0660006A0D4 /* demo.js */,
 				A1296B05225F77330058C23D /* js-blockchain */,
 				A1296B06225F77330058C23D /* node_modules */,
@@ -733,10 +741,12 @@
 			files = (
 				A19E9106225EC2C3004FC391 /* yarn.lock in Resources */,
 				A19E9105225EC2C3004FC391 /* package.json in Resources */,
+				A126499222717A4000D3DF47 /* sweetiekit.js in Resources */,
 				A19E9101225D7F2A004FC391 /* hello.js in Resources */,
-				A12649892271741900D3DF47 /* index.js in Resources */,
+				A126498D227178E200D3DF47 /* index.js in Resources */,
 				A1296B07225F77340058C23D /* js-blockchain in Resources */,
 				A1296B08225F77340058C23D /* node_modules in Resources */,
+				A126499122717A4000D3DF47 /* app.js in Resources */,
 				A19E9109225EC394004FC391 /* server.js in Resources */,
 				A11CB496226BC0660006A0D4 /* demo.js in Resources */,
 			);

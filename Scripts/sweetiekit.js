@@ -37,9 +37,9 @@ const ObjC = {
 const CoreAnimation = {
     CALayer,
 };
-exports.default = {
+module.exports = {
     UIKit,
     ObjC,
     CoreAnimation,
 };
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=sweetiekit.js.map

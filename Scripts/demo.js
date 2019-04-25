@@ -1,9 +1,10 @@
-const demo = require('./index');
+const demo = require('./app');
 
-// const sweetiekit = require('std:sweetiekit.node');
+// const SweetieKit = require('./index');
+//
+// const { UIKit, ObjC } = SweetieKit;
+//
 // const {
-//   NSObject,
-//   NSUserDefaults,
 //   UIApplication,
 //   UIWindow,
 //   UIStoryboard,
@@ -22,10 +23,15 @@ const demo = require('./index');
 //   UITableViewDataSource,
 //   UITableViewCell,
 //   UIRefreshControl,
-// } = sweetiekit;
-
-// console.log(sweetiekit);
+// } = UIKit;
 //
+// const {
+//   NSObject,
+//   NSUserDefaults,
+// } = ObjC;
+//
+// // console.log(sweetiekit);
+// //
 // // app main
 // let app;
 // // root navigation controller
@@ -117,56 +123,56 @@ const demo = require('./index');
 //   // tblView.dataSource = dataSrc;
 // }
 //
-// async function demo() {
-//   const dashboardVC = sb.instantiateViewController(ctrls.DASH);
-//   dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
-//   const table = createTable();
-//   dashboardVC.view.addSubview(table);
-//   nav.setViewControllers([dashboardVC], false);
-// }
-//
-// async function userPhoto() {
-//   const photoVC = sb.instantiateViewController(ctrls.PHOTO);
-//
-//   const viewW = photoVC.view.width;
-//   const viewH = photoVC.view.height;
-//   const elemW = viewW - 24;
-//   const imgY = ((viewH - 100) / 2) - 40;
-//   const imgX = (viewW - 100) / 2;
-//
-//   const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
-//     if (img === undefined) {
-//       const imgDel = new UIImagePickerControllerDelegate();
-//       const imgCtrl = new UIImagePickerController();
-//
-//       imgDel.onInfo = () => {
-//         let i = imgDel.result;
-//
-//         if (i) {
-//           img = i;
-//           const imgView = new UIImageView(img);
-//           imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
-//           imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
-//           photoVC.view.addSubview(imgView);
-//           nextBtn.title = '✅ Lovely';
-//         }
-//       };
-//
-//       imgDel.onCancel = (picker) => {};
-//       imgCtrl.delegate = imgDel;
-//       photoVC.present(imgCtrl, true, () => {});
-//     } else {
-//       demo();
-//     }
-//   });
-//
-//   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
-//
-//   photoVC.view.addSubview(nextBtn);
-//
-//   nav.pushViewController(photoVC);
-// }
-//
+// // async function demo() {
+// //   const dashboardVC = sb.instantiateViewController(ctrls.DASH);
+// //   dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
+// //   const table = createTable();
+// //   dashboardVC.view.addSubview(table);
+// //   nav.setViewControllers([dashboardVC], false);
+// // }
+// //
+// // async function userPhoto() {
+// //   const photoVC = sb.instantiateViewController(ctrls.PHOTO);
+// //
+// //   const viewW = photoVC.view.width;
+// //   const viewH = photoVC.view.height;
+// //   const elemW = viewW - 24;
+// //   const imgY = ((viewH - 100) / 2) - 40;
+// //   const imgX = (viewW - 100) / 2;
+// //
+// //   const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
+// //     if (img === undefined) {
+// //       const imgDel = new UIImagePickerControllerDelegate();
+// //       const imgCtrl = new UIImagePickerController();
+// //
+// //       imgDel.onInfo = () => {
+// //         let i = imgDel.result;
+// //
+// //         if (i) {
+// //           img = i;
+// //           const imgView = new UIImageView(img);
+// //           imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
+// //           imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+// //           photoVC.view.addSubview(imgView);
+// //           nextBtn.title = '✅ Lovely';
+// //         }
+// //       };
+// //
+// //       imgDel.onCancel = (picker) => {};
+// //       imgCtrl.delegate = imgDel;
+// //       photoVC.present(imgCtrl, true, () => {});
+// //     } else {
+// //       demo();
+// //     }
+// //   });
+// //
+// //   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+// //
+// //   photoVC.view.addSubview(nextBtn);
+// //
+// //   nav.pushViewController(photoVC);
+// // }
+// //
 // async function setupApp() {
 //   app = new UIApplication();
 //   sb = new UIStoryboard('Main');
@@ -201,7 +207,7 @@ const demo = require('./index');
 //
 //   app.keyWindow.setRootViewController(nav);
 // }
-
-process.nextTick(async () => {
-  // await setupApp();
-});
+//
+// process.nextTick(async () => {
+//   await setupApp();
+// });

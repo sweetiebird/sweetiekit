@@ -15,7 +15,7 @@ type Color = {
   alpha: number;
 };
 
-declare module Sweetiekit {
+declare module SweetieKit {
   export namespace CoreGraphics {
     export class CGSize implements Size {
       constructor(size: Size);
