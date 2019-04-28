@@ -27,6 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIWindow::Initialize(Isolate 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "setRootViewController", SetRootViewController);
+  Nan::SetMethod(proto, "makeKeyAndVisible", MakeKeyAndVisible);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -66,3 +67,14 @@ NAN_METHOD(NUIWindow::SetRootViewController) {
     });
   }
 }
+
+NAN_METHOD(NUIWindow::MakeKeyAndVisible) {
+  NUIWindow *win = ObjectWrap::Unwrap<NUIWindow>(Local<Object>::Cast(info.This()));
+  
+  @autoreleasepool {
+    dispatch_async(dispatch_get_main_queue(), ^ {
+      [win->As<UIWindow>() makeKeyAndVisible];
+    });
+  }
+}
+

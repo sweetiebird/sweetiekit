@@ -1,6 +1,5 @@
 
-
-// {
+declare namespace "std:sweetiekit.node" {
 
   export type Optional<T> = T | null;
   export type DelegateGet<T1, T2, T3> = (arg0: T2, arg1: T2) => T3;
@@ -22,7 +21,7 @@
     alpha?: number;
   };
 
-  export namespace CoreGraphics {
+  declare namespace CoreGraphics {
     export class CGSize implements Size {
       constructor(size: Size);
 
@@ -45,7 +44,7 @@
     }
   }
 
-  export namespace ObjC {
+  declare namespace ObjC {
     export class NSObject {
     }
 
@@ -67,7 +66,7 @@
     }
   }
 
-  export namespace CoreAnimation {
+  declare namespace CoreAnimation {
     export class CALayer extends ObjC.NSObject {
       cornerRadius: number;
       borderWidth: number;
@@ -78,7 +77,7 @@
     }
   }
 
-  export module UIKit {
+  declare namespace UIKit {
     export enum UIControlState {
       normal = 'normal',
       highlighted = 'highlighted',
@@ -276,4 +275,4 @@
     }
   }
 
-// }
+}
