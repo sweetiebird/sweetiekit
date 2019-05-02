@@ -915,7 +915,7 @@
 					"-fmodules",
 					"-fcxx-modules",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello-2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello-napi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
@@ -962,7 +962,7 @@
 					"-fmodules",
 					"-fcxx-modules",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello-2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.emilykolar.node-ios-hello-napi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";

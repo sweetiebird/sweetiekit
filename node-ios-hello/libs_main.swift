@@ -34,7 +34,7 @@ class LibsMain : NSObject
   var argc = 2;
   var v: [napi_value?] = []
   while (v.count < argc) {
-    v.insert(nil, at: v.count - 1)
+    v.insert(nil, at: v.count)
   }
   status = napi_get_cb_info(env, info, &argc, &v, nil, nil);
   assert(status == napi_ok);
