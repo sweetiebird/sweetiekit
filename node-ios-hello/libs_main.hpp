@@ -11,4 +11,14 @@
 
 #import <UIKit/UIKit.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+extern void UIKit_PumpEvents();
+
+#if defined(__cplusplus)
+}
+#endif
+
 #endif /* libs_main_h */

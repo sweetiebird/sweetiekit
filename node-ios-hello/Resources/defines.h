@@ -136,10 +136,17 @@ namespace sweetiekit {
 
   void RunResInMainThread(uv_async_t *handle);
   void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete = false);
+  
+  Local<Value> CallSync(Local<Function> cb, const char* methodName, int argc, Local<Value>* argv);
+  
   void CallAsync(Nan::Global<Function>& cb, const char* methodName);
   void Kick();
 }
 
 extern "C" void iOSLog0(const char* msg);
+
+#include <dispatch/queue.h>
+extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block);
+#define dispatch_sync dispatch_ui_sync
 
 #endif /* defines_h */

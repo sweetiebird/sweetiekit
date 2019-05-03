@@ -47,7 +47,7 @@ NAN_METHOD(NUITableViewCell::New) {
   } else {
 #if 1
     @autoreleasepool {
-      dispatch_async(dispatch_get_main_queue(), ^ {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
         //auto cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
         auto cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id"];
         //[cell initWithFrame:CGRectMake(0, 0, 300, 40)];

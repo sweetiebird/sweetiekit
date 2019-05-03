@@ -79,12 +79,13 @@ NAN_METHOD(NUIButton::Alloc) {
   double width = TO_DOUBLE(info[3]);
   double height = TO_DOUBLE(info[4]);
 
-  Nan::Persistent<Promise::Resolver>* pResolver = new Nan::Persistent<Promise::Resolver>(resolver);
-  Nan::Persistent<Object>* pBtnObj = new Nan::Persistent<Object>(btnObj);
-  
   if (info[5]->IsFunction()) {
     btn->_callback->Reset(Local<Function>::Cast(info[5]));
   }
+  
+#if SYNC
+  Nan::Persistent<Promise::Resolver>* pResolver = new Nan::Persistent<Promise::Resolver>(resolver);
+  Nan::Persistent<Object>* pBtnObj = new Nan::Persistent<Object>(btnObj);
   
   @autoreleasepool {
     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -109,8 +110,20 @@ NAN_METHOD(NUIButton::Alloc) {
 
     });
   }
-
   JS_SET_RETURN(scope.Escape(resolver->GetPromise()));
+#else
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+      [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+      [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
+      [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
+        sweetiekit::Resolve(btn->_callback);
+      }];
+    });
+  }
+  JS_SET_RETURN(btnObj);
+#endif
 }
 
 NAN_GETTER(NUIButton::TitleGetter) {

@@ -10,7 +10,36 @@ import UIKit
 
 extension String: Error {}
 
-@UIApplicationMain
+extension DispatchQueue {
+    class func mainSyncSafe(execute work: () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.sync(execute: work)
+        }
+    }
+
+    class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
+        if Thread.isMainThread {
+            return try work()
+        } else {
+            return try DispatchQueue.main.sync(execute: work)
+        }
+    }
+}
+
+@objc(ScriptGetter)
+class ScriptGetter: NSObject {
+  @objc
+  static func Get(name: String) -> String? {
+    guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return nil; }
+    guard let bundle = Bundle(url: bundleURL) else { iOSLog0("Scripts bundle url not found"); iOSTrap(); return nil; }
+    guard let scriptURL = bundle.url(forResource: name, withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return nil; }
+    return scriptURL.path
+  }
+}
+
+@objc(AppDelegate)
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -26,13 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc;*/
         
         iOSLog0("Finished launching\n");
+        embed_start();
         if (false) {
             run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
             iOSLog0("Done embedding");
             iOSTrap();
         } else if (false) {
           hellov8async("node-ios-hello");
-        } else if (true) {
+        } else if (false) {
 //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
 //        let first = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "first") as! FirstViewController
 //        vc.setViewControllers([first], animated: false)
@@ -48,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }
             guard let bundle = Bundle(url: bundleURL) else { iOSLog0("Scripts bundle url not found"); iOSTrap(); return false; }
-            guard let scriptURL = bundle.url(forResource: "dist/index", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
+            guard let scriptURL = bundle.url(forResource: "app", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
 
             //iOSLog0(scriptURL.path);
             #if false

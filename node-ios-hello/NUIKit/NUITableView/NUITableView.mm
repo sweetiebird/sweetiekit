@@ -143,10 +143,14 @@ NAN_SETTER(NUITableView::DataSourceSetter) {
   NUITableView *tv = ObjectWrap::Unwrap<NUITableView>(info.This());
   NUITableViewDataSource *ds = ObjectWrap::Unwrap<NUITableViewDataSource>(Local<Object>::Cast(value));
   auto dataSource = ds->As<SUITableViewDataSource>();
+  tv->_dataSource.Reset(value);
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [tv->As<UITableView>() setDataSource:dataSource];
+      auto ui = tv->As<UITableView>();
+      [ui associateValue:dataSource withKey:@"sweetiekit.datasource"];
+      [ui setDataSource:dataSource];
+      [ui setDelegate:dataSource];
     });
   }
 }

@@ -34,6 +34,9 @@ public:
   JS_PROP(EstimatedRowHeight);
   JS_PROP(RefreshControl);
   static NAN_METHOD(ReloadData);
+
+
+  Nan::Persistent<Value> _dataSource;
 };
 
 

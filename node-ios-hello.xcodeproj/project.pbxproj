@@ -34,12 +34,8 @@
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
 		A12655FD22719CE400D3DF47 /* package-lock.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655ED22719CE300D3DF47 /* package-lock.json */; };
 		A12655FE22719CE400D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EE22719CE300D3DF47 /* app.js */; };
-		A12655FF22719CE400D3DF47 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A12655F022719CE300D3DF47 /* node_modules */; };
-		A126560022719CE400D3DF47 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = A12655F122719CE300D3DF47 /* dist */; };
-		A126560122719CE400D3DF47 /* old in Resources */ = {isa = PBXBuildFile; fileRef = A12655F222719CE300D3DF47 /* old */; };
 		A126560222719CE400D3DF47 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F322719CE300D3DF47 /* hello.js */; };
 		A126560322719CE400D3DF47 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F422719CE300D3DF47 /* server.js */; };
-		A126560422719CE400D3DF47 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A12655F522719CE300D3DF47 /* src */; };
 		A126560522719CE400D3DF47 /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A12655F622719CE400D3DF47 /* js-blockchain */; };
 		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
@@ -149,12 +145,8 @@
 		A12655ED22719CE300D3DF47 /* package-lock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
 		A12655EE22719CE300D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		A12655EF22719CE300D3DF47 /* index.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = index.js.map; sourceTree = "<group>"; };
-		A12655F022719CE300D3DF47 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
-		A12655F122719CE300D3DF47 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dist; sourceTree = "<group>"; };
-		A12655F222719CE300D3DF47 /* old */ = {isa = PBXFileReference; lastKnownFileType = folder; path = old; sourceTree = "<group>"; };
 		A12655F322719CE300D3DF47 /* hello.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
 		A12655F422719CE300D3DF47 /* server.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
-		A12655F522719CE300D3DF47 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		A12655F622719CE400D3DF47 /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A12655F722719CE400D3DF47 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
@@ -410,17 +402,13 @@
 			children = (
 				A12655EE22719CE300D3DF47 /* app.js */,
 				A12655F722719CE400D3DF47 /* demo.js */,
-				A12655F122719CE300D3DF47 /* dist */,
 				A12655F322719CE300D3DF47 /* hello.js */,
 				A12655EB22719CE300D3DF47 /* index.js */,
 				A12655EF22719CE300D3DF47 /* index.js.map */,
 				A12655F622719CE400D3DF47 /* js-blockchain */,
-				A12655F022719CE300D3DF47 /* node_modules */,
-				A12655F222719CE300D3DF47 /* old */,
 				A12655ED22719CE300D3DF47 /* package-lock.json */,
 				A12655F822719CE400D3DF47 /* package.json */,
 				A12655F422719CE300D3DF47 /* server.js */,
-				A12655F522719CE300D3DF47 /* src */,
 				A12655EC22719CE300D3DF47 /* tsconfig.json */,
 				A12655E922719CE300D3DF47 /* tslint.json */,
 				A12655EA22719CE300D3DF47 /* yarn.lock */,
@@ -752,16 +740,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A126560122719CE400D3DF47 /* old in Resources */,
 				A126560222719CE400D3DF47 /* hello.js in Resources */,
 				A126560322719CE400D3DF47 /* server.js in Resources */,
-				A126560422719CE400D3DF47 /* src in Resources */,
-				A126560022719CE400D3DF47 /* dist in Resources */,
 				A12655FE22719CE400D3DF47 /* app.js in Resources */,
 				A12655FB22719CE400D3DF47 /* index.js in Resources */,
 				A12655FA22719CE400D3DF47 /* yarn.lock in Resources */,
 				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
-				A12655FF22719CE400D3DF47 /* node_modules in Resources */,
 				A12655FD22719CE400D3DF47 /* package-lock.json in Resources */,
 				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
 				A12655F922719CE400D3DF47 /* tslint.json in Resources */,

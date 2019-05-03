@@ -7,6 +7,7 @@
   "scripts": {
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
+    "build": "npx babel reactkit/components --out-dir dist/components && npx babel reactkit/renderer --out-dir dist/renderer && npx babel reactkit/utils --out-dir dist/utils && npx babel reactkit/index.js --out-file dist/index.js",
     "start": "webpack"
   },
   "dependencies": {

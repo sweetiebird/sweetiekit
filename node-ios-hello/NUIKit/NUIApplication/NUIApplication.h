@@ -28,6 +28,8 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
   static NAN_GETTER(KeyWindowGetter);
+  
+  static NAN_METHOD(Main);
 
 private:
   static UIWindow* tmp_UIWindow;

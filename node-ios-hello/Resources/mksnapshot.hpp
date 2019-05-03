@@ -17,6 +17,7 @@ extern "C" {
 
 extern void run_mksnapshot();
 extern void run_mksnapshot_with_args(const char* args);
+extern void gen_snapshot();
 
 #ifdef __cplusplus
 }

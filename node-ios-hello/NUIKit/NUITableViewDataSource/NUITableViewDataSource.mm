@@ -12,6 +12,7 @@
 #include "NUITableViewDataSource.h"
 #include "NUITableViewCell.h"
 #include "NUIControl.h"
+#include "libs_main.hpp"
 
 Nan::Persistent<FunctionTemplate> NUITableViewDataSource::type;
 
@@ -29,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewDataSource::Initia
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "numberOfRowsInSection", NumberOfRowsInSection);
   JS_SET_PROP(proto, "cellForRowAt", CellForRowAt);
+  JS_SET_PROP(proto, "willDisplayCellForRowAt", WillDisplayCellForRowAt);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -190,6 +192,57 @@ namespace sweetiekit {
         }
       });
     }
+  #elif 1
+  Nan::Global<Value> result;
+  Local<Object> asyncObject = Nan::New<Object>();
+  AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
+
+  Local<Function> cbFn = Nan::New(cb);
+  std::vector< Local<Value> > argv(getArgs());
+  Local<Value> ret = asyncResource.MakeCallback(cbFn, (int)argv.size(), &argv[0]).ToLocalChecked();
+  result.Reset(ret);
+  onFinished(Nan::New(result));
+  #elif 1
+  Nan::Global<Value> result;
+  volatile bool done = false;
+  //Local<Function> cbFn = Local<Function>::Cast(info[10]);
+
+  //Nan::Global<Function> cb(cbFn);
+  {
+    std::lock_guard<std::mutex> lock(sweetiekit::reqMutex);
+    sweetiekit::reqCbs.push_back([ &onFinished, &getArgs, &result, &cb, method, &done]() -> void {
+
+      // platform code.
+
+      {
+        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
+
+        sweetiekit::resCbs.push_back([ &onFinished, &getArgs, &result, &cb, method, &done]() -> void {
+          {
+            Local<Object> asyncObject = Nan::New<Object>();
+            AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
+
+            Local<Function> cbFn = Nan::New(cb);
+            std::vector< Local<Value> > argv(getArgs());
+            Local<Value> ret = asyncResource.MakeCallback(cbFn, (int)argv.size(), &argv[0]).ToLocalChecked();
+            result.Reset(ret);
+            onFinished(Nan::New(result));
+            done = true;
+          }
+
+          //delete vrPoseRes;
+        });
+      }
+
+      uv_async_send(&sweetiekit::resAsync);
+
+    });
+  }
+
+  uv_sem_post(&sweetiekit::reqSem);
+  while (!done) {
+    UIKit_PumpEvents();
+  }
   #elif 1
   uv_sem_t sem;
   uv_sem_init(&sem, 0);
@@ -534,12 +587,73 @@ NAN_SETTER(NUITableViewDataSource::CellForRowAtSetter) {
   }
 }
 
+#include "NUITableView.h"
+
+NAN_SETTER(NUITableViewDataSource::WillDisplayCellForRowAtSetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewDataSource *del = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
+  del->_displayCallback->Reset(Local<Function>::Cast(value));
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      Nan::HandleScope scope;
+      SUITableViewDataSource* d = del->As<SUITableViewDataSource>();
+      [d setWillDsiplayCellClosureWithClosure:^(UITableView * _Nonnull tv, UITableViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath) {
+        Local<Object> tvObj;
+        {
+          Local<Value> argv[] = {
+            Nan::New<v8::External>((__bridge void*)tv)
+          };
+          tvObj = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(tv, NUITableView::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+        }
+        Local<Object> cellObj;
+        {
+          Local<Value> argv[] = {
+            Nan::New<v8::External>((__bridge void*)cell)
+          };
+          cellObj = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, NUITableViewCell::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+        }
+        
+        auto section = [indexPath section];
+        auto row = [indexPath row];
+        Local<Object> indexPathObj = Object::New(Isolate::GetCurrent());
+        indexPathObj->Set(JS_STR("section"), JS_NUM(section));
+        indexPathObj->Set(JS_STR("row"), JS_NUM(row));
+      
+        Local<Value> argv[] = {
+          tvObj,
+          cellObj,
+          indexPathObj
+        };
+        sweetiekit::CallSync(Nan::New(*del->_displayCallback), "NUITableViewDataSource::WillDisplayCellForRowAtSetter", 3, argv);
+        
+      }];
+//      [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
+//        sweetiekit::Resolve(del->_onCancel);
+//        return true;
+//      }];
+    });
+  }
+}
+
+NAN_GETTER(NUITableViewDataSource::WillDisplayCellForRowAtGetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewDataSource *view = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
+
+  info.GetReturnValue().Set(Nan::New(view->_displayCallback));
+}
+
+
 NUITableViewDataSource::NUITableViewDataSource ()
 : _numberRowsCallback(new Nan::Persistent<Function>())
 , _cellCallback(new Nan::Persistent<Function>())
+, _displayCallback(new Nan::Persistent<Function>())
 {}
 
 NUITableViewDataSource::~NUITableViewDataSource () {
   delete _numberRowsCallback;
   delete _cellCallback;
+  delete _displayCallback;
 }

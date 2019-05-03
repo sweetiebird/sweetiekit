@@ -68,7 +68,7 @@ NAN_METHOD(NUILabel::Alloc) {
   //Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
 
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       UIFont * customFont = [UIFont systemFontOfSize:15]; //custom font
 
       UILabel* fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
@@ -134,7 +134,7 @@ NAN_SETTER(NUILabel::TextSetter) {
   }
   
   @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
       [btn->As<UILabel>() setText:[NSString stringWithUTF8String:title.c_str()]];
     });
   }

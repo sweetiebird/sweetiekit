@@ -50,7 +50,7 @@ NAN_METHOD(NNSUserDefaults::New) {
     app->SetNSObject((__bridge NSUserDefaults *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_async(dispatch_get_main_queue(), ^ {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
           app->SetNSObject([NSUserDefaults standardUserDefaults]);
       });
     }

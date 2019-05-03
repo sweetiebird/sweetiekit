@@ -46,7 +46,7 @@ NAN_METHOD(NUIApplication::New) {
     app->SetNSObject((__bridge UIApplication *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_async(dispatch_get_main_queue(), ^ {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
           app->SetNSObject([UIApplication sharedApplication]);
       });
     }
@@ -58,13 +58,17 @@ NAN_METHOD(NUIApplication::New) {
 
 NAN_GETTER(NUIApplication::KeyWindowGetter)
 {
-  NUIApplication *app = ObjectWrap::Unwrap<NUIApplication>(Local<Object>::Cast(info.This()));
+  JS_UNWRAP(UIApplication, app)
 
   tmp_UIWindow = nullptr;
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      tmp_UIWindow = [app->As<UIApplication>() keyWindow];
+      tmp_UIWindow = [app keyWindow];
+      if (tmp_UIWindow == nullptr) {
+        tmp_UIWindow = [UIWindow new];
+        [tmp_UIWindow makeKeyAndVisible];
+      }
     });
   }
 
@@ -74,6 +78,35 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
   
   info.GetReturnValue().Set(winObj);
+}
+
+NAN_METHOD(NUIApplication::Main) {
+  Nan::HandleScope scope;
+  
+  std::string identifier;
+  if (info[0]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    identifier = *utf8Value;
+  } else {
+    identifier = "AppDelegate";
+  }
+  NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
+  
+  char* args = "node\0--jitless\0\0";
+  char* args1 = (char*)args;
+  std::vector<char*> arg;
+  while (*args1 != '\0') {
+      arg.push_back((char*)args1);
+      args1 += strlen(args1) + 1;
+      if (arg.size() > 100)
+          __builtin_trap();
+  }
+  arg.push_back(nullptr);
+  
+  @autoreleasepool {
+    UIApplicationMain(arg.size() - 1, &arg[0], nullptr, result);
+  }
+  
 }
 
 NUIApplication::NUIApplication () {}

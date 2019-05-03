@@ -1205,15 +1205,16 @@ https.get(options, function(res) {
 });
 */
 
-leftpad = require('leftpad')
+//leftpad = require('leftpad')
 
-process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
+//process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
 const sweetiekit = require('std:sweetiekit.node');
 const {
   NSObject,
   NSUserDefaults,
   UIApplication,
+  UIApplicationMain,
   UIWindow,
   UIStoryboard,
   UIViewController,
@@ -1482,7 +1483,7 @@ function iosApp() {
       let img = del.result
 
       if (img) {
-        const vc2 = sb.instantiateViewController('imageVC');
+        const vc2 = sb.instantiateViewController('photoVC');
 
         const imgView = new UIImageView(img); // named argument ({ image })
         const viewWidth = vc2.view.width;
@@ -1508,9 +1509,11 @@ function iosApp() {
   btnLogin.callback = handleButtonPress;
 }
 
-process.nextTick(async () => {
+setTimeout(async () => {
   await iosApp();
-});
+},1000);
+
+UIApplicationMain();
 
 //httpServer = require('./server.js')
 //
