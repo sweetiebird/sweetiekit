@@ -141,12 +141,189 @@ namespace sweetiekit {
   
   void CallAsync(Nan::Global<Function>& cb, const char* methodName);
   void Kick();
+  uint64_t nodeTick();
+  void nodePump(Isolate* isolate);
 }
 
-extern "C" void iOSLog0(const char* msg);
+struct Block_layout {
+    void *isa;
+    int flags;
+    int reserved;
+    void (*invoke)(void *, ...);
+    struct Block_descriptor *descriptor;
+};
+
+typedef const Nan::FunctionCallbackInfo<v8::Value> & JSInfo;
+typedef std::vector<Local<Value>> JSArgs;
+namespace sweetiekit {
+  typedef void (^BlockFunctionCallback)(JSInfo info);
+
+  static Local<Function> FromBlock(const char* name, BlockFunctionCallback block) {
+   Nan::EscapableHandleScope handleScope;
+   Nan::FunctionCallback cb = [](JSInfo info) {
+    Local<Value> data(info.Data());
+    BlockFunctionCallback block_((__bridge BlockFunctionCallback)(data.As<External>()->Value()));
+    Nan::HandleScope handleScope;
+    @autoreleasepool {
+      block_(info);
+    }
+   };
+   Local<Function> fn = Nan::New<v8::Function>(cb, Nan::New<v8::External>((__bridge void*)block));
+   fn->SetName(JS_STR(name));
+   return handleScope.Escape(fn);
+  }
+  
+  static void Set(Local<Object> obj, const char* name, BlockFunctionCallback block) {
+    Nan::HandleScope handleScope;
+    obj->Set(JS_STR(name), FromBlock(name, block));
+  }
+}
+
+namespace sweetiekit {
+  static Local<Function> Rename(const char* name, Local<Function> fn) {
+    Nan::HandleScope handleScope;
+    fn->SetName(JS_STR(name));
+    return fn;
+  }
+  class JSFunction
+  {
+     std::shared_ptr<Nan::Persistent<Function>> cb;
+  public:
+     JSFunction(Local<Value> cb)
+     : cb(new Nan::Persistent<Function>(Local<Function>::Cast(cb)))
+     {
+     }
+     JSFunction(Local<Function> cb)
+     : cb(new Nan::Persistent<Function>(cb))
+     {
+     }
+     virtual ~JSFunction() {
+      Reset();
+     }
+     
+     void Reset() {
+       cb.reset();
+     }
+    
+     void Reset(Local<Function> fn) {
+       cb.reset(new Nan::Persistent<Function>(fn));
+     }
+    
+     void Reset(Local<Value> fn) {
+       cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
+     }
+    
+     JSFunction& operator = (Local<Function> fn) {
+      Reset(fn);
+      return *this;
+     }
+    
+     JSFunction& operator = (Local<Value> fn) {
+      Reset(fn);
+      return *this;
+     }
+    
+     Local<Function> Get() {
+       return Nan::New(*cb);
+     }
+     Local<Function> operator *() {
+       return Get();
+     }
+     Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) {
+      return sweetiekit::CallSync(Get(), methodName, argc, argv);
+     }
+     Local<Value> operator()(const char* methodName, int argc, Local<Value>* argv) {
+      return sweetiekit::CallSync(Get(), methodName, argc, argv);
+     }
+     Local<Value> Call(const char* methodName, JSArgs& args) {
+      return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
+     }
+     Local<Value> operator()(const char* methodName, JSArgs& args) {
+      return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
+     }
+     Local<Value> Call(const char* methodName) {
+      return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
+     }
+     Local<Value> operator()(const char* methodName) {
+      return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
+     }
+     Local<Value> Call(const char* methodName, Local<Value> arg0) {
+      Local<Value> argv[] = { arg0 };
+      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+     }
+     Local<Value> operator()(const char* methodName, Local<Value> arg0) {
+      Local<Value> argv[] = { arg0 };
+      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+     }
+     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1) {
+      Local<Value> argv[] = { arg0, arg1 };
+      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+     }
+     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1) {
+      Local<Value> argv[] = { arg0, arg1 };
+      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+     }
+     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) {
+      Local<Value> argv[] = { arg0, arg1, arg2 };
+      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+     }
+     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) {
+      Local<Value> argv[] = { arg0, arg1, arg2 };
+      return sweetiekit::CallSync(Get(), methodName, 3, argv);
+     }
+     static JSArgs Args() {
+      return JSArgs();
+     }
+     static JSArgs Args(Local<Value> x0) {
+       Local<Value> argv[] = { x0 };
+       return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
+     }
+     static JSArgs Args(Local<Value> x0, Local<Value> x1) {
+       Local<Value> argv[] = { x0, x1 };
+       return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
+     }
+     static JSArgs Args(Local<Value> x0, Local<Value> x1, Local<Value> x2) {
+       Local<Value> argv[] = { x0, x1, x2 };
+       return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
+     }
+  };
+}
+
+
+extern "C" {
+
+void iOSLog0(const char* msg);
 
 #include <dispatch/queue.h>
-extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block);
+void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block);
 #define dispatch_sync dispatch_ui_sync
+
+bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr);
+
+#ifdef __OBJC__
+#import <CoreFoundation/CoreFoundation.h>
+NSString* NJSStringToNSString(Local<Value> jsStr);
+#endif
+
+}
+
+namespace sweetiekit {
+  class TryCatchReport : Nan::TryCatch
+  {
+  public:
+    TryCatchReport() {
+      this->SetVerbose(true);
+    }
+    virtual ~TryCatchReport() {
+      if (this->HasCaught()) {
+        auto msg = this->Message();
+        std::string str;
+        if (NJSStringGetUTF8String(msg->Get(), str)) {
+          iOSLog0(str.c_str());
+        }
+      }
+    }
+  };
+}
 
 #endif /* defines_h */

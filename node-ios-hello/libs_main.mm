@@ -86,15 +86,19 @@ namespace sweetiekit {
   
   Local<Value> CallSync(Local<Function> callback, const char* methodName, int argc, Local<Value>* argv)
   {
+    Isolate* isolate = callback->GetIsolate();
+    MicrotasksScope enableMicrotasks(isolate, MicrotasksScope::kRunMicrotasks);
+    TryCatchReport reportErrors;
     Local<Value> result;
     if (!callback.IsEmpty()) {
       Local<Object> asyncObject = Nan::New<Object>();
-      AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
+      AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, methodName /*"UIButton::New"*/);
       auto res = asyncResource.MakeCallback(callback, argc, argv);
       Kick();
       if (res.ToLocal(&result)) {
         if (result->IsPromise()) {
           Local<Promise> promise = result.As<Promise>();
+#if 0
           if (!promise->HasHandler()) {
             promise->Then(JS_CONTEXT(),
             (v8::Function::New(JS_CONTEXT(), [](const FunctionCallbackInfo<Value>& info) -> void {
@@ -107,8 +111,14 @@ namespace sweetiekit {
             }).ToLocalChecked()));
           }
           while (promise->HasHandler() && (promise->State() == Promise::kPending)) {
-            Isolate::GetCurrent()->RunMicrotasks();
+            //Isolate::GetCurrent()->RunMicrotasks();
+            sweetiekit::nodeTick();
           }
+#else
+          if (promise->State() == Promise::kPending) {
+            Nan::ThrowError("Unresolved promise");
+          }
+#endif
           if (promise->State() == Promise::kRejected) {
             Nan::ThrowError(promise->Result());
           } else {
@@ -384,6 +394,46 @@ static volatile int embed_closed;
 
 static int embed_timer_called;
 
+namespace sweetiekit {
+
+  void nodePump(Isolate* isolate) {
+    TryCatchReport tryCatch;
+    {
+      MicrotasksScope microScope(isolate, MicrotasksScope::kRunMicrotasks);
+
+      uv_run(uv_default_loop(), UV_RUN_NOWAIT);
+      isolate->RunMicrotasks();
+    }
+  }
+  
+  Isolate* nodeIsolate;
+  
+  uint64_t nodeTick() {
+    auto start = uv_hrtime();
+#if 1
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      if (nodeIsolate) {
+        Isolate* isolate = nodeIsolate;
+        nodeIsolate = nullptr;
+        isolate->Enter();
+      }
+      Isolate* isolate = Isolate::GetCurrent();
+      //Isolate* isolate = nodeIsolate;
+      Local<Context> context = isolate->GetCurrentContext();
+      v8::Locker locker(isolate);
+      v8::Isolate::Scope isolateScope(isolate);
+      Nan::HandleScope handleScope;
+      nodePump(isolate);
+    });
+#else
+    CFRunLoopWakeUp(CFRunLoopGetMain());
+#endif
+    auto now = uv_hrtime();
+    auto elapsed = now - start;
+    return elapsed;
+  }
+}
+
 static void embed_thread_runner(void* arg) {
   int r;
   int fd;
@@ -392,6 +442,7 @@ static void embed_thread_runner(void* arg) {
   while (!embed_closed) {
     fd = uv_backend_fd(uv_default_loop());
     timeout = uv_backend_timeout(uv_default_loop());
+    timeout = 1000;
 
     do {
 #if defined(HAVE_KQUEUE)
@@ -399,6 +450,7 @@ static void embed_thread_runner(void* arg) {
       ts.tv_sec = timeout / 1000;
       ts.tv_nsec = (timeout % 1000) * 1000000;
       r = kevent(fd, NULL, 0, NULL, 0, &ts);
+      //r = kevent(fd, NULL, 0, NULL, 0, NULL);
 #elif defined(HAVE_EPOLL)
       {
         struct epoll_event ev;
@@ -406,19 +458,10 @@ static void embed_thread_runner(void* arg) {
       }
 #endif
     } while (r == -1 && errno == EINTR);
-    auto start = uv_hrtime();
-#if 1
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      uv_run(uv_default_loop(), UV_RUN_NOWAIT);
-      Isolate::GetCurrent()->RunMicrotasks();
-    });
-#else
-    CFRunLoopWakeUp(CFRunLoopGetMain());
-#endif
-    auto now = uv_hrtime();
-    auto elapsed = now - start;
-    if (elapsed < 0.001*NSEC_PER_SEC) {
-      usleep((0.001*NSEC_PER_SEC - elapsed) / 1000);
+    auto elapsed = sweetiekit::nodeTick();
+    
+    if (elapsed < 0.005*NSEC_PER_SEC) {
+      usleep((0.005*NSEC_PER_SEC - elapsed) / 1000);
     }
   }
 }

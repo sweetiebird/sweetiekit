@@ -80,6 +80,9 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   info.GetReturnValue().Set(winObj);
 }
 
+namespace sweetiekit {
+  extern Isolate* nodeIsolate;
+}
 NAN_METHOD(NUIApplication::Main) {
   Nan::HandleScope scope;
   
@@ -103,6 +106,10 @@ NAN_METHOD(NUIApplication::Main) {
   }
   arg.push_back(nullptr);
   
+  Isolate* isolate = info.GetIsolate();
+  MicrotasksScope noMicrotasks(isolate, MicrotasksScope::kDoNotRunMicrotasks);
+  sweetiekit::nodeIsolate = isolate;
+  isolate->Exit();
   @autoreleasepool {
     UIApplicationMain(arg.size() - 1, &arg[0], nullptr, result);
   }
