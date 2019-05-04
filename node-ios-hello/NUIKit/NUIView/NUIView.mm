@@ -47,6 +47,45 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  sweetiekit::Set(ctorFn, "beginAnimations", ^(JSInfo info) {
+    [UIView beginAnimations:NJSStringToNSString(info[0]) context:nullptr];
+  });
+  sweetiekit::Set(ctorFn, "setAnimationDuration", ^(JSInfo info) {
+    if (!info[0]->IsNumber()) {
+      Nan::ThrowTypeError("setAnimationDuration: Expected a number");
+    } else {
+      [UIView setAnimationDuration:TO_DOUBLE(info[0])];
+    }
+  });
+  sweetiekit::Set(ctorFn, "setAnimationBeginsFromCurrentState", ^(JSInfo info) {
+    if (!info[0]->IsBoolean()) {
+      Nan::ThrowTypeError("setAnimationBeginsFromCurrentState: Expected a boolean");
+    } else {
+      [UIView setAnimationBeginsFromCurrentState:TO_BOOL(info[0])];
+    }
+  });
+  sweetiekit::Set(ctorFn, "commitAnimations", ^(JSInfo info) {
+    [UIView commitAnimations];
+  });
+  sweetiekit::Set(ctorFn, "animate", ^(JSInfo info) {
+    Isolate* isolate = info.GetIsolate();
+    Nan::HandleScope handleScope;
+    NSTimeInterval duration = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
+    NSTimeInterval delay = info[1]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
+    auto options = info[2]; // TODO
+    __block sweetiekit::JSFunction animations(info[3]);
+    __block sweetiekit::JSFunction completion(info[4]);
+    
+    @autoreleasepool {
+      [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        Nan::HandleScope handleScope;
+        animations("UIView:animateWithDuration:animations");
+      } completion:^(BOOL finished) {
+        Nan::HandleScope handleScope;
+        completion("UIView:animateWithDuration:animations", JS_BOOL(finished));
+      }];
+    }
+  });
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
