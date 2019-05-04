@@ -31,6 +31,7 @@
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
 #include "NCALayer.h"
+#include "NCABasicAnimation.h"
 #include <unistd.h>
 
 #include <string>
@@ -301,6 +302,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_CALayer = NCALayer::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CALayer").ToLocalChecked(), N_CALayer.first);
+  
+        auto N_CABasicAnimation = NCABasicAnimation::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CABasicAnimation").ToLocalChecked(), N_CABasicAnimation.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

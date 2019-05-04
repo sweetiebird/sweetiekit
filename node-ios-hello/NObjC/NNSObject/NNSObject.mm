@@ -169,6 +169,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
 #include "NCALayer.h"
+#include "NCABasicAnimation.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -183,12 +184,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
     }
     if (wrapper == nullptr) {
     
-      // CoreAnimation
-      
+      // ========= core animation
       if ([obj isKindOfClass:[CALayer class]]) {
         return NCALayer::type;
       }
-      
+      if ([obj isKindOfClass:[CABasicAnimation class]]) {
+        return NCABasicAnimation::type;
+      }
+
       // UIKit
       
       if ([obj isKindOfClass:[UIApplication class]]) {

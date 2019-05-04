@@ -48,6 +48,7 @@
 		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
+		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D67292226953BB00562A42 /* NUIViewController.mm */; };
 		A1D6729822695D0200562A42 /* NUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729722695D0200562A42 /* NUIView.mm */; };
 		A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729A22696D7A00562A42 /* NUIStoryboard.mm */; };
@@ -163,6 +164,8 @@
 		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
 		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
+		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
 		A1D6729022694E7000562A42 /* libs_main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libs_main.hpp; sourceTree = "<group>"; };
 		A1D67291226953B100562A42 /* NUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewController.h; sourceTree = "<group>"; };
 		A1D67292226953BB00562A42 /* NUIViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewController.mm; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */,
 				216392A3226BD48A00051DE0 /* NCALayer */,
 			);
 			path = NCoreAnimation;
@@ -414,6 +418,15 @@
 				A12655EA22719CE300D3DF47 /* yarn.lock */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */,
+				A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */,
+			);
+			path = CABasicAnimation;
 			sourceTree = "<group>";
 		};
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
@@ -801,6 +814,7 @@
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
+				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
