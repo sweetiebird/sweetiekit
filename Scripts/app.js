@@ -241,7 +241,7 @@ async function setupApp() {
     console.log(username);
   });
   console.log('setupApp6a');
-  nameField.delegate = nameVC;
+  // nameField.delegate = nameVC;
   console.log('setupApp6b');
 
   const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
@@ -315,4 +315,16 @@ setTimeout(async () => {
     console.log('foo bar 3');
 }, 7000);
 
-UIApplicationMain();
+const options =
+{
+  appDelegate: "AppDelegate",
+  onBackgroundFetch: (onComplete) => {
+    console.log("bgFetch!");
+    setTimeout(() => {
+      console.log("before onComplete");
+      onComplete();
+      console.log("after onComplete");
+    }, 2000);
+  }
+}
+UIApplicationMain(options);

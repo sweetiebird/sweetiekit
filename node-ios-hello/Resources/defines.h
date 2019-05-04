@@ -189,6 +189,10 @@ namespace sweetiekit {
   {
      std::shared_ptr<Nan::Persistent<Function>> cb;
   public:
+     JSFunction()
+     {
+     }
+    
      JSFunction(Local<Value> cb)
      : cb(new Nan::Persistent<Function>(Local<Function>::Cast(cb)))
      {
@@ -223,51 +227,55 @@ namespace sweetiekit {
       return *this;
      }
     
-     Local<Function> Get() {
+     Local<Value> GetValue() const {
+       return Nan::New(*cb);
+     }
+    
+     Local<Function> Get() const {
        return Nan::New(*cb);
      }
      Local<Function> operator *() {
        return Get();
      }
-     Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) {
+     Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) const {
       return sweetiekit::CallSync(Get(), methodName, argc, argv);
      }
-     Local<Value> operator()(const char* methodName, int argc, Local<Value>* argv) {
+     Local<Value> operator()(const char* methodName, int argc, Local<Value>* argv) const {
       return sweetiekit::CallSync(Get(), methodName, argc, argv);
      }
-     Local<Value> Call(const char* methodName, JSArgs& args) {
+     Local<Value> Call(const char* methodName, JSArgs& args) const {
       return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
      }
-     Local<Value> operator()(const char* methodName, JSArgs& args) {
+     Local<Value> operator()(const char* methodName, JSArgs& args) const {
       return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
      }
-     Local<Value> Call(const char* methodName) {
+     Local<Value> Call(const char* methodName) const {
       return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
      }
-     Local<Value> operator()(const char* methodName) {
+     Local<Value> operator()(const char* methodName) const {
       return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0) {
+     Local<Value> Call(const char* methodName, Local<Value> arg0) const {
       Local<Value> argv[] = { arg0 };
       return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0) {
+     Local<Value> operator()(const char* methodName, Local<Value> arg0) const {
       Local<Value> argv[] = { arg0 };
       return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1) {
+     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
       Local<Value> argv[] = { arg0, arg1 };
       return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1) {
+     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
       Local<Value> argv[] = { arg0, arg1 };
       return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) {
+     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) {
+     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return sweetiekit::CallSync(Get(), methodName, 3, argv);
      }

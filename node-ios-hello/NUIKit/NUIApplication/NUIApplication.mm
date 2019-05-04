@@ -79,7 +79,7 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   
   info.GetReturnValue().Set(winObj);
 }
- 
+
 #import "node_ios_hello-Swift.h"
 
 namespace sweetiekit {
@@ -88,27 +88,41 @@ namespace sweetiekit {
 NAN_METHOD(NUIApplication::Main) {
   Nan::HandleScope scope;
   
-  std::string identifier;
+  std::string identifier("AppDelegate");
+  sweetiekit::JSFunction fetchFn;
+  
+  __block void (^ _completion)(UIBackgroundFetchResult);
+  
+  __block sweetiekit::JSFunction onFetchDoneFn(sweetiekit::FromBlock("BackgroundFetchCompletionHandler", ^(JSInfo info) {
+    if (_completion != nullptr) {
+      _completion(UIBackgroundFetchResultNewData);
+      _completion = nullptr;
+    }
+  }));
+  
+  
   if (info[0]->IsString()) {
     Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
     identifier = *utf8Value;
-  } else {
-    identifier = "AppDelegate";
+  }
+  if (info[0]->IsObject()) {
+    auto delegateName = JS_OBJ(info[0])->Get(JS_STR("appDelegate"));
+    if (delegateName->IsString()) {
+      NJSStringGetUTF8String(delegateName, identifier);
+    }
+    auto onBackgroundFetch = JS_OBJ(info[0])->Get(JS_STR("onBackgroundFetch"));
+    if (onBackgroundFetch->IsFunction()) {
+      fetchFn.Reset(onBackgroundFetch);
+    }
   }
   NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
   
-  __block void (^ _Nonnull _completion)(UIBackgroundFetchResult);
-  
-  auto onFetchDone = ^{
-    _completion(UIBackgroundFetchResultNewData);
-  };
   
   [AppDelegate setFetchCallback:^(void (^ _Nonnull completion)(UIBackgroundFetchResult)) {
     Nan::HandleScope handleScope;
     _completion = completion;
-    
-    iOSLog0("TODO fetch");
-    onFetchDone();
+    [[UIApplication sharedApplication] associateValue:_completion withKey:@"sweetiekit.UIApplication._completion"];
+    fetchFn.Call("AppDelegate:fetchCallback", onFetchDoneFn.GetValue());
   }];
   char* args = "node\0--jitless\0\0";
   char* args1 = (char*)args;

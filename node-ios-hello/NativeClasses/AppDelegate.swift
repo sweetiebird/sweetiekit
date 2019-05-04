@@ -46,14 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc static var queue: DispatchQueue! = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
   
     typealias FetchCallbackCompletionHandler = (UIBackgroundFetchResult) -> Void;
-    typealias FetchCallback = (FetchCallbackCompletionHandler) -> Void;
+  typealias FetchCallback = (@escaping FetchCallbackCompletionHandler) -> Void;
     @objc static var fetchCallback: FetchCallback?;
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
       AppDelegate.fetchCallback?(completionHandler);
-//      let time = Date().timeIntervalSince1970
-//      print(time)
-//      completionHandler(.newData)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
