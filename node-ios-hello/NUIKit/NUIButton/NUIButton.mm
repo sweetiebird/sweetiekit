@@ -117,6 +117,7 @@ NAN_METHOD(NUIButton::Alloc) {
       btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
       [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
+      btn->Ref();
       [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
         sweetiekit::Resolve(btn->_callback);
       }];

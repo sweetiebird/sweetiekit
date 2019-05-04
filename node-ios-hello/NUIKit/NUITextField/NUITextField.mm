@@ -62,34 +62,37 @@ NAN_METHOD(NUITextField::Alloc) {
   };
   Local<Object> tfObj = JS_TYPE(NUITextField)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
 
-  NUITextField *field = ObjectWrap::Unwrap<NUITextField>(tfObj);
+  JS_UNWRAPPED(tfObj, UITextField, ui);
 
   double x = TO_DOUBLE(info[0]);
   double y = TO_DOUBLE(info[1]);
   double width = TO_DOUBLE(info[2]);
   double height = TO_DOUBLE(info[3]);
   
-  if (info[4]->IsFunction()) {
-    field->_callback->Reset(Local<Function>::Cast(info[4]));
-  }
-
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      UITextField* txt = [[UITextField alloc] initWithFrame:CGRectMake(x, y, width, height)];
-      field->SetNSObject(txt);
-      [txt setPlaceholder:@"Enter text here"];
-      [txt setFont:[UIFont systemFontOfSize:15]];
-      [txt setBorderStyle:UITextBorderStyleRoundedRect];
-      [txt setAutocorrectionType:UITextAutocorrectionTypeNo];
-      [txt setKeyboardType:UIKeyboardTypeDefault];
-      [txt setReturnKeyType:UIReturnKeyDone];
-      [txt setClearButtonMode:UITextFieldViewModeWhileEditing];
-      [txt setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-      [txt setTargetClosureWithClosure:^(UITextField*){
-        sweetiekit::Resolve(field->_callback);
+      ui = [[UITextField alloc] initWithFrame:CGRectMake(x, y, width, height)];
+      nui->SetNSObject(ui);
+      [ui setPlaceholder:@"Enter text here"];
+      [ui setFont:[UIFont systemFontOfSize:15]];
+      [ui setBorderStyle:UITextBorderStyleRoundedRect];
+      [ui setAutocorrectionType:UITextAutocorrectionTypeNo];
+      [ui setKeyboardType:UIKeyboardTypeDefault];
+      [ui setReturnKeyType:UIReturnKeyDone];
+      [ui setClearButtonMode:UITextFieldViewModeWhileEditing];
+      [ui setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+      [ui setTargetClosureWithClosure:^(UITextField*){
+        sweetiekit::Resolve(nui->_callback);
         return true;
       }];
     });
+  }
+  
+  if (info[4]->IsFunction()) {
+    nui->_callback->Reset(Local<Function>::Cast(info[4]));
+    NodeUIViewController* del = [[NodeUIViewController alloc] init];
+    [ui associateValue:del withKey:@"sweetiekit.UITextField.callback"];
+    [ui setDelegate:del];
   }
 
   info.GetReturnValue().Set(tfObj);
@@ -140,16 +143,17 @@ NAN_GETTER(NUITextField::DelegateGetter) {
 
 NAN_SETTER(NUITextField::DelegateSetter) {
   Nan::HandleScope scope;
-
-  NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
-  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(value));
-  auto delegate = ctrl->As<NodeUIViewController>();
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UITextField>() setDelegate:delegate];
-    });
-  }
+//
+//  NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
+//  NUIViewController *ctrl = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(value));
+//  auto delegate = ctrl->As<NodeUIViewController>();
+//
+//  @autoreleasepool {
+//    dispatch_sync(dispatch_get_main_queue(), ^ {
+//      [view->As<UITextField>() setDelegate:delegate];
+//    });
+//  }
+  Nan::ThrowError("UITextField:setDelegate not implemented");
 }
 
 NAN_GETTER(NUITextField::CallbackGetter) {
