@@ -26,6 +26,9 @@ public:
   
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  JS_PROP(FromValue);
+  JS_PROP(ToValue);
+  JS_PROP(Duration);
 };
 
 #endif /* CABasicAnimation_h */

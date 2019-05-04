@@ -25,6 +25,7 @@ const {
   UITableViewDataSource,
   UITableViewCell,
   UIRefreshControl,
+  CABasicAnimation,
 } = UIKit;
 
 const {
@@ -116,7 +117,7 @@ function createTable() {
     }
     return cell;
   };
-  
+
   dataSrc.willDisplayCellForRowAt = (tv, cell, {section, row}) => {
     //console.log('willDisplayCellForRowAt', tv, cell, {section, row});
     if (row >= myData[0][1].length - 100) {
@@ -177,7 +178,7 @@ function createTable() {
    const imgX = (viewW - 100) / 2;
 
   console.log('userPhoto2');
-  
+
    const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
      if (img === undefined) {
        const imgDel = new UIImagePickerControllerDelegate();
@@ -255,13 +256,22 @@ async function setupApp() {
   nameVC.view.addSubview(nameField);
   nameVC.view.addSubview(nextBtn);
 
-  const table = createTable();
-  console.log(table);
-  nameVC.view.addSubview(table);
+  // const table = createTable();
+  // console.log(table);
+  // nameVC.view.addSubview(table);
   nav = new UINavigationController(nameVC);
 
   app.keyWindow.setRootViewController(nav);
-  
+
+  const layerPos = nextBtn.layer.position;
+  console.log('layer position', layerPos);
+  const anim = new CABasicAnimation('position');
+  anim.duration = 3.0;
+  anim.fromValue = { x: layerPos.x, y: layerPos.y };
+  nextBtn.layer.position = { x: layerPos.x + 100, y: layerPos.y + 100 };
+  anim.toValue = { x: layerPos.x + 100, y: layerPos.y + 100 };
+  nextBtn.layer.addAnimation(anim, 'position');
+
   console.log('setupAppDone');
 }
 
@@ -282,7 +292,7 @@ function foo () {
     res = resolve;
     rej = reject;
   });
-  
+
   setTimeout(() => {
     console.log('foo done');
     res();
@@ -301,5 +311,5 @@ setTimeout(async () => {
   foo()
     console.log('foo bar 3');
 }, 7000);
-  
+
 UIApplicationMain();
