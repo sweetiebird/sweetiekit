@@ -331,7 +331,7 @@ NAN_METHOD(NCALayer::AddAnimation) {
     NCABasicAnimation *anim = ObjectWrap::Unwrap<NCABasicAnimation>(obj);
     
     std::string kp;
-    if (info[0]->IsString()) {
+    if (info[1]->IsString()) {
       Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
       kp = *utf8Value;
     } else {
