@@ -80,6 +80,8 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   info.GetReturnValue().Set(winObj);
 }
 
+#import "node_ios_hello-Swift.h"
+
 NAN_METHOD(NUIApplication::Main) {
   Nan::HandleScope scope;
   
@@ -92,6 +94,19 @@ NAN_METHOD(NUIApplication::Main) {
   }
   NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
   
+  __block void (^ _Nonnull _completion)(UIBackgroundFetchResult);
+  
+  auto onFetchDone = ^{
+    _completion(UIBackgroundFetchResultNewData);
+  };
+  
+  [AppDelegate setFetchCallback:^(void (^ _Nonnull completion)(UIBackgroundFetchResult)) {
+    Nan::HandleScope handleScope;
+    _completion = completion;
+    
+    iOSLog0("TODO fetch");
+    onFetchDone();
+  }];
   char* args = "node\0--jitless\0\0";
   char* args1 = (char*)args;
   std::vector<char*> arg;

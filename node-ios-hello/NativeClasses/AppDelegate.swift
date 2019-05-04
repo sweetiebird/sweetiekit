@@ -44,7 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     @objc static var queue: DispatchQueue! = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
+  
+    typealias FetchCallbackCompletionHandler = (UIBackgroundFetchResult) -> Void;
+    typealias FetchCallback = (FetchCallbackCompletionHandler) -> Void;
+    @objc static var fetchCallback: FetchCallback?;
 
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+      AppDelegate.fetchCallback?(completionHandler);
+//      let time = Date().timeIntervalSince1970
+//      print(time)
+//      completionHandler(.newData)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         /*
@@ -53,7 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "secondVC") as! SecondViewController
         vc.setViewControllers([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;*/
-        
+      
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+
         iOSLog0("Finished launching\n");
         embed_start();
         if (false) {
