@@ -27,7 +27,9 @@
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
+#include "NUIViewControllerTransitioningDelegate.h"
 #include "NUITableViewController.h"
+#include "NUIPresentationController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
@@ -258,6 +260,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIImagePickerController = NUIImagePickerController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImagePickerController").ToLocalChecked(), N_UIImagePickerController.first);
 
+        auto N_UIPresentationController = NUIPresentationController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPresentationController").ToLocalChecked(), N_UIPresentationController.first);
+
         auto N_UIView = NUIView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIView").ToLocalChecked(), N_UIView.first);
   
@@ -301,7 +306,10 @@ void InitExports(Local<Object> exports) {
 
         auto N_UITableViewDataSource = NUITableViewDataSource::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITableViewDataSource").ToLocalChecked(), N_UITableViewDataSource.first);
-  
+
+        auto N_UIViewControllerTransitioningDelegate = NUIViewControllerTransitioningDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIViewControllerTransitioningDelegate").ToLocalChecked(), N_UIViewControllerTransitioningDelegate.first);
+
         // CoreAnimation
   
         auto N_CALayer = NCALayer::Initialize(Isolate::GetCurrent());

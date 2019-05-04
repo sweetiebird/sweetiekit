@@ -11,20 +11,14 @@
 
 #include "defines.h"
 
+#ifdef __OBJC__
 @interface NSObject (CategoryNSObject)
 
 - (void) associateValue:(id)value withKey:(NSString *)aKey;
 - (id) associatedValueForKey:(NSString *)aKey;
 
 @end
-
-@interface NSInvocation (CategoryNSInvocation)
-
-+ (NSInvocation *) invocationWithTarget:(id)aTarget block:(void (^)(id target))block;
-+ (NSInvocation *) invocationWithSelector:(SEL)aSelector forTarget:(id)aTarget;
-+ (NSInvocation *) invocationWithSelector:(SEL)aSelector andObject:(__autoreleasing id)anObject forTarget:(id)aTarget;
-
-@end
+#endif
 
 using namespace v8;
 using namespace node;

@@ -10,93 +10,6 @@
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 
-
-#import <objc/runtime.h>
-
-@implementation NSObject (CategoryNSObject)
-
-#pragma mark Associated Methods:
-
-- (void) associateValue:(id)value withKey:(NSString *)aKey {
-
-    objc_setAssociatedObject( self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN );
-}
-
-- (id) associatedValueForKey:(NSString *)aKey {
-
-    return objc_getAssociatedObject( self, (__bridge void *)aKey );
-}
-
-@end
-
-typedef void (^BlockInvocationBlock)(id target);
-
-#pragma mark - Private Interface:
-
-@interface BlockInvocation : NSObject
-@property (readwrite, nonatomic, copy) BlockInvocationBlock block;
-@end
-
-#pragma mark - Invocation Container:
-
-@implementation BlockInvocation
-
-@synthesize block;
-
-- (id) initWithBlock:(BlockInvocationBlock)aBlock {
-
-    if ( (self = [super init]) ) {
-
-        self.block = aBlock;
-
-    } return self;
-}
-
-+ (BlockInvocation *) invocationWithBlock:(BlockInvocationBlock)aBlock {
-    return [[self alloc] initWithBlock:aBlock];
-}
-
-- (void) performWithTarget:(id)aTarget {
-    self.block(aTarget);
-}
-
-@end
-
-#pragma mark Implementation:
-
-@implementation NSInvocation (CategoryNSInvocation)
-
-#pragma mark - Class Methods:
-
-+ (NSInvocation *) invocationWithTarget:(id)aTarget block:(void (^)(id target))block {
-
-    BlockInvocation *blockInvocation = [BlockInvocation invocationWithBlock:block];
-    NSInvocation *invocation = [NSInvocation invocationWithSelector:@selector(performWithTarget:) andObject:aTarget forTarget:blockInvocation];
-    [invocation associateValue:blockInvocation withKey:@"BlockInvocation"];
-    return invocation;
-}
-
-+ (NSInvocation *) invocationWithSelector:(SEL)aSelector forTarget:(id)aTarget {
-
-    NSMethodSignature   *aSignature  = [aTarget methodSignatureForSelector:aSelector];
-    NSInvocation        *aInvocation = [NSInvocation invocationWithMethodSignature:aSignature];
-    [aInvocation setTarget:aTarget];
-    [aInvocation setSelector:aSelector];
-    return aInvocation;
-}
-
-+ (NSInvocation *) invocationWithSelector:(SEL)aSelector andObject:(__autoreleasing id)anObject forTarget:(id)aTarget {
-
-    NSInvocation *aInvocation = [NSInvocation invocationWithSelector:aSelector
-                                                           forTarget:aTarget];
-    [aInvocation setArgument:&anObject atIndex:2];
-    return aInvocation;
-}
-
-@end
-
-
-
 Nan::Persistent<FunctionTemplate> NNSObject::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate *isolate)
@@ -165,12 +78,14 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
+#include "NUIViewControllerTransitioningDelegate.h"
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
+#include "NUIPresentationController.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -257,12 +172,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIViewController class]]) {
         return NUIViewController::type;
       }
+      if ([obj isKindOfClass:[UIPresentationController class]]) {
+        return NUIPresentationController::type;
+      }
       // ========= delegates
       if ([obj isKindOfClass:[SUIImagePickerControllerDelegate class]]) {
         return NUIImagePickerControllerDelegate::type;
       }
       if ([obj isKindOfClass:[SUITableViewDataSource class]]) {
         return NUITableViewDataSource::type;
+      }
+      if ([obj isKindOfClass:[SUIViewControllerTransitioningDelegate class]]) {
+        return NUIViewControllerTransitioningDelegate::type;
       }
       // ========= objects
       if ([obj isKindOfClass:[NSUserDefaults class]]) {
