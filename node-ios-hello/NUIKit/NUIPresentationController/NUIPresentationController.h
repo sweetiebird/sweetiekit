@@ -24,6 +24,12 @@ public:
   virtual ~NUIPresentationController();
   
   static NAN_METHOD(New);
+  JS_PROP(FrameOfPresentedViewInContainerView);
+  Nan::Persistent<Function>* _frameOfPresentedView;
+  Nan::Persistent<Function>* _presentationTransitionWillBegin;
+  Nan::Persistent<Function>* _dismissalTransitionWillBegin;
+  Nan::Persistent<Function>* _containerWillLayoutSubviews;
+  Nan::Persistent<Function>* _sizeForChildContentContainer;
 };
 
 #endif /* NUIPresentationController_h */

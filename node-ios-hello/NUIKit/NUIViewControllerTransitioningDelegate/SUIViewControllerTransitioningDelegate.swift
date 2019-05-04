@@ -11,5 +11,5 @@ import UIKit
 
 @objc (SUIViewControllerTransitioningDelegate)
 class SUIViewControllerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
-  
+
 }
