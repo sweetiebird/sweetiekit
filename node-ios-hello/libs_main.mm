@@ -15,6 +15,7 @@
 #include "NUIViewController.h"
 #include "NUIView.h"
 #include "NUIRefreshControl.h"
+#include "NUISwitch.h"
 #include "NUIControl.h"
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
@@ -265,7 +266,10 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIRefreshControl = NUIRefreshControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIRefreshControl").ToLocalChecked(), N_UIRefreshControl.first);
-  
+
+        auto N_UISwitch = NUISwitch::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UISwitch").ToLocalChecked(), N_UISwitch.first);
+
         auto N_UIStoryboard = NUIStoryboard::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIStoryboard").ToLocalChecked(), N_UIStoryboard.first);
   

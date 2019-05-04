@@ -155,6 +155,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUIWindow.h"
 #include "NUIButton.h"
 #include "NUIRefreshControl.h"
+#include "NUISwitch.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUITextField.h"
@@ -224,6 +225,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[UITextField class]]) {
         return NUITextField::type;
+      }
+      if ([obj isKindOfClass:[UISwitch class]]) {
+        return NUISwitch::type;
       }
       if ([obj isKindOfClass:[UIRefreshControl class]]) {
         return NUIRefreshControl::type;

@@ -26,6 +26,7 @@ const {
   UITableViewCell,
   UIRefreshControl,
   CABasicAnimation,
+  UISwitch,
 } = UIKit;
 
 const {
@@ -256,6 +257,8 @@ async function setupApp() {
   nameVC.view.addSubview(nameField);
   nameVC.view.addSubview(nextBtn);
 
+  const toggle = new UISwitch({ x: 100, y: 100, width: 80, height: 80 });
+  nameVC.view.addSubview(toggle);
   // const table = createTable();
   // console.log(table);
   // nameVC.view.addSubview(table);
