@@ -47,6 +47,12 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_METHOD(ViewWithStringTag);
   JS_PROP(Layer);
   JS_PROP(TranslatesAutoresizingMaskIntoConstraints);
+  JS_PROP(LeadingAnchor);
+  JS_PROP(TrailingAnchor);
+  JS_PROP(TopAnchor);
+  JS_PROP(BottomAnchor);
+  JS_PROP(CenterXAnchor);
+  JS_PROP(WidthAnchor);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);

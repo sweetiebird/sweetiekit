@@ -87,6 +87,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
 #include "NUIScrollView.h"
+#include "NNSLayoutAnchor.h"
+#include "NNSLayoutConstraint.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -190,6 +192,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIViewControllerTransitioningDelegate::type;
       }
       // ========= objects
+      if ([obj isKindOfClass:[NSLayoutConstraint class]]) {
+        return NNSLayoutConstraint::type;
+      }
+      if ([obj isKindOfClass:[NSLayoutAnchor class]]) {
+        return NNSLayoutAnchor::type;
+      }
       if ([obj isKindOfClass:[NSUserDefaults class]]) {
         return NNSUserDefaults::type;
       }

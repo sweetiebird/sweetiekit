@@ -47,7 +47,7 @@ NAN_METHOD(NUIScrollView::New) {
 
   if (info[0]->IsExternal()) {
     scrollView->SetNSObject((__bridge UIScrollView *)(info[0].As<External>()->Value()));
-  } else {
+  } else if (info.Length() > 0) {
     @autoreleasepool {
       double x = TO_DOUBLE(info[0]);
       double y = TO_DOUBLE(info[1]);
@@ -58,7 +58,12 @@ NAN_METHOD(NUIScrollView::New) {
         scrollView->SetNSObject([[UIScrollView alloc] initWithFrame:frame]);
       });
     }
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      scrollView->SetNSObject([[UIScrollView alloc] init]);
+    });
   }
+
   scrollView->Wrap(obj);
 
   info.GetReturnValue().Set(obj);

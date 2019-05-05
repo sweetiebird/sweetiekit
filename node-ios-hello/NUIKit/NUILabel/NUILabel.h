@@ -30,6 +30,7 @@ public:
   static NAN_METHOD(Destroy);
   static NAN_GETTER(TextGetter);
   static NAN_SETTER(TextSetter);
+  JS_PROP(NumberOfLines);
 };
 
 #endif /* NUILabel_h */

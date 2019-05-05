@@ -27,6 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
+  JS_SET_PROP(proto, "numberOfLines", NumberOfLines);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -138,6 +139,24 @@ NAN_SETTER(NUILabel::TextSetter) {
       [btn->As<UILabel>() setText:[NSString stringWithUTF8String:title.c_str()]];
     });
   }
+}
+
+NAN_GETTER(NUILabel::NumberOfLinesGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+  
+  JS_SET_RETURN(JS_NUM([ui numberOfLines]));
+}
+
+NAN_SETTER(NUILabel::NumberOfLinesSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+
+  int lines = TO_INT32(value);
+
+  [ui setNumberOfLines:lines];
 }
 
 NUILabel::NUILabel () {}

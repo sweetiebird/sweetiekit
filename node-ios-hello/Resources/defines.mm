@@ -34,7 +34,7 @@ NSString* NJSStringToNSString(Local<Value> jsStr) {
 
 namespace sweetiekit
 {
-  Local<Value> GetWrapperFor(id pThing, const Nan::Persistent<FunctionTemplate>& defaultType)
+  Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
   {
     Nan::EscapableHandleScope handleScope;
     Local<Value> result;
@@ -42,8 +42,8 @@ namespace sweetiekit
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
-//      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-//      result = value;
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      result = value;
     } else {
       result = Nan::Undefined();
     }

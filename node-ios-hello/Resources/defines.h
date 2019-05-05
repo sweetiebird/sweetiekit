@@ -298,7 +298,7 @@ namespace sweetiekit {
 }
 
 namespace sweetiekit {
-  Local<Value> GetWrapperFor(id pThing, const Nan::Persistent<FunctionTemplate>& defaultType);
+  Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
 }
 
 extern "C" {

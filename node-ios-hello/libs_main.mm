@@ -36,6 +36,8 @@
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
+#include "NNSLayoutAnchor.h"
+#include "NNSLayoutConstraint.h"
 #include <unistd.h>
 
 #include <string>
@@ -246,7 +248,13 @@ void InitExports(Local<Object> exports) {
   
         auto N_NSUserDefaults = NNSUserDefaults::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSUserDefaults").ToLocalChecked(), N_NSUserDefaults.first);
-  
+
+        auto N_NSLayoutAnchor = NNSLayoutAnchor::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSLayoutAnchor").ToLocalChecked(), N_NSLayoutAnchor.first);
+
+        auto N_NSLayoutConstraint = NNSLayoutConstraint::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSLayoutConstraint").ToLocalChecked(), N_NSLayoutConstraint.first);
+
         // UIKit
   
         auto N_UIApplication = NUIApplication::Initialize(Isolate::GetCurrent());

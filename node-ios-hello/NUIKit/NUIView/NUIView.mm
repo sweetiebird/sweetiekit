@@ -12,6 +12,7 @@
 #include "NUIView.h"
 #include "NUIButton.h"
 #include "NUIResponder.h"
+#include "NNSLayoutAnchor.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
 CGSize NUIView::tmp_Size;
@@ -46,6 +47,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
   Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
   JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
+  JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
+  JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
+  JS_SET_PROP_READONLY(proto, "topAnchor", TopAnchor);
+  JS_SET_PROP_READONLY(proto, "bottomAnchor", BottomAnchor);
+  JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
+  JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -101,7 +108,7 @@ NAN_METHOD(NUIView::New) {
 
   if (info[0]->IsExternal()) {
     view->SetNSObject((__bridge UIView *)(info[0].As<External>()->Value()));
-  } else {
+  } else if (info.Length() > 0) {
       double x = TO_DOUBLE(info[0]);
       double y = TO_DOUBLE(info[1]);
       double width = TO_DOUBLE(info[2]);
@@ -112,7 +119,14 @@ NAN_METHOD(NUIView::New) {
             view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
         });
       }
+  } else {
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          view->SetNSObject([[UIView alloc] init]);
+      });
+    }
   }
+
   view->Wrap(viewObj);
   
   JS_SET_RETURN(viewObj);
@@ -608,6 +622,55 @@ NAN_SETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsSetter) {
   
   [view->As<UIView>() setTranslatesAutoresizingMaskIntoConstraints:TO_BOOL(value)];
 }
+
+NAN_GETTER(NUIView::LeadingAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui leadingAnchor], NNSLayoutAnchor::type)));
+}
+
+NAN_GETTER(NUIView::TrailingAnchorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui trailingAnchor], NNSLayoutAnchor::type)));
+}
+
+NAN_GETTER(NUIView::TopAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui topAnchor], NNSLayoutAnchor::type)));
+}
+
+NAN_GETTER(NUIView::BottomAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui bottomAnchor], NNSLayoutAnchor::type)));
+}
+
+NAN_GETTER(NUIView::CenterXAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type)));
+}
+
+NAN_GETTER(NUIView::WidthAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type)));
+}
+
 
 NUIView::NUIView () {}
 NUIView::~NUIView () {}

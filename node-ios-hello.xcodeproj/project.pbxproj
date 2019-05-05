@@ -31,6 +31,8 @@
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
+		A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */; };
+		A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
@@ -150,6 +152,10 @@
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
 		A11D1297227EA6AD0038C262 /* NUIScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIScrollView.h; sourceTree = "<group>"; };
 		A11D1298227EA6B40038C262 /* NUIScrollView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScrollView.mm; sourceTree = "<group>"; };
+		A11D129B227F6AB70038C262 /* NNSLayoutConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutConstraint.h; sourceTree = "<group>"; };
+		A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutConstraint.mm; sourceTree = "<group>"; };
+		A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutAnchor.h; sourceTree = "<group>"; };
+		A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutAnchor.mm; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
@@ -388,6 +394,24 @@
 				A11D1298227EA6B40038C262 /* NUIScrollView.mm */,
 			);
 			path = NUIScrollView;
+			sourceTree = "<group>";
+		};
+		A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */ = {
+			isa = PBXGroup;
+			children = (
+				A11D129B227F6AB70038C262 /* NNSLayoutConstraint.h */,
+				A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */,
+			);
+			path = NNSLayoutConstraint;
+			sourceTree = "<group>";
+		};
+		A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */,
+				A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */,
+			);
+			path = NNSLayoutAnchor;
 			sourceTree = "<group>";
 		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
@@ -634,6 +658,8 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
+				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
@@ -876,6 +902,7 @@
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
+				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
@@ -899,6 +926,7 @@
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
+				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
 				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
