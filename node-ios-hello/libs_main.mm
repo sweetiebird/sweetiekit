@@ -91,18 +91,20 @@ namespace sweetiekit {
   Local<Value> CallSync(Local<Function> callback, const char* methodName, int argc, Local<Value>* argv)
   {
     Isolate* isolate = callback->GetIsolate();
+    Nan::HandleScope handleScope;
     MicrotasksScope enableMicrotasks(isolate, MicrotasksScope::kRunMicrotasks);
     TryCatchReport reportErrors;
+    GetMainThreadMultiIsolatePlatform()->DrainTasks(isolate);
     Local<Value> result;
     if (!callback.IsEmpty()) {
       Local<Object> asyncObject = Nan::New<Object>();
-      AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, methodName /*"UIButton::New"*/);
+      AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
       auto res = asyncResource.MakeCallback(callback, argc, argv);
       Kick();
       if (res.ToLocal(&result)) {
         if (result->IsPromise()) {
           Local<Promise> promise = result.As<Promise>();
-#if 0
+#if 1
           if (!promise->HasHandler()) {
             promise->Then(JS_CONTEXT(),
             (v8::Function::New(JS_CONTEXT(), [](const FunctionCallbackInfo<Value>& info) -> void {
@@ -417,6 +419,7 @@ namespace sweetiekit {
     {
       MicrotasksScope microScope(isolate, MicrotasksScope::kRunMicrotasks);
 
+      GetMainThreadMultiIsolatePlatform()->DrainTasks(isolate);
       uv_run(uv_default_loop(), UV_RUN_NOWAIT);
       isolate->RunMicrotasks();
     }

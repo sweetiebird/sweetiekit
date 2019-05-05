@@ -1,2 +1,4 @@
 dist/
 old/
+yarn.lock
+package-lock.json

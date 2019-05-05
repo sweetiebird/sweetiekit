@@ -30,10 +30,8 @@
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
-		A12655FA22719CE400D3DF47 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A12655EA22719CE300D3DF47 /* yarn.lock */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
-		A12655FD22719CE400D3DF47 /* package-lock.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655ED22719CE300D3DF47 /* package-lock.json */; };
 		A12655FE22719CE400D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EE22719CE300D3DF47 /* app.js */; };
 		A126560222719CE400D3DF47 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F322719CE300D3DF47 /* hello.js */; };
 		A126560322719CE400D3DF47 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F422719CE300D3DF47 /* server.js */; };
@@ -45,6 +43,7 @@
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
 		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
+		A188710E227E51D700129A75 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A188710D227E51D700129A75 /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
@@ -147,10 +146,8 @@
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
-		A12655EA22719CE300D3DF47 /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
-		A12655ED22719CE300D3DF47 /* package-lock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
 		A12655EE22719CE300D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		A12655EF22719CE300D3DF47 /* index.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = index.js.map; sourceTree = "<group>"; };
 		A12655F322719CE300D3DF47 /* hello.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
@@ -166,6 +163,7 @@
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
 		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
 		A1887109227E370500129A75 /* SUIPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPresentationController.swift; sourceTree = "<group>"; };
+		A188710D227E51D700129A75 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
@@ -448,18 +446,17 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				A188710D227E51D700129A75 /* node_modules */,
 				A12655EE22719CE300D3DF47 /* app.js */,
 				A12655F722719CE400D3DF47 /* demo.js */,
 				A12655F322719CE300D3DF47 /* hello.js */,
 				A12655EB22719CE300D3DF47 /* index.js */,
 				A12655EF22719CE300D3DF47 /* index.js.map */,
 				A12655F622719CE400D3DF47 /* js-blockchain */,
-				A12655ED22719CE300D3DF47 /* package-lock.json */,
 				A12655F822719CE400D3DF47 /* package.json */,
 				A12655F422719CE300D3DF47 /* server.js */,
 				A12655EC22719CE300D3DF47 /* tsconfig.json */,
 				A12655E922719CE300D3DF47 /* tslint.json */,
-				A12655EA22719CE300D3DF47 /* yarn.lock */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -810,12 +807,11 @@
 				A126560322719CE400D3DF47 /* server.js in Resources */,
 				A12655FE22719CE400D3DF47 /* app.js in Resources */,
 				A12655FB22719CE400D3DF47 /* index.js in Resources */,
-				A12655FA22719CE400D3DF47 /* yarn.lock in Resources */,
 				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
-				A12655FD22719CE400D3DF47 /* package-lock.json in Resources */,
 				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
 				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
 				A126560622719CE400D3DF47 /* demo.js in Resources */,
+				A188710E227E51D700129A75 /* node_modules in Resources */,
 				A126560722719CE400D3DF47 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

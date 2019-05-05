@@ -1,4 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
+// const axios = require('axios');
+const https = require('https');
 
 //const { UIKit, ObjC, CoreAnimation } = SweetieKit;
 const UIKit = SweetieKit;
@@ -315,16 +317,64 @@ setTimeout(async () => {
     console.log('foo bar 3');
 }, 7000);
 
+https.get('https://testserver-rugwhbkbuu.now.sh/', (resp) => {
+  console.log('inside https get');
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    console.log('on data');
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log('on end');
+    console.log(JSON.parse(data));
+    // onComplete();
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+  // onComplete();
+});
+
 const options =
 {
   appDelegate: "AppDelegate",
   onBackgroundFetch: (onComplete) => {
     console.log("bgFetch!");
-    setTimeout(() => {
-      console.log("before onComplete");
-      onComplete();
-      console.log("after onComplete");
-    }, 2000);
+
+
+    // try {
+    // console.log('trying');
+    //   axios.get('http://230048b3.ngrok.io')
+    //     .then(resp => console.log('bg fetch result', resp))
+    //     .catch((e) => {
+    //       console.log('bg fetch err', e);
+    //       console.log('bg fetch err msg', e.message);
+    //     })
+    //     .finally(() => {
+    //       console.log('finally');
+    //       onComplete();
+    //     });
+    // } catch (err) {
+    //   console.log('error', err);
+    //   console.log('error message', err.message);
+    // }
+    // try {
+    //   console.log("bgFetch1!");
+    //   const result = await axios.get('https://testserver-rugwhbkbuu.now.sh/');
+    //   console.log("bgFetch2!");
+    //   console.log(result);
+    // } catch(e) {
+    //   console.log("bgError!", e.message);
+    //
+    // } finally {
+    //   console.log("bgFetchFinally!");
+    //   onComplete();
+    // }
   }
-}
+};
+
 UIApplicationMain(options);
