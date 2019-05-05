@@ -30,6 +30,7 @@
 		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
+		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
@@ -147,6 +148,8 @@
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
+		A11D1297227EA6AD0038C262 /* NUIScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIScrollView.h; sourceTree = "<group>"; };
+		A11D1298227EA6B40038C262 /* NUIScrollView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScrollView.mm; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
@@ -378,6 +381,15 @@
 			path = NUITableViewController;
 			sourceTree = "<group>";
 		};
+		A11D1296227EA69B0038C262 /* NUIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A11D1297227EA6AD0038C262 /* NUIScrollView.h */,
+				A11D1298227EA6B40038C262 /* NUIScrollView.mm */,
+			);
+			path = NUIScrollView;
+			sourceTree = "<group>";
+		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,10 +488,6 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */,
-				A1649775227E1F6D00CA943F /* NUIPresentationController */,
-				A164976F227E148D00CA943F /* NUISwitch */,
-				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
@@ -488,8 +496,12 @@
 				211E76AC226A1BF100B838AF /* NUIImageView */,
 				211E76BA226A52AC00B838AF /* NUILabel */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
+				A1649775227E1F6D00CA943F /* NUIPresentationController */,
+				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,
 				211E76A4226A0CE600B838AF /* NUIResponder */,
+				A11D1296227EA69B0038C262 /* NUIScrollView */,
 				A1D6729F2269940B00562A42 /* NUIStoryboard */,
+				A164976F227E148D00CA943F /* NUISwitch */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
 				A19476BA226E9450003BB393 /* NUITableView */,
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
@@ -498,6 +510,7 @@
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D6729E226993FE00562A42 /* NUIView */,
 				A1D6729D226993E700562A42 /* NUIViewController */,
+				A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */,
 				211E76982269B10A00B838AF /* NUIWindow */,
 			);
 			path = NUIKit;
@@ -852,6 +865,7 @@
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
+				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,

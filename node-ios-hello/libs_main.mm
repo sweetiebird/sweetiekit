@@ -35,6 +35,7 @@
 #include "NUITableViewDataSource.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
+#include "NUIScrollView.h"
 #include <unistd.h>
 
 #include <string>
@@ -310,6 +311,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UITableView = NUITableView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITableView").ToLocalChecked(), N_UITableView.first);
+
+        auto N_UIScrollView = NUIScrollView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIScrollView").ToLocalChecked(), N_UIScrollView.first);
 
         // UIKit delegates ========
   

@@ -28,6 +28,7 @@ const {
   UISwitch,
   UIViewControllerTransitioningDelegate,
   UIPresentationController,
+  UIScrollView,
 } = UIKit;
 
 // shared application
@@ -36,11 +37,30 @@ let app;
 let sb;
 // root nav
 let nav;
+// todos view controller
+let todoVC;
+
+const todos = ['Do stuff', 'Other stuff'];
+const mainBlue = { red: 17/255, green: 205/255, blue: 239/255 };
+const mainBg = { red: 248/255, green: 249/255, blue: 244/255 };
+
+async function renderTodos() {
+  const startY = (todoVC.view.frame.height / 2) - 100;
+  todos.forEach((todo, idx) => {
+    const label = UILabel.alloc();
+    label.frame = { x: 12, y: startY + (idx * 40), width: todoVC.view.frame.width - 24, height: 40 };
+    label.text = todo;
+    todoVC.view.addSubview(label);
+  });
+}
 
 async function getTodoController() {
-  const todoVC = new UIViewController();
+  todoVC = new UIViewController();
 
-  todoVC.view.backgroundColor = { red: 1, green: 1, blue: 1 };
+  todoVC.view.backgroundColor = mainBg;
+
+  const scrollView = new UIScrollView(0, 0, todoVC.view.frame.width, todoVC.view.frame.height);
+  scrollView.translatesAutoresizingMaskIntoConstraints = false;
 
   const viewH = todoVC.view.height;
   const viewW = todoVC.view.width;
@@ -56,8 +76,15 @@ async function getTodoController() {
     console.log('UIButton', todoField.text);
   });
 
-  todoVC.view.addSubview(todoField);
-  todoVC.view.addSubview(addBtn);
+  addBtn.backgroundColor = mainBlue;
+
+  const longView = new UIView(0, 0, todoVC.view.frame.width, todoVC.view.frame.height * 2);
+  longView.addSubview(todoField);
+  longView.addSubview(addBtn);
+
+  scrollView.addSubview(longView);
+
+  todoVC.view.addSubview(scrollView);
 
   return todoVC;
 }
@@ -71,6 +98,8 @@ async function setup() {
   nav = new UINavigationController(todoVC);
 
   app.keyWindow.setRootViewController(nav);
+
+  await renderTodos();
 }
 
 async function start() {

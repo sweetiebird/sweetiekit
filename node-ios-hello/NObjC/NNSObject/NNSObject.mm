@@ -86,6 +86,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
+#include "NUIScrollView.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -117,6 +118,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIWindow::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UIScrollView class]]) {
+        return NUIScrollView::type;
+      }
       if ([obj isKindOfClass:[UITableViewCell class]]) {
         return NUITableViewCell::type;
       }
