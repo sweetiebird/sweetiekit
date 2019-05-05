@@ -26,6 +26,8 @@ public:
   virtual ~NNSLayoutConstraint();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(ActivateConstraints);
+  static NAN_METHOD(DeactivateConstraints);
   JS_PROP(IsActive);
   JS_PROP(Priority);
 };

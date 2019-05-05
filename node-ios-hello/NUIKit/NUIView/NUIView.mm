@@ -46,6 +46,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
   Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
   Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
+  Nan::SetMethod(proto, "removeFromSuperview", RemoveFromSuperview);
   JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
   JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
   JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
@@ -585,6 +586,14 @@ NAN_METHOD(NUIView::ViewWithStringTag) {
     Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
     JS_SET_RETURN(value);
   }
+}
+
+NAN_METHOD(NUIView::RemoveFromSuperview) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  [ui removeFromSuperview];
 }
 
 NAN_GETTER(NUIView::LayerGetter) {

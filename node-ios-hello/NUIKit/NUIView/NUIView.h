@@ -45,6 +45,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_GETTER(BackgroundColorGetter);
   static NAN_SETTER(BackgroundColorSetter);
   static NAN_METHOD(ViewWithStringTag);
+  static NAN_METHOD(RemoveFromSuperview);
   JS_PROP(Layer);
   JS_PROP(TranslatesAutoresizingMaskIntoConstraints);
   JS_PROP(LeadingAnchor);
