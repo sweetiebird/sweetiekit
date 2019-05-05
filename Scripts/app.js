@@ -29,6 +29,8 @@ const {
   UIRefreshControl,
   CABasicAnimation,
   UISwitch,
+  UIViewControllerTransitioningDelegate,
+  UIPresentationController,
 } = UIKit;
 
 const {
@@ -277,6 +279,38 @@ async function setupApp() {
   anim.toValue = { x: layerPos.x + 100, y: layerPos.y + 100 };
   nextBtn.layer.addAnimation(anim, 'position');
 
+  const showVC = new UIViewController();
+  const showTransitionDel = new UIViewControllerTransitioningDelegate();
+  showTransitionDel.pres = (presented, presenting, source) => {
+    const showPresentationCtrl = new UIPresentationController(presented, presenting);
+    showPresentationCtrl.frameOfPresentedViewInContainerView = () => {
+      console.log('getting frame');
+      return { x: 0, y: 0, width: showVC.view.frame.width, height: 200 };
+    };
+    showPresentationCtrl.containerWillLayoutSubviews = () => {
+      const presentedView = showPresentationCtrl.presentedView;
+      console.log('presented view', presentedView);
+      if (presentedView) {
+        presentedView.frame = showPresentationCtrl.frameOfPresentedViewInContainerView;
+      }
+    };
+    showPresentationCtrl.presentationTransitionWillBegin = () => {
+      const containerView = showPresentationCtrl.containerView;
+      console.log('container view', containerView);
+      if (containerView) {
+        const transitionView = new UIView(0, 0, showVC.view.frame.width, 200);
+        transitionView.backgroundColor = { red: 1, green: 0, blue: 1 };
+        containerView.insertSubview(transitionView);
+      }
+    };
+    return showPresentationCtrl;
+  };
+  nameVC.transitioningDelegate = showTransitionDel;
+  nameVC.modalPresentationStyle = 'custom';
+
+  setTimeout(() => {
+    nameVC.present(showVC, true, () => {});
+  }, 3000);
   console.log('setupAppDone');
 }
 
@@ -317,27 +351,27 @@ setTimeout(async () => {
     console.log('foo bar 3');
 }, 7000);
 
-https.get('https://testserver-rugwhbkbuu.now.sh/', (resp) => {
-  console.log('inside https get');
-  let data = '';
-
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    console.log('on data');
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log('on end');
-    console.log(JSON.parse(data));
-    // onComplete();
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-  // onComplete();
-});
+// https.get('https://testserver-rugwhbkbuu.now.sh/', (resp) => {
+//   console.log('inside https get');
+//   let data = '';
+//
+//   // A chunk of data has been recieved.
+//   resp.on('data', (chunk) => {
+//     console.log('on data');
+//     data += chunk;
+//   });
+//
+//   // The whole response has been received. Print out the result.
+//   resp.on('end', () => {
+//     console.log('on end');
+//     console.log(JSON.parse(data));
+//     // onComplete();
+//   });
+//
+// }).on("error", (err) => {
+//   console.log("Error: " + err.message);
+//   // onComplete();
+// });
 
 const options =
 {

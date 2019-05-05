@@ -25,11 +25,17 @@ public:
   
   static NAN_METHOD(New);
   JS_PROP(FrameOfPresentedViewInContainerView);
-  Nan::Persistent<Function>* _frameOfPresentedView;
-  Nan::Persistent<Function>* _presentationTransitionWillBegin;
-  Nan::Persistent<Function>* _dismissalTransitionWillBegin;
-  Nan::Persistent<Function>* _containerWillLayoutSubviews;
-  Nan::Persistent<Function>* _sizeForChildContentContainer;
+  JS_PROP(PresentationTransitionWillBegin);
+  JS_PROP(DismissalTransitionWillBegin);
+  JS_PROP(ContainerWillLayoutSubviews);
+  JS_PROP(SizeForChildContentContainer);
+  JS_PROP(ContainerView);
+  JS_PROP(PresentedView);
+  sweetiekit::JSFunction _frameOfPresentedView;
+  sweetiekit::JSFunction _presentationTransitionWillBegin;
+  sweetiekit::JSFunction _dismissalTransitionWillBegin;
+  sweetiekit::JSFunction _containerWillLayoutSubviews;
+  sweetiekit::JSFunction _sizeForChildContentContainer;
 };
 
 #endif /* NUIPresentationController_h */

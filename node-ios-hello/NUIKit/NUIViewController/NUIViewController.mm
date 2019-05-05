@@ -10,6 +10,7 @@
 #import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIViewController.h"
+#include "NUIViewControllerTransitioningDelegate.h"
 #include "NUIView.h"
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
@@ -33,6 +34,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   Nan::SetAccessor(proto, JS_STR("view"), ViewGetter);
   Nan::SetMethod(proto, "present", PresentViewController);
   Nan::SetMethod(proto, "dismiss", DismissViewController);
+  JS_SET_PROP(proto, "transitioningDelegate", TransitioningDelegate);
+  JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -124,4 +127,57 @@ NAN_METHOD(NUIViewController::DismissViewController)
       }];
     });
   }
+}
+
+NAN_SETTER(NUIViewController::TransitioningDelegateSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ctrl);
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      Local<Object> obj = JS_OBJ(value);
+      NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(obj);
+      [ctrl setTransitioningDelegate:del->As<SUIViewControllerTransitioningDelegate>()];
+    });
+  }
+}
+
+NAN_GETTER(NUIViewController::TransitioningDelegateGetter) {
+  Nan::HandleScope scope;
+  
+//  NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(info.This());
+//
+//  info.GetReturnValue().Set(del->_presentationControllerFor.GetValue());
+}
+
+NAN_SETTER(NUIViewController::ModalPresentationStyleSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ctrl);
+
+
+  std::string style;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    style = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+
+  UIModalPresentationStyle modalStyle = style == "custom" ? UIModalPresentationCustom : UIModalPresentationFullScreen;
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [ctrl setModalPresentationStyle:modalStyle];
+    });
+  }
+}
+
+NAN_GETTER(NUIViewController::ModalPresentationStyleGetter) {
+  Nan::HandleScope scope;
+  
+//  NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(info.This());
+//
+//  info.GetReturnValue().Set(del->_presentationControllerFor.GetValue());
 }

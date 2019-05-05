@@ -32,12 +32,14 @@ class SUIPresentationController: UIPresentationController {
   }
 
   override func presentationTransitionWillBegin() {
+  super.presentationTransitionWillBegin()
     if let presentationTransitionWillBeginCallback = presentationTransitionWillBeginCallback {
       presentationTransitionWillBeginCallback()
     }
   }
   
   override func dismissalTransitionWillBegin() {
+    super.dismissalTransitionWillBegin()
     if let dismissalransitionWillBeginCallback = dismissalransitionWillBeginCallback {
       dismissalransitionWillBeginCallback()
     }

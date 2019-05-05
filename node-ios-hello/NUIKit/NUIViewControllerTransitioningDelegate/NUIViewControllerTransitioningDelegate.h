@@ -22,6 +22,8 @@ public:
   virtual ~NUIViewControllerTransitioningDelegate();
   
   static NAN_METHOD(New);
+  JS_PROP(PresentationControllerFor);
+  sweetiekit::JSFunction _presentationControllerFor;
 };
 
 #endif /* NUIViewControllerTransitioningDelegate_h */

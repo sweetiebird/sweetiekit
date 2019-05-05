@@ -26,6 +26,8 @@ public:
   static NAN_GETTER(ViewGetter);
   static NAN_METHOD(PresentViewController);
   static NAN_METHOD(DismissViewController);
+  JS_PROP(TransitioningDelegate);
+  JS_PROP(ModalPresentationStyle);
 };
 
 #endif /* NUIViewController_h */
