@@ -52,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
       AppDelegate.fetchCallback?(completionHandler);
     }
+  
+    @objc class func node() {
+       print("node_main()");
+       node_main();
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         /*
@@ -64,8 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         iOSLog0("Finished launching\n");
-        embed_start();
-        if (false) {
+        if (true) {
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            iOSLog0("node_main will be called");
+            AppDelegate.performSelector(onMainThread: #selector(AppDelegate.node), with: nil, waitUntilDone: false)
+          }
+        } else if (false) {
+          embed_start();
+        } else if (false) {
             run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
             iOSLog0("Done embedding");
             iOSTrap();

@@ -24,6 +24,7 @@
 		216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A8226BDBF000051DE0 /* ColorHelper.mm */; };
 		21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21C872CD226A87C500B5192B /* NNSUserDefaults.mm */; };
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
+		21FD99B4227F4884005FA7E6 /* app2.js in Resources */ = {isa = PBXBuildFile; fileRef = 21FD99B3227F4884005FA7E6 /* app2.js */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
@@ -141,6 +142,7 @@
 		21C872CD226A87C500B5192B /* NNSUserDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserDefaults.mm; sourceTree = "<group>"; };
 		21C872CE226A87C500B5192B /* NNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserDefaults.h; sourceTree = "<group>"; };
 		21C872D0226A989400B5192B /* UIView+stringTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+stringTag.swift"; sourceTree = "<group>"; };
+		21FD99B3227F4884005FA7E6 /* app2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app2.js; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "../node-ios-full/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				21FD99B3227F4884005FA7E6 /* app2.js */,
 				A11D1294227EA0A90038C262 /* todo.js */,
 				A188710D227E51D700129A75 /* node_modules */,
 				A12655EE22719CE300D3DF47 /* app.js */,
@@ -828,6 +831,7 @@
 				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
 				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
 				A126560622719CE400D3DF47 /* demo.js in Resources */,
+				21FD99B4227F4884005FA7E6 /* app2.js in Resources */,
 				A188710E227E51D700129A75 /* node_modules in Resources */,
 				A126560722719CE400D3DF47 /* package.json in Resources */,
 			);

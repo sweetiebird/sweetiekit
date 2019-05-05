@@ -1,5 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
-const axios = require('axios');
+// const axios = require('axios');
 const https = require('https');
 
 //const { UIKit, ObjC, CoreAnimation } = SweetieKit;
@@ -29,8 +29,6 @@ const {
   UIRefreshControl,
   CABasicAnimation,
   UISwitch,
-  UIViewControllerTransitioningDelegate,
-  UIPresentationController,
 } = UIKit;
 
 const {
@@ -85,6 +83,35 @@ function CGRect(x, y, width, height) {
   return {x, y, width, height}
 }
 
+function flash(duration, start, end, again)
+{
+  UIView.animate(duration, 0.0, null, () => {
+    start();
+  }, () => {
+    if (false) {
+      UIView.beginAnimations();
+      try {
+        UIView.setAnimationBeginsFromCurrentState(true);
+        UIView.setAnimationDuration(duration);
+        end();
+      } finally {
+        UIView.commitAnimations();
+        if (!again || again()) {
+          setTimeout(() => flash(duration, start, end, again), duration*1000);
+        }
+      }
+    } else {
+      UIView.animate(duration, 0.0, null, () => {
+        end();
+      }, () => {
+        if (!again || again()) {
+          flash(duration, start, end, again);
+        }
+      });
+    }
+  });
+}
+
 function createTable() {
   const tbl = new UITableView(0, 0, 300, 400);
   const label = UILabel.alloc(0, 0, 200, 40);
@@ -123,16 +150,18 @@ function createTable() {
     return cell;
   };
 
+  let cancelReload;
   dataSrc.willDisplayCellForRowAt = (tv, cell, {section, row}) => {
     //console.log('willDisplayCellForRowAt', tv, cell, {section, row});
     if (row >= myData[0][1].length - 100) {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 1; i++) {
         myData[0][1].push({
           name: makeid(60),
           cell: new UITableViewCell(),
         });
       }
-      setTimeout(() => {
+      if (cancelReload) clearTimeout(cancelReload);
+      cancelReload = setTimeout(() => {
         tbl.reloadData();
       }, 10);
     }
@@ -195,10 +224,27 @@ function createTable() {
          if (i) {
            img = i;
            const imgView = new UIImageView(img);
-           imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
+           imgView.frame = { x: imgX - 5, y: imgY, width: 100 - 10, height: 100 - 10 };
            imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+           imgView.center = {x: imgView.x + imgView.width/2, y: imgView.y + imgView.height/2};
            photoVC.view.addSubview(imgView);
            nextBtn.title = '✅ Lovely';
+           const imgViewStart = imgView.frame;
+           const imgViewMorph = imgView.frame;
+           imgViewMorph.x += 10;
+           imgViewMorph.width += 10;
+           imgViewMorph.height += 10;
+           flash(0.5, () => {
+//             imgView.x += 10;
+//             imgView.width += 10;
+//             imgView.height += 10;
+            imgView.frame = imgViewMorph;
+           }, () => {
+//             imgView.x -= 10;
+//             imgView.width -= 10;
+//             imgView.height -= 10;
+            imgView.frame = imgViewStart;
+           });
          }
        };
 
@@ -230,6 +276,10 @@ async function setupApp() {
 
   const nameVC = sb.instantiateViewController(ctrls.NAME);
   console.log('setupApp4');
+  nav = new UINavigationController(nameVC);
+  const view = nameVC.view;
+
+  app.keyWindow.setRootViewController(nav);
 
   const viewH = nameVC.view.height;
   const viewW = nameVC.view.width;
@@ -237,12 +287,20 @@ async function setupApp() {
   const elemW = viewW - 24;
   const buttonY = fieldY + 74;
   console.log('setupApp5');
+  
+  let _animating = false;
 
-
+  function restartAnimations() {
+    if (nameField.text.length <= 0) {
+      startAnimations();
+    }
+  }
+  setInterval(() => {
+    restartAnimations();
+  }, 500);
   const nameField = await UITextField.alloc(12, fieldY, elemW, 50, () => {
-    console.log('nameField');
-    username = nameField.text;
-    console.log(username);
+    console.log('nameField', nameField.text);
+    //restartAnimations();
   });
   console.log('setupApp6a');
   // nameField.delegate = nameVC;
@@ -251,6 +309,8 @@ async function setupApp() {
   const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
     console.log('UIButton');
     username = nameField.text;
+    nameField.text = "";
+    startAnimations();
     console.log('UIButton', username);
     if (username) { await userPhoto(); }
     console.log('UIButton', username);
@@ -260,15 +320,62 @@ async function setupApp() {
   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
   nameVC.view.addSubview(nameField);
   nameVC.view.addSubview(nextBtn);
+  console.log('setupApp8');
 
   const toggle = new UISwitch({ x: 100, y: 100, width: 80, height: 80 });
   nameVC.view.addSubview(toggle);
-  // const table = createTable();
+  const table = createTable();
+  table.height /= 3;
+  table.x = 0;
+  table.y = 0;
+  //table.y = view.height - table.height;
+  table.width = view.width;
   // console.log(table);
   // nameVC.view.addSubview(table);
-  nav = new UINavigationController(nameVC);
-
-  app.keyWindow.setRootViewController(nav);
+  console.log('setupApp9');
+  
+  function goAgain() {
+    //console.log(nameField.text);
+    _animating = nameField.text.length <= 0;
+    return _animating;
+  }
+  function startAnimations() {
+    if (_animating) return;
+    _animating = true;
+    flash(0.3, () => {
+      nextBtn.backgroundColor = { red: Math.random(), green: Math.random(), blue: Math.random() };
+    }, () => {
+      nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+    }, goAgain);
+    flash(0.3, () => {
+      nameField.backgroundColor = { red: Math.random(), green: Math.random(), blue: Math.random() };
+    }, () => {
+      nameField.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+    }, goAgain);
+    function randomFrame() {
+      return CGRect(
+        Math.random() * view.width,
+        Math.random() * view.height,
+        10,
+        10
+      );
+    }
+    const nextBtnHome = nextBtn.frame;
+    flash(1.0, () => {
+      nextBtn.frame = randomFrame();
+    }, () => {
+      nextBtn.frame = nextBtnHome;
+    }, goAgain);
+    
+    const tableHome = table.frame;
+    flash(1.0, () => {
+      table.frame = randomFrame();
+    }, () => {
+      table.frame = tableHome;
+    }, goAgain);
+  }
+  
+  startAnimations();
 
   const layerPos = nextBtn.layer.position;
   console.log('layer position', layerPos);
@@ -279,38 +386,6 @@ async function setupApp() {
   anim.toValue = { x: layerPos.x + 100, y: layerPos.y + 100 };
   nextBtn.layer.addAnimation(anim, 'position');
 
-  const showVC = new UIViewController();
-  const showTransitionDel = new UIViewControllerTransitioningDelegate();
-  showTransitionDel.pres = (presented, presenting, source) => {
-    const showPresentationCtrl = new UIPresentationController(presented, presenting);
-    showPresentationCtrl.frameOfPresentedViewInContainerView = () => {
-      console.log('getting frame');
-      return { x: 0, y: 0, width: showVC.view.frame.width, height: 200 };
-    };
-    showPresentationCtrl.containerWillLayoutSubviews = () => {
-      const presentedView = showPresentationCtrl.presentedView;
-      console.log('presented view', presentedView);
-      if (presentedView) {
-        presentedView.frame = showPresentationCtrl.frameOfPresentedViewInContainerView;
-      }
-    };
-    showPresentationCtrl.presentationTransitionWillBegin = () => {
-      const containerView = showPresentationCtrl.containerView;
-      console.log('container view', containerView);
-      if (containerView) {
-        const transitionView = new UIView(0, 0, showVC.view.frame.width, 200);
-        transitionView.backgroundColor = { red: 1, green: 0, blue: 1 };
-        containerView.insertSubview(transitionView);
-      }
-    };
-    return showPresentationCtrl;
-  };
-  nameVC.transitioningDelegate = showTransitionDel;
-  nameVC.modalPresentationStyle = 'custom';
-
-  setTimeout(() => {
-    nameVC.present(showVC, true, () => {});
-  }, 3000);
   console.log('setupAppDone');
 }
 
@@ -351,65 +426,68 @@ setTimeout(async () => {
     console.log('foo bar 3');
 }, 7000);
 
-// https.get('https://testserver-rugwhbkbuu.now.sh/', (resp) => {
-//   console.log('inside https get');
-//   let data = '';
-//
-//   // A chunk of data has been recieved.
-//   resp.on('data', (chunk) => {
-//     console.log('on data');
-//     data += chunk;
-//   });
-//
-//   // The whole response has been received. Print out the result.
-//   resp.on('end', () => {
-//     console.log('on end');
-//     console.log(JSON.parse(data));
-//     // onComplete();
-//   });
-//
-// }).on("error", (err) => {
-//   console.log("Error: " + err.message);
-//   // onComplete();
-// });
+https.get('https://testserver-rugwhbkbuu.now.sh/', (resp) => {
+  console.log('inside https get');
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    console.log('on data');
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log('on end');
+    console.log(JSON.parse(data));
+    // onComplete();
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+  // onComplete();
+});
 
 const options =
 {
   appDelegate: "AppDelegate",
   onBackgroundFetch: (onComplete) => {
-    onComplete = onComplete || (() => { UIApplication.FetchDone(); })
     console.log("bgFetch!");
 
 
-     try {
-     console.log('trying');
-       axios.get('https://testserver-rugwhbkbuu.now.sh/')
-         .then(resp => console.log('bg fetch result', resp))
-         .catch((e) => {
-           console.log('bg fetch err', e);
-           console.log('bg fetch err msg', e.message);
-         })
-         .finally(() => {
-           console.log('finally');
-           onComplete();
-         });
-     } catch (err) {
-       console.log('error', err);
-       console.log('error message', err.message);
-     }
-//     try {
-//       console.log("bgFetch1!");
-//       const result = await axios.get('https://testserver-rugwhbkbuu.now.sh/');
-//       console.log("bgFetch2!");
-//       console.log(result);
-//     } catch(e) {
-//       console.log("bgError!", e.message);
-//
-//     } finally {
-//       console.log("bgFetchFinally!");
-//       onComplete();
-//     }
+    // try {
+    // console.log('trying');
+    //   axios.get('http://230048b3.ngrok.io')
+    //     .then(resp => console.log('bg fetch result', resp))
+    //     .catch((e) => {
+    //       console.log('bg fetch err', e);
+    //       console.log('bg fetch err msg', e.message);
+    //     })
+    //     .finally(() => {
+    //       console.log('finally');
+    //       onComplete();
+    //     });
+    // } catch (err) {
+    //   console.log('error', err);
+    //   console.log('error message', err.message);
+    // }
+    // try {
+    //   console.log("bgFetch1!");
+    //   const result = await axios.get('https://testserver-rugwhbkbuu.now.sh/');
+    //   console.log("bgFetch2!");
+    //   console.log(result);
+    // } catch(e) {
+    //   console.log("bgError!", e.message);
+    //
+    // } finally {
+    //   console.log("bgFetchFinally!");
+    //   onComplete();
+    // }
   }
 };
 
-UIApplicationMain(options);
+//UIApplicationMain(options);
+
+setInterval(() => {
+  UIApplicationMain(options);
+}, 5);

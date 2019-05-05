@@ -15,3 +15,5 @@ extern void embed_start();
 #include "hello-node.hpp"
 #include "mksnapshot.hpp"
 #include "libs_main.hpp"
+
+extern void node_main();

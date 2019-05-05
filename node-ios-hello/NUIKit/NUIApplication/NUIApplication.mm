@@ -31,6 +31,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Iso
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "FetchDone", FetchDone);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -80,26 +81,38 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   info.GetReturnValue().Set(winObj);
 }
 
+static void (^ _Nonnull fetch_completion)(UIBackgroundFetchResult);
+
+NAN_METHOD(NUIApplication::FetchDone)
+{
+  Nan::HandleScope scope;
+  if (fetch_completion != nullptr) {
+    auto completion = fetch_completion;
+    fetch_completion = nullptr;
+    completion(UIBackgroundFetchResultNewData);
+  }
+}
+
 #import "node_ios_hello-Swift.h"
 
 namespace sweetiekit {
   extern Isolate* nodeIsolate;
 }
+
 NAN_METHOD(NUIApplication::Main) {
   Nan::HandleScope scope;
   
   std::string identifier("AppDelegate");
   sweetiekit::JSFunction fetchFn;
   
-  __block void (^ _completion)(UIBackgroundFetchResult);
-  
+  /*
   __block sweetiekit::JSFunction onFetchDoneFn(sweetiekit::FromBlock("BackgroundFetchCompletionHandler", ^(JSInfo info) {
     if (_completion != nullptr) {
       _completion(UIBackgroundFetchResultNewData);
       _completion = nullptr;
     }
   }));
-  
+  */
   
   if (info[0]->IsString()) {
     Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
@@ -120,10 +133,11 @@ NAN_METHOD(NUIApplication::Main) {
   
   [AppDelegate setFetchCallback:^(void (^ _Nonnull completion)(UIBackgroundFetchResult)) {
     Nan::HandleScope handleScope;
-    _completion = completion;
-    [[UIApplication sharedApplication] associateValue:_completion withKey:@"sweetiekit.UIApplication._completion"];
-    fetchFn.Call("AppDelegate:fetchCallback", onFetchDoneFn.GetValue());
+    fetch_completion = completion;
+    //[[UIApplication sharedApplication] associateValue:_completion withKey:@"sweetiekit.UIApplication._completion"];
+    fetchFn.Call("AppDelegate:fetchCallback"/*, onFetchDoneFn.GetValue()*/);
   }];
+#if 0
   char* args = "node\0--jitless\0\0";
   char* args1 = (char*)args;
   std::vector<char*> arg;
@@ -142,7 +156,7 @@ NAN_METHOD(NUIApplication::Main) {
   @autoreleasepool {
     UIApplicationMain(arg.size() - 1, &arg[0], nullptr, result);
   }
-  
+#endif
 }
 
 NUIApplication::NUIApplication () {}

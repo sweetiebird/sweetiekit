@@ -34,6 +34,14 @@ NSString* NJSStringToNSString(Local<Value> jsStr) {
 
 namespace sweetiekit
 {
+  NSMutableArray* eternal = [NSMutableArray array];
+  
+  void MakeEternal(id obj) {
+    NSObject* o = obj;
+    [eternal addObject:o];
+    [eternal addObject:obj];
+  }
+  
   Local<Value> GetWrapperFor(id pThing, const Nan::Persistent<FunctionTemplate>& defaultType)
   {
     Nan::EscapableHandleScope handleScope;

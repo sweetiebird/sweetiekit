@@ -156,18 +156,23 @@ struct Block_layout {
 typedef const Nan::FunctionCallbackInfo<v8::Value> & JSInfo;
 typedef std::vector<Local<Value>> JSArgs;
 namespace sweetiekit {
+  
+  void MakeEternal(id obj);
+  
   typedef void (^BlockFunctionCallback)(JSInfo info);
 
   static Local<Function> FromBlock(const char* name, BlockFunctionCallback block) {
    Nan::EscapableHandleScope handleScope;
    Nan::FunctionCallback cb = [](JSInfo info) {
+    Nan::HandleScope handleScope;
     Local<Value> data(info.Data());
     BlockFunctionCallback block_((__bridge BlockFunctionCallback)(data.As<External>()->Value()));
-    Nan::HandleScope handleScope;
     @autoreleasepool {
       block_(info);
     }
    };
+   // TODO: retain a reference to block
+   MakeEternal(block);
    Local<Function> fn = Nan::New<v8::Function>(cb, Nan::New<v8::External>((__bridge void*)block));
    fn->SetName(JS_STR(name));
    return handleScope.Escape(fn);
@@ -228,14 +233,17 @@ namespace sweetiekit {
      }
     
      Local<Value> GetValue() const {
-       return Nan::New(*cb);
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Nan::New(*cb));
      }
     
      Local<Function> Get() const {
-       return Nan::New(*cb);
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Nan::New(*cb));
      }
      Local<Function> operator *() {
-       return Get();
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Get());
      }
      Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) const {
       return sweetiekit::CallSync(Get(), methodName, argc, argv);

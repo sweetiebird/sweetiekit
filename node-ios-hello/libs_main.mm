@@ -92,7 +92,7 @@ namespace sweetiekit {
   Local<Value> CallSync(Local<Function> callback, const char* methodName, int argc, Local<Value>* argv)
   {
     Isolate* isolate = callback->GetIsolate();
-    Nan::HandleScope handleScope;
+    Nan::EscapableHandleScope handleScope;
     MicrotasksScope enableMicrotasks(isolate, MicrotasksScope::kRunMicrotasks);
     TryCatchReport reportErrors;
     GetMainThreadMultiIsolatePlatform()->DrainTasks(isolate);
@@ -134,7 +134,7 @@ namespace sweetiekit {
         }
       }
     }
-    return result;
+    return handleScope.Escape(result);
   }
   
   void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete) {
@@ -160,6 +160,7 @@ namespace sweetiekit {
 #else
     if (cb != nullptr)
     {
+      Nan::HandleScope handleScope;
       Local<Function> callback = Nan::New(*cb);
       sweetiekit::CallSync(callback, "sweetiekit::Resolve", 0, nullptr);
     }
@@ -362,6 +363,18 @@ inline void registerDlibs(std::map<std::string, std::pair<void *, bool>> &dlibs)
 extern "C" void registerNodeDLibs() {
     registerDlibs(node::dlibs);
 }
+//
+//extern "C" void UIKit_PumpEvents() {
+//  const CFTimeInterval seconds = 0.000002;
+//  SInt32 result;
+//  do {
+//    result = CFRunLoopRunInMode(kCFRunLoopDefaultMode, seconds, TRUE);
+//  } while (result == kCFRunLoopRunHandledSource);
+//
+//  do {
+//    result = CFRunLoopRunInMode((CFStringRef)UITrackingRunLoopMode, seconds, TRUE);
+//  } while (result == kCFRunLoopRunHandledSource);
+//}
 
 extern "C" void UIKit_PumpEvents() {
   const CFTimeInterval seconds = 0.000002;
@@ -517,12 +530,44 @@ extern "C" void embed_start() {
 
 }
 
+int main_argc;
+char** main_argv;
+struct uv_loop_s* node_loop;
+
+extern "C" void node_main()
+{
+#if 0
+  uv_run(node_loop, UV_RUN_DEFAULT);
+#else
+  for (;;) {
+    uv_run(node_loop, UV_RUN_NOWAIT);
+    usleep(0.02 * NSEC_PER_SEC / 1000);
+    UIKit_PumpEvents();
+  }
+#endif
+}
 
 extern "C" void hello_node(const char* args);
 
+
+void MyNodeRunLoopRun(v8::Isolate* isolate, v8::Local<v8::Context> context, struct uv_loop_s* loop)
+{
+  node_loop = loop;
+#if 0
+  uv_run(loop, UV_RUN_DEFAULT);
+#else
+  @autoreleasepool {
+    UIApplicationMain(main_argc, main_argv, nil, NSStringFromClass([AppDelegate class]));
+  }
+#endif
+}
+
 int main(int argc, char** argv)
 {
+  main_argc = argc;
+  main_argv = argv;
 #if 1
+    node::pNodeRunLoopRun = MyNodeRunLoopRun;
     registerNodeDLibs();
     chdir(getenv("HOME"));
     chdir("Documents");

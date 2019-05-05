@@ -30,9 +30,10 @@ public:
   static NAN_GETTER(KeyWindowGetter);
   
   static NAN_METHOD(Main);
+  static NAN_METHOD(FetchDone);
 
 private:
-  static UIWindow* tmp_UIWindow;
+  static UIWindow* _Nullable tmp_UIWindow;
   
 };
 
