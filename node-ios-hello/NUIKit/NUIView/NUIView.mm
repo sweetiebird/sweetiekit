@@ -110,16 +110,16 @@ NAN_METHOD(NUIView::New) {
   if (info[0]->IsExternal()) {
     view->SetNSObject((__bridge UIView *)(info[0].As<External>()->Value()));
   } else if (info.Length() > 0) {
-      double x = TO_DOUBLE(info[0]);
-      double y = TO_DOUBLE(info[1]);
-      double width = TO_DOUBLE(info[2]);
-      double height = TO_DOUBLE(info[3]);
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
 
-      @autoreleasepool {
-        dispatch_sync(dispatch_get_main_queue(), ^ {
-            view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-        });
-      }
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+      });
+    }
   } else {
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
