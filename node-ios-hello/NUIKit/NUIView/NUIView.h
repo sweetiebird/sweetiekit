@@ -19,9 +19,10 @@ using namespace node;
 
 JS_WRAP_CLASS(UIView, UIResponder);
   CGRect GetFrame();
+  CGRect GetBounds();
   static NAN_METHOD(AddSubview);
-  static NAN_GETTER(FrameGetter);
-  static NAN_SETTER(FrameSetter);
+  JS_PROP(Frame);
+  JS_PROP(Bounds);
   static NAN_GETTER(OriginGetter);
   static NAN_SETTER(OriginSetter);
   static NAN_GETTER(CenterGetter);
