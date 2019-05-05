@@ -27,6 +27,7 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(IsActive);
+  JS_PROP(Priority);
 };
 
 #endif /* NNSLayoutConstraint_h */

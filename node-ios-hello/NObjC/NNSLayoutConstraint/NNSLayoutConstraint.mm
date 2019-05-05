@@ -28,6 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSLayoutConstraint::Initializ
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "isActive", IsActive);
+  JS_SET_PROP(proto, "priority", Priority);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -69,4 +70,22 @@ NAN_SETTER(NNSLayoutConstraint::IsActiveSetter) {
   JS_UNWRAP(NSLayoutConstraint, constraint);
   
   [constraint setActive:TO_BOOL(value)];
+}
+
+NAN_GETTER(NNSLayoutConstraint::PriorityGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(NSLayoutConstraint, constraint);
+
+  JS_SET_RETURN(JS_NUM([constraint priority]));
+}
+
+NAN_SETTER(NNSLayoutConstraint::PrioritySetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(NSLayoutConstraint, constraint);
+  
+  float priority = TO_FLOAT(value);
+  
+  [constraint setPriority:priority];
 }
