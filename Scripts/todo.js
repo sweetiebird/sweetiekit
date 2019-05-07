@@ -7,6 +7,7 @@ const CoreAnimation = SweetieKit;
 const {
   UIApplicationMain,
   UIApplication,
+  UIBarButtonItem,
   UIWindow,
   UIStoryboard,
   UIViewController,
@@ -32,6 +33,7 @@ const {
   NSLayoutConstraint,
   NSLayoutAnchor,
   UITableViewManager,
+  NSObject,
 } = UIKit;
 
 // shared application
@@ -146,6 +148,9 @@ async function setup() {
 
   todoVC = new UIViewController();
 
+  const addBarItem = new UIBarButtonItem('Add', () => console.log('add'));
+  todoVC.toolbarItems = [addBarItem];
+
   todoTable = await makeTableView();
 
   mgr = new UITableViewManager((tableView, section) => {
@@ -163,9 +168,9 @@ async function setup() {
 
   nav = new UINavigationController(todoVC);
 
-  app.keyWindow.setRootViewController(nav);
+  nav.isToolbarHidden = false;
 
-  // await renderTodos();
+  app.keyWindow.setRootViewController(nav);
 }
 
 async function start() {

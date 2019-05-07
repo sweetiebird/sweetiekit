@@ -60,6 +60,9 @@
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
+		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
+		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
+		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
 		A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D67292226953BB00562A42 /* NUIViewController.mm */; };
 		A1D6729822695D0200562A42 /* NUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729722695D0200562A42 /* NUIView.mm */; };
 		A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729A22696D7A00562A42 /* NUIStoryboard.mm */; };
@@ -195,6 +198,11 @@
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
+		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
+		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
+		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
+		A1D65DD32281744C00AC0BD9 /* NUITarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITarget.h; sourceTree = "<group>"; };
+		A1D65DD42281745500AC0BD9 /* NUITarget.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITarget.mm; sourceTree = "<group>"; };
 		A1D6729022694E7000562A42 /* libs_main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libs_main.hpp; sourceTree = "<group>"; };
 		A1D67291226953B100562A42 /* NUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewController.h; sourceTree = "<group>"; };
 		A1D67292226953BB00562A42 /* NUIViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewController.mm; sourceTree = "<group>"; };
@@ -524,9 +532,37 @@
 			path = CABasicAnimation;
 			sourceTree = "<group>";
 		};
+		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */,
+				A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */,
+			);
+			path = NUIBarButtonItem;
+			sourceTree = "<group>";
+		};
+		A1D65DCF22816ED800AC0BD9 /* SUITarget */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DD32281744C00AC0BD9 /* NUITarget.h */,
+				A1D65DD42281745500AC0BD9 /* NUITarget.mm */,
+				A1D65DD122816F0100AC0BD9 /* SUITarget.swift */,
+			);
+			path = SUITarget;
+			sourceTree = "<group>";
+		};
+		A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DCF22816ED800AC0BD9 /* SUITarget */,
+			);
+			path = SwiftInterfaces;
+			sourceTree = "<group>";
+		};
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
@@ -737,6 +773,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A1E2D7A5226A500100FA1562 /* NObjC */,
@@ -912,6 +949,7 @@
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
+				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
@@ -925,6 +963,7 @@
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
+				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
@@ -933,6 +972,7 @@
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
+				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,

@@ -1,15 +1,15 @@
 //
-//  NUITableViewManager.h
+//  NUITarget.h
 //  node-ios-hello
 //
-//  Created by Emily Kolar on 5/5/19.
+//  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUITableViewManager_h
-#define NUITableViewManager_h
+#ifndef NUITarget_h
+#define NUITarget_h
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NNSObject.h"
 #import "node_ios_hello-Swift.h"
@@ -17,18 +17,18 @@
 using namespace v8;
 using namespace node;
 
-class NUITableViewManager : public NNSObject {
+class NUITarget : public NNSObject {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NUITableViewManager();
-  virtual ~NUITableViewManager();
+  NUITarget();
+  virtual ~NUITarget();
 
   static NAN_METHOD(New);
-  sweetiekit::JSFunction _numberRowsInSection;
-  sweetiekit::JSFunction _cellForRowAt;
+  
+  sweetiekit::JSFunction _callback;
 };
 
-#endif /* NUITableViewManager_h */
+#endif /* NUITarget_h */

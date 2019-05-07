@@ -31,6 +31,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationController::Initi
   Nan::SetMethod(proto, "popToRootViewController", PopToRootViewController);
   Nan::SetMethod(proto, "popToViewController", PopToViewController);
   Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
+  JS_SET_PROP(proto, "isToolbarHidden", IsToolbarHidden);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -195,3 +196,20 @@ NAN_METHOD(NUINavigationController::PopToViewController) {
 
   info.GetReturnValue().Set(result);
 }
+
+NAN_GETTER(NUINavigationController::IsToolbarHiddenGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationController, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isToolbarHidden]));
+}
+
+NAN_SETTER(NUINavigationController::IsToolbarHiddenSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationController, ui);
+
+  [ui setToolbarHidden:TO_BOOL(value)];
+}
+

@@ -12,6 +12,7 @@
 #include "NUIViewController.h"
 #include "NUIViewControllerTransitioningDelegate.h"
 #include "NUIView.h"
+#include "NUIBarButtonItem.h"
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
 
@@ -36,6 +37,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   Nan::SetMethod(proto, "dismiss", DismissViewController);
   JS_SET_PROP(proto, "transitioningDelegate", TransitioningDelegate);
   JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
+  JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -158,10 +160,7 @@ NAN_SETTER(NUIViewController::ModalPresentationStyleSetter) {
 
 
   std::string style;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    style = *utf8Value;
-  } else {
+  if (!NJSStringGetUTF8String(value, style)) {
     Nan::ThrowError("invalid argument");
   }
 
@@ -177,7 +176,51 @@ NAN_SETTER(NUIViewController::ModalPresentationStyleSetter) {
 NAN_GETTER(NUIViewController::ModalPresentationStyleGetter) {
   Nan::HandleScope scope;
   
+  Nan::ThrowError("TODO NUIViewController::ModalPresentationStyleGetter");
 //  NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(info.This());
 //
 //  info.GetReturnValue().Set(del->_presentationControllerFor.GetValue());
+}
+
+NAN_SETTER(NUIViewController::ToolbarItemsSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+
+  NSMutableArray* items = [[NSMutableArray alloc] init];
+
+  if (value->IsObject()) {
+    Local<Object> object = JS_OBJ(value);
+    MaybeLocal<Array> maybe_props = object->GetOwnPropertyNames(JS_CONTEXT());
+    if (!maybe_props.IsEmpty()) {
+      Local<Array> props = maybe_props.ToLocalChecked();
+      for (uint32_t i=0; i < props->Length(); i++) {
+        Local<Value> key = props->Get(i);
+        Local<Value> val = object->Get(key);
+        JS_UNWRAPPED(JS_OBJ(val), UIBarButtonItem, c);
+        [items addObject:c];
+      }
+    }
+
+    [ui setToolbarItems:items];
+  }
+}
+
+NAN_GETTER(NUIViewController::ToolbarItemsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+
+  auto result = Nan::New<Array>();
+  NSInteger count = [[ui toolbarItems] count];
+
+  for (NSInteger i = 0; i < count; i++) {
+    UIBarButtonItem* item = [[ui toolbarItems] objectAtIndex:i];
+    if (item != nullptr) {
+      Local<Value> value = sweetiekit::GetWrapperFor(item, NUIBarButtonItem::type);
+      Nan::Set(result, static_cast<uint32_t>(i), value);
+    }
+  }
+
+  JS_SET_RETURN(result);
 }

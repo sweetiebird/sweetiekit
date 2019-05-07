@@ -18,6 +18,8 @@
 - (id) associatedValueForKey:(NSString *)aKey;
 
 @end
+
+extern "C" void objc_callCallback(NSObject* obj);
 #endif
 
 using namespace v8;
@@ -47,6 +49,7 @@ public:
   
 private:
   NSObject* _NSObject;
+  sweetiekit::JSFunction _callback;
 };
 
 #endif /* NNSObject_h */

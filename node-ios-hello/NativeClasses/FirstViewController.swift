@@ -12,6 +12,7 @@ class FirstViewController: NodeUIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let bbi = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
 

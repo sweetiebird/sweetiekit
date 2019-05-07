@@ -20,24 +20,6 @@
 
 @end
 
-#import <objc/runtime.h>
-
-@implementation NSObject (CategoryNSObject)
-
-#pragma mark Associated Methods:
-
-- (void) associateValue:(id)value withKey:(NSString *)aKey {
-  
-  objc_setAssociatedObject( self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN );
-}
-
-- (id) associatedValueForKey:(NSString *)aKey {
-  
-  return objc_getAssociatedObject( self, (__bridge void *)aKey );
-}
-
-@end
-
 typedef void (^BlockInvocationBlock)(id target);
 
 #pragma mark - Private Interface:

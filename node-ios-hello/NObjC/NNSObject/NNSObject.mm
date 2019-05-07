@@ -10,6 +10,24 @@
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 
+#import <objc/runtime.h>
+
+@implementation NSObject (CategoryNSObject)
+
+#pragma mark Associated Methods:
+
+- (void) associateValue:(id)value withKey:(NSString *)aKey {
+  
+  objc_setAssociatedObject( self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN );
+}
+
+- (id) associatedValueForKey:(NSString *)aKey {
+  
+  return objc_getAssociatedObject( self, (__bridge void *)aKey );
+}
+
+@end
+
 Nan::Persistent<FunctionTemplate> NNSObject::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate *isolate)
@@ -90,6 +108,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
+#include "NUIBarButtonItem.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -196,6 +215,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIViewControllerTransitioningDelegate::type;
       }
       // ========= objects
+      if ([obj isKindOfClass:[UIBarButtonItem class]]) {
+        return NUIBarButtonItem::type;
+      }
       if ([obj isKindOfClass:[NSLayoutConstraint class]]) {
         return NNSLayoutConstraint::type;
       }

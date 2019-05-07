@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(DismissViewController);
   JS_PROP(TransitioningDelegate);
   JS_PROP(ModalPresentationStyle);
+  JS_PROP(ToolbarItems);
 };
 
 #endif /* NUIViewController_h */

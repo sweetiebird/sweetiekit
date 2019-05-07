@@ -39,6 +39,7 @@
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
+#include "NUIBarButtonItem.h"
 #include <unistd.h>
 
 #include <string>
@@ -255,6 +256,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_NSLayoutConstraint = NNSLayoutConstraint::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSLayoutConstraint").ToLocalChecked(), N_NSLayoutConstraint.first);
+
+        auto N_UIBarButtonItem = NUIBarButtonItem::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIBarButtonItem").ToLocalChecked(), N_UIBarButtonItem.first);
 
         // UIKit
   

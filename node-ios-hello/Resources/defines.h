@@ -83,7 +83,7 @@ using namespace node;
   type* name = n##name->As<type>(); name = name;
 
 #define JS_UNWRAPPED(info, type, name) \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(info); n##name = n##name; \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
   __block type* name = n##name->As<type>(); name = name;
 
 /*

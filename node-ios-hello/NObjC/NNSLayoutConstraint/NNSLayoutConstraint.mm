@@ -95,45 +95,43 @@ NAN_SETTER(NNSLayoutConstraint::PrioritySetter) {
 NAN_METHOD(NNSLayoutConstraint::ActivateConstraints) {
   Nan::HandleScope scope;
 
-//  NSMutableArray* constraints = [[NSMutableArray alloc] init];
-//
-//  if (info[0]->IsObject()) {
-//    Local<Context> context = JS_CONTEXT();
-//    Local<Object> object = info[0]->ToObject(JS_ISOLATE());
-//    MaybeLocal<Array> maybe_props = object->GetOwnPropertyNames(context);
-//    if (!maybe_props.IsEmpty()) {
-//      Local<Array> props = maybe_props.ToLocalChecked();
-//      for (uint32_t i=0; i < props->Length(); i++) {
-//        Local<Value> key = props->Get(i);
-//        Local<Value> value = object->Get(key);
-//        JS_UNWRAPPED(value, NSLayoutConstraint, c);
-//        [constraints addObject:c];
-//      }
-//    }
-//
-//    [NSLayoutConstraint activateConstraints:constraints];
-//  }
+  NSMutableArray* constraints = [[NSMutableArray alloc] init];
+
+  if (info[0]->IsObject()) {
+    Local<Object> object = JS_OBJ(info[0]);
+    MaybeLocal<Array> maybe_props = object->GetOwnPropertyNames(JS_CONTEXT());
+    if (!maybe_props.IsEmpty()) {
+      Local<Array> props = maybe_props.ToLocalChecked();
+      for (uint32_t i=0; i < props->Length(); i++) {
+        Local<Value> key = props->Get(i);
+        Local<Value> value = object->Get(key);
+        JS_UNWRAPPED(JS_OBJ(value), NSLayoutConstraint, c);
+        [constraints addObject:c];
+      }
+    }
+
+    [NSLayoutConstraint activateConstraints:constraints];
+  }
 }
 
 NAN_METHOD(NNSLayoutConstraint::DeactivateConstraints) {
   Nan::HandleScope scope;
 
-//  NSMutableArray* constraints = [[NSMutableArray alloc] init];
-//
-//  if (info[0]->IsObject()) {
-//    Local<Context> context = JS_CONTEXT();
-//    Local<Object> object = info[0]->ToObject(JS_ISOLATE());
-//    MaybeLocal<Array> maybe_props = object->GetOwnPropertyNames(context);
-//    if (!maybe_props.IsEmpty()) {
-//      Local<Array> props = maybe_props.ToLocalChecked();
-//      for (uint32_t i=0; i < props->Length(); i++) {
-//        Local<Value> key = props->Get(i);
-//        Local<Value> value = object->Get(key);
-//        JS_UNWRAPPED(value, NSLayoutConstraint, c);
-//        [constraints addObject:c];
-//      }
-//    }
-//
-//    [NSLayoutConstraint deactivateConstraints:constraints];
-//  }
+  NSMutableArray* constraints = [[NSMutableArray alloc] init];
+
+  if (info[0]->IsObject()) {
+    Local<Object> object = JS_OBJ(info[0]);
+    MaybeLocal<Array> maybe_props = object->GetOwnPropertyNames(JS_CONTEXT());
+    if (!maybe_props.IsEmpty()) {
+      Local<Array> props = maybe_props.ToLocalChecked();
+      for (uint32_t i=0; i < props->Length(); i++) {
+        Local<Value> key = props->Get(i);
+        Local<Value> value = object->Get(key);
+        JS_UNWRAPPED(JS_OBJ(value), NSLayoutConstraint, c);
+        [constraints addObject:c];
+      }
+    }
+
+    [NSLayoutConstraint deactivateConstraints:constraints];
+  }
 }

@@ -11,6 +11,8 @@
 
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr) {
+  Nan::HandleScope scope;
+  
   std::string identifier;
   if (jsStr->IsString()) {
     Nan::Utf8String utf8Value(Local<String>::Cast(jsStr));
