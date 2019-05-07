@@ -210,6 +210,8 @@ class MyApp {
 
     this.todoTable.reloadData();
 
+    this.todoTable.scrollToRowAt({ section: 0, row: this.todos.length - 1 }, true);
+
     const todosStr = JSON.stringify(this.todos);
     this.defaults.setValueForKey(todosStr, 'TODOS');
   }

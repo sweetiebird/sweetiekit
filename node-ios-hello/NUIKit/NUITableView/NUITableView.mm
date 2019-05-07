@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isola
   JS_SET_PROP(proto, "refreshControl", RefreshControl);
   Nan::SetMethod(proto, "reloadData", ReloadData);
   Nan::SetMethod(proto, "cellForRowAt", CellForRowAt);
+  Nan::SetMethod(proto, "scrollToRowAt", ScrollToRowAt);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -270,6 +271,31 @@ NAN_METHOD(NUITableView::CellForRowAt) {
       NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
       cell = [tv cellForRowAtIndexPath:path];
     });
+  }
+  
+  Local<Value> argv[] = {
+    Nan::New<v8::External>((__bridge void*)cell)
+  };
+
+  Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  JS_SET_RETURN(value);
+}
+
+NAN_METHOD(NUITableView::ScrollToRowAt) {
+  JS_UNWRAP(UITableView, tv);
+  
+  int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
+  int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
+  bool animated = TO_BOOL(info[1]);
+
+  __block UITableViewCell* cell;
+  @autoreleasepool {
+    NSUInteger indexes[2];
+    indexes[0] = section;
+    indexes[1] = row;
+    NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+    [tv scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:animated];
   }
   
   Local<Value> argv[] = {

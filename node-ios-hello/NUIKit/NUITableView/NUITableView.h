@@ -35,7 +35,7 @@ public:
   JS_PROP(RefreshControl);
   static NAN_METHOD(CellForRowAt);
   static NAN_METHOD(ReloadData);
-
+  static NAN_METHOD(ScrollToRowAt);
 
   Nan::Persistent<Value> _dataSource;
 };
