@@ -89,6 +89,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUIScrollView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
+#include "NUITableViewManager.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -120,14 +121,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIWindow::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UITableView class]]) {
+        return NUITableView::type;
+      }
       if ([obj isKindOfClass:[UIScrollView class]]) {
         return NUIScrollView::type;
       }
       if ([obj isKindOfClass:[UITableViewCell class]]) {
         return NUITableViewCell::type;
-      }
-      if ([obj isKindOfClass:[UITableView class]]) {
-        return NUITableView::type;
       }
       if ([obj isKindOfClass:[UILabel class]]) {
         return NUILabel::type;
@@ -182,6 +183,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SUITableViewManager class]]) {
+        return NUITableViewManager::type;
+      }
       if ([obj isKindOfClass:[SUIImagePickerControllerDelegate class]]) {
         return NUIImagePickerControllerDelegate::type;
       }

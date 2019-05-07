@@ -33,6 +33,8 @@
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
 		A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */; };
 		A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */; };
+		A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */; };
+		A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
@@ -156,6 +158,9 @@
 		A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutConstraint.mm; sourceTree = "<group>"; };
 		A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutAnchor.h; sourceTree = "<group>"; };
 		A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutAnchor.mm; sourceTree = "<group>"; };
+		A11D12A3227F8D950038C262 /* NUITableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewManager.h; sourceTree = "<group>"; };
+		A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewManager.mm; sourceTree = "<group>"; };
+		A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewManager.swift; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
@@ -414,6 +419,16 @@
 			path = NNSLayoutAnchor;
 			sourceTree = "<group>";
 		};
+		A11D12A2227F8D780038C262 /* NUITableViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				A11D12A3227F8D950038C262 /* NUITableViewManager.h */,
+				A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */,
+				A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */,
+			);
+			path = NUITableViewManager;
+			sourceTree = "<group>";
+		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +546,7 @@
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
 				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
 				A19476B0226E9043003BB393 /* NUITableViewDataSource */,
+				A11D12A2227F8D780038C262 /* NUITableViewManager */,
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D6729E226993FE00562A42 /* NUIView */,
 				A1D6729D226993E700562A42 /* NUIViewController */,
@@ -881,6 +897,7 @@
 			files = (
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
+				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
@@ -911,6 +928,7 @@
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
+				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,

@@ -43,23 +43,34 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isola
 NAN_METHOD(NUITableView::New) {
   Nan::HandleScope scope;
 
-  Local<Object> ctrlObj = info.This();
+  Local<Object> obj = info.This();
 
-  NUITableView *ctrl = new NUITableView();
+  NUITableView *tbl = new NUITableView();
 
   if (info[0]->IsExternal()) {
-    ctrl->SetNSObject((__bridge UITableView *)(info[0].As<External>()->Value()));
+    tbl->SetNSObject((__bridge UITableView *)(info[0].As<External>()->Value()));
+  } else if (info.Length() > 0) {
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
+
+    @autoreleasepool {
+      CGRect frame = CGRectMake(x, y, width, height);
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          tbl->SetNSObject([[UITableView alloc] initWithFrame:frame]);
+      });
+    }
   } else {
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
-        auto tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 400)];
-        ctrl->SetNSObject(tv);
+        tbl->SetNSObject([[UITableView alloc] init]);
       });
     }
   }
-  ctrl->Wrap(ctrlObj);
+  tbl->Wrap(obj);
 
-  info.GetReturnValue().Set(ctrlObj);
+  info.GetReturnValue().Set(obj);
 }
 
 NUITableView::NUITableView () {}

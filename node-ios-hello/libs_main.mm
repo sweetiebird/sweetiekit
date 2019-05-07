@@ -38,6 +38,7 @@
 #include "NUIScrollView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
+#include "NUITableViewManager.h"
 #include <unistd.h>
 
 #include <string>
@@ -94,7 +95,7 @@ namespace sweetiekit {
   Local<Value> CallSync(Local<Function> callback, const char* methodName, int argc, Local<Value>* argv)
   {
     Isolate* isolate = callback->GetIsolate();
-    Nan::HandleScope handleScope;
+    Nan::EscapableHandleScope handleScope;
     MicrotasksScope enableMicrotasks(isolate, MicrotasksScope::kRunMicrotasks);
     TryCatchReport reportErrors;
     GetMainThreadMultiIsolatePlatform()->DrainTasks(isolate);
@@ -136,7 +137,7 @@ namespace sweetiekit {
         }
       }
     }
-    return result;
+    return handleScope.Escape(result);
   }
   
   void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete) {
@@ -322,6 +323,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIScrollView = NUIScrollView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIScrollView").ToLocalChecked(), N_UIScrollView.first);
+
+        auto N_UITableViewManager = NUITableViewManager::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITableViewManager").ToLocalChecked(), N_UITableViewManager.first);
 
         // UIKit delegates ========
   

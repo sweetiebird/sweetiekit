@@ -194,26 +194,29 @@ namespace sweetiekit {
      }
     
      JSFunction(Local<Value> cb)
-     : cb(new Nan::Persistent<Function>(Local<Function>::Cast(cb)))
      {
+       Reset(cb);
      }
      JSFunction(Local<Function> cb)
-     : cb(new Nan::Persistent<Function>(cb))
      {
+       Reset(cb);
      }
      virtual ~JSFunction() {
       Reset();
      }
      
      void Reset() {
+       Nan::HandleScope scope;
        cb.reset();
      }
     
      void Reset(Local<Function> fn) {
+       Nan::HandleScope scope;
        cb.reset(new Nan::Persistent<Function>(fn));
      }
     
      void Reset(Local<Value> fn) {
+       Nan::HandleScope scope;
        cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
      }
     
@@ -228,70 +231,88 @@ namespace sweetiekit {
      }
     
      Local<Value> GetValue() const {
-       return Nan::New(*cb);
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Nan::New(*cb));
      }
     
      Local<Function> Get() const {
-       return Nan::New(*cb);
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Nan::New(*cb));
      }
      Local<Function> operator *() {
-       return Get();
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(Get());
      }
      Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) const {
-      return sweetiekit::CallSync(Get(), methodName, argc, argv);
+       Nan::EscapableHandleScope scope;
+       return scope.Escape(sweetiekit::CallSync(Get(), methodName, argc, argv));
      }
      Local<Value> operator()(const char* methodName, int argc, Local<Value>* argv) const {
-      return sweetiekit::CallSync(Get(), methodName, argc, argv);
+       Nan::EscapableHandleScope scope;
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, argc, argv));
      }
      Local<Value> Call(const char* methodName, JSArgs& args) const {
-      return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
+       Nan::EscapableHandleScope scope;
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]));
      }
      Local<Value> operator()(const char* methodName, JSArgs& args) const {
-      return sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]);
+       Nan::EscapableHandleScope scope;
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]));
      }
      Local<Value> Call(const char* methodName) const {
-      return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
+       Nan::EscapableHandleScope scope;
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 0, nullptr));
      }
      Local<Value> operator()(const char* methodName) const {
-      return sweetiekit::CallSync(Get(), methodName, 0, nullptr);
+       Nan::EscapableHandleScope scope;
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 0, nullptr));
      }
      Local<Value> Call(const char* methodName, Local<Value> arg0) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0 };
-      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
      Local<Value> operator()(const char* methodName, Local<Value> arg0) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0 };
-      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
      Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1 };
-      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
      Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1 };
-      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
      Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
-      return sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
      Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
+       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
-      return sweetiekit::CallSync(Get(), methodName, 3, argv);
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 3, argv));
      }
      static JSArgs Args() {
       return JSArgs();
      }
      static JSArgs Args(Local<Value> x0) {
-       Local<Value> argv[] = { x0 };
+       Nan::EscapableHandleScope scope;
+       Local<Value> argv[] = { scope.Escape(x0) };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
      static JSArgs Args(Local<Value> x0, Local<Value> x1) {
-       Local<Value> argv[] = { x0, x1 };
+       Nan::EscapableHandleScope scope;
+       Local<Value> argv[] = { scope.Escape(x0), scope.Escape(x1) };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
      static JSArgs Args(Local<Value> x0, Local<Value> x1, Local<Value> x2) {
-       Local<Value> argv[] = { x0, x1, x2 };
+       Nan::EscapableHandleScope scope;
+       Local<Value> argv[] = { scope.Escape(x0), scope.Escape(x1), scope.Escape(x2) };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
   };

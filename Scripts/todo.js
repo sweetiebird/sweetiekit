@@ -31,6 +31,7 @@ const {
   UIScrollView,
   NSLayoutConstraint,
   NSLayoutAnchor,
+  UITableViewManager,
 } = UIKit;
 
 // shared application
@@ -41,6 +42,10 @@ let sb;
 let nav;
 // todos view controller
 let todoVC;
+// todos table view
+let todoTable;
+// todos data source
+let mgr;
 
 const todos = ['Do stuff', 'Other stuff'];
 const mainBlue = { red: 17/255, green: 205/255, blue: 239/255 };
@@ -54,6 +59,21 @@ async function renderTodos() {
     label.text = todo;
     todoVC.view.addSubview(label);
   });
+}
+
+async function makeTableView() {
+  const table = new UITableView();
+
+  todoVC.view.addSubview(table);
+
+  table.translatesAutoresizingMaskIntoConstraints = false;
+
+  table.leadingAnchor.constraintEqualToAnchor(todoVC.view.leadingAnchor, 0).isActive = true;
+  table.trailingAnchor.constraintEqualToAnchor(todoVC.view.trailingAnchor, 0).isActive = true;
+  table.topAnchor.constraintEqualToAnchor(todoVC.view.topAnchor, 0).isActive = true;
+  table.bottomAnchor.constraintEqualToAnchor(todoVC.view.bottomAnchor, 0).isActive = true;
+
+  return table;
 }
 
 async function getTodoController() {
@@ -124,7 +144,20 @@ async function setup() {
   app = new UIApplication();
   sb = new UIStoryboard('Main');
 
-  const todoVC = await getTodoController();
+  todoVC = new UIViewController();
+
+  todoTable = await makeTableView();
+
+  mgr = new UITableViewManager((tableView, section) => {
+    console.log(tableView, section);
+    return todos.length;
+  }, (tableView, { row, section }) => {
+    console.log(todos[row]);
+    return new UITableViewCell();
+  });
+
+  todoTable.dataSource = mgr;
+  todoTable.delegate = mgr;
 
   nav = new UINavigationController(todoVC);
 
