@@ -12,12 +12,14 @@ import UIKit
 typealias NumberSectionsClosure = (UITableView) -> Int
 typealias NumberRowsInSectionClosure = (UITableView, Int) -> Int
 typealias CellForRowAtClosure = (UITableView, IndexPath) -> UITableViewCell
+typealias DidSelectRowAtClosure = (UITableView, IndexPath) -> Void
 
 @objc class SUITableViewManager: NSObject, UITableViewDataSource, UITableViewDelegate {
   var numberSectionsCallback: NumberSectionsClosure?
   var numberRowsInSectionCallback: NumberRowsInSectionClosure!
   var cellForRowAtCallback: CellForRowAtClosure!
-  
+  var didSelectRowAtCallback: DidSelectRowAtClosure?
+
   override init() {
     super.init()
   }
@@ -47,11 +49,21 @@ typealias CellForRowAtClosure = (UITableView, IndexPath) -> UITableViewCell
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     return cellForRowAtCallback(tableView, indexPath)
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let didSelectRowAtCallback = didSelectRowAtCallback {
+      didSelectRowAtCallback(tableView, indexPath)
+    }
+  }
 }
 
 @objc extension SUITableViewManager {
   func setNumberOfSectionsCallback(_ closure: @escaping NumberSectionsClosure) {
     numberSectionsCallback = closure
+  }
+
+  func setDidSelectRowAtCallback(_ closure: @escaping DidSelectRowAtClosure) {
+    didSelectRowAtCallback = closure
   }
 }
 

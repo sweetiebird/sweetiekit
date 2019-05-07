@@ -28,6 +28,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewCell::Initialize(I
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "textLabel", TextLabel);
   JS_SET_PROP_READONLY(proto, "detailTextLabel", DetailTextLabel);
+  JS_SET_PROP(proto, "isEditing", IsEditing);
+  JS_SET_PROP(proto, "isSelected", IsSelected);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -111,6 +113,38 @@ NAN_GETTER(NUITableViewCell::DetailTextLabelGetter) {
       Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(result, NUILabel::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
       JS_SET_RETURN(value);
   }
+}
+
+NAN_GETTER(NUITableViewCell::IsEditingGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isEditing]));
+}
+
+NAN_SETTER(NUITableViewCell::IsEditingSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+
+  [ui setEditing:TO_BOOL(value)];
+}
+
+NAN_GETTER(NUITableViewCell::IsSelectedGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isSelected]));
+}
+
+NAN_SETTER(NUITableViewCell::IsSelectedSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+
+  [ui setSelected:TO_BOOL(value)];
 }
 
 NUITableViewCell::NUITableViewCell () {}

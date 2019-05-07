@@ -33,6 +33,7 @@ public:
   JS_PROP(RowHeight);
   JS_PROP(EstimatedRowHeight);
   JS_PROP(RefreshControl);
+  static NAN_METHOD(CellForRowAt);
   static NAN_METHOD(ReloadData);
 
 

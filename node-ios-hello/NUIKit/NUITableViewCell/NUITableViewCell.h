@@ -30,6 +30,8 @@ public:
   static NAN_METHOD(Destroy);
   JS_PROP(TextLabel);
   JS_PROP(DetailTextLabel);
+  JS_PROP(IsEditing);
+  JS_PROP(IsSelected);
 };
 
 #endif /* NUITableViewCell_h */

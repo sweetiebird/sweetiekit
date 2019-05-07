@@ -33,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isola
   JS_SET_PROP(proto, "estimatedRowHeight", EstimatedRowHeight);
   JS_SET_PROP(proto, "refreshControl", RefreshControl);
   Nan::SetMethod(proto, "reloadData", ReloadData);
+  Nan::SetMethod(proto, "cellForRowAt", CellForRowAt);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -252,4 +253,30 @@ NAN_METHOD(NUITableView::ReloadData) {
       [ui reloadData];
     });
   }
+}
+
+NAN_METHOD(NUITableView::CellForRowAt) {
+  JS_UNWRAP(UITableView, tv);
+  
+  int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
+  int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
+
+  __block UITableViewCell* cell;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      NSUInteger indexes[2];
+      indexes[0] = section;
+      indexes[1] = row;
+      NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+      cell = [tv cellForRowAtIndexPath:path];
+    });
+  }
+  
+  Local<Value> argv[] = {
+    Nan::New<v8::External>((__bridge void*)cell)
+  };
+
+  Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  JS_SET_RETURN(value);
 }

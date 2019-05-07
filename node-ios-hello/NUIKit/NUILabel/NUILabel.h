@@ -31,6 +31,7 @@ public:
   static NAN_GETTER(TextGetter);
   static NAN_SETTER(TextSetter);
   JS_PROP(NumberOfLines);
+  JS_PROP(Font);
 };
 
 #endif /* NUILabel_h */

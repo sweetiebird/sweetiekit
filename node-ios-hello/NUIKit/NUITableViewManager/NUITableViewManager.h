@@ -27,8 +27,10 @@ public:
   virtual ~NUITableViewManager();
 
   static NAN_METHOD(New);
+  JS_PROP(DidSelectRowAt);
   sweetiekit::JSFunction _numberRowsInSection;
   sweetiekit::JSFunction _cellForRowAt;
+  sweetiekit::JSFunction _didSelectRowAt;
 };
 
 #endif /* NUITableViewManager_h */

@@ -29,8 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewManager::Initializ
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-//  JS_SET_PROP(proto, "numberOfRowsInSection", NumberOfRowsInSection);
-//  JS_SET_PROP(proto, "cellForRowAt", CellForRowAt);
+  JS_SET_PROP(proto, "didSelectRowAt", DidSelectRowAt);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -87,4 +86,32 @@ NAN_METHOD(NUITableViewManager::New) {
   mgr->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_GETTER(NUITableViewManager::DidSelectRowAtGetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  Nan::ThrowError("TODO NUITableViewManager::DidSelectRowAtGetter");
+}
+
+NAN_SETTER(NUITableViewManager::DidSelectRowAtSetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  mgr->_didSelectRowAt.Reset(Local<Function>::Cast(value));
+  
+  [sMgr setDidSelectRowAtCallback: ^ (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+    uint32_t section = [indexPath section];
+    uint32_t row = [indexPath row];
+    Local<Object> indexPathObj = Nan::New<Object>();
+    Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
+    Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+    mgr->_didSelectRowAt("NUITableViewManager::New", tableViewObj, indexPathObj);
+  }];
 }

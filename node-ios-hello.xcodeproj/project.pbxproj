@@ -376,8 +376,8 @@
 		21C872CC226A87C500B5192B /* NNSUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				21C872CD226A87C500B5192B /* NNSUserDefaults.mm */,
 				21C872CE226A87C500B5192B /* NNSUserDefaults.h */,
+				21C872CD226A87C500B5192B /* NNSUserDefaults.mm */,
 			);
 			path = NNSUserDefaults;
 			sourceTree = "<group>";

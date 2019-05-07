@@ -28,6 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
   JS_SET_PROP(proto, "numberOfLines", NumberOfLines);
+  JS_SET_PROP(proto, "font", Font);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -157,6 +158,32 @@ NAN_SETTER(NUILabel::NumberOfLinesSetter) {
   int lines = TO_INT32(value);
 
   [ui setNumberOfLines:lines];
+}
+
+NAN_GETTER(NUILabel::FontGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+
+  Nan::ThrowError("TODO NUILabel::FontGetter");
+}
+
+NAN_SETTER(NUILabel::FontSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+
+  std::string fontName;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    fontName = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  @autoreleasepool {
+    [ui setFont:[UIFont fontWithName:[NSString stringWithUTF8String:fontName.c_str()] size:16]];
+  }
 }
 
 NUILabel::NUILabel () {}
