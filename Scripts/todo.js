@@ -152,8 +152,10 @@ async function setup() {
     console.log(tableView, section);
     return todos.length;
   }, (tableView, { row, section }) => {
-    console.log(todos[row]);
-    return new UITableViewCell();
+    const cell = new UITableViewCell();
+    cell.textLabel.text = todos[row];
+    console.log(cell.textLabel.text, todos[row]);
+    return cell;
   });
 
   todoTable.dataSource = mgr;

@@ -43,7 +43,7 @@ typealias CellForRowAtClosure = (UITableView, IndexPath) -> UITableViewCell
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return numberRowsInSectionCallback(tableView, section)
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     return cellForRowAtCallback(tableView, indexPath)
   }
