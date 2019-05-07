@@ -40,6 +40,10 @@
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
 #include "NUIBarButtonItem.h"
+#include "NSKView.h"
+#include "NARSKView.h"
+#include "NARSession.h"
+#include "NARWorldTrackingConfiguration.h"
 #include <unistd.h>
 
 #include <string>
@@ -349,6 +353,22 @@ void InitExports(Local<Object> exports) {
   
         auto N_CABasicAnimation = NCABasicAnimation::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CABasicAnimation").ToLocalChecked(), N_CABasicAnimation.first);
+  
+        // SpriteKit
+  
+        auto N_SKView = NSKView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKView").ToLocalChecked(), N_SKView.first);
+
+        // ARKit
+  
+        auto N_ARSKView = NARSKView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARSKView").ToLocalChecked(), N_ARSKView.first);
+
+        auto N_ARSession = NARSession::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARSession").ToLocalChecked(), N_ARSession.first);
+  
+        auto N_ARWorldTrackingConfiguration = NARWorldTrackingConfiguration::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARWorldTrackingConfiguration").ToLocalChecked(), N_ARWorldTrackingConfiguration.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

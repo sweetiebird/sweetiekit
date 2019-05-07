@@ -63,6 +63,10 @@
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
+		A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */; };
+		A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1222819D9500AC0BD9 /* NARSKView.mm */; };
+		A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1622819F8E00AC0BD9 /* NARSession.mm */; };
+		A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */; };
 		A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D67292226953BB00562A42 /* NUIViewController.mm */; };
 		A1D6729822695D0200562A42 /* NUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729722695D0200562A42 /* NUIView.mm */; };
 		A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729A22696D7A00562A42 /* NUIStoryboard.mm */; };
@@ -203,6 +207,14 @@
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
 		A1D65DD32281744C00AC0BD9 /* NUITarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITarget.h; sourceTree = "<group>"; };
 		A1D65DD42281745500AC0BD9 /* NUITarget.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITarget.mm; sourceTree = "<group>"; };
+		A1D65E0D22819C3400AC0BD9 /* NSKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKView.h; sourceTree = "<group>"; };
+		A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKView.mm; sourceTree = "<group>"; };
+		A1D65E1122819D8E00AC0BD9 /* NARSKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKView.h; sourceTree = "<group>"; };
+		A1D65E1222819D9500AC0BD9 /* NARSKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKView.mm; sourceTree = "<group>"; };
+		A1D65E1522819F8800AC0BD9 /* NARSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSession.h; sourceTree = "<group>"; };
+		A1D65E1622819F8E00AC0BD9 /* NARSession.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSession.mm; sourceTree = "<group>"; };
+		A1D65E182281A03600AC0BD9 /* NARWorldTrackingConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARWorldTrackingConfiguration.h; sourceTree = "<group>"; };
+		A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARWorldTrackingConfiguration.mm; sourceTree = "<group>"; };
 		A1D6729022694E7000562A42 /* libs_main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libs_main.hpp; sourceTree = "<group>"; };
 		A1D67291226953B100562A42 /* NUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewController.h; sourceTree = "<group>"; };
 		A1D67292226953BB00562A42 /* NUIViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewController.mm; sourceTree = "<group>"; };
@@ -559,6 +571,52 @@
 			path = SwiftInterfaces;
 			sourceTree = "<group>";
 		};
+		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
+				A1D65E1422819F7B00AC0BD9 /* NARSession */,
+				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
+			);
+			path = NARKit;
+			sourceTree = "<group>";
+		};
+		A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E0D22819C3400AC0BD9 /* NSKView.h */,
+				A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */,
+			);
+			path = NSKSpriteKit;
+			sourceTree = "<group>";
+		};
+		A1D65E1022819D7C00AC0BD9 /* NARSKView */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E1122819D8E00AC0BD9 /* NARSKView.h */,
+				A1D65E1222819D9500AC0BD9 /* NARSKView.mm */,
+			);
+			path = NARSKView;
+			sourceTree = "<group>";
+		};
+		A1D65E1422819F7B00AC0BD9 /* NARSession */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E1522819F8800AC0BD9 /* NARSession.h */,
+				A1D65E1622819F8E00AC0BD9 /* NARSession.mm */,
+			);
+			path = NARSession;
+			sourceTree = "<group>";
+		};
+		A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E182281A03600AC0BD9 /* NARWorldTrackingConfiguration.h */,
+				A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */,
+			);
+			path = NARWorldTrackingConfiguration;
+			sourceTree = "<group>";
+		};
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,6 +831,8 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */,
+				A1D65E0B22819C1600AC0BD9 /* NARKit */,
 				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D672A12269944C00562A42 /* NativeClasses */,
@@ -942,6 +1002,7 @@
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
+				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
@@ -958,6 +1019,7 @@
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
+				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
@@ -975,6 +1037,7 @@
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
+				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
@@ -987,6 +1050,7 @@
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
 				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
+				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
+#import <ARKit/ARKit.h>
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 
@@ -109,6 +111,10 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
 #include "NUIBarButtonItem.h"
+#include "NARSKView.h"
+#include "NARSession.h"
+#include "NARWorldTrackingConfiguration.h"
+#include "NSKView.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -129,6 +135,24 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[CABasicAnimation class]]) {
         return NCABasicAnimation::type;
+      }
+
+      // ARKit
+
+      if ([obj isKindOfClass:[ARSKView class]]) {
+        return NARSKView::type;
+      }
+      if ([obj isKindOfClass:[ARSession class]]) {
+        return NARSession::type;
+      }
+      if ([obj isKindOfClass:[ARWorldTrackingConfiguration class]]) {
+        return NARWorldTrackingConfiguration::type;
+      }
+
+      // SpriteKit
+      
+      if ([obj isKindOfClass:[SKView class]]) {
+        return NSKView::type;
       }
 
       // UIKit

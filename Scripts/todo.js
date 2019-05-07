@@ -35,6 +35,8 @@ const {
   UITableViewManager,
   NSObject,
   NSUserDefaults,
+  ARSKView,
+  ARWorldTrackingConfiguration,
 } = UIKit;
 
 // shared application
@@ -269,9 +271,34 @@ class MyApp {
   }
 }
 
+class MyARApp {
+  constructor(app) {
+    this.app = app;
+    this.sb = new UIStoryboard('Main');
+    this.vc = new UIViewController();
+  }
+
+  launch() {
+    this.app.keyWindow.setRootViewController(this.vc);
+    this.arView = new ARSKView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });
+    this.vc.view.addSubview(this.arView);
+    console.log(this.arView);
+    setTimeout(() => {
+      const config = new ARWorldTrackingConfiguration();
+      this.arView.session.run(config);
+    }, 2000);
+  }
+}
+
+// async function start() {
+//   const sharedApp = new UIApplication();
+//   const myApp = new MyApp(sharedApp);
+//   myApp.launch();
+// }
+
 async function start() {
   const sharedApp = new UIApplication();
-  const myApp = new MyApp(sharedApp);
+  const myApp = new MyARApp(sharedApp);
   myApp.launch();
 }
 
