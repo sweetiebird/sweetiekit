@@ -290,17 +290,17 @@ class MyARApp {
   }
 }
 
-// async function start() {
-//   const sharedApp = new UIApplication();
-//   const myApp = new MyApp(sharedApp);
-//   myApp.launch();
-// }
-
 async function start() {
   const sharedApp = new UIApplication();
-  const myApp = new MyARApp(sharedApp);
+  const myApp = new MyApp(sharedApp);
   myApp.launch();
 }
+
+// async function start() {
+//   const sharedApp = new UIApplication();
+//   const myApp = new MyARApp(sharedApp);
+//   myApp.launch();
+// }
 
 setTimeout(start, 1000);
 

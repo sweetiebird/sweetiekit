@@ -1309,6 +1309,27 @@ process.stderr.write('sweetiekit-node\\n');
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+      let sendingAppID = options[.sourceApplication]
+      print("source application = \(sendingAppID ?? "Unknown")")
+      
+      // Process the URL.
+      guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+        let developer = components.host,
+        let path = components.path else {
+              print("Invalid URL")
+              return false
+      }
 
+      if let appId = path.split(separator: "/").first  {
+      // e.g. "node-ios-hello-2://dev/someappid"
+          print("developer = \(developer)")
+          print("appId = \(appId)")
+          return true
+      } else {
+          print("app id missing")
+          return false
+      }
+    }
 }
 

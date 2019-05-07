@@ -182,6 +182,7 @@
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
 		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
+		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
 		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
 		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -831,6 +832,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */,
 				A1D65E0B22819C1600AC0BD9 /* NARKit */,
 				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
@@ -929,6 +931,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
 							};
 						};
 					};
