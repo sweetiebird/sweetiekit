@@ -154,15 +154,14 @@ class MyApp {
     this.app = app;
     this.todos = [];
     this.sb = new UIStoryboard('Main');
-    this.vc = this.sb.instantiateViewController('builder');
-    // this.setupDefaults();
-  //   this.todoVC = new UIViewController();
-  //   this.todoTable = new UITableView();
-  //   this.todoVC.view.addSubview(this.todoTable);
-  //   this.setupConstraints();
-  //   this.addBarItem();
-  //   this.setTableManager();
-  //   this.createNavController();
+     this.setupDefaults();
+     this.todoVC = new UIViewController();
+     this.todoTable = new UITableView();
+     this.todoVC.view.addSubview(this.todoTable);
+     this.setupConstraints();
+     this.addBarItem();
+     this.setTableManager();
+     this.createNavController();
   }
 
   setupDefaults() {
@@ -269,17 +268,17 @@ class MyApp {
     this.nav.isToolbarHidden = false;
   }
 
-  playAudio() {
-    this.sound = NSBundle.main().pathForResource('sunflower', 'mp3');
-    this.player = new AVAudioPlayer(this.sound);
-    console.log(this.sound, this.player);
-    if (this.player) {
-      this.player.play();
-    }
-  }
+  // playAudio() {
+  //   this.sound = NSBundle.main().pathForResource('sunflower', 'mp3');
+  //   this.player = new AVAudioPlayer(this.sound);
+  //   console.log(this.sound, this.player);
+  //   if (this.player) {
+  //     this.player.play();
+  //   }
+  // }
 
   launch() {
-    this.nav = new UINavigationController(this.vc);
+    this.nav = new UINavigationController(this.todoVC);
     this.app.keyWindow.setRootViewController(this.nav);
   }
 }
