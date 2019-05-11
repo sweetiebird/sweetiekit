@@ -1,4 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
+const axios = require('axios');
 
 const UIKit = SweetieKit;
 const ObjC = SweetieKit;
@@ -301,6 +302,11 @@ class MyApp {
 //     }, 2000);
 //   }
 // }
+
+axios.get('https://testserver-rugwhbkbuu.now.sh/').then((resp) => {
+  const { data } = resp;
+  console.log(data);
+});
 
 async function start() {
   const sharedApp = new UIApplication();
