@@ -1346,7 +1346,7 @@ extension JSApplication {
   }
 
   @objc func update(_ loop: UnsafeMutablePointer<uv_loop_s>!) {
-    print("iOS callback")
+//    print("iOS callback")
     uv_run(loop, UV_RUN_NOWAIT)
   }
 }

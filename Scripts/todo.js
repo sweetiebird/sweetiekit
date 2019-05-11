@@ -155,14 +155,14 @@ class MyApp {
     this.app = app;
     this.todos = [];
     this.sb = new UIStoryboard('Main');
-     this.setupDefaults();
-     this.todoVC = new UIViewController();
-     this.todoTable = new UITableView();
-     this.todoVC.view.addSubview(this.todoTable);
-     this.setupConstraints();
-     this.addBarItem();
-     this.setTableManager();
-     this.createNavController();
+    this.setupDefaults();
+    this.todoVC = new UIViewController();
+    this.todoTable = new UITableView();
+    this.todoVC.view.addSubview(this.todoTable);
+    this.setupConstraints();
+    this.addBarItem();
+    this.setTableManager();
+    this.createNavController();
   }
 
   setupDefaults() {
@@ -279,7 +279,6 @@ class MyApp {
   // }
 
   launch() {
-    this.nav = new UINavigationController(this.todoVC);
     this.app.keyWindow.setRootViewController(this.nav);
   }
 }
