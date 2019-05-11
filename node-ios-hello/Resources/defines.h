@@ -11,6 +11,7 @@
 
 #include <v8.h>
 #include <nan.h>
+#include "main.h"
 
 using namespace v8;
 

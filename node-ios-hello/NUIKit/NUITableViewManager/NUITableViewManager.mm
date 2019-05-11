@@ -106,6 +106,7 @@ NAN_SETTER(NUITableViewManager::DidSelectRowAtSetter) {
   mgr->_didSelectRowAt.Reset(Local<Function>::Cast(value));
   
   [sMgr setDidSelectRowAtCallback: ^ (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+    Nan::HandleScope scope;
     Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
     uint32_t section = [indexPath section];
     uint32_t row = [indexPath row];

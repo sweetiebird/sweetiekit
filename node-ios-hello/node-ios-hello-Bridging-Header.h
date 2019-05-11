@@ -4,6 +4,10 @@
 
 #include <stdarg.h>
 #import <UIKit/UIKit.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 extern void iOSLog0(const char* msg);
 extern void iOSTrap();
@@ -11,7 +15,13 @@ extern void registerNodeDLibs();
 
 extern void embed_start();
 
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
 #include "hello-v8.hpp"
 #include "hello-node.hpp"
 #include "mksnapshot.hpp"
 #include "libs_main.hpp"
+#include "main.h"
+#include <uv.h>

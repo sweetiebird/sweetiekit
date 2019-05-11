@@ -323,4 +323,4 @@ const options = {
   }
 };
 
-UIApplicationMain(options);
+//UIApplicationMain(options);

@@ -54,6 +54,7 @@
 #include <v8.h>
 #include <node.h>
 #include "nan.h"
+#include "main.h"
 
 #import <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
@@ -564,25 +565,25 @@ extern "C" void embed_start() {
 
 extern "C" void hello_node(const char* args);
 
-int main(int argc, char** argv)
-{
-#if 1
-    registerNodeDLibs();
-    chdir(getenv("HOME"));
-    chdir("Documents");
-    
-    NSString* entry = [ScriptGetter GetWithName:@"demo"];
-    if (entry == nullptr) {
-      __builtin_trap();
-    }
-    auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
-    fprintf(stderr, "%s\n", [entry UTF8String]);
-    fprintf(stderr, "%s\n", [args UTF8String]);
-    hello_node([args UTF8String]);
-    
-#else
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-    }
-#endif
-}
+//int main(int argc, char** argv)
+//{
+//#if 1
+//    registerNodeDLibs();
+//    chdir(getenv("HOME"));
+//    chdir("Documents");
+//
+//    NSString* entry = [ScriptGetter GetWithName:@"demo"];
+//    if (entry == nullptr) {
+//      __builtin_trap();
+//    }
+//    auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
+//    fprintf(stderr, "%s\n", [entry UTF8String]);
+//    fprintf(stderr, "%s\n", [args UTF8String]);
+//    hello_node([args UTF8String]);
+//
+//#else
+//    @autoreleasepool {
+//        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+//    }
+//#endif
+//}

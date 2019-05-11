@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
+#include "main.h"
 
 Nan::Persistent<FunctionTemplate> NUIApplication::type;
 UIWindow* NUIApplication::tmp_UIWindow;
@@ -139,9 +140,9 @@ NAN_METHOD(NUIApplication::Main) {
   MicrotasksScope noMicrotasks(isolate, MicrotasksScope::kDoNotRunMicrotasks);
   sweetiekit::nodeIsolate = isolate;
   isolate->Exit();
-  @autoreleasepool {
-    UIApplicationMain(arg.size() - 1, &arg[0], nullptr, result);
-  }
+//  @autoreleasepool {
+//    UIApplicationMain(arg.size() - 1, &arg[0], NSStringFromClass(JSApplication.class), result);
+//  }
   
 }
 

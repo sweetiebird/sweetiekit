@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         iOSLog0("Finished launching\n");
-        embed_start();
+        //embed_start();
         if (false) {
             run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
             iOSLog0("Done embedding");
@@ -1333,20 +1333,20 @@ process.stderr.write('sweetiekit-node\\n');
     }
 }
 
-//typealias Thunk = () -> ()
-//
-//extension JSApplication {
-//  @objc static var afterNodeExit: Thunk?
-//
-//  @objc func start() {
-//    if let afterNodeExit = JSApplication.afterNodeExit {
-//      JSApplication.afterNodeExit = nil
-//      afterNodeExit()
-//    }
-//  }
-//
-//  @objc func update(_ loop: UnsafeMutablePointer<uv_loop_s>!) {
-//    print("iOS callback")
-//    uv_run(loop, UV_RUN_NOWAIT)
-//  }
-//}
+typealias Thunk = () -> ()
+
+extension JSApplication {
+  @objc static var afterNodeExit: Thunk?
+
+  @objc func start() {
+    if let afterNodeExit = JSApplication.afterNodeExit {
+      JSApplication.afterNodeExit = nil
+      afterNodeExit()
+    }
+  }
+
+  @objc func update(_ loop: UnsafeMutablePointer<uv_loop_s>!) {
+    print("iOS callback")
+    uv_run(loop, UV_RUN_NOWAIT)
+  }
+}
