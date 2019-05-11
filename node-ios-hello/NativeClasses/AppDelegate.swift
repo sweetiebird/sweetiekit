@@ -1333,3 +1333,20 @@ process.stderr.write('sweetiekit-node\\n');
     }
 }
 
+//typealias Thunk = () -> ()
+//
+//extension JSApplication {
+//  @objc static var afterNodeExit: Thunk?
+//
+//  @objc func start() {
+//    if let afterNodeExit = JSApplication.afterNodeExit {
+//      JSApplication.afterNodeExit = nil
+//      afterNodeExit()
+//    }
+//  }
+//
+//  @objc func update(_ loop: UnsafeMutablePointer<uv_loop_s>!) {
+//    print("iOS callback")
+//    uv_run(loop, UV_RUN_NOWAIT)
+//  }
+//}

@@ -115,6 +115,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
 #include "NSKView.h"
+#include "NNSBundle.h"
+#include "NAVAudioPlayer.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -241,6 +243,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // ========= objects
       if ([obj isKindOfClass:[UIBarButtonItem class]]) {
         return NUIBarButtonItem::type;
+      }
+      if ([obj isKindOfClass:[AVAudioPlayer class]]) {
+        return NAVAudioPlayer::type;
+      }
+      if ([obj isKindOfClass:[NSBundle class]]) {
+        return NNSBundle::type;
       }
       if ([obj isKindOfClass:[NSLayoutConstraint class]]) {
         return NNSLayoutConstraint::type;

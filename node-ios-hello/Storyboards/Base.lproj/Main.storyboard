@@ -308,6 +308,35 @@
             </objects>
             <point key="canvasLocation" x="-820" y="-173.16341829085459"/>
         </scene>
+        <!--Builder View Controller-->
+        <scene sceneID="Fks-dc-Gxk">
+            <objects>
+                <viewController storyboardIdentifier="builder" id="g6n-Nn-jur" customClass="BuilderViewController" customModule="node_ios_hello" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bh1-Jw-rmB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Non-VM-jUJ">
+                                <rect key="frame" x="87" y="337" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="laarc" translatesAutoresizingMaskIntoConstraints="NO" id="vZA-SE-zOe">
+                                <rect key="frame" x="87" y="83" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="KwS-S6-b0j"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstImageView" destination="vZA-SE-zOe" id="FPO-e7-Su0"/>
+                        <outlet property="secondImageView" destination="Non-VM-jUJ" id="8eM-mQ-1KE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRJ-L0-xpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-420" y="-1032.2338830584708"/>
+        </scene>
         <!--NodeUI Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -325,6 +354,7 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="laarc" width="60" height="60"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>

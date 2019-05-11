@@ -44,8 +44,12 @@
 		A126560522719CE400D3DF47 /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A12655F622719CE400D3DF47 /* js-blockchain */; };
 		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
+		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
+		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
+		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
+		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
 		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
@@ -178,11 +182,17 @@
 		A12655F622719CE400D3DF47 /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A12655F722719CE400D3DF47 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
 		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
 		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
 		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
+		A174A16922822161002A8216 /* NAVAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NAVAudioPlayer.h; sourceTree = "<group>"; };
+		A174A16A22822169002A8216 /* NAVAudioPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioPlayer.mm; sourceTree = "<group>"; };
+		A174A16D22822290002A8216 /* NNSBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSBundle.h; sourceTree = "<group>"; };
+		A174A16E2282229B002A8216 /* NNSBundle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSBundle.mm; sourceTree = "<group>"; };
+		A174A170228227A2002A8216 /* sunflower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sunflower.mp3; sourceTree = "<group>"; };
 		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
 		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -469,6 +479,32 @@
 			path = NUIPresentationController;
 			sourceTree = "<group>";
 		};
+		A174A1672282214B002A8216 /* NAVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16822822152002A8216 /* NAVAudioPlayer */,
+			);
+			path = NAVFoundation;
+			sourceTree = "<group>";
+		};
+		A174A16822822152002A8216 /* NAVAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16922822161002A8216 /* NAVAudioPlayer.h */,
+				A174A16A22822169002A8216 /* NAVAudioPlayer.mm */,
+			);
+			path = NAVAudioPlayer;
+			sourceTree = "<group>";
+		};
+		A174A16C22822286002A8216 /* NNSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16D22822290002A8216 /* NNSBundle.h */,
+				A174A16E2282229B002A8216 /* NNSBundle.mm */,
+			);
+			path = NNSBundle;
+			sourceTree = "<group>";
+		};
 		A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +748,7 @@
 				A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */,
 				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
 				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
+				A149D0A4228260D300E11EDA /* BuilderViewController.swift */,
 			);
 			path = NativeClasses;
 			sourceTree = "<group>";
@@ -769,6 +806,7 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A174A16C22822286002A8216 /* NNSBundle */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
@@ -809,6 +847,7 @@
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A174A170228227A2002A8216 /* sunflower.mp3 */,
 				A1058B44226810B700CEAA5C /* embedded.S */,
 				A1058B46226810BF00CEAA5C /* snapshot.cc */,
 				A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */,
@@ -832,6 +871,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A174A1672282214B002A8216 /* NAVFoundation */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */,
 				A1D65E0B22819C1600AC0BD9 /* NARKit */,
@@ -982,6 +1022,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */,
+				A174A171228227A2002A8216 /* sunflower.mp3 in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
@@ -997,6 +1038,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
@@ -1062,8 +1104,10 @@
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
+				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
 				A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */,

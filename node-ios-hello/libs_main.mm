@@ -43,6 +43,8 @@
 #include "NSKView.h"
 #include "NARSKView.h"
 #include "NARSession.h"
+#include "NNSBundle.h"
+#include "NAVAudioPlayer.h"
 #include "NARWorldTrackingConfiguration.h"
 #include <unistd.h>
 
@@ -252,6 +254,12 @@ void InitExports(Local<Object> exports) {
         auto N_NSObject = NNSObject::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSObject").ToLocalChecked(), N_NSObject.first);
   
+        auto N_NSBundle = NNSBundle::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSBundle").ToLocalChecked(), N_NSBundle.first);
+  
+         auto N_AVAudioPlayer = NAVAudioPlayer::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("AVAudioPlayer").ToLocalChecked(), N_AVAudioPlayer.first);
+
         auto N_NSUserDefaults = NNSUserDefaults::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSUserDefaults").ToLocalChecked(), N_NSUserDefaults.first);
 
