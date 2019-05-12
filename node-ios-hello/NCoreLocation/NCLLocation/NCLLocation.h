@@ -29,6 +29,12 @@ public:
   JS_PROP(Coordinate);
   JS_PROP(Altitude);
   JS_PROP(Floor);
+  JS_PROP(HorizontalAccuracy);
+  JS_PROP(VerticalAccuracy);
+  JS_PROP(Timestamp);
+  static NAN_METHOD(Distance);
+  JS_PROP(Speed);
+  JS_PROP(Course);
 };
 
 #endif /* NCLLocation_h */
