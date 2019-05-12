@@ -66,19 +66,16 @@ NAN_GETTER(NUIApplication::KeyWindowGetter)
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       tmp_UIWindow = [app keyWindow];
-      if (tmp_UIWindow == nullptr) {
-        tmp_UIWindow = [UIWindow new];
-        [tmp_UIWindow makeKeyAndVisible];
-      }
     });
   }
-
-  Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
-  };
-  Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-  
-  info.GetReturnValue().Set(winObj);
+  if (tmp_UIWindow != nullptr) {
+    Local<Value> argv[] = {
+      Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
+    };
+    Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+    
+    info.GetReturnValue().Set(winObj);
+  }
 }
 
 #import "node_ios_hello-Swift.h"
