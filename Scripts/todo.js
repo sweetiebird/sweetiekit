@@ -160,16 +160,33 @@ const CLLocationAccuracy = {
 //   return todoVC;
 // }
 
+const randomColor = () => {
+  const colors = [
+    { red: 205/255, green: 37/255, blue: 83/255, alpha: 1 },
+    { red: 205/255, green: 223/255, blue: 206/255, alpha: 1 },
+    { red: 87/255, green: 174/255, blue: 176/255, alpha: 1 },
+    { red: 1, green: 1, blue: 1, alpha: 1 },
+    { red: 0, green: 0, blue: 0, alpha: 1 },
+  ];
+  const index = Math.floor(Math.random() * colors.length);
+  return colors[index];
+};
+
+const target = { lat: 41.880605, lng: -87.630256 };
+
 class ARApp {
   constructor(app) {
     this.app = app;
+    this.targetAdded = false;
     this.vc = new UIViewController();
     const view = this.vc.view;
     this.arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
     this.vc.view.addSubview(this.arView);
     this.config = new ARWorldTrackingConfiguration();
     this.viewDel = new ARSKViewDelegate(() => {
-      const node = new SKSpriteNode('flux');
+      const node = new SKSpriteNode('flux_white');
+      node.colorBlendFactor = 1;
+      node.color = randomColor();
       return node;
     });
     this.arView.delegate = this.viewDel;
@@ -179,13 +196,23 @@ class ARApp {
 
   setupLocationUpdates() {
     this.locDel = new CLLocationManagerDelegate((mgr, status) => {
-      console.log(mgr, status);
       this.locMgr.startUpdatingLocation();
     }, (mgr, locations) => {
-      console.log(locations);
-      locations.forEach((loc) => {
-        console.log('location', loc.coordinate.latitude, loc.coordinate.longitude, loc.altitude, loc.floor);
-      });
+      if (!this.targetAdded) {
+        for (let i = 0, len = locations.length; i < len; i++) {
+          const loc = locations[i];
+          const { coordinate } = loc;
+          const { latitude, longitude } = coordinate;
+          if (latitude - target.lat <= 0.01) {
+            if (longitude - target.lng <= 0.01) {
+              console.log('ADD TARGET');
+              this.targetAdded = true;
+              this.arView.session.add();
+              break;
+            }
+          }
+        }
+      }
     });
     this.locMgr = new CLLocationManager();
     this.locMgr.delegate = this.locDel;

@@ -28,6 +28,8 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(Size);
+  JS_PROP(ColorBlendFactor);
+  JS_PROP(Color);
 };
 
 #endif /* NSKSpriteNode_h */

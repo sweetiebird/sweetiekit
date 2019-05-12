@@ -29,6 +29,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isol
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "size", Size);
+  JS_SET_PROP(proto, "colorBlendFactor", ColorBlendFactor);
+  JS_SET_PROP(proto, "color", Color);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -93,5 +95,45 @@ NAN_SETTER(NSKSpriteNode::SizeSetter) {
       CGSize size = CGSizeMake(width, height);
       [node setSize:size];
     });
+  }
+}
+
+NAN_GETTER(NSKSpriteNode::ColorBlendFactorGetter) {
+  Nan::HandleScope scope;
+
+  Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
+}
+
+NAN_SETTER(NSKSpriteNode::ColorBlendFactorSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKSpriteNode, node);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      double factor = TO_DOUBLE(value);
+      [node setColorBlendFactor:factor];
+    });
+  }
+}
+
+NAN_GETTER(NSKSpriteNode::ColorGetter) {
+  Nan::HandleScope scope;
+
+  Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
+}
+
+NAN_SETTER(NSKSpriteNode::ColorSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKSpriteNode, node);
+
+  @autoreleasepool {
+    double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+    double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+    double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+    double alpha = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha")));
+    UIColor *color = [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
+    [node setColor:color];
   }
 }
