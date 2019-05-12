@@ -486,6 +486,126 @@ class MyApp {
   }
 }
 
+class CollectionApp {
+  constructor(app) {
+    this.app = app;
+    this.items = [];
+    this.sb = new UIStoryboard('Main');
+    this.setupDefaults();
+    this.vc = new UIViewController();
+    this.collView = new UITableView();
+    this.vc.view.addSubview(this.collView);
+    this.addBarItem();
+    this.setupConstraints();
+    this.setCollectionManager();
+    this.createNavController();
+  }
+
+  setupDefaults() {
+    this.defaults = new NSUserDefaults();
+
+    const existingItems = this.defaults.stringForKey('ITEMS');
+    if (existingItems) {
+      const itemsObj = JSON.parse(existingItems);
+      console.log(itemsObj);
+      if (itemsObj) {
+        this.items = itemsObj;
+      }
+    } else {
+      const strItems = JSON.stringify(this.items);
+      this.defaults.setValueForKey(strItems, 'ITEMS');
+    }
+  }
+
+  setupConstraints() {
+    this.collView.translatesAutoresizingMaskIntoConstraints = false;
+
+    this.collView
+      .leadingAnchor
+      .constraintEqualToAnchor(this.vc.view.leadingAnchor, 0)
+      .isActive = true;
+    this.collView
+      .trailingAnchor
+      .constraintEqualToAnchor(this.vc.view.trailingAnchor, 0)
+      .isActive = true;
+    this.collView
+      .topAnchor
+      .constraintEqualToAnchor(this.vc.view.topAnchor, 0)
+      .isActive = true;
+    this.collView
+      .bottomAnchor
+      .constraintEqualToAnchor(this.vc.view.bottomAnchor, 0)
+      .isActive = true;
+  }
+
+  addNewItem() {
+    const d = new Date();
+    const dateStr = `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+
+    const newItem = {
+      text: dateStr,
+      isDone: false,
+    };
+
+    this.items.push(newItem);
+
+    this.collView.reloadData();
+
+    this.collView.scrollToItemAtIndexPath(
+      { section: 0, row: this.items.length - 1 },
+      UICollectionViewScrollPosition.CenteredVertically,
+      true,
+    );
+
+    const itemsStr = JSON.stringify(this.items);
+    this.defaults.setValueForKey(itemsStr, 'ITEMS');
+  }
+
+  addBarItem() {
+    const addBarItem = new UIBarButtonItem('Add', this.addNewItem.bind(this));
+    this.vc.toolbarItems = [addBarItem];
+  }
+
+  getItemsFor(tableView, section) {
+    return this.todos.length;
+  }
+
+  getCellFor(tableView, { section, row }) {
+    const cell = new UITableViewCell();
+    const todo = this.todos[row];
+    if (todo && todo.text) {
+      cell.textLabel.text = todo.text;
+      if (!todo.isDone) {
+        cell.textLabel.font = 'Arial-BoldMT';
+      }
+    }
+    return cell;
+  }
+
+  handleCellSelected(tableView, { section, row }) {
+    const cell = this.collView.cellForItemAt({ section, row });
+    console.log('item selected: cell: ', cell);
+  }
+
+  setCollectionManager() {
+    this.mgr = new UICollectionViewManager(this.getItemsFor.bind(this), this.getCellFor.bind(this));
+
+    this.mgr.didSelectItemAt = this.handleCellSelected.bind(this);
+
+    this.collView.dataSource = this.mgr;
+    this.collView.delegate = this.mgr;
+  }
+
+  createNavController() {
+    this.nav = new UINavigationController(this.vc);
+    this.nav.isToolbarHidden = false;
+  }
+
+  launch() {
+    this.app.keyWindow.setRootViewController(this.nav);
+  }
+}
+
 async function start() {
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
