@@ -343,11 +343,23 @@ class MyApp {
 //   myApp.launch();
 // }
 
+// async function start() {
+//   const sharedApp = new UIApplication();
+//   const myApp = new ARApp(sharedApp);
+//   myApp.launch();
+// }
+
 async function start() {
   const sharedApp = new UIApplication();
-  const myApp = new ARApp(sharedApp);
-  myApp.launch();
+  if (sharedApp.keyWindow) {
+    const myApp = new ARApp(sharedApp);
+    myApp.launch();
+  } else {
+    setTimeout(start, 10);
+  }
 }
+
+setTimeout(start, 1);
 
 
 // async function start() {
@@ -355,8 +367,6 @@ async function start() {
 //   const myApp = new MyARApp(sharedApp);
 //   myApp.launch();
 // }
-
-setTimeout(start, 1000);
 
 const options = {
   appDelegate: 'AppDelegate',
