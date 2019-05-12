@@ -82,6 +82,7 @@ NAN_METHOD(NUITextField::Alloc) {
       [ui setClearButtonMode:UITextFieldViewModeWhileEditing];
       [ui setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
       [ui setTargetClosureWithClosure:^(UITextField*){
+        Nan::HandleScope scope;
         sweetiekit::Resolve(nui->_callback);
         return true;
       }];

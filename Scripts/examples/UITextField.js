@@ -4,11 +4,11 @@ const {
   UITextField,
 } = SweetieKit;
 
-async function make() {
-  const field = await UITextField.alloc(0, 0, 200, 50, () => {
+async function make(demoVC) {
+  const w = demoVC.view.frame.width;
+  const field = await UITextField.alloc(12, 80, w - 24, 50, () => {
     console.log(field.text);
   });
-
   return field;
 }
 

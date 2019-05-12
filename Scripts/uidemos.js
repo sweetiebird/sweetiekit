@@ -7,6 +7,7 @@ const makeLabel = require('./examples/UILabel');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
+const makeTextField = require('./examples/UITextField');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
 const makeImagePickerCtrl = require('./examples/UIImagePickerController');
@@ -30,6 +31,7 @@ const demoTypes = {
   UIScrollView: makeScrollView,
   UISlider: makeSlider,
   UISwitch: makeSwitch,
+  UITextField: makeTextField,
   UIView: makeView,
 };
 
