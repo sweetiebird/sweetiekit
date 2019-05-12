@@ -366,11 +366,11 @@ void InitExports(Local<Object> exports) {
         auto N_UITableViewCell = NUITableViewCell::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITableViewCell").ToLocalChecked(), N_UITableViewCell.first);
 
-        auto N_UITableView = NUITableView::Initialize(Isolate::GetCurrent());
-        exports->Set(Nan::New("UITableView").ToLocalChecked(), N_UITableView.first);
-
         auto N_UIScrollView = NUIScrollView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIScrollView").ToLocalChecked(), N_UIScrollView.first);
+        
+        auto N_UITableView = NUITableView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITableView").ToLocalChecked(), N_UITableView.first);
 
         auto N_UICollectionView = NUICollectionView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UICollectionView").ToLocalChecked(), N_UICollectionView.first);
