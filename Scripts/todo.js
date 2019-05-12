@@ -43,6 +43,7 @@ const {
   NSBundle,
   SKLabelNode,
   SKScene,
+  SKSpriteNode,
 } = UIKit;
 
 // shared application
@@ -162,9 +163,8 @@ class ARApp {
     this.vc.view.addSubview(this.arView);
     this.config = new ARWorldTrackingConfiguration();
     this.viewDel = new ARSKViewDelegate(() => {
-      const labelNode = new SKLabelNode();
-      labelNode.text = '👾';
-      return labelNode;
+      const node = new SKSpriteNode('laarc');
+      return node;
     });
     this.arView.delegate = this.viewDel;
     this.scene = new SKScene('Scene');

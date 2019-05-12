@@ -77,6 +77,7 @@
 		A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */; };
 		A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1BD4B8D2287CCF3001D1F6E /* Scene.sks */; };
 		A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8F2287CDD9001D1F6E /* Scene.swift */; };
+		A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -250,6 +251,8 @@
 		A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKScene.mm; sourceTree = "<group>"; };
 		A1BD4B8D2287CCF3001D1F6E /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
 		A1BD4B8F2287CDD9001D1F6E /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		A1BD4B922287D549001D1F6E /* NSKSpriteNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKSpriteNode.h; sourceTree = "<group>"; };
+		A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKSpriteNode.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -718,6 +721,15 @@
 			path = NSKScene;
 			sourceTree = "<group>";
 		};
+		A1BD4B912287D53B001D1F6E /* NSKSpriteNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B922287D549001D1F6E /* NSKSpriteNode.h */,
+				A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */,
+			);
+			path = NSKSpriteNode;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +772,7 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
 				A1BD4B892287CA2E001D1F6E /* NSKScene */,
 				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
 				A1BD4B812287C355001D1F6E /* NSKNode */,
@@ -1240,6 +1253,7 @@
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
+				A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,

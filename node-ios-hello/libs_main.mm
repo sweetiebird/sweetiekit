@@ -52,6 +52,7 @@
 #include "NARAnchor.h"
 #include "NSCNView.h"
 #include "NSKScene.h"
+#include "NSKSpriteNode.h"
 #include <unistd.h>
 
 #include <string>
@@ -371,11 +372,15 @@ void InitExports(Local<Object> exports) {
   
         // SpriteKit
   
+
         auto N_SKView = NSKView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKView").ToLocalChecked(), N_SKView.first);
   
         auto N_SKNode = NSKNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKNode").ToLocalChecked(), N_SKNode.first);
+  
+        auto N_SKSpriteNode = NSKSpriteNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKSpriteNode").ToLocalChecked(), N_SKSpriteNode.first);
   
         auto N_SKLabelNode = NSKLabelNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKLabelNode").ToLocalChecked(), N_SKLabelNode.first);

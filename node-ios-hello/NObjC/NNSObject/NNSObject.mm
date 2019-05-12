@@ -124,6 +124,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NARAnchor.h"
 #include "NSCNView.h"
 #include "NSKScene.h"
+#include "NSKSpriteNode.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -172,6 +173,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKSpriteNode class]]) {
+        return NSKSpriteNode::type;
+      }
       if ([obj isKindOfClass:[SKScene class]]) {
         return NSKScene::type;
       }
