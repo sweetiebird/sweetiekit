@@ -66,12 +66,11 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
           for (NSInteger i = 0; i < count; i++) {
             CLLocation* loc = [locations objectAtIndex:i];
             if (loc != nullptr) {
-              Local<Object> result = Object::New(Isolate::GetCurrent());
-              double lng = [loc coordinate].longitude;
-              double lat = [loc coordinate].latitude;
-              result->Set(JS_STR("latitude"), JS_NUM(lat));
-              result->Set(JS_STR("longitude"), JS_NUM(lng));
-              Nan::Set(locResult, static_cast<uint32_t>(i), result);
+              Local<Value> argv[] = {
+                Nan::New<v8::External>((__bridge void*)loc)
+              };
+              Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(loc, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+              Nan::Set(locResult, static_cast<uint32_t>(i), value);
             }
           }
 

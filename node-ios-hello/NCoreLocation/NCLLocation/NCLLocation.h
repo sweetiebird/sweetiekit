@@ -27,6 +27,8 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(Coordinate);
+  JS_PROP(Altitude);
+  JS_PROP(Floor);
 };
 
 #endif /* NCLLocation_h */

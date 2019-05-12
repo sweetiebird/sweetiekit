@@ -169,7 +169,7 @@ class ARApp {
     this.vc.view.addSubview(this.arView);
     this.config = new ARWorldTrackingConfiguration();
     this.viewDel = new ARSKViewDelegate(() => {
-      const node = new SKSpriteNode('laarc');
+      const node = new SKSpriteNode('flux');
       return node;
     });
     this.arView.delegate = this.viewDel;
@@ -184,7 +184,7 @@ class ARApp {
     }, (mgr, locations) => {
       console.log(locations);
       locations.forEach((loc) => {
-        console.log('location', loc.latitude, loc.longitude);
+        console.log('location', loc.coordinate.latitude, loc.coordinate.longitude, loc.altitude, loc.floor);
       });
     });
     this.locMgr = new CLLocationManager();

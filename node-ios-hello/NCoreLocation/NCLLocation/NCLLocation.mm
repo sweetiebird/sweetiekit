@@ -29,6 +29,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCLLocation::Initialize(Isolat
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "coordinate", Coordinate);
+  JS_SET_PROP_READONLY(proto, "altitude", Altitude);
+  JS_SET_PROP_READONLY(proto, "floor", Floor);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -72,4 +74,24 @@ NAN_GETTER(NCLLocation::CoordinateGetter) {
   result->Set(JS_STR("longitude"), JS_NUM(lng));
 
   JS_SET_RETURN(result);
+}
+
+NAN_GETTER(NCLLocation::FloorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  NSInteger level = [[loc floor] level];
+
+  JS_SET_RETURN(JS_NUM(level));
+}
+
+NAN_GETTER(NCLLocation::AltitudeGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  double alt = [loc altitude];
+
+  JS_SET_RETURN(JS_NUM(alt));
 }
