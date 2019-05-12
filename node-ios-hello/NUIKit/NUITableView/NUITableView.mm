@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUITableView.h"
-#include "NUIView.h"
+#include "NUIScrollView.h"
 #include "NUITableViewDataSource.h"
 #import "node_ios_hello-Swift.h"
 
@@ -21,7 +21,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isola
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
+  ctor->Inherit(Nan::New(NUIScrollView::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UITableView"));
   type.Reset(ctor);

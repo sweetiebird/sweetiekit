@@ -10,13 +10,13 @@
 #define NUITableView_h
 
 #import <UIKit/UIKit.h>
-#include "NUIView.h"
+#include "NUIScrollView.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NUITableView : public NUIView {
+class NUITableView : public NUIScrollView {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
@@ -39,6 +39,5 @@ public:
 
   Nan::Persistent<Value> _dataSource;
 };
-
 
 #endif /* NUITableView_h */
