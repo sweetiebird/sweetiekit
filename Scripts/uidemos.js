@@ -12,6 +12,7 @@ const makeAlertCtrl = require('./examples/UIAlertController');
 const makeImagePickerCtrl = require('./examples/UIImagePickerController');
 const makeNavigationCtrl = require('./examples/UINavigationController');
 const makeTabBarCtrl = require('./examples/UITabBarController');
+const makeTableView = require('./examples/UITableView');
 
 const {
   UIApplication,
@@ -38,6 +39,7 @@ const demoCtrls = {
   UIImagePickerController: makeImagePickerCtrl,
   UINavigationController: makeNavigationCtrl,
   UITabBarController: makeTabBarCtrl,
+  UITableView: makeTableView,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
