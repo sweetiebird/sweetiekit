@@ -4,6 +4,7 @@ const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
+const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -23,6 +24,7 @@ const demoTypes = {
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
+  UIScrollView: makeScrollView,
   UISlider: makeSlider,
   UIView: makeView,
 };
@@ -128,7 +130,9 @@ class UIDemosApp {
   }
 
   showDemoUI(view) {
-    this.demoVC.view.addSubview(view);
+    if (view) {
+      this.demoVC.view.addSubview(view);
+    }
     this.nav.pushViewController(this.demoVC);
   }
 
