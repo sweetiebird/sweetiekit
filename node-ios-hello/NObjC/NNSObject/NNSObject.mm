@@ -112,6 +112,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
+#include "NUIAlertController.h"
+#include "NUIAlertAction.h"
 #include "NUIScrollView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
@@ -268,6 +270,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIResponder::type;
       }
       // ======== controllers
+      if ([obj isKindOfClass:[UIAlertController class]]) {
+        return NUIAlertController::type;
+      }
       if ([obj isKindOfClass:[UICollectionViewController class]]) {
         return NUICollectionViewController::type;
       }
@@ -321,6 +326,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= objects
+      if ([obj isKindOfClass:[UIAlertAction class]]) {
+        return NUIAlertAction::type;
+      }
       if ([obj isKindOfClass:[UINib class]]) {
         return NUINib::type;
       }

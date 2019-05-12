@@ -1,7 +1,9 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+const makeButton = require('./examples/UIButton');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
+const makeAlertCtrl = require('./examples/UIAlertController');
 
 const {
   UIApplication,
@@ -13,8 +15,13 @@ const {
 } = SweetieKit;
 
 const demoTypes = {
+  UIButton: makeButton,
   UISlider: makeSlider,
   UIView: makeView,
+};
+
+const demoCtrls = {
+  UIAlertController: makeAlertCtrl,
 };
 
 class UIDemosApp {
@@ -59,33 +66,53 @@ class UIDemosApp {
   }
 
   getCellFor(tableView, indexPath) {
-    const { row } = indexPath;
+    const { row, section } = indexPath;
     const cell = new UITableViewCell();
-    const type = Object.keys(demoTypes)[row];
-    if (type) {
-      cell.textLabel.text = type;
+    if (section === 0) {
+      const type = Object.keys(demoTypes)[row];
+      if (type) {
+        cell.textLabel.text = type;
+      }
+    } else {
+      const type = Object.keys(demoCtrls)[row];
+      if (type) {
+        cell.textLabel.text = type;
+      }
     }
     return cell;
   }
 
   getNumberRows(tableView, section) {
-    return Object.keys(demoTypes).length;
+    if (section === 0) {
+      return Object.keys(demoTypes).length;
+    }
+    return Object.keys(demoCtrls).length;
   }
 
   async handleCellSelected(tableView, indexPath) {
-    const { row } = indexPath;
+    const { section, row } = indexPath;
 
     const cell = this.table.cellForRowAt(indexPath);
     if (cell) {
       cell.isSelected = false;
     }
 
-    const type = Object.keys(demoTypes)[row];
+    if (section === 0) {
+      const type = Object.keys(demoTypes)[row];
 
-    if (demoTypes[type]) {
-      this.createDemoVC();
-      const ui = await demoTypes[type](this.demoVC);
-      this.showDemoUI(ui);
+      if (demoTypes[type]) {
+        this.createDemoVC();
+        const ui = await demoTypes[type](this.demoVC);
+        this.showDemoUI(ui);
+      }
+    } else {
+      const type = Object.keys(demoCtrls)[row];
+      if (demoCtrls[type]) {
+        this.createDemoVC();
+        const ctrl = await demoCtrls[type](this.nav, this.demoVC);
+        this.nav.pushViewController(this.demoVC);
+        this.demoVC.present(ctrl, true, () => {});
+      }
     }
   }
 
@@ -94,12 +121,22 @@ class UIDemosApp {
     this.nav.pushViewController(this.demoVC);
   }
 
+  presentDemoUI(ctrl) {
+    this.nav.pushViewController(this.demoVC);
+    setTimeout(() => {
+      this.demoVC.present(ctrl, true);
+    }, 1000);
+  }
+
   setTableManager() {
     this.mgr = new UITableViewManager(
       this.getNumberRows.bind(this),
       this.getCellFor.bind(this),
     );
 
+    this.mgr.numberOfSections = () => {
+      return 2;
+    };
     this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
 
     this.table.dataSource = this.mgr;

@@ -30,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewManager::Initializ
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "didSelectRowAt", DidSelectRowAt);
+  JS_SET_PROP(proto, "numberOfSections", NumberOfSections);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -114,5 +115,32 @@ NAN_SETTER(NUITableViewManager::DidSelectRowAtSetter) {
     Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
     Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
     mgr->_didSelectRowAt("NUITableViewManager::New", tableViewObj, indexPathObj);
+  }];
+}
+
+NAN_GETTER(NUITableViewManager::NumberOfSectionsGetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  Nan::ThrowError("TODO NUITableViewManager::NumberOfSectionsGetter");
+}
+
+NAN_SETTER(NUITableViewManager::NumberOfSectionsSetter) {
+  Nan::HandleScope scope;
+
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  mgr->_numberSections.Reset(Local<Function>::Cast(value));
+  
+  [sMgr setNumberOfSectionsCallback: ^ NSInteger (UITableView * _Nonnull tableView) {
+    Nan::HandleScope scope;
+    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+    Local<Value> resultVal = mgr->_numberSections("NUITableViewManager::NumberOfSectionsSetter",
+            tableViewObj);
+    int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+    return result;
   }];
 }

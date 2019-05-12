@@ -13,12 +13,14 @@ typealias NumberSectionsClosure = (UITableView) -> Int
 typealias NumberRowsInSectionClosure = (UITableView, Int) -> Int
 typealias CellForRowAtClosure = (UITableView, IndexPath) -> UITableViewCell
 typealias DidSelectRowAtClosure = (UITableView, IndexPath) -> Void
+typealias TitleForSectionHeaderClosure = (UITableView, Int) -> String?
 
 @objc class SUITableViewManager: NSObject, UITableViewDataSource, UITableViewDelegate {
   var numberSectionsCallback: NumberSectionsClosure?
   var numberRowsInSectionCallback: NumberRowsInSectionClosure!
   var cellForRowAtCallback: CellForRowAtClosure!
   var didSelectRowAtCallback: DidSelectRowAtClosure?
+  var titleForSectionCallback: TitleForSectionHeaderClosure?
 
   override init() {
     super.init()
@@ -55,6 +57,13 @@ typealias DidSelectRowAtClosure = (UITableView, IndexPath) -> Void
       didSelectRowAtCallback(tableView, indexPath)
     }
   }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    if let titleForSectionCallback = titleForSectionCallback {
+      return titleForSectionCallback(tableView, section)
+    }
+    return String(section)
+  }
 }
 
 @objc extension SUITableViewManager {
@@ -64,6 +73,10 @@ typealias DidSelectRowAtClosure = (UITableView, IndexPath) -> Void
 
   func setDidSelectRowAtCallback(_ closure: @escaping DidSelectRowAtClosure) {
     didSelectRowAtCallback = closure
+  }
+  
+  func setTitleForSectionCallback(_ closure: @escaping TitleForSectionHeaderClosure) {
+    titleForSectionCallback = closure
   }
 }
 

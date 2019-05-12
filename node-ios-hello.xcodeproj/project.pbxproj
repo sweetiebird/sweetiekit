@@ -50,6 +50,7 @@
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
+		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
 		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
@@ -65,6 +66,7 @@
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
+		A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEE222885C76003C1DC4 /* NUIAlertController.mm */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
@@ -229,6 +231,8 @@
 		A174A16D22822290002A8216 /* NNSBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSBundle.h; sourceTree = "<group>"; };
 		A174A16E2282229B002A8216 /* NNSBundle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSBundle.mm; sourceTree = "<group>"; };
 		A174A170228227A2002A8216 /* sunflower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sunflower.mp3; sourceTree = "<group>"; };
+		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
+		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
 		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
 		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
 		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
 		A199AEDE22885581003C1DC4 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
+		A199AEE122885C6F003C1DC4 /* NUIAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertController.h; sourceTree = "<group>"; };
+		A199AEE222885C76003C1DC4 /* NUIAlertController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertController.mm; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
@@ -606,6 +612,15 @@
 			path = NNSBundle;
 			sourceTree = "<group>";
 		};
+		A178B26C228863B5005184EE /* NUIAlertAction */ = {
+			isa = PBXGroup;
+			children = (
+				A178B26D228863C2005184EE /* NUIAlertAction.h */,
+				A178B26E228863C9005184EE /* NUIAlertAction.mm */,
+			);
+			path = NUIAlertAction;
+			sourceTree = "<group>";
+		};
 		A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +677,15 @@
 				A199AEDA22884F3E003C1DC4 /* NUISlider.mm */,
 			);
 			path = NUISlider;
+			sourceTree = "<group>";
+		};
+		A199AEE022885C63003C1DC4 /* NUIAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				A199AEE122885C6F003C1DC4 /* NUIAlertController.h */,
+				A199AEE222885C76003C1DC4 /* NUIAlertController.mm */,
+			);
+			path = NUIAlertController;
 			sourceTree = "<group>";
 		};
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
@@ -1007,6 +1031,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A178B26C228863B5005184EE /* NUIAlertAction */,
+				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				A199AED822884F27003C1DC4 /* NUISlider */,
 				A1BD4BCA22882EA5001D1F6E /* NUINib */,
 				A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */,
@@ -1412,6 +1438,7 @@
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
+				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
@@ -1451,6 +1478,7 @@
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,

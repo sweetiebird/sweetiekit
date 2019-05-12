@@ -5,9 +5,11 @@ const {
 } = SweetieKit;
 
 async function make() {
-  return UIButton.alloc('👋 Hello', 0, 0, 200, 50, () => {
+  const button = await UIButton.alloc('👋 Hello Button', 0, 0, 200, 50, () => {
     console.log('button pressed');
   });
+  button.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  return button;
 }
 
 module.exports = make;

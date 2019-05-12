@@ -93,6 +93,7 @@ NAN_METHOD(NUIButton::Alloc) {
       [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
       [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
+        Nan::HandleScope scope;
         sweetiekit::Resolve(btn->_callback);
       }];
      {
@@ -119,6 +120,7 @@ NAN_METHOD(NUIButton::Alloc) {
       [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
       btn->Ref();
       [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
+        Nan::HandleScope scope;
         sweetiekit::Resolve(btn->_callback);
       }];
     });

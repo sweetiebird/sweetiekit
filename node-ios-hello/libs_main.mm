@@ -37,6 +37,8 @@
 #include "NUITableViewDataSource.h"
 #include "NUICollectionView.h"
 #include "NUICollectionViewController.h"
+#include "NUIAlertController.h"
+#include "NUIAlertAction.h"
 #include "NUICollectionViewCell.h"
 #include "NUICollectionViewManager.h"
 #include "NCALayer.h"
@@ -291,6 +293,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIBarButtonItem = NUIBarButtonItem::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIBarButtonItem").ToLocalChecked(), N_UIBarButtonItem.first);
+  
+        auto N_UIAlertAction = NUIAlertAction::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIAlertAction").ToLocalChecked(), N_UIAlertAction.first);
 
         // Core Location
   
@@ -337,6 +342,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIPresentationController = NUIPresentationController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPresentationController").ToLocalChecked(), N_UIPresentationController.first);
+
+        auto N_UIAlertController = NUIAlertController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIAlertController").ToLocalChecked(), N_UIAlertController.first);
 
         auto N_UIView = NUIView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIView").ToLocalChecked(), N_UIView.first);
