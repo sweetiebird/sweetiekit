@@ -54,6 +54,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_SET_PROP_READONLY(proto, "bottomAnchor", BottomAnchor);
   JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
   JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
+  JS_SET_PROP(proto, "isUserInteractionEnabled", UserInteractionEnabled);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -680,6 +681,21 @@ NAN_GETTER(NUIView::WidthAnchorGetter) {
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type)));
 }
 
+NAN_GETTER(NUIView::UserInteractionEnabledGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isUserInteractionEnabled]));
+}
+
+NAN_SETTER(NUIView::UserInteractionEnabledSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  [ui setUserInteractionEnabled:TO_BOOL(value)];
+}
 
 NUIView::NUIView () {}
 NUIView::~NUIView () {}
