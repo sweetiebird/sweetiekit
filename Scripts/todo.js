@@ -227,8 +227,10 @@ class ARApp {
     console.log(this.config, this.vc.view);
     setTimeout(() => {
       this.arView.session.run(this.config);
-      this.setupLocationUpdates();
     }, 1000);
+    setTimeout(() => {
+      this.setupLocationUpdates();
+    }, 3000);
   }
 }
 
