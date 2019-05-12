@@ -13,6 +13,7 @@
 #include "NARSession.h"
 #include "NARAnchor.h"
 #include "NNSObject.h"
+#include "NARFrame.h"
 #include "NARWorldTrackingConfiguration.h"
 #import "node_ios_hello-Swift.h"
 
@@ -31,6 +32,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSession::Initialize(Isolate
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP_READONLY(proto, "currentFrame", CurrentFrame);
   Nan::SetMethod(proto, "run", Run);
   Nan::SetMethod(proto, "add", Add);
 
@@ -72,12 +74,17 @@ NAN_METHOD(NARSession::Add) {
 
   JS_UNWRAP(ARSession, session);
 
-  simd_float4x4 translation = matrix_identity_float4x4;
-  translation.columns[3].z = -2;
-  simd_float4x4 camTransform = [[[session currentFrame] camera] transform];
-  simd_float4x4 transform = simd_mul(camTransform, translation);
-  ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
-  [session addAnchor:anchor];
+  NARAnchor *anchor = ObjectWrap::Unwrap<NARAnchor>(JS_OBJ(info[0]));
+
+  [session addAnchor:anchor->As<ARAnchor>()];
+}
+
+NAN_GETTER(NARSession::CurrentFrameGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(ARSession, session);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([session currentFrame], NARFrame::type)));
 }
 
 NARSession::NARSession () {}

@@ -83,6 +83,9 @@
 		A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */; };
 		A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */; };
 		A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */; };
+		A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAE228809AF001D1F6E /* NARFrame.mm */; };
+		A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BB222880B30001D1F6E /* NARCamera.mm */; };
+		A1BD4BB5228819A3001D1F6E /* three-min.js in Resources */ = {isa = PBXBuildFile; fileRef = A1BD4BB4228819A2001D1F6E /* three-min.js */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -267,6 +270,11 @@
 		A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocation.mm; sourceTree = "<group>"; };
 		A1BD4BA92287F671001D1F6E /* NSKTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKTexture.h; sourceTree = "<group>"; };
 		A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTexture.mm; sourceTree = "<group>"; };
+		A1BD4BAD228809A8001D1F6E /* NARFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARFrame.h; sourceTree = "<group>"; };
+		A1BD4BAE228809AF001D1F6E /* NARFrame.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARFrame.mm; sourceTree = "<group>"; };
+		A1BD4BB122880B26001D1F6E /* NARCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARCamera.h; sourceTree = "<group>"; };
+		A1BD4BB222880B30001D1F6E /* NARCamera.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARCamera.mm; sourceTree = "<group>"; };
+		A1BD4BB4228819A2001D1F6E /* three-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "three-min.js"; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -613,6 +621,7 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4BB4228819A2001D1F6E /* three-min.js */,
 				A11D1294227EA0A90038C262 /* todo.js */,
 				A188710D227E51D700129A75 /* node_modules */,
 				A12655EE22719CE300D3DF47 /* app.js */,
@@ -791,6 +800,24 @@
 			path = NSKTexture;
 			sourceTree = "<group>";
 		};
+		A1BD4BAC22880999001D1F6E /* NARFrame */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BAD228809A8001D1F6E /* NARFrame.h */,
+				A1BD4BAE228809AF001D1F6E /* NARFrame.mm */,
+			);
+			path = NARFrame;
+			sourceTree = "<group>";
+		};
+		A1BD4BB022880B1A001D1F6E /* NARCamera */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BB122880B26001D1F6E /* NARCamera.h */,
+				A1BD4BB222880B30001D1F6E /* NARCamera.mm */,
+			);
+			path = NARCamera;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,6 +848,8 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4BB022880B1A001D1F6E /* NARCamera */,
+				A1BD4BAC22880999001D1F6E /* NARFrame */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */,
 				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
@@ -1239,6 +1268,7 @@
 				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
 				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
 				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
+				A1BD4BB5228819A3001D1F6E /* three-min.js in Resources */,
 				A126560622719CE400D3DF47 /* demo.js in Resources */,
 				A188710E227E51D700129A75 /* node_modules in Resources */,
 				A126560722719CE400D3DF47 /* package.json in Resources */,
@@ -1287,6 +1317,7 @@
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
+				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
@@ -1335,6 +1366,7 @@
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
 				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,

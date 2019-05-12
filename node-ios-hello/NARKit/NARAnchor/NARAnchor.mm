@@ -32,6 +32,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARAnchor::Initialize(Isolate 
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "initWithTransform", InitWithTransform);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -46,11 +47,34 @@ NAN_METHOD(NARAnchor::New) {
   if (info[0]->IsExternal()) {
     anchor->SetNSObject((__bridge ARAnchor *)(info[0].As<External>()->Value()));
   } else {
-    Nan::ThrowError("NARAnchor::New not implemented");
+    @autoreleasepool {
+      simd_float4x4 transform = matrix_identity_float4x4;
+      anchor->SetNSObject([[ARAnchor alloc] initWithTransform:transform]);
+    }
   }
   anchor->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_METHOD(NARAnchor::InitWithTransform) {
+  Nan::HandleScope scope;
+  
+  Local<Object> anchorObj = JS_TYPE(NARAnchor)->NewInstance(JS_CONTEXT(), 0, nullptr).ToLocalChecked();
+
+  JS_UNWRAPPED(anchorObj, ARAnchor, anchor);
+
+  @autoreleasepool {
+    simd_float4x4 transform = matrix_identity_float4x4;
+    float* matrix = (float*)&transform;
+    Local<Float32Array> xform = Local<Float32Array>::Cast(info[0]);
+    for (uint32_t i = 0; i < 16; i++) {
+      matrix[i] = TO_FLOAT(xform->Get(i));
+    }
+    nanchor->SetNSObject([anchor initWithTransform:transform]);
+  }
+
+  info.GetReturnValue().Set(anchorObj);
 }
 
 NARAnchor::NARAnchor () {}

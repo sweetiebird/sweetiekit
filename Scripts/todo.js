@@ -1,5 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
 const axios = require('axios');
+const THREE = require('./three-min');
 
 const UIKit = SweetieKit;
 const ObjC = SweetieKit;
@@ -37,6 +38,7 @@ const {
   NSObject,
   NSUserDefaults,
   ARSKView,
+  ARAnchor,
   ARWorldTrackingConfiguration,
   AVAudioPlayer,
   ARSKViewDelegate,
@@ -173,6 +175,7 @@ const randomColor = () => {
 };
 
 const target = { lat: 41.880605, lng: -87.630256 };
+// const target = { lat: 41.880605, lng: -87.629714 };
 
 class ARApp {
   constructor(app) {
@@ -184,10 +187,7 @@ class ARApp {
     this.vc.view.addSubview(this.arView);
     this.config = new ARWorldTrackingConfiguration();
     this.viewDel = new ARSKViewDelegate(() => {
-      const node = new SKSpriteNode('flux_white');
-      node.colorBlendFactor = 1;
-      node.color = randomColor();
-      return node;
+      return new SKSpriteNode('flux_pin');
     });
     this.arView.delegate = this.viewDel;
     this.scene = new SKScene('Scene');
@@ -203,11 +203,31 @@ class ARApp {
           const loc = locations[i];
           const { coordinate } = loc;
           const { latitude, longitude } = coordinate;
-          if (latitude - target.lat <= 0.01) {
-            if (longitude - target.lng <= 0.01) {
-              console.log('ADD TARGET');
+          // if (Math.abs(latitude - target.lat) <= 0.01) {
+          //   if (Math.abs(longitude - target.lng) <= 0.0001) {
+          //     console.log('ADD TARGET');
+          //     console.log(latitude, longitude);
+          //     this.targetAdded = true;
+          //     this.arView.session.add();
+          //     break;
+          //   }
+          // }
+
+           // simd_float4x4 translation = matrix_identity_float4x4;
+           // translation.columns[3].z = -3;
+           // simd_float4x4 camTransform = [[[session currentFrame] camera] transform];
+           // simd_float4x4 transform = simd_mul(camTransform, translation);
+           // ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
+           // [session addAnchor:anchor];
+          if (Math.abs(latitude - target.lat) <= 0.01) {
+            if (Math.abs(longitude - target.lng) <= 0.01) {
               this.targetAdded = true;
-              this.arView.session.add();
+              const camXform = this.arView.session.currentFrame.camera.transform;
+              const translation = new THREE.Matrix4().makeTranslation(0,0,-3);
+              const view = new THREE.Matrix4().set(...camXform);
+              view.multiply(translation);
+              const anchor = ARAnchor.initWithTransform(new Float32Array(view.elements));
+              this.arView.session.add(anchor);
               break;
             }
           }

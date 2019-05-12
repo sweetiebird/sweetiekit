@@ -122,6 +122,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARAnchor.h"
+#include "NARFrame.h"
+#include "NARCamera.h"
 #include "NSCNView.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
@@ -152,6 +154,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // ARKit
 
+      if ([obj isKindOfClass:[ARCamera class]]) {
+        return NARCamera::type;
+      }
+      if ([obj isKindOfClass:[ARFrame class]]) {
+        return NARFrame::type;
+      }
       if ([obj isKindOfClass:[SARSKViewDelegate class]]) {
         return NARSKViewDelegate::type;
       }

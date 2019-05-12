@@ -50,6 +50,8 @@
 #include "NAVAudioPlayer.h"
 #include "NARWorldTrackingConfiguration.h"
 #include "NARAnchor.h"
+#include "NARCamera.h"
+#include "NARFrame.h"
 #include "NSCNView.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
@@ -409,6 +411,12 @@ void InitExports(Local<Object> exports) {
   
         auto N_ARWorldTrackingConfiguration = NARWorldTrackingConfiguration::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARWorldTrackingConfiguration").ToLocalChecked(), N_ARWorldTrackingConfiguration.first);
+
+        auto N_ARCamera = NARCamera::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARCamera").ToLocalChecked(), N_ARCamera.first);
+
+        auto N_ARFrame = NARFrame::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARFrame").ToLocalChecked(), N_ARFrame.first);
 
         auto N_ARAnchor = NARAnchor::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARAnchor").ToLocalChecked(), N_ARAnchor.first);

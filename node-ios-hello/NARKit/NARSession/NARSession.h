@@ -29,7 +29,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Run);
   static NAN_METHOD(Add);
-  JS_PROP(Camera);
+  JS_PROP(CurrentFrame);
 };
 
 #endif /* NARSession_h */
