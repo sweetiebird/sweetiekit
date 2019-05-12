@@ -29,6 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
   JS_SET_PROP(proto, "numberOfLines", NumberOfLines);
   JS_SET_PROP(proto, "font", Font);
+  JS_SET_PROP(proto, "textColor", TextColor);
+  JS_SET_PROP(proto, "highlightedTextColor", HighlightedTextColor);
+  JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -184,6 +187,100 @@ NAN_SETTER(NUILabel::FontSetter) {
   @autoreleasepool {
     [ui setFont:[UIFont fontWithName:[NSString stringWithUTF8String:fontName.c_str()] size:16]];
   }
+}
+
+NAN_GETTER(NUILabel::TextColorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UILabel, ui);
+  
+  CGFloat red = 0;
+  CGFloat green = 0;
+  CGFloat blue = 0;
+  CGFloat alpha = 1;
+  @autoreleasepool {
+    UIColor* color = [ui textColor];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUILabel::TextColorSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UILabel, ui);
+
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+  
+  @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    [ui setTextColor:color];
+  }
+}
+
+NAN_GETTER(NUILabel::HighlightedTextColorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UILabel, ui);
+  
+  CGFloat red = 0;
+  CGFloat green = 0;
+  CGFloat blue = 0;
+  CGFloat alpha = 1;
+  @autoreleasepool {
+    UIColor* color = [ui highlightedTextColor];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUILabel::HighlightedTextColorSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UILabel, ui);
+
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+  
+  @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    [ui setHighlightedTextColor:color];
+  }
+}
+
+NAN_GETTER(NUILabel::IsHighlightedGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isHighlighted]));
+}
+
+NAN_SETTER(NUILabel::IsHighlightedSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+  
+  [ui setHighlighted:TO_BOOL(value)];
 }
 
 NUILabel::NUILabel () {}
