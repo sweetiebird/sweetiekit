@@ -5,7 +5,7 @@ const {
   UIAlertAction,
 } = SweetieKit;
 
-async function make() {
+async function make(nav, demoVC) {
   const alert = new UIAlertController(
     'Alert Title',
     'And an informative message',
@@ -14,7 +14,8 @@ async function make() {
     alert.dismiss(true, () => {});
   });
   alert.addAction(action);
-  return alert;
+  nav.pushViewController(demoVC);
+  demoVC.present(alert, true, () => {});
 }
 
 module.exports = make;

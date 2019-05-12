@@ -1,6 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
 const makeButton = require('./examples/UIButton');
+const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -22,6 +23,7 @@ const demoTypes = {
 
 const demoCtrls = {
   UIAlertController: makeAlertCtrl,
+  UIBarButtonItem: makeBarButtonItem,
 };
 
 class UIDemosApp {
@@ -109,9 +111,7 @@ class UIDemosApp {
       const type = Object.keys(demoCtrls)[row];
       if (demoCtrls[type]) {
         this.createDemoVC();
-        const ctrl = await demoCtrls[type](this.nav, this.demoVC);
-        this.nav.pushViewController(this.demoVC);
-        this.demoVC.present(ctrl, true, () => {});
+        await demoCtrls[type](this.nav, this.demoVC);
       }
     }
   }
