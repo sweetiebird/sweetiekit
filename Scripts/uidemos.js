@@ -6,6 +6,7 @@ const makeImageView = require('./examples/UIImageView');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
+const makeImagePickerCtrl = require('./examples/UIImagePickerController');
 
 const {
   UIApplication,
@@ -26,6 +27,7 @@ const demoTypes = {
 const demoCtrls = {
   UIAlertController: makeAlertCtrl,
   UIBarButtonItem: makeBarButtonItem,
+  UIImagePickerController: makeImagePickerCtrl,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();

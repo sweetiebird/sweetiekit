@@ -173,7 +173,7 @@ function createTable() {
 
  async function userPhoto() {
   console.log('userPhoto');
-   const photoVC = sb.instantiateViewController(ctrls.PHOTO);
+  const photoVC = sb.instantiateViewController(ctrls.PHOTO);
   console.log('userPhoto1');
 
    const viewW = photoVC.view.width;
