@@ -3,6 +3,7 @@ const SweetieKit = require('std:sweetiekit.node');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeImageView = require('./examples/UIImageView');
+const makeLabel = require('./examples/UILabel');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -20,6 +21,7 @@ const {
 const demoTypes = {
   UIButton: makeButton,
   UIImageView: makeImageView,
+  UILabel: makeLabel,
   UISlider: makeSlider,
   UIView: makeView,
 };

@@ -49,6 +49,19 @@ NAN_METHOD(NUILabel::New) {
   
   if (info[0]->IsExternal()) {
     txt->SetNSObject((__bridge UILabel *)(info[0].As<External>()->Value()));
+  } else if (info.Length() > 0) {
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
+
+    @autoreleasepool {
+      txt->SetNSObject([[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+    }
+  } else {
+    @autoreleasepool {
+      txt->SetNSObject([[UILabel alloc] init]);
+    }
   }
   txt->Wrap(txtObj);
 
