@@ -42,10 +42,16 @@
 #include "NUIBarButtonItem.h"
 #include "NSKView.h"
 #include "NARSKView.h"
+#include "NSKNode.h"
+#include "NSKLabelNode.h"
+#include "NARSKViewDelegate.h"
 #include "NARSession.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARWorldTrackingConfiguration.h"
+#include "NARAnchor.h"
+#include "NSCNView.h"
+#include "NSKScene.h"
 #include <unistd.h>
 
 #include <string>
@@ -367,6 +373,12 @@ void InitExports(Local<Object> exports) {
   
         auto N_SKView = NSKView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKView").ToLocalChecked(), N_SKView.first);
+  
+        auto N_SKNode = NSKNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKNode").ToLocalChecked(), N_SKNode.first);
+  
+        auto N_SKLabelNode = NSKLabelNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKLabelNode").ToLocalChecked(), N_SKLabelNode.first);
 
         // ARKit
   
@@ -378,6 +390,18 @@ void InitExports(Local<Object> exports) {
   
         auto N_ARWorldTrackingConfiguration = NARWorldTrackingConfiguration::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARWorldTrackingConfiguration").ToLocalChecked(), N_ARWorldTrackingConfiguration.first);
+
+        auto N_ARAnchor = NARAnchor::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARAnchor").ToLocalChecked(), N_ARAnchor.first);
+
+        auto N_ARSKViewDelegate = NARSKViewDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARSKViewDelegate").ToLocalChecked(), N_ARSKViewDelegate.first);
+  
+        auto N_SCNView = NSCNView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNView").ToLocalChecked(), N_SCNView.first);
+  
+        auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

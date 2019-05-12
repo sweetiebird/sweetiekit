@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import <SceneKit/SceneKit.h>
 #import <ARKit/ARKit.h>
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
@@ -115,8 +116,14 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
 #include "NSKView.h"
+#include "NSKNode.h"
+#include "NSKLabelNode.h"
+#include "NARSKViewDelegate.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
+#include "NARAnchor.h"
+#include "NSCNView.h"
+#include "NSKScene.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -141,6 +148,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // ARKit
 
+      if ([obj isKindOfClass:[SARSKViewDelegate class]]) {
+        return NARSKViewDelegate::type;
+      }
+      if ([obj isKindOfClass:[ARAnchor class]]) {
+        return NARAnchor::type;
+      }
       if ([obj isKindOfClass:[ARSKView class]]) {
         return NARSKView::type;
       }
@@ -151,8 +164,23 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NARWorldTrackingConfiguration::type;
       }
 
+      //SceneKit
+      
+      if ([obj isKindOfClass:[SCNView class]]) {
+        return NSCNView::type;
+      }
+
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKScene class]]) {
+        return NSKScene::type;
+      }
+      if ([obj isKindOfClass:[SKLabelNode class]]) {
+        return NSKLabelNode::type;
+      }
+      if ([obj isKindOfClass:[SKNode class]]) {
+        return NSKNode::type;
+      }
       if ([obj isKindOfClass:[SKView class]]) {
         return NSKView::type;
       }

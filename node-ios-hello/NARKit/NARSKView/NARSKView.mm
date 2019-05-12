@@ -13,6 +13,8 @@
 #include "NARSKView.h"
 #include "NSKView.h"
 #include "NARSession.h"
+#include "NARSKViewDelegate.h"
+#include "NSKScene.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NARSKView::type;
@@ -31,6 +33,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSKView::Initialize(Isolate 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "session", Session);
+  JS_SET_PROP(proto, "delegate", Delegate);
+  Nan::SetMethod(proto, "presentScene", PresentScene);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -77,6 +81,41 @@ NAN_GETTER(NARSKView::SessionGetter) {
   JS_UNWRAP(ARSKView, ui);
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui session], NARSession::type)));
+}
+
+NAN_GETTER(NARSKView::DelegateGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(ARSKView, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui delegate], NARSKViewDelegate::type)));
+}
+
+NAN_SETTER(NARSKView::DelegateSetter) {
+  Nan::HandleScope scope;
+  
+  NARSKView *view = ObjectWrap::Unwrap<NARSKView>(info.This());
+  NARSKViewDelegate *del = ObjectWrap::Unwrap<NARSKViewDelegate>(Local<Object>::Cast(value));
+  auto delegate = del->As<SARSKViewDelegate>();
+  view->_delegate.Reset(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      JS_UNWRAP(ARSKView, ui);
+      [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
+      [ui setDelegate:delegate];
+    });
+  }
+}
+
+NAN_METHOD(NARSKView::PresentScene) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSKView, ui);
+
+  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(Local<Object>::Cast(info[0]));
+  
+  [ui presentScene:scene->As<SKScene>()];
 }
 
 NARSKView::NARSKView () {}

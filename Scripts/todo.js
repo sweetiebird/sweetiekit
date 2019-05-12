@@ -39,7 +39,10 @@ const {
   ARSKView,
   ARWorldTrackingConfiguration,
   AVAudioPlayer,
+  ARSKViewDelegate,
   NSBundle,
+  SKLabelNode,
+  SKScene,
 } = UIKit;
 
 // shared application
@@ -149,6 +152,33 @@ const {
 //
 //   return todoVC;
 // }
+
+class ARApp {
+  constructor(app) {
+    this.app = app;
+    this.vc = new UIViewController();
+    const view = this.vc.view;
+    this.arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
+    this.vc.view.addSubview(this.arView);
+    this.config = new ARWorldTrackingConfiguration();
+    this.viewDel = new ARSKViewDelegate(() => {
+      const labelNode = new SKLabelNode();
+      labelNode.text = '👾';
+      return labelNode;
+    });
+    this.arView.delegate = this.viewDel;
+    this.scene = new SKScene('Scene');
+    this.arView.presentScene(this.scene);
+  }
+
+  launch() {
+    this.app.keyWindow.setRootViewController(this.vc);
+    console.log(this.config, this.vc.view);
+    setTimeout(() => {
+      this.arView.session.run(this.config);
+    }, 1000);
+  }
+}
 
 class MyApp {
   constructor(app) {
@@ -302,16 +332,23 @@ class MyApp {
 //   }
 // }
 
-axios.get('https://testserver-rugwhbkbuu.now.sh/').then((resp) => {
-  const { data } = resp;
-  console.log(data);
-});
+// axios.get('https://testserver-rugwhbkbuu.now.sh/').then((resp) => {
+//   const { data } = resp;
+//   console.log(data);
+// });
+
+// async function start() {
+//   const sharedApp = new UIApplication();
+//   const myApp = new MyApp(sharedApp);
+//   myApp.launch();
+// }
 
 async function start() {
   const sharedApp = new UIApplication();
-  const myApp = new MyApp(sharedApp);
+  const myApp = new ARApp(sharedApp);
   myApp.launch();
 }
+
 
 // async function start() {
 //   const sharedApp = new UIApplication();

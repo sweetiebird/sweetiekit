@@ -68,6 +68,15 @@
 		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
 		A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B092287B769001D1F6E /* snapshot.cc */; };
 		A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B0A2287B769001D1F6E /* embedded.S */; };
+		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
+		A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */; };
+		A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */; };
+		A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */; };
+		A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B832287C369001D1F6E /* NSKNode.mm */; };
+		A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */; };
+		A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */; };
+		A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1BD4B8D2287CCF3001D1F6E /* Scene.sks */; };
+		A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8F2287CDD9001D1F6E /* Scene.swift */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -226,6 +235,21 @@
 		A1BD4B0A2287B769001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Debug/embedded.S; sourceTree = "<group>"; };
 		A1BD4B0D2287B773001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Release/embedded.S; sourceTree = "<group>"; };
 		A1BD4B0E2287B773001D1F6E /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = Release/snapshot.cc; sourceTree = "<group>"; };
+		A1BD4B412287BCB5001D1F6E /* NSCNView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNView.h; sourceTree = "<group>"; };
+		A1BD4B422287BCBC001D1F6E /* NSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNView.mm; sourceTree = "<group>"; };
+		A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKViewDelegate.h; sourceTree = "<group>"; };
+		A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKViewDelegatem.mm; sourceTree = "<group>"; };
+		A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSKViewDelegate.swift; sourceTree = "<group>"; };
+		A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARAnchor.h; sourceTree = "<group>"; };
+		A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARAnchor.mm; sourceTree = "<group>"; };
+		A1BD4B822287C361001D1F6E /* NSKNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKNode.h; sourceTree = "<group>"; };
+		A1BD4B832287C369001D1F6E /* NSKNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKNode.mm; sourceTree = "<group>"; };
+		A1BD4B862287C55D001D1F6E /* NSKLabelNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKLabelNode.h; sourceTree = "<group>"; };
+		A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKLabelNode.mm; sourceTree = "<group>"; };
+		A1BD4B8A2287CA39001D1F6E /* NSKScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKScene.h; sourceTree = "<group>"; };
+		A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKScene.mm; sourceTree = "<group>"; };
+		A1BD4B8D2287CCF3001D1F6E /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
+		A1BD4B8F2287CDD9001D1F6E /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -615,6 +639,85 @@
 			name = ReleaseSnapshot;
 			sourceTree = "<group>";
 		};
+		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B402287BC9E001D1F6E /* NSCNView */,
+			);
+			path = NSceneKit;
+			sourceTree = "<group>";
+		};
+		A1BD4B402287BC9E001D1F6E /* NSCNView */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B412287BCB5001D1F6E /* NSCNView.h */,
+				A1BD4B422287BCBC001D1F6E /* NSCNView.mm */,
+			);
+			path = NSCNView;
+			sourceTree = "<group>";
+		};
+		A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NARSCNViewDelegate;
+			sourceTree = "<group>";
+		};
+		A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */,
+				A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */,
+				A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */,
+			);
+			path = NARSKViewDelegate;
+			sourceTree = "<group>";
+		};
+		A1BD4B7C2287C20E001D1F6E /* NARAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */,
+				A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */,
+			);
+			path = NARAnchor;
+			sourceTree = "<group>";
+		};
+		A1BD4B802287C34A001D1F6E /* NSKView */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E0D22819C3400AC0BD9 /* NSKView.h */,
+				A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */,
+			);
+			path = NSKView;
+			sourceTree = "<group>";
+		};
+		A1BD4B812287C355001D1F6E /* NSKNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B822287C361001D1F6E /* NSKNode.h */,
+				A1BD4B832287C369001D1F6E /* NSKNode.mm */,
+			);
+			path = NSKNode;
+			sourceTree = "<group>";
+		};
+		A1BD4B852287C551001D1F6E /* NSKLabelNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B862287C55D001D1F6E /* NSKLabelNode.h */,
+				A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */,
+			);
+			path = NSKLabelNode;
+			sourceTree = "<group>";
+		};
+		A1BD4B892287CA2E001D1F6E /* NSKScene */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B8A2287CA39001D1F6E /* NSKScene.h */,
+				A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */,
+			);
+			path = NSKScene;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,6 +748,8 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
+				A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */,
 				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
@@ -655,8 +760,10 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1D65E0D22819C3400AC0BD9 /* NSKView.h */,
-				A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */,
+				A1BD4B892287CA2E001D1F6E /* NSKScene */,
+				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
+				A1BD4B812287C355001D1F6E /* NSKNode */,
+				A1BD4B802287C34A001D1F6E /* NSKView */,
 			);
 			path = NSKSpriteKit;
 			sourceTree = "<group>";
@@ -664,6 +771,7 @@
 		A1D65E1022819D7C00AC0BD9 /* NARSKView */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */,
 				A1D65E1122819D8E00AC0BD9 /* NARSKView.h */,
 				A1D65E1222819D9500AC0BD9 /* NARSKView.mm */,
 			);
@@ -783,6 +891,7 @@
 				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
 				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
 				A149D0A4228260D300E11EDA /* BuilderViewController.swift */,
+				A1BD4B8F2287CDD9001D1F6E /* Scene.swift */,
 			);
 			path = NativeClasses;
 			sourceTree = "<group>";
@@ -907,6 +1016,8 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
+				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
 				A174A1672282214B002A8216 /* NAVFoundation */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */,
@@ -1068,6 +1179,7 @@
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
+				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1094,6 +1206,7 @@
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
+				A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
@@ -1114,13 +1227,19 @@
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
+				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
+				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
+				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
+				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
+				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
@@ -1148,6 +1267,7 @@
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
+				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
