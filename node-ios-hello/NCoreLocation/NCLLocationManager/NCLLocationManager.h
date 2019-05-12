@@ -27,11 +27,13 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(StartUpdatingLocation);
+  static NAN_METHOD(StartUpdatingHeading);
   static NAN_METHOD(RequestAlwaysAuthorization);
   static NAN_METHOD(RequestWhenInUseAuthorization);
   JS_PROP(Delegate);
   JS_PROP(DesiredAccuracy);
   JS_PROP(DistanceFilter);
+  JS_PROP(HeadingFilter);
   
   Nan::Persistent<Value> _delegate;
 };

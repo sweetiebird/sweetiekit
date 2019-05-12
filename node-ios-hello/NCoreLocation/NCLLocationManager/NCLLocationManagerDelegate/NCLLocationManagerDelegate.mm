@@ -12,6 +12,7 @@
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocationManager.h"
 #include "NCLLocation.h"
+#include "NCLHeading.h"
 #include "NNSObject.h"
 #import "node_ios_hello-Swift.h"
 
@@ -49,6 +50,7 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
   } else if (info.Length() > 0) {
     mgr->_onAuthorization.Reset(Local<Function>::Cast(info[0]));
     mgr->_didUpdateLocations.Reset(Local<Function>::Cast(info[1]));
+    mgr->_didUpdateHeading.Reset(Local<Function>::Cast(info[2]));
   
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
@@ -65,16 +67,17 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
 
           for (NSInteger i = 0; i < count; i++) {
             CLLocation* loc = [locations objectAtIndex:i];
-            if (loc != nullptr) {
-              Local<Value> argv[] = {
-                Nan::New<v8::External>((__bridge void*)loc)
-              };
-              Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(loc, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-              Nan::Set(locResult, static_cast<uint32_t>(i), value);
-            }
+            Local<Value> value = sweetiekit::GetWrapperFor(loc, NCLLocation::type);
+            Nan::Set(locResult, static_cast<uint32_t>(i), value);
           }
 
           mgr->_didUpdateLocations("NCLLocationManagerDelegate _didUpdateLocations", mgrObj, locResult);
+        } didUpdateHeading: ^(CLLocationManager* manager, CLHeading* _Nonnull newHeading) {
+          Nan::HandleScope scope;
+          Local<Value> mgrObj = sweetiekit::GetWrapperFor(manager, NCLLocationManager::type);
+          Local<Value> jsHeading = sweetiekit::GetWrapperFor(newHeading, NCLHeading::type);
+          
+          mgr->_didUpdateHeading("NCLLocationManagerDelegate _didUpdateHeading", mgrObj, jsHeading);
         }]);
       });
     }

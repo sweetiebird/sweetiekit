@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(New);
   sweetiekit::JSFunction _onAuthorization;
   sweetiekit::JSFunction _didUpdateLocations;
+  sweetiekit::JSFunction _didUpdateHeading;
 };
 
 #endif /* NCLLocationManagerDelegate_h */

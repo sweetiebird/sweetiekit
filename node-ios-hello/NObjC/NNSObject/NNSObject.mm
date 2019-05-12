@@ -134,6 +134,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NCLHeading.h"
 #include "NUINib.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -304,6 +305,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // ========= core location
       if ([obj isKindOfClass:[CLLocation class]]) {
         return NCLLocation::type;
+      }
+      if ([obj isKindOfClass:[CLHeading class]]) {
+        return NCLHeading::type;
       }
       if ([obj isKindOfClass:[CLLocationManager class]]) {
         return NCLLocationManager::type;

@@ -30,14 +30,20 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCLLocationManager::Initialize
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "startUpdatingLocation", StartUpdatingLocation);
+  Nan::SetMethod(proto, "startUpdatingHeading", StartUpdatingHeading);
   Nan::SetMethod(proto, "requestAlwaysAuthorization", RequestAlwaysAuthorization);
   Nan::SetMethod(proto, "requestWhenInUseAuthorization", RequestWhenInUseAuthorization);
   JS_SET_PROP(proto, "delegate", Delegate);
   JS_SET_PROP(proto, "desiredAccuracy", DesiredAccuracy);
   JS_SET_PROP(proto, "distanceFilter", DistanceFilter);
+  JS_SET_PROP(proto, "headingFilter", HeadingFilter);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  sweetiekit::Set(ctorFn, "headingAvailable", ^(JSInfo info) {
+    bool result = [CLLocationManager headingAvailable];
+    JS_SET_RETURN(JS_BOOL(result));
+  });
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -72,6 +78,14 @@ NAN_METHOD(NCLLocationManager::StartUpdatingLocation) {
   JS_UNWRAP(CLLocationManager, mgr);
 
   [mgr startUpdatingLocation];
+}
+
+NAN_METHOD(NCLLocationManager::StartUpdatingHeading) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocationManager, mgr);
+
+  [mgr startUpdatingHeading];
 }
 
 NAN_METHOD(NCLLocationManager::RequestAlwaysAuthorization) {
@@ -151,4 +165,24 @@ NAN_SETTER(NCLLocationManager::DistanceFilterSetter) {
   double filter = TO_DOUBLE(value);
 
   [mgr setDistanceFilter:filter];
+}
+
+NAN_GETTER(NCLLocationManager::HeadingFilterGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CLLocationManager, mgr);
+  
+  double heading = [mgr headingFilter];
+
+  JS_SET_RETURN(JS_NUM(heading));
+}
+
+NAN_SETTER(NCLLocationManager::HeadingFilterSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CLLocationManager, mgr);
+  
+  double filter = TO_DOUBLE(value);
+
+  [mgr setHeadingFilter:filter];
 }

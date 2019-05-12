@@ -288,6 +288,7 @@ const randomColor = () => {
 
 const target = { lat: 41.880605, lng: -87.630256 };
 // const target = { lat: 41.880605, lng: -87.629714 };
+let currentHeading = {};
 
 class ARApp {
   constructor(app) {
@@ -310,6 +311,11 @@ class ARApp {
   setupLocationUpdates() {
     this.locDel = new CLLocationManagerDelegate((mgr, status) => {
       this.locMgr.startUpdatingLocation();
+      if (CLLocationManager.headingAvailable()) {
+        this.locMgr.headingFilter = 5
+        this.locMgr.startUpdatingHeading()
+      }
+
     }, (mgr, locations) => {
       for (let i = 0, len = locations.length; i < len; i++) {
         const loc = locations[i];
@@ -321,7 +327,7 @@ class ARApp {
         print({ latitude, longitude, floor, altitude,
           horizontalAccuracy, verticalAccuracy,
           timestamp,
-          speed, course });
+          speed, course, heading: currentHeading });
         // if (Math.abs(latitude - target.lat) <= 0.01) {
         //   if (Math.abs(longitude - target.lng) <= 0.0001) {
         //     console.log('ADD TARGET');
@@ -353,6 +359,25 @@ class ARApp {
           }
         }
       }
+    }, (mgr, heading) => {
+      const {
+        magneticHeading,
+        trueHeading,
+        headingAccuracy,
+        timestamp,
+        x,
+        y,
+        z,
+      } = heading;
+      console.log(currentHeading = {
+        magneticHeading,
+        trueHeading,
+        headingAccuracy,
+        timestamp,
+        x,
+        y,
+        z,
+      });
     });
     this.locMgr = new CLLocationManager();
     this.locMgr.delegate = this.locDel;

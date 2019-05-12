@@ -42,6 +42,7 @@
 		A126560522719CE400D3DF47 /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A12655F622719CE400D3DF47 /* js-blockchain */; };
 		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
+		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
@@ -210,6 +211,8 @@
 		A12655F622719CE400D3DF47 /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
 		A12655F722719CE400D3DF47 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
+		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
@@ -542,6 +545,15 @@
 			path = NUITableViewManager;
 			sourceTree = "<group>";
 		};
+		A13768EA2288394C00CDB13B /* NCLHeading */ = {
+			isa = PBXGroup;
+			children = (
+				A13768ED2288398300CDB13B /* NCLHeading.h */,
+				A13768EB2288396400CDB13B /* NCLHeading.mm */,
+			);
+			path = NCLHeading;
+			sourceTree = "<group>";
+		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,6 +786,7 @@
 		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
 			isa = PBXGroup;
 			children = (
+				A13768EA2288394C00CDB13B /* NCLHeading */,
 				A1BD4BA02287DE04001D1F6E /* NCLLocation */,
 				A1BD4B962287DA1A001D1F6E /* NCLLocationManager */,
 			);
@@ -1444,6 +1457,7 @@
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
+				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,

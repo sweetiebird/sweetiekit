@@ -9,23 +9,24 @@
 import Foundation
 import CoreLocation
 
-typealias DidUpdateLocationsClosure = (CLLocationManager, [CLLocation]) -> Void
 typealias OnAuthorizationClosure = (CLLocationManager, Int32) -> Void
+typealias DidUpdateLocationsClosure = (CLLocationManager, [CLLocation]) -> Void
+typealias DidUpdateHeadingClosure = (CLLocationManager, CLHeading) -> Void
 
 @objc(SCLLocationManagerDelegate)
 class SCLLocationManagerDelegate: NSObject, CLLocationManagerDelegate {
-  @objc var didUpdateLocationsCallback: DidUpdateLocationsClosure?
   @objc var onAuthorizationCallback: OnAuthorizationClosure?
+  @objc var didUpdateLocationsCallback: DidUpdateLocationsClosure?
+  @objc var didUpdateHeadingCallback: DidUpdateHeadingClosure?
 
-  @objc convenience init(onAuthorization: OnAuthorizationClosure!, didUpdateLocations: DidUpdateLocationsClosure!) {
+  @objc convenience init(onAuthorization: OnAuthorizationClosure!,
+                        didUpdateLocations: DidUpdateLocationsClosure!,
+                        didUpdateHeading: DidUpdateHeadingClosure!
+                        ) {
     self.init()
     onAuthorizationCallback = onAuthorization
     didUpdateLocationsCallback = didUpdateLocations
-  }
-
-  @objc convenience init(didUpdateLocations: DidUpdateLocationsClosure!) {
-    self.init()
-    didUpdateLocationsCallback = didUpdateLocations
+    didUpdateHeadingCallback = didUpdateHeading
   }
 }
 
@@ -40,6 +41,12 @@ class SCLLocationManagerDelegate: NSObject, CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let didUpdateLocationsCallback = didUpdateLocationsCallback {
       didUpdateLocationsCallback(manager, locations)
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    if let didUpdateHeadingCallback = didUpdateHeadingCallback {
+      didUpdateHeadingCallback(manager, newHeading)
     }
   }
 }
