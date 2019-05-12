@@ -2,6 +2,7 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
+const makeImageView = require('./examples/UIImageView');
 const makeSlider = require('./examples/UISlider');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -17,6 +18,7 @@ const {
 
 const demoTypes = {
   UIButton: makeButton,
+  UIImageView: makeImageView,
   UISlider: makeSlider,
   UIView: makeView,
 };
@@ -25,6 +27,9 @@ const demoCtrls = {
   UIAlertController: makeAlertCtrl,
   UIBarButtonItem: makeBarButtonItem,
 };
+
+const demoTypeNames = Object.keys(demoTypes).sort();
+const demoCtrlNames = Object.keys(demoCtrls).sort();
 
 class UIDemosApp {
   constructor(app) {
@@ -71,12 +76,12 @@ class UIDemosApp {
     const { row, section } = indexPath;
     const cell = new UITableViewCell();
     if (section === 0) {
-      const type = Object.keys(demoTypes)[row];
+      const type = demoTypeNames[row];
       if (type) {
         cell.textLabel.text = type;
       }
     } else {
-      const type = Object.keys(demoCtrls)[row];
+      const type = demoCtrlNames[row];
       if (type) {
         cell.textLabel.text = type;
       }
