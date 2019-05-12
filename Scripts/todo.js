@@ -198,27 +198,34 @@ class ARApp {
     this.locDel = new CLLocationManagerDelegate((mgr, status) => {
       this.locMgr.startUpdatingLocation();
     }, (mgr, locations) => {
-      if (!this.targetAdded) {
-        for (let i = 0, len = locations.length; i < len; i++) {
-          const loc = locations[i];
-          const { coordinate } = loc;
-          const { latitude, longitude } = coordinate;
-          // if (Math.abs(latitude - target.lat) <= 0.01) {
-          //   if (Math.abs(longitude - target.lng) <= 0.0001) {
-          //     console.log('ADD TARGET');
-          //     console.log(latitude, longitude);
-          //     this.targetAdded = true;
-          //     this.arView.session.add();
-          //     break;
-          //   }
-          // }
+      for (let i = 0, len = locations.length; i < len; i++) {
+        const loc = locations[i];
+        const { coordinate, floor, altitude,
+          horizontalAccuracy, verticalAccuracy,
+          timestamp,
+          speed, course } = loc;
+        const { latitude, longitude } = coordinate;
+        console.log({ latitude, longitude, floor, altitude,
+          horizontalAccuracy, verticalAccuracy,
+          timestamp,
+          speed, course });
+        // if (Math.abs(latitude - target.lat) <= 0.01) {
+        //   if (Math.abs(longitude - target.lng) <= 0.0001) {
+        //     console.log('ADD TARGET');
+        //     console.log(latitude, longitude);
+        //     this.targetAdded = true;
+        //     this.arView.session.add();
+        //     break;
+        //   }
+        // }
 
-           // simd_float4x4 translation = matrix_identity_float4x4;
-           // translation.columns[3].z = -3;
-           // simd_float4x4 camTransform = [[[session currentFrame] camera] transform];
-           // simd_float4x4 transform = simd_mul(camTransform, translation);
-           // ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
-           // [session addAnchor:anchor];
+         // simd_float4x4 translation = matrix_identity_float4x4;
+         // translation.columns[3].z = -3;
+         // simd_float4x4 camTransform = [[[session currentFrame] camera] transform];
+         // simd_float4x4 transform = simd_mul(camTransform, translation);
+         // ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
+         // [session addAnchor:anchor];
+        if (!this.targetAdded) {
           if (Math.abs(latitude - target.lat) <= 0.01) {
             if (Math.abs(longitude - target.lng) <= 0.01) {
               this.targetAdded = true;

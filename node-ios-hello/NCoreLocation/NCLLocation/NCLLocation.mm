@@ -31,6 +31,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCLLocation::Initialize(Isolat
   JS_SET_PROP_READONLY(proto, "coordinate", Coordinate);
   JS_SET_PROP_READONLY(proto, "altitude", Altitude);
   JS_SET_PROP_READONLY(proto, "floor", Floor);
+  JS_SET_PROP_READONLY(proto, "horizontalAccuracy", HorizontalAccuracy);
+  JS_SET_PROP_READONLY(proto, "verticalAccuracy", VerticalAccuracy);
+  JS_SET_PROP_READONLY(proto, "timestamp", Timestamp);
+  Nan::SetMethod(proto, "distance", Distance);
+  JS_SET_PROP_READONLY(proto, "speed", Speed);
+  JS_SET_PROP_READONLY(proto, "course", Course);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -80,10 +86,16 @@ NAN_GETTER(NCLLocation::FloorGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(CLLocation, loc);
+  
+  CLFloor* floor = [loc floor];
+  if (floor != nullptr) {
+    NSInteger level = [floor level];
 
-  NSInteger level = [[loc floor] level];
+    Local<Object> result = Object::New(Isolate::GetCurrent());
+    result->Set(JS_STR("floor"), JS_NUM(level));
 
-  JS_SET_RETURN(JS_NUM(level));
+    JS_SET_RETURN(result);
+  }
 }
 
 NAN_GETTER(NCLLocation::AltitudeGetter) {
@@ -94,4 +106,66 @@ NAN_GETTER(NCLLocation::AltitudeGetter) {
   double alt = [loc altitude];
 
   JS_SET_RETURN(JS_NUM(alt));
+}
+
+NAN_GETTER(NCLLocation::HorizontalAccuracyGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  double result = [loc horizontalAccuracy];
+
+  JS_SET_RETURN(JS_NUM(result));
+}
+
+NAN_GETTER(NCLLocation::VerticalAccuracyGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  double result = [loc verticalAccuracy];
+
+  JS_SET_RETURN(JS_NUM(result));
+}
+
+NAN_GETTER(NCLLocation::TimestampGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  NSDate* result = [loc timestamp];
+  double milliseconds = 1000.0 * [result timeIntervalSince1970];
+
+  JS_SET_RETURN(Nan::New<Date>(milliseconds).ToLocalChecked());
+}
+
+NAN_METHOD(NCLLocation::Distance) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc1);
+  
+  JS_UNWRAPPED(info[0], CLLocation, loc2);
+  double result = [loc1 distanceFromLocation:loc2];
+  
+  JS_SET_RETURN(JS_NUM(result));
+}
+
+NAN_GETTER(NCLLocation::SpeedGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  double result = [loc speed];
+
+  JS_SET_RETURN(JS_NUM(result));
+}
+
+NAN_GETTER(NCLLocation::CourseGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CLLocation, loc);
+
+  double result = [loc course];
+
+  JS_SET_RETURN(JS_NUM(result));
 }
