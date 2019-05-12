@@ -17,5 +17,4 @@ JS_WRAP_CLASS(UISwitch, UIControl);
   static NAN_METHOD(SetOn);
 JS_WRAP_CLASS_END(UISwitch);
 
-
 #endif /* NUISwitch_h */

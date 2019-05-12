@@ -85,6 +85,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 }
 #include "NNSUserDefaults.h"
 #include "NUILabel.h"
+#include "NUISlider.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
 #include "NUIButton.h"
@@ -215,6 +216,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIWindow::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UISlider class]]) {
+        return NUISlider::type;
+      }
       if ([obj isKindOfClass:[UICollectionViewCell class]]) {
         return NUICollectionViewCell::type;
       }

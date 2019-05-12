@@ -24,6 +24,7 @@
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUILabel.h"
+#include "NUISlider.h"
 #include "NUITextField.h"
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
@@ -342,7 +343,10 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIControl = NUIControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIControl").ToLocalChecked(), N_UIControl.first);
-  
+
+        auto N_UISlider = NUISlider::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UISlider").ToLocalChecked(), N_UISlider.first);
+
         auto N_UIRefreshControl = NUIRefreshControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIRefreshControl").ToLocalChecked(), N_UIRefreshControl.first);
 

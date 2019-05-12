@@ -103,6 +103,7 @@ NAN_METHOD(NUIViewController::PresentViewController)
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^{
       [ctrl->As<UIViewController>() presentViewController:vc->As<UIViewController>() animated:animated completion:^{
+        Nan::HandleScope scope;
         sweetiekit::Resolve(cb, true);
       }];
     });
