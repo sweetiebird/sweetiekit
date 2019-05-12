@@ -34,6 +34,7 @@ public:
   JS_PROP(ShadowColor);
   JS_PROP(ShadowRadius);
   JS_PROP(Position);
+  JS_PROP(MasksToBounds);
 };
 
 

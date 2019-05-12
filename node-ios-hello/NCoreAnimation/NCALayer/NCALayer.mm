@@ -38,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
   JS_SET_PROP(proto, "position", Position)
   Nan::SetMethod(proto, "addAnimation", AddAnimation);
+  JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -346,4 +347,20 @@ NAN_METHOD(NCALayer::AddAnimation) {
       });
     }
   }
+}
+
+NAN_GETTER(NCALayer::MasksToBoundsGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui masksToBounds]));
+}
+
+NAN_SETTER(NCALayer::MasksToBoundsSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+  
+  [ui setMasksToBounds:TO_BOOL(value)];
 }

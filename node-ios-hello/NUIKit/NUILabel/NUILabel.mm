@@ -84,6 +84,7 @@ NAN_METHOD(NUILabel::Alloc) {
       fromLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
       fromLabel.adjustsFontSizeToFitWidth = YES;
       //fromLabel.adjustsLetterSpacingToFitWidth = YES;
+      fromLabel.lineBreakMode = NSLineBreakByWordWrapping;
       fromLabel.minimumScaleFactor = 10.0f/12.0f;
       fromLabel.clipsToBounds = YES;
       fromLabel.backgroundColor = [UIColor clearColor];
