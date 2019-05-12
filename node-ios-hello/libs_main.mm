@@ -63,6 +63,7 @@
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NCLHeading.h"
 #include <unistd.h>
 
 #include <string>
@@ -291,6 +292,9 @@ void InitExports(Local<Object> exports) {
         exports->Set(Nan::New("UIBarButtonItem").ToLocalChecked(), N_UIBarButtonItem.first);
 
         // Core Location
+  
+        auto N_CLHeading = NCLHeading::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLHeading").ToLocalChecked(), N_CLHeading.first);
   
         auto N_CLLocation = NCLLocation::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CLLocation").ToLocalChecked(), N_CLLocation.first);
