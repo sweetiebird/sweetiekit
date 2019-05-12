@@ -162,6 +162,8 @@ const CLLocationAccuracy = {
 //   return todoVC;
 // }
 
+lblConsole = null;
+
 function attachConsole(vc) {
 
   const scrollView = new UIScrollView();
@@ -176,6 +178,7 @@ function attachConsole(vc) {
   scrollView.addSubview(contentView);
 
   scrollView.backgroundColor = { red: 248/255, green: 236/255, blue: 194/255, alpha: 0/255 };
+  scrollView.backgroundColor = { red: 0.5*248/255, green: 0.5*236/255, blue: 0.5*194/255, alpha: 192/255 };
 
   scrollView.leadingAnchor.constraintEqualToAnchor(vc.view.leadingAnchor, 20).isActive = true;
   scrollView.trailingAnchor.constraintEqualToAnchor(vc.view.trailingAnchor, 0).isActive = true;
@@ -187,15 +190,17 @@ function attachConsole(vc) {
   contentView.topAnchor.constraintEqualToAnchor(scrollView.topAnchor, 0).isActive = true;
   contentView.bottomAnchor.constraintEqualToAnchor(scrollView.bottomAnchor, 0).isActive = true;
 
-  const label1 = UILabel.alloc();
-  label1.numberOfLines = 0;
-  label1.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
-  label1.text = 'Lorem ipsum dolor amet aliqua sunt lumbersexual cardigan. Authentic live-edge chia everyday carry, selfies id est. Coloring book activated charcoal dreamcatcher flannel direct trade wayfarers put a bird on it retro locavore health goth seitan enamel pin esse. Excepteur non irony, kitsch nulla pok pok raw denim plaid. Messenger bag deep v ut, photo booth raclette crucifix XOXO glossier veniam ugh labore. Tumblr celiac irure labore, beard live-edge street art health goth non marfa gochujang poke la croix plaid. Duis roof party poutine, copper mug normcore pickled microdosing swag messenger bag. Meggings nulla man braid 8-bit distillery, authentic affogato poke poutine selvage proident actually ullamco sartorial blog. Tattooed letterpress street art four loko. Photo booth hexagon mlkshk, cupidatat officia pinterest distillery. Portland hashtag labore dolore deserunt gochujang, tacos taxidermy ut selfies.';
-  label1.sizeToFit();
-  label1.translatesAutoresizingMaskIntoConstraints = false;
-
+  lblConsole = UILabel.alloc();
+  lblConsole.numberOfLines = 0;
+  lblConsole.font = "Courier-Bold";
+  lblConsole.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
+  lblConsole.text = 'Lorem ipsum dolor amet aliqua sunt lumbersexual cardigan. Authentic live-edge chia everyday carry, selfies id est. Coloring book activated charcoal dreamcatcher flannel direct trade wayfarers put a bird on it retro locavore health goth seitan enamel pin esse. Excepteur non irony, kitsch nulla pok pok raw denim plaid. Messenger bag deep v ut, photo booth raclette crucifix XOXO glossier veniam ugh labore. Tumblr celiac irure labore, beard live-edge street art health goth non marfa gochujang poke la croix plaid. Duis roof party poutine, copper mug normcore pickled microdosing swag messenger bag. Meggings nulla man braid 8-bit distillery, authentic affogato poke poutine selvage proident actually ullamco sartorial blog. Tattooed letterpress street art four loko. Photo booth hexagon mlkshk, cupidatat officia pinterest distillery. Portland hashtag labore dolore deserunt gochujang, tacos taxidermy ut selfies.';
+  lblConsole.sizeToFit();
+  lblConsole.translatesAutoresizingMaskIntoConstraints = false;
+/*
   const label2 = UILabel.alloc();
   label2.numberOfLines = 0;
+  label2.font = "Courier-Bold";
   label2.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
   label2.text = 'Pop-up brooklyn kitsch distillery. Celiac austin minim live-edge distillery. Ut succulents deserunt, reprehenderit nisi locavore in beard bicycle rights voluptate venmo. Viral quis hammock, mlkshk microdosing aute truffaut lomo. Echo park sed activated charcoal iPhone sriracha irony shoreditch gastropub dreamcatcher disrupt butcher VHS man braid neutra DIY. Chillwave actually sartorial trust fund DIY irony copper mug. Ea enamel pin irure est. Williamsburg adipisicing neutra, cupidatat mollit tofu bitters forage. Messenger bag crucifix commodo jean shorts viral meditation.';
   label2.sizeToFit();
@@ -203,19 +208,29 @@ function attachConsole(vc) {
 
   const label3 = UILabel.alloc();
   label3.numberOfLines = 0;
+  label3.font = "Courier-Bold";
   label3.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
   label3.text = 'Pop-up brooklyn kitsch distillery. Celiac austin minim live-edge distillery. Ut succulents deserunt, reprehenderit nisi locavore in beard bicycle rights voluptate venmo. Viral quis hammock, mlkshk microdosing aute truffaut lomo. Echo park sed activated charcoal iPhone sriracha irony shoreditch gastropub dreamcatcher disrupt butcher VHS man braid neutra DIY. Chillwave actually sartorial trust fund DIY irony copper mug. Ea enamel pin irure est. Williamsburg adipisicing neutra, cupidatat mollit tofu bitters forage. Messenger bag crucifix commodo jean shorts viral meditation.';
   label3.sizeToFit();
   label3.translatesAutoresizingMaskIntoConstraints = false;
-
   contentView.addSubview(label1);
   contentView.addSubview(label2);
   contentView.addSubview(label3);
+*/
 
-  label1.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor, 0).isActive = true;
-  label1.topAnchor.constraintEqualToAnchor(contentView.topAnchor, 0).isActive = true;
-  label1.widthAnchor.constraintEqualToAnchor(contentView.widthAnchor, -20).isActive = true;
+  contentView.addSubview(lblConsole);
 
+  lblConsole.layer.shadowColor = {red: 0, green: 0, blue: 0};
+  lblConsole.layer.shadowRadius = 3.0;
+  lblConsole.layer.shadowOpacity = 1.0;
+  lblConsole.layer.shadowOffset = {width: 4, height: 4};
+  lblConsole.layer.masksToBounds = false;
+
+  lblConsole.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor, 0).isActive = true;
+  lblConsole.topAnchor.constraintEqualToAnchor(contentView.topAnchor, 0).isActive = true;
+  lblConsole.widthAnchor.constraintEqualToAnchor(contentView.widthAnchor, -20).isActive = true;
+
+  /*
   label2.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor, 0).isActive = true;
   label2.topAnchor.constraintEqualToAnchor(label1.bottomAnchor, 25).isActive = true;
   label2.widthAnchor.constraintEqualToAnchor(contentView.widthAnchor, -20).isActive = true;
@@ -224,9 +239,19 @@ function attachConsole(vc) {
   label3.topAnchor.constraintEqualToAnchor(label2.bottomAnchor, 25).isActive = true;
   label3.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor, 0).isActive = true;
   label3.widthAnchor.constraintEqualToAnchor(contentView.widthAnchor, -20).isActive = true;
+  */
 
 }
 
+const util = require('util');
+
+function print(txt) {
+  console.log(txt);
+  if (typeof txt !== 'string') {
+    txt = util.inspect(txt, {depth: Infinity});
+  }
+  lblConsole.text = txt + '\n' + lblConsole.text;
+}
 
 const randomColor = () => {
   const colors = [
@@ -272,7 +297,7 @@ class ARApp {
           timestamp,
           speed, course } = loc;
         const { latitude, longitude } = coordinate;
-        console.log({ latitude, longitude, floor, altitude,
+        print({ latitude, longitude, floor, altitude,
           horizontalAccuracy, verticalAccuracy,
           timestamp,
           speed, course });
