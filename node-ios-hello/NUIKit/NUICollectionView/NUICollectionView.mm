@@ -11,6 +11,7 @@
 #include "NUICollectionView.h"
 #include "NUIScrollView.h"
 #include "NUITableViewDataSource.h"
+#include "NUINib.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NUICollectionView::type;
@@ -28,6 +29,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionView::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP(proto, "backgroundView", BackgroundView);
+  Nan::SetMethod(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -70,3 +73,45 @@ NAN_METHOD(NUICollectionView::New) {
 
 NUICollectionView::NUICollectionView () {}
 NUICollectionView::~NUICollectionView () {}
+
+NAN_METHOD(NUICollectionView::RegisterNibForCellWithReuseIdentifier) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+
+  NUINib *nibObj = ObjectWrap::Unwrap<NUINib>(Local<Object>::Cast(info[0]));
+  
+  std::string identifier;
+  if (info[1]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
+    identifier = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+
+  @autoreleasepool {
+    NSString *reuseIdentifier = [NSString stringWithUTF8String:identifier.c_str()];
+    [ui registerNib:nibObj->As<UINib>() forCellWithReuseIdentifier:reuseIdentifier];
+  }
+}
+
+NAN_GETTER(NUICollectionView::BackgroundViewGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type)));
+}
+
+NAN_SETTER(NUICollectionView::BackgroundViewSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+
+  NUIView *bgViewObj = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setBackgroundView:bgViewObj->As<UIView>()];
+  }
+}
+

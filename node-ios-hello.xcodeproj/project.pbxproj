@@ -91,6 +91,7 @@
 		A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC02288240F001D1F6E /* NUICollectionViewManager.mm */; };
 		A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC222882469001D1F6E /* SUICollectionViewManager.swift */; };
 		A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC62288284E001D1F6E /* NUICollectionViewCell.mm */; };
+		A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BCC22882EB9001D1F6E /* NUINib.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -289,6 +290,8 @@
 		A1BD4BC222882469001D1F6E /* SUICollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUICollectionViewManager.swift; sourceTree = "<group>"; };
 		A1BD4BC522882846001D1F6E /* NUICollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewCell.h; sourceTree = "<group>"; };
 		A1BD4BC62288284E001D1F6E /* NUICollectionViewCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewCell.mm; sourceTree = "<group>"; };
+		A1BD4BCB22882EB2001D1F6E /* NUINib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUINib.h; sourceTree = "<group>"; };
+		A1BD4BCC22882EB9001D1F6E /* NUINib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINib.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -871,6 +874,15 @@
 			path = NUICollectionViewCell;
 			sourceTree = "<group>";
 		};
+		A1BD4BCA22882EA5001D1F6E /* NUINib */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BCB22882EB2001D1F6E /* NUINib.h */,
+				A1BD4BCC22882EB9001D1F6E /* NUINib.mm */,
+			);
+			path = NUINib;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,6 +968,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4BCA22882EA5001D1F6E /* NUINib */,
 				A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */,
 				A1BD4BBA228821AD001D1F6E /* NUICollectionViewController */,
 				A1BD4BB622882116001D1F6E /* NUICollectionView */,
@@ -1424,6 +1437,7 @@
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
+				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,

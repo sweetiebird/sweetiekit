@@ -134,6 +134,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NUINib.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -312,6 +313,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= objects
+      if ([obj isKindOfClass:[UINib class]]) {
+        return NUINib::type;
+      }
       if ([obj isKindOfClass:[UIBarButtonItem class]]) {
         return NUIBarButtonItem::type;
       }

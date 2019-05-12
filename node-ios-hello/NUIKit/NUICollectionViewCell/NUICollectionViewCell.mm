@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUICollectionViewCell.h"
+#include "NUIView.h"
 
 Nan::Persistent<FunctionTemplate> NUICollectionViewCell::type;
 
@@ -25,6 +26,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionViewCell::Initial
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP_READONLY(proto, "contentView", ContentView);
+  JS_SET_PROP(proto, "backgroundView", BackgroundView);
+  JS_SET_PROP(proto, "selectedBackgroundView", SelectedBackgroundView);
+  JS_SET_PROP(proto, "isSelected", IsSelected);
+  JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -63,3 +69,83 @@ NAN_METHOD(NUICollectionViewCell::New) {
 
 NUICollectionViewCell::NUICollectionViewCell () {}
 NUICollectionViewCell::~NUICollectionViewCell () {}
+
+NAN_GETTER(NUICollectionViewCell::ContentViewGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui contentView], NUIView::type)));
+}
+
+NAN_GETTER(NUICollectionViewCell::BackgroundViewGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type)));
+}
+
+NAN_SETTER(NUICollectionViewCell::BackgroundViewSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+
+  NUIView *bgViewObj = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setBackgroundView:bgViewObj->As<UIView>()];
+  }
+}
+
+NAN_GETTER(NUICollectionViewCell::SelectedBackgroundViewGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui selectedBackgroundView], NUIView::type)));
+}
+
+NAN_SETTER(NUICollectionViewCell::SelectedBackgroundViewSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+
+  NUIView *bgViewObj = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setSelectedBackgroundView:bgViewObj->As<UIView>()];
+  }
+}
+
+NAN_GETTER(NUICollectionViewCell::IsSelectedGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+  
+  JS_SET_RETURN(JS_BOOL([ui isSelected]));
+}
+
+NAN_SETTER(NUICollectionViewCell::IsSelectedSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+
+  [ui setSelected:TO_BOOL(value)];
+}
+
+NAN_GETTER(NUICollectionViewCell::IsHighlightedGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+  
+  JS_SET_RETURN(JS_BOOL([ui isHighlighted]));
+}
+
+NAN_SETTER(NUICollectionViewCell::IsHighlightedSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionViewCell, ui);
+
+  [ui setHighlighted:TO_BOOL(value)];
+}

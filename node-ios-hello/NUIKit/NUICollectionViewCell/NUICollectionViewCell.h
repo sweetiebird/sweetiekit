@@ -26,6 +26,11 @@ public:
   virtual ~NUICollectionViewCell();
 
   static NAN_METHOD(New);
+  JS_PROP(ContentView);
+  JS_PROP(BackgroundView);
+  JS_PROP(SelectedBackgroundView);
+  JS_PROP(IsSelected);
+  JS_PROP(IsHighlighted);
 };
 
 #endif /* NUICollectionViewCell_h */

@@ -14,6 +14,7 @@
 #include "NUIWindow.h"
 #include "NUIViewController.h"
 #include "NUIView.h"
+#include "NUINib.h"
 #include "NUIRefreshControl.h"
 #include "NUISwitch.h"
 #include "NUIControl.h"
@@ -382,6 +383,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UICollectionViewManager = NUICollectionViewManager::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UICollectionViewManager").ToLocalChecked(), N_UICollectionViewManager.first);
+
+        auto N_UINib = NUINib::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UINib").ToLocalChecked(), N_UINib.first);
 
         // UIKit delegates ========
   

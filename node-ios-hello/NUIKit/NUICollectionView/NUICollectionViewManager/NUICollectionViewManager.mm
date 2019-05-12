@@ -12,7 +12,7 @@
 #include "NUICollectionViewManager.h"
 #import "node_ios_hello-Swift.h"
 #include "NUICollectionView.h"
-#include "NUITableViewCell.h"
+#include "NUICollectionViewCell.h"
 
 Nan::Persistent<FunctionTemplate> NUICollectionViewManager::type;
 
@@ -66,17 +66,15 @@ NAN_METHOD(NUICollectionViewManager::New) {
           return 1;
         } cellForItemAt: ^ UICollectionViewCell * _Nonnull (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
           Nan::HandleScope scope;
-//          Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-//          uint32_t section = [indexPath section];
-//          uint32_t row = [indexPath row];
-//          Local<Object> indexPathObj = Nan::New<Object>();
-//          Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
-//          Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
-//          Local<Value> result = mgr->_cellForRowAt("NUITableViewManager::New",
-//            tableViewObj, indexPathObj);
-//          JS_UNWRAPPED(JS_OBJ(result), UITableViewCell, cell);
-//          return cell;
-          return [[UICollectionViewCell alloc] init];
+          Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
+          uint32_t section = [indexPath section];
+          uint32_t row = [indexPath row];
+          Local<Object> indexPathObj = Nan::New<Object>();
+          Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
+          Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+          Local<Value> result = mgr->_cellForItemAt("NUITableViewManager::New", cvObj, indexPathObj);
+          JS_UNWRAPPED(JS_OBJ(result), UICollectionViewCell, cell);
+          return cell;
         }]);
       });
     }
