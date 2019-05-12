@@ -292,7 +292,7 @@ NAN_GETTER(NUIView::SizeGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-   Local<Object> result = Object::New(Isolate::GetCurrent());
+  Local<Object> result = Object::New(Isolate::GetCurrent());
   result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
   result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
 

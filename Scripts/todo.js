@@ -48,10 +48,31 @@ const {
   SKSpriteNode,
   CLLocationManager,
   CLLocationManagerDelegate,
+  UICollectionViewManager,
+  UICollectionView,
+  UICollectionViewCell,
+  UICollectionViewController,
 } = UIKit;
 
 const CLLocationAccuracy = {
   BestForNavigation: 'kCLLocationAccuracyBestForNavigation',
+};
+
+const UITableViewScrollPosition = {
+  Top: 'Top',
+  Bottom: 'Bottom',
+  Middle: 'Middle',
+  None: 'None',
+};
+
+const UICollectionViewScrollPosition = {
+  Top: 'Top',
+  Bottom: 'Bottom',
+  Left: 'Left',
+  Right: 'Right',
+  None: 'None',
+  CenteredHorizontally: 'CenteredHorizontally',
+  CenteredVertically: 'CenteredVertically',
 };
 
 // shared application
@@ -393,7 +414,11 @@ class MyApp {
 
     this.todoTable.reloadData();
 
-    this.todoTable.scrollToRowAt({ section: 0, row: this.todos.length - 1 }, true);
+    this.todoTable.scrollToRowAt(
+      { section: 0, row: this.todos.length - 1 },
+      UITableViewScrollPosition.Top,
+      true,
+    );
 
     const todosStr = JSON.stringify(this.todos);
     this.defaults.setValueForKey(todosStr, 'TODOS');
@@ -461,42 +486,6 @@ class MyApp {
   }
 }
 
-// class MyARApp {
-//   constructor(app) {
-//     this.app = app;
-//     this.sb = new UIStoryboard('Main');
-//     this.vc = new UIViewController();
-//   }
-//
-//   launch() {
-//     this.app.keyWindow.setRootViewController(this.vc);
-//     this.arView = new ARSKView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });
-//     this.vc.view.addSubview(this.arView);
-//     console.log(this.arView);
-//     setTimeout(() => {
-//       const config = new ARWorldTrackingConfiguration();
-//       this.arView.session.run(config);
-//     }, 2000);
-//   }
-// }
-
-// axios.get('https://testserver-rugwhbkbuu.now.sh/').then((resp) => {
-//   const { data } = resp;
-//   console.log(data);
-// });
-
-// async function start() {
-//   const sharedApp = new UIApplication();
-//   const myApp = new MyApp(sharedApp);
-//   myApp.launch();
-// }
-
-// async function start() {
-//   const sharedApp = new UIApplication();
-//   const myApp = new ARApp(sharedApp);
-//   myApp.launch();
-// }
-
 async function start() {
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
@@ -509,18 +498,9 @@ async function start() {
 
 setTimeout(start, 1);
 
-
-// async function start() {
-//   const sharedApp = new UIApplication();
-//   const myApp = new MyARApp(sharedApp);
-//   myApp.launch();
-// }
-
 const options = {
   appDelegate: 'AppDelegate',
   onBackgroundFetch: () => {
     console.log('bgFetch!');
   }
 };
-
-//UIApplicationMain(options);

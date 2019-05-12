@@ -287,22 +287,33 @@ NAN_METHOD(NUITableView::ScrollToRowAt) {
   
   int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
   int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
-  bool animated = TO_BOOL(info[1]);
 
-  __block UITableViewCell* cell;
+  std::string position;
+  if (info[1]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
+    position = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  NSString *str = [NSString stringWithUTF8String:position.c_str()];
+  UITableViewScrollPosition pos = UITableViewScrollPositionTop;
+
+  if ([str isEqualToString:@"Bottom"]) {
+    pos = UITableViewScrollPositionBottom;
+  } else if ([str isEqualToString:@"Middle"]) {
+    pos = UITableViewScrollPositionMiddle;
+  } else if ([str isEqualToString:@"None"]) {
+    pos = UITableViewScrollPositionNone;
+  }
+
+  bool animated = TO_BOOL(info[2]);
+
   @autoreleasepool {
     NSUInteger indexes[2];
     indexes[0] = section;
     indexes[1] = row;
     NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
-    [tv scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:animated];
+    [tv scrollToRowAtIndexPath:path atScrollPosition:pos animated:animated];
   }
-  
-  Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)cell)
-  };
-
-  Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  JS_SET_RETURN(value);
 }

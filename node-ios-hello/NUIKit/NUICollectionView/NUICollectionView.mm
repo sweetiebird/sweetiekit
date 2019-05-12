@@ -29,8 +29,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionView::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP_READONLY(proto, "visibleCells", VisibleCells);
+  JS_SET_PROP_READONLY(proto, "indexPathsForSelectedItems", IndexPathsForSelectedItems);
   JS_SET_PROP(proto, "backgroundView", BackgroundView);
   Nan::SetMethod(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
+  Nan::SetMethod(proto, "scrollToItemAtIndexPath", ScrollToItemAtIndexPath);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -93,6 +96,105 @@ NAN_METHOD(NUICollectionView::RegisterNibForCellWithReuseIdentifier) {
     NSString *reuseIdentifier = [NSString stringWithUTF8String:identifier.c_str()];
     [ui registerNib:nibObj->As<UINib>() forCellWithReuseIdentifier:reuseIdentifier];
   }
+}
+
+NAN_METHOD(NUICollectionView::ScrollToItemAtIndexPath) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+
+  int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
+  int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
+
+  std::string position;
+  if (info[1]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
+    position = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  NSString *str = [NSString stringWithUTF8String:position.c_str()];
+  UICollectionViewScrollPosition pos = UICollectionViewScrollPositionCenteredVertically;
+
+  if ([str isEqualToString:@"CenteredHorizontally"]) {
+    pos = UICollectionViewScrollPositionCenteredHorizontally;
+  } else if ([str isEqualToString:@"Top"]) {
+    pos = UICollectionViewScrollPositionTop;
+  } else if ([str isEqualToString:@"Bottom"]) {
+    pos = UICollectionViewScrollPositionBottom;
+  } else if ([str isEqualToString:@"Left"]) {
+    pos = UICollectionViewScrollPositionLeft;
+  } else if ([str isEqualToString:@"Right"]) {
+    pos = UICollectionViewScrollPositionRight;
+  } else if ([str isEqualToString:@"None"]) {
+    pos = UICollectionViewScrollPositionNone;
+  }
+
+  bool animated = TO_BOOL(info[2]);
+
+  @autoreleasepool {
+    NSUInteger indexes[2];
+    indexes[0] = section;
+    indexes[1] = row;
+    NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+    [ui scrollToItemAtIndexPath:path atScrollPosition:pos animated:animated];
+  }
+}
+
+NAN_GETTER(NUICollectionView::VisibleCellsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+  
+  __block NSArray* cells = nullptr;
+  __block NSInteger count = 0;
+
+  @autoreleasepool {
+    cells = [ui visibleCells];
+    count = [cells count];
+  }
+  
+  auto result = Nan::New<Array>();
+
+  for (NSInteger i = 0; i < count; i++) {
+    UIView* cell = [cells objectAtIndex:i];
+    if (cell != nullptr) {
+      Local<Value> argv[] = {
+        Nan::New<v8::External>((__bridge void*)cell)
+      };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      Nan::Set(result, static_cast<uint32_t>(i), value);
+    }
+  }
+
+  JS_SET_RETURN(result);
+}
+
+NAN_GETTER(NUICollectionView::IndexPathsForSelectedItemsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+  
+  __block NSArray* paths = nullptr;
+  __block NSInteger count = 0;
+
+  @autoreleasepool {
+    paths = [ui indexPathsForSelectedItems];
+    count = [paths count];
+  }
+  
+  auto result = Nan::New<Array>();
+
+  for (NSInteger i = 0; i < count; i++) {
+    NSIndexPath *path = [paths objectAtIndex:i];
+    Local<Object> resultVal = Object::New(Isolate::GetCurrent());
+    resultVal->Set(JS_STR("section"), JS_NUM([path section]));
+    resultVal->Set(JS_STR("row"), JS_NUM([path row]));
+    Nan::Set(result, static_cast<uint32_t>(i), resultVal);
+  }
+
+  JS_SET_RETURN(result);
 }
 
 NAN_GETTER(NUICollectionView::BackgroundViewGetter) {
