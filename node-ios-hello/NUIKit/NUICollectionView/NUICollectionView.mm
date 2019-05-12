@@ -10,7 +10,7 @@
 #include "defines.h"
 #include "NUICollectionView.h"
 #include "NUIScrollView.h"
-#include "NUITableViewDataSource.h"
+#include "NUICollectionViewManager.h"
 #include "NUINib.h"
 #import "node_ios_hello-Swift.h"
 
@@ -32,7 +32,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionView::Initialize(
   JS_SET_PROP_READONLY(proto, "visibleCells", VisibleCells);
   JS_SET_PROP_READONLY(proto, "indexPathsForSelectedItems", IndexPathsForSelectedItems);
   JS_SET_PROP(proto, "backgroundView", BackgroundView);
+  JS_SET_PROP(proto, "delegate", Delegate);
+  JS_SET_PROP(proto, "dataSource", DataSource);
   Nan::SetMethod(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
+  Nan::SetMethod(proto, "dequeueReusableCellWithReuseIdentifier", DequeueReusableCellWithReuseIdentifier);
   Nan::SetMethod(proto, "scrollToItemAtIndexPath", ScrollToItemAtIndexPath);
   Nan::SetMethod(proto, "reloadData", ReloadData);
 
@@ -59,9 +62,8 @@ NAN_METHOD(NUICollectionView::New) {
 
     @autoreleasepool {
       CGRect frame = CGRectMake(x, y, width, height);
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[UICollectionView alloc] initWithFrame:frame]);
-      });
+      UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+      view->SetNSObject([[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout]);
     }
   } else {
     @autoreleasepool {
@@ -98,6 +100,43 @@ NAN_METHOD(NUICollectionView::RegisterNibForCellWithReuseIdentifier) {
     [ui registerNib:nibObj->As<UINib>() forCellWithReuseIdentifier:reuseIdentifier];
   }
 }
+
+NAN_METHOD(NUICollectionView::DequeueReusableCellWithReuseIdentifier) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+  
+  std::string identifier;
+  if (info[1]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    identifier = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+
+  int section = TO_UINT32(JS_OBJ(info[1])->Get(JS_STR("section")));
+  int row = TO_UINT32(JS_OBJ(info[1])->Get(JS_STR("row")));
+
+  __block UICollectionViewCell* cell;
+
+  @autoreleasepool {
+    NSString *reuseIdentifier = [NSString stringWithUTF8String:identifier.c_str()];
+    NSUInteger indexes[2];
+    indexes[0] = section;
+    indexes[1] = row;
+    NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+    cell = [ui dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:path];
+  }
+  
+  Local<Value> argv[] = {
+    Nan::New<v8::External>((__bridge void*)cell)
+  };
+
+  Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  JS_SET_RETURN(value);
+}
+
 
 NAN_METHOD(NUICollectionView::ScrollToItemAtIndexPath) {
   Nan::HandleScope scope;
@@ -149,6 +188,54 @@ NAN_METHOD(NUICollectionView::ReloadData) {
   JS_UNWRAP(UICollectionView, ui);
 
   [ui reloadData];
+}
+
+NAN_GETTER(NUICollectionView::DataSourceGetter) {
+  Nan::HandleScope scope;
+
+  Nan::ThrowError("NUICollectionView::DataSourceGetter not implemented");
+  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+}
+
+NAN_SETTER(NUICollectionView::DataSourceSetter) {
+  Nan::HandleScope scope;
+
+  NUICollectionView *view = ObjectWrap::Unwrap<NUICollectionView>(info.This());
+  NUICollectionViewManager *mgr = ObjectWrap::Unwrap<NUICollectionViewManager>(Local<Object>::Cast(value));
+  auto dataSource = mgr->As<SUICollectionViewManager>();
+  view->_dataSource.Reset(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      auto ui = view->As<UICollectionView>();
+      [ui associateValue:dataSource withKey:@"sweetiekit.datasource"];
+      [ui setDataSource:dataSource];
+    });
+  }
+}
+
+NAN_GETTER(NUICollectionView::DelegateGetter) {
+  Nan::HandleScope scope;
+
+  Nan::ThrowError("NUICollectionView::DelegateGetter not implemented");
+  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+}
+
+NAN_SETTER(NUICollectionView::DelegateSetter) {
+  Nan::HandleScope scope;
+
+  NUICollectionView *view = ObjectWrap::Unwrap<NUICollectionView>(info.This());
+  NUICollectionViewManager *mgr = ObjectWrap::Unwrap<NUICollectionViewManager>(Local<Object>::Cast(value));
+  auto delegate = mgr->As<SUICollectionViewManager>();
+  view->_delegate.Reset(value);
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      auto ui = view->As<UICollectionView>();
+      [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
+      [ui setDelegate:delegate];
+    });
+  }
 }
 
 NAN_GETTER(NUICollectionView::VisibleCellsGetter) {

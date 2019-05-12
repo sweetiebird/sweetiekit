@@ -839,6 +839,7 @@
 		A1BD4BB622882116001D1F6E /* NUICollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */,
 				A1BD4BBE228823FA001D1F6E /* NUICollectionViewManager */,
 				A1BD4BB72288212A001D1F6E /* NUICollectionView.h */,
 				A1BD4BB822882131001D1F6E /* NUICollectionView.mm */,
@@ -881,6 +882,13 @@
 				A1BD4BCC22882EB9001D1F6E /* NUINib.mm */,
 			);
 			path = NUINib;
+			sourceTree = "<group>";
+		};
+		A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NUICollectionViewDataSource;
 			sourceTree = "<group>";
 		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {

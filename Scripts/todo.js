@@ -518,7 +518,8 @@ class CollectionApp {
     this.sb = new UIStoryboard('Main');
     this.setupDefaults();
     this.vc = new UIViewController();
-    this.collView = new UITableView();
+    this.collView = new UICollectionView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });
+    this.collView.backgroundColor = { red: 1, green: 1, blue: 1 };
     this.vc.view.addSubview(this.collView);
     this.addBarItem();
     this.setupConstraints();
@@ -576,12 +577,6 @@ class CollectionApp {
 
     this.collView.reloadData();
 
-    this.collView.scrollToItemAtIndexPath(
-      { section: 0, row: this.items.length - 1 },
-      UICollectionViewScrollPosition.CenteredVertically,
-      true,
-    );
-
     const itemsStr = JSON.stringify(this.items);
     this.defaults.setValueForKey(itemsStr, 'ITEMS');
   }
@@ -592,17 +587,25 @@ class CollectionApp {
   }
 
   getItemsFor(tableView, section) {
-    return this.todos.length;
+    return this.items.length;
   }
 
   getCellFor(tableView, { section, row }) {
-    const cell = new UITableViewCell();
-    const todo = this.todos[row];
-    if (todo && todo.text) {
-      cell.textLabel.text = todo.text;
-      if (!todo.isDone) {
-        cell.textLabel.font = 'Arial-BoldMT';
-      }
+    const cell = this.collView.dequeueReusableCellWithReuseIdentifier(
+      'collCell',
+      { section, row },
+    );
+    const item = this.items[row];
+    console.log(cell, item);
+    if (item && item.text) {
+      const label = UILabel.alloc();
+      label.frame = { x: 0, y: 0, width: 200, height: 40 };
+      label.text = item.text;
+      const view = new UIView({
+        x: 0, y: 0, width: 200, height: 200,
+      });
+      view.addSubview(label);
+      cell.contentView.addSubview(view);
     }
     return cell;
   }
@@ -631,10 +634,20 @@ class CollectionApp {
   }
 }
 
+// async function start() {
+//   const sharedApp = new UIApplication();
+//   if (sharedApp.keyWindow) {
+//     const myApp = new ARApp(sharedApp);
+//     myApp.launch();
+//   } else {
+//     setTimeout(start, 10);
+//   }
+// }
+
 async function start() {
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
-    const myApp = new ARApp(sharedApp);
+    const myApp = new CollectionApp(sharedApp);
     myApp.launch();
   } else {
     setTimeout(start, 10);

@@ -70,8 +70,8 @@ NAN_METHOD(NUICollectionViewManager::New) {
           uint32_t section = [indexPath section];
           uint32_t row = [indexPath row];
           Local<Object> indexPathObj = Nan::New<Object>();
-          Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
-          Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+          Nan::Set(indexPathObj, JS_STR("section"), JS_NUM(section));
+          Nan::Set(indexPathObj, JS_STR("row"), JS_NUM(row));
           Local<Value> result = mgr->_cellForItemAt("NUITableViewManager::New", cvObj, indexPathObj);
           JS_UNWRAPPED(JS_OBJ(result), UICollectionViewCell, cell);
           return cell;

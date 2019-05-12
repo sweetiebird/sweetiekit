@@ -29,9 +29,15 @@ public:
   static NAN_METHOD(RegisterNibForCellWithReuseIdentifier);
   static NAN_METHOD(ScrollToItemAtIndexPath);
   static NAN_METHOD(ReloadData);
+  static NAN_METHOD(DequeueReusableCellWithReuseIdentifier);
+  JS_PROP(Delegate);
+  JS_PROP(DataSource);
   JS_PROP(BackgroundView);
   JS_PROP(VisibleCells);
   JS_PROP(IndexPathsForSelectedItems);
+  
+  Nan::Persistent<Value> _dataSource;
+  Nan::Persistent<Value> _delegate;
 };
 
 #endif /* NUICollectionView_h */
