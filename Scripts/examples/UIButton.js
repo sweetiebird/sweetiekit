@@ -9,6 +9,7 @@ async function make() {
     console.log('button pressed');
   });
   button.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  button.layer.cornerRadius = 4;
   return button;
 }
 

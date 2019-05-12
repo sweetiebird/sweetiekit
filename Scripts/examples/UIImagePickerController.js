@@ -37,6 +37,7 @@ async function make(nav, demoVC) {
   });
 
   btn.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  btn.layer.cornerRadius = 4;
 
   demoVC.view.addSubview(btn);
 
