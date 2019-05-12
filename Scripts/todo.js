@@ -183,12 +183,16 @@ class ARApp {
       this.locMgr.startUpdatingLocation();
     }, (mgr, locations) => {
       console.log(locations);
+      locations.forEach((loc) => {
+        console.log('location', loc.latitude, loc.longitude);
+      });
     });
     this.locMgr = new CLLocationManager();
     this.locMgr.delegate = this.locDel;
     this.locMgr.desiredAccuracy = CLLocationAccuracy.BestForNavigation;
     this.locMgr.distanceFilter = 1;
     console.log(this.locMgr, this.locDel);
+    this.locMgr.requestAlwaysAuthorization();
   }
 
   launch() {

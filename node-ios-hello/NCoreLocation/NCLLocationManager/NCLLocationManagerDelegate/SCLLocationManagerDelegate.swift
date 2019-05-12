@@ -17,11 +17,12 @@ class SCLLocationManagerDelegate: NSObject, CLLocationManagerDelegate {
   @objc var didUpdateLocationsCallback: DidUpdateLocationsClosure?
   @objc var onAuthorizationCallback: OnAuthorizationClosure?
 
-//  @objc convenience init(onAuthorization: OnAuthorizationClosure!, didUpdateLocations: DidUpdateLocationsClosure!) {
-//    self.init()
-//    onAuthorizationCallback = onAuthorization
-//    didUpdateLocationsCallback = didUpdateLocations
-//  }
+  @objc convenience init(onAuthorization: OnAuthorizationClosure!, didUpdateLocations: DidUpdateLocationsClosure!) {
+    self.init()
+    onAuthorizationCallback = onAuthorization
+    didUpdateLocationsCallback = didUpdateLocations
+  }
+
   @objc convenience init(didUpdateLocations: DidUpdateLocationsClosure!) {
     self.init()
     didUpdateLocationsCallback = didUpdateLocations
