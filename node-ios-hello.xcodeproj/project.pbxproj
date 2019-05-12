@@ -26,8 +26,6 @@
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
-		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
-		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
@@ -65,6 +63,11 @@
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
+		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
+		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
+		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
+		A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B092287B769001D1F6E /* snapshot.cc */; };
+		A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B0A2287B769001D1F6E /* embedded.S */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -216,6 +219,13 @@
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
+		A1BD4B002287B6DC001D1F6E /* libicuucx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuucx.a; path = "../node-ios-release/out/Release/libicuucx.a"; sourceTree = "<group>"; };
+		A1BD4B012287B6DC001D1F6E /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = "../node-ios-release/out/Release/libicui18n.a"; sourceTree = "<group>"; };
+		A1BD4B022287B6DC001D1F6E /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = "../node-ios-release/out/Release/libicudata.a"; sourceTree = "<group>"; };
+		A1BD4B092287B769001D1F6E /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = Debug/snapshot.cc; sourceTree = "<group>"; };
+		A1BD4B0A2287B769001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Debug/embedded.S; sourceTree = "<group>"; };
+		A1BD4B0D2287B773001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Release/embedded.S; sourceTree = "<group>"; };
+		A1BD4B0E2287B773001D1F6E /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = Release/snapshot.cc; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -302,6 +312,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
+				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
+				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
 				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
 				A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */,
 				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
@@ -584,6 +597,24 @@
 			path = CABasicAnimation;
 			sourceTree = "<group>";
 		};
+		A1BD4B072287B753001D1F6E /* DebugSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B0A2287B769001D1F6E /* embedded.S */,
+				A1BD4B092287B769001D1F6E /* snapshot.cc */,
+			);
+			name = DebugSnapshot;
+			sourceTree = "<group>";
+		};
+		A1BD4B082287B75A001D1F6E /* ReleaseSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B0D2287B773001D1F6E /* embedded.S */,
+				A1BD4B0E2287B773001D1F6E /* snapshot.cc */,
+			);
+			name = ReleaseSnapshot;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -850,6 +881,8 @@
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B082287B75A001D1F6E /* ReleaseSnapshot */,
+				A1BD4B072287B753001D1F6E /* DebugSnapshot */,
 				A174A170228227A2002A8216 /* sunflower.mp3 */,
 				A1058B44226810B700CEAA5C /* embedded.S */,
 				A1058B46226810BF00CEAA5C /* snapshot.cc */,
@@ -899,6 +932,9 @@
 		A1FC1A1B225C6AB100085571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B022287B6DC001D1F6E /* libicudata.a */,
+				A1BD4B012287B6DC001D1F6E /* libicui18n.a */,
+				A1BD4B002287B6DC001D1F6E /* libicuucx.a */,
 				A18E802122657B6C000438E0 /* Client.framework */,
 				A1FC1A1D225C6AB200085571 /* libbrotli.a */,
 				A1FC1A2C225C6AB200085571 /* libcares.a */,
@@ -1044,13 +1080,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
+				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
-				A1058B45226810B700CEAA5C /* embedded.S in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
@@ -1061,12 +1097,12 @@
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
-				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */,
 				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
@@ -1313,13 +1349,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"V8_INTL_SUPPORT=1",
+					"DEBUG=1",
+				);
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-full/src",
-					"../node-ios-full/deps/uv/include",
-					"../node-ios-full/deps/v8/include",
-					"../node-ios-full/deps/v8",
-					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					"../node-ios-release/src",
+					"../node-ios-release/deps/uv/include",
+					"../node-ios-release/deps/v8/include",
+					"../node-ios-release/deps/v8",
+					"../node-ios-release/out/Debug/obj/gen/generate-bytecode-output-root",
+					"../node-ios-release/out/Debug/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -1329,7 +1369,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Debug";
+				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Debug";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -1360,13 +1400,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "V8_INTL_SUPPORT=1";
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-full/src",
-					"../node-ios-full/deps/uv/include",
-					"../node-ios-full/deps/v8/include",
-					"../node-ios-full/deps/v8",
-					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					"../node-ios-release/src",
+					"../node-ios-release/deps/uv/include",
+					"../node-ios-release/deps/v8/include",
+					"../node-ios-release/deps/v8",
+					"../node-ios-release/out/Release/obj/gen/generate-bytecode-output-root",
+					"../node-ios-release/out/Release/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -1376,7 +1417,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Release";
+				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Release";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
