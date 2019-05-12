@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionView::Initialize(
   JS_SET_PROP(proto, "backgroundView", BackgroundView);
   Nan::SetMethod(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
   Nan::SetMethod(proto, "scrollToItemAtIndexPath", ScrollToItemAtIndexPath);
+  Nan::SetMethod(proto, "reloadData", ReloadData);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -140,6 +141,14 @@ NAN_METHOD(NUICollectionView::ScrollToItemAtIndexPath) {
     NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
     [ui scrollToItemAtIndexPath:path atScrollPosition:pos animated:animated];
   }
+}
+
+NAN_METHOD(NUICollectionView::ReloadData) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionView, ui);
+
+  [ui reloadData];
 }
 
 NAN_GETTER(NUICollectionView::VisibleCellsGetter) {

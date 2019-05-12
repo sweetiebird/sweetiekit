@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(RegisterNibForCellWithReuseIdentifier);
   static NAN_METHOD(ScrollToItemAtIndexPath);
+  static NAN_METHOD(ReloadData);
   JS_PROP(BackgroundView);
   JS_PROP(VisibleCells);
   JS_PROP(IndexPathsForSelectedItems);
