@@ -44,7 +44,13 @@ const {
   SKLabelNode,
   SKScene,
   SKSpriteNode,
+  CLLocationManager,
+  CLLocationManagerDelegate,
 } = UIKit;
+
+const CLLocationAccuracy = {
+  BestForNavigation: 'kCLLocationAccuracyBestForNavigation',
+};
 
 // shared application
 // let app;
@@ -171,11 +177,26 @@ class ARApp {
     this.arView.presentScene(this.scene);
   }
 
+  setupLocationUpdates() {
+    this.locDel = new CLLocationManagerDelegate((mgr, status) => {
+      console.log(mgr, status);
+      this.locMgr.startUpdatingLocation();
+    }, (mgr, locations) => {
+      console.log(locations);
+    });
+    this.locMgr = new CLLocationManager();
+    this.locMgr.delegate = this.locDel;
+    this.locMgr.desiredAccuracy = CLLocationAccuracy.BestForNavigation;
+    this.locMgr.distanceFilter = 1;
+    console.log(this.locMgr, this.locDel);
+  }
+
   launch() {
     this.app.keyWindow.setRootViewController(this.vc);
     console.log(this.config, this.vc.view);
     setTimeout(() => {
       this.arView.session.run(this.config);
+      this.setupLocationUpdates();
     }, 1000);
   }
 }

@@ -53,6 +53,9 @@
 #include "NSCNView.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
+#include "NCLLocationManager.h"
+#include "NCLLocationManagerDelegate.h"
+#include "NCLLocation.h"
 #include <unistd.h>
 
 #include <string>
@@ -279,6 +282,17 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIBarButtonItem = NUIBarButtonItem::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIBarButtonItem").ToLocalChecked(), N_UIBarButtonItem.first);
+
+        // Core Location
+  
+        auto N_CLLocation = NCLLocation::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLLocation").ToLocalChecked(), N_CLLocation.first);
+
+        auto N_CLLocationManager = NCLLocationManager::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLLocationManager").ToLocalChecked(), N_CLLocationManager.first);
+  
+        auto N_CLLocationManagerDelegate = NCLLocationManagerDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLLocationManagerDelegate").ToLocalChecked(), N_CLLocationManagerDelegate.first);
 
         // UIKit
   

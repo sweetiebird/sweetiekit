@@ -125,6 +125,9 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NSCNView.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
+#include "NCLLocationManager.h"
+#include "NCLLocationManagerDelegate.h"
+#include "NCLLocation.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -272,6 +275,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[SUIViewControllerTransitioningDelegate class]]) {
         return NUIViewControllerTransitioningDelegate::type;
       }
+
+      // ========= core location
+      if ([obj isKindOfClass:[CLLocation class]]) {
+        return NCLLocation::type;
+      }
+      if ([obj isKindOfClass:[CLLocationManager class]]) {
+        return NCLLocationManager::type;
+      }
+      if ([obj isKindOfClass:[SCLLocationManagerDelegate class]]) {
+        return NCLLocationManagerDelegate::type;
+      }
+
       // ========= objects
       if ([obj isKindOfClass:[UIBarButtonItem class]]) {
         return NUIBarButtonItem::type;
