@@ -103,6 +103,10 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
+#include "NUICollectionView.h"
+#include "NUICollectionViewController.h"
+#include "NUICollectionViewCell.h"
+#include "NUICollectionViewManager.h"
 #include "NUITableViewDataSource.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
@@ -209,6 +213,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIWindow::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UICollectionViewCell class]]) {
+        return NUICollectionViewCell::type;
+      }
+      if ([obj isKindOfClass:[UICollectionView class]]) {
+        return NUICollectionView::type;
+      }
       if ([obj isKindOfClass:[UITableView class]]) {
         return NUITableView::type;
       }
@@ -252,6 +262,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIResponder::type;
       }
       // ======== controllers
+      if ([obj isKindOfClass:[UICollectionViewController class]]) {
+        return NUICollectionViewController::type;
+      }
       if ([obj isKindOfClass:[UITableViewController class]]) {
         return NUITableViewController::type;
       }
@@ -271,6 +284,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SUICollectionViewManager class]]) {
+        return NUICollectionViewManager::type;
+      }
       if ([obj isKindOfClass:[SUITableViewManager class]]) {
         return NUITableViewManager::type;
       }

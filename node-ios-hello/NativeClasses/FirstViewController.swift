@@ -13,6 +13,8 @@ class FirstViewController: NodeUIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let vc = UICollectionViewController()
+        
     }
 }
 

@@ -33,6 +33,10 @@
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
+#include "NUICollectionView.h"
+#include "NUICollectionViewController.h"
+#include "NUICollectionViewCell.h"
+#include "NUICollectionViewManager.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
@@ -316,6 +320,9 @@ void InitExports(Local<Object> exports) {
         auto N_UITableViewController = NUITableViewController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITableViewController").ToLocalChecked(), N_UITableViewController.first);
 
+        auto N_UICollectionViewController = NUICollectionViewController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UICollectionViewController").ToLocalChecked(), N_UICollectionViewController.first);
+
         auto N_UINavigationController = NUINavigationController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UINavigationController").ToLocalChecked(), N_UINavigationController.first);
 
@@ -364,8 +371,17 @@ void InitExports(Local<Object> exports) {
         auto N_UIScrollView = NUIScrollView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIScrollView").ToLocalChecked(), N_UIScrollView.first);
 
+        auto N_UICollectionView = NUICollectionView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UICollectionView").ToLocalChecked(), N_UICollectionView.first);
+
+        auto N_UICollectionViewCell = NUICollectionViewCell::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UICollectionViewCell").ToLocalChecked(), N_UICollectionViewCell.first);
+
         auto N_UITableViewManager = NUITableViewManager::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITableViewManager").ToLocalChecked(), N_UITableViewManager.first);
+
+        auto N_UICollectionViewManager = NUICollectionViewManager::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UICollectionViewManager").ToLocalChecked(), N_UICollectionViewManager.first);
 
         // UIKit delegates ========
   
