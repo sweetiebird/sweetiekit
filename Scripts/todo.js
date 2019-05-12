@@ -224,7 +224,7 @@ class ARApp {
               this.targetAdded = true;
               const camXform = this.arView.session.currentFrame.camera.transform;
               const translation = new THREE.Matrix4().makeTranslation(0,0,-3);
-              const view = new THREE.Matrix4().set(...camXform);
+              const view = new THREE.Matrix4().fromArray(camXform);
               view.multiply(translation);
               const anchor = ARAnchor.initWithTransform(new Float32Array(view.elements));
               this.arView.session.add(anchor);
