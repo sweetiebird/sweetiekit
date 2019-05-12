@@ -51,6 +51,7 @@
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
 		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
+		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
 		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
@@ -233,6 +234,8 @@
 		A174A170228227A2002A8216 /* sunflower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sunflower.mp3; sourceTree = "<group>"; };
 		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
 		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
+		A178B2712288790C005184EE /* NUITabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITabBarItem.h; sourceTree = "<group>"; };
+		A178B27222887913005184EE /* NUITabBarItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarItem.mm; sourceTree = "<group>"; };
 		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
 		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -619,6 +622,15 @@
 				A178B26E228863C9005184EE /* NUIAlertAction.mm */,
 			);
 			path = NUIAlertAction;
+			sourceTree = "<group>";
+		};
+		A178B27022887901005184EE /* NUITabBarItem */ = {
+			isa = PBXGroup;
+			children = (
+				A178B2712288790C005184EE /* NUITabBarItem.h */,
+				A178B27222887913005184EE /* NUITabBarItem.mm */,
+			);
+			path = NUITabBarItem;
 			sourceTree = "<group>";
 		};
 		A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */ = {
@@ -1031,6 +1043,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A178B27022887901005184EE /* NUITabBarItem */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1456,6 +1469,7 @@
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
+				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,

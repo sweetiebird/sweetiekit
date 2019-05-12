@@ -13,6 +13,7 @@
 #include "NUIViewControllerTransitioningDelegate.h"
 #include "NUIView.h"
 #include "NUIBarButtonItem.h"
+#include "NUITabBarItem.h"
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
 
@@ -38,6 +39,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_SET_PROP(proto, "transitioningDelegate", TransitioningDelegate);
   JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
   JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
+  JS_SET_PROP(proto, "tabBarItem", TabBarItem);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -224,4 +226,24 @@ NAN_GETTER(NUIViewController::ToolbarItemsGetter) {
   }
 
   JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUIViewController::TabBarItemSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+
+  NUITabBarItem *itemObj = ObjectWrap::Unwrap<NUITabBarItem>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setTabBarItem:itemObj->As<UITabBarItem>()];
+  }
+}
+
+NAN_GETTER(NUIViewController::TabBarItemGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui tabBarItem], NUITabBarItem::type)));
 }

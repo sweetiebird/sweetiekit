@@ -21,6 +21,7 @@
 #include "NUIStoryboard.h"
 #include "NUIButton.h"
 #include "NUITabBarController.h"
+#include "NUITabBarItem.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUILabel.h"
@@ -294,6 +295,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIBarButtonItem = NUIBarButtonItem::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIBarButtonItem").ToLocalChecked(), N_UIBarButtonItem.first);
   
+        auto N_UITabBarItem = NUITabBarItem::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITabBarItem").ToLocalChecked(), N_UITabBarItem.first);
+
         auto N_UIAlertAction = NUIAlertAction::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIAlertAction").ToLocalChecked(), N_UIAlertAction.first);
 

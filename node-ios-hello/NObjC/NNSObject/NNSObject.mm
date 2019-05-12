@@ -96,6 +96,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NUITextField.h"
 #include "NUIStoryboard.h"
 #include "NUITabBarController.h"
+#include "NUITabBarItem.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
 #include "NUIImagePickerController.h"
@@ -331,6 +332,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[UINib class]]) {
         return NUINib::type;
+      }
+      if ([obj isKindOfClass:[UITabBarItem class]]) {
+        return NUITabBarItem::type;
       }
       if ([obj isKindOfClass:[UIBarButtonItem class]]) {
         return NUIBarButtonItem::type;

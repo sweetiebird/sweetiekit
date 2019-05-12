@@ -6,10 +6,12 @@ const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
+const makeSwitch = require('./examples/UISwitch');
 const makeView = require('./examples/UIView');
 const makeAlertCtrl = require('./examples/UIAlertController');
 const makeImagePickerCtrl = require('./examples/UIImagePickerController');
 const makeNavigationCtrl = require('./examples/UINavigationController');
+const makeTabBarCtrl = require('./examples/UITabBarController');
 
 const {
   UIApplication,
@@ -26,6 +28,7 @@ const demoTypes = {
   UILabel: makeLabel,
   UIScrollView: makeScrollView,
   UISlider: makeSlider,
+  UISwitch: makeSwitch,
   UIView: makeView,
 };
 
@@ -34,6 +37,7 @@ const demoCtrls = {
   UIBarButtonItem: makeBarButtonItem,
   UIImagePickerController: makeImagePickerCtrl,
   UINavigationController: makeNavigationCtrl,
+  UITabBarController: makeTabBarCtrl,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
