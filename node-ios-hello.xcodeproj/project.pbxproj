@@ -766,13 +766,6 @@
 			path = NSCNView;
 			sourceTree = "<group>";
 		};
-		A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NARSCNViewDelegate;
-			sourceTree = "<group>";
-		};
 		A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -991,7 +984,6 @@
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1BD4BAC22880999001D1F6E /* NARFrame */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
-				A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */,
 				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
@@ -1002,11 +994,11 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1BD4BA82287F661001D1F6E /* NSKTexture */,
-				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
-				A1BD4B892287CA2E001D1F6E /* NSKScene */,
 				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
 				A1BD4B812287C355001D1F6E /* NSKNode */,
+				A1BD4B892287CA2E001D1F6E /* NSKScene */,
+				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
+				A1BD4BA82287F661001D1F6E /* NSKTexture */,
 				A1BD4B802287C34A001D1F6E /* NSKView */,
 			);
 			path = NSKSpriteKit;
@@ -1043,7 +1035,6 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A178B27022887901005184EE /* NUITabBarItem */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1067,6 +1058,7 @@
 				A1D6729F2269940B00562A42 /* NUIStoryboard */,
 				A164976F227E148D00CA943F /* NUISwitch */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
+				A178B27022887901005184EE /* NUITabBarItem */,
 				A19476BA226E9450003BB393 /* NUITableView */,
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
 				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
@@ -1135,14 +1127,14 @@
 			isa = PBXGroup;
 			children = (
 				A1FC1A01225C65DC00085571 /* AppDelegate.swift */,
-				A1FC1A03225C65DC00085571 /* FirstViewController.swift */,
-				A1FC1A05225C65DC00085571 /* SecondViewController.swift */,
-				A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */,
-				A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */,
-				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
-				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
 				A149D0A4228260D300E11EDA /* BuilderViewController.swift */,
+				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
+				A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */,
+				A1FC1A03225C65DC00085571 /* FirstViewController.swift */,
+				A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */,
+				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
 				A1BD4B8F2287CDD9001D1F6E /* Scene.swift */,
+				A1FC1A05225C65DC00085571 /* SecondViewController.swift */,
 			);
 			path = NativeClasses;
 			sourceTree = "<group>";

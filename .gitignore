@@ -4,5 +4,5 @@ xcuserdata
 xcuserdata/*
 *.swp
 .idea
-
+.DS_Store
 node_modules
