@@ -81,7 +81,7 @@ NAN_GETTER(NARSCNView::SessionGetter) {
   
   JS_UNWRAP(ARSCNView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui session], NARSession::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
 }
 
 NAN_GETTER(NARSCNView::DelegateGetter) {
@@ -89,7 +89,7 @@ NAN_GETTER(NARSCNView::DelegateGetter) {
   
   JS_UNWRAP(ARSCNView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui delegate], NARSCNViewDelegate::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSCNViewDelegate::type));
 }
 
 NAN_SETTER(NARSCNView::DelegateSetter) {
@@ -127,7 +127,7 @@ NAN_GETTER(NARSCNView::SceneGetter) {
   
   JS_UNWRAP(ARSCNView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui scene], NSCNScene::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui scene], NSCNScene::type));
 }
 
 NAN_SETTER(NARSCNView::SceneSetter) {

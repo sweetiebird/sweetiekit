@@ -66,5 +66,5 @@ NAN_METHOD(NNSLayoutAnchor::ConstraintEqualToAnchor) {
 
   NSLayoutConstraint *constraint = [ui constraintEqualToAnchor:anchor constant:constant];
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor(constraint, NNSLayoutConstraint::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor(constraint, NNSLayoutConstraint::type));
 }

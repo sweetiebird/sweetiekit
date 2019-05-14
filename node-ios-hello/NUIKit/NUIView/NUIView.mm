@@ -638,7 +638,7 @@ NAN_GETTER(NUIView::LeadingAnchorGetter) {
 
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui leadingAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui leadingAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::TrailingAnchorGetter) {
@@ -646,7 +646,7 @@ NAN_GETTER(NUIView::TrailingAnchorGetter) {
   
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui trailingAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui trailingAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::TopAnchorGetter) {
@@ -654,7 +654,7 @@ NAN_GETTER(NUIView::TopAnchorGetter) {
 
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui topAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui topAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::BottomAnchorGetter) {
@@ -662,7 +662,7 @@ NAN_GETTER(NUIView::BottomAnchorGetter) {
 
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui bottomAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui bottomAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::CenterXAnchorGetter) {
@@ -670,7 +670,7 @@ NAN_GETTER(NUIView::CenterXAnchorGetter) {
 
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::WidthAnchorGetter) {
@@ -678,7 +678,7 @@ NAN_GETTER(NUIView::WidthAnchorGetter) {
 
   JS_UNWRAP(UIView, ui);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::UserInteractionEnabledGetter) {

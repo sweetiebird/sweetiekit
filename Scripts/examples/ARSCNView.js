@@ -1,5 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+THREE = require('../vendor/three/three');
+
 const {
   ARSCNView,
   ARSCNViewDelegate,
@@ -19,13 +21,27 @@ async function make(nav, demoVC) {
   });
   const scene = new SCNScene();
   const node = new SCNNode(modelFile);
-  scene.rootNode.addChildNode(node);
+  
   arView.delegate = viewDel;
   arView.scene = scene;
   demoVC.view.addSubview(arView);
   nav.pushViewController(demoVC);
+  
   setTimeout(() => {
     arView.session.run(config);
+    function configure() {
+      const frame = arView.session.currentFrame;
+      if (!frame) {
+        setTimeout(configure, 10);
+      } else {
+        const camXform = frame.camera.transform;
+        const xform = new THREE.Matrix4().fromArray(camXform);
+        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-3));
+        node.simdTransform = xform.elements;
+        scene.rootNode.addChildNode(node);
+      }
+    }
+    configure();
   }, 1000);
 }
 

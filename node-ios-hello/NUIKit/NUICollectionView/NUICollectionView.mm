@@ -298,7 +298,7 @@ NAN_GETTER(NUICollectionView::BackgroundViewGetter) {
   
   JS_UNWRAP(UICollectionView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type));
 }
 
 NAN_SETTER(NUICollectionView::BackgroundViewSetter) {

@@ -78,7 +78,7 @@ NAN_GETTER(NSCNScene::RootNodeGetter) {
   
   JS_UNWRAP(SCNScene, scene);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([scene rootNode], NSCNNode::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([scene rootNode], NSCNNode::type));
 }
 
 NAN_SETTER(NSCNScene::RootNodeSetter) {

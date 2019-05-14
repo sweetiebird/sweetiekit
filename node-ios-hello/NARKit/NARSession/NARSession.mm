@@ -84,7 +84,7 @@ NAN_GETTER(NARSession::CurrentFrameGetter) {
   
   JS_UNWRAP(ARSession, session);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([session currentFrame], NARFrame::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([session currentFrame], NARFrame::type));
 }
 
 NARSession::NARSession () {}

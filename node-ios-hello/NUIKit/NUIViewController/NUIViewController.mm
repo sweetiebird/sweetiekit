@@ -245,5 +245,5 @@ NAN_GETTER(NUIViewController::TabBarItemGetter) {
   
   JS_UNWRAP(UIViewController, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui tabBarItem], NUITabBarItem::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui tabBarItem], NUITabBarItem::type));
 }

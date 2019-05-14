@@ -80,7 +80,7 @@ NAN_GETTER(NARSKView::SessionGetter) {
   
   JS_UNWRAP(ARSKView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui session], NARSession::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
 }
 
 NAN_GETTER(NARSKView::DelegateGetter) {
@@ -88,7 +88,7 @@ NAN_GETTER(NARSKView::DelegateGetter) {
   
   JS_UNWRAP(ARSKView, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui delegate], NARSKViewDelegate::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSKViewDelegate::type));
 }
 
 NAN_SETTER(NARSKView::DelegateSetter) {
