@@ -57,12 +57,26 @@ NAN_METHOD(NSCNNode::New) {
     @autoreleasepool {
       NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
       NSString *fileName = NJSStringToNSString(info[0]);
-      NSString *filePath = [documents stringByAppendingPathComponent:fileName];
-      NSURL *url = [[NSURL alloc] initFileURLWithPath:filePath];
-      MDLAsset *asset = [[MDLAsset alloc] initWithURL:url];
-      MDLObject *object = [asset objectAtIndex:0];
-      SCNNode *scene = [SCNNode nodeWithMDLObject:object];
-      node->SetNSObject(scene);
+      if (strcmp([fileName UTF8String], "box") == 0) {
+        SCNBox* box = [SCNBox boxWithWidth:0.1 height:0.1 length:0.1 chamferRadius:0];
+        SCNNode* scnNode = [SCNNode nodeWithGeometry:box];
+        SCNMaterial *mat = [[SCNMaterial alloc] init];
+        [[mat diffuse] setContents: [SCNColor whiteColor]];
+        mat.diffuse.intensity = 60;
+        [box setMaterials:@[mat]];
+        node->SetNSObject(scnNode);
+      } else {
+        NSString *filePath = [documents stringByAppendingPathComponent:fileName];
+        NSURL *url = [[NSURL alloc] initFileURLWithPath:filePath];
+        MDLAsset *asset = [[MDLAsset alloc] initWithURL:url];
+        MDLObject *object = [asset objectAtIndex:0];
+        SCNNode *scnNode = [SCNNode nodeWithMDLObject:object];
+        SCNMaterial *mat = [[SCNMaterial alloc] init];
+        [[mat diffuse] setContents: [SCNColor whiteColor]];
+        mat.diffuse.intensity = 60;
+        [[scnNode geometry] setMaterials:@[mat]];
+        node->SetNSObject(scnNode);
+      }
     }
   } else {
     @autoreleasepool {
@@ -146,7 +160,7 @@ NAN_GETTER(NSCNNode::LightGetter) {
 
   JS_UNWRAP(SCNNode, node);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([node light], NSCNLight::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node light], NSCNLight::type));
 }
 
 NAN_SETTER(NSCNNode::LightSetter) {

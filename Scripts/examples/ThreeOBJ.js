@@ -9,7 +9,8 @@ async function make(demoVC) {
   const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   const mesh = new THREE.Mesh(geometry, material);
   const output = exporter.parse(mesh);
-  fs.writeFileSync('model.obj', output);
+  console.log(output);
+  fs.writeFileSync('model.obj', output, "utf8");
   return undefined;
 }
 

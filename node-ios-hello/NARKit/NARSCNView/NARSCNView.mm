@@ -25,7 +25,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNView::Initialize(Isolate
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKView::type));
+  ctor->Inherit(Nan::New(NSCNView::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("ARSCNView"));
   type.Reset(ctor);
@@ -36,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNView::Initialize(Isolate
   JS_SET_PROP(proto, "delegate", Delegate);
   JS_SET_PROP(proto, "scene", Scene);
   Nan::SetMethod(proto, "presentScene", PresentScene);
+  JS_SET_PROP(proto, "automaticallyUpdatesLighting", AutomaticallyUpdatesLighting);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -137,6 +138,22 @@ NAN_SETTER(NARSCNView::SceneSetter) {
   NSCNScene *scene = ObjectWrap::Unwrap<NSCNScene>(Local<Object>::Cast(value));
 
   [ui setScene:scene->As<SCNScene>()];
+}
+
+NAN_GETTER(NARSCNView::AutomaticallyUpdatesLightingGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSCNView, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui automaticallyUpdatesLighting]));
+}
+
+NAN_SETTER(NARSCNView::AutomaticallyUpdatesLightingSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSCNView, ui);
+  
+  [ui setAutomaticallyUpdatesLighting:TO_BOOL(value)];
 }
 
 NARSCNView::NARSCNView () {}

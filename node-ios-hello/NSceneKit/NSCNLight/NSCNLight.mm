@@ -29,10 +29,17 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNLight::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "type", Type);
-  JS_SET_PROP(proto, "color", Color);
-  JS_SET_PROP(proto, "spotInnerAngle", SpotInnerAngle);
-  JS_SET_PROP(proto, "spotOuterAngle", SpotOuterAngle);
+  JS_ASSIGN_PROP(proto, type);
+  JS_ASSIGN_PROP(proto, color);
+  JS_ASSIGN_PROP(proto, spotInnerAngle);
+  JS_ASSIGN_PROP(proto, spotOuterAngle);
+  JS_ASSIGN_PROP(proto, temperature);
+  JS_ASSIGN_PROP(proto, intensity);
+  JS_ASSIGN_PROP(proto, zNear);
+  JS_ASSIGN_PROP(proto, zFar);
+  JS_ASSIGN_PROP(proto, attenuationStartDistance);
+  JS_ASSIGN_PROP(proto, attenuationEndDistance);
+  JS_ASSIGN_PROP(proto, attenuationFalloffExponent);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -62,7 +69,7 @@ NAN_METHOD(NSCNLight::New) {
 NSCNLight::NSCNLight () {}
 NSCNLight::~NSCNLight () {}
 
-NAN_GETTER(NSCNLight::TypeGetter) {
+NAN_GETTER(NSCNLight::typeGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -70,7 +77,7 @@ NAN_GETTER(NSCNLight::TypeGetter) {
   JS_SET_RETURN(JS_STR([[light type] UTF8String]));
 }
 
-NAN_SETTER(NSCNLight::TypeSetter) {
+NAN_SETTER(NSCNLight::typeSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -80,33 +87,36 @@ NAN_SETTER(NSCNLight::TypeSetter) {
     Nan::Utf8String utf8Value(Local<String>::Cast(value));
     t = *utf8Value;
   } else {
-    Nan::ThrowError("invalid argument");
-  }
-  
-  NSString *str = [NSString stringWithUTF8String:t.c_str()];
-  SCNLightType type = SCNLightTypeAmbient;
-
-  if ([str isEqualToString:@"spot"]) {
-    type = SCNLightTypeSpot;
-  } else if ([str isEqualToString:@"IES"]) {
-    type = SCNLightTypeIES;
-  } else if ([str isEqualToString:@"ambient"]) {
-    type = SCNLightTypeAmbient;
-  } else if ([str isEqualToString:@"omni"]) {
-    type = SCNLightTypeOmni;
-  } else if ([str isEqualToString:@"directional"]) {
-    type = SCNLightTypeDirectional;
-  } else if ([str isEqualToString:@"probe"]) {
-    type = SCNLightTypeProbe;
-  } else {
-    Nan::ThrowError("No valid light type specified");
+    Nan::ThrowError("SCNLight:setType: invaid argument");
     return;
   }
+  
+  @autoreleasepool {
+    NSString *str = [NSString stringWithUTF8String:t.c_str()];
+    SCNLightType type = SCNLightTypeAmbient;
 
-  [light setType:type];
+    if ([str isEqualToString:@"spot"]) {
+      type = SCNLightTypeSpot;
+    } else if ([str isEqualToString:@"IES"]) {
+      type = SCNLightTypeIES;
+    } else if ([str isEqualToString:@"ambient"]) {
+      type = SCNLightTypeAmbient;
+    } else if ([str isEqualToString:@"omni"]) {
+      type = SCNLightTypeOmni;
+    } else if ([str isEqualToString:@"directional"]) {
+      type = SCNLightTypeDirectional;
+    } else if ([str isEqualToString:@"probe"]) {
+      type = SCNLightTypeProbe;
+    } else {
+      Nan::ThrowError("No valid light type specified");
+      return;
+    }
+
+    [light setType:type];
+  }
 }
 
-NAN_GETTER(NSCNLight::ColorGetter) {
+NAN_GETTER(NSCNLight::colorGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -116,7 +126,7 @@ NAN_GETTER(NSCNLight::ColorGetter) {
   __block CGFloat blue = 0;
   __block CGFloat alpha = 1;
   @autoreleasepool {
-    UIColor *color = [UIColor colorWithCGColor:(CGColorRef)[light color]];
+    UIColor *color = [light color];
     [color getRed:&red green:&green blue:&blue alpha:&alpha];
   }
   
@@ -129,7 +139,7 @@ NAN_GETTER(NSCNLight::ColorGetter) {
   JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NSCNLight::ColorSetter) {
+NAN_SETTER(NSCNLight::colorSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -145,7 +155,7 @@ NAN_SETTER(NSCNLight::ColorSetter) {
   }
 }
 
-NAN_GETTER(NSCNLight::SpotInnerAngleGetter) {
+NAN_GETTER(NSCNLight::spotInnerAngleGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -153,19 +163,19 @@ NAN_GETTER(NSCNLight::SpotInnerAngleGetter) {
   JS_SET_RETURN(JS_FLOAT([light spotInnerAngle]));
 }
 
-NAN_SETTER(NSCNLight::SpotInnerAngleSetter) {
+NAN_SETTER(NSCNLight::spotInnerAngleSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
 
-  float angle = TO_FLOAT(value);
+  float fValue = TO_FLOAT(value);
 
   @autoreleasepool {
-    [light setSpotInnerAngle:angle];
+    [light setSpotInnerAngle:fValue];
   }
 }
 
-NAN_GETTER(NSCNLight::SpotOuterAngleGetter) {
+NAN_GETTER(NSCNLight::spotOuterAngleGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
@@ -173,14 +183,154 @@ NAN_GETTER(NSCNLight::SpotOuterAngleGetter) {
   JS_SET_RETURN(JS_FLOAT([light spotOuterAngle]));
 }
 
-NAN_SETTER(NSCNLight::SpotOuterAngleSetter) {
+NAN_SETTER(NSCNLight::spotOuterAngleSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNLight, light);
 
-  float angle = TO_FLOAT(value);
+  float fValue = TO_FLOAT(value);
 
   @autoreleasepool {
-    [light setSpotOuterAngle:angle];
+    [light setSpotOuterAngle:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::temperatureGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light temperature]));
+}
+
+NAN_SETTER(NSCNLight::temperatureSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setTemperature:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::intensityGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light intensity]));
+}
+
+NAN_SETTER(NSCNLight::intensitySetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setIntensity:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::zNearGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light zNear]));
+}
+
+NAN_SETTER(NSCNLight::zNearSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setZNear:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::zFarGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light zFar]));
+}
+
+NAN_SETTER(NSCNLight::zFarSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setZFar:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::attenuationStartDistanceGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light attenuationStartDistance]));
+}
+
+NAN_SETTER(NSCNLight::attenuationStartDistanceSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setAttenuationStartDistance:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::attenuationEndDistanceGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light attenuationEndDistance]));
+}
+
+NAN_SETTER(NSCNLight::attenuationEndDistanceSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setAttenuationEndDistance:fValue];
+  }
+}
+
+NAN_GETTER(NSCNLight::attenuationFalloffExponentGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+  
+  JS_SET_RETURN(JS_FLOAT([light attenuationFalloffExponent]));
+}
+
+NAN_SETTER(NSCNLight::attenuationFalloffExponentSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNLight, light);
+
+  float fValue = TO_FLOAT(value);
+
+  @autoreleasepool {
+    [light setAttenuationFalloffExponent:fValue];
   }
 }

@@ -70,6 +70,7 @@ NAN_METHOD(NUIButton::Alloc) {
       str = *utf8Value;
     } else {
       Nan::ThrowError("info[0] isn't a string");
+      return;
     }
     label = [NSString stringWithUTF8String:str.c_str()];
   }

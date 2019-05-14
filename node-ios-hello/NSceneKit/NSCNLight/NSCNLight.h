@@ -25,10 +25,16 @@ public:
   virtual ~NSCNLight();
 
   static NAN_METHOD(New);
-  JS_PROP(Type);
-  JS_PROP(Color);
-  JS_PROP(SpotInnerAngle);
-  JS_PROP(SpotOuterAngle);
+  JS_PROP(type);
+  JS_PROP(color);
+  JS_PROP(spotInnerAngle);
+  JS_PROP(spotOuterAngle);
+  JS_PROP(temperature);
+  JS_PROP(intensity);
+  JS_PROP(zNear);
+  JS_PROP(zFar);
+  JS_PROP(attenuationStartDistance);
+  JS_PROP(attenuationEndDistance);
+  JS_PROP(attenuationFalloffExponent);
 };
-
 #endif /* NSCNLight_h */
