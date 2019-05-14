@@ -137,6 +137,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NSCNView.h"
 #include "NSCNScene.h"
 #include "NSCNNode.h"
+#include "NSCNLight.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NCLLocationManager.h"
@@ -192,6 +193,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       
+      if ([obj isKindOfClass:[SCNLight class]]) {
+        return NSCNLight::type;
+      }
       if ([obj isKindOfClass:[SCNScene class]]) {
         return NSCNScene::type;
       }

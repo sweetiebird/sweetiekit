@@ -66,6 +66,7 @@
 #include "NSCNView.h"
 #include "NSCNNode.h"
 #include "NSCNScene.h"
+#include "NSCNLight.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NCLLocationManager.h"
@@ -484,6 +485,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_ARSCNView = NARSCNView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARSCNView").ToLocalChecked(), N_ARSCNView.first);
+
+        auto N_SCNLight = NSCNLight::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNLight").ToLocalChecked(), N_SCNLight.first);
 
         // SpriteKit
 
