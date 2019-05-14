@@ -45,6 +45,7 @@ public:
   JS_PROP(properties);
   static NAN_METHOD(invokeBooleanGetter);
   static NAN_METHOD(invokeBooleanSetter);
+  static NAN_METHOD(invokeMethod);
 
   template<typename T>
   T* As() {

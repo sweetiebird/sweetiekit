@@ -56,6 +56,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
   JS_ASSIGN_PROP_READONLY(proto, properties);
   Nan::SetMethod(proto, "invokeBooleanGetter", invokeBooleanGetter);
   Nan::SetMethod(proto, "invokeBooleanSetter", invokeBooleanSetter);
+  Nan::SetMethod(proto, "invokeMethod", invokeMethod);
   
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -246,6 +247,95 @@ NAN_METHOD(NNSObject::invokeBooleanSetter)
     [inv setSelector:sel];
     [inv setArgument:&value atIndex:2];
     [inv invokeWithTarget:ns];
+  }
+}
+
+NAN_METHOD(NNSObject::invokeMethod)
+{
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  @autoreleasepool {
+    Class cls = [ns class];
+    
+    Local<Array> spec = Local<Array>::Cast(info[0]);
+    char returnType = [NJSStringToNSString(spec->Get(0)) UTF8String][0];
+    NSString* name = NJSStringToNSString(spec->Get(1));
+    SEL sel = NSSelectorFromString(name);
+    NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setSelector:sel];
+    for (unsigned int i = 1; i < info.Length(); i++) {
+      Local<Array> arg = Local<Array>::Cast(info[i]);
+      char type = [NJSStringToNSString(arg->Get(0)) UTF8String][0];
+      Local<Value> jsValue = arg->Get(1);
+      switch (type)
+      {
+        case 'B':
+        {
+          bool value = jsValue->BooleanValue(JS_ISOLATE());
+          [inv setArgument:&value atIndex:1+i];
+        } break;
+        case 'i':
+        {
+          int32_t value = TO_INT32(jsValue);
+          [inv setArgument:&value atIndex:1+i];
+        } break;
+        case 'd':
+        {
+          double value = TO_DOUBLE(jsValue);
+          [inv setArgument:&value atIndex:1+i];
+        } break;
+        case 'Q':
+        {
+          double value = TO_DOUBLE(jsValue);
+          long long value1 = (long long)value;
+          [inv setArgument:&value1 atIndex:1+i];
+        } break;
+        default:
+        {
+          Nan::ThrowError("NSObject::invokeMethod: Unknown type specifier");
+          return;
+        } break;
+      }
+    }
+    [inv invokeWithTarget:ns];
+    switch (returnType)
+    {
+      case 'B':
+      {
+        bool value = false;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_BOOL(value));
+      } break;
+      case 'i':
+      {
+        int32_t value = 0;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_INT(value));
+      } break;
+      case 'd':
+      {
+        double value = 0.0;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_NUM(value));
+      } break;
+      case 'Q':
+      {
+        long long value = 0;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_NUM(value));
+      } break;
+      case 'v':
+      {
+        // void
+      } break;
+      default:
+      {
+        Nan::ThrowError("NSObject::invokeMethod: Unknown return type specifier");
+        return;
+      } break;
+    }
   }
 }
 

@@ -33,6 +33,12 @@ GetBoolSetters = function GetBoolSetters(cls) {
           .filter(x => (x.arguments.length === 3) && (x.arguments[2] === "B"));
 }
 
+GetVoidMethods = function GetVoidMethods(cls) {
+  return GetMethods(cls)
+           .filter(x => !x.name.startsWith("_") && !x.name.startsWith("."))
+           .filter(x => x.returnType === 'v' && x.arguments.length <= 2);
+}
+
 BindClass = function BindClass(nativeType, className = nativeType.name) {
   let UIViewClass = SweetieKit.NSObject.classFromString(className);
   if (!UIViewClass) {
@@ -41,6 +47,15 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   let UIViewMethods = GetMethods(UIViewClass);
   let UIViewAccessors = GetBoolAccessors(UIViewClass);
   let UIViewSetters = GetBoolSetters(UIViewClass);
+  let UIViewVoids = GetVoidMethods(UIViewClass);
+  
+  for (let method of UIViewVoids) {
+    if (!nativeType.prototype.hasOwnProperty(method.name)) {
+      nativeType.prototype[method.name] = function () {
+        return this.invokeMethod(["v", method.name]);
+      }
+    }
+  }
 
   for (let accessor of UIViewAccessors) {
     let getterName = accessor.name;
