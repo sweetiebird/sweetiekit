@@ -613,7 +613,7 @@ NAN_GETTER(NUIView::LayerGetter) {
       Nan::New<v8::External>((__bridge void*)theLayer)
     };
     Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(theLayer, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    JS_SET_RETURN(JS_OBJ(value));
+    JS_SET_RETURN(value);
   }
 }
 
