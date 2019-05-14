@@ -63,7 +63,7 @@ NAN_METHOD(NSCNScene::New) {
       scene->SetNSObject([SCNScene sceneWithURL:url options:nullptr error:nullptr]);
     }
   } else {
-    Nan::ThrowError("NSCNScene::New Additional inits not implemented");
+    scene->SetNSObject([[SCNScene alloc] init]);
   }
   scene->Wrap(obj);
 
@@ -84,6 +84,6 @@ NAN_GETTER(NSCNScene::RootNodeGetter) {
 NAN_SETTER(NSCNScene::RootNodeSetter) {
   Nan::HandleScope scope;
   
-  Nan::ThrowError("NSCNScene::RootNodeSetter not implemented");
+  Nan::ThrowError("NSCNScene::RootNodeSetter is read-only; use scene.rootNode.addChildNode instead");
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
+#import <SceneKit/ModelIO.h>
 #include "defines.h"
 #include "NSCNNode.h"
 #include "NNSObject.h"
@@ -45,6 +46,17 @@ NAN_METHOD(NSCNNode::New) {
 
   if (info[0]->IsExternal()) {
     node->SetNSObject((__bridge SCNNode *)(info[0].As<External>()->Value()));
+  } else if (info[0]->IsString()) {
+    @autoreleasepool {
+      NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+      NSString *fileName = NJSStringToNSString(info[0]);
+      NSString *filePath = [documents stringByAppendingPathComponent:fileName];
+      NSURL *url = [[NSURL alloc] initFileURLWithPath:filePath];
+      MDLAsset *asset = [[MDLAsset alloc] initWithURL:url];
+      MDLObject *object = [asset objectAtIndex:0];
+      SCNNode *scene = [SCNNode nodeWithMDLObject:object];
+      node->SetNSObject(scene);
+    }
   } else {
     @autoreleasepool {
       node->SetNSObject([[SCNNode alloc] init]);

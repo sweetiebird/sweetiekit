@@ -17,7 +17,9 @@ async function make(nav, demoVC) {
   const viewDel = new ARSCNViewDelegate(() => {
     return new SCNNode();
   });
-  const scene = new SCNScene(modelFile);
+  const scene = new SCNScene();
+  const node = new SCNNode(modelFile);
+  scene.rootNode.addChildNode(node);
   arView.delegate = viewDel;
   arView.scene = scene;
   demoVC.view.addSubview(arView);
