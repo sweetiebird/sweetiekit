@@ -143,4 +143,3 @@ NAN_SETTER(NMKAnnotationView::AnnotationSetter) {
     [ui setAnnotation:note];
   }
 }
-

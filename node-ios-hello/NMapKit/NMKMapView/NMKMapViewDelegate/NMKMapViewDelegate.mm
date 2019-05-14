@@ -7,6 +7,7 @@
 //
     
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 #include "defines.h"
 #include "NNSObject.h"
@@ -28,6 +29,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NMKMapViewDelegate::Initialize
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP(proto, "didFinishRendering", DidFinishRendering);
+  JS_SET_PROP(proto, "didUpdateUserLocation", DidUpdateUserLocation);
+  JS_SET_PROP(proto, "viewForAnnotation", ViewForAnnotation);
+  JS_SET_PROP(proto, "didSelectViewForAnnotation", DidSelectViewForAnnotation);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -56,3 +61,75 @@ NAN_METHOD(NMKMapViewDelegate::New) {
 
 NMKMapViewDelegate::NMKMapViewDelegate () {}
 NMKMapViewDelegate::~NMKMapViewDelegate () {}
+
+NAN_GETTER(NMKMapViewDelegate::DidFinishRenderingGetter) {
+  Nan::HandleScope scope;
+  
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_SETTER(NMKMapViewDelegate::DidFinishRenderingSetter) {
+  Nan::HandleScope scope;
+
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_GETTER(NMKMapViewDelegate::DidUpdateUserLocationGetter) {
+  Nan::HandleScope scope;
+  
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_SETTER(NMKMapViewDelegate::DidUpdateUserLocationSetter) {
+  Nan::HandleScope scope;
+
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_GETTER(NMKMapViewDelegate::ViewForAnnotationGetter) {
+  Nan::HandleScope scope;
+  
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_SETTER(NMKMapViewDelegate::ViewForAnnotationSetter) {
+  Nan::HandleScope scope;
+
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_GETTER(NMKMapViewDelegate::DidSelectViewForAnnotationGetter) {
+  Nan::HandleScope scope;
+  
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}
+
+NAN_SETTER(NMKMapViewDelegate::DidSelectViewForAnnotationSetter) {
+  Nan::HandleScope scope;
+
+  @autoreleasepool {
+    NMKMapViewDelegate *del = ObjectWrap::Unwrap<NMKMapViewDelegate>(Local<Object>::Cast(info.This()));
+    SMKMapViewDelegate *sDel = del->As<SMKMapViewDelegate>();
+  }
+}

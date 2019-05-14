@@ -26,6 +26,14 @@ public:
   virtual ~NMKMapViewDelegate();
 
   static NAN_METHOD(New);
+  JS_PROP(DidFinishRendering);
+  JS_PROP(DidUpdateUserLocation);
+  JS_PROP(ViewForAnnotation);
+  JS_PROP(DidSelectViewForAnnotation);
+  sweetiekit::JSFunction _didFinishRendering;
+  sweetiekit::JSFunction _didUpdateUserLocation;
+  sweetiekit::JSFunction _viewForAnnotation;
+  sweetiekit::JSFunction _didSelectViewForAnnotation;
 };
 
 #endif /* NMKMapViewDelegate_h */
