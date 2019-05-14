@@ -19,6 +19,16 @@ const UICollectionViewScrollPosition = {
   CenteredVertically: 'CenteredVertically',
 };
 
+const SCNLightType = {
+  IES: 'SCNLightTypeIES',
+  Ambient: 'SCNLightTypeAmbient',
+  Directional: 'SCNLightTypeDirectional',
+  Omni: 'SCNLightTypeOmni',
+  Probe: 'SCNLightTypeProbe',
+  Spot: 'SCNLightTypeSpot',
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
+module.exports.SCNLightType = SCNLightType;

@@ -70,6 +70,7 @@
 		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
 		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
+		A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948932228A5D46007BF787 /* NSCNLight.mm */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
@@ -268,6 +269,8 @@
 		A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIRefreshControl.h; sourceTree = "<group>"; };
 		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
 		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		A1948931228A5D40007BF787 /* NSCNLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNLight.h; sourceTree = "<group>"; };
+		A1948932228A5D46007BF787 /* NSCNLight.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNLight.mm; sourceTree = "<group>"; };
 		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
 		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
 		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
@@ -734,6 +737,15 @@
 			path = NUIRefreshControl;
 			sourceTree = "<group>";
 		};
+		A1948930228A5D33007BF787 /* NSCNLight */ = {
+			isa = PBXGroup;
+			children = (
+				A1948931228A5D40007BF787 /* NSCNLight.h */,
+				A1948932228A5D46007BF787 /* NSCNLight.mm */,
+			);
+			path = NSCNLight;
+			sourceTree = "<group>";
+		};
 		A199AED822884F27003C1DC4 /* NUISlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -804,6 +816,7 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1948930228A5D33007BF787 /* NSCNLight */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
 				A1BD4B402287BC9E001D1F6E /* NSCNView */,
@@ -1592,6 +1605,7 @@
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
+				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,

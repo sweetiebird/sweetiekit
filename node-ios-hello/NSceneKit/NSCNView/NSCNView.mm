@@ -28,6 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNView::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_SET_PROP(proto, "autoenablesDefaultLighting", AutoenablesDefaultLighting);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -66,3 +67,19 @@ NAN_METHOD(NSCNView::New) {
 
 NSCNView::NSCNView () {}
 NSCNView::~NSCNView () {}
+
+NAN_GETTER(NSCNView::AutoenablesDefaultLightingGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNView, view);
+  
+  JS_SET_RETURN(JS_BOOL([view autoenablesDefaultLighting]));
+}
+
+NAN_SETTER(NSCNView::AutoenablesDefaultLightingSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNView, view);
+
+  [view setAutoenablesDefaultLighting:TO_BOOL(value)];
+}
