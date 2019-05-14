@@ -138,10 +138,9 @@ NAN_SETTER(NSCNLight::ColorSetter) {
   double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
   double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
   double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
-  
-  UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 
   @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
     [light setColor:color];
   }
 }
