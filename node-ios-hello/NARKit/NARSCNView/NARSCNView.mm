@@ -36,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNView::Initialize(Isolate
   JS_SET_PROP(proto, "delegate", Delegate);
   JS_SET_PROP(proto, "scene", Scene);
   Nan::SetMethod(proto, "presentScene", PresentScene);
+  JS_SET_PROP(proto, "automaticallyUpdatesLighting", AutomaticallyUpdatesLighting);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
