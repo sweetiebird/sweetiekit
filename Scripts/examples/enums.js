@@ -20,12 +20,12 @@ const UICollectionViewScrollPosition = {
 };
 
 const SCNLightType = {
-  IES: 'SCNLightTypeIES',
-  Ambient: 'SCNLightTypeAmbient',
-  Directional: 'SCNLightTypeDirectional',
-  Omni: 'SCNLightTypeOmni',
-  Probe: 'SCNLightTypeProbe',
-  Spot: 'SCNLightTypeSpot',
+  IES: 'IES',
+  ambient: 'ambient',
+  directional: 'directional',
+  omni: 'omni',
+  probe: 'probe',
+  spot: 'spot',
 };
 
 module.exports.CLLocationAccuracy = CLLocationAccuracy;

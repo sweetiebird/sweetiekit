@@ -133,6 +133,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NARFrame.h"
 #include "NARCamera.h"
 #include "NARSCNView.h"
+#include "NARLightEstimate.h"
+#include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
@@ -169,6 +171,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // ARKit
 
+      if ([obj isKindOfClass:[ARLightEstimate class]]) {
+        return NARLightEstimate::type;
+      }
       if ([obj isKindOfClass:[ARCamera class]]) {
         return NARCamera::type;
       }
@@ -189,6 +194,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[ARWorldTrackingConfiguration class]]) {
         return NARWorldTrackingConfiguration::type;
+      }
+      if ([obj isKindOfClass:[ARConfiguration class]]) {
+        return NARConfiguration::type;
       }
 
       //SceneKit

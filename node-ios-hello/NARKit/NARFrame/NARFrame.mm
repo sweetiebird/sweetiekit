@@ -12,6 +12,7 @@
 #include "defines.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
+#include "NARLightEstimate.h"
 #include "NNSObject.h"
 #include "NARWorldTrackingConfiguration.h"
 #import "node_ios_hello-Swift.h"
@@ -32,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARFrame::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "camera", Camera);
+  JS_SET_PROP_READONLY(proto, "lightEstimate", LightEstimate);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -62,6 +64,14 @@ NAN_GETTER(NARFrame::CameraGetter) {
   JS_UNWRAP(ARFrame, frame);
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([frame camera], NARCamera::type)));
+}
+
+NAN_GETTER(NARFrame::LightEstimateGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(ARFrame, frame);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([frame lightEstimate], NARLightEstimate::type)));
 }
 
 NARFrame::NARFrame () {}

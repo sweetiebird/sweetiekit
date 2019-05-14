@@ -9,15 +9,13 @@
 #ifndef NARWorldTrackingConfiguration_h
 #define NARWorldTrackingConfiguration_h
 
-#import <UIKit/UIKit.h>
-#import "NSKView.h"
-#include "NNSObject.h"
+#include "NARConfiguration.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NARWorldTrackingConfiguration : public NNSObject {
+class NARWorldTrackingConfiguration : public NARConfiguration {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;

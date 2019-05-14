@@ -75,19 +75,35 @@ NAN_SETTER(NSCNLight::TypeSetter) {
 
   JS_UNWRAP(SCNLight, light);
 
-  std::string str;
+  std::string t;
   if (value->IsString()) {
     Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    str = *utf8Value;
+    t = *utf8Value;
   } else {
     Nan::ThrowError("invalid argument");
   }
+  
+  NSString *str = [NSString stringWithUTF8String:t.c_str()];
+  SCNLightType type = SCNLightTypeAmbient;
 
-  NSString *type = [NSString stringWithUTF8String:str.c_str()];
+  if ([str isEqualToString:@"spot"]) {
+    type = SCNLightTypeSpot;
+  } else if ([str isEqualToString:@"IES"]) {
+    type = SCNLightTypeIES;
+  } else if ([str isEqualToString:@"ambient"]) {
+    type = SCNLightTypeAmbient;
+  } else if ([str isEqualToString:@"omni"]) {
+    type = SCNLightTypeOmni;
+  } else if ([str isEqualToString:@"directional"]) {
+    type = SCNLightTypeDirectional;
+  } else if ([str isEqualToString:@"probe"]) {
+    type = SCNLightTypeProbe;
+  } else {
+    Nan::ThrowError("No valid light type specified");
+    return;
+  }
 
-  SCNLightType lightType = SCNLightType(type);
-
-  [light setType:lightType];
+  [light setType:type];
 }
 
 NAN_GETTER(NSCNLight::ColorGetter) {

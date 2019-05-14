@@ -26,6 +26,7 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(Camera);
+  JS_PROP(LightEstimate);
 };
 
 #endif /* NARFrame_h */

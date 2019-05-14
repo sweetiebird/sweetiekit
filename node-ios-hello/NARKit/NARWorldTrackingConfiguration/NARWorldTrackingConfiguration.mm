@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
 #import <ARKit/ARKit.h>
 #include "defines.h"
 #include "NARWorldTrackingConfiguration.h"
-#include "NNSObject.h"
+#include "NARConfiguration.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NARWorldTrackingConfiguration::type;
@@ -22,7 +21,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARWorldTrackingConfiguration:
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
+  ctor->Inherit(Nan::New(NARConfiguration::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("ARWorldTrackingConfiguration"));
   type.Reset(ctor);

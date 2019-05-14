@@ -59,6 +59,8 @@
 #include "NARSCNViewDelegate.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
+#include "NARLightEstimate.h"
+#include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
 #include "NARAnchor.h"
 #include "NARCamera.h"
@@ -448,12 +450,18 @@ void InitExports(Local<Object> exports) {
 
         // ARKit
   
+        auto N_ARLightEstimate = NARLightEstimate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARLightEstimate").ToLocalChecked(), N_ARLightEstimate.first);
+
         auto N_ARSKView = NARSKView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARSKView").ToLocalChecked(), N_ARSKView.first);
 
         auto N_ARSession = NARSession::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARSession").ToLocalChecked(), N_ARSession.first);
   
+        auto N_ARConfiguration = NARConfiguration::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARConfiguration").ToLocalChecked(), N_ARConfiguration.first);
+
         auto N_ARWorldTrackingConfiguration = NARWorldTrackingConfiguration::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARWorldTrackingConfiguration").ToLocalChecked(), N_ARWorldTrackingConfiguration.first);
 

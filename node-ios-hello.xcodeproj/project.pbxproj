@@ -71,6 +71,8 @@
 		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948932228A5D46007BF787 /* NSCNLight.mm */; };
+		A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948936228A68BA007BF787 /* NARConfiguration.mm */; };
+		A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194893A228A6AA6007BF787 /* NARLightEstimate.mm */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
@@ -271,6 +273,10 @@
 		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A1948931228A5D40007BF787 /* NSCNLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNLight.h; sourceTree = "<group>"; };
 		A1948932228A5D46007BF787 /* NSCNLight.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNLight.mm; sourceTree = "<group>"; };
+		A1948935228A68B4007BF787 /* NARConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARConfiguration.h; sourceTree = "<group>"; };
+		A1948936228A68BA007BF787 /* NARConfiguration.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARConfiguration.mm; sourceTree = "<group>"; };
+		A1948939228A6A9F007BF787 /* NARLightEstimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARLightEstimate.h; sourceTree = "<group>"; };
+		A194893A228A6AA6007BF787 /* NARLightEstimate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARLightEstimate.mm; sourceTree = "<group>"; };
 		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
 		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
 		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
@@ -746,6 +752,24 @@
 			path = NSCNLight;
 			sourceTree = "<group>";
 		};
+		A1948934228A68A0007BF787 /* NARConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A1948935228A68B4007BF787 /* NARConfiguration.h */,
+				A1948936228A68BA007BF787 /* NARConfiguration.mm */,
+			);
+			path = NARConfiguration;
+			sourceTree = "<group>";
+		};
+		A1948938228A6A8F007BF787 /* NARLightEstimate */ = {
+			isa = PBXGroup;
+			children = (
+				A1948939228A6A9F007BF787 /* NARLightEstimate.h */,
+				A194893A228A6AA6007BF787 /* NARLightEstimate.mm */,
+			);
+			path = NARLightEstimate;
+			sourceTree = "<group>";
+		};
 		A199AED822884F27003C1DC4 /* NUISlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,6 +1079,8 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1948938228A6A8F007BF787 /* NARLightEstimate */,
+				A1948934228A68A0007BF787 /* NARConfiguration */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1BD4BAC22880999001D1F6E /* NARFrame */,
@@ -1568,6 +1594,7 @@
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
+				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
@@ -1593,6 +1620,7 @@
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
+				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
