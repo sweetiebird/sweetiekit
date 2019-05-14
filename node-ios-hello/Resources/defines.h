@@ -373,4 +373,105 @@ namespace sweetiekit {
   extern bool SetTransform(simd_float4x4& transform, Local<Value> value);
 }
 
+
+#ifdef __OBJC__
+#include <objc/objc.h>
+#include <objc/runtime.h>
+#endif
+/*
+#include <cassert>
+#define ASSERT assert
+*/
+
+namespace sweetiekit {
+  template<typename T, typename U>
+  inline std::unique_ptr<T> adoptSystem(U value)
+  {
+      return std::unique_ptr<T>(value);
+  }
+
+  inline bool protocolImplementsProtocol(Protocol *candidate, Protocol *target)
+  {
+      unsigned protocolProtocolsCount;
+      auto protocolProtocols = adoptSystem<__unsafe_unretained Protocol*[]>(protocol_copyProtocolList(candidate, &protocolProtocolsCount));
+      for (unsigned i = 0; i < protocolProtocolsCount; ++i) {
+          if (protocol_isEqual(protocolProtocols[i], target))
+              return true;
+      }
+      return false;
+  }
+  /*
+  inline void forEachProtocolImplementingProtocol(Class cls, Protocol *target, void (^callback)(Protocol *, bool& stop))
+  {
+      ASSERT(cls);
+      ASSERT(target);
+
+      Vector<Protocol*> worklist;
+      HashSet<void*> visited;
+
+      // Initially fill the worklist with the Class's protocols.
+      {
+          unsigned protocolsCount;
+          auto protocols = adoptSystem<__unsafe_unretained Protocol*[]>(class_copyProtocolList(cls, &protocolsCount));
+          worklist.append(protocols.get(), protocolsCount);
+      }
+
+      bool stop = false;
+      while (!worklist.isEmpty()) {
+          Protocol *protocol = worklist.last();
+          worklist.removeLast();
+
+          // Are we encountering this Protocol for the first time?
+          if (!visited.add((__bridge void*)protocol).isNewEntry)
+              continue;
+
+          // If it implements the protocol, make the callback.
+          if (protocolImplementsProtocol(protocol, target)) {
+              callback(protocol, stop);
+              if (stop)
+                  break;
+          }
+
+          // Add incorporated protocols to the worklist.
+          {
+              unsigned protocolsCount;
+              auto protocols = adoptSystem<__unsafe_unretained Protocol*[]>(protocol_copyProtocolList(protocol, &protocolsCount));
+              worklist.append(protocols.get(), protocolsCount);
+          }
+      }
+  }*/
+
+  inline void forEachMethodInClass(Class cls, void (^callback)(Method))
+  {
+      unsigned count;
+      auto methods = adoptSystem<Method[]>(class_copyMethodList(cls, &count));
+      for (unsigned i = 0; i < count; ++i)
+          callback(methods[i]);
+  }
+
+  inline void forEachPropertyInClass(Class cls, void (^callback)(objc_property_t))
+  {
+      unsigned count;
+      auto properties = adoptSystem<objc_property_t[]>(class_copyPropertyList(cls, &count));
+      for (unsigned i = 0; i < count; ++i)
+          callback(properties[i]);
+  }
+
+  inline void forEachMethodInProtocol(Protocol *protocol, BOOL isRequiredMethod, BOOL isInstanceMethod, void (^callback)(SEL, const char*))
+  {
+      unsigned count;
+      auto methods = adoptSystem<objc_method_description[]>(protocol_copyMethodDescriptionList(protocol, isRequiredMethod, isInstanceMethod, &count));
+      for (unsigned i = 0; i < count; ++i)
+          callback(methods[i].name, methods[i].types);
+  }
+
+  inline void forEachPropertyInProtocol(Protocol *protocol, void (^callback)(objc_property_t))
+  {
+      unsigned count;
+      auto properties = adoptSystem<objc_property_t[]>(protocol_copyPropertyList(protocol, &count));
+      for (unsigned i = 0; i < count; ++i)
+          callback(properties[i]);
+  }
+}
+
 #endif /* defines_h */

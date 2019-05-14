@@ -46,9 +46,36 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP_READONLY(proto, class);
+  JS_ASSIGN_PROP_READONLY(proto, superclass);
+  JS_ASSIGN_PROP_READONLY(proto, className);
+  JS_ASSIGN_PROP_READONLY(proto, description);
+  JS_ASSIGN_PROP_READONLY(proto, debugDescription);
+  JS_ASSIGN_PROP_READONLY(proto, methods);
+  JS_ASSIGN_PROP_READONLY(proto, properties);
+  Nan::SetMethod(proto, "invokeBooleanGetter", invokeBooleanGetter);
+  Nan::SetMethod(proto, "invokeBooleanSetter", invokeBooleanSetter);
   
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  sweetiekit::Set(ctorFn, "classFromString", ^(JSInfo info) {
+    Nan::HandleScope scope;
+    Class cls = NSClassFromString(NJSStringToNSString(info[0]));
+    JS_SET_RETURN(sweetiekit::GetWrapperFor(cls, NNSObject::type));
+  });
+  sweetiekit::Set(ctorFn, "stringFromClass", ^(JSInfo info) {
+    Nan::HandleScope scope;
+    NNSObject* ncls = ObjectWrap::Unwrap<NNSObject>(JS_OBJ(info[0]));
+    @autoreleasepool {
+      if (!ncls->IsClass()) {
+        Nan::ThrowError("NSObject.stringFromClass: argument isn't a class");
+      } else {
+        Class cls = ncls->AsClass();
+        NSString* clsStr = NSStringFromClass(cls);
+        JS_SET_RETURN(JS_STR([clsStr UTF8String]));
+      }
+    }
+  });
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -87,6 +114,140 @@ void NNSObject::SetNSObject(NSObject* obj) {
     //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
   }*/
 }
+
+NAN_GETTER(NNSObject::classGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(NSObject, ns);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ns class], NNSObject::type));
+}
+
+NAN_GETTER(NNSObject::superclassGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(NSObject, ns);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ns superclass], NNSObject::type));
+}
+
+NAN_GETTER(NNSObject::classNameGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  JS_SET_RETURN(JS_STR([NSStringFromClass([ns class]) UTF8String]));
+}
+
+NAN_GETTER(NNSObject::descriptionGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  JS_SET_RETURN(JS_STR([[ns description] UTF8String]));
+}
+
+NAN_GETTER(NNSObject::debugDescriptionGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  JS_SET_RETURN(JS_STR([[ns debugDescription] UTF8String]));
+}
+
+NAN_GETTER(NNSObject::methodsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  if (!object_isClass(ns)) {
+    Nan::ThrowError("NSObject:methods: not a class");
+    return;
+  }
+  Class cls = nns->AsClass();
+  
+  Local<Array> result = Nan::New<Array>();
+  __block unsigned int n = 0;
+  sweetiekit::forEachMethodInClass(cls, ^(Method m) {
+    @autoreleasepool {
+      Nan::HandleScope scope;
+      Local<Object> obj = Nan::New<Object>();
+      auto argc = method_getNumberOfArguments(m);
+      obj->Set(JS_STR("name"), JS_STR([NSStringFromSelector(method_getName(m)) UTF8String]));
+      obj->Set(JS_STR("returnType"), JS_STR(method_copyReturnType(m)));
+      Local<Array> argv = Nan::New<Array>();
+      for (auto i = 0; i < argc; i++) {
+        argv->Set(i, JS_STR(method_copyArgumentType(m, i)));
+      }
+      obj->Set(JS_STR("arguments"), argv);
+      obj->Set(JS_STR("typeEncoding"), JS_STR(method_getTypeEncoding(m)));
+      result->Set(n, obj);
+      n++;
+    }
+  });
+  JS_SET_RETURN(result);
+}
+
+NAN_GETTER(NNSObject::propertiesGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  if (!object_isClass(ns)) {
+    Nan::ThrowError("NSObject:properties: not a class");
+    return;
+  }
+  Class cls = nns->AsClass();
+  
+  Local<Array> result = Nan::New<Array>();
+  __block unsigned int n = 0;
+  sweetiekit::forEachPropertyInClass(cls, ^(objc_property_t p) {
+    @autoreleasepool {
+      Nan::HandleScope scope;
+      Local<Object> obj = Nan::New<Object>();
+      obj->Set(JS_STR("name"), JS_STR(property_getName(p)));
+      obj->Set(JS_STR("attributes"), JS_STR(property_getAttributes(p)));
+      result->Set(n, obj);
+      n++;
+    }
+  });
+  JS_SET_RETURN(result);
+}
+
+NAN_METHOD(NNSObject::invokeBooleanGetter)
+{
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  @autoreleasepool {
+    Class cls = [ns class];
+  
+    NSString* name = NJSStringToNSString(info[0]);
+    SEL sel = NSSelectorFromString(name);
+    NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setSelector:sel];
+    [inv invokeWithTarget:ns];
+    bool result = false;
+    [inv getReturnValue:&result];
+    JS_SET_RETURN(JS_BOOL(result));
+  }
+}
+
+NAN_METHOD(NNSObject::invokeBooleanSetter)
+{
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(NSObject, ns);
+  @autoreleasepool {
+    Class cls = [ns class];
+    
+    NSString* name = NJSStringToNSString(info[0]);
+    SEL sel = NSSelectorFromString(name);
+    bool value = info[1]->BooleanValue(JS_ISOLATE());
+    NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setSelector:sel];
+    [inv setArgument:&value atIndex:0];
+    [inv invokeWithTarget:ns];
+  }
+}
+
 #include "NNSUserDefaults.h"
 #include "NUILabel.h"
 #include "NUISlider.h"
