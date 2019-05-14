@@ -26,6 +26,7 @@
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
+		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
@@ -209,6 +210,8 @@
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
+		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
+		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
@@ -552,6 +555,15 @@
 				211E76942269AED300B838AF /* NUIApplication.mm */,
 			);
 			path = NUIApplication;
+			sourceTree = "<group>";
+		};
+		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
+			isa = PBXGroup;
+			children = (
+				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
+				A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */,
+			);
+			path = NSKPhysicsBody;
 			sourceTree = "<group>";
 		};
 		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
@@ -1151,6 +1163,7 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				A10AADE2228B881400C64F60 /* NSKPhysicsBody */,
 				A1BD4BA82287F661001D1F6E /* NSKTexture */,
 				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
 				A1BD4B892287CA2E001D1F6E /* NSKScene */,
@@ -1649,6 +1662,7 @@
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
