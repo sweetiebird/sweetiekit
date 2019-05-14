@@ -118,4 +118,15 @@
     return retColor;
 }
 
++ (CGColorRef)UIColorToCGColor:(UIColor *)color
+{
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGFloat newComponents[4];
+    [color getRed:&newComponents[0] green:&newComponents[1] blue:&newComponents[2] alpha:&newComponents[3]];
+    CGColorRef newColor = CGColorCreate(colorSpace, newComponents);
+    CGColorSpaceRelease(colorSpace);
+  
+    return newColor;
+}
+
 @end

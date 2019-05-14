@@ -27,4 +27,6 @@
 
 + (UIColor *)CGColorToUIColor:(CGColor *)color;
 
++ (CGColorRef)UIColorToCGColor:(UIColor *)color;
+
 @end
