@@ -58,16 +58,20 @@ NNSObject::NNSObject() {}
 NNSObject::~NNSObject() {}
 
 NAN_METHOD(NNSObject::New) {
-  NNSObject *gl = new NNSObject();
-  Local<Object> glObj = info.This();
-  gl->Wrap(glObj);
+  Local<Object> obj = info.This();
 
-  info.GetReturnValue().Set(glObj);
+  NNSObject *nObj = new NNSObject();
+
+  if (info[0]->IsExternal()) {
+    nObj->SetNSObject((__bridge NSObject *)(info[0].As<External>()->Value()));
+  }
+  nObj->Wrap(obj);
+
+  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NNSObject::Destroy) {
-  NNSObject *gl = ObjectWrap::Unwrap<NNSObject>(info.This());
-  //gl->live = false;
+  //NNSObject *ns = ObjectWrap::Unwrap<NNSObject>(info.This());
 }
 
 void NNSObject::SetNSObject(NSObject* obj) {
