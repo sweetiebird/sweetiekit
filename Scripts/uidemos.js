@@ -79,8 +79,11 @@ class UIDemosApp {
   }
 
   createDemoVC() {
+    gc();
     this.demoVC = new UIViewController();
+    gc();
     this.demoVC.view.backgroundColor = { red: 1, green: 1, blue: 1 };
+    gc();
   }
 
   setupConstraints() {
@@ -150,7 +153,9 @@ class UIDemosApp {
       const type = Object.keys(arDemos)[row];
       if (arDemos[type]) {
         this.createDemoVC();
+        gc();
         await arDemos[type](this.nav, this.demoVC);
+        gc();
       }
     }
   }
