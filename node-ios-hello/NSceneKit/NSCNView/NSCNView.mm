@@ -29,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNView::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "autoenablesDefaultLighting", AutoenablesDefaultLighting);
+  JS_SET_PROP(proto, "playing", Playing);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -82,4 +83,20 @@ NAN_SETTER(NSCNView::AutoenablesDefaultLightingSetter) {
   JS_UNWRAP(SCNView, view);
 
   [view setAutoenablesDefaultLighting:TO_BOOL(value)];
+}
+
+NAN_GETTER(NSCNView::PlayingGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNView, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isPlaying]));
+}
+
+NAN_SETTER(NSCNView::PlayingSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNView, ui);
+  
+  [ui setPlaying:TO_BOOL(value)];
 }
