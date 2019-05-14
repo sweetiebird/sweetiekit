@@ -53,11 +53,15 @@ NAN_METHOD(NCLLocation::New) {
 
   if (info[0]->IsExternal()) {
     loc->SetNSObject((__bridge CLLocation *)(info[0].As<External>()->Value()));
+  } else if (info.Length() > 0) {
+    @autoreleasepool {
+      double lat = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("latitude")));
+      double lng = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("longitude")));
+      loc->SetNSObject([[CLLocation alloc] initWithLatitude:lat longitude:lng]);
+    }
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
         loc->SetNSObject([[CLLocation alloc] init]);
-      });
     }
   }
   loc->Wrap(obj);
