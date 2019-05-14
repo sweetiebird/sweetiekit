@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 #import <SceneKit/SceneKit.h>
+#import <MapKit/MapKit.h>
 #import <ARKit/ARKit.h>
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
@@ -146,6 +147,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
 #include "NCLHeading.h"
+#include "NMKMapView.h"
 #include "NUINib.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -167,6 +169,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[CABasicAnimation class]]) {
         return NCABasicAnimation::type;
+      }
+
+      // MapKit
+      
+      if ([obj isKindOfClass:[MKMapView class]]) {
+        return NMKMapView::type;
       }
 
       // ARKit

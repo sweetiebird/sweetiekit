@@ -6,6 +6,7 @@ const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
+const makeMapView = require('./examples/MKMapView');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
@@ -32,7 +33,7 @@ const {
 } = SweetieKit;
 
 const demoTypes = {
-  ThreeObj: makeThreeObj,
+  MKMapView: makeMapView,
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,

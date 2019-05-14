@@ -75,6 +75,7 @@
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
 #include "NCLHeading.h"
+#include "NMKMapView.h"
 #include <unistd.h>
 
 #include <string>
@@ -502,6 +503,11 @@ void InitExports(Local<Object> exports) {
         auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
 
+        // MapKit
+  
+        auto N_MKMapView = NMKMapView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("MKMapView").ToLocalChecked(), N_MKMapView.first);
+  
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
         initFunctionAddressArray->Set(0, Nan::New<Integer>((uint32_t)(initFunctionAddress >> 32)));

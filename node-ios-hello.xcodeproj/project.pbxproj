@@ -73,6 +73,9 @@
 		A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948932228A5D46007BF787 /* NSCNLight.mm */; };
 		A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948936228A68BA007BF787 /* NARConfiguration.mm */; };
 		A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194893A228A6AA6007BF787 /* NARLightEstimate.mm */; };
+		A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948957228A84DB007BF787 /* NMKMapView.mm */; };
+		A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A194895E228A89B0007BF787 /* MapKit.framework */; };
+		A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1948966228A945E007BF787 /* SMKAnnotation.swift */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
@@ -277,6 +280,10 @@
 		A1948936228A68BA007BF787 /* NARConfiguration.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARConfiguration.mm; sourceTree = "<group>"; };
 		A1948939228A6A9F007BF787 /* NARLightEstimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARLightEstimate.h; sourceTree = "<group>"; };
 		A194893A228A6AA6007BF787 /* NARLightEstimate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARLightEstimate.mm; sourceTree = "<group>"; };
+		A1948957228A84DB007BF787 /* NMKMapView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapView.mm; sourceTree = "<group>"; };
+		A1948958228A84DB007BF787 /* NMKMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapView.h; sourceTree = "<group>"; };
+		A194895E228A89B0007BF787 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A1948966228A945E007BF787 /* SMKAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKAnnotation.swift; sourceTree = "<group>"; };
 		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
 		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
 		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
@@ -420,6 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
 				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
 				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
 				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
@@ -768,6 +776,24 @@
 				A194893A228A6AA6007BF787 /* NARLightEstimate.mm */,
 			);
 			path = NARLightEstimate;
+			sourceTree = "<group>";
+		};
+		A194894D228A8489007BF787 /* NMapKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1948956228A84DB007BF787 /* NMKMapView */,
+			);
+			path = NMapKit;
+			sourceTree = "<group>";
+		};
+		A1948956228A84DB007BF787 /* NMKMapView */ = {
+			isa = PBXGroup;
+			children = (
+				A1948957228A84DB007BF787 /* NMKMapView.mm */,
+				A1948958228A84DB007BF787 /* NMKMapView.h */,
+				A1948966228A945E007BF787 /* SMKAnnotation.swift */,
+			);
+			path = NMKMapView;
 			sourceTree = "<group>";
 		};
 		A199AED822884F27003C1DC4 /* NUISlider */ = {
@@ -1361,6 +1387,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A194894D228A8489007BF787 /* NMapKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
@@ -1389,6 +1416,7 @@
 		A1FC1A1B225C6AB100085571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A194895E228A89B0007BF787 /* MapKit.framework */,
 				A1BD4B022287B6DC001D1F6E /* libicudata.a */,
 				A1BD4B012287B6DC001D1F6E /* libicui18n.a */,
 				A1BD4B002287B6DC001D1F6E /* libicuucx.a */,
@@ -1582,6 +1610,7 @@
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
+				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
@@ -1621,6 +1650,7 @@
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
+				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
