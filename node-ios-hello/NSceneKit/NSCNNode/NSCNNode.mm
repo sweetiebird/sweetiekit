@@ -160,7 +160,7 @@ NAN_GETTER(NSCNNode::LightGetter) {
 
   JS_UNWRAP(SCNNode, node);
 
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([node light], NSCNLight::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node light], NSCNLight::type));
 }
 
 NAN_SETTER(NSCNNode::LightSetter) {
