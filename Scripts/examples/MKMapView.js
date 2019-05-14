@@ -12,6 +12,7 @@ async function make(demoVC) {
   const frame = { x: 0, y: 0, width: w, height: h };
   const view = new MKMapView(frame);
   const del = new MKMapViewDelegate();
+
   demoVC.view.addSubview(view);
   setTimeout(() => {
     const region = {

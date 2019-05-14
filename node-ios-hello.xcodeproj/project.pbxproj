@@ -1148,7 +1148,7 @@
 			path = NARKit;
 			sourceTree = "<group>";
 		};
-		A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */ = {
+		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
 				A1BD4BA82287F661001D1F6E /* NSKTexture */,
@@ -1158,7 +1158,7 @@
 				A1BD4B812287C355001D1F6E /* NSKNode */,
 				A1BD4B802287C34A001D1F6E /* NSKView */,
 			);
-			path = NSKSpriteKit;
+			path = NSpriteKit;
 			sourceTree = "<group>";
 		};
 		A1D65E1022819D7C00AC0BD9 /* NARSKView */ = {
@@ -1432,7 +1432,7 @@
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
-				A1D65E0C22819C1E00AC0BD9 /* NSKSpriteKit */,
+				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
 				A1D672A02269942100562A42 /* Resources */,
 				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,

@@ -27,6 +27,8 @@ public:
   virtual ~NSKNode();
 
   static NAN_METHOD(New);
+  JS_PROP(Position);
+  JS_PROP(ZRotation);
 };
 
 #endif /* NSKNode_h */
