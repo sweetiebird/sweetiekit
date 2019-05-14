@@ -52,15 +52,11 @@ NAN_METHOD(NSCNView::New) {
 
     @autoreleasepool {
       CGRect frame = CGRectMake(x, y, width, height);
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[SCNView alloc] initWithFrame:frame]);
-      });
+      view->SetNSObject([[SCNView alloc] initWithFrame:frame]);
     }
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[SCNView alloc] init]);
-      });
+      view->SetNSObject([[SCNView alloc] init]);
     }
   }
   view->Wrap(obj);

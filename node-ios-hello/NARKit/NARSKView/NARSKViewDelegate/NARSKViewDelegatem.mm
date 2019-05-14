@@ -27,7 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSKViewDelegate::Initialize(
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
   ctor->Inherit(Nan::New(NSKView::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSKView"));
+  ctor->SetClassName(JS_STR("ARSKViewDelegate"));
   type.Reset(ctor);
 
   // prototype

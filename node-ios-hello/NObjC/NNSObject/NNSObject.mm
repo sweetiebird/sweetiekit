@@ -132,7 +132,11 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
+#include "NARSCNView.h"
+#include "NARSCNViewDelegate.h"
 #include "NSCNView.h"
+#include "NSCNScene.h"
+#include "NSCNNode.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NCLLocationManager.h"
@@ -188,6 +192,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       
+      if ([obj isKindOfClass:[SCNScene class]]) {
+        return NSCNScene::type;
+      }
+      if ([obj isKindOfClass:[SCNNode class]]) {
+        return NSCNNode::type;
+      }
       if ([obj isKindOfClass:[SCNView class]]) {
         return NSCNView::type;
       }

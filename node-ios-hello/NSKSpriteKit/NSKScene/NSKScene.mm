@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
 #include "defines.h"
 #include "NSKNode.h"
 #include "NSKScene.h"
@@ -23,7 +22,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIResponder::type));
+  ctor->Inherit(Nan::New(NSKNode::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("SKScene"));
   type.Reset(ctor);

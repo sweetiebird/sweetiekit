@@ -1,31 +1,32 @@
 //
-//  NSKScene.h
+//  NSCNScene.h
 //  node-ios-hello
 //
-//  Created by Emily Kolar on 5/11/19.
+//  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NSKScene_h
-#define NSKScene_h
+#ifndef NSCNScene_h
+#define NSCNScene_h
 
-#import <SpriteKit/SpriteKit.h>
-#import "NSKNode.h"
+#import <SceneKit/SceneKit.h>
+#import "NNSObject.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NSKScene : public NSKNode {
+class NSCNScene : public NNSObject {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NSKScene();
-  virtual ~NSKScene();
+  NSCNScene();
+  virtual ~NSCNScene();
 
   static NAN_METHOD(New);
+  JS_PROP(RootNode);
 };
 
-#endif /* NSKScene_h */
+#endif /* NSCNScene_h */

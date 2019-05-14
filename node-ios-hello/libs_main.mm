@@ -55,6 +55,8 @@
 #include "NSKLabelNode.h"
 #include "NARSKViewDelegate.h"
 #include "NARSession.h"
+#include "NARSCNView.h"
+#include "NARSCNViewDelegate.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -62,6 +64,8 @@
 #include "NARCamera.h"
 #include "NARFrame.h"
 #include "NSCNView.h"
+#include "NSCNNode.h"
+#include "NSCNScene.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NCLLocationManager.h"
@@ -464,9 +468,25 @@ void InitExports(Local<Object> exports) {
         auto N_ARSKViewDelegate = NARSKViewDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("ARSKViewDelegate").ToLocalChecked(), N_ARSKViewDelegate.first);
   
+        auto N_ARSCNViewDelegate = NARSCNViewDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARSCNViewDelegate").ToLocalChecked(), N_ARSCNViewDelegate.first);
+  
+        // SceneKit
+
+        auto N_SCNNode = NSCNNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNNode").ToLocalChecked(), N_SCNNode.first);
+
+        auto N_SCNScene = NSCNScene::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNScene").ToLocalChecked(), N_SCNScene.first);
+
         auto N_SCNView = NSCNView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SCNView").ToLocalChecked(), N_SCNView.first);
-  
+
+        auto N_ARSCNView = NARSCNView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("ARSCNView").ToLocalChecked(), N_ARSCNView.first);
+
+        // SpriteKit
+
         auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
 

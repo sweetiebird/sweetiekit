@@ -1,5 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+// view based demos
+const makeARSCNView = require('./examples/ARSCNView');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeImageView = require('./examples/UIImageView');
@@ -9,11 +11,16 @@ const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
 const makeTextField = require('./examples/UITextField');
 const makeView = require('./examples/UIView');
+
+// controller based demos
 const makeAlertCtrl = require('./examples/UIAlertController');
 const makeImagePickerCtrl = require('./examples/UIImagePickerController');
 const makeNavigationCtrl = require('./examples/UINavigationController');
 const makeTabBarCtrl = require('./examples/UITabBarController');
 const makeTableView = require('./examples/UITableView');
+
+// misc demos
+const makeThreeObj = require('./examples/ThreeOBJ');
 
 const {
   UIApplication,
@@ -25,6 +32,7 @@ const {
 } = SweetieKit;
 
 const demoTypes = {
+  ThreeObj: makeThreeObj,
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
@@ -44,8 +52,15 @@ const demoCtrls = {
   UITableView: makeTableView,
 };
 
+const arDemos = {
+  ARSCNView: makeARSCNView,
+};
+
 const demoTypeNames = Object.keys(demoTypes).sort();
 const demoCtrlNames = Object.keys(demoCtrls).sort();
+const arDemoNames = Object.keys(arDemos).sort();
+
+const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames];
 
 class UIDemosApp {
   constructor(app) {
@@ -91,25 +106,21 @@ class UIDemosApp {
   getCellFor(tableView, indexPath) {
     const { row, section } = indexPath;
     const cell = new UITableViewCell();
-    if (section === 0) {
-      const type = demoTypeNames[row];
-      if (type) {
-        cell.textLabel.text = type;
-      }
-    } else {
-      const type = demoCtrlNames[row];
-      if (type) {
-        cell.textLabel.text = type;
-      }
+    const names = allDemoNames[section];
+    const type = names[row];
+    if (type) {
+      cell.textLabel.text = type;
     }
     return cell;
   }
 
   getNumberRows(tableView, section) {
     if (section === 0) {
-      return Object.keys(demoTypes).length;
+      return demoTypeNames.length;
+    } else if (section === 1) {
+      return demoCtrlNames.length;
     }
-    return Object.keys(demoCtrls).length;
+    return arDemoNames.length;
   }
 
   async handleCellSelected(tableView, indexPath) {
@@ -128,11 +139,17 @@ class UIDemosApp {
         const ui = await demoTypes[type](this.demoVC);
         this.showDemoUI(ui);
       }
-    } else {
+    } else if (section === 1) {
       const type = Object.keys(demoCtrls)[row];
       if (demoCtrls[type]) {
         this.createDemoVC();
         await demoCtrls[type](this.nav, this.demoVC);
+      }
+    } else {
+      const type = Object.keys(arDemos)[row];
+      if (arDemos[type]) {
+        this.createDemoVC();
+        await arDemos[type](this.nav, this.demoVC);
       }
     }
   }
@@ -158,7 +175,7 @@ class UIDemosApp {
     );
 
     this.mgr.numberOfSections = () => {
-      return 2;
+      return 3;
     };
     this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
 
