@@ -139,5 +139,21 @@ NAN_SETTER(NARSCNView::SceneSetter) {
   [ui setScene:scene->As<SCNScene>()];
 }
 
+NAN_GETTER(NARSCNView::AutomaticallyUpdatesLightingGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSCNView, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui automaticallyUpdatesLighting]));
+}
+
+NAN_SETTER(NARSCNView::AutomaticallyUpdatesLightingSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSCNView, ui);
+  
+  [ui setAutomaticallyUpdatesLighting:TO_BOOL(value)];
+}
+
 NARSCNView::NARSCNView () {}
 NARSCNView::~NARSCNView () {}

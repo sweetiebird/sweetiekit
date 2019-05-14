@@ -31,6 +31,7 @@ public:
   JS_PROP(Session);
   JS_PROP(Delegate);
   JS_PROP(Scene);
+  JS_PROP(AutomaticallyUpdatesLighting);
   
   Nan::Persistent<Value> _delegate;
 };
