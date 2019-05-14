@@ -102,6 +102,18 @@ NAN_GETTER(N##type::name##Getter) { \
 
 #define JS_SET_PROP_READONLY(proto, jsName, cppName) \
   Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter);
+  
+#define JS_ASSIGN_PROP(proto, jsName) \
+  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter, jsName##Setter);
+  
+#define JS_ASSIGN_PROP_READONLY(proto, jsName) \
+  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter);
+  
+#define JS_SETTER(name) \
+  NAN_SETTER(name##Setter)
+  
+#define JS_GETTER(name) \
+  NAN_GETTER(name##Getter)
 
 
 #define JS_WRAP_CLASS(name, base) \
