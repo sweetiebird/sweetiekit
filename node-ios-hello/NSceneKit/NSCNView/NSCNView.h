@@ -26,6 +26,7 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(AutoenablesDefaultLighting);
+  JS_PROP(Playing);
 };
 
 #endif /* NSCNView_h */
