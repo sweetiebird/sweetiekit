@@ -30,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "addChildNode", AddChildNode);
+  Nan::SetMethod(proto, "clone", Clone);
   JS_SET_PROP(proto, "simdTransform", SimdTransform);
   JS_SET_PROP(proto, "simdWorldTransform", SimdWorldTransform);
 
@@ -79,6 +80,13 @@ NAN_METHOD(NSCNNode::AddChildNode) {
   NSCNNode *child = ObjectWrap::Unwrap<NSCNNode>(Local<Object>::Cast(info[0]));
   
   [node addChildNode:child->As<SCNNode>()];
+}
+
+NAN_METHOD(NSCNNode::Clone) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node clone], NSCNNode::type));
 }
 
 NAN_GETTER(NSCNNode::SimdTransformGetter) {

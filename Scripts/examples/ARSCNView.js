@@ -34,10 +34,14 @@ async function make(nav, demoVC) {
       if (!frame) {
         setTimeout(configure, 10);
       } else {
+        const child = node.clone();
+        child.simdTransform = new THREE.Matrix4().makeTranslation(0,0,-3);
+        node.addChildNode(child);
+        child.addChildNode(child.clone());
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
         xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-3));
-        node.simdTransform = xform.elements;
+        node.simdTransform = xform;
         scene.rootNode.addChildNode(node);
       }
     }

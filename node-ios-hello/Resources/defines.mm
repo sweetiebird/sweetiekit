@@ -54,7 +54,11 @@ namespace sweetiekit
   
 
   bool SetTransform(simd_float4x4& transform, Local<Value> value) {
+    Nan::HandleScope scope;
     float* matrix = (float*)&transform;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      value = JS_OBJ(value)->Get(JS_STR("elements"));
+    }
     if (value->IsFloat32Array()) {
       Local<Float32Array> xform = Local<Float32Array>::Cast(value);
       for (uint32_t i = 0; i < 16; i++) {
