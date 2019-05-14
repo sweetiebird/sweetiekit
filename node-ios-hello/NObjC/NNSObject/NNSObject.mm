@@ -244,7 +244,7 @@ NAN_METHOD(NNSObject::invokeBooleanSetter)
     NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
     [inv setSelector:sel];
-    [inv setArgument:&value atIndex:0];
+    [inv setArgument:&value atIndex:2];
     [inv invokeWithTarget:ns];
   }
 }
