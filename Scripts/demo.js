@@ -86,9 +86,11 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   return nativeType;
 }
 Object.getOwnPropertyNames(SweetieKit)
-  .filter(x => ["AR", "AV", "CA", "CL", "NS", "SCN", "SK", "UI"].filter(y => x.startsWith(y)).length > 0)
+  .filter(x => ["AR", "AV", "CA", "CL", "MK", "NS", "SCN", "SK", "UI"]
+                 .filter(y => x.startsWith(y))
+                 .length > 0)
   .sort()
-  .forEach(x => { 
+  .forEach(x => {
     console.log(x);
     BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
