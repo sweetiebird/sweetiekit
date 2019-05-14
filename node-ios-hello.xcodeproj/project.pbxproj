@@ -770,6 +770,21 @@
 			path = NARLightEstimate;
 			sourceTree = "<group>";
 		};
+		A194893C228A7728007BF787 /* NMapKit */ = {
+			isa = PBXGroup;
+			children = (
+				A194893D228A772F007BF787 /* NMapKitView */,
+			);
+			path = NMapKit;
+			sourceTree = "<group>";
+		};
+		A194893D228A772F007BF787 /* NMapKitView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NMapKitView;
+			sourceTree = "<group>";
+		};
 		A199AED822884F27003C1DC4 /* NUISlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1361,6 +1376,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A194893C228A7728007BF787 /* NMapKit */,
 				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
