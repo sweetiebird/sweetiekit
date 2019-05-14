@@ -27,6 +27,8 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(AddChildNode);
+  JS_PROP(SimdTransform);
+  JS_PROP(SimdWorldTransform);
 };
 
 #endif /* NSCNNode_h */

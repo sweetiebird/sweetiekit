@@ -51,4 +51,28 @@ namespace sweetiekit
     }
     return handleScope.Escape(result);
   }
+  
+
+  bool SetTransform(simd_float4x4& transform, Local<Value> value) {
+    float* matrix = (float*)&transform;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      for (uint32_t i = 0; i < 16; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 16; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      for (uint32_t i = 0; i < 16; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
 }

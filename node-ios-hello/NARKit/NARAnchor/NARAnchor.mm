@@ -66,12 +66,11 @@ NAN_METHOD(NARAnchor::InitWithTransform) {
 
   @autoreleasepool {
     simd_float4x4 transform = matrix_identity_float4x4;
-    float* matrix = (float*)&transform;
-    Local<Float32Array> xform = Local<Float32Array>::Cast(info[0]);
-    for (uint32_t i = 0; i < 16; i++) {
-      matrix[i] = TO_FLOAT(xform->Get(i));
+    if (!sweetiekit::SetTransform(transform, info[0])) {
+      Nan::ThrowError("ARAnchor:initWithTransform: Invalid transform type");
+    } else {
+      nanchor->SetNSObject([anchor initWithTransform:transform]);
     }
-    nanchor->SetNSObject([anchor initWithTransform:transform]);
   }
 
   info.GetReturnValue().Set(anchorObj);

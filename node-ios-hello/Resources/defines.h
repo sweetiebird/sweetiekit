@@ -357,6 +357,8 @@ namespace sweetiekit {
       }
     }
   };
+    
+  extern bool SetTransform(simd_float4x4& transform, Local<Value> value);
 }
 
 #endif /* defines_h */
