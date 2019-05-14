@@ -190,9 +190,10 @@ class UIDemosApp {
 }
 
 async function start() {
+  gc();
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
-    const myApp = new UIDemosApp(sharedApp);
+    const myApp = this.myApp = new UIDemosApp(sharedApp);
     myApp.launch();
   } else {
     setTimeout(start, 10);
