@@ -26,7 +26,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNViewDelegate::Initialize
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKView::type));
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("ARSCNViewDelegate"));
   type.Reset(ctor);

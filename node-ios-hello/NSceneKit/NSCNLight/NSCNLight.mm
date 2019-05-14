@@ -116,7 +116,7 @@ NAN_GETTER(NSCNLight::ColorGetter) {
   __block CGFloat blue = 0;
   __block CGFloat alpha = 1;
   @autoreleasepool {
-    UIColor *color = [UIColor colorWithCGColor:(CGColorRef)[light color]];
+    UIColor *color = [light color];
     [color getRed:&red green:&green blue:&blue alpha:&alpha];
   }
   

@@ -71,7 +71,7 @@ NAN_GETTER(NARFrame::LightEstimateGetter) {
   
   JS_UNWRAP(ARFrame, frame);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([frame lightEstimate], NARLightEstimate::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([frame lightEstimate], NARLightEstimate::type));
 }
 
 NARFrame::NARFrame () {}

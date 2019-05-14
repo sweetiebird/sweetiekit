@@ -61,7 +61,7 @@ NAN_GETTER(NARConfiguration::IsLightEstimationEnabledGetter) {
 
   JS_UNWRAP(ARConfiguration, config);
   
-  JS_SET_RETURN(JS_FLOAT([config isLightEstimationEnabled]));
+  JS_SET_RETURN(JS_BOOL([config isLightEstimationEnabled]));
 }
 
 NAN_SETTER(NARConfiguration::IsLightEstimationEnabledSetter) {
