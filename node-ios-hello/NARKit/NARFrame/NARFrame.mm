@@ -63,7 +63,7 @@ NAN_GETTER(NARFrame::CameraGetter) {
   
   JS_UNWRAP(ARFrame, frame);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([frame camera], NARCamera::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([frame camera], NARCamera::type));
 }
 
 NAN_GETTER(NARFrame::LightEstimateGetter) {

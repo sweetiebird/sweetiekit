@@ -27,6 +27,9 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(AddChildNode);
+  static NAN_METHOD(Clone);
+  JS_PROP(SimdTransform);
+  JS_PROP(SimdWorldTransform);
   JS_PROP(Light);
   JS_PROP(Position);
   JS_PROP(EulerAngles);

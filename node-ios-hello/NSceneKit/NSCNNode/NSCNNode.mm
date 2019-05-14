@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
+#import <SceneKit/ModelIO.h>
 #include "defines.h"
 #include "NSCNNode.h"
 #include "NNSObject.h"
@@ -30,6 +31,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "addChildNode", AddChildNode);
+  Nan::SetMethod(proto, "clone", Clone);
+  JS_SET_PROP(proto, "simdTransform", SimdTransform);
+  JS_SET_PROP(proto, "simdWorldTransform", SimdWorldTransform);
   JS_SET_PROP(proto, "light", Light);
   JS_SET_PROP(proto, "position", Position);
   JS_SET_PROP(proto, "eulerAngles", EulerAngles);
@@ -49,6 +53,17 @@ NAN_METHOD(NSCNNode::New) {
 
   if (info[0]->IsExternal()) {
     node->SetNSObject((__bridge SCNNode *)(info[0].As<External>()->Value()));
+  } else if (info[0]->IsString()) {
+    @autoreleasepool {
+      NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+      NSString *fileName = NJSStringToNSString(info[0]);
+      NSString *filePath = [documents stringByAppendingPathComponent:fileName];
+      NSURL *url = [[NSURL alloc] initFileURLWithPath:filePath];
+      MDLAsset *asset = [[MDLAsset alloc] initWithURL:url];
+      MDLObject *object = [asset objectAtIndex:0];
+      SCNNode *scene = [SCNNode nodeWithMDLObject:object];
+      node->SetNSObject(scene);
+    }
   } else {
     @autoreleasepool {
       node->SetNSObject([[SCNNode alloc] init]);
@@ -71,6 +86,60 @@ NAN_METHOD(NSCNNode::AddChildNode) {
   
   [node addChildNode:child->As<SCNNode>()];
 }
+
+NAN_METHOD(NSCNNode::Clone) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node clone], NSCNNode::type));
+}
+
+NAN_GETTER(NSCNNode::SimdTransformGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+
+  auto xform = node.simdTransform;
+  const float* matrix = (const float*)&xform;
+  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
+}
+
+NAN_SETTER(NSCNNode::SimdTransformSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+
+  auto xform = node.simdWorldTransform;
+  if (!sweetiekit::SetTransform(xform, value)) {
+    Nan::ThrowError("SCNNode:setSimdTransform: invalid transform type");
+  } else {
+    [node setSimdTransform:xform];
+  }
+}
+
+NAN_GETTER(NSCNNode::SimdWorldTransformGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+
+  auto xform = node.simdWorldTransform;
+  const float* matrix = (const float*)&xform;
+  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
+}
+
+NAN_SETTER(NSCNNode::SimdWorldTransformSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SCNNode, node);
+
+  auto xform = node.simdWorldTransform;
+  if (!sweetiekit::SetTransform(xform, value)) {
+    Nan::ThrowError("SCNNode:setSimdWorldTransform: invalid transform type");
+  } else {
+    [node setSimdWorldTransform:xform];
+  }
+}
+
 
 NAN_GETTER(NSCNNode::LightGetter) {
   Nan::HandleScope scope;

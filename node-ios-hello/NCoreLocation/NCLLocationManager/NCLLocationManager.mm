@@ -109,7 +109,7 @@ NAN_GETTER(NCLLocationManager::DelegateGetter) {
   
   JS_UNWRAP(CLLocationManager, mgr);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([mgr delegate], NCLLocationManagerDelegate::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([mgr delegate], NCLLocationManagerDelegate::type));
 }
 
 NAN_SETTER(NCLLocationManager::DelegateSetter) {

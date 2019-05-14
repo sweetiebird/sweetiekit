@@ -75,7 +75,7 @@ NAN_GETTER(NUICollectionViewCell::ContentViewGetter) {
   
   JS_UNWRAP(UICollectionViewCell, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui contentView], NUIView::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui contentView], NUIView::type));
 }
 
 NAN_GETTER(NUICollectionViewCell::BackgroundViewGetter) {
@@ -83,7 +83,7 @@ NAN_GETTER(NUICollectionViewCell::BackgroundViewGetter) {
   
   JS_UNWRAP(UICollectionViewCell, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui backgroundView], NUIView::type));
 }
 
 NAN_SETTER(NUICollectionViewCell::BackgroundViewSetter) {
@@ -103,7 +103,7 @@ NAN_GETTER(NUICollectionViewCell::SelectedBackgroundViewGetter) {
   
   JS_UNWRAP(UICollectionViewCell, ui);
   
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui selectedBackgroundView], NUIView::type)));
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui selectedBackgroundView], NUIView::type));
 }
 
 NAN_SETTER(NUICollectionViewCell::SelectedBackgroundViewSetter) {
