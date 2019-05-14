@@ -148,6 +148,8 @@ void NNSObject::SetNSObject(NSObject* obj) {
 #include "NCLLocation.h"
 #include "NCLHeading.h"
 #include "NMKMapView.h"
+#include "NMKMapViewDelegate.h"
+#include "NMKAnnotationView.h"
 #include "NUINib.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -175,6 +177,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       if ([obj isKindOfClass:[MKMapView class]]) {
         return NMKMapView::type;
+      }
+      if ([obj isKindOfClass:[MKAnnotationView class]]) {
+        return NMKAnnotationView::type;
+      }
+      if ([obj isKindOfClass:[SMKMapViewDelegate class]]) {
+        return NMKMapViewDelegate::type;
       }
 
       // ARKit

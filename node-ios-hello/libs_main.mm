@@ -76,6 +76,8 @@
 #include "NCLLocation.h"
 #include "NCLHeading.h"
 #include "NMKMapView.h"
+#include "NMKAnnotationView.h"
+#include "NMKMapViewDelegate.h"
 #include <unistd.h>
 
 #include <string>
@@ -507,7 +509,13 @@ void InitExports(Local<Object> exports) {
   
         auto N_MKMapView = NMKMapView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("MKMapView").ToLocalChecked(), N_MKMapView.first);
-  
+
+        auto N_MNAnnotationView = NMKAnnotationView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("MNAnnotationView").ToLocalChecked(), N_MNAnnotationView.first);
+
+        auto N_MKMapViewDelegate = NMKMapViewDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("MKMapViewDelegate").ToLocalChecked(), N_MKMapViewDelegate.first);
+
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
         initFunctionAddressArray->Set(0, Nan::New<Integer>((uint32_t)(initFunctionAddress >> 32)));

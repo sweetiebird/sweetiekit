@@ -76,6 +76,9 @@
 		A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948957228A84DB007BF787 /* NMKMapView.mm */; };
 		A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A194895E228A89B0007BF787 /* MapKit.framework */; };
 		A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1948966228A945E007BF787 /* SMKAnnotation.swift */; };
+		A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */; };
+		A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */; };
+		A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194896F228AA47E007BF787 /* NMKAnnotationView.mm */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
@@ -284,6 +287,11 @@
 		A1948958228A84DB007BF787 /* NMKMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapView.h; sourceTree = "<group>"; };
 		A194895E228A89B0007BF787 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A1948966228A945E007BF787 /* SMKAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKAnnotation.swift; sourceTree = "<group>"; };
+		A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapViewDelegate.mm; sourceTree = "<group>"; };
+		A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapViewDelegate.h; sourceTree = "<group>"; };
+		A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKMapViewDelegate.swift; sourceTree = "<group>"; };
+		A194896F228AA47E007BF787 /* NMKAnnotationView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKAnnotationView.mm; sourceTree = "<group>"; };
+		A1948970228AA47E007BF787 /* NMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKAnnotationView.h; sourceTree = "<group>"; };
 		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
 		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
 		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
@@ -781,6 +789,7 @@
 		A194894D228A8489007BF787 /* NMapKit */ = {
 			isa = PBXGroup;
 			children = (
+				A194896E228AA47E007BF787 /* NMKAnnotationView */,
 				A1948956228A84DB007BF787 /* NMKMapView */,
 			);
 			path = NMapKit;
@@ -789,11 +798,31 @@
 		A1948956228A84DB007BF787 /* NMKMapView */ = {
 			isa = PBXGroup;
 			children = (
+				A1948968228AA15C007BF787 /* NMKMapViewDelegate */,
 				A1948957228A84DB007BF787 /* NMKMapView.mm */,
 				A1948958228A84DB007BF787 /* NMKMapView.h */,
 				A1948966228A945E007BF787 /* SMKAnnotation.swift */,
 			);
 			path = NMKMapView;
+			sourceTree = "<group>";
+		};
+		A1948968228AA15C007BF787 /* NMKMapViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */,
+				A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */,
+				A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */,
+			);
+			path = NMKMapViewDelegate;
+			sourceTree = "<group>";
+		};
+		A194896E228AA47E007BF787 /* NMKAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				A194896F228AA47E007BF787 /* NMKAnnotationView.mm */,
+				A1948970228AA47E007BF787 /* NMKAnnotationView.h */,
+			);
+			path = NMKAnnotationView;
 			sourceTree = "<group>";
 		};
 		A199AED822884F27003C1DC4 /* NUISlider */ = {
@@ -1572,6 +1601,7 @@
 				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
+				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
@@ -1623,6 +1653,7 @@
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
+				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
@@ -1668,6 +1699,7 @@
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
+				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,

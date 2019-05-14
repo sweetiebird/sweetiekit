@@ -73,11 +73,11 @@ NAN_METHOD(NMKMapView::SetRegion) {
   JS_UNWRAP(MKMapView, ui);
 
   @autoreleasepool {
-    double lat = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("latitude")));
-    double lng = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("longitude")));
-    double latDist = TO_DOUBLE(info[1]);
-    double lngDist = TO_DOUBLE(info[2]);
-    bool animated = TO_BOOL(info[3]);
+    double lat = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("latitude")));
+    double lng = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("longitude")));
+    double latDist = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("latitudinalMeters")));
+    double lngDist = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("longitudinalMeters")));
+    bool animated = TO_BOOL(info[1]);
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
     [ui setRegion:MKCoordinateRegionMakeWithDistance([loc coordinate], latDist, lngDist) animated:animated];
   }
@@ -89,18 +89,18 @@ NAN_METHOD(NMKMapView::AddAnnotation) {
   JS_UNWRAP(MKMapView, ui);
 
   @autoreleasepool {
-    double lat = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("latitude")));
-    double lng = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("longitude")));
-    std::string t;
-    if (info[1]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
-      t = *utf8Value;
-    } else {
-      Nan::ThrowError("invalid argument");
+    double lat = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("latitude")));
+    double lng = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("longitude")));
+    NSString *title = nullptr;
+    NSString *subtitle = nullptr;
+    if (JS_OBJ(info[0])->Get(JS_STR("title"))->IsString()) {
+      title = NJSStringToNSString(JS_OBJ(info[0])->Get(JS_STR("title")));
     }
-    NSString *title = [NSString stringWithUTF8String:t.c_str()];
+    if (JS_OBJ(info[0])->Get(JS_STR("subtitle"))->IsString()) {
+      subtitle = NJSStringToNSString(JS_OBJ(info[0])->Get(JS_STR("subtitle")));
+    }
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-    SMKAnnotation *note = [[SMKAnnotation alloc] initWithCoordinate:[loc coordinate] title:title];
+    SMKAnnotation *note = [[SMKAnnotation alloc] initWithCoordinate:[loc coordinate] title:title about:subtitle];
     [ui addAnnotation:note];
   }
 }
