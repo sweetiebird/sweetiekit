@@ -13,6 +13,7 @@
 #include "NSKNode.h"
 #include "NUIResponder.h"
 #include "NARSession.h"
+#include "NSKPhysicsBody.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKNode::type;
@@ -119,11 +120,7 @@ NAN_GETTER(NSKNode::PhysicsBodyGetter) {
 
   JS_UNWRAP(SKNode, node);
   
-//  Local<Object> result = Object::New(Isolate::GetCurrent());
-//  result->Set(JS_STR("x"), JS_FLOAT([node position].x));
-//  result->Set(JS_STR("y"), JS_FLOAT([node position].y));
-//
-//  JS_SET_RETURN(result);
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node physicsBody], NSKPhysicsBody::type));
 }
 
 NAN_SETTER(NSKNode::PhysicsBodySetter) {
@@ -131,14 +128,9 @@ NAN_SETTER(NSKNode::PhysicsBodySetter) {
 
   JS_UNWRAP(SKNode, node);
   
-//  __block float x = 0;
-//  __block float y = 0;
-//  @autoreleasepool {
-//    x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-//    y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-//  }
-//
-//  [node setPosition:CGPointMake(x, y)];
+  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(Local<Object>::Cast(value));
+
+  [node setPhysicsBody:body->As<SKPhysicsBody>()];
 }
 
 NAN_METHOD(NSKNode::AddChild) {

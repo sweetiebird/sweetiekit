@@ -28,7 +28,15 @@ const SCNLightType = {
   spot: 'spot',
 };
 
+const SKSceneScaleMode = {
+  fill: 'fill',
+  aspectFill: 'aspectFill',
+  aspectFit: 'aspectFit',
+  resizeFill: 'resizeFill',
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;
+module.exports.SKSceneScaleMode = SKSceneScaleMode;

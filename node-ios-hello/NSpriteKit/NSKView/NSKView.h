@@ -26,6 +26,7 @@ public:
   virtual ~NSKView();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(presentScene);
 };
 
 #endif /* NSKView_h */

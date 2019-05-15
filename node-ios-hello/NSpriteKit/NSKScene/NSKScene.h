@@ -26,6 +26,10 @@ public:
   virtual ~NSKScene();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(sceneWithSize);
+  
+  JS_PROP(backgroundColor);
+  JS_PROP(scaleMode);
 };
 
 #endif /* NSKScene_h */

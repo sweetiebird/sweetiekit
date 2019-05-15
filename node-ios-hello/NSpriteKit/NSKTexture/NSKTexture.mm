@@ -60,9 +60,7 @@ NAN_METHOD(NSKTexture::New) {
     }
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        tx->SetNSObject([[SKTexture alloc] init]);
-      });
+      tx->SetNSObject([[SKTexture alloc] init]);
     }
   }
 

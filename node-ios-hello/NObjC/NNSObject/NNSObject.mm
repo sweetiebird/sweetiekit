@@ -381,6 +381,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NARWorldTrackingConfiguration.h"
 #include "NSKView.h"
 #include "NSKNode.h"
+#include "NSKPhysicsBody.h"
 #include "NSKLabelNode.h"
 #include "NARSKViewDelegate.h"
 #include "NNSBundle.h"
@@ -487,6 +488,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKPhysicsBody class]]) {
+        return NSKPhysicsBody::type;
+      }
       if ([obj isKindOfClass:[SKSpriteNode class]]) {
         return NSKSpriteNode::type;
       }

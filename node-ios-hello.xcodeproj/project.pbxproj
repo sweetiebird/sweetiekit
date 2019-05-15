@@ -560,8 +560,8 @@
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
 			isa = PBXGroup;
 			children = (
-				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
 				A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */,
+				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
 			);
 			path = NSKPhysicsBody;
 			sourceTree = "<group>";

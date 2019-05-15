@@ -7,6 +7,7 @@ const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
 const makeMapView = require('./examples/MKMapView');
+const makeSKScene = require('./examples/SKScene');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
@@ -34,6 +35,7 @@ const {
 
 const demoTypes = {
   MKMapView: makeMapView,
+  SKScene: makeSKScene,
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,

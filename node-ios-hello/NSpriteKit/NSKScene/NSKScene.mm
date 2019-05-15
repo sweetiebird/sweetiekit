@@ -29,9 +29,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP(proto, backgroundColor);
+  JS_ASSIGN_PROP(proto, scaleMode);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "sceneWithSize", sceneWithSize);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -45,7 +48,7 @@ NAN_METHOD(NSKScene::New) {
 
   if (info[0]->IsExternal()) {
     scene->SetNSObject((__bridge SKScene *)(info[0].As<External>()->Value()));
-  } else {
+  } else if (info.Length() > 0) {
     std::string file;
     if (info[0]->IsString()) {
       Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
@@ -55,9 +58,11 @@ NAN_METHOD(NSKScene::New) {
     }
     @autoreleasepool {
       NSString *fileName = [NSString stringWithUTF8String:file.c_str()];
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        scene->SetNSObject([SKScene nodeWithFileNamed:fileName]);
-      });
+      scene->SetNSObject([SKScene nodeWithFileNamed:fileName]);
+    }
+  } else {
+    @autoreleasepool {
+      scene->SetNSObject([[SKScene alloc] init]);
     }
   }
   scene->Wrap(obj);
@@ -67,3 +72,88 @@ NAN_METHOD(NSKScene::New) {
 
 NSKScene::NSKScene () {}
 NSKScene::~NSKScene () {}
+
+NAN_METHOD(NSKScene::sceneWithSize) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKScene)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(obj);
+
+  @autoreleasepool {
+    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    scene->SetNSObject([SKScene sceneWithSize:CGSizeMake(w, h)]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+NAN_GETTER(NSKScene::backgroundColorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKScene, scene);
+  
+  __block double r = 0;
+  __block double g = 0;
+  __block double b = 0;
+  __block double a = 0;
+  @autoreleasepool {
+    [[scene backgroundColor] getRed:&r green:&g blue:&b alpha:&a];
+  }
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_FLOAT(r));
+  result->Set(JS_STR("green"), JS_FLOAT(g));
+  result->Set(JS_STR("blue"), JS_FLOAT(b));
+  result->Set(JS_STR("alpha"), JS_FLOAT(a));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NSKScene::backgroundColorSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKScene, scene);
+
+  double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double g = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double b = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+
+  [scene setBackgroundColor:[[UIColor alloc] initWithRed:r green:g blue:b alpha:1]];
+}
+
+NAN_GETTER(NSKScene::scaleModeGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKScene::scaleModeGetter not yet implemented");
+}
+
+NAN_SETTER(NSKScene::scaleModeSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKScene, scene);
+
+  std::string mode;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    mode = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  NSString *str = [NSString stringWithUTF8String:mode.c_str()];
+  SKSceneScaleMode scaleMode = SKSceneScaleModeFill;
+
+  if ([str isEqualToString:@"aspectFill"]) {
+    scaleMode = SKSceneScaleModeAspectFill;
+  } else if ([str isEqualToString:@"aspectFit"]) {
+    scaleMode = SKSceneScaleModeAspectFit;
+  } else if ([str isEqualToString:@"resizeFill"]) {
+    scaleMode = SKSceneScaleModeResizeFill;
+  }
+  
+  [scene setScaleMode:scaleMode];
+}

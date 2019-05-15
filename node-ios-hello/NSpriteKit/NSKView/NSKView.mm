@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NSKView.h"
 #include "NUIView.h"
+#include "NSKScene.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKView::type;
@@ -28,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKView::Initialize(Isolate *i
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetMethod(proto, "presentScene", presentScene);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -66,3 +68,13 @@ NAN_METHOD(NSKView::New) {
 
 NSKView::NSKView () {}
 NSKView::~NSKView () {}
+
+NAN_METHOD(NSKView::presentScene) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKView, ui);
+  
+  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(Local<Object>::Cast(info[0]));
+  
+  [ui presentScene:scene->As<SKScene>()];
+}

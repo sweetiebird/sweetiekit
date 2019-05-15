@@ -71,6 +71,7 @@
 #include "NSCNLight.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
+#include "NSKPhysicsBody.h"
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
@@ -437,11 +438,13 @@ void InitExports(Local<Object> exports) {
         exports->Set(Nan::New("CABasicAnimation").ToLocalChecked(), N_CABasicAnimation.first);
   
         // SpriteKit
-  
 
         auto N_SKView = NSKView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKView").ToLocalChecked(), N_SKView.first);
   
+        auto N_SKPhysicsBody = NSKPhysicsBody::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKPhysicsBody").ToLocalChecked(), N_SKPhysicsBody.first);
+
         auto N_SKNode = NSKNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKNode").ToLocalChecked(), N_SKNode.first);
   
@@ -450,6 +453,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_SKLabelNode = NSKLabelNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKLabelNode").ToLocalChecked(), N_SKLabelNode.first);
+  
+        auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
 
         // ARKit
   
@@ -499,11 +505,6 @@ void InitExports(Local<Object> exports) {
 
         auto N_SCNLight = NSCNLight::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SCNLight").ToLocalChecked(), N_SCNLight.first);
-
-        // SpriteKit
-
-        auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
-        exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
 
         // MapKit
   

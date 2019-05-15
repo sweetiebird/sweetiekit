@@ -26,6 +26,8 @@ public:
   virtual ~NSKPhysicsBody();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(bodyWithCircleOfRadius);
+  static NAN_METHOD(bodyWithTexture);
 };
 
 #endif /* NSKPhysicsBody_h */
