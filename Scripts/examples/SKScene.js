@@ -6,6 +6,7 @@ const {
   SKNode,
   SKPhysicsBody,
   SKScene,
+  SKSpriteNode,
 } = SweetieKit;
 
 async function make(demoVC) {
@@ -17,8 +18,14 @@ async function make(demoVC) {
   scene.scaleMode = SKSceneScaleMode.resizeFill;
   const frame = { x: 0, y:0, width: w, height: h };
   const view = new SKView(frame);
+  const sprite = new SKSpriteNode('laarc');
+  const body = SKPhysicsBody.bodyWithCircleOfRadius(sprite.size.width / 2);
+  sprite.physicsBody = body;
+  sprite.affectedByGravity = true;
   setTimeout(() => {
     view.presentScene(scene);
+    scene.addChild(sprite);
+    sprite.position = { x: w / 2, y: h / 2 };
   }, 2000);
   return view;
 }

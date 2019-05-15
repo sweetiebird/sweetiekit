@@ -80,7 +80,21 @@ NSKSpriteNode::~NSKSpriteNode () {}
 NAN_GETTER(NSKSpriteNode::SizeGetter) {
   Nan::HandleScope scope;
 
-  Nan::ThrowError("NSKSpriteNode::SizeGetter not implemented");
+  JS_UNWRAP(SKSpriteNode, node);
+
+  __block double w = 0;
+  __block double h = 0;
+  @autoreleasepool {
+    CGSize size = [node size];
+    w = size.width;
+    h = size.height;
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("width"), JS_NUM(w));
+  result->Set(JS_STR("height"), JS_NUM(h));
+
+  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NSKSpriteNode::SizeSetter) {
