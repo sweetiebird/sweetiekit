@@ -14,6 +14,7 @@
 #include "NUIResponder.h"
 #include "NARSession.h"
 #include "NSKPhysicsBody.h"
+#include "NSKAction.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKNode::type;
@@ -36,6 +37,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   JS_SET_PROP(proto, "zRotation", ZRotation);
   Nan::SetMethod(proto, "addChild", AddChild);
   Nan::SetMethod(proto, "removeFromParent", RemoveFromParent);
+  Nan::SetMethod(proto, "runAction", runAction);
   
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -149,4 +151,14 @@ NAN_METHOD(NSKNode::RemoveFromParent) {
   JS_UNWRAP(SKNode, node);
 
   [node removeFromParent];
+}
+
+NAN_METHOD(NSKNode::runAction) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKNode, node);
+  
+  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(Local<Object>::Cast(info[0]));
+
+  [node runAction:action->As<SKAction>()];
 }

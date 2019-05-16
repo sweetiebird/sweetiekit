@@ -28,6 +28,12 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(bodyWithCircleOfRadius);
   static NAN_METHOD(bodyWithTexture);
+  static NAN_METHOD(bodyWithRectangleOfSize);
+  
+  JS_PROP(node);
+  JS_PROP(categoryBitMask);
+  JS_PROP(contactTestBitMask);
+  JS_PROP(collisionBitMask);
 };
 
 #endif /* NSKPhysicsBody_h */

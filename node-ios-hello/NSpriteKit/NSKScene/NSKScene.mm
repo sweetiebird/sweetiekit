@@ -12,6 +12,7 @@
 #include "NSKNode.h"
 #include "NSKScene.h"
 #include "NARSession.h"
+#include "NSKPhysicsWorld.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKScene::type;
@@ -31,6 +32,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, backgroundColor);
   JS_ASSIGN_PROP(proto, scaleMode);
+  JS_ASSIGN_PROP(proto, touchesEnded);
+  JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -47,7 +50,7 @@ NAN_METHOD(NSKScene::New) {
   NSKScene *scene = new NSKScene();
 
   if (info[0]->IsExternal()) {
-    scene->SetNSObject((__bridge SKScene *)(info[0].As<External>()->Value()));
+    scene->SetNSObject((__bridge SSKScene *)(info[0].As<External>()->Value()));
   } else if (info.Length() > 0) {
     std::string file;
     if (info[0]->IsString()) {
@@ -58,11 +61,11 @@ NAN_METHOD(NSKScene::New) {
     }
     @autoreleasepool {
       NSString *fileName = [NSString stringWithUTF8String:file.c_str()];
-      scene->SetNSObject([SKScene nodeWithFileNamed:fileName]);
+      scene->SetNSObject([SSKScene nodeWithFileNamed:fileName]);
     }
   } else {
     @autoreleasepool {
-      scene->SetNSObject([[SKScene alloc] init]);
+      scene->SetNSObject([[SSKScene alloc] init]);
     }
   }
   scene->Wrap(obj);
@@ -85,7 +88,7 @@ NAN_METHOD(NSKScene::sceneWithSize) {
   @autoreleasepool {
     double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
     double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    scene->SetNSObject([SKScene sceneWithSize:CGSizeMake(w, h)]);
+    scene->SetNSObject([SSKScene sceneWithSize:CGSizeMake(w, h)]);
   }
 
   JS_SET_RETURN(obj);
@@ -94,7 +97,8 @@ NAN_METHOD(NSKScene::sceneWithSize) {
 NAN_GETTER(NSKScene::backgroundColorGetter) {
   Nan::HandleScope scope;
   
-  JS_UNWRAP(SKScene, scene);
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
   
   __block double r = 0;
   __block double g = 0;
@@ -116,7 +120,8 @@ NAN_GETTER(NSKScene::backgroundColorGetter) {
 NAN_SETTER(NSKScene::backgroundColorSetter) {
   Nan::HandleScope scope;
   
-  JS_UNWRAP(SKScene, scene);
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
 
   double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
   double g = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
@@ -134,7 +139,8 @@ NAN_GETTER(NSKScene::scaleModeGetter) {
 NAN_SETTER(NSKScene::scaleModeSetter) {
   Nan::HandleScope scope;
   
-  JS_UNWRAP(SKScene, scene);
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
 
   std::string mode;
   if (value->IsString()) {
@@ -156,4 +162,44 @@ NAN_SETTER(NSKScene::scaleModeSetter) {
   }
   
   [scene setScaleMode:scaleMode];
+}
+
+NAN_GETTER(NSKScene::touchesEndedGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKScene::touchesEndedGetter not yet implemented");
+}
+
+NAN_SETTER(NSKScene::touchesEndedSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+
+  wrap->_touchesEnded.Reset(Local<Function>::Cast(value));
+  
+  [scene setTouchesEnded: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
+    Nan::HandleScope scope;
+
+    __block NSInteger count = 0;
+    auto arr = Nan::New<Array>();
+    
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      Nan::Set(arr, static_cast<uint32_t>(count), value);
+      count++;
+    }];
+
+    wrap->_touchesEnded("NSKScene::touchesEndedSetter", arr, Nan::Null());
+  }];
+}
+
+NAN_GETTER(NSKScene::physicsWorldGetter) {
+  Nan::HandleScope scope;
+  
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([scene physicsWorld], NSKPhysicsWorld::type));
 }

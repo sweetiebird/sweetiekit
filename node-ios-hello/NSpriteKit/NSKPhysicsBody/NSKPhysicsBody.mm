@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NNSObject.h"
 #include "NSKPhysicsBody.h"
+#include "NSKNode.h"
 #include "NSKTexture.h"
 
 Nan::Persistent<FunctionTemplate> NSKPhysicsBody::type;
@@ -28,11 +29,16 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Iso
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP(proto, node);
+  JS_ASSIGN_PROP(proto, categoryBitMask);
+  JS_ASSIGN_PROP(proto, contactTestBitMask);
+  JS_ASSIGN_PROP(proto, collisionBitMask);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
   Nan::SetMethod(ctorFn, "bodyWithCircleOfRadius", bodyWithCircleOfRadius);
   Nan::SetMethod(ctorFn, "bodyWithTexture", bodyWithTexture);
+  Nan::SetMethod(ctorFn, "bodyWithRectangleOfSize", bodyWithRectangleOfSize);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -103,4 +109,97 @@ NAN_METHOD(NSKPhysicsBody::bodyWithTexture) {
   }
 
   JS_SET_RETURN(obj);
+}
+
+NAN_METHOD(NSKPhysicsBody::bodyWithRectangleOfSize) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
+
+  @autoreleasepool {
+    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    CGSize size = CGSizeMake(w, h);
+    body->SetNSObject([SKPhysicsBody bodyWithRectangleOfSize:size]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+NAN_GETTER(NSKPhysicsBody::nodeGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([body node], NSKNode::type));
+}
+
+NAN_SETTER(NSKPhysicsBody::nodeSetter) {
+  Nan::EscapableHandleScope scope;
+
+  Nan::ThrowError("NSKPhysicsBody::nodeSetter not yet implemented");
+}
+
+NAN_GETTER(NSKPhysicsBody::categoryBitMaskGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  NSInteger mask = [body categoryBitMask];
+
+  JS_SET_RETURN(JS_NUM(mask));
+}
+
+NAN_SETTER(NSKPhysicsBody::categoryBitMaskSetter) {
+  Nan::EscapableHandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  uint32_t mask = TO_INT32(value);
+
+  [body setCategoryBitMask:mask];
+}
+
+NAN_GETTER(NSKPhysicsBody::contactTestBitMaskGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  NSInteger mask = [body contactTestBitMask];
+
+  JS_SET_RETURN(JS_NUM(mask));
+}
+
+NAN_SETTER(NSKPhysicsBody::contactTestBitMaskSetter) {
+  Nan::EscapableHandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  uint32_t mask = TO_INT32(value);
+
+  [body setContactTestBitMask:mask];
+}
+
+NAN_GETTER(NSKPhysicsBody::collisionBitMaskGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+  
+  NSInteger mask = [body collisionBitMask];
+
+  JS_SET_RETURN(JS_NUM(mask));
+}
+
+NAN_SETTER(NSKPhysicsBody::collisionBitMaskSetter) {
+  Nan::EscapableHandleScope scope;
+  
+  JS_UNWRAP(SKPhysicsBody, body);
+
+  uint32_t mask = TO_INT32(value);
+
+  [body setCollisionBitMask:mask];
 }

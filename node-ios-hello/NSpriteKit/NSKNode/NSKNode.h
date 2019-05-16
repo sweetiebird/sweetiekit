@@ -29,6 +29,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(AddChild);
   static NAN_METHOD(RemoveFromParent);
+  static NAN_METHOD(runAction);
   JS_PROP(PhysicsBody);
   JS_PROP(Position);
   JS_PROP(ZRotation);

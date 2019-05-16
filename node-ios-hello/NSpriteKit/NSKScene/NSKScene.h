@@ -30,6 +30,10 @@ public:
   
   JS_PROP(backgroundColor);
   JS_PROP(scaleMode);
+  JS_PROP(touchesEnded);
+  JS_PROP(physicsWorld);
+
+  sweetiekit::JSFunction _touchesEnded;
 };
 
 #endif /* NSKScene_h */

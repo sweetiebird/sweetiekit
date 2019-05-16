@@ -375,6 +375,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
+#include "NUITouch.h"
 #include "NUIBarButtonItem.h"
 #include "NARSKView.h"
 #include "NARSession.h"
@@ -382,7 +383,12 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSKView.h"
 #include "NSKNode.h"
 #include "NSKPhysicsBody.h"
+#include "NSKPhysicsWorld.h"
+#include "NSKPhysicsContactDelegate.h"
+#include "NSKPhysicsContact.h"
+#include "NSKPhysicsWorld.h"
 #include "NSKLabelNode.h"
+#include "NSKAction.h"
 #include "NARSKViewDelegate.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
@@ -488,6 +494,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKPhysicsWorld class]]) {
+        return NSKPhysicsWorld::type;
+      }
+      if ([obj isKindOfClass:[SKPhysicsContact class]]) {
+        return NSKPhysicsContact::type;
+      }
+      if ([obj isKindOfClass:[SSKPhysicsContactDelegate class]]) {
+        return NSKPhysicsContactDelegate::type;
+      }
+      if ([obj isKindOfClass:[SKPhysicsWorld class]]) {
+        return NSKPhysicsWorld::type;
+      }
       if ([obj isKindOfClass:[SKPhysicsBody class]]) {
         return NSKPhysicsBody::type;
       }
@@ -506,6 +524,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[SKView class]]) {
         return NSKView::type;
       }
+      if ([obj isKindOfClass:[SKAction class]]) {
+        return NSKAction::type;
+      }
 
       // UIKit
       
@@ -514,6 +535,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[UIWindow class]]) {
         return NUIWindow::type;
+      }
+      if ([obj isKindOfClass:[UITouch class]]) {
+        return NUITouch::type;
       }
       // ========= views
       if ([obj isKindOfClass:[UISlider class]]) {

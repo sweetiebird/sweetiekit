@@ -36,6 +36,7 @@
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
+#include "NUITouch.h"
 #include "NUICollectionView.h"
 #include "NUICollectionViewController.h"
 #include "NUIAlertController.h"
@@ -72,6 +73,11 @@
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NSKPhysicsBody.h"
+#include "NSKPhysicsWorld.h"
+#include "NSKPhysicsContactDelegate.h"
+#include "NSKPhysicsContact.h"
+#include "NSKPhysicsWorld.h"
+#include "NSKAction.h"
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
@@ -418,6 +424,9 @@ void InitExports(Local<Object> exports) {
         auto N_UINib = NUINib::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UINib").ToLocalChecked(), N_UINib.first);
 
+        auto N_UITouch = NUITouch::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITouch").ToLocalChecked(), N_UITouch.first);
+
         // UIKit delegates ========
   
         auto N_UIImagePickerControllerDelegate = NUIImagePickerControllerDelegate::Initialize(Isolate::GetCurrent());
@@ -439,6 +448,9 @@ void InitExports(Local<Object> exports) {
   
         // SpriteKit
 
+        auto N_SKPhysicsContact = NSKPhysicsContact::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKPhysicsContact").ToLocalChecked(), N_SKPhysicsContact.first);
+
         auto N_SKView = NSKView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKView").ToLocalChecked(), N_SKView.first);
   
@@ -456,6 +468,15 @@ void InitExports(Local<Object> exports) {
   
         auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
+  
+        auto N_SKAction = NSKAction::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKAction").ToLocalChecked(), N_SKAction.first);
+
+        auto N_SKPhysicsWorld = NSKPhysicsWorld::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKPhysicsWorld").ToLocalChecked(), N_SKPhysicsWorld.first);
+  
+        auto N_SKPhysicsContactDelegate = NSKPhysicsContactDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKPhysicsContactDelegate").ToLocalChecked(), N_SKPhysicsContactDelegate.first);
 
         // ARKit
   

@@ -103,12 +103,10 @@ NAN_SETTER(NSKSpriteNode::SizeSetter) {
   JS_UNWRAP(SKSpriteNode, node);
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-      double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-      CGSize size = CGSizeMake(width, height);
-      [node setSize:size];
-    });
+    double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+    CGSize size = CGSizeMake(width, height);
+    [node setSize:size];
   }
 }
 
