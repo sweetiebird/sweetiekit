@@ -27,6 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionReusableView::Ini
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP_READONLY(proto, reuseIdentifier);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -55,3 +56,16 @@ NAN_METHOD(NUICollectionReusableView::New) {
 
 NUICollectionReusableView::NUICollectionReusableView () {}
 NUICollectionReusableView::~NUICollectionReusableView () {}
+
+NAN_GETTER(NUICollectionReusableView::reuseIdentifierGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UICollectionReusableView, ui);
+  
+  @autoreleasepool {
+    NSString* reuseIdentifier = [ui reuseIdentifier];
+    if (reuseIdentifier != nullptr) {
+      JS_SET_RETURN(JS_STR([reuseIdentifier UTF8String]));
+    }
+  }
+}

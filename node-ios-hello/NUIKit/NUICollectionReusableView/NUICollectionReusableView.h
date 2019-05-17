@@ -26,6 +26,7 @@ public:
   virtual ~NUICollectionReusableView();
 
   static NAN_METHOD(New);
+  JS_PROP(reuseIdentifier);
 };
 
 #endif /* NUICollectionReusableView_h */
