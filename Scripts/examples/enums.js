@@ -43,6 +43,14 @@ const NSTextAlignment = {
   natural: 'natural',
 };
 
+const UIControlState = {
+  normal: 0,
+  highlighted: 1 << 0,
+  disabled: 1 << 1,
+  selected: 1 << 2,
+  focused: 1 << 3,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -51,3 +59,4 @@ module.exports.SKSceneScaleMode = SKSceneScaleMode;
 module.exports.NSTextAlignment = NSTextAlignment;
 module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
 module.exports.NSForegroundColorAttributeName = 'NSColor';
+module.exports.UIControlState = UIControlState;

@@ -13,9 +13,11 @@
 
 JS_WRAP_CLASS(UIButton, UIControl);
   static NAN_METHOD(Alloc);
-  static NAN_METHOD(setTitleColor);
+  static NAN_METHOD(setTitleColorForState);
+  static NAN_METHOD(setTitleForState);
   JS_PROP(Title);
   JS_PROP(Callback);
+  JS_PROP(titleLabel);
   Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UIButton);
 

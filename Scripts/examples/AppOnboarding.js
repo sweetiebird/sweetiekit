@@ -4,6 +4,7 @@ const {
   NSTextAlignment,
   NSParagraphStyleAttributeName,
   NSForegroundColorAttributeName,
+  UIControlState,
 }= require('./enums');
 
 const {
@@ -123,7 +124,7 @@ async function make(nav, demoVC) {
     };
   }
 
-  const pageControl = new UIPageControl({ x: 12, y: h - 200, width: w - 24, height: 60 });
+  const pageControl = new UIPageControl({ x: 12, y: viewH - 200, width: w - 24, height: 60 });
   pageControl.numberOfPages = numSlides;
   pageControl.currentPage = 0;
   pageControl.currentPageIndicatorTintColor = colors.fitbodPink;
@@ -146,8 +147,10 @@ async function make(nav, demoVC) {
     height: 50,
   });
   nextBtn.title = 'GET STARTED';
-  nextBtn.layer.cornerRadius = 12;
+  nextBtn.layer.cornerRadius = 25;
   nextBtn.backgroundColor = colors.fitbodPink;
+  nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
+  nextBtn.titleLabel.font = UIFont.boldSystemFont(17);
 
   demoVC.view.addSubview(pageControl);
   demoVC.view.addSubview(nextBtn);

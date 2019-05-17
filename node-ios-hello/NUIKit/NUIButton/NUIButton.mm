@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NUIButton.h"
 #include "NUIControl.h"
+#include "NUILabel.h"
 
 Nan::Persistent<FunctionTemplate> NUIButton::type;
 
@@ -28,7 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "title", Title);
   JS_SET_PROP(proto, "callback", Callback);
-  Nan::SetMethod(proto, "setTitleColor", setTitleColor);
+  JS_ASSIGN_PROP_READONLY(proto, titleLabel);
+  Nan::SetMethod(proto, "setTitleColorForState", setTitleColorForState);
+  Nan::SetMethod(proto, "setTitleForState", setTitleForState);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -162,7 +165,6 @@ NAN_GETTER(NUIButton::TitleGetter) {
     auto result = JS_STR([str UTF8String]);
     JS_SET_RETURN(result);
   }
-  
 }
 
 NAN_SETTER(NUIButton::TitleSetter) {
@@ -209,26 +211,40 @@ NAN_SETTER(NUIButton::CallbackSetter) {
   }
 }
 
-NAN_METHOD(NUIButton::setTitleColor) {
+NAN_METHOD(NUIButton::setTitleColorForState) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(UIButton, ui);
   
   @autoreleasepool {
-    NSString* string = NJSStringToNSString(info[0]);
-
-    UIControlState state = UIControlStateNormal;
-
-    if ([string isEqualToString:@"normal"]) {
-      state = UIControlStateNormal;
-    } else {
-      Nan::ThrowError("No valid light type specified");
-      return;
-    }
     double r = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("red")));
     double g = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("green")));
     double b = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("blue")));
     double a = JS_HAS(JS_OBJ(info[0]), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("alpha"))) : 1.0;
+
+    UIControlState state = UIControlState(TO_UINT32(info[1]));
+
     [ui setTitleColor:[[UIColor alloc] initWithRed:r green:g blue:b alpha:a] forState:state];
   }
+}
+
+NAN_METHOD(NUIButton::setTitleForState) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  @autoreleasepool {
+    NSString *title = NJSStringToNSString(info[9]);
+    UIControlState state = UIControlState(TO_UINT32(info[1]));
+
+    [ui setTitle:title forState:state];
+  }
+}
+
+NAN_GETTER(NUIButton::titleLabelGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIButton, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui titleLabel], NUILabel::type));
 }
