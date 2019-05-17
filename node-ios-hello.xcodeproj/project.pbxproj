@@ -27,6 +27,7 @@
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
+		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
@@ -219,6 +220,8 @@
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
+		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
+		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
@@ -583,6 +586,15 @@
 				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
 			);
 			path = NSKPhysicsBody;
+			sourceTree = "<group>";
+		};
+		A11029D3228E4C9C0078FAC0 /* NSKCameraNode */ = {
+			isa = PBXGroup;
+			children = (
+				A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */,
+				A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */,
+			);
+			path = NSKCameraNode;
 			sourceTree = "<group>";
 		};
 		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
@@ -1229,6 +1241,7 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				A11029D3228E4C9C0078FAC0 /* NSKCameraNode */,
 				A1B65496228CE80D00976024 /* NSKPhysicsContact */,
 				A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */,
 				A1B6548C228CE34D00976024 /* NSKPhysicsWorld */,
@@ -1787,6 +1800,7 @@
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
+				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
