@@ -509,6 +509,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[SKPhysicsContact class]]) {
         return NSKPhysicsContact::type;
       }
+      if ([NSStringFromClass([obj class]) isEqual: @"PKPhysicsContact"]) {
+        return NSKPhysicsContact::type;
+      }
       if ([obj isKindOfClass:[SSKPhysicsContactDelegate class]]) {
         return NSKPhysicsContactDelegate::type;
       }
