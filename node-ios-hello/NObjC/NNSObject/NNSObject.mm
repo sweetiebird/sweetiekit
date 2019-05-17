@@ -384,6 +384,8 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
+#include "NUIPickerView.h"
+#include "NUIPickerViewManager.h"
 #include "NUICollectionReusableView.h"
 #include "NUICollectionView.h"
 #include "NUICollectionViewController.h"
@@ -588,6 +590,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UIPickerView class]]) {
+        return NUIPickerView::type;
+      }
       if ([obj isKindOfClass:[UINavigationBar class]]) {
         return NUINavigationBar::type;
       }
@@ -677,6 +682,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SUIPickerViewManager class]]) {
+        return NUIPickerViewManager::type;
+      }
       if ([obj isKindOfClass:[SUIScrollViewDelegate class]]) {
         return NUIScrollViewDelegate::type;
       }

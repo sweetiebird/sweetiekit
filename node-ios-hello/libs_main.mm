@@ -58,6 +58,8 @@
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
+#include "NUIPickerView.h"
+#include "NUIPickerViewManager.h"
 #include "NUIBarButtonItem.h"
 #include "NSKView.h"
 #include "NARSKView.h"
@@ -460,9 +462,15 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIPageControl = NUIPageControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPageControl").ToLocalChecked(), N_UIPageControl.first);
+  
+        auto N_UIPickerView = NUIPickerView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPickerView").ToLocalChecked(), N_UIPickerView.first);
 
         // UIKit delegates ========
   
+        auto N_UIPickerViewManager = NUIPickerViewManager::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPickerViewManager").ToLocalChecked(), N_UIPickerViewManager.first);
+
         auto N_UIScrollViewDelegate = NUIScrollViewDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIScrollViewDelegate").ToLocalChecked(), N_UIScrollViewDelegate.first);
 

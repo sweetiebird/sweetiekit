@@ -65,7 +65,7 @@ function makeBgView(demoVC) {
   const imgView = new UIImageView(img);
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
-  imgView.alpha = 0.35;
+  imgView.alpha = 0.2;
   return imgView;
 }
 
