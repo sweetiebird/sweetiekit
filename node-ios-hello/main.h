@@ -54,9 +54,5 @@ typedef struct foo_s {
 
 @end
 
-@interface JSUtil : NSObject
-+ (double)hrtimeToSeconds:(double)hrtime;
-@end
-
 
 #endif /* main_h */

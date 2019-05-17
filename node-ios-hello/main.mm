@@ -10,6 +10,180 @@
 #include "main.h"
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
+#import <objc/runtime.h>
+
+void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
+{
+  Method originalMethod = class_getInstanceMethod(class_, originalSelector);
+  Method swizzledMethod = class_getInstanceMethod(class_, swizzledSelector);
+
+  // When swizzling a class method, use the following:
+  // Class class = object_getClass((id)self);
+  // ...
+  // Method originalMethod = class_getClassMethod(class, originalSelector);
+  // Method swizzledMethod = class_getClassMethod(class, swizzledSelector);
+
+  BOOL didAddMethod =
+      class_addMethod(class_,
+          originalSelector,
+          method_getImplementation(swizzledMethod),
+          method_getTypeEncoding(swizzledMethod));
+
+  if (didAddMethod) {
+      class_replaceMethod(class_,
+          swizzledSelector,
+          method_getImplementation(originalMethod),
+          method_getTypeEncoding(originalMethod));
+  } else {
+      method_exchangeImplementations(originalMethod, swizzledMethod);
+  }
+}
+@implementation UIView (Sweetiekit_Hooks)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class_ = [self class];
+        xxx_swizzle(class_,
+          @selector(drawRect:),
+          @selector(xxx_drawRect:));
+    });
+}
+
+#pragma mark - Method Swizzling
+
+- (void)xxx_drawRect:(CGRect)rect {
+  [self xxx_drawRect:rect];
+  //NSLog(@"drawRect: %@ %@", self, rect);
+  id fn = [self associatedValueForKey:@"sweetiekit_drawRect"];
+  if (fn != nullptr) {
+    Nan::HandleScope scope;
+    SweetJSFunction* func = (SweetJSFunction*)fn;
+        
+    Local<Object> result = Object::New(Isolate::GetCurrent());
+  #if 1
+    Local<Object> origin = result;
+    Local<Object> size = result;
+  #else
+    Local<Object> origin = Object::New(Isolate::GetCurrent());
+    Local<Object> size = Object::New(Isolate::GetCurrent());
+    result->Set(JS_STR("origin"), JS_OBJ(origin));
+    result->Set(JS_STR("size"), JS_OBJ(size));
+  #endif
+    double width = rect.size.width;
+    double height = rect.size.height;
+    double x = rect.origin.x;
+    double y = rect.origin.y;
+    origin->Set(JS_STR("x"), JS_NUM(x));
+    origin->Set(JS_STR("y"), JS_NUM(y));
+    size->Set(JS_STR("width"), JS_NUM(width));
+    size->Set(JS_STR("height"), JS_NUM(height));
+    [func jsFunction]->Call("UIView::drawRect", result);
+  }
+}
+@end
+
+@implementation UIViewController (Sweetiekit_Hooks)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class_ = [self class];
+        xxx_swizzle(class_,
+          @selector(viewWillAppear:),
+          @selector(xxx_viewWillAppear:));
+        xxx_swizzle(class_,
+          @selector(viewDidAppear:),
+          @selector(xxx_viewDidAppear:));
+        xxx_swizzle(class_,
+          @selector(viewWillDisappear:),
+          @selector(xxx_viewWillDisappear:));
+        xxx_swizzle(class_,
+          @selector(viewDidDisappear:),
+          @selector(xxx_viewDidDisappear:));
+    });
+}
+
+#pragma mark - Method Swizzling
+
+- (void)xxx_viewWillAppear:(BOOL)animated {
+    [self xxx_viewWillAppear:animated];
+    //NSLog(@"viewWillAppear: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewWillAppear"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewWillAppear", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewWillAppear"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewWillAppear", JS_BOOL(animated));
+      }
+    });
+}
+
+- (void)xxx_viewDidAppear:(BOOL)animated {
+    [self xxx_viewDidAppear:animated];
+    //NSLog(@"viewDidAppear: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewDidAppear"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewDidAppear", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewDidAppear"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewDidAppear", JS_BOOL(animated));
+      }
+    });
+}
+
+- (void)xxx_viewWillDisappear:(BOOL)animated {
+    [self xxx_viewWillDisappear:animated];
+    //NSLog(@"viewWillDisappear: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewWillDisappear"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewWillDisappear", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewWillDisappear"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewWillDisappear", JS_BOOL(animated));
+      }
+    });
+}
+
+- (void)xxx_viewDidDisappear:(BOOL)animated {
+    [self xxx_viewWillDisappear:animated];
+    //NSLog(@"viewDidDisappear: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewDidDisappear"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewDidDisappear", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewDidDisappear"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewDidDisappear", JS_BOOL(animated));
+      }
+    });
+}
+
+@end
+
 
 @implementation JSApplication
 

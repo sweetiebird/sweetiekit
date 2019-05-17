@@ -40,6 +40,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
   JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
   JS_SET_PROP(proto, "tabBarItem", TabBarItem);
+  JS_ASSIGN_PROP(proto, viewDidAppear);
+  JS_ASSIGN_PROP(proto, viewWillAppear);
+  JS_ASSIGN_PROP(proto, viewDidDisappear);
+  JS_ASSIGN_PROP(proto, viewWillDisappear);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -246,4 +250,112 @@ NAN_GETTER(NUIViewController::TabBarItemGetter) {
   JS_UNWRAP(UIViewController, ui);
   
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui tabBarItem], NUITabBarItem::type));
+}
+
+NAN_GETTER(NUIViewController::viewDidAppearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidAppear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIViewController::viewDidAppearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewDidAppear"];
+  }
+}
+
+NAN_GETTER(NUIViewController::viewWillAppearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillAppear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIViewController::viewWillAppearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewWillAppear"];
+  }
+}
+
+NAN_GETTER(NUIViewController::viewDidDisappearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidDisappear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIViewController::viewDidDisappearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewDidDisappear"];
+  }
+}
+
+NAN_GETTER(NUIViewController::viewWillDisappearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillDisappear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIViewController::viewWillDisappearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewWillDisappear"];
+  }
 }

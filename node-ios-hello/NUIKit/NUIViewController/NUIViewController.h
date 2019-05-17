@@ -30,6 +30,10 @@ public:
   JS_PROP(ModalPresentationStyle);
   JS_PROP(ToolbarItems);
   JS_PROP(TabBarItem);
+  JS_PROP(viewDidAppear);
+  JS_PROP(viewWillAppear);
+  JS_PROP(viewDidDisappear);
+  JS_PROP(viewWillDisappear);
 };
 
 #endif /* NUIViewController_h */

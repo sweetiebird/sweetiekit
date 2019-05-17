@@ -200,8 +200,9 @@ namespace sweetiekit {
   }
   class JSFunction
   {
-     std::shared_ptr<Nan::Persistent<Function>> cb;
   public:
+     std::shared_ptr<Nan::Persistent<Function>> cb;
+     
      JSFunction()
      {
      }
@@ -224,13 +225,13 @@ namespace sweetiekit {
      }
     
      void Reset(Local<Function> fn) {
-       Nan::HandleScope scope;
-       cb.reset(new Nan::Persistent<Function>(fn));
+       Nan::EscapableHandleScope scope;
+       cb.reset(new Nan::Persistent<Function>(scope.Escape(fn)));
      }
     
      void Reset(Local<Value> fn) {
-       Nan::HandleScope scope;
-       cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
+       Nan::EscapableHandleScope scope;
+       cb.reset(new Nan::Persistent<Function>(scope.Escape(Local<Function>::Cast(fn))));
      }
     
      JSFunction& operator = (Local<Function> fn) {
@@ -330,6 +331,24 @@ namespace sweetiekit {
      }
   };
 }
+
+#ifdef __OBJC__
+@interface SweetJSFunction : NSObject
+{
+#ifdef __cplusplus
+  sweetiekit::JSFunction _jsFunction;
+#else
+  void* _jsFunction;
+#endif
+}
+
+#ifdef __cplusplus
+- (sweetiekit::JSFunction * _Nonnull)jsFunction;
+#else
+- (void * _Nonnull)jsFunction;
+#endif
+@end
+#endif
 
 namespace sweetiekit {
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
@@ -471,6 +490,13 @@ namespace sweetiekit {
       auto properties = adoptSystem<objc_property_t[]>(protocol_copyPropertyList(protocol, &count));
       for (unsigned i = 0; i < count; ++i)
           callback(properties[i]);
+  }
+  
+  inline void forEachView(UIView *view, void(^callback)(UIView* view)) {
+    callback(view);
+    for (UIView* subview : [view subviews]) {
+      forEachView(subview, callback);
+    }
   }
 }
 
