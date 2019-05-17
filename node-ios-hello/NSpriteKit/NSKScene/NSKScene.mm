@@ -13,6 +13,7 @@
 #include "NSKScene.h"
 #include "NARSession.h"
 #include "NSKPhysicsWorld.h"
+#include "NSKCameraNode.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKScene::type;
@@ -35,7 +36,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
+  JS_ASSIGN_PROP(proto, update);
   JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
+  JS_ASSIGN_PROP_READONLY(proto, camera);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -266,4 +269,33 @@ NAN_GETTER(NSKScene::physicsWorldGetter) {
   SSKScene* scene = wrap->As<SSKScene>();
   
   JS_SET_RETURN(sweetiekit::GetWrapperFor([scene physicsWorld], NSKPhysicsWorld::type));
+}
+
+NAN_GETTER(NSKScene::cameraGetter) {
+  Nan::HandleScope scope;
+  
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([scene camera], NSKCameraNode::type));
+}
+
+NAN_GETTER(NSKScene::updateGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKScene::updateGetter not yet implemented");
+}
+
+NAN_SETTER(NSKScene::updateSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+
+  wrap->_update.Reset(Local<Function>::Cast(value));
+  
+  [scene setUpdate: ^ (NSTimeInterval currentTime) {
+    Nan::HandleScope scope;
+    wrap->_update("NSKScene::updateSetter", JS_FLOAT(currentTime));
+  }];
 }

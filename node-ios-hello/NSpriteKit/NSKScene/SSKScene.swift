@@ -12,12 +12,18 @@ import SpriteKit
 typealias SSKScene_TouchesBegan = (Set<UITouch>, UIEvent?) -> Void
 typealias SSKScene_TouchesMoved = (Set<UITouch>, UIEvent?) -> Void
 typealias SSKScene_TouchesEnded = (Set<UITouch>, UIEvent?) -> Void
+typealias SSKScene_Update = (TimeInterval) -> Void
 
 @objc class SSKScene: SKScene {
   var touchesBeganCallback: SSKScene_TouchesBegan?
   var touchesMovedCallback: SSKScene_TouchesMoved?
   var touchesEndedCallback: SSKScene_TouchesEnded?
+  var updateCallback: SSKScene_Update?
   
+  override func update(_ currentTime: TimeInterval) {
+    updateCallback?(currentTime)
+  }
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     touchesBeganCallback?(touches, event)
   }
@@ -32,12 +38,18 @@ typealias SSKScene_TouchesEnded = (Set<UITouch>, UIEvent?) -> Void
 }
 
 @objc extension SSKScene {
+  @objc func setUpdate(_ closure: @escaping SSKScene_Update) {
+    updateCallback = closure
+  }
+
   @objc func setTouchesBegan(_ closure: @escaping SSKScene_TouchesBegan) {
     touchesBeganCallback = closure
   }
+
   @objc func setTouchesMoved(_ closure: @escaping SSKScene_TouchesMoved) {
     touchesMovedCallback = closure
   }
+
   @objc func setTouchesEnded(_ closure: @escaping SSKScene_TouchesEnded) {
     touchesEndedCallback = closure
   }

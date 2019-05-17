@@ -78,6 +78,7 @@
 #include "NSKPhysicsContact.h"
 #include "NSKPhysicsWorld.h"
 #include "NSKAction.h"
+#include "NSKCameraNode.h"
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
@@ -465,7 +466,10 @@ void InitExports(Local<Object> exports) {
   
         auto N_SKLabelNode = NSKLabelNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKLabelNode").ToLocalChecked(), N_SKLabelNode.first);
-  
+
+        auto N_SKCameraNode = NSKCameraNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKCameraNode").ToLocalChecked(), N_SKCameraNode.first);
+
         auto N_SKScene = NSKScene::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKScene").ToLocalChecked(), N_SKScene.first);
   
