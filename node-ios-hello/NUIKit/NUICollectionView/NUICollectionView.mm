@@ -63,14 +63,18 @@ NAN_METHOD(NUICollectionView::New) {
     @autoreleasepool {
       CGRect frame = CGRectMake(x, y, width, height);
       UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-      view->SetNSObject([[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout]);
+      [layout setItemSize:CGSizeMake(width, height)];
+      [layout setEstimatedItemSize:CGSizeMake(width, height)];
+      //For Setting the Spacing between cells
+      layout.minimumInteritemSpacing = 0;
+      //layout.minimumLineSpacing = 0;
+      UICollectionView* collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+      [collectionView registerClass:[UICollectionViewCell self] forCellWithReuseIdentifier:@"sweetiekit.UICollectionViewCell"];
+      view->SetNSObject(collectionView);
     }
   } else {
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[UICollectionView alloc] init]);
-      });
-    }
+    Nan::ThrowError("Specify a frame for UICollectionView");
+    return;
   }
   view->Wrap(obj);
 

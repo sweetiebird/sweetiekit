@@ -55,11 +55,27 @@ NAN_METHOD(NUICollectionViewCell::New) {
 
     @autoreleasepool {
       CGRect frame = CGRectMake(x, y, width, height);
-      view->SetNSObject([[UICollectionViewCell alloc] initWithFrame:frame]);
+      UICollectionViewCell* cell = [[UICollectionViewCell alloc] initWithFrame:frame];
+      [cell setValue:@"sweetiekit.UICollectionViewCell" forKey:@"reuseIdentifier"];
+      Ivar ivar = class_getInstanceVariable([UICollectionViewCell self], "_reusableViewFlags");
+      ptrdiff_t offset = ivar_getOffset(ivar);
+      unsigned char* bytes = (unsigned char *)(__bridge void*)cell;
+      NSInteger flags = *((NSInteger *)(bytes+offset));
+      flags |= 0x1;
+      ((void (*)(id, Ivar, NSInteger))object_setIvar)(cell, ivar, flags);
+      view->SetNSObject(cell);
     }
   } else {
     @autoreleasepool {
-      view->SetNSObject([[UICollectionViewCell alloc] init]);
+      UICollectionViewCell* cell = [[UICollectionViewCell alloc] init];
+      [cell setValue:@"sweetiekit.UICollectionViewCell" forKey:@"reuseIdentifier"];
+      Ivar ivar = class_getInstanceVariable([UICollectionViewCell self], "_reusableViewFlags");
+      ptrdiff_t offset = ivar_getOffset(ivar);
+      unsigned char* bytes = (unsigned char *)(__bridge void*)cell;
+      NSInteger flags = *((NSInteger *)(bytes+offset));
+      flags |= 0x1;
+      ((void (*)(id, Ivar, NSInteger))object_setIvar)(cell, ivar, flags);
+      view->SetNSObject(cell);
     }
   }
   view->Wrap(obj);
