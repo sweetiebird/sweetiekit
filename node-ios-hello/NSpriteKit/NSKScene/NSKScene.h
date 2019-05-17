@@ -35,6 +35,7 @@ public:
   JS_PROP(touchesEnded);
   JS_PROP(update);
   JS_PROP(physicsWorld);
+  JS_PROP(camera);
 
   sweetiekit::JSFunction _touchesBegan;
   sweetiekit::JSFunction _touchesMoved;

@@ -414,6 +414,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSCNLight.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
+#include "NSKCameraNode.h"
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
@@ -503,6 +504,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKCameraNode class]]) {
+        return NSKCameraNode::type;
+      }
       if ([obj isKindOfClass:[SKPhysicsWorld class]]) {
         return NSKPhysicsWorld::type;
       }
