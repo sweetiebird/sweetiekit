@@ -28,10 +28,12 @@ public:
   static NAN_METHOD(New);
 
   JS_PROP(didScroll);
+  JS_PROP(didEndDecelerating);
   JS_PROP(didScrollToTop);
   JS_PROP(shouldScrollToTop);
 
   sweetiekit::JSFunction _didScroll;
+  sweetiekit::JSFunction _didEndDecelerating;
   sweetiekit::JSFunction _didScrollToTop;
   sweetiekit::JSFunction _shouldScrollToTop;
 };

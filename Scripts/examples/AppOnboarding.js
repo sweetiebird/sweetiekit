@@ -18,18 +18,24 @@ const bgColors = [
   colors.fitbodMedGrey,
 ];
 
+const numSlides = 4;
+
 function makeDelegate(demoVC, pageControl) {
   const del = new UIScrollViewDelegate();
   del.didScroll = (sv) => {
     const { x } = sv.contentOffset;
     pageControl.currentPage = Math.round(x / demoVC.view.frame.width);
   };
+  del.didEndDecelerating = (sv) => {
+    const { x, y } = sv.contentOffset;
+    if (y !== 0) {
+      sv.setContentOffset({ x, y: 0 }, false);
+    }
+  };
   scrollView.delegate = del;
 }
 
 async function make(nav, demoVC) {
-  const numSlides = 4;
-
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
   const viewH = h - 84;

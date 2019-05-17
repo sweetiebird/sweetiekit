@@ -102,7 +102,7 @@ NAN_GETTER(NUIPageControl::currentPageGetter) {
   JS_UNWRAP(UIPageControl, ui);
   
   __block float currPage = 0;
-  
+   
   @autoreleasepool {
     currPage = [ui currentPage];
   }
