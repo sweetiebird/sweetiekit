@@ -378,6 +378,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
 #include "NUINavigationBar.h"
+#include "NUINavigationItem.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include "NUIViewControllerTransitioningDelegate.h"
@@ -592,6 +593,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // ========= views
       if ([obj isKindOfClass:[UIPickerView class]]) {
         return NUIPickerView::type;
+      }
+      if ([obj isKindOfClass:[UINavigationItem class]]) {
+        return NUINavigationItem::type;
       }
       if ([obj isKindOfClass:[UINavigationBar class]]) {
         return NUINavigationBar::type;

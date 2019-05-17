@@ -1,35 +1,37 @@
 //
-//  NUINavigationBar.h
+//  NUINavigationItem.h
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUINavigationBar_h
-#define NUINavigationBar_h    
+#ifndef NUINavigationItem_h
+#define NUINavigationItem_h    
 
 #import <UIKit/UIKit.h>
-#include "NUIView.h"
+#include "NNSObject.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NUINavigationBar : public NUIView {
+class NUINavigationItem : public NNSObject {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NUINavigationBar();
-  virtual ~NUINavigationBar();
+  NUINavigationItem();
+  virtual ~NUINavigationItem();
 
   static NAN_METHOD(New);
-  JS_PROP(barStyle);
-  JS_PROP(backItem);
-  JS_PROP(barTintColor);
-  JS_PROP(tintColor);
+  static NAN_METHOD(initWithTitle);
+  
+  JS_PROP(title);
+  JS_PROP(backBarButtonItem);
+  JS_PROP(titleView);
+  JS_PROP(prompt);
 };
 
-#endif /* NUINavigationBar_h */
+#endif /* NUINavigationItem_h */

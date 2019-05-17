@@ -34,6 +34,7 @@
 #include "NUITextField.h"
 #include "NUINavigationController.h"
 #include "NUINavigationBar.h"
+#include "NUINavigationItem.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include "NUIViewControllerTransitioningDelegate.h"
@@ -485,6 +486,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UINavigationBar = NUINavigationBar::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UINavigationBar").ToLocalChecked(), N_UINavigationBar.first);
+
+        auto N_UINavigationItem = NUINavigationItem::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UINavigationItem").ToLocalChecked(), N_UINavigationItem.first);
 
         // UIKit Custom
 

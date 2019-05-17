@@ -29,6 +29,8 @@
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
+		A10BD049228F551100184286 /* NUIStackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD047228F551100184286 /* NUIStackView.mm */; };
+		A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD04B228F6B5400184286 /* NUINavigationItem.mm */; };
 		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
@@ -252,6 +254,10 @@
 		A10BD040228F483B00184286 /* NNSNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSNotificationCenter.h; sourceTree = "<group>"; };
 		A10BD043228F490400184286 /* NNSNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSNotification.h; sourceTree = "<group>"; };
 		A10BD044228F490400184286 /* NNSNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotification.mm; sourceTree = "<group>"; };
+		A10BD047228F551100184286 /* NUIStackView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStackView.mm; sourceTree = "<group>"; };
+		A10BD048228F551100184286 /* NUIStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIStackView.h; sourceTree = "<group>"; };
+		A10BD04B228F6B5400184286 /* NUINavigationItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationItem.mm; sourceTree = "<group>"; };
+		A10BD04C228F6B5400184286 /* NUINavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationItem.h; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -677,6 +683,24 @@
 				A10BD044228F490400184286 /* NNSNotification.mm */,
 			);
 			path = NNSNotification;
+			sourceTree = "<group>";
+		};
+		A10BD046228F551100184286 /* NUIStackView */ = {
+			isa = PBXGroup;
+			children = (
+				A10BD048228F551100184286 /* NUIStackView.h */,
+				A10BD047228F551100184286 /* NUIStackView.mm */,
+			);
+			path = NUIStackView;
+			sourceTree = "<group>";
+		};
+		A10BD04A228F6B5400184286 /* NUINavigationItem */ = {
+			isa = PBXGroup;
+			children = (
+				A10BD04C228F6B5400184286 /* NUINavigationItem.h */,
+				A10BD04B228F6B5400184286 /* NUINavigationItem.mm */,
+			);
+			path = NUINavigationItem;
 			sourceTree = "<group>";
 		};
 		A11029D3228E4C9C0078FAC0 /* NSKCameraNode */ = {
@@ -1525,8 +1549,6 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1CE2B97228F050700D9B3B8 /* NUIPickerViewManager */,
-				A1CE2B93228F03D100D9B3B8 /* NUIPickerView */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1545,14 +1567,18 @@
 				211E76BA226A52AC00B838AF /* NUILabel */,
 				A1CE2B82228EFCAC00D9B3B8 /* NUINavigationBar */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
+				A10BD04A228F6B5400184286 /* NUINavigationItem */,
 				A1BD4BCA22882EA5001D1F6E /* NUINib */,
 				A1CE2B42228E605100D9B3B8 /* NUIPageControl */,
+				A1CE2B93228F03D100D9B3B8 /* NUIPickerView */,
+				A1CE2B97228F050700D9B3B8 /* NUIPickerViewManager */,
 				A1649775227E1F6D00CA943F /* NUIPresentationController */,
 				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,
 				211E76A4226A0CE600B838AF /* NUIResponder */,
 				A11D1296227EA69B0038C262 /* NUIScrollView */,
 				A1CE2B46228E694B00D9B3B8 /* NUIScrollViewDelegate */,
 				A199AED822884F27003C1DC4 /* NUISlider */,
+				A10BD046228F551100184286 /* NUIStackView */,
 				A1D6729F2269940B00562A42 /* NUIStoryboard */,
 				A164976F227E148D00CA943F /* NUISwitch */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
@@ -2010,6 +2036,7 @@
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
+				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
@@ -2044,6 +2071,7 @@
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
+				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,

@@ -5,6 +5,7 @@ const {
   NSParagraphStyleAttributeName,
   UIControlState,
   UIViewContentMode,
+  UIBarStyle,
 }= require('./enums');
 
 const {
@@ -121,7 +122,7 @@ async function make(nav, demoVC) {
     const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
     const label = new UILabel();
-    label.frame = { x: 12, y: labelY, width: w - 24, height: 25 };
+    label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
@@ -131,7 +132,7 @@ async function make(nav, demoVC) {
     contentLabel.textAlignment = NSTextAlignment.left;
     contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
     contentLabel.font = contentFont;
-    contentLabel.frame = { x: 12, y: contentY, width: w - 24, height: 120 };
+    contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
     const attrText = new NSMutableAttributedString(contentTexts[i]);
     attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
       location: 0,
@@ -183,6 +184,13 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(pageControl);
   demoVC.view.addSubview(nextBtn);
+  nav.navigationBar.barStyle = UIBarStyle.blackTranslucent;
+  nav.navigationBar.isTranslucent = false;
+  nav.navigationBar.tintColor = colors.fitbodPink;
+  nav.navigationBar.barTintColor = {
+    ...colors.fitbodDarkGrey,
+    alpha: 0,
+  };
   nav.pushViewController(demoVC);
 }
 

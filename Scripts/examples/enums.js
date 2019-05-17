@@ -83,3 +83,4 @@ module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
 module.exports.NSForegroundColorAttributeName = 'NSColor';
 module.exports.UIControlState = UIControlState;
 module.exports.UIViewContentMode = UIViewContentMode;
+module.exports.UIBarStyle = UIBarStyle;

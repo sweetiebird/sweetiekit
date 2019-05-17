@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NUIView.h"
 #include "NUINavigationBar.h"
+#include "NUINavigationItem.h"
 
 Nan::Persistent<FunctionTemplate> NUINavigationBar::type;
 
@@ -28,6 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationBar::Initialize(I
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, barStyle);
+  JS_ASSIGN_PROP_READONLY(proto, backItem);
+  JS_ASSIGN_PROP(proto, barTintColor);
+  JS_ASSIGN_PROP(proto, tintColor);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -74,3 +78,90 @@ NAN_SETTER(NUINavigationBar::barStyleSetter) {
     [ui setBarStyle:UIBarStyle(TO_UINT32(value))];
   }
 }
+
+NAN_GETTER(NUINavigationBar::barTintColorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationBar, ui);
+
+  CGFloat red = 0;
+  CGFloat green = 0;
+  CGFloat blue = 0;
+  CGFloat alpha = 1;
+  @autoreleasepool {
+    UIColor* color = [ui barTintColor];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUINavigationBar::barTintColorSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationBar, ui);
+
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+  
+  @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    [ui setBarTintColor:color];
+  }
+}
+
+NAN_GETTER(NUINavigationBar::tintColorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationBar, ui);
+
+  CGFloat red = 0;
+  CGFloat green = 0;
+  CGFloat blue = 0;
+  CGFloat alpha = 1;
+  @autoreleasepool {
+    UIColor* color = [ui tintColor];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUINavigationBar::tintColorSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationBar, ui);
+
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+  
+  @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    [ui setTintColor:color];
+  }
+}
+
+NAN_GETTER(NUINavigationBar::backItemGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UINavigationBar, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backItem], NUINavigationItem::type)));
+}
+
