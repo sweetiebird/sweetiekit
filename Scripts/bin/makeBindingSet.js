@@ -117,6 +117,8 @@ public:
   try {
     fs.writeFileSync(hPath, hData);
     fs.writeFileSync(mPath, mData);
+    console.log(hPath);
+    console.log(mPath);
     process.exit(0);
   } catch (e) {
     console.log('cant write');

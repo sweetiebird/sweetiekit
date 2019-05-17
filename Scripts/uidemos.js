@@ -4,6 +4,7 @@ const SweetieKit = require('std:sweetiekit.node');
 const makeARSCNView = require('./examples/ARSCNView');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
+const makeCollectionView = require('./examples/UICollectionView');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
 const makeMapView = require('./examples/MKMapView');
@@ -39,6 +40,7 @@ const demoTypes = {
   SKScene: makeSKScene,
   SKSceneSockets: makeSKSceneSockets,
   UIButton: makeButton,
+  UICollectionView: makeCollectionView,
   UIImageView: makeImageView,
   UILabel: makeLabel,
   UIScrollView: makeScrollView,

@@ -37,6 +37,7 @@
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
 #include "NUITouch.h"
+#include "NUICollectionReusableView.h"
 #include "NUICollectionView.h"
 #include "NUICollectionViewController.h"
 #include "NUIAlertController.h"
@@ -371,6 +372,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIView = NUIView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIView").ToLocalChecked(), N_UIView.first);
   
+        auto N_UICollectionReusableView = NUICollectionReusableView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UICollectionReusableView").ToLocalChecked(), N_UICollectionReusableView.first);
+
         auto N_UIControl = NUIControl::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIControl").ToLocalChecked(), N_UIControl.first);
 

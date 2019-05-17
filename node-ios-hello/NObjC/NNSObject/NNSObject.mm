@@ -370,6 +370,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
+#include "NUICollectionReusableView.h"
 #include "NUICollectionView.h"
 #include "NUICollectionViewController.h"
 #include "NUICollectionViewCell.h"
@@ -561,6 +562,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[UICollectionViewCell class]]) {
         return NUICollectionViewCell::type;
+      }
+      if ([obj isKindOfClass:[UICollectionReusableView class]]) {
+        return NUICollectionReusableView::type;
       }
       if ([obj isKindOfClass:[UICollectionView class]]) {
         return NUICollectionView::type;

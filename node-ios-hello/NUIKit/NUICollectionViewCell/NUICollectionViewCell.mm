@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NUICollectionViewCell.h"
-#include "NUIView.h"
+#include "NUICollectionReusableView.h"
 
 Nan::Persistent<FunctionTemplate> NUICollectionViewCell::type;
 
@@ -19,7 +19,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionViewCell::Initial
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
+  ctor->Inherit(Nan::New(NUICollectionReusableView::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("UICollectionViewCell"));
   type.Reset(ctor);
