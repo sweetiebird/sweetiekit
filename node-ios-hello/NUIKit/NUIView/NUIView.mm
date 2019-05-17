@@ -47,6 +47,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
   Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
   Nan::SetMethod(proto, "removeFromSuperview", RemoveFromSuperview);
+  Nan::SetMethod(proto, "bringSubviewToFront", bringSubviewToFront);
   JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
   JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
   JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
@@ -695,6 +696,19 @@ NAN_SETTER(NUIView::UserInteractionEnabledSetter) {
   JS_UNWRAP(UIView, ui);
   
   [ui setUserInteractionEnabled:TO_BOOL(value)];
+}
+
+NAN_METHOD(NUIView::bringSubviewToFront) {
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+  Local<Object> obj = JS_OBJ(info[0]);
+  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIView)).FromJust()) {
+    NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
+    @autoreleasepool {
+      [view->As<UIView>() bringSubviewToFront:subview->As<UIView>()];
+    }
+  } else {
+    Nan::ThrowError("Unknown addSubview type");
+  }
 }
 
 NUIView::NUIView () {}

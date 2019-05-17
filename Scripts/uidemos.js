@@ -7,9 +7,10 @@ const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeCollectionView = require('./examples/UICollectionView');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
+const makePageControl = require('./examples/UIPageControl');
 const makeMapView = require('./examples/MKMapView');
 const makeSKScene = require('./examples/SKScene');
-const makeSKSceneSockets = require('./examples/SKSceneSockets');
+// const makeSKSceneSockets = require('./examples/SKSceneSockets');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
@@ -38,11 +39,12 @@ const {
 const demoTypes = {
   MKMapView: makeMapView,
   SKScene: makeSKScene,
-  SKSceneSockets: makeSKSceneSockets,
+  // SKSceneSockets: makeSKSceneSockets,
   UIButton: makeButton,
   UICollectionView: makeCollectionView,
   UIImageView: makeImageView,
   UILabel: makeLabel,
+  UIPageControl: makePageControl,
   UIScrollView: makeScrollView,
   UISlider: makeSlider,
   UISwitch: makeSwitch,

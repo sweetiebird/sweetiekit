@@ -26,6 +26,13 @@ public:
   virtual ~NUIScrollView();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(setContentOffset);
+  
+  JS_PROP(delegate);
+  JS_PROP(contentOffset);
+  JS_PROP(contentSize);
+  
+  Nan::Persistent<Value> _delegate;
 };
 
 #endif /* NUIScrollView_h */

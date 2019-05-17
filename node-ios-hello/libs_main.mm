@@ -44,9 +44,11 @@
 #include "NUIAlertAction.h"
 #include "NUICollectionViewCell.h"
 #include "NUICollectionViewManager.h"
+#include "NUIPageControl.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
+#include "NUIScrollViewDelegate.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
@@ -432,8 +434,14 @@ void InitExports(Local<Object> exports) {
         auto N_UITouch = NUITouch::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITouch").ToLocalChecked(), N_UITouch.first);
 
+        auto N_UIPageControl = NUIPageControl::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPageControl").ToLocalChecked(), N_UIPageControl.first);
+
         // UIKit delegates ========
   
+        auto N_UIScrollViewDelegate = NUIScrollViewDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIScrollViewDelegate").ToLocalChecked(), N_UIScrollViewDelegate.first);
+
         auto N_UIImagePickerControllerDelegate = NUIImagePickerControllerDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImagePickerControllerDelegate").ToLocalChecked(), N_UIImagePickerControllerDelegate.first);
 

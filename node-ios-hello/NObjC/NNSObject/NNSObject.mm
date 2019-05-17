@@ -376,12 +376,14 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUICollectionViewCell.h"
 #include "NUICollectionViewManager.h"
 #include "NUITableViewDataSource.h"
+#include "NUIPageControl.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
 #include "NUIAlertController.h"
 #include "NUIAlertAction.h"
 #include "NUIScrollView.h"
+#include "NUIScrollViewDelegate.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
@@ -557,6 +559,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UIPageControl class]]) {
+        return NUIPageControl::type;
+      }
       if ([obj isKindOfClass:[UISlider class]]) {
         return NUISlider::type;
       }
@@ -637,6 +642,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SUIScrollViewDelegate class]]) {
+        return NUIScrollViewDelegate::type;
+      }
       if ([obj isKindOfClass:[SUICollectionViewManager class]]) {
         return NUICollectionViewManager::type;
       }
