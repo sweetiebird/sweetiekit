@@ -7,7 +7,15 @@ const {
 async function make(demoVC) {
   const w = demoVC.view.frame.width;
   const button = await UIButton.alloc('👋 Hello Button', 12, 80, w - 24, 50, () => {
-    console.log('button pressed');
+    const alert = new UIAlertController(
+      'Button pressed',
+      'Hello',
+    );
+    const action = new UIAlertAction('Okay', () => {
+      alert.dismiss(true, () => {});
+    });
+    alert.addAction(action);
+    demoVC.present(alert, true, () => {});
   });
   button.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
   button.layer.cornerRadius = 4;
