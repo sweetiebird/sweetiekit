@@ -1,6 +1,10 @@
 const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
-const NSTextAlignment = require('./enums').NSTextAlignment;
+const {
+  NSTextAlignment,
+  NSParagraphStyleAttributeName,
+  NSForegroundColorAttributeName,
+}= require('./enums');
 
 const {
   UIScrollView,
@@ -11,6 +15,8 @@ const {
   UIImage,
   UIImageView,
   UIFont,
+  NSMutableParagraphStyle,
+  NSMutableAttributedString,
 } = SweetieKit;
 
 let scrollView;
@@ -32,7 +38,9 @@ const iconImages = [
 ];
 
 const titleFont = UIFont.boldSystemFont(20);
-const contentFont = UIFont.boldSystemFont(16);
+const contentFont = UIFont.systemFont(16);
+const pStyle = new NSMutableParagraphStyle();
+pStyle.lineSpacing = 10;
 
 const contentTexts = [
   'IPhone XOXO flexitarian meditation brooklyn sustainable pinterest. Before they sold out vape everyday carry YOLO. Lyft listicle kitsch pop-up try-hard.',
@@ -79,7 +87,7 @@ async function make(nav, demoVC) {
   for (let i = 0; i < numSlides; i++) {
     const imgX = (w - 100) / 2;
     const labelY = imgY + imgSize + 40;
-    const contentY = labelY + 40;
+    const contentY = labelY + 60;
     const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = bgColors[i];
     const label = new UILabel();
@@ -94,7 +102,13 @@ async function make(nav, demoVC) {
     contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 12, y: contentY, width: w - 24, height: 120 };
-    contentLabel.text = contentTexts[i];
+    const attrText = new NSMutableAttributedString(contentTexts[i]);
+    attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+      location: 0,
+      length: contentTexts[i].length,
+    });
+    contentLabel.attributedText = attrText;
+    // contentLabel.text = contentTexts[i];
     const image = new UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
@@ -103,6 +117,9 @@ async function make(nav, demoVC) {
     slideView.addSubview(label);
     slideView.addSubview(imageView);
     slideView.addSubview(contentLabel);
+    const attrs = {
+      attribute: 'value',
+    };
   }
 
   const pageControl = new UIPageControl({ x: 12, y: h - 200, width: w - 24, height: 60 });

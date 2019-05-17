@@ -52,6 +52,13 @@ namespace sweetiekit
     return handleScope.Escape(result);
   }
   
+  id FromJS(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+    JS_UNWRAPPED(jsThing, NSObject, thing);
+    return thing;
+  }
+  
 
   bool SetTransform(simd_float4x4& transform, Local<Value> value) {
     Nan::HandleScope scope;

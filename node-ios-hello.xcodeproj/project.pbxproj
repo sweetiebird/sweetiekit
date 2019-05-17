@@ -135,6 +135,11 @@
 		A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B61228E847500D9B3B8 /* NGifManager.mm */; };
 		A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B64228E85ED00D9B3B8 /* NGifView.mm */; };
 		A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */; };
+		A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B6C228EB20800D9B3B8 /* NNSAttributedString.mm */; };
+		A1CE2B71228EB20E00D9B3B8 /* NNSMutableAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */; };
+		A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */; };
+		A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */; };
+		A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -408,6 +413,16 @@
 		A1CE2B64228E85ED00D9B3B8 /* NGifView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NGifView.mm; sourceTree = "<group>"; };
 		A1CE2B67228EA6EC00D9B3B8 /* NUIFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFont.h; sourceTree = "<group>"; };
 		A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFont.mm; sourceTree = "<group>"; };
+		A1CE2B6B228EB20800D9B3B8 /* NNSAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSAttributedString.h; sourceTree = "<group>"; };
+		A1CE2B6C228EB20800D9B3B8 /* NNSAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSAttributedString.mm; sourceTree = "<group>"; };
+		A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableAttributedString.mm; sourceTree = "<group>"; };
+		A1CE2B70228EB20E00D9B3B8 /* NNSMutableAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableAttributedString.h; sourceTree = "<group>"; };
+		A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableParagraphStyle.mm; sourceTree = "<group>"; };
+		A1CE2B74228EB96000D9B3B8 /* NNSMutableParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableParagraphStyle.h; sourceTree = "<group>"; };
+		A1CE2B76228EB96000D9B3B8 /* NNSParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSParagraphStyle.h; sourceTree = "<group>"; };
+		A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSParagraphStyle.mm; sourceTree = "<group>"; };
+		A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableAttributedString.mm; sourceTree = "<group>"; };
+		A1CE2B7C228EC15800D9B3B8 /* NNSMutableAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableAttributedString.h; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -1298,6 +1313,51 @@
 			path = NUIFont;
 			sourceTree = "<group>";
 		};
+		A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B6B228EB20800D9B3B8 /* NNSAttributedString.h */,
+				A1CE2B6C228EB20800D9B3B8 /* NNSAttributedString.mm */,
+			);
+			path = NNSAttributedString;
+			sourceTree = "<group>";
+		};
+		A1CE2B6E228EB20E00D9B3B8 /* NNSMutableAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */,
+				A1CE2B70228EB20E00D9B3B8 /* NNSMutableAttributedString.h */,
+			);
+			path = NNSMutableAttributedString;
+			sourceTree = "<group>";
+		};
+		A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B74228EB96000D9B3B8 /* NNSMutableParagraphStyle.h */,
+				A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */,
+			);
+			path = NNSMutableParagraphStyle;
+			sourceTree = "<group>";
+		};
+		A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B76228EB96000D9B3B8 /* NNSParagraphStyle.h */,
+				A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */,
+			);
+			path = NNSParagraphStyle;
+			sourceTree = "<group>";
+		};
+		A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B7C228EC15800D9B3B8 /* NNSMutableAttributedString.h */,
+				A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */,
+			);
+			path = NNSMutableAttributedString;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -1555,9 +1615,14 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
+				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
+				A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */,
+				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
+				A1CE2B6E228EB20E00D9B3B8 /* NNSMutableAttributedString */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
@@ -1814,6 +1879,7 @@
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
+				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
@@ -1833,6 +1899,7 @@
 				A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
+				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
@@ -1865,6 +1932,7 @@
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
+				A1CE2B71228EB20E00D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
@@ -1874,6 +1942,7 @@
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
+				A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
 				A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */,
@@ -1939,6 +2008,7 @@
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */,
+				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
 				A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */,
 			);

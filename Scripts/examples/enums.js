@@ -49,3 +49,5 @@ module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;
 module.exports.NSTextAlignment = NSTextAlignment;
+module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
+module.exports.NSForegroundColorAttributeName = 'NSColor';

@@ -333,6 +333,7 @@ namespace sweetiekit {
 
 namespace sweetiekit {
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
+  id FromJS(Local<Value> jsThing);
 }
 
 extern "C" {
@@ -471,6 +472,33 @@ namespace sweetiekit {
       auto properties = adoptSystem<objc_property_t[]>(protocol_copyPropertyList(protocol, &count));
       for (unsigned i = 0; i < count; ++i)
           callback(properties[i]);
+  }
+}
+
+namespace sweetiekit
+{
+  inline void forEachValueInArray(Local<Array> array, void (^callback)(uint32_t index, Local<Value> value))
+  {
+    Nan::HandleScope scope;
+    for (uint32_t i = 0, n = array->Length(); i < n; i++) {
+      @autoreleasepool {
+        Local<Value> value = array->Get(i);
+        callback(i, value);
+      }
+    }
+  }
+  
+  inline void forEachEntryInObject(Local<Object> object, void (^callback)(Local<Value> key, Local<Value> value))
+  {
+    Nan::HandleScope scope;
+    Local<Array> names = object->GetOwnPropertyNames(JS_CONTEXT()).ToLocalChecked();
+    for (uint32_t i = 0, n = names->Length(); i < n; i++) {
+      @autoreleasepool {
+        Local<Value> jsKey = names->Get(i);
+        Local<Value> jsValue = object->Get(jsKey);
+        callback(jsKey, jsValue);
+      }
+    }
   }
 }
 

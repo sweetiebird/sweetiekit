@@ -11,6 +11,7 @@
 #include "NUILabel.h"
 #include "NUIView.h"
 #include "NUIFont.h"
+#include "NNSAttributedString.h"
 
 Nan::Persistent<FunctionTemplate> NUILabel::type;
 
@@ -34,6 +35,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   JS_SET_PROP(proto, "highlightedTextColor", HighlightedTextColor);
   JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
   JS_ASSIGN_PROP(proto, textAlignment);
+  JS_ASSIGN_PROP(proto, attributedText);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -356,5 +358,23 @@ NAN_SETTER(NUILabel::textAlignmentSetter) {
 
     [ui setTextAlignment:type];
   }
+}
+
+NAN_GETTER(NUILabel::attributedTextGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui attributedText], NNSAttributedString::type));
+}
+
+NAN_SETTER(NUILabel::attributedTextSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+  
+  NSAttributedString *str = (NSAttributedString *)sweetiekit::FromJS(value);
+  
+  [ui setAttributedText:str];
 }
 

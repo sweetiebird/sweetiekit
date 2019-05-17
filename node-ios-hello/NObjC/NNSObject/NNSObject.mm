@@ -357,6 +357,10 @@ NAN_METHOD(NNSObject::invokeMethod)
 }
 
 #include "NNSUserDefaults.h"
+#include "NNSMutableParagraphStyle.h"
+#include "NNSParagraphStyle.h"
+#include "NNSAttributedString.h"
+#include "NNSMutableAttributedString.h"
 #include "NUILabel.h"
 #include "NUIFont.h"
 #include "NUISlider.h"
@@ -703,6 +707,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= objects
+      if ([obj isKindOfClass:[NSMutableAttributedString class]]) {
+        return NNSMutableAttributedString::type;
+      }
+      if ([obj isKindOfClass:[NSAttributedString class]]) {
+        return NNSAttributedString::type;
+      }
+      if ([obj isKindOfClass:[NSMutableParagraphStyle class]]) {
+        return NNSMutableParagraphStyle::type;
+      }
+      if ([obj isKindOfClass:[NSParagraphStyle class]]) {
+        return NNSParagraphStyle::type;
+      }
       if ([obj isKindOfClass:[UIAlertAction class]]) {
         return NUIAlertAction::type;
       }

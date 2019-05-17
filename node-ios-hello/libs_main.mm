@@ -10,6 +10,10 @@
 
 #include "NNSObject.h"
 #include "NNSUserDefaults.h"
+#include "NNSMutableParagraphStyle.h"
+#include "NNSParagraphStyle.h"
+#include "NNSAttributedString.h"
+#include "NNSMutableAttributedString.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
 #include "NUIViewController.h"
@@ -325,6 +329,18 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIAlertAction = NUIAlertAction::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIAlertAction").ToLocalChecked(), N_UIAlertAction.first);
+  
+        auto N_NSParagraphStyle = NNSParagraphStyle::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSParagraphStyle").ToLocalChecked(), N_NSParagraphStyle.first);
+  
+        auto N_NSMutableParagraphStyle = NNSMutableParagraphStyle::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSMutableParagraphStyle").ToLocalChecked(), N_NSMutableParagraphStyle.first);
+  
+        auto N_NSAttributedString = NNSAttributedString::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSAttributedString").ToLocalChecked(), N_NSAttributedString.first);
+  
+        auto N_NSMutableAttributedString = NNSMutableAttributedString::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("NSMutableAttributedString").ToLocalChecked(), N_NSMutableAttributedString.first);
 
         // Core Location
   
