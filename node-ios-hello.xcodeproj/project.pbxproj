@@ -27,6 +27,8 @@
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
+		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
+		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
 		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
@@ -136,7 +138,6 @@
 		A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B64228E85ED00D9B3B8 /* NGifView.mm */; };
 		A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */; };
 		A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B6C228EB20800D9B3B8 /* NNSAttributedString.mm */; };
-		A1CE2B71228EB20E00D9B3B8 /* NNSMutableAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */; };
 		A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */; };
 		A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */; };
 		A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */; };
@@ -247,6 +248,10 @@
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
+		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
+		A10BD040228F483B00184286 /* NNSNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSNotificationCenter.h; sourceTree = "<group>"; };
+		A10BD043228F490400184286 /* NNSNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSNotification.h; sourceTree = "<group>"; };
+		A10BD044228F490400184286 /* NNSNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotification.mm; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -424,8 +429,6 @@
 		A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFont.mm; sourceTree = "<group>"; };
 		A1CE2B6B228EB20800D9B3B8 /* NNSAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSAttributedString.h; sourceTree = "<group>"; };
 		A1CE2B6C228EB20800D9B3B8 /* NNSAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSAttributedString.mm; sourceTree = "<group>"; };
-		A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableAttributedString.mm; sourceTree = "<group>"; };
-		A1CE2B70228EB20E00D9B3B8 /* NNSMutableAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableAttributedString.h; sourceTree = "<group>"; };
 		A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableParagraphStyle.mm; sourceTree = "<group>"; };
 		A1CE2B74228EB96000D9B3B8 /* NNSMutableParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableParagraphStyle.h; sourceTree = "<group>"; };
 		A1CE2B76228EB96000D9B3B8 /* NNSParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSParagraphStyle.h; sourceTree = "<group>"; };
@@ -656,6 +659,24 @@
 				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
 			);
 			path = NSKPhysicsBody;
+			sourceTree = "<group>";
+		};
+		A10BD03E228F483B00184286 /* NNSNotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A10BD040228F483B00184286 /* NNSNotificationCenter.h */,
+				A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */,
+			);
+			path = NNSNotificationCenter;
+			sourceTree = "<group>";
+		};
+		A10BD042228F490400184286 /* NNSNotification */ = {
+			isa = PBXGroup;
+			children = (
+				A10BD043228F490400184286 /* NNSNotification.h */,
+				A10BD044228F490400184286 /* NNSNotification.mm */,
+			);
+			path = NNSNotification;
 			sourceTree = "<group>";
 		};
 		A11029D3228E4C9C0078FAC0 /* NSKCameraNode */ = {
@@ -1343,15 +1364,6 @@
 			path = NNSAttributedString;
 			sourceTree = "<group>";
 		};
-		A1CE2B6E228EB20E00D9B3B8 /* NNSMutableAttributedString */ = {
-			isa = PBXGroup;
-			children = (
-				A1CE2B6F228EB20E00D9B3B8 /* NNSMutableAttributedString.mm */,
-				A1CE2B70228EB20E00D9B3B8 /* NNSMutableAttributedString.h */,
-			);
-			path = NNSMutableAttributedString;
-			sourceTree = "<group>";
-		};
 		A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1679,6 +1691,8 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A10BD042228F490400184286 /* NNSNotification */,
+				A10BD03E228F483B00184286 /* NNSNotificationCenter */,
 				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
 				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
 				A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */,
@@ -1686,7 +1700,6 @@
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
-				A1CE2B6E228EB20E00D9B3B8 /* NNSMutableAttributedString */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
@@ -2003,7 +2016,6 @@
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
-				A1CE2B71228EB20E00D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
@@ -2035,6 +2047,7 @@
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
+				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
@@ -2066,6 +2079,7 @@
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
+				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
