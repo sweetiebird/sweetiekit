@@ -27,8 +27,10 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(didBeginContact);
+  JS_PROP(didEndContact);
   
   sweetiekit::JSFunction _didBeginContact;
+  sweetiekit::JSFunction _didEndContact;
 };
 
 #endif /* NSKPhysicsContactDelegate_h */

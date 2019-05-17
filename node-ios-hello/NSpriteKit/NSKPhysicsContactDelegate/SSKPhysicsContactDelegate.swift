@@ -9,18 +9,27 @@
 import Foundation
 import SpriteKit
 
-typealias SSKPhysicsContactDelegate_DidBegin = (SKPhysicsContact) -> Void
+typealias SSKPhysicsContactDelegate_Contact = (SKPhysicsContact) -> Void
 
 @objc class SSKPhysicsContactDelegate: NSObject, SKPhysicsContactDelegate {
-  var didBeginCallback: SSKPhysicsContactDelegate_DidBegin?
+  var didBeginCallback: SSKPhysicsContactDelegate_Contact?
+  var didEndCallback: SSKPhysicsContactDelegate_Contact?
 
   func didBegin(_ contact: SKPhysicsContact) {
     didBeginCallback?(contact)
   }
+  
+  func didEnd(_ contact: SKPhysicsContact) {
+    didEndCallback?(contact)
+  }
 }
 
 @objc extension SSKPhysicsContactDelegate {
-  func setDidBegin(_ closure: @escaping SSKPhysicsContactDelegate_DidBegin) {
+  func setDidBegin(_ closure: @escaping SSKPhysicsContactDelegate_Contact) {
     didBeginCallback = closure
+  }
+  
+  func setDidEnd(_ closure: @escaping SSKPhysicsContactDelegate_Contact) {
+    didEndCallback = closure
   }
 }

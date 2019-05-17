@@ -30,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsContactDelegate::Ini
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, didBeginContact);
+  JS_ASSIGN_PROP(proto, didEndContact);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -77,5 +78,26 @@ NAN_SETTER(NSKPhysicsContactDelegate::didBeginContactSetter) {
     Nan::HandleScope scope;
     Local<Value> contactObj = sweetiekit::GetWrapperFor(contact, NSKPhysicsContact::type);
     wrap->_didBeginContact("NSKPhysicsContactDelegate::didBeginContactSetter", contactObj);
+  }];
+}
+
+NAN_GETTER(NSKPhysicsContactDelegate::didEndContactGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKPhysicsContactDelegate::didBeginContactGetter not yet implemented");
+}
+
+NAN_SETTER(NSKPhysicsContactDelegate::didEndContactSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NSKPhysicsContactDelegate *wrap = ObjectWrap::Unwrap<NSKPhysicsContactDelegate>(info.This());
+  SSKPhysicsContactDelegate* del = wrap->As<SSKPhysicsContactDelegate>();
+
+  wrap->_didEndContact.Reset(Local<Function>::Cast(value));
+  
+  [del setDidEnd: ^ (SKPhysicsContact * _Nonnull contact) {
+    Nan::HandleScope scope;
+    Local<Value> contactObj = sweetiekit::GetWrapperFor(contact, NSKPhysicsContact::type);
+    wrap->_didEndContact("NSKPhysicsContactDelegate::didEndContactSetter", contactObj);
   }];
 }
