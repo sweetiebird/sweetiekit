@@ -21,7 +21,7 @@ function makeDelegate(demoVC, pageControl) {
   const del = new UIScrollViewDelegate();
   del.didScroll = (sv) => {
     const { x } = sv.contentOffset;
-    pageControl = Math.round(x / demoVC.view.frame.width);
+    pageControl.currentPage = Math.round(x / demoVC.view.frame.width);
   };
   scrollView.delegate = del;
 }
