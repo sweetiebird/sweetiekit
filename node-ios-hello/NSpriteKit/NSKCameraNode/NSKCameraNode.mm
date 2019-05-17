@@ -7,7 +7,7 @@
 //
     
 #import <Foundation/Foundation.h>
-
+#import <SpriteKit/SpriteKit.h>
 #include "defines.h"
 #include "NSKNode.h"
 #include "NSKCameraNode.h"
