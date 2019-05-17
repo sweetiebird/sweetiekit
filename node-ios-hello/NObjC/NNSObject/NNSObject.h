@@ -38,6 +38,7 @@ public:
   static NAN_METHOD(Destroy);
   JS_PROP(class);
   JS_PROP(superclass);
+  JS_PROP(metaclass);
   JS_PROP(className);
   JS_PROP(description);
   JS_PROP(debugDescription);
