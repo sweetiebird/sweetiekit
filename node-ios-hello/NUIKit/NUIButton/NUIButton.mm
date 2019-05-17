@@ -28,6 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "title", Title);
   JS_SET_PROP(proto, "callback", Callback);
+  Nan::SetMethod(proto, "setTitleColor", setTitleColor);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -45,12 +46,28 @@ NAN_METHOD(NUIButton::New) {
   
   if (info[0]->IsExternal()) {
     btn->SetNSObject((__bridge UIButton *)(info[0].As<External>()->Value()));
+  } else if (info.Length() > 0) {
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
+
+    @autoreleasepool {
+      btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+    }
+  } else {
+    @autoreleasepool {
+      btn->SetNSObject([[UIButton alloc] init]);
+    }
   }
   
   btn->Wrap(btnObj);
 
   JS_SET_RETURN(btnObj);
 }
+
+NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
+NUIButton::~NUIButton () { delete _callback; }
 
 NAN_METHOD(NUIButton::Alloc) {
   Nan::EscapableHandleScope scope;
@@ -192,5 +209,26 @@ NAN_SETTER(NUIButton::CallbackSetter) {
   }
 }
 
-NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
-NUIButton::~NUIButton () { delete _callback; }
+NAN_METHOD(NUIButton::setTitleColor) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  @autoreleasepool {
+    NSString* string = NJSStringToNSString(info[0]);
+
+    UIControlState state = UIControlStateNormal;
+
+    if ([string isEqualToString:@"normal"]) {
+      state = UIControlStateNormal;
+    } else {
+      Nan::ThrowError("No valid light type specified");
+      return;
+    }
+    double r = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("red")));
+    double g = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("green")));
+    double b = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("blue")));
+    double a = JS_HAS(JS_OBJ(info[0]), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("alpha"))) : 1.0;
+    [ui setTitleColor:[[UIColor alloc] initWithRed:r green:g blue:b alpha:a] forState:state];
+  }
+}

@@ -17,6 +17,7 @@ const {
   UIFont,
   NSMutableParagraphStyle,
   NSMutableAttributedString,
+  UIButton,
 } = SweetieKit;
 
 let scrollView;
@@ -138,7 +139,18 @@ async function make(nav, demoVC) {
 
   makeDelegate(demoVC, pageControl);
 
+  const nextBtn = new UIButton({
+    x: 20,
+    y: viewH - 100,
+    width: w - 40,
+    height: 50,
+  });
+  nextBtn.title = 'GET STARTED';
+  nextBtn.layer.cornerRadius = 12;
+  nextBtn.backgroundColor = colors.fitbodPink;
+
   demoVC.view.addSubview(pageControl);
+  demoVC.view.addSubview(nextBtn);
   nav.pushViewController(demoVC);
 }
 
