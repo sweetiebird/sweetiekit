@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NUIControl.h"
 #include "NUIPageControl.h"
+#import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NUIPageControl::type;
 
@@ -32,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIPageControl::Initialize(Iso
   JS_ASSIGN_PROP(proto, pageIndicatorTintColor);
   JS_ASSIGN_PROP(proto, currentPageIndicatorTintColor);
   Nan::SetMethod(proto, "sizeForNumberOfPages", sizeForNumberOfPages);
+  Nan::SetMethod(proto, "addTarget", addTarget);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -99,13 +101,13 @@ NAN_GETTER(NUIPageControl::currentPageGetter) {
   
   JS_UNWRAP(UIPageControl, ui);
   
-  __block double currPage = 0;
+  __block int currPage = 0;
   
   @autoreleasepool {
     currPage = [ui numberOfPages];
   }
   
-  JS_SET_RETURN(JS_NUM(currPage));
+  JS_SET_RETURN(JS_INT(currPage));
 }
 
 NAN_SETTER(NUIPageControl::currentPageSetter) {
@@ -214,4 +216,33 @@ NAN_METHOD(NUIPageControl::sizeForNumberOfPages) {
   result->Set(JS_STR("height"), JS_NUM(size.height));
   
   JS_SET_RETURN(result);
+}
+
+NAN_METHOD(NUIPageControl::addTarget) {
+  Nan::EscapableHandleScope scope;
+
+  NUIPageControl *ctrl = ObjectWrap::Unwrap<NUIPageControl>(Local<Object>::Cast(info.This()));
+
+  __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[0]);
+
+  SUITarget* target = [[SUITarget alloc] init];
+  
+  [target setCallbackClosure:^(id _Nullable) {
+    Nan::HandleScope scope;
+    (*fn)("NUIControl::addTarget");
+  }];
+
+  [target setDeinitClosure:^() {
+    Nan::HandleScope scope;
+    delete fn; fn = nullptr;
+    iOSLog0("fn deleted");
+  }];
+
+  UIPageControl *ui = ctrl->As<UIPageControl>();
+  
+  [ui addTarget:target action:[target callbackSelector] forControlEvents:UIControlEventValueChanged];
+  
+  [ui associateValue:target withKey:@"sweetiekit.nuicontrol.target"];
+
+  ctrl->SetNSObject(ui);
 }

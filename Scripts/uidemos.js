@@ -28,6 +28,7 @@ const makeTableView = require('./examples/UITableView');
 
 // misc demos
 const makeThreeObj = require('./examples/ThreeOBJ');
+const makeAppOnboarding = require('./examples/AppOnboarding');
 
 const {
   UIApplication,
@@ -69,11 +70,16 @@ const arDemos = {
   ARSCNView: makeARSCNView,
 };
 
+const appDemos = {
+  AppOnboarding: makeAppOnboarding,
+};
+
 const demoTypeNames = Object.keys(demoTypes).sort();
 const demoCtrlNames = Object.keys(demoCtrls).sort();
 const arDemoNames = Object.keys(arDemos).sort();
+const appDemoNames = Object.keys(appDemos).sort();
 
-const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames];
+const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames, appDemoNames];
 
 class UIDemosApp {
   constructor(app) {
@@ -135,9 +141,12 @@ class UIDemosApp {
       return demoTypeNames.length;
     } else if (section === 1) {
       return demoCtrlNames.length;
+    } else if (section === 2) {
+      return arDemoNames.length;
     }
-    return arDemoNames.length;
+    return appDemoNames.length;
   }
+
 
   async handleCellSelected(tableView, indexPath) {
     const { section, row } = indexPath;
@@ -148,7 +157,7 @@ class UIDemosApp {
     }
 
     if (section === 0) {
-      const type = Object.keys(demoTypes)[row];
+      const type = demoTypeNames[row];
 
       if (demoTypes[type]) {
         this.createDemoVC();
@@ -156,17 +165,25 @@ class UIDemosApp {
         this.showDemoUI(ui);
       }
     } else if (section === 1) {
-      const type = Object.keys(demoCtrls)[row];
+      const type = demoCtrlNames[row];
       if (demoCtrls[type]) {
         this.createDemoVC();
         await demoCtrls[type](this.nav, this.demoVC);
       }
-    } else {
-      const type = Object.keys(arDemos)[row];
+    } else if (section === 2 ) {
+      const type = arDemoNames[row];
       if (arDemos[type]) {
         this.createDemoVC();
         gc();
         await arDemos[type](this.nav, this.demoVC);
+        gc();
+      }
+    } else {
+      const type = appDemoNames[row];
+      if (appDemos[type]) {
+        this.createDemoVC();
+        gc();
+        await appDemos[type](this.nav, this.demoVC);
         gc();
       }
     }
@@ -179,13 +196,6 @@ class UIDemosApp {
     this.nav.pushViewController(this.demoVC);
   }
 
-  presentDemoUI(ctrl) {
-    this.nav.pushViewController(this.demoVC);
-    setTimeout(() => {
-      this.demoVC.present(ctrl, true);
-    }, 1000);
-  }
-
   setTableManager() {
     this.mgr = new UITableViewManager(
       this.getNumberRows.bind(this),
@@ -193,7 +203,7 @@ class UIDemosApp {
     );
 
     this.mgr.numberOfSections = () => {
-      return 3;
+      return allDemoNames.length;
     };
     this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
 

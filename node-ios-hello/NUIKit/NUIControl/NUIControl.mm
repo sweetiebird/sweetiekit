@@ -207,4 +207,3 @@ NAN_GETTER(NUIControl::TouchInsideGetter) {
   
   JS_SET_RETURN(JS_BOOL(isTouchInside));
 }
-
