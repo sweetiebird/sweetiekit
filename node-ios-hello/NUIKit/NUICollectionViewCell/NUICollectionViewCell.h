@@ -10,13 +10,13 @@
 #define NUICollectionViewCell_h
 
 #import <UIKit/UIKit.h>
-#include "NUIView.h"
+#include "NUICollectionReusableView.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NUICollectionViewCell : public NUIView {
+class NUICollectionViewCell : public NUICollectionReusableView {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
