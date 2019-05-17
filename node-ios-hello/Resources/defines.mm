@@ -87,3 +87,9 @@ namespace sweetiekit
     return true;
   }
 }
+
+@implementation SweetJSFunction
+- (sweetiekit::JSFunction *)jsFunction {
+  return &_jsFunction;
+}
+@end

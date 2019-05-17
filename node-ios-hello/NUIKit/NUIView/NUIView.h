@@ -57,6 +57,11 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(WidthAnchor);
   JS_PROP(UserInteractionEnabled);
   JS_PROP(alpha);
+  JS_PROP(viewDidAppear);
+  JS_PROP(viewWillAppear);
+  JS_PROP(viewDidDisappear);
+  JS_PROP(viewWillDisappear);
+  JS_PROP(drawRect);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);
