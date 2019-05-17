@@ -32,6 +32,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, backgroundColor);
   JS_ASSIGN_PROP(proto, scaleMode);
+  JS_ASSIGN_PROP(proto, touchesBegan);
+  JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
   JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
 
@@ -162,6 +164,68 @@ NAN_SETTER(NSKScene::scaleModeSetter) {
   }
   
   [scene setScaleMode:scaleMode];
+}
+
+NAN_GETTER(NSKScene::touchesBeganGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKScene::touchesBeganGetter not yet implemented");
+}
+
+NAN_SETTER(NSKScene::touchesBeganSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+
+  wrap->_touchesBegan.Reset(Local<Function>::Cast(value));
+  
+  [scene setTouchesBegan: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
+    Nan::HandleScope scope;
+
+    __block NSInteger count = 0;
+    auto arr = Nan::New<Array>();
+    
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      Nan::Set(arr, static_cast<uint32_t>(count), value);
+      count++;
+    }];
+
+    wrap->_touchesBegan("NSKScene::touchesBeganSetter", arr, Nan::Null());
+  }];
+}
+
+NAN_GETTER(NSKScene::touchesMovedGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NSKScene::touchesMovedGetter not yet implemented");
+}
+
+NAN_SETTER(NSKScene::touchesMovedSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+
+  wrap->_touchesMoved.Reset(Local<Function>::Cast(value));
+  
+  [scene setTouchesMoved: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
+    Nan::HandleScope scope;
+
+    __block NSInteger count = 0;
+    auto arr = Nan::New<Array>();
+    
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
+      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+      Nan::Set(arr, static_cast<uint32_t>(count), value);
+      count++;
+    }];
+
+    wrap->_touchesMoved("NSKScene::touchesMovedSetter", arr, Nan::Null());
+  }];
 }
 
 NAN_GETTER(NSKScene::touchesEndedGetter) {
