@@ -49,6 +49,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP_READONLY(proto, class);
   JS_ASSIGN_PROP_READONLY(proto, superclass);
+  JS_ASSIGN_PROP_READONLY(proto, metaclass);
   JS_ASSIGN_PROP_READONLY(proto, className);
   JS_ASSIGN_PROP_READONLY(proto, description);
   JS_ASSIGN_PROP_READONLY(proto, debugDescription);
@@ -131,6 +132,14 @@ NAN_GETTER(NNSObject::superclassGetter) {
   JS_UNWRAP(NSObject, ns);
 
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ns superclass], NNSObject::type));
+}
+
+NAN_GETTER(NNSObject::metaclassGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(NSObject, ns);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor(object_getClass([ns class]), NNSObject::type));
 }
 
 NAN_GETTER(NNSObject::classNameGetter) {
