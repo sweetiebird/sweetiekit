@@ -41,7 +41,6 @@ const demoTypes = {
   SKScene: makeSKScene,
   // SKSceneSockets: makeSKSceneSockets,
   UIButton: makeButton,
-  UICollectionView: makeCollectionView,
   UIImageView: makeImageView,
   UILabel: makeLabel,
   UIPageControl: makePageControl,
@@ -55,6 +54,7 @@ const demoTypes = {
 const demoCtrls = {
   UIAlertController: makeAlertCtrl,
   UIBarButtonItem: makeBarButtonItem,
+  UICollectionView: makeCollectionView,
   UIImagePickerController: makeImagePickerCtrl,
   UINavigationController: makeNavigationCtrl,
   UITabBarController: makeTabBarCtrl,

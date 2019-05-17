@@ -4,17 +4,52 @@ const {
   UIView,
 } = SweetieKit;
 
-async function make(demoVC) {
-  const w = demoVC.view.frame.width;
-  const h = demoVC.view.frame.height;
-  const frame = { x: 0, y: 0, width: w, height: h };
-  const view = new UIView(frame);
-  const frame2 = { x: 40, y: 80, width: frame.width - 80, height: frame.width - 80 };
-  const view2 = new UIView(frame2);
-  view.backgroundColor = { red: 0, green: 174/255, blue: 174/255 };
-  view2.backgroundColor = { red: 205/255, green: 37/255, blue: 83/255 };
-  view.addSubview(view2);
-  return view;
+let colletion;
+let mgr;
+let frame;
+
+function getItems() {
+  return 1000;
+}
+
+let cells = {};
+
+function getCell(collectionView, { section, row }) {
+  let cell = cells[`${section}:${row}`];
+  if (cell) {
+    return cell;
+  }
+  console.log('getCell', collectionView, { section, row });
+  cell = cells[`${section}:${row}`] = new UICollectionViewCell(frame);
+  cell.backgroundColor = {red: Math.random(), green: Math.random(), blue: Math.random()};
+  const label = new UILabel(frame);
+  label.numberOfLines = 0;
+  label.text = 'Lorem ipsum dolor amet cray cronut pok pok veniam kitsch literally. Occupy letterpress mixtape mollit nostrud.';
+  label.sizeToFit();
+  cell.addSubview(label);
+  return cell;
+}
+
+function handleCellSelected(collectionView, { section, row }) {
+  console.log('handleCellSelected', collectionView, { section, row });
+}
+
+function setCollectionManager() {
+  mgr = new UICollectionViewManager(getItems, getCell);
+  mgr.didSelectItemAt = handleCellSelected;
+  collection.dataSource = mgr;
+  collection.delegate = mgr;
+}
+
+async function make(nav, demoVC) {
+  //setupDefaults();
+  collection = new UICollectionView(frame = demoVC.view.frame);
+  demoVC.view.addSubview(collection);
+  //setupConstraints(demoVC);
+  //addBarItem(nav, demoVC);
+  setCollectionManager();
+  //nav.isToolbarHidden = false;
+  nav.pushViewController(demoVC);
 }
 
 module.exports = make;
