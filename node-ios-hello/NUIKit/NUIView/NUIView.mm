@@ -57,6 +57,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
   JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
   JS_SET_PROP(proto, "isUserInteractionEnabled", UserInteractionEnabled);
+  JS_ASSIGN_PROP(proto, viewDidAppear);
+  JS_ASSIGN_PROP(proto, viewWillAppear);
+  JS_ASSIGN_PROP(proto, viewDidDisappear);
+  JS_ASSIGN_PROP(proto, viewWillDisappear);
+  JS_ASSIGN_PROP(proto, drawRect);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -728,6 +733,141 @@ NAN_SETTER(NUIView::alphaSetter) {
   @autoreleasepool {
     double alpha = TO_DOUBLE(value);
     [ui setAlpha:alpha];
+  }
+}
+
+NAN_GETTER(NUIView::viewDidAppearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidAppear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewDidAppearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewDidAppear"];
+  }
+}
+
+NAN_GETTER(NUIView::viewWillAppearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillAppear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewWillAppearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewWillAppear"];
+  }
+}
+
+NAN_GETTER(NUIView::viewDidDisappearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidDisappear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewDidDisappearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewDidDisappear"];
+  }
+}
+
+NAN_GETTER(NUIView::viewWillDisappearGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillDisappear"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewWillDisappearSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewWillDisappear"];
+  }
+}
+
+NAN_GETTER(NUIView::drawRectGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_drawRect"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::drawRectSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_drawRect"];
   }
 }
 
