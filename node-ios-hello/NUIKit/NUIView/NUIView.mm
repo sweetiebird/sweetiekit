@@ -38,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_SET_PROP(proto, "y", Y);
   JS_SET_PROP(proto, "width", Width);
   JS_SET_PROP(proto, "height", Height);
+  JS_ASSIGN_PROP(proto, alpha);
   Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
   Nan::SetAccessor(proto, JS_STR("subviews"), SubviewsGetter);
   Nan::SetAccessor(proto, JS_STR("layer"), LayerGetter);
@@ -708,6 +709,25 @@ NAN_METHOD(NUIView::bringSubviewToFront) {
     }
   } else {
     Nan::ThrowError("Unknown addSubview type");
+  }
+}
+
+NAN_GETTER(NUIView::alphaGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  JS_SET_RETURN(JS_NUM([ui alpha]));
+}
+
+NAN_SETTER(NUIView::alphaSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  @autoreleasepool {
+    double alpha = TO_DOUBLE(value);
+    [ui setAlpha:alpha];
   }
 }
 

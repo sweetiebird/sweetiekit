@@ -1,5 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
+const NSTextAlignment = require('./enums').NSTextAlignment;
 
 const {
   UIScrollView,
@@ -7,6 +8,9 @@ const {
   UILabel,
   UIPageControl,
   UIScrollViewDelegate,
+  UIImage,
+  UIImageView,
+  UIFont,
 } = SweetieKit;
 
 let scrollView;
@@ -19,6 +23,23 @@ const bgColors = [
 ];
 
 const numSlides = 4;
+
+const iconImages = [
+  'heart',
+  'fire',
+  'star',
+  'plane',
+];
+
+const titleFont = UIFont.boldSystemFont(20);
+const contentFont = UIFont.boldSystemFont(16);
+
+const contentTexts = [
+  'IPhone XOXO flexitarian meditation brooklyn sustainable pinterest. Before they sold out vape everyday carry YOLO. Lyft listicle kitsch pop-up try-hard.',
+  'You probably haven\'t heard of them tousled celiac, tofu hoodie cred tote bag polaroid pok pok master cleanse godard mustache lomo.',
+  'Mustache snackwave raw denim cred lo-fi pop-up art party coloring book. Unicorn truffaut paleo selfies health goth. Iceland woke aesthetic kombucha.',
+  'Tbh narwhal tote bag street art put a bird on it normcore, before they sold out artisan edison bulb sriracha salvia forage 3 wolf moon unicorn vice.',
+];
 
 function makeDelegate(demoVC, pageControl) {
   const del = new UIScrollViewDelegate();
@@ -52,14 +73,36 @@ async function make(nav, demoVC) {
   scrollView.topAnchor.constraintEqualToAnchor(demoVC.view.topAnchor, 0).isActive = true;
   scrollView.bottomAnchor.constraintEqualToAnchor(demoVC.view.bottomAnchor, 0).isActive = true;
 
+  const imgY = 40;
+  const imgSize = 100;
+
   for (let i = 0; i < numSlides; i++) {
+    const imgX = (w - 100) / 2;
+    const labelY = imgY + imgSize + 40;
+    const contentY = labelY + 40;
     const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = bgColors[i];
     const label = new UILabel();
+    label.frame = { x: 12, y: labelY, width: w - 24, height: 25 };
     label.text = `Label ${i + 1}`;
-    label.sizeToFit();
+    label.textColor = colors.fitbodPink;
+    label.font = titleFont;
+    label.textAlignment = NSTextAlignment.center;
+    const contentLabel = new UILabel();
+    contentLabel.numberOfLines = 0;
+    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.font = contentFont;
+    contentLabel.frame = { x: 12, y: contentY, width: w - 24, height: 120 };
+    contentLabel.text = contentTexts[i];
+    const image = new UIImage(iconImages[i]);
+    const imageView = new UIImageView(image);
+    imageView.alpha = 0.5;
+    imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
     scrollView.addSubview(slideView);
     slideView.addSubview(label);
+    slideView.addSubview(imageView);
+    slideView.addSubview(contentLabel);
   }
 
   const pageControl = new UIPageControl({ x: 12, y: h - 200, width: w - 24, height: 60 });

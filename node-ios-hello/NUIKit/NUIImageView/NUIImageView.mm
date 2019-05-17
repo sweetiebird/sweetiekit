@@ -44,18 +44,16 @@ NAN_METHOD(NUIImageView::New) {
     imgView->SetNSObject((__bridge UIImageView *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          if (info[0]->IsObject() && info[1]->IsObject()) {
-            auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
-            auto hlImg = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[1]))->As<UIImage>();
-            imgView->SetNSObject([[UIImageView alloc] initWithImage:img highlightedImage:hlImg]);
-          } else if (info[0]->IsObject()) {
-            auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
-            imgView->SetNSObject([[UIImageView alloc] initWithImage:img]);
-          } else {
-            imgView->SetNSObject([[UIImageView alloc] init]);
-          }
-      });
+      if (info[0]->IsObject() && info[1]->IsObject()) {
+        auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
+        auto hlImg = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[1]))->As<UIImage>();
+        imgView->SetNSObject([[UIImageView alloc] initWithImage:img highlightedImage:hlImg]);
+      } else if (info[0]->IsObject()) {
+        auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
+        imgView->SetNSObject([[UIImageView alloc] initWithImage:img]);
+      } else {
+        imgView->SetNSObject([[UIImageView alloc] init]);
+      }
     }
   }
   imgView->Wrap(imgObj);

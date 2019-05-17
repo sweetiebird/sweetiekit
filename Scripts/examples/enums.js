@@ -35,8 +35,17 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
+const NSTextAlignment = {
+  left: 'left',
+  right: 'right',
+  center: 'center',
+  justified: 'justified',
+  natural: 'natural',
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;
+module.exports.NSTextAlignment = NSTextAlignment;

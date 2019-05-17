@@ -56,6 +56,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(CenterXAnchor);
   JS_PROP(WidthAnchor);
   JS_PROP(UserInteractionEnabled);
+  JS_PROP(alpha);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);

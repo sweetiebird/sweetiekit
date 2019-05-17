@@ -17,6 +17,9 @@ let defaults;
 let mgr;
 let table;
 
+const boldFont = new UIFont('Arial-BoldMT', 17);
+const regFont = new UIFont('Arial', 17);
+
 function setupDefaults() {
   defaults = new NSUserDefaults();
 
@@ -98,7 +101,9 @@ function getCell(tableView, { section, row }) {
   if (todo && todo.text) {
     cell.textLabel.text = todo.text;
     if (!todo.isDone) {
-      cell.textLabel.font = 'Arial-BoldMT';
+      cell.textLabel.font = boldFont;
+    } else {
+      cell.textLabel.font = regFont;
     }
   }
   return cell;

@@ -134,6 +134,7 @@
 		A1CE2B5F228E83D400D9B3B8 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B5E228E83D400D9B3B8 /* 1.gif */; };
 		A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B61228E847500D9B3B8 /* NGifManager.mm */; };
 		A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B64228E85ED00D9B3B8 /* NGifView.mm */; };
+		A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -405,6 +406,8 @@
 		A1CE2B61228E847500D9B3B8 /* NGifManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NGifManager.mm; sourceTree = "<group>"; };
 		A1CE2B63228E85E400D9B3B8 /* NGifView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGifView.h; sourceTree = "<group>"; };
 		A1CE2B64228E85ED00D9B3B8 /* NGifView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NGifView.mm; sourceTree = "<group>"; };
+		A1CE2B67228EA6EC00D9B3B8 /* NUIFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFont.h; sourceTree = "<group>"; };
+		A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFont.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -893,8 +896,8 @@
 		A194896E228AA47E007BF787 /* NMKAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
-				A194896F228AA47E007BF787 /* NMKAnnotationView.mm */,
 				A1948970228AA47E007BF787 /* NMKAnnotationView.h */,
+				A194896F228AA47E007BF787 /* NMKAnnotationView.mm */,
 			);
 			path = NMKAnnotationView;
 			sourceTree = "<group>";
@@ -1256,8 +1259,8 @@
 		A1CE2B4C228E7B4B00D9B3B8 /* NUIBezierPath */ = {
 			isa = PBXGroup;
 			children = (
-				A1CE2B4D228E7B4B00D9B3B8 /* NUIBezierPath.mm */,
 				A1CE2B4E228E7B4B00D9B3B8 /* NUIBezierPath.h */,
+				A1CE2B4D228E7B4B00D9B3B8 /* NUIBezierPath.mm */,
 			);
 			path = NUIBezierPath;
 			sourceTree = "<group>";
@@ -1284,6 +1287,15 @@
 				A1CE2B56228E808200D9B3B8 /* UIImageView+NGif.swift */,
 			);
 			path = NGif;
+			sourceTree = "<group>";
+		};
+		A1CE2B66228EA6EC00D9B3B8 /* NUIFont */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B67228EA6EC00D9B3B8 /* NUIFont.h */,
+				A1CE2B68228EA6EC00D9B3B8 /* NUIFont.mm */,
+			);
+			path = NUIFont;
 			sourceTree = "<group>";
 		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
@@ -1380,17 +1392,18 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1CE2B4C228E7B4B00D9B3B8 /* NUIBezierPath */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
 				A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */,
+				A1CE2B4C228E7B4B00D9B3B8 /* NUIBezierPath */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
 				A1CC12CE228E5935008C10A0 /* NUICollectionReusableView */,
 				A1BD4BB622882116001D1F6E /* NUICollectionView */,
 				A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */,
 				A1BD4BBA228821AD001D1F6E /* NUICollectionViewController */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
+				A1CE2B66228EA6EC00D9B3B8 /* NUIFont */,
 				A1D672BD2269A05700562A42 /* NUIImage */,
 				A1E48226226AB0AE002AF96F /* NUIImagePickerController */,
 				211E76AC226A1BF100B838AF /* NUIImageView */,
@@ -1916,6 +1929,7 @@
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
+				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,

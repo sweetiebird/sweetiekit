@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUILabel.h"
 #include "NUIView.h"
+#include "NUIFont.h"
 
 Nan::Persistent<FunctionTemplate> NUILabel::type;
 
@@ -32,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   JS_SET_PROP(proto, "textColor", TextColor);
   JS_SET_PROP(proto, "highlightedTextColor", HighlightedTextColor);
   JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
+  JS_ASSIGN_PROP(proto, textAlignment);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -67,6 +69,9 @@ NAN_METHOD(NUILabel::New) {
 
   info.GetReturnValue().Set(txtObj);
 }
+
+NUILabel::NUILabel () {}
+NUILabel::~NUILabel () {}
 
 NAN_METHOD(NUILabel::Alloc) {
   Nan::EscapableHandleScope scope;
@@ -182,7 +187,7 @@ NAN_GETTER(NUILabel::FontGetter) {
 
   JS_UNWRAP(UILabel, ui);
 
-  Nan::ThrowError("TODO NUILabel::FontGetter");
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui font], NUIFont::type));
 }
 
 NAN_SETTER(NUILabel::FontSetter) {
@@ -190,16 +195,10 @@ NAN_SETTER(NUILabel::FontSetter) {
 
   JS_UNWRAP(UILabel, ui);
 
-  std::string fontName;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    fontName = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
-  }
-  
+  NUIFont *font = ObjectWrap::Unwrap<NUIFont>(Local<Object>::Cast(value));
+
   @autoreleasepool {
-    [ui setFont:[UIFont fontWithName:[NSString stringWithUTF8String:fontName.c_str()] size:16]];
+    [ui setFont:font->As<UIFont>()];
   }
 }
 
@@ -297,7 +296,65 @@ NAN_SETTER(NUILabel::IsHighlightedSetter) {
   [ui setHighlighted:TO_BOOL(value)];
 }
 
-NUILabel::NUILabel () {}
-NUILabel::~NUILabel () {}
+NAN_GETTER(NUILabel::textAlignmentGetter) {
+  Nan::HandleScope scope;
 
+  JS_UNWRAP(UILabel, ui);
+  
+  __block NSString *align = nullptr;
+  
+  @autoreleasepool {
+    NSTextAlignment a = [ui textAlignment];
+    if (a == NSTextAlignmentCenter) {
+      align = @"center";
+    } else if (a == NSTextAlignmentLeft) {
+      align = @"left";
+    } else if (a == NSTextAlignmentRight) {
+      align = @"right";
+    } else if (a == NSTextAlignmentJustified) {
+      align = @"justified";
+    } else if (a == NSTextAlignmentNatural) {
+      align = @"natural";
+    }
+  }
+
+  JS_SET_RETURN(JS_STR([align UTF8String]));
+}
+
+NAN_SETTER(NUILabel::textAlignmentSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UILabel, ui);
+
+  std::string str;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    str = *utf8Value;
+  } else {
+    Nan::ThrowError("SCNLight:setType: invaid argument");
+    return;
+  }
+  
+@autoreleasepool {
+    NSString *align = [NSString stringWithUTF8String:str.c_str()];
+    NSTextAlignment type = NSTextAlignmentLeft;
+
+    if ([align isEqualToString:@"right"]) {
+      type = NSTextAlignmentRight;
+    } else if ([align isEqualToString:@"center"]) {
+      type = NSTextAlignmentCenter;
+    } else if ([align isEqualToString:@"justified"]) {
+      type = NSTextAlignmentJustified;
+    } else if ([align isEqualToString:@"natural"]) {
+      type = NSTextAlignmentNatural;
+    } else if ([align isEqualToString:@"left"]) {
+      type = NSTextAlignmentLeft;
+    } else {
+      Nan::ThrowError("No valid light type specified");
+      return;
+    }
+
+    [ui setTextAlignment:type];
+  }
+}
 

@@ -25,6 +25,7 @@
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUILabel.h"
+#include "NUIFont.h"
 #include "NUISlider.h"
 #include "NUITextField.h"
 #include "NUINavigationController.h"
@@ -407,6 +408,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIImageView = NUIImageView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIImageView").ToLocalChecked(), N_UIImageView.first);
   
+        auto N_UIFont = NUIFont::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIFont").ToLocalChecked(), N_UIFont.first);
+
         auto N_UILabel = NUILabel::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UILabel").ToLocalChecked(), N_UILabel.first);
 

@@ -358,6 +358,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 
 #include "NNSUserDefaults.h"
 #include "NUILabel.h"
+#include "NUIFont.h"
 #include "NUISlider.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
@@ -608,6 +609,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[UILabel class]]) {
         return NUILabel::type;
+      }
+      if ([obj isKindOfClass:[UIFont class]]) {
+        return NUIFont::type;
       }
       if ([obj isKindOfClass:[UIButton class]]) {
         return NUIButton::type;

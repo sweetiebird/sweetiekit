@@ -35,6 +35,7 @@ public:
   JS_PROP(TextColor);
   JS_PROP(HighlightedTextColor);
   JS_PROP(IsHighlighted);
+  JS_PROP(textAlignment);
 };
 
 #endif /* NUILabel_h */
