@@ -31,6 +31,8 @@ public:
   JS_PROP(delegate);
   JS_PROP(contentOffset);
   JS_PROP(contentSize);
+  JS_PROP(showsHorizontalScrollIndicator);
+  JS_PROP(showsVerticalScrollIndicator);
   
   Nan::Persistent<Value> _delegate;
 };

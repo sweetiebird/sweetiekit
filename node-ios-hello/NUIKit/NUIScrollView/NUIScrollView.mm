@@ -31,6 +31,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIScrollView::Initialize(Isol
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, contentSize);
+  JS_ASSIGN_PROP(proto, showsHorizontalScrollIndicator);
+  JS_ASSIGN_PROP(proto, showsVerticalScrollIndicator);
   JS_ASSIGN_PROP_READONLY(proto, contentOffset);
   Nan::SetMethod(proto, "setContentOffset", setContentOffset);
 
@@ -150,5 +152,55 @@ NAN_SETTER(NUIScrollView::contentSizeSetter) {
     double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
     double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
     [ui setContentSize:CGSizeMake(width, height)];
+  }
+}
+
+NAN_GETTER(NUIScrollView::showsHorizontalScrollIndicatorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIScrollView, ui);
+
+  __block BOOL val;
+
+  @autoreleasepool {
+    val = [ui showsHorizontalScrollIndicator];
+  }
+  
+  JS_SET_RETURN(JS_BOOL(val));
+}
+
+NAN_SETTER(NUIScrollView::showsHorizontalScrollIndicatorSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIScrollView, ui);
+
+  @autoreleasepool {
+    BOOL val = TO_BOOL(value);
+    [ui setShowsHorizontalScrollIndicator:val];
+  }
+}
+
+NAN_GETTER(NUIScrollView::showsVerticalScrollIndicatorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIScrollView, ui);
+
+  __block BOOL val;
+
+  @autoreleasepool {
+    val = [ui showsVerticalScrollIndicator];
+  }
+  
+  JS_SET_RETURN(JS_BOOL(val));
+}
+
+NAN_SETTER(NUIScrollView::showsVerticalScrollIndicatorSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIScrollView, ui);
+
+  @autoreleasepool {
+    BOOL val = TO_BOOL(value);
+    [ui setShowsVerticalScrollIndicator:val];
   }
 }

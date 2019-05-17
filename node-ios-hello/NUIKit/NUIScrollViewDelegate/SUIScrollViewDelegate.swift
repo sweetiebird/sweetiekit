@@ -16,6 +16,7 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
   var didScrollCallback: SUIScrollViewDelegate_CommonDidClosure?
   var shouldScrollToTopCallback: SUIScrollViewDelegate_CommonShouldClosure?
   var didScrollToTopCallback: SUIScrollViewDelegate_CommonDidClosure?
+  var willBeginDeceleratingCallback: SUIScrollViewDelegate_CommonDidClosure?
   var didEndDeceleratingCallback: SUIScrollViewDelegate_CommonDidClosure?
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -36,6 +37,10 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     didEndDeceleratingCallback?(scrollView)
   }
+  
+  func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+    willBeginDeceleratingCallback?(scrollView)
+  }
 }
 
 @objc extension SUIScrollViewDelegate {
@@ -51,6 +56,10 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
     didScrollToTopCallback = closure
   }
   
+  func setWillBeginDecelerating(_ closure: @escaping SUIScrollViewDelegate_CommonDidClosure) {
+    willBeginDeceleratingCallback = closure
+  }
+
   func setDidEndDecelerating(_ closure: @escaping SUIScrollViewDelegate_CommonDidClosure) {
     didEndDeceleratingCallback = closure
   }
