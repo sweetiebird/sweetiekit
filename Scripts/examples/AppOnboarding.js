@@ -65,7 +65,9 @@ async function make(nav, demoVC) {
     alpha: 0.5,
   };
   pageControl.addTarget(() => {
-    console.log(pageControl.currentPage);
+    const i = pageControl.currentPage;
+    const offsetX = w * i;
+    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
   });
 
   makeDelegate(demoVC, pageControl);

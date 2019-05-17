@@ -101,13 +101,13 @@ NAN_GETTER(NUIPageControl::currentPageGetter) {
   
   JS_UNWRAP(UIPageControl, ui);
   
-  __block int currPage = 0;
+  __block float currPage = 0;
   
   @autoreleasepool {
-    currPage = [ui numberOfPages];
+    currPage = [ui currentPage];
   }
   
-  JS_SET_RETURN(JS_INT(currPage));
+  JS_SET_RETURN(JS_NUM(currPage));
 }
 
 NAN_SETTER(NUIPageControl::currentPageSetter) {
