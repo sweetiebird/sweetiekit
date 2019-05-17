@@ -8,6 +8,7 @@ const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
 const makeMapView = require('./examples/MKMapView');
 const makeSKScene = require('./examples/SKScene');
+const makeSKSceneSockets = require('./examples/SKSceneSockets');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
@@ -36,6 +37,7 @@ const {
 const demoTypes = {
   MKMapView: makeMapView,
   SKScene: makeSKScene,
+  SKSceneSockets: makeSKSceneSockets,
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
