@@ -426,6 +426,9 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NMKMapViewDelegate.h"
 #include "NMKAnnotationView.h"
 #include "NUINib.h"
+#include "NGif.h"
+#include "NGifView.h"
+#include "NGifManager.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -545,6 +548,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[SKAction class]]) {
         return NSKAction::type;
+      }
+
+      // Custom UIKit
+
+      if ([obj isKindOfClass:[GifManager class]]) {
+        return NGifManager::type;
+      }
+      if ([obj isKindOfClass:[Gif class]]) {
+        return NGif::type;
+      }
+      if ([obj isKindOfClass:[GifView class]]) {
+        return NGifView::type;
       }
 
       // UIKit

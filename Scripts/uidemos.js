@@ -5,6 +5,7 @@ const makeARSCNView = require('./examples/ARSCNView');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeCollectionView = require('./examples/UICollectionView');
+const makeGifView = require('./examples/GifView');
 const makeImageView = require('./examples/UIImageView');
 const makeLabel = require('./examples/UILabel');
 const makePageControl = require('./examples/UIPageControl');
@@ -37,6 +38,7 @@ const {
 } = SweetieKit;
 
 const demoTypes = {
+  GifView: makeGifView,
   MKMapView: makeMapView,
   SKScene: makeSKScene,
   // SKSceneSockets: makeSKSceneSockets,

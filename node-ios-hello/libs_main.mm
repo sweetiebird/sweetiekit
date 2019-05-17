@@ -89,6 +89,9 @@
 #include "NMKMapView.h"
 #include "NMKAnnotationView.h"
 #include "NMKMapViewDelegate.h"
+#include "NGif.h"
+#include "NGifView.h"
+#include "NGifManager.h"
 #include <unistd.h>
 
 #include <string>
@@ -450,6 +453,17 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIViewControllerTransitioningDelegate = NUIViewControllerTransitioningDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIViewControllerTransitioningDelegate").ToLocalChecked(), N_UIViewControllerTransitioningDelegate.first);
+
+        // UIKit Custom
+
+        auto N_GifManager = NGifManager::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("GifManager").ToLocalChecked(), N_GifManager.first);
+  
+        auto N_Gif = NGif::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("Gif").ToLocalChecked(), N_Gif.first);
+  
+        auto N_GifView = NGifView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("GifView").ToLocalChecked(), N_GifView.first);
 
         // CoreAnimation
   
