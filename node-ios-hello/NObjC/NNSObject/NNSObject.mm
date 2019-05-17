@@ -66,6 +66,14 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
     JS_SET_RETURN(sweetiekit::GetWrapperFor(cls, NNSObject::type));
   });
+  sweetiekit::Set(ctorFn, "metaclassFromString", ^(JSInfo info) {
+    Nan::HandleScope scope;
+    Class cls = NSClassFromString(NJSStringToNSString(info[0]));
+    if (cls != nullptr) {
+      cls = object_getClass(cls);
+      JS_SET_RETURN(sweetiekit::GetWrapperFor(cls, NNSObject::type));
+    }
+  });
   sweetiekit::Set(ctorFn, "stringFromClass", ^(JSInfo info) {
     Nan::HandleScope scope;
     NNSObject* ncls = ObjectWrap::Unwrap<NNSObject>(JS_OBJ(info[0]));
