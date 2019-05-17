@@ -77,5 +77,9 @@ extension NSObject {
   @objc public func removeAssociatedObjects() {
     objc_removeAssociatedObjects(self)
   }
+  
+//  @objc public func callCallback() {
+//    objc_callCallback(self);
+//  }
 
 }

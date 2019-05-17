@@ -41,44 +41,47 @@ class NodeUIViewController: UIViewController, UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("TextField did begin editing method called")
+        //print("TextField did begin editing method called")
+        textField.closureAction();
     }
 
   func textFieldDidEndEditing(_ textField: UITextField) {
-        print("TextField did end editing method called")
+        //print("TextField did end editing method called")
         textField.closureAction();
         //self.closureAction(textField);
     }
 
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("TextField should begin editing method called")
+        //print("TextField should begin editing method called")
         return true;
     }
 
   func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("TextField should clear method called")
+        //print("TextField should clear method called")
+        textField.closureAction();
         return true;
     }
 
   func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("TextField should snd editing method called")
+        //print("TextField should snd editing method called")
         return true;
     }
 
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("While entering the characters this method gets called")
+        //print("While entering the characters this method gets called")
+        textField.closureAction();
         return true;
     }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("TextField should return method called")
+        //print("TextField should return method called")
         textField.resignFirstResponder();
         return true;
     }
 
 
 }
-
-@objc extension NodeUIViewController: UIImagePickerControllerDelegate {
-
-}
+//
+//@objc extension NodeUIViewController: UIImagePickerControllerDelegate {
+//
+//}

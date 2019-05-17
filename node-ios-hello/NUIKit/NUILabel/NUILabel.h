@@ -30,6 +30,11 @@ public:
   static NAN_METHOD(Destroy);
   static NAN_GETTER(TextGetter);
   static NAN_SETTER(TextSetter);
+  JS_PROP(NumberOfLines);
+  JS_PROP(Font);
+  JS_PROP(TextColor);
+  JS_PROP(HighlightedTextColor);
+  JS_PROP(IsHighlighted);
 };
 
 #endif /* NUILabel_h */

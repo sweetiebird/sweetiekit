@@ -422,3 +422,7 @@ extern "C" void run_mksnapshot_with_args(const char* args)
     }
     mksnapshot_main((int)arg.size(), &arg[0]);
 }
+
+extern "C" void gen_snapshot() {
+  run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
+}

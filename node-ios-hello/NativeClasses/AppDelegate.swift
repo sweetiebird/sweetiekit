@@ -10,11 +10,48 @@ import UIKit
 
 extension String: Error {}
 
-@UIApplicationMain
+extension DispatchQueue {
+    class func mainSyncSafe(execute work: () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.sync(execute: work)
+        }
+    }
+
+    class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
+        if Thread.isMainThread {
+            return try work()
+        } else {
+            return try DispatchQueue.main.sync(execute: work)
+        }
+    }
+}
+
+@objc(ScriptGetter)
+class ScriptGetter: NSObject {
+  @objc
+  static func Get(name: String) -> String? {
+    guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return nil; }
+    guard let bundle = Bundle(url: bundleURL) else { iOSLog0("Scripts bundle url not found"); iOSTrap(); return nil; }
+    guard let scriptURL = bundle.url(forResource: name, withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return nil; }
+    return scriptURL.path
+  }
+}
+
+@objc(AppDelegate)
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    @objc static var queue: DispatchQueue! = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
+  
+    typealias FetchCallbackCompletionHandler = (UIBackgroundFetchResult) -> Void;
+  typealias FetchCallback = (@escaping FetchCallbackCompletionHandler) -> Void;
+    @objc static var fetchCallback: FetchCallback?;
 
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+      AppDelegate.fetchCallback?(completionHandler);
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         /*
@@ -23,15 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "secondVC") as! SecondViewController
         vc.setViewControllers([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;*/
-        
+      
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+
         iOSLog0("Finished launching\n");
+        //embed_start();
         if (false) {
             run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
             iOSLog0("Done embedding");
             iOSTrap();
         } else if (false) {
           hellov8async("node-ios-hello");
-        } else if (true) {
+        } else if (false) {
 //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
 //        let first = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "first") as! FirstViewController
 //        vc.setViewControllers([first], animated: false)
@@ -47,10 +87,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }
             guard let bundle = Bundle(url: bundleURL) else { iOSLog0("Scripts bundle url not found"); iOSTrap(); return false; }
-            guard let scriptURL = bundle.url(forResource: "demo", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
+            guard let scriptURL = bundle.url(forResource: "todo", withExtension: "js") else { iOSLog0("demo not found"); iOSTrap(); return false; }
 
             //iOSLog0(scriptURL.path);
-            #if true
+            #if false
+            //AppDelegate.queue = DispatchQueue(label: "sweetiekit.node", attributes: .concurrent)
+            AppDelegate.queue.async {
+              hello_node("node\0--jitless\0\(scriptURL.path)\0\0");
+            }
+            #elseif true
             hello_node_async("node\0--jitless\0\(scriptURL.path)\0\0");
             #else
           hello_node("""
@@ -1264,6 +1309,44 @@ process.stderr.write('sweetiekit-node\\n');
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+      let sendingAppID = options[.sourceApplication]
+      print("source application = \(sendingAppID ?? "Unknown")")
+      
+      // Process the URL.
+      guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+        let developer = components.host,
+        let path = components.path else {
+              print("Invalid URL")
+              return false
+      }
 
+      if let appId = path.split(separator: "/").first  {
+      // e.g. "node-ios-hello-2://dev/someappid"
+          print("developer = \(developer)")
+          print("appId = \(appId)")
+          return true
+      } else {
+          print("app id missing")
+          return false
+      }
+    }
 }
 
+typealias Thunk = () -> ()
+
+extension JSApplication {
+  @objc static var afterNodeExit: Thunk?
+
+  @objc func start() {
+    if let afterNodeExit = JSApplication.afterNodeExit {
+      JSApplication.afterNodeExit = nil
+      afterNodeExit()
+    }
+  }
+
+  @objc func update(_ loop: UnsafeMutablePointer<uv_loop_s>!) {
+//    print("iOS callback")
+    uv_run(loop, UV_RUN_NOWAIT)
+  }
+}

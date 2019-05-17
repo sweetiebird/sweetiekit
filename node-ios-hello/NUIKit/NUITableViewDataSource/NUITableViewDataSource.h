@@ -9,5 +9,15 @@
 #ifndef NUITableViewDataSource_h
 #define NUITableViewDataSource_h
 
+#include "NNSObject.h"
+
+JS_WRAP_CLASS(UITableViewDataSource, NSObject);
+  JS_PROP(NumberOfRowsInSection);
+  JS_PROP(CellForRowAt);
+  JS_PROP(WillDisplayCellForRowAt);
+  Nan::Persistent<Function>* _numberRowsCallback;
+  Nan::Persistent<Function>* _cellCallback;
+  Nan::Persistent<Function>* _displayCallback;
+JS_WRAP_CLASS_END(UITableViewDataSource);
 
 #endif /* NUITableViewDataSource_h */

@@ -9,21 +9,24 @@
 #ifndef NUITableViewController_h
 #define NUITableViewController_h
 
+#import <UIKit/UIKit.h>
+#include "NUIViewController.h"
 #include "defines.h"
+
 using namespace v8;
 using namespace node;
 
-#include "NUITableViewController.h"
+class NUITableViewController : public NUIViewController {
+public:
 
-JS_WRAP_CLASS(UITextField, UIControl);
-  static NAN_METHOD(Alloc);
-  static NAN_GETTER(TextGetter);
-  static NAN_SETTER(TextSetter);
-  static NAN_GETTER(DelegateGetter);
-  static NAN_SETTER(DelegateSetter);
-  static NAN_GETTER(CallbackGetter);
-  static NAN_SETTER(CallbackSetter);
-  Nan::Persistent<Function>* _callback;
-JS_WRAP_CLASS_END(UITextField);
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUITableViewController();
+  virtual ~NUITableViewController();
+
+  static NAN_METHOD(New);
+  static NAN_METHOD(Destroy);
+};
 
 #endif /* NUITableViewController_h */

@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #include "NCALayer.h"
 #include "ColorHelper.h"
+#include "NCABasicAnimation.h"
 
 Nan::Persistent<FunctionTemplate> NCALayer::type;
 
@@ -35,6 +36,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "shadowOffset", ShadowOffset);
   JS_SET_PROP(proto, "shadowColor", ShadowColor);
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
+  JS_SET_PROP(proto, "position", Position)
+  Nan::SetMethod(proto, "addAnimation", AddAnimation);
+  JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -284,4 +288,79 @@ NAN_SETTER(NCALayer::ShadowRadiusSetter) {
   } else {
     iOSLog0("NCALayer::ShadowRadiusSetter: value is not a number");
   }
+}
+
+NAN_GETTER(NCALayer::PositionGetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(CALayer, ui);
+  
+  __block CGPoint position;
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      position = [ui position];
+    });
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_NUM(position.x));
+  result->Set(JS_STR("y"), JS_NUM(position.y));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NCALayer::PositionSetter) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(CALayer, ui);
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+      double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+      CGPoint pt = CGPointMake(x, y);
+      [ui setPosition:pt];
+    });
+  }
+}
+
+NAN_METHOD(NCALayer::AddAnimation) {
+  Nan::HandleScope scope;
+  JS_UNWRAP(CALayer, layer)
+
+  Local<Object> obj = JS_OBJ(info[0]);
+  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NCABasicAnimation)).FromJust()) {
+    NCABasicAnimation *anim = ObjectWrap::Unwrap<NCABasicAnimation>(obj);
+    
+    std::string kp;
+    if (info[1]->IsString()) {
+      Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
+      kp = *utf8Value;
+    } else {
+      Nan::ThrowError("invalid argument: key path");
+    }
+    
+    @autoreleasepool {
+      NSString *keyPath = [NSString stringWithUTF8String:kp.c_str()];
+      
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+        [layer addAnimation:anim->As<CABasicAnimation>() forKey:keyPath];
+      });
+    }
+  }
+}
+
+NAN_GETTER(NCALayer::MasksToBoundsGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui masksToBounds]));
+}
+
+NAN_SETTER(NCALayer::MasksToBoundsSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+  
+  [ui setMasksToBounds:TO_BOOL(value)];
 }

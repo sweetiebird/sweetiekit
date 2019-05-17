@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUIApplication.h"
 #include "NUIWindow.h"
+#include "main.h"
 
 Nan::Persistent<FunctionTemplate> NUIApplication::type;
 UIWindow* NUIApplication::tmp_UIWindow;
@@ -46,7 +47,7 @@ NAN_METHOD(NUIApplication::New) {
     app->SetNSObject((__bridge UIApplication *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_async(dispatch_get_main_queue(), ^ {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
           app->SetNSObject([UIApplication sharedApplication]);
       });
     }
@@ -58,22 +59,88 @@ NAN_METHOD(NUIApplication::New) {
 
 NAN_GETTER(NUIApplication::KeyWindowGetter)
 {
-  NUIApplication *app = ObjectWrap::Unwrap<NUIApplication>(Local<Object>::Cast(info.This()));
+  JS_UNWRAP(UIApplication, app)
 
   tmp_UIWindow = nullptr;
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      tmp_UIWindow = [app->As<UIApplication>() keyWindow];
+      tmp_UIWindow = [app keyWindow];
     });
   }
+  if (tmp_UIWindow != nullptr) {
+    Local<Value> argv[] = {
+      Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
+    };
+    Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+    
+    info.GetReturnValue().Set(winObj);
+  }
+}
 
-  Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
-  };
-  Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+#import "node_ios_hello-Swift.h"
+
+namespace sweetiekit {
+  extern Isolate* nodeIsolate;
+}
+NAN_METHOD(NUIApplication::Main) {
+  Nan::HandleScope scope;
   
-  info.GetReturnValue().Set(winObj);
+  std::string identifier("AppDelegate");
+  sweetiekit::JSFunction fetchFn;
+  
+  __block void (^ _completion)(UIBackgroundFetchResult);
+  
+  __block sweetiekit::JSFunction onFetchDoneFn(sweetiekit::FromBlock("BackgroundFetchCompletionHandler", ^(JSInfo info) {
+    if (_completion != nullptr) {
+      _completion(UIBackgroundFetchResultNewData);
+      _completion = nullptr;
+    }
+  }));
+  
+  
+  if (info[0]->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    identifier = *utf8Value;
+  }
+  if (info[0]->IsObject()) {
+    auto delegateName = JS_OBJ(info[0])->Get(JS_STR("appDelegate"));
+    if (delegateName->IsString()) {
+      NJSStringGetUTF8String(delegateName, identifier);
+    }
+    auto onBackgroundFetch = JS_OBJ(info[0])->Get(JS_STR("onBackgroundFetch"));
+    if (onBackgroundFetch->IsFunction()) {
+      fetchFn.Reset(onBackgroundFetch);
+    }
+  }
+  NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
+  
+  
+  [AppDelegate setFetchCallback:^(void (^ _Nonnull completion)(UIBackgroundFetchResult)) {
+    Nan::HandleScope handleScope;
+    _completion = completion;
+    [[UIApplication sharedApplication] associateValue:_completion withKey:@"sweetiekit.UIApplication._completion"];
+    fetchFn.Call("AppDelegate:fetchCallback", onFetchDoneFn.GetValue());
+  }];
+  char* args = "node\0--jitless\0\0";
+  char* args1 = (char*)args;
+  std::vector<char*> arg;
+  while (*args1 != '\0') {
+      arg.push_back((char*)args1);
+      args1 += strlen(args1) + 1;
+      if (arg.size() > 100)
+          __builtin_trap();
+  }
+  arg.push_back(nullptr);
+  
+  Isolate* isolate = info.GetIsolate();
+  MicrotasksScope noMicrotasks(isolate, MicrotasksScope::kDoNotRunMicrotasks);
+  sweetiekit::nodeIsolate = isolate;
+  isolate->Exit();
+//  @autoreleasepool {
+//    UIApplicationMain(arg.size() - 1, &arg[0], NSStringFromClass(JSApplication.class), result);
+//  }
+  
 }
 
 NUIApplication::NUIApplication () {}

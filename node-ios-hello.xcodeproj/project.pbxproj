@@ -19,24 +19,116 @@
 		211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B6226A3E4D00B838AF /* NodeUITabBarController.swift */; };
 		211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */; };
 		211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76BB226A52AC00B838AF /* NUILabel.mm */; };
+		212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */ = {isa = PBXBuildFile; fileRef = 212BA5DA227DA9E9000B8D1D /* defines.mm */; };
 		216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A5226BD48A00051DE0 /* NCALayer.mm */; };
 		216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A8226BDBF000051DE0 /* ColorHelper.mm */; };
 		21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21C872CD226A87C500B5192B /* NNSUserDefaults.mm */; };
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
-		A1058B45226810B700CEAA5C /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
-		A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
-		A11CB496226BC0660006A0D4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11CB495226BC0660006A0D4 /* demo.js */; };
-		A11CB49A226BE0420006A0D4 /* NUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.m */; };
-		A1296B07225F77340058C23D /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A1296B05225F77330058C23D /* js-blockchain */; };
-		A1296B08225F77340058C23D /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A1296B06225F77330058C23D /* node_modules */; };
+		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
+		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
+		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
+		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
+		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
+		A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */; };
+		A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */; };
+		A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */; };
+		A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */; };
+		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
+		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
+		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
+		A12655FE22719CE400D3DF47 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EE22719CE300D3DF47 /* app.js */; };
+		A126560222719CE400D3DF47 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F322719CE300D3DF47 /* hello.js */; };
+		A126560322719CE400D3DF47 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F422719CE300D3DF47 /* server.js */; };
+		A126560522719CE400D3DF47 /* js-blockchain in Resources */ = {isa = PBXBuildFile; fileRef = A12655F622719CE400D3DF47 /* js-blockchain */; };
+		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
+		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
+		A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12C1503228A3718005BDD9D /* NSCNScene.mm */; };
+		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
+		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
+		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
+		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
+		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
+		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
+		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
+		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
+		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
+		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
+		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
+		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
+		A188710E227E51D700129A75 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A188710D227E51D700129A75 /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
+		A18F1E61228A3D1500A42754 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = A18F1E60228A3D1500A42754 /* vendor */; };
+		A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E64228A41C000A42754 /* NARSCNView.mm */; };
+		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
+		A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */; };
+		A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E72228A478600A42754 /* NSCNNode.mm */; };
+		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
+		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
+		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
+		A19476BD226E9469003BB393 /* NUITableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476BC226E9469003BB393 /* NUITableView.mm */; };
+		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
+		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
+		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
+		A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948932228A5D46007BF787 /* NSCNLight.mm */; };
+		A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948936228A68BA007BF787 /* NARConfiguration.mm */; };
+		A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194893A228A6AA6007BF787 /* NARLightEstimate.mm */; };
+		A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948957228A84DB007BF787 /* NMKMapView.mm */; };
+		A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A194895E228A89B0007BF787 /* MapKit.framework */; };
+		A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1948966228A945E007BF787 /* SMKAnnotation.swift */; };
+		A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */; };
+		A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */; };
+		A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194896F228AA47E007BF787 /* NMKAnnotationView.mm */; };
+		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
+		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
+		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
+		A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEE222885C76003C1DC4 /* NUIAlertController.mm */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
-		A19E9101225D7F2A004FC391 /* hello.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9100225D7F29004FC391 /* hello.js */; };
-		A19E9105225EC2C3004FC391 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A19E9102225EC2C2004FC391 /* package.json */; };
-		A19E9106225EC2C3004FC391 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A19E9103225EC2C2004FC391 /* yarn.lock */; };
-		A19E9109225EC394004FC391 /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = A19E9108225EC394004FC391 /* server.js */; };
+		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
+		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
+		A1B65486228CBA7200976024 /* SSKScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65485228CBA7200976024 /* SSKScene.swift */; };
+		A1B6548A228CD87600976024 /* NSKAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65489228CD87500976024 /* NSKAction.mm */; };
+		A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */; };
+		A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */; };
+		A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */; };
+		A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */; };
+		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
+		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
+		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
+		A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B092287B769001D1F6E /* snapshot.cc */; };
+		A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B0A2287B769001D1F6E /* embedded.S */; };
+		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
+		A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */; };
+		A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */; };
+		A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */; };
+		A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B832287C369001D1F6E /* NSKNode.mm */; };
+		A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */; };
+		A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */; };
+		A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1BD4B8D2287CCF3001D1F6E /* Scene.sks */; };
+		A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B8F2287CDD9001D1F6E /* Scene.swift */; };
+		A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */; };
+		A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B982287DA43001D1F6E /* NCLLocationManager.mm */; };
+		A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */; };
+		A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */; };
+		A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */; };
+		A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */; };
+		A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAE228809AF001D1F6E /* NARFrame.mm */; };
+		A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BB222880B30001D1F6E /* NARCamera.mm */; };
+		A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BB822882131001D1F6E /* NUICollectionView.mm */; };
+		A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BBC228821C0001D1F6E /* NUICollectionViewController.mm */; };
+		A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC02288240F001D1F6E /* NUICollectionViewManager.mm */; };
+		A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC222882469001D1F6E /* SUICollectionViewManager.swift */; };
+		A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BC62288284E001D1F6E /* NUICollectionViewCell.mm */; };
+		A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BCC22882EB9001D1F6E /* NUINib.mm */; };
+		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
+		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
+		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
+		A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */; };
+		A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1222819D9500AC0BD9 /* NARSKView.mm */; };
+		A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1622819F8E00AC0BD9 /* NARSession.mm */; };
+		A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */; };
 		A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D67292226953BB00562A42 /* NUIViewController.mm */; };
 		A1D6729822695D0200562A42 /* NUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729722695D0200562A42 /* NUIView.mm */; };
 		A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D6729A22696D7A00562A42 /* NUIStoryboard.mm */; };
@@ -114,6 +206,7 @@
 		211E76B8226A44CA00B838AF /* UITextField+AddTargetClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddTargetClosure.swift"; sourceTree = "<group>"; };
 		211E76BB226A52AC00B838AF /* NUILabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILabel.mm; sourceTree = "<group>"; };
 		211E76BC226A52AC00B838AF /* NUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILabel.h; sourceTree = "<group>"; };
+		212BA5DA227DA9E9000B8D1D /* defines.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = defines.mm; sourceTree = "<group>"; };
 		216392A4226BD48A00051DE0 /* NCALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCALayer.h; sourceTree = "<group>"; };
 		216392A5226BD48A00051DE0 /* NCALayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCALayer.mm; sourceTree = "<group>"; };
 		216392A7226BDBD900051DE0 /* ColorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
@@ -125,18 +218,175 @@
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
-		A11CB495226BC0660006A0D4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
+		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
+		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
+		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
-		A11CB499226BE0420006A0D4 /* NUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NUITableViewController.m; sourceTree = "<group>"; };
-		A1296B05225F77330058C23D /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
-		A1296B06225F77330058C23D /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
+		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
+		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
+		A11D1297227EA6AD0038C262 /* NUIScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIScrollView.h; sourceTree = "<group>"; };
+		A11D1298227EA6B40038C262 /* NUIScrollView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScrollView.mm; sourceTree = "<group>"; };
+		A11D129B227F6AB70038C262 /* NNSLayoutConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutConstraint.h; sourceTree = "<group>"; };
+		A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutConstraint.mm; sourceTree = "<group>"; };
+		A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutAnchor.h; sourceTree = "<group>"; };
+		A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutAnchor.mm; sourceTree = "<group>"; };
+		A11D12A3227F8D950038C262 /* NUITableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewManager.h; sourceTree = "<group>"; };
+		A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewManager.mm; sourceTree = "<group>"; };
+		A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewManager.swift; sourceTree = "<group>"; };
+		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
+		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
+		A12655EE22719CE300D3DF47 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		A12655EF22719CE300D3DF47 /* index.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = index.js.map; sourceTree = "<group>"; };
+		A12655F322719CE300D3DF47 /* hello.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
+		A12655F422719CE300D3DF47 /* server.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
+		A12655F622719CE400D3DF47 /* js-blockchain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "js-blockchain"; sourceTree = "<group>"; };
+		A12655F722719CE400D3DF47 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		A12C1502228A3710005BDD9D /* NSCNScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNScene.h; sourceTree = "<group>"; };
+		A12C1503228A3718005BDD9D /* NSCNScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNScene.mm; sourceTree = "<group>"; };
+		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
+		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
+		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
+		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
+		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
+		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
+		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
+		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
+		A174A16922822161002A8216 /* NAVAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NAVAudioPlayer.h; sourceTree = "<group>"; };
+		A174A16A22822169002A8216 /* NAVAudioPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioPlayer.mm; sourceTree = "<group>"; };
+		A174A16D22822290002A8216 /* NNSBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSBundle.h; sourceTree = "<group>"; };
+		A174A16E2282229B002A8216 /* NNSBundle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSBundle.mm; sourceTree = "<group>"; };
+		A174A170228227A2002A8216 /* sunflower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sunflower.mp3; sourceTree = "<group>"; };
+		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
+		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
+		A178B2712288790C005184EE /* NUITabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITabBarItem.h; sourceTree = "<group>"; };
+		A178B27222887913005184EE /* NUITabBarItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarItem.mm; sourceTree = "<group>"; };
+		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
+		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
+		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
+		A1887109227E370500129A75 /* SUIPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPresentationController.swift; sourceTree = "<group>"; };
+		A188710D227E51D700129A75 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
+		A18F1E60228A3D1500A42754 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vendor; sourceTree = "<group>"; };
+		A18F1E63228A419000A42754 /* NARSCNView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSCNView.h; sourceTree = "<group>"; };
+		A18F1E64228A41C000A42754 /* NARSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSCNView.mm; sourceTree = "<group>"; };
+		A18F1E67228A429500A42754 /* NARSCNViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSCNViewDelegate.h; sourceTree = "<group>"; };
+		A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSCNViewDelegate.mm; sourceTree = "<group>"; };
+		A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSCNViewDelegate.swift; sourceTree = "<group>"; };
+		A18F1E72228A478600A42754 /* NSCNNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNNode.mm; sourceTree = "<group>"; };
+		A18F1E74228A478D00A42754 /* NSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNNode.h; sourceTree = "<group>"; };
+		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
+		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
+		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
+		A19476B7226E90FF003BB393 /* NUITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewCell.h; sourceTree = "<group>"; };
+		A19476B8226E9109003BB393 /* NUITableViewCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewCell.mm; sourceTree = "<group>"; };
+		A19476BB226E9461003BB393 /* NUITableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableView.h; sourceTree = "<group>"; };
+		A19476BC226E9469003BB393 /* NUITableView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableView.mm; sourceTree = "<group>"; };
+		A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIRefreshControl.mm; sourceTree = "<group>"; };
+		A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIRefreshControl.h; sourceTree = "<group>"; };
+		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
+		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		A1948931228A5D40007BF787 /* NSCNLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNLight.h; sourceTree = "<group>"; };
+		A1948932228A5D46007BF787 /* NSCNLight.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNLight.mm; sourceTree = "<group>"; };
+		A1948935228A68B4007BF787 /* NARConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARConfiguration.h; sourceTree = "<group>"; };
+		A1948936228A68BA007BF787 /* NARConfiguration.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARConfiguration.mm; sourceTree = "<group>"; };
+		A1948939228A6A9F007BF787 /* NARLightEstimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARLightEstimate.h; sourceTree = "<group>"; };
+		A194893A228A6AA6007BF787 /* NARLightEstimate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARLightEstimate.mm; sourceTree = "<group>"; };
+		A1948957228A84DB007BF787 /* NMKMapView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapView.mm; sourceTree = "<group>"; };
+		A1948958228A84DB007BF787 /* NMKMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapView.h; sourceTree = "<group>"; };
+		A194895E228A89B0007BF787 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A1948966228A945E007BF787 /* SMKAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKAnnotation.swift; sourceTree = "<group>"; };
+		A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapViewDelegate.mm; sourceTree = "<group>"; };
+		A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapViewDelegate.h; sourceTree = "<group>"; };
+		A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKMapViewDelegate.swift; sourceTree = "<group>"; };
+		A194896F228AA47E007BF787 /* NMKAnnotationView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKAnnotationView.mm; sourceTree = "<group>"; };
+		A1948970228AA47E007BF787 /* NMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKAnnotationView.h; sourceTree = "<group>"; };
+		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
+		A199AEDA22884F3E003C1DC4 /* NUISlider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISlider.mm; sourceTree = "<group>"; };
+		A199AEDC22885573003C1DC4 /* uidemos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = uidemos.js; sourceTree = "<group>"; };
+		A199AEDE22885581003C1DC4 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
+		A199AEE122885C6F003C1DC4 /* NUIAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertController.h; sourceTree = "<group>"; };
+		A199AEE222885C76003C1DC4 /* NUIAlertController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertController.mm; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		A19E90F9225D7EA8004FC391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A19E9100225D7F29004FC391 /* hello.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
-		A19E9102225EC2C2004FC391 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		A19E9103225EC2C2004FC391 /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
-		A19E9108225EC394004FC391 /* server.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
+		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
+		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
+		A1B65482228CB87E00976024 /* NUITouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITouch.mm; sourceTree = "<group>"; };
+		A1B65483228CB87E00976024 /* NUITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITouch.h; sourceTree = "<group>"; };
+		A1B65485228CBA7200976024 /* SSKScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKScene.swift; sourceTree = "<group>"; };
+		A1B65488228CD87500976024 /* NSKAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKAction.h; sourceTree = "<group>"; };
+		A1B65489228CD87500976024 /* NSKAction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKAction.mm; sourceTree = "<group>"; };
+		A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsWorld.mm; sourceTree = "<group>"; };
+		A1B6548E228CE34D00976024 /* NSKPhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsWorld.h; sourceTree = "<group>"; };
+		A1B65491228CE4AF00976024 /* NSKPhysicsContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsContactDelegate.h; sourceTree = "<group>"; };
+		A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsContactDelegate.mm; sourceTree = "<group>"; };
+		A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKPhysicsContactDelegate.swift; sourceTree = "<group>"; };
+		A1B65497228CE80D00976024 /* NSKPhysicsContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsContact.h; sourceTree = "<group>"; };
+		A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsContact.mm; sourceTree = "<group>"; };
+		A1BD4B002287B6DC001D1F6E /* libicuucx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuucx.a; path = "../node-ios-release/out/Release/libicuucx.a"; sourceTree = "<group>"; };
+		A1BD4B012287B6DC001D1F6E /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = "../node-ios-release/out/Release/libicui18n.a"; sourceTree = "<group>"; };
+		A1BD4B022287B6DC001D1F6E /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = "../node-ios-release/out/Release/libicudata.a"; sourceTree = "<group>"; };
+		A1BD4B092287B769001D1F6E /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = Debug/snapshot.cc; sourceTree = "<group>"; };
+		A1BD4B0A2287B769001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Debug/embedded.S; sourceTree = "<group>"; };
+		A1BD4B0D2287B773001D1F6E /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = embedded.S; path = Release/embedded.S; sourceTree = "<group>"; };
+		A1BD4B0E2287B773001D1F6E /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snapshot.cc; path = Release/snapshot.cc; sourceTree = "<group>"; };
+		A1BD4B412287BCB5001D1F6E /* NSCNView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNView.h; sourceTree = "<group>"; };
+		A1BD4B422287BCBC001D1F6E /* NSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNView.mm; sourceTree = "<group>"; };
+		A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKViewDelegate.h; sourceTree = "<group>"; };
+		A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKViewDelegatem.mm; sourceTree = "<group>"; };
+		A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSKViewDelegate.swift; sourceTree = "<group>"; };
+		A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARAnchor.h; sourceTree = "<group>"; };
+		A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARAnchor.mm; sourceTree = "<group>"; };
+		A1BD4B822287C361001D1F6E /* NSKNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKNode.h; sourceTree = "<group>"; };
+		A1BD4B832287C369001D1F6E /* NSKNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKNode.mm; sourceTree = "<group>"; };
+		A1BD4B862287C55D001D1F6E /* NSKLabelNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKLabelNode.h; sourceTree = "<group>"; };
+		A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKLabelNode.mm; sourceTree = "<group>"; };
+		A1BD4B8A2287CA39001D1F6E /* NSKScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKScene.h; sourceTree = "<group>"; };
+		A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKScene.mm; sourceTree = "<group>"; };
+		A1BD4B8D2287CCF3001D1F6E /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
+		A1BD4B8F2287CDD9001D1F6E /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		A1BD4B922287D549001D1F6E /* NSKSpriteNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKSpriteNode.h; sourceTree = "<group>"; };
+		A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKSpriteNode.mm; sourceTree = "<group>"; };
+		A1BD4B972287DA3C001D1F6E /* NCLLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLLocationManager.h; sourceTree = "<group>"; };
+		A1BD4B982287DA43001D1F6E /* NCLLocationManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocationManager.mm; sourceTree = "<group>"; };
+		A1BD4B9B2287DC0B001D1F6E /* NCLLocationManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLLocationManagerDelegate.h; sourceTree = "<group>"; };
+		A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocationManagerDelegate.mm; sourceTree = "<group>"; };
+		A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLLocationManagerDelegate.swift; sourceTree = "<group>"; };
+		A1BD4BA12287DE15001D1F6E /* NCLLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLLocation.h; sourceTree = "<group>"; };
+		A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocation.mm; sourceTree = "<group>"; };
+		A1BD4BA92287F671001D1F6E /* NSKTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKTexture.h; sourceTree = "<group>"; };
+		A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTexture.mm; sourceTree = "<group>"; };
+		A1BD4BAD228809A8001D1F6E /* NARFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARFrame.h; sourceTree = "<group>"; };
+		A1BD4BAE228809AF001D1F6E /* NARFrame.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARFrame.mm; sourceTree = "<group>"; };
+		A1BD4BB122880B26001D1F6E /* NARCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARCamera.h; sourceTree = "<group>"; };
+		A1BD4BB222880B30001D1F6E /* NARCamera.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARCamera.mm; sourceTree = "<group>"; };
+		A1BD4BB72288212A001D1F6E /* NUICollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUICollectionView.h; sourceTree = "<group>"; };
+		A1BD4BB822882131001D1F6E /* NUICollectionView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionView.mm; sourceTree = "<group>"; };
+		A1BD4BBB228821B9001D1F6E /* NUICollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewController.h; sourceTree = "<group>"; };
+		A1BD4BBC228821C0001D1F6E /* NUICollectionViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewController.mm; sourceTree = "<group>"; };
+		A1BD4BBF22882409001D1F6E /* NUICollectionViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewManager.h; sourceTree = "<group>"; };
+		A1BD4BC02288240F001D1F6E /* NUICollectionViewManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewManager.mm; sourceTree = "<group>"; };
+		A1BD4BC222882469001D1F6E /* SUICollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUICollectionViewManager.swift; sourceTree = "<group>"; };
+		A1BD4BC522882846001D1F6E /* NUICollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewCell.h; sourceTree = "<group>"; };
+		A1BD4BC62288284E001D1F6E /* NUICollectionViewCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewCell.mm; sourceTree = "<group>"; };
+		A1BD4BCB22882EB2001D1F6E /* NUINib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUINib.h; sourceTree = "<group>"; };
+		A1BD4BCC22882EB9001D1F6E /* NUINib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINib.mm; sourceTree = "<group>"; };
+		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
+		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
+		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
+		A1D65DD32281744C00AC0BD9 /* NUITarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITarget.h; sourceTree = "<group>"; };
+		A1D65DD42281745500AC0BD9 /* NUITarget.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITarget.mm; sourceTree = "<group>"; };
+		A1D65E0D22819C3400AC0BD9 /* NSKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKView.h; sourceTree = "<group>"; };
+		A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKView.mm; sourceTree = "<group>"; };
+		A1D65E1122819D8E00AC0BD9 /* NARSKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKView.h; sourceTree = "<group>"; };
+		A1D65E1222819D9500AC0BD9 /* NARSKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKView.mm; sourceTree = "<group>"; };
+		A1D65E1522819F8800AC0BD9 /* NARSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSession.h; sourceTree = "<group>"; };
+		A1D65E1622819F8E00AC0BD9 /* NARSession.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSession.mm; sourceTree = "<group>"; };
+		A1D65E182281A03600AC0BD9 /* NARWorldTrackingConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARWorldTrackingConfiguration.h; sourceTree = "<group>"; };
+		A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARWorldTrackingConfiguration.mm; sourceTree = "<group>"; };
 		A1D6729022694E7000562A42 /* libs_main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libs_main.hpp; sourceTree = "<group>"; };
 		A1D67291226953B100562A42 /* NUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewController.h; sourceTree = "<group>"; };
 		A1D67292226953BB00562A42 /* NUIViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewController.mm; sourceTree = "<group>"; };
@@ -210,6 +460,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
+				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
+				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
+				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
 				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
 				A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */,
 				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
@@ -292,6 +546,7 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */,
 				216392A3226BD48A00051DE0 /* NCALayer */,
 			);
 			path = NCoreAnimation;
@@ -309,8 +564,8 @@
 		21C872CC226A87C500B5192B /* NNSUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				21C872CD226A87C500B5192B /* NNSUserDefaults.mm */,
 				21C872CE226A87C500B5192B /* NNSUserDefaults.h */,
+				21C872CD226A87C500B5192B /* NNSUserDefaults.mm */,
 			);
 			path = NNSUserDefaults;
 			sourceTree = "<group>";
@@ -324,48 +579,748 @@
 			path = NUIApplication;
 			sourceTree = "<group>";
 		};
+		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
+			isa = PBXGroup;
+			children = (
+				A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */,
+				A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */,
+			);
+			path = NSKPhysicsBody;
+			sourceTree = "<group>";
+		};
+		A11029D3228E4C9C0078FAC0 /* NSKCameraNode */ = {
+			isa = PBXGroup;
+			children = (
+				A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */,
+				A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */,
+			);
+			path = NSKCameraNode;
+			sourceTree = "<group>";
+		};
 		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
 			isa = PBXGroup;
 			children = (
 				A11CB498226BE0390006A0D4 /* NUITableViewController.h */,
-				A11CB499226BE0420006A0D4 /* NUITableViewController.m */,
+				A11CB499226BE0420006A0D4 /* NUITableViewController.mm */,
 			);
 			path = NUITableViewController;
+			sourceTree = "<group>";
+		};
+		A11D1296227EA69B0038C262 /* NUIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A11D1297227EA6AD0038C262 /* NUIScrollView.h */,
+				A11D1298227EA6B40038C262 /* NUIScrollView.mm */,
+			);
+			path = NUIScrollView;
+			sourceTree = "<group>";
+		};
+		A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */ = {
+			isa = PBXGroup;
+			children = (
+				A11D129B227F6AB70038C262 /* NNSLayoutConstraint.h */,
+				A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */,
+			);
+			path = NNSLayoutConstraint;
+			sourceTree = "<group>";
+		};
+		A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */,
+				A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */,
+			);
+			path = NNSLayoutAnchor;
+			sourceTree = "<group>";
+		};
+		A11D12A2227F8D780038C262 /* NUITableViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				A11D12A3227F8D950038C262 /* NUITableViewManager.h */,
+				A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */,
+				A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */,
+			);
+			path = NUITableViewManager;
+			sourceTree = "<group>";
+		};
+		A12C1501228A3700005BDD9D /* NSCNScene */ = {
+			isa = PBXGroup;
+			children = (
+				A12C1502228A3710005BDD9D /* NSCNScene.h */,
+				A12C1503228A3718005BDD9D /* NSCNScene.mm */,
+			);
+			path = NSCNScene;
+			sourceTree = "<group>";
+		};
+		A13768EA2288394C00CDB13B /* NCLHeading */ = {
+			isa = PBXGroup;
+			children = (
+				A13768ED2288398300CDB13B /* NCLHeading.h */,
+				A13768EB2288396400CDB13B /* NCLHeading.mm */,
+			);
+			path = NCLHeading;
+			sourceTree = "<group>";
+		};
+		A164976F227E148D00CA943F /* NUISwitch */ = {
+			isa = PBXGroup;
+			children = (
+				A1649770227E149900CA943F /* NUISwitch.h */,
+				A1649771227E14A200CA943F /* NUISwitch.mm */,
+			);
+			path = NUISwitch;
+			sourceTree = "<group>";
+		};
+		A1649775227E1F6D00CA943F /* NUIPresentationController */ = {
+			isa = PBXGroup;
+			children = (
+				A1649776227E1F8300CA943F /* NUIPresentationController.h */,
+				A1649777227E1F8B00CA943F /* NUIPresentationController.mm */,
+				A1887109227E370500129A75 /* SUIPresentationController.swift */,
+			);
+			path = NUIPresentationController;
+			sourceTree = "<group>";
+		};
+		A174A1672282214B002A8216 /* NAVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16822822152002A8216 /* NAVAudioPlayer */,
+			);
+			path = NAVFoundation;
+			sourceTree = "<group>";
+		};
+		A174A16822822152002A8216 /* NAVAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16922822161002A8216 /* NAVAudioPlayer.h */,
+				A174A16A22822169002A8216 /* NAVAudioPlayer.mm */,
+			);
+			path = NAVAudioPlayer;
+			sourceTree = "<group>";
+		};
+		A174A16C22822286002A8216 /* NNSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				A174A16D22822290002A8216 /* NNSBundle.h */,
+				A174A16E2282229B002A8216 /* NNSBundle.mm */,
+			);
+			path = NNSBundle;
+			sourceTree = "<group>";
+		};
+		A178B26C228863B5005184EE /* NUIAlertAction */ = {
+			isa = PBXGroup;
+			children = (
+				A178B26D228863C2005184EE /* NUIAlertAction.h */,
+				A178B26E228863C9005184EE /* NUIAlertAction.mm */,
+			);
+			path = NUIAlertAction;
+			sourceTree = "<group>";
+		};
+		A178B27022887901005184EE /* NUITabBarItem */ = {
+			isa = PBXGroup;
+			children = (
+				A178B2712288790C005184EE /* NUITabBarItem.h */,
+				A178B27222887913005184EE /* NUITabBarItem.mm */,
+			);
+			path = NUITabBarItem;
+			sourceTree = "<group>";
+		};
+		A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */,
+				A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */,
+				A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */,
+			);
+			path = NUIViewControllerTransitioningDelegate;
+			sourceTree = "<group>";
+		};
+		A18F1E62228A418300A42754 /* NARSCNView */ = {
+			isa = PBXGroup;
+			children = (
+				A18F1E66228A428200A42754 /* NARSCNViewDelegate */,
+				A18F1E63228A419000A42754 /* NARSCNView.h */,
+				A18F1E64228A41C000A42754 /* NARSCNView.mm */,
+			);
+			path = NARSCNView;
+			sourceTree = "<group>";
+		};
+		A18F1E66228A428200A42754 /* NARSCNViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A18F1E67228A429500A42754 /* NARSCNViewDelegate.h */,
+				A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */,
+				A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */,
+			);
+			path = NARSCNViewDelegate;
+			sourceTree = "<group>";
+		};
+		A18F1E71228A477800A42754 /* NSCNNode */ = {
+			isa = PBXGroup;
+			children = (
+				A18F1E74228A478D00A42754 /* NSCNNode.h */,
+				A18F1E72228A478600A42754 /* NSCNNode.mm */,
+			);
+			path = NSCNNode;
+			sourceTree = "<group>";
+		};
+		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				A19476B3226E9066003BB393 /* NUITableViewDataSource.h */,
+				A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */,
+				A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */,
+			);
+			path = NUITableViewDataSource;
+			sourceTree = "<group>";
+		};
+		A19476B6226E90F0003BB393 /* NUITableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A19476B7226E90FF003BB393 /* NUITableViewCell.h */,
+				A19476B8226E9109003BB393 /* NUITableViewCell.mm */,
+			);
+			path = NUITableViewCell;
+			sourceTree = "<group>";
+		};
+		A19476BA226E9450003BB393 /* NUITableView */ = {
+			isa = PBXGroup;
+			children = (
+				A11D12A2227F8D780038C262 /* NUITableViewManager */,
+				A19476BB226E9461003BB393 /* NUITableView.h */,
+				A19476BC226E9469003BB393 /* NUITableView.mm */,
+			);
+			path = NUITableView;
+			sourceTree = "<group>";
+		};
+		A19476C0226F5BCD003BB393 /* NUIRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */,
+				A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */,
+				A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */,
+			);
+			path = NUIRefreshControl;
+			sourceTree = "<group>";
+		};
+		A1948930228A5D33007BF787 /* NSCNLight */ = {
+			isa = PBXGroup;
+			children = (
+				A1948931228A5D40007BF787 /* NSCNLight.h */,
+				A1948932228A5D46007BF787 /* NSCNLight.mm */,
+			);
+			path = NSCNLight;
+			sourceTree = "<group>";
+		};
+		A1948934228A68A0007BF787 /* NARConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A1948935228A68B4007BF787 /* NARConfiguration.h */,
+				A1948936228A68BA007BF787 /* NARConfiguration.mm */,
+			);
+			path = NARConfiguration;
+			sourceTree = "<group>";
+		};
+		A1948938228A6A8F007BF787 /* NARLightEstimate */ = {
+			isa = PBXGroup;
+			children = (
+				A1948939228A6A9F007BF787 /* NARLightEstimate.h */,
+				A194893A228A6AA6007BF787 /* NARLightEstimate.mm */,
+			);
+			path = NARLightEstimate;
+			sourceTree = "<group>";
+		};
+		A194894D228A8489007BF787 /* NMapKit */ = {
+			isa = PBXGroup;
+			children = (
+				A194896E228AA47E007BF787 /* NMKAnnotationView */,
+				A1948956228A84DB007BF787 /* NMKMapView */,
+			);
+			path = NMapKit;
+			sourceTree = "<group>";
+		};
+		A1948956228A84DB007BF787 /* NMKMapView */ = {
+			isa = PBXGroup;
+			children = (
+				A1948968228AA15C007BF787 /* NMKMapViewDelegate */,
+				A1948957228A84DB007BF787 /* NMKMapView.mm */,
+				A1948958228A84DB007BF787 /* NMKMapView.h */,
+				A1948966228A945E007BF787 /* SMKAnnotation.swift */,
+			);
+			path = NMKMapView;
+			sourceTree = "<group>";
+		};
+		A1948968228AA15C007BF787 /* NMKMapViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */,
+				A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */,
+				A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */,
+			);
+			path = NMKMapViewDelegate;
+			sourceTree = "<group>";
+		};
+		A194896E228AA47E007BF787 /* NMKAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				A194896F228AA47E007BF787 /* NMKAnnotationView.mm */,
+				A1948970228AA47E007BF787 /* NMKAnnotationView.h */,
+			);
+			path = NMKAnnotationView;
+			sourceTree = "<group>";
+		};
+		A199AED822884F27003C1DC4 /* NUISlider */ = {
+			isa = PBXGroup;
+			children = (
+				A199AED922884F37003C1DC4 /* NUISlider.h */,
+				A199AEDA22884F3E003C1DC4 /* NUISlider.mm */,
+			);
+			path = NUISlider;
+			sourceTree = "<group>";
+		};
+		A199AEE022885C63003C1DC4 /* NUIAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				A199AEE122885C6F003C1DC4 /* NUIAlertController.h */,
+				A199AEE222885C76003C1DC4 /* NUIAlertController.mm */,
+			);
+			path = NUIAlertController;
 			sourceTree = "<group>";
 		};
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				A11CB495226BC0660006A0D4 /* demo.js */,
-				A1296B05225F77330058C23D /* js-blockchain */,
-				A1296B06225F77330058C23D /* node_modules */,
-				A19E9102225EC2C2004FC391 /* package.json */,
-				A19E9103225EC2C2004FC391 /* yarn.lock */,
-				A19E90F9225D7EA8004FC391 /* Info.plist */,
-				A19E9100225D7F29004FC391 /* hello.js */,
-				A19E9108225EC394004FC391 /* server.js */,
+				A18F1E60228A3D1500A42754 /* vendor */,
+				A199AEDE22885581003C1DC4 /* examples */,
+				A199AEDC22885573003C1DC4 /* uidemos.js */,
+				A11D1294227EA0A90038C262 /* todo.js */,
+				A188710D227E51D700129A75 /* node_modules */,
+				A12655EE22719CE300D3DF47 /* app.js */,
+				A12655F722719CE400D3DF47 /* demo.js */,
+				A12655F322719CE300D3DF47 /* hello.js */,
+				A12655EB22719CE300D3DF47 /* index.js */,
+				A12655EF22719CE300D3DF47 /* index.js.map */,
+				A12655F622719CE400D3DF47 /* js-blockchain */,
+				A12655F822719CE400D3DF47 /* package.json */,
+				A12655F422719CE300D3DF47 /* server.js */,
+				A12655EC22719CE300D3DF47 /* tsconfig.json */,
+				A12655E922719CE300D3DF47 /* tslint.json */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */,
+				A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */,
+			);
+			path = CABasicAnimation;
+			sourceTree = "<group>";
+		};
+		A1B65481228CB87E00976024 /* NUITouch */ = {
+			isa = PBXGroup;
+			children = (
+				A1B65483228CB87E00976024 /* NUITouch.h */,
+				A1B65482228CB87E00976024 /* NUITouch.mm */,
+			);
+			path = NUITouch;
+			sourceTree = "<group>";
+		};
+		A1B65487228CD87500976024 /* NSKAction */ = {
+			isa = PBXGroup;
+			children = (
+				A1B65488228CD87500976024 /* NSKAction.h */,
+				A1B65489228CD87500976024 /* NSKAction.mm */,
+			);
+			path = NSKAction;
+			sourceTree = "<group>";
+		};
+		A1B6548C228CE34D00976024 /* NSKPhysicsWorld */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6548E228CE34D00976024 /* NSKPhysicsWorld.h */,
+				A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */,
+			);
+			path = NSKPhysicsWorld;
+			sourceTree = "<group>";
+		};
+		A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1B65491228CE4AF00976024 /* NSKPhysicsContactDelegate.h */,
+				A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */,
+				A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */,
+			);
+			path = NSKPhysicsContactDelegate;
+			sourceTree = "<group>";
+		};
+		A1B65496228CE80D00976024 /* NSKPhysicsContact */ = {
+			isa = PBXGroup;
+			children = (
+				A1B65497228CE80D00976024 /* NSKPhysicsContact.h */,
+				A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */,
+			);
+			path = NSKPhysicsContact;
+			sourceTree = "<group>";
+		};
+		A1BD4B072287B753001D1F6E /* DebugSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B0A2287B769001D1F6E /* embedded.S */,
+				A1BD4B092287B769001D1F6E /* snapshot.cc */,
+			);
+			name = DebugSnapshot;
+			sourceTree = "<group>";
+		};
+		A1BD4B082287B75A001D1F6E /* ReleaseSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B0D2287B773001D1F6E /* embedded.S */,
+				A1BD4B0E2287B773001D1F6E /* snapshot.cc */,
+			);
+			name = ReleaseSnapshot;
+			sourceTree = "<group>";
+		};
+		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1948930228A5D33007BF787 /* NSCNLight */,
+				A18F1E71228A477800A42754 /* NSCNNode */,
+				A12C1501228A3700005BDD9D /* NSCNScene */,
+				A1BD4B402287BC9E001D1F6E /* NSCNView */,
+			);
+			path = NSceneKit;
+			sourceTree = "<group>";
+		};
+		A1BD4B402287BC9E001D1F6E /* NSCNView */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B412287BCB5001D1F6E /* NSCNView.h */,
+				A1BD4B422287BCBC001D1F6E /* NSCNView.mm */,
+			);
+			path = NSCNView;
+			sourceTree = "<group>";
+		};
+		A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NARSCNViewDelegate;
+			sourceTree = "<group>";
+		};
+		A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */,
+				A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */,
+				A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */,
+			);
+			path = NARSKViewDelegate;
+			sourceTree = "<group>";
+		};
+		A1BD4B7C2287C20E001D1F6E /* NARAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */,
+				A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */,
+			);
+			path = NARAnchor;
+			sourceTree = "<group>";
+		};
+		A1BD4B802287C34A001D1F6E /* NSKView */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E0D22819C3400AC0BD9 /* NSKView.h */,
+				A1D65E0E22819C3B00AC0BD9 /* NSKView.mm */,
+			);
+			path = NSKView;
+			sourceTree = "<group>";
+		};
+		A1BD4B812287C355001D1F6E /* NSKNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B822287C361001D1F6E /* NSKNode.h */,
+				A1BD4B832287C369001D1F6E /* NSKNode.mm */,
+			);
+			path = NSKNode;
+			sourceTree = "<group>";
+		};
+		A1BD4B852287C551001D1F6E /* NSKLabelNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B862287C55D001D1F6E /* NSKLabelNode.h */,
+				A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */,
+			);
+			path = NSKLabelNode;
+			sourceTree = "<group>";
+		};
+		A1BD4B892287CA2E001D1F6E /* NSKScene */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B8A2287CA39001D1F6E /* NSKScene.h */,
+				A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */,
+				A1B65485228CBA7200976024 /* SSKScene.swift */,
+			);
+			path = NSKScene;
+			sourceTree = "<group>";
+		};
+		A1BD4B912287D53B001D1F6E /* NSKSpriteNode */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B922287D549001D1F6E /* NSKSpriteNode.h */,
+				A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */,
+			);
+			path = NSKSpriteNode;
+			sourceTree = "<group>";
+		};
+		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				A13768EA2288394C00CDB13B /* NCLHeading */,
+				A1BD4BA02287DE04001D1F6E /* NCLLocation */,
+				A1BD4B962287DA1A001D1F6E /* NCLLocationManager */,
+			);
+			path = NCoreLocation;
+			sourceTree = "<group>";
+		};
+		A1BD4B962287DA1A001D1F6E /* NCLLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B9A2287DBF4001D1F6E /* NCLLocationManagerDelegate */,
+				A1BD4B972287DA3C001D1F6E /* NCLLocationManager.h */,
+				A1BD4B982287DA43001D1F6E /* NCLLocationManager.mm */,
+			);
+			path = NCLLocationManager;
+			sourceTree = "<group>";
+		};
+		A1BD4B9A2287DBF4001D1F6E /* NCLLocationManagerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B9B2287DC0B001D1F6E /* NCLLocationManagerDelegate.h */,
+				A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */,
+				A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */,
+			);
+			path = NCLLocationManagerDelegate;
+			sourceTree = "<group>";
+		};
+		A1BD4BA02287DE04001D1F6E /* NCLLocation */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BA12287DE15001D1F6E /* NCLLocation.h */,
+				A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */,
+			);
+			path = NCLLocation;
+			sourceTree = "<group>";
+		};
+		A1BD4BA82287F661001D1F6E /* NSKTexture */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BA92287F671001D1F6E /* NSKTexture.h */,
+				A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */,
+			);
+			path = NSKTexture;
+			sourceTree = "<group>";
+		};
+		A1BD4BAC22880999001D1F6E /* NARFrame */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BAD228809A8001D1F6E /* NARFrame.h */,
+				A1BD4BAE228809AF001D1F6E /* NARFrame.mm */,
+			);
+			path = NARFrame;
+			sourceTree = "<group>";
+		};
+		A1BD4BB022880B1A001D1F6E /* NARCamera */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BB122880B26001D1F6E /* NARCamera.h */,
+				A1BD4BB222880B30001D1F6E /* NARCamera.mm */,
+			);
+			path = NARCamera;
+			sourceTree = "<group>";
+		};
+		A1BD4BB622882116001D1F6E /* NUICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */,
+				A1BD4BBE228823FA001D1F6E /* NUICollectionViewManager */,
+				A1BD4BB72288212A001D1F6E /* NUICollectionView.h */,
+				A1BD4BB822882131001D1F6E /* NUICollectionView.mm */,
+			);
+			path = NUICollectionView;
+			sourceTree = "<group>";
+		};
+		A1BD4BBA228821AD001D1F6E /* NUICollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BBB228821B9001D1F6E /* NUICollectionViewController.h */,
+				A1BD4BBC228821C0001D1F6E /* NUICollectionViewController.mm */,
+			);
+			path = NUICollectionViewController;
+			sourceTree = "<group>";
+		};
+		A1BD4BBE228823FA001D1F6E /* NUICollectionViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BBF22882409001D1F6E /* NUICollectionViewManager.h */,
+				A1BD4BC02288240F001D1F6E /* NUICollectionViewManager.mm */,
+				A1BD4BC222882469001D1F6E /* SUICollectionViewManager.swift */,
+			);
+			path = NUICollectionViewManager;
+			sourceTree = "<group>";
+		};
+		A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BC522882846001D1F6E /* NUICollectionViewCell.h */,
+				A1BD4BC62288284E001D1F6E /* NUICollectionViewCell.mm */,
+			);
+			path = NUICollectionViewCell;
+			sourceTree = "<group>";
+		};
+		A1BD4BCA22882EA5001D1F6E /* NUINib */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4BCB22882EB2001D1F6E /* NUINib.h */,
+				A1BD4BCC22882EB9001D1F6E /* NUINib.mm */,
+			);
+			path = NUINib;
+			sourceTree = "<group>";
+		};
+		A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NUICollectionViewDataSource;
+			sourceTree = "<group>";
+		};
+		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */,
+				A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */,
+			);
+			path = NUIBarButtonItem;
+			sourceTree = "<group>";
+		};
+		A1D65DCF22816ED800AC0BD9 /* SUITarget */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DD32281744C00AC0BD9 /* NUITarget.h */,
+				A1D65DD42281745500AC0BD9 /* NUITarget.mm */,
+				A1D65DD122816F0100AC0BD9 /* SUITarget.swift */,
+			);
+			path = SUITarget;
+			sourceTree = "<group>";
+		};
+		A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65DCF22816ED800AC0BD9 /* SUITarget */,
+			);
+			path = SwiftInterfaces;
+			sourceTree = "<group>";
+		};
+		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1948938228A6A8F007BF787 /* NARLightEstimate */,
+				A1948934228A68A0007BF787 /* NARConfiguration */,
+				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
+				A1BD4BB022880B1A001D1F6E /* NARCamera */,
+				A1BD4BAC22880999001D1F6E /* NARFrame */,
+				A18F1E62228A418300A42754 /* NARSCNView */,
+				A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */,
+				A1D65E1422819F7B00AC0BD9 /* NARSession */,
+				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
+				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
+			);
+			path = NARKit;
+			sourceTree = "<group>";
+		};
+		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				A11029D3228E4C9C0078FAC0 /* NSKCameraNode */,
+				A1B65496228CE80D00976024 /* NSKPhysicsContact */,
+				A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */,
+				A1B6548C228CE34D00976024 /* NSKPhysicsWorld */,
+				A1B65487228CD87500976024 /* NSKAction */,
+				A10AADE2228B881400C64F60 /* NSKPhysicsBody */,
+				A1BD4BA82287F661001D1F6E /* NSKTexture */,
+				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
+				A1BD4B892287CA2E001D1F6E /* NSKScene */,
+				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
+				A1BD4B812287C355001D1F6E /* NSKNode */,
+				A1BD4B802287C34A001D1F6E /* NSKView */,
+			);
+			path = NSpriteKit;
+			sourceTree = "<group>";
+		};
+		A1D65E1022819D7C00AC0BD9 /* NARSKView */ = {
+			isa = PBXGroup;
+			children = (
+				A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */,
+				A1D65E1122819D8E00AC0BD9 /* NARSKView.h */,
+				A1D65E1222819D9500AC0BD9 /* NARSKView.mm */,
+			);
+			path = NARSKView;
+			sourceTree = "<group>";
+		};
+		A1D65E1422819F7B00AC0BD9 /* NARSession */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E1522819F8800AC0BD9 /* NARSession.h */,
+				A1D65E1622819F8E00AC0BD9 /* NARSession.mm */,
+			);
+			path = NARSession;
+			sourceTree = "<group>";
+		};
+		A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A1D65E182281A03600AC0BD9 /* NARWorldTrackingConfiguration.h */,
+				A1D65E1A2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm */,
+			);
+			path = NARWorldTrackingConfiguration;
 			sourceTree = "<group>";
 		};
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
+				A1B65481228CB87E00976024 /* NUITouch */,
+				A178B27022887901005184EE /* NUITabBarItem */,
+				A178B26C228863B5005184EE /* NUIAlertAction */,
+				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
+				A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */,
 				A1D672A3226994AD00562A42 /* NUIButton */,
+				A1BD4BB622882116001D1F6E /* NUICollectionView */,
+				A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */,
+				A1BD4BBA228821AD001D1F6E /* NUICollectionViewController */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
 				A1D672BD2269A05700562A42 /* NUIImage */,
 				A1E48226226AB0AE002AF96F /* NUIImagePickerController */,
 				211E76AC226A1BF100B838AF /* NUIImageView */,
 				211E76BA226A52AC00B838AF /* NUILabel */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
+				A1BD4BCA22882EA5001D1F6E /* NUINib */,
+				A1649775227E1F6D00CA943F /* NUIPresentationController */,
+				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,
 				211E76A4226A0CE600B838AF /* NUIResponder */,
+				A11D1296227EA69B0038C262 /* NUIScrollView */,
+				A199AED822884F27003C1DC4 /* NUISlider */,
 				A1D6729F2269940B00562A42 /* NUIStoryboard */,
+				A164976F227E148D00CA943F /* NUISwitch */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
+				A19476BA226E9450003BB393 /* NUITableView */,
+				A19476B6226E90F0003BB393 /* NUITableViewCell */,
+				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
+				A19476B0226E9043003BB393 /* NUITableViewDataSource */,
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D6729E226993FE00562A42 /* NUIView */,
 				A1D6729D226993E700562A42 /* NUIViewController */,
+				A1887103227E337700129A75 /* NUIViewControllerTransitioningDelegate */,
 				211E76982269B10A00B838AF /* NUIWindow */,
 			);
 			path = NUIKit;
@@ -415,6 +1370,7 @@
 				A1FF9E6C225D3CEB004D7C82 /* hello-node.hpp */,
 				A1FC1A16225C66D000085571 /* hello.mm */,
 				A1D67294226954C000562A42 /* defines.h */,
+				212BA5DA227DA9E9000B8D1D /* defines.mm */,
 				216392A7226BDBD900051DE0 /* ColorHelper.h */,
 				216392A8226BDBF000051DE0 /* ColorHelper.mm */,
 			);
@@ -430,6 +1386,9 @@
 				A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */,
 				A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */,
 				A1E2D7BC226A63B300FA1562 /* PasswordTextField.swift */,
+				A19476C6226F7410003BB393 /* DashboardViewController.swift */,
+				A149D0A4228260D300E11EDA /* BuilderViewController.swift */,
+				A1BD4B8F2287CDD9001D1F6E /* Scene.swift */,
 			);
 			path = NativeClasses;
 			sourceTree = "<group>";
@@ -487,6 +1446,9 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A174A16C22822286002A8216 /* NNSBundle */,
+				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
+				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
@@ -525,6 +1487,9 @@
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A1BD4B082287B75A001D1F6E /* ReleaseSnapshot */,
+				A1BD4B072287B753001D1F6E /* DebugSnapshot */,
+				A174A170228227A2002A8216 /* sunflower.mp3 */,
 				A1058B44226810B700CEAA5C /* embedded.S */,
 				A1058B46226810BF00CEAA5C /* snapshot.cc */,
 				A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */,
@@ -548,17 +1513,28 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A1D672A22269945B00562A42 /* Storyboards */,
-				A1D672A12269944C00562A42 /* NativeClasses */,
-				A1D672A02269942100562A42 /* Resources */,
-				A1E2D7A5226A500100FA1562 /* NObjC */,
-				216392A2226BD43600051DE0 /* NCoreAnimation */,
-				A1D6729522695C9C00562A42 /* NUIKit */,
+				A194894D228A8489007BF787 /* NMapKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
-				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
-				A1058B422268029E00CEAA5C /* libs_main.mm */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
+				A1058B422268029E00CEAA5C /* libs_main.mm */,
+				A1394A6D22865F200087F712 /* main.h */,
+				A1394A6B22865EF00087F712 /* main.mm */,
+				A1D65E0B22819C1600AC0BD9 /* NARKit */,
+				A1D672A12269944C00562A42 /* NativeClasses */,
+				A174A1672282214B002A8216 /* NAVFoundation */,
+				216392A2226BD43600051DE0 /* NCoreAnimation */,
+				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
+				A1E2D7A5226A500100FA1562 /* NObjC */,
+				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
+				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
+				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
+				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
+				A1D6729522695C9C00562A42 /* NUIKit */,
+				A1D672A02269942100562A42 /* Resources */,
+				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
+				A1D672A22269945B00562A42 /* Storyboards */,
+				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 			);
 			path = "node-ios-hello";
 			sourceTree = "<group>";
@@ -566,6 +1542,10 @@
 		A1FC1A1B225C6AB100085571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A194895E228A89B0007BF787 /* MapKit.framework */,
+				A1BD4B022287B6DC001D1F6E /* libicudata.a */,
+				A1BD4B012287B6DC001D1F6E /* libicui18n.a */,
+				A1BD4B002287B6DC001D1F6E /* libicuucx.a */,
 				A18E802122657B6C000438E0 /* Client.framework */,
 				A1FC1A1D225C6AB200085571 /* libbrotli.a */,
 				A1FC1A2C225C6AB200085571 /* libcares.a */,
@@ -640,6 +1620,14 @@
 					A1FC19FD225C65DC00085571 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -667,13 +1655,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A19E9106225EC2C3004FC391 /* yarn.lock in Resources */,
-				A19E9105225EC2C3004FC391 /* package.json in Resources */,
-				A19E9101225D7F2A004FC391 /* hello.js in Resources */,
-				A1296B07225F77340058C23D /* js-blockchain in Resources */,
-				A1296B08225F77340058C23D /* node_modules in Resources */,
-				A19E9109225EC394004FC391 /* server.js in Resources */,
-				A11CB496226BC0660006A0D4 /* demo.js in Resources */,
+				A199AEDD22885573003C1DC4 /* uidemos.js in Resources */,
+				A126560222719CE400D3DF47 /* hello.js in Resources */,
+				A126560322719CE400D3DF47 /* server.js in Resources */,
+				A12655FE22719CE400D3DF47 /* app.js in Resources */,
+				A12655FB22719CE400D3DF47 /* index.js in Resources */,
+				A199AEDF22885581003C1DC4 /* examples in Resources */,
+				A11D1295227EA0A90038C262 /* todo.js in Resources */,
+				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
+				A18F1E61228A3D1500A42754 /* vendor in Resources */,
+				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
+				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
+				A126560622719CE400D3DF47 /* demo.js in Resources */,
+				A188710E227E51D700129A75 /* node_modules in Resources */,
+				A126560722719CE400D3DF47 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,10 +1677,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */,
+				A174A171228227A2002A8216 /* sunflower.mp3 in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
+				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,50 +1694,129 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
+				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
+				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
+				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
+				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
+				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
+				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
+				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
+				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
-				A1058B45226810B700CEAA5C /* embedded.S in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
+				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
+				A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */,
+				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
+				A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */,
+				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
-				A1058B47226810BF00CEAA5C /* snapshot.cc in Sources */,
+				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
+				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
+				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
+				A1394A6C22865EF00087F712 /* main.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
+				A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */,
+				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
+				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
+				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
+				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
+				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
+				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
+				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
+				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
+				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
-				A11CB49A226BE0420006A0D4 /* NUITableViewController.m in Sources */,
+				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
+				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
+				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
+				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
+				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
+				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
+				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
+				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
+				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
+				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
+				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
+				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
+				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
+				A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */,
+				A1B65486228CBA7200976024 /* SSKScene.swift in Sources */,
+				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
+				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
+				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
+				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
+				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
+				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
+				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
+				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
+				A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */,
+				A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
+				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
+				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
+				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
+				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
+				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
+				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
+				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
+				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
+				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
+				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
+				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
+				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
+				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
+				A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */,
+				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
+				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
+				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
+				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
+				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
+				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
+				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
+				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
+				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
+				A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
+				A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -779,9 +1855,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				DEVELOPMENT_TEAM = B9452FEMTF;
 				INFOPLIST_FILE = Scripts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -795,9 +1872,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4GK9M255PQ;
+				DEVELOPMENT_TEAM = B9452FEMTF;
 				INFOPLIST_FILE = Scripts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilykolar.Scripts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -935,13 +2013,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"V8_INTL_SUPPORT=1",
+					"DEBUG=1",
+				);
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-full/src",
-					"../node-ios-full/deps/uv/include",
-					"../node-ios-full/deps/v8/include",
-					"../node-ios-full/deps/v8",
-					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					"../node-ios-release/src",
+					"../node-ios-release/deps/uv/include",
+					"../node-ios-release/deps/v8/include",
+					"../node-ios-release/deps/v8",
+					"../node-ios-release/out/Debug/obj/gen/generate-bytecode-output-root",
+					"../node-ios-release/out/Debug/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -951,7 +2033,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Debug";
+				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Debug";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -982,13 +2064,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "V8_INTL_SUPPORT=1";
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-full/src",
-					"../node-ios-full/deps/uv/include",
-					"../node-ios-full/deps/v8/include",
-					"../node-ios-full/deps/v8",
-					"../node-ios-full/out/Debug/obj/gen/generate-bytecode-output-root",
-					"../node-ios-full/out/Debug/obj/gen/torque-output-root",
+					"../node-ios-release/src",
+					"../node-ios-release/deps/uv/include",
+					"../node-ios-release/deps/v8/include",
+					"../node-ios-release/deps/v8",
+					"../node-ios-release/out/Release/obj/gen/generate-bytecode-output-root",
+					"../node-ios-release/out/Release/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -998,7 +2081,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-full/out/Release";
+				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Release";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",

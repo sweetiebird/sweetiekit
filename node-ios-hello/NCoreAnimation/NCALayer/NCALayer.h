@@ -26,12 +26,15 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  static NAN_METHOD(AddAnimation);
   JS_PROP(CornerRadius);
   JS_PROP(BorderWidth);
   JS_PROP(BorderColor);
   JS_PROP(ShadowOffset);
   JS_PROP(ShadowColor);
   JS_PROP(ShadowRadius);
+  JS_PROP(Position);
+  JS_PROP(MasksToBounds);
 };
 
 

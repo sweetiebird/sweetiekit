@@ -45,9 +45,7 @@ NAN_METHOD(NUITabBarController::New) {
     ctrl->SetNSObject((__bridge UITabBarController *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          ctrl->SetNSObject([UITabBarController alloc]);
-      });
+      ctrl->SetNSObject([[UITabBarController alloc] init]);
     }
   }
   ctrl->Wrap(ctrlObj);
@@ -61,7 +59,6 @@ NUITabBarController::~NUITabBarController () {}
 
 NAN_METHOD(NUITabBarController::SetViewControllers) {
   NUITabBarController *vc = ObjectWrap::Unwrap<NUITabBarController>(Local<Object>::Cast(info.This()));
-
 
   Local<Array> array = Local<Array>::Cast(info[0]);
   bool animated = TO_BOOL(info[1]);
@@ -78,8 +75,6 @@ NAN_METHOD(NUITabBarController::SetViewControllers) {
   UITabBarController* c = vc->As<UITabBarController>();
   
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [c setViewControllers:controllers animated:animated];
-    });
+    [c setViewControllers:controllers animated:animated];
   }
 }

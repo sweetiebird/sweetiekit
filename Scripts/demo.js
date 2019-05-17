@@ -1,122 +1,113 @@
-const sweetiekit = require('std:sweetiekit.node');
-const {
-  NSObject,
-  NSUserDefaults,
-  UIApplication,
-  UIWindow,
-  UIStoryboard,
-  UIViewController,
-  UIView,
-  UIButton,
-  UITextField,
-  UITabBarController,
-  UIImage,
-  UIImageView,
-  UILabel,
-  UINavigationController,
-  UIImagePickerController,
-  UIImagePickerControllerDelegate,
-} = sweetiekit;
+console.log([].concat(...Object.values(require('os').networkInterfaces()).map(x => { return x.filter(y => y.family === 'IPv4').map(y => y.address); }).filter(x => x.length > 0)));
 
-console.log(sweetiekit);
+if (typeof gc === 'undefined') {
+  gc = (() => { console.log('gc stub'); });
+}
+SweetieKit = require('std:sweetiekit.node');
 
-// app main
-let app;
-// root navigation controller
-let nav;
-// storyboard
-let sb;
-// user name
-let username;
-// user photo
-let img;
 
-const ctrls = {
-  NAME: 'nameVC',
-  PHOTO: 'photoVC',
-  DASH: 'dashVC',
-};
-
-async function demo() {
-  const dashboardVC = sb.instantiateViewController(ctrls.DASH);
-  dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
-  nav.setViewControllers([dashboardVC], false);
+GetterNameToSetterName = function GetterNameToSetterName(name) {
+  if (name.startsWith("is")) {
+    name = name.substr(2);
+  }
+  name = 'set' + name[0].toUpperCase() + name.substr(1);
+  if (!name.endsWith(":")) {
+    name = name + ":";
+  }
+  return name;
 }
 
-async function userPhoto() {
-  const photoVC = sb.instantiateViewController(ctrls.PHOTO);
+GetMethods = function GetMethods(cls) {
+  return cls.methods.sort((x, y) => { return (x.name < y.name) ? -1 : 1; })
+}
 
-  const viewW = photoVC.view.width;
-  const viewH = photoVC.view.height;
-  const elemW = viewW - 24;
-  const imgY = ((viewH - 100) / 2) - 40;
-  const imgX = (viewW - 100) / 2;
+GetBoolAccessors = function GetBoolAccessors(cls) {
+  return GetMethods(cls)
+          .filter(x => !x.name.startsWith("_"))
+          .filter(x => (x.arguments.length === 2) && (x.returnType === "B"));
+}
 
-  const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
-    if (img === undefined) {
-      const imgDel = new UIImagePickerControllerDelegate();
-      const imgCtrl = new UIImagePickerController();
+GetBoolSetters = function GetBoolSetters(cls) {
+  return GetMethods(cls)
+          .filter(x => x.name.startsWith("set") && x.name.endsWith(":"))
+          .filter(x => (x.arguments.length === 3) && (x.arguments[2] === "B"));
+}
 
-      imgDel.onInfo = () => {
-        let i = imgDel.result;
+GetVoidMethods = function GetVoidMethods(cls) {
+  return GetMethods(cls)
+           .filter(x => !x.name.startsWith("_") && !x.name.startsWith("."))
+           .filter(x => x.returnType === 'v' && x.arguments.length <= 2);
+}
 
-        if (i) {
-          img = i;
-          const imgView = new UIImageView(img);
-          imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
-          imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
-          photoVC.view.addSubview(imgView);
-          nextBtn.title = '✅ Lovely';
-        }
-      };
-
-      imgDel.onCancel = (picker) => {};
-      imgCtrl.delegate = imgDel;
-      photoVC.present(imgCtrl, true, () => {});
-    } else {
-      demo();
+BindClass = function BindClass(nativeType, className = nativeType.name) {
+  let UIViewClass = SweetieKit.NSObject.classFromString(className);
+  if (!UIViewClass) {
+    return;
+  }
+  let UIViewMethods = GetMethods(UIViewClass);
+  let UIViewAccessors = GetBoolAccessors(UIViewClass);
+  let UIViewSetters = GetBoolSetters(UIViewClass);
+  let UIViewVoids = GetVoidMethods(UIViewClass);
+  
+  for (let method of UIViewVoids) {
+    if (!nativeType.prototype.hasOwnProperty(method.name)) {
+      nativeType.prototype[method.name] = function () {
+        return this.invokeMethod(["v", method.name]);
+      }
     }
-  });
+  }
 
-  nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
-
-  photoVC.view.addSubview(nextBtn);
-
-  nav.pushViewController(photoVC);
+  for (let accessor of UIViewAccessors) {
+    let getterName = accessor.name;
+    let setterName = GetterNameToSetterName(accessor.name);
+    let setter = UIViewSetters.find(x => (x.name === setterName));
+    //if (!nativeType.prototype.hasOwnProperty(name))
+    {
+      let name = "get" + accessor.name[0].toUpperCase() + accessor.name.substr(1);
+      nativeType.prototype[name] = function () {
+        return this.invokeBooleanGetter(accessor.name);
+      }
+    }
+    if (!nativeType.prototype.hasOwnProperty(getterName)) {
+      if (setter) {
+        Object.defineProperty(nativeType.prototype, getterName, {
+          get() {
+            return this.invokeBooleanGetter(accessor.name);
+          },
+          set(value) {
+            return this.invokeBooleanSetter(setter.name, !!value);
+          },
+          enumerable: true,
+          configurable: true,
+        });
+        nativeType.prototype[setterName.substr(0, setterName.length - 1)] = function (value) {
+          return this.invokeBooleanSetter(setterName, !!value);
+        }
+      } else {
+        Object.defineProperty(nativeType.prototype, getterName, {
+          get() {
+            return this.invokeBooleanGetter(accessor.name);
+          },
+          /*
+          set(value) {
+            throw new Error(`${className}:${getterName} is read-only`);
+          },*/
+          enumerable: true,
+          configurable: true,
+        });
+      }
+    }
+  }
+  return nativeType;
 }
-
-async function setupApp() {
-  app = new UIApplication();
-  sb = new UIStoryboard('Main');
-
-  const nameVC = sb.instantiateViewController(ctrls.NAME);
-
-  const viewH = nameVC.view.height;
-  const viewW = nameVC.view.width;
-  const fieldY = ((viewH - 50) / 2) - 25;
-  const elemW = viewW - 24;
-  const buttonY = fieldY + 74;
-
-  const nameField = await UITextField.alloc(12, fieldY, elemW, 50, () => {
-    username = nameField.text;
-    console.log(username);
-  });
-  nameField.delegate = nameVC;
-
-  const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
-    username = nameField.text;
-    if (username) userPhoto();
-  });
-
-  nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
-  nameVC.view.addSubview(nameField);
-  nameVC.view.addSubview(nextBtn);
-
-  nav = new UINavigationController(nameVC);
-
-  app.keyWindow.setRootViewController(nav);
-}
-
-process.nextTick(async () => {
-  await setupApp();
-});
+Object.getOwnPropertyNames(SweetieKit)
+  .filter(x => ["AR", "AV", "CA", "CL", "MK", "NS", "SCN", "SK", "UI"]
+                 .filter(y => x.startsWith(y))
+                 .length > 0)
+  .sort()
+  .forEach(x => {
+    console.log(x);
+    BindClass(SweetieKit[x]);
+    global[x] = SweetieKit[x];
+   });
+require('./uidemos');

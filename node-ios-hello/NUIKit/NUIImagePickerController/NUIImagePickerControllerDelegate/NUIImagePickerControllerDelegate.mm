@@ -45,9 +45,7 @@ NAN_METHOD(NUIImagePickerControllerDelegate::New) {
   NUIImagePickerControllerDelegate *ctrl = new NUIImagePickerControllerDelegate();
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      ctrl->SetNSObject([[SUIImagePickerControllerDelegate alloc] init]);
-    });
+    ctrl->SetNSObject([[SUIImagePickerControllerDelegate alloc] init]);
   }
   ctrl->Wrap(ctrlObj);
 
@@ -61,14 +59,12 @@ NAN_SETTER(NUIImagePickerControllerDelegate::OnInfoSetter) {
   del->_onInfo->Reset(Local<Function>::Cast(value));
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
-      [d setOnInfoClosureWithClosure:^(UIImagePickerController * _Nonnull, NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull) {
-        
-        sweetiekit::Resolve(del->_onInfo);
-        return true;
-      }];
-    });
+    SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
+    [d setOnInfoClosureWithClosure:^(UIImagePickerController * _Nonnull, NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull) {
+      Nan::HandleScope scope;
+      sweetiekit::Resolve(del->_onInfo);
+      return true;
+    }];
   }
 }
 
@@ -105,13 +101,12 @@ NAN_SETTER(NUIImagePickerControllerDelegate::OnCancelSetter) {
   del->_onCancel->Reset(Local<Function>::Cast(value));
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
-      [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
-        sweetiekit::Resolve(del->_onCancel);
-        return true;
-      }];
-    });
+    SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
+    [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
+      Nan::HandleScope scope;
+      sweetiekit::Resolve(del->_onCancel);
+      return true;
+    }];
   }
 }
 

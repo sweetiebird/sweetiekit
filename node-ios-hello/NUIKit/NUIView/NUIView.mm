@@ -12,6 +12,7 @@
 #include "NUIView.h"
 #include "NUIButton.h"
 #include "NUIResponder.h"
+#include "NNSLayoutAnchor.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
 CGSize NUIView::tmp_Size;
@@ -28,14 +29,15 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("frame"), FrameGetter, FrameSetter);
-  Nan::SetAccessor(proto, JS_STR("origin"), OriginGetter, OriginSetter);
-  Nan::SetAccessor(proto, JS_STR("center"), CenterGetter, CenterSetter);
-  Nan::SetAccessor(proto, JS_STR("size"), SizeGetter, SizeSetter);
-  Nan::SetAccessor(proto, JS_STR("x"), XGetter, XSetter);
-  Nan::SetAccessor(proto, JS_STR("y"), YGetter, YSetter);
-  Nan::SetAccessor(proto, JS_STR("width"), WidthGetter, WidthSetter);
-  Nan::SetAccessor(proto, JS_STR("height"), HeightGetter, HeightSetter);
+  JS_SET_PROP(proto, "frame", Frame);
+  JS_SET_PROP(proto, "bounds", Bounds);
+  JS_SET_PROP(proto, "origin", Origin);
+  JS_SET_PROP(proto, "center", Center);
+  JS_SET_PROP(proto, "size", Size);
+  JS_SET_PROP(proto, "x", X);
+  JS_SET_PROP(proto, "y", Y);
+  JS_SET_PROP(proto, "width", Width);
+  JS_SET_PROP(proto, "height", Height);
   Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
   Nan::SetAccessor(proto, JS_STR("subviews"), SubviewsGetter);
   Nan::SetAccessor(proto, JS_STR("layer"), LayerGetter);
@@ -44,9 +46,57 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetMethod(proto, "sizeToFit", SizeToFit);
   Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
   Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
+  Nan::SetMethod(proto, "removeFromSuperview", RemoveFromSuperview);
+  JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
+  JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
+  JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
+  JS_SET_PROP_READONLY(proto, "topAnchor", TopAnchor);
+  JS_SET_PROP_READONLY(proto, "bottomAnchor", BottomAnchor);
+  JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
+  JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
+  JS_SET_PROP(proto, "isUserInteractionEnabled", UserInteractionEnabled);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  sweetiekit::Set(ctorFn, "beginAnimations", ^(JSInfo info) {
+    [UIView beginAnimations:NJSStringToNSString(info[0]) context:nullptr];
+  });
+  sweetiekit::Set(ctorFn, "setAnimationDuration", ^(JSInfo info) {
+    if (!info[0]->IsNumber()) {
+      Nan::ThrowTypeError("setAnimationDuration: Expected a number");
+    } else {
+      [UIView setAnimationDuration:TO_DOUBLE(info[0])];
+    }
+  });
+  sweetiekit::Set(ctorFn, "setAnimationBeginsFromCurrentState", ^(JSInfo info) {
+    if (!info[0]->IsBoolean()) {
+      Nan::ThrowTypeError("setAnimationBeginsFromCurrentState: Expected a boolean");
+    } else {
+      [UIView setAnimationBeginsFromCurrentState:TO_BOOL(info[0])];
+    }
+  });
+  sweetiekit::Set(ctorFn, "commitAnimations", ^(JSInfo info) {
+    [UIView commitAnimations];
+  });
+  sweetiekit::Set(ctorFn, "animate", ^(JSInfo info) {
+    Isolate* isolate = info.GetIsolate();
+    Nan::HandleScope handleScope;
+    NSTimeInterval duration = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
+    NSTimeInterval delay = info[1]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
+    auto options = info[2]; // TODO
+    __block sweetiekit::JSFunction animations(info[3]);
+    __block sweetiekit::JSFunction completion(info[4]);
+    
+    @autoreleasepool {
+      [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        Nan::HandleScope handleScope;
+        animations("UIView:animateWithDuration:animations");
+      } completion:^(BOOL finished) {
+        Nan::HandleScope handleScope;
+        completion("UIView:animateWithDuration:animations", JS_BOOL(finished));
+      }];
+    }
+  });
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -60,18 +110,25 @@ NAN_METHOD(NUIView::New) {
 
   if (info[0]->IsExternal()) {
     view->SetNSObject((__bridge UIView *)(info[0].As<External>()->Value()));
-  } else {
-      double x = TO_DOUBLE(info[0]);
-      double y = TO_DOUBLE(info[1]);
-      double width = TO_DOUBLE(info[2]);
-      double height = TO_DOUBLE(info[3]);
+  } else if (info.Length() > 0) {
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
 
-      @autoreleasepool {
-        dispatch_sync(dispatch_get_main_queue(), ^ {
-            view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-        });
-      }
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+      });
+    }
+  } else {
+    @autoreleasepool {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+          view->SetNSObject([[UIView alloc] init]);
+      });
+    }
   }
+
   view->Wrap(viewObj);
   
   JS_SET_RETURN(viewObj);
@@ -80,16 +137,26 @@ NAN_METHOD(NUIView::New) {
 NAN_GETTER(NUIView::FrameGetter) {
   Nan::HandleScope scope;
 
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  JS_UNWRAP(UIView, ui);
   Local<Object> result = Object::New(Isolate::GetCurrent());
+#if 1
+  Local<Object> origin = result;
+  Local<Object> size = result;
+#else
   Local<Object> origin = Object::New(Isolate::GetCurrent());
-  origin->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
-  origin->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
-  result->Set(JS_STR("origin"), JS_OBJ(origin));
   Local<Object> size = Object::New(Isolate::GetCurrent());
-  size->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
-  size->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
+  result->Set(JS_STR("origin"), JS_OBJ(origin));
   result->Set(JS_STR("size"), JS_OBJ(size));
+#endif
+  CGRect frame(nui->GetFrame());
+  double width = frame.size.width;
+  double height = frame.size.height;
+  double x = frame.origin.x;
+  double y = frame.origin.y;
+  origin->Set(JS_STR("x"), JS_NUM(x));
+  origin->Set(JS_STR("y"), JS_NUM(y));
+  size->Set(JS_STR("width"), JS_NUM(width));
+  size->Set(JS_STR("height"), JS_NUM(height));
 
   JS_SET_RETURN(result);
 }
@@ -110,6 +177,54 @@ NAN_SETTER(NUIView::FrameSetter) {
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
       [view->As<UIView>() setFrame:CGRectMake(x, y, width, height)];
+    });
+  }
+}
+
+
+NAN_GETTER(NUIView::BoundsGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+#if 1
+  Local<Object> origin = result;
+  Local<Object> size = result;
+#else
+  Local<Object> origin = Object::New(Isolate::GetCurrent());
+  Local<Object> size = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("origin"), JS_OBJ(origin));
+  result->Set(JS_STR("size"), JS_OBJ(size));
+#endif
+  CGRect bounds(nui->GetBounds());
+  double width = bounds.size.width;
+  double height = bounds.size.height;
+  double x = bounds.origin.x;
+  double y = bounds.origin.y;
+  origin->Set(JS_STR("x"), JS_NUM(x));
+  origin->Set(JS_STR("y"), JS_NUM(y));
+  size->Set(JS_STR("width"), JS_NUM(width));
+  size->Set(JS_STR("height"), JS_NUM(height));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUIView::BoundsSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+//  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
+//  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
+//  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
+//  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
+
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [view->As<UIView>() setBounds:CGRectMake(x, y, width, height)];
     });
   }
 }
@@ -177,7 +292,7 @@ NAN_GETTER(NUIView::SizeGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-   Local<Object> result = Object::New(Isolate::GetCurrent());
+  Local<Object> result = Object::New(Isolate::GetCurrent());
   result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
   result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
 
@@ -248,7 +363,7 @@ NAN_GETTER(NUIView::WidthGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetFrame().size.width));
+  JS_SET_RETURN(JS_NUM(view->GetBounds().size.width));
 }
 
 NAN_SETTER(NUIView::WidthSetter) {
@@ -256,12 +371,12 @@ NAN_SETTER(NUIView::WidthSetter) {
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
 
-  CGRect frame(view->GetFrame());
-  frame.size.width = TO_DOUBLE(value);
+  CGRect bounds(view->GetBounds());
+  bounds.size.width = TO_DOUBLE(value);
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
+      [view->As<UIView>() setBounds:bounds];
     });
   }
 }
@@ -270,7 +385,7 @@ NAN_GETTER(NUIView::HeightGetter) {
   Nan::HandleScope scope;
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetFrame().size.height));
+  JS_SET_RETURN(JS_NUM(view->GetBounds().size.height));
 }
 
 NAN_SETTER(NUIView::HeightSetter) {
@@ -278,12 +393,12 @@ NAN_SETTER(NUIView::HeightSetter) {
 
   NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
 
-  CGRect frame(view->GetFrame());
-  frame.size.height = TO_DOUBLE(value);
+  CGRect bounds(view->GetBounds());
+  bounds.size.height = TO_DOUBLE(value);
 
   @autoreleasepool {
     dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
+      [view->As<UIView>() setBounds:bounds];
     });
   }
 }
@@ -346,6 +461,18 @@ CGRect NUIView::GetFrame() {
     });
   }
   return frame;
+}
+
+CGRect NUIView::GetBounds() {
+  __block CGRect bounds = CGRectMake(0,0,0,0);
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      if (As<UIView>()) {
+        bounds = [As<UIView>() bounds];
+      }
+    });
+  }
+  return bounds;
 }
 
 NAN_METHOD(NUIView::SizeThatFits) {
@@ -462,6 +589,14 @@ NAN_METHOD(NUIView::ViewWithStringTag) {
   }
 }
 
+NAN_METHOD(NUIView::RemoveFromSuperview) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  [ui removeFromSuperview];
+}
+
 NAN_GETTER(NUIView::LayerGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(UIView, ui);
@@ -478,8 +613,88 @@ NAN_GETTER(NUIView::LayerGetter) {
       Nan::New<v8::External>((__bridge void*)theLayer)
     };
     Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(theLayer, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    JS_SET_RETURN(JS_OBJ(value));
+    JS_SET_RETURN(value);
   }
+}
+
+NAN_GETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsGetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+
+  JS_SET_RETURN(JS_BOOL([view->As<UIView>() translatesAutoresizingMaskIntoConstraints]));
+}
+
+NAN_SETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsSetter) {
+  Nan::HandleScope scope;
+
+  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
+  
+  [view->As<UIView>() setTranslatesAutoresizingMaskIntoConstraints:TO_BOOL(value)];
+}
+
+NAN_GETTER(NUIView::LeadingAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui leadingAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::TrailingAnchorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui trailingAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::TopAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui topAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::BottomAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui bottomAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::CenterXAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::WidthAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::UserInteractionEnabledGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(JS_BOOL([ui isUserInteractionEnabled]));
+}
+
+NAN_SETTER(NUIView::UserInteractionEnabledSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  [ui setUserInteractionEnabled:TO_BOOL(value)];
 }
 
 NUIView::NUIView () {}

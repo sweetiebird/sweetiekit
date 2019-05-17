@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
   static NAN_METHOD(SetRootViewController);
+  static NAN_METHOD(MakeKeyAndVisible);
 };
 
 #endif /* NUIWindow_h */

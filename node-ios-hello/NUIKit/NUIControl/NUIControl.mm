@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #include "NUIControl.h"
 #include "NUIView.h"
+#import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NUIControl::type;
 
@@ -206,3 +207,4 @@ NAN_GETTER(NUIControl::TouchInsideGetter) {
   
   JS_SET_RETURN(JS_BOOL(isTouchInside));
 }
+

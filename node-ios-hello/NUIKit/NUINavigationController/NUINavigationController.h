@@ -32,6 +32,7 @@ public:
   static NAN_METHOD(PopViewController);
   static NAN_METHOD(PopToRootViewController);
   static NAN_METHOD(PopToViewController);
+  JS_PROP(IsToolbarHidden);
 };
 
 #endif /* NUINavigationController_h */
