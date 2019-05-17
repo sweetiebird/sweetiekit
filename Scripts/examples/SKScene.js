@@ -55,8 +55,6 @@ function touchesEnded(touches) {
     projectile.physicsBody.usesPreciseCollisionDetection = true;
 
     const offset = math.point.sub(l, projectile.position);
-    if (offset.x < 0) return;
-
     const direction = math.point.normalized(offset);
     const shootAmount = math.point.mult(direction, 1000);
     const realDest = math.point.add(shootAmount, projectile.position);
