@@ -30,9 +30,13 @@ public:
   
   JS_PROP(backgroundColor);
   JS_PROP(scaleMode);
+  JS_PROP(touchesBegan);
+  JS_PROP(touchesMoved);
   JS_PROP(touchesEnded);
   JS_PROP(physicsWorld);
 
+  sweetiekit::JSFunction _touchesBegan;
+  sweetiekit::JSFunction _touchesMoved;
   sweetiekit::JSFunction _touchesEnded;
 };
 
