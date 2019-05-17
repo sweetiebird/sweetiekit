@@ -20,9 +20,16 @@ const {
   NSMutableParagraphStyle,
   NSMutableAttributedString,
   UIButton,
+  UIViewController,
 } = SweetieKit;
 
 let scrollView;
+let quizVC;
+let w;
+let h;
+let viewH;
+let nav;
+let demoVC;
 
 const bgColors = [
   colors.fitbodDarkGrey,
@@ -60,8 +67,12 @@ const contentTexts = [
   'Tbh narwhal tote bag street art put a bird on it normcore, before they sold out artisan edison bulb sriracha salvia forage 3 wolf moon unicorn vice.',
 ];
 
-function makeBgView(demoVC) {
-  const frame = { x: 0, y: 0, width: demoVC.view.frame.width, height: demoVC.view.frame.height };
+function startQuiz() {
+
+}
+
+function makeBgView() {
+  const frame = { x: 0, y: 0, width: w, height: h };
   const img = new UIImage('abstract_grey');
   const imgView = new UIImageView(img);
   imgView.frame = frame;
@@ -70,11 +81,11 @@ function makeBgView(demoVC) {
   return imgView;
 }
 
-function makeDelegate(demoVC, pageControl) {
+function makeDelegate(pageControl) {
   const del = new UIScrollViewDelegate();
   del.didScroll = (sv) => {
     const { x, y } = sv.contentOffset;
-    const page = Math.round(x / demoVC.view.frame.width);
+    const page = Math.round(x / w);
     if (page !== pageControl.currentPage) {
       pageControl.currentPage = page;
     }
@@ -88,15 +99,15 @@ function makeDelegate(demoVC, pageControl) {
   scrollView.delegate = del;
 }
 
-async function make(nav, demoVC) {
+function setupWelcomeView() {
+  w = demoVC.view.frame.width;
+  h = demoVC.view.frame.height;
+  viewH = h - 84;
+
   demoVC.view.backgroundColor = colors.fitbodDarkGrey;
 
-  const bgView = makeBgView(demoVC);
+  const bgView = makeBgView();
   demoVC.view.addSubview(bgView);
-
-  const w = demoVC.view.frame.width;
-  const h = demoVC.view.frame.height;
-  const viewH = h - 84;
 
   scrollView = new UIScrollView();
   scrollView.contentSize = { width: w * numSlides, height: viewH };
@@ -165,6 +176,10 @@ async function make(nav, demoVC) {
 
   makeDelegate(demoVC, pageControl);
 
+  demoVC.view.addSubview(pageControl);
+}
+
+function setupStartButton() {
   const nextBtn = new UIButton({
     x: 20,
     y: viewH - 100,
@@ -181,9 +196,12 @@ async function make(nav, demoVC) {
   nextBtn.backgroundColor = colors.fitbodPink;
   nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
   nextBtn.titleLabel.font = buttonFont;
+  nextBtn.showsTouchWhenHighlighted = true;
 
-  demoVC.view.addSubview(pageControl);
-  demoVC.view.addSubview(nextBtn);
+  return nextBtn;
+}
+
+function setupNavStyle() {
   nav.navigationBar.barStyle = UIBarStyle.blackTranslucent;
   nav.navigationBar.isTranslucent = false;
   nav.navigationBar.tintColor = colors.fitbodPink;
@@ -191,6 +209,21 @@ async function make(nav, demoVC) {
     ...colors.fitbodDarkGrey,
     alpha: 0,
   };
+}
+
+async function make(n, d) {
+  demoVC = d;
+  nav = n;
+
+  setupWelcomeView();
+
+  const nextBtn = setupStartButton();
+  nextBtn.callback = startQuiz;
+
+  demoVC.view.addSubview(nextBtn);
+
+  setupNavStyle(nav);
+
   nav.pushViewController(demoVC);
 }
 
