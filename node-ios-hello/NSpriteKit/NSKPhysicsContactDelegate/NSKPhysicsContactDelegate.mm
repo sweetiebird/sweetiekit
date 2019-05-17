@@ -5,7 +5,7 @@
 //  Created by Emily Kolar on 2019-5-15.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
+
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 #include "defines.h"
@@ -83,8 +83,8 @@ NAN_SETTER(NSKPhysicsContactDelegate::didBeginContactSetter) {
 
 NAN_GETTER(NSKPhysicsContactDelegate::didEndContactGetter) {
   Nan::HandleScope scope;
-  
-  Nan::ThrowError("NSKPhysicsContactDelegate::didBeginContactGetter not yet implemented");
+
+  Nan::ThrowError("NSKPhysicsContactDelegate::didEndContactGetter not yet implemented");
 }
 
 NAN_SETTER(NSKPhysicsContactDelegate::didEndContactSetter) {
