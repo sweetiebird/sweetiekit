@@ -86,6 +86,7 @@ public extension UIImageView {
     ///     - showLoader: Show UIActivityIndicatorView or not
     /// - Returns: An URL session task. Note: You can cancel the downloading task if it needed.
     @discardableResult
+    @objc
     func setGifFromURL(_ url: URL,
                        manager: GifManager = .defaultManager,
                        loopCount: Int = -1,

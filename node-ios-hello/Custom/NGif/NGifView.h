@@ -27,6 +27,7 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(setGifImage);
+  static NAN_METHOD(setGifFromUrl);
 };
 
 #endif /* NGifView_h */

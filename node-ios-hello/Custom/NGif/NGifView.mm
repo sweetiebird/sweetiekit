@@ -32,6 +32,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NGifView::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "setGifImage", setGifImage);
+  Nan::SetMethod(proto, "setGifFromUrl", setGifFromUrl);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -65,15 +66,39 @@ NAN_METHOD(NGifView::New) {
 NGifView::NGifView () {}
 NGifView::~NGifView () {}
 
+NAN_METHOD(NGifView::setGifFromUrl) {
+  Nan::HandleScope scope;
+
+  NGifView *gv = ObjectWrap::Unwrap<NGifView>(info.This());
+  NGifManager *mgr = ObjectWrap::Unwrap<NGifManager>(Local<Object>::Cast(info[1]));
+
+  @autoreleasepool {
+    std::string str;
+    if (info[0]->IsString()) {
+      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+      str = *utf8Value;
+    } else {
+      // throw
+    }
+    NSString* urlStr = [NSString stringWithUTF8String:str.c_str()];
+    NSURL* url = [NSURL URLWithString:urlStr];
+    double count = TO_DOUBLE(info[2]);
+    double integrity = TO_DOUBLE(info[3]);
+    BOOL showLoader = TO_BOOL(info[4]);
+    auto ui = gv->As<GifView>();
+    [ui setGifFromURL:url manager:mgr->As<GifManager>() loopCount:count levelOfIntegrity:integrity showLoader:showLoader];
+  }
+}
+
 NAN_METHOD(NGifView::setGifImage) {
   Nan::HandleScope scope;
 
   NGifView *gv = ObjectWrap::Unwrap<NGifView>(info.This());
   NGif *ng = ObjectWrap::Unwrap<NGif>(Local<Object>::Cast(info[0]));
   NGifManager *mgr = ObjectWrap::Unwrap<NGifManager>(Local<Object>::Cast(info[1]));
-  double count = TO_DOUBLE(info[2]);
 
   @autoreleasepool {
+    double count = TO_DOUBLE(info[2]);
     auto ui = gv->As<GifView>();
     [ui setGifImage:ng->As<Gif>() manager:mgr->As<GifManager>() loopCount:count];
   }

@@ -55,7 +55,8 @@ NAN_METHOD(NGif::New) {
         // throw
       }
       NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
-      ui->SetNSObject([[Gif alloc] initWithGifName:result levelOfIntegrity:0.8 error:nullptr]);
+      double integrity = TO_DOUBLE(info[1]);
+      ui->SetNSObject([[Gif alloc] initWithGifName:result levelOfIntegrity:integrity error:nullptr]);
     }
   }
   ui->Wrap(obj);
