@@ -63,6 +63,11 @@ function touchesEnded(touches) {
 
     scene.addChild(projectile);
 
+    setTimeout(() => {
+      projectile.physicsBody.node.removeFromParent();
+    }, 1500);
+
+
     const actionMove = SKAction.moveTo(realDest, 2);
     const moveDone = SKAction.removeFromParent();
     const sequence = SKAction.sequence([actionMove, moveDone]);
@@ -75,7 +80,7 @@ function makeScene(demoVC) {
   const h = (demoVC.view.frame.height - 84);
   const size = { width: w, height: h };
   scene = SKScene.sceneWithSize(size);
-  scene.backgroundColor = { red: 218/255, green: 112/255, blue: 214/255 };
+  scene.backgroundColor = { red: 135/255, green: 206/255, blue: 250/255 };
   scene.scaleMode = SKSceneScaleMode.resizeFill;
   scene.touchesEnded = touchesEnded;
   scene.physicsWorld.gravity = { dx: 0, dy: 0 };
@@ -135,7 +140,7 @@ function start(demoVC) {
   scene.addChild(player);
   setInterval(() => {
     addMonster(demoVC);
-  }, 2000);
+  }, 500);
 }
 
 async function make(demoVC) {
