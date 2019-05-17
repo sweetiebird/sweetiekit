@@ -62,6 +62,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(viewDidDisappear);
   JS_PROP(viewWillDisappear);
   JS_PROP(drawRect);
+  JS_PROP(contentMode);
 private:
   static CGSize tmp_Size;
 JS_WRAP_CLASS_END(UIView);

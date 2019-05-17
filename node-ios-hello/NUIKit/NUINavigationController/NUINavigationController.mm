@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUINavigationController.h"
 #include "NUIViewController.h"
+#include "NUINavigationBar.h"
 
 Nan::Persistent<FunctionTemplate> NUINavigationController::type;
 
@@ -32,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationController::Initi
   Nan::SetMethod(proto, "popToViewController", PopToViewController);
   Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
   JS_SET_PROP(proto, "isToolbarHidden", IsToolbarHidden);
+  JS_ASSIGN_PROP_READONLY(proto, navigationBar);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -213,3 +215,10 @@ NAN_SETTER(NUINavigationController::IsToolbarHiddenSetter) {
   [ui setToolbarHidden:TO_BOOL(value)];
 }
 
+NAN_GETTER(NUINavigationController::navigationBarGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UINavigationController, ui);
+
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui navigationBar], NUINavigationBar::type)));
+}

@@ -39,6 +39,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "position", Position)
   Nan::SetMethod(proto, "addAnimation", AddAnimation);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
+  JS_ASSIGN_PROP(proto, shadowOpacity);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -363,4 +364,20 @@ NAN_SETTER(NCALayer::MasksToBoundsSetter) {
   JS_UNWRAP(CALayer, ui);
   
   [ui setMasksToBounds:TO_BOOL(value)];
+}
+
+NAN_GETTER(NCALayer::shadowOpacityGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+
+  JS_SET_RETURN(JS_NUM([ui shadowOpacity]));
+}
+
+NAN_SETTER(NCALayer::shadowOpacitySetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ui);
+  
+  [ui setShadowOpacity:TO_FLOAT(value)];
 }

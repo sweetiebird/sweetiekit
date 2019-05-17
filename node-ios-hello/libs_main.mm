@@ -33,6 +33,7 @@
 #include "NUISlider.h"
 #include "NUITextField.h"
 #include "NUINavigationController.h"
+#include "NUINavigationBar.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include "NUIViewControllerTransitioningDelegate.h"
@@ -473,6 +474,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UIViewControllerTransitioningDelegate = NUIViewControllerTransitioningDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIViewControllerTransitioningDelegate").ToLocalChecked(), N_UIViewControllerTransitioningDelegate.first);
+  
+        auto N_UINavigationBar = NUINavigationBar::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UINavigationBar").ToLocalChecked(), N_UINavigationBar.first);
 
         // UIKit Custom
 

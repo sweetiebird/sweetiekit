@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIScrollViewDelegate::Initial
   JS_ASSIGN_PROP(proto, didEndDecelerating);
   JS_ASSIGN_PROP(proto, didScrollToTop);
   JS_ASSIGN_PROP(proto, shouldScrollToTop);
+  JS_ASSIGN_PROP(proto, didEndDragging);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -167,5 +168,26 @@ NAN_SETTER(NUIScrollViewDelegate::willBeginDeceleratingSetter) {
     Nan::HandleScope scope;
     Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
     del->_willBeginDecelerating("NUIScrollViewDelegate::willBeginDeceleratingSetter", scrollViewObj);
+  }];
+}
+
+NAN_GETTER(NUIScrollViewDelegate::didEndDraggingGetter) {
+  Nan::HandleScope scope;
+
+  Nan::ThrowError("NUIScrollViewDelegate::didEndDraggingGetter not yet implemented");
+}
+
+NAN_SETTER(NUIScrollViewDelegate::didEndDraggingSetter) {
+  Nan::EscapableHandleScope scope;
+
+  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
+  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
+
+  del->_didEndDragging.Reset(Local<Function>::Cast(value));
+
+  [sDel setDidEndDragging: ^ (UIScrollView * _Nonnull scrollView, BOOL decelerate) {
+    Nan::HandleScope scope;
+    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
+    del->_didEndDragging("NUIScrollViewDelegate::didEndDraggingSetter", scrollViewObj);
   }];
 }

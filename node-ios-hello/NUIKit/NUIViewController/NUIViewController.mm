@@ -10,6 +10,7 @@
 #import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIViewController.h"
+#include "NUINavigationController.h"
 #include "NUIViewControllerTransitioningDelegate.h"
 #include "NUIView.h"
 #include "NUIBarButtonItem.h"
@@ -44,6 +45,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_ASSIGN_PROP(proto, viewWillAppear);
   JS_ASSIGN_PROP(proto, viewDidDisappear);
   JS_ASSIGN_PROP(proto, viewWillDisappear);
+  JS_ASSIGN_PROP_READONLY(proto, navigationController);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -358,4 +360,12 @@ NAN_SETTER(NUIViewController::viewWillDisappearSetter) {
     [func jsFunction]->Reset(scope.Escape(value));
     [ui associateValue:func withKey:@"sweetiekit_viewWillDisappear"];
   }
+}
+
+NAN_GETTER(NUIViewController::navigationControllerGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui navigationController], NUINavigationController::type)));
 }

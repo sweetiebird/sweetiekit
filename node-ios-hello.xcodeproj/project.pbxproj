@@ -140,6 +140,12 @@
 		A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B73228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm */; };
 		A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */; };
 		A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */; };
+		A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B84228EFCAC00D9B3B8 /* NUINavigationBar.mm */; };
+		A1CE2B8C228F020800D9B3B8 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B88228F020800D9B3B8 /* Lato-Hairline.ttf */; };
+		A1CE2B8D228F020800D9B3B8 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B89228F020800D9B3B8 /* Lato-Bold.ttf */; };
+		A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B8A228F020800D9B3B8 /* Lato-Light.ttf */; };
+		A1CE2B8F228F020800D9B3B8 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B8B228F020800D9B3B8 /* Lato-Black.ttf */; };
+		A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CE2B87228F01F700D9B3B8 /* Lato-Regular.ttf */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -423,6 +429,13 @@
 		A1CE2B77228EB96000D9B3B8 /* NNSParagraphStyle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSParagraphStyle.mm; sourceTree = "<group>"; };
 		A1CE2B7B228EC15800D9B3B8 /* NNSMutableAttributedString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableAttributedString.mm; sourceTree = "<group>"; };
 		A1CE2B7C228EC15800D9B3B8 /* NNSMutableAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableAttributedString.h; sourceTree = "<group>"; };
+		A1CE2B83228EFCAC00D9B3B8 /* NUINavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationBar.h; sourceTree = "<group>"; };
+		A1CE2B84228EFCAC00D9B3B8 /* NUINavigationBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationBar.mm; sourceTree = "<group>"; };
+		A1CE2B87228F01F700D9B3B8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A1CE2B88228F020800D9B3B8 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		A1CE2B89228F020800D9B3B8 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		A1CE2B8A228F020800D9B3B8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		A1CE2B8B228F020800D9B3B8 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -1358,6 +1371,27 @@
 			path = NNSMutableAttributedString;
 			sourceTree = "<group>";
 		};
+		A1CE2B82228EFCAC00D9B3B8 /* NUINavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B83228EFCAC00D9B3B8 /* NUINavigationBar.h */,
+				A1CE2B84228EFCAC00D9B3B8 /* NUINavigationBar.mm */,
+			);
+			path = NUINavigationBar;
+			sourceTree = "<group>";
+		};
+		A1CE2B86228F01D900D9B3B8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE2B8B228F020800D9B3B8 /* Lato-Black.ttf */,
+				A1CE2B89228F020800D9B3B8 /* Lato-Bold.ttf */,
+				A1CE2B88228F020800D9B3B8 /* Lato-Hairline.ttf */,
+				A1CE2B8A228F020800D9B3B8 /* Lato-Light.ttf */,
+				A1CE2B87228F01F700D9B3B8 /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -1452,6 +1486,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1CE2B82228EFCAC00D9B3B8 /* NUINavigationBar */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1688,6 +1723,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1CE2B86228F01D900D9B3B8 /* Fonts */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A194894D228A8489007BF787 /* NMapKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
@@ -1852,13 +1888,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1CE2B8D228F020800D9B3B8 /* Lato-Bold.ttf in Resources */,
 				A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */,
 				A174A171228227A2002A8216 /* sunflower.mp3 in Resources */,
+				A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
+				A1CE2B8C228F020800D9B3B8 /* Lato-Hairline.ttf in Resources */,
 				A1CE2B5F228E83D400D9B3B8 /* 1.gif in Resources */,
+				A1CE2B8F228F020800D9B3B8 /* Lato-Black.ttf in Resources */,
+				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
 				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
@@ -1911,6 +1952,7 @@
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
 				A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */,
+				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,

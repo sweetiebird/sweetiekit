@@ -11,6 +11,7 @@ import UIKit
 
 typealias SUIScrollViewDelegate_CommonDidClosure = (UIScrollView) -> Void
 typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
+typealias SUIScrollViewDelegate_DidEndDraggingClosure = (UIScrollView, Bool) -> Void
 
 @objc class SUIScrollViewDelegate: NSObject, UIScrollViewDelegate {
   var didScrollCallback: SUIScrollViewDelegate_CommonDidClosure?
@@ -18,6 +19,7 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
   var didScrollToTopCallback: SUIScrollViewDelegate_CommonDidClosure?
   var willBeginDeceleratingCallback: SUIScrollViewDelegate_CommonDidClosure?
   var didEndDeceleratingCallback: SUIScrollViewDelegate_CommonDidClosure?
+  var didEndDraggingCallback: SUIScrollViewDelegate_DidEndDraggingClosure?
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     didScrollCallback?(scrollView)
@@ -41,6 +43,10 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
   func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
     willBeginDeceleratingCallback?(scrollView)
   }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    didEndDraggingCallback?(scrollView, decelerate)
+  }
 }
 
 @objc extension SUIScrollViewDelegate {
@@ -62,5 +68,9 @@ typealias SUIScrollViewDelegate_CommonShouldClosure = (UIScrollView) -> Bool
 
   func setDidEndDecelerating(_ closure: @escaping SUIScrollViewDelegate_CommonDidClosure) {
     didEndDeceleratingCallback = closure
+  }
+  
+  func setDidEndDragging(_ closure: @escaping SUIScrollViewDelegate_DidEndDraggingClosure) {
+    didEndDraggingCallback = closure
   }
 }

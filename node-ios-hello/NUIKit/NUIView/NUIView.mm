@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIView.h"
@@ -62,6 +63,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_ASSIGN_PROP(proto, viewDidDisappear);
   JS_ASSIGN_PROP(proto, viewWillDisappear);
   JS_ASSIGN_PROP(proto, drawRect);
+  JS_ASSIGN_PROP(proto, contentMode);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -733,6 +735,25 @@ NAN_SETTER(NUIView::alphaSetter) {
   @autoreleasepool {
     double alpha = TO_DOUBLE(value);
     [ui setAlpha:alpha];
+  }
+}
+
+NAN_GETTER(NUIView::contentModeGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  JS_SET_RETURN(JS_NUM([ui contentMode]));
+}
+
+NAN_SETTER(NUIView::contentModeSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  @autoreleasepool {
+    UIViewContentMode mode = UIViewContentMode(TO_INT32(value));
+    [ui setContentMode:mode];
   }
 }
 

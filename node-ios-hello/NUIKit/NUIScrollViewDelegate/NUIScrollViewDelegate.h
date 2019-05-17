@@ -32,12 +32,14 @@ public:
   JS_PROP(didScrollToTop);
   JS_PROP(shouldScrollToTop);
   JS_PROP(willBeginDecelerating);
+  JS_PROP(didEndDragging);
 
   sweetiekit::JSFunction _didScroll;
   sweetiekit::JSFunction _didEndDecelerating;
   sweetiekit::JSFunction _willBeginDecelerating;
   sweetiekit::JSFunction _didScrollToTop;
   sweetiekit::JSFunction _shouldScrollToTop;
+  sweetiekit::JSFunction _didEndDragging;
 };
 
 #endif /* NUIScrollViewDelegate_h */

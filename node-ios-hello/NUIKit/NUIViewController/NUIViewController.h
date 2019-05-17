@@ -34,6 +34,7 @@ public:
   JS_PROP(viewWillAppear);
   JS_PROP(viewDidDisappear);
   JS_PROP(viewWillDisappear);
+  JS_PROP(navigationController);
 };
 
 #endif /* NUIViewController_h */

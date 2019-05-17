@@ -51,6 +51,28 @@ const UIControlState = {
   focused: 1 << 3,
 };
 
+const UIViewContentMode = {
+  scaleToFill: 0,
+  scaleAspectFit: 1,
+  scaleAspectFill: 2,
+  redraw: 3,
+  center: 4,
+  top: 5,
+  bottom: 6,
+  left: 7,
+  right: 8,
+  topLeft: 9,
+  topRight: 10,
+  bottomLeft: 11,
+  bottomRight: 12,
+};
+
+const UIBarStyle = {
+  default: 0,
+  black: 1,
+  blackTranslucent: 2,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -60,3 +82,4 @@ module.exports.NSTextAlignment = NSTextAlignment;
 module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
 module.exports.NSForegroundColorAttributeName = 'NSColor';
 module.exports.UIControlState = UIControlState;
+module.exports.UIViewContentMode = UIViewContentMode;

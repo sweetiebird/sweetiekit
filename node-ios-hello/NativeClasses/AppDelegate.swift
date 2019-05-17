@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vc.setViewControllers([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;*/
       
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+       UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         iOSLog0("Finished launching\n");
         //embed_start();

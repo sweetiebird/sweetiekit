@@ -377,6 +377,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUITabBarItem.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
+#include "NUINavigationBar.h"
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include "NUIViewControllerTransitioningDelegate.h"
@@ -587,6 +588,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UINavigationBar class]]) {
+        return NUINavigationBar::type;
+      }
       if ([obj isKindOfClass:[UIPageControl class]]) {
         return NUIPageControl::type;
       }
