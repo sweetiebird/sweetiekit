@@ -26,6 +26,13 @@ public:
   virtual ~NUIBezierPath();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(bezierPath);
+  static NAN_METHOD(bezierPathWithRect);
+  static NAN_METHOD(bezierPathWithOvalInRect);
+  static NAN_METHOD(bezierPathWithArcCenter);
+  static NAN_METHOD(moveToPoint);
+  
+  JS_PROP(lineWidth);
 };
 
 #endif /* NUIBezierPath_h */

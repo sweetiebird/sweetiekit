@@ -28,6 +28,7 @@
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
+		A11029DA228E51370078FAC0 /* NUIBezierPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D8228E51360078FAC0 /* NUIBezierPath.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
@@ -222,6 +223,8 @@
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
+		A11029D8228E51360078FAC0 /* NUIBezierPath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBezierPath.mm; sourceTree = "<group>"; };
+		A11029D9228E51360078FAC0 /* NUIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBezierPath.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
@@ -595,6 +598,15 @@
 				A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */,
 			);
 			path = NSKCameraNode;
+			sourceTree = "<group>";
+		};
+		A11029D7228E51360078FAC0 /* NUIBezierPath */ = {
+			isa = PBXGroup;
+			children = (
+				A11029D9228E51360078FAC0 /* NUIBezierPath.h */,
+				A11029D8228E51360078FAC0 /* NUIBezierPath.mm */,
+			);
+			path = NUIBezierPath;
 			sourceTree = "<group>";
 		};
 		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
@@ -1288,6 +1300,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A11029D7228E51360078FAC0 /* NUIBezierPath */,
 				A1B65481228CB87E00976024 /* NUITouch */,
 				A178B27022887901005184EE /* NUITabBarItem */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
@@ -1776,6 +1789,7 @@
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
+				A11029DA228E51370078FAC0 /* NUIBezierPath.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
