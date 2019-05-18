@@ -27,7 +27,7 @@ public:
   virtual ~NUIBarButtonItem();
 
   static NAN_METHOD(New);
-  
+  JS_PROP(title);
   sweetiekit::JSFunction _callback;
 };
 

@@ -26,6 +26,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIBarButtonItem::Initialize(I
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP(proto, title);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -87,3 +88,41 @@ NAN_METHOD(NUIBarButtonItem::New) {
 
 NUIBarButtonItem::NUIBarButtonItem () {}
 NUIBarButtonItem::~NUIBarButtonItem () {}
+
+NAN_GETTER(NUIBarButtonItem::titleGetter) {
+  Nan::HandleScope scope;
+
+  NUIBarButtonItem *view = ObjectWrap::Unwrap<NUIBarButtonItem>(info.This());
+  __block NSString* str = nullptr;
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      str = [view->As<UIBarButtonItem>() title];
+    });
+  }
+
+  if (str != nullptr) {
+    auto result = JS_STR([str UTF8String]);
+    info.GetReturnValue().Set(result);
+  }
+  
+}
+
+NAN_SETTER(NUIBarButtonItem::titleSetter) {
+  Nan::HandleScope scope;
+
+  NUIBarButtonItem *btn = ObjectWrap::Unwrap<NUIBarButtonItem>(info.This());
+
+  std::string title;
+  if (value->IsString()) {
+    Nan::Utf8String utf8Value(Local<String>::Cast(value));
+    title = *utf8Value;
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+  
+  @autoreleasepool {
+    dispatch_sync(dispatch_get_main_queue(), ^ {
+      [btn->As<UIBarButtonItem>() setTitle:[NSString stringWithUTF8String:title.c_str()]];
+    });
+  }
+}

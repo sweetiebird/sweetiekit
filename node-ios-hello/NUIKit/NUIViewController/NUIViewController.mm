@@ -15,6 +15,7 @@
 #include "NUIView.h"
 #include "NUIBarButtonItem.h"
 #include "NUITabBarItem.h"
+#include "NUINavigationItem.h"
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
 
@@ -46,6 +47,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_ASSIGN_PROP(proto, viewDidDisappear);
   JS_ASSIGN_PROP(proto, viewWillDisappear);
   JS_ASSIGN_PROP_READONLY(proto, navigationController);
+  JS_ASSIGN_PROP_READONLY(proto, navigationItem);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -368,4 +370,12 @@ NAN_GETTER(NUIViewController::navigationControllerGetter) {
   JS_UNWRAP(UIViewController, ui);
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui navigationController], NUINavigationController::type)));
+}
+
+NAN_GETTER(NUIViewController::navigationItemGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIViewController, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui navigationItem], NUINavigationItem::type)));
 }

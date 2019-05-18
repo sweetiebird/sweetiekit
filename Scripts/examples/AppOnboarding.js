@@ -25,6 +25,7 @@ const {
   NSMutableAttributedString,
   UIButton,
   UIViewController,
+  UIBarButtonItem,
 } = SweetieKit;
 
 let scrollView;
@@ -74,28 +75,41 @@ const contentTexts = [
 
 function setupProgressView() {
   progressView = new UIProgressView({
-    x: 60,
-    y: 40,
-    width: quizVC.view.frame.width - 120,
+    x: 100,
+    y: 68,
+    width: quizVC.view.frame.width - 200,
     height: 20,
   });
-  progressView.progressTintColor = colors.fitbodLightGrey;
+  progressView.progressTintColor = { red: 1, green: 1, blue: 1, alpha: 1 };
   progressView.trackTintColor = colors.fitbodMedGrey;
-  quizVC.view.addSubview(progressView);
 }
 
 function startQuiz() {
   quizVC = new UIViewController();
+  quizVC.view.layer.maskToBounds = true;
   quizVC.view.backgroundColor = colors.fitbodDarkGrey;
+
+  const clippingView = makeClippingView();
+  quizVC.view.addSubview(clippingView);
+
   const bgView = makeBgView();
-  quizVC.view.addSubview(bgView);
+  clippingView.addSubview(bgView);
 
   const barView = makeStatusBarView();
-  quizVC.view.addSubview(barView);
+  clippingView.addSubview(barView);
 
   setupProgressView();
 
+  clippingView.addSubview(progressView);
+
+
+  quizVC.navigationItem.backBarButtonItem = new UIBarButtonItem('');
+
   nav.pushViewController(quizVC);
+
+  setTimeout(() => {
+    progressView.setProgress(0.2, true);
+  }, 500);
 }
 
 function makeBgView() {
@@ -105,6 +119,7 @@ function makeBgView() {
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
   imgView.alpha = 0.2;
+  imgView.layer.maskToBounds = true;
   return imgView;
 }
 
@@ -126,12 +141,7 @@ function makeDelegate(pageControl) {
   scrollView.delegate = del;
 }
 
-function setupWelcomeView() {
-  w = demoVC.view.frame.width;
-  h = demoVC.view.frame.height;
-  viewH = h - 84;
-
-  demoVC.view.backgroundColor = colors.fitbodDarkGrey;
+function makeClippingView() {
   const clippingView = new UIView({
     x: 0,
     y: -88,
@@ -140,6 +150,17 @@ function setupWelcomeView() {
   });
   clippingView.backgroundColor = colors.fitbodDarkGrey;
   clippingView.layer.maskToBounds = true;
+  return clippingView;
+}
+
+function setupWelcomeView() {
+  w = demoVC.view.frame.width;
+  h = demoVC.view.frame.height;
+  viewH = h - 84;
+
+  demoVC.view.backgroundColor = colors.fitbodDarkGrey;
+
+  const clippingView = makeClippingView();
   demoVC.view.addSubview(clippingView);
 
   const bgView = makeBgView();
