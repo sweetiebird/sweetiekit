@@ -7,9 +7,12 @@ const {
   UIViewContentMode,
   UIBarStyle,
   UIControlEvents,
+  UIProgressViewStyle,
+  UIBarMetrics,
 }= require('./enums');
 
 const {
+  UIProgressView,
   UIScrollView,
   UIView,
   UILabel,
@@ -31,6 +34,7 @@ let h;
 let viewH;
 let nav;
 let demoVC;
+let progressView;
 
 const bgColors = [
   colors.fitbodDarkGrey,
@@ -68,12 +72,34 @@ const contentTexts = [
   'Tbh narwhal tote bag street art put a bird on it normcore, before they sold out artisan edison bulb sriracha salvia forage 3 wolf moon unicorn vice.',
 ];
 
+function setupProgressView() {
+  progressView = new UIProgressView({
+    x: 60,
+    y: 40,
+    width: quizVC.view.frame.width - 120,
+    height: 20,
+  });
+  progressView.progressTintColor = colors.fitbodLightGrey;
+  progressView.trackTintColor = colors.fitbodMedGrey;
+  quizVC.view.addSubview(progressView);
+}
+
 function startQuiz() {
-  console.log('start');
+  quizVC = new UIViewController();
+  quizVC.view.backgroundColor = colors.fitbodDarkGrey;
+  const bgView = makeBgView();
+  quizVC.view.addSubview(bgView);
+
+  const barView = makeStatusBarView();
+  quizVC.view.addSubview(barView);
+
+  setupProgressView();
+
+  nav.pushViewController(quizVC);
 }
 
 function makeBgView() {
-  const frame = { x: 0, y: 0, width: w, height: h };
+  const frame = { x: 0, y: -84, width: w, height: h + 84 };
   const img = new UIImage('abstract_grey');
   const imgView = new UIImageView(img);
   imgView.frame = frame;
@@ -106,9 +132,21 @@ function setupWelcomeView() {
   viewH = h - 84;
 
   demoVC.view.backgroundColor = colors.fitbodDarkGrey;
+  const clippingView = new UIView({
+    x: 0,
+    y: -88,
+    width: w,
+    height: h + 88,
+  });
+  clippingView.backgroundColor = colors.fitbodDarkGrey;
+  clippingView.layer.maskToBounds = true;
+  demoVC.view.addSubview(clippingView);
 
   const bgView = makeBgView();
-  demoVC.view.addSubview(bgView);
+  clippingView.addSubview(bgView);
+
+  const barView = makeStatusBarView();
+  clippingView.addSubview(barView);
 
   scrollView = new UIScrollView();
   scrollView.contentSize = { width: w * numSlides, height: viewH };
@@ -118,6 +156,7 @@ function setupWelcomeView() {
   scrollView.bounces = false;
 
   demoVC.view.addSubview(scrollView);
+  scrollView.layer.maskToBounds = true;
 
   scrollView.leadingAnchor.constraintEqualToAnchor(demoVC.view.leadingAnchor, 0).isActive = true;
   scrollView.trailingAnchor.constraintEqualToAnchor(demoVC.view.trailingAnchor, 0).isActive = true;
@@ -170,7 +209,6 @@ function setupWelcomeView() {
     alpha: 0.5,
   };
   pageControl.addTarget(() => {
-    console.log('page control target');
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
@@ -201,22 +239,28 @@ function setupStartButton() {
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
-  nextBtn.addTarget(() => {
-    console.log('button target');
-    // startQuiz();
-  }, UIControlEvents.touchUpInside);
+  nextBtn.addTarget(startQuiz, UIControlEvents.touchUpInside);
 
   demoVC.view.addSubview(nextBtn);
 }
 
-function setupNavStyle() {
-  nav.navigationBar.barStyle = UIBarStyle.blackTranslucent;
-  nav.navigationBar.isTranslucent = false;
-  nav.navigationBar.tintColor = colors.fitbodPink;
-  nav.navigationBar.barTintColor = {
-    ...colors.fitbodDarkGrey,
-    alpha: 0,
-  };
+function setupNavStyle(n) {
+  n.navigationBar.setTranslucent(true);
+  n.navigationBar.setBackgroundImageForBarMetrics(new UIImage(), UIBarMetrics.default);
+  n.navigationBar.shadowImage = new UIImage();
+  n.navigationBar.tintColor = colors.fitbodPink;
+  n.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+}
+
+function makeStatusBarView() {
+  const barView = new UIView({
+    x: 0,
+    y: -88,
+    width: w,
+    height: 88,
+  });
+  barView.backgroundColor = colors.fitbodDarkGrey;
+  return barView;
 }
 
 async function make(n, d) {
@@ -226,15 +270,8 @@ async function make(n, d) {
   setupWelcomeView();
 
   setupStartButton();
-  // nextBtn.callback = startQuiz;
-  // nextBtn.addTarget(() => {
-  //   console.log('button target');
-  //   startQuiz();
-  // });
 
-  // demoVC.view.addSubview(nextBtn);
-
-  setupNavStyle(nav);
+  setupNavStyle(n);
 
   nav.pushViewController(demoVC);
 }

@@ -55,6 +55,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(BottomAnchor);
   JS_PROP(CenterXAnchor);
   JS_PROP(WidthAnchor);
+  JS_PROP(heightAnchor);
   JS_PROP(UserInteractionEnabled);
   JS_PROP(alpha);
   JS_PROP(viewDidAppear);

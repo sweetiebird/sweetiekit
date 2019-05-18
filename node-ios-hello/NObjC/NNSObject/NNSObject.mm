@@ -394,6 +394,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUICollectionViewManager.h"
 #include "NUITableViewDataSource.h"
 #include "NUIPageControl.h"
+#include "NUIProgressView.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
@@ -591,6 +592,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UIProgressView class]]) {
+        return NUIProgressView::type;
+      }
       if ([obj isKindOfClass:[UIPickerView class]]) {
         return NUIPickerView::type;
       }

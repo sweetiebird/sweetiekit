@@ -12,6 +12,7 @@
 #include "NUIView.h"
 #include "NUINavigationBar.h"
 #include "NUINavigationItem.h"
+#include "NUIImage.h"
 
 Nan::Persistent<FunctionTemplate> NUINavigationBar::type;
 
@@ -28,10 +29,13 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationBar::Initialize(I
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetMethod(proto, "setBackgroundImageForBarMetrics", setBackgroundImageForBarMetrics);
   JS_ASSIGN_PROP(proto, barStyle);
   JS_ASSIGN_PROP_READONLY(proto, backItem);
   JS_ASSIGN_PROP(proto, barTintColor);
   JS_ASSIGN_PROP(proto, tintColor);
+  JS_ASSIGN_PROP(proto, shadowImage);
+//  JS_ASSIGN_PROP(proto, isTranslucent);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -60,6 +64,28 @@ NAN_METHOD(NUINavigationBar::New) {
 
 NUINavigationBar::NUINavigationBar () {}
 NUINavigationBar::~NUINavigationBar () {}
+
+NAN_METHOD(NUINavigationBar::setBackgroundImageForBarMetrics) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UINavigationBar, ui);
+  
+  NUIImage *imgObj = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]));
+
+  UIBarMetrics metrics = UIBarMetricsDefault;
+  double metricNum = TO_UINT32(info[1]);
+  if (metricNum == 1) {
+    metrics = UIBarMetricsCompact;
+  } else if (metricNum == 2) {
+    metrics = UIBarMetricsDefaultPrompt;
+  } else if (metricNum == 3) {
+    metrics = UIBarMetricsCompactPrompt;
+  }
+
+  @autoreleasepool {
+    [ui setBackgroundImage:imgObj->As<UIImage>() forBarMetrics:metrics];
+  }
+}
 
 NAN_GETTER(NUINavigationBar::barStyleGetter) {
   Nan::HandleScope scope;
@@ -164,4 +190,42 @@ NAN_GETTER(NUINavigationBar::backItemGetter) {
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backItem], NUINavigationItem::type)));
 }
+
+NAN_GETTER(NUINavigationBar::shadowImageGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UINavigationBar, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui shadowImage], NUIImage::type)));
+}
+
+NAN_SETTER(NUINavigationBar::shadowImageSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UINavigationBar, ui);
+  
+  NUIImage *imgObj = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setShadowImage:imgObj->As<UIImage>()];
+  }
+}
+//
+//NAN_GETTER(NUINavigationBar::isTranslucentGetter) {
+//  Nan::HandleScope scope;
+//  
+//  JS_UNWRAP(UINavigationBar, ui);
+//  
+//  JS_SET_RETURN(JS_BOOL([ui isTranslucent]));
+//}
+//
+//NAN_SETTER(NUINavigationBar::isTranslucentSetter) {
+//  Nan::HandleScope scope;
+//  
+//  JS_UNWRAP(UINavigationBar, ui);
+//
+//  @autoreleasepool {
+//    [ui setTranslucent:TO_BOOL(value)];
+//  }
+//}
 

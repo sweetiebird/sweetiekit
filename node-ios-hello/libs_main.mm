@@ -52,6 +52,7 @@
 #include "NUICollectionViewCell.h"
 #include "NUICollectionViewManager.h"
 #include "NUIPageControl.h"
+#include "NUIProgressView.h"
 #include "NCALayer.h"
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
@@ -467,6 +468,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIPickerView = NUIPickerView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPickerView").ToLocalChecked(), N_UIPickerView.first);
+  
+        auto N_UIProgressView = NUIProgressView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIProgressView").ToLocalChecked(), N_UIProgressView.first);
 
         // UIKit delegates ========
   

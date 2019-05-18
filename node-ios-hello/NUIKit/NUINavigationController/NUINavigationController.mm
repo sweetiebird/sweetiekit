@@ -50,13 +50,15 @@ NAN_METHOD(NUINavigationController::New) {
 
   if (info[0]->IsExternal()) {
     ctrl->SetNSObject((__bridge UINavigationController *)(info[0].As<External>()->Value()));
-  } else {
+  } else if (info.Length() > 0) {
     NUIViewController *child = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
 
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        ctrl->SetNSObject([[UINavigationController alloc] initWithRootViewController:child->As<UIViewController>()]);
-      });
+      ctrl->SetNSObject([[UINavigationController alloc] initWithRootViewController:child->As<UIViewController>()]);
+    }
+  } else {
+    @autoreleasepool {
+      ctrl->SetNSObject([[UINavigationController alloc] init]);
     }
   }
   ctrl->Wrap(ctrlObj);

@@ -31,6 +31,7 @@
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
 		A10BD049228F551100184286 /* NUIStackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD047228F551100184286 /* NUIStackView.mm */; };
 		A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD04B228F6B5400184286 /* NUINavigationItem.mm */; };
+		A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD04F228F8ACB00184286 /* NUIProgressView.mm */; };
 		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
@@ -258,6 +259,8 @@
 		A10BD048228F551100184286 /* NUIStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIStackView.h; sourceTree = "<group>"; };
 		A10BD04B228F6B5400184286 /* NUINavigationItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationItem.mm; sourceTree = "<group>"; };
 		A10BD04C228F6B5400184286 /* NUINavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationItem.h; sourceTree = "<group>"; };
+		A10BD04F228F8ACB00184286 /* NUIProgressView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIProgressView.mm; sourceTree = "<group>"; };
+		A10BD050228F8ACB00184286 /* NUIProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIProgressView.h; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -701,6 +704,15 @@
 				A10BD04B228F6B5400184286 /* NUINavigationItem.mm */,
 			);
 			path = NUINavigationItem;
+			sourceTree = "<group>";
+		};
+		A10BD04E228F8ACB00184286 /* NUIProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A10BD050228F8ACB00184286 /* NUIProgressView.h */,
+				A10BD04F228F8ACB00184286 /* NUIProgressView.mm */,
+			);
+			path = NUIProgressView;
 			sourceTree = "<group>";
 		};
 		A11029D3228E4C9C0078FAC0 /* NSKCameraNode */ = {
@@ -1549,6 +1561,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A10BD04E228F8ACB00184286 /* NUIProgressView */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -2046,6 +2059,7 @@
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
+				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,

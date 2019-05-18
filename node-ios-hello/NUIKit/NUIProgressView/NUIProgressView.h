@@ -1,13 +1,13 @@
 //
-//  NUINavigationBar.h
+//  NUIProgressView.h
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUINavigationBar_h
-#define NUINavigationBar_h    
+#ifndef NUIProgressView_h
+#define NUIProgressView_h    
 
 #import <UIKit/UIKit.h>
 #include "NUIView.h"
@@ -16,23 +16,20 @@
 using namespace v8;
 using namespace node;
 
-class NUINavigationBar : public NUIView {
+class NUIProgressView : public NUIView {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NUINavigationBar();
-  virtual ~NUINavigationBar();
+  NUIProgressView();
+  virtual ~NUIProgressView();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(setBackgroundImageForBarMetrics);
-  JS_PROP(barStyle);
-  JS_PROP(backItem);
-  JS_PROP(barTintColor);
-  JS_PROP(tintColor);
-  JS_PROP(shadowImage);
-//  JS_PROP(isTranslucent);
+  static NAN_METHOD(setProgress);
+  JS_PROP(progress);
+  JS_PROP(progressTintColor);
+  JS_PROP(trackTintColor);
 };
 
-#endif /* NUINavigationBar_h */
+#endif /* NUIProgressView_h */

@@ -69,6 +69,11 @@ const UIControlEvents = {
   editingDidEndOnExit: 1 << 19,
 };
 
+const UIProgressViewStyle = {
+  default: 0,
+  bar: 1,
+};
+
 const UIViewContentMode = {
   scaleToFill: 0,
   scaleAspectFit: 1,
@@ -91,6 +96,13 @@ const UIBarStyle = {
   blackTranslucent: 2,
 };
 
+const UIBarMetrics = {
+  default: 0,
+  compact: 1,
+  defaultPrompt: 2,
+  compactPrompt: 3,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -103,3 +115,5 @@ module.exports.UIControlState = UIControlState;
 module.exports.UIViewContentMode = UIViewContentMode;
 module.exports.UIBarStyle = UIBarStyle;
 module.exports.UIControlEvents = UIControlEvents;
+module.exports.UIProgressViewStyle = UIProgressViewStyle;
+module.exports.UIBarMetrics = UIBarMetrics;
