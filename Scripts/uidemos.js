@@ -12,6 +12,7 @@ const makeLabel = require('./examples/UILabel');
 const makePageControl = require('./examples/UIPageControl');
 const makePicker = require('./examples/UIPickerView');
 const makeMapView = require('./examples/MKMapView');
+const makeMiniApp = require('./examples/MiniApp');
 const makeSKScene = require('./examples/SKScene');
 // const makeSKSceneSockets = require('./examples/SKSceneSockets');
 const makeScrollView = require('./examples/UIScrollView');
@@ -73,7 +74,7 @@ const arDemos = {
 };
 
 const appDemos = {
-  AppOnboarding: makeAppOnboarding,
+  MiniApp: makeMiniApp,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
