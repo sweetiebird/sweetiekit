@@ -36,6 +36,7 @@ let viewH;
 let nav;
 let demoVC;
 let progressView;
+let quizScroll;
 
 const bgColors = [
   colors.fitbodDarkGrey,
@@ -45,6 +46,11 @@ const bgColors = [
 ];
 
 const numSlides = 4;
+const numQuizSlides = 4;
+
+const quizImages = [];
+const quizTitles = [];
+const quizOptions = [];
 
 const iconImages = [
   'heart',
@@ -73,6 +79,33 @@ const contentTexts = [
   'Tbh narwhal tote bag street art put a bird on it normcore, before they sold out artisan edison bulb sriracha salvia forage 3 wolf moon unicorn vice.',
 ];
 
+function setupQuizButton() {
+  const nextBtn = new UIButton({
+    x: 20,
+    y: viewH - 100,
+    width: w - 40,
+    height: 50,
+  });
+  // const nextBtn = UIButton.alloc('GET STARTED', 20, viewH - 100, w - 40, 50, startQuiz);
+  nextBtn.title = 'GET STARTED';
+  nextBtn.layer.cornerRadius = 25;
+  nextBtn.layer.shadowOffset = { width: 0, height: 12 };
+  nextBtn.layer.shadowColor = { red: 0.33, green: 0.33, blue: 0.33, alpha: 1 };
+  nextBtn.layer.shadowOpacity = 0.2;
+  nextBtn.layer.shadowRadius = 8;
+  nextBtn.layer.maskToBounds = false;
+  nextBtn.backgroundColor = colors.fitbodPink;
+  nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
+  nextBtn.titleLabel.font = buttonFont;
+  nextBtn.showsTouchWhenHighlighted = true;
+
+  nextBtn.addTarget(() => {
+
+  }, UIControlEvents.touchUpInside);
+
+  quizVC.view.addSubview(nextBtn);
+}
+
 function setupProgressView() {
   progressView = new UIProgressView({
     x: 100,
@@ -82,6 +115,96 @@ function setupProgressView() {
   });
   progressView.progressTintColor = { red: 1, green: 1, blue: 1, alpha: 1 };
   progressView.trackTintColor = colors.fitbodMedGrey;
+}
+
+function makeQuizDelegate(pageControl) {
+  const del = new UIScrollViewDelegate();
+  del.didScroll = (sv) => {
+    const { x, y } = sv.contentOffset;
+    const page = Math.round(x / w);
+    if (page !== pageControl.currentPage) {
+      pageControl.currentPage = page;
+    }
+  };
+  del.didEndDecelerating = (sv) => {
+    const { x, y } = sv.contentOffset;
+    if (y < 0 || y > 0) {
+      sv.setContentOffset({ x, y: 0 }, false);
+    }
+  };
+  quizScroll.delegate = del;
+}
+
+function setupQuizView() {
+  quizScroll = new UIScrollView();
+  quizScroll.contentSize = { width: w * numSlides, height: viewH };
+  quizScroll.isPagingEnabled = true;
+  quizScroll.translatesAutoresizingMaskIntoConstraints = false;
+  quizScroll.isDirectionalLockEnabled = true;
+  quizScroll.bounces = false;
+
+  quizVC.view.addSubview(quizScroll);
+  quizScroll.layer.maskToBounds = true;
+
+  quizScroll.leadingAnchor.constraintEqualToAnchor(quizVC.view.leadingAnchor, 0).isActive = true;
+  quizScroll.trailingAnchor.constraintEqualToAnchor(quizVC.view.trailingAnchor, 0).isActive = true;
+  quizScroll.topAnchor.constraintEqualToAnchor(quizVC.view.topAnchor, 0).isActive = true;
+  quizScroll.bottomAnchor.constraintEqualToAnchor(quizVC.view.bottomAnchor, 0).isActive = true;
+
+  const imgY = 60;
+  const imgSize = 100;
+
+  for (let i = 0; i < numSlides; i++) {
+    const imgX = (w - 100) / 2;
+    const labelY = imgY + imgSize + 50;
+    const contentY = labelY + 70;
+    const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
+    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    const label = new UILabel();
+    label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
+    label.text = titles[i];
+    label.textColor = colors.fitbodPink;
+    label.font = titleFont;
+    label.textAlignment = NSTextAlignment.center;
+    const contentLabel = new UILabel();
+    contentLabel.numberOfLines = 0;
+    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.font = contentFont;
+    contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
+    const attrText = new NSMutableAttributedString(contentTexts[i]);
+    attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+      location: 0,
+      length: contentTexts[i].length,
+    });
+    contentLabel.attributedText = attrText;
+    const image = new UIImage(iconImages[i]);
+    const imageView = new UIImageView(image);
+    imageView.alpha = 0.5;
+    imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
+    quizScroll.addSubview(slideView);
+    slideView.addSubview(label);
+    slideView.addSubview(imageView);
+    slideView.addSubview(contentLabel);
+  }
+
+  const pageControl = new UIPageControl({ x: 12, y: viewH - 200, width: w - 24, height: 60 });
+  pageControl.numberOfPages = numSlides;
+  pageControl.currentPage = 0;
+  pageControl.currentPageIndicatorTintColor = colors.fitbodPink;
+  pageControl.pageIndicatorTintColor = {
+    ...colors.fitbodPink,
+    alpha: 0.5,
+  };
+  pageControl.addTarget(() => {
+    const i = pageControl.currentPage;
+    const offsetX = w * i;
+    quizScroll.setContentOffset({ x: offsetX, y: 0 }, true);
+  }, UIControlEvents.valueChanged);
+
+  makeQuizDelegate(pageControl);
+
+  quizVC.view.addSubview(pageControl);
 }
 
 function startQuiz() {
@@ -98,12 +221,13 @@ function startQuiz() {
   const barView = makeStatusBarView();
   clippingView.addSubview(barView);
 
+  setupQuizView();
+
   setupProgressView();
 
   clippingView.addSubview(progressView);
 
-
-  quizVC.navigationItem.backBarButtonItem = new UIBarButtonItem('');
+  setupQuizButton();
 
   nav.pushViewController(quizVC);
 
@@ -235,7 +359,7 @@ function setupWelcomeView() {
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
   }, UIControlEvents.valueChanged);
 
-  makeDelegate(demoVC, pageControl);
+  makeDelegate(pageControl);
 
   demoVC.view.addSubview(pageControl);
 }
