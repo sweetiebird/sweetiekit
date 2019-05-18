@@ -33,11 +33,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIBarButtonItem::Initialize(I
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
-void objc_callCallback(NSObject* obj)
-{
-  
-}
-
 NAN_METHOD(NUIBarButtonItem::New) {
   Nan::HandleScope scope;
 

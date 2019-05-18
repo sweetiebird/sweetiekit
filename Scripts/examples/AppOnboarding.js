@@ -6,6 +6,7 @@ const {
   UIControlState,
   UIViewContentMode,
   UIBarStyle,
+  UIControlEvents,
 }= require('./enums');
 
 const {
@@ -68,7 +69,7 @@ const contentTexts = [
 ];
 
 function startQuiz() {
-
+  console.log('start');
 }
 
 function makeBgView() {
@@ -169,10 +170,11 @@ function setupWelcomeView() {
     alpha: 0.5,
   };
   pageControl.addTarget(() => {
+    console.log('page control target');
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
-  });
+  }, UIControlEvents.valueChanged);
 
   makeDelegate(demoVC, pageControl);
 
@@ -186,6 +188,7 @@ function setupStartButton() {
     width: w - 40,
     height: 50,
   });
+  // const nextBtn = UIButton.alloc('GET STARTED', 20, viewH - 100, w - 40, 50, startQuiz);
   nextBtn.title = 'GET STARTED';
   nextBtn.layer.cornerRadius = 25;
   nextBtn.layer.shadowOffset = { width: 0, height: 12 };
@@ -198,7 +201,12 @@ function setupStartButton() {
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
-  return nextBtn;
+  nextBtn.addTarget(() => {
+    console.log('button target');
+    // startQuiz();
+  }, UIControlEvents.touchUpInside);
+
+  demoVC.view.addSubview(nextBtn);
 }
 
 function setupNavStyle() {
@@ -217,10 +225,14 @@ async function make(n, d) {
 
   setupWelcomeView();
 
-  const nextBtn = setupStartButton();
-  nextBtn.callback = startQuiz;
+  setupStartButton();
+  // nextBtn.callback = startQuiz;
+  // nextBtn.addTarget(() => {
+  //   console.log('button target');
+  //   startQuiz();
+  // });
 
-  demoVC.view.addSubview(nextBtn);
+  // demoVC.view.addSubview(nextBtn);
 
   setupNavStyle(nav);
 

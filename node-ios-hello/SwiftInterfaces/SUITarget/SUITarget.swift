@@ -14,7 +14,12 @@ typealias DeinitClosure = () -> Void
 @objc class SUITarget: NSObject {
   @objc var callbackClosure: TargetClosure?
   @objc var deinitClosure: DeinitClosure?
-  @objc var callbackSelector = #selector(callback)
+  @objc var callbackSelector: Selector!
+  
+  override init() {
+    super.init()
+    callbackSelector = #selector(callback)
+  }
 
   @objc func callback(_ sender: Any?) {
     self.callbackClosure?(sender)

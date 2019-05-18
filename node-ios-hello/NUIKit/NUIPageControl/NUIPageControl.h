@@ -27,7 +27,6 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(sizeForNumberOfPages);
-  static NAN_METHOD(addTarget);
 
   JS_PROP(currentPage);
   JS_PROP(numberOfPages);

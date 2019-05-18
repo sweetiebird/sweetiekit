@@ -9,16 +9,43 @@
 #ifndef NUIButton_h
 #define NUIButton_h
 
+#import <UIKit/UIKit.h>
 #include "NUIControl.h"
+#include "defines.h"
 
-JS_WRAP_CLASS(UIButton, UIControl);
+using namespace v8;
+using namespace node;
+
+class NUIButton : public NUIControl {
+public:
+
+  static Nan::Persistent<FunctionTemplate> type;
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+
+  NUIButton();
+  virtual ~NUIButton();
+
+  static NAN_METHOD(New);
   static NAN_METHOD(Alloc);
   static NAN_METHOD(setTitleColorForState);
   static NAN_METHOD(setTitleForState);
+
   JS_PROP(Title);
   JS_PROP(Callback);
   JS_PROP(titleLabel);
   Nan::Persistent<Function>* _callback;
-JS_WRAP_CLASS_END(UIButton);
+};
+
+//#include "NUIControl.h"
+//
+//JS_WRAP_CLASS(UIButton, UIControl);
+//  static NAN_METHOD(Alloc);
+//  static NAN_METHOD(setTitleColorForState);
+//  static NAN_METHOD(setTitleForState);
+//  JS_PROP(Title);
+//  JS_PROP(Callback);
+//  JS_PROP(titleLabel);
+//  Nan::Persistent<Function>* _callback;
+//JS_WRAP_CLASS_END(UIButton);
 
 #endif /* NUIButton_h */

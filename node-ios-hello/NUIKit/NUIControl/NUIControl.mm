@@ -36,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
   JS_SET_PROP(proto, "isHighlighted", Highlighted);
   JS_SET_PROP_READONLY(proto, "isTracking", Tracking)
   JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
+  Nan::SetMethod(proto, "addTarget", addTarget);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -206,4 +207,35 @@ NAN_GETTER(NUIControl::TouchInsideGetter) {
   }
   
   JS_SET_RETURN(JS_BOOL(isTouchInside));
+}
+
+NAN_METHOD(NUIControl::addTarget) {
+  Nan::EscapableHandleScope scope;
+
+  NUIControl *ctrl = ObjectWrap::Unwrap<NUIControl>(Local<Object>::Cast(info.This()));
+
+  __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[0]);
+
+  SUITarget* target = [[SUITarget alloc] init];
+  
+  [target setCallbackClosure:^(id _Nullable) {
+    Nan::HandleScope scope;
+    (*fn)("NUIControl::addTarget");
+  }];
+
+  [target setDeinitClosure:^() {
+    Nan::HandleScope scope;
+    delete fn; fn = nullptr;
+    iOSLog0("fn deleted");
+  }];
+
+  UIControlEvents events = UIControlEvents(TO_UINT32(info[1]));
+
+  UIControl *ui = ctrl->As<UIControl>();
+  
+  [ui addTarget:target action:[target callbackSelector] forControlEvents:events];
+  
+  [ui associateValue:target withKey:@"sweetiekit.nuicontrol.target"];
+
+  ctrl->SetNSObject(ui);
 }

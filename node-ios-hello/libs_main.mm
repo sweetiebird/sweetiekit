@@ -224,6 +224,7 @@ namespace sweetiekit {
     }
     uv_async_send(&sweetiekit::resAsync);
 #else
+    Nan::HandleScope scope;
     if (cb != nullptr)
     {
       Local<Function> callback = Nan::New(*cb);

@@ -26,6 +26,7 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  static NAN_METHOD(addTarget);
   JS_PROP(State);
   JS_PROP(Enabled);
   JS_PROP(Selected);
