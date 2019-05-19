@@ -20,6 +20,7 @@ const makeSlider = require('./examples/UISlider');
 const makeSwitch = require('./examples/UISwitch');
 const makeTextField = require('./examples/UITextField');
 const makeView = require('./examples/UIView');
+const makeARSKView = require('./examples/ARSKView');
 
 // controller based demos
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -70,6 +71,7 @@ const demoCtrls = {
 };
 
 const arDemos = {
+  ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
 };
 

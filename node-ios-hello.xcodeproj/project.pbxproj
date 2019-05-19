@@ -53,6 +53,7 @@
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
@@ -292,6 +293,8 @@
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
+		A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterCell.mm; sourceTree = "<group>"; };
+		A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterCell.h; sourceTree = "<group>"; };
 		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
@@ -628,6 +631,7 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A1646B7C2291E6E90078CF4B /* NCAEmitterCell */,
 				A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */,
 				216392A3226BD48A00051DE0 /* NCALayer */,
 			);
@@ -786,6 +790,15 @@
 				A13768EB2288396400CDB13B /* NCLHeading.mm */,
 			);
 			path = NCLHeading;
+			sourceTree = "<group>";
+		};
+		A1646B7C2291E6E90078CF4B /* NCAEmitterCell */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */,
+				A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */,
+			);
+			path = NCAEmitterCell;
 			sourceTree = "<group>";
 		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
@@ -1993,6 +2006,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
