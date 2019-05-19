@@ -22,6 +22,7 @@ const makeTextField = require('./examples/UITextField');
 const makeView = require('./examples/UIView');
 const makeARSKView = require('./examples/ARSKView');
 const makeCAEmitterLayer = require('./examples/CAEmitterLayer');
+const makeCLLocation = require('./examples/CLLocation');
 
 // controller based demos
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -45,6 +46,7 @@ const {
 
 const demoTypes = {
   CAEmitterLayer: makeCAEmitterLayer,
+  CLGeocoder: makeCLLocation,
   GifView: makeGifView,
   MKMapView: makeMapView,
   RemoteGifView: makeRemoteGifView,

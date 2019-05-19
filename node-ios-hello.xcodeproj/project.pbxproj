@@ -55,6 +55,8 @@
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
+		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
+		A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9322920E930078CF4B /* NCLPlacemark.mm */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
@@ -298,6 +300,10 @@
 		A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterCell.h; sourceTree = "<group>"; };
 		A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterLayer.mm; sourceTree = "<group>"; };
 		A1646B8B229201B50078CF4B /* NCAEmitterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterLayer.h; sourceTree = "<group>"; };
+		A1646B8E22920CFC0078CF4B /* NCLGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLGeocoder.h; sourceTree = "<group>"; };
+		A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLGeocoder.mm; sourceTree = "<group>"; };
+		A1646B9222920E930078CF4B /* NCLPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLPlacemark.h; sourceTree = "<group>"; };
+		A1646B9322920E930078CF4B /* NCLPlacemark.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLPlacemark.mm; sourceTree = "<group>"; };
 		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
@@ -814,6 +820,24 @@
 			path = NCAEmitterLayer;
 			sourceTree = "<group>";
 		};
+		A1646B8D22920CFC0078CF4B /* NCLGeocoder */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B8E22920CFC0078CF4B /* NCLGeocoder.h */,
+				A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */,
+			);
+			path = NCLGeocoder;
+			sourceTree = "<group>";
+		};
+		A1646B9122920E930078CF4B /* NCLPlacemark */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B9222920E930078CF4B /* NCLPlacemark.h */,
+				A1646B9322920E930078CF4B /* NCLPlacemark.mm */,
+			);
+			path = NCLPlacemark;
+			sourceTree = "<group>";
+		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1229,6 +1253,8 @@
 		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
 			isa = PBXGroup;
 			children = (
+				A1646B9122920E930078CF4B /* NCLPlacemark */,
+				A1646B8D22920CFC0078CF4B /* NCLGeocoder */,
 				A13768EA2288394C00CDB13B /* NCLHeading */,
 				A1BD4BA02287DE04001D1F6E /* NCLLocation */,
 				A1BD4B962287DA1A001D1F6E /* NCLLocationManager */,
@@ -2023,6 +2049,7 @@
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
+				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
@@ -2142,6 +2169,7 @@
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
 				A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */,
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
+				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,

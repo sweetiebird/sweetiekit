@@ -441,6 +441,8 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NCLGeocoder.h"
+#include "NCLPlacemark.h"
 #include "NCLHeading.h"
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
@@ -721,6 +723,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= core location
+      if ([obj isKindOfClass:[CLGeocoder class]]) {
+        return NCLGeocoder::type;
+      }
+      if ([obj isKindOfClass:[CLPlacemark class]]) {
+        return NCLPlacemark::type;
+      }
       if ([obj isKindOfClass:[CLLocation class]]) {
         return NCLLocation::type;
       }

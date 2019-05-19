@@ -97,6 +97,8 @@
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NCLGeocoder.h"
+#include "NCLPlacemark.h"
 #include "NCLHeading.h"
 #include "NMKMapView.h"
 #include "NMKAnnotationView.h"
@@ -363,6 +365,12 @@ void InitExports(Local<Object> exports) {
   
         auto N_CLLocationManagerDelegate = NCLLocationManagerDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CLLocationManagerDelegate").ToLocalChecked(), N_CLLocationManagerDelegate.first);
+
+        auto N_CLGeocoder = NCLGeocoder::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLGeocoder").ToLocalChecked(), N_CLGeocoder.first);
+
+        auto N_CLPlacemark = NCLPlacemark::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CLPlacemark").ToLocalChecked(), N_CLPlacemark.first);
 
         // UIKit
   
