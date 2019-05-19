@@ -21,6 +21,7 @@ const makeSwitch = require('./examples/UISwitch');
 const makeTextField = require('./examples/UITextField');
 const makeView = require('./examples/UIView');
 const makeARSKView = require('./examples/ARSKView');
+const makeCAEmitterLayer = require('./examples/CAEmitterLayer');
 
 // controller based demos
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -43,6 +44,7 @@ const {
 } = SweetieKit;
 
 const demoTypes = {
+  CAEmitterLayer: makeCAEmitterLayer,
   GifView: makeGifView,
   MKMapView: makeMapView,
   RemoteGifView: makeRemoteGifView,

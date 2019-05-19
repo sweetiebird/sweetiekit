@@ -29,6 +29,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCAEmitterCell::Initialize(Iso
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, contents);
+  JS_ASSIGN_PROP(proto, birthrate);
+  JS_ASSIGN_PROP(proto, lifetime);
+  JS_ASSIGN_PROP(proto, velocity);
+  JS_ASSIGN_PROP(proto, scale);
+  JS_ASSIGN_PROP(proto, emissionRange);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -92,7 +97,102 @@ NAN_SETTER(NCAEmitterCell::contentsSetter) {
   NUIImage *img = ObjectWrap::Unwrap<NUIImage>(obj);
 
   @autoreleasepool {
-    [ca setContents:img->As<UIImage>()];
+    [ca setContents:(id)[img->As<UIImage>() CGImage]];
+  }
+}
+
+NAN_GETTER(NCAEmitterCell::birthrateGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+  
+  JS_SET_RETURN(JS_NUM([ca birthRate]));
+}
+
+NAN_SETTER(NCAEmitterCell::birthrateSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+
+  @autoreleasepool {
+    double rate = TO_DOUBLE(value);
+    [ca setBirthRate:rate];
+  }
+}
+
+NAN_GETTER(NCAEmitterCell::lifetimeGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+  
+  JS_SET_RETURN(JS_NUM([ca lifetime]));
+}
+
+NAN_SETTER(NCAEmitterCell::lifetimeSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+
+  @autoreleasepool {
+    double lf = TO_DOUBLE(value);
+    [ca setLifetime:lf];
+  }
+}
+
+NAN_GETTER(NCAEmitterCell::velocityGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+  
+  JS_SET_RETURN(JS_NUM([ca velocity]));
+}
+
+NAN_SETTER(NCAEmitterCell::velocitySetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+
+  @autoreleasepool {
+    double v = TO_DOUBLE(value);
+    [ca setVelocity:v];
+  }
+}
+
+NAN_GETTER(NCAEmitterCell::scaleGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+  
+  JS_SET_RETURN(JS_NUM([ca scale]));
+}
+
+NAN_SETTER(NCAEmitterCell::scaleSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+
+  @autoreleasepool {
+    double v = TO_DOUBLE(value);
+    [ca setScale:v];
+  }
+}
+
+NAN_GETTER(NCAEmitterCell::emissionRangeGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+  
+  JS_SET_RETURN(JS_NUM([ca emissionRange]));
+}
+
+NAN_SETTER(NCAEmitterCell::emissionRangeSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(CAEmitterCell, ca);
+
+  @autoreleasepool {
+    double r = TO_DOUBLE(value);
+    [ca setEmissionRange:r];
   }
 }
 

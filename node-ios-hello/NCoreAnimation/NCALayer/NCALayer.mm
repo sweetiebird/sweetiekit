@@ -38,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
   JS_SET_PROP(proto, "position", Position)
   Nan::SetMethod(proto, "addAnimation", AddAnimation);
+  Nan::SetMethod(proto, "addSublayer", addSublayer);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
   JS_ASSIGN_PROP(proto, shadowOpacity);
 
@@ -380,4 +381,19 @@ NAN_SETTER(NCALayer::shadowOpacitySetter) {
   JS_UNWRAP(CALayer, ui);
   
   [ui setShadowOpacity:TO_FLOAT(value)];
+}
+
+NAN_METHOD(NCALayer::addSublayer) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, layer)
+
+  Local<Object> obj = JS_OBJ(info[0]);
+  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NCALayer)).FromJust()) {
+    NCALayer *sublayer = ObjectWrap::Unwrap<NCALayer>(obj);
+  
+    @autoreleasepool {
+      [layer addSublayer:sublayer->As<CALayer>()];
+    }
+  }
 }

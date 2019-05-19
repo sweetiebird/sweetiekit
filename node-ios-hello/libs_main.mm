@@ -54,6 +54,8 @@
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NCALayer.h"
+#include "NCAEmitterLayer.h"
+#include "NCAEmitterCell.h"
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
@@ -513,6 +515,13 @@ void InitExports(Local<Object> exports) {
   
         auto N_CABasicAnimation = NCABasicAnimation::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CABasicAnimation").ToLocalChecked(), N_CABasicAnimation.first);
+  
+         auto N_CAEmitterCell = NCAEmitterCell::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CAEmitterCell").ToLocalChecked(), N_CAEmitterCell.first);
+
+        auto N_CAEmitterLayer = NCAEmitterLayer::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CAEmitterLayer").ToLocalChecked(), N_CAEmitterLayer.first);
+        
   
         // SpriteKit
 

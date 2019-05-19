@@ -396,6 +396,8 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NCALayer.h"
+#include "NCAEmitterLayer.h"
+#include "NCAEmitterCell.h"
 #include "NCABasicAnimation.h"
 #include "NUIPresentationController.h"
 #include "NUIAlertController.h"
@@ -462,6 +464,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
     if (wrapper == nullptr) {
     
       // ========= core animation
+      if ([obj isKindOfClass:[CAEmitterCell class]]) {
+        return NCAEmitterCell::type;
+      }
+      if ([obj isKindOfClass:[CAEmitterLayer class]]) {
+        return NCAEmitterLayer::type;
+      }
       if ([obj isKindOfClass:[CALayer class]]) {
         return NCALayer::type;
       }

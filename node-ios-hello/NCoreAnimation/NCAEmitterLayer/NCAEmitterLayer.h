@@ -1,39 +1,33 @@
 //
-//  NCAEmitterCell.h
+//  NCAEmitterLayer.h
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NCAEmitterCell_h
-#define NCAEmitterCell_h    
+#ifndef NCAEmitterLayer_h
+#define NCAEmitterLayer_h    
 
 #import <UIKit/UIKit.h>
-#include "NNSObject.h"
+#include "NCALayer.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NCAEmitterCell : public NNSObject {
+class NCAEmitterLayer : public NCALayer {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NCAEmitterCell();
-  virtual ~NCAEmitterCell();
+  NCAEmitterLayer();
+  virtual ~NCAEmitterLayer();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(emitterCell);
-  
-  JS_PROP(contents);
-  JS_PROP(birthrate);
-  JS_PROP(lifetime);
-  JS_PROP(velocity);
-  JS_PROP(scale);
-  JS_PROP(emissionRange);
+  JS_PROP(emitterCells);
+  JS_PROP(emitterPosition);
 };
 
-#endif /* NCAEmitterCell_h */
+#endif /* NCAEmitterLayer_h */
