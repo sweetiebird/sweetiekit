@@ -20,6 +20,15 @@ let location2;
 let text;
 let distLabel;
 
+const angleFromCoord = (lat1, long1, lat2, long2) => {
+  const dLong = long2 - long1;
+  const y = Math.sin(dLong) * Math.cos(lat2);
+  const x = (Math.cos(lat1) * Math.sin(lat2)) - (Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLong));
+  const brng = Math.atan2(y, x);
+  return brng * (180 / Math.PI);
+  // return (deg + 360) / 360;
+};
+
 function makeMap(demoVC) {
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
@@ -57,6 +66,12 @@ function updateMap() {
     title: 'YOU ARE HERE',
   });
   distLabel.text = `Distance: ${Math.round(distance)} meters`;
+  console.log('angles?', angleFromCoord(
+    location.coordinate.latitude,
+    location.coordinate.longitude,
+    location2.coordinate.latitude,
+    location2.coordinate.longitude,
+  ));
 }
 
 async function make(demoVC) {
