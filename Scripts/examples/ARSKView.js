@@ -9,7 +9,10 @@ const {
   SKLabelNode,
   SKScene,
   ARAnchor,
+  UITextField,
 } = SweetieKit;
+
+let text;
 
 async function make(nav, demoVC) {
   const view = demoVC.view;
@@ -17,9 +20,10 @@ async function make(nav, demoVC) {
   const config = new ARWorldTrackingConfiguration();
   const viewDel = new ARSKViewDelegate(() => {
     const node = new SKLabelNode();
-    node.text = 'SweetieKit';
+    node.text = text || 'SweetieKit';
     return node;
   });
+
   const scene = SKScene.sceneWithSize({ width: view.frame.width, height: view.frame.height });
 
   arView.delegate = viewDel;
@@ -38,6 +42,13 @@ async function make(nav, demoVC) {
   nav.pushViewController(demoVC);
 
   arView.presentScene(scene);
+
+  const field = await UITextField.alloc(12, 80, demoVC.view.frame.width - 24, 50, () => {
+    text = field.text;
+  });
+
+  demoVC.view.addSubview(field);
+  demoVC.view.bringSubviewToFront(field);
 
   setTimeout(() => {
     arView.session.run(config);
