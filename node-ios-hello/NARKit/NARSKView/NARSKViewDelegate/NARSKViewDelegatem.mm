@@ -58,8 +58,12 @@ NAN_METHOD(NARSKViewDelegate::New) {
             Local<Value> anchorObj = sweetiekit::GetWrapperFor(anchor, NARAnchor::type);
             Local<Value> result = del->_nodeForAnchor("NARSKViewDelegate::New",
             viewObj, anchorObj);
-            JS_UNWRAPPED(JS_OBJ(result), SKNode, node);
-            return node;
+            if (!result->IsNullOrUndefined()) {
+              JS_UNWRAPPED(result, SKNode, node);
+              return node;
+            } else {
+              return nullptr;
+            }
           }]);
       });
     }

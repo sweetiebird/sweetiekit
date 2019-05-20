@@ -27,6 +27,8 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(font);
+  JS_PROP(string);
+  JS_PROP(textSize);
 };
 
 #endif /* NSCNText_h */
