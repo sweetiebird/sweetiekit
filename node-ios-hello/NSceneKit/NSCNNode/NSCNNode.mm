@@ -39,6 +39,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *
   JS_SET_PROP(proto, "position", Position);
   JS_SET_PROP(proto, "eulerAngles", EulerAngles);
   JS_ASSIGN_PROP(proto, scale);
+  JS_ASSIGN_PROP(proto, geometry);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -291,4 +292,21 @@ NAN_SETTER(NSCNNode::scaleSetter) {
     SCNVector3 v = SCNVector3Make(x, y, z);
     [scn setScale:v];
   }
+}
+
+NAN_GETTER(NSCNNode::geometryGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SCNNode, scn);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([scn geometry], NSCNGeometry::type));
+}
+
+NAN_SETTER(NSCNNode::geometrySetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SCNNode, scn);
+  
+  JS_UNWRAPPED(value, SCNGeometry, geo);
+  [scn setGeometry:geo];
 }

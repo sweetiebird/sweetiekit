@@ -34,6 +34,7 @@ public:
   JS_PROP(Position);
   JS_PROP(EulerAngles);
   JS_PROP(scale);
+  JS_PROP(geometry);
 };
 
 #endif /* NSCNNode_h */
