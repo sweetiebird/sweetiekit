@@ -14,6 +14,7 @@
 #include "NUIButton.h"
 #include "NUIResponder.h"
 #include "NNSLayoutAnchor.h"
+#include "NUIGestureRecognizer.h"
 
 Nan::Persistent<FunctionTemplate> NUIView::type;
 CGSize NUIView::tmp_Size;
@@ -50,6 +51,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
   Nan::SetMethod(proto, "removeFromSuperview", RemoveFromSuperview);
   Nan::SetMethod(proto, "bringSubviewToFront", bringSubviewToFront);
+  Nan::SetMethod(proto, "addGestureRecognizer", addGestureRecognizer);
   JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
   JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
   JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
@@ -110,6 +112,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
+
+NUIView::NUIView () {}
+NUIView::~NUIView () {}
 
 NAN_METHOD(NUIView::New) {
   Nan::HandleScope scope;
@@ -901,6 +906,11 @@ NAN_SETTER(NUIView::drawRectSetter) {
   }
 }
 
-NUIView::NUIView () {}
-NUIView::~NUIView () {}
-
+NAN_METHOD(NUIView::addGestureRecognizer) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIView, ui);
+  
+  Local<Object> obj = JS_OBJ(info[0]);
+  NUIGestureRecognizer *gest = ObjectWrap::Unwrap<NUIGestureRecognizer>(obj);
+}

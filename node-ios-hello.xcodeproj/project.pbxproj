@@ -57,6 +57,8 @@
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
 		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
 		A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9322920E930078CF4B /* NCLPlacemark.mm */; };
+		A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9722922B8F0078CF4B /* NUIGestureRecognizer.mm */; };
+		A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9A22922B8F0078CF4B /* NUITapGestureRecognizer.mm */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
@@ -304,6 +306,10 @@
 		A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLGeocoder.mm; sourceTree = "<group>"; };
 		A1646B9222920E930078CF4B /* NCLPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLPlacemark.h; sourceTree = "<group>"; };
 		A1646B9322920E930078CF4B /* NCLPlacemark.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLPlacemark.mm; sourceTree = "<group>"; };
+		A1646B9622922B8F0078CF4B /* NUIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIGestureRecognizer.h; sourceTree = "<group>"; };
+		A1646B9722922B8F0078CF4B /* NUIGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGestureRecognizer.mm; sourceTree = "<group>"; };
+		A1646B9922922B8F0078CF4B /* NUITapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITapGestureRecognizer.h; sourceTree = "<group>"; };
+		A1646B9A22922B8F0078CF4B /* NUITapGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITapGestureRecognizer.mm; sourceTree = "<group>"; };
 		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
@@ -836,6 +842,24 @@
 				A1646B9322920E930078CF4B /* NCLPlacemark.mm */,
 			);
 			path = NCLPlacemark;
+			sourceTree = "<group>";
+		};
+		A1646B9522922B8F0078CF4B /* NUIGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B9622922B8F0078CF4B /* NUIGestureRecognizer.h */,
+				A1646B9722922B8F0078CF4B /* NUIGestureRecognizer.mm */,
+			);
+			path = NUIGestureRecognizer;
+			sourceTree = "<group>";
+		};
+		A1646B9822922B8F0078CF4B /* NUITapGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B9922922B8F0078CF4B /* NUITapGestureRecognizer.h */,
+				A1646B9A22922B8F0078CF4B /* NUITapGestureRecognizer.mm */,
+			);
+			path = NUITapGestureRecognizer;
 			sourceTree = "<group>";
 		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
@@ -1613,6 +1637,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1646B9522922B8F0078CF4B /* NUIGestureRecognizer */,
+				A1646B9822922B8F0078CF4B /* NUITapGestureRecognizer */,
 				A10BD04E228F8ACB00184286 /* NUIProgressView */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
@@ -2085,6 +2111,7 @@
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
 				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
 				A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
@@ -2093,6 +2120,7 @@
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
 				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A1CE2B57228E808200D9B3B8 /* UIImageView+NGif.swift in Sources */,
+				A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */,
 				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,

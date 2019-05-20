@@ -47,6 +47,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   static NAN_METHOD(ViewWithStringTag);
   static NAN_METHOD(RemoveFromSuperview);
   static NAN_METHOD(bringSubviewToFront);
+  static NAN_METHOD(addGestureRecognizer);
   JS_PROP(Layer);
   JS_PROP(TranslatesAutoresizingMaskIntoConstraints);
   JS_PROP(LeadingAnchor);

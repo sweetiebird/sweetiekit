@@ -176,7 +176,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
         contentLabel.textAlignment = NSTextAlignment.left;
         contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
         contentLabel.font = contentFont;
-        contentLabel.frame = { x: 20, y: contentY + (20 * j), width: w - 40, height: 120 };
+        contentLabel.frame = { x: 20, y: contentY + (40 * j), width: w - 40, height: 120 };
 
         const attrText = new NSMutableAttributedString(items[j]);
         attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
@@ -185,6 +185,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
         });
 
         contentLabel.attributedText = attrText;
+        contentLabel.isUserInteractionEnabled = true;
 
         slideView.addSubview(contentLabel);
       }
