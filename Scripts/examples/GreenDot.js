@@ -32,21 +32,6 @@ let dest;
 
 const address = '1538 n halsted st chicago il 60642';
 
-const azimuth = (start, end) => {
-  let az = 0;
-  let lat1 = math.degToRad(start.latitude);
-  let long1 = math.degToRad(start.longitude);
-  let lat2 = math.degToRad(end.latitude);
-  let long2 = math.degToRad(end.longitude);
-  let dLong = long2 - long1;
-  let y = Math.sin(dLong) * Math.cos(lat2);
-  let x = (Math.cos(lat1) * Math.sin(lat2)) - (Math.sin(lat1 * Math.cos(lat2) * Math.cos(dLong)));
-  let radsBearing = Math.atan2(y, x);
-  az = math.radToDeg(radsBearing);
-  if (az < 0) az += 360;
-  return az;
-};
-
 function setupLocation() {
   geocoder = new CLGeocoder();
   mgr = new CLLocationManager();
@@ -55,7 +40,6 @@ function setupLocation() {
   }, (_, locations) => {
     const loc = locations[0];
     if (dest) {
-      const az = azimuth(loc.coordinate, dest.coordinate);
       const d = loc.distance(dest);
       distNode.geometry.string = `${Math.round(d)} meters`;
     }
