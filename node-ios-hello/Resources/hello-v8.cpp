@@ -109,7 +109,9 @@ extern "C" void hellov8(const char* program_name)
     i::FLAG_profile_deserialization = true;
     i::FLAG_interpreted_frames_native_stack = true;
     i::FLAG_jitless = true;
+#ifdef DEBUG
     i::FLAG_print_ast = true;
+#endif
     i::FLAG_print_bytecode = true;
     i::FLAG_log_function_events = true;
     i::FLAG_abort_on_stack_or_string_length_overflow = true;

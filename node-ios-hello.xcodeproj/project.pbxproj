@@ -50,6 +50,8 @@
 		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
 		A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12C1503228A3718005BDD9D /* NSCNScene.mm */; };
+		A1311C4E2292BF340064FE1D /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
+		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
@@ -111,8 +113,6 @@
 		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
 		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
 		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
-		A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B092287B769001D1F6E /* snapshot.cc */; };
-		A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B0A2287B769001D1F6E /* embedded.S */; };
 		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
 		A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */; };
 		A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */; };
@@ -1878,9 +1878,9 @@
 			children = (
 				A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */,
 				A1FF9E6E225D7BB9004D7C82 /* shell.cc */,
-				A1058B46226810BF00CEAA5C /* snapshot.cc */,
 				A1CE2B5E228E83D400D9B3B8 /* 1.gif */,
 				A174A170228227A2002A8216 /* sunflower.mp3 */,
+				A1058B46226810BF00CEAA5C /* snapshot.cc */,
 				A1058B44226810B700CEAA5C /* embedded.S */,
 				A1FC1A00225C65DC00085571 /* node-ios-hello */,
 				A19E90F8225D7EA8004FC391 /* Scripts */,
@@ -2095,7 +2095,6 @@
 			files = (
 				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
-				A1BD4B0C2287B769001D1F6E /* embedded.S in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
@@ -2106,6 +2105,7 @@
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
+				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
@@ -2135,7 +2135,6 @@
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
 				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
-				A1BD4B0B2287B769001D1F6E /* snapshot.cc in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
@@ -2189,6 +2188,7 @@
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
+				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
@@ -2358,6 +2358,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -2370,6 +2372,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				NODE_IOS_SIMULATOR = 0;
+				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
+				NODE_ROOT = "../node-ios-release";
+				"NODE_ROOT[sdk=iphoneos*]" = "../node-ios-release";
+				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2416,6 +2423,11 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2425,6 +2437,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				NODE_IOS_SIMULATOR = 0;
+				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
+				NODE_ROOT = "../node-ios-release";
+				"NODE_ROOT[sdk=iphoneos*]" = "../node-ios-release";
+				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -2445,17 +2462,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"V8_INTL_SUPPORT=1",
-					"DEBUG=1",
-				);
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-release/src",
-					"../node-ios-release/deps/uv/include",
-					"../node-ios-release/deps/v8/include",
-					"../node-ios-release/deps/v8",
-					"../node-ios-release/out/Debug/obj/gen/generate-bytecode-output-root",
-					"../node-ios-release/out/Debug/obj/gen/torque-output-root",
+					"$(NODE_ROOT)/src",
+					"$(NODE_ROOT)/deps/uv/include",
+					"$(NODE_ROOT)/deps/v8/include",
+					"$(NODE_ROOT)/deps/v8",
+					"$(NODE_ROOT)/out/Debug/obj/gen/generate-bytecode-output-root",
+					"$(NODE_ROOT)/out/Debug/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -2465,7 +2478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Debug";
+				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Debug";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -2496,14 +2509,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "V8_INTL_SUPPORT=1";
 				HEADER_SEARCH_PATHS = (
-					"../node-ios-release/src",
-					"../node-ios-release/deps/uv/include",
-					"../node-ios-release/deps/v8/include",
-					"../node-ios-release/deps/v8",
-					"../node-ios-release/out/Release/obj/gen/generate-bytecode-output-root",
-					"../node-ios-release/out/Release/obj/gen/torque-output-root",
+					"$(NODE_ROOT)/src",
+					"$(NODE_ROOT)/deps/uv/include",
+					"$(NODE_ROOT)/deps/v8/include",
+					"$(NODE_ROOT)/deps/v8",
+					"$(NODE_ROOT)/out/Release/obj/gen/generate-bytecode-output-root",
+					"$(NODE_ROOT)/out/Release/obj/gen/torque-output-root",
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
@@ -2513,7 +2525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "../node-ios-release/out/Release";
+				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Release";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
