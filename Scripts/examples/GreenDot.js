@@ -29,7 +29,6 @@ let arView;
 let distNode;
 let geocoder;
 let dest;
-let dist;
 
 const address = '1538 n halsted st chicago il 60642';
 
@@ -58,7 +57,7 @@ function setupLocation() {
     if (dest) {
       const az = azimuth(loc.coordinate, dest.coordinate);
       const d = loc.distance(dest);
-      console.log(az, d);
+      distNode.geometry.string = `${Math.round(d)} meters`;
     }
   }, () => {});
   mgr.requestAlwaysAuthorization();
