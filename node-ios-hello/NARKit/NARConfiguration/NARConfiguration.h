@@ -26,6 +26,7 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(IsLightEstimationEnabled);
+  JS_PROP(worldAlignment);
 };
 
 #endif /* NARConfiguration_h */

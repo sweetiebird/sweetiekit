@@ -103,6 +103,12 @@ const UIBarMetrics = {
   compactPrompt: 3,
 };
 
+const ARWorldAlignment = {
+  camera: 0,
+  gravity: 1,
+  gravityAndHeading: 2,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -117,3 +123,4 @@ module.exports.UIBarStyle = UIBarStyle;
 module.exports.UIControlEvents = UIControlEvents;
 module.exports.UIProgressViewStyle = UIProgressViewStyle;
 module.exports.UIBarMetrics = UIBarMetrics;
+module.exports.ARWorldAlignment = ARWorldAlignment;

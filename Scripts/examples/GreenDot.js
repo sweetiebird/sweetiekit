@@ -1,6 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
-
+const math = require('./helpers/math');
 const SCNLightType = require('./enums').SCNLightType;
+const ARWorldAlignment = require('./enums').ARWorldAlignment;
 THREE = require('../vendor/three/three');
 
 const {
@@ -13,23 +14,69 @@ const {
   SCNLight,
   UIFont,
   SCNText,
+  CLLocationManager,
+  CLLocationManagerDelegate,
+  CLGeocoder,
 } = SweetieKit;
 
 const modelFile = 'dot.obj';
 
 const font = new UIFont('RobotoMono-Medium', 8);
 
+let mgr;
+let navAnchor;
+let arView;
+let distNode;
+let geocoder;
+let dest;
+let dist;
+
+const address = '1538 n halsted st chicago il 60642';
+
+const azimuth = (start, end) => {
+  let az = 0;
+  let lat1 = math.degToRad(start.latitude);
+  let long1 = math.degToRad(start.longitude);
+  let lat2 = math.degToRad(end.latitude);
+  let long2 = math.degToRad(end.longitude);
+  let dLong = long2 - long1;
+  let y = Math.sin(dLong) * Math.cos(lat2);
+  let x = (Math.cos(lat1) * Math.sin(lat2)) - (Math.sin(lat1 * Math.cos(lat2) * Math.cos(dLong)));
+  let radsBearing = Math.atan2(y, x);
+  az = math.radToDeg(radsBearing);
+  if (az < 0) az += 360;
+  return az;
+};
+
+function setupLocation() {
+  geocoder = new CLGeocoder();
+  mgr = new CLLocationManager();
+  mgr.delegate = new CLLocationManagerDelegate(() => {
+    mgr.startUpdatingLocation();
+  }, (_, locations) => {
+    const loc = locations[0];
+    if (dest) {
+      const az = azimuth(loc.coordinate, dest.coordinate);
+      const d = loc.distance(dest);
+      console.log(az, d);
+    }
+  }, () => {});
+  mgr.requestAlwaysAuthorization();
+  geocoder.geocodeAddressString(address, (placemarks) => {
+    dest = placemarks[0].location;
+  });
+}
+
 async function make(nav, demoVC) {
   const view = demoVC.view;
-  const arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
+  arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   const config = new ARWorldTrackingConfiguration();
+  config.worldAlignment = ARWorldAlignment.gravityAndHeading;
+
   const viewDel = new ARSCNViewDelegate(() => {
     const parentNode = new SCNNode();
     const node = new SCNNode(modelFile);
     const camXform = arView.session.currentFrame.camera.transform;
-    // const xform = new THREE.Matrix4().fromArray(camXform);
-    // xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
-    // node.simdTransform = xform;
 
     const text = new SCNText('NAV', 1);
     text.font = font;
@@ -39,8 +86,18 @@ async function make(nav, demoVC) {
     textNode.simdTransform = xform2;
     textNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
 
+    const distText = new SCNText('0 Meters', 1);
+    text.font = font;
+    distNode = new SCNNode(distText);
+    const xform3 = new THREE.Matrix4().fromArray(camXform);
+    xform3.multiply(new THREE.Matrix4().makeTranslation(-2.5,-1.8,0));
+    distNode.simdTransform = xform3;
+    distNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
+
+
     parentNode.addChildNode(textNode);
     parentNode.addChildNode(node);
+    parentNode.addChildNode(distNode);
 
     return parentNode;
   });
@@ -72,22 +129,8 @@ async function make(nav, demoVC) {
       xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
       const anchor = ARAnchor.initWithTransform(xform);
       arView.session.add(anchor);
-      // const node = new SCNNode(modelFile);
-      // const camXform = frame.camera.transform;
-      // const xform = new THREE.Matrix4().fromArray(camXform);
-      // xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
-      // node.simdTransform = xform;
-      //
-      // const text = new SCNText('NAV', 1);
-      // text.font = font;
-      // const textNode = new SCNNode(text);
-      // const xform2 = new THREE.Matrix4().fromArray(camXform);
-      // xform2.multiply(new THREE.Matrix4().makeTranslation(-3,0.6,-5));
-      // textNode.simdTransform = xform2;
-      // textNode.scale = { x: 0.4, y: 0.4, z: 0.4 };
-      //
-      // scene.rootNode.addChildNode(textNode);
-      // scene.rootNode.addChildNode(node);
+      navAnchor = anchor;
+      setupLocation();
     }
   }
 

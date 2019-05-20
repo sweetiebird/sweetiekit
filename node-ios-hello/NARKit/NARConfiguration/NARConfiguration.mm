@@ -29,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARConfiguration::Initialize(I
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "isLightEstimationEnabled", IsLightEstimationEnabled);
+  JS_ASSIGN_PROP(proto, worldAlignment);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -71,5 +72,40 @@ NAN_SETTER(NARConfiguration::IsLightEstimationEnabledSetter) {
 
   @autoreleasepool {
     [config setLightEstimationEnabled:TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NARConfiguration::worldAlignmentGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARConfiguration, config);
+  
+  ARWorldAlignment align = [config worldAlignment];
+
+  int alignVal = 0;
+  if (align == ARWorldAlignmentGravityAndHeading) {
+    alignVal = 2;
+  } else if (align == ARWorldAlignmentGravity) {
+    alignVal = 1;
+  }
+
+  JS_SET_RETURN(JS_NUM(alignVal));
+}
+
+NAN_SETTER(NARConfiguration::worldAlignmentSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARConfiguration, config);
+
+  ARWorldAlignment align = ARWorldAlignmentCamera;
+  int alignVal = TO_INT32(value);
+  if (alignVal == 1) {
+    align = ARWorldAlignmentGravity;
+  } else if (alignVal == 2) {
+    align = ARWorldAlignmentGravityAndHeading;
+  }
+  
+  @autoreleasepool {
+    [config setWorldAlignment:align];
   }
 }
