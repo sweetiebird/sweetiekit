@@ -23,6 +23,7 @@ const makeView = require('./examples/UIView');
 const makeARSKView = require('./examples/ARSKView');
 const makeCAEmitterLayer = require('./examples/CAEmitterLayer');
 const makeCLLocation = require('./examples/CLLocation');
+const makeGreenDot = require('./examples/GreenDot');
 
 // controller based demos
 const makeAlertCtrl = require('./examples/UIAlertController');
@@ -52,6 +53,7 @@ const demoTypes = {
   RemoteGifView: makeRemoteGifView,
   SKScene: makeSKScene,
   // SKSceneSockets: makeSKSceneSockets,
+  ThreeOBJ: makeThreeObj,
   UIButton: makeButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
@@ -77,6 +79,7 @@ const demoCtrls = {
 const arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
+  GreenDot: makeGreenDot,
 };
 
 const appDemos = {

@@ -13,6 +13,7 @@
 #include "NSCNNode.h"
 #include "NNSObject.h"
 #include "NSCNLight.h"
+#include "NSCNGeometry.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSCNNode::type;
@@ -37,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *
   JS_SET_PROP(proto, "light", Light);
   JS_SET_PROP(proto, "position", Position);
   JS_SET_PROP(proto, "eulerAngles", EulerAngles);
+  JS_ASSIGN_PROP(proto, scale);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -77,6 +79,11 @@ NAN_METHOD(NSCNNode::New) {
         [[scnNode geometry] setMaterials:@[mat]];
         node->SetNSObject(scnNode);
       }
+    }
+  } else if (info[0]->IsObject()) {
+    @autoreleasepool {
+      NSCNGeometry *child = ObjectWrap::Unwrap<NSCNGeometry>(Local<Object>::Cast(info[0]));
+      node->SetNSObject([SCNNode nodeWithGeometry:child->As<SCNGeometry>()]);
     }
   } else {
     @autoreleasepool {
@@ -246,5 +253,42 @@ NAN_SETTER(NSCNNode::EulerAnglesSetter) {
 
   @autoreleasepool {
     [node setEulerAngles:SCNVector3Make(x, y, z)];
+  }
+}
+
+NAN_GETTER(NSCNNode::scaleGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SCNNode, scn);
+  
+  __block float x = 0;
+  __block float y = 0;
+  __block float z = 0;
+  @autoreleasepool {
+    SCNVector3 v = [scn scale];
+    x = v.x;
+    y = v.y;
+    z = v.z;
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(x));
+  result->Set(JS_STR("y"), JS_FLOAT(y));
+  result->Set(JS_STR("z"), JS_FLOAT(z));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NSCNNode::scaleSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(SCNNode, scn);
+
+  @autoreleasepool {
+    float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+    float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+    float z = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
+    SCNVector3 v = SCNVector3Make(x, y, z);
+    [scn setScale:v];
   }
 }

@@ -33,6 +33,7 @@ public:
   JS_PROP(Light);
   JS_PROP(Position);
   JS_PROP(EulerAngles);
+  JS_PROP(scale);
 };
 
 #endif /* NSCNNode_h */

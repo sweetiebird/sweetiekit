@@ -85,6 +85,8 @@
 #include "NSCNNode.h"
 #include "NSCNScene.h"
 #include "NSCNLight.h"
+#include "NSCNGeometry.h"
+#include "NSCNText.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NSKPhysicsBody.h"
@@ -599,6 +601,12 @@ void InitExports(Local<Object> exports) {
         exports->Set(Nan::New("ARSCNViewDelegate").ToLocalChecked(), N_ARSCNViewDelegate.first);
   
         // SceneKit
+
+        auto N_SCNGeometry = NSCNGeometry::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNGeometry").ToLocalChecked(), N_SCNGeometry.first);
+
+        auto N_SCNText = NSCNText::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SCNText").ToLocalChecked(), N_SCNText.first);
 
         auto N_SCNNode = NSCNNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SCNNode").ToLocalChecked(), N_SCNNode.first);

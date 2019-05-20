@@ -435,6 +435,8 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSCNScene.h"
 #include "NSCNNode.h"
 #include "NSCNLight.h"
+#include "NSCNGeometry.h"
+#include "NSCNText.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NSKCameraNode.h"
@@ -523,6 +525,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       
+      if ([obj isKindOfClass:[SCNText class]]) {
+        return NSCNText::type;
+      }
+      if ([obj isKindOfClass:[SCNGeometry class]]) {
+        return NSCNGeometry::type;
+      }
       if ([obj isKindOfClass:[SCNLight class]]) {
         return NSCNLight::type;
       }

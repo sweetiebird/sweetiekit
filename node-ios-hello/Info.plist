@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RobotoMono-Medium.ttf</string>
 		<string>Lato-Black.ttf</string>
 		<string>Lato-Bold.ttf</string>
 		<string>Lato-Harline.ttf</string>

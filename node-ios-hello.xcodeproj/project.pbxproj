@@ -59,6 +59,9 @@
 		A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9322920E930078CF4B /* NCLPlacemark.mm */; };
 		A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9722922B8F0078CF4B /* NUIGestureRecognizer.mm */; };
 		A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9A22922B8F0078CF4B /* NUITapGestureRecognizer.mm */; };
+		A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B9F229238630078CF4B /* NSCNGeometry.mm */; };
+		A1646BA4229238630078CF4B /* NSCNText.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646BA1229238630078CF4B /* NSCNText.mm */; };
+		A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
@@ -310,6 +313,11 @@
 		A1646B9722922B8F0078CF4B /* NUIGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGestureRecognizer.mm; sourceTree = "<group>"; };
 		A1646B9922922B8F0078CF4B /* NUITapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITapGestureRecognizer.h; sourceTree = "<group>"; };
 		A1646B9A22922B8F0078CF4B /* NUITapGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITapGestureRecognizer.mm; sourceTree = "<group>"; };
+		A1646B9E229238630078CF4B /* NSCNGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNGeometry.h; sourceTree = "<group>"; };
+		A1646B9F229238630078CF4B /* NSCNGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNGeometry.mm; sourceTree = "<group>"; };
+		A1646BA1229238630078CF4B /* NSCNText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNText.mm; sourceTree = "<group>"; };
+		A1646BA2229238630078CF4B /* NSCNText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNText.h; sourceTree = "<group>"; };
+		A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Medium.ttf"; sourceTree = "<group>"; };
 		A1649770227E149900CA943F /* NUISwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISwitch.h; sourceTree = "<group>"; };
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
@@ -862,6 +870,24 @@
 			path = NUITapGestureRecognizer;
 			sourceTree = "<group>";
 		};
+		A1646B9D229238630078CF4B /* NSCNGeometry */ = {
+			isa = PBXGroup;
+			children = (
+				A1646B9E229238630078CF4B /* NSCNGeometry.h */,
+				A1646B9F229238630078CF4B /* NSCNGeometry.mm */,
+			);
+			path = NSCNGeometry;
+			sourceTree = "<group>";
+		};
+		A1646BA0229238630078CF4B /* NSCNText */ = {
+			isa = PBXGroup;
+			children = (
+				A1646BA2229238630078CF4B /* NSCNText.h */,
+				A1646BA1229238630078CF4B /* NSCNText.mm */,
+			);
+			path = NSCNText;
+			sourceTree = "<group>";
+		};
 		A164976F227E148D00CA943F /* NUISwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1185,6 +1211,8 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1646B9D229238630078CF4B /* NSCNGeometry */,
+				A1646BA0229238630078CF4B /* NSCNText */,
 				A1948930228A5D33007BF787 /* NSCNLight */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
@@ -1515,6 +1543,7 @@
 		A1CE2B86228F01D900D9B3B8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */,
 				A1CE2B8B228F020800D9B3B8 /* Lato-Black.ttf */,
 				A1CE2B89228F020800D9B3B8 /* Lato-Bold.ttf */,
 				A1CE2B88228F020800D9B3B8 /* Lato-Hairline.ttf */,
@@ -2051,6 +2080,7 @@
 				A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */,
 				A174A171228227A2002A8216 /* sunflower.mp3 in Resources */,
 				A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */,
+				A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
@@ -2177,6 +2207,8 @@
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
+				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
+				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
