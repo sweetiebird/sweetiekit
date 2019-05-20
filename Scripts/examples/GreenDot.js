@@ -6,6 +6,7 @@ THREE = require('../vendor/three/three');
 const {
   ARSCNView,
   ARSCNViewDelegate,
+  ARAnchor,
   SCNScene,
   SCNNode,
   ARWorldTrackingConfiguration,
@@ -23,8 +24,27 @@ async function make(nav, demoVC) {
   const arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   const config = new ARWorldTrackingConfiguration();
   const viewDel = new ARSCNViewDelegate(() => {
-    return new SCNNode();
+    const parentNode = new SCNNode();
+    const node = new SCNNode(modelFile);
+    const camXform = arView.session.currentFrame.camera.transform;
+    // const xform = new THREE.Matrix4().fromArray(camXform);
+    // xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
+    // node.simdTransform = xform;
+
+    const text = new SCNText('NAV', 1);
+    text.font = font;
+    const textNode = new SCNNode(text);
+    const xform2 = new THREE.Matrix4().fromArray(camXform);
+    xform2.multiply(new THREE.Matrix4().makeTranslation(-0.7,0.4,0));
+    textNode.simdTransform = xform2;
+    textNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
+
+    parentNode.addChildNode(textNode);
+    parentNode.addChildNode(node);
+
+    return parentNode;
   });
+
   const scene = new SCNScene();
 
   arView.delegate = viewDel;
@@ -47,22 +67,27 @@ async function make(nav, demoVC) {
     if (!frame) {
       setTimeout(configure, 10);
     } else {
-      const node = new SCNNode(modelFile);
       const camXform = frame.camera.transform;
       const xform = new THREE.Matrix4().fromArray(camXform);
       xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
-      node.simdTransform = xform;
-
-      const text = new SCNText('NAV', 1);
-      text.font = font;
-      const textNode = new SCNNode(text);
-      const xform2 = new THREE.Matrix4().fromArray(camXform);
-      xform2.multiply(new THREE.Matrix4().makeTranslation(-3,0.6,-5));
-      textNode.simdTransform = xform2;
-      textNode.scale = { x: 0.4, y: 0.4, z: 0.4 };
-
-      scene.rootNode.addChildNode(textNode);
-      scene.rootNode.addChildNode(node);
+      const anchor = ARAnchor.initWithTransform(xform);
+      arView.session.add(anchor);
+      // const node = new SCNNode(modelFile);
+      // const camXform = frame.camera.transform;
+      // const xform = new THREE.Matrix4().fromArray(camXform);
+      // xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
+      // node.simdTransform = xform;
+      //
+      // const text = new SCNText('NAV', 1);
+      // text.font = font;
+      // const textNode = new SCNNode(text);
+      // const xform2 = new THREE.Matrix4().fromArray(camXform);
+      // xform2.multiply(new THREE.Matrix4().makeTranslation(-3,0.6,-5));
+      // textNode.simdTransform = xform2;
+      // textNode.scale = { x: 0.4, y: 0.4, z: 0.4 };
+      //
+      // scene.rootNode.addChildNode(textNode);
+      // scene.rootNode.addChildNode(node);
     }
   }
 

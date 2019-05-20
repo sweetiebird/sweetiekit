@@ -22,6 +22,10 @@ class SARSCNViewDelegate: NSObject, ARSCNViewDelegate {
   }
 
   func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-    return nodeForAnchorCallback(renderer, anchor)
+    var node: SCNNode?
+    DispatchQueue.main.sync {
+      node = nodeForAnchorCallback(renderer, anchor)
+    }
+    return node;
   }
 }

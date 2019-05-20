@@ -102,11 +102,9 @@ NAN_SETTER(NARSCNView::DelegateSetter) {
   view->_delegate.Reset(value);
 
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      JS_UNWRAP(ARSCNView, ui);
-      [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
-      [ui setDelegate:delegate];
-    });
+    JS_UNWRAP(ARSCNView, ui);
+    [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
+    [ui setDelegate:delegate];
   }
 }
 

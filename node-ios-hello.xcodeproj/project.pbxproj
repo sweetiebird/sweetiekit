@@ -1230,13 +1230,6 @@
 			path = NSCNView;
 			sourceTree = "<group>";
 		};
-		A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NARSCNViewDelegate;
-			sourceTree = "<group>";
-		};
 		A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1608,7 +1601,6 @@
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1BD4BAC22880999001D1F6E /* NARFrame */,
 				A18F1E62228A418300A42754 /* NARSCNView */,
-				A1BD4B452287BE32001D1F6E /* NARSCNViewDelegate */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
 				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,

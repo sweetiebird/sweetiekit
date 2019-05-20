@@ -5,7 +5,7 @@ require('../vendor/three/OBJExporter');
 
 async function make(demoVC) {
   const exporter = new THREE.OBJExporter();
-  const geometry = new THREE.RingGeometry(0.7, 1, 32);
+  const geometry = new THREE.RingGeometry(0.3, 0.5, 32);
   const material = new THREE.MeshNormalMaterial();
   const mesh = new THREE.Mesh(geometry, material);
   const output = exporter.parse(mesh);
