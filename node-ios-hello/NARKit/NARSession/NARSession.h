@@ -29,6 +29,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Run);
   static NAN_METHOD(Add);
+  static NAN_METHOD(Remove);
   JS_PROP(CurrentFrame);
 };
 

@@ -35,6 +35,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSession::Initialize(Isolate
   JS_SET_PROP_READONLY(proto, "currentFrame", CurrentFrame);
   Nan::SetMethod(proto, "run", Run);
   Nan::SetMethod(proto, "add", Add);
+  Nan::SetMethod(proto, "remove", Remove);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -77,6 +78,16 @@ NAN_METHOD(NARSession::Add) {
   NARAnchor *anchor = ObjectWrap::Unwrap<NARAnchor>(JS_OBJ(info[0]));
 
   [session addAnchor:anchor->As<ARAnchor>()];
+}
+
+NAN_METHOD(NARSession::Remove) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARSession, session);
+
+  NARAnchor *anchor = ObjectWrap::Unwrap<NARAnchor>(JS_OBJ(info[0]));
+
+  [session removeAnchor:anchor->As<ARAnchor>()];
 }
 
 NAN_GETTER(NARSession::CurrentFrameGetter) {
