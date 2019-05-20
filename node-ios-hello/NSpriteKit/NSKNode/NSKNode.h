@@ -32,6 +32,7 @@ public:
   static NAN_METHOD(runAction);
   JS_PROP(PhysicsBody);
   JS_PROP(Position);
+  JS_PROP(ZPosition);
   JS_PROP(ZRotation);
 };
 

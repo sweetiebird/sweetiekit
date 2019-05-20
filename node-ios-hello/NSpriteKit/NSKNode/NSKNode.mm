@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "physicsBody", PhysicsBody);
   JS_SET_PROP(proto, "position", Position);
+  JS_SET_PROP(proto, "zPosition", ZPosition);
   JS_SET_PROP(proto, "zRotation", ZRotation);
   Nan::SetMethod(proto, "addChild", AddChild);
   Nan::SetMethod(proto, "removeFromParent", RemoveFromParent);
@@ -94,6 +95,24 @@ NAN_SETTER(NSKNode::PositionSetter) {
   }
 
   [node setPosition:CGPointMake(x, y)];
+}
+
+NAN_GETTER(NSKNode::ZPositionGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKNode, node);
+  
+  JS_SET_RETURN(JS_FLOAT([node zPosition]));
+}
+
+NAN_SETTER(NSKNode::ZPositionSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKNode, node);
+  
+  float z = TO_FLOAT(value);
+
+  [node setZPosition:z];
 }
 
 NAN_GETTER(NSKNode::ZRotationGetter) {

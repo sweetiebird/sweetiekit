@@ -27,6 +27,10 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(InitWithTransform);
+  
+  JS_PROP(name);
+  JS_PROP(identifier);
+  JS_PROP(transform);
 };
 
 

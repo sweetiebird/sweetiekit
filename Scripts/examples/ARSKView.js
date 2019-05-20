@@ -12,15 +12,17 @@ const {
   UITextField,
 } = SweetieKit;
 
-let text;
+let text = '@';
 
 async function make(nav, demoVC) {
   const view = demoVC.view;
   const arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   const config = new ARWorldTrackingConfiguration();
-  const viewDel = new ARSKViewDelegate(() => {
+  const chars = [];
+  const viewDel = new ARSKViewDelegate((view, anchor) => {
     const node = new SKLabelNode();
     node.text = text || 'SweetieKit';
+    chars.push({anchor, node});
     return node;
   });
 
@@ -31,12 +33,20 @@ async function make(nav, demoVC) {
 
   scene.touchesEnded = (touches) => {
     const camXform = arView.session.currentFrame.camera.transform;
-    const translation = new THREE.Matrix4().makeTranslation(0,0,-3);
+    const translation = new THREE.Matrix4().makeTranslation(0,0,-40/1000);
     const view = new THREE.Matrix4().fromArray(camXform);
     view.multiply(translation);
     const anchor = ARAnchor.initWithTransform(view);
     arView.session.add(anchor);
   };
+  
+  this.interval = setInterval(() => {
+    for (let c of chars) {
+      let pos = c.node.position;
+      pos.x += 1;
+      c.node.position = pos;
+    }
+  }, 1000/60);
 
   demoVC.view.addSubview(arView);
   nav.pushViewController(demoVC);
@@ -50,9 +60,9 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(field);
   demoVC.view.bringSubviewToFront(field);
 
-  setTimeout(() => {
+  arView.viewWillAppear = () => {
     arView.session.run(config);
-  }, 2000);
+  }
 }
 
 module.exports = make;

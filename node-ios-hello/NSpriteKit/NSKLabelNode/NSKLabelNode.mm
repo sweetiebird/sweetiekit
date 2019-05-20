@@ -53,6 +53,8 @@ NAN_METHOD(NSKLabelNode::New) {
         SKLabelNode *n = [[SKLabelNode alloc] init];
         [n setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [n setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
+        [n setFontSize:50];
+        [n setFontName:@"Arial-BoldMT"];
         node->SetNSObject([[SKLabelNode alloc] init]);
       });
     }

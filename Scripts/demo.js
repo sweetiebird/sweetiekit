@@ -110,4 +110,9 @@ Object.getOwnPropertyNames(SweetieKit)
     BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
+   
+// gc periodically
+setInterval(() => {
+  gc();
+}, 1000);
 require('./uidemos');
