@@ -66,14 +66,18 @@ const quizTitles = [
   'Neutra Mustache',
   'Unicorn Hexagon',
   "Ennui Flannel",
-  'Hammock Swag',
 ];
 
 const quizContentTexts = [
   '2IPhone XOXO flexitarian meditation brooklyn sustainable pinterest. Before they sold out vape everyday carry YOLO. Lyft listicle kitsch pop-up try-hard.',
   '2You probably haven\'t heard of them tousled celiac, tofu hoodie cred tote bag polaroid pok pok master cleanse godard mustache lomo.',
   '2Mustache snackwave raw denim cred lo-fi pop-up art party coloring book. Unicorn truffaut paleo selfies health goth. Iceland woke aesthetic kombucha.',
-  '2Tbh narwhal tote bag street art put a bird on it normcore, before they sold out artisan edison bulb sriracha salvia forage 3 wolf moon unicorn vice.',
+];
+
+const quizResponses = [
+  ['Resp A', 'Resp B', 'Resp C'],
+  ['Resp A', 'Resp B', 'Resp C'],
+  ['Resp A', 'Resp B', 'Resp C'],
 ];
 
 const titleFont = new UIFont('Lato-Bold', 22);
@@ -164,20 +168,44 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     label.font = titleFont;
     label.textAlignment = NSTextAlignment.center;
 
-    const contentLabel = new UILabel();
-    contentLabel.numberOfLines = 0;
-    contentLabel.textAlignment = NSTextAlignment.left;
-    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
-    contentLabel.font = contentFont;
-    contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
+    if (Array.isArray(contentTexts[i])) {
+      const items = contentTexts[i];
+      for (let j = 0, len = items.length; j < len; j++) {
+        const contentLabel = new UILabel();
+        contentLabel.numberOfLines = 0;
+        contentLabel.textAlignment = NSTextAlignment.left;
+        contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+        contentLabel.font = contentFont;
+        contentLabel.frame = { x: 20, y: contentY + (20 * j), width: w - 40, height: 120 };
 
-    const attrText = new NSMutableAttributedString(contentTexts[i]);
-    attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
-      location: 0,
-      length: contentTexts[i].length,
-    });
+        const attrText = new NSMutableAttributedString(items[j]);
+        attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+          location: 0,
+          length: items[j].length,
+        });
 
-    contentLabel.attributedText = attrText;
+        contentLabel.attributedText = attrText;
+
+        slideView.addSubview(contentLabel);
+      }
+    } else {
+      const contentLabel = new UILabel();
+      contentLabel.numberOfLines = 0;
+      contentLabel.textAlignment = NSTextAlignment.left;
+      contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+      contentLabel.font = contentFont;
+      contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
+
+      const attrText = new NSMutableAttributedString(contentTexts[i]);
+      attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+        location: 0,
+        length: contentTexts[i].length,
+      });
+
+      contentLabel.attributedText = attrText;
+
+      slideView.addSubview(contentLabel);
+    }
 
     const image = new UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
@@ -186,7 +214,6 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 
     slideView.addSubview(label);
     slideView.addSubview(imageView);
-    slideView.addSubview(contentLabel);
 
     scroll.addSubview(slideView);
   }
@@ -288,8 +315,8 @@ function startQuiz(nav) {
   const barView = makeStatusBarView();
   clippingView.addSubview(barView);
 
-  const scrollView = makeScrollView(vc, 2);
-  makeSlides(scrollView, 2, quizTitles, quizContentTexts, quizImages);
+  const scrollView = makeScrollView(vc, 3);
+  makeSlides(scrollView, 3, quizTitles, quizResponses, quizImages);
 
   const pageControl = makePageControl(scrollView, 4);
   scrollView.delegate = makeScrollDelegate(pageControl);
