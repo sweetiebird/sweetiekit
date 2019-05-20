@@ -29,6 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARAnchor::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP_READONLY(proto, name);
+  JS_ASSIGN_PROP_READONLY(proto, identifier);
+  JS_ASSIGN_PROP_READONLY(proto, transform);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -74,6 +77,42 @@ NAN_METHOD(NARAnchor::InitWithTransform) {
   }
 
   info.GetReturnValue().Set(anchorObj);
+}
+
+NAN_GETTER(NARAnchor::nameGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARAnchor, ar);
+  
+  @autoreleasepool {
+    NSString* name = [ar name];
+    if (name != nullptr) {
+      JS_SET_RETURN(JS_STR([name UTF8String]));
+    }
+  }
+}
+
+NAN_GETTER(NARAnchor::identifierGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARAnchor, ar);
+  
+  @autoreleasepool {
+    NSUUID* identifier = [ar identifier];
+    if (identifier != nullptr) {
+      JS_SET_RETURN(JS_STR([[identifier UUIDString] UTF8String]));
+    }
+  }
+}
+
+NAN_GETTER(NARAnchor::transformGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(ARAnchor, ar);
+
+  auto xform = ar.transform;
+  const float* matrix = (const float*)&xform;
+  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
 }
 
 NARAnchor::NARAnchor () {}
