@@ -33,6 +33,7 @@ public:
   JS_PROP(IsEditing);
   JS_PROP(IsSelected);
   JS_PROP(selectionStyle);
+  JS_PROP(cellStyle);
 };
 
 #endif /* NUITableViewCell_h */

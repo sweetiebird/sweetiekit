@@ -26,6 +26,13 @@ public:
   virtual ~NUIStackView();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(addArrangedSubview);
+  static NAN_METHOD(insertArrangedSubview);
+  static NAN_METHOD(removeArrangedSubview);
+  JS_PROP(arrangedSubviews);
+  JS_PROP(axis);
+  JS_PROP(distribution);
+  JS_PROP(alignment);
 };
 
 #endif /* NUIStackView_h */

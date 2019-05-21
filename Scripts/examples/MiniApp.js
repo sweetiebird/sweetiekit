@@ -11,6 +11,7 @@ const {
   UIBarMetrics,
   UITableViewSelectionStyle,
   UITableViewCellSeparatorStyle,
+  UITableViewCellStyle,
 }= require('./enums');
 
 const {
@@ -32,6 +33,9 @@ const {
   UITableViewManager,
   UITabBarController,
   UITabBarItem,
+  UIStackView,
+  UIAlertController,
+  UIAlertAction,
 } = SweetieKit;
 
 let w;
@@ -40,6 +44,11 @@ let viewH;
 
 const imgY = 60;
 const imgSize = 100;
+
+let partyTable;
+let wagonStack;
+const party = [];
+const wagon = [];
 
 const welcomeImages = [
   'heart',
@@ -299,6 +308,43 @@ function makeTopToolbarView() {
   return toolbar;
 }
 
+function makePartyTable() {
+  const cellH = 100;
+
+  partyTable = new UITableView({
+    x: 0,
+    y: 88,
+    width: w,
+    height: h - 172,
+  });
+
+  const mgr = new UITableViewManager(() => {
+    return party.length;
+  }, (_, { row }) => {
+    const cell = new UITableViewCell(UITableViewCellStyle.subtitle);
+    const person = party[row];
+    cell.textLabel.text = person.name;
+    cell.textLabel.textColor = colors.white;
+    if (cell.detailTextLabel) {
+      cell.detailTextLabel.text = `${person.experience} • ${person.item}`;
+      cell.detailTextLabel.textColor = {
+        ...colors.white,
+        alpha: 0.7,
+      };
+    }
+    cell.backgroundColor = colors.clear;
+    cell.selectionStyle = UITableViewSelectionStyle.none;
+    return cell;
+  });
+
+  mgr.heightForRowAtIndexPath = () => {
+    return cellH;
+  };
+
+  partyTable.delegate = mgr;
+  partyTable.dataSource = mgr;
+}
+
 function makeInnerAppControllers(nav) {
   setInnerAppNavStyles(nav);
 
@@ -318,7 +364,7 @@ function makeInnerAppControllers(nav) {
     new UIImage('user'),
   );
   const partyToolbar = makeTopToolbarView();
-  const partyTitle = makeTopToolbarTitle('🖋 YOUR PARTY');
+  const partyTitle = makeTopToolbarTitle('➕ YOUR PARTY');
   const partyTitleH = partyTitle.frame.height;
   partyToolbar.addSubview(partyTitle);
   partyTitle.centerYAnchor.constraintEqualToAnchor(partyToolbar.centerYAnchor, partyTitleH / 2).isActive = true;
@@ -327,8 +373,19 @@ function makeInnerAppControllers(nav) {
   partyVC.view.bringSubviewToFront(partyToolbar);
 
   partyTitle.addTarget(() => {
-    console.log('editor view controller');
+    party.push({
+      name: 'Fred',
+      experience: 'Greenhorn',
+      goal: 'Who knows',
+      item: 'Wooden teeth',
+    });
+    partyTable.reloadData();
   }, UIControlEvents.touchUpInside);
+
+  makePartyTable();
+  partyTable.separatorStyle = UITableViewCellSeparatorStyle.none;
+  partyTable.backgroundColor = colors.clear;
+  partyVC.view.addSubview(partyTable);
 
   const wagonVC = new UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
@@ -338,7 +395,7 @@ function makeInnerAppControllers(nav) {
     new UIImage('truck'),
   );
   const wagonToolbar = makeTopToolbarView();
-  const wagonTitle = makeTopToolbarTitle('🖋 YOUR WAGON');
+  const wagonTitle = makeTopToolbarTitle('➕ YOUR WAGON');
   const wagonTitleH = wagonTitle.frame.height;
   wagonToolbar.addSubview(wagonTitle);
   wagonTitle.centerYAnchor.constraintEqualToAnchor(wagonToolbar.centerYAnchor, wagonTitleH / 2).isActive = true;
@@ -469,6 +526,12 @@ function startQuiz(nav) {
   const nextButton = makeAppButton('NEXT');
   nextButton.addTarget(() => {
     if (quizStep === numQuestions - 1) {
+      party.push({
+        name: 'Me',
+        experience: quizResponses[0][responseSelections[0]],
+        goal: quizResponses[1][responseSelections[1]],
+        item: quizResponses[2][responseSelections[2]],
+      });
       makeInnerAppControllers(nav);
     } else {
       quizStep += 1;

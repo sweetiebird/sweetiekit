@@ -5,3 +5,4 @@ module.exports.fitbodMedGrey = { red: 59/255, green: 66/255, blue: 70/255 };
 module.exports.fitbodLightGrey = { red: 59/255, green: 66/255, blue: 70/255 };
 module.exports.black = { red: 0, green: 0, blue: 0, alpha: 1 };
 module.exports.white = { red: 1, green: 1, blue: 1, alpha: 1 };
+module.exports.clear = { red: 0, green: 0, blue: 0, alpha: 0 };

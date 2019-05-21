@@ -60,6 +60,7 @@
 #include "NCABasicAnimation.h"
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
+#include "NUIStackView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
@@ -487,6 +488,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_UITabBar = NUITabBar::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITabBar").ToLocalChecked(), N_UITabBar.first);
+  
+        auto N_UIStackView = NUIStackView::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIStackView").ToLocalChecked(), N_UIStackView.first);
 
         // UIKit delegates ========
   

@@ -406,6 +406,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUIAlertAction.h"
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
+#include "NUIStackView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NUITableViewManager.h"
@@ -612,6 +613,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UIStackView class]]) {
+        return NUIStackView::type;
+      }
       if ([obj isKindOfClass:[UITabBar class]]) {
         return NUITabBar::type;
       }

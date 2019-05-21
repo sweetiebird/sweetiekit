@@ -121,6 +121,37 @@ const UITableViewCellSeparatorStyle = {
   singleLine: 1,
 };
 
+const UILayoutConstraintAxis = {
+  horizontal: 0,
+  vertical: 1,
+};
+
+const UIStackViewDistribution = {
+  fill: 0,
+  fillEqually: 1,
+  fillProportionally: 2,
+  equalSpacing: 3,
+  equalCentering: 4,
+};
+
+const UIStackViewAlignment = {
+  fill: 0,
+  leading: 1,
+  top: 2,
+  firstBaseline: 3,
+  center: 4,
+  trailing: 5,
+  bottom: 6,
+  lastBaseline: 7,
+};
+
+const UITableViewCellStyle = {
+  default: 0,
+  value1: 1,
+  value2: 2,
+  subtitle: 3,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -138,3 +169,7 @@ module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
 module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;
 module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;
+module.exports.UILayoutConstraintAxis = UILayoutConstraintAxis;
+module.exports.UIStackViewDistribution = UIStackViewDistribution;
+module.exports.UIStackViewAlignment = UIStackViewAlignment;
+module.exports.UITableViewCellStyle = UITableViewCellStyle;

@@ -50,12 +50,12 @@ NAN_METHOD(NUITableViewCell::New) {
   } else {
 #if 1
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        //auto cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
-        auto cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id"];
-        //[cell initWithFrame:CGRectMake(0, 0, 300, 40)];
-        ctrl->SetNSObject(cell);
-      });
+      //auto cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+      double styleVal = info.Length() > 0 && info[0]->IsNumber() ? UITableViewCellStyle(TO_DOUBLE(info[0])) : 0;
+      UITableViewCellStyle style = UITableViewCellStyle(styleVal);
+      auto cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"id"];
+      //[cell initWithFrame:CGRectMake(0, 0, 300, 40)];
+      ctrl->SetNSObject(cell);
     }
 #elif 1
     ctrl->SetNSObject([[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)]);
