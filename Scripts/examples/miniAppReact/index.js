@@ -16,6 +16,28 @@ div = document.createElement('div');
 div.setAttribute('id', 'app');
 document.body.appendChild(div);
 
+const _ui = [];
+
+function PushUI(view) {
+  _ui.push(view);
+}
+
+function PopUI(view) {
+  const view2 = _ui.pop();
+  if (view !== view2) {
+    throw new Error("Internal error");
+  }
+}
+
+function WithUI(view, fn) {
+  PushUI(view);
+  try {
+    fn(view);
+  } finally {
+    PopUI(view);
+  }
+}
+
 class Button extends React.Component {
   componentDidMount() {
     const { superview, onClick } = this.props;
@@ -80,16 +102,25 @@ class FullScreenView extends React.Component {
 
   componentWillUnmount() {
     this.ui.removeFromSuperview();
+    delete this.ui;
   }
 
   render() {
     const { children, isDarkTheme, onButtonClick } = this.props;
 
-    return React.createElement(Button, {
-      superview: this.ui,
-      isDarkTheme,
-      onClick: onButtonClick,
+    const newChildren = React.Children.map(children, (child, idx) => {
+      return React.cloneElement(child, {
+        ...child.props,
+        superview: this.ui,
+      });
     });
+
+    return newChildren;
+    // return React.createElement(Button, {
+    //   superview: this.ui,
+    //   isDarkTheme,
+    //   onClick: onButtonClick,
+    // });
   }
 }
 
@@ -116,11 +147,15 @@ class App extends React.Component {
     const { vc } = this.props;
     const { isDarkTheme } = this.state;
 
+    const button = React.createElement(Button, {
+      isDarkTheme,
+      onClick: this.handleButtonClick,
+    });
+
     return React.createElement(FullScreenView, {
       isDarkTheme,
-      onButtonClick: this.handleButtonClick,
       superview: vc.view,
-    });
+    }, button);
   }
 }
 
