@@ -5,6 +5,11 @@ const SweetieKit = Require('std:sweetiekit.node');
 
 const { UIControlState, UIControlEvents } = Require('../enums');
 const colors = Require('../colors');
+colors.red = {red: 1, green: 0, blue: 0};
+colors.green = {red: 0, green: 1, blue: 0};
+colors.blue = {red: 0, green: 0, blue: 1};
+colors.magenta = {red: 1, green: 0, blue: 1};
+colors.yellow = {red: 1, green: 1, blue: 0};
 
 const {
   UIButton,
@@ -12,6 +17,146 @@ const {
   UIView,
   UIImageView,
 } = SweetieKit;
+
+class Responder extends React.Component {
+  componentDidMount() {
+  }
+  componentDidUpdate(prevProps) {
+  }
+  componentWillUnmount() {
+  }
+  create() {
+  }
+
+  configure() {
+  }
+
+  dispose() {
+  }
+}
+
+class View extends Responder {
+
+  static UIProps(props) {
+    let r = {};
+    for (let k in props) {
+      if (k == "frame" ||
+        k == "backgroundColor" ||
+        k == "width" ||
+        k == "height" ||
+        k == "center")
+      {
+        r[k] = props[k];
+      }
+    }
+    return r;
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    console.log('View componentDidMount');
+    this.configure();
+  }
+
+  componentDidUpdate(prevProps) {
+    super.componentDidUpdate(prevProps);
+    console.log('View componentDidUpdate', this.props, prevProps);
+    this.configure();
+  }
+
+  componentWillUnmount() {
+    try {
+      console.log('View componentWillUnmount');
+      this.dispose();
+    } finally {
+      super.componentWillUnmount();
+    }
+  }
+
+  create() {
+    let el = super.create();
+    if (el) {
+      return el;
+    }
+    const { superview, children } = this.props;
+    if (superview) {
+      return new UIView(superview.frame);
+    }
+  }
+
+  configure() {
+    super.configure();
+    const { superview, children } = this.props;
+    console.log('View.configure', superview != null);
+    if (!superview) {
+      return;
+    }
+
+    /*
+    let src;
+    React.Children.forEach(children, (child) => {
+      if (child.props.isSelected) {
+        src = child;
+      }
+    });
+    */
+    let el = this.props.el ? this.props.el.handle : this.el;
+    if (!el) {
+      el = this.create();
+      if (el) {
+        if (this.props.el) {
+          this.props.el.handle = el;
+        } else {
+          console.log('Warning: expected this.props.el to be an object');
+          this.el = el;
+        }
+        superview.addSubview(el);
+      }
+    }
+    if (el) {
+      /*
+      console.log('setting image', src.props, Image.el(src));
+      if (!this.el) {
+        this.el = new UIImageView(Image.el(src));
+        superview.addSubview(this.el);
+      }
+      this.el.image = Image.el(src);
+      this.el.frame = superview.frame;
+      this.el.width /= 3;
+      this.el.height /= 3;
+      this.el.backgroundColor = colors.clear;
+      */
+      Object.assign(el, View.UIProps(this.props));
+    }
+  }
+
+  dispose() {
+    try {
+      console.log('View dispose');
+      if (this.el) {
+        console.log('View dispose this.el');
+        this.el.removeFromSuperview();
+        console.log('View dispose this.el done');
+        delete this.el;
+      }
+      if (this.props.el) {
+        console.log('View dispose this.props.el');
+        if (this.props.el.handle) {
+          console.log('View dispose this.props.el.handle');
+          this.props.el.handle.removeFromSuperview();
+          console.log('View dispose this.props.el.handle done');
+          delete this.props.el.handle;
+        }
+      }
+    } finally {
+      super.dispose();
+    }
+  }
+
+  render() {
+    return e('div', {className: 'view'}, this.props.children);
+  }
+}
 
 class Button extends React.Component {
   componentDidMount() {
@@ -178,7 +323,7 @@ class ImageView extends React.Component {
   }
 }
 
-class App extends React.Component {
+class MyApp extends React.Component {
   constructor(props) {
     console.log('app constructor ', props);
     super(props);
@@ -201,14 +346,22 @@ class App extends React.Component {
   }
 
   handleButtonClick() {
-    console.log('app handleButtonClick');
+    console.log('app  handleButtonClick');
     const { isDarkTheme } = this.state;
     this.setState({ isDarkTheme: !isDarkTheme });
   }
 
+  componentDidUpdate() {
+    console.log(document);
+  }
+
   render() {
-    console.log('app render');
     const { vc } = this.props;
+    console.log('app render', (vc != null));
+    if (!vc) {
+      return null;
+    }
+    const view = vc.view;
     const { isDarkTheme } = this.state;
 
     const img = e(Image, {
@@ -222,16 +375,39 @@ class App extends React.Component {
       key: 'img-view',
     }, img);
 
-    const button = e(Button, {
-      isDarkTheme,
-      onClick: this.handleButtonClick,
-      key: 'btn',
-    });
+    this.viewEl = this.viewEl || {};
 
-    return e(FullScreenView, {
-      isDarkTheme,
-      superview: vc.view,
-    }, isDarkTheme ? [imageView, button] : [button]);
+    return (
+        <FullScreenView
+            isDarkTheme={isDarkTheme}
+            superview={view}>
+
+          <View
+            el={this.viewEl}
+            key={'view'}
+            superview={view}
+            width={view.width/7}
+            height={view.height/7}
+            
+            backgroundColor={colors.blue}
+          >
+          </View>
+           
+
+          <Button
+            isDarkTheme={isDarkTheme}
+            onClick={this.handleButtonClick}
+            key={'btn'}
+           />
+
+          {isDarkTheme ? [imageView] : [imageView]}
+        </FullScreenView>
+      );
+  }
+}
+class App extends React.Component {
+  render() {
+    return e(MyApp, this.props, this.props.children);
   }
 }
 
