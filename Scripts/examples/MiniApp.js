@@ -314,6 +314,13 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const contentY = labelY + 70;
     const items = contentTexts[i];
 
+    const label = new UILabel();
+    label.frame = { x: (w * i) + 20, y: labelY, width: w - 40, height: 25 };
+    label.text = titles[i];
+    label.textColor = colors.fitbodLightGrey;
+    label.font = titleFont;
+    label.textAlignment = NSTextAlignment.center;
+
     const del = new UITableViewManager((tv, section) => {
       return 3;
     }, (tv, indexPath) => {
@@ -358,18 +365,11 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
       return 80;
     };
 
-    const slideView = new UITableView({ x: w * i, y: 60, width: w, height: viewH - 60 });
+    const slideView = new UITableView({ x: w * i, y: contentY, width: w, height: viewH - contentY });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
     slideView.separatorStyle = UITableViewCellSeparatorStyle.none;
     slideView.delegate = del;
     slideView.dataSource = del;
-
-    // const label = new UILabel();
-    // label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
-    // label.text = titles[i];
-    // label.textColor = colors.fitbodPink;
-    // label.font = titleFont;
-    // label.textAlignment = NSTextAlignment.center;
 
     // const image = new UIImage(iconImages[i]);
     // const imageView = new UIImageView(image);
@@ -379,6 +379,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     // slideView.addSubview(label);
     // slideView.addSubview(imageView);
 
+    scroll.addSubview(label);
     scroll.addSubview(slideView);
   }
 }
