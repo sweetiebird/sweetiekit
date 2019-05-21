@@ -8,7 +8,10 @@
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "build": "npx babel reactkit/components --out-dir dist/components && npx babel reactkit/renderer --out-dir dist/renderer && npx babel reactkit/utils --out-dir dist/utils && npx babel reactkit/index.js --out-file dist/index.js",
-    "start": "webpack"
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production",
+    "start": "webpack-dev-server --hot --mode development"
   },
   "dependencies": {
     "Faker": "^0.7.2",
@@ -17,20 +20,18 @@
     "leftpad": "^0.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.8.2",
+    "react-reconciler": "^0.20.4",
     "socket.io-client": "^2.2.0",
     "sweetiekit-dom": "^0.0.1"
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      "@babel/preset-react"
-    ]
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   }
 }
