@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from './renderer';
-
 const SweetieKit = Require('std:sweetiekit.node');
 
 const {
@@ -10,15 +9,19 @@ const {
   UIViewController,
 } = SweetieKit;
 
+import App from './App';
+
+
 const app = new UIApplication();
 const rootVC = new UIViewController();
 app.keyWindow.setRootViewController(rootVC);
 
-class App extends React.Component {
-  render() {
-    return <div>Hello {this.props.name}</div>;
-  }
+function render() {
+  // var mountNode = document.getElementById('app');
+  ReactDOM.render(<App frame={rootVC.view.frame} />, rootVC.view);
 }
 
-// var mountNode = document.getElementById('app');
-ReactDOM.render(<App name='Jane' />, rootVC.view);
+render();
+if (module.hot) {
+  module.hot.accept('./App', () => { render(); });
+}

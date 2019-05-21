@@ -4,9 +4,8 @@ const SweetieKit = Require('std:sweetiekit.node');
 const {
   UILabel,
   UIView,
+  UIButton,
 } = SweetieKit;
-
-console.log('sweetiekit uilabel', UILabel);
 
 const hostConfig = {
   getRootHostContext(rootContainerInstance) {
@@ -34,10 +33,15 @@ const hostConfig = {
     hostContext,
     internalInstanceHandle
   ) {
-    if (type === 'div') {
-      return new UIView();
-    }
-    return new UILabel();
+    let [prefix, ...rest] = type.split('-');
+    prefix = prefix.toUpperCase();
+    rest = rest.reduce((str, word) => {
+      const next = word[0].toUpperCase() + word.substring(1);
+      return `${str}${next}`;
+    }, '');
+    const component = `${prefix}${rest}`;
+    console.log(component);
+    return new SweetieKit[component]();
   },
 
   appendInitialChild(parentInstance, child) {
@@ -46,28 +50,34 @@ const hostConfig = {
   },
 
   finalizeInitialChildren(
-    domElement,
+    view,
     type,
     props,
     rootContainerInstance,
     hostContext
   ) {
-    // const { children, ...otherProps } = props;
-    // Object.keys(otherProps).forEach(attr => {
-    //   if (attr === 'className') {
-    //     domElement.class = otherProps[attr];
-    //   } else if (attr === 'onClick') {
-    //     const listener = otherProps[attr];
-    //     if (domElement.__ourVeryHackCacheOfEventListeners) {
-    //       domElement.__ourVeryHackCacheOfEventListeners.push(listener)
-    //     } else {
-    //       domElement.__ourVeryHackCacheOfEventListeners = [ listener ]
-    //     }
-    //     domElement.addEventListener('click', listener);
-    //   } else {
-    //     throw new Error('TODO: We haven\'t handled other properties/attributes')
-    //   }
-    // })
+    const { children, ...otherProps } = props;
+    Object.keys(otherProps).forEach(attr => {
+      if (attr === 'frame') {
+        view.frame = otherProps[attr];
+      } else if (attr === 'backgroundColor') {
+        view.backgroundColor = otherProps[attr];
+      } else if (attr === 'text') {
+        view.text = otherProps[attr];
+      } else if (attr === 'target') {
+        const [fn, events] = otherProps[attr];
+
+        if (view.__ourVeryHackCacheOfEventListeners) {
+          view.__ourVeryHackCacheOfEventListeners.push([fn, events]);
+        } else {
+          view.__ourVeryHackCacheOfEventListeners = [[fn, events]];
+        }
+
+        view.addTarget(fn, events);
+      } else {
+        console.log('we have not handled this attribute yet', attr);
+      }
+    });
   },
 
   prepareUpdate(
@@ -78,10 +88,25 @@ const hostConfig = {
     rootContainerInstance,
     hostContext
   ) {
-    console.log('prepareUpdate');
+    const propKeys = new Set(
+      Object.keys(newProps).concat(
+        Object.keys(oldProps)
+      )
+    ).values();
 
-    return [ null ];
+    const payload = [];
 
+    for (let key of propKeys) {
+      if (
+        // text children are already handled
+        key !== 'children' &&
+        oldProps[key] !== newProps[key]
+      ) {
+        payload.push({ [key]: newProps[key] })
+      }
+    }
+
+    return payload;
   },
 
   shouldSetTextContent(type, props) {
@@ -106,7 +131,7 @@ const hostConfig = {
   now: Date.now,
 
   isPrimaryRenderer: true,
-  scheduleDeferredCallback: "",
+  scheduleDeferredCallback() {},
   cancelDeferredCallback: "",
 
   // -------------------
@@ -120,13 +145,26 @@ const hostConfig = {
   },
 
   commitUpdate(
-    domElement,
+    view,
     updatePayload,
     type,
     oldProps,
     newProps,
     internalInstanceHandle
   ) {
+    updatePayload.forEach(update => {
+      Object.keys(update).forEach(key => {
+        if (key === 'target') {
+          view.__ourVeryHackCacheOfEventListeners.forEach(pair => { // To prevent leak
+            view.removeTarget(pair[0], pair[1]);
+          });
+          view.__ourVeryHackCacheOfEventListeners = [ update[key] ];
+          view.addTarget(update[key][0], update[key][1]);
+        } else {
+          view[key] = update[key];
+        }
+      });
+    });
   },
 
   resetTextContent(domElement) {
@@ -137,6 +175,7 @@ const hostConfig = {
   },
 
   appendChild(parentInstance, child) {
+    parentInstance.addSubview(child);
   },
 
   appendChildToContainer(container, child) {
@@ -154,26 +193,29 @@ const hostConfig = {
 
   removeChild(parentInstance, child) {
     console.log('removeChild');
+    child.removeFromSuperview();
   },
 
   removeChildFromContainer(container, child) {
     console.log('removeChildFromContainer');
+    child.removeFromSuperview();
   }
 };
-const DOMRenderer = ReactReconciler(hostConfig);
+
+const SKRenderer = ReactReconciler(hostConfig);
 
 let internalContainerStructure;
 
 export default {
   render(elements, containerNode, callback) {
     if (!internalContainerStructure) {
-      internalContainerStructure = DOMRenderer.createContainer(
+      internalContainerStructure = SKRenderer.createContainer(
         containerNode,
         false,
         false,
       );
     }
 
-    DOMRenderer.updateContainer(elements, internalContainerStructure, null, callback);
+    SKRenderer.updateContainer(elements, internalContainerStructure, null, callback);
   }
 };

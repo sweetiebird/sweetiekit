@@ -37,6 +37,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
   JS_SET_PROP_READONLY(proto, "isTracking", Tracking)
   JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
   Nan::SetMethod(proto, "addTarget", addTarget);
+  Nan::SetMethod(proto, "removeTarget", removeTarget);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -236,6 +237,24 @@ NAN_METHOD(NUIControl::addTarget) {
   [ui addTarget:target action:[target callbackSelector] forControlEvents:events];
   
   [ui associateValue:target withKey:@"sweetiekit.nuicontrol.target"];
+
+  ctrl->SetNSObject(ui);
+}
+
+NAN_METHOD(NUIControl::removeTarget) {
+  Nan::EscapableHandleScope scope;
+
+  NUIControl *ctrl = ObjectWrap::Unwrap<NUIControl>(Local<Object>::Cast(info.This()));
+
+  UIControl *ui = ctrl->As<UIControl>();
+
+  id t = (SUITarget*)[ui associatedValueForKey:@"sweetiekit.nuicontrol.target"];
+
+  UIControlEvents events = UIControlEvents(TO_UINT32(info[1]));
+  
+  [ui removeTarget:t action:[t callbackSelector] forControlEvents:events];
+
+  [ui dissociateValueForKey:@"sweetiekit.nuicontrol.target"];
 
   ctrl->SetNSObject(ui);
 }

@@ -30,6 +30,11 @@
   return objc_getAssociatedObject( self, (__bridge void *)aKey );
 }
 
+- (void) dissociateValueForKey:(NSString *)aKey {
+  id val = [self associatedValueForKey:aKey];
+  objc_removeAssociatedObjects(val);
+}
+
 @end
 
 Nan::Persistent<FunctionTemplate> NNSObject::type;

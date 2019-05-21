@@ -16,6 +16,7 @@
 
 - (void) associateValue:(id)value withKey:(NSString *)aKey;
 - (id) associatedValueForKey:(NSString *)aKey;
+- (void) dissociateValueForKey:(NSString *)aKey;
 
 @end
 
