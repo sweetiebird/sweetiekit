@@ -142,8 +142,7 @@ NAN_SETTER(NUITableViewManager::NumberOfSectionsSetter) {
     Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
     Local<Value> resultVal = mgr->_numberSections("NUITableViewManager::NumberOfSectionsSetter",
             tableViewObj);
-    int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
-    return result;
+    return resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
   }];
 }
 
@@ -170,8 +169,7 @@ NAN_SETTER(NUITableViewManager::heightForRowAtIndexPathSetter) {
     Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
     Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
     Local<Value> resultVal = mgr->_heightForRow("NUITableViewManager::NumberOfSectionsSetter", tableViewObj, indexPathObj);
-    double result = resultVal->IsNumber() ? TO_DOUBLE(resultVal) : 0;
-    return result;
+    return resultVal->IsNumber() ? TO_DOUBLE(resultVal) : 0;
   }];
 }
 
@@ -193,7 +191,6 @@ NAN_SETTER(NUITableViewManager::titleForHeaderInSectionSetter) {
     Nan::HandleScope scope;
     Local<Value> tableViewObj = sweetiekit::GetWrapperFor(table, NUITableView::type);
     Local<Value> resultVal = mgr->_titleForSection("NUITableViewManager::titleForHeaderInSectionSetter", tableViewObj, JS_NUM(section));
-    NSString *result = resultVal->IsString() ? NJSStringToNSString(resultVal) : nullptr;
-    return result;
+    return resultVal->IsString() ? NJSStringToNSString(resultVal) : nil;
   }];
 }
