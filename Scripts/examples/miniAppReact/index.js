@@ -130,19 +130,24 @@ class FullScreenView extends React.Component {
 class Image extends React.PureComponent {
   constructor(props) {
     super(props);
+    const { source, el } = this.props;
+    if (!el) {
+      throw new Error("expected el to be a container");
+    }
   }
 
   componentDidUpdate() {
-    const { source } = this.props;
-
+    const { source, el } = this.props;
+    delete el.handle;
+    el.handle = new UIImage(source);
   }
 
-  get el() {
-    if (!this._el) {
-      const { source } = this.props;
-      this._el = new UIImage(source);
+  static el(me) {
+    const { source, el } = me.props;
+    if (!el.handle) {
+      el.handle = new UIImage(source);
     }
-    return this._el;
+    return el.handle;
   }
 
   render() {
@@ -162,7 +167,7 @@ class ImageView extends React.Component {
     if (!src) {
       throw new Error("expected selected image");
     }
-    this.el = new UIImageView(src.el);
+    this.el = new UIImageView(Image.el(src));
     this.el.frame = superview.frame;
     this.el.backgroundColor = colors.white;
     console.log('tktk', this.el.frame);
@@ -179,8 +184,8 @@ class ImageView extends React.Component {
         }
       });
       if (src) {
-        console.log('setting image', src.props, src.el);
-        this.el.image = src.el;
+        console.log('setting image', src.props, Image.el(src));
+        this.el.image = Image.el(src);
       }
     //}
   }
@@ -221,6 +226,7 @@ class App extends React.Component {
     const img = React.createElement(Image, {
       source: isDarkTheme ? 'user' : 'user_unselected',
       isSelected: true,
+      el: {},
     });
 
     const imageView = React.createElement(ImageView, {

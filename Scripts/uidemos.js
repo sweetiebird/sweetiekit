@@ -142,8 +142,9 @@ class UIDemosApp {
   }
 
   getCellFor(tableView, indexPath) {
-    const { row, section } = indexPath;
+    let { row, section } = indexPath;
     const cell = new UITableViewCell();
+    section = (section + 1) % allDemoNames.length;
     const names = allDemoNames[section];
     const type = names[row];
     if (type) {
@@ -153,6 +154,7 @@ class UIDemosApp {
   }
 
   getNumberRows(tableView, section) {
+    section = (section + 1) % allDemoNames.length;
     if (section === 0) {
       return demoTypeNames.length;
     } else if (section === 1) {
@@ -165,7 +167,8 @@ class UIDemosApp {
 
 
   async handleCellSelected(tableView, indexPath) {
-    const { section, row } = indexPath;
+    let { section, row } = indexPath;
+    section = (section + 1) % allDemoNames.length;
 
     const cell = this.table.cellForRowAt(indexPath);
     if (cell) {
