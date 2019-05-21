@@ -279,6 +279,25 @@ function setSizes(vc) {
   viewH = h - 84;
 }
 
+function makeTopToolbarView(title) {
+  const barHeight = 88;
+  const toolbar = new UIView({ x: 0, y: 0, width: w, height: barHeight });
+  toolbar.backgroundColor = colors.fitbodMedGrey;
+  const label = new UILabel();
+  label.text = title;
+  label.sizeToFit();
+  label.textColor = {
+    ...colors.white,
+    alpha: 0.8,
+  };
+  const labelH = label.frame.height;
+  label.translatesAutoresizingMaskIntoConstraints = false;
+  toolbar.addSubview(label);
+  label.centerYAnchor.constraintEqualToAnchor(toolbar.centerYAnchor, labelH / 2).isActive = true;
+  label.centerXAnchor.constraintEqualToAnchor(toolbar.centerXAnchor, 0).isActive = true;
+  return toolbar;
+}
+
 function makeInnerAppControllers(nav) {
   const tabVC = new UITabBarController();
   tabVC.tabBar.barTintColor = colors.fitbodMedGrey;
@@ -295,6 +314,8 @@ function makeInnerAppControllers(nav) {
     new UIImage('user_unselected'),
     new UIImage('user'),
   );
+  const partyToolbar = makeTopToolbarView('Your Party');
+  partyVC.view.addSubview(partyToolbar);
 
   const wagonVC = new UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
@@ -303,6 +324,8 @@ function makeInnerAppControllers(nav) {
     new UIImage('truck_unselected'),
     new UIImage('truck'),
   );
+  const wagonToolbar = makeTopToolbarView('Your Wagon');
+  wagonVC.view.addSubview(wagonToolbar);
 
   nav.setViewControllers([tabVC], true);
 

@@ -58,6 +58,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_SET_PROP_READONLY(proto, "topAnchor", TopAnchor);
   JS_SET_PROP_READONLY(proto, "bottomAnchor", BottomAnchor);
   JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
+  JS_SET_PROP_READONLY(proto, "centerYAnchor", centerYAnchor);
   JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
   JS_ASSIGN_PROP_READONLY(proto, heightAnchor);
   JS_SET_PROP(proto, "isUserInteractionEnabled", UserInteractionEnabled);
@@ -686,6 +687,14 @@ NAN_GETTER(NUIView::CenterXAnchorGetter) {
   JS_UNWRAP(UIView, ui);
 
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type));
+}
+
+NAN_GETTER(NUIView::centerYAnchorGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerYAnchor], NNSLayoutAnchor::type));
 }
 
 NAN_GETTER(NUIView::WidthAnchorGetter) {
