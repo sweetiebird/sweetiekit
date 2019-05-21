@@ -1,5 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
-
+const faker = require('Faker');
 const colors = require('./colors');
 
 const {
@@ -98,6 +98,12 @@ const barTitleFont = new UIFont('Lato-Black', 14);
 
 const pStyle = new NSMutableParagraphStyle();
 pStyle.lineSpacing = 10;
+
+const randomExpLevel = () => {
+  const levels = ['Greenhorn', 'Adventurer', 'Trail Guide'];
+  const idx = Math.floor(Math.random() * levels.length);
+  return levels[idx];
+};
 
 function setNavStyles(nav) {
   nav.navigationBar.setTranslucent(true);
@@ -364,7 +370,7 @@ function makeInnerAppControllers(nav) {
     new UIImage('user'),
   );
   const partyToolbar = makeTopToolbarView();
-  const partyTitle = makeTopToolbarTitle('➕ YOUR PARTY');
+  const partyTitle = makeTopToolbarTitle('YOUR PARTY 🕺');
   const partyTitleH = partyTitle.frame.height;
   partyToolbar.addSubview(partyTitle);
   partyTitle.centerYAnchor.constraintEqualToAnchor(partyToolbar.centerYAnchor, partyTitleH / 2).isActive = true;
@@ -373,11 +379,13 @@ function makeInnerAppControllers(nav) {
   partyVC.view.bringSubviewToFront(partyToolbar);
 
   partyTitle.addTarget(() => {
+    const adj = faker.random.bs_adjective();
+    const noun = faker.random.bs_noun();
     party.push({
-      name: 'Fred',
-      experience: 'Greenhorn',
-      goal: 'Who knows',
-      item: 'Wooden teeth',
+      name: faker.Name.findName(),
+      experience: randomExpLevel(),
+      goal: faker.Company.catchPhrase(),
+      item: `${adj[0].toUpperCase()}${adj.substring(1).toLowerCase()} ${noun[0].toUpperCase()}${noun.substring(1).toLowerCase()}`,
     });
     partyTable.reloadData();
   }, UIControlEvents.touchUpInside);
