@@ -31,6 +31,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewManager::Initializ
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "didSelectRowAt", DidSelectRowAt);
   JS_SET_PROP(proto, "numberOfSections", NumberOfSections);
+  JS_ASSIGN_PROP(proto, heightForRowAtIndexPath);
+  JS_ASSIGN_PROP(proto, titleForHeaderInSection);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -141,6 +143,57 @@ NAN_SETTER(NUITableViewManager::NumberOfSectionsSetter) {
     Local<Value> resultVal = mgr->_numberSections("NUITableViewManager::NumberOfSectionsSetter",
             tableViewObj);
     int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+    return result;
+  }];
+}
+
+NAN_GETTER(NUITableViewManager::heightForRowAtIndexPathGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NUITableViewManager::heightForRowAtIndexPathGetter not implemented");
+}
+
+NAN_SETTER(NUITableViewManager::heightForRowAtIndexPathSetter) {
+  Nan::HandleScope scope;
+  
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  mgr->_heightForRow.Reset(Local<Function>::Cast(value));
+
+  [sMgr setHeightForRowCallback:^CGFloat(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+    Nan::HandleScope scope;
+    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+    uint32_t section = [indexPath section];
+    uint32_t row = [indexPath row];
+    Local<Object> indexPathObj = Nan::New<Object>();
+    Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
+    Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+    Local<Value> resultVal = mgr->_heightForRow("NUITableViewManager::NumberOfSectionsSetter", tableViewObj, indexPathObj);
+    double result = resultVal->IsNumber() ? TO_DOUBLE(resultVal) : 0;
+    return result;
+  }];
+}
+
+NAN_GETTER(NUITableViewManager::titleForHeaderInSectionGetter) {
+  Nan::HandleScope scope;
+  
+  Nan::ThrowError("NUITableViewManager::titleForHeaderInSectionGetter not implemented");
+}
+
+NAN_SETTER(NUITableViewManager::titleForHeaderInSectionSetter) {
+  Nan::HandleScope scope;
+  
+  NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+
+  mgr->_titleForSection.Reset(Local<Function>::Cast(value));
+
+  [sMgr setTitleForSectionCallback:^NSString * _Nullable(UITableView * _Nonnull table, NSInteger section) {
+    Nan::HandleScope scope;
+    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(table, NUITableView::type);
+    Local<Value> resultVal = mgr->_titleForSection("NUITableViewManager::titleForHeaderInSectionSetter", tableViewObj, JS_NUM(section));
+    NSString *result = resultVal->IsString() ? NJSStringToNSString(resultVal) : nullptr;
     return result;
   }];
 }

@@ -218,6 +218,19 @@ class UIDemosApp {
       return allDemoNames.length;
     };
     this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
+    this.mgr.titleForHeaderInSection = (tv, section) => {
+      switch (section) {
+        case 1:
+          return 'Controller Demos';
+        case 2:
+          return 'AR Demos';
+        case 3:
+          return 'App Demos';
+        case 0:
+        default:
+          return 'View Demos';
+      }
+    };
 
     this.table.dataSource = this.mgr;
     this.table.delegate = this.mgr;

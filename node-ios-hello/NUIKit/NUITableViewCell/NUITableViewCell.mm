@@ -30,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewCell::Initialize(I
   JS_SET_PROP_READONLY(proto, "detailTextLabel", DetailTextLabel);
   JS_SET_PROP(proto, "isEditing", IsEditing);
   JS_SET_PROP(proto, "isSelected", IsSelected);
+  JS_ASSIGN_PROP(proto, selectionStyle);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -93,6 +94,9 @@ NAN_GETTER(NUITableViewCell::TextLabelGetter) {
   }
 }
 
+NUITableViewCell::NUITableViewCell () {}
+NUITableViewCell::~NUITableViewCell () {}
+
 NAN_GETTER(NUITableViewCell::DetailTextLabelGetter) {
   Nan::HandleScope scope;
 
@@ -147,5 +151,34 @@ NAN_SETTER(NUITableViewCell::IsSelectedSetter) {
   [ui setSelected:TO_BOOL(value)];
 }
 
-NUITableViewCell::NUITableViewCell () {}
-NUITableViewCell::~NUITableViewCell () {}
+NAN_GETTER(NUITableViewCell::selectionStyleGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+  
+  UITableViewCellSelectionStyle style = [ui selectionStyle];
+  int styleInt = 0;
+
+  if (style == UITableViewCellSelectionStyleBlue) {
+    styleInt = 1;
+  } else if (style == UITableViewCellSelectionStyleGray) {
+    styleInt = 2;
+  } else if (style == UITableViewCellSelectionStyleDefault) {
+    styleInt = 3;
+  }
+
+  JS_SET_RETURN(JS_NUM(styleInt));
+}
+
+NAN_SETTER(NUITableViewCell::selectionStyleSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableViewCell, ui);
+
+  double styleVal = TO_DOUBLE(value);
+  UITableViewCellSelectionStyle style = UITableViewCellSelectionStyle(styleVal);
+
+  @autoreleasepool {
+    [ui setSelectionStyle:style];
+  }
+}

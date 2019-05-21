@@ -9,6 +9,8 @@ const {
   UIViewContentMode,
   UIControlEvents,
   UIBarMetrics,
+  UITableViewSelectionStyle,
+  UITableViewCellSeparatorStyle,
 }= require('./enums');
 
 const {
@@ -25,6 +27,9 @@ const {
   NSMutableAttributedString,
   UIButton,
   UIViewController,
+  UITableViewCell,
+  UITableView,
+  UITableViewManager,
 } = SweetieKit;
 
 let w;
@@ -79,6 +84,8 @@ const quizResponses = [
   ['Resp A', 'Resp B', 'Resp C'],
   ['Resp A', 'Resp B', 'Resp C'],
 ];
+
+const responseSelections = [0, 0, 0];
 
 const titleFont = new UIFont('Lato-Bold', 22);
 const contentFont = new UIFont('Lato-Bold', 16);
@@ -300,6 +307,82 @@ function makeClippingView() {
   viewH = h - 84;
 }
 
+function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
+  for (let i = 0; i < numSlides; i++) {
+    const imgX = (w - 100) / 2;
+    const labelY = imgY + imgSize + 50;
+    const contentY = labelY + 70;
+    const items = contentTexts[i];
+
+    const del = new UITableViewManager((tv, section) => {
+      return 3;
+    }, (tv, indexPath) => {
+      const cell = new UITableViewCell();
+      const text = items[indexPath.row];
+      cell.textLabel.numberOfLines = 0;
+      cell.textLabel.textAlignment = NSTextAlignment.left;
+      cell.textLabel.font = contentFont;
+
+      if (indexPath.row === responseSelections[i]) {
+        cell.textLabel.textColor = colors.fitbodPink;
+      } else {
+        cell.textLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+      }
+
+      cell.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+
+      const attrText = new NSMutableAttributedString(text);
+      attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+        location: 0,
+        length: text.length,
+      });
+
+      cell.textLabel.attributedText = attrText;
+
+      cell.selectionStyle = UITableViewSelectionStyle.none;
+
+      return cell;
+    });
+
+    del.numberOfSections = () => {
+      return 1;
+    };
+
+    del.didSelectRowAt = (tv, indexPath) => {
+      const { row } = indexPath;
+      responseSelections[i] = row;
+      tv.reloadData();
+    };
+
+    del.heightForRowAtIndexPath = (tv, indexPath) => {
+      return 80;
+    };
+
+    const slideView = new UITableView({ x: w * i, y: 60, width: w, height: viewH - 60 });
+    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    slideView.separatorStyle = UITableViewCellSeparatorStyle.none;
+    slideView.delegate = del;
+    slideView.dataSource = del;
+
+    // const label = new UILabel();
+    // label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
+    // label.text = titles[i];
+    // label.textColor = colors.fitbodPink;
+    // label.font = titleFont;
+    // label.textAlignment = NSTextAlignment.center;
+
+    // const image = new UIImage(iconImages[i]);
+    // const imageView = new UIImageView(image);
+    // imageView.alpha = 0.5;
+    // imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
+
+    // slideView.addSubview(label);
+    // slideView.addSubview(imageView);
+
+    scroll.addSubview(slideView);
+  }
+}
+
 function startQuiz(nav) {
   const numQuestions = 2;
   let quizStep = 0;
@@ -317,9 +400,9 @@ function startQuiz(nav) {
   clippingView.addSubview(barView);
 
   const scrollView = makeScrollView(vc, 3);
-  makeSlides(scrollView, 3, quizTitles, quizResponses, quizImages);
+  makeQuizSlides(scrollView, 3, quizTitles, quizResponses, quizImages);
 
-  const pageControl = makePageControl(scrollView, 4);
+  const pageControl = makePageControl(scrollView, 3);
   scrollView.delegate = makeScrollDelegate(pageControl);
   vc.view.addSubview(pageControl);
 

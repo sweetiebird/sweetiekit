@@ -32,6 +32,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isola
   JS_SET_PROP(proto, "rowHeight", RowHeight);
   JS_SET_PROP(proto, "estimatedRowHeight", EstimatedRowHeight);
   JS_SET_PROP(proto, "refreshControl", RefreshControl);
+  JS_ASSIGN_PROP(proto, separatorStyle);
   Nan::SetMethod(proto, "reloadData", ReloadData);
   Nan::SetMethod(proto, "cellForRowAt", CellForRowAt);
   Nan::SetMethod(proto, "scrollToRowAt", ScrollToRowAt);
@@ -315,5 +316,33 @@ NAN_METHOD(NUITableView::ScrollToRowAt) {
     indexes[1] = row;
     NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
     [tv scrollToRowAtIndexPath:path atScrollPosition:pos animated:animated];
+  }
+}
+
+NAN_GETTER(NUITableView::separatorStyleGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableView, ui);
+  
+  UITableViewCellSeparatorStyle style = [ui separatorStyle];
+  int styleInt = 0;
+
+  if (style == UITableViewCellSeparatorStyleSingleLine) {
+    styleInt = 1;
+  }
+
+  JS_SET_RETURN(JS_NUM(styleInt));
+}
+
+NAN_SETTER(NUITableView::separatorStyleSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITableView, ui);
+  
+  double styleVal = TO_DOUBLE(value);
+  UITableViewCellSeparatorStyle style = UITableViewCellSeparatorStyle(styleVal);
+
+  @autoreleasepool {
+    [ui setSeparatorStyle:style];
   }
 }

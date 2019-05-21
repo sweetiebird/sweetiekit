@@ -29,11 +29,14 @@ public:
   static NAN_METHOD(New);
   JS_PROP(DidSelectRowAt);
   JS_PROP(NumberOfSections);
+  JS_PROP(heightForRowAtIndexPath);
+  JS_PROP(titleForHeaderInSection);
   sweetiekit::JSFunction _numberRowsInSection;
   sweetiekit::JSFunction _numberSections;
   sweetiekit::JSFunction _cellForRowAt;
   sweetiekit::JSFunction _didSelectRowAt;
   sweetiekit::JSFunction _titleForSection;
+  sweetiekit::JSFunction _heightForRow;
 };
 
 #endif /* NUITableViewManager_h */

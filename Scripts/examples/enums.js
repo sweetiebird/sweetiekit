@@ -109,6 +109,18 @@ const ARWorldAlignment = {
   gravityAndHeading: 2,
 };
 
+const UITableViewSelectionStyle = {
+  none: 0,
+  blue: 1,
+  gray: 2,
+  default: 3,
+};
+
+const UITableViewCellSeparatorStyle = {
+  none: 0,
+  singleLine: 1,
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
@@ -124,3 +136,5 @@ module.exports.UIControlEvents = UIControlEvents;
 module.exports.UIProgressViewStyle = UIProgressViewStyle;
 module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
+module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;
+module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;

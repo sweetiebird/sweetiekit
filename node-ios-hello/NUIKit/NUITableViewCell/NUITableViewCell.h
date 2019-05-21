@@ -32,6 +32,7 @@ public:
   JS_PROP(DetailTextLabel);
   JS_PROP(IsEditing);
   JS_PROP(IsSelected);
+  JS_PROP(selectionStyle);
 };
 
 #endif /* NUITableViewCell_h */

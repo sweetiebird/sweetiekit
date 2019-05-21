@@ -14,13 +14,18 @@ typealias NumberRowsInSectionClosure = (UITableView, Int) -> Int
 typealias CellForRowAtClosure = (UITableView, IndexPath) -> UITableViewCell
 typealias DidSelectRowAtClosure = (UITableView, IndexPath) -> Void
 typealias TitleForSectionHeaderClosure = (UITableView, Int) -> String?
+typealias SUITableViewManager_HeightForRowClosure = (UITableView, IndexPath) -> CGFloat
 
 @objc class SUITableViewManager: NSObject, UITableViewDataSource, UITableViewDelegate {
+  // data source
   var numberSectionsCallback: NumberSectionsClosure?
   var numberRowsInSectionCallback: NumberRowsInSectionClosure!
   var cellForRowAtCallback: CellForRowAtClosure!
   var didSelectRowAtCallback: DidSelectRowAtClosure?
   var titleForSectionCallback: TitleForSectionHeaderClosure?
+  
+  // delegate
+  var heightForRowCallback: SUITableViewManager_HeightForRowClosure?
 
   override init() {
     super.init()
@@ -53,16 +58,20 @@ typealias TitleForSectionHeaderClosure = (UITableView, Int) -> String?
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let didSelectRowAtCallback = didSelectRowAtCallback {
-      didSelectRowAtCallback(tableView, indexPath)
-    }
+    didSelectRowAtCallback?(tableView, indexPath)
   }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if let titleForSectionCallback = titleForSectionCallback {
-      return titleForSectionCallback(tableView, section)
+    return titleForSectionCallback?(tableView, section)
+  }
+}
+
+@objc extension SUITableViewManager {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if let heightForRowCallback = heightForRowCallback {
+      return heightForRowCallback(tableView, indexPath)
     }
-    return String(section)
+    return UITableView.automaticDimension
   }
 }
 
@@ -77,6 +86,10 @@ typealias TitleForSectionHeaderClosure = (UITableView, Int) -> String?
   
   func setTitleForSectionCallback(_ closure: @escaping TitleForSectionHeaderClosure) {
     titleForSectionCallback = closure
+  }
+
+  func setHeightForRowCallback(_ closure: @escaping SUITableViewManager_HeightForRowClosure) {
+    heightForRowCallback = closure
   }
 }
 
