@@ -314,6 +314,11 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const contentY = labelY + 70;
     const items = contentTexts[i];
 
+    const image = new UIImage(iconImages[i]);
+    const imageView = new UIImageView(image);
+    imageView.alpha = 0.5;
+    imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };
+
     const label = new UILabel();
     label.frame = { x: (w * i) + 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
@@ -371,14 +376,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     slideView.delegate = del;
     slideView.dataSource = del;
 
-    // const image = new UIImage(iconImages[i]);
-    // const imageView = new UIImageView(image);
-    // imageView.alpha = 0.5;
-    // imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
-
-    // slideView.addSubview(label);
-    // slideView.addSubview(imageView);
-
+    scroll.addSubview(imageView);
     scroll.addSubview(label);
     scroll.addSubview(slideView);
   }
