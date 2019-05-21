@@ -33,6 +33,9 @@ public:
   JS_PROP(Title);
   JS_PROP(Callback);
   JS_PROP(titleLabel);
+  JS_PROP(titleEdgeInsets);
+  JS_PROP(contentEdgeInsets);
+  JS_PROP(imageEdgeInsets);
   Nan::Persistent<Function>* _callback;
 };
 

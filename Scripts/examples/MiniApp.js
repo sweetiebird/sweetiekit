@@ -99,9 +99,7 @@ function setNavStyles(nav) {
 }
 
 function setInnerAppNavStyles(nav) {
-  nav.navigationBar.setTranslucent(false);
-  nav.navigationBar.tintColor = colors.fitbodPink;
-  nav.navigationBar.backgroundColor = colors.fitbodMedGrey;
+  nav.setNavigationBarHidden(true);
 }
 
 function makeAppButton(title) {
@@ -290,8 +288,6 @@ function makeTopToolbarTitle(title) {
   }, UIControlState.normal);
   button.titleLabel.font = barTitleFont;
   button.translatesAutoresizingMaskIntoConstraints = false;
-  button.backgroundColor = colors.fitbodDarkGrey;
-  button.layer.cornerRadius = button.frame.height / 2;
   button.showsTouchWhenHighlighted = true;
   return button;
 }
@@ -304,6 +300,8 @@ function makeTopToolbarView() {
 }
 
 function makeInnerAppControllers(nav) {
+  setInnerAppNavStyles(nav);
+
   const tabVC = new UITabBarController();
   tabVC.tabBar.barTintColor = colors.fitbodMedGrey;
   tabVC.tabBar.tintColor = colors.fitbodPink;
@@ -326,7 +324,11 @@ function makeInnerAppControllers(nav) {
   partyTitle.centerYAnchor.constraintEqualToAnchor(partyToolbar.centerYAnchor, partyTitleH / 2).isActive = true;
   partyTitle.centerXAnchor.constraintEqualToAnchor(partyToolbar.centerXAnchor, 0).isActive = true;
   partyVC.view.addSubview(partyToolbar);
+  partyVC.view.bringSubviewToFront(partyToolbar);
 
+  partyTitle.addTarget(() => {
+    console.log('editor view controller');
+  }, UIControlEvents.touchUpInside);
 
   const wagonVC = new UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
@@ -342,6 +344,11 @@ function makeInnerAppControllers(nav) {
   wagonTitle.centerYAnchor.constraintEqualToAnchor(wagonToolbar.centerYAnchor, wagonTitleH / 2).isActive = true;
   wagonTitle.centerXAnchor.constraintEqualToAnchor(wagonToolbar.centerXAnchor, 0).isActive = true;
   wagonVC.view.addSubview(wagonToolbar);
+  wagonVC.view.bringSubviewToFront(wagonToolbar);
+
+  wagonTitle.addTarget(() => {
+    console.log('editor view controller');
+  }, UIControlEvents.touchUpInside);
 
   nav.setViewControllers([tabVC], true);
 

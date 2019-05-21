@@ -30,6 +30,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   JS_SET_PROP(proto, "title", Title);
   JS_SET_PROP(proto, "callback", Callback);
   JS_ASSIGN_PROP_READONLY(proto, titleLabel);
+  JS_ASSIGN_PROP(proto, titleEdgeInsets);
+  JS_ASSIGN_PROP(proto, contentEdgeInsets);
+  JS_ASSIGN_PROP(proto, imageEdgeInsets);
   Nan::SetMethod(proto, "setTitleColorForState", setTitleColorForState);
   Nan::SetMethod(proto, "setTitleForState", setTitleForState);
 
@@ -247,4 +250,88 @@ NAN_GETTER(NUIButton::titleLabelGetter) {
   JS_UNWRAP(UIButton, ui);
 
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui titleLabel], NUILabel::type));
+}
+
+NAN_GETTER(NUIButton::titleEdgeInsetsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("top"), JS_NUM([ui titleEdgeInsets].top));
+  result->Set(JS_STR("bottom"), JS_NUM([ui titleEdgeInsets].bottom));
+  result->Set(JS_STR("left"), JS_NUM([ui titleEdgeInsets].left));
+  result->Set(JS_STR("right"), JS_NUM([ui titleEdgeInsets].right));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUIButton::titleEdgeInsetsSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  @autoreleasepool {
+    double b = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("bottom")));
+    double t = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("top")));
+    double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("right")));
+    double l = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("left")));
+    [ui setTitleEdgeInsets:UIEdgeInsetsMake(t, l, b, r)];
+  }
+}
+
+NAN_GETTER(NUIButton::contentEdgeInsetsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("top"), JS_NUM([ui contentEdgeInsets].top));
+  result->Set(JS_STR("bottom"), JS_NUM([ui contentEdgeInsets].bottom));
+  result->Set(JS_STR("left"), JS_NUM([ui contentEdgeInsets].left));
+  result->Set(JS_STR("right"), JS_NUM([ui contentEdgeInsets].right));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUIButton::contentEdgeInsetsSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  @autoreleasepool {
+    double b = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("bottom")));
+    double t = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("top")));
+    double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("right")));
+    double l = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("left")));
+    [ui setContentEdgeInsets:UIEdgeInsetsMake(t, l, b, r)];
+  }
+}
+
+NAN_GETTER(NUIButton::imageEdgeInsetsGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("top"), JS_NUM([ui imageEdgeInsets].top));
+  result->Set(JS_STR("bottom"), JS_NUM([ui imageEdgeInsets].bottom));
+  result->Set(JS_STR("left"), JS_NUM([ui imageEdgeInsets].left));
+  result->Set(JS_STR("right"), JS_NUM([ui imageEdgeInsets].right));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUIButton::imageEdgeInsetsSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+  
+  @autoreleasepool {
+    double b = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("bottom")));
+    double t = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("top")));
+    double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("right")));
+    double l = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("left")));
+    [ui setImageEdgeInsets:UIEdgeInsetsMake(t, l, b, r)];
+  }
 }
