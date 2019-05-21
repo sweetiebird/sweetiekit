@@ -16,7 +16,7 @@
     "http-server": "^0.11.1",
     "leftpad": "^0.0.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react-dom": "npm:@hot-loader/react-dom",
     "socket.io-client": "^2.2.0",
     "sweetiekit-dom": "^0.0.1"
   },
