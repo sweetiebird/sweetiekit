@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUITabBarController.h"
 #include "NUIViewController.h"
+#include "NUITabBar.h"
 
 Nan::Persistent<FunctionTemplate> NUITabBarController::type;
 
@@ -27,6 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITabBarController::Initializ
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
+  JS_ASSIGN_PROP_READONLY(proto, tabBar);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -77,4 +79,12 @@ NAN_METHOD(NUITabBarController::SetViewControllers) {
   @autoreleasepool {
     [c setViewControllers:controllers animated:animated];
   }
+}
+
+NAN_GETTER(NUITabBarController::tabBarGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UITabBarController, ui);
+  
+  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui tabBar], NUITabBar::type)));
 }

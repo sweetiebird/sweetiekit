@@ -281,13 +281,32 @@ function setSizes(vc) {
 
 function makeInnerAppControllers(nav) {
   const tabVC = new UITabBarController();
+  tabVC.tabBar.barTintColor = colors.fitbodMedGrey;
+  tabVC.tabBar.tintColor = colors.fitbodPink;
+  tabVC.tabBar.unselectedItemTintColor = {
+    ...colors.white,
+    alpha: 0.8,
+  };
+
+  const partyVC = new UIViewController();
+  partyVC.view.backgroundColor = colors.fitbodDarkGrey;
+  partyVC.tabBarItem = new UITabBarItem(
+    'Party',
+    new UIImage('user_unselected'),
+    new UIImage('user'),
+  );
 
   const wagonVC = new UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
+  wagonVC.tabBarItem = new UITabBarItem(
+    'Wagon',
+    new UIImage('truck_unselected'),
+    new UIImage('truck'),
+  );
 
   nav.setViewControllers([tabVC], true);
 
-  tabVC.setViewControllers([wagonVC], false);
+  tabVC.setViewControllers([partyVC, wagonVC], false);
 }
 
 function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {

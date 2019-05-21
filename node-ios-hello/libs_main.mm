@@ -26,6 +26,7 @@
 #include "NUIButton.h"
 #include "NUITabBarController.h"
 #include "NUITabBarItem.h"
+#include "NUITabBar.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUILabel.h"
@@ -483,6 +484,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_UIProgressView = NUIProgressView::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIProgressView").ToLocalChecked(), N_UIProgressView.first);
+
+        auto N_UITabBar = NUITabBar::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UITabBar").ToLocalChecked(), N_UITabBar.first);
 
         // UIKit delegates ========
   

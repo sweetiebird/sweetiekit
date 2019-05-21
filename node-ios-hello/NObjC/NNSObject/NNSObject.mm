@@ -376,6 +376,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUIStoryboard.h"
 #include "NUITabBarController.h"
 #include "NUITabBarItem.h"
+#include "NUITabBar.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
 #include "NUINavigationBar.h"
@@ -611,6 +612,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUITouch::type;
       }
       // ========= views
+      if ([obj isKindOfClass:[UITabBar class]]) {
+        return NUITabBar::type;
+      }
       if ([obj isKindOfClass:[UIProgressView class]]) {
         return NUIProgressView::type;
       }

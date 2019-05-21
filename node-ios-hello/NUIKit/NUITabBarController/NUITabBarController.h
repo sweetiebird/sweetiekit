@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
   static NAN_METHOD(SetViewControllers);
+  JS_PROP(tabBar);
 };
 
 #endif /* NUITabBarController_h */
