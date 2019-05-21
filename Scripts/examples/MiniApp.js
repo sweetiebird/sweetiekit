@@ -61,28 +61,21 @@ const welcomeContentTexts = [
 ];
 
 const quizImages = [
-  'heart',
-  'fire',
-  'star',
-  'plane',
+  'study',
+  'like',
+  'diamond',
 ];
 
 const quizTitles = [
-  'Neutra Mustache',
-  'Unicorn Hexagon',
-  "Ennui Flannel",
-];
-
-const quizContentTexts = [
-  '2IPhone XOXO flexitarian meditation brooklyn sustainable pinterest. Before they sold out vape everyday carry YOLO. Lyft listicle kitsch pop-up try-hard.',
-  '2You probably haven\'t heard of them tousled celiac, tofu hoodie cred tote bag polaroid pok pok master cleanse godard mustache lomo.',
-  '2Mustache snackwave raw denim cred lo-fi pop-up art party coloring book. Unicorn truffaut paleo selfies health goth. Iceland woke aesthetic kombucha.',
+  'How experienced are you with the Oregon Trail?',
+  'What\'s your main reason for joining a wagon party?',
+  'What special items are you bringing?',
 ];
 
 const quizResponses = [
-  ['Resp A', 'Resp B', 'Resp C'],
-  ['Resp A', 'Resp B', 'Resp C'],
-  ['Resp A', 'Resp B', 'Resp C'],
+  ['Greenhorn', 'Adventurer', 'Trail Guide'],
+  ['To make my fortune', 'To hunt squirrels', 'Feeling lucky'],
+  ['Wagon Caulk', 'Grandfather clock', 'Box of ammo (Costco wholesale)'],
 ];
 
 const responseSelections = [0, 0, 0];
@@ -175,53 +168,30 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     label.font = titleFont;
     label.textAlignment = NSTextAlignment.center;
 
-    if (Array.isArray(contentTexts[i])) {
-      const items = contentTexts[i];
-      for (let j = 0, len = items.length; j < len; j++) {
-        const contentLabel = new UILabel();
-        contentLabel.numberOfLines = 0;
-        contentLabel.textAlignment = NSTextAlignment.left;
-        contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
-        contentLabel.font = contentFont;
-        contentLabel.frame = { x: 20, y: contentY + (40 * j), width: w - 40, height: 120 };
+    const contentLabel = new UILabel();
+    contentLabel.numberOfLines = 0;
+    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.font = contentFont;
+    contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
 
-        const attrText = new NSMutableAttributedString(items[j]);
-        attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
-          location: 0,
-          length: items[j].length,
-        });
+    const attrText = new NSMutableAttributedString(contentTexts[i]);
+    attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+      location: 0,
+      length: contentTexts[i].length,
+    });
 
-        contentLabel.attributedText = attrText;
-        contentLabel.isUserInteractionEnabled = true;
-
-        slideView.addSubview(contentLabel);
-      }
-    } else {
-      const contentLabel = new UILabel();
-      contentLabel.numberOfLines = 0;
-      contentLabel.textAlignment = NSTextAlignment.left;
-      contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
-      contentLabel.font = contentFont;
-      contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
-
-      const attrText = new NSMutableAttributedString(contentTexts[i]);
-      attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
-        location: 0,
-        length: contentTexts[i].length,
-      });
-
-      contentLabel.attributedText = attrText;
-
-      slideView.addSubview(contentLabel);
-    }
+    contentLabel.attributedText = attrText;
 
     const image = new UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
+    imageView.contentMode = UIViewContentMode.scaleAspectFit;
 
     slideView.addSubview(label);
     slideView.addSubview(imageView);
+    slideView.addSubview(contentLabel);
 
     scroll.addSubview(slideView);
   }
@@ -311,20 +281,24 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
   for (let i = 0; i < numSlides; i++) {
     const imgX = (w - 100) / 2;
     const labelY = imgY + imgSize + 50;
-    const contentY = labelY + 70;
     const items = contentTexts[i];
 
     const image = new UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };
+    imageView.contentMode = UIViewContentMode.scaleAspectFit;
 
     const label = new UILabel();
     label.frame = { x: (w * i) + 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
-    label.textColor = colors.fitbodLightGrey;
+    label.textColor = colors.white;
     label.font = titleFont;
-    label.textAlignment = NSTextAlignment.center;
+    label.textAlignment = NSTextAlignment.left;
+    label.numberOfLines = 0;
+    label.sizeToFit();
+
+    const contentY = labelY + label.frame.height + 10;
 
     const del = new UITableViewManager((tv, section) => {
       return 3;
