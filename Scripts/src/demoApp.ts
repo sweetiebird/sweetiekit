@@ -111,7 +111,8 @@
 // import UIApplication = UIKit.UIApplication
 //
 
-import {IndexPath, UIKit} from "./sweetiekit";
+// @ts-ignore
+import { IndexPath, UIKit } from "./sweetiekit";
 import UIApplication = UIKit.UIApplication;
 import UILabel = UIKit.UILabel;
 import UIStoryboard = UIKit.UIStoryboard;
