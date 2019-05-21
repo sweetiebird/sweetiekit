@@ -132,15 +132,15 @@ public: \
 #define JS_WRAP_CLASS_END(name) \
 };
 
-#define JS_ATTACH_FUNCTION(objc, jsValue, keyName) \
+#define JS_ATTACH_FUNCTION(jsValue, objcValue, keyName) \
   { \
     SweetJSFunction* func = [[SweetJSFunction alloc] init]; \
     [func jsFunction]->Reset(jsValue); \
-    [objc associateValue:func withKey:keyName]; \
+    [objcValue associateValue:func withKey:keyName]; \
   }
   
-#define JS_GET_FUNCTION(varName, keyName) \
-  auto& varName = *[(SweetJSFunction*)[act associatedValueForKey:keyName] jsFunction];
+#define JS_GET_FUNCTION(varName, objc, keyName) \
+  auto& varName = *[(SweetJSFunction*)[objc associatedValueForKey:keyName] jsFunction];
 
 #include <array>
 #include <deque>
@@ -362,6 +362,7 @@ namespace sweetiekit {
 
 namespace sweetiekit {
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
+  Local<Value> GetWrapperFor(id pThing);
   id FromJS(Local<Value> jsThing);
 }
 
