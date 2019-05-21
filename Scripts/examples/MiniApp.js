@@ -30,6 +30,8 @@ const {
   UITableViewCell,
   UITableView,
   UITableViewManager,
+  UITabBarController,
+  UITabBarItem,
 } = SweetieKit;
 
 let w;
@@ -93,6 +95,12 @@ function setNavStyles(nav) {
   nav.navigationBar.shadowImage = new UIImage();
   nav.navigationBar.tintColor = colors.fitbodPink;
   nav.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+}
+
+function setInnerAppNavStyles(nav) {
+  nav.navigationBar.setTranslucent(false);
+  nav.navigationBar.tintColor = colors.fitbodPink;
+  nav.navigationBar.backgroundColor = colors.fitbodMedGrey;
 }
 
 function makeAppButton(title) {
@@ -265,10 +273,21 @@ function makeClippingView() {
   return clippingView;
 }
 
-  function setSizes(vc) {
+function setSizes(vc) {
   w = vc.view.frame.width;
   h = vc.view.frame.height;
   viewH = h - 84;
+}
+
+function makeInnerAppControllers(nav) {
+  const tabVC = new UITabBarController();
+
+  const wagonVC = new UIViewController();
+  wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
+
+  nav.setViewControllers([tabVC], true);
+
+  tabVC.setViewControllers([wagonVC], false);
 }
 
 function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
@@ -384,18 +403,22 @@ function startQuiz(nav) {
 
   const nextButton = makeAppButton('NEXT');
   nextButton.addTarget(() => {
-    quizStep += 1;
-    if (quizStep <= numQuestions - 1) {
-      const newContentOffset = w * quizStep;
-      scrollView.setContentOffset({ x: newContentOffset, y: 0 }, true);
-      progressView.setProgress((quizStep + 1) / 3, true);
+    if (quizStep === numQuestions - 1) {
+      makeInnerAppControllers(nav);
     } else {
-      quizStep = numQuestions - 1;
-    }
-    if (quizStep >= numQuestions - 1) {
-      nextButton.setTitleForState('DONE', UIControlState.normal);
-    } else {
-      nextButton.setTitleForState('NEXT', UIControlState.normal);
+      quizStep += 1;
+      if (quizStep <= numQuestions - 1) {
+        const newContentOffset = w * quizStep;
+        scrollView.setContentOffset({ x: newContentOffset, y: 0 }, true);
+        progressView.setProgress((quizStep + 1) / 3, true);
+      } else {
+        quizStep = numQuestions - 1;
+      }
+      if (quizStep >= numQuestions - 1) {
+        nextButton.setTitleForState('DONE', UIControlState.normal);
+      } else {
+        nextButton.setTitleForState('NEXT', UIControlState.normal);
+      }
     }
   }, UIControlEvents.touchUpInside);
 
