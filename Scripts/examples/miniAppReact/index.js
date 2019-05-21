@@ -10,6 +10,9 @@ const colors = require('../colors');
 
 const {
   UIButton,
+  UIImage,
+  UIView,
+  UIImageView,
 } = SweetieKit;
 
 div = document.createElement('div');
@@ -42,15 +45,15 @@ class Button extends React.Component {
   componentDidMount() {
     const { superview, onClick } = this.props;
     const w = superview.frame.width;
-    this.ui = new UIButton({ x: 12, y: 80, width: w - 24, height: 50 });
-    this.ui.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
-    this.ui.layer.cornerRadius = 4;
-    this.ui.layer.shadowRadius = 12;
-    this.ui.layer.shadowColor = { red: 87/255, green: 174/255, blue: 176/255 };
-    this.ui.layer.shadowOffset = { width: 0, height: 12 };
-    this.ui.setTitleForState('Toggle Me', UIControlState.normal);
-    this.ui.addTarget(onClick, UIControlEvents.touchUpInside);
-    superview.addSubview(this.ui);
+    this.el = new UIButton({ x: 12, y: 80, width: w - 24, height: 50 });
+    this.el.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+    this.el.layer.cornerRadius = 4;
+    this.el.layer.shadowRadius = 12;
+    this.el.layer.shadowColor = { red: 87/255, green: 174/255, blue: 176/255 };
+    this.el.layer.shadowOffset = { width: 0, height: 12 };
+    this.el.setTitleForState('Toggle Me', UIControlState.normal);
+    this.el.addTarget(onClick, UIControlEvents.touchUpInside);
+    superview.addSubview(this.el);
   }
 
   componentDidUpdate(prevProps) {
@@ -58,17 +61,17 @@ class Button extends React.Component {
     const { isDarkTheme: wasDarkTheme } = prevProps;
     if (isDarkTheme !== wasDarkTheme) {
       if (isDarkTheme) {
-        this.ui.titleLabel.textColor = colors.white;
-        this.ui.backgroundColor = colors.fitbodMedGrey;
+        this.el.titleLabel.textColor = colors.white;
+        this.el.backgroundColor = colors.fitbodMedGrey;
       } else {
-        this.ui.titleLabel.textColor = colors.fitbodDarkGrey;
-        this.ui.backgroundColor = colors.fitbodPink;
+        this.el.titleLabel.textColor = colors.fitbodDarkGrey;
+        this.el.backgroundColor = colors.fitbodPink;
       }
     }
   }
 
   componentWillUnmount() {
-    this.ui.removeFromSuperview();
+    this.el.removeFromSuperview();
   }
 
   render() {
@@ -79,13 +82,13 @@ class Button extends React.Component {
 class FullScreenView extends React.Component {
   componentWillMount() {
     const { superview, isDarkTheme } = this.props;
-    this.ui = new UIView({ x: 0, y: 0, width: superview.frame.width, height: superview.frame.height });
+    this.el = new UIView({ x: 0, y: 0, width: superview.frame.width, height: superview.frame.height });
     if (isDarkTheme) {
-      this.ui.backgroundColor = colors.fitbodDarkGrey;
+      this.el.backgroundColor = colors.fitbodDarkGrey;
     } else {
-      this.ui.backgroundColor = colors.white;
+      this.el.backgroundColor = colors.white;
     }
-    superview.addSubview(this.ui);
+    superview.addSubview(this.el);
   }
 
   componentDidUpdate(prevProps) {
@@ -93,16 +96,16 @@ class FullScreenView extends React.Component {
     const { isDarkTheme: wasDarkTheme } = prevProps;
     if (isDarkTheme !== wasDarkTheme) {
       if (isDarkTheme) {
-        this.ui.backgroundColor = colors.fitbodMedGrey;
+        this.el.backgroundColor = colors.fitbodMedGrey;
       } else {
-        this.ui.backgroundColor = colors.white;
+        this.el.backgroundColor = colors.white;
       }
     }
   }
 
   componentWillUnmount() {
-    this.ui.removeFromSuperview();
-    delete this.ui;
+    this.el.removeFromSuperview();
+    delete this.el;
   }
 
   render() {
@@ -111,16 +114,84 @@ class FullScreenView extends React.Component {
     const newChildren = React.Children.map(children, (child, idx) => {
       return React.cloneElement(child, {
         ...child.props,
-        superview: this.ui,
+        superview: this.el,
       });
     });
 
     return newChildren;
     // return React.createElement(Button, {
-    //   superview: this.ui,
+    //   superview: this.el,
     //   isDarkTheme,
     //   onClick: onButtonClick,
     // });
+  }
+}
+
+class Image extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidUpdate() {
+    const { source } = this.props;
+
+  }
+
+  get el() {
+    if (!this._el) {
+      const { source } = this.props;
+      this._el = new UIImage(source);
+    }
+    return this._el;
+  }
+
+  render() {
+    return React.createElement('span');
+  }
+}
+
+class ImageView extends React.Component {
+  componentDidMount() {
+    const { children, superview } = this.props;
+    let src;
+    React.Children.forEach(children, (child) => {
+      if (child.props.isSelected) {
+        src = child;
+      }
+    });
+    if (!src) {
+      throw new Error("expected selected image");
+    }
+    this.el = new UIImageView(src.el);
+    this.el.frame = superview.frame;
+    this.el.backgroundColor = colors.white;
+    console.log('tktk', this.el.frame);
+    superview.addSubview(this.el);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { superview, children, isDarkView } = this.props;
+    //if (isDarkView !== prevProps.isDarkView) {
+      let src;
+      React.Children.forEach(children, (child) => {
+        if (child.props.isSelected) {
+          src = child;
+        }
+      });
+      if (src) {
+        console.log('setting image', src.props, src.el);
+        this.el.image = src.el;
+      }
+    //}
+  }
+
+  componentWillUnmount() {
+    this.el.removeFromSuperview();
+    delete this.el;
+  }
+
+  render() {
+    return React.createElement('image');
   }
 }
 
@@ -147,15 +218,26 @@ class App extends React.Component {
     const { vc } = this.props;
     const { isDarkTheme } = this.state;
 
+    const img = React.createElement(Image, {
+      source: isDarkTheme ? 'user' : 'user_unselected',
+      isSelected: true,
+    });
+
+    const imageView = React.createElement(ImageView, {
+      isDarkTheme,
+      key: 'img-view',
+    }, img);
+
     const button = React.createElement(Button, {
       isDarkTheme,
       onClick: this.handleButtonClick,
+      key: 'btn',
     });
 
     return React.createElement(FullScreenView, {
       isDarkTheme,
       superview: vc.view,
-    }, button);
+    }, [imageView, button]);
   }
 }
 

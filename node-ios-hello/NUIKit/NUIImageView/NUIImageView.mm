@@ -26,6 +26,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImageView::Initialize(Isola
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP(proto, image);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -64,3 +65,25 @@ NAN_METHOD(NUIImageView::New) {
 NUIImageView::NUIImageView () {}
 NUIImageView::~NUIImageView () {}
 
+NAN_GETTER(NUIImageView::imageGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIImageView, ui);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui image], NUIImage::type));
+}
+
+NAN_SETTER(NUIImageView::imageSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UIImageView, ui);
+  if (value->IsNullOrUndefined()) {
+    [ui setImage:nullptr];
+  } else {
+    JS_UNWRAPPED(value, UIImage, img);
+
+    @autoreleasepool {
+      [ui setImage:img];
+    }
+  }
+}

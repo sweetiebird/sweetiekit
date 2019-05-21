@@ -15,6 +15,7 @@ using namespace node;
 #include "NUIView.h"
 
 JS_WRAP_CLASS(UIImageView, UIView);
+  JS_PROP(image);
 JS_WRAP_CLASS_END(UIImageView);
 
 #endif /* NUIImageView_h */
