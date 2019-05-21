@@ -55,10 +55,10 @@ NAN_METHOD(NUIAlertAction::New) {
       UIAlertAction* ui = action->SetNSObject([UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull act) {
         Nan::HandleScope scope;
         Local<Value> actionObj = sweetiekit::GetWrapperFor(act, NUIAlertAction::type);
-        JS_GET_FUNCTION(fn, @"sweetiekit_UIAlertAction_callback");
+        JS_GET_FUNCTION(fn, act, @"sweetiekit_UIAlertAction_callback");
         fn("NUITableViewManager::New", actionObj);
       }]);
-      JS_ATTACH_FUNCTION(ui, info[1], @"sweetiekit_UIAlertAction_callback");
+      JS_ATTACH_FUNCTION(info[1], ui, @"sweetiekit_UIAlertAction_callback");
     }
   }
   action->Wrap(obj);

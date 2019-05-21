@@ -36,6 +36,11 @@ NSString* NJSStringToNSString(Local<Value> jsStr) {
 
 namespace sweetiekit
 {
+  Local<Value> GetWrapperFor(id pThing)
+  {
+    return GetWrapperFor(pThing, NNSObject::type);
+  }
+  
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
   {
     Nan::EscapableHandleScope handleScope;
