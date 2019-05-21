@@ -1,5 +1,9 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+// apps
+const makeMiniApp = require('./examples/MiniApp');
+const makeMiniAppReact = require('./examples/miniAppReact');
+
 // view based demos
 const makeARSCNView = require('./examples/ARSCNView');
 const makeButton = require('./examples/UIButton');
@@ -12,7 +16,6 @@ const makeLabel = require('./examples/UILabel');
 const makePageControl = require('./examples/UIPageControl');
 const makePicker = require('./examples/UIPickerView');
 const makeMapView = require('./examples/MKMapView');
-const makeMiniApp = require('./examples/MiniApp');
 const makeSKScene = require('./examples/SKScene');
 // const makeSKSceneSockets = require('./examples/SKSceneSockets');
 const makeScrollView = require('./examples/UIScrollView');
@@ -84,6 +87,7 @@ const arDemos = {
 
 const appDemos = {
   MiniApp: makeMiniApp,
+  MiniAppReact: makeMiniAppReact,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
