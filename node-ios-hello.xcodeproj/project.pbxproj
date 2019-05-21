@@ -2374,8 +2374,7 @@
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
-				NODE_ROOT = "../node-ios-release";
-				"NODE_ROOT[sdk=iphoneos*]" = "../node-ios-release";
+				NODE_ROOT = "/opt/sweet/node-ios";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2439,8 +2438,7 @@
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
-				NODE_ROOT = "../node-ios-release";
-				"NODE_ROOT[sdk=iphoneos*]" = "../node-ios-release";
+				NODE_ROOT = "/opt/sweet/node-ios";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
