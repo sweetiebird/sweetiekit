@@ -85,6 +85,7 @@ const responseSelections = [0, 0, 0];
 const titleFont = new UIFont('Lato-Bold', 22);
 const contentFont = new UIFont('Lato-Bold', 17);
 const buttonFont = new UIFont('Lato-Bold', 17);
+const barTitleFont = new UIFont('Lato-Black', 14);
 
 const pStyle = new NSMutableParagraphStyle();
 pStyle.lineSpacing = 10;
@@ -279,22 +280,26 @@ function setSizes(vc) {
   viewH = h - 84;
 }
 
-function makeTopToolbarView(title) {
+function makeTopToolbarTitle(title) {
+  const button = new UIButton();
+  button.setTitleForState(title, UIControlState.normal);
+  button.sizeToFit();
+  button.setTitleColorForState({
+    ...colors.white,
+    alpha: 0.8,
+  }, UIControlState.normal);
+  button.titleLabel.font = barTitleFont;
+  button.translatesAutoresizingMaskIntoConstraints = false;
+  button.backgroundColor = colors.fitbodDarkGrey;
+  button.layer.cornerRadius = button.frame.height / 2;
+  button.showsTouchWhenHighlighted = true;
+  return button;
+}
+
+function makeTopToolbarView() {
   const barHeight = 88;
   const toolbar = new UIView({ x: 0, y: 0, width: w, height: barHeight });
   toolbar.backgroundColor = colors.fitbodMedGrey;
-  const label = new UILabel();
-  label.text = title;
-  label.sizeToFit();
-  label.textColor = {
-    ...colors.white,
-    alpha: 0.8,
-  };
-  const labelH = label.frame.height;
-  label.translatesAutoresizingMaskIntoConstraints = false;
-  toolbar.addSubview(label);
-  label.centerYAnchor.constraintEqualToAnchor(toolbar.centerYAnchor, labelH / 2).isActive = true;
-  label.centerXAnchor.constraintEqualToAnchor(toolbar.centerXAnchor, 0).isActive = true;
   return toolbar;
 }
 
@@ -314,8 +319,14 @@ function makeInnerAppControllers(nav) {
     new UIImage('user_unselected'),
     new UIImage('user'),
   );
-  const partyToolbar = makeTopToolbarView('Your Party');
+  const partyToolbar = makeTopToolbarView();
+  const partyTitle = makeTopToolbarTitle('🖋 YOUR PARTY');
+  const partyTitleH = partyTitle.frame.height;
+  partyToolbar.addSubview(partyTitle);
+  partyTitle.centerYAnchor.constraintEqualToAnchor(partyToolbar.centerYAnchor, partyTitleH / 2).isActive = true;
+  partyTitle.centerXAnchor.constraintEqualToAnchor(partyToolbar.centerXAnchor, 0).isActive = true;
   partyVC.view.addSubview(partyToolbar);
+
 
   const wagonVC = new UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
@@ -324,7 +335,12 @@ function makeInnerAppControllers(nav) {
     new UIImage('truck_unselected'),
     new UIImage('truck'),
   );
-  const wagonToolbar = makeTopToolbarView('Your Wagon');
+  const wagonToolbar = makeTopToolbarView();
+  const wagonTitle = makeTopToolbarTitle('🖋 YOUR WAGON');
+  const wagonTitleH = wagonTitle.frame.height;
+  wagonToolbar.addSubview(wagonTitle);
+  wagonTitle.centerYAnchor.constraintEqualToAnchor(wagonToolbar.centerYAnchor, wagonTitleH / 2).isActive = true;
+  wagonTitle.centerXAnchor.constraintEqualToAnchor(wagonToolbar.centerXAnchor, 0).isActive = true;
   wagonVC.view.addSubview(wagonToolbar);
 
   nav.setViewControllers([tabVC], true);
