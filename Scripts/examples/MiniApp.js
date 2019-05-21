@@ -81,7 +81,7 @@ const quizResponses = [
 const responseSelections = [0, 0, 0];
 
 const titleFont = new UIFont('Lato-Bold', 22);
-const contentFont = new UIFont('Lato-Bold', 16);
+const contentFont = new UIFont('Lato-Bold', 17);
 const buttonFont = new UIFont('Lato-Bold', 17);
 
 const pStyle = new NSMutableParagraphStyle();
@@ -207,12 +207,6 @@ function makePageControl(scroll, numSlides) {
     ...colors.fitbodPink,
     alpha: 0.5,
   };
-
-  pageControl.addTarget(() => {
-    const i = pageControl.currentPage;
-    const offsetX = w * i;
-    scroll.setContentOffset({ x: offsetX, y: 0 }, true);
-  }, UIControlEvents.valueChanged);
 
   return pageControl;
 }
@@ -357,7 +351,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 }
 
 function startQuiz(nav) {
-  const numQuestions = 2;
+  const numQuestions = 3;
   let quizStep = 0;
 
   const vc = new UIViewController();
@@ -372,12 +366,18 @@ function startQuiz(nav) {
   const barView = makeStatusBarView();
   clippingView.addSubview(barView);
 
-  const scrollView = makeScrollView(vc, 3);
-  makeQuizSlides(scrollView, 3, quizTitles, quizResponses, quizImages);
+  const scrollView = makeScrollView(vc, numQuestions);
+  makeQuizSlides(scrollView, numQuestions, quizTitles, quizResponses, quizImages);
 
-  const pageControl = makePageControl(scrollView, 3);
-  scrollView.delegate = makeScrollDelegate(pageControl);
-  vc.view.addSubview(pageControl);
+  const pageControl = makePageControl(scrollView, numQuestions);
+  pageControl.addTarget(() => {
+    const i = pageControl.currentPage;
+    const offsetX = w * i;
+    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
+    if (i !== quizStep) {
+      quizStep = i;
+    }
+  }, UIControlEvents.valueChanged);
 
   const progressView = makeProgressView();
   clippingView.addSubview(progressView);
@@ -385,19 +385,64 @@ function startQuiz(nav) {
   const nextButton = makeAppButton('NEXT');
   nextButton.addTarget(() => {
     quizStep += 1;
-    if (quizStep === numQuestions) {
-      console.log('done');
+    if (quizStep <= numQuestions - 1) {
+      const newContentOffset = w * quizStep;
+      scrollView.setContentOffset({ x: newContentOffset, y: 0 }, true);
+      progressView.setProgress((quizStep + 1) / 3, true);
     } else {
-      console.log('page to next');
+      quizStep = numQuestions - 1;
+    }
+    if (quizStep >= numQuestions - 1) {
+      nextButton.setTitleForState('DONE', UIControlState.normal);
+    } else {
+      nextButton.setTitleForState('NEXT', UIControlState.normal);
     }
   }, UIControlEvents.touchUpInside);
 
+  const del = new UIScrollViewDelegate();
+
+  del.didScroll = (sv) => {
+    const { x } = sv.contentOffset;
+    const page = Math.round(x / w);
+    if (page !== pageControl.currentPage) {
+      pageControl.currentPage = page;
+    }
+    if (page !== quizStep) {
+      quizStep = page;
+      progressView.setProgress((quizStep + 1) / 3, true);
+    }
+    if (page >= numQuestions - 1) {
+      nextButton.setTitleForState('DONE', UIControlState.normal);
+    } else {
+      nextButton.setTitleForState('NEXT', UIControlState.normal);
+    }
+  };
+
+  del.didEndDecelerating = (sv) => {
+    const { x, y } = sv.contentOffset;
+    if (y < 0 || y > 0) {
+      sv.setContentOffset({ x, y: 0 }, false);
+    }
+    const page = Math.round(x / w);
+    if (page !== quizStep) {
+      quizStep = page;
+      progressView.setProgress((quizStep + 1) / 3, true);
+    }
+    if (page >= numQuestions - 1) {
+      nextButton.setTitleForState('DONE', UIControlState.normal);
+    } else {
+      nextButton.setTitleForState('NEXT', UIControlState.normal);
+    }
+  };
+
+  scrollView.delegate = del;
+  vc.view.addSubview(pageControl);
   vc.view.addSubview(nextButton);
 
   nav.pushViewController(vc);
 
   setTimeout(() => {
-    progressView.setProgress(0.2, true);
+    progressView.setProgress(1/3, true);
   }, 500);
 }
 
@@ -421,6 +466,11 @@ async function make(nav, demoVC) {
 
   const pageControl = makePageControl(scrollView, 4);
   scrollView.delegate = makeScrollDelegate(pageControl);
+  pageControl.addTarget(() => {
+    const i = pageControl.currentPage;
+    const offsetX = w * i;
+    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
+  }, UIControlEvents.valueChanged);
   demoVC.view.addSubview(pageControl);
 
   const startButton = makeAppButton('GET STARTED');
