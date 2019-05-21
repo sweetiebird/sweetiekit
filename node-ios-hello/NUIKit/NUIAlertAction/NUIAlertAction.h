@@ -26,7 +26,6 @@ public:
   virtual ~NUIAlertAction();
 
   static NAN_METHOD(New);
-  sweetiekit::JSFunction _handler;
 };
 
 

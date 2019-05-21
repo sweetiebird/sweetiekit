@@ -50,20 +50,22 @@ NAN_METHOD(NUIAlertAction::New) {
     } else {
       Nan::ThrowError("invalid argument");
     }
-    action->_handler.Reset(Local<Function>::Cast(info[1]));
     @autoreleasepool {
       NSString *title = [NSString stringWithUTF8String:str.c_str()];
-      action->SetNSObject([UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull act) {
+      UIAlertAction* ui = action->SetNSObject([UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull act) {
         Nan::HandleScope scope;
         Local<Value> actionObj = sweetiekit::GetWrapperFor(act, NUIAlertAction::type);
-        action->_handler("NUITableViewManager::New", actionObj);
+        JS_GET_FUNCTION(fn, @"sweetiekit_UIAlertAction_callback");
+        fn("NUITableViewManager::New", actionObj);
       }]);
+      JS_ATTACH_FUNCTION(ui, info[1], @"sweetiekit_UIAlertAction_callback");
     }
   }
   action->Wrap(obj);
 
   JS_SET_RETURN(obj);
 }
+  
 
 NUIAlertAction::NUIAlertAction () {}
 NUIAlertAction::~NUIAlertAction () {}

@@ -112,7 +112,7 @@ NAN_METHOD(NNSObject::Destroy) {
   //NNSObject *ns = ObjectWrap::Unwrap<NNSObject>(info.This());
 }
 
-void NNSObject::SetNSObject(NSObject* obj) {
+NSObject* NNSObject::SetNSObject(NSObject* obj) {
   _NSObject = obj;
   /*
   auto wrapper = objc_getAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"]);
@@ -124,6 +124,7 @@ void NNSObject::SetNSObject(NSObject* obj) {
     objc_setAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"], w, objc_AssociationPolicy::OBJC_ASSOCIATION_RETAIN);
     //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
   }*/
+  return _NSObject;
 }
 
 NAN_GETTER(NNSObject::classGetter) {
