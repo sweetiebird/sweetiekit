@@ -132,6 +132,16 @@ public: \
 #define JS_WRAP_CLASS_END(name) \
 };
 
+#define JS_ATTACH_FUNCTION(objc, jsValue, keyName) \
+  { \
+    SweetJSFunction* func = [[SweetJSFunction alloc] init]; \
+    [func jsFunction]->Reset(jsValue); \
+    [objc associateValue:func withKey:keyName]; \
+  }
+  
+#define JS_GET_FUNCTION(varName, keyName) \
+  auto& varName = *[(SweetJSFunction*)[act associatedValueForKey:keyName] jsFunction];
+
 #include <array>
 #include <deque>
 #include <mutex>
