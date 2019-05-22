@@ -16,16 +16,18 @@
 using namespace v8;
 
 #define JS_STR(...) Nan::New<v8::String>(__VA_ARGS__).ToLocalChecked()
-#define JS_INT(val) Nan::New<v8::Integer>(val)
+#define JS_INT(val) Nan::New<v8::Integer>(static_cast<int32_t>(val))
 #define JS_NUM(val) Nan::New<v8::Number>(val)
 #define JS_FLOAT(val) Nan::New<v8::Number>(val)
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
+#define JS_WRAPPER(el, ElType) sweetiekit::GetWrapperFor(el, N##ElType::type)
 
 #define JS_ISOLATE() (Isolate::GetCurrent())
 #define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
+#define JS_GLOBAL() (JS_CONTEXT()->Global())
 #define JS_HAS(obj, name) (obj)->Has(JS_CONTEXT(), name).FromJust()
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
@@ -79,6 +81,9 @@ using namespace node;
   static NAN_GETTER(name##Getter); \
   static NAN_SETTER(name##Setter)
 
+#define JS_METHOD(name) \
+  static NAN_METHOD(name)
+
 #define JS_UNWRAP(type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type* name = n##name->As<type>(); name = name;
@@ -86,16 +91,6 @@ using namespace node;
 #define JS_UNWRAPPED(info, type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
   __block type* name = n##name->As<type>(); name = name;
-
-/*
-#define JS_GETTER(type, name) \
-NAN_GETTER(N##type::name##Getter) { \
-  Nan::HandleScope scope; \
-  N##type* nui = ObjectWrap::Unwrap<N##type>(info.This()); nui = nui; \
-  type* ui = nui->As<type>(); ui = ui;
-
-#define JS_GETTER_END(type, name) \
-}*/
 
 #define JS_SET_PROP(proto, jsName, cppName) \
   Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter, cppName##Setter);
@@ -107,14 +102,25 @@ NAN_GETTER(N##type::name##Getter) { \
   Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter, jsName##Setter);
   
 #define JS_ASSIGN_PROP_READONLY(proto, jsName) \
-  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter);
-  
-#define JS_SETTER(name) \
-  NAN_SETTER(name##Setter)
-  
-#define JS_GETTER(name) \
-  NAN_GETTER(name##Getter)
+  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter)
 
+#define JS_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
+#define JS_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
+#define JS_PROTO_METHOD(jsName)         Nan::SetMethod(proto, #jsName, jsName)
+
+#define JS_GETTER(ElType, el, jsName, ...) \
+NAN_GETTER(N##ElType::jsName##Getter) { \
+  Nan::HandleScope scope; \
+  JS_UNWRAP(ElType, el); \
+  __VA_ARGS__; \
+}
+
+#define JS_SETTER(ElType, el, jsName, ...) \
+NAN_SETTER(N##ElType::jsName##Setter) { \
+  Nan::HandleScope scope; \
+  JS_UNWRAP(ElType, el); \
+  __VA_ARGS__; \
+}
 
 #define JS_WRAP_CLASS(name, base) \
 \
