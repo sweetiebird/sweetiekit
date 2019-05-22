@@ -36,11 +36,11 @@ const SKSceneScaleMode = {
 };
 
 const NSTextAlignment = {
-  left: 'left',
-  right: 'right',
-  center: 'center',
-  justified: 'justified',
-  natural: 'natural',
+  left: 0,
+  right: 2,
+  center: 1,
+  justified: 3,
+  natural: 4,
 };
 
 const UIControlState = {

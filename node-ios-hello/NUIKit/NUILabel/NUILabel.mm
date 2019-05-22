@@ -302,60 +302,18 @@ NAN_GETTER(NUILabel::textAlignmentGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(UILabel, ui);
-  
-  __block NSString *align = nullptr;
-  
-  @autoreleasepool {
-    NSTextAlignment a = [ui textAlignment];
-    if (a == NSTextAlignmentCenter) {
-      align = @"center";
-    } else if (a == NSTextAlignmentLeft) {
-      align = @"left";
-    } else if (a == NSTextAlignmentRight) {
-      align = @"right";
-    } else if (a == NSTextAlignmentJustified) {
-      align = @"justified";
-    } else if (a == NSTextAlignmentNatural) {
-      align = @"natural";
-    }
-  }
 
-  JS_SET_RETURN(JS_STR([align UTF8String]));
+  JS_SET_RETURN(JS_NUM([ui textAlignment]));
 }
 
 NAN_SETTER(NUILabel::textAlignmentSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(UILabel, ui);
-
-  std::string str;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    str = *utf8Value;
-  } else {
-    Nan::ThrowError("SCNLight:setType: invaid argument");
-    return;
-  }
   
-@autoreleasepool {
-    NSString *align = [NSString stringWithUTF8String:str.c_str()];
-    NSTextAlignment type = NSTextAlignmentLeft;
+  NSTextAlignment type = NSTextAlignment(TO_DOUBLE(value));
 
-    if ([align isEqualToString:@"right"]) {
-      type = NSTextAlignmentRight;
-    } else if ([align isEqualToString:@"center"]) {
-      type = NSTextAlignmentCenter;
-    } else if ([align isEqualToString:@"justified"]) {
-      type = NSTextAlignmentJustified;
-    } else if ([align isEqualToString:@"natural"]) {
-      type = NSTextAlignmentNatural;
-    } else if ([align isEqualToString:@"left"]) {
-      type = NSTextAlignmentLeft;
-    } else {
-      Nan::ThrowError("No valid light type specified");
-      return;
-    }
-
+  @autoreleasepool {
     [ui setTextAlignment:type];
   }
 }

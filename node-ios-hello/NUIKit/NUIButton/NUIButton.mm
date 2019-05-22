@@ -235,7 +235,7 @@ NAN_METHOD(NUIButton::setTitleForState) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(UIButton, ui);
-  
+
   @autoreleasepool {
     NSString *title = NJSStringToNSString(info[0]);
     UIControlState state = UIControlState(TO_UINT32(info[1]));
