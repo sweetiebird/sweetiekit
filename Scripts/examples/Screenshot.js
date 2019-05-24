@@ -5,7 +5,7 @@ const { UIControlEvents } = require('./enums');
 const {
   UIView,
   UIButton,
-  CoreGraphicsGlobals,
+  CoreGraphics,
   UIImageView,
 } = SweetieKit;
 
@@ -13,16 +13,12 @@ let view;
 let view2;
 let ssView;
 
-const cg = new CoreGraphicsGlobals();
-
-console.log(cg);
-
 function takeSS() {
   const w = view.frame.width;
   const h = view.frame.height;
 
   try {
-    cg.uiGraphicsBeginImageContextWithOptions(
+    CoreGraphics.UIGraphicsBeginImageContextWithOptions(
       { width: w, height: h },
       true,
       0.0,
@@ -30,20 +26,18 @@ function takeSS() {
 
     view.layer.renderInContext('current');
 
-    const img = cg.uiGraphicsGetImageFromCurrentImageContext();
+    const img = CoreGraphics.UIGraphicsGetImageFromCurrentImageContext();
 
     if (img) {
-      console.log(img);
       const ssFrame = { x: 0, y: 0, width: w * 0.4, height: h * 0.4 };
       ssView = new UIImageView(img);
-      console.log(ssView);
       ssView.frame = ssFrame;
       ssView.layer.borderWidth = 1;
       ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
       view.addSubview(ssView);
     }
   } finally {
-    cg.uiGraphicsEndImageContext();
+    CoreGraphics.UIGraphicsEndImageContext();
   }
 }
 

@@ -26,9 +26,9 @@ public:
   virtual ~NCoreGraphicsGlobals();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(uiGraphicsBeginImageContextWithOptions);
-  static NAN_METHOD(uiGraphicsGetImageFromCurrentImageContext);
-  static NAN_METHOD(uiGraphicsEndImageContext);
+  static NAN_METHOD(UIGraphicsBeginImageContextWithOptions);
+  static NAN_METHOD(UIGraphicsGetImageFromCurrentImageContext);
+  static NAN_METHOD(UIGraphicsEndImageContext);
 };
 
 #endif /* NCoreGraphicsGlobals_h */

@@ -16,20 +16,20 @@ import CoreGraphics
     super.init()
   }
   
-  @objc func uiGraphicsGetCurrentContext() -> CGContext? {
+  @objc static func uiGraphicsGetCurrentContext() -> CGContext? {
     return UIGraphicsGetCurrentContext()
   }
   
-  @objc func uiGraphicsBeginImageContextWithOptions(size: CGSize, opaque: Bool, scale: CGFloat) {
+  @objc static func uiGraphicsBeginImageContextWithOptions(size: CGSize, opaque: Bool, scale: CGFloat) {
     UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
   }
   
-  @objc func uiGraphicsGetImageFromCurrentImageContext() -> UIImage? {
+  @objc static func uiGraphicsGetImageFromCurrentImageContext() -> UIImage? {
     let img = UIGraphicsGetImageFromCurrentImageContext()
     return img
   }
   
-  @objc func uiGraphicsEndImageContext() {
+  @objc static func uiGraphicsEndImageContext() {
     UIGraphicsEndImageContext()
   }
 }

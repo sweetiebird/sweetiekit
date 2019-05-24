@@ -646,7 +646,7 @@ void InitExports(Local<Object> exports) {
         // misc
   
         auto N_CoreGraphicsGlobals = NCoreGraphicsGlobals::Initialize(Isolate::GetCurrent());
-        exports->Set(Nan::New("CoreGraphicsGlobals").ToLocalChecked(), N_CoreGraphicsGlobals.first);
+        exports->Set(Nan::New("CoreGraphics").ToLocalChecked(), N_CoreGraphicsGlobals.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);
