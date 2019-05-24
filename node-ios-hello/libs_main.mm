@@ -110,6 +110,7 @@
 #include "NGif.h"
 #include "NGifView.h"
 #include "NGifManager.h"
+#include "NUIKitGlobals.h"
 #include "NCoreGraphicsGlobals.h"
 #include <unistd.h>
 
@@ -647,6 +648,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_CoreGraphicsGlobals = NCoreGraphicsGlobals::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CoreGraphics").ToLocalChecked(), N_CoreGraphicsGlobals.first);
+  
+        auto N_UIKitGlobals = NUIKitGlobals::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIKit").ToLocalChecked(), N_UIKitGlobals.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

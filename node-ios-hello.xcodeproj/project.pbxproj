@@ -105,6 +105,8 @@
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
 		A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */; };
 		A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */; };
+		A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */; };
+		A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20576229799BF006CA4C6 /* SUIKitGlobals.swift */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
 		A1B65486228CBA7200976024 /* SSKScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65485228CBA7200976024 /* SSKScene.swift */; };
@@ -387,6 +389,9 @@
 		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
 		A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreGraphicsGlobals.mm; sourceTree = "<group>"; };
 		A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCoreGraphicsGlobals.swift; sourceTree = "<group>"; };
+		A1B20573229799A9006CA4C6 /* NUIKitGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIKitGlobals.h; sourceTree = "<group>"; };
+		A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIKitGlobals.mm; sourceTree = "<group>"; };
+		A1B20576229799BF006CA4C6 /* SUIKitGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIKitGlobals.swift; sourceTree = "<group>"; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
 		A1B65482228CB87E00976024 /* NUITouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITouch.mm; sourceTree = "<group>"; };
@@ -1170,6 +1175,16 @@
 			path = NCoreGraphicsGlobals;
 			sourceTree = "<group>";
 		};
+		A1B20572229799A9006CA4C6 /* NUIKitGlobals */ = {
+			isa = PBXGroup;
+			children = (
+				A1B20573229799A9006CA4C6 /* NUIKitGlobals.h */,
+				A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */,
+				A1B20576229799BF006CA4C6 /* SUIKitGlobals.swift */,
+			);
+			path = NUIKitGlobals;
+			sourceTree = "<group>";
+		};
 		A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1693,6 +1708,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1B20572229799A9006CA4C6 /* NUIKitGlobals */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1939,11 +1955,9 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
-				A1CE2B86228F01D900D9B3B8 /* Fonts */,
-				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
-				A194894D228A8489007BF787 /* NMapKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
+				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
+				A1CE2B86228F01D900D9B3B8 /* Fonts */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
 				A1058B422268029E00CEAA5C /* libs_main.mm */,
@@ -1953,7 +1967,9 @@
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A174A1672282214B002A8216 /* NAVFoundation */,
 				216392A2226BD43600051DE0 /* NCoreAnimation */,
+				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
+				A194894D228A8489007BF787 /* NMapKit */,
 				A1E2D7A5226A500100FA1562 /* NObjC */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
@@ -2142,10 +2158,12 @@
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
+				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
+				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,
 				A10D697F2293B058008D0ABC /* NUITabBar.mm in Sources */,
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,

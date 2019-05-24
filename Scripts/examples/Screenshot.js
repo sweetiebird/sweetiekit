@@ -7,6 +7,7 @@ const {
   UIButton,
   CoreGraphics,
   UIImageView,
+  UIKit,
 } = SweetieKit;
 
 let view;
@@ -35,6 +36,14 @@ function takeSS() {
       ssView.layer.borderWidth = 1;
       ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
       view.addSubview(ssView);
+
+      // ==========
+      // recalls UIApplicationMain and crashes?
+      // ==========
+
+      // UIKit.UIImageWriteToSavedPhotosAlbum(img, () => {
+      //   console.log('written!');
+      // });
     }
   } finally {
     CoreGraphics.UIGraphicsEndImageContext();
