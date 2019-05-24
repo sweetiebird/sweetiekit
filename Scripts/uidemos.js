@@ -37,7 +37,7 @@ const makeTableView = require('./examples/UITableView');
 
 // misc demos
 const makeThreeObj = require('./examples/ThreeOBJ');
-const makeAppOnboarding = require('./examples/AppOnboarding');
+const makeScreenshotDemo = require('./examples/Screenshot');
 
 const {
   UIApplication,
@@ -54,6 +54,7 @@ const demoTypes = {
   GifView: makeGifView,
   MKMapView: makeMapView,
   RemoteGifView: makeRemoteGifView,
+  Screenshot: makeScreenshotDemo,
   SKScene: makeSKScene,
   // SKSceneSockets: makeSKSceneSockets,
   ThreeOBJ: makeThreeObj,

@@ -103,6 +103,8 @@
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
 		A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEE222885C76003C1DC4 /* NUIAlertController.mm */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
+		A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */; };
+		A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
 		A1B65486228CBA7200976024 /* SSKScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65485228CBA7200976024 /* SSKScene.swift */; };
@@ -382,6 +384,9 @@
 		A199AEE122885C6F003C1DC4 /* NUIAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertController.h; sourceTree = "<group>"; };
 		A199AEE222885C76003C1DC4 /* NUIAlertController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertController.mm; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
+		A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreGraphicsGlobals.mm; sourceTree = "<group>"; };
+		A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCoreGraphicsGlobals.swift; sourceTree = "<group>"; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
 		A1B65482228CB87E00976024 /* NUITouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITouch.mm; sourceTree = "<group>"; };
@@ -1145,6 +1150,24 @@
 				A12655E922719CE300D3DF47 /* tslint.json */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		A1B2056B229788FC006CA4C6 /* NCoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2056C229788FC006CA4C6 /* NCoreGraphicsGlobals */,
+			);
+			path = NCoreGraphics;
+			sourceTree = "<group>";
+		};
+		A1B2056C229788FC006CA4C6 /* NCoreGraphicsGlobals */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */,
+				A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */,
+				A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */,
+			);
+			path = NCoreGraphicsGlobals;
 			sourceTree = "<group>";
 		};
 		A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */ = {
@@ -1916,6 +1939,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A194894D228A8489007BF787 /* NMapKit */,
@@ -2163,6 +2187,7 @@
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
+				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
@@ -2237,6 +2262,7 @@
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
+				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 #include "NCALayer.h"
 #include "ColorHelper.h"
 #include "NCABasicAnimation.h"
@@ -39,6 +40,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "position", Position)
   Nan::SetMethod(proto, "addAnimation", AddAnimation);
   Nan::SetMethod(proto, "addSublayer", addSublayer);
+  Nan::SetMethod(proto, "renderInContext", renderInContext);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
   JS_ASSIGN_PROP(proto, shadowOpacity);
 
@@ -394,6 +396,20 @@ NAN_METHOD(NCALayer::addSublayer) {
   
     @autoreleasepool {
       [layer addSublayer:sublayer->As<CALayer>()];
+    }
+  }
+}
+
+NAN_METHOD(NCALayer::renderInContext) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, layer)
+
+  NSString *ctxType = NJSStringToNSString(info[0]);
+
+  if ([ctxType  isEqual: @"current"]) {
+    @autoreleasepool {
+      [layer renderInContext:UIGraphicsGetCurrentContext()];
     }
   }
 }

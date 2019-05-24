@@ -110,6 +110,7 @@
 #include "NGif.h"
 #include "NGifView.h"
 #include "NGifManager.h"
+#include "NCoreGraphicsGlobals.h"
 #include <unistd.h>
 
 #include <string>
@@ -641,6 +642,11 @@ void InitExports(Local<Object> exports) {
 
         auto N_MKMapViewDelegate = NMKMapViewDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("MKMapViewDelegate").ToLocalChecked(), N_MKMapViewDelegate.first);
+  
+        // misc
+  
+        auto N_CoreGraphicsGlobals = NCoreGraphicsGlobals::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CoreGraphicsGlobals").ToLocalChecked(), N_CoreGraphicsGlobals.first);
 
         uintptr_t initFunctionAddress = (uintptr_t)InitExports;
         Local<Array> initFunctionAddressArray = Nan::New<Array>(2);

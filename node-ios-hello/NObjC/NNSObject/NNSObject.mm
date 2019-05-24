@@ -461,6 +461,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NGif.h"
 #include "NGifView.h"
 #include "NGifManager.h"
+#include "NCoreGraphicsGlobals.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -765,6 +766,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= objects
+      if ([obj isKindOfClass:[SCoreGraphicsGlobals class]]) {
+        return NCoreGraphicsGlobals::type;
+      }
       if ([obj isKindOfClass:[NSMutableAttributedString class]]) {
         return NNSMutableAttributedString::type;
       }

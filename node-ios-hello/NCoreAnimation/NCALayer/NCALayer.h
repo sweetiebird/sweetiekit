@@ -28,6 +28,7 @@ public:
   static NAN_METHOD(Destroy);
   static NAN_METHOD(AddAnimation);
   static NAN_METHOD(addSublayer);
+  static NAN_METHOD(renderInContext);
   JS_PROP(CornerRadius);
   JS_PROP(BorderWidth);
   JS_PROP(BorderColor);
