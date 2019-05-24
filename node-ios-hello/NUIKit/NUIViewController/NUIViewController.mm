@@ -16,6 +16,7 @@
 #include "NUIBarButtonItem.h"
 #include "NUITabBarItem.h"
 #include "NUINavigationItem.h"
+#include "NUIPopoverPresentationController.h"
 
 Nan::Persistent<FunctionTemplate> NUIViewController::type;
 
@@ -42,12 +43,15 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
   JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
   JS_SET_PROP(proto, "tabBarItem", TabBarItem);
+  JS_ASSIGN_PROP(proto, modalPresentationStyle);
   JS_ASSIGN_PROP(proto, viewDidAppear);
   JS_ASSIGN_PROP(proto, viewWillAppear);
   JS_ASSIGN_PROP(proto, viewDidDisappear);
   JS_ASSIGN_PROP(proto, viewWillDisappear);
+  JS_ASSIGN_PROP(proto, preferredContentSize);
   JS_ASSIGN_PROP_READONLY(proto, navigationController);
   JS_ASSIGN_PROP_READONLY(proto, navigationItem);
+  JS_ASSIGN_PROP_READONLY(proto, popoverPresentationController);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -378,4 +382,55 @@ NAN_GETTER(NUIViewController::navigationItemGetter) {
   JS_UNWRAP(UIViewController, ui);
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui navigationItem], NUINavigationItem::type)));
+}
+
+NAN_GETTER(NUIViewController::modalPresentationStyleGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+  
+  Nan::ThrowError("NUIViewController::modalPresentationStyleGetter not implemented");
+}
+
+NAN_SETTER(NUIViewController::modalPresentationStyleSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    double styleVal = TO_DOUBLE(value);
+    [ui setModalPresentationStyle:UIModalPresentationPopover];
+  }
+}
+
+NAN_GETTER(NUIViewController::popoverPresentationControllerGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui popoverPresentationController], NUIPopoverPresentationController::type));
+}
+
+NAN_SETTER(NUIViewController::preferredContentSizeSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+  
+  @autoreleasepool {
+    double w = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+    double h = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+    [ui setPreferredContentSize:CGSizeMake(w, h)];
+  }
+}
+
+NAN_GETTER(NUIViewController::preferredContentSizeGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIViewController, ui);
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("width"), JS_FLOAT([ui preferredContentSize].width));
+  result->Set(JS_STR("height"), JS_FLOAT([ui preferredContentSize].height));
+  
+  JS_SET_RETURN(result);
 }

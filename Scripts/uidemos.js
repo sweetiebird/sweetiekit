@@ -34,6 +34,7 @@ const makeImagePickerCtrl = require('./examples/UIImagePickerController');
 const makeNavigationCtrl = require('./examples/UINavigationController');
 const makeTabBarCtrl = require('./examples/UITabBarController');
 const makeTableView = require('./examples/UITableView');
+const makePopover = require('./examples/Popover');
 
 // misc demos
 const makeThreeObj = require('./examples/ThreeOBJ');
@@ -71,6 +72,7 @@ const demoTypes = {
 };
 
 const demoCtrls = {
+  Popover: makePopover,
   UIAlertController: makeAlertCtrl,
   UIBarButtonItem: makeBarButtonItem,
   UICollectionView: makeCollectionView,

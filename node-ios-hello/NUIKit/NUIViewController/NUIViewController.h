@@ -36,6 +36,9 @@ public:
   JS_PROP(viewWillDisappear);
   JS_PROP(navigationController);
   JS_PROP(navigationItem);
+  JS_PROP(modalPresentationStyle);
+  JS_PROP(popoverPresentationController);
+  JS_PROP(preferredContentSize);
 };
 
 #endif /* NUIViewController_h */

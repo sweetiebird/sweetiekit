@@ -41,6 +41,8 @@
 #include "NUIViewControllerTransitioningDelegate.h"
 #include "NUITableViewController.h"
 #include "NUIPresentationController.h"
+#include "NUIPopoverPresentationControllerDelegate.h"
+#include "NUIPopoverPresentationController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
 #include "NUITableViewDataSource.h"
@@ -410,6 +412,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIPresentationController = NUIPresentationController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPresentationController").ToLocalChecked(), N_UIPresentationController.first);
 
+        auto N_UIPopoverPresentationController = NUIPopoverPresentationController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPopoverPresentationController").ToLocalChecked(), N_UIPopoverPresentationController.first);
+
         auto N_UIAlertController = NUIAlertController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIAlertController").ToLocalChecked(), N_UIAlertController.first);
 
@@ -496,6 +501,9 @@ void InitExports(Local<Object> exports) {
 
         // UIKit delegates ========
   
+        auto N_UIPopoverPresentationControllerDelegate = NUIPopoverPresentationControllerDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("UIPopoverPresentationControllerDelegate").ToLocalChecked(), N_UIPopoverPresentationControllerDelegate.first);
+
         auto N_UIPickerViewManager = NUIPickerViewManager::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPickerViewManager").ToLocalChecked(), N_UIPickerViewManager.first);
 

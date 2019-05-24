@@ -11,6 +11,7 @@
 #include "ColorHelper.h"
 #include "NUIView.h"
 #import "node_ios_hello-Swift.h"
+#include "NNSObject.h"
 
 Nan::Persistent<FunctionTemplate> NUIPresentationController::type;
 
@@ -52,14 +53,12 @@ NAN_METHOD(NUIPresentationController::New) {
   NUIPresentationController *view = new NUIPresentationController();
   
   if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge UIPresentationController *)(info[0].As<External>()->Value()));
+    view->SetNSObject((__bridge SUIPresentationController *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
       NUIViewController *presented = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
       NUIViewController *presenting = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[1]));
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[UIPresentationController alloc] initWithPresentedViewController:presented->As<UIViewController>() presentingViewController:presenting->As<UIViewController>()]);
-      });
+      view->SetNSObject([[SUIPresentationController alloc] initWithPresentedViewController:presented->As<UIViewController>() presentingViewController:presenting->As<UIViewController>()]);
     }
   }
   view->Wrap(obj);
@@ -116,13 +115,13 @@ NAN_GETTER(NUIPresentationController::PresentationTransitionWillBeginGetter) {
   Nan::HandleScope scope;
   
   NUIPresentationController *pres = ObjectWrap::Unwrap<NUIPresentationController>(info.This());
-  
+
   info.GetReturnValue().Set(pres->_presentationTransitionWillBegin.GetValue());
 }
 
 NAN_SETTER(NUIPresentationController::DismissalTransitionWillBeginSetter) {
   Nan::HandleScope scope;
-  
+
   NUIPresentationController *pres = ObjectWrap::Unwrap<NUIPresentationController>(info.This());
   pres->_dismissalTransitionWillBegin.Reset(Local<Function>::Cast(value));
 

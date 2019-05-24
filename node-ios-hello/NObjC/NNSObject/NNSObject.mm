@@ -389,6 +389,8 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NUIImagePickerController.h"
 #include "NUIImagePickerControllerDelegate.h"
 #include "NUIViewControllerTransitioningDelegate.h"
+#include "NUIPopoverPresentationControllerDelegate.h"
+#include "NUIPopoverPresentationController.h"
 #include "NUITableViewController.h"
 #include "NUITableView.h"
 #include "NUITableViewCell.h"
@@ -720,10 +722,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIViewController class]]) {
         return NUIViewController::type;
       }
-      if ([obj isKindOfClass:[UIPresentationController class]]) {
+      if ([obj isKindOfClass:[UIPopoverPresentationController class]]) {
+        return NUIPopoverPresentationController::type;
+      }
+      if ([obj isKindOfClass:[SUIPresentationController class]]) {
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SUIPopoverPresentationControllerDelegate class]]) {
+        return NUIPopoverPresentationControllerDelegate::type;
+      }
       if ([obj isKindOfClass:[SUIPickerViewManager class]]) {
         return NUIPickerViewManager::type;
       }
