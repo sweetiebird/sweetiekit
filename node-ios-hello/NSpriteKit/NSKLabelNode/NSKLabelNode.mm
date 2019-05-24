@@ -31,6 +31,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKLabelNode::Initialize(Isola
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "text", Text);
+  JS_ASSIGN_PROP(proto, preferredMaxLayoutWidth);
+  JS_ASSIGN_PROP(proto, numberOfLines);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -55,6 +57,7 @@ NAN_METHOD(NSKLabelNode::New) {
         [n setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [n setFontSize:50];
         [n setFontName:@"Arial-BoldMT"];
+        [n setLineBreakMode:NSLineBreakByWordWrapping];
         node->SetNSObject([[SKLabelNode alloc] init]);
       });
     }
@@ -103,4 +106,36 @@ NAN_SETTER(NSKLabelNode::TextSetter) {
       [node setText:[NSString stringWithUTF8String:text.c_str()]];
     });
   }
+}
+
+NAN_GETTER(NSKLabelNode::preferredMaxLayoutWidthGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+  JS_SET_RETURN(JS_NUM([node preferredMaxLayoutWidth]));
+}
+
+NAN_SETTER(NSKLabelNode::preferredMaxLayoutWidthSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+  
+  CGFloat fValue = TO_FLOAT(value);
+  [node setPreferredMaxLayoutWidth:fValue];
+}
+
+NAN_GETTER(NSKLabelNode::numberOfLinesGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+  JS_SET_RETURN(JS_INT((int)[node numberOfLines]));
+}
+
+NAN_SETTER(NSKLabelNode::numberOfLinesSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+  
+  int iValue = TO_INT32(value);
+  [node setNumberOfLines:iValue];
 }

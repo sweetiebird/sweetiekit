@@ -30,6 +30,7 @@ public:
   static NAN_METHOD(PresentScene);
   JS_PROP(Session);
   JS_PROP(Delegate);
+  static NAN_METHOD(hitTest);
   
   Nan::Persistent<Value> _delegate;
 };

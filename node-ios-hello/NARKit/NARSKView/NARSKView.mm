@@ -15,6 +15,7 @@
 #include "NARSession.h"
 #include "NARSKViewDelegate.h"
 #include "NSKScene.h"
+#include "NARAnchor.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NARSKView::type;
@@ -35,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSKView::Initialize(Isolate 
   JS_SET_PROP_READONLY(proto, "session", Session);
   JS_SET_PROP(proto, "delegate", Delegate);
   Nan::SetMethod(proto, "presentScene", PresentScene);
+  Nan::SetMethod(proto, "hitTest", hitTest);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -116,6 +118,82 @@ NAN_METHOD(NARSKView::PresentScene) {
   NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(Local<Object>::Cast(info[0]));
   
   [ui presentScene:scene->As<SKScene>()];
+}
+
+NAN_METHOD(NARSKView::hitTest) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(ARSKView, ui);
+  
+  if (!info[0]->IsObject() 
+        || !JS_OBJ(info[0])->Get(JS_STR("x"))->IsNumber()
+        || !JS_OBJ(info[0])->Get(JS_STR("y"))->IsNumber())
+  {
+    Nan::ThrowError("NARSKView::hitTest: expected 1st arg to be a CGPoint");
+    return;
+  }
+  
+  CGPoint point;
+  point.x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
+  point.y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
+  
+  ARHitTestResultType types = info[1]->IsInt32() ? TO_UINT32(info[1]) : ARHitTestResultTypeFeaturePoint;
+  
+  @autoreleasepool {
+    NSArray<ARHitTestResult *> *result = [ui hitTest:point types:types];
+    if (result != nullptr) {
+      Local<Array> resultObj(Nan::New<Array>());
+      
+      uint32_t i = 0;
+      for (ARHitTestResult* hit : result) {
+        Local<Object> value(Nan::New<Object>());
+                
+        /**
+         The type of the hit-test result.
+         */
+        //@property (nonatomic, readonly) ARHitTestResultType type;
+        value->Set(JS_STR("type"), JS_INT((int)[hit type]));
+
+        /**
+         The distance from the camera to the intersection in meters.
+         */
+        //@property (nonatomic, readonly) CGFloat distance;
+        value->Set(JS_STR("distance"), JS_NUM([hit distance]));
+
+        /**
+         The transformation matrix that defines the intersection’s rotation, translation and scale
+         relative to the anchor or nearest feature point.
+         */
+        //@property (nonatomic, readonly) simd_float4x4 localTransform;
+        auto localTransform([hit localTransform]);
+        value->Set(JS_STR("localTransform"), createTypedArray<Float32Array>(16, (const float*)&localTransform));
+        
+
+        /**
+         The transformation matrix that defines the intersection’s rotation, translation and scale
+         relative to the world.
+         */
+        //@property (nonatomic, readonly) simd_float4x4 worldTransform;
+        auto worldTransform([hit worldTransform]);
+        value->Set(JS_STR("worldTransform"), createTypedArray<Float32Array>(16, (const float*)&worldTransform));
+
+        /**
+         The anchor that the hit-test intersected.
+         
+         @discussion An anchor will only be provided for existing plane result types.
+         */
+        //@property (nonatomic, strong, nullable, readonly) ARAnchor *anchor;
+        ARAnchor* anchor = [hit anchor];
+        if (anchor != nullptr) {
+          value->Set(JS_STR("anchor"), sweetiekit::GetWrapperFor([hit anchor], NARAnchor::type));
+        }
+                
+        resultObj->Set(i++, value);
+      }
+      
+      JS_SET_RETURN(scope.Escape(resultObj));
+    }
+  }
 }
 
 NARSKView::NARSKView () {}

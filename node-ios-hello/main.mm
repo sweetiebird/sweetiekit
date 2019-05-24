@@ -11,6 +11,7 @@
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 #import <objc/runtime.h>
+#include "defines.h"
 
 void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
 {
@@ -184,7 +185,6 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
 
 @end
 
-
 @implementation JSApplication
 
 - (instancetype)init
@@ -202,6 +202,29 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
      self.frame = frame;
    }
    return self;
+}
+
+- (void) sendEvent:(UIEvent *)event
+{
+    if( event && (event.subtype==UIEventSubtypeMotionShake))
+    {
+        /*AppDelegate *objAppDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+        [objAppDelegate doWhatEver];*/
+        dispatch_ui_sync(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+          if (JS_HAS(JS_GLOBAL(), JS_STR("OnShake")) && JS_GLOBAL()->Get(JS_STR("OnShake"))->IsFunction()) {
+            sweetiekit::JSFunction fn(JS_GLOBAL()->Get(JS_STR("OnShake")));
+            fn.Call("JSApplication:sendEvent OnShake");
+          }
+        });
+        
+        [super sendEvent:event];
+    }
+    else
+    {
+        [super sendEvent:event];
+    }
 }
 
 @end

@@ -174,6 +174,36 @@ const UIPopoverArrowDirection = {
   unknown: -1,
 };
 
+module.exports.ARHitTestResultType = {
+  /** Result type from intersecting the nearest feature point. */
+  featurePoint                                        : (1 << 0),
+
+  /** Result type from intersecting a horizontal plane estimate, determined for the current frame. */
+  estimatedHorizontalPlane                            : (1 << 1),
+
+  /** Result type from intersecting a vertical plane estimate, determined for the current frame. */
+  estimatedVerticalPlane                              : (1 << 2),
+
+  /** Result type from intersecting with an existing plane anchor. */
+  existingPlane                                       : (1 << 3),
+
+  /** Result type from intersecting with an existing plane anchor, taking into account the plane’s extent. */
+  existingPlaneUsingExtent                            : (1 << 4),
+
+  /** Result type from intersecting with an existing plane anchor, taking into account the plane’s geometry. */
+  existingPlaneUsingGeometry                          : (1 << 5),
+};
+
+
+//typedef NS_ENUM(NSInteger, UITouchPhase)
+module.exports.UITouchPhase = {
+  began:0,             // whenever a finger touches the surface.
+  moved:1,             // whenever a finger moves on the surface.
+  stationary:2,        // whenever a finger is touching the surface but hasn't moved since the previous event.
+  ended:3,             // whenever a finger leaves the surface.
+  cancelled:4,         // whenever a touch doesn't end but we need to stop tracking (e.g. putting device to face)
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;

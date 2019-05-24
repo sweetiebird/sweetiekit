@@ -14,6 +14,7 @@
 #include "NARSession.h"
 #include "NSKPhysicsWorld.h"
 #include "NSKCameraNode.h"
+#include "NUITouch.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKScene::type;
@@ -186,17 +187,12 @@ NAN_SETTER(NSKScene::touchesBeganSetter) {
   [scene setTouchesBegan: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
     Nan::HandleScope scope;
 
-    __block NSInteger count = 0;
-    auto arr = Nan::New<Array>();
-    
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
-      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(arr, static_cast<uint32_t>(count), value);
-      count++;
+    __block uint32_t count = 0;
+    auto value = Nan::New<Array>();
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
     }];
-
-    wrap->_touchesBegan("NSKScene::touchesBeganSetter", arr, Nan::Null());
+    wrap->_touchesBegan("NSKScene::touchesBeganSetter", value, sweetiekit::GetWrapperFor(evt));
   }];
 }
 
@@ -217,17 +213,12 @@ NAN_SETTER(NSKScene::touchesMovedSetter) {
   [scene setTouchesMoved: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
     Nan::HandleScope scope;
 
-    __block NSInteger count = 0;
-    auto arr = Nan::New<Array>();
-    
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
-      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(arr, static_cast<uint32_t>(count), value);
-      count++;
+    __block uint32_t count = 0;
+    auto value = Nan::New<Array>();
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
     }];
-
-    wrap->_touchesMoved("NSKScene::touchesMovedSetter", arr, Nan::Null());
+    wrap->_touchesMoved("NSKScene::touchesMovedSetter", value, sweetiekit::GetWrapperFor(evt));
   }];
 }
 
@@ -248,17 +239,12 @@ NAN_SETTER(NSKScene::touchesEndedSetter) {
   [scene setTouchesEnded: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
     Nan::HandleScope scope;
 
-    __block NSInteger count = 0;
-    auto arr = Nan::New<Array>();
-    
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
-      Local<Value> argv[] = { Nan::New<v8::External>((__bridge void*)obj) };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(arr, static_cast<uint32_t>(count), value);
-      count++;
+    __block uint32_t count = 0;
+    auto value = Nan::New<Array>();
+    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
     }];
-
-    wrap->_touchesEnded("NSKScene::touchesEndedSetter", arr, Nan::Null());
+    wrap->_touchesEnded("NSKScene::touchesEndedSetter", value, sweetiekit::GetWrapperFor(evt));
   }];
 }
 

@@ -1,8 +1,11 @@
 const SweetieKit = require('std:sweetiekit.node');
 
 // apps
-const makeMiniApp = require('./examples/MiniApp');
-const makeMiniAppReact = require('./examples/miniAppReact');
+const makeMiniApp = () => require('./examples/MiniApp');
+makeMiniApp.lazy = true;
+const makeMiniAppReact = () => require('./examples/miniAppReact');
+makeMiniAppReact.lazy = true;
+const makeFullReact = require('./examples/fullReact');
 
 // view based demos
 const makeARSCNView = require('./examples/ARSCNView');
@@ -91,6 +94,7 @@ const arDemos = {
 const appDemos = {
   MiniApp: makeMiniApp,
   MiniAppReact: makeMiniAppReact,
+  FullReact: makeFullReact,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
@@ -205,6 +209,9 @@ class UIDemosApp {
       if (appDemos[type]) {
         this.createDemoVC();
         gc();
+        if (appDemos[type].lazy) {
+          appDemos[type] = await appDemos[type]();
+        }
         await appDemos[type](this.nav, this.demoVC);
         gc();
       }
