@@ -34,6 +34,8 @@ public:
   JS_PROP(Position);
   JS_PROP(ZPosition);
   JS_PROP(ZRotation);
+  JS_PROP(xScale);
+  JS_PROP(yScale);
 };
 
 #endif /* NSKNode_h */

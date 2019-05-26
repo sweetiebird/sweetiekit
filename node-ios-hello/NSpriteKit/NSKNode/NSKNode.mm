@@ -39,6 +39,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   Nan::SetMethod(proto, "addChild", AddChild);
   Nan::SetMethod(proto, "removeFromParent", RemoveFromParent);
   Nan::SetMethod(proto, "runAction", runAction);
+  JS_ASSIGN_PROP(proto, xScale);
+  JS_ASSIGN_PROP(proto, yScale);
   
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -181,3 +183,15 @@ NAN_METHOD(NSKNode::runAction) {
 
   [node runAction:action->As<SKAction>()];
 }
+
+JS_GETTER(SKNode, node, xScale,
+  JS_SET_RETURN(JS_NUM([node xScale])));
+  
+JS_SETTER(SKNode, node, xScale,
+  [node setXScale:TO_DOUBLE(value)]);
+
+JS_GETTER(SKNode, node, yScale,
+  JS_SET_RETURN(JS_NUM([node yScale])));
+  
+JS_SETTER(SKNode, node, yScale,
+  [node setYScale:TO_DOUBLE(value)]);

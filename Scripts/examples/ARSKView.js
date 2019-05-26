@@ -119,6 +119,8 @@ async function make(nav, demoVC) {
   const _node = (text) => {
     if (text instanceof UIImage || text instanceof SKTexture) {
       const node = new SKSpriteNode(text);
+      node.xScale = 0.1;
+      node.yScale = 0.1;
       return node;
     } else {
       const node = new SKLabelNode();
@@ -203,7 +205,7 @@ async function make(nav, demoVC) {
 
   arView.presentScene(scene);
 
-  const field = await UITextField.alloc(12, 80, demoVC.view.frame.width - 24, 50, () => {
+  const field = await UITextField.alloc(12, 0, demoVC.view.frame.width - 24, 50, () => {
     text = field.text;
   });
 
