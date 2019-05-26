@@ -370,6 +370,12 @@ namespace sweetiekit {
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
   Local<Value> GetWrapperFor(id pThing);
   id FromJS(Local<Value> jsThing);
+  Local<Object> JSObjFromFrame(CGRect frame);
+  Local<Object> JSObjFromColor(CGColorRef color);
+  CGRect FrameFromJSObj(Local<Value> jsThing);
+  UIColor* UIColorFromJSColor(Local<Value> jsThing);
+  CGColorRef CGColorRefFromJSColor(Local<Value> jsThing);
+  bool IsJSColor(Local<Value> jsThing);
 }
 
 extern "C" {

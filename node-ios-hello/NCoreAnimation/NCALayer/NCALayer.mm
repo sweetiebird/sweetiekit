@@ -12,6 +12,7 @@
 #include "NCALayer.h"
 #include "ColorHelper.h"
 #include "NCABasicAnimation.h"
+#include "defines.h"
 
 Nan::Persistent<FunctionTemplate> NCALayer::type;
 
@@ -43,6 +44,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   Nan::SetMethod(proto, "renderInContext", renderInContext);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
   JS_ASSIGN_PROP(proto, shadowOpacity);
+  JS_ASSIGN_PROP(proto, frame);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -411,5 +413,23 @@ NAN_METHOD(NCALayer::renderInContext) {
     @autoreleasepool {
       [layer renderInContext:UIGraphicsGetCurrentContext()];
     }
+  }
+}
+
+NAN_GETTER(NCALayer::frameGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ca);
+  
+  JS_SET_RETURN(sweetiekit::JSObjFromFrame([ca frame]));
+}
+
+NAN_SETTER(NCALayer::frameSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(CALayer, ca);
+
+  @autoreleasepool {
+    [ca setFrame:sweetiekit::FrameFromJSObj(JS_OBJ(value))];
   }
 }

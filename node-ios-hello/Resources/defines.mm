@@ -83,7 +83,7 @@ namespace sweetiekit
     return JS_HAS(jsObj, JS_STR("alpha"));
   }
 
-  UIColor* ColorFromJSColor(Local<Value> jsThing)
+  UIColor* UIColorFromJSColor(Local<Value> jsThing)
   {
     Nan::EscapableHandleScope handleScope;
 
@@ -96,12 +96,80 @@ namespace sweetiekit
     UIColor *color = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a];
     return color;
   }
+  
+  CGColorRef CGColorRefFromJSColor(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    UIColor *color = UIColorFromJSColor(jsThing);
+
+    return color.CGColor;
+  }
+
+  Local<Object> JSObjFromColor(CGColorRef color)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    const CGFloat* components = CGColorGetComponents(color);
+    float r = components[0];
+    float g = components[1];
+    float b = components[2];
+    float a = CGColorGetAlpha(color);
+
+    Local<Object> result = Object::New(Isolate::GetCurrent());
+    result->Set(JS_STR("red"), JS_NUM(r));
+    result->Set(JS_STR("green"), JS_NUM(g));
+    result->Set(JS_STR("blue"), JS_NUM(b));
+    result->Set(JS_STR("alpha"), JS_NUM(a));
+  
+    return result;
+  }
+
+  CGRect FrameFromJSObj(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    if (jsThing->IsObject()) {
+      Local<Object> jsObj = JS_OBJ(jsThing);
+      double x = TO_DOUBLE(jsObj->Get(JS_STR("x")));
+      double y = TO_DOUBLE(jsObj->Get(JS_STR("y")));
+      double w = TO_DOUBLE(jsObj->Get(JS_STR("w")));
+      double h = TO_DOUBLE(jsObj->Get(JS_STR("h")));
+      return CGRectMake(x, y, w, h);
+    }
+
+    return CGRectZero;
+  }
+  
+  Local<Object> JSObjFromFrame(CGRect frame)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    Local<Object> result = Object::New(Isolate::GetCurrent());
+
+    Local<Object> origin = Object::New(Isolate::GetCurrent());
+    origin->Set(JS_STR("x"), JS_NUM(frame.origin.x));
+    origin->Set(JS_STR("y"), JS_NUM(frame.origin.y));
+    result->Set(JS_STR("origin"), JS_OBJ(origin));
+
+    Local<Object> size = Object::New(Isolate::GetCurrent());
+    size->Set(JS_STR("width"), JS_NUM(frame.size.width));
+    size->Set(JS_STR("height"), JS_NUM(frame.size.height));
+    result->Set(JS_STR("size"), JS_OBJ(size));
+
+    result->Set(JS_STR("minX"), JS_NUM(CGRectGetMinX(frame)));
+    result->Set(JS_STR("maxX"), JS_NUM(CGRectGetMaxX(frame)));
+    result->Set(JS_STR("minY"), JS_NUM(CGRectGetMinY(frame)));
+    result->Set(JS_STR("maxY"), JS_NUM(CGRectGetMaxY(frame)));
+  
+    return result;
+  }
 
   id FromJS(Local<Value> jsThing)
   {
     Nan::EscapableHandleScope handleScope;
     if (IsJSColor(jsThing)) {
-      UIColor *color = ColorFromJSColor(jsThing);
+      UIColor *color = UIColorFromJSColor(jsThing);
       return color;
     }
 

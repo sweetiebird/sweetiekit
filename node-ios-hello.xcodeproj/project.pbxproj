@@ -56,6 +56,7 @@
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
 		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
@@ -311,6 +312,8 @@
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
+		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
+		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterCell.mm; sourceTree = "<group>"; };
 		A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterCell.h; sourceTree = "<group>"; };
 		A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterLayer.mm; sourceTree = "<group>"; };
@@ -675,6 +678,7 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A158FD86229A292F000F7ABA /* NCAShapeLayer */,
 				A1646B89229201B50078CF4B /* NCAEmitterLayer */,
 				A1646B7C2291E6E90078CF4B /* NCAEmitterCell */,
 				A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */,
@@ -844,6 +848,15 @@
 				A13768EB2288396400CDB13B /* NCLHeading.mm */,
 			);
 			path = NCLHeading;
+			sourceTree = "<group>";
+		};
+		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A158FD87229A292F000F7ABA /* NCAShapeLayer.h */,
+				A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */,
+			);
+			path = NCAShapeLayer;
 			sourceTree = "<group>";
 		};
 		A1646B7C2291E6E90078CF4B /* NCAEmitterCell */ = {
@@ -2320,6 +2333,7 @@
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
+				A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,

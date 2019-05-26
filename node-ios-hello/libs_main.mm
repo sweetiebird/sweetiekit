@@ -60,6 +60,7 @@
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
 #include "NCABasicAnimation.h"
+#include "NCAShapeLayer.h"
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
 #include "NUIStackView.h"
@@ -541,6 +542,9 @@ void InitExports(Local<Object> exports) {
         auto N_CALayer = NCALayer::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CALayer").ToLocalChecked(), N_CALayer.first);
   
+        auto N_CAShapeLayer = NCAShapeLayer::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CAShapeLayer").ToLocalChecked(), N_CAShapeLayer.first);
+
         auto N_CABasicAnimation = NCABasicAnimation::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("CABasicAnimation").ToLocalChecked(), N_CABasicAnimation.first);
   

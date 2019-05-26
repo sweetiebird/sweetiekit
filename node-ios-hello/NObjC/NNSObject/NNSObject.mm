@@ -408,6 +408,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
 #include "NCABasicAnimation.h"
+#include "NCAShapeLayer.h"
 #include "NUIPresentationController.h"
 #include "NUIAlertController.h"
 #include "NUIAlertAction.h"
@@ -485,6 +486,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[CAEmitterLayer class]]) {
         return NCAEmitterLayer::type;
+      }
+      if ([obj isKindOfClass:[CAShapeLayer class]]) {
+        return NCAShapeLayer::type;
       }
       if ([obj isKindOfClass:[CALayer class]]) {
         return NCALayer::type;

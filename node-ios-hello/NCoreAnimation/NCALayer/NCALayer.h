@@ -38,6 +38,7 @@ public:
   JS_PROP(Position);
   JS_PROP(MasksToBounds);
   JS_PROP(shadowOpacity);
+  JS_PROP(frame);
 };
 
 
