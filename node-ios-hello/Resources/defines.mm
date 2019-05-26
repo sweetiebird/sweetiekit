@@ -59,7 +59,7 @@ namespace sweetiekit
   
   bool IsJSNumber(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope handleScope;
     return jsThing->IsNumber();
   }
   
@@ -122,7 +122,7 @@ namespace sweetiekit
     result->Set(JS_STR("blue"), JS_NUM(b));
     result->Set(JS_STR("alpha"), JS_NUM(a));
   
-    return result;
+    return handleScope.Escape(result);
   }
   
   Local<Object> JSObjFromUIColor(UIColor* color)
@@ -141,7 +141,7 @@ namespace sweetiekit
     result->Set(JS_STR("blue"), JS_NUM(b));
     result->Set(JS_STR("alpha"), JS_NUM(a));
   
-    return result;
+    return handleScope.Escape(result);
   }
 
   CGRect FrameFromJSObj(Local<Value> jsThing)
@@ -181,7 +181,8 @@ namespace sweetiekit
     result->Set(JS_STR("minY"), JS_NUM(CGRectGetMinY(frame)));
     result->Set(JS_STR("maxY"), JS_NUM(CGRectGetMaxY(frame)));
   
-    return result;
+    
+    return handleScope.Escape(result);
   }
 
   Local<Array> JSArrayFromCGAffineTransform(CGAffineTransform xform)
@@ -196,7 +197,7 @@ namespace sweetiekit
     Nan::Set(result, static_cast<uint32_t>(4), JS_NUM(xform.tx));
     Nan::Set(result, static_cast<uint32_t>(5), JS_NUM(xform.ty));
 
-    return result;
+    return handleScope.Escape(result);
   }
   
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing)
@@ -233,7 +234,6 @@ namespace sweetiekit
     JS_UNWRAPPED(jsThing, NSObject, thing);
     return thing;
   }
-  
 
   bool SetTransform(simd_float4x4& transform, Local<Value> value) {
     Nan::HandleScope scope;

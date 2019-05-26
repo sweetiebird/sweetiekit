@@ -68,6 +68,7 @@
 		A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
+		A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
@@ -335,6 +336,8 @@
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
 		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
+		A1710EA1229A58A100EC7C86 /* NRPScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorder.h; sourceTree = "<group>"; };
+		A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorder.mm; sourceTree = "<group>"; };
 		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
 		A174A16922822161002A8216 /* NAVAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NAVAudioPlayer.h; sourceTree = "<group>"; };
 		A174A16A22822169002A8216 /* NAVAudioPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioPlayer.mm; sourceTree = "<group>"; };
@@ -948,6 +951,23 @@
 				A1887109227E370500129A75 /* SUIPresentationController.swift */,
 			);
 			path = NUIPresentationController;
+			sourceTree = "<group>";
+		};
+		A1710E9F229A58A100EC7C86 /* NReplayKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EA0229A58A100EC7C86 /* NRPScreenRecorder */,
+			);
+			path = NReplayKit;
+			sourceTree = "<group>";
+		};
+		A1710EA0229A58A100EC7C86 /* NRPScreenRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EA1229A58A100EC7C86 /* NRPScreenRecorder.h */,
+				A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */,
+			);
+			path = NRPScreenRecorder;
 			sourceTree = "<group>";
 		};
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
@@ -1923,16 +1943,16 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
-				A10BD042228F490400184286 /* NNSNotification */,
-				A10BD03E228F483B00184286 /* NNSNotificationCenter */,
-				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
-				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
-				A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
+				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
+				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
+				A10BD042228F490400184286 /* NNSNotification */,
+				A10BD03E228F483B00184286 /* NNSNotificationCenter */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
+				A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
 			path = NObjC;
@@ -2015,6 +2035,7 @@
 				A1E2D7A5226A500100FA1562 /* NObjC */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
+				A1710E9F229A58A100EC7C86 /* NReplayKit */,
 				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
 				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
@@ -2314,6 +2335,7 @@
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
