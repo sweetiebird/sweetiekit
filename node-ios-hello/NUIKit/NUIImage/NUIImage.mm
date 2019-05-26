@@ -43,14 +43,7 @@ NAN_METHOD(NUIImage::New) {
     if (info[0]->IsExternal()) {
       img->SetNSObject((__bridge UIImage *)(info[0].As<External>()->Value()));
     } else if (info.Length() > 0 && info[0]->IsString()) {
-      std::string imageName;
-      if (info[0]->IsString()) {
-        Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-        imageName = *utf8Value;
-      } else {
-        // throw
-      }
-      NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
+      NSString* result = NJSStringToNSString(info[0]);
 
       img->SetNSObject([UIImage imageNamed:result]);
     } else if (info.Length() > 0 && info[0]->IsArrayBuffer()) {
