@@ -33,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKLabelNode::Initialize(Isola
   JS_SET_PROP(proto, "text", Text);
   JS_ASSIGN_PROP(proto, preferredMaxLayoutWidth);
   JS_ASSIGN_PROP(proto, numberOfLines);
+  JS_ASSIGN_PROP(proto, fontName);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -138,4 +139,21 @@ NAN_SETTER(NSKLabelNode::numberOfLinesSetter) {
   
   int iValue = TO_INT32(value);
   [node setNumberOfLines:iValue];
+}
+
+NAN_GETTER(NSKLabelNode::fontNameGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+
+  JS_SET_RETURN(JS_STR([[node fontName] UTF8String]));
+}
+
+NAN_SETTER(NSKLabelNode::fontNameSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+
+  NSString *name = NJSStringToNSString(value);
+  [node setFontName:name];
 }

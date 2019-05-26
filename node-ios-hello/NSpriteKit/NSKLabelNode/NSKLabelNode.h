@@ -30,6 +30,7 @@ public:
   JS_PROP(Text);
   JS_PROP(preferredMaxLayoutWidth);
   JS_PROP(numberOfLines);
+  JS_PROP(fontName);
 };
 
 

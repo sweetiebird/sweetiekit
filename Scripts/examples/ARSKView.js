@@ -77,7 +77,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
   };
   field.backgroundColor = colors.clear;
   const placeholderText = '👀, 🐙, Hi Mom, etc';
-  const placeholderFont = new UIFont('Lato-Regular', 17);
+  const placeholderFont = new UIFont('Lato-Bold', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
   attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
     location: 0,
@@ -237,7 +237,7 @@ async function make(nav, demoVC) {
 
   const _text = (txt) => {
     return txt || text || '👀';
-  }
+  };
 
   const _node = (text) => {
     if (text instanceof UIImage || text instanceof SKTexture) {
@@ -251,6 +251,7 @@ async function make(nav, demoVC) {
       node.numberOfLines = textWrap(txt).split('\n').length;
       //node.preferredMaxLayoutWidth = 10;
       node.text = txt.substr(0,500);
+      node.fontName = 'Lato-Regular';
       return node;
     }
   };

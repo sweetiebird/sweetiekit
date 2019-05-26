@@ -65,7 +65,7 @@ namespace sweetiekit
   
   bool IsJSColor(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
 
     if (!jsThing->IsObject()) {
       return false;
@@ -79,13 +79,13 @@ namespace sweetiekit
   
   bool HasJSAlphaProp(Local<Object> jsObj)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
     return JS_HAS(jsObj, JS_STR("alpha"));
   }
 
   UIColor* UIColorFromJSColor(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
 
     Local<Object> jsObj = JS_OBJ(jsThing);
     double r = TO_DOUBLE(jsObj->Get(JS_STR("red")));
@@ -99,14 +99,14 @@ namespace sweetiekit
   
   CGColorRef CGColorRefFromJSColor(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
 
     UIColor *color = UIColorFromJSColor(jsThing);
 
     return color.CGColor;
   }
 
-  Local<Object> JSObjFromColor(CGColorRef color)
+  Local<Object> JSObjFromCGColor(CGColorRef color)
   {
     Nan::EscapableHandleScope handleScope;
 
@@ -124,17 +124,36 @@ namespace sweetiekit
   
     return result;
   }
+  
+  Local<Object> JSObjFromUIColor(UIColor* color)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    double r = 0;
+    double g = 0;
+    double b = 0;
+    double a = 0;
+    [color getRed:&r green:&g blue:&b alpha:&a];
+
+    Local<Object> result = Object::New(Isolate::GetCurrent());
+    result->Set(JS_STR("red"), JS_NUM(r));
+    result->Set(JS_STR("green"), JS_NUM(g));
+    result->Set(JS_STR("blue"), JS_NUM(b));
+    result->Set(JS_STR("alpha"), JS_NUM(a));
+  
+    return result;
+  }
 
   CGRect FrameFromJSObj(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
 
     if (jsThing->IsObject()) {
       Local<Object> jsObj = JS_OBJ(jsThing);
       double x = TO_DOUBLE(jsObj->Get(JS_STR("x")));
       double y = TO_DOUBLE(jsObj->Get(JS_STR("y")));
-      double w = TO_DOUBLE(jsObj->Get(JS_STR("w")));
-      double h = TO_DOUBLE(jsObj->Get(JS_STR("h")));
+      double w = TO_DOUBLE(jsObj->Get(JS_STR("width")));
+      double h = TO_DOUBLE(jsObj->Get(JS_STR("height")));
       return CGRectMake(x, y, w, h);
     }
 
@@ -182,7 +201,7 @@ namespace sweetiekit
   
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::HandleScope scope;
 
     if (jsThing->IsArray()) {
       Local<Array> array = Local<Array>::Cast(jsThing);

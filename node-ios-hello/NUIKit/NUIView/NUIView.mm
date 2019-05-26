@@ -68,6 +68,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_ASSIGN_PROP(proto, viewWillDisappear);
   JS_ASSIGN_PROP(proto, drawRect);
   JS_ASSIGN_PROP(proto, contentMode);
+  JS_ASSIGN_PROP(proto, transform);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -920,4 +921,22 @@ NAN_METHOD(NUIView::addGestureRecognizer) {
   
   Local<Object> obj = JS_OBJ(info[0]);
   NUIGestureRecognizer *gest = ObjectWrap::Unwrap<NUIGestureRecognizer>(obj);
+}
+
+NAN_GETTER(NUIView::transformGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  JS_SET_RETURN(sweetiekit::JSArrayFromCGAffineTransform([ui transform]));
+}
+
+NAN_SETTER(NUIView::transformSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+
+  @autoreleasepool {
+    [ui setTransform:sweetiekit::CGAffineXFormFromJSArray(value)];
+  }
 }
