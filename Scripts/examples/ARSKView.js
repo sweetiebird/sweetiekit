@@ -39,6 +39,7 @@ const {
 
 //let text = '👀';
 let text = new SKTexture(new UIImage("nic"));
+UIImage.transparent = UIImage.transparent || new UIImage("transparent");
 
 function lineWrap(s) {
   if (s.length > 600) {
@@ -288,9 +289,9 @@ async function make(nav, demoVC) {
 
       const attrTxt = new NSMutableAttributedString(str);
       attrTxt.addAttribute(NSForegroundColorAttributeName, colors.white, attrRange);
-      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Regular', 17), attrRange);
+      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Bold', 17), attrRange);
       attrTxt.addAttribute(NSStrokeColorAttributeName, colors.black, attrRange);
-      attrTxt.addAttribute(NSStrokeWidthAttributeName, -2.0, attrRange);
+      attrTxt.addAttribute(NSStrokeWidthAttributeName, -4.0, attrRange);
 
       node.attributedText = attrTxt;
       return node;
@@ -391,13 +392,14 @@ async function make(nav, demoVC) {
   topView.addSubview(field);
 
   const viewW = view.frame.width;
-  const scaleSliderY = fieldHeight + 0;
+  const scaleSliderY = fieldHeight + 20;
   const sliderHeight = 20;
 
   const scaleSlider = new UISlider({
       x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
   });
   scaleSlider.value = 0.5;
+  scaleSlider.setThumbImage(UIImage.transparent);
   scaleSlider.addTarget(() => {
     console.log('scale slider changed', scaleSlider.value);
     if (active && active.node) {
@@ -411,6 +413,7 @@ async function make(nav, demoVC) {
     x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
   });
   distSlider.value = 0.5;
+  distSlider.setThumbImage(UIImage.transparent);
   distSlider.addTarget(() => {
     console.log('distance slider changed', distSlider.value);
   }, UIControlEvents.valueChanged);
@@ -419,6 +422,7 @@ async function make(nav, demoVC) {
     x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
   });
   rotSlider.value = 0.5;
+  rotSlider.setThumbImage(UIImage.transparent);
   rotSlider.addTarget(() => {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEvents.valueChanged);
