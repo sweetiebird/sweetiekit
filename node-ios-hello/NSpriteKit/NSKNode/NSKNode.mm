@@ -184,14 +184,18 @@ NAN_METHOD(NSKNode::runAction) {
   [node runAction:action->As<SKAction>()];
 }
 
-JS_GETTER(SKNode, node, xScale,
-  JS_SET_RETURN(JS_NUM([node xScale])));
+JS_GETTER(SKNode, node, xScale, {
+  JS_SET_RETURN(JS_NUM([node xScale]));
+});
   
-JS_SETTER(SKNode, node, xScale,
-  [node setXScale:TO_DOUBLE(value)]);
+JS_SETTER(SKNode, node, xScale, {
+  [node setXScale:TO_DOUBLE(value)];
+});
 
-JS_GETTER(SKNode, node, yScale,
-  JS_SET_RETURN(JS_NUM([node yScale])));
+JS_GETTER(SKNode, node, yScale, {
+  JS_SET_RETURN(JS_NUM([node yScale]));
+});
   
-JS_SETTER(SKNode, node, yScale,
-  [node setYScale:TO_DOUBLE(value)]);
+JS_SETTER(SKNode, node, yScale, {
+  [node setYScale:TO_DOUBLE(value)];
+});

@@ -30,6 +30,7 @@ public:
   JS_PROP(Size);
   JS_PROP(ColorBlendFactor);
   JS_PROP(Color);
+  JS_METHOD(scaleToSize);
 };
 
 #endif /* NSKSpriteNode_h */
