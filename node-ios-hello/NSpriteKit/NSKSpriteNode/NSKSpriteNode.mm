@@ -12,6 +12,7 @@
 #include "NSKNode.h"
 #include "NSKSpriteNode.h"
 #include "NSKTexture.h"
+#include "NUIImage.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKSpriteNode::type;
@@ -61,6 +62,10 @@ NAN_METHOD(NSKSpriteNode::New) {
     }
   } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NSKTexture)) {
     JS_UNWRAPPED(info[0], SKTexture, tex);
+    node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex]);
+  } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NUIImage)) {
+    JS_UNWRAPPED(info[0], UIImage, img);
+    SKTexture* tex = [SKTexture textureWithImage:img];
     node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex]);
   } else if (info.Length() > 0) {
     delete node;
