@@ -131,9 +131,10 @@ function takeScreenshot(view) {
       // recalls UIApplicationMain and crashes?
       // ==========
 
-      // UIKit.UIImageWriteToSavedPhotosAlbum(img, () => {
-      //   console.log('written!');
-      // });
+      console.log("Writing UIImage");
+      UIKit.UIImageWriteToSavedPhotosAlbum(img, () => {
+        console.log('written!');
+      });
     }
   } finally {
     CoreGraphics.UIGraphicsEndImageContext();
@@ -144,14 +145,19 @@ function toggleRecordScreen(demoVC, recorder) {
   const del = new RPPreviewViewControllerDelegate();
   del.previewControllerDidFinish = (previewController) => {
     console.log('preview controller did finish - uidemos.js toggleRecordScreen()');
-    previewController.dismiss(true, () => {});
+    previewController.dismiss(true, () => {
+      console.log('preview controller did finish 2 - uidemos.js toggleRecordScreen()');
+    });
   };
 
   if (recorder.isRecording) {
     console.log('stop recording - uidemos.js toggleRecordScreen()');
     recorder.stopRecordingWithHandler((previewController) => {
+      console.log('stop recording 2 - uidemos.js toggleRecordScreen()');
       previewController.delegate = del;
-      demoVC.present(previewController, true, () => {});
+      demoVC.present(previewController, true, () => {
+        console.log('stop recording 3 - uidemos.js toggleRecordScreen()');
+      });
     });
   } else if (recorder.isAvailable) {
     console.log('start recording - uidemos.js toggleRecordScreen()');
@@ -378,7 +384,8 @@ async function make(nav, demoVC) {
   const camBtn = makeCamBtn(demoVC, btnSize);
   camBtn.addTarget(() => {
     console.log('recording');
-    toggleRecordScreen(demoVC, recorder);
+    //toggleRecordScreen(demoVC, recorder);
+    takeScreenshot(demoVC.view);
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;

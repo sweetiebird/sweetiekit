@@ -9,6 +9,22 @@
 import Foundation
 import UIKit
 
+typealias UIImageWriteToSavedPhotosAlbumClosure = (UIImage, NSError?, UnsafeMutableRawPointer?) -> Void 
+
+@objc class SUITargetUIImageWriteToSavedPhotosAlbum: SUITargetBase {
+  @objc var callbackClosure: UIImageWriteToSavedPhotosAlbumClosure?
+  @objc var callbackSelector: Selector!
+  
+  override init() {
+    super.init()
+    callbackSelector = #selector(callback)
+  }
+
+  @objc func callback(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: UnsafeMutableRawPointer?) {
+    self.callbackClosure?(image, didFinishSavingWithError, contextInfo)
+  }
+}
+
 @objc class SUIKitGlobals: NSObject {
  @objc static let shared = SUIKitGlobals()
 
@@ -16,7 +32,7 @@ import UIKit
     super.init()
   }
 
-  @objc static func uiImageWriteToSavedPhotosAlbum(image: UIImage, target: SUITarget?, selector: Selector?, contextInfo: UnsafeMutableRawPointer?) {
+  @objc static func uiImageWriteToSavedPhotosAlbum(image: UIImage, target: SUITargetUIImageWriteToSavedPhotosAlbum?, selector: Selector?, contextInfo: UnsafeMutableRawPointer?) {
     UIImageWriteToSavedPhotosAlbum(image, target, selector, contextInfo)
   }
 }

@@ -65,18 +65,20 @@ NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
   
   __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[1]);
+  __block SUITargetUIImageWriteToSavedPhotosAlbum* target = [[SUITargetUIImageWriteToSavedPhotosAlbum alloc] init];
 
-  SUITarget* target = [[SUITarget alloc] init];
-
-  [target setCallbackClosure:^(id _Nullable) {
+  [target setCallbackClosure:^(UIImage * _Nonnull image, NSError * _Nullable error, void * _Nullable context) {
     Nan::HandleScope scope;
+    (*fn)("NUIKitGlobals::UIImageWriteToSavedPhotosAlbum",
+            sweetiekit::GetWrapperFor(image, NUIImage::type),
+            sweetiekit::GetWrapperFor(error));
     [[SUIKitGlobals shared] dissociateValueForKey:@"sweetiekit.uikitglobals.uiimagewritetosavedphotosalbum"];
-    (*fn)("NUIKitGlobals::UIImageWriteToSavedPhotosAlbum");
+    target = nullptr;
   }];
 
   [target setDeinitClosure:^() {
     Nan::HandleScope scope;
-    delete fn; fn = nullptr;
+    delete fn; fn = nullptr; target = nullptr;
     iOSLog0("fn deleted");
   }];
 
