@@ -13,6 +13,7 @@
 #include "NSKTexture.h"
 #include "NNSObject.h"
 #include "NARSession.h"
+#include "NUIImage.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKTexture::type;
@@ -33,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKTexture::Initialize(Isolate
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "textureWithImage", textureWithImage);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -46,18 +48,18 @@ NAN_METHOD(NSKTexture::New) {
 
   if (info[0]->IsExternal()) {
     tx->SetNSObject((__bridge SKTexture *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    std::string name;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      name = *utf8Value;
-    } else {
-      Nan::ThrowError("invalid argument");
-    }
+  } else if (info.Length() > 0 && info[0]->IsString()) {
     @autoreleasepool {
-      NSString *imageName = [NSString stringWithUTF8String:name.c_str()];
+      NSString *imageName = NJSStringToNSString(info[0]);
       tx->SetNSObject([SKTexture textureWithImageNamed:imageName]);
     }
+  } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NUIImage)) {
+    JS_UNWRAPPED(info[0], UIImage, ui);
+    tx->SetNSObject([SKTexture textureWithImage:ui]);
+  } else if (info.Length() > 0) {
+    delete tx;
+    Nan::ThrowError("NSKTexture::New: Invalid argument");
+    return;
   } else {
     @autoreleasepool {
       tx->SetNSObject([[SKTexture alloc] init]);
@@ -67,6 +69,20 @@ NAN_METHOD(NSKTexture::New) {
   tx->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_METHOD(NSKTexture::textureWithImage)
+{
+  if (!JS_INSTANCEOF(info[0], NUIImage)) {
+    Nan::ThrowError("NSKTexture::textureWithImage: Expected a UIImage");
+    return;
+  }
+  JS_UNWRAPPED(info[0], UIImage, ui);
+  
+  Local<Value> argv[] = {
+    Nan::New<External>((__bridge void*)[SKTexture textureWithImage:ui])
+  };
+  JS_SET_RETURN(JS_NEW(NSKTexture, argv));
 }
 
 NSKTexture::NSKTexture () {}

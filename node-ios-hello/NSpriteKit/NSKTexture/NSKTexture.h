@@ -27,6 +27,7 @@ public:
   virtual ~NSKTexture();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(textureWithImage);
 };
 
 #endif /* NSKTexture_h */

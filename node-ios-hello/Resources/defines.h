@@ -22,6 +22,8 @@ using namespace v8;
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
+#define JS_INSTANCEOF(obj, type) ((obj)->InstanceOf(JS_CONTEXT(), JS_TYPE(type)).FromJust())
+#define JS_NEW(type, argv) (JS_TYPE(type)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked())
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_WRAPPER(el, ElType) sweetiekit::GetWrapperFor(el, N##ElType::type)
 
