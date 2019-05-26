@@ -25,6 +25,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetMethod(proto, "toArrayBuffer", toArrayBuffer);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -67,3 +68,39 @@ NAN_METHOD(NUIImage::New) {
 NUIImage::NUIImage () {}
 NUIImage::~NUIImage () {}
 
+NAN_METHOD(NUIImage::toArrayBuffer)
+{
+  JS_UNWRAP(UIImage, ui);
+  @autoreleasepool {
+    std::string type;
+    if (info[0]->IsString()) {
+      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+      type = *utf8Value;
+    }
+
+    double quality = 0.95;
+    if (info[1]->IsNumber()) {
+      quality = TO_DOUBLE(info[1]);
+    }
+
+    NSData* data = nullptr;
+    if (type == "image/png") {
+      data = UIImagePNGRepresentation(ui);
+    } else if (type == "image/jpeg" || type == "image/jpg") {
+      data = UIImageJPEGRepresentation(ui, quality);
+    } else {
+      type = "image/png";
+      data = UIImagePNGRepresentation(ui);
+    }
+    NSUInteger length = [data length];
+    const void* bytes = [data bytes];
+
+    Local<ArrayBuffer> result = ArrayBuffer::New(Isolate::GetCurrent(), length);
+    memcpy(result->GetContents().Data(), bytes, length);
+    result->Set(JS_STR("type"), JS_STR(type));
+    if (type == "image/jpeg" || type == "image/jpg") {
+      result->Set(JS_STR("quality"), JS_NUM(quality));
+    }
+    JS_SET_RETURN(result);
+  }
+}
