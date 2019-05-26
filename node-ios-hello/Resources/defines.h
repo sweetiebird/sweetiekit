@@ -242,18 +242,15 @@ namespace sweetiekit {
      }
      
      void Reset() {
-       Nan::HandleScope scope;
        cb.reset();
      }
     
      void Reset(Local<Function> fn) {
-       Nan::EscapableHandleScope scope;
-       cb.reset(new Nan::Persistent<Function>(scope.Escape(fn)));
+       cb.reset(new Nan::Persistent<Function>(fn));
      }
     
      void Reset(Local<Value> fn) {
-       Nan::EscapableHandleScope scope;
-       cb.reset(new Nan::Persistent<Function>(scope.Escape(Local<Function>::Cast(fn))));
+       cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
      }
     
      JSFunction& operator = (Local<Function> fn) {

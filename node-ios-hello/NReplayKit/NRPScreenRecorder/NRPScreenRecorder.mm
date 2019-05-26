@@ -60,28 +60,30 @@ NRPScreenRecorder::NRPScreenRecorder () {}
 NRPScreenRecorder::~NRPScreenRecorder () {}
 
 NAN_METHOD(NRPScreenRecorder::startRecordingWithHandler) {
-  Nan::HandleScope scope;
-  
   JS_UNWRAP(RPScreenRecorder, rp);
   
-  sweetiekit::JSFunction fn(info[0]);
+  __block sweetiekit::JSFunction fn(info[0]);
 
   [rp startRecordingWithHandler: ^ (NSError * _Nullable error) {
-    Nan::HandleScope scope;
-    fn.Call("NRPScreenRecorder::startRecording handler");
+    dispatch_ui_sync(dispatch_get_main_queue(), ^{
+      Nan::HandleScope scope;
+      fn.Call("NRPScreenRecorder::startRecording handler");
+      fn.Reset();
+    });
   }];
 }
 
 NAN_METHOD(NRPScreenRecorder::stopRecordingWithHandler) {
-  Nan::HandleScope scope;
-
   JS_UNWRAP(RPScreenRecorder, rp);
 
-  sweetiekit::JSFunction fn(info[0]);
+  __block sweetiekit::JSFunction fn(info[0]);
 
   [rp stopRecordingWithHandler: ^ (RPPreviewViewController * _Nullable previewViewController, NSError * _Nullable error) {
-    Nan::HandleScope scope;
-    Local<Value> ctrlObj = sweetiekit::GetWrapperFor(previewViewController, NRPPreviewViewController::type);
-    fn.Call("NRPScreenRecorder::startRecording handler", ctrlObj);
+    dispatch_ui_sync(dispatch_get_main_queue(), ^{
+      Nan::HandleScope scope;
+      Local<Value> ctrlObj = sweetiekit::GetWrapperFor(previewViewController, NRPPreviewViewController::type);
+      fn.Call("NRPScreenRecorder::startRecording handler", ctrlObj);
+      fn.Reset();
+    });
   }];
 }
