@@ -33,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isol
   JS_SET_PROP(proto, "size", Size);
   JS_SET_PROP(proto, "colorBlendFactor", ColorBlendFactor);
   JS_SET_PROP(proto, "color", Color);
+  Nan::SetMethod(proto, "scaleToSize", scaleToSize);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -156,5 +157,18 @@ NAN_SETTER(NSKSpriteNode::ColorSetter) {
     double alpha = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha")));
     UIColor *color = [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
     [node setColor:color];
+  }
+}
+
+NAN_METHOD(NSKSpriteNode::scaleToSize) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKSpriteNode, node);
+
+  @autoreleasepool {
+    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    CGSize size = CGSizeMake(width, height);
+    [node scaleToSize:size];
   }
 }
