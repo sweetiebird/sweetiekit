@@ -91,6 +91,7 @@
 #include "NSCNText.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
+#include "NSKTexture.h"
 #include "NSKPhysicsBody.h"
 #include "NSKPhysicsWorld.h"
 #include "NSKPhysicsContactDelegate.h"
@@ -569,6 +570,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_SKAction = NSKAction::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKAction").ToLocalChecked(), N_SKAction.first);
+  
+        auto N_SKTexture = NSKTexture::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKTexture").ToLocalChecked(), N_SKTexture.first);
 
         auto N_SKPhysicsWorld = NSKPhysicsWorld::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKPhysicsWorld").ToLocalChecked(), N_SKPhysicsWorld.first);
