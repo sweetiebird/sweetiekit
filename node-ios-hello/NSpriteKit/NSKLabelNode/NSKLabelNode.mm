@@ -13,6 +13,7 @@
 #include "NSKNode.h"
 #include "NSKLabelNode.h"
 #include "NARSession.h"
+#include "NNSAttributedString.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKLabelNode::type;
@@ -31,6 +32,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKLabelNode::Initialize(Isola
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "text", Text);
+  JS_ASSIGN_PROP(proto, attributedText);
   JS_ASSIGN_PROP(proto, preferredMaxLayoutWidth);
   JS_ASSIGN_PROP(proto, numberOfLines);
   JS_ASSIGN_PROP(proto, fontName);
@@ -107,6 +109,24 @@ NAN_SETTER(NSKLabelNode::TextSetter) {
       [node setText:[NSString stringWithUTF8String:text.c_str()]];
     });
   }
+}
+
+NAN_GETTER(NSKLabelNode::attributedTextGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([node attributedText], NNSAttributedString::type));
+}
+
+NAN_SETTER(NSKLabelNode::attributedTextSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKLabelNode, node);
+
+  NSAttributedString *str = (NSAttributedString *)sweetiekit::FromJS(value);
+
+  [node setAttributedText:str];
 }
 
 NAN_GETTER(NSKLabelNode::preferredMaxLayoutWidthGetter) {

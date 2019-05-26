@@ -28,6 +28,7 @@ public:
 
   static NAN_METHOD(New);
   JS_PROP(Text);
+  JS_PROP(attributedText);
   JS_PROP(preferredMaxLayoutWidth);
   JS_PROP(numberOfLines);
   JS_PROP(fontName);

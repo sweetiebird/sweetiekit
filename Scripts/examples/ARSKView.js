@@ -9,6 +9,8 @@ const {
   NSFontAttributeName,
   NSForegroundColorAttributeName,
   NSKernAttributeName,
+  NSStrokeColorAttributeName,
+  NSStrokeWidthAttributeName,
   UITextAutocorrectionType,
   UITextSpellCheckingType,
 } = require('./enums');
@@ -250,10 +252,23 @@ async function make(nav, demoVC) {
     } else {
       const node = new SKLabelNode();
       const txt = _text(text);
-      node.numberOfLines = textWrap(txt).split('\n').length;
+      const str = txt.substr(0, 500);
+
+      const attrRange = {
+        location: 0,
+        length: str.length,
+      };
+
+      node.numberOfLines = textWrap(str).split('\n').length;
       //node.preferredMaxLayoutWidth = 10;
-      node.text = txt.substr(0,500);
-      node.fontName = 'Lato-Regular';
+
+      const attrTxt = new NSMutableAttributedString(str);
+      attrTxt.addAttribute(NSForegroundColorAttributeName, colors.white, attrRange);
+      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Regular', 17), attrRange);
+      attrTxt.addAttribute(NSStrokeColorAttributeName, colors.black, attrRange);
+      attrTxt.addAttribute(NSStrokeWidthAttributeName, -2.0, attrRange);
+
+      node.attributedText = attrTxt;
       return node;
     }
   };
