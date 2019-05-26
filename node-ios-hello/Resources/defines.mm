@@ -57,9 +57,59 @@ namespace sweetiekit
     return handleScope.Escape(result);
   }
   
+  bool IsJSNumber(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+    return jsThing->IsNumber();
+  }
+  
+  bool IsJSColor(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    if (!jsThing->IsObject()) {
+      return false;
+    }
+
+    Local<Object> jsObj = JS_OBJ(jsThing);
+    return JS_HAS(jsObj, JS_STR("red"))
+      && JS_HAS(jsObj, JS_STR("green"))
+      && JS_HAS(jsObj, JS_STR("blue"));
+  }
+  
+  bool HasJSAlphaProp(Local<Object> jsObj)
+  {
+    Nan::EscapableHandleScope handleScope;
+    return JS_HAS(jsObj, JS_STR("alpha"));
+  }
+
+  UIColor* ColorFromJSColor(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    Local<Object> jsObj = JS_OBJ(jsThing);
+    double r = TO_DOUBLE(jsObj->Get(JS_STR("red")));
+    double g = TO_DOUBLE(jsObj->Get(JS_STR("green")));
+    double b = TO_DOUBLE(jsObj->Get(JS_STR("blue")));
+    double a = HasJSAlphaProp(jsObj) ? TO_DOUBLE(jsObj->Get(JS_STR("alpha"))) : 1.0;
+    
+    UIColor *color = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a];
+    return color;
+  }
+
   id FromJS(Local<Value> jsThing)
   {
     Nan::EscapableHandleScope handleScope;
+    if (IsJSColor(jsThing)) {
+      UIColor *color = ColorFromJSColor(jsThing);
+      return color;
+    }
+
+    if (IsJSNumber(jsThing)) {
+      NSNumber *thing = [NSNumber numberWithDouble:TO_DOUBLE(jsThing)];
+      return thing;
+    }
+
     JS_UNWRAPPED(jsThing, NSObject, thing);
     return thing;
   }

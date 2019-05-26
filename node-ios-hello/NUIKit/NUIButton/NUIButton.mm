@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NUIButton.h"
 #include "NUIControl.h"
 #include "NUILabel.h"
+#include "NUIImage.h"
 
 Nan::Persistent<FunctionTemplate> NUIButton::type;
 
@@ -35,6 +37,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   JS_ASSIGN_PROP(proto, imageEdgeInsets);
   Nan::SetMethod(proto, "setTitleColorForState", setTitleColorForState);
   Nan::SetMethod(proto, "setTitleForState", setTitleForState);
+  Nan::SetMethod(proto, "setBackgroundImageForState", setBackgroundImageForState);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -333,5 +336,20 @@ NAN_SETTER(NUIButton::imageEdgeInsetsSetter) {
     double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("right")));
     double l = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("left")));
     [ui setImageEdgeInsets:UIEdgeInsetsMake(t, l, b, r)];
+  }
+}
+
+NAN_METHOD(NUIButton::setBackgroundImageForState) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIButton, ui);
+
+  if (!info[0]->IsNullOrUndefined()) {
+    JS_UNWRAPPED(info[0], UIImage, img);
+    UIControlState state = UIControlState(TO_UINT32(info[1]));
+
+    @autoreleasepool {
+      [ui setBackgroundImage:img forState:state];
+    }
   }
 }

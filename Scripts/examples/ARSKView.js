@@ -2,6 +2,14 @@ const SweetieKit = require('std:sweetiekit.node');
 
 THREE = require('../vendor/three/three');
 
+const colors = require('./colors');
+const {
+  UIControlState,
+  NSFontAttributeName,
+  NSForegroundColorAttributeName,
+  NSKernAttributeName,
+} = require('./enums');
+
 const {
   ARSKView,
   ARSKViewDelegate,
@@ -10,6 +18,11 @@ const {
   SKScene,
   ARAnchor,
   UITextField,
+  UIButton,
+  UIImage,
+  NSMutableAttributedString,
+  UIFont,
+  UIView,
 } = SweetieKit;
 
 let text = '👀';
@@ -188,12 +201,69 @@ async function make(nav, demoVC) {
 
   arView.presentScene(scene);
 
-  const field = await UITextField.alloc(12, 80, demoVC.view.frame.width - 24, 50, () => {
-    text = field.text;
+  const btnSize = 70;
+  const btn = new UIButton({
+    x: (demoVC.view.frame.width - btnSize) / 2,
+    y: demoVC.view.frame.height - (124 + btnSize),
+    width: btnSize,
+    height: btnSize,
   });
+  btn.layer.cornerRadius = btnSize / 2;
+  btn.layer.shadowOpacity = 1;
+  btn.layer.shadowOffset = { width: 0, height: 4 };
+  btn.layer.shadowColor = colors.fitbodDarkGrey;
+  btn.layer.shadowRadius = 8;
+  btn.showsTouchWhenHighlighted = true;
+  btn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+
+  const fieldHeight = 50;
+  const fieldOffset = 12;
+  const field = await UITextField.alloc(
+    fieldOffset,
+    0,
+    view.frame.width - (fieldOffset * 2),
+    fieldHeight,
+    () => {
+      text = field.text;
+    },
+  );
+  field.textColor = {
+    ...colors.white,
+    alpha: 0.8,
+  };
+  field.backgroundColor = colors.clear;
+  const placeholderText = '👀, 🐙, Hi Mom, etc';
+  const placeholderFont = new UIFont('Lato-Black', 17);
+  const attrPlaceholder = new NSMutableAttributedString(placeholderText);
+  attrPlaceholder.addAttribute(NSForegroundColorAttributeName, {
+    ...colors.white,
+    alpha: 0.6,
+  }, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  attrPlaceholder.addAttribute(NSFontAttributeName, placeholderFont, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  attrPlaceholder.addAttribute(NSKernAttributeName, 1.1, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  field.attributedPlaceholder = attrPlaceholder;
+
+  const borderView = new UIView({ x: 0, y: fieldHeight, width: view.frame.width, height: 1 });
+  borderView.backgroundColor = {
+    ...colors.white,
+    alpha: 0.3,
+  };
 
   demoVC.view.addSubview(field);
   demoVC.view.bringSubviewToFront(field);
+  demoVC.view.addSubview(borderView);
+  demoVC.view.bringSubviewToFront(borderView);
+  demoVC.view.addSubview(btn);
+  demoVC.view.bringSubviewToFront(btn);
 
   arView.viewWillAppear = () => {
     arView.session.run(config);

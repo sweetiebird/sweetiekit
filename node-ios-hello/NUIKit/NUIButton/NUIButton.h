@@ -29,6 +29,7 @@ public:
   static NAN_METHOD(Alloc);
   static NAN_METHOD(setTitleColorForState);
   static NAN_METHOD(setTitleForState);
+  static NAN_METHOD(setBackgroundImageForState);
 
   JS_PROP(Title);
   JS_PROP(Callback);

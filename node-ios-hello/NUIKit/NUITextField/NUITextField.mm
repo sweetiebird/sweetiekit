@@ -12,6 +12,7 @@
 #include "defines.h"
 #include "NUITextField.h"
 #include "NUIViewController.h"
+#include "NNSAttributedString.h"
 
 Nan::Persistent<FunctionTemplate> NUITextField::type;
 
@@ -30,6 +31,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITextField::Initialize(Isola
   Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
   Nan::SetAccessor(proto, JS_STR("delegate"), DelegateGetter, DelegateSetter);
   Nan::SetAccessor(proto, JS_STR("callback"), CallbackGetter, CallbackSetter);
+  JS_ASSIGN_PROP(proto, textColor);
+  JS_ASSIGN_PROP(proto, placeholder);
+  JS_ASSIGN_PROP(proto, attributedPlaceholder);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -37,6 +41,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITextField::Initialize(Isola
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
+
+NUITextField::NUITextField () : _callback(new Nan::Persistent<Function>()) {}
+NUITextField::~NUITextField () { delete _callback; }
 
 NAN_METHOD(NUITextField::New) {
   Nan::HandleScope scope;
@@ -182,6 +189,92 @@ NAN_SETTER(NUITextField::CallbackSetter) {
   }
 }
 
-NUITextField::NUITextField () : _callback(new Nan::Persistent<Function>()) {}
-NUITextField::~NUITextField () { delete _callback; }
+NAN_GETTER(NUITextField::textColorGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UITextField, ui);
+  
+  __block CGFloat red = 0;
+  __block CGFloat green = 0;
+  __block CGFloat blue = 0;
+  __block CGFloat alpha = 1;
+  @autoreleasepool {
+    UIColor* color = [ui textColor];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("red"), JS_NUM(red));
+  result->Set(JS_STR("green"), JS_NUM(green));
+  result->Set(JS_STR("blue"), JS_NUM(blue));
+  result->Set(JS_STR("alpha"), JS_NUM(alpha));
 
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NUITextField::textColorSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+
+  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
+  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
+  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
+  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
+
+  @autoreleasepool {
+    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    [ui setTextColor:color];
+  }
+}
+
+NAN_GETTER(NUITextField::placeholderGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+
+  __block NSString* str = nullptr;
+
+  @autoreleasepool {
+    str = [ui text];
+  }
+
+  if (str != nullptr) {
+    info.GetReturnValue().Set(JS_STR([str UTF8String]));
+  }
+}
+
+NAN_SETTER(NUITextField::placeholderSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+  
+  NSString *text;
+  if (value->IsString()) {
+    text = NJSStringToNSString(value);
+  } else {
+    Nan::ThrowError("invalid argument");
+  }
+
+  @autoreleasepool {
+    [ui setText:text];
+  }
+}
+
+NAN_GETTER(NUITextField::attributedPlaceholderGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui attributedPlaceholder], NNSAttributedString::type));
+}
+
+NAN_SETTER(NUITextField::attributedPlaceholderSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+  
+  NSAttributedString *str = (NSAttributedString *)sweetiekit::FromJS(value);
+
+  [ui setAttributedPlaceholder:str];
+}

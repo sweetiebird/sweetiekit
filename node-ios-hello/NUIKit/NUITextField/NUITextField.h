@@ -23,6 +23,9 @@ JS_WRAP_CLASS(UITextField, UIControl);
   static NAN_SETTER(DelegateSetter);
   static NAN_GETTER(CallbackGetter);
   static NAN_SETTER(CallbackSetter);
+  JS_PROP(textColor);
+  JS_PROP(placeholder);
+  JS_PROP(attributedPlaceholder);
   Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 
