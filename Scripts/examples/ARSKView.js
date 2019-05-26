@@ -233,11 +233,11 @@ async function make(nav, demoVC) {
   };
   field.backgroundColor = colors.clear;
   const placeholderText = '👀, 🐙, Hi Mom, etc';
-  const placeholderFont = new UIFont('Lato-Black', 17);
+  const placeholderFont = new UIFont('Lato-Regular', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
   attrPlaceholder.addAttribute(NSForegroundColorAttributeName, {
     ...colors.white,
-    alpha: 0.6,
+    alpha: 0.7,
   }, {
     location: 0,
     length: placeholderText.length,
