@@ -383,7 +383,7 @@ async function make(nav, demoVC) {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEvents.valueChanged);
 
-  const subviews = [topView, scaleSlider, distSlider, rotSlider, camBtn];
+  const subviews = [topView, scaleSlider/*, distSlider, rotSlider*/, camBtn];
   subviews.forEach((s) => {
     demoVC.view.addSubview(s);
     demoVC.view.bringSubviewToFront(s);
