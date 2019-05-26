@@ -9,6 +9,8 @@ const {
   NSFontAttributeName,
   NSForegroundColorAttributeName,
   NSKernAttributeName,
+  UITextAutocorrectionType,
+  UITextSpellCheckingType,
 } = require('./enums');
 
 const {
@@ -39,6 +41,57 @@ function lineWrap(s) {
 
 function textWrap(s) {
  return s.split('\n').map(line => lineWrap(line)).join('\n');
+}
+
+function makeCamBtn(demoVC, btnSize) {
+  const camBtn = new UIButton({
+    x: (demoVC.view.frame.width - btnSize) / 2,
+    y: demoVC.view.frame.height - (124 + btnSize),
+    width: btnSize,
+    height: btnSize,
+  });
+  camBtn.layer.cornerRadius = btnSize / 2;
+  camBtn.layer.shadowOpacity = 1;
+  camBtn.layer.shadowOffset = { width: 0, height: 4 };
+  camBtn.layer.shadowColor = colors.fitbodDarkGrey;
+  camBtn.layer.shadowRadius = 6;
+  camBtn.showsTouchWhenHighlighted = true;
+  camBtn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+  return camBtn;
+}
+
+async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
+  const field = await UITextField.alloc(
+    horOffset,
+    0,
+    demoVC.view.frame.width - (horOffset * 2),
+    fieldHeight,
+    callback,
+  );
+  field.textColor = {
+    ...colors.white,
+    alpha: 0.8,
+  };
+  field.backgroundColor = colors.clear;
+  const placeholderText = '👀, 🐙, Hi Mom, etc';
+  const placeholderFont = new UIFont('Lato-Regular', 17);
+  const attrPlaceholder = new NSMutableAttributedString(placeholderText);
+  attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  attrPlaceholder.addAttribute(NSFontAttributeName, placeholderFont, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  attrPlaceholder.addAttribute(NSKernAttributeName, 1.1, {
+    location: 0,
+    length: placeholderText.length,
+  });
+  field.attributedPlaceholder = attrPlaceholder;
+  field.autocorrectionType = UITextAutocorrectionType.none;
+  field.spellCheckingType = UITextSpellCheckingType.none;
+  return field;
 }
 
 function takeScreenshot(view) {
@@ -76,6 +129,24 @@ function takeScreenshot(view) {
   } finally {
     CoreGraphics.UIGraphicsEndImageContext();
   }
+}
+
+function makeTopView(demoVC, fieldHeight) {
+  const borderView = new UIView({ x: 0, y: fieldHeight, width: demoVC.view.frame.width, height: 1 });
+  borderView.backgroundColor = {
+    ...colors.white,
+    alpha: 0.3,
+  };
+
+  const topView = new UIView({ x: 0, y: 0, width: demoVC.view.frame.width, height: fieldHeight + 1 });
+  topView.backgroundColor = {
+    ...colors.white,
+    alpha: 0.1,
+  };
+
+  topView.addSubview(borderView);
+
+  return topView;
 }
 
 async function make(nav, demoVC) {
@@ -242,19 +313,8 @@ async function make(nav, demoVC) {
   arView.presentScene(scene);
 
   const btnSize = 70;
-  const camBtn = new UIButton({
-    x: (demoVC.view.frame.width - btnSize) / 2,
-    y: demoVC.view.frame.height - (124 + btnSize),
-    width: btnSize,
-    height: btnSize,
-  });
-  camBtn.layer.cornerRadius = btnSize / 2;
-  camBtn.layer.shadowOpacity = 1;
-  camBtn.layer.shadowOffset = { width: 0, height: 4 };
-  camBtn.layer.shadowColor = colors.fitbodDarkGrey;
-  camBtn.layer.shadowRadius = 6;
-  camBtn.showsTouchWhenHighlighted = true;
-  camBtn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+
+  const camBtn = makeCamBtn(demoVC, btnSize);
   camBtn.addTarget(() => {
     console.log('taking screenshot');
     takeScreenshot(arView);
@@ -262,54 +322,18 @@ async function make(nav, demoVC) {
 
   const fieldHeight = 50;
   const horOffset = 12;
-  const field = await UITextField.alloc(
-    horOffset,
-    0,
-    view.frame.width - (horOffset * 2),
-    fieldHeight,
-    () => {
-      text = field.text;
-    },
-  );
-  field.textColor = {
-    ...colors.white,
-    alpha: 0.8,
-  };
-  field.backgroundColor = colors.clear;
-  const placeholderText = '👀, 🐙, Hi Mom, etc';
-  const placeholderFont = new UIFont('Lato-Regular', 17);
-  const attrPlaceholder = new NSMutableAttributedString(placeholderText);
-  attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
-    location: 0,
-    length: placeholderText.length,
-  });
-  attrPlaceholder.addAttribute(NSFontAttributeName, placeholderFont, {
-    location: 0,
-    length: placeholderText.length,
-  });
-  attrPlaceholder.addAttribute(NSKernAttributeName, 1.1, {
-    location: 0,
-    length: placeholderText.length,
-  });
-  field.attributedPlaceholder = attrPlaceholder;
 
-  const borderView = new UIView({ x: 0, y: fieldHeight, width: view.frame.width, height: 1 });
-  borderView.backgroundColor = {
-    ...colors.white,
-    alpha: 0.3,
-  };
+  const field = await makeTextField(demoVC, fieldHeight, horOffset, () => {
+    text = field.text;
+  });
 
-  const topView = new UIView({ x: 0, y: 0, width: view.frame.width, height: fieldHeight + 1 });
-  topView.backgroundColor = {
-    ...colors.white,
-    alpha: 0.1,
-  };
+  const topView = makeTopView(demoVC, fieldHeight);
   topView.addSubview(field);
-  topView.addSubview(borderView);
 
   const viewW = view.frame.width;
   const scaleSliderY = fieldHeight + 62;
   const sliderHeight = 40;
+
   const scaleSlider = new UISlider({
       x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
   });
@@ -336,10 +360,6 @@ async function make(nav, demoVC) {
     demoVC.view.addSubview(s);
     demoVC.view.bringSubviewToFront(s);
   });
-  // demoVC.view.addSubview(topView);
-  // demoVC.view.bringSubviewToFront(topView);
-  // demoVC.view.addSubview(btn);
-  // demoVC.view.bringSubviewToFront(btn);
 
   arView.viewWillAppear = () => {
     arView.session.run(config);

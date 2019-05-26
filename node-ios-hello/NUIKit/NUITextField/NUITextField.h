@@ -26,6 +26,7 @@ JS_WRAP_CLASS(UITextField, UIControl);
   JS_PROP(textColor);
   JS_PROP(placeholder);
   JS_PROP(attributedPlaceholder);
+  JS_PROP(autocorrectionType);
   Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 

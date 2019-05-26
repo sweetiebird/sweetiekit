@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITextField::Initialize(Isola
   JS_ASSIGN_PROP(proto, textColor);
   JS_ASSIGN_PROP(proto, placeholder);
   JS_ASSIGN_PROP(proto, attributedPlaceholder);
+  JS_ASSIGN_PROP(proto, autocorrectionType);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -277,4 +278,24 @@ NAN_SETTER(NUITextField::attributedPlaceholderSetter) {
   NSAttributedString *str = (NSAttributedString *)sweetiekit::FromJS(value);
 
   [ui setAttributedPlaceholder:str];
+}
+
+NAN_GETTER(NUITextField::autocorrectionTypeGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+  
+  JS_SET_RETURN(JS_NUM([ui autocorrectionType]));
+}
+
+NAN_SETTER(NUITextField::autocorrectionTypeSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+  
+  UITextAutocorrectionType type = value->IsNumber() ? UITextAutocorrectionType(TO_INT32(value)) : UITextAutocorrectionTypeDefault;
+
+  @autoreleasepool {
+    [ui setAutocorrectionType:type];
+  }
 }

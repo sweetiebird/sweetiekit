@@ -165,6 +165,39 @@ namespace sweetiekit
     return result;
   }
 
+  Local<Array> JSArrayFromCGAffineTransform(CGAffineTransform xform)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    Local<Array> result = Nan::New<Array>();
+    Nan::Set(result, static_cast<uint32_t>(0), JS_NUM(xform.a));
+    Nan::Set(result, static_cast<uint32_t>(1), JS_NUM(xform.b));
+    Nan::Set(result, static_cast<uint32_t>(2), JS_NUM(xform.c));
+    Nan::Set(result, static_cast<uint32_t>(3), JS_NUM(xform.d));
+    Nan::Set(result, static_cast<uint32_t>(4), JS_NUM(xform.tx));
+    Nan::Set(result, static_cast<uint32_t>(5), JS_NUM(xform.ty));
+
+    return result;
+  }
+  
+  CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing)
+  {
+    Nan::EscapableHandleScope handleScope;
+
+    if (jsThing->IsArray()) {
+      Local<Array> array = Local<Array>::Cast(jsThing);
+      double a = TO_DOUBLE(array->Get(0));
+      double b = TO_DOUBLE(array->Get(1));
+      double c = TO_DOUBLE(array->Get(2));
+      double d = TO_DOUBLE(array->Get(3));
+      double tx = TO_DOUBLE(array->Get(4));
+      double ty = TO_DOUBLE(array->Get(5));
+      return CGAffineTransformMake(a, b, c, d, tx, ty);
+    }
+
+    return CGAffineTransformIdentity;
+  }
+
   id FromJS(Local<Value> jsThing)
   {
     Nan::EscapableHandleScope handleScope;

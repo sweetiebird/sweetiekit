@@ -194,6 +194,17 @@ module.exports.ARHitTestResultType = {
   existingPlaneUsingGeometry                          : (1 << 5),
 };
 
+const UITextAutocorrectionType = {
+  default: 0,
+  none: 1,
+  yes: 2,
+};
+
+const UITextSpellCheckingType = {
+  default: 0,
+  none: 1,
+  yes: 2,
+};
 
 //typedef NS_ENUM(NSInteger, UITouchPhase)
 module.exports.UITouchPhase = {
@@ -229,3 +240,5 @@ module.exports.UIStackViewAlignment = UIStackViewAlignment;
 module.exports.UITableViewCellStyle = UITableViewCellStyle;
 module.exports.UIModalPresentationStyle = UIModalPresentationStyle;
 module.exports.UIPopoverArrowDirection = UIPopoverArrowDirection;
+module.exports.UITextAutocorrectionType = UITextAutocorrectionType;
+module.exports.UITextSpellCheckingType = UITextSpellCheckingType;
