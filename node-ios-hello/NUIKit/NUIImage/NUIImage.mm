@@ -35,34 +35,37 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *
 
 NAN_METHOD(NUIImage::New) {
   Nan::HandleScope scope;
+  @autoreleasepool {
+    Local<Object> imgObj = info.This();
 
-  Local<Object> imgObj = info.This();
+    NUIImage *img = new NUIImage();
 
-  NUIImage *img = new NUIImage();
+    if (info[0]->IsExternal()) {
+      img->SetNSObject((__bridge UIImage *)(info[0].As<External>()->Value()));
+    } else if (info.Length() > 0 && info[0]->IsString()) {
+      std::string imageName;
+      if (info[0]->IsString()) {
+        Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+        imageName = *utf8Value;
+      } else {
+        // throw
+      }
+      NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
 
-  if (info[0]->IsExternal()) {
-    img->SetNSObject((__bridge UIImage *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0 && info[0]->IsString()) {
-    std::string imageName;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      imageName = *utf8Value;
-    } else {
-      // throw
-    }
-    NSString* result = [NSString stringWithUTF8String:imageName.c_str()];
-
-    @autoreleasepool {
       img->SetNSObject([UIImage imageNamed:result]);
-    }
-  } else {
-    @autoreleasepool {
+    } else if (info.Length() > 0 && info[0]->IsArrayBuffer()) {
+      Local<ArrayBuffer> value = Local<ArrayBuffer>::Cast(info[0]);
+      NSUInteger length = value->GetContents().ByteLength();
+      const void* data = value->GetContents().Data();
+      CGFloat scale = info[1]->IsNumber() ? TO_FLOAT(info[1]) : 1.0;
+      img->SetNSObject([[UIImage alloc] initWithData:[[NSData alloc] initWithBytes:data length:length] scale:scale]);
+    } else {
       img->SetNSObject([[UIImage alloc] init]);
     }
-  }
-  img->Wrap(imgObj);
+    img->Wrap(imgObj);
 
-  info.GetReturnValue().Set(imgObj);
+    info.GetReturnValue().Set(imgObj);
+  }
 }
 
 NUIImage::NUIImage () {}
