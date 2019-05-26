@@ -1,34 +1,34 @@
 //
-//  NARFrame.h
+//  NCIImage.h
 //  node-ios-hello
 //
-//  Created by Emily Kolar on 5/12/19.
+//  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NARFrame_h
-#define NARFrame_h
+#ifndef NCIImage_h
+#define NCIImage_h    
 
+#import <UIKit/UIKit.h>
 #include "NNSObject.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NARFrame : public NNSObject {
+class NCIImage : public NNSObject {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NARFrame();
-  virtual ~NARFrame();
+  NCIImage();
+  virtual ~NCIImage();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(displayTransform);
-  JS_PROP(Camera);
-  JS_PROP(LightEstimate);
-  JS_PROP(capturedImage);
+  static NAN_METHOD(initWithCVPixelBuffer);
+  static NAN_METHOD(imageByApplyingTransform);
+  static NAN_METHOD(initWithImage);
 };
 
-#endif /* NARFrame_h */
+#endif /* NCIImage_h */

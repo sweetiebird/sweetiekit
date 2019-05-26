@@ -29,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Iso
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("keyWindow"), KeyWindowGetter);
+  JS_ASSIGN_PROP_READONLY(proto, statusBarOrientation);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -146,4 +147,10 @@ NAN_METHOD(NUIApplication::Main) {
 NUIApplication::NUIApplication () {}
 NUIApplication::~NUIApplication () {}
 
+NAN_GETTER(NUIApplication::statusBarOrientationGetter) {
+  Nan::HandleScope scope;
 
+  JS_UNWRAP(UIApplication, ui);
+
+  JS_SET_RETURN(JS_NUM([ui statusBarOrientation]));
+}

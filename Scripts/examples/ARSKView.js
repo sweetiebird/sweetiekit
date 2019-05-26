@@ -13,6 +13,7 @@ const {
   NSStrokeWidthAttributeName,
   UITextAutocorrectionType,
   UITextSpellCheckingType,
+  UIImageOrientation,
 } = require('./enums');
 
 const {
@@ -138,6 +139,28 @@ function takeScreenshot(view) {
     }
   } finally {
     CoreGraphics.UIGraphicsEndImageContext();
+  }
+}
+
+function getCapturedImage(arView) {
+  try {
+    const orientation = (new UIApplication()).statusBarOrientation;
+    const size = { width: arView.frame.width, height: arView.frame.height };
+    const xform = arView.session.currentFrame.displayTransform(orientation, size);
+    const xFormMatrix = new THREE.Matrix3().fromArray(xform);
+    const matrix = new THREE.Matrix3().rotate(90);
+    xFormMatrix.multiply(matrix);
+    const ciImg = arView.session.currentFrame.capturedImage;
+    const xformedImg = ciImg.imageByApplyingTransform(xFormMatrix);
+    console.log(xformedImg);
+    const uiImg = UIImage.initWithCIImage(xformedImg, 1, orientation);
+    console.log(ciImg, xformedImg, uiImg);
+    const ssView = new UIImageView(uiImg);
+    ssView.frame = { x: 0, y: 0, width: arView.frame.width, height: arView.frame.height };
+    return ssView;
+  } catch (err) {
+    console.log(err);
+    return undefined;
   }
 }
 
@@ -385,7 +408,9 @@ async function make(nav, demoVC) {
   camBtn.addTarget(() => {
     console.log('recording');
     //toggleRecordScreen(demoVC, recorder);
-    takeScreenshot(demoVC.view);
+    // takeScreenshot(demoVC.view);
+    const imgView = getCapturedImage(arView);
+    if (imgView) demoVC.view.addSubview(imgView);
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;

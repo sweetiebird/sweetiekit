@@ -72,6 +72,7 @@
 		A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */; };
 		A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */; };
 		A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */; };
+		A1710EBC229A92C000EC7C86 /* NCIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EBB229A92BF00EC7C86 /* NCIImage.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
@@ -346,6 +347,8 @@
 		A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
 		A1710EAA229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewControllerDelegate.h; sourceTree = "<group>"; };
 		A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SRPPreviewViewControllerDelegate.swift; path = "node-ios-hello/NReplayKit/SRPPreviewViewControllerDelegate.swift"; sourceTree = SOURCE_ROOT; };
+		A1710EBA229A92BF00EC7C86 /* NCIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIImage.h; sourceTree = "<group>"; };
+		A1710EBB229A92BF00EC7C86 /* NCIImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIImage.mm; sourceTree = "<group>"; };
 		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
 		A174A16922822161002A8216 /* NAVAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NAVAudioPlayer.h; sourceTree = "<group>"; };
 		A174A16A22822169002A8216 /* NAVAudioPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioPlayer.mm; sourceTree = "<group>"; };
@@ -997,6 +1000,23 @@
 				A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */,
 			);
 			path = NRPPreviewViewControllerDelegate;
+			sourceTree = "<group>";
+		};
+		A1710EB8229A92BF00EC7C86 /* NCoreImage */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EB9229A92BF00EC7C86 /* NCIImage */,
+			);
+			path = NCoreImage;
+			sourceTree = "<group>";
+		};
+		A1710EB9229A92BF00EC7C86 /* NCIImage */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EBA229A92BF00EC7C86 /* NCIImage.h */,
+				A1710EBB229A92BF00EC7C86 /* NCIImage.mm */,
+			);
+			path = NCIImage;
 			sourceTree = "<group>";
 		};
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
@@ -2046,6 +2066,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -2264,6 +2285,7 @@
 				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
 				A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */,
+				A1710EBC229A92C000EC7C86 /* NCIImage.mm in Sources */,
 				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,

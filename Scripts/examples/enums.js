@@ -1,3 +1,7 @@
+const SweetieKit = require('std:sweetiekit.node');
+
+const { UIKit } = SweetieKit;
+
 const CLLocationAccuracy = {
   BestForNavigation: 'kCLLocationAccuracyBestForNavigation',
 };
@@ -244,3 +248,4 @@ module.exports.UIModalPresentationStyle = UIModalPresentationStyle;
 module.exports.UIPopoverArrowDirection = UIPopoverArrowDirection;
 module.exports.UITextAutocorrectionType = UITextAutocorrectionType;
 module.exports.UITextSpellCheckingType = UITextSpellCheckingType;
+module.exports.UIImageOrientation = UIKit.UIImageOrientation();

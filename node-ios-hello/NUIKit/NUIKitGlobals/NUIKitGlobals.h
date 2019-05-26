@@ -27,6 +27,7 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(UIImageWriteToSavedPhotosAlbum);
+  static NAN_METHOD(UIImageOrientation);
 };
 
 #endif /* NUIKitGlobals_h */

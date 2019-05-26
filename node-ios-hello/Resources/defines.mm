@@ -144,6 +144,21 @@ namespace sweetiekit
     return handleScope.Escape(result);
   }
 
+  bool IsJSFrame(Local<Value> jsThing)
+  {
+    Nan::HandleScope scope;
+
+    if (jsThing->IsObject()) {
+      Local<Object> jsObj = JS_OBJ(jsThing);
+      return JS_HAS(jsObj, JS_STR("x"))
+        && JS_HAS(jsObj, JS_STR("y"))
+        && JS_HAS(jsObj, JS_STR("width"))
+        && JS_HAS(jsObj, JS_STR("height"));
+    }
+  
+    return false;
+  }
+
   CGRect FrameFromJSObj(Local<Value> jsThing)
   {
     Nan::HandleScope scope;
@@ -254,6 +269,33 @@ namespace sweetiekit
     } else if (value->IsFloat64Array()) {
       Local<Float64Array> xform = Local<Float64Array>::Cast(value);
       for (uint32_t i = 0; i < 16; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetTransform3(simd_float3x3& transform, Local<Value> value) {
+    Nan::HandleScope scope;
+    float* matrix = (float*)&transform;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      value = JS_OBJ(value)->Get(JS_STR("elements"));
+    }
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      for (uint32_t i = 0; i < 9; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 9; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      for (uint32_t i = 0; i < 9; i++) {
         matrix[i] = TO_FLOAT(xform->Get(i));
       }
     } else {

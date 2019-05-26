@@ -30,6 +30,8 @@ public:
   static NAN_GETTER(KeyWindowGetter);
   
   static NAN_METHOD(Main);
+  
+  JS_PROP(statusBarOrientation);
 
 private:
   static UIWindow* tmp_UIWindow;

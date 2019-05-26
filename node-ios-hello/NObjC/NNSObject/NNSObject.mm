@@ -11,6 +11,7 @@
 #import <SceneKit/SceneKit.h>
 #import <MapKit/MapKit.h>
 #import <ARKit/ARKit.h>
+#import <CoreImage/CoreImage.h>
 #import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 
@@ -465,6 +466,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
+#include "NCIImage.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -494,6 +496,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[CABasicAnimation class]]) {
         return NCABasicAnimation::type;
+      }
+      
+      // ========= core image
+
+       if ([obj isKindOfClass:[CIImage class]]) {
+        return NCIImage::type;
       }
 
       // MapKit

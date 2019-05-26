@@ -16,6 +16,7 @@ using namespace node;
 
 JS_WRAP_CLASS(UIImage, NSObject);
 JS_METHOD(toArrayBuffer);
+static NAN_METHOD(initWithCIImage);
 JS_WRAP_CLASS_END(UIImage);
 
 #endif /* NUIImage_h */

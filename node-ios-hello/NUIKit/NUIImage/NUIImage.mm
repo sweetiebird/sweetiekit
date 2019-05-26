@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <CoreImage/CoreImage.h>
 #include "defines.h"
 #include "NUIImage.h"
+#include "NCIImage.h"
 
 Nan::Persistent<FunctionTemplate> NUIImage::type;
 
@@ -29,6 +31,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "initWithCIImage", initWithCIImage);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -99,4 +102,25 @@ NAN_METHOD(NUIImage::toArrayBuffer)
     }
     JS_SET_RETURN(result);
   }
+}
+
+NAN_METHOD(NUIImage::initWithCIImage) {
+  Nan::HandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NUIImage)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NUIImage *ui = ObjectWrap::Unwrap<NUIImage>(obj);
+
+  @autoreleasepool {
+    NCIImage *img = ObjectWrap::Unwrap<NCIImage>(Local<Object>::Cast(info[0]));
+    double scale = TO_DOUBLE(info[1]);
+    NSNumber *val = [[NSNumber alloc] initWithDouble:TO_DOUBLE(info[2])];
+    UIImageOrientation orient = UIImageOrientation([val integerValue]);
+
+    ui->SetNSObject([[UIImage alloc] initWithCIImage:img->As<CIImage>() scale:scale orientation:orient]);
+  }
+
+  JS_SET_RETURN(obj);
 }

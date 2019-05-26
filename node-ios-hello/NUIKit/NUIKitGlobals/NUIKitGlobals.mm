@@ -33,6 +33,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIKitGlobals::Initialize(Isol
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
   Nan::SetMethod(ctorFn, "UIImageWriteToSavedPhotosAlbum", UIImageWriteToSavedPhotosAlbum);
+  Nan::SetMethod(ctorFn, "UIImageOrientation", UIImageOrientation);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -85,4 +86,21 @@ NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   [[SUIKitGlobals shared] associateValue:target withKey:@"sweetiekit.uikitglobals.uiimagewritetosavedphotosalbum"];
 
   [SUIKitGlobals uiImageWriteToSavedPhotosAlbumWithImage:img target:target selector:[target callbackSelector] contextInfo:nullptr];
+}
+
+NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
+  Nan::HandleScope scope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  
+  result->Set(JS_STR("up"), JS_NUM(UIImageOrientationUp));
+  result->Set(JS_STR("down"), JS_NUM(UIImageOrientationDown));
+  result->Set(JS_STR("left"), JS_NUM(UIImageOrientationLeft));
+  result->Set(JS_STR("right"), JS_NUM(UIImageOrientationRight));
+  result->Set(JS_STR("upMirrored"), JS_NUM(UIImageOrientationUpMirrored));
+  result->Set(JS_STR("downMirrored"), JS_NUM(UIImageOrientationDownMirrored));
+  result->Set(JS_STR("leftMirrored"), JS_NUM(UIImageOrientationLeftMirrored));
+  result->Set(JS_STR("rightMirrored"), JS_NUM(UIImageOrientationRightMirrored));
+  
+  JS_SET_RETURN(result);
 }

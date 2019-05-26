@@ -382,6 +382,8 @@ namespace sweetiekit {
   bool IsJSColor(Local<Value> jsThing);
   Local<Array> JSArrayFromCGAffineTransform(CGAffineTransform xform);
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing);
+  bool IsJSFrame(Local<Value> jsThing);
+  bool SetTransform3(simd_float3x3& transform, Local<Value> value);
 }
 
 extern "C" {

@@ -119,6 +119,7 @@
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
+#include "NCIImage.h"
 #include <unistd.h>
 
 #include <string>
@@ -672,6 +673,11 @@ void InitExports(Local<Object> exports) {
         auto N_MKMapViewDelegate = NMKMapViewDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("MKMapViewDelegate").ToLocalChecked(), N_MKMapViewDelegate.first);
   
+        // core image
+
+        auto N_CIImage = NCIImage::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("CIImageCIImage").ToLocalChecked(), N_CIImage.first);
+
         // misc
   
         auto N_CoreGraphicsGlobals = NCoreGraphicsGlobals::Initialize(Isolate::GetCurrent());
