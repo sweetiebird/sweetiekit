@@ -28,6 +28,8 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(textureWithImage);
+  JS_PROP(size);
+  JS_PROP(textureRect);
 };
 
 #endif /* NSKTexture_h */

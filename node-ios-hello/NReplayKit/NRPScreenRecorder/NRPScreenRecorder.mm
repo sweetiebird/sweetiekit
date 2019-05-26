@@ -1,11 +1,11 @@
-//
-//  RPScreenRecorder.m
-//  node-ios-hello
-//
-//  Created by Emily Kolar on 2019-5-26.
-//  Copyright © 2019 sweetiebird. All rights reserved.
-//
-    
+////
+////  RPScreenRecorder.m
+////  node-ios-hello
+////
+////  Created by Emily Kolar on 2019-5-26.
+////  Copyright © 2019 sweetiebird. All rights reserved.
+////
+
 #import <Foundation/Foundation.h>
 #import <ReplayKit/ReplayKit.h>
 #include "defines.h"
@@ -27,7 +27,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NRPScreenRecorder::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "startCaptureWithHandler", startCaptureWithHandler);
+//  Nan::SetMethod(proto, "startCaptureWithHandler", startCaptureWithHandler);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -56,7 +56,3 @@ NAN_METHOD(NRPScreenRecorder::New) {
 
 NRPScreenRecorder::NRPScreenRecorder () {}
 NRPScreenRecorder::~NRPScreenRecorder () {}
-
-NAN_METHOD(NRPScreenRecorder::startCaptureWithHandler) {
-  Nan::EscapableHandleScope scope;
-}

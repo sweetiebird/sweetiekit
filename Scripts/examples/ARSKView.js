@@ -243,9 +243,10 @@ async function make(nav, demoVC) {
 
   const _node = (text) => {
     if (text instanceof UIImage || text instanceof SKTexture) {
-      const node = new SKSpriteNode(text);
-      node.xScale = 0.1;
-      node.yScale = 0.1;
+      const size = text.size;
+      size.width *= scaleSlider.value;
+      size.height *= scaleSlider.value;
+      const node = new SKSpriteNode(text, size);
       return node;
     } else {
       const node = new SKLabelNode();
@@ -276,17 +277,16 @@ async function make(nav, demoVC) {
       char = {};
       chars.push(char);
     }
-    if (txt instanceof UIImage || txt instanceof SKTexture) {
-      if (!char.node) {
-        char.node = _node(txt);
-      }
-    } else {
-      if (!char.node) {
-        char.node = _node(txt);
-      }
+    if (!char.node) {
+      char.node = _node(txt);
+    }
+    if (typeof txt === "string") {
       char.node.text = _text(txt);
     }
     if (char.anchor) {
+      if (!xform) {
+        xform = char.anchor.transform;
+      }
       arView.session.remove(char.anchor);
       delete char.anchor;
     }
@@ -315,6 +315,9 @@ async function make(nav, demoVC) {
     //console.log('touchesMoved', touches.length, pt);
     if (hits && hits.length > 0) {
       active = _update(hits ? hits[0] : null);
+      console.log(active.node.xScale, active.node.yScale, 
+        active.node.size ? active.node.size.width : -1,
+        active.node.size ? active.node.size.height : -1);
     }
   };
 
@@ -353,7 +356,7 @@ async function make(nav, demoVC) {
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;
-  const horOffset = 12;
+  const horOffset = 24;
 
   const field = await makeTextField(demoVC, fieldHeight, horOffset, () => {
     text = field.text;
@@ -363,19 +366,26 @@ async function make(nav, demoVC) {
   topView.addSubview(field);
 
   const viewW = view.frame.width;
-  const scaleSliderY = fieldHeight + 62;
-  const sliderHeight = 40;
+  const scaleSliderY = fieldHeight + 0;
+  const sliderHeight = 20;
 
   const scaleSlider = new UISlider({
       x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
   });
+  scaleSlider.value = 0.5;
   scaleSlider.addTarget(() => {
     console.log('scale slider changed', scaleSlider.value);
+    if (active && active.node) {
+      active.node.removeFromParent();
+      delete active.node;
+      _update();
+    }
   }, UIControlEvents.valueChanged);
 
   const distSlider = new UISlider({
     x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
   });
+  distSlider.value = 0.5;
   distSlider.addTarget(() => {
     console.log('distance slider changed', distSlider.value);
   }, UIControlEvents.valueChanged);
@@ -383,11 +393,12 @@ async function make(nav, demoVC) {
   const rotSlider = new UISlider({
     x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
   });
+  rotSlider.value = 0.5;
   rotSlider.addTarget(() => {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEvents.valueChanged);
 
-  const subviews = [topView, scaleSlider, distSlider, rotSlider, camBtn];
+  const subviews = [topView, scaleSlider/*, distSlider, rotSlider*/, camBtn];
   subviews.forEach((s) => {
     demoVC.view.addSubview(s);
     demoVC.view.bringSubviewToFront(s);
