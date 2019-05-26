@@ -178,8 +178,6 @@ NAN_GETTER(NNSObject::debugDescriptionGetter) {
 }
 
 NAN_GETTER(NNSObject::methodsGetter) {
-  Nan::EscapableHandleScope scope;
-  
   JS_UNWRAP(NSObject, ns);
   if (!object_isClass(ns)) {
     Nan::ThrowError("NSObject:methods: not a class");
@@ -191,7 +189,6 @@ NAN_GETTER(NNSObject::methodsGetter) {
   __block unsigned int n = 0;
   sweetiekit::forEachMethodInClass(cls, ^(Method m) {
     @autoreleasepool {
-      Nan::EscapableHandleScope scope;
       Local<Object> obj = Nan::New<Object>();
       auto argc = method_getNumberOfArguments(m);
       obj->Set(JS_STR("name"), JS_STR([NSStringFromSelector(method_getName(m)) UTF8String]));
@@ -202,11 +199,11 @@ NAN_GETTER(NNSObject::methodsGetter) {
       }
       obj->Set(JS_STR("arguments"), argv);
       obj->Set(JS_STR("typeEncoding"), JS_STR(method_getTypeEncoding(m)));
-      result->Set(n, scope.Escape(obj));
+      result->Set(n, obj);
       n++;
     }
   });
-  JS_SET_RETURN(scope.Escape(result));
+  JS_SET_RETURN(result);
 }
 
 NAN_GETTER(NNSObject::propertiesGetter) {
