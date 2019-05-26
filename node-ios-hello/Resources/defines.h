@@ -114,14 +114,18 @@ using namespace node;
 NAN_GETTER(N##ElType::jsName##Getter) { \
   Nan::HandleScope scope; \
   JS_UNWRAP(ElType, el); \
-  __VA_ARGS__; \
+  @autoreleasepool { \
+    __VA_ARGS__; \
+  } \
 }
 
 #define JS_SETTER(ElType, el, jsName, ...) \
 NAN_SETTER(N##ElType::jsName##Setter) { \
   Nan::HandleScope scope; \
   JS_UNWRAP(ElType, el); \
-  __VA_ARGS__; \
+  @autoreleasepool { \
+    __VA_ARGS__; \
+  } \
 }
 
 #define JS_WRAP_CLASS(name, base) \
