@@ -141,20 +141,20 @@ function takeScreenshot(view) {
 }
 
 function toggleRecordScreen(demoVC, recorder) {
-  console.log('//----> toggleRecordScreen', recorder.isAvailable, recorder.isRecording);
   const del = new RPPreviewViewControllerDelegate();
   del.previewControllerDidFinish = (previewController) => {
+    console.log('preview controller did finish - uidemos.js toggleRecordScreen()');
     previewController.dismiss(true, () => {});
   };
 
   if (recorder.isRecording) {
-    console.log('stopping recording');
+    console.log('stop recording - uidemos.js toggleRecordScreen()');
     recorder.stopRecordingWithHandler((previewController) => {
       previewController.delegate = del;
       demoVC.present(previewController, true, () => {});
     });
   } else if (recorder.isAvailable) {
-    console.log('starting recording');
+    console.log('start recording - uidemos.js toggleRecordScreen()');
     recorder.startRecordingWithHandler(() => {});
   }
 }

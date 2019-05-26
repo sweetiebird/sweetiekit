@@ -28,7 +28,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NRPScreenRecorder::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "startRecording", startRecordingWithHandler);
+  Nan::SetMethod(proto, "startRecordingWithHandler", startRecordingWithHandler);
   Nan::SetMethod(proto, "stopRecordingWithHandler", stopRecordingWithHandler);
 
   // ctor
