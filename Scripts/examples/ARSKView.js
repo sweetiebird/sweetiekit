@@ -264,9 +264,9 @@ async function make(nav, demoVC) {
 
       const attrTxt = new NSMutableAttributedString(str);
       attrTxt.addAttribute(NSForegroundColorAttributeName, colors.white, attrRange);
-      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Regular', 17), attrRange);
+      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Bold', 17), attrRange);
       attrTxt.addAttribute(NSStrokeColorAttributeName, colors.black, attrRange);
-      attrTxt.addAttribute(NSStrokeWidthAttributeName, -2.0, attrRange);
+      attrTxt.addAttribute(NSStrokeWidthAttributeName, -4.0, attrRange);
 
       node.attributedText = attrTxt;
       return node;
