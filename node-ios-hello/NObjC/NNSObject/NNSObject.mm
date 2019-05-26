@@ -22,7 +22,7 @@
 
 - (void) associateValue:(id)value withKey:(NSString *)aKey {
   
-  objc_setAssociatedObject( self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN );
+  objc_setAssociatedObject(self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (id) associatedValueForKey:(NSString *)aKey {
@@ -31,8 +31,7 @@
 }
 
 - (void) dissociateValueForKey:(NSString *)aKey {
-  id val = [self associatedValueForKey:aKey];
-  objc_removeAssociatedObjects(val);
+  objc_setAssociatedObject(self, (__bridge void *)aKey, nil, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

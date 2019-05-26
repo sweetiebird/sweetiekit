@@ -82,7 +82,7 @@ NAN_METHOD(NRPScreenRecorder::stopRecordingWithHandler) {
     dispatch_ui_sync(dispatch_get_main_queue(), ^{
       Nan::HandleScope scope;
       Local<Value> ctrlObj = sweetiekit::GetWrapperFor(previewViewController, NRPPreviewViewController::type);
-      fn.Call("NRPScreenRecorder::startRecording handler", ctrlObj);
+      fn.Call("NRPScreenRecorder::stopRecording handler", ctrlObj);
       fn.Reset();
     });
   }];

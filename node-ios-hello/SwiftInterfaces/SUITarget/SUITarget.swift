@@ -8,12 +8,19 @@
 
 import Foundation
 
-typealias TargetClosure = (Any?) -> Void
 typealias DeinitClosure = () -> Void
+typealias TargetClosure = (Any?) -> Void
 
-@objc class SUITarget: NSObject {
-  @objc var callbackClosure: TargetClosure?
+@objc class SUITargetBase: NSObject {
   @objc var deinitClosure: DeinitClosure?
+  
+  deinit {
+    print("deinit")
+    self.deinitClosure?()
+  }
+}
+@objc class SUITarget: SUITargetBase {
+  @objc var callbackClosure: TargetClosure?
   @objc var callbackSelector: Selector!
   
   override init() {
@@ -23,10 +30,5 @@ typealias DeinitClosure = () -> Void
 
   @objc func callback(_ sender: Any?) {
     self.callbackClosure?(sender)
-  }
-  
-  deinit {
-    print("deinit")
-    self.deinitClosure?()
   }
 }
