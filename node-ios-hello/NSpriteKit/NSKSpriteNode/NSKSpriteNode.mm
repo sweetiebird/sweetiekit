@@ -63,7 +63,28 @@ NAN_METHOD(NSKSpriteNode::New) {
     }
   } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NSKTexture)) {
     JS_UNWRAPPED(info[0], SKTexture, tex);
-    node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex]);
+    @autoreleasepool {
+      UIColor* color = [UIColor whiteColor];
+      CGSize size = [tex size];
+      auto jsSize = info[2];
+      auto jsColor = info[1];
+      if (!info[2]->IsObject()) {
+        jsColor = Nan::Undefined();
+        jsSize = info[1];
+      }
+      if (jsSize->IsObject()) {
+        size.width = TO_DOUBLE(JS_OBJ(jsSize)->Get(JS_STR("width")));
+        size.height = TO_DOUBLE(JS_OBJ(jsSize)->Get(JS_STR("height")));
+      }
+      if (jsColor->IsObject()) {
+        double red = TO_DOUBLE(JS_OBJ(jsColor)->Get(JS_STR("red")));
+        double green = TO_DOUBLE(JS_OBJ(jsColor)->Get(JS_STR("green")));
+        double blue = TO_DOUBLE(JS_OBJ(jsColor)->Get(JS_STR("blue")));
+        double alpha = TO_DOUBLE(JS_OBJ(jsColor)->Get(JS_STR("alpha")));
+        color = [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
+      }
+      node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex color:color size:size]);
+    }
   } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NUIImage)) {
     JS_UNWRAPPED(info[0], UIImage, img);
     SKTexture* tex = [SKTexture textureWithImage:img];
@@ -103,7 +124,6 @@ NAN_GETTER(NSKSpriteNode::SizeGetter) {
   Local<Object> result = Object::New(Isolate::GetCurrent());
   result->Set(JS_STR("width"), JS_NUM(w));
   result->Set(JS_STR("height"), JS_NUM(h));
-
   JS_SET_RETURN(result);
 }
 
