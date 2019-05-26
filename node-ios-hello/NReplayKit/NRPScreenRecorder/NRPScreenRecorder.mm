@@ -7,7 +7,7 @@
 //
     
 #import <Foundation/Foundation.h>
-
+#import <ReplayKit/ReplayKit.h>
 #include "defines.h"
 #include "NNSObject.h"
 #include "NRPScreenRecorder.h"
@@ -27,10 +27,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NRPScreenRecorder::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Nan::SetMethod(proto, "startCaptureWithHandler", startCaptureWithHandler);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
+  
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
@@ -45,7 +46,7 @@ NAN_METHOD(NRPScreenRecorder::New) {
     ui->SetNSObject((__bridge RPScreenRecorder *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      ui->SetNSObject([[RPScreenRecorder alloc] init]);
+      ui->SetNSObject([RPScreenRecorder sharedRecorder]);
     }
   }
   ui->Wrap(obj);
@@ -55,3 +56,7 @@ NAN_METHOD(NRPScreenRecorder::New) {
 
 NRPScreenRecorder::NRPScreenRecorder () {}
 NRPScreenRecorder::~NRPScreenRecorder () {}
+
+NAN_METHOD(NRPScreenRecorder::startCaptureWithHandler) {
+  Nan::EscapableHandleScope scope;
+}

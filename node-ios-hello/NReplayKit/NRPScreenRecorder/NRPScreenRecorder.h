@@ -26,6 +26,7 @@ public:
   virtual ~NRPScreenRecorder();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(startCaptureWithHandler);
 };
 
 #endif /* NRPScreenRecorder_h */
