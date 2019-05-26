@@ -71,7 +71,7 @@ NAN_GETTER(NUISlider::ValueGetter) {
   
   JS_UNWRAP(UISlider, ui);
   
-  JS_SET_RETURN(JS_BOOL([ui value]));
+  JS_SET_RETURN(JS_NUM([ui value]));
 }
 
 NAN_SETTER(NUISlider::ValueSetter) {
