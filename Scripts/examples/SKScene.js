@@ -44,7 +44,7 @@ function touchesEnded(touches) {
       y: view.frame.height - loc.y,
     };
 
-    let projectile = new SKSpriteNode(new UIImage('projectile'));
+    let projectile = new SKSpriteNode('projectile');
     projectile.position = player.position;
 
     projectile.physicsBody = SKPhysicsBody.bodyWithCircleOfRadius(projectile.size.width / 2);
