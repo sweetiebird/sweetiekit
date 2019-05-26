@@ -10,9 +10,13 @@ const {
   SKScene,
   ARAnchor,
   UITextField,
+  UIImage,
+  SKTexture,
+  SKSpriteNode,
 } = SweetieKit;
 
-let text = '👀';
+//let text = '👀';
+let text = new SKTexture(new UIImage("nic"));
 
 function lineWrap(s) {
   if (s.length > 600) {
@@ -113,12 +117,17 @@ async function make(nav, demoVC) {
   }
 
   const _node = (text) => {
-    const node = new SKLabelNode();
-    const txt = _text(text);
-    node.numberOfLines = textWrap(txt).split('\n').length;
-    //node.preferredMaxLayoutWidth = 10;
-    node.text = txt.substr(0,500);
-    return node;
+    if (text instanceof UIImage || text instanceof SKTexture) {
+      const node = new SKSpriteNode(text);
+      return node;
+    } else {
+      const node = new SKLabelNode();
+      const txt = _text(text);
+      node.numberOfLines = textWrap(txt).split('\n').length;
+      //node.preferredMaxLayoutWidth = 10;
+      node.text = txt.substr(0,500);
+      return node;
+    }
   };
 
   const _update = (xform, txt = text, char = active) => {
@@ -126,10 +135,16 @@ async function make(nav, demoVC) {
       char = {};
       chars.push(char);
     }
-    if (!char.node) {
-      char.node = _node(txt);
+    if (txt instanceof UIImage || txt instanceof SKTexture) {
+      if (!char.node) {
+        char.node = _node(txt);
+      }
+    } else {
+      if (!char.node) {
+        char.node = _node(txt);
+      }
+      char.node.text = _text(txt);
     }
-    char.node.text = _text(txt);
     if (char.anchor) {
       arView.session.remove(char.anchor);
       delete char.anchor;
