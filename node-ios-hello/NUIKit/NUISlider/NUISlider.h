@@ -28,6 +28,9 @@ public:
   static NAN_METHOD(New);
   static NAN_METHOD(SetValue);
   JS_PROP(Value);
+  static NAN_METHOD(setThumbImage);
+  JS_PROP(currentThumbImage);
+  JS_PROP(thumbTintColor);
 };
 
 #endif /* NUISlider_h */

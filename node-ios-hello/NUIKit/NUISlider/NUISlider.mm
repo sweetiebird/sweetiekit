@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NUISlider.h"
 #include "NUIControl.h"
+#include "NUIImage.h"
 
 Nan::Persistent<FunctionTemplate> NUISlider::type;
 
@@ -28,6 +29,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUISlider::Initialize(Isolate 
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP(proto, "value", Value);
   Nan::SetMethod(proto, "setValue", SetValue);
+  Nan::SetMethod(proto, "setThumbImage", setThumbImage);
+  JS_ASSIGN_PROP_READONLY(proto, currentThumbImage);
+  JS_ASSIGN_PROP(proto, thumbTintColor);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -89,3 +93,45 @@ NAN_METHOD(NUISlider::SetValue) {
 
   [ui setValue:TO_FLOAT(info[0]) animated:TO_BOOL(info[1])];
 }
+
+NAN_METHOD(NUISlider::setThumbImage) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UISlider, ui);
+  
+  if (!JS_INSTANCEOF(info[0], NUIImage)) {
+    Nan::ThrowError("NUISlider::setThumbImage: expected 1st arg to be a UIImage");
+    return;
+  }
+  
+  JS_UNWRAPPED(info[0], UIImage, img);
+  
+  UIControlState state = [ui state];
+  if (info[1]->IsUint32()) {
+    state = TO_UINT32(info[1]);
+  }
+  [ui setThumbImage:img forState:state];
+}
+
+JS_GETTER(UISlider, ui, currentThumbImage, {
+  UIImage* img = [ui currentThumbImage];
+  if (img != nullptr) {
+    JS_SET_RETURN(sweetiekit::GetWrapperFor(img, NUIImage::type));
+  }
+});
+
+JS_GETTER(UISlider, ui, thumbTintColor, {
+  UIColor* color = [ui thumbTintColor];
+  if (color != nullptr) {
+    JS_SET_RETURN(sweetiekit::JSObjFromUIColor(color));
+  }
+});
+
+JS_SETTER(UISlider, ui, thumbTintColor, {
+  UIColor* color = sweetiekit::UIColorFromJSColor(value);
+  if (color == nullptr) {
+    Nan::ThrowError("NUISlider::thumbTintColorSetter: Expected a UIColor");
+    return;
+  }
+  [ui setThumbTintColor:color];
+});
