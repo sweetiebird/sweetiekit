@@ -11,6 +11,8 @@
 #include "defines.h"
 #include "NSKNode.h"
 #include "NSKSpriteNode.h"
+#include "NSKTexture.h"
+#include "NUIImage.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NSKSpriteNode::type;
@@ -47,14 +49,10 @@ NAN_METHOD(NSKSpriteNode::New) {
 
   if (info[0]->IsExternal()) {
     node->SetNSObject((__bridge SKSpriteNode *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
+  } else if (info.Length() > 0 && info[0]->IsString()) {
     std::string name;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      name = *utf8Value;
-    } else {
-      Nan::ThrowError("invalid argument");
-    }
+    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
+    name = *utf8Value;
 
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
@@ -62,6 +60,17 @@ NAN_METHOD(NSKSpriteNode::New) {
         node->SetNSObject([[SKSpriteNode alloc] initWithImageNamed:imageName]);
       });
     }
+  } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NSKTexture)) {
+    JS_UNWRAPPED(info[0], SKTexture, tex);
+    node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex]);
+  } else if (info.Length() > 0 && JS_INSTANCEOF(info[0], NUIImage)) {
+    JS_UNWRAPPED(info[0], UIImage, img);
+    SKTexture* tex = [SKTexture textureWithImage:img];
+    node->SetNSObject([[SKSpriteNode alloc] initWithTexture:tex]);
+  } else if (info.Length() > 0) {
+    delete node;
+    Nan::ThrowError("NSKSpriteNode::New: Invalid argument");
+    return;
   } else {
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
