@@ -5,6 +5,7 @@ THREE = require('../vendor/three/three');
 const colors = require('./colors');
 const {
   UIControlState,
+  UIControlEvents,
   NSFontAttributeName,
   NSForegroundColorAttributeName,
   NSKernAttributeName,
@@ -23,6 +24,8 @@ const {
   NSMutableAttributedString,
   UIFont,
   UIView,
+  UISlider,
+  CoreGraphics,
 } = SweetieKit;
 
 let text = '👀';
@@ -36,6 +39,43 @@ function lineWrap(s) {
 
 function textWrap(s) {
  return s.split('\n').map(line => lineWrap(line)).join('\n');
+}
+
+function takeScreenshot(view) {
+  const w = view.frame.width;
+  const h = view.frame.height;
+
+  try {
+    CoreGraphics.UIGraphicsBeginImageContextWithOptions(
+      { width: w, height: h },
+      true,
+      0.0,
+    );
+
+    view.layer.renderInContext('current');
+
+    const img = CoreGraphics.UIGraphicsGetImageFromCurrentImageContext();
+
+    if (img) {
+      const ssFrame = { x: 0, y: 0, width: w * 0.4, height: h * 0.4 };
+      const ssView = new UIImageView(img);
+      ssView.frame = ssFrame;
+      ssView.layer.borderWidth = 1;
+      ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+      view.addSubview(ssView);
+      view.bringSubviewToFront(ssView);
+
+      // ==========
+      // recalls UIApplicationMain and crashes?
+      // ==========
+
+      // UIKit.UIImageWriteToSavedPhotosAlbum(img, () => {
+      //   console.log('written!');
+      // });
+    }
+  } finally {
+    CoreGraphics.UIGraphicsEndImageContext();
+  }
 }
 
 async function make(nav, demoVC) {
@@ -202,26 +242,30 @@ async function make(nav, demoVC) {
   arView.presentScene(scene);
 
   const btnSize = 70;
-  const btn = new UIButton({
+  const camBtn = new UIButton({
     x: (demoVC.view.frame.width - btnSize) / 2,
     y: demoVC.view.frame.height - (124 + btnSize),
     width: btnSize,
     height: btnSize,
   });
-  btn.layer.cornerRadius = btnSize / 2;
-  btn.layer.shadowOpacity = 1;
-  btn.layer.shadowOffset = { width: 0, height: 4 };
-  btn.layer.shadowColor = colors.fitbodDarkGrey;
-  btn.layer.shadowRadius = 8;
-  btn.showsTouchWhenHighlighted = true;
-  btn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+  camBtn.layer.cornerRadius = btnSize / 2;
+  camBtn.layer.shadowOpacity = 1;
+  camBtn.layer.shadowOffset = { width: 0, height: 4 };
+  camBtn.layer.shadowColor = colors.fitbodDarkGrey;
+  camBtn.layer.shadowRadius = 6;
+  camBtn.showsTouchWhenHighlighted = true;
+  camBtn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+  camBtn.addTarget(() => {
+    console.log('taking screenshot');
+    takeScreenshot(arView);
+  }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;
-  const fieldOffset = 12;
+  const horOffset = 12;
   const field = await UITextField.alloc(
-    fieldOffset,
+    horOffset,
     0,
-    view.frame.width - (fieldOffset * 2),
+    view.frame.width - (horOffset * 2),
     fieldHeight,
     () => {
       text = field.text;
@@ -235,10 +279,7 @@ async function make(nav, demoVC) {
   const placeholderText = '👀, 🐙, Hi Mom, etc';
   const placeholderFont = new UIFont('Lato-Regular', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
-  attrPlaceholder.addAttribute(NSForegroundColorAttributeName, {
-    ...colors.white,
-    alpha: 0.7,
-  }, {
+  attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
     location: 0,
     length: placeholderText.length,
   });
@@ -258,12 +299,47 @@ async function make(nav, demoVC) {
     alpha: 0.3,
   };
 
-  demoVC.view.addSubview(field);
-  demoVC.view.bringSubviewToFront(field);
-  demoVC.view.addSubview(borderView);
-  demoVC.view.bringSubviewToFront(borderView);
-  demoVC.view.addSubview(btn);
-  demoVC.view.bringSubviewToFront(btn);
+  const topView = new UIView({ x: 0, y: 0, width: view.frame.width, height: fieldHeight + 1 });
+  topView.backgroundColor = {
+    ...colors.white,
+    alpha: 0.1,
+  };
+  topView.addSubview(field);
+  topView.addSubview(borderView);
+
+  const viewW = view.frame.width;
+  const scaleSliderY = fieldHeight + 62;
+  const sliderHeight = 40;
+  const scaleSlider = new UISlider({
+      x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
+  });
+  scaleSlider.addTarget(() => {
+    console.log('scale slider changed', scaleSlider.value);
+  }, UIControlEvents.valueChanged);
+
+  const distSlider = new UISlider({
+    x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
+  });
+  distSlider.addTarget(() => {
+    console.log('distance slider changed', distSlider.value);
+  }, UIControlEvents.valueChanged);
+
+  const rotSlider = new UISlider({
+    x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
+  });
+  rotSlider.addTarget(() => {
+    console.log('rotation slider changed', rotSlider.value);
+  }, UIControlEvents.valueChanged);
+
+  const subviews = [topView, scaleSlider, distSlider, rotSlider, camBtn];
+  subviews.forEach((s) => {
+    demoVC.view.addSubview(s);
+    demoVC.view.bringSubviewToFront(s);
+  });
+  // demoVC.view.addSubview(topView);
+  // demoVC.view.bringSubviewToFront(topView);
+  // demoVC.view.addSubview(btn);
+  // demoVC.view.bringSubviewToFront(btn);
 
   arView.viewWillAppear = () => {
     arView.session.run(config);
