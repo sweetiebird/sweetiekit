@@ -1,33 +1,33 @@
 //
-//  NRPScreenRecorder.h
+//  NRPPreviewViewController.h
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NRPScreenRecorder_h
-#define NRPScreenRecorder_h    
+#ifndef NRPPreviewViewController_h
+#define NRPPreviewViewController_h    
 
 #import <UIKit/UIKit.h>
-#include "NNSObject.h"
+#include "NUIViewController.h"
 #include "defines.h"
 
 using namespace v8;
 using namespace node;
 
-class NRPScreenRecorder : public NNSObject {
+class NRPPreviewViewController : public NUIViewController {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
 
-  NRPScreenRecorder();
-  virtual ~NRPScreenRecorder();
+  NRPPreviewViewController();
+  virtual ~NRPPreviewViewController();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(startRecordingWithHandler);
-  static NAN_METHOD(stopRecordingWithHandler);
+  JS_PROP(previewControllerDelegate);
+  Nan::Persistent<Value> _delegate;
 };
 
-#endif /* NRPScreenRecorder_h */
+#endif /* NRPPreviewViewController_h */

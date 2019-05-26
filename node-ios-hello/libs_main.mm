@@ -116,6 +116,9 @@
 #include "NGifManager.h"
 #include "NUIKitGlobals.h"
 #include "NCoreGraphicsGlobals.h"
+#include "NRPScreenRecorder.h"
+#include "NRPPreviewViewController.h"
+#include "NRPPreviewViewControllerDelegate.h"
 #include <unistd.h>
 
 #include <string>
@@ -361,6 +364,9 @@ void InitExports(Local<Object> exports) {
   
         auto N_NSMutableAttributedString = NNSMutableAttributedString::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("NSMutableAttributedString").ToLocalChecked(), N_NSMutableAttributedString.first);
+  
+        auto N_RPScreenRecorder = NRPScreenRecorder::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("RPScreenRecorder").ToLocalChecked(), N_RPScreenRecorder.first);
 
         // Core Location
   
@@ -396,6 +402,9 @@ void InitExports(Local<Object> exports) {
         auto N_UIViewController = NUIViewController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIViewController").ToLocalChecked(), N_UIViewController.first);
   
+        auto N_RPPreviewViewController = NRPPreviewViewController::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("RPPreviewViewController").ToLocalChecked(), N_RPPreviewViewController.first);
+
         auto N_UITabBarController = NUITabBarController::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UITabBarController").ToLocalChecked(), N_UITabBarController.first);
 
@@ -503,6 +512,9 @@ void InitExports(Local<Object> exports) {
 
         // UIKit delegates ========
   
+        auto N_RPPreviewViewControllerDelegate = NRPPreviewViewControllerDelegate::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("RPPreviewViewControllerDelegate").ToLocalChecked(), N_RPPreviewViewControllerDelegate.first);
+
         auto N_UIPopoverPresentationControllerDelegate = NUIPopoverPresentationControllerDelegate::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("UIPopoverPresentationControllerDelegate").ToLocalChecked(), N_UIPopoverPresentationControllerDelegate.first);
 

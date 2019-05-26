@@ -466,6 +466,9 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NGifManager.h"
 #include "NUIKitGlobals.h"
 #include "NCoreGraphicsGlobals.h"
+#include "NRPScreenRecorder.h"
+#include "NRPPreviewViewController.h"
+#include "NRPPreviewViewControllerDelegate.h"
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -704,7 +707,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIResponder class]]) {
         return NUIResponder::type;
       }
+
       // ======== controllers
+
+      if ([obj isKindOfClass:[RPPreviewViewController class]]) {
+        return NRPPreviewViewController::type;
+      }
       if ([obj isKindOfClass:[UIAlertController class]]) {
         return NUIAlertController::type;
       }
@@ -733,6 +741,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NUIPresentationController::type;
       }
       // ========= delegates
+      if ([obj isKindOfClass:[SRPPreviewViewControllerDelegate class]]) {
+        return NRPPreviewViewControllerDelegate::type;
+      }
       if ([obj isKindOfClass:[SUIPopoverPresentationControllerDelegate class]]) {
         return NUIPopoverPresentationControllerDelegate::type;
       }
@@ -779,6 +790,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= objects
+      if ([obj isKindOfClass:[RPScreenRecorder class]]) {
+        return NRPScreenRecorder::type;
+      }
       if ([obj isKindOfClass:[SUIKitGlobals class]]) {
         return NUIKitGlobals::type;
       }

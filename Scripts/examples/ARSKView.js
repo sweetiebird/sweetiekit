@@ -32,6 +32,9 @@ const {
   CoreGraphics,
   SKTexture,
   SKSpriteNode,
+  RPScreenRecorder,
+  RPPreviewViewController,
+  RPPreviewViewControllerDelegate,
 } = SweetieKit;
 
 //let text = '👀';
@@ -136,6 +139,25 @@ function takeScreenshot(view) {
   }
 }
 
+function toggleRecordScreen(demoVC, recorder) {
+  console.log('//----> toggleRecordScreen', recorder.isAvailable, recorder.isRecording);
+  const del = new RPPreviewViewControllerDelegate();
+  del.previewControllerDidFinish = (previewController) => {
+    previewController.dismiss(true, () => {});
+  };
+
+  if (recorder.isRecording) {
+    console.log('stopping recording');
+    recorder.stopRecordingWithHandler((previewController) => {
+      previewController.delegate = del;
+      demoVC.present(previewController, true, () => {});
+    });
+  } else if (recorder.isAvailable) {
+    console.log('starting recording');
+    recorder.startRecordingWithHandler(() => {});
+  }
+}
+
 function makeTopView(demoVC, fieldHeight) {
   const borderView = new UIView({ x: 0, y: fieldHeight, width: demoVC.view.frame.width, height: 1 });
   borderView.backgroundColor = {
@@ -155,6 +177,9 @@ function makeTopView(demoVC, fieldHeight) {
 }
 
 async function make(nav, demoVC) {
+  const recorder = new RPScreenRecorder();
+  console.log(recorder);
+
   const view = demoVC.view;
   const arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   const config = new ARWorldTrackingConfiguration();
@@ -315,7 +340,7 @@ async function make(nav, demoVC) {
     //console.log('touchesMoved', touches.length, pt);
     if (hits && hits.length > 0) {
       active = _update(hits ? hits[0] : null);
-      console.log(active.node.xScale, active.node.yScale, 
+      console.log(active.node.xScale, active.node.yScale,
         active.node.size ? active.node.size.width : -1,
         active.node.size ? active.node.size.height : -1);
     }
@@ -351,8 +376,8 @@ async function make(nav, demoVC) {
 
   const camBtn = makeCamBtn(demoVC, btnSize);
   camBtn.addTarget(() => {
-    console.log('taking screenshot');
-    takeScreenshot(arView);
+    console.log('recording');
+    toggleRecordScreen(demoVC, recorder);
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;

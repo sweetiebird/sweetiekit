@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "NNSObject.h"
 #include "NRPScreenRecorder.h"
+#include "NRPPreviewViewController.h"
 
 Nan::Persistent<FunctionTemplate> NRPScreenRecorder::type;
 
@@ -27,7 +28,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NRPScreenRecorder::Initialize(
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-//  Nan::SetMethod(proto, "startCaptureWithHandler", startCaptureWithHandler);
+  Nan::SetMethod(proto, "startRecording", startRecordingWithHandler);
+  Nan::SetMethod(proto, "stopRecordingWithHandler", stopRecordingWithHandler);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -56,3 +58,30 @@ NAN_METHOD(NRPScreenRecorder::New) {
 
 NRPScreenRecorder::NRPScreenRecorder () {}
 NRPScreenRecorder::~NRPScreenRecorder () {}
+
+NAN_METHOD(NRPScreenRecorder::startRecordingWithHandler) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(RPScreenRecorder, rp);
+  
+  sweetiekit::JSFunction fn(info[0]);
+
+  [rp startRecordingWithHandler: ^ (NSError * _Nullable error) {
+    Nan::HandleScope scope;
+    fn.Call("NRPScreenRecorder::startRecording handler");
+  }];
+}
+
+NAN_METHOD(NRPScreenRecorder::stopRecordingWithHandler) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(RPScreenRecorder, rp);
+
+  sweetiekit::JSFunction fn(info[0]);
+
+  [rp stopRecordingWithHandler: ^ (RPPreviewViewController * _Nullable previewViewController, NSError * _Nullable error) {
+    Nan::HandleScope scope;
+    Local<Value> ctrlObj = sweetiekit::GetWrapperFor(previewViewController, NRPPreviewViewController::type);
+    fn.Call("NRPScreenRecorder::startRecording handler", ctrlObj);
+  }];
+}

@@ -69,6 +69,9 @@
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
 		A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */; };
+		A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */; };
+		A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */; };
+		A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
@@ -338,6 +341,11 @@
 		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
 		A1710EA1229A58A100EC7C86 /* NRPScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorder.h; sourceTree = "<group>"; };
 		A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorder.mm; sourceTree = "<group>"; };
+		A1710EA5229A648900EC7C86 /* NRPPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewController.h; sourceTree = "<group>"; };
+		A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewController.mm; sourceTree = "<group>"; };
+		A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
+		A1710EAA229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewControllerDelegate.h; sourceTree = "<group>"; };
+		A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SRPPreviewViewControllerDelegate.swift; path = "node-ios-hello/NReplayKit/SRPPreviewViewControllerDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		A174A16622821DDB002A8216 /* node-ios-hello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "node-ios-hello.entitlements"; sourceTree = "<group>"; };
 		A174A16922822161002A8216 /* NAVAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NAVAudioPlayer.h; sourceTree = "<group>"; };
 		A174A16A22822169002A8216 /* NAVAudioPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioPlayer.mm; sourceTree = "<group>"; };
@@ -956,6 +964,8 @@
 		A1710E9F229A58A100EC7C86 /* NReplayKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */,
+				A1710EA4229A648900EC7C86 /* NRPPreviewViewController */,
 				A1710EA0229A58A100EC7C86 /* NRPScreenRecorder */,
 			);
 			path = NReplayKit;
@@ -968,6 +978,25 @@
 				A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */,
 			);
 			path = NRPScreenRecorder;
+			sourceTree = "<group>";
+		};
+		A1710EA4229A648900EC7C86 /* NRPPreviewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EA5229A648900EC7C86 /* NRPPreviewViewController.h */,
+				A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */,
+			);
+			path = NRPPreviewViewController;
+			sourceTree = "<group>";
+		};
+		A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1710EAA229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.h */,
+				A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */,
+				A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */,
+			);
+			path = NRPPreviewViewControllerDelegate;
 			sourceTree = "<group>";
 		};
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
@@ -2270,6 +2299,7 @@
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
+				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
@@ -2360,6 +2390,7 @@
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
+				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
 				A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
@@ -2367,6 +2398,7 @@
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
