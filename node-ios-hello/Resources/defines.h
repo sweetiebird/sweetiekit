@@ -374,6 +374,7 @@ namespace sweetiekit {
   id FromJS(Local<Value> jsThing);
   Local<Object> JSObjFromFrame(CGRect frame);
   Local<Object> JSObjFromCGColor(CGColorRef color);
+  Local<Object> JSObjFromUIColor(UIColor* color);
   CGRect FrameFromJSObj(Local<Value> jsThing);
   UIColor* UIColorFromJSColor(Local<Value> jsThing);
   CGColorRef CGColorRefFromJSColor(Local<Value> jsThing);

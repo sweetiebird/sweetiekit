@@ -87,7 +87,7 @@ NAN_GETTER(NCAShapeLayer::fillColorGetter) {
 
   JS_UNWRAP(CAShapeLayer, ca);
   
-  JS_SET_RETURN(sweetiekit::JSObjFromColor([ca fillColor]));
+  JS_SET_RETURN(sweetiekit::JSObjFromCGColor([ca fillColor]));
 }
 
 NAN_SETTER(NCAShapeLayer::fillColorSetter) {
@@ -106,7 +106,7 @@ NAN_GETTER(NCAShapeLayer::strokeColorGetter) {
 
   JS_UNWRAP(CAShapeLayer, ca);
   
-  JS_SET_RETURN(sweetiekit::JSObjFromColor([ca strokeColor]));
+  JS_SET_RETURN(sweetiekit::JSObjFromCGColor([ca strokeColor]));
 }
 
 NAN_SETTER(NCAShapeLayer::strokeColorSetter) {
