@@ -304,6 +304,64 @@ namespace sweetiekit
     }
     return true;
   }
+  bool SetQuaternion(simd_quatf& quat, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 4;
+    float* elements = (float*)&quat;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
+      elements[3] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("w")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetVector3(simd_float3& xyz, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 3;
+    float* elements = (float*)&xyz;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
+    } else {
+      return false;
+    }
+    return true;
+  }
 }
 
 @implementation SweetJSFunction
@@ -311,6 +369,67 @@ namespace sweetiekit
   return &_jsFunction;
 }
 @end
+
+Local<Value> js_value_simd_quatf(const simd_quatf& value) {
+  return createTypedArray<Float32Array>(4, (const float*)&value);
+}
+
+Local<Value> js_value_simd_float3(const simd_float3& value) {
+  return createTypedArray<Float32Array>(3, (const float*)&value);
+}
+
+Local<Value> js_value_simd_float3x3(const simd_float3x3& value) {
+  return createTypedArray<Float32Array>(9, (const float*)&value);
+}
+
+Local<Value> js_value_simd_float4x4(const simd_float4x4& value) {
+  return createTypedArray<Float32Array>(16, (const float*)&value);
+}
+
+simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed) {
+  simd_quatf result = { { 0, 0, 0, 1 } };
+  bool ok = sweetiekit::SetQuaternion(result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  return result;
+}
+
+simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float3 result = { 0, 0, 0 };
+  bool ok = sweetiekit::SetVector3(result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  return result;
+}
+
+simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float3x3 result = { {
+    { 1, 0, 0 },
+    { 0, 1, 0 },
+    { 0, 0, 1 },
+  } };
+  bool ok = sweetiekit::SetTransform3(result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  return result;
+}
+
+simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float4x4 result = { {
+    { 1, 0, 0, 0 },
+    { 0, 1, 0, 0 },
+    { 0, 0, 1, 0 },
+    { 0, 0, 0, 1 },
+  } };
+  bool ok = sweetiekit::SetTransform(result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  return result;
+}
 
 Local<Value> js_value_CGPoint(const CGPoint& pt) {
   auto __obj = Nan::New<Object>();
@@ -331,13 +450,4 @@ CGSize to_value_CGSize(const Local<Value>& value) {
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
   );
-}
-
-Local<Array> js_value_NSArray(const NSArray<SKNode*>* arr) {
-  auto result = Nan::New<Array>();
-  for (NSInteger i = 0; i < [arr count]; i++) {
-    SKNode* kid = [arr objectAtIndex:i];
-    Nan::Set(result, i, sweetiekit::GetWrapperFor(kid, NSKNode::type));
-  }
-  return result;
 }

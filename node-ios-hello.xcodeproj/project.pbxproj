@@ -57,6 +57,7 @@
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
+		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
 		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
@@ -325,6 +326,8 @@
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
+		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
+		A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTransformNode.mm; sourceTree = "<group>"; };
 		A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterCell.mm; sourceTree = "<group>"; };
 		A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterCell.h; sourceTree = "<group>"; };
 		A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterLayer.mm; sourceTree = "<group>"; };
@@ -884,6 +887,15 @@
 				A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */,
 			);
 			path = NCAShapeLayer;
+			sourceTree = "<group>";
+		};
+		A15B60A3229D20FB00A4887E /* NSKTransformNode */ = {
+			isa = PBXGroup;
+			children = (
+				A15B60A4229D20FB00A4887E /* NSKTransformNode.h */,
+				A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */,
+			);
+			path = NSKTransformNode;
 			sourceTree = "<group>";
 		};
 		A1646B7C2291E6E90078CF4B /* NCAEmitterCell */ = {
@@ -1804,18 +1816,19 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
-				A16EF587229CE73B007BCB49 /* NSKEmitterNode */,
+				A1B65487228CD87500976024 /* NSKAction */,
 				A11029D3228E4C9C0078FAC0 /* NSKCameraNode */,
+				A16EF587229CE73B007BCB49 /* NSKEmitterNode */,
+				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
+				A1BD4B812287C355001D1F6E /* NSKNode */,
+				A10AADE2228B881400C64F60 /* NSKPhysicsBody */,
 				A1B65496228CE80D00976024 /* NSKPhysicsContact */,
 				A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */,
 				A1B6548C228CE34D00976024 /* NSKPhysicsWorld */,
-				A1B65487228CD87500976024 /* NSKAction */,
-				A10AADE2228B881400C64F60 /* NSKPhysicsBody */,
-				A1BD4BA82287F661001D1F6E /* NSKTexture */,
-				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
 				A1BD4B892287CA2E001D1F6E /* NSKScene */,
-				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
-				A1BD4B812287C355001D1F6E /* NSKNode */,
+				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
+				A1BD4BA82287F661001D1F6E /* NSKTexture */,
+				A15B60A3229D20FB00A4887E /* NSKTransformNode */,
 				A1BD4B802287C34A001D1F6E /* NSKView */,
 			);
 			path = NSpriteKit;
@@ -2377,6 +2390,7 @@
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
+				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,

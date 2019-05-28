@@ -385,6 +385,9 @@ namespace sweetiekit {
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing);
   bool IsJSFrame(Local<Value> jsThing);
   bool SetTransform3(simd_float3x3& transform, Local<Value> value);
+  bool SetTransform(simd_float4x4& transform, Local<Value> value);
+  bool SetQuaternion(simd_quatf& quat, Local<Value> value);
+  bool SetVector3(simd_float3& xyz, Local<Value> value);
 }
 
 extern "C" {
@@ -421,8 +424,6 @@ namespace sweetiekit {
       }
     }
   };
-    
-  extern bool SetTransform(simd_float4x4& transform, Local<Value> value);
 }
 
 
@@ -560,19 +561,38 @@ namespace sweetiekit
   }
 }
 
+#define js_value_vector_float3   js_value_simd_float3
+#define js_value_matrix_float3x3 js_value_simd_float3x3
+#define js_value_matrix_float4x4 js_value_simd_float4x4
+#define to_value_vector_float3   to_value_simd_float3
+#define to_value_matrix_float3x3 to_value_simd_float3x3
+#define to_value_matrix_float4x4 to_value_simd_float4x4
+
+Local<Value> js_value_simd_quatf(const simd_quatf& value);
+Local<Value> js_value_simd_float3(const simd_float3& value);
+Local<Value> js_value_simd_float3x3(const simd_float3x3& value);
+Local<Value> js_value_simd_float4x4(const simd_float4x4& value);
+simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 CGPoint to_value_CGPoint(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
-Local<Array> js_value_NSArray(const NSArray<SKNode *>* arr);
 
 template<typename T>
-Local<Array> js_value_NSArray(const NSArray<T>* arr) {
-  auto result = Nan::New<Array>();
-  for (NSInteger i = 0, n = [arr count]; i < n; i++) {
-    T item = [arr objectAtIndex:i];
-    Nan::Set(result, i, sweetiekit::GetWrapperFor(item));
+Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
+  if (arr == nullptr) {
+    return Nan::Undefined();
+  } else {
+    auto result = Nan::New<Array>();
+    for (NSInteger i = 0, n = [arr count]; i < n; i++) {
+      T item = [arr objectAtIndex:i];
+      Nan::Set(result, static_cast<uint32_t>(i), sweetiekit::GetWrapperFor(item));
+    }
+    return result;
   }
-  return result;
 }
 
 #define js_value_NSUInteger JS_UINT

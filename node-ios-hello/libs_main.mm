@@ -73,6 +73,7 @@
 #include "NSKView.h"
 #include "NARSKView.h"
 #include "NSKNode.h"
+#include "NSKTransformNode.h"
 #include "NSKLabelNode.h"
 #include "NARSKViewDelegate.h"
 #include "NARSession.h"
@@ -583,6 +584,9 @@ void InitExports(Local<Object> exports) {
 
         auto N_SKNode = NSKNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKNode").ToLocalChecked(), N_SKNode.first);
+        
+        auto N_SKTransformNode = NSKTransformNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKTransformNode").ToLocalChecked(), N_SKTransformNode.first);
   
         auto N_SKEmitterNode = NSKEmitterNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKEmitterNode").ToLocalChecked(), N_SKEmitterNode.first);

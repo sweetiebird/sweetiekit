@@ -442,7 +442,7 @@ NAN_GETTER(NSKNode::childrenGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-    JS_SET_RETURN(js_value_NSArray([self children]));
+    JS_SET_RETURN(js_value_NSArray<SKNode*>([self children]));
     return;
   }
 }

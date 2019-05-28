@@ -422,6 +422,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NARWorldTrackingConfiguration.h"
 #include "NSKView.h"
 #include "NSKNode.h"
+#include "NSKTransformNode.h"
 #include "NSKPhysicsBody.h"
 #include "NSKPhysicsWorld.h"
 #include "NSKPhysicsContactDelegate.h"
@@ -602,6 +603,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
       if ([obj isKindOfClass:[SKLabelNode class]]) {
         return NSKLabelNode::type;
+      }
+      if ([obj isKindOfClass:[SKTransformNode class]]) {
+        return NSKTransformNode::type;
       }
       if ([obj isKindOfClass:[SKNode class]]) {
         return NSKNode::type;
