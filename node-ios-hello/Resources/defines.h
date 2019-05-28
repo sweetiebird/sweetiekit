@@ -388,6 +388,10 @@ namespace sweetiekit {
   bool SetTransform(simd_float4x4& transform, Local<Value> value);
   bool SetQuaternion(simd_quatf& quat, Local<Value> value);
   bool SetVector3(simd_float3& xyz, Local<Value> value);
+  bool SetTransform3(float* transform, Local<Value> value);
+  bool SetTransform(float* transform, Local<Value> value);
+  bool SetQuaternion(float* quat, Local<Value> value);
+  bool SetVector3(float* xyz, Local<Value> value);
 }
 
 extern "C" {
@@ -406,6 +410,7 @@ NSString* NJSStringToNSString(Local<Value> jsStr);
 #endif
 
 }
+Local<Value> NSStringToJSString(NSString* value);
 
 namespace sweetiekit {
   class TryCatchReport : Nan::TryCatch
@@ -570,12 +575,25 @@ namespace sweetiekit
 
 Local<Value> js_value_simd_quatf(const simd_quatf& value);
 Local<Value> js_value_simd_float3(const simd_float3& value);
+Local<Value> js_value_simd_float4(const simd_float4& value);
 Local<Value> js_value_simd_float3x3(const simd_float3x3& value);
 Local<Value> js_value_simd_float4x4(const simd_float4x4& value);
 simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float4   to_value_simd_float4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+
+
+Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value);
+Local<Value> js_value_SCNVector3(const SCNVector3& value);
+Local<Value> js_value_SCNVector4(const SCNVector4& value);
+Local<Value> js_value_SCNMatrix4(const SCNMatrix4& value);
+SCNQuaternion  to_value_SCNQuaternion(const Local<Value>& value, bool * _Nullable failed = nullptr);
+SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+
 
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 CGPoint to_value_CGPoint(const Local<Value>& value);

@@ -33,6 +33,14 @@ NSString* NJSStringToNSString(Local<Value> jsStr) {
   }
 }
 
+
+Local<Value> NSStringToJSString(NSString* value) {
+  if (value) {
+    return JS_STR([value UTF8String]);
+  } else {
+    return Nan::Undefined();
+  }
+}
 #include "NNSObject.h"
 
 namespace sweetiekit
@@ -252,8 +260,10 @@ namespace sweetiekit
   }
 
   bool SetTransform(simd_float4x4& transform, Local<Value> value) {
+    return SetTransform((float*)&transform, value);
+  }
+  bool SetTransform(float* matrix, Local<Value> value) {
     Nan::HandleScope scope;
-    float* matrix = (float*)&transform;
     if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
       value = JS_OBJ(value)->Get(JS_STR("elements"));
     }
@@ -279,8 +289,10 @@ namespace sweetiekit
   }
   
   bool SetTransform3(simd_float3x3& transform, Local<Value> value) {
+    return SetTransform3((float*)&transform, value);
+  }
+  bool SetTransform3(float* matrix, Local<Value> value) {
     Nan::HandleScope scope;
-    float* matrix = (float*)&transform;
     if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
       value = JS_OBJ(value)->Get(JS_STR("elements"));
     }
@@ -304,10 +316,13 @@ namespace sweetiekit
     }
     return true;
   }
+  
   bool SetQuaternion(simd_quatf& quat, Local<Value> value) {
+    return SetQuaternion((float*)&quat, value);
+  }
+  bool SetQuaternion(float* elements, Local<Value> value) {
     Nan::HandleScope scope;
     const int size = 4;
-    float* elements = (float*)&quat;
     if (value->IsFloat32Array()) {
       Local<Float32Array> xform = Local<Float32Array>::Cast(value);
       for (uint32_t i = 0; i < size; i++) {
@@ -334,10 +349,12 @@ namespace sweetiekit
     return true;
   }
   
-  bool SetVector3(simd_float3& xyz, Local<Value> value) {
+  bool SetVector3(simd_float3& quat, Local<Value> value) {
+    return SetVector3((float*)&quat, value);
+  }
+  bool SetVector3(float* elements, Local<Value> value) {
     Nan::HandleScope scope;
     const int size = 3;
-    float* elements = (float*)&xyz;
     if (value->IsFloat32Array()) {
       Local<Float32Array> xform = Local<Float32Array>::Cast(value);
       for (uint32_t i = 0; i < size; i++) {
@@ -378,6 +395,10 @@ Local<Value> js_value_simd_float3(const simd_float3& value) {
   return createTypedArray<Float32Array>(3, (const float*)&value);
 }
 
+Local<Value> js_value_simd_float4(const simd_float4& value) {
+  return createTypedArray<Float32Array>(4, (const float*)&value);
+}
+
 Local<Value> js_value_simd_float3x3(const simd_float3x3& value) {
   return createTypedArray<Float32Array>(9, (const float*)&value);
 }
@@ -392,6 +413,9 @@ simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable fa
   if (failed) {
     *failed = ok;
   }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_quatf");
+  }
   return result;
 }
 
@@ -400,6 +424,21 @@ simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable f
   bool ok = sweetiekit::SetVector3(result, value);
   if (failed) {
     *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float3");
+  }
+  return result;
+}
+
+simd_float4   to_value_simd_float4(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float4 result = { 0, 0, 0, 1 };
+  bool ok = sweetiekit::SetQuaternion((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float4");
   }
   return result;
 }
@@ -414,6 +453,9 @@ simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable
   if (failed) {
     *failed = ok;
   }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float3x3");
+  }
   return result;
 }
 
@@ -427,6 +469,98 @@ simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable
   bool ok = sweetiekit::SetTransform(result, value);
   if (failed) {
     *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float4x4");
+  }
+  return result;
+}
+
+Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value) {
+  //return createTypedArray<Float32Array>(4, (const float*)&value);
+  Nan::EscapableHandleScope scope;
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(value.x));
+  result->Set(JS_STR("y"), JS_FLOAT(value.y));
+  result->Set(JS_STR("z"), JS_FLOAT(value.z));
+  result->Set(JS_STR("w"), JS_FLOAT(value.w));
+  return scope.Escape(result);
+}
+
+Local<Value> js_value_SCNVector3(const SCNVector3& value) {
+  //return createTypedArray<Float32Array>(3, (const float*)&value);
+  Nan::EscapableHandleScope scope;
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(value.x));
+  result->Set(JS_STR("y"), JS_FLOAT(value.y));
+  result->Set(JS_STR("z"), JS_FLOAT(value.z));
+  return scope.Escape(result);
+}
+
+Local<Value> js_value_SCNVector4(const SCNVector4& value) {
+//  return createTypedArray<Float32Array>(4, (const float*)&value);
+  Nan::EscapableHandleScope scope;
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(value.x));
+  result->Set(JS_STR("y"), JS_FLOAT(value.y));
+  result->Set(JS_STR("z"), JS_FLOAT(value.z));
+  result->Set(JS_STR("w"), JS_FLOAT(value.w));
+  return scope.Escape(result);
+}
+
+Local<Value> js_value_SCNMatrix4(const SCNMatrix4& value) {
+  return createTypedArray<Float32Array>(16, (const float*)&value);
+}
+
+SCNQuaternion    to_value_SCNQuaternion(const Local<Value>& value, bool * _Nullable failed) {
+  SCNQuaternion result = { 0, 0, 0, 1 };
+  bool ok = sweetiekit::SetQuaternion((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected SCNQuaternion");
+  }
+  return result;
+}
+
+SCNVector3   to_value_SCNVector3(const Local<Value>& value, bool * _Nullable failed) {
+  SCNVector3 result = { 0, 0, 0 };
+  bool ok = sweetiekit::SetVector3((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected SCNVector3");
+  }
+  return result;
+}
+
+SCNVector4   to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed) {
+  SCNVector4 result = { 0, 0, 0, 1 };
+  bool ok = sweetiekit::SetQuaternion((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected SCNVector4");
+  }
+  return result;
+}
+
+SCNMatrix4 to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed) {
+  SCNMatrix4 result = {
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1,
+  };
+  bool ok = sweetiekit::SetTransform((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected SCNMatrix4");
   }
   return result;
 }
