@@ -425,11 +425,12 @@ async function make(nav, demoVC) {
       const kids = active.node.children;
 
       if (kids.length) {
+        const node = kids[0];
         const actionGroup = SKAction.group([
-          SKAction.moveBy({ dx: 0, dy: 100 }, 1),
-          SKAction.scaleBy(-0.5, 1),
+          SKAction.moveBy({ dx: 0, dy: -30 }, 0.6),
+          SKAction.scaleBy(-0.4, 0.6),
         ]);
-        kids[0].runAction(actionGroup, () => {});
+        node.runAction(actionGroup, () => {});
       }
     }
 
