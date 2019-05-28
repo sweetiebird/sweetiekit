@@ -36,6 +36,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKAction::Initialize(Isolate 
   Nan::SetMethod(ctorFn, "waitForDuration", waitForDuration);
   Nan::SetMethod(ctorFn, "moveBy", moveBy);
   Nan::SetMethod(ctorFn, "scaleBy", scaleBy);
+  Nan::SetMethod(ctorFn, "group", group);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -177,6 +178,31 @@ NAN_METHOD(NSKAction::scaleBy) {
     float scale = TO_FLOAT(info[0]);
     double duration = TO_DOUBLE(info[1]);
     action->SetNSObject([SKAction scaleBy:scale duration:duration]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+// creates an action that runs a collection of actions in parallel
+NAN_METHOD(NSKAction::group) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKAction)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(obj);
+  Local<Array> arr = Local<Array>::Cast(info[0]);
+  NSMutableArray *actions = [NSMutableArray array];
+
+  @autoreleasepool {
+    for (unsigned int i = 0, len = arr->Length(); i < len; i++ ) {
+      if (Nan::Has(arr, i).FromJust()) {
+        NSKAction *sk = ObjectWrap::Unwrap<NSKAction>(JS_OBJ(arr->Get(i)));
+        [actions addObject:sk->As<SKAction>()];
+      }
+    }
+    action->SetNSObject([SKAction group:actions]);
   }
 
   JS_SET_RETURN(obj);

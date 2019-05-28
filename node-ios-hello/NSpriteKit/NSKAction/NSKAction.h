@@ -32,6 +32,7 @@ public:
   static NAN_METHOD(waitForDuration);
   static NAN_METHOD(moveBy);
   static NAN_METHOD(scaleBy);
+  static NAN_METHOD(group);
 };
 
 #endif /* NSKAction_h */
