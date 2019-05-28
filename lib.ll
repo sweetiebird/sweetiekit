@@ -146,66 +146,66 @@
 (define-macro js-return (x)
   `(do (JS_SET_RETURN (js-value ,x)) (return)))
 
-(define-macro js-value-NSString* (x)
-  `(js-value (aif ,x (JS_STR [it UTF8String]) (js-nil))))
+;(define-macro js-value-NSString* (x)
+;  `(js-value (aif ,x (JS_STR [it UTF8String]) (js-nil))))
 
 (define-macro js-value-number (x)
   `(js-value (JS_NUM ,x)))
 
-(define-macro js-value-CGFloat (x)
-  `(js-value (JS_FLOAT ,x)))
-
-(define-macro to-value-CGFloat (x)
-  `(to-value CGFloat (TO_FLOAT ,x)))
-
-(define-macro js-value-uint32_t (x) `(js-value (JS_INT ,x)))
+(define-macro js-value-CGFloat (x) `(js-value (JS_FLOAT ,x)))
+(define-macro to-value-CGFloat (x) `(to-value CGFloat (TO_FLOAT ,x)))
+(define-macro js-value-uint32_t (x) `(js-value (JS_UINT ,x)))
 (define-macro to-value-uint32_t (x) `(to-value CGFloat (TO_UINT32 ,x)))
+(define-macro js-value-int32_t (x) `(js-value (JS_INT ,x)))
+(define-macro to-value-int32_t (x) `(to-value CGFloat (TO_INT32 ,x)))
 
 (define-macro js-value-BOOL (x) `(js-value (JS_BOOL ,x)))
 (define-macro to-value-BOOL (x) `(to-value BOOL (TO_BOOL ,x)))
+(define-macro js-value-bool (x) `(js-value (JS_BOOL ,x)))
+(define-macro to-value-bool (x) `(to-value BOOL (TO_BOOL ,x)))
 
-(define-macro js-value-CGRect (x)
-  `(let (rect ,x
-         obj (js-new-object))
-     (js-set-number obj "x" (rect .origin .x))
-     (js-set-number obj "y" (rect .origin .y))
-     (js-set-number obj "width" (rect .size .width))
-     (js-set-number obj "height" (rect .size .height))
-     (js-value obj)))
-
-(define-macro js-value-CGSize (x)
-  `(let (size ,x
-         obj (js-new-object))
-     (js-set-number obj "width" (size .width))
-     (js-set-number obj "height" (size .height))
-     (js-value obj)))
-
-(define-macro js-value-CGPoint (x)
-  `(let (point ,x
-         obj (js-new-object))
-     (js-set-number obj "x" (point .x))
-     (js-set-number obj "y" (point .y))
-     (js-value obj)))
+; (define-macro js-value-CGRect (x)
+;   `(let (rect ,x
+;          obj (js-new-object))
+;      (js-set-number obj "x" (rect .origin .x))
+;      (js-set-number obj "y" (rect .origin .y))
+;      (js-set-number obj "width" (rect .size .width))
+;      (js-set-number obj "height" (rect .size .height))
+;      (js-value obj)))
+; 
+; (define-macro js-value-CGSize (x)
+;   `(let (size ,x
+;          obj (js-new-object))
+;      (js-set-number obj "width" (size .width))
+;      (js-set-number obj "height" (size .height))
+;      (js-value obj)))
+; 
+; (define-macro js-value-CGPoint (x)
+;   `(let (point ,x
+;          obj (js-new-object))
+;      (js-set-number obj "x" (point .x))
+;      (js-set-number obj "y" (point .y))
+;      (js-value obj)))
 
 (define-macro js-obj (var rest: body)
   `(js-value
      (with ,var (js-new-object)
        ,@body)))
 
-(define-macro js-value-CLFloor* (x)
-  `(js-value (aif ,x (js-wrap ,x CLFloor))))
+;(define-macro js-value-CLFloor* (x)
+; `(js-value (aif ,x (js-wrap ,x CLFloor))))
 
-(define-macro js-value-UIView* (x)
-  `(js-value (js-wrap ,x UIView)))
+; (define-macro js-value-UIView* (x)
+;  `(js-value (js-wrap ,x UIView)))
 
-(define-macro js-value-Array<UIView*> (seq)
-  `(js-map-NSArray ,seq type: UIView* x (js-wrap x UIView)))
+;(define-macro js-value-Array<UIView*> (seq)
+; `(js-map-NSArray ,seq type: UIView* x (js-wrap x UIView)))
 
-(define-macro js-value-id (x)
-  `(js-value (js-wrap ,x NSObject)))
+;(define-macro js-value-id (x)
+; `(js-value (js-wrap ,x NSObject)))
 
-(define-macro js-value-Array<id> (seq)
-  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
+;(define-macro js-value-Array<id> (seq)
+;  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
 
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
