@@ -11,7 +11,7 @@
 
 #include "NSKNode.h"
 
-#define js_value_SKLabelNode(x) js_value_wrapper_known(x, SKLabelNode)
+#define js_value_SKLabelNode(x) js_value_wrapper(x, SKLabelNode)
 #define to_value_SKLabelNode(x) to_value_wrapper(x, SKLabelNode)
 
 class NSKLabelNode : public NSKNode {

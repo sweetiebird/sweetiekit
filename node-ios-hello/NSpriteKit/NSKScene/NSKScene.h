@@ -11,7 +11,7 @@
 
 #import "NSKNode.h"
 
-#define js_value_SKScene(x) js_value_wrapper_known(x, SKScene)
+#define js_value_SKScene(x) js_value_wrapper(x, SKScene)
 #define to_value_SKScene(x) to_value_wrapper(x, SKScene)
 
 class NSKScene : public NSKNode {

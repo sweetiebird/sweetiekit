@@ -11,8 +11,8 @@
 
 #include "NSCNGeometry.h"
 
-#define js_value_SCNText(x) js_value_wrapper_known(x, SCNText)
-#define to_value_SCNText(x) to_value_wrapper_known(x, SCNText)
+#define js_value_SCNText(x) js_value_wrapper(x, SCNText)
+#define to_value_SCNText(x) to_value_wrapper(x, SCNText)
 
 class NSCNText : public NSCNGeometry {
 public:

@@ -11,8 +11,8 @@
 
 #include "NNSObject.h"
 
-#define js_value_SCNScene(x) js_value_wrapper_known(x, SCNScene)
-#define to_value_SCNScene(x) to_value_wrapper_known(x, SCNScene)
+#define js_value_SCNScene(x) js_value_wrapper(x, SCNScene)
+#define to_value_SCNScene(x) to_value_wrapper(x, SCNScene)
 
 class NSCNScene : public NNSObject {
 public:

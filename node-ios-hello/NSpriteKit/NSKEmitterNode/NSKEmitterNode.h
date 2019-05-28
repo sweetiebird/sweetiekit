@@ -11,7 +11,7 @@
 
 #include "NSKNode.h"
 
-#define js_value_SKEmitterNode(x) js_value_wrapper_known(x, SKEmitterNode)
+#define js_value_SKEmitterNode(x) js_value_wrapper(x, SKEmitterNode)
 #define to_value_SKEmitterNode(x) to_value_wrapper(x, SKEmitterNode)
 
 //#define js_value_SKBlendMode JS_INT

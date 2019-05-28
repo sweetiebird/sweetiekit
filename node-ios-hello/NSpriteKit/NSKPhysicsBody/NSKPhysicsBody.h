@@ -16,7 +16,7 @@
 using namespace v8;
 using namespace node;
 
-#define js_value_SKPhysicsBody(x) js_value_wrapper_known(x, SKPhysicsBody)
+#define js_value_SKPhysicsBody(x) js_value_wrapper(x, SKPhysicsBody)
 #define to_value_SKPhysicsBody(x) to_value_wrapper(x, SKPhysicsBody)
 
 class NSKPhysicsBody : public NNSObject {

@@ -11,7 +11,7 @@
 
 #import "NSKNode.h"
 
-#define js_value_SKSpriteNode(x) js_value_wrapper_known(x, SKSpriteNode)
+#define js_value_SKSpriteNode(x) js_value_wrapper(x, SKSpriteNode)
 #define to_value_SKSpriteNode(x) to_value_wrapper(x, SKSpriteNode)
 
 class NSKSpriteNode : public NSKNode {

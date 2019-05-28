@@ -11,7 +11,7 @@
 
 #include "NNSObject.h"
 
-#define js_value_SKPhysicsWorld(x) js_value_wrapper_known(x, SKPhysicsWorld)
+#define js_value_SKPhysicsWorld(x) js_value_wrapper(x, SKPhysicsWorld)
 #define to_value_SKPhysicsWorld(x) to_value_wrapper(x, SKPhysicsWorld)
 
 class NSKPhysicsWorld : public NNSObject {

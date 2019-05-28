@@ -11,8 +11,8 @@
 
 #include "NNSObject.h"
 
-#define js_value_SCNLight(x) js_value_wrapper_known(x, SCNLight)
-#define to_value_SCNLight(x) to_value_wrapper_known(x, SCNLight)
+#define js_value_SCNLight(x) js_value_wrapper(x, SCNLight)
+#define to_value_SCNLight(x) to_value_wrapper(x, SCNLight)
 
 class NSCNLight : public NNSObject {
 public:

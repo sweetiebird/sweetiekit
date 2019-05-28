@@ -11,7 +11,7 @@
 
 #import "NUIView.h"
 
-#define js_value_SKView(x) js_value_wrapper_known(x, SKView)
+#define js_value_SKView(x) js_value_wrapper(x, SKView)
 #define to_value_SKView(x) to_value_wrapper(x, SKView)
 
 class NSKView : public NUIView {

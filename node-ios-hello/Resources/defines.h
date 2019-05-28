@@ -684,12 +684,12 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define JS_ENUM(type, c, x) js_value_##c(x)
 #define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
 
-#define js_value_wrapper(x, t) sweetiekit::GetWrapperFor(x)
-#define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
-#define js_value_wrapper_known(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
+#define js_value_wrapper(x, t) js_value_wrapper_known(x, t)
 #define to_value_wrapper(x, t) (t*)sweetiekit::GetValueFor(x)
-#define to_value_wrapper_unknown(x, t) (t*)sweetiekit::GetValueFor(x)
-#define to_value_wrapper_known(x, t) (t*)sweetiekit::GetValueFor(x)
+#define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
+#define to_value_wrapper_unknown(x, t) to_value_wrapper(x, t)
+#define js_value_wrapper_known(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
+#define to_value_wrapper_known(x, t) to_value_wrapper(x, t)
 
 // SceneKit types
 #define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)

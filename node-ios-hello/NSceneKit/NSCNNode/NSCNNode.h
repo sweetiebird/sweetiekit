@@ -11,8 +11,8 @@
 
 #import "NNSObject.h"
 
-#define js_value_SCNNode(x) js_value_wrapper_known(x, SCNNode)
-#define to_value_SCNNode(x) to_value_wrapper_known(x, SCNNode)
+#define js_value_SCNNode(x) js_value_wrapper(x, SCNNode)
+#define to_value_SCNNode(x) to_value_wrapper(x, SCNNode)
 
 // SpriteKit enums
 #define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)

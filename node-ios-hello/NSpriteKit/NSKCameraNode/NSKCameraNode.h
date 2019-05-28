@@ -11,7 +11,7 @@
 
 #include "NNSObject.h"
 
-#define js_value_SKCameraNode(x) js_value_wrapper_known(x, SKCameraNode)
+#define js_value_SKCameraNode(x) js_value_wrapper(x, SKCameraNode)
 #define to_value_SKCameraNode(x) to_value_wrapper(x, SKCameraNode)
 
 class NSKCameraNode : public NSKNode {

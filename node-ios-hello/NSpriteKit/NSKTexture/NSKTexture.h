@@ -11,7 +11,7 @@
 
 #import "NNSObject.h"
 
-#define js_value_SKTexture(x) js_value_wrapper_known(x, SKTexture)
+#define js_value_SKTexture(x) js_value_wrapper(x, SKTexture)
 #define to_value_SKTexture(x) to_value_wrapper(x, SKTexture)
 
 class NSKTexture : public NNSObject {

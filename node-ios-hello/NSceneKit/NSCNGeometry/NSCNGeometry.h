@@ -11,8 +11,8 @@
 
 #include "NNSObject.h"
 
-#define js_value_SCNGeometry(x) js_value_wrapper_known(x, SCNGeometry)
-#define to_value_SCNGeometry(x) to_value_wrapper_known(x, SCNGeometry)
+#define js_value_SCNGeometry(x) js_value_wrapper(x, SCNGeometry)
+#define to_value_SCNGeometry(x) to_value_wrapper(x, SCNGeometry)
 
 class NSCNGeometry : public NNSObject {
 public:

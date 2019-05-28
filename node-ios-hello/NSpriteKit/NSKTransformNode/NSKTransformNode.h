@@ -11,7 +11,7 @@
 
 #import "NSKNode.h"
 
-#define js_value_SKTransformNode(x) js_value_wrapper_known(x, SKTransformNode)
+#define js_value_SKTransformNode(x) js_value_wrapper(x, SKTransformNode)
 #define to_value_SKTransformNode(x) to_value_wrapper(x, SKTransformNode)
 
 class NSKTransformNode : public NSKNode {

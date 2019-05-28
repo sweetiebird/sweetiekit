@@ -11,7 +11,7 @@
 
 #include "NNSObject.h"
 
-#define js_value_SKAction(x) js_value_wrapper_known(x, SKAction)
+#define js_value_SKAction(x) js_value_wrapper(x, SKAction)
 #define to_value_SKAction(x) to_value_wrapper(x, SKAction)
 
 class NSKAction : public NNSObject {

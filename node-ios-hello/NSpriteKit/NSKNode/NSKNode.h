@@ -11,7 +11,7 @@
 
 #include "NUIResponder.h"
 
-#define js_value_SKNode(x) js_value_wrapper_known(x, SKNode)
+#define js_value_SKNode(x) js_value_wrapper(x, SKNode)
 #define to_value_SKNode(x) to_value_wrapper(x, SKNode)
 
 #define js_value_SKNodeFocusBehavior(x) JS_ENUM(SKNodeFocusBehavior, NSInteger, x)
