@@ -69,7 +69,7 @@ function touchesEnded(touches) {
     const actionMove = SKAction.moveTo(realDest, 2);
     const moveDone = SKAction.removeFromParent();
     const sequence = SKAction.sequence([actionMove, moveDone]);
-    projectile.runAction(sequence);
+    projectile.runAction(sequence, () => {});
   }
 }
 
@@ -130,7 +130,7 @@ function addMonster(demoVC) {
   const moveDone = SKAction.removeFromParent();
   const sequence = SKAction.sequence([actionMove, moveDone]);
 
-  monster.runAction(sequence);
+  monster.runAction(sequence, () => {});
 }
 
 function start(demoVC) {

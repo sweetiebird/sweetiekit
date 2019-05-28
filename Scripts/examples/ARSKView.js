@@ -14,6 +14,7 @@ const {
   UITextAutocorrectionType,
   UITextSpellCheckingType,
   UIImageOrientation,
+  UIViewContentMode,
 } = require('./enums');
 
 const {
@@ -37,6 +38,8 @@ const {
   RPPreviewViewController,
   RPPreviewViewControllerDelegate,
   SKEmitterNode,
+  SKNode,
+  SKAction,
 } = SweetieKit;
 
 //let text = '👀';
@@ -110,7 +113,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
 }
 
 function makeParticleButton(demoVC) {
-  const size = 50;
+  const size = 40;
   const btn = new UIButton({
     x: demoVC.view.frame.width - size,
     y: 0,
@@ -120,7 +123,8 @@ function makeParticleButton(demoVC) {
   btn.backgroundColor = colors.clear;
   btn.setBackgroundImageForState(new UIImage('fire'), UIControlState.normal);
   btn.showsTouchWhenHighlighted = true;
-  button.contentMode = UIViewContentMode.scaleAspectFit;
+  btn.contentMode = UIViewContentMode.scaleAspectFit;
+  btn.alpha = 0.3;
   return btn;
 }
 
@@ -318,7 +322,12 @@ async function make(nav, demoVC) {
 
   const _node = (text) => {
     if (isEffectMode) {
-      return new SKEmitterNode(sparkParticlePath) || new SKLabelNode();
+      const wrapper = new SKNode();
+      const magicNode = new SKEmitterNode(magicParticlePath);
+      const sparkNode = new SKEmitterNode(sparkParticlePath);
+      wrapper.addChild(sparkNode);
+      wrapper.addChild(magicNode);
+      return wrapper;
     }
 
     if (text instanceof UIImage || text instanceof SKTexture) {
@@ -426,7 +435,7 @@ async function make(nav, demoVC) {
 
   arView.presentScene(scene);
 
-  const btnSize = 70;
+  // const btnSize = 70;
 
   // const camBtn = makeCamBtn(demoVC, btnSize);
   // camBtn.addTarget(() => {
@@ -440,6 +449,7 @@ async function make(nav, demoVC) {
   const fireBtn = makeParticleButton(demoVC);
   fireBtn.addTarget(() => {
     isEffectMode = !isEffectMode;
+    fireBtn.alpha = isEffectMode ? 1 : 0.3;
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;

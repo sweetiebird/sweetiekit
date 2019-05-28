@@ -111,7 +111,15 @@ NAN_METHOD(NSKNode::runAction) {
   JS_UNWRAP(SKNode, node);
 
   NSKAction *action = ObjectWrap::Unwrap<NSKAction>(Local<Object>::Cast(info[0]));
+  __block sweetiekit::JSFunction fn(info[1]);
 
+  [node runAction:action->As<SKAction>() completion: ^ {
+    dispatch_ui_sync(dispatch_get_main_queue(), ^{
+      Nan::HandleScope scope;
+      fn.Call("NSKNode::runAction completion handler");
+      fn.Reset();
+    });
+  }];
   [node runAction:action->As<SKAction>()];
 }
 

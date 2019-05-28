@@ -29,6 +29,8 @@ public:
   static NAN_METHOD(moveTo);
   static NAN_METHOD(removeFromParent);
   static NAN_METHOD(sequence);
+  static NAN_METHOD(waitForDuration);
+  static NAN_METHOD(moveBy);
 };
 
 #endif /* NSKAction_h */

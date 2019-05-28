@@ -33,6 +33,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKAction::Initialize(Isolate 
   Nan::SetMethod(ctorFn, "moveTo", moveTo);
   Nan::SetMethod(ctorFn, "removeFromParent", removeFromParent);
   Nan::SetMethod(ctorFn, "sequence", sequence);
+  Nan::SetMethod(ctorFn, "waitForDuration", waitForDuration);
+  Nan::SetMethod(ctorFn, "moveBy", moveBy);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -118,6 +120,43 @@ NAN_METHOD(NSKAction::sequence) {
 
   @autoreleasepool {
     action->SetNSObject([SKAction sequence:actions]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+// creates an action that idles for a specified period of time
+NAN_METHOD(NSKAction::waitForDuration) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKAction)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(obj);
+
+  @autoreleasepool {
+    action->SetNSObject([SKAction waitForDuration:TO_DOUBLE(info[0])]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+// creates an action that moves a node relative to its current position
+NAN_METHOD(NSKAction::moveBy) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKAction)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(obj);
+
+  @autoreleasepool {
+    float dx = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("dx")));
+    float dy = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("dy")));
+    double duration = TO_DOUBLE(info[1]);
+    action->SetNSObject([SKAction moveBy:CGVectorMake(dx, dy) duration:duration]);
   }
 
   JS_SET_RETURN(obj);
