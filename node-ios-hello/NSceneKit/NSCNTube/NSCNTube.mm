@@ -1,0 +1,51 @@
+//
+//  SCNTube.m
+//  node-ios-hello
+//
+//  Created by Shawn Presser on 5/28/2019.
+//  Copyright © 2019 sweetiebird. All rights reserved.
+//
+    
+#include "NSCNTube.h"
+
+Nan::Persistent<FunctionTemplate> NSCNTube::type;
+
+NSCNTube::NSCNTube () {}
+NSCNTube::~NSCNTube () {}
+
+std::pair<Local<Object>, Local<FunctionTemplate>> NSCNTube::Initialize(Isolate *isolate)
+{
+  Nan::EscapableHandleScope scope;
+
+  // constructor
+  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NSCNGeometry::type));
+  ctor->InstanceTemplate()->SetInternalFieldCount(1);
+  ctor->SetClassName(JS_STR("SCNTube"));
+  type.Reset(ctor);
+
+  // prototype
+  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
+}
+
+NAN_METHOD(NSCNTube::New) {
+  @autoreleasepool {
+    Local<Object> obj = info.This();
+
+    NSCNTube *ui = new NSCNTube();
+
+    if (info[0]->IsExternal()) {
+      ui->SetNSObject((__bridge SCNTube *)(info[0].As<External>()->Value()));
+    } else {
+      ui->SetNSObject([[SCNTube alloc] init]);
+    }
+    ui->Wrap(obj);
+
+    JS_SET_RETURN(obj);
+  }
+}

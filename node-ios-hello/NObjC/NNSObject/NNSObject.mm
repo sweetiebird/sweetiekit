@@ -446,8 +446,18 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSCNNode.h"
 #include "NSCNLight.h"
 #include "NSCNMaterial.h"
+#include "NSCNBox.h"
+#include "NSCNCapsule.h"
+#include "NSCNCone.h"
+#include "NSCNCylinder.h"
+#include "NSCNPlane.h"
+#include "NSCNPyramid.h"
+#include "NSCNSphere.h"
+#include "NSCNTorus.h"
+#include "NSCNTube.h"
 #include "NSCNGeometry.h"
 #include "NSCNText.h"
+#include "NSCNShape.h"
 #include "NSKScene.h"
 #include "NSKSpriteNode.h"
 #include "NSKCameraNode.h"
@@ -599,7 +609,17 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // SceneKit
     JS_EXPORT_TYPE(SCNMaterial);
     JS_EXPORT_TYPE(SCNGeometry);
+    JS_EXPORT_TYPE(SCNBox);
+    JS_EXPORT_TYPE(SCNCapsule);
+    JS_EXPORT_TYPE(SCNCone);
+    JS_EXPORT_TYPE(SCNCylinder);
+    JS_EXPORT_TYPE(SCNPlane);
+    JS_EXPORT_TYPE(SCNPyramid);
+    JS_EXPORT_TYPE(SCNSphere);
+    JS_EXPORT_TYPE(SCNTorus);
+    JS_EXPORT_TYPE(SCNTube);
     JS_EXPORT_TYPE(SCNText);
+    JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
     JS_EXPORT_TYPE(SCNScene);
     JS_EXPORT_TYPE(SCNView);
@@ -631,6 +651,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
     }
     if (wrapper == nullptr) {
+    
+#define JS_RETURN_TYPE(Type) \
+      if ([obj isKindOfClass:[Type class]]) { \
+        return N##Type::type; \
+      }
     
       // ========= core animation
       if ([obj isKindOfClass:[CAEmitterCell class]]) {
@@ -698,29 +723,25 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       //SceneKit
+      JS_RETURN_TYPE(SCNText);
+      JS_RETURN_TYPE(SCNMaterial);
+      JS_RETURN_TYPE(SCNBox);
+      JS_RETURN_TYPE(SCNCapsule);
+      JS_RETURN_TYPE(SCNCone);
+      JS_RETURN_TYPE(SCNCylinder);
+      JS_RETURN_TYPE(SCNPlane);
+      JS_RETURN_TYPE(SCNPyramid);
+      JS_RETURN_TYPE(SCNSphere);
+      JS_RETURN_TYPE(SCNTorus);
+      JS_RETURN_TYPE(SCNTube);
+      JS_RETURN_TYPE(SCNText);
+      JS_RETURN_TYPE(SCNShape);
+      JS_RETURN_TYPE(SCNGeometry);
+      JS_RETURN_TYPE(SCNLight);
+      JS_RETURN_TYPE(SCNScene);
+      JS_RETURN_TYPE(SCNNode);
+      JS_RETURN_TYPE(SCNView);
       
-      if ([obj isKindOfClass:[SCNText class]]) {
-        return NSCNText::type;
-      }
-      if ([obj isKindOfClass:[SCNMaterial class]]) {
-        return NSCNMaterial::type;
-      }
-      if ([obj isKindOfClass:[SCNGeometry class]]) {
-        return NSCNGeometry::type;
-      }
-      if ([obj isKindOfClass:[SCNLight class]]) {
-        return NSCNLight::type;
-      }
-      if ([obj isKindOfClass:[SCNScene class]]) {
-        return NSCNScene::type;
-      }
-      if ([obj isKindOfClass:[SCNNode class]]) {
-        return NSCNNode::type;
-      }
-      if ([obj isKindOfClass:[SCNView class]]) {
-        return NSCNView::type;
-      }
-
       // SpriteKit
       
       if ([obj isKindOfClass:[SKTexture class]]) {

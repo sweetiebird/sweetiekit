@@ -1,0 +1,51 @@
+//
+//  SCNShape.m
+//  node-ios-hello
+//
+//  Created by Shawn Presser on 5/28/2019.
+//  Copyright © 2019 sweetiebird. All rights reserved.
+//
+    
+#include "NSCNShape.h"
+
+Nan::Persistent<FunctionTemplate> NSCNShape::type;
+
+NSCNShape::NSCNShape () {}
+NSCNShape::~NSCNShape () {}
+
+std::pair<Local<Object>, Local<FunctionTemplate>> NSCNShape::Initialize(Isolate *isolate)
+{
+  Nan::EscapableHandleScope scope;
+
+  // constructor
+  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
+  ctor->Inherit(Nan::New(NSCNGeometry::type));
+  ctor->InstanceTemplate()->SetInternalFieldCount(1);
+  ctor->SetClassName(JS_STR("SCNShape"));
+  type.Reset(ctor);
+
+  // prototype
+  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
+}
+
+NAN_METHOD(NSCNShape::New) {
+  @autoreleasepool {
+    Local<Object> obj = info.This();
+
+    NSCNShape *ui = new NSCNShape();
+
+    if (info[0]->IsExternal()) {
+      ui->SetNSObject((__bridge SCNShape *)(info[0].As<External>()->Value()));
+    } else {
+      ui->SetNSObject([[SCNShape alloc] init]);
+    }
+    ui->Wrap(obj);
+
+    JS_SET_RETURN(obj);
+  }
+}
