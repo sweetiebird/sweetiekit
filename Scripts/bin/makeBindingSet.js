@@ -33,7 +33,7 @@ function makeBindingSet(group, name, superClass, me) {
 #import <Foundation/Foundation.h>
 
 #include "defines.h"
-#include "N${superclass}.h"
+#include "N${superClass}.h"
 #include "N${name}.h"
 
 Nan::Persistent<FunctionTemplate> N${name}::type;
@@ -47,7 +47,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(N${superclass}::type));
+  ctor->Inherit(Nan::New(N${superClass}::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("${name}"));
   type.Reset(ctor);
@@ -93,9 +93,9 @@ NAN_METHOD(N${name}::New) {
 #define N${name}_h    
 
 #import <UIKit/UIKit.h>
-#include "N${superclass}.h"
+#include "N${superClass}.h"
 
-class N${name} : public N${superclass} {
+class N${name} : public N${superClass} {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
