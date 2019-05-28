@@ -38,11 +38,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "shadowOffset", ShadowOffset);
   JS_SET_PROP(proto, "shadowColor", ShadowColor);
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
-  JS_SET_PROP(proto, "position", Position)
+  JS_SET_PROP(proto, "position", Position);
   Nan::SetMethod(proto, "addAnimation", AddAnimation);
   Nan::SetMethod(proto, "addSublayer", addSublayer);
   Nan::SetMethod(proto, "renderInContext", renderInContext);
-  JS_SET_PROP(proto, "masksToBounds", MasksToBounds)
+  JS_SET_PROP(proto, "masksToBounds", MasksToBounds);
   JS_ASSIGN_PROP(proto, shadowOpacity);
   JS_ASSIGN_PROP(proto, frame);
 

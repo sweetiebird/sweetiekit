@@ -34,24 +34,61 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCapsule::Initialize(Isolat
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  JS_ASSIGN_METHOD(ctorFn, capsuleWithCapRadiusHeight);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNCapsule*
+SCNCapsule_capsuleWithCapRadiusHeight(
+  Local<Value> radius,
+  Local<Value> height)
+{
+  return [SCNCapsule
+            capsuleWithCapRadius:TO_FLOAT(radius)
+            height:TO_FLOAT(height)];
+}
+
+NAN_METHOD(NSCNCapsule::capsuleWithCapRadiusHeight) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNCapsule_capsuleWithCapRadiusHeight(info[0], info[1]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNCapsule, argv));
+  }
+}
+
 NAN_METHOD(NSCNCapsule::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNCapsule *ui = new NSCNCapsule();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNCapsule *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNCapsule alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNCapsule(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNCapsule, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNCapsule* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNCapsule *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 2 && info[0]->IsNumber()) {
+      self = SCNCapsule_capsuleWithCapRadiusHeight(info[0], info[1]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("capRadius"))) {
+      self = SCNCapsule_capsuleWithCapRadiusHeight(
+          JS_OBJ(info[0])->Get(JS_STR("capRadius")),
+          JS_OBJ(info[0])->Get(JS_STR("height"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNCapsule alloc] init];
+    }
+    if (self) {
+      NSCNCapsule *wrapper = new NSCNCapsule();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else if (info.Length() <= 0) {
+      Nan::ThrowError("SCNCapsule::New: invalid arguments");
+    }
   }
 }
 

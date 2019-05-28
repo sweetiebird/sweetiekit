@@ -37,24 +37,68 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNBox::Initialize(Isolate *i
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn));
+  JS_ASSIGN_METHOD(type, boxWithWidthHeightLengthChamferRadius);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNBox*
+SCNBox_boxWithWidthHeightLengthChamferRadius(
+  Local<Value> width, 
+  Local<Value> height,
+  Local<Value> length,
+  Local<Value> chamferRadius)
+{
+  return [SCNBox
+            boxWithWidth:TO_FLOAT(width)
+            height:TO_FLOAT(height)
+            length:TO_FLOAT(length)
+            chamferRadius:TO_FLOAT(chamferRadius)];
+}
+
+NAN_METHOD(NSCNBox::boxWithWidthHeightLengthChamferRadius) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNBox_boxWithWidthHeightLengthChamferRadius(info[0], info[1], info[2], info[3]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNBox, argv));
+  }
+}
+  
 NAN_METHOD(NSCNBox::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNBox *ui = new NSCNBox();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNBox *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNBox alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNBox(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNBox, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNBox* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNBox *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 4) {
+      self = SCNBox_boxWithWidthHeightLengthChamferRadius(info[0], info[1], info[2], info[3]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+      self = SCNBox_boxWithWidthHeightLengthChamferRadius(
+          JS_OBJ(info[0])->Get(JS_STR("width")),
+          JS_OBJ(info[0])->Get(JS_STR("height")),
+          JS_OBJ(info[0])->Get(JS_STR("length")),
+          JS_OBJ(info[0])->Get(JS_STR("chamferRadius"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNBox alloc] init];
+    }
+    if (self) {
+      NSCNBox *wrapper = new NSCNBox();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNBox::New: invalid arguments");
+    }
   }
 }
 

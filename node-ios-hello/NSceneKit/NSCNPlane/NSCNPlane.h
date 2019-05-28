@@ -15,6 +15,7 @@
 #define to_value_SCNPlane(x) to_value_wrapper(x, SCNPlane)
 
 JS_WRAP_CLASS(SCNPlane, SCNGeometry);
+  JS_METHOD(planeWithWidthHeight);
   JS_PROP(width);
   JS_PROP(height);
   JS_PROP(widthSegmentCount);

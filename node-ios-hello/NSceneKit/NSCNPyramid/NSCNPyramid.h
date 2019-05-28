@@ -15,6 +15,7 @@
 #define to_value_SCNPyramid(x) to_value_wrapper(x, SCNPyramid)
 
 JS_WRAP_CLASS(SCNPyramid, SCNGeometry);
+  JS_METHOD(pyramidWithWidthHeightLength);
   JS_PROP(width);
   JS_PROP(height);
   JS_PROP(length);

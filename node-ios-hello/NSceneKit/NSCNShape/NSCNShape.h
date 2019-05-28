@@ -18,6 +18,7 @@
 #define to_value_SCNChamferMode(x) TO_ENUM(SCNChamferMode, NSInteger, x)
 
 JS_WRAP_CLASS(SCNShape, SCNGeometry);
+  JS_METHOD(shapeWithPathExtrusionDepth);
   JS_PROP(path);
   JS_PROP(extrusionDepth);
   JS_PROP(chamferMode);

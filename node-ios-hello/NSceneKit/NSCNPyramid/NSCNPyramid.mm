@@ -35,24 +35,66 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNPyramid::Initialize(Isolat
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn));
+  JS_ASSIGN_METHOD(type, pyramidWithWidthHeightLength);
+
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNPyramid*
+SCNPyramid_pyramidWithWidthHeightLength(
+  Local<Value> width,
+  Local<Value> height,
+  Local<Value> length)
+{
+  return [SCNPyramid
+            pyramidWithWidth:TO_FLOAT(width)
+            height:TO_FLOAT(height)
+            length:TO_FLOAT(length)];
+}
+
+NAN_METHOD(NSCNPyramid::pyramidWithWidthHeightLength) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNPyramid_pyramidWithWidthHeightLength(info[0], info[1], info[2]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNPyramid, argv));
+  }
+}
+
 NAN_METHOD(NSCNPyramid::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNPyramid *ui = new NSCNPyramid();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNPyramid *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNPyramid alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNPyramid(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNPyramid, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNPyramid* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNPyramid *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 3) {
+      self = SCNPyramid_pyramidWithWidthHeightLength(info[0], info[1], info[2]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+      self = SCNPyramid_pyramidWithWidthHeightLength(
+          JS_OBJ(info[0])->Get(JS_STR("width")),
+          JS_OBJ(info[0])->Get(JS_STR("height")),
+          JS_OBJ(info[0])->Get(JS_STR("length"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNPyramid alloc] init];
+    }
+    if (self) {
+      NSCNPyramid *wrapper = new NSCNPyramid();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNPyramid::New: invalid arguments");
+    }
   }
 }
 

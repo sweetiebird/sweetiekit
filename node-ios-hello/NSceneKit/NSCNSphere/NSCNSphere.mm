@@ -32,24 +32,59 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNSphere::Initialize(Isolate
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn)); type = type;
+  JS_ASSIGN_METHOD(type, sphereWithRadius);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNSphere*
+SCNSphere_sphereWithRadius(
+  Local<Value> radius)
+{
+  return [SCNSphere
+            sphereWithRadius:TO_FLOAT(radius)];
+}
+
+NAN_METHOD(NSCNSphere::sphereWithRadius) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNSphere_sphereWithRadius(info[0]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNSphere, argv));
+  }
+}
+
 NAN_METHOD(NSCNSphere::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNSphere *ui = new NSCNSphere();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNSphere *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNSphere alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNSphere(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNSphere, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNSphere* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNSphere *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && info[0]->IsNumber()) {
+      self = SCNSphere_sphereWithRadius(info[0]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("radius"))) {
+      self = SCNSphere_sphereWithRadius(
+          JS_OBJ(info[0])->Get(JS_STR("radius"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNSphere alloc] init];
+    }
+    if (self) {
+      NSCNSphere *wrapper = new NSCNSphere();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNSphere::New: invalid arguments");
+    }
   }
 }
 

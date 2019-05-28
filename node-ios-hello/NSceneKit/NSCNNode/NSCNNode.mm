@@ -136,7 +136,7 @@ NAN_METHOD(NSCNNode::New) {
         node->SetNSObject(scnNode);
       }
     }
-  } else if (info[0]->IsObject()) {
+  } else if (info[0]->IsObject() && JS_INSTANCEOF(info[0], NSCNGeometry)) {
     @autoreleasepool {
       NSCNGeometry *child = ObjectWrap::Unwrap<NSCNGeometry>(Local<Object>::Cast(info[0]));
       node->SetNSObject([SCNNode nodeWithGeometry:child->As<SCNGeometry>()]);

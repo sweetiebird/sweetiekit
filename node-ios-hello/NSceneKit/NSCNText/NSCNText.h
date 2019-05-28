@@ -15,6 +15,7 @@
 #define to_value_SCNText(x) to_value_wrapper(x, SCNText)
 
 JS_WRAP_CLASS(SCNText, SCNGeometry);
+  JS_METHOD(textWithStringExtrusionDepth);
   JS_PROP(textSize);
   JS_PROP(extrusionDepth);
   JS_PROP(string);

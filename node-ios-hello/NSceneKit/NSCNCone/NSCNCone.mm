@@ -33,24 +33,64 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCone::Initialize(Isolate *
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  JS_ASSIGN_METHOD(ctorFn, coneWithTopRadiusBottomRadiusHeight);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNCone*
+SCNCone_coneWithTopRadiusBottomRadiusHeight(
+  Local<Value> topRadius, 
+  Local<Value> bottomRadius,
+  Local<Value> height)
+{
+  return [SCNCone
+            coneWithTopRadius:TO_FLOAT(topRadius)
+            bottomRadius:TO_FLOAT(bottomRadius)
+            height:TO_FLOAT(height)];
+}
+
+NAN_METHOD(NSCNCone::coneWithTopRadiusBottomRadiusHeight) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNCone_coneWithTopRadiusBottomRadiusHeight(info[0], info[1], info[2]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNCone, argv));
+  }
+}
+  
 NAN_METHOD(NSCNCone::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNCone *ui = new NSCNCone();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNCone *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNCone alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNCone(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNCone, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNCone* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNCone *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 3) {
+      self = SCNCone_coneWithTopRadiusBottomRadiusHeight(info[0], info[1], info[2]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("topRadius"))) {
+      self = SCNCone_coneWithTopRadiusBottomRadiusHeight(
+          JS_OBJ(info[0])->Get(JS_STR("topRadius")),
+          JS_OBJ(info[0])->Get(JS_STR("bottomRadius")),
+          JS_OBJ(info[0])->Get(JS_STR("height"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNCone alloc] init];
+    }
+    if (self) {
+      NSCNCone *wrapper = new NSCNCone();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNCone::New: invalid arguments");
+    }
   }
 }
 

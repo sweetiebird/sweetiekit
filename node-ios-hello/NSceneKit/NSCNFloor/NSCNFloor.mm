@@ -35,24 +35,54 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNFloor::Initialize(Isolate 
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  JS_ASSIGN_METHOD(ctorFn, floor);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+#include "NUIBezierPath.h"
+
+SCNFloor*
+SCNFloor_floor()
+{
+  return [SCNFloor floor];
+}
+
+NAN_METHOD(NSCNFloor::floor) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNFloor_floor())
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNFloor, argv));
+  }
+}
+
 NAN_METHOD(NSCNFloor::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNFloor *ui = new NSCNFloor();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNFloor *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNFloor alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNFloor(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNFloor, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNFloor* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNFloor *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && info[0]->IsObject()) {
+      self = SCNFloor_floor();
+    } else if (info.Length() <= 0) {
+      self = [[SCNFloor alloc] init];
+    }
+    if (self) {
+      NSCNFloor *wrapper = new NSCNFloor();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else if (info.Length() <= 0) {
+      Nan::ThrowError("SCNFloor::New: invalid arguments");
+    }
   }
 }
 

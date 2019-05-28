@@ -15,6 +15,7 @@
 #define to_value_SCNSphere(x) to_value_wrapper(x, SCNSphere)
 
 JS_WRAP_CLASS(SCNSphere, SCNGeometry);
+  JS_METHOD(sphereWithRadius);
   JS_PROP(radius);
   JS_PROP(geodesic);
   JS_PROP(segmentCount);

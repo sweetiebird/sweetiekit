@@ -14,6 +14,7 @@
 #define to_value_SCNFloor(x) to_value_wrapper(x, SCNFloor)
 
 JS_WRAP_CLASS(SCNFloor, SCNGeometry);
+  JS_METHOD(floor);
   JS_PROP(reflectivity);
   JS_PROP(reflectionFalloffStart);
   JS_PROP(reflectionFalloffEnd);

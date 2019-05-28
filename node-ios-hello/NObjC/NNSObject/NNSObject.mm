@@ -614,12 +614,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNCapsule);
     JS_EXPORT_TYPE(SCNCone);
     JS_EXPORT_TYPE(SCNCylinder);
+    JS_EXPORT_TYPE(SCNFloor);
     JS_EXPORT_TYPE(SCNPlane);
     JS_EXPORT_TYPE(SCNPyramid);
     JS_EXPORT_TYPE(SCNSphere);
     JS_EXPORT_TYPE(SCNTorus);
     JS_EXPORT_TYPE(SCNTube);
-    JS_EXPORT_TYPE(SCNFloor);
     JS_EXPORT_TYPE(SCNText);
     JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
@@ -731,12 +731,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNCapsule);
       JS_RETURN_TYPE(SCNCone);
       JS_RETURN_TYPE(SCNCylinder);
+      JS_RETURN_TYPE(SCNFloor);
       JS_RETURN_TYPE(SCNPlane);
       JS_RETURN_TYPE(SCNPyramid);
       JS_RETURN_TYPE(SCNSphere);
       JS_RETURN_TYPE(SCNTorus);
       JS_RETURN_TYPE(SCNTube);
-      JS_RETURN_TYPE(SCNFloor);
       JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNShape);
       JS_RETURN_TYPE(SCNGeometry);

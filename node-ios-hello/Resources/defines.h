@@ -24,7 +24,8 @@ using namespace v8;
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_INSTANCEOF(obj, type) ((obj)->InstanceOf(JS_CONTEXT(), JS_TYPE(type)).FromJust())
-#define JS_NEW(type, argv) (JS_TYPE(type)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked())
+#define JS_NEW(type, argc, argv) (JS_TYPE(type)->NewInstance(JS_CONTEXT(), argc, argv).ToLocalChecked())
+#define JS_NEW_ARGV(type, argv) JS_NEW(type, sizeof(argv)/sizeof(argv[0]), argv)
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_WRAPPER(el, ElType) sweetiekit::GetWrapperFor(el, N##ElType::type)
 
@@ -77,6 +78,16 @@ using namespace node;
 #define JS_SET_RETURN(x) \
   info.GetReturnValue().Set(x)
 
+// forwards arguments to type's constructor.
+#define JS_SET_RETURN_NEW(type, info) \
+  { \
+      std::vector<Local<Value>> argv; \
+      for (int i = 0; i < info.Length(); i++) { \
+        argv.push_back(info[i]); \
+      } \
+      JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
+  }
+
 #define JS_PROP(name) \
   static NAN_GETTER(name##Getter); \
   static NAN_SETTER(name##Setter)
@@ -93,16 +104,22 @@ using namespace node;
   __block type* name = n##name->As<type>(); name = name;
 
 #define JS_SET_PROP(proto, jsName, cppName) \
-  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter, cppName##Setter);
+  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter, cppName##Setter)
 
 #define JS_SET_PROP_READONLY(proto, jsName, cppName) \
-  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter);
+  Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter)
   
 #define JS_ASSIGN_PROP(proto, jsName) \
-  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter, jsName##Setter);
-  
+  Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter, jsName##Setter)
+
 #define JS_ASSIGN_PROP_READONLY(proto, jsName) \
   Nan::SetAccessor(proto, JS_STR(#jsName), jsName##Getter)
+  
+#define JS_SET_METHOD(proto, jsName, cppName) \
+  Nan::SetMethod(proto, jsName, cppName)
+  
+#define JS_ASSIGN_METHOD(proto, jsName) \
+  Nan::SetMethod(proto, #jsName, jsName)
 
 #define JS_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
 #define JS_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
@@ -671,9 +688,17 @@ Local<Value> js_value_id(T* _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
+static inline Local<Value> js_value_id(id _Nullable value) {
+  return sweetiekit::GetWrapperFor(value);
+}
+
 template<typename T>
 T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T*)sweetiekit::GetValueFor(value, failed);
+}
+
+static inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
+  return sweetiekit::GetValueFor(value, failed);
 }
 
 #define js_value_NSInteger JS_INT

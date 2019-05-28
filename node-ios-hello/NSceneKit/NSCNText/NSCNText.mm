@@ -42,33 +42,86 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNText::Initialize(Isolate *
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn)); type = type;
+  JS_ASSIGN_METHOD(type, textWithStringExtrusionDepth);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
-NAN_METHOD(NSCNText::New) {
-  Nan::HandleScope scope;
+#include "NNSAttributedString.h"
 
-  Local<Object> obj = info.This();
-
-  NSCNText *ui = new NSCNText();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge SCNText *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      NSString *str = NJSStringToNSString(info[0]);
-      float depth = TO_FLOAT(info[1]);
-      ui->SetNSObject([SCNText textWithString:str extrusionDepth:depth]);
-    }
+id to_value_SCNText_string(Local<Value> value, bool* failed = nullptr) {
+  if (failed) {
+    *failed = false;
+  }
+  if (JS_INSTANCEOF(value, NNSAttributedString)) {
+    JS_UNWRAPPED(value, NSAttributedString, attributedString);
+    return attributedString;
+  } else if (value->IsString()) {
+    return NJSStringToNSString(value);
+  } else if (value->IsNullOrUndefined()) {
+    return nil;
+  } else if (failed) {
+    *failed = true;
   } else {
-    @autoreleasepool {
-      ui->SetNSObject([[SCNText alloc] init]);
+    Nan::ThrowError("SCNText_string: Expected a string, NSAttributedString, or null/undefined");
+  }
+  return nil;
+}
+
+SCNText*
+SCNText_textWithStringExtrusionDepth(
+  Local<Value> string,
+  Local<Value> extrusionDepth)
+{
+  return [SCNText
+            textWithString:to_value_SCNText_string(string)
+            extrusionDepth:TO_FLOAT(extrusionDepth)];
+}
+
+NAN_METHOD(NSCNText::textWithStringExtrusionDepth) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNText_textWithStringExtrusionDepth(info[0], info[1]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNText, argv));
+  }
+}
+
+NAN_METHOD(NSCNText::New) {
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNText(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNText, info);
+      return;
+    }
+    SCNText* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNText *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 2) {
+      self = SCNText_textWithStringExtrusionDepth(info[0], info[1]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("string"))) {
+      self = SCNText_textWithStringExtrusionDepth(
+          JS_OBJ(info[0])->Get(JS_STR("string")),
+          JS_OBJ(info[0])->Get(JS_STR("extrusionDepth"))
+        );
+    } else if (info.Length() >= 1 && (info[0]->IsString() || JS_INSTANCEOF(info[0], NNSAttributedString))) {
+      self = SCNText_textWithStringExtrusionDepth(info[0], JS_FLOAT(0.1f));
+    } else if (info.Length() <= 0) {
+      self = [[SCNText alloc] init];
+    }
+    if (self) {
+      NSCNText *wrapper = new NSCNText();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNText::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 NSCNText::NSCNText () {}
@@ -96,20 +149,13 @@ NAN_SETTER(NSCNText::stringSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNText, scn);
-  
-  if (value->IsNullOrUndefined()) {
-    [scn setString:nullptr];
-    return;
-  }
-  
-  if (!value->IsString()) {
-    Nan::ThrowError("NSCNText::stringSetter: Expected a string or null/undefined");
-    return;
-  }
   @autoreleasepool {
-    NSString* str = NJSStringToNSString(value);
-    if (str != nullptr) {
-      [scn setString:str];
+    bool failed = false;
+    id string = to_value_SCNText_string(value, &failed);
+    if (!failed) {
+      [scn setString:string];
+    } else {
+      Nan::ThrowError("NSCNText::stringSetter: Expected a string, NSAttributedString, or null/undefined");
     }
   }
 }

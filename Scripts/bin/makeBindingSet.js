@@ -52,24 +52,36 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn)); type = type;
+  //JS_ASSIGN_METHOD(type, someStaticMethod);
+  //JS_ASSIGN_PROP(type, someStaticProperty);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(N${name}::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    N${name} *ui = new N${name}();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge ${name} *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[${name} alloc] init]);
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function '${name}(...)', turn into construct call.
+      JS_SET_RETURN_NEW(${name}, info);
+      return;
     }
-    ui->Wrap(obj);
 
-    JS_SET_RETURN(obj);
+    ${name}* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge ${name} *)(info[0].As<External>()->Value());
+    } else if(info.Length() <= 0) {
+      self = [[${name} alloc] init];
+    }
+    if (self) {
+      N${name} *wrapper = new N${name}();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("${name}::New: invalid arguments");
+    }
   }
 }
 `;

@@ -33,24 +33,61 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNTorus::Initialize(Isolate 
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  JS_ASSIGN_METHOD(ctorFn, torusWithRingRadiusPipeRadius);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+SCNTorus*
+SCNTorus_torusWithRingRadiusPipeRadius(
+  Local<Value> ringRadius,
+  Local<Value> pipeRadius)
+{
+  return [SCNTorus
+            torusWithRingRadius:TO_FLOAT(ringRadius)
+            pipeRadius:TO_FLOAT(pipeRadius)];
+}
+
+NAN_METHOD(NSCNTorus::torusWithRingRadiusPipeRadius) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNTorus_torusWithRingRadiusPipeRadius(info[0], info[1]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNTorus, argv));
+  }
+}
+
 NAN_METHOD(NSCNTorus::New) {
   @autoreleasepool {
-    Local<Object> obj = info.This();
-
-    NSCNTorus *ui = new NSCNTorus();
-
-    if (info[0]->IsExternal()) {
-      ui->SetNSObject((__bridge SCNTorus *)(info[0].As<External>()->Value()));
-    } else {
-      ui->SetNSObject([[SCNTorus alloc] init]);
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNTorus(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNTorus, info);
+      return;
     }
-    ui->Wrap(obj);
-
-    JS_SET_RETURN(obj);
+    SCNTorus* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNTorus *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 2 && info[0]->IsNumber()) {
+      self = SCNTorus_torusWithRingRadiusPipeRadius(info[0], info[1]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("ringRadius"))) {
+      self = SCNTorus_torusWithRingRadiusPipeRadius(
+          JS_OBJ(info[0])->Get(JS_STR("ringRadius")),
+          JS_OBJ(info[0])->Get(JS_STR("pipeRadius"))
+        );
+    } else if (info.Length() <= 0) {
+      self = [[SCNTorus alloc] init];
+    }
+    if (self) {
+      NSCNTorus *wrapper = new NSCNTorus();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else if (info.Length() <= 0) {
+      Nan::ThrowError("SCNTorus::New: invalid arguments");
+    }
   }
 }
 
