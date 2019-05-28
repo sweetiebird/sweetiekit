@@ -206,6 +206,7 @@
 		A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */; };
 		A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */; };
 		A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */; };
+		A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -577,6 +578,8 @@
 		A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImagePickerControllerDelegate.h; sourceTree = "<group>"; };
 		A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerControllerDelegate.mm; sourceTree = "<group>"; };
 		A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
+		A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNMaterial.mm; sourceTree = "<group>"; };
+		A1EE7D53229D84F9002B53FF /* NSCNMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNMaterial.h; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1417,10 +1420,11 @@
 			isa = PBXGroup;
 			children = (
 				A1646B9D229238630078CF4B /* NSCNGeometry */,
-				A1646BA0229238630078CF4B /* NSCNText */,
 				A1948930228A5D33007BF787 /* NSCNLight */,
+				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
+				A1646BA0229238630078CF4B /* NSCNText */,
 				A1BD4B402287BC9E001D1F6E /* NSCNView */,
 			);
 			path = NSceneKit;
@@ -2084,6 +2088,15 @@
 			path = NUIImagePickerControllerDelegate;
 			sourceTree = "<group>";
 		};
+		A1EE7D51229D84F9002B53FF /* NSCNMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D53229D84F9002B53FF /* NSCNMaterial.h */,
+				A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */,
+			);
+			path = NSCNMaterial;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -2429,6 +2442,7 @@
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
+				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
 				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,

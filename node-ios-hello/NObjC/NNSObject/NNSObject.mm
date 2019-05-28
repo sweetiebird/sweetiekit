@@ -422,6 +422,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NARWorldTrackingConfiguration.h"
 #include "NSKView.h"
 #include "NSKNode.h"
+#include "NSKTexture.h"
 #include "NSKTransformNode.h"
 #include "NSKPhysicsBody.h"
 #include "NSKPhysicsWorld.h"
@@ -444,6 +445,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSCNScene.h"
 #include "NSCNNode.h"
 #include "NSCNLight.h"
+#include "NSCNMaterial.h"
 #include "NSCNGeometry.h"
 #include "NSCNText.h"
 #include "NSKScene.h"
@@ -469,6 +471,153 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIImage.h"
+
+#define JS_EXPORT_TYPE_AS(type, name) \
+        auto N_##type = N##type::Initialize(Isolate::GetCurrent()); \
+        exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
+
+#define JS_EXPORT_TYPE(type) \
+        JS_EXPORT_TYPE_AS(type, #type)
+
+void NNSObject::RegisterTypes(Local<Object> exports) {
+    JS_EXPORT_TYPE(NSObject);
+    JS_EXPORT_TYPE(NSBundle);
+    JS_EXPORT_TYPE(AVAudioPlayer);
+    JS_EXPORT_TYPE(NSUserDefaults);
+    JS_EXPORT_TYPE(NSLayoutAnchor);
+    JS_EXPORT_TYPE(NSLayoutConstraint);
+    JS_EXPORT_TYPE(UIBarButtonItem);
+    JS_EXPORT_TYPE(UITabBarItem);
+    JS_EXPORT_TYPE(UIAlertAction);
+    JS_EXPORT_TYPE(NSParagraphStyle);
+    JS_EXPORT_TYPE(NSMutableParagraphStyle);
+    JS_EXPORT_TYPE(NSAttributedString);
+    JS_EXPORT_TYPE(NSMutableAttributedString);
+    JS_EXPORT_TYPE(RPScreenRecorder);
+
+    // Core Location
+    JS_EXPORT_TYPE(CLHeading);
+    JS_EXPORT_TYPE(CLLocation);
+    JS_EXPORT_TYPE(CLLocationManager);
+    JS_EXPORT_TYPE(CLLocationManagerDelegate);
+    JS_EXPORT_TYPE(CLGeocoder);
+    JS_EXPORT_TYPE(CLPlacemark);
+
+    // UIKit
+    JS_EXPORT_TYPE(UIApplication);
+    JS_EXPORT_TYPE(UIWindow);
+    JS_EXPORT_TYPE(UIResponder);
+    JS_EXPORT_TYPE(UIViewController);
+    JS_EXPORT_TYPE(RPPreviewViewController);
+    JS_EXPORT_TYPE(UITabBarController);
+    JS_EXPORT_TYPE(UITableViewController);
+    JS_EXPORT_TYPE(UICollectionViewController);
+    JS_EXPORT_TYPE(UINavigationController);
+    JS_EXPORT_TYPE(UIImagePickerController);
+    JS_EXPORT_TYPE(UIPresentationController);
+    JS_EXPORT_TYPE(UIPopoverPresentationController);
+    JS_EXPORT_TYPE(UIAlertController);
+    JS_EXPORT_TYPE(UIView);
+    JS_EXPORT_TYPE(UICollectionReusableView);
+    JS_EXPORT_TYPE(UIControl);
+    JS_EXPORT_TYPE(UISlider);
+    JS_EXPORT_TYPE(UIRefreshControl);
+    JS_EXPORT_TYPE(UISwitch);
+    JS_EXPORT_TYPE(UIStoryboard);
+    JS_EXPORT_TYPE(UIButton);
+    JS_EXPORT_TYPE(UITextField);
+    JS_EXPORT_TYPE(UIImage);
+    JS_EXPORT_TYPE(UIImageView);
+    JS_EXPORT_TYPE(UIFont);
+    JS_EXPORT_TYPE(UILabel);
+    JS_EXPORT_TYPE(UITableViewCell);
+    JS_EXPORT_TYPE(UIScrollView);
+    JS_EXPORT_TYPE(UITableView);
+    JS_EXPORT_TYPE(UICollectionView);
+    JS_EXPORT_TYPE(UICollectionViewCell);
+    JS_EXPORT_TYPE(UITableViewManager);
+    JS_EXPORT_TYPE(UICollectionViewManager);
+    JS_EXPORT_TYPE(UINib);
+    JS_EXPORT_TYPE(UITouch);
+    JS_EXPORT_TYPE(UIPageControl);
+    JS_EXPORT_TYPE(UIPickerView);
+    JS_EXPORT_TYPE(UIProgressView);
+    JS_EXPORT_TYPE(UITabBar);
+    JS_EXPORT_TYPE(UIStackView);
+
+    // UIKit delegates
+    JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
+    JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
+    JS_EXPORT_TYPE(UIPickerViewManager);
+    JS_EXPORT_TYPE(UIScrollViewDelegate);
+    JS_EXPORT_TYPE(UIImagePickerControllerDelegate);
+    JS_EXPORT_TYPE(UITableViewDataSource);
+    JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
+    JS_EXPORT_TYPE(UINavigationBar);
+    JS_EXPORT_TYPE(UINavigationItem);
+
+    // UIKit Custom
+    JS_EXPORT_TYPE(GifManager);
+    JS_EXPORT_TYPE(Gif);
+    JS_EXPORT_TYPE(GifView);
+
+    // CoreAnimation
+    JS_EXPORT_TYPE(CALayer);
+    JS_EXPORT_TYPE(CAShapeLayer);
+    JS_EXPORT_TYPE(CABasicAnimation);
+    JS_EXPORT_TYPE(CAEmitterCell);
+    JS_EXPORT_TYPE(CAEmitterLayer);
+
+    // SpriteKit
+    JS_EXPORT_TYPE(SKPhysicsContact);
+    JS_EXPORT_TYPE(SKView);
+    JS_EXPORT_TYPE(SKPhysicsBody);
+    JS_EXPORT_TYPE(SKNode);
+    JS_EXPORT_TYPE(SKTransformNode);
+    JS_EXPORT_TYPE(SKEmitterNode);
+    JS_EXPORT_TYPE(SKSpriteNode);
+    JS_EXPORT_TYPE(SKLabelNode);
+    JS_EXPORT_TYPE(SKCameraNode);
+    JS_EXPORT_TYPE(SKScene);
+    JS_EXPORT_TYPE(SKAction);
+    JS_EXPORT_TYPE(SKTexture);
+    JS_EXPORT_TYPE(SKPhysicsWorld);
+    JS_EXPORT_TYPE(SKPhysicsContactDelegate);
+
+    // ARKit
+    JS_EXPORT_TYPE(ARLightEstimate);
+    JS_EXPORT_TYPE(ARSKView);
+    JS_EXPORT_TYPE(ARSession);
+    JS_EXPORT_TYPE(ARConfiguration);
+    JS_EXPORT_TYPE(ARWorldTrackingConfiguration);
+    JS_EXPORT_TYPE(ARCamera);
+    JS_EXPORT_TYPE(ARFrame);
+    JS_EXPORT_TYPE(ARAnchor);
+    JS_EXPORT_TYPE(ARSKViewDelegate);
+    JS_EXPORT_TYPE(ARSCNViewDelegate);
+
+    // SceneKit
+    JS_EXPORT_TYPE(SCNMaterial);
+    JS_EXPORT_TYPE(SCNGeometry);
+    JS_EXPORT_TYPE(SCNText);
+    JS_EXPORT_TYPE(SCNNode);
+    JS_EXPORT_TYPE(SCNScene);
+    JS_EXPORT_TYPE(SCNView);
+    JS_EXPORT_TYPE(ARSCNView);
+    JS_EXPORT_TYPE(SCNLight);
+
+    // MapKit
+    JS_EXPORT_TYPE(MKMapView);
+    JS_EXPORT_TYPE(MKAnnotationView);
+    JS_EXPORT_TYPE(MKMapViewDelegate);
+
+    // core image
+    JS_EXPORT_TYPE(CIImage);
+
+    // misc
+    JS_EXPORT_TYPE(CoreGraphicsGlobals);
+    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
+}
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
   if (obj != nullptr) {
@@ -553,6 +702,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[SCNText class]]) {
         return NSCNText::type;
       }
+      if ([obj isKindOfClass:[SCNMaterial class]]) {
+        return NSCNMaterial::type;
+      }
       if ([obj isKindOfClass:[SCNGeometry class]]) {
         return NSCNGeometry::type;
       }
@@ -571,6 +723,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SpriteKit
       
+      if ([obj isKindOfClass:[SKTexture class]]) {
+        return NSKTexture::type;
+      }
       if ([obj isKindOfClass:[SKEmitterNode class]]) {
         return NSKEmitterNode::type;
       }
