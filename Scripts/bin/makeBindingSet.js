@@ -33,10 +33,13 @@ function makeBindingSet(group, name, superClass, me) {
 #import <Foundation/Foundation.h>
 
 #include "defines.h"
-#include "N${superClass !== undefined ? superClass : 'NSObject'}.h"
+#include "N${superclass}.h"
 #include "N${name}.h"
 
 Nan::Persistent<FunctionTemplate> N${name}::type;
+
+N${name}::N${name} () {}
+N${name}::~N${name} () {}
 
 std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *isolate)
 {
@@ -44,7 +47,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(N${superClass !== undefined ? superClass : 'NSObject'}::type));
+  ctor->Inherit(Nan::New(N${superclass}::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("${name}"));
   type.Reset(ctor);
@@ -76,9 +79,6 @@ NAN_METHOD(N${name}::New) {
 
   JS_SET_RETURN(obj);
 }
-
-N${name}::N${name} () {}
-N${name}::~N${name} () {}
 `;
 
   const hData = `//
@@ -93,13 +93,9 @@ N${name}::~N${name} () {}
 #define N${name}_h    
 
 #import <UIKit/UIKit.h>
-#include "N${superClass !== undefined ? superClass : 'NSObject'}.h"
-#include "defines.h"
+#include "N${superclass}.h"
 
-using namespace v8;
-using namespace node;
-
-class N${name} : public N${superClass !== undefined ? superClass : 'NSObject'} {
+class N${name} : public N${superclass} {
 public:
 
   static Nan::Persistent<FunctionTemplate> type;
@@ -108,7 +104,7 @@ public:
   N${name}();
   virtual ~N${name}();
 
-  static NAN_METHOD(New);
+  JS_METHOD(New);
 };
 
 #endif /* N${name}_h */`;
@@ -132,7 +128,7 @@ const args = process.argv;
 
 const group = args[2];
 const name = args[3];
-const superClass = args[4];
+const superClass = args[4] || 'NSObject';
 const me = args[5] !== undefined ? args[5] : process.env.USER_FULL_NAME;
 
 makeBindingSet(group, name, superClass, me);
