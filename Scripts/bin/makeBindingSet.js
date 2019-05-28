@@ -30,10 +30,6 @@ function makeBindingSet(group, name, superClass, me) {
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
 //
     
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "N${superClass}.h"
 #include "N${name}.h"
 
 Nan::Persistent<FunctionTemplate> N${name}::type;
@@ -53,7 +49,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
   type.Reset(ctor);
 
   // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -62,22 +58,20 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
 }
 
 NAN_METHOD(N${name}::New) {
-  Nan::HandleScope scope;
+  @autoreleasepool {
+    Local<Object> obj = info.This();
 
-  Local<Object> obj = info.This();
+    N${name} *ui = new N${name}();
 
-  N${name} *ui = new N${name}();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge ${name} *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
+    if (info[0]->IsExternal()) {
+      ui->SetNSObject((__bridge ${name} *)(info[0].As<External>()->Value()));
+    } else {
       ui->SetNSObject([[${name} alloc] init]);
     }
-  }
-  ui->Wrap(obj);
+    ui->Wrap(obj);
 
-  JS_SET_RETURN(obj);
+    JS_SET_RETURN(obj);
+  }
 }
 `;
 
@@ -92,20 +86,19 @@ NAN_METHOD(N${name}::New) {
 #ifndef N${name}_h
 #define N${name}_h    
 
-#import <UIKit/UIKit.h>
 #include "N${superClass}.h"
 
-class N${name} : public N${superClass} {
-public:
+#define js_value_${name}(x) js_value_wrapper(x, ${name})
+#define to_value_${name}(x) to_value_wrapper(x, ${name})
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+// SpriteKit enums
+//#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
+//#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
 
-  N${name}();
-  virtual ~N${name}();
-
-  JS_METHOD(New);
-};
+JS_WRAP_CLASS(${name}, ${superClass});
+  //JS_METHOD(iosMethodName);
+  //JS_PROP(iosPropertyName);
+JS_WRAP_CLASS_END(${name});
 
 #endif /* N${name}_h */`;
 
