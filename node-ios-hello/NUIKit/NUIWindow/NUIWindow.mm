@@ -29,6 +29,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIWindow::Initialize(Isolate 
   Nan::SetMethod(proto, "setRootViewController", SetRootViewController);
   Nan::SetMethod(proto, "makeKeyAndVisible", MakeKeyAndVisible);
   JS_ASSIGN_PROP(proto, rootViewController);
+  JS_ASSIGN_PROP_READONLY(proto, layer);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -98,4 +99,14 @@ NAN_SETTER(NUIWindow::rootViewControllerSetter) {
     [ui setRootViewController:vc->As<UITabBarController>()];
     [ui makeKeyAndVisible];
   }
+}
+
+#include "NCALayer.h"
+
+NAN_GETTER(NUIWindow::layerGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UIWindow, ui);
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui layer], NCALayer::type));
 }

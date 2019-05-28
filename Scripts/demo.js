@@ -5,6 +5,13 @@ if (typeof gc === 'undefined') {
 }
 SweetieKit = require('std:sweetiekit.node');
 
+Object.defineProperty(SweetieKit.UIApplication, 'shared', {
+  get() {
+    return UIApplication.getSharedApplication();
+  },
+  enumerable: true,
+  configurable: true,
+});
 
 GetterNameToSetterName = function GetterNameToSetterName(name) {
   if (name.startsWith("is")) {
@@ -48,7 +55,7 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   let UIViewAccessors = GetBoolAccessors(UIViewClass);
   let UIViewSetters = GetBoolSetters(UIViewClass);
   let UIViewVoids = GetVoidMethods(UIViewClass);
-  
+
   for (let method of UIViewVoids) {
     if (!nativeType.prototype.hasOwnProperty(method.name)) {
       nativeType.prototype[method.name] = function () {
@@ -110,7 +117,7 @@ Object.getOwnPropertyNames(SweetieKit)
     BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
-   
+
 // gc periodically
 setInterval(() => {
   gc();

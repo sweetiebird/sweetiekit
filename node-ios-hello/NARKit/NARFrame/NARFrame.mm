@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARFrame::Initialize(Isolate *
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_SET_PROP_READONLY(proto, "camera", Camera);
   JS_SET_PROP_READONLY(proto, "lightEstimate", LightEstimate);
+  JS_ASSIGN_PROP_READONLY(proto, capturedImage);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -73,6 +74,29 @@ NAN_GETTER(NARFrame::LightEstimateGetter) {
   
   JS_SET_RETURN(sweetiekit::GetWrapperFor([frame lightEstimate], NARLightEstimate::type));
 }
+
+#include "NUIImage.h"
+#import <CoreVideo/CoreVideo.h>
+
+JS_GETTER(ARFrame, frame, capturedImage, {
+  CVPixelBufferRef pixelBuffer = [frame capturedImage];
+//    CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+//
+//    CIContext *temporaryContext = [CIContext contextWithOptions:nil];
+//    CGImageRef videoImage = [temporaryContext
+//                       createCGImage:ciImage
+//                       fromRect:CGRectMake(0, 0, 
+//                              CVPixelBufferGetWidth(pixelBuffer),
+//                              CVPixelBufferGetHeight(pixelBuffer))];
+//
+//    UIImage *uiImage = [UIImage imageWithCGImage:videoImage];
+//    CGImageRelease(videoImage);
+//    JS_SET_RETURN(sweetiekit::GetWrapperFor(uiImage, NUIImage::type));
+  if (pixelBuffer != nullptr) {
+    UIImage* uiImage = [[UIImage alloc] initWithPixelBuffer:pixelBuffer];
+    JS_SET_RETURN(sweetiekit::GetWrapperFor(uiImage, NUIImage::type));
+  }
+});
 
 NARFrame::NARFrame () {}
 NARFrame::~NARFrame () {}

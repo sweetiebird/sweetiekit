@@ -103,7 +103,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
   return field;
 }
 
-function takeScreenshot(view) {
+function takeScreenshotOld(view) {
   const w = view.frame.width;
   const h = view.frame.height;
 
@@ -132,12 +132,26 @@ function takeScreenshot(view) {
       // ==========
 
       console.log("Writing UIImage");
-      UIKit.UIImageWriteToSavedPhotosAlbum(img, () => {
-        console.log('written!');
+      UIKit.UIImageWriteToSavedPhotosAlbum(img, (i, err, ctx) => {
+        console.log('written!', i, err, ctx);
       });
     }
   } finally {
     CoreGraphics.UIGraphicsEndImageContext();
+  }
+}
+
+function takeScreenshot(arView) {
+  //let img = UIApplication.shared.screenShot();
+  let img = arView.session.currentFrame.capturedImage;
+  if (img) {
+    img = img.rotated;
+  }
+  if (img) {
+    console.log("Writing UIImage");
+    UIKit.UIImageWriteToSavedPhotosAlbum(img, (i, err, ctx) => {
+      console.log('written!', i, err, ctx);
+    });
   }
 }
 
@@ -385,7 +399,8 @@ async function make(nav, demoVC) {
   camBtn.addTarget(() => {
     console.log('recording');
     //toggleRecordScreen(demoVC, recorder);
-    takeScreenshot(demoVC.view);
+    //takeScreenshot(demoVC.view);
+    takeScreenshot(arView);
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;

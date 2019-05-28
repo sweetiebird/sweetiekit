@@ -26,13 +26,14 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetMethod(proto, "toArrayBuffer", toArrayBuffer);
+  JS_ASSIGN_PROP_READONLY(proto, rotated);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
-
+/*
 NAN_METHOD(NUIImage::New) {
   Nan::HandleScope scope;
   @autoreleasepool {
@@ -59,7 +60,36 @@ NAN_METHOD(NUIImage::New) {
 
     info.GetReturnValue().Set(imgObj);
   }
+}*/
+
+NAN_METHOD(NUIImage::New)
+{
+  Nan::HandleScope scope;
+  @autoreleasepool
+  {
+    Local<Object> uiObj = info.This();
+    NUIImage* ui = new NUIImage();
+    UIImage* el;
+    auto arg0 = info[0];
+    decltype(el) __e12 = nil;
+    if (arg0->IsExternal()) {
+      __e12 = (__bridge UIImage *)(arg0.As<External>()->Value());
+    } else {
+      decltype(el) __e13 = nil;
+      auto obj = Nan::New<Object>();
+      Nan::Set(obj, JS_STR("foo"), JS_NUM(42));
+      if (arg0->IsString()) {
+        NSString* name = NJSStringToNSString(arg0);
+        __e13 = [UIImage imageNamed: name];
+      } else {
+        __e13 = [[UIImage alloc] init];
+      }
+      __e12 = __e13;
+    }
+    ui->SetNSObject(__e12);
+  }
 }
+
 
 NUIImage::NUIImage () {}
 NUIImage::~NUIImage () {}
@@ -100,3 +130,8 @@ NAN_METHOD(NUIImage::toArrayBuffer)
     JS_SET_RETURN(result);
   }
 }
+
+JS_GETTER(UIImage, img, rotated, {
+  UIImage* img2 = [[UIImage alloc] initWithCGImage:[img CGImage] scale:1.0f orientation:UIImageOrientationRight];
+  JS_SET_RETURN(sweetiekit::GetWrapperFor(img2, NUIImage::type));
+})

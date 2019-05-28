@@ -21,7 +21,7 @@ JS_WRAP_CLASS(UIView, UIResponder);
   CGRect GetFrame();
   CGRect GetBounds();
   static NAN_METHOD(AddSubview);
-  JS_PROP(Frame);
+  JS_PROP(frame);
   JS_PROP(Bounds);
   static NAN_GETTER(OriginGetter);
   static NAN_SETTER(OriginSetter);

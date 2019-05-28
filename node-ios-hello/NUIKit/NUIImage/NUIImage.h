@@ -16,6 +16,7 @@ using namespace node;
 
 JS_WRAP_CLASS(UIImage, NSObject);
 JS_METHOD(toArrayBuffer);
+JS_PROP(rotated);
 JS_WRAP_CLASS_END(UIImage);
 
 #endif /* NUIImage_h */

@@ -55,6 +55,7 @@
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
+		A1479602229A8D2B00CEA529 /* UIApplication+screenShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1479601229A8D2B00CEA529 /* UIApplication+screenShot.swift */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -315,6 +316,7 @@
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		A1479601229A8D2B00CEA529 /* UIApplication+screenShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+screenShot.swift"; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 			children = (
 				211E76962269AF3100B838AF /* NUIApplication.h */,
 				211E76942269AED300B838AF /* NUIApplication.mm */,
+				A1479601229A8D2B00CEA529 /* UIApplication+screenShot.swift */,
 			);
 			path = NUIApplication;
 			sourceTree = "<group>";
@@ -2366,6 +2369,7 @@
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
+				A1479602229A8D2B00CEA529 /* UIApplication+screenShot.swift in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,

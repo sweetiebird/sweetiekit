@@ -26,10 +26,14 @@ public:
   virtual ~NUIApplication();
 
   static NAN_METHOD(New);
+  static NAN_METHOD(shared);
+  
   static NAN_METHOD(Destroy);
   static NAN_GETTER(KeyWindowGetter);
   
   static NAN_METHOD(Main);
+  
+  static NAN_METHOD(screenShot);
 
 private:
   static UIWindow* tmp_UIWindow;

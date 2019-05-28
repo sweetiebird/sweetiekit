@@ -29,9 +29,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Iso
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   Nan::SetAccessor(proto, JS_STR("keyWindow"), KeyWindowGetter);
+  Nan::SetMethod(proto, "screenShot", screenShot);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "getSharedApplication", shared);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -55,6 +57,18 @@ NAN_METHOD(NUIApplication::New) {
   app->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_METHOD(NUIApplication::shared)
+{
+  @autoreleasepool {
+    UIApplication* app = [UIApplication sharedApplication];
+      
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)app)
+    };
+    JS_SET_RETURN(JS_NEW(NUIApplication, argv));
+  }
 }
 
 NAN_GETTER(NUIApplication::KeyWindowGetter)
@@ -147,3 +161,12 @@ NUIApplication::NUIApplication () {}
 NUIApplication::~NUIApplication () {}
 
 
+#include "NUIImage.h"
+
+NAN_METHOD(NUIApplication::screenShot) {
+  JS_UNWRAP(UIApplication, ui);
+  UIImage* img = [ui screenShot];
+  if (img != nullptr) {
+    JS_SET_RETURN(sweetiekit::GetWrapperFor(img, NUIImage::type));
+  }
+}

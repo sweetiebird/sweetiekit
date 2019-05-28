@@ -30,6 +30,7 @@ public:
   static NAN_METHOD(SetRootViewController);
   static NAN_METHOD(MakeKeyAndVisible);
   JS_PROP(rootViewController);
+  JS_PROP(layer);
 };
 
 #endif /* NUIWindow_h */
