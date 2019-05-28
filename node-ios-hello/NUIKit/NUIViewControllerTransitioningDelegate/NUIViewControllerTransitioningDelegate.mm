@@ -52,7 +52,7 @@ NAN_METHOD(NUIViewControllerTransitioningDelegate::New) {
   info.GetReturnValue().Set(ctrlObj);
 }
 
-#include "NUIViewController.h"'
+#include "NUIViewController.h"
 #include "NUIPresentationController.h"
 
 NAN_SETTER(NUIViewControllerTransitioningDelegate::PresentationControllerForSetter) {

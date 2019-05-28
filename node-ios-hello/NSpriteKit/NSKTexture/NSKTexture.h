@@ -9,13 +9,10 @@
 #ifndef NSKTexture_h
 #define NSKTexture_h
 
-#import <UIKit/UIKit.h>
-#import <SpriteKit/SpriteKit.h>
 #import "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKTexture(x) js_value_wrapper_known(x, SKTexture)
+#define to_value_SKTexture(x) to_value_wrapper(x, SKTexture)
 
 class NSKTexture : public NNSObject {
 public:

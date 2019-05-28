@@ -9,12 +9,16 @@
 #ifndef NSCNNode_h
 #define NSCNNode_h
 
-#import <SceneKit/SceneKit.h>
 #import "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SCNNode(x) js_value_wrapper_known(x, SCNNode)
+#define to_value_SCNNode(x) to_value_wrapper_known(x, SCNNode)
+
+// SpriteKit enums
+#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
+#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
+#define js_value_SCNNodeFocusBehavior(x) JS_ENUM(SCNNodeFocusBehavior, NSInteger, x)
+#define to_value_SCNNodeFocusBehavior(x) TO_ENUM(SCNNodeFocusBehavior, NSInteger, x)
 
 class NSCNNode : public NNSObject {
 public:

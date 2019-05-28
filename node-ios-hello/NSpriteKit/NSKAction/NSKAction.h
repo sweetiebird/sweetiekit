@@ -9,12 +9,10 @@
 #ifndef NSKAction_h
 #define NSKAction_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKAction(x) js_value_wrapper_known(x, SKAction)
+#define to_value_SKAction(x) to_value_wrapper(x, SKAction)
 
 class NSKAction : public NNSObject {
 public:

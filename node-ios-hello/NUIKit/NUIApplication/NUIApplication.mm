@@ -114,8 +114,6 @@ NAN_METHOD(NUIApplication::Main) {
       fetchFn.Reset(onBackgroundFetch);
     }
   }
-  NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
-  
   
   [AppDelegate setFetchCallback:^(void (^ _Nonnull completion)(UIBackgroundFetchResult)) {
     Nan::HandleScope handleScope;
@@ -123,7 +121,7 @@ NAN_METHOD(NUIApplication::Main) {
     [[UIApplication sharedApplication] associateValue:_completion withKey:@"sweetiekit.UIApplication._completion"];
     fetchFn.Call("AppDelegate:fetchCallback", onFetchDoneFn.GetValue());
   }];
-  char* args = "node\0--jitless\0\0";
+  char* args = (char*)"node\0--jitless\0\0";
   char* args1 = (char*)args;
   std::vector<char*> arg;
   while (*args1 != '\0') {

@@ -9,12 +9,10 @@
 #ifndef NSCNGeometry_h
 #define NSCNGeometry_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SCNGeometry(x) js_value_wrapper_known(x, SCNGeometry)
+#define to_value_SCNGeometry(x) to_value_wrapper_known(x, SCNGeometry)
 
 class NSCNGeometry : public NNSObject {
 public:

@@ -140,7 +140,7 @@ NAN_GETTER(NNSNotification::userInfoGetter) {
     NSDictionary *userInfo = [ns userInfo];
     if (userInfo != nullptr) {
       NSArray *keys = [userInfo allKeys];
-      for (uint32_t i = 0, count = [keys count]; i < count; i++) {
+      for (NSUInteger i = 0, count = [keys count]; i < count; i++) {
         NSString *k = [keys objectAtIndex:i];
         id val = [userInfo valueForKey:k];
         if ([val isKindOfClass:[NSString class]]) {

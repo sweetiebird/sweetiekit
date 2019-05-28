@@ -69,8 +69,8 @@ NAN_METHOD(NUITableViewManager::New) {
         } getCellForRowAt: ^ UITableViewCell * _Nonnull (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
           Nan::HandleScope scope;
           Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-          uint32_t section = [indexPath section];
-          uint32_t row = [indexPath row];
+          auto section = [indexPath section];
+          auto row = [indexPath row];
           Local<Object> indexPathObj = Nan::New<Object>();
           Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
           Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
@@ -95,7 +95,7 @@ NAN_GETTER(NUITableViewManager::DidSelectRowAtGetter) {
   Nan::HandleScope scope;
 
   NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
-  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>(); sMgr = sMgr;
 
   Nan::ThrowError("TODO NUITableViewManager::DidSelectRowAtGetter");
 }
@@ -104,15 +104,15 @@ NAN_SETTER(NUITableViewManager::DidSelectRowAtSetter) {
   Nan::HandleScope scope;
 
   NUITableViewManager *mgr = ObjectWrap::Unwrap<NUITableViewManager>(info.This());
-  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>();
+  SUITableViewManager* sMgr = mgr->As<SUITableViewManager>(); sMgr = sMgr;
 
   mgr->_didSelectRowAt.Reset(Local<Function>::Cast(value));
   
   [sMgr setDidSelectRowAtCallback: ^ (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
     Nan::HandleScope scope;
     Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-    uint32_t section = [indexPath section];
-    uint32_t row = [indexPath row];
+    auto section = [indexPath section];
+    auto row = [indexPath row];
     Local<Object> indexPathObj = Nan::New<Object>();
     Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
     Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
@@ -163,8 +163,8 @@ NAN_SETTER(NUITableViewManager::heightForRowAtIndexPathSetter) {
   [sMgr setHeightForRowCallback:^CGFloat(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
     Nan::HandleScope scope;
     Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-    uint32_t section = [indexPath section];
-    uint32_t row = [indexPath row];
+    auto section = [indexPath section];
+    auto row = [indexPath row];
     Local<Object> indexPathObj = Nan::New<Object>();
     Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
     Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));

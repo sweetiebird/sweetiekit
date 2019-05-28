@@ -770,8 +770,8 @@ void UIKit_PumpQuick(CFTimeInterval seconds = 0.000002, bool returnAfterHandled 
 
 static uv_thread_t embed_thread;
 static uv_sem_t embed_sem;
-static uv_timer_t embed_timer;
-static uv_async_t embed_async;
+//static uv_timer_t embed_timer;
+//static uv_async_t embed_async;
 static volatile int embed_closed;
 
 static int embed_timer_called;
@@ -802,7 +802,7 @@ namespace sweetiekit {
       }
       Isolate* isolate = Isolate::GetCurrent();
       //Isolate* isolate = nodeIsolate;
-      Local<Context> context = isolate->GetCurrentContext();
+//      Local<Context> context = isolate->GetCurrentContext();
       v8::Locker locker(isolate);
       v8::Isolate::Scope isolateScope(isolate);
       Nan::HandleScope handleScope;
@@ -850,7 +850,7 @@ static void embed_thread_runner(void* arg) {
 }
 
 
-static void embed_cb(uv_async_t* async) {
+inline static void embed_cb(uv_async_t* async) {
   uv_run(uv_default_loop(), UV_RUN_ONCE);
 
   uv_sem_post(&embed_sem);

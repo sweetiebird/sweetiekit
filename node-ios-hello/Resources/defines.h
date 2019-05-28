@@ -43,14 +43,11 @@ using namespace v8;
 template <typename T>
 class shared_ptr_release_deleter {
 public:
-  void operator() (T *ptr) {
+  void operator() (T * _Nullable ptr) {
     // nothing
   }
 private:
 };
-
-Local<Array> pointerToArray(void *ptr);
-void *arrayToPointer(Local<Array> array);
 
 template <typename T> struct V8TypedArrayTraits;
 template<> struct V8TypedArrayTraits<Float32Array> { typedef float value_type; };
@@ -59,7 +56,7 @@ template<> struct V8TypedArrayTraits<Int32Array> { typedef int value_type; };
 template<> struct V8TypedArrayTraits<Uint32Array> { typedef unsigned int value_type; };
 
 template <typename T>
-Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::value_type* data = NULL) {
+Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::value_type* _Nullable data = NULL) {
   size_t byteLength = size * sizeof(typename V8TypedArrayTraits<T>::value_type);
   Local<ArrayBuffer> buffer = ArrayBuffer::New(Isolate::GetCurrent(), byteLength);
   Local<T> result = T::New(buffer, 0, size);
@@ -170,23 +167,23 @@ namespace sweetiekit {
   extern std::deque<std::function<void()>> resCbs;
   extern std::thread reqThead;
 
-  void RunResInMainThread(uv_async_t *handle);
-  void Resolve(Nan::Persistent<Function>* cb, bool shouldDelete = false);
+  void RunResInMainThread(uv_async_t * _Nonnull handle);
+  void Resolve(Nan::Persistent<Function>* _Nullable cb, bool shouldDelete = false);
   
-  Local<Value> CallSync(Local<Function> cb, const char* methodName, int argc, Local<Value>* argv);
+  Local<Value> CallSync(Local<Function> cb, const char* _Nonnull methodName, int argc, Local<Value>* _Nullable argv);
   
-  void CallAsync(Nan::Global<Function>& cb, const char* methodName);
+  void CallAsync(Nan::Global<Function>& cb, const char* _Nonnull methodName);
   void Kick();
   uint64_t nodeTick();
-  void nodePump(Isolate* isolate);
+  void nodePump(Isolate* _Nonnull isolate);
 }
 
 struct Block_layout {
-    void *isa;
+    void * _Nonnull isa;
     int flags;
     int reserved;
-    void (*invoke)(void *, ...);
-    struct Block_descriptor *descriptor;
+    void (* _Nonnull invoke)(void * _Nonnull, ...);
+    struct Block_descriptor * _Nonnull descriptor;
 };
 
 typedef const Nan::FunctionCallbackInfo<v8::Value> & JSInfo;
@@ -194,7 +191,7 @@ typedef std::vector<Local<Value>> JSArgs;
 namespace sweetiekit {
   typedef void (^BlockFunctionCallback)(JSInfo info);
 
-  static Local<Function> FromBlock(const char* name, BlockFunctionCallback block) {
+  static Local<Function> FromBlock(const char* _Nonnull name, BlockFunctionCallback _Nonnull block) {
    Nan::EscapableHandleScope handleScope;
    Nan::FunctionCallback cb = [](JSInfo info) {
     Local<Value> data(info.Data());
@@ -209,14 +206,14 @@ namespace sweetiekit {
    return handleScope.Escape(fn);
   }
   
-  static void Set(Local<Object> obj, const char* name, BlockFunctionCallback block) {
+  inline static void Set(Local<Object> obj, const char* _Nonnull name, BlockFunctionCallback _Nonnull block) {
     Nan::HandleScope handleScope;
     obj->Set(JS_STR(name), FromBlock(name, block));
   }
 }
 
 namespace sweetiekit {
-  static Local<Function> Rename(const char* name, Local<Function> fn) {
+  inline static Local<Function> Rename(const char* _Nonnull name, Local<Function> fn) {
     Nan::HandleScope handleScope;
     fn->SetName(JS_STR(name));
     return fn;
@@ -277,56 +274,56 @@ namespace sweetiekit {
        Nan::EscapableHandleScope scope;
        return scope.Escape(Get());
      }
-     Local<Value> Call(const char* methodName, int argc, Local<Value>* argv) const {
+     Local<Value> Call(const char* _Nonnull methodName, int argc, Local<Value>* _Nullable argv) const {
        Nan::EscapableHandleScope scope;
        return scope.Escape(sweetiekit::CallSync(Get(), methodName, argc, argv));
      }
-     Local<Value> operator()(const char* methodName, int argc, Local<Value>* argv) const {
+     Local<Value> operator()(const char* _Nonnull methodName, int argc, Local<Value>* _Nullable argv) const {
        Nan::EscapableHandleScope scope;
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, argc, argv));
      }
-     Local<Value> Call(const char* methodName, JSArgs& args) const {
+     Local<Value> Call(const char* _Nonnull methodName, JSArgs& args) const {
        Nan::EscapableHandleScope scope;
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]));
      }
-     Local<Value> operator()(const char* methodName, JSArgs& args) const {
+     Local<Value> operator()(const char* _Nonnull methodName, JSArgs& args) const {
        Nan::EscapableHandleScope scope;
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, (int)args.size(), args.empty() ? nullptr : &args[0]));
      }
-     Local<Value> Call(const char* methodName) const {
+     Local<Value> Call(const char* _Nonnull methodName) const {
        Nan::EscapableHandleScope scope;
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, 0, nullptr));
      }
-     Local<Value> operator()(const char* methodName) const {
+     Local<Value> operator()(const char* _Nonnull methodName) const {
        Nan::EscapableHandleScope scope;
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, 0, nullptr));
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0) const {
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0) const {
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1) const {
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
-     Local<Value> Call(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
-     Local<Value> operator()(const char* methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, 3, argv));
@@ -371,15 +368,16 @@ namespace sweetiekit {
 #endif
 
 namespace sweetiekit {
-  Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType);
-  Local<Value> GetWrapperFor(id pThing);
-  id FromJS(Local<Value> jsThing);
+  Local<Value> GetWrapperFor(id _Nullable pThing, Nan::Persistent<FunctionTemplate>& defaultType);
+  Local<Value> GetWrapperFor(id _Nullable pThing);
+  id _Nullable GetValueFor(Local<Value> value, bool* _Nullable failed = nullptr);
+  id _Nullable FromJS(Local<Value> jsThing);
   Local<Object> JSObjFromFrame(CGRect frame);
-  Local<Object> JSObjFromCGColor(CGColorRef color);
-  Local<Object> JSObjFromUIColor(UIColor* color);
+  Local<Object> JSObjFromCGColor(CGColorRef _Nullable color);
+  Local<Object> JSObjFromUIColor(UIColor* _Nullable color);
   CGRect FrameFromJSObj(Local<Value> jsThing);
-  UIColor* UIColorFromJSColor(Local<Value> jsThing);
-  CGColorRef CGColorRefFromJSColor(Local<Value> jsThing);
+  UIColor* _Nullable UIColorFromJSColor(Local<Value> jsThing);
+  CGColorRef _Nullable CGColorRefFromJSColor(Local<Value> jsThing);
   bool IsJSColor(Local<Value> jsThing);
   Local<Array> JSArrayFromCGAffineTransform(CGAffineTransform xform);
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing);
@@ -388,29 +386,29 @@ namespace sweetiekit {
   bool SetTransform(simd_float4x4& transform, Local<Value> value);
   bool SetQuaternion(simd_quatf& quat, Local<Value> value);
   bool SetVector3(simd_float3& xyz, Local<Value> value);
-  bool SetTransform3(float* transform, Local<Value> value);
-  bool SetTransform(float* transform, Local<Value> value);
-  bool SetQuaternion(float* quat, Local<Value> value);
-  bool SetVector3(float* xyz, Local<Value> value);
+  bool SetTransform3(float* _Nonnull transform, Local<Value> value);
+  bool SetTransform(float* _Nonnull transform, Local<Value> value);
+  bool SetQuaternion(float* _Nonnull quat, Local<Value> value);
+  bool SetVector3(float* _Nonnull xyz, Local<Value> value);
 }
 
 extern "C" {
 
-void iOSLog0(const char* msg);
+void iOSLog0(const char* _Nonnull msg);
 
 #include <dispatch/queue.h>
-void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block);
+void dispatch_ui_sync(dispatch_queue_t _Nonnull queue, dispatch_block_t _Nonnull block);
 #define dispatch_sync dispatch_ui_sync
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr);
 
 #ifdef __OBJC__
 #import <CoreFoundation/CoreFoundation.h>
-NSString* NJSStringToNSString(Local<Value> jsStr);
+NSString* _Nullable NJSStringToNSString(Local<Value> jsStr);
 #endif
 
 }
-Local<Value> NSStringToJSString(NSString* value);
+Local<Value> NSStringToJSString(NSString* _Nullable value);
 
 namespace sweetiekit {
   class TryCatchReport : Nan::TryCatch
@@ -448,7 +446,7 @@ namespace sweetiekit {
       return std::unique_ptr<T>(value);
   }
 
-  inline bool protocolImplementsProtocol(Protocol *candidate, Protocol *target)
+  inline bool protocolImplementsProtocol(Protocol * _Nonnull candidate, Protocol* _Nonnull target)
   {
       unsigned protocolProtocolsCount;
       auto protocolProtocols = adoptSystem<__unsafe_unretained Protocol*[]>(protocol_copyProtocolList(candidate, &protocolProtocolsCount));
@@ -499,7 +497,7 @@ namespace sweetiekit {
       }
   }*/
 
-  inline void forEachMethodInClass(Class cls, void (^callback)(Method))
+  inline void forEachMethodInClass(Class _Nonnull cls, void (^ _Nonnull callback)(Method _Nonnull))
   {
       unsigned count;
       auto methods = adoptSystem<Method[]>(class_copyMethodList(cls, &count));
@@ -507,7 +505,7 @@ namespace sweetiekit {
           callback(methods[i]);
   }
 
-  inline void forEachPropertyInClass(Class cls, void (^callback)(objc_property_t))
+  inline void forEachPropertyInClass(Class _Nonnull cls, void (^ _Nonnull callback)(objc_property_t _Nonnull))
   {
       unsigned count;
       auto properties = adoptSystem<objc_property_t[]>(class_copyPropertyList(cls, &count));
@@ -515,7 +513,7 @@ namespace sweetiekit {
           callback(properties[i]);
   }
 
-  inline void forEachMethodInProtocol(Protocol *protocol, BOOL isRequiredMethod, BOOL isInstanceMethod, void (^callback)(SEL, const char*))
+  inline void forEachMethodInProtocol(Protocol* _Nonnull protocol, BOOL isRequiredMethod, BOOL isInstanceMethod, void (^ _Nonnull callback)(SEL _Nonnull , const char*_Nonnull))
   {
       unsigned count;
       auto methods = adoptSystem<objc_method_description[]>(protocol_copyMethodDescriptionList(protocol, isRequiredMethod, isInstanceMethod, &count));
@@ -523,7 +521,7 @@ namespace sweetiekit {
           callback(methods[i].name, methods[i].types);
   }
 
-  inline void forEachPropertyInProtocol(Protocol *protocol, void (^callback)(objc_property_t))
+  inline void forEachPropertyInProtocol(Protocol* _Nonnull protocol, void (^ _Nonnull callback)(objc_property_t _Nonnull ))
   {
       unsigned count;
       auto properties = adoptSystem<objc_property_t[]>(protocol_copyPropertyList(protocol, &count));
@@ -531,7 +529,7 @@ namespace sweetiekit {
           callback(properties[i]);
   }
   
-  inline void forEachView(UIView *view, void(^callback)(UIView* view)) {
+  inline void forEachView(UIView * _Nonnull view, void(^ _Nonnull callback)(UIView* _Nullable view)) {
     callback(view);
     for (UIView* subview : [view subviews]) {
       forEachView(subview, callback);
@@ -541,7 +539,7 @@ namespace sweetiekit {
 
 namespace sweetiekit
 {
-  inline void forEachValueInArray(Local<Array> array, void (^callback)(uint32_t index, Local<Value> value))
+  inline void forEachValueInArray(Local<Array> array, void (^ _Nonnull callback)(uint32_t index, Local<Value> value))
   {
     Nan::HandleScope scope;
     for (uint32_t i = 0, n = array->Length(); i < n; i++) {
@@ -552,7 +550,7 @@ namespace sweetiekit
     }
   }
   
-  inline void forEachEntryInObject(Local<Object> object, void (^callback)(Local<Value> key, Local<Value> value))
+  inline void forEachEntryInObject(Local<Object> object, void (^ _Nonnull callback)(Local<Value> key, Local<Value> value))
   {
     Nan::HandleScope scope;
     Local<Array> names = object->GetOwnPropertyNames(JS_CONTEXT()).ToLocalChecked();
@@ -594,10 +592,19 @@ SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable f
 SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 
-
 Local<Value> js_value_CGPoint(const CGPoint& pt);
+Local<Value> js_value_CGVector(const CGVector& pt);
+Local<Value> js_value_CGSize(const CGSize& size);
 CGPoint to_value_CGPoint(const Local<Value>& value);
+CGVector to_value_CGVector(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
+
+Local<Value> js_value_CGColor(CGColorRef _Nullable color);
+Local<Value> js_value_UIColor(UIColor* _Nullable color);
+#define js_value_SKColor js_value_UIColor
+CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
+UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
+#define to_value_SKColor to_value_UIColor
 
 template<typename T>
 Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
@@ -613,10 +620,93 @@ Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
   }
 }
 
+template<typename T>
+NSArray<T>* _Nullable to_value_NSArray(Local<Value> arr) {
+  if (!arr->IsArray()) {
+    return nullptr;
+  } else {
+    auto value = Local<Array>::Cast(arr);
+    auto result = [[NSMutableArray alloc] initWithCapacity:value->Length()];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id item = sweetiekit::GetValueFor(value->Get(i));
+      [result setObject:item atIndexedSubscript:i];
+    }
+    return result;
+  }
+}
+
+static inline Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable dict) {
+  if (dict == nullptr) {
+    return Nan::Undefined();
+  } else {
+    auto result = Nan::New<Object>();
+    Nan::ThrowError("js_value_NSMutableDictionary: not yet implemented");
+//    for (NSInteger i = 0, n = [arr count]; i < n; i++) {
+//      T item = [arr objectAtIndex:i];
+//      Nan::Set(result, static_cast<uint32_t>(i), sweetiekit::GetWrapperFor(item));
+//    }
+    return result;
+  }
+}
+
+static inline NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict) {
+  if (!dict->IsObject()) {
+    return nullptr;
+  } else {
+    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
+    Nan::ThrowError("to_value_NSMutableDictionary: not yet implemented");
+//    auto value = Local<Object>::Cast(dict);
+//    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+//      id item = sweetiekit::GetValueFor(value->Get(i));
+//      [result setObject:item atIndexedSubscript:i];
+//    }
+    return result;
+  }
+}
+
+template<typename T>
+Local<Value> js_value_id(T* _Nullable value) {
+  return sweetiekit::GetWrapperFor(value);
+}
+
+template<typename T>
+T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
+  return (T*)sweetiekit::GetValueFor(value, failed);
+}
+
+#define js_value_NSInteger JS_INT
+#define to_value_NSInteger TO_INT32
 #define js_value_NSUInteger JS_UINT
 #define to_value_NSUInteger TO_UINT32
-#define js_value_SKBlendMode JS_INT
-#define to_value_SKBlendMode(x) static_cast<SKBlendMode>(TO_INT32(x))
+#define js_value_NSString NSStringToJSString
+#define to_value_NSString NJSStringToNSString
 
+#define JS_ENUM(type, c, x) js_value_##c(x)
+#define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
+
+#define js_value_wrapper(x, t) sweetiekit::GetWrapperFor(x)
+#define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
+#define js_value_wrapper_known(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
+#define to_value_wrapper(x, t) (t*)sweetiekit::GetValueFor(x)
+#define to_value_wrapper_unknown(x, t) (t*)sweetiekit::GetValueFor(x)
+#define to_value_wrapper_known(x, t) (t*)sweetiekit::GetValueFor(x)
+
+// SceneKit types
+#define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)
+#define to_value_SCNMorpher(x) to_value_wrapper_unknown(x, SCNMorpher)
+#define js_value_SCNCamera(x) js_value_wrapper_unknown(x, SCNCamera)
+#define to_value_SCNCamera(x) to_value_wrapper_unknown(x, SCNCamera)
+#define js_value_SCNSkinner(x) js_value_wrapper_unknown(x, SCNSkinner)
+#define to_value_SCNSkinner(x) to_value_wrapper_unknown(x, SCNSkinner)
+#define js_value_SCNPhysicsBody(x) js_value_wrapper_unknown(x, SCNPhysicsBody)
+#define to_value_SCNPhysicsBody(x) to_value_wrapper_unknown(x, SCNPhysicsBody)
+#define js_value_SCNPhysicsField(x) js_value_wrapper_unknown(x, SCNPhysicsField)
+#define to_value_SCNPhysicsField(x) to_value_wrapper_unknown(x, SCNPhysicsField)
+
+// SpriteKit types
+#define js_value_SKKeyframeSequence(x) js_value_wrapper_unknown(x, SKKeyframeSequence)
+#define to_value_SKKeyframeSequence(x) to_value_wrapper_unknown(x, SKKeyframeSequence)
+#define js_value_SKReachConstraints(x) js_value_wrapper_unknown(x, SKReachConstraints)
+#define to_value_SKReachConstraints(x) to_value_wrapper_unknown(x, SKReachConstraints)
 
 #endif /* defines_h */

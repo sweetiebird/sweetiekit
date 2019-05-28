@@ -9,12 +9,10 @@
 #ifndef NSKScene_h
 #define NSKScene_h
 
-#import <SpriteKit/SpriteKit.h>
 #import "NSKNode.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKScene(x) js_value_wrapper_known(x, SKScene)
+#define to_value_SKScene(x) to_value_wrapper(x, SKScene)
 
 class NSKScene : public NSKNode {
 public:

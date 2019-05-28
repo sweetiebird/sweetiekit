@@ -7,14 +7,12 @@
 //
 
 #ifndef NSKCameraNode_h
-#define NSKCameraNode_h    
+#define NSKCameraNode_h  
 
-#import <UIKit/UIKit.h>
-#include "NSKNode.h"
-#include "defines.h"
+#include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKCameraNode(x) js_value_wrapper_known(x, SKCameraNode)
+#define to_value_SKCameraNode(x) to_value_wrapper(x, SKCameraNode)
 
 class NSKCameraNode : public NSKNode {
 public:

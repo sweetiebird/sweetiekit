@@ -66,6 +66,22 @@ namespace sweetiekit
     return handleScope.Escape(result);
   }
   
+  id GetValueFor(Local<Value> value, bool* failed) {
+    if (JS_INSTANCEOF(value, NNSObject)) {
+      JS_UNWRAPPED(value, NSObject, result);
+      if (failed) {
+        *failed = false;
+      }
+      return result;
+    }
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected id value (NSObject wrapper)");
+    }
+    return nullptr;
+  }
+  
   bool IsJSNumber(Local<Value> jsThing)
   {
     Nan::HandleScope handleScope;
@@ -572,10 +588,31 @@ Local<Value> js_value_CGPoint(const CGPoint& pt) {
   return __obj;
 }
 
+Local<Value> js_value_CGVector(const CGVector& pt) {
+  auto __obj = Nan::New<Object>();
+  Nan::Set(__obj, JS_STR("dx"), JS_NUM(pt.dx));
+  Nan::Set(__obj, JS_STR("dy"), JS_NUM(pt.dy));
+  return __obj;
+}
+
+Local<Value> js_value_CGSize(const CGSize& size) {
+  auto __obj = Nan::New<Object>();
+  Nan::Set(__obj, JS_STR("width"), JS_NUM(size.width));
+  Nan::Set(__obj, JS_STR("width"), JS_NUM(size.height));
+  return __obj;
+}
+
 CGPoint to_value_CGPoint(const Local<Value>& value) {
   return CGPointMake(
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")))
+  );
+}
+
+CGVector to_value_CGVector(const Local<Value>& value) {
+  return CGVectorMake(
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("dx"))),
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("dy")))
   );
 }
 
@@ -584,4 +621,26 @@ CGSize to_value_CGSize(const Local<Value>& value) {
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
   );
+}
+
+Local<Value> js_value_CGColor(CGColorRef _Nullable color) {
+  return sweetiekit::JSObjFromCGColor(color);
+}
+
+Local<Value> js_value_UIColor(UIColor* _Nullable color) {
+  return sweetiekit::JSObjFromUIColor(color);
+}
+
+CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  return sweetiekit::CGColorRefFromJSColor(value);
+}
+
+UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  return sweetiekit::UIColorFromJSColor(value);
 }

@@ -10,10 +10,9 @@
 #define NSCNLight_h
 
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SCNLight(x) js_value_wrapper_known(x, SCNLight)
+#define to_value_SCNLight(x) to_value_wrapper_known(x, SCNLight)
 
 class NSCNLight : public NNSObject {
 public:

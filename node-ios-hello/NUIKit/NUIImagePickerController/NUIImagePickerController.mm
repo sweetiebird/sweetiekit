@@ -61,11 +61,9 @@ NAN_METHOD(NUIImagePickerController::New) {
 }
 
 NAN_GETTER(NUIImagePickerController::DelegateGetter) {
-  Nan::HandleScope scope;
-
+  JS_UNWRAP(UIImagePickerController, ui);
   NUIImagePickerController *view = ObjectWrap::Unwrap<NUIImagePickerController>(info.This());
-
-  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
+  Nan::ThrowError("NUIImagePickerController::DelegateGetter not yet implemented");
 }
 
 NAN_SETTER(NUIImagePickerController::DelegateSetter) {
