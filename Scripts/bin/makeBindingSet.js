@@ -23,8 +23,7 @@ function makeBindingSet(group, name, superClass, me) {
   const d = new Date();
 
   const mData = `//
-//  ${name}.m
-//  node-ios-hello
+//  ${name}.mm
 //
 //  Created by ${me} on ${d.toLocaleDateString()}.
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
@@ -77,7 +76,6 @@ NAN_METHOD(N${name}::New) {
 
   const hData = `//
 //  N${name}.h
-//  node-ios-hello
 //
 //  Created by ${me} on ${d.toLocaleDateString()}.
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
