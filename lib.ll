@@ -158,11 +158,11 @@
 (define-macro to-value-CGFloat (x)
   `(to-value CGFloat (TO_FLOAT ,x)))
 
-(define-macro js-value-uint32_t (x)
-  `(js-value (JS_INT ,x)))
+(define-macro js-value-uint32_t (x) `(js-value (JS_INT ,x)))
+(define-macro to-value-uint32_t (x) `(to-value CGFloat (TO_UINT32 ,x)))
 
-(define-macro to-value-uint32_t (x)
-  `(to-value CGFloat (TO_UINT32 ,x)))
+(define-macro js-value-BOOL (x) `(js-value (JS_BOOL ,x)))
+(define-macro to-value-BOOL (x) `(to-value BOOL (TO_BOOL ,x)))
 
 (define-macro js-value-CGRect (x)
   `(let (rect ,x
@@ -209,7 +209,7 @@
 
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
-        body (if (none? body) `([self ,name]) body))
+        body (if (none? body) `([self ,(if (= return-type 'BOOL) (camel-case (cat "is-" name)) name)]) body))
     `(js-getter ,self-type self ,name
        (js-return (,(cat "js-value-" return-type) (declare-type ,return-type ,@body))))))
 
@@ -260,17 +260,18 @@
     `(js-property ,@attrs type: ,type name: ,name))))
 
 (define-macro js-property (name: name type: type class: (o class (getenv 'Class 'type)) readonly: readonly?)
-  (case (getenv '%%flags 'stage)
-    header
-    `(JS_PROP ,name)
-    ctor
-    (if readonly?
-        `(JS_ASSIGN_PROP_READONLY proto ,name)
-        `(JS_ASSIGN_PROP          proto ,name))
-    source
-    `(do (js-type-getter ,(if (obj? class) (hd class) class) ,type ,name)
-       ,(unless readonly?
-          `(js-type-setter ,(if (obj? class) (hd class) class) ,type ,name)))))
+  (let class (if (obj? class) (hd class) class)
+    (case (getenv '%%flags 'stage)
+      header
+      `(JS_PROP ,name)
+      ctor
+      (if readonly?
+          `(JS_ASSIGN_PROP_READONLY proto ,name)
+          `(JS_ASSIGN_PROP          proto ,name))
+      source
+      `(do (js-type-getter ,class ,type ,name)
+         ,(unless readonly?
+            `(js-type-setter ,class ,type ,name))))))
 
 (define-global str-replace (s before after rest: more)
   (let ((a rest: bs) (split s before))
