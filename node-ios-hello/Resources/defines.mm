@@ -582,24 +582,33 @@ SCNMatrix4 to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable faile
 }
 
 Local<Value> js_value_CGPoint(const CGPoint& pt) {
-  auto __obj = Nan::New<Object>();
-  Nan::Set(__obj, JS_STR("x"), JS_NUM(pt.x));
-  Nan::Set(__obj, JS_STR("y"), JS_NUM(pt.y));
-  return __obj;
+  auto result = Nan::New<Object>();
+  Nan::Set(result, JS_STR("x"), JS_NUM(pt.x));
+  Nan::Set(result, JS_STR("y"), JS_NUM(pt.y));
+  return result;
 }
 
 Local<Value> js_value_CGVector(const CGVector& pt) {
-  auto __obj = Nan::New<Object>();
-  Nan::Set(__obj, JS_STR("dx"), JS_NUM(pt.dx));
-  Nan::Set(__obj, JS_STR("dy"), JS_NUM(pt.dy));
-  return __obj;
+  auto result = Nan::New<Object>();
+  Nan::Set(result, JS_STR("dx"), JS_NUM(pt.dx));
+  Nan::Set(result, JS_STR("dy"), JS_NUM(pt.dy));
+  return result;
 }
 
 Local<Value> js_value_CGSize(const CGSize& size) {
-  auto __obj = Nan::New<Object>();
-  Nan::Set(__obj, JS_STR("width"), JS_NUM(size.width));
-  Nan::Set(__obj, JS_STR("width"), JS_NUM(size.height));
-  return __obj;
+  auto result = Nan::New<Object>();
+  Nan::Set(result, JS_STR("width"), JS_NUM(size.width));
+  Nan::Set(result, JS_STR("height"), JS_NUM(size.height));
+  return result;
+}
+
+Local<Value> js_value_CGRect(const CGRect& rect) {
+  auto result = Nan::New<Object>();
+  Nan::Set(result, JS_STR("x"), JS_NUM(rect.origin.x));
+  Nan::Set(result, JS_STR("y"), JS_NUM(rect.origin.y));
+  Nan::Set(result, JS_STR("width"), JS_NUM(rect.size.width));
+  Nan::Set(result, JS_STR("height"), JS_NUM(rect.size.height));
+  return result;
 }
 
 CGPoint to_value_CGPoint(const Local<Value>& value) {
@@ -618,6 +627,15 @@ CGVector to_value_CGVector(const Local<Value>& value) {
 
 CGSize to_value_CGSize(const Local<Value>& value) {
   return CGSizeMake(
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
+  );
+}
+
+CGRect to_value_CGRect(const Local<Value>& value) {
+  return CGRectMake(
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x"))),
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
   );

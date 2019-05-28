@@ -15,6 +15,10 @@
 #define to_value_SCNTorus(x) to_value_wrapper(x, SCNTorus)
 
 JS_WRAP_CLASS(SCNTorus, SCNGeometry);
+  JS_PROP(ringRadius);
+  JS_PROP(pipeRadius);
+  JS_PROP(ringSegmentCount);
+  JS_PROP(pipeSegmentCount);
 JS_WRAP_CLASS_END(SCNTorus);
 
 #endif /* NSCNTorus_h */

@@ -26,6 +26,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNSphere::Initialize(Isolate
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+  JS_ASSIGN_PROP(proto, radius);
+  JS_ASSIGN_PROP(proto, geodesic);
+  JS_ASSIGN_PROP(proto, segmentCount);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,3 +52,55 @@ NAN_METHOD(NSCNSphere::New) {
     JS_SET_RETURN(obj);
   }
 }
+
+NAN_GETTER(NSCNSphere::radiusGetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self radius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNSphere::radiusSetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    [self setRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNSphere::geodesicGetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self isGeodesic]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNSphere::geodesicSetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    [self setGeodesic: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNSphere::segmentCountGetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self segmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNSphere::segmentCountSetter) {
+  JS_UNWRAP(SCNSphere, self);
+  @autoreleasepool
+  {
+    [self setSegmentCount: to_value_NSInteger(value)];
+  }
+}
+

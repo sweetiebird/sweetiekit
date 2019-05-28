@@ -26,6 +26,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCylinder::Initialize(Isola
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+  JS_ASSIGN_PROP(proto, radius);
+  JS_ASSIGN_PROP(proto, height);
+  JS_ASSIGN_PROP(proto, radialSegmentCount);
+  JS_ASSIGN_PROP(proto, heightSegmentCount);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,3 +53,72 @@ NAN_METHOD(NSCNCylinder::New) {
     JS_SET_RETURN(obj);
   }
 }
+
+NAN_GETTER(NSCNCylinder::radiusGetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self radius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCylinder::radiusSetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    [self setRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCylinder::heightGetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self height]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCylinder::heightSetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    [self setHeight: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCylinder::radialSegmentCountGetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self radialSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCylinder::radialSegmentCountSetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    [self setRadialSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
+NAN_GETTER(NSCNCylinder::heightSegmentCountGetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self heightSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCylinder::heightSegmentCountSetter) {
+  JS_UNWRAP(SCNCylinder, self);
+  @autoreleasepool
+  {
+    [self setHeightSegmentCount: to_value_NSInteger(value)];
+  }
+}
+

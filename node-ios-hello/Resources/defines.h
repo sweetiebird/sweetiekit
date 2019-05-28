@@ -595,9 +595,11 @@ SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable f
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 Local<Value> js_value_CGVector(const CGVector& pt);
 Local<Value> js_value_CGSize(const CGSize& size);
+Local<Value> js_value_CGRect(const CGRect& size);
 CGPoint to_value_CGPoint(const Local<Value>& value);
 CGVector to_value_CGVector(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
+CGRect to_value_CGRect(const Local<Value>& value);
 
 Local<Value> js_value_CGColor(CGColorRef _Nullable color);
 Local<Value> js_value_UIColor(UIColor* _Nullable color);

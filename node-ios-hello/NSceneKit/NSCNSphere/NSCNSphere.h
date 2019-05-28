@@ -15,6 +15,9 @@
 #define to_value_SCNSphere(x) to_value_wrapper(x, SCNSphere)
 
 JS_WRAP_CLASS(SCNSphere, SCNGeometry);
+  JS_PROP(radius);
+  JS_PROP(geodesic);
+  JS_PROP(segmentCount);
 JS_WRAP_CLASS_END(SCNSphere);
 
 #endif /* NSCNSphere_h */

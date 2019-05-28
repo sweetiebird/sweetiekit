@@ -15,6 +15,11 @@
 #define to_value_SCNCapsule(x) to_value_wrapper(x, SCNCapsule)
 
 JS_WRAP_CLASS(SCNCapsule, SCNGeometry);
+  JS_PROP(capRadius);
+  JS_PROP(height);
+  JS_PROP(radialSegmentCount);
+  JS_PROP(heightSegmentCount);
+  JS_PROP(capSegmentCount);
 JS_WRAP_CLASS_END(SCNCapsule);
 
 #endif /* NSCNCapsule_h */

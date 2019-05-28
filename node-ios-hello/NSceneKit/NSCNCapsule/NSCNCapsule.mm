@@ -26,6 +26,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCapsule::Initialize(Isolat
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+  JS_ASSIGN_PROP(proto, capRadius);
+  JS_ASSIGN_PROP(proto, height);
+  JS_ASSIGN_PROP(proto, radialSegmentCount);
+  JS_ASSIGN_PROP(proto, heightSegmentCount);
+  JS_ASSIGN_PROP(proto, capSegmentCount);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,3 +54,89 @@ NAN_METHOD(NSCNCapsule::New) {
     JS_SET_RETURN(obj);
   }
 }
+
+NAN_GETTER(NSCNCapsule::capRadiusGetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self capRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCapsule::capRadiusSetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    [self setCapRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCapsule::heightGetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self height]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCapsule::heightSetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    [self setHeight: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCapsule::radialSegmentCountGetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self radialSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCapsule::radialSegmentCountSetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    [self setRadialSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
+NAN_GETTER(NSCNCapsule::heightSegmentCountGetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self heightSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCapsule::heightSegmentCountSetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    [self setHeightSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
+NAN_GETTER(NSCNCapsule::capSegmentCountGetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self capSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCapsule::capSegmentCountSetter) {
+  JS_UNWRAP(SCNCapsule, self);
+  @autoreleasepool
+  {
+    [self setCapSegmentCount: to_value_NSInteger(value)];
+  }
+}
+

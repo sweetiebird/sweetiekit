@@ -455,6 +455,7 @@ NAN_METHOD(NNSObject::invokeMethod)
 #include "NSCNSphere.h"
 #include "NSCNTorus.h"
 #include "NSCNTube.h"
+#include "NSCNFloor.h"
 #include "NSCNGeometry.h"
 #include "NSCNText.h"
 #include "NSCNShape.h"
@@ -618,6 +619,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNSphere);
     JS_EXPORT_TYPE(SCNTorus);
     JS_EXPORT_TYPE(SCNTube);
+    JS_EXPORT_TYPE(SCNFloor);
     JS_EXPORT_TYPE(SCNText);
     JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
@@ -734,6 +736,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNSphere);
       JS_RETURN_TYPE(SCNTorus);
       JS_RETURN_TYPE(SCNTube);
+      JS_RETURN_TYPE(SCNFloor);
       JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNShape);
       JS_RETURN_TYPE(SCNGeometry);

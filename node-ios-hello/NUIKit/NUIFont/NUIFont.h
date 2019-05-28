@@ -9,26 +9,15 @@
 #ifndef NUIFont_h
 #define NUIFont_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIFont(x) js_value_wrapper(x, UIFont)
+#define to_value_UIFont(x) to_value_wrapper(x, UIFont)
 
-class NUIFont : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIFont();
-  virtual ~NUIFont();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(systemFont);
-  static NAN_METHOD(boldSystemFont);
-  static NAN_METHOD(italicSystemFont);
-};
+JS_WRAP_CLASS(UIFont, NSObject);
+  JS_METHOD(systemFont);
+  JS_METHOD(boldSystemFont);
+  JS_METHOD(italicSystemFont);
+JS_WRAP_CLASS_END(UIFont);
 
 #endif /* NUIFont_h */

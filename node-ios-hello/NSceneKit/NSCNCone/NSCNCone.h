@@ -15,6 +15,11 @@
 #define to_value_SCNCone(x) to_value_wrapper(x, SCNCone)
 
 JS_WRAP_CLASS(SCNCone, SCNGeometry);
+  JS_PROP(topRadius);
+  JS_PROP(bottomRadius);
+  JS_PROP(height);
+  JS_PROP(radialSegmentCount);
+  JS_PROP(heightSegmentCount);
 JS_WRAP_CLASS_END(SCNCone);
 
 #endif /* NSCNCone_h */

@@ -15,6 +15,10 @@
 #define to_value_SCNCylinder(x) to_value_wrapper(x, SCNCylinder)
 
 JS_WRAP_CLASS(SCNCylinder, SCNGeometry);
+  JS_PROP(radius);
+  JS_PROP(height);
+  JS_PROP(radialSegmentCount);
+  JS_PROP(heightSegmentCount);
 JS_WRAP_CLASS_END(SCNCylinder);
 
 #endif /* NSCNCylinder_h */

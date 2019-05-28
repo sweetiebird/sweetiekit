@@ -16,6 +16,9 @@
 using namespace v8;
 using namespace node;
 
+#define js_value_UIBezierPath(x) js_value_wrapper(x, UIBezierPath)
+#define to_value_UIBezierPath(x) to_value_wrapper(x, UIBezierPath)
+
 class NUIBezierPath : public NNSObject {
 public:
 

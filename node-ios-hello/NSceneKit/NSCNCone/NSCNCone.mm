@@ -1,6 +1,5 @@
 //
-//  SCNCone.m
-//  node-ios-hello
+//  SCNCone.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
@@ -26,6 +25,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCone::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+  JS_ASSIGN_PROP(proto, topRadius);
+  JS_ASSIGN_PROP(proto, bottomRadius);
+  JS_ASSIGN_PROP(proto, height);
+  JS_ASSIGN_PROP(proto, radialSegmentCount);
+  JS_ASSIGN_PROP(proto, heightSegmentCount);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,3 +53,89 @@ NAN_METHOD(NSCNCone::New) {
     JS_SET_RETURN(obj);
   }
 }
+
+NAN_GETTER(NSCNCone::topRadiusGetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self topRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCone::topRadiusSetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    [self setTopRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCone::bottomRadiusGetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self bottomRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCone::bottomRadiusSetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    [self setBottomRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCone::heightGetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self height]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCone::heightSetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    [self setHeight: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNCone::radialSegmentCountGetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self radialSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCone::radialSegmentCountSetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    [self setRadialSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
+NAN_GETTER(NSCNCone::heightSegmentCountGetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self heightSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNCone::heightSegmentCountSetter) {
+  JS_UNWRAP(SCNCone, self);
+  @autoreleasepool
+  {
+    [self setHeightSegmentCount: to_value_NSInteger(value)];
+  }
+}
+

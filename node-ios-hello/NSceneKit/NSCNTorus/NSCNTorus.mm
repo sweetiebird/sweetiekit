@@ -26,6 +26,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNTorus::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+  JS_ASSIGN_PROP(proto, ringRadius);
+  JS_ASSIGN_PROP(proto, pipeRadius);
+  JS_ASSIGN_PROP(proto, ringSegmentCount);
+  JS_ASSIGN_PROP(proto, pipeSegmentCount);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -49,3 +53,72 @@ NAN_METHOD(NSCNTorus::New) {
     JS_SET_RETURN(obj);
   }
 }
+
+NAN_GETTER(NSCNTorus::ringRadiusGetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self ringRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNTorus::ringRadiusSetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    [self setRingRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNTorus::pipeRadiusGetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self pipeRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNTorus::pipeRadiusSetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    [self setPipeRadius: TO_FLOAT(value)];
+  }
+}
+
+NAN_GETTER(NSCNTorus::ringSegmentCountGetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self ringSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNTorus::ringSegmentCountSetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    [self setRingSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
+NAN_GETTER(NSCNTorus::pipeSegmentCountGetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self pipeSegmentCount]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNTorus::pipeSegmentCountSetter) {
+  JS_UNWRAP(SCNTorus, self);
+  @autoreleasepool
+  {
+    [self setPipeSegmentCount: to_value_NSInteger(value)];
+  }
+}
+
