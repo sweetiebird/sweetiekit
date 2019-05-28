@@ -35,6 +35,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKAction::Initialize(Isolate 
   Nan::SetMethod(ctorFn, "sequence", sequence);
   Nan::SetMethod(ctorFn, "waitForDuration", waitForDuration);
   Nan::SetMethod(ctorFn, "moveBy", moveBy);
+  Nan::SetMethod(ctorFn, "scaleBy", scaleBy);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -157,6 +158,25 @@ NAN_METHOD(NSKAction::moveBy) {
     float dy = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("dy")));
     double duration = TO_DOUBLE(info[1]);
     action->SetNSObject([SKAction moveBy:CGVectorMake(dx, dy) duration:duration]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+// creates an action that changes the x and y scale values of a node by a relative value
+NAN_METHOD(NSKAction::scaleBy) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKAction)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(obj);
+
+  @autoreleasepool {
+    float scale = TO_FLOAT(info[0]);
+    double duration = TO_DOUBLE(info[1]);
+    action->SetNSObject([SKAction scaleBy:scale duration:duration]);
   }
 
   JS_SET_RETURN(obj);

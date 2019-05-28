@@ -563,10 +563,22 @@ namespace sweetiekit
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 CGPoint to_value_CGPoint(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
+Local<Array> js_value_NSArray(const NSArray<SKNode *>* arr);
+
+template<typename T>
+Local<Array> js_value_NSArray(const NSArray<T>* arr) {
+  auto result = Nan::New<Array>();
+  for (NSInteger i = 0, n = [arr count]; i < n; i++) {
+    T item = [arr objectAtIndex:i];
+    Nan::Set(result, i, sweetiekit::GetWrapperFor(item));
+  }
+  return result;
+}
 
 #define js_value_NSUInteger JS_UINT
 #define to_value_NSUInteger TO_UINT32
 #define js_value_SKBlendMode JS_INT
 #define to_value_SKBlendMode(x) static_cast<SKBlendMode>(TO_INT32(x))
+
 
 #endif /* defines_h */

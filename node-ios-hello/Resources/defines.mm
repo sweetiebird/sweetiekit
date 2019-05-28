@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #include "defines.h"
+#include "NSKNode.h"
 
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr) {
@@ -330,4 +331,13 @@ CGSize to_value_CGSize(const Local<Value>& value) {
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
     TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
   );
+}
+
+Local<Array> js_value_NSArray(const NSArray<SKNode*>* arr) {
+  auto result = Nan::New<Array>();
+  for (NSInteger i = 0; i < [arr count]; i++) {
+    SKNode* kid = [arr objectAtIndex:i];
+    Nan::Set(result, i, sweetiekit::GetWrapperFor(kid, NSKNode::type));
+  }
+  return result;
 }

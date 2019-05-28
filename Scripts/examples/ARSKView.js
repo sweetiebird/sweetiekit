@@ -323,10 +323,12 @@ async function make(nav, demoVC) {
   const _node = (text) => {
     if (isEffectMode) {
       const wrapper = new SKNode();
+      const moveWrapper = new SKNode();
       const magicNode = new SKEmitterNode(magicParticlePath);
       const sparkNode = new SKEmitterNode(sparkParticlePath);
-      wrapper.addChild(sparkNode);
-      wrapper.addChild(magicNode);
+      moveWrapper.addChild(sparkNode);
+      moveWrapper.addChild(magicNode);
+      wrapper.addChild(moveWrapper);
       return wrapper;
     }
 
@@ -418,6 +420,16 @@ async function make(nav, demoVC) {
     if (hits && hits.length > 0) {
       active = _update(hits ? hits[0] : null);
     }
+
+    if (active && active.node) {
+      const kids = active.node.children;
+
+      if (kids.length) {
+        const moveAction = SKAction.moveBy({ dx: 200, dy: 200 }, 1);
+        kids[0].runAction(moveAction, () => {});
+      }
+    }
+
     active = null;
   };
 
