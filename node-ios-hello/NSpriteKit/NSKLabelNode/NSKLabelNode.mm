@@ -31,7 +31,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKLabelNode::Initialize(Isola
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "text", Text);
+  JS_ASSIGN_PROP(proto, text);
   JS_ASSIGN_PROP(proto, attributedText);
   JS_ASSIGN_PROP(proto, preferredMaxLayoutWidth);
   JS_ASSIGN_PROP(proto, numberOfLines);
@@ -73,7 +73,7 @@ NAN_METHOD(NSKLabelNode::New) {
 NSKLabelNode::NSKLabelNode () {}
 NSKLabelNode::~NSKLabelNode () {}
 
-NAN_GETTER(NSKLabelNode::TextGetter) {
+NAN_GETTER(NSKLabelNode::textGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKLabelNode, node);
@@ -91,7 +91,7 @@ NAN_GETTER(NSKLabelNode::TextGetter) {
   }
 }
 
-NAN_SETTER(NSKLabelNode::TextSetter) {
+NAN_SETTER(NSKLabelNode::textSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKLabelNode, node);

@@ -102,6 +102,7 @@
 #include "NSKPhysicsWorld.h"
 #include "NSKAction.h"
 #include "NSKCameraNode.h"
+#include "NSKEmitterNode.h"
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
@@ -583,6 +584,9 @@ void InitExports(Local<Object> exports) {
         auto N_SKNode = NSKNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKNode").ToLocalChecked(), N_SKNode.first);
   
+        auto N_SKEmitterNode = NSKEmitterNode::Initialize(Isolate::GetCurrent());
+        exports->Set(Nan::New("SKEmitterNode").ToLocalChecked(), N_SKEmitterNode.first);
+
         auto N_SKSpriteNode = NSKSpriteNode::Initialize(Isolate::GetCurrent());
         exports->Set(Nan::New("SKSpriteNode").ToLocalChecked(), N_SKSpriteNode.first);
   

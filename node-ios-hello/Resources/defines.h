@@ -17,6 +17,7 @@ using namespace v8;
 
 #define JS_STR(...) Nan::New<v8::String>(__VA_ARGS__).ToLocalChecked()
 #define JS_INT(val) Nan::New<v8::Integer>(static_cast<int32_t>(val))
+#define JS_UINT(val) Nan::New<v8::Integer>(static_cast<uint32_t>(val))
 #define JS_NUM(val) Nan::New<v8::Number>(val)
 #define JS_FLOAT(val) Nan::New<v8::Number>(val)
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
@@ -558,5 +559,14 @@ namespace sweetiekit
     }
   }
 }
+
+Local<Value> js_value_CGPoint(const CGPoint& pt);
+CGPoint to_value_CGPoint(const Local<Value>& value);
+CGSize to_value_CGSize(const Local<Value>& value);
+
+#define js_value_NSUInteger JS_UINT
+#define to_value_NSUInteger TO_UINT32
+#define js_value_SKBlendMode JS_INT
+#define to_value_SKBlendMode(x) static_cast<SKBlendMode>(TO_INT32(x))
 
 #endif /* defines_h */

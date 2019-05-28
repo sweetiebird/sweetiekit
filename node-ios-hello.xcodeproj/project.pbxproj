@@ -68,6 +68,12 @@
 		A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
+		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
+		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
+		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
+		A16EF593229D0917007BCB49 /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF592229D0917007BCB49 /* Magic.sks */; };
+		A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF594229D0BD6007BCB49 /* Spark.sks */; };
+		A16EF597229D0C5F007BCB49 /* Spark2.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF596229D0C5F007BCB49 /* Spark2.sks */; };
 		A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */; };
 		A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */; };
 		A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */; };
@@ -340,6 +346,13 @@
 		A1649771227E14A200CA943F /* NUISwitch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISwitch.mm; sourceTree = "<group>"; };
 		A1649776227E1F8300CA943F /* NUIPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIPresentationController.h; sourceTree = "<group>"; };
 		A1649777227E1F8B00CA943F /* NUIPresentationController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPresentationController.mm; sourceTree = "<group>"; };
+		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
+		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
+		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
+		A16EF58F229D07D4007BCB49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A16EF592229D0917007BCB49 /* Magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Magic.sks; sourceTree = "<group>"; };
+		A16EF594229D0BD6007BCB49 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		A16EF596229D0C5F007BCB49 /* Spark2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark2.sks; sourceTree = "<group>"; };
 		A1710EA1229A58A100EC7C86 /* NRPScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorder.h; sourceTree = "<group>"; };
 		A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorder.mm; sourceTree = "<group>"; };
 		A1710EA5229A648900EC7C86 /* NRPPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewController.h; sourceTree = "<group>"; };
@@ -962,6 +975,27 @@
 				A1887109227E370500129A75 /* SUIPresentationController.swift */,
 			);
 			path = NUIPresentationController;
+			sourceTree = "<group>";
+		};
+		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
+			isa = PBXGroup;
+			children = (
+				A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */,
+				A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */,
+			);
+			path = NSKEmitterNode;
+			sourceTree = "<group>";
+		};
+		A16EF58D229D07B8007BCB49 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				A16EF596229D0C5F007BCB49 /* Spark2.sks */,
+				A16EF58E229D07D4007BCB49 /* Fire.sks */,
+				A16EF594229D0BD6007BCB49 /* Spark.sks */,
+				A16EF592229D0917007BCB49 /* Magic.sks */,
+				A16EF58F229D07D4007BCB49 /* Assets.xcassets */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 		A1710E9F229A58A100EC7C86 /* NReplayKit */ = {
@@ -1770,6 +1804,7 @@
 		A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				A16EF587229CE73B007BCB49 /* NSKEmitterNode */,
 				A11029D3228E4C9C0078FAC0 /* NSKCameraNode */,
 				A1B65496228CE80D00976024 /* NSKPhysicsContact */,
 				A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */,
@@ -2066,6 +2101,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A16EF58D229D07B8007BCB49 /* Templates */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
@@ -2240,13 +2276,18 @@
 				A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */,
 				A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
+				A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */,
+				A16EF593229D0917007BCB49 /* Magic.sks in Resources */,
+				A16EF597229D0C5F007BCB49 /* Spark2.sks in Resources */,
 				A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */,
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
 				A1CE2B8C228F020800D9B3B8 /* Lato-Hairline.ttf in Resources */,
 				A1CE2B5F228E83D400D9B3B8 /* 1.gif in Resources */,
 				A1CE2B8F228F020800D9B3B8 /* Lato-Black.ttf in Resources */,
+				A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */,
 				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
+				A16EF590229D07D4007BCB49 /* Fire.sks in Resources */,
 				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
@@ -2320,6 +2361,7 @@
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
+				A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */,
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,

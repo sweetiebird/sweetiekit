@@ -310,3 +310,24 @@ namespace sweetiekit
   return &_jsFunction;
 }
 @end
+
+Local<Value> js_value_CGPoint(const CGPoint& pt) {
+  auto __obj = Nan::New<Object>();
+  Nan::Set(__obj, JS_STR("x"), JS_NUM(pt.x));
+  Nan::Set(__obj, JS_STR("y"), JS_NUM(pt.y));
+  return __obj;
+}
+
+CGPoint to_value_CGPoint(const Local<Value>& value) {
+  return CGPointMake(
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x"))),
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")))
+  );
+}
+
+CGSize to_value_CGSize(const Local<Value>& value) {
+  return CGSizeMake(
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width"))),
+    TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")))
+  );
+}

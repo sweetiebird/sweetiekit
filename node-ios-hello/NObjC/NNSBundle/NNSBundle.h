@@ -27,8 +27,8 @@ public:
   virtual ~NNSBundle();
 
   static NAN_METHOD(New);
-  static NAN_METHOD(PathForResource);
-  static NAN_METHOD(Main);
+  static NAN_METHOD(pathForResource);
+  static NAN_METHOD(main);
 };
 
 #endif /* NNSBundle_h */

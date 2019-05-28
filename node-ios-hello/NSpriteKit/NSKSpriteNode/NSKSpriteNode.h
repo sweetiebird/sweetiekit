@@ -27,9 +27,9 @@ public:
   virtual ~NSKSpriteNode();
 
   static NAN_METHOD(New);
-  JS_PROP(Size);
-  JS_PROP(ColorBlendFactor);
-  JS_PROP(Color);
+  JS_PROP(size);
+  JS_PROP(colorBlendFactor);
+  JS_PROP(color);
   JS_METHOD(scaleToSize);
 };
 

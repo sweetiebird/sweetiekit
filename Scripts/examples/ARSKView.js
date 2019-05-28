@@ -36,11 +36,16 @@ const {
   RPScreenRecorder,
   RPPreviewViewController,
   RPPreviewViewControllerDelegate,
+  SKEmitterNode,
 } = SweetieKit;
 
 //let text = '👀';
 let text = new SKTexture(new UIImage("nic"));
 UIImage.transparent = UIImage.transparent || new UIImage("transparent");
+
+let isEffectMode = false;
+const sparkParticlePath = 'Spark.sks';
+const magicParticlePath = 'Magic.sks';
 
 function lineWrap(s) {
   if (s.length > 600) {
@@ -83,7 +88,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     alpha: 0.8,
   };
   field.backgroundColor = colors.clear;
-  const placeholderText = '👀, 🐙, Hi Mom, etc';
+  const placeholderText = 'Enter some text...';
   const placeholderFont = new UIFont('Lato-Bold', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
   attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
@@ -102,6 +107,21 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
   field.autocorrectionType = UITextAutocorrectionType.none;
   field.spellCheckingType = UITextSpellCheckingType.none;
   return field;
+}
+
+function makeParticleButton(demoVC) {
+  const size = 50;
+  const btn = new UIButton({
+    x: demoVC.view.frame.width - size,
+    y: 0,
+    width: size,
+    height: size,
+  });
+  btn.backgroundColor = colors.clear;
+  btn.setBackgroundImageForState(new UIImage('fire'), UIControlState.normal);
+  btn.showsTouchWhenHighlighted = true;
+  button.contentMode = UIViewContentMode.scaleAspectFit;
+  return btn;
 }
 
 function takeScreenshot(view) {
@@ -297,6 +317,10 @@ async function make(nav, demoVC) {
   };
 
   const _node = (text) => {
+    if (isEffectMode) {
+      return new SKEmitterNode(sparkParticlePath) || new SKLabelNode();
+    }
+
     if (text instanceof UIImage || text instanceof SKTexture) {
       const size = text.size;
       size.width *= scaleSlider.value;
@@ -404,13 +428,18 @@ async function make(nav, demoVC) {
 
   const btnSize = 70;
 
-  const camBtn = makeCamBtn(demoVC, btnSize);
-  camBtn.addTarget(() => {
-    console.log('recording');
-    //toggleRecordScreen(demoVC, recorder);
-    // takeScreenshot(demoVC.view);
-    const imgView = getCapturedImage(arView);
-    if (imgView) demoVC.view.addSubview(imgView);
+  // const camBtn = makeCamBtn(demoVC, btnSize);
+  // camBtn.addTarget(() => {
+  //   console.log('recording');
+  //   //toggleRecordScreen(demoVC, recorder);
+  //   // takeScreenshot(demoVC.view);
+  //   const imgView = getCapturedImage(arView);
+  //   if (imgView) demoVC.view.addSubview(imgView);
+  // }, UIControlEvents.touchUpInside);
+
+  const fireBtn = makeParticleButton(demoVC);
+  fireBtn.addTarget(() => {
+    isEffectMode = !isEffectMode;
   }, UIControlEvents.touchUpInside);
 
   const fieldHeight = 50;
@@ -422,6 +451,7 @@ async function make(nav, demoVC) {
 
   const topView = makeTopView(demoVC, fieldHeight);
   topView.addSubview(field);
+  topView.addSubview(fireBtn);
 
   const viewW = view.frame.width;
   const scaleSliderY = fieldHeight + 20;
@@ -459,7 +489,7 @@ async function make(nav, demoVC) {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEvents.valueChanged);
 
-  const subviews = [topView, scaleSlider/*, distSlider, rotSlider*/, camBtn];
+  const subviews = [topView, scaleSlider/*, distSlider, rotSlider, camBtn */];
   subviews.forEach((s) => {
     demoVC.view.addSubview(s);
     demoVC.view.bringSubviewToFront(s);

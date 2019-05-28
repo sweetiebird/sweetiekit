@@ -30,9 +30,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isol
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "size", Size);
-  JS_SET_PROP(proto, "colorBlendFactor", ColorBlendFactor);
-  JS_SET_PROP(proto, "color", Color);
+  JS_ASSIGN_PROP(proto, size);
+  JS_ASSIGN_PROP(proto, colorBlendFactor);
+  JS_ASSIGN_PROP(proto, color);
   Nan::SetMethod(proto, "scaleToSize", scaleToSize);
 
   // ctor
@@ -108,7 +108,7 @@ NAN_METHOD(NSKSpriteNode::New) {
 NSKSpriteNode::NSKSpriteNode () {}
 NSKSpriteNode::~NSKSpriteNode () {}
 
-NAN_GETTER(NSKSpriteNode::SizeGetter) {
+NAN_GETTER(NSKSpriteNode::sizeGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKSpriteNode, node);
@@ -127,7 +127,7 @@ NAN_GETTER(NSKSpriteNode::SizeGetter) {
   JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NSKSpriteNode::SizeSetter) {
+NAN_SETTER(NSKSpriteNode::sizeSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKSpriteNode, node);
@@ -140,13 +140,13 @@ NAN_SETTER(NSKSpriteNode::SizeSetter) {
   }
 }
 
-NAN_GETTER(NSKSpriteNode::ColorBlendFactorGetter) {
+NAN_GETTER(NSKSpriteNode::colorBlendFactorGetter) {
   Nan::HandleScope scope;
 
   Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
 }
 
-NAN_SETTER(NSKSpriteNode::ColorBlendFactorSetter) {
+NAN_SETTER(NSKSpriteNode::colorBlendFactorSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKSpriteNode, node);
@@ -159,13 +159,13 @@ NAN_SETTER(NSKSpriteNode::ColorBlendFactorSetter) {
   }
 }
 
-NAN_GETTER(NSKSpriteNode::ColorGetter) {
+NAN_GETTER(NSKSpriteNode::colorGetter) {
   Nan::HandleScope scope;
 
   Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
 }
 
-NAN_SETTER(NSKSpriteNode::ColorSetter) {
+NAN_SETTER(NSKSpriteNode::colorSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SKSpriteNode, node);

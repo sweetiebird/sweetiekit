@@ -26,11 +26,11 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSBundle::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "pathForResource", PathForResource);
+  Nan::SetMethod(proto, "pathForResource", pathForResource);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "main", Main);
+  Nan::SetMethod(ctorFn, "main", main);
   
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -55,7 +55,7 @@ NAN_METHOD(NNSBundle::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_METHOD(NNSBundle::Main) {
+NAN_METHOD(NNSBundle::main) {
   Nan::HandleScope scope;
 
   NSBundle *main = [NSBundle mainBundle];
@@ -69,7 +69,7 @@ NAN_METHOD(NNSBundle::Main) {
   JS_SET_RETURN(value);
 }
 
-NAN_METHOD(NNSBundle::PathForResource) {
+NAN_METHOD(NNSBundle::pathForResource) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(NSBundle, bundle);

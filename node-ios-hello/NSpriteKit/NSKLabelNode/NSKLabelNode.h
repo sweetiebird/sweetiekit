@@ -27,7 +27,7 @@ public:
   virtual ~NSKLabelNode();
 
   static NAN_METHOD(New);
-  JS_PROP(Text);
+  JS_PROP(text);
   JS_PROP(attributedText);
   JS_PROP(preferredMaxLayoutWidth);
   JS_PROP(numberOfLines);
