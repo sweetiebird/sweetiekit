@@ -81,6 +81,18 @@ namespace sweetiekit
       id result = (__bridge id)(value.As<External>()->Value());
       return result;
     }
+    if (value->IsString()) {
+      return to_value_NSString(value);
+    }
+    if (value->IsInt32()) {
+      return [[NSNumber alloc] initWithInt: TO_INT32(value)];
+    }
+    if (value->IsUint32()) {
+      return [[NSNumber alloc] initWithUnsignedInt: TO_UINT32(value)];
+    }
+    if (value->IsNumber()) {
+      return [[NSNumber alloc] initWithDouble: TO_DOUBLE(value)];
+    }
     if (failed) {
       *failed = true;
     } else {

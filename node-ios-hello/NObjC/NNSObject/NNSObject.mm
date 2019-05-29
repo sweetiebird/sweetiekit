@@ -376,12 +376,6 @@ NAN_METHOD(Nid::invokeMethod)
       return;
     }
     
-    Class cls = [self class];
-    if (!cls) {
-      Nan::ThrowError("Nid::invokeMethod: [self class] is nil");
-      return;
-    }
-    
     if (!info[0]->IsArray()) {
       Nan::ThrowError("Nid::invokeMethod: expected first argument to be an array");
       return;
@@ -409,12 +403,17 @@ NAN_METHOD(Nid::invokeMethod)
     
     NSMethodSignature * sig = nullptr;
     if (object_isClass(self)) {
-      sig = [cls methodSignatureForSelector:sel];
+      sig = [self methodSignatureForSelector:sel];
       if (!sig) {
-        Nan::ThrowError("Nid::invokeMethod: [[self class] methodSignatureForSelector:] returned nil");
+        Nan::ThrowError("Nid::invokeMethod: [self methodSignatureForSelector:] returned nil");
         return;
       }
     } else {
+      Class cls = [self class];
+      if (!cls) {
+        Nan::ThrowError("Nid::invokeMethod: [self class] is nil");
+        return;
+      }
       sig = [cls instanceMethodSignatureForSelector:sel];
       if (!sig) {
         Nan::ThrowError("Nid::invokeMethod: [[self class] instanceMethodSignatureForSelector:] returned nil");
@@ -472,11 +471,12 @@ NAN_METHOD(Nid::invokeMethod)
         {
           bool failed = false;
           id value = to_id(jsValue, &failed);
+          [inv associateValue:value withKey:[NSString stringWithFormat:@"arg%u", i]];
           if (failed) {
             Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
             return;
           }
-          [inv setArgument:(__bridge void*)value atIndex:1+i];
+          [inv setArgument:&value atIndex:1+i];
         } break;
         default:
         {
