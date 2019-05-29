@@ -14,36 +14,30 @@
 #define js_value_SKScene(x) js_value_wrapper(x, SKScene)
 #define to_value_SKScene(x) to_value_wrapper(x, SKScene)
 
-class NSKScene : public NSKNode {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKScene();
-  virtual ~NSKScene();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(sceneWithSize);
-  static NAN_METHOD(convertPointFromView);
-  static NAN_METHOD(convertPointToView);
-  
-  JS_PROP(backgroundColor);
-  JS_PROP(scaleMode);
+JS_WRAP_CLASS(SKScene, SKNode);
+  JS_METHOD(sceneWithSize);
+  JS_METHOD(convertPointFromView);
+  JS_METHOD(convertPointToView);
   JS_PROP(touchesBegan);
   JS_PROP(touchesMoved);
   JS_PROP(touchesEnded);
   JS_PROP(update);
-  JS_PROP(physicsWorld);
-  JS_PROP(camera);
-  JS_PROP(size);
-  JS_PROP(anchorPoint);
   JS_PROP(frame);
+  JS_PROP(size);
+  JS_PROP(scaleMode);
+  JS_PROP(camera);
+  JS_PROP(listener);
+  JS_PROP(audioEngine);
+  JS_PROP(backgroundColor);
+  JS_PROP(delegate);
+  JS_PROP(anchorPoint);
+  JS_PROP(physicsWorld);
+  JS_PROP(view);
 
   sweetiekit::JSFunction _touchesBegan;
   sweetiekit::JSFunction _touchesMoved;
   sweetiekit::JSFunction _touchesEnded;
   sweetiekit::JSFunction _update;
-};
+JS_WRAP_CLASS_END(SKScene);
 
 #endif /* NSKScene_h */
