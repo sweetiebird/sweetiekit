@@ -37,14 +37,17 @@
 
 @end
 
-Nan::Persistent<FunctionTemplate> NNSObject::type;
+Nan::Persistent<FunctionTemplate> Nid::type;
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate *isolate)
+Nid::Nid() {}
+Nid::~Nid() {}
+
+std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isolate)
 {
   Nan::EscapableHandleScope scope;
 
   // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(NNSObject::New);
+  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(Nid::New);
 
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("NSObject"));
@@ -52,6 +55,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  JS_ASSIGN_PROP_READONLY(proto, self);
   JS_ASSIGN_PROP_READONLY(proto, class);
   JS_ASSIGN_PROP_READONLY(proto, superclass);
   JS_ASSIGN_PROP_READONLY(proto, metaclass);
@@ -66,6 +70,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
   
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Nan::SetMethod(ctorFn, "NSClassFromString", _NSClassFromString);
+  Nan::SetMethod(ctorFn, "objc_msgSend", _objc_msgSend);
   sweetiekit::Set(ctorFn, "classFromString", ^(JSInfo info) {
     Nan::HandleScope scope;
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
@@ -96,91 +102,66 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
-NNSObject::NNSObject() {}
-
-NNSObject::~NNSObject() {}
-
-NAN_METHOD(NNSObject::New) {
-  Local<Object> obj = info.This();
-
-  NNSObject *nObj = new NNSObject();
-
-  if (info[0]->IsExternal()) {
-    nObj->SetNSObject((__bridge NSObject *)(info[0].As<External>()->Value()));
+NAN_METHOD(Nid::New) {
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `id(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(id, info);
+      return;
+    }
+    id self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge id)(info[0].As<External>()->Value());
+    }
+    if (!self && info.Length() > 0 && !info[0]->IsNullOrUndefined() && !info[0]->IsExternal()) {
+      Nan::ThrowError("Nid::New: invalid arguments");
+    } else {
+      Nid *wrapper = new Nid();
+      wrapper->set_self(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    }
   }
-  nObj->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
-NAN_METHOD(NNSObject::Destroy) {
-  //NNSObject *ns = ObjectWrap::Unwrap<NNSObject>(info.This());
+NAN_GETTER(Nid::classGetter) {
+  JS_UNWRAP_(id, ns);
+
+  JS_SET_RETURN(js_value_id([ns class]));
 }
 
-NSObject* NNSObject::SetNSObject(NSObject* obj) {
-  _NSObject = obj;
-  /*
-  auto wrapper = objc_getAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"]);
-  if (wrapper == nullptr) {
-    Nan::Persistent<FunctionTemplate>** p = new Nan::Persistent<FunctionTemplate>*(&GetDerivedType());
-    auto w = [NSObjectWrapper alloc];
-    w.ptr = p;
-    
-    objc_setAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"], w, objc_AssociationPolicy::OBJC_ASSOCIATION_RETAIN);
-    //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
-  }*/
-  return _NSObject;
+NAN_GETTER(Nid::superclassGetter) {
+  JS_UNWRAP_(id, ns);
+
+  JS_SET_RETURN(js_value_id([ns superclass]));
 }
 
-NAN_GETTER(NNSObject::classGetter) {
-  Nan::HandleScope scope;
+NAN_GETTER(Nid::metaclassGetter) {
+  JS_UNWRAP_(id, ns);
 
-  JS_UNWRAP(NSObject, ns);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ns class], NNSObject::type));
+  JS_SET_RETURN(js_value_id(object_getClass([ns class])));
 }
 
-NAN_GETTER(NNSObject::superclassGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(NSObject, ns);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ns superclass], NNSObject::type));
+NAN_GETTER(Nid::classNameGetter) {
+  JS_UNWRAP_(id, ns);
+  JS_SET_RETURN(js_value_NSString(NSStringFromClass([ns class])));
 }
 
-NAN_GETTER(NNSObject::metaclassGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(NSObject, ns);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor(object_getClass([ns class]), NNSObject::type));
+NAN_GETTER(Nid::descriptionGetter) {
+  JS_UNWRAP_(id, ns);
+  JS_SET_RETURN(js_value_NSString([ns description]));
 }
 
-NAN_GETTER(NNSObject::classNameGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSObject, ns);
-  JS_SET_RETURN(JS_STR([NSStringFromClass([ns class]) UTF8String]));
+NAN_GETTER(Nid::debugDescriptionGetter) {
+  JS_UNWRAP_(id, ns);
+  JS_SET_RETURN(js_value_NSString([ns debugDescription]));
 }
 
-NAN_GETTER(NNSObject::descriptionGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSObject, ns);
-  JS_SET_RETURN(JS_STR([[ns description] UTF8String]));
-}
-
-NAN_GETTER(NNSObject::debugDescriptionGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSObject, ns);
-  JS_SET_RETURN(JS_STR([[ns debugDescription] UTF8String]));
-}
-
-NAN_GETTER(NNSObject::methodsGetter) {
-  JS_UNWRAP(NSObject, ns);
+NAN_GETTER(Nid::methodsGetter) {
+  JS_UNWRAP_(id, ns);
   if (!object_isClass(ns)) {
-    Nan::ThrowError("NSObject:methods: not a class");
+    Nan::ThrowError("id:methods: not a class");
     return;
   }
   Class cls = nns->AsClass();
@@ -206,12 +187,12 @@ NAN_GETTER(NNSObject::methodsGetter) {
   JS_SET_RETURN(result);
 }
 
-NAN_GETTER(NNSObject::propertiesGetter) {
+NAN_GETTER(Nid::propertiesGetter) {
   Nan::EscapableHandleScope scope;
   
-  JS_UNWRAP(NSObject, ns);
+  JS_UNWRAP_(id, ns);
   if (!object_isClass(ns)) {
-    Nan::ThrowError("NSObject:properties: not a class");
+    Nan::ThrowError("id:properties: not a class");
     return;
   }
   Class cls = nns->AsClass();
@@ -231,63 +212,229 @@ NAN_GETTER(NNSObject::propertiesGetter) {
   JS_SET_RETURN(scope.Escape(result));
 }
 
-NAN_METHOD(NNSObject::invokeBooleanGetter)
+NAN_METHOD(Nid::invokeBooleanGetter)
 {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSObject, ns);
+  JS_UNWRAP_(id, self);
   @autoreleasepool {
-    Class cls = [ns class];
+    if (!self) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: self is nil");
+      return;
+    }
+    Class cls = [self class];
+    if (!cls) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: [self class] is nil");
+      return;
+    }
   
     NSString* name = NJSStringToNSString(info[0]);
+    if (!name) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: expected 1st argument to be a string");
+      return;
+    }
+    
     SEL sel = NSSelectorFromString(name);
+    if (!sel) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: NSSelectorFromString returned nil");
+      return;
+    }
+    
     NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    if (!sig) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: [[self class] instanceMethodSignatureForSelector:] returned nil");
+      return;
+    }
+    
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    if (!inv) {
+      Nan::ThrowError("Nid::invokeBooleanGetter: [NSInvocation invocationWithMethodSignature:] returned nil");
+      return;
+    }
+    
     [inv setSelector:sel];
-    [inv invokeWithTarget:ns];
+    [inv invokeWithTarget:self];
     bool result = false;
     [inv getReturnValue:&result];
     JS_SET_RETURN(JS_BOOL(result));
   }
 }
 
-NAN_METHOD(NNSObject::invokeBooleanSetter)
+NAN_METHOD(Nid::invokeBooleanSetter)
 {
   Nan::HandleScope scope;
   
-  JS_UNWRAP(NSObject, ns);
+  JS_UNWRAP_(id, self);
   @autoreleasepool {
-    Class cls = [ns class];
+    if (!self) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: self is nil");
+      return;
+    }
+    
+    Class cls = [self class];
+    if (!cls) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: [self class] is nil");
+      return;
+    }
     
     NSString* name = NJSStringToNSString(info[0]);
+    if (!name) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: expected 1st argument to be a string");
+      return;
+    }
+    
     SEL sel = NSSelectorFromString(name);
+    if (!sel) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: NSSelectorFromString returned nil");
+      return;
+    }
+    
     bool value = info[1]->BooleanValue(JS_ISOLATE());
     NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    if (!sig) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: [[self class] instanceMethodSignatureForSelector:] returned nil");
+      return;
+    }
+    
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    if (!inv) {
+      Nan::ThrowError("Nid::invokeBooleanSetter: [NSInvocation invocationWithMethodSignature:] returned nil");
+      return;
+    }
+    
     [inv setSelector:sel];
     [inv setArgument:&value atIndex:2];
-    [inv invokeWithTarget:ns];
+    [inv invokeWithTarget:self];
   }
 }
 
-NAN_METHOD(NNSObject::invokeMethod)
+NAN_METHOD(Nid::_NSClassFromString)
+{
+  @autoreleasepool {
+    NSString* name = to_value_NSString(info[0]);
+    if (!name) {
+        Nan::ThrowError("Nid::NSClassFromString: expected first argument to be a string");
+        return;
+    }
+    Class result = NSClassFromString(name);
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)result)
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+  }
+}
+
+id to_id(Local<Value> jsValue, bool* failed = nullptr) {
+  return to_value_id(jsValue, failed);
+}
+
+#include "Nobjc.h"
+
+NAN_METHOD(Nid::_objc_msgSend)
+{
+  @autoreleasepool {
+    bool failed = false;
+    id obj = to_id(info[0], &failed);
+    if (failed) {
+      Nan::ThrowError("Nid::objc_msgSend: expected first argument to be an id");
+      return;
+    }
+    if (!obj) {
+      Nan::ThrowError("Nid::objc_msgSend: first argument is nil");
+      return;
+    }
+    NSString* name = to_value_NSString(info[1]);
+    if (!name) {
+      Nan::ThrowError("Nid::objc_msgSend: expected second argument to be a SEL (string)");
+      return;
+    }
+    
+    SEL sel = NSSelectorFromString(name);
+    if (!sel) {
+      Nan::ThrowError("Nid::objc_msgSend: NSSelectorFromString returned nil");
+      return;
+    }
+    
+    switch (info.Length()) {
+      case 2: {
+        nobjc_msgSend0(obj, sel);
+      } break;
+      default: {
+        Nan::ThrowError("Nid::objc_msgSend: input arguments not yet implemented");
+        return;
+      }
+    }
+  }
+}
+
+NAN_METHOD(Nid::invokeMethod)
 {
   Nan::HandleScope scope;
   
-  JS_UNWRAP(NSObject, ns);
+  JS_UNWRAP_(id, self);
   @autoreleasepool {
-    Class cls = [ns class];
+    if (!self) {
+      Nan::ThrowError("Nid::invokeMethod: self is nil");
+      return;
+    }
+    
+    Class cls = [self class];
+    if (!cls) {
+      Nan::ThrowError("Nid::invokeMethod: [self class] is nil");
+      return;
+    }
+    
+    if (!info[0]->IsArray()) {
+      Nan::ThrowError("Nid::invokeMethod: expected first argument to be an array");
+      return;
+    }
     
     Local<Array> spec = Local<Array>::Cast(info[0]);
-    char returnType = [NJSStringToNSString(spec->Get(0)) UTF8String][0];
+    
+    NSString* returnTypeSpec = NJSStringToNSString(spec->Get(0));
+    if (!returnTypeSpec) {
+      Nan::ThrowError("Nid::invokeMethod: expected first value of first argument to be a string");
+      return;
+    }
+    
     NSString* name = NJSStringToNSString(spec->Get(1));
+    if (!name) {
+      Nan::ThrowError("Nid::invokeMethod: expected last value of first argument to be a string");
+      return;
+    }
+    
     SEL sel = NSSelectorFromString(name);
+    if (!sel) {
+      Nan::ThrowError("Nid::invokeMethod: NSSelectorFromString returned nil");
+      return;
+    }
+    
     NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
+    if (!sig) {
+      Nan::ThrowError("Nid::invokeMethod: [[self class] instanceMethodSignatureForSelector:] returned nil");
+      return;
+    }
+    
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+    if (!inv) {
+      Nan::ThrowError("Nid::invokeMethod: [NSInvocation invocationWithMethodSignature:] returned nil");
+      return;
+    }
+    
     [inv setSelector:sel];
+    
     for (unsigned int i = 1; i < info.Length(); i++) {
+      if (!info[i]->IsArray()) {
+        Nan::ThrowError("Nid::invokeMethod: expected argument to be an array");
+        return;
+      }
       Local<Array> arg = Local<Array>::Cast(info[i]);
-      char type = [NJSStringToNSString(arg->Get(0)) UTF8String][0];
+      
+      NSString* typeSpec = NJSStringToNSString(arg->Get(0));
+      if (!typeSpec) {
+        Nan::ThrowError("Nid::invokeMethod: expected first value of argument to be a string");
+        return;
+      }
+      
+      char type = [typeSpec UTF8String][0];
       Local<Value> jsValue = arg->Get(1);
       switch (type)
       {
@@ -312,14 +459,33 @@ NAN_METHOD(NNSObject::invokeMethod)
           long long value1 = (long long)value;
           [inv setArgument:&value1 atIndex:1+i];
         } break;
+        case '@':
+        {
+          id value = nil;
+          if (jsValue->IsExternal()) {
+            value = (__bridge id)(jsValue.As<External>()->Value());
+          } else if (jsValue->IsNullOrUndefined()) {
+            value = nil;
+          } else {
+            bool failed = false;
+            value = to_id(jsValue, &failed);
+            if (failed) {
+              Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
+              return;
+            }
+          }
+          [inv setArgument:(__bridge void*)value atIndex:1+i];
+        } break;
         default:
         {
-          Nan::ThrowError("NSObject::invokeMethod: Unknown type specifier");
+          Nan::ThrowError("id::invokeMethod: Unknown type specifier");
           return;
         } break;
       }
     }
-    [inv invokeWithTarget:ns];
+    [inv invokeWithTarget:self];
+    
+    char returnType = [returnTypeSpec UTF8String][0];
     switch (returnType)
     {
       case 'B':
@@ -350,11 +516,92 @@ NAN_METHOD(NNSObject::invokeMethod)
       {
         // void
       } break;
+      case '@':
+      {
+        void* value = nullptr;
+        [inv getReturnValue:&value];
+        Local<Value> argv[] = {
+          Nan::New<External>(value)
+        };
+        JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+      } break;
       default:
       {
-        Nan::ThrowError("NSObject::invokeMethod: Unknown return type specifier");
+        Nan::ThrowError("id::invokeMethod: Unknown return type specifier");
         return;
       } break;
+    }
+  }
+}
+
+id Nid::set_self(id self) {
+  _self = self;
+  /*
+  auto wrapper = objc_getAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"]);
+  if (wrapper == nullptr) {
+    Nan::Persistent<FunctionTemplate>** p = new Nan::Persistent<FunctionTemplate>*(&GetDerivedType());
+    auto w = [NSObjectWrapper alloc];
+    w.ptr = p;
+    
+    objc_setAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"], w, objc_AssociationPolicy::OBJC_ASSOCIATION_RETAIN);
+    //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
+  }*/
+  return _self;
+}
+
+NAN_GETTER(Nid::selfGetter) {
+  JS_UNWRAP_(id, self);
+  JS_SET_RETURN(Nan::New<External>((__bridge void*)self));
+}
+
+Nan::Persistent<FunctionTemplate> NNSObject::type;
+
+std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate *isolate)
+{
+  Nan::EscapableHandleScope scope;
+
+  // constructor
+  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(NNSObject::New);
+
+  ctor->InstanceTemplate()->SetInternalFieldCount(1);
+  ctor->SetClassName(JS_STR("NSObject"));
+  ctor->Inherit(Nan::New(Nid::type));
+  type.Reset(ctor);
+
+  // prototype
+  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  
+  // ctor
+  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
+}
+
+NNSObject::NNSObject() {}
+
+NNSObject::~NNSObject() {}
+
+NAN_METHOD(NNSObject::New) {
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `NSObject(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(NSObject, info);
+      return;
+    }
+    NSObject* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSObject *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[NSObject alloc] init];
+    }
+    if (self) {
+      NNSObject *wrapper = new NNSObject();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NSObject::New: invalid arguments");
     }
   }
 }
@@ -491,6 +738,7 @@ NAN_METHOD(NNSObject::invokeMethod)
         JS_EXPORT_TYPE_AS(type, #type)
 
 void NNSObject::RegisterTypes(Local<Object> exports) {
+    JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(AVAudioPlayer);
@@ -1032,7 +1280,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[NSObject class]]) {
         return NNSObject::type;
       }
-      Nan::ThrowError("Unknown type");
+      return Nid::type;
     }
   }
   return unset;

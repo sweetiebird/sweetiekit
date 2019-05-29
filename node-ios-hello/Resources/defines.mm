@@ -67,17 +67,24 @@ namespace sweetiekit
   }
   
   id GetValueFor(Local<Value> value, bool* failed) {
-    if (JS_INSTANCEOF(value, NNSObject)) {
-      JS_UNWRAPPED(value, NSObject, result);
-      if (failed) {
-        *failed = false;
-      }
+    if (failed) {
+      *failed = false;
+    }
+    if (JS_INSTANCEOF(value, Nid)) {
+      JS_UNWRAPPED_(value, id, result);
+      return result;
+    }
+    if (value->IsNullOrUndefined()) {
+      return nullptr;
+    }
+    if (value->IsExternal()) {
+      id result = (__bridge id)(value.As<External>()->Value());
       return result;
     }
     if (failed) {
       *failed = true;
     } else {
-      Nan::ThrowError("Expected id value (NSObject wrapper)");
+      Nan::ThrowError("Expected objective-c id value");
     }
     return nullptr;
   }
