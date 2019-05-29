@@ -25,6 +25,8 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(sceneWithSize);
+  static NAN_METHOD(convertPointFromView);
+  static NAN_METHOD(convertPointToView);
   
   JS_PROP(backgroundColor);
   JS_PROP(scaleMode);
@@ -34,6 +36,9 @@ public:
   JS_PROP(update);
   JS_PROP(physicsWorld);
   JS_PROP(camera);
+  JS_PROP(size);
+  JS_PROP(anchorPoint);
+  JS_PROP(frame);
 
   sweetiekit::JSFunction _touchesBegan;
   sweetiekit::JSFunction _touchesMoved;

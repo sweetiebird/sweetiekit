@@ -24,10 +24,11 @@ public:
   virtual ~NSKSpriteNode();
 
   static NAN_METHOD(New);
+  JS_METHOD(scaleToSize);
   JS_PROP(size);
   JS_PROP(colorBlendFactor);
   JS_PROP(color);
-  JS_METHOD(scaleToSize);
+  JS_PROP(anchorPoint);
 };
 
 #endif /* NSKSpriteNode_h */

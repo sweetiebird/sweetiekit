@@ -653,12 +653,28 @@ CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullabl
   if (failed) {
     *failed = false;
   }
-  return sweetiekit::CGColorRefFromJSColor(value);
+  CGColorRef result = sweetiekit::CGColorRefFromJSColor(value);
+  if (!result) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected CGColor");
+    }
+  }
+  return result;
 }
 
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed) {
   if (failed) {
     *failed = false;
   }
-  return sweetiekit::UIColorFromJSColor(value);
+  UIColor* result = sweetiekit::UIColorFromJSColor(value);
+  if (result) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected CGColor");
+    }
+  }
+  return result;
 }

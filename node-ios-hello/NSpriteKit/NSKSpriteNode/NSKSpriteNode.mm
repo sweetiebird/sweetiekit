@@ -192,3 +192,35 @@ NAN_METHOD(NSKSpriteNode::scaleToSize) {
     [node scaleToSize:size];
   }
 }
+
+NAN_GETTER(NSKSpriteNode::anchorPointGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKSpriteNode, node);
+
+  __block float x = 0;
+  __block float y = 0;
+
+  @autoreleasepool {
+    x = [node anchorPoint].x;
+    y = [node anchorPoint].y;
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(x));
+  result->Set(JS_STR("y"), JS_FLOAT(y));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NSKSpriteNode::anchorPointSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKSpriteNode, node);
+
+  @autoreleasepool {
+    float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+    float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+    [node setAnchorPoint:CGPointMake(x, y)];
+  }
+}

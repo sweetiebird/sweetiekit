@@ -55,6 +55,7 @@
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
+		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
@@ -2429,6 +2430,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14099CA229E54AF00148A41 /* GameScene.sks in Resources */,
 				A199AEDD22885573003C1DC4 /* uidemos.js in Resources */,
 				A126560222719CE400D3DF47 /* hello.js in Resources */,
 				A126560322719CE400D3DF47 /* server.js in Resources */,

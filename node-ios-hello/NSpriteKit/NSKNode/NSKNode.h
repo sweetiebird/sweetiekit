@@ -31,6 +31,8 @@ public:
   static NAN_METHOD(removeFromParent);
   static NAN_METHOD(runAction);
   static NAN_METHOD(childNodeWithName);
+  static NAN_METHOD(containsPoint);
+  static NAN_METHOD(nodeAtPoint);
   JS_PROP(frame);
   JS_PROP(width);
   JS_PROP(height);

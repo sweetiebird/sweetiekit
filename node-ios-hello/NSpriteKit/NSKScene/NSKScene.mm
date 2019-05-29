@@ -38,8 +38,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
   JS_ASSIGN_PROP(proto, update);
+  JS_ASSIGN_PROP(proto, size);
+  JS_ASSIGN_PROP(proto, anchorPoint);
   JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
   JS_ASSIGN_PROP_READONLY(proto, camera);
+  Nan::SetMethod(proto, "convertPointFromView", convertPointFromView);
+  Nan::SetMethod(proto, "convertPointToView", convertPointToView);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
@@ -284,4 +288,103 @@ NAN_SETTER(NSKScene::updateSetter) {
     Nan::HandleScope scope;
     wrap->_update("NSKScene::updateSetter", JS_FLOAT(currentTime));
   }];
+}
+
+NAN_GETTER(NSKScene::sizeGetter) {
+  Nan::HandleScope scope;
+  
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+  
+  __block float w = 0;
+  __block float h = 0;
+  @autoreleasepool {
+    CGSize size = [scene size];
+    w = size.width;
+    h = size.height;
+  }
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("width"), JS_FLOAT(w));
+  result->Set(JS_STR("height"), JS_FLOAT(h));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NSKScene::sizeSetter) {
+  Nan::HandleScope scope;
+  
+  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
+  SSKScene* scene = wrap->As<SSKScene>();
+
+  float w = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width")));
+  float h = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")));
+
+  @autoreleasepool {
+    [scene setSize:CGSizeMake(w, h)];
+  }
+}
+
+NAN_GETTER(NSKScene::anchorPointGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKScene, sk);
+
+  __block float x = 0;
+  __block float y = 0;
+
+  @autoreleasepool {
+    x = [sk anchorPoint].x;
+    y = [sk anchorPoint].y;
+  }
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(x));
+  result->Set(JS_STR("y"), JS_FLOAT(y));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_SETTER(NSKScene::anchorPointSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+    float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+    [sk setAnchorPoint:CGPointMake(x, y)];
+  }
+}
+
+NAN_METHOD(NSKScene::convertPointFromView) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKScene, node);
+
+  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
+  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
+  CGPoint converted = [node convertPointFromView:CGPointMake(x, y)];
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(converted.x));
+  result->Set(JS_STR("y"), JS_FLOAT(converted.y));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_METHOD(NSKScene::convertPointToView) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKScene, node);
+
+  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
+  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
+  CGPoint converted = [node convertPointToView:CGPointMake(x, y)];
+  
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(converted.x));
+  result->Set(JS_STR("y"), JS_FLOAT(converted.y));
+
+  JS_SET_RETURN(result);
 }

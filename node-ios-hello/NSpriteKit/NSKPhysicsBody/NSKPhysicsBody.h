@@ -32,11 +32,39 @@ public:
   static NAN_METHOD(bodyWithCircleOfRadius);
   static NAN_METHOD(bodyWithTexture);
   static NAN_METHOD(bodyWithRectangleOfSize);
+  static NAN_METHOD(applyImpulse);
+  static NAN_METHOD(applyTorque);
+  static NAN_METHOD(applyForce);
+  static NAN_METHOD(applyAngularImpulse);
+  static NAN_METHOD(applyForceAtPoint);
+  static NAN_METHOD(applyImpulseAtPoint);
   
-  JS_PROP(node);
+  // JS_PROP(node);
+  // JS_PROP(categoryBitMask);
+  // JS_PROP(contactTestBitMask);
+  // JS_PROP(collisionBitMask);
+  JS_PROP(dynamic);
+  JS_PROP(usesPreciseCollisionDetection);
+  JS_PROP(allowsRotation);
+  JS_PROP(pinned);
+  JS_PROP(resting);
+  JS_PROP(friction);
+  JS_PROP(charge);
+  JS_PROP(restitution);
+  JS_PROP(linearDamping);
+  JS_PROP(angularDamping);
+  JS_PROP(density);
+  JS_PROP(mass);
+  JS_PROP(area);
+  JS_PROP(affectedByGravity);
+  JS_PROP(fieldBitMask);
   JS_PROP(categoryBitMask);
-  JS_PROP(contactTestBitMask);
   JS_PROP(collisionBitMask);
+  JS_PROP(contactTestBitMask);
+  JS_PROP(joints);
+  JS_PROP(node);
+  JS_PROP(velocity);
+  JS_PROP(angularVelocity);
 };
 
 #endif /* NSKPhysicsBody_h */
