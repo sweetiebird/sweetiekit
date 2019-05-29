@@ -45,28 +45,28 @@ Local<Value> NSStringToJSString(NSString* value) {
 
 namespace sweetiekit
 {
-  Local<Value> GetWrapperFor(id pThing)
+  Local<Value> GetWrapperFor(__weak id pThing)
   {
     return GetWrapperFor(pThing, NNSObject::type);
   }
   
-  Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
+  Local<Value> GetWrapperFor(__weak id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
   {
-    Nan::EscapableHandleScope scope;
-    Local<Value> result;
-    if (pThing != nullptr) {
-      if ([pThing isKindOfClass:[NSString class]]) {
-        return scope.Escape(JS_STR([(NSString*)pThing UTF8String]));
+    @autoreleasepool {
+      if (pThing == nullptr) {
+        return Nan::Undefined();
       }
+      if ([pThing isKindOfClass:[NSString class]]) {
+        return JS_STR([(NSString*)pThing UTF8String]);
+      }
+      Nan::EscapableHandleScope scope;
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      result = value;
-    } else {
-      result = Nan::Undefined();
+      auto result(JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
+//      auto kind(NNSObject::GetNSObjectType(pThing, defaultType));
+      return scope.Escape(result);
     }
-    return scope.Escape(result);
   }
   
   id GetValueFor(Local<Value> value, bool* failed) {
