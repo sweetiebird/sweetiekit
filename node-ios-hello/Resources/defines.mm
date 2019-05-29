@@ -52,9 +52,12 @@ namespace sweetiekit
   
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::EscapableHandleScope scope;
     Local<Value> result;
     if (pThing != nullptr) {
+      if ([pThing isKindOfClass:[NSString class]]) {
+        return scope.Escape(JS_STR([(NSString*)pThing UTF8String]));
+      }
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
@@ -63,7 +66,7 @@ namespace sweetiekit
     } else {
       result = Nan::Undefined();
     }
-    return handleScope.Escape(result);
+    return scope.Escape(result);
   }
   
   id GetValueFor(Local<Value> value, bool* failed) {

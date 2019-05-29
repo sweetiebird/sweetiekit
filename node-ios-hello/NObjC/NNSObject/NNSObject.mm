@@ -39,7 +39,7 @@
 
 Nan::Persistent<FunctionTemplate> Nid::type;
 
-Nid::Nid() {}
+Nid::Nid() : _self(nullptr) {}
 Nid::~Nid() {}
 
 std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isolate)
@@ -456,6 +456,11 @@ NAN_METHOD(Nid::invokeMethod)
           int32_t value = TO_INT32(jsValue);
           [inv setArgument:&value atIndex:1+i];
         } break;
+        case 'I':
+        {
+          uint32_t value = TO_UINT32(jsValue);
+          [inv setArgument:&value atIndex:1+i];
+        } break;
         case 'd':
         {
           double value = TO_DOUBLE(jsValue);
@@ -471,7 +476,6 @@ NAN_METHOD(Nid::invokeMethod)
         {
           bool failed = false;
           id value = to_id(jsValue, &failed);
-          [inv associateValue:value withKey:[NSString stringWithFormat:@"arg%u", i]];
           if (failed) {
             Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
             return;
@@ -503,6 +507,12 @@ NAN_METHOD(Nid::invokeMethod)
         [inv getReturnValue:&value];
         JS_SET_RETURN(JS_INT(value));
       } break;
+      case 'I':
+      {
+        uint32_t value = 0;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_UINT(value));
+      } break;
       case 'd':
       {
         double value = 0.0;
@@ -533,12 +543,9 @@ NAN_METHOD(Nid::invokeMethod)
       } break;
       case '@':
       {
-        void* value = nullptr;
+        __weak id value = nil;
         [inv getReturnValue:&value];
-        Local<Value> argv[] = {
-          Nan::New<External>(value)
-        };
-        JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+        JS_SET_RETURN(js_value_id(value));
       } break;
       default:
       {

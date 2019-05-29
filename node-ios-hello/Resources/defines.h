@@ -691,22 +691,22 @@ static inline NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<
   }
 }
 
-template<typename T>
-Local<Value> js_value_id(T* _Nullable value) {
+inline Local<Value> js_value_id(id _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
-static inline Local<Value> js_value_id(id _Nullable value) {
+inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
+  return sweetiekit::GetValueFor(value, failed);
+}
+
+template<typename T>
+Local<Value> js_value_id(T* _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
 template<typename T>
 T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T*)sweetiekit::GetValueFor(value, failed);
-}
-
-static inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
-  return sweetiekit::GetValueFor(value, failed);
 }
 
 #define js_value_NSInteger JS_INT
