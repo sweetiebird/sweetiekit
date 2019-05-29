@@ -30,6 +30,7 @@ public:
   static NAN_METHOD(addChild);
   static NAN_METHOD(removeFromParent);
   static NAN_METHOD(runAction);
+  static NAN_METHOD(childNodeWithName);
   JS_PROP(frame);
   JS_PROP(position);
   JS_PROP(zPosition);

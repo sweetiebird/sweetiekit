@@ -55,6 +55,7 @@
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
+		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
@@ -323,6 +324,7 @@
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		A1482A94229D4E3F001502C0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
@@ -878,6 +880,14 @@
 				A13768EB2288396400CDB13B /* NCLHeading.mm */,
 			);
 			path = NCLHeading;
+			sourceTree = "<group>";
+		};
+		A1482A93229D4DAC001502C0 /* GameFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A1482A94229D4E3F001502C0 /* GameScene.sks */,
+			);
+			path = GameFiles;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -2114,6 +2124,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1482A93229D4DAC001502C0 /* GameFiles */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
@@ -2298,6 +2309,7 @@
 				A1CE2B8C228F020800D9B3B8 /* Lato-Hairline.ttf in Resources */,
 				A1CE2B5F228E83D400D9B3B8 /* 1.gif in Resources */,
 				A1CE2B8F228F020800D9B3B8 /* Lato-Black.ttf in Resources */,
+				A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */,
 				A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */,
 				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
 				A16EF590229D07D4007BCB49 /* Fire.sks in Resources */,

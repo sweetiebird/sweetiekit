@@ -6,6 +6,7 @@ makeMiniApp.lazy = true;
 const makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
 const makeFullReact = require('./examples/fullReact');
+const makePlatformer = require('./examples/Beez');
 
 // view based demos
 const makeARSCNView = require('./examples/ARSCNView');
@@ -95,6 +96,7 @@ const appDemos = {
   MiniApp: makeMiniApp,
   MiniAppReact: makeMiniAppReact,
   FullReact: makeFullReact,
+  Platformer: makePlatformer,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();
@@ -103,6 +105,7 @@ const arDemoNames = Object.keys(arDemos).sort();
 const appDemoNames = Object.keys(appDemos).sort();
 
 const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames, appDemoNames];
+const allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demos'];
 
 class UIDemosApp {
   constructor(app) {
@@ -236,17 +239,7 @@ class UIDemosApp {
     };
     this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
     this.mgr.titleForHeaderInSection = (tv, section) => {
-      switch (section) {
-        case 1:
-          return 'Controller Demos';
-        case 2:
-          return 'AR Demos';
-        case 3:
-          return 'App Demos';
-        case 0:
-        default:
-          return 'View Demos';
-      }
+      return allDemoSections[section];
     };
 
     this.table.dataSource = this.mgr;

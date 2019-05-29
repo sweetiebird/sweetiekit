@@ -35,6 +35,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   Nan::SetMethod(proto, "addChild", addChild);
   Nan::SetMethod(proto, "removeFromParent", removeFromParent);
   Nan::SetMethod(proto, "runAction", runAction);
+  Nan::SetMethod(proto, "childNodeWithName", childNodeWithName);
   JS_ASSIGN_PROP_READONLY(proto, frame);
   JS_ASSIGN_PROP(proto, position);
   JS_ASSIGN_PROP(proto, zPosition);
@@ -122,6 +123,17 @@ NAN_METHOD(NSKNode::runAction) {
   }];
   [node runAction:action->As<SKAction>()];
 }
+
+NAN_METHOD(NSKNode::childNodeWithName) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKNode, node);
+
+  id child = [node childNodeWithName:NJSStringToNSString(info[0])];
+  
+  JS_SET_RETURN(sweetiekit::GetWrapperFor(child, NSKNode::type));
+}
+
 
 //NAN_GETTER(NSKNode::PositionGetter) {
 //  Nan::HandleScope scope;
@@ -564,3 +576,4 @@ NAN_SETTER(NSKNode::attributeValuesSetter) {
 //    [self setAttributeValues: to_value_NSDictionary<NSString4232SKAttributeValue4232>(value)];
   }
 }
+
