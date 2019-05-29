@@ -14,16 +14,19 @@
 #define js_value_SCNGeometry(x) js_value_wrapper(x, SCNGeometry)
 #define to_value_SCNGeometry(x) to_value_wrapper(x, SCNGeometry)
 
-class NSCNGeometry : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSCNGeometry();
-  virtual ~NSCNGeometry();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(SCNGeometry, NSObject);
+  JS_PROP(name);
+  JS_PROP(materials);
+  JS_PROP(firstMaterial);
+  JS_PROP(geometrySources);
+  JS_PROP(geometryElements);
+  JS_PROP(geometryElementCount);
+  JS_PROP(levelsOfDetail);
+  JS_PROP(tessellator);
+  JS_PROP(subdivisionLevel);
+  JS_PROP(wantsAdaptiveSubdivision);
+  JS_PROP(edgeCreasesElement);
+  JS_PROP(edgeCreasesSource);
+JS_WRAP_CLASS_END(SCNGeometry);
 
 #endif /* NSCNGeometry_h */
