@@ -12,7 +12,7 @@
 #include "NNSObject.h"
 
 #define js_value_SKPhysicsContactDelegate(x) js_value_wrapper(x, SKPhysicsContactDelegate)
-#define to_value_SKPhysicsContactDelegate(x) to_value_wrapper(x, SKPhysicsContactDelegate)
+#define to_value_SKPhysicsContactDelegate(x) to_value_wrapper(x, SSKPhysicsContactDelegate)
 
 class NSKPhysicsContactDelegate : public NNSObject {
 public:
