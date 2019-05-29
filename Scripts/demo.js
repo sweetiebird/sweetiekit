@@ -40,7 +40,7 @@ GetVoidMethods = function GetVoidMethods(cls) {
 }
 
 BindClass = function BindClass(nativeType, className = nativeType.name) {
-  let UIViewClass = SweetieKit.NSObject.classFromString(className);
+  let UIViewClass = SweetieKit.id.classFromString(className);
   if (!UIViewClass) {
     return;
   }

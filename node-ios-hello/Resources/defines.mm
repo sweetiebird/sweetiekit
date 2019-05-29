@@ -52,9 +52,12 @@ namespace sweetiekit
   
   Local<Value> GetWrapperFor(id pThing, Nan::Persistent<FunctionTemplate>& defaultType)
   {
-    Nan::EscapableHandleScope handleScope;
+    Nan::EscapableHandleScope scope;
     Local<Value> result;
     if (pThing != nullptr) {
+      if ([pThing isKindOfClass:[NSString class]]) {
+        return scope.Escape(JS_STR([(NSString*)pThing UTF8String]));
+      }
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
@@ -63,21 +66,40 @@ namespace sweetiekit
     } else {
       result = Nan::Undefined();
     }
-    return handleScope.Escape(result);
+    return scope.Escape(result);
   }
   
   id GetValueFor(Local<Value> value, bool* failed) {
-    if (JS_INSTANCEOF(value, NNSObject)) {
-      JS_UNWRAPPED(value, NSObject, result);
-      if (failed) {
-        *failed = false;
-      }
+    if (failed) {
+      *failed = false;
+    }
+    if (JS_INSTANCEOF(value, Nid)) {
+      JS_UNWRAPPED_(value, id, result);
       return result;
+    }
+    if (value->IsNullOrUndefined()) {
+      return nullptr;
+    }
+    if (value->IsExternal()) {
+      id result = (__bridge id)(value.As<External>()->Value());
+      return result;
+    }
+    if (value->IsString()) {
+      return to_value_NSString(value);
+    }
+    if (value->IsInt32()) {
+      return [[NSNumber alloc] initWithInt: TO_INT32(value)];
+    }
+    if (value->IsUint32()) {
+      return [[NSNumber alloc] initWithUnsignedInt: TO_UINT32(value)];
+    }
+    if (value->IsNumber()) {
+      return [[NSNumber alloc] initWithDouble: TO_DOUBLE(value)];
     }
     if (failed) {
       *failed = true;
     } else {
-      Nan::ThrowError("Expected id value (NSObject wrapper)");
+      Nan::ThrowError("Expected objective-c id value");
     }
     return nullptr;
   }

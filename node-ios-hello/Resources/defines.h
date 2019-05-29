@@ -24,7 +24,7 @@ using namespace v8;
 #define JS_OBJ(val) Nan::To<v8::Object>(val).ToLocalChecked()
 #define JS_TYPE(name) (Nan::New(name::type)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_INSTANCEOF(obj, type) ((obj)->InstanceOf(JS_CONTEXT(), JS_TYPE(type)).FromJust())
-#define JS_NEW(type, argc, argv) (JS_TYPE(type)->NewInstance(JS_CONTEXT(), argc, argv).ToLocalChecked())
+#define JS_NEW(type, argc, argv) (JS_TYPE(type)->NewInstance(JS_CONTEXT(), argc, argv).FromMaybe<Value>(Nan::Undefined()))
 #define JS_NEW_ARGV(type, argv) JS_NEW(type, sizeof(argv)/sizeof(argv[0]), argv)
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_WRAPPER(el, ElType) sweetiekit::GetWrapperFor(el, N##ElType::type)
@@ -94,10 +94,18 @@ using namespace node;
 
 #define JS_METHOD(name) \
   static NAN_METHOD(name)
+  
+#define JS_UNWRAP_(type, name) \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  type name = n##name->self<type>(); name = name;
 
 #define JS_UNWRAP(type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type* name = n##name->As<type>(); name = name;
+  
+#define JS_UNWRAPPED_(info, type, name) \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
+  __block type name = n##name->self<type>(); name = name;
 
 #define JS_UNWRAPPED(info, type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
@@ -683,22 +691,22 @@ static inline NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<
   }
 }
 
-template<typename T>
-Local<Value> js_value_id(T* _Nullable value) {
+inline Local<Value> js_value_id(id _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
-static inline Local<Value> js_value_id(id _Nullable value) {
+inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
+  return sweetiekit::GetValueFor(value, failed);
+}
+
+template<typename T>
+Local<Value> js_value_id(T* _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
 template<typename T>
 T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T*)sweetiekit::GetValueFor(value, failed);
-}
-
-static inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
-  return sweetiekit::GetValueFor(value, failed);
 }
 
 #define js_value_NSInteger JS_INT

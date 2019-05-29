@@ -23,20 +23,15 @@
 extern "C" void objc_callCallback(NSObject* obj);
 #endif
 
-using namespace v8;
-using namespace node;
+class NObjectWrap : public ObjectWrap
+{
+};
 
-class NNSObject : public ObjectWrap {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSObject();
-  virtual ~NNSObject();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
+JS_WRAP_CLASS(id, ObjectWrap);
+  JS_METHOD(_NSClassFromString);
+  JS_METHOD(_objc_msgSend);
+  
+  JS_PROP(self);
   JS_PROP(class);
   JS_PROP(superclass);
   JS_PROP(metaclass);
@@ -45,37 +40,52 @@ public:
   JS_PROP(debugDescription);
   JS_PROP(methods);
   JS_PROP(properties);
-  static NAN_METHOD(invokeBooleanGetter);
-  static NAN_METHOD(invokeBooleanSetter);
-  static NAN_METHOD(invokeMethod);
+  JS_METHOD(invokeBooleanGetter);
+  JS_METHOD(invokeBooleanSetter);
+  JS_METHOD(invokeMethod);
 
+  id _self;
+  id set_self(id self);
+  
+  template<typename T>
+  T self() {
+    return (T)_self;
+  }
+  
+  id self() {
+    return _self;
+  }
+  
   template<typename T>
   T* As() {
-    return (T*)_NSObject;
+    return self<T*>();
   }
   
   bool IsClass() {
-    return object_isClass(_NSObject);
+    return object_isClass(self());
   }
   
   Class AsClass() {
     if (IsClass()) {
-      return (Class)_NSObject;
+      return self<Class>();
     } else {
       return nullptr;
     }
   }
+JS_WRAP_CLASS_END(id);
 
-  NSObject* SetNSObject(NSObject* obj);
+
+#define js_value_NSObject(x) js_value_wrapper(x, NSObject)
+#define to_value_NSObject(x) to_value_wrapper(x, NSObject)
+
+JS_WRAP_CLASS(NSObject, id);
+  NSObject* SetNSObject(NSObject* obj) {
+    set_self(obj);
+    return self<NSObject*>();
+  }
   
   static void RegisterTypes(Local<Object> exports);
   static Nan::Persistent<FunctionTemplate>& GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset);
-  
-  virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; }
-  
-private:
-  NSObject* _NSObject;
-  sweetiekit::JSFunction _callback;
-};
+JS_WRAP_CLASS_END(NSObject);
 
 #endif /* NNSObject_h */

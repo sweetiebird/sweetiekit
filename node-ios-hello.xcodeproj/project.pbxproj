@@ -220,6 +220,7 @@
 		A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D6F229D8EEE002B53FF /* NSCNPlane.mm */; };
 		A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */; };
 		A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */; };
+		A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D81229E77FE002B53FF /* Nobjc.cpp */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -616,6 +617,8 @@
 		A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCapsule.mm; sourceTree = "<group>"; };
 		A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNFloor.mm; sourceTree = "<group>"; };
 		A1EE7D7F229D97C0002B53FF /* NSCNFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNFloor.h; sourceTree = "<group>"; };
+		A1EE7D81229E77FE002B53FF /* Nobjc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Nobjc.cpp; sourceTree = "<group>"; };
+		A1EE7D83229E7821002B53FF /* Nobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nobjc.h; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -704,6 +707,8 @@
 				211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */,
 				211E76A32269F42B00B838AF /* NNSObject.h */,
 				211E76A12269F41D00B838AF /* NNSObject.mm */,
+				A1EE7D81229E77FE002B53FF /* Nobjc.cpp */,
+				A1EE7D83229E7821002B53FF /* Nobjc.h */,
 			);
 			path = NNSObject;
 			sourceTree = "<group>";
@@ -2651,6 +2656,7 @@
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
 				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
+				A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */,
 				A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
