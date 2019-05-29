@@ -221,6 +221,7 @@
 		A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */; };
 		A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */; };
 		A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D81229E77FE002B53FF /* Nobjc.cpp */; };
+		A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -619,6 +620,7 @@
 		A1EE7D7F229D97C0002B53FF /* NSCNFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNFloor.h; sourceTree = "<group>"; };
 		A1EE7D81229E77FE002B53FF /* Nobjc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Nobjc.cpp; sourceTree = "<group>"; };
 		A1EE7D83229E7821002B53FF /* Nobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nobjc.h; sourceTree = "<group>"; };
+		A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+GIF.swift"; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1560,6 +1562,7 @@
 			children = (
 				A1BD4B922287D549001D1F6E /* NSKSpriteNode.h */,
 				A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */,
+				A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */,
 			);
 			path = NSKSpriteNode;
 			sourceTree = "<group>";
@@ -2617,6 +2620,7 @@
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
+				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
