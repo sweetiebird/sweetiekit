@@ -14,18 +14,10 @@
 #define js_value_SKPhysicsWorld(x) js_value_wrapper(x, SKPhysicsWorld)
 #define to_value_SKPhysicsWorld(x) to_value_wrapper(x, SKPhysicsWorld)
 
-class NSKPhysicsWorld : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKPhysicsWorld();
-  virtual ~NSKPhysicsWorld();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKPhysicsWorld, NSObject);
   JS_PROP(gravity);
+  JS_PROP(speed);
   JS_PROP(contactDelegate);
-};
+JS_WRAP_CLASS_END(SKPhysicsWorld);
 
 #endif /* NSKPhysicsWorld_h */
