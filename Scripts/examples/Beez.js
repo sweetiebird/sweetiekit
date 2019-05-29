@@ -30,7 +30,7 @@ class Player {
     if (!this.isJumping) {
       this.isJumping = true;
       this.node.physicsBody.velocity = { dx: 0, dy: 0 };
-      this.node.physicsBody.applyImpulse({ dx: 0, dy: 200 });
+      this.node.physicsBody.applyImpulse({ dx: 0, dy: 50 });
     }
   }
 
@@ -45,6 +45,8 @@ function makeDemo(navigation, dvc) {
   let skView;
   let contactDel;
   let joystick;
+  let joystickArrows;
+  let joystickKnob;
 
   const PhysicsCategory = {
     none: 0,
@@ -52,17 +54,32 @@ function makeDemo(navigation, dvc) {
     ground: 2,
   };
 
-  function touchesBegan(touches) {
-    if (touches.length) {
-      const t = touches[0];
+  function touchesMoved(touches = []) {
+    touches.forEach((t, idx) => {
       const viewLoc = t.locationInView(skView);
       const scnLoc = scene.convertPointFromView(viewLoc);
-      const hitNode = scene.nodeAtPoint(scnLoc);
-      if (hitNode && hitNode.name === 'knob') {
-        console.log(scnLoc, 'do stuff');
-        player.jump();
-      }
-    }
+      const jPos = joystick.convertPointFromNode(scnLoc, scene);
+
+      const radius = Math.min(
+        joystickArrows.size.width / 2,
+        Math.sqrt(Math.pow(jPos.y, 2) + Math.pow(jPos.x, 2)),
+      );
+
+      const angle = Math.atan2(jPos.y, jPos.x);
+
+      joystickKnob.position = {
+        x: Math.cos(angle) * radius,
+        y: Math.sin(angle) * radius,
+      };
+    });
+  }
+
+  function touchesEnded() {
+    const action = SKAction.moveTo({ x: 0, y: 0 }, 0.2);
+    joystickKnob.runAction(action, () => {
+      joystickKnob.position = { x: 0, y: 0 };
+    });
+    player.jump();
   }
 
   function addPlatforms() {
@@ -110,8 +127,9 @@ function makeDemo(navigation, dvc) {
     scn.addChild(bg);
     const stars = new SKSpriteNode('game_stars');
     const starsH = Math.round(demoVC.view.bounds.height * 0.26);
-    stars.position = { x: 0, y: (scn.size.height - starsH) * 0.75 };
-    stars.size = { width: demoVC.view.bounds.width, height: starsH };
+    const starsSize = { width: scn.size.width, height: starsH };
+    stars.position = { x: 0, y: distToTopY(scn.size, starsSize) };
+    stars.size = starsSize;
     scn.addChild(stars);
     const ground = new SKSpriteNode('game_ground');
     const groundH = Math.round(demoVC.view.bounds.height * 0.08);
@@ -133,16 +151,27 @@ function makeDemo(navigation, dvc) {
 
   function makeJoystick() {
     joystick = new SKNode();
-    const knob = new SKSpriteNode('game_knob');
-    knob.size = { width: 100, height: 100 };
-    knob.position = { x: 0, y: 0 };
-    knob.name = 'knob';
+    joystickKnob = new SKSpriteNode('game_knob');
+    joystickArrows = new SKSpriteNode('game_arrows');
+    const joystickSize = { width: 100, height: 100 };
+
+    joystickKnob.size = joystickSize;
+    joystick.size = joystickSize;
+    joystickArrows.size = joystickSize;
+
+    joystickKnob.position = { x: 0, y: 0 };
+    joystickArrows.position = { x: 0, y: 0 };
     joystick.position = {
-      x: distToLeftX(scene.size, knob.size),
-      y: distToBtmY(scene.size, knob.size),
+      x: distToLeftX(scene.size, joystickSize) + 30,
+      y: distToBtmY(scene.size, joystickSize) + 30,
     };
-    joystick.size = { width: 100, height: 100 };
-    joystick.addChild(knob);
+
+    joystickKnob.name = 'knob';
+    joystickArrows.name = 'arrows';
+    joystick.name = 'joystick';
+
+    joystick.addChild(joystickKnob);
+    joystick.addChild(joystickArrows);
     scene.addChild(joystick);
   }
 
@@ -220,7 +249,8 @@ function makeDemo(navigation, dvc) {
 
     makeJoystick();
 
-    scene.touchesBegan = touchesBegan;
+    scene.touchesMoved = touchesMoved;
+    scene.touchesEnded = touchesEnded;
 
     nav.pushViewController(demoVC);
 

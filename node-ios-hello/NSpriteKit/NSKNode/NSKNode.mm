@@ -38,6 +38,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   Nan::SetMethod(proto, "childNodeWithName", childNodeWithName);
   Nan::SetMethod(proto, "containsPoint", containsPoint);
   Nan::SetMethod(proto, "nodeAtPoint", nodeAtPoint);
+  Nan::SetMethod(proto, "convertPointFromNode", convertPointFromNode);
   JS_ASSIGN_PROP_READONLY(proto, frame);
   JS_ASSIGN_PROP_READONLY(proto, width);
   JS_ASSIGN_PROP_READONLY(proto, height);
@@ -149,7 +150,7 @@ NAN_METHOD(NSKNode::containsPoint) {
   float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
   float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
   bool contains = [node containsPoint:CGPointMake(x, y)];
-//
+
   JS_SET_RETURN(JS_BOOL(contains));
 }
 
@@ -163,6 +164,24 @@ NAN_METHOD(NSKNode::nodeAtPoint) {
   id child = [node nodeAtPoint:CGPointMake(x, y)];
 
   JS_SET_RETURN(sweetiekit::GetWrapperFor(child, NSKNode::type));
+}
+
+NAN_METHOD(NSKNode::convertPointFromNode) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(SKNode, node);
+
+  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
+  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
+  NSKNode *child = ObjectWrap::Unwrap<NSKNode>(Local<Object>::Cast(info[1]));
+  CGPoint pt  = [node convertPoint:CGPointMake(x, y) fromNode:child->As<SKNode>()];
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("x"), JS_FLOAT(pt.x));
+  result->Set(JS_STR("y"), JS_FLOAT(pt.y));
+
+  JS_SET_RETURN(result);
+  return;
 }
 
 

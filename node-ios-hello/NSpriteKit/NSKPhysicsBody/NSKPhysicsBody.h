@@ -9,35 +9,21 @@
 #ifndef NSKPhysicsBody_h
 #define NSKPhysicsBody_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
-
-using namespace v8;
-using namespace node;
 
 #define js_value_SKPhysicsBody(x) js_value_wrapper(x, SKPhysicsBody)
 #define to_value_SKPhysicsBody(x) to_value_wrapper(x, SKPhysicsBody)
 
-class NSKPhysicsBody : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKPhysicsBody();
-  virtual ~NSKPhysicsBody();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(bodyWithCircleOfRadius);
-  static NAN_METHOD(bodyWithTexture);
-  static NAN_METHOD(bodyWithRectangleOfSize);
-  static NAN_METHOD(applyImpulse);
-  static NAN_METHOD(applyTorque);
-  static NAN_METHOD(applyForce);
-  static NAN_METHOD(applyAngularImpulse);
-  static NAN_METHOD(applyForceAtPoint);
-  static NAN_METHOD(applyImpulseAtPoint);
+JS_WRAP_CLASS(SKPhysicsBody, NSObject);
+  JS_METHOD(bodyWithCircleOfRadius);
+  JS_METHOD(bodyWithTexture);
+  JS_METHOD(bodyWithRectangleOfSize);
+  JS_METHOD(applyImpulse);
+  JS_METHOD(applyTorque);
+  JS_METHOD(applyForce);
+  JS_METHOD(applyAngularImpulse);
+  JS_METHOD(applyForceAtPoint);
+  JS_METHOD(applyImpulseAtPoint);
   
   // JS_PROP(node);
   // JS_PROP(categoryBitMask);
@@ -65,6 +51,6 @@ public:
   JS_PROP(node);
   JS_PROP(velocity);
   JS_PROP(angularVelocity);
-};
+JS_WRAP_CLASS_END(SKPhysicsBody);
 
 #endif /* NSKPhysicsBody_h */

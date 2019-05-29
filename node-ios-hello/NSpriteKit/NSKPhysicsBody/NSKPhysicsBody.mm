@@ -5,11 +5,7 @@
 //  Created by Emily Kolar on 2019-5-14.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NNSObject.h"
+
 #include "NSKPhysicsBody.h"
 #include "NSKNode.h"
 #include "NSKTexture.h"
@@ -33,12 +29,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Iso
 //  JS_ASSIGN_PROP(proto, categoryBitMask);
 //  JS_ASSIGN_PROP(proto, contactTestBitMask);
 //  JS_ASSIGN_PROP(proto, collisionBitMask);
-  Nan::SetMethod(proto, "applyImpulse", applyImpulse);
-  Nan::SetMethod(proto, "applyImpulse", applyAngularImpulse);
-  Nan::SetMethod(proto, "applyImpulse", applyImpulseAtPoint);
-  Nan::SetMethod(proto, "applyImpulse", applyForce);
-  Nan::SetMethod(proto, "applyImpulse", applyForceAtPoint);
-  Nan::SetMethod(proto, "applyImpulse", applyTorque);
+  JS_ASSIGN_METHOD(proto, applyImpulse);
+  JS_ASSIGN_METHOD(proto, applyAngularImpulse);
+  JS_ASSIGN_METHOD(proto, applyImpulseAtPoint);
+  JS_ASSIGN_METHOD(proto, applyForce);
+  JS_ASSIGN_METHOD(proto, applyForceAtPoint);
+  JS_ASSIGN_METHOD(proto, applyTorque);
   JS_ASSIGN_PROP(proto, dynamic);
   JS_ASSIGN_PROP(proto, usesPreciseCollisionDetection);
   JS_ASSIGN_PROP(proto, allowsRotation);
@@ -64,9 +60,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Iso
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "bodyWithCircleOfRadius", bodyWithCircleOfRadius);
-  Nan::SetMethod(ctorFn, "bodyWithTexture", bodyWithTexture);
-  Nan::SetMethod(ctorFn, "bodyWithRectangleOfSize", bodyWithRectangleOfSize);
+  JS_ASSIGN_METHOD(ctorFn, bodyWithCircleOfRadius);
+  JS_ASSIGN_METHOD(ctorFn, bodyWithTexture);
+  JS_ASSIGN_METHOD(ctorFn, bodyWithRectangleOfSize);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }

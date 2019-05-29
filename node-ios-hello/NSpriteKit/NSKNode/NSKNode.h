@@ -33,6 +33,7 @@ public:
   static NAN_METHOD(childNodeWithName);
   static NAN_METHOD(containsPoint);
   static NAN_METHOD(nodeAtPoint);
+  static NAN_METHOD(convertPointFromNode);
   JS_PROP(frame);
   JS_PROP(width);
   JS_PROP(height);

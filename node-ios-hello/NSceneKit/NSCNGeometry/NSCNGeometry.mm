@@ -34,7 +34,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNGeometry::Initialize(Isola
   JS_ASSIGN_PROP_READONLY(proto, geometryElements);
   JS_ASSIGN_PROP_READONLY(proto, geometryElementCount);
   JS_ASSIGN_PROP(proto, levelsOfDetail);
+#if SCN_ENABLE_METAL
   JS_ASSIGN_PROP(proto, tessellator);
+#endif
   JS_ASSIGN_PROP(proto, subdivisionLevel);
   JS_ASSIGN_PROP(proto, wantsAdaptiveSubdivision);
   JS_ASSIGN_PROP(proto, edgeCreasesElement);
@@ -171,6 +173,7 @@ NAN_SETTER(NSCNGeometry::levelsOfDetailSetter) {
   }
 }
 
+#if SCN_ENABLE_METAL
 #define js_value_SCNGeometryTessellator(x) js_value_wrapper_unknown(x, SCNGeometryTessellator)
 #define to_value_SCNGeometryTessellator(x) to_value_wrapper_unknown(x, SCNGeometryTessellator)
 
@@ -190,6 +193,7 @@ NAN_SETTER(NSCNGeometry::tessellatorSetter) {
     [self setTessellator: to_value_SCNGeometryTessellator(value)];
   }
 }
+#endif
 
 NAN_GETTER(NSCNGeometry::subdivisionLevelGetter) {
   JS_UNWRAP(SCNGeometry, self);
