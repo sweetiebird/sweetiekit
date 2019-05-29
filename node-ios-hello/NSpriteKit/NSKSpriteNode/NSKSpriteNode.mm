@@ -34,6 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isol
 //  JS_ASSIGN_PROP(proto, colorBlendFactor);
 //  JS_ASSIGN_PROP(proto, color);
   JS_ASSIGN_METHOD(proto, scaleToSize);
+  JS_ASSIGN_METHOD(proto, animateWithRemoteGIF);
   JS_ASSIGN_PROP(proto, texture);
   JS_ASSIGN_PROP(proto, normalTexture);
   JS_ASSIGN_PROP(proto, lightingBitMask);
@@ -231,6 +232,19 @@ NAN_METHOD(NSKSpriteNode::scaleToSize) {
   @autoreleasepool
   {
     [node scaleToSize:to_value_CGSize(info[0])];
+  }
+}
+
+NAN_METHOD(NSKSpriteNode::animateWithRemoteGIF) {
+  JS_UNWRAP(SKSpriteNode, node);
+  @autoreleasepool
+  {
+    NSString* str = to_value_NSString(info[0]);
+    if (!str) {
+      Nan::ThrowError("NSKSpriteNode::animateWithRemoteGIF: Expected string");
+      return;
+    }
+    [node animateWithRemoteGIFWithUrl:[NSURL URLWithString:str]];
   }
 }
 

@@ -20,6 +20,7 @@
 
 JS_WRAP_CLASS(SKSpriteNode, SKNode);
   JS_METHOD(scaleToSize);
+  JS_METHOD(animateWithRemoteGIF);
 //  JS_PROP(size);
 //  JS_PROP(colorBlendFactor);
 //  JS_PROP(color);
