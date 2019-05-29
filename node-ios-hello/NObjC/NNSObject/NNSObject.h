@@ -67,6 +67,8 @@ public:
   }
 
   NSObject* SetNSObject(NSObject* obj);
+  
+  static void RegisterTypes(Local<Object> exports);
   static Nan::Persistent<FunctionTemplate>& GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset);
   
   virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; }

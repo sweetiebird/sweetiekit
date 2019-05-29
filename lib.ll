@@ -146,66 +146,66 @@
 (define-macro js-return (x)
   `(do (JS_SET_RETURN (js-value ,x)) (return)))
 
-(define-macro js-value-NSString* (x)
-  `(js-value (aif ,x (JS_STR [it UTF8String]) (js-nil))))
+;(define-macro js-value-NSString* (x)
+;  `(js-value (aif ,x (JS_STR [it UTF8String]) (js-nil))))
 
 (define-macro js-value-number (x)
   `(js-value (JS_NUM ,x)))
 
-(define-macro js-value-CGFloat (x)
-  `(js-value (JS_FLOAT ,x)))
-
-(define-macro to-value-CGFloat (x)
-  `(to-value CGFloat (TO_FLOAT ,x)))
-
-(define-macro js-value-uint32_t (x) `(js-value (JS_INT ,x)))
+(define-macro js-value-CGFloat (x) `(js-value (JS_FLOAT ,x)))
+(define-macro to-value-CGFloat (x) `(to-value CGFloat (TO_FLOAT ,x)))
+(define-macro js-value-uint32_t (x) `(js-value (JS_UINT ,x)))
 (define-macro to-value-uint32_t (x) `(to-value CGFloat (TO_UINT32 ,x)))
+(define-macro js-value-int32_t (x) `(js-value (JS_INT ,x)))
+(define-macro to-value-int32_t (x) `(to-value CGFloat (TO_INT32 ,x)))
 
 (define-macro js-value-BOOL (x) `(js-value (JS_BOOL ,x)))
 (define-macro to-value-BOOL (x) `(to-value BOOL (TO_BOOL ,x)))
+(define-macro js-value-bool (x) `(js-value (JS_BOOL ,x)))
+(define-macro to-value-bool (x) `(to-value BOOL (TO_BOOL ,x)))
 
-(define-macro js-value-CGRect (x)
-  `(let (rect ,x
-         obj (js-new-object))
-     (js-set-number obj "x" (rect .origin .x))
-     (js-set-number obj "y" (rect .origin .y))
-     (js-set-number obj "width" (rect .size .width))
-     (js-set-number obj "height" (rect .size .height))
-     (js-value obj)))
-
-(define-macro js-value-CGSize (x)
-  `(let (size ,x
-         obj (js-new-object))
-     (js-set-number obj "width" (size .width))
-     (js-set-number obj "height" (size .height))
-     (js-value obj)))
-
-(define-macro js-value-CGPoint (x)
-  `(let (point ,x
-         obj (js-new-object))
-     (js-set-number obj "x" (point .x))
-     (js-set-number obj "y" (point .y))
-     (js-value obj)))
+; (define-macro js-value-CGRect (x)
+;   `(let (rect ,x
+;          obj (js-new-object))
+;      (js-set-number obj "x" (rect .origin .x))
+;      (js-set-number obj "y" (rect .origin .y))
+;      (js-set-number obj "width" (rect .size .width))
+;      (js-set-number obj "height" (rect .size .height))
+;      (js-value obj)))
+; 
+; (define-macro js-value-CGSize (x)
+;   `(let (size ,x
+;          obj (js-new-object))
+;      (js-set-number obj "width" (size .width))
+;      (js-set-number obj "height" (size .height))
+;      (js-value obj)))
+; 
+; (define-macro js-value-CGPoint (x)
+;   `(let (point ,x
+;          obj (js-new-object))
+;      (js-set-number obj "x" (point .x))
+;      (js-set-number obj "y" (point .y))
+;      (js-value obj)))
 
 (define-macro js-obj (var rest: body)
   `(js-value
      (with ,var (js-new-object)
        ,@body)))
 
-(define-macro js-value-CLFloor* (x)
-  `(js-value (aif ,x (js-wrap ,x CLFloor))))
+;(define-macro js-value-CLFloor* (x)
+; `(js-value (aif ,x (js-wrap ,x CLFloor))))
 
-(define-macro js-value-UIView* (x)
-  `(js-value (js-wrap ,x UIView)))
+; (define-macro js-value-UIView* (x)
+;  `(js-value (js-wrap ,x UIView)))
 
-(define-macro js-value-Array<UIView*> (seq)
-  `(js-map-NSArray ,seq type: UIView* x (js-wrap x UIView)))
+;(define-macro js-value-Array<UIView*> (seq)
+; `(js-map-NSArray ,seq type: UIView* x (js-wrap x UIView)))
 
-(define-macro js-value-id (x)
-  `(js-value (js-wrap ,x NSObject)))
+;(define-macro js-value-id (x)
+; `(js-value (js-wrap ,x NSObject)))
 
-(define-macro js-value-Array<id> (seq)
-  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
+;(define-macro js-value-Array<id> (seq)
+;  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
 
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
@@ -259,15 +259,25 @@
           (set (get attrs x) true)))
     `(js-property ,@attrs type: ,type name: ,name))))
 
+(during-compilation
+  (define-global js-print-type (type form)
+    (if (= type (getenv 'js-print-type_%prev 'type))
+        form
+        (do (setenv 'js-print-type_%prev type: type)
+            `(%do (%stmt "// " ,(escape type))
+                  ,form)))))
+
+
 (define-macro js-property (name: name type: type class: (o class (getenv 'Class 'type)) readonly: readonly?)
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
       header
-      `(JS_PROP ,name)
+      (js-print-type class `(JS_PROP ,name))
       ctor
-      (if readonly?
-          `(JS_ASSIGN_PROP_READONLY proto ,name)
-          `(JS_ASSIGN_PROP          proto ,name))
+      (js-print-type class
+        (if readonly?
+            `(JS_ASSIGN_PROP_READONLY proto ,name)
+            `(JS_ASSIGN_PROP          proto ,name)))
       source
       `(do (js-type-getter ,class ,type ,name)
          ,(unless readonly?
@@ -296,38 +306,58 @@
                         " *" "* " 
                         " *" "* ")
     (with r (list)
-      (step line (split hdr "\n")
-        (when (search line " @")
-          (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
-        (step pre (list " NS_" " UI_" " API_" " __TVOS")
-          (when (search line pre)
-            (set line (hd (split line pre)))))
-        (set line (rtrim line (fn (c) (or (whitec c) (= c "{")))))
-        (when (= (char line 0) "@")
-          (let (stream (reader (.stream (clip line 1)))
-                kind (reader (.read stream)))
-            ;(print (str kind))
-            (case kind
-              private (do)
-              class
-              (unless (= (last line) ";")
-                (add r (join (list kind (reader (.read-all stream))))))
-              interface
-              (add r (join (list kind (reader (.read-all stream)))))
-              property 
-              (let (rest (reader (.read-all stream))
-                    attrs (list))
-                (when (obj? (hd rest))
-                  (set attrs (hd rest))
-                  (set rest (tl rest)))
-                (let (name (drop rest)
-                      type (trim (apply concat " " (map trim rest))))
-                  (add r
-                       (list kind 
-                             attrs
-                             type
-                             name))))
-              (add r (list kind)))))))))
+      (let lines (map (fn (line)
+                        (when (search line " @")
+                          (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
+                        (step pre (list " NS_" " UI_" " API_" " __TVOS")
+                          (when (search line pre)
+                            (set line (hd (split line pre)))))
+                        (set line (rtrim line (fn (c) (or (whitec c) (= c "{"))))))
+                   (split hdr "\n"))
+        (step line lines
+          (if (= (char line 0) "+")
+              (let (stream (reader (.stream (clip line 1)))
+                    (ok x) (guard (reader (.read-all stream))))
+                 (when ok
+                   (print (str `(+ ,@x)))))
+              (= (char line 0) "-")
+              (let (stream (reader (.stream (clip line 1)))
+                    (ok x) (guard (reader (.read-all stream))))
+                 (when ok
+                   (print (str `(- ,@x)))))
+;                (when (and ok (two? x))
+;                  (let ((type name) x)
+;                    (when (obj? type)
+;                      (set type (apply concat " " type)))
+;                    (print (str `(,type ,name)))
+;                    (unless (in type "instancetype" "void")
+;                      (add r (list 'property '(nonatomic) type name)))
+;                    )))
+              (= (char line 0) "@")
+              (let (stream (reader (.stream (clip line 1)))
+                    kind (reader (.read stream)))
+                ;(print (str kind))
+                (case kind
+                  private (do)
+                  class
+                  (unless (= (last line) ";")
+                    (add r (join (list kind (reader (.read-all stream))))))
+                  interface
+                  (add r (join (list kind (reader (.read-all stream)))))
+                  property 
+                  (let (rest (reader (.read-all stream))
+                        attrs (list))
+                    (when (obj? (hd rest))
+                      (set attrs (hd rest))
+                      (set rest (tl rest)))
+                    (let (name (drop rest)
+                          type (trim (apply concat " " (map trim rest))))
+                      (add r
+                           (list kind 
+                                 attrs
+                                 type
+                                 name))))
+                  (add r (list kind))))))))))
 
 (define-global ios-header-path (framework type)
   (with r "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/"

@@ -34,7 +34,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate
   JS_SET_PROP(proto, "isSelected", Selected);
   JS_SET_PROP(proto, "isEnabled", Enabled);
   JS_SET_PROP(proto, "isHighlighted", Highlighted);
-  JS_SET_PROP_READONLY(proto, "isTracking", Tracking)
+  JS_SET_PROP_READONLY(proto, "isTracking", Tracking);
   JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
   Nan::SetMethod(proto, "addTarget", addTarget);
   Nan::SetMethod(proto, "removeTarget", removeTarget);

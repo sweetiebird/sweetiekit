@@ -22,8 +22,8 @@ async function make(nav, demoVC) {
     return new SCNNode();
   });
   const scene = new SCNScene();
-  const node = new SCNNode(modelFile);
-  
+  const node = new SCNNode(SCNTube(0.01, 0.02, 0.1));
+
   arView.delegate = viewDel;
   arView.scene = scene;
 
@@ -38,7 +38,7 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(arView);
   nav.pushViewController(demoVC);
-  
+
   setTimeout(() => {
     arView.session.run(config);
     function configure() {
@@ -47,12 +47,12 @@ async function make(nav, demoVC) {
         setTimeout(configure, 10);
       } else {
         const child = node.clone();
-        child.simdTransform = new THREE.Matrix4().makeTranslation(0,0,-3);
+        child.simdTransform = new THREE.Matrix4().makeTranslation(0,0,-0.3);
         node.addChildNode(child);
         child.addChildNode(child.clone());
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
-        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-3));
+        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-0.3));
         node.simdTransform = xform;
         scene.rootNode.addChildNode(node);
       }

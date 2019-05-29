@@ -37,7 +37,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   Nan::SetMethod(proto, "runAction", runAction);
   Nan::SetMethod(proto, "childNodeWithName", childNodeWithName);
   JS_ASSIGN_PROP_READONLY(proto, frame);
+  JS_ASSIGN_PROP_READONLY(proto, width);
+  JS_ASSIGN_PROP_READONLY(proto, height);
   JS_ASSIGN_PROP(proto, position);
+  JS_ASSIGN_PROP(proto, x);
+  JS_ASSIGN_PROP(proto, y);
+  JS_ASSIGN_PROP(proto, z);
   JS_ASSIGN_PROP(proto, zPosition);
   JS_ASSIGN_PROP(proto, zRotation);
   JS_ASSIGN_PROP(proto, xScale);
@@ -271,6 +276,75 @@ NAN_SETTER(NSKNode::positionSetter) {
   }
 }
 
+NAN_GETTER(NSKNode::widthGetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self frame].size.width));
+    return;
+  }
+}
+
+NAN_GETTER(NSKNode::heightGetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self frame].size.height));
+    return;
+  }
+}
+
+NAN_GETTER(NSKNode::xGetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self position].x));
+    return;
+  }
+}
+
+NAN_SETTER(NSKNode::xSetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    [self setPosition: CGPointMake(TO_FLOAT(value), [self position].y)];
+  }
+}
+
+NAN_GETTER(NSKNode::yGetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self position].y));
+    return;
+  }
+}
+
+NAN_SETTER(NSKNode::ySetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    [self setPosition: CGPointMake([self position].x, TO_FLOAT(value))];
+  }
+}
+
+NAN_GETTER(NSKNode::zGetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self zPosition]));
+    return;
+  }
+}
+
+NAN_SETTER(NSKNode::zSetter) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool
+  {
+    [self setZPosition: TO_FLOAT(value)];
+  }
+}
+
 NAN_GETTER(NSKNode::zPositionGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
@@ -428,7 +502,7 @@ NAN_GETTER(NSKNode::focusBehaviorGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKNodeFocusBehavior([self focusBehavior]));
+    JS_SET_RETURN(js_value_SKNodeFocusBehavior([self focusBehavior]));
     return;
   }
 }
@@ -437,7 +511,7 @@ NAN_SETTER(NSKNode::focusBehaviorSetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setFocusBehavior: to_value_SKNodeFocusBehavior(value)];
+    [self setFocusBehavior: to_value_SKNodeFocusBehavior(value)];
   }
 }
 
@@ -445,7 +519,7 @@ NAN_GETTER(NSKNode::parentGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKNode([self parent]));
+    JS_SET_RETURN(js_value_SKNode([self parent]));
     return;
   }
 }
@@ -479,15 +553,16 @@ NAN_SETTER(NSKNode::nameSetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setName: to_value_NSString(value)];
+    [self setName: to_value_NSString(value)];
   }
 }
 
+#include "NSKScene.h"
 NAN_GETTER(NSKNode::sceneGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKScene([self scene]));
+    JS_SET_RETURN(js_value_SKScene([self scene]));
     return;
   }
 }
@@ -496,7 +571,7 @@ NAN_GETTER(NSKNode::physicsBodyGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKPhysicsBody([self physicsBody]));
+    JS_SET_RETURN(js_value_SKPhysicsBody([self physicsBody]));
     return;
   }
 }
@@ -505,7 +580,7 @@ NAN_SETTER(NSKNode::physicsBodySetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setPhysicsBody: to_value_SKPhysicsBody(value)];
+    [self setPhysicsBody: to_value_SKPhysicsBody(value)];
   }
 }
 
@@ -513,7 +588,7 @@ NAN_GETTER(NSKNode::userDataGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_NSMutableDictionary([self userData]));
+    JS_SET_RETURN(js_value_NSMutableDictionary([self userData]));
     return;
   }
 }
@@ -522,7 +597,7 @@ NAN_SETTER(NSKNode::userDataSetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setUserData: to_value_NSMutableDictionary(value)];
+    [self setUserData: to_value_NSMutableDictionary(value)];
   }
 }
 
@@ -530,7 +605,7 @@ NAN_GETTER(NSKNode::reachConstraintsGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKReachConstraints([self reachConstraints]));
+    JS_SET_RETURN(js_value_SKReachConstraints([self reachConstraints]));
     return;
   }
 }
@@ -539,7 +614,7 @@ NAN_SETTER(NSKNode::reachConstraintsSetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setReachConstraints: to_value_SKReachConstraints(value)];
+    [self setReachConstraints: to_value_SKReachConstraints(value)];
   }
 }
 
@@ -547,7 +622,7 @@ NAN_GETTER(NSKNode::constraintsGetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_NSArray<SKConstraint42>([self constraints]));
+    JS_SET_RETURN(js_value_NSArray<SKConstraint*>([self constraints]));
     return;
   }
 }
@@ -556,7 +631,7 @@ NAN_SETTER(NSKNode::constraintsSetter) {
   JS_UNWRAP(SKNode, self);
   @autoreleasepool
   {
-//    [self setConstraints: to_value_NSArray<SKConstraint42>(value)];
+    [self setConstraints: to_value_NSArray<SKConstraint*>(value)];
   }
 }
 

@@ -84,7 +84,7 @@ NAN_METHOD(NSKTexture::textureWithImage)
   Local<Value> argv[] = {
     Nan::New<External>((__bridge void*)[SKTexture textureWithImage:ui])
   };
-  JS_SET_RETURN(JS_NEW(NSKTexture, argv));
+  JS_SET_RETURN(JS_NEW_ARGV(NSKTexture, argv));
 }
 
 NSKTexture::NSKTexture () {}

@@ -10,7 +10,6 @@
 #define NNSAttributedString_h    
 
 #include "NNSObject.h"
-#include "defines.h"
 
 using namespace v8;
 using namespace node;

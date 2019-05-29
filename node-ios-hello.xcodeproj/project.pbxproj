@@ -207,6 +207,18 @@
 		A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */; };
 		A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */; };
 		A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */; };
+		A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */; };
+		A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D56229D8EEE002B53FF /* NSCNPyramid.mm */; };
+		A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D5A229D8EEE002B53FF /* NSCNTube.mm */; };
+		A1EE7D75229D8EEF002B53FF /* NSCNCylinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D5C229D8EEE002B53FF /* NSCNCylinder.mm */; };
+		A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D60229D8EEE002B53FF /* NSCNTorus.mm */; };
+		A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D63229D8EEE002B53FF /* NSCNShape.mm */; };
+		A1EE7D78229D8EEF002B53FF /* NSCNSphere.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D66229D8EEE002B53FF /* NSCNSphere.mm */; };
+		A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D68229D8EEE002B53FF /* NSCNCone.mm */; };
+		A1EE7D7A229D8EEF002B53FF /* NSCNBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D6B229D8EEE002B53FF /* NSCNBox.mm */; };
+		A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D6F229D8EEE002B53FF /* NSCNPlane.mm */; };
+		A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */; };
+		A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -579,6 +591,30 @@
 		A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImagePickerControllerDelegate.h; sourceTree = "<group>"; };
 		A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerControllerDelegate.mm; sourceTree = "<group>"; };
 		A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
+		A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNMaterial.mm; sourceTree = "<group>"; };
+		A1EE7D53229D84F9002B53FF /* NSCNMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNMaterial.h; sourceTree = "<group>"; };
+		A1EE7D56229D8EEE002B53FF /* NSCNPyramid.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPyramid.mm; sourceTree = "<group>"; };
+		A1EE7D57229D8EEE002B53FF /* NSCNPyramid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPyramid.h; sourceTree = "<group>"; };
+		A1EE7D59229D8EEE002B53FF /* NSCNTube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNTube.h; sourceTree = "<group>"; };
+		A1EE7D5A229D8EEE002B53FF /* NSCNTube.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNTube.mm; sourceTree = "<group>"; };
+		A1EE7D5C229D8EEE002B53FF /* NSCNCylinder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCylinder.mm; sourceTree = "<group>"; };
+		A1EE7D5D229D8EEE002B53FF /* NSCNCylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNCylinder.h; sourceTree = "<group>"; };
+		A1EE7D5F229D8EEE002B53FF /* NSCNTorus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNTorus.h; sourceTree = "<group>"; };
+		A1EE7D60229D8EEE002B53FF /* NSCNTorus.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNTorus.mm; sourceTree = "<group>"; };
+		A1EE7D62229D8EEE002B53FF /* NSCNShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNShape.h; sourceTree = "<group>"; };
+		A1EE7D63229D8EEE002B53FF /* NSCNShape.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNShape.mm; sourceTree = "<group>"; };
+		A1EE7D65229D8EEE002B53FF /* NSCNSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNSphere.h; sourceTree = "<group>"; };
+		A1EE7D66229D8EEE002B53FF /* NSCNSphere.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNSphere.mm; sourceTree = "<group>"; };
+		A1EE7D68229D8EEE002B53FF /* NSCNCone.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCone.mm; sourceTree = "<group>"; };
+		A1EE7D69229D8EEE002B53FF /* NSCNCone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNCone.h; sourceTree = "<group>"; };
+		A1EE7D6B229D8EEE002B53FF /* NSCNBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNBox.mm; sourceTree = "<group>"; };
+		A1EE7D6C229D8EEE002B53FF /* NSCNBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNBox.h; sourceTree = "<group>"; };
+		A1EE7D6E229D8EEE002B53FF /* NSCNPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPlane.h; sourceTree = "<group>"; };
+		A1EE7D6F229D8EEE002B53FF /* NSCNPlane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPlane.mm; sourceTree = "<group>"; };
+		A1EE7D71229D8EEE002B53FF /* NSCNCapsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNCapsule.h; sourceTree = "<group>"; };
+		A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCapsule.mm; sourceTree = "<group>"; };
+		A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNFloor.mm; sourceTree = "<group>"; };
+		A1EE7D7F229D97C0002B53FF /* NSCNFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNFloor.h; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1426,11 +1462,23 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1EE7D7D229D97C0002B53FF /* NSCNFloor */,
+				A1EE7D6A229D8EEE002B53FF /* NSCNBox */,
+				A1EE7D70229D8EEE002B53FF /* NSCNCapsule */,
+				A1EE7D67229D8EEE002B53FF /* NSCNCone */,
+				A1EE7D5B229D8EEE002B53FF /* NSCNCylinder */,
+				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
+				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
+				A1EE7D61229D8EEE002B53FF /* NSCNShape */,
+				A1EE7D64229D8EEE002B53FF /* NSCNSphere */,
+				A1EE7D5E229D8EEE002B53FF /* NSCNTorus */,
+				A1EE7D58229D8EEE002B53FF /* NSCNTube */,
 				A1646B9D229238630078CF4B /* NSCNGeometry */,
-				A1646BA0229238630078CF4B /* NSCNText */,
 				A1948930228A5D33007BF787 /* NSCNLight */,
+				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
+				A1646BA0229238630078CF4B /* NSCNText */,
 				A1BD4B402287BC9E001D1F6E /* NSCNView */,
 			);
 			path = NSceneKit;
@@ -2094,6 +2142,114 @@
 			path = NUIImagePickerControllerDelegate;
 			sourceTree = "<group>";
 		};
+		A1EE7D51229D84F9002B53FF /* NSCNMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D53229D84F9002B53FF /* NSCNMaterial.h */,
+				A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */,
+			);
+			path = NSCNMaterial;
+			sourceTree = "<group>";
+		};
+		A1EE7D55229D8EEE002B53FF /* NSCNPyramid */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D57229D8EEE002B53FF /* NSCNPyramid.h */,
+				A1EE7D56229D8EEE002B53FF /* NSCNPyramid.mm */,
+			);
+			path = NSCNPyramid;
+			sourceTree = "<group>";
+		};
+		A1EE7D58229D8EEE002B53FF /* NSCNTube */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D59229D8EEE002B53FF /* NSCNTube.h */,
+				A1EE7D5A229D8EEE002B53FF /* NSCNTube.mm */,
+			);
+			path = NSCNTube;
+			sourceTree = "<group>";
+		};
+		A1EE7D5B229D8EEE002B53FF /* NSCNCylinder */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D5D229D8EEE002B53FF /* NSCNCylinder.h */,
+				A1EE7D5C229D8EEE002B53FF /* NSCNCylinder.mm */,
+			);
+			path = NSCNCylinder;
+			sourceTree = "<group>";
+		};
+		A1EE7D5E229D8EEE002B53FF /* NSCNTorus */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D5F229D8EEE002B53FF /* NSCNTorus.h */,
+				A1EE7D60229D8EEE002B53FF /* NSCNTorus.mm */,
+			);
+			path = NSCNTorus;
+			sourceTree = "<group>";
+		};
+		A1EE7D61229D8EEE002B53FF /* NSCNShape */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D62229D8EEE002B53FF /* NSCNShape.h */,
+				A1EE7D63229D8EEE002B53FF /* NSCNShape.mm */,
+			);
+			path = NSCNShape;
+			sourceTree = "<group>";
+		};
+		A1EE7D64229D8EEE002B53FF /* NSCNSphere */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D65229D8EEE002B53FF /* NSCNSphere.h */,
+				A1EE7D66229D8EEE002B53FF /* NSCNSphere.mm */,
+			);
+			path = NSCNSphere;
+			sourceTree = "<group>";
+		};
+		A1EE7D67229D8EEE002B53FF /* NSCNCone */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D69229D8EEE002B53FF /* NSCNCone.h */,
+				A1EE7D68229D8EEE002B53FF /* NSCNCone.mm */,
+			);
+			path = NSCNCone;
+			sourceTree = "<group>";
+		};
+		A1EE7D6A229D8EEE002B53FF /* NSCNBox */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D6C229D8EEE002B53FF /* NSCNBox.h */,
+				A1EE7D6B229D8EEE002B53FF /* NSCNBox.mm */,
+			);
+			path = NSCNBox;
+			sourceTree = "<group>";
+		};
+		A1EE7D6D229D8EEE002B53FF /* NSCNPlane */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D6E229D8EEE002B53FF /* NSCNPlane.h */,
+				A1EE7D6F229D8EEE002B53FF /* NSCNPlane.mm */,
+			);
+			path = NSCNPlane;
+			sourceTree = "<group>";
+		};
+		A1EE7D70229D8EEE002B53FF /* NSCNCapsule */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D71229D8EEE002B53FF /* NSCNCapsule.h */,
+				A1EE7D72229D8EEE002B53FF /* NSCNCapsule.mm */,
+			);
+			path = NSCNCapsule;
+			sourceTree = "<group>";
+		};
+		A1EE7D7D229D97C0002B53FF /* NSCNFloor */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D7F229D97C0002B53FF /* NSCNFloor.h */,
+				A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */,
+			);
+			path = NSCNFloor;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -2330,6 +2486,7 @@
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
+				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
@@ -2338,12 +2495,14 @@
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
+				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,
 				A10D697F2293B058008D0ABC /* NUITabBar.mm in Sources */,
+				A1EE7D75229D8EEF002B53FF /* NSCNCylinder.mm in Sources */,
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
@@ -2363,6 +2522,7 @@
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
+				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
 				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
@@ -2396,9 +2556,11 @@
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
+				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
+				A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
@@ -2419,6 +2581,7 @@
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
+				A1EE7D78229D8EEF002B53FF /* NSCNSphere.mm in Sources */,
 				A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
@@ -2426,6 +2589,7 @@
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
 				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,
+				A1EE7D7A229D8EEF002B53FF /* NSCNBox.mm in Sources */,
 				A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */,
 				A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
@@ -2441,6 +2605,7 @@
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
+				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
 				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
@@ -2448,6 +2613,7 @@
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
+				A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
@@ -2459,6 +2625,7 @@
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
+				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
@@ -2481,6 +2648,7 @@
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
+				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
 				A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,

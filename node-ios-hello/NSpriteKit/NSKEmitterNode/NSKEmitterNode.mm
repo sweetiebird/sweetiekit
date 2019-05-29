@@ -104,11 +104,13 @@ NAN_METHOD(NSKEmitterNode::New) {
 NSKEmitterNode::NSKEmitterNode () {}
 NSKEmitterNode::~NSKEmitterNode () {}
 
+#include "NSKTexture.h"
+
 NAN_GETTER(NSKEmitterNode::particleTextureGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKTexture([self particleTexture]));
+    JS_SET_RETURN(js_value_SKTexture([self particleTexture]));
     return;
   }
 }
@@ -117,7 +119,7 @@ NAN_SETTER(NSKEmitterNode::particleTextureSetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    [self setParticleTexture: to_value_SKTexture(value)];
+    [self setParticleTexture: to_value_SKTexture(value)];
   }
 }
 
@@ -142,7 +144,7 @@ NAN_GETTER(NSKEmitterNode::particleColorGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKColor([self particleColor]));
+    JS_SET_RETURN(js_value_SKColor([self particleColor]));
     return;
   }
 }
@@ -151,7 +153,7 @@ NAN_SETTER(NSKEmitterNode::particleColorSetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    [self setParticleColor: to_value_SKColor(value)];
+    [self setParticleColor: to_value_SKColor(value)];
   }
 }
 
@@ -295,7 +297,7 @@ NAN_GETTER(NSKEmitterNode::particleColorSequenceGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKKeyframeSequence([self particleColorSequence]));
+    JS_SET_RETURN(js_value_SKKeyframeSequence([self particleColorSequence]));
     return;
   }
 }
@@ -304,7 +306,7 @@ NAN_SETTER(NSKEmitterNode::particleColorSequenceSetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    [self setParticleColorSequence: to_value_SKKeyframeSequence(value)];
+    [self setParticleColorSequence: to_value_SKKeyframeSequence(value)];
   }
 }
 
@@ -363,7 +365,7 @@ NAN_GETTER(NSKEmitterNode::particleColorBlendFactorSequenceGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_SKKeyframeSequence([self particleColorBlendFactorSequence]));
+    JS_SET_RETURN(js_value_SKKeyframeSequence([self particleColorBlendFactorSequence]));
     return;
   }
 }
@@ -372,7 +374,7 @@ NAN_SETTER(NSKEmitterNode::particleColorBlendFactorSequenceSetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    [self setParticleColorBlendFactorSequence: to_value_SKKeyframeSequence(value)];
+    [self setParticleColorBlendFactorSequence: to_value_SKKeyframeSequence(value)];
   }
 }
 
@@ -380,11 +382,7 @@ NAN_GETTER(NSKEmitterNode::particlePositionGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-    auto __point = [self particlePosition];
-    auto __obj = Nan::New<Object>();
-    Nan::Set(__obj, JS_STR("x"), JS_NUM(__point.x));
-    Nan::Set(__obj, JS_STR("y"), JS_NUM(__point.y));
-    JS_SET_RETURN(__obj);
+    JS_SET_RETURN(js_value_CGPoint([self particlePosition]));
     return;
   }
 }
@@ -401,7 +399,7 @@ NAN_GETTER(NSKEmitterNode::particlePositionRangeGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    JS_SET_RETURN(js_value_CGVector([self particlePositionRange]));
+    JS_SET_RETURN(js_value_CGVector([self particlePositionRange]));
     return;
   }
 }
@@ -410,7 +408,7 @@ NAN_SETTER(NSKEmitterNode::particlePositionRangeSetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-//    [self setParticlePositionRange: to_value_CGVector(value)];
+    [self setParticlePositionRange: to_value_CGVector(value)];
   }
 }
 
@@ -639,11 +637,7 @@ NAN_GETTER(NSKEmitterNode::particleSizeGetter) {
   JS_UNWRAP(SKEmitterNode, self);
   @autoreleasepool
   {
-    auto __size = [self particleSize];
-    auto __obj1 = Nan::New<Object>();
-    Nan::Set(__obj1, JS_STR("width"), JS_NUM(__size.width));
-    Nan::Set(__obj1, JS_STR("height"), JS_NUM(__size.height));
-    JS_SET_RETURN(__obj1);
+    JS_SET_RETURN(js_value_CGSize([self particleSize]));
     return;
   }
 }

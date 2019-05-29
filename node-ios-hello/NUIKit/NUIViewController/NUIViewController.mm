@@ -389,7 +389,7 @@ NAN_GETTER(NUIViewController::modalPresentationStyleGetter) {
   
   JS_UNWRAP(UIViewController, ui);
   
-  Nan::ThrowError("NUIViewController::modalPresentationStyleGetter not implemented");
+  JS_SET_RETURN(js_value_UIModalPresentationStyle([ui modalPresentationStyle]));
 }
 
 NAN_SETTER(NUIViewController::modalPresentationStyleSetter) {
@@ -398,8 +398,8 @@ NAN_SETTER(NUIViewController::modalPresentationStyleSetter) {
   JS_UNWRAP(UIViewController, ui);
   
   @autoreleasepool {
-    double styleVal = TO_DOUBLE(value);
-    [ui setModalPresentationStyle:UIModalPresentationPopover];
+    UIModalPresentationStyle result = (value->IsInt32() ? to_value_UIModalPresentationStyle(value) : UIModalPresentationPopover);
+    [ui setModalPresentationStyle:result];
   }
 }
 

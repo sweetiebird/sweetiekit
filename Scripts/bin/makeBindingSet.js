@@ -23,17 +23,12 @@ function makeBindingSet(group, name, superClass, me) {
   const d = new Date();
 
   const mData = `//
-//  ${name}.m
-//  node-ios-hello
+//  ${name}.mm
 //
 //  Created by ${me} on ${d.toLocaleDateString()}.
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
 //
     
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "N${superClass}.h"
 #include "N${name}.h"
 
 Nan::Persistent<FunctionTemplate> N${name}::type;
@@ -53,37 +48,46 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *
   type.Reset(ctor);
 
   // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn)); type = type;
+  //JS_ASSIGN_METHOD(type, someStaticMethod);
+  //JS_ASSIGN_PROP(type, someStaticProperty);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(N${name}::New) {
-  Nan::HandleScope scope;
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function '${name}(...)', turn into construct call.
+      JS_SET_RETURN_NEW(${name}, info);
+      return;
+    }
 
-  Local<Object> obj = info.This();
-
-  N${name} *ui = new N${name}();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge ${name} *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[${name} alloc] init]);
+    ${name}* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge ${name} *)(info[0].As<External>()->Value());
+    } else if(info.Length() <= 0) {
+      self = [[${name} alloc] init];
+    }
+    if (self) {
+      N${name} *wrapper = new N${name}();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("${name}::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 `;
 
   const hData = `//
 //  N${name}.h
-//  node-ios-hello
 //
 //  Created by ${me} on ${d.toLocaleDateString()}.
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
@@ -92,20 +96,19 @@ NAN_METHOD(N${name}::New) {
 #ifndef N${name}_h
 #define N${name}_h    
 
-#import <UIKit/UIKit.h>
 #include "N${superClass}.h"
 
-class N${name} : public N${superClass} {
-public:
+#define js_value_${name}(x) js_value_wrapper(x, ${name})
+#define to_value_${name}(x) to_value_wrapper(x, ${name})
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
+// SpriteKit enums
+//#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
+//#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
 
-  N${name}();
-  virtual ~N${name}();
-
-  JS_METHOD(New);
-};
+JS_WRAP_CLASS(${name}, ${superClass});
+  //JS_METHOD(iosMethodName);
+  //JS_PROP(iosPropertyName);
+JS_WRAP_CLASS_END(${name});
 
 #endif /* N${name}_h */`;
 

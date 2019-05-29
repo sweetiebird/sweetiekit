@@ -9,12 +9,10 @@
 #ifndef NSCNScene_h
 #define NSCNScene_h
 
-#import <SceneKit/SceneKit.h>
-#import "NNSObject.h"
-#include "defines.h"
+#include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SCNScene(x) js_value_wrapper(x, SCNScene)
+#define to_value_SCNScene(x) to_value_wrapper(x, SCNScene)
 
 class NSCNScene : public NNSObject {
 public:

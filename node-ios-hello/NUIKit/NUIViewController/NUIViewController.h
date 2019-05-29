@@ -9,8 +9,11 @@
 #ifndef NUIViewController_h
 #define NUIViewController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIResponder.h"
+
+// UIKit enums
+#define js_value_UIModalPresentationStyle(x) JS_ENUM(UIModalPresentationStyle, NSInteger, x)
+#define to_value_UIModalPresentationStyle(x) TO_ENUM(UIModalPresentationStyle, NSInteger, x)
 
 class NUIViewController : public NUIResponder {
 public:

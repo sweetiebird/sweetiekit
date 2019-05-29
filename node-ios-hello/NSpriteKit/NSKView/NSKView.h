@@ -9,12 +9,10 @@
 #ifndef NSKView_h
 #define NSKView_h
 
-#import <UIKit/UIKit.h>
-#include "NUIView.h"
-#include "defines.h"
+#import "NUIView.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKView(x) js_value_wrapper(x, SKView)
+#define to_value_SKView(x) to_value_wrapper(x, SKView)
 
 class NSKView : public NUIView {
 public:

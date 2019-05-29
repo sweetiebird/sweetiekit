@@ -9,13 +9,13 @@
 #ifndef NSKNode_h
 #define NSKNode_h
 
-#import <UIKit/UIKit.h>
-#import <SpriteKit/SpriteKit.h>
-#import "NUIResponder.h"
-#include "defines.h"
+#include "NUIResponder.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKNode(x) js_value_wrapper(x, SKNode)
+#define to_value_SKNode(x) to_value_wrapper(x, SKNode)
+
+#define js_value_SKNodeFocusBehavior(x) JS_ENUM(SKNodeFocusBehavior, NSInteger, x)
+#define to_value_SKNodeFocusBehavior(x) TO_ENUM(SKNodeFocusBehavior, NSInteger, x)
 
 class NSKNode : public NUIResponder {
 public:
@@ -32,7 +32,12 @@ public:
   static NAN_METHOD(runAction);
   static NAN_METHOD(childNodeWithName);
   JS_PROP(frame);
+  JS_PROP(width);
+  JS_PROP(height);
   JS_PROP(position);
+  JS_PROP(x);
+  JS_PROP(y);
+  JS_PROP(z);
   JS_PROP(zPosition);
   JS_PROP(zRotation);
   JS_PROP(xScale);

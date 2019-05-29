@@ -9,13 +9,10 @@
 #ifndef NSKLabelNode_h
 #define NSKLabelNode_h
 
-#import <UIKit/UIKit.h>
-#import <SpriteKit/SpriteKit.h>
-#import "NSKNode.h"
-#include "defines.h"
+#include "NSKNode.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKLabelNode(x) js_value_wrapper(x, SKLabelNode)
+#define to_value_SKLabelNode(x) to_value_wrapper(x, SKLabelNode)
 
 class NSKLabelNode : public NSKNode {
 public:

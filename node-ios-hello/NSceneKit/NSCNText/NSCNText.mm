@@ -28,63 +28,104 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNText::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_ASSIGN_PROP(proto, font);
-  JS_ASSIGN_PROP(proto, string);
   JS_ASSIGN_PROP(proto, textSize);
+  JS_ASSIGN_PROP(proto, extrusionDepth);
+  JS_ASSIGN_PROP(proto, string);
+  JS_ASSIGN_PROP(proto, font);
+  JS_ASSIGN_PROP(proto, wrapped);
+  JS_ASSIGN_PROP(proto, containerFrame);
+  JS_ASSIGN_PROP(proto, truncationMode);
+  JS_ASSIGN_PROP(proto, alignmentMode);
+  JS_ASSIGN_PROP(proto, chamferRadius);
+  JS_ASSIGN_PROP(proto, chamferProfile);
+  JS_ASSIGN_PROP(proto, flatness);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  Local<Object> type(JS_OBJ(ctorFn)); type = type;
+  JS_ASSIGN_METHOD(type, textWithStringExtrusionDepth);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
-NAN_METHOD(NSCNText::New) {
-  Nan::HandleScope scope;
+#include "NNSAttributedString.h"
 
-  Local<Object> obj = info.This();
-
-  NSCNText *ui = new NSCNText();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge SCNText *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      NSString *str = NJSStringToNSString(info[0]);
-      float depth = TO_FLOAT(info[1]);
-      ui->SetNSObject([SCNText textWithString:str extrusionDepth:depth]);
-    }
+id to_value_SCNText_string(Local<Value> value, bool* failed = nullptr) {
+  if (failed) {
+    *failed = false;
+  }
+  if (JS_INSTANCEOF(value, NNSAttributedString)) {
+    JS_UNWRAPPED(value, NSAttributedString, attributedString);
+    return attributedString;
+  } else if (value->IsString()) {
+    return NJSStringToNSString(value);
+  } else if (value->IsNullOrUndefined()) {
+    return nil;
+  } else if (failed) {
+    *failed = true;
   } else {
-    @autoreleasepool {
-      ui->SetNSObject([[SCNText alloc] init]);
+    Nan::ThrowError("SCNText_string: Expected a string, NSAttributedString, or null/undefined");
+  }
+  return nil;
+}
+
+SCNText*
+SCNText_textWithStringExtrusionDepth(
+  Local<Value> string,
+  Local<Value> extrusionDepth)
+{
+  return [SCNText
+            textWithString:to_value_SCNText_string(string)
+            extrusionDepth:TO_FLOAT(extrusionDepth)];
+}
+
+NAN_METHOD(NSCNText::textWithStringExtrusionDepth) {
+  @autoreleasepool
+  {
+    Local<Value> argv[] = {
+      Nan::New<External>((__bridge void*)
+        SCNText_textWithStringExtrusionDepth(info[0], info[1]))
+    };
+    JS_SET_RETURN(JS_NEW_ARGV(NSCNText, argv));
+  }
+}
+
+NAN_METHOD(NSCNText::New) {
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNText(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNText, info);
+      return;
+    }
+    SCNText* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge SCNText *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 2) {
+      self = SCNText_textWithStringExtrusionDepth(info[0], info[1]);
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("string"))) {
+      self = SCNText_textWithStringExtrusionDepth(
+          JS_OBJ(info[0])->Get(JS_STR("string")),
+          JS_OBJ(info[0])->Get(JS_STR("extrusionDepth"))
+        );
+    } else if (info.Length() >= 1 && (info[0]->IsString() || JS_INSTANCEOF(info[0], NNSAttributedString))) {
+      self = SCNText_textWithStringExtrusionDepth(info[0], JS_FLOAT(0.1f));
+    } else if (info.Length() <= 0) {
+      self = [[SCNText alloc] init];
+    }
+    if (self) {
+      NSCNText *wrapper = new NSCNText();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNText::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 NSCNText::NSCNText () {}
 NSCNText::~NSCNText () {}
-
-NAN_GETTER(NSCNText::fontGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNText, scn);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([scn font], NUIFont::type));
-}
-
-NAN_SETTER(NSCNText::fontSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNText, scn);
-
-  NUIFont *font = ObjectWrap::Unwrap<NUIFont>(Local<Object>::Cast(value));
-
-  @autoreleasepool {
-    [scn setFont:font->As<UIFont>()];
-  }
-}
 
 NAN_GETTER(NSCNText::stringGetter) {
   Nan::HandleScope scope;
@@ -108,20 +149,13 @@ NAN_SETTER(NSCNText::stringSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNText, scn);
-  
-  if (value->IsNullOrUndefined()) {
-    [scn setString:nullptr];
-    return;
-  }
-  
-  if (!value->IsString()) {
-    Nan::ThrowError("NSCNText::stringSetter: Expected a string or null/undefined");
-    return;
-  }
   @autoreleasepool {
-    NSString* str = NJSStringToNSString(value);
-    if (str != nullptr) {
-      [scn setString:str];
+    bool failed = false;
+    id string = to_value_SCNText_string(value, &failed);
+    if (!failed) {
+      [scn setString:string];
+    } else {
+      Nan::ThrowError("NSCNText::stringSetter: Expected a string, NSAttributedString, or null/undefined");
     }
   }
 }
@@ -184,3 +218,178 @@ NAN_SETTER(NSCNText::textSizeSetter) {
     Nan::ThrowError("NSCNText::textSizeSetter: Could not getBoundingBoxMin");
   }
 }
+
+NAN_GETTER(NSCNText::extrusionDepthGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self extrusionDepth]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::extrusionDepthSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setExtrusionDepth: TO_FLOAT(value)];
+  }
+}
+/*
+NAN_GETTER(NSCNText::stringGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id([self string]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::stringSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setString: to_value_id(value)];
+  }
+}*/
+
+#include "NUIFont.h"
+
+NAN_GETTER(NSCNText::fontGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIFont([self font]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::fontSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setFont: to_value_UIFont(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::wrappedGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self isWrapped]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::wrappedSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setWrapped: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::containerFrameGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGRect([self containerFrame]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::containerFrameSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setContainerFrame: to_value_CGRect(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::truncationModeGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSString([self truncationMode]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::truncationModeSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setTruncationMode: to_value_NSString(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::alignmentModeGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSString([self alignmentMode]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::alignmentModeSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setAlignmentMode: to_value_NSString(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::chamferRadiusGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self chamferRadius]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::chamferRadiusSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setChamferRadius: TO_FLOAT(value)];
+  }
+}
+
+#include "NUIBezierPath.h"
+
+NAN_GETTER(NSCNText::chamferProfileGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIBezierPath([self chamferProfile]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::chamferProfileSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setChamferProfile: to_value_UIBezierPath(value)];
+  }
+}
+
+NAN_GETTER(NSCNText::flatnessGetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self flatness]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNText::flatnessSetter) {
+  JS_UNWRAP(SCNText, self);
+  @autoreleasepool
+  {
+    [self setFlatness: TO_FLOAT(value)];
+  }
+}
+

@@ -67,8 +67,8 @@ NAN_METHOD(NUICollectionViewManager::New) {
         } cellForItemAt: ^ UICollectionViewCell * _Nonnull (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
           Nan::HandleScope scope;
           Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
-          uint32_t section = [indexPath section];
-          uint32_t row = [indexPath row];
+          auto section = [indexPath section];
+          auto row = [indexPath row];
           Local<Object> indexPathObj = Nan::New<Object>();
           Nan::Set(indexPathObj, JS_STR("section"), JS_NUM(section));
           Nan::Set(indexPathObj, JS_STR("row"), JS_NUM(row));

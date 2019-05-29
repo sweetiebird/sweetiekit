@@ -7,10 +7,12 @@
 //
 
 #ifndef NSKTransformNode_h
-#define NSKTransformNode_h    
+#define NSKTransformNode_h   
 
-#import <UIKit/UIKit.h>
-#include "NSKNode.h"
+#import "NSKNode.h"
+
+#define js_value_SKTransformNode(x) js_value_wrapper(x, SKTransformNode)
+#define to_value_SKTransformNode(x) to_value_wrapper(x, SKTransformNode)
 
 class NSKTransformNode : public NSKNode {
 public:

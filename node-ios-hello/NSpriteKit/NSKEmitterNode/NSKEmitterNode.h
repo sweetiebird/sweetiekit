@@ -9,12 +9,15 @@
 #ifndef NNSKEmitterNode_h
 #define NNSKEmitterNode_h    
 
-#import <UIKit/UIKit.h>
 #include "NSKNode.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKEmitterNode(x) js_value_wrapper(x, SKEmitterNode)
+#define to_value_SKEmitterNode(x) to_value_wrapper(x, SKEmitterNode)
+
+//#define js_value_SKBlendMode JS_INT
+//#define to_value_SKBlendMode(x) static_cast<SKBlendMode>(TO_INT32(x))
+#define js_value_SKBlendMode(x) JS_ENUM(SKBlendMode, NSInteger, x)
+#define to_value_SKBlendMode(x) TO_ENUM(SKBlendMode, NSInteger, x)
 
 class NSKEmitterNode : public NSKNode {
 public:

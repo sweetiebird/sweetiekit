@@ -10,10 +10,9 @@
 #define NSCNView_h
 
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SCNView(x) js_value_wrapper(x, SCNView)
+#define to_value_SCNView(x) to_value_wrapper(x, SCNView)
 
 class NSCNView : public NUIView {
 public:

@@ -9,13 +9,10 @@
 #ifndef NSKSpriteNode_h
 #define NSKSpriteNode_h
 
-#import <UIKit/UIKit.h>
-#import <SpriteKit/SpriteKit.h>
 #import "NSKNode.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_SKSpriteNode(x) js_value_wrapper(x, SKSpriteNode)
+#define to_value_SKSpriteNode(x) to_value_wrapper(x, SKSpriteNode)
 
 class NSKSpriteNode : public NSKNode {
 public:
