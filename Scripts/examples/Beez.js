@@ -4,6 +4,14 @@ const SKSceneScaleMode = require('./enums').SKSceneScaleMode;
 
 const math = require('./helpers').math;
 
+const v2 = (...args) => {
+  switch (args.length == 0) {
+    case 0: return new THREE.Vector2(0, 0);
+    case 1: return (args[0] instanceof THREE.Vector2) ? args[0] : new THREE.Vector2(args[0].x, args[0].y);
+    default: return new THREE.Vector2(args[0], args[1]);
+  }
+};
+
 const {
   SKScene,
   SKSpriteNode,
@@ -23,30 +31,59 @@ class Player {
   constructor(node) {
     this.node = node;
     this.node.name = 'player';
-    this.isJumping = false;
+    this.refillJumps();
   }
 
-  jump() {
-    if (!this.isJumping) {
-      this.isJumping = true;
-      this.node.physicsBody.velocity = { dx: 0, dy: 0 };
-      this.node.physicsBody.applyImpulse({ dx: 0, dy: 50 });
+  configure() {
+    this.node.colorBlendFactor = 0.5;
+    switch (this.jumps) {
+      case 0:
+        this.node.color = {red: 0.0, green: 0.0, blue: 1.0};
+        break;
+      case 1:
+        this.node.color = {red: 1.0, green: 0.0, blue: 0.0};
+        break;
+      default:
+        this.node.color = {red: 1.0, green: 1.0, blue: 1.0};
+        break;
     }
   }
 
+  refillJumps() {
+    this.jumps = 2;
+    this.configure();
+  }
+
+  jump(force) {
+    if (this.jumps > 0) {
+      --this.jumps;
+      this.configure();
+      this.node.physicsBody.velocity = { dx: 0, dy: 0 };
+      this.node.physicsBody.applyImpulse({ dx: force.x, dy: force.y });
+    }
+  }
+
+  move(force) {
+  }
+
   touchedGround() {
-    this.isJumping = false;
+    this.refillJumps();
+  }
+
+  kill() {
+    this.refillJumps();
+    this.node.position = v2(0, 0);
   }
 }
 
 function makeDemo(navigation, dvc) {
-  let player;
-  let scene;
-  let skView;
-  let contactDel;
-  let joystick;
-  let joystickArrows;
-  let joystickKnob;
+  //let player;
+  //let scene;
+  //let skView;
+  //let contactDel;
+  //let joystick;
+  //let joystickArrows;
+  //let joystickKnob;
 
   const PhysicsCategory = {
     none: 0,
@@ -75,11 +112,11 @@ function makeDemo(navigation, dvc) {
   }
 
   function touchesEnded() {
-    const action = SKAction.moveTo({ x: 0, y: 0 }, 0.2);
+    player.jump(joystickKnob.position);
+    const action = SKAction.moveTo(v2(0, 0), 0.2);
     joystickKnob.runAction(action, () => {
-      joystickKnob.position = { x: 0, y: 0 };
+      joystickKnob.position = v2(0, 0);
     });
-    player.jump();
   }
 
   function addPlatforms() {
@@ -133,8 +170,9 @@ function makeDemo(navigation, dvc) {
     scn.addChild(stars);
     const ground = new SKSpriteNode('game_ground');
     const groundH = Math.round(demoVC.view.bounds.height * 0.08);
-    ground.size = { width: demoVC.view.bounds.width, height: groundH };
-    ground.position = { x: 0, y: (demoVC.view.bounds.height / -2) + groundH };
+    const groundW = demoVC.view.bounds.width * 1000;
+    ground.size = { width: 2*groundW, height: groundH };
+    ground.position = { x: -groundW, y: (demoVC.view.bounds.height / -2) + groundH };
     ground.name = 'ground';
 
     ground.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(ground.size);
@@ -159,12 +197,12 @@ function makeDemo(navigation, dvc) {
     joystick.size = joystickSize;
     joystickArrows.size = joystickSize;
 
-    joystickKnob.position = { x: 0, y: 0 };
-    joystickArrows.position = { x: 0, y: 0 };
-    joystick.position = {
-      x: distToLeftX(scene.size, joystickSize) + 30,
-      y: distToBtmY(scene.size, joystickSize) + 30,
-    };
+    joystickKnob.position = v2(0, 0);
+    joystickArrows.position = v2(0, 0);
+    joystick.position = v2(
+      distToRightX(scene.size, joystickSize) - 30,
+      distToBtmY(scene.size, joystickSize) + 30,
+    );
 
     joystickKnob.name = 'knob';
     joystickArrows.name = 'arrows';
@@ -178,7 +216,7 @@ function makeDemo(navigation, dvc) {
   function makePlayer(demoVC) {
     const node = new SKSpriteNode('game_player');
     node.size = { width: 36, height: 49 };
-    node.position = { x: 0, y: 0};
+    node.position = v2(0, 0);
     // node.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(node.size);
     return new Player(node);
   }
@@ -186,14 +224,14 @@ function makeDemo(navigation, dvc) {
   function makeDelegate() {
     const del = new SKPhysicsContactDelegate();
     del.didBeginContact = (contact) => {
-      let firstBody = contact.bodyA;
-      let secBody = contact.bodyB;
-      console.log(contact.bodyA, contact.bodyB);
-      if (firstBody && firstBody.node) {
-        if (secBody && secBody.node) {
+      let bodyA = contact.bodyA;
+      let bodyB = contact.bodyB;
+      console.log(contact.bodyA.node.name, contact.bodyB.node.name);
+      if (bodyA && bodyA.node) {
+        if (bodyB && bodyB.node) {
           if (
-            (firstBody.node.name.includes('ground') && secBody.node.name === 'player') ||
-            (firstBody.node.name === 'player' && secBody.node.name.includes('ground'))
+            (bodyA.node.name.includes('ground') && bodyB.node.name === 'player') ||
+            (bodyA.node.name === 'player' && bodyB.node.name.includes('ground'))
           ) {
             player.touchedGround();
           }
@@ -202,6 +240,24 @@ function makeDemo(navigation, dvc) {
     };
     return del;
   }
+
+  // sometimes the ground contact never seems to fire. This unsticks the player.
+  let prevPos = v2(0, 0);
+  let curPos = v2(0, 0);
+  setInterval(() => {
+    prevPos.x = curPos.x;
+    prevPos.y = curPos.y;
+    let pos = player.node.position;
+    if (!pos || pos.y < -scene.size.height) {
+      player.kill();
+    } else {
+      curPos.x = pos.x;
+      curPos.y = pos.y;
+      if (curPos.distanceTo(prevPos) < 0.01) {
+        player.touchedGround();
+      }
+    }
+  }, 1000);
 
   function makeView(demoVC) {
     const w = demoVC.view.frame.width;
@@ -249,12 +305,15 @@ function makeDemo(navigation, dvc) {
 
     makeJoystick();
 
+    scene.touchesBegan = touchesMoved;
     scene.touchesMoved = touchesMoved;
     scene.touchesEnded = touchesEnded;
 
     nav.pushViewController(demoVC);
 
-    setTimeout(start, 2000);
+    skView.viewWillAppear = () => {
+      start();
+    }
   }
 
   make(navigation, dvc);
