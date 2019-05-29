@@ -158,58 +158,63 @@ NAN_GETTER(Nid::debugDescriptionGetter) {
   JS_SET_RETURN(js_value_NSString([ns debugDescription]));
 }
 
+class JS_FREE_STR {
+public:
+  JS_FREE_STR(char* str) : _str(str) {}
+  virtual ~JS_FREE_STR() { free(_str); }
+  operator Local<Value>() { return JS_STR(_str); }
+  char* _str;
+};
+
 NAN_GETTER(Nid::methodsGetter) {
   JS_UNWRAP_(id, ns);
-  if (!object_isClass(ns)) {
-    Nan::ThrowError("id:methods: not a class");
-    return;
-  }
-  Class cls = nns->AsClass();
-  
-  Local<Array> result = Nan::New<Array>();
-  __block unsigned int n = 0;
-  sweetiekit::forEachMethodInClass(cls, ^(Method m) {
-    @autoreleasepool {
+  @autoreleasepool {
+    if (!object_isClass(ns)) {
+      Nan::ThrowError("id:methods: not a class");
+      return;
+    }
+    Class cls = nns->AsClass();
+    
+    Local<Array> result = Nan::New<Array>();
+    __block unsigned int n = 0;
+    sweetiekit::forEachMethodInClass(cls, ^(Method m) {
       Local<Object> obj = Nan::New<Object>();
       auto argc = method_getNumberOfArguments(m);
       obj->Set(JS_STR("name"), JS_STR([NSStringFromSelector(method_getName(m)) UTF8String]));
-      obj->Set(JS_STR("returnType"), JS_STR(method_copyReturnType(m)));
+      obj->Set(JS_STR("returnType"), JS_FREE_STR(method_copyReturnType(m)));
       Local<Array> argv = Nan::New<Array>();
       for (auto i = 0; i < argc; i++) {
-        argv->Set(i, JS_STR(method_copyArgumentType(m, i)));
+        argv->Set(i, JS_FREE_STR(method_copyArgumentType(m, i)));
       }
       obj->Set(JS_STR("arguments"), argv);
       obj->Set(JS_STR("typeEncoding"), JS_STR(method_getTypeEncoding(m)));
       result->Set(n, obj);
       n++;
-    }
-  });
-  JS_SET_RETURN(result);
+    });
+    JS_SET_RETURN(result);
+  }
 }
 
 NAN_GETTER(Nid::propertiesGetter) {
-  Nan::EscapableHandleScope scope;
-  
   JS_UNWRAP_(id, ns);
-  if (!object_isClass(ns)) {
-    Nan::ThrowError("id:properties: not a class");
-    return;
-  }
-  Class cls = nns->AsClass();
-  
-  Local<Array> result = Nan::New<Array>();
-  __block unsigned int n = 0;
-  sweetiekit::forEachPropertyInClass(cls, ^(objc_property_t p) {
-    @autoreleasepool {
-      Nan::EscapableHandleScope scope;
+  @autoreleasepool {
+    if (!object_isClass(ns)) {
+      Nan::ThrowError("id:properties: not a class");
+      return;
+    }
+    Class cls = nns->AsClass();
+    
+    Local<Array> result = Nan::New<Array>();
+    __block unsigned int n = 0;
+    sweetiekit::forEachPropertyInClass(cls, ^(objc_property_t p) {
       Local<Object> obj = Nan::New<Object>();
       obj->Set(JS_STR("name"), JS_STR(property_getName(p)));
       obj->Set(JS_STR("attributes"), JS_STR(property_getAttributes(p)));
-      result->Set(n, scope.Escape(obj));
+      result->Set(n, obj);
       n++;
-    }
-  });
-  JS_SET_RETURN(scope.Escape(result));
+    });
+    JS_SET_RETURN(result);
+  }
 }
 
 NAN_METHOD(Nid::invokeBooleanGetter)
