@@ -407,10 +407,19 @@ NAN_METHOD(Nid::invokeMethod)
       return;
     }
     
-    NSMethodSignature * sig = [cls instanceMethodSignatureForSelector:sel];
-    if (!sig) {
-      Nan::ThrowError("Nid::invokeMethod: [[self class] instanceMethodSignatureForSelector:] returned nil");
-      return;
+    NSMethodSignature * sig = nullptr;
+    if (object_isClass(self)) {
+      sig = [cls methodSignatureForSelector:sel];
+      if (!sig) {
+        Nan::ThrowError("Nid::invokeMethod: [[self class] methodSignatureForSelector:] returned nil");
+        return;
+      }
+    } else {
+      sig = [cls instanceMethodSignatureForSelector:sel];
+      if (!sig) {
+        Nan::ThrowError("Nid::invokeMethod: [[self class] instanceMethodSignatureForSelector:] returned nil");
+        return;
+      }
     }
     
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
@@ -461,18 +470,11 @@ NAN_METHOD(Nid::invokeMethod)
         } break;
         case '@':
         {
-          id value = nil;
-          if (jsValue->IsExternal()) {
-            value = (__bridge id)(jsValue.As<External>()->Value());
-          } else if (jsValue->IsNullOrUndefined()) {
-            value = nil;
-          } else {
-            bool failed = false;
-            value = to_id(jsValue, &failed);
-            if (failed) {
-              Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
-              return;
-            }
+          bool failed = false;
+          id value = to_id(jsValue, &failed);
+          if (failed) {
+            Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
+            return;
           }
           [inv setArgument:(__bridge void*)value atIndex:1+i];
         } break;
@@ -483,7 +485,8 @@ NAN_METHOD(Nid::invokeMethod)
         } break;
       }
     }
-    [inv invokeWithTarget:self];
+    [inv setTarget:self];
+    [inv invoke];
     
     char returnType = [returnTypeSpec UTF8String][0];
     switch (returnType)
@@ -515,6 +518,18 @@ NAN_METHOD(Nid::invokeMethod)
       case 'v':
       {
         // void
+      } break;
+      case 's':
+      {
+        void* value = nullptr;
+        [inv getReturnValue:&value];
+        if (value) {
+          if (![(__bridge id)value isKindOfClass:[NSString class]]) {
+            Nan::ThrowError("id::invokeMethod: returned value was not an NSString");
+            return;
+          }
+          JS_SET_RETURN(JS_STR([(__bridge NSString*)value UTF8String]));
+        }
       } break;
       case '@':
       {
