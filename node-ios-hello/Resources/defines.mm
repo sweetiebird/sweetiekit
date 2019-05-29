@@ -691,7 +691,7 @@ UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable 
     *failed = false;
   }
   UIColor* result = sweetiekit::UIColorFromJSColor(value);
-  if (result) {
+  if (!result) {
     if (failed) {
       *failed = true;
     } else {
