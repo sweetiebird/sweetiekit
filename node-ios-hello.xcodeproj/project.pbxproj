@@ -118,6 +118,7 @@
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
 		A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEE222885C76003C1DC4 /* NUIAlertController.mm */; };
 		A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19E90F7225D7EA8004FC391 /* Scripts.bundle */; };
+		A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */; };
 		A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */; };
 		A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */; };
 		A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */; };
@@ -438,6 +439,8 @@
 		A199AEE122885C6F003C1DC4 /* NUIAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertController.h; sourceTree = "<group>"; };
 		A199AEE222885C76003C1DC4 /* NUIAlertController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertController.mm; sourceTree = "<group>"; };
 		A19E90F7225D7EA8004FC391 /* Scripts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Scripts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A19F4DA0229F7D5A00E7F593 /* NUIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIEvent.h; sourceTree = "<group>"; };
+		A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIEvent.mm; sourceTree = "<group>"; };
 		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
 		A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreGraphicsGlobals.mm; sourceTree = "<group>"; };
 		A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCoreGraphicsGlobals.swift; sourceTree = "<group>"; };
@@ -1345,6 +1348,15 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		A19F4D9F229F7D5A00E7F593 /* NUIEvent */ = {
+			isa = PBXGroup;
+			children = (
+				A19F4DA0229F7D5A00E7F593 /* NUIEvent.h */,
+				A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */,
+			);
+			path = NUIEvent;
+			sourceTree = "<group>";
+		};
 		A1B2056B229788FC006CA4C6 /* NCoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1929,6 +1941,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
 				A1B2057E2297A423006CA4C6 /* NUIPopoverPresentationController */,
 				A1B2057822979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate */,
 				A1B20572229799A9006CA4C6 /* NUIKitGlobals */,
@@ -2505,6 +2518,7 @@
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
+				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,

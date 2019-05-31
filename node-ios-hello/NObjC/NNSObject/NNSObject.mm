@@ -907,7 +907,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CIImage);
 
     // misc
-    JS_EXPORT_TYPE(CoreGraphicsGlobals);
+    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
 }
 

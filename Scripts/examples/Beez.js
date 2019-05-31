@@ -162,7 +162,7 @@ function makeDemo(navigation, dvc) {
     joystickKnob.position = { x: 0, y: 0 };
     joystickArrows.position = { x: 0, y: 0 };
     joystick.position = {
-      x: distToLeftX(scene.size, joystickSize) + 30,
+      x: distToRightX(scene.size, joystickSize) - 30,
       y: distToBtmY(scene.size, joystickSize) + 30,
     };
 
@@ -172,6 +172,13 @@ function makeDemo(navigation, dvc) {
 
     joystick.addChild(joystickKnob);
     joystick.addChild(joystickArrows);
+
+    joystick.userInteractionEnabled = true;
+    joystickArrows.userInteractionEnabled = true;
+
+    joystickArrows.touchesMoved = touchesMoved;
+    joystickArrows.touchesEnded = touchesEnded;
+
     scene.addChild(joystick);
   }
 
@@ -249,8 +256,8 @@ function makeDemo(navigation, dvc) {
 
     makeJoystick();
 
-    scene.touchesMoved = touchesMoved;
-    scene.touchesEnded = touchesEnded;
+    // scene.touchesMoved = touchesMoved;
+    // scene.touchesEnded = touchesEnded;
 
     nav.pushViewController(demoVC);
 

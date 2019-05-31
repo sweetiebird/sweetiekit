@@ -26,6 +26,31 @@ public:
 
   static NAN_METHOD(New);
   static NAN_METHOD(Destroy);
+  static NAN_METHOD(touchesBeganWithEvent);
+  static NAN_METHOD(touchesMovedWithEvent);
+  static NAN_METHOD(touchesEndedWithEvent);
+  JS_PROP(nextResponder);
+  JS_PROP(canBecomeFirstResponder);
+  JS_PROP(canResignFirstResponder);
+  JS_PROP(isFirstResponder);
+  JS_PROP(undoManager);
+  // UIKeyCommand
+//  JS_PROP(input);
+//  JS_PROP(modifierFlags);
+//  JS_PROP(discoverabilityTitle);
+  // UIResponder
+  JS_PROP(keyCommands);
+  JS_PROP(inputView);
+  JS_PROP(inputAccessoryView);
+  JS_PROP(inputAssistantItem);
+  JS_PROP(inputViewController);
+  JS_PROP(inputAccessoryViewController);
+  JS_PROP(textInputMode);
+  JS_PROP(textInputContextIdentifier);
+  JS_PROP(userActivity);
+  JS_PROP(touchesBegan);
+  JS_PROP(touchesMoved);
+  JS_PROP(touchesEnded);
 };
 
 #endif /* NUIResponder_h */
