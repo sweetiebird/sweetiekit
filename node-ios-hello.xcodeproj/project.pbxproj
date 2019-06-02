@@ -222,6 +222,7 @@
 		A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D7E229D97C0002B53FF /* NSCNFloor.mm */; };
 		A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D81229E77FE002B53FF /* Nobjc.cpp */; };
 		A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */; };
+		A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D8722A41637002B53FF /* NSCNMaterialProperty.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -622,6 +623,8 @@
 		A1EE7D81229E77FE002B53FF /* Nobjc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Nobjc.cpp; sourceTree = "<group>"; };
 		A1EE7D83229E7821002B53FF /* Nobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nobjc.h; sourceTree = "<group>"; };
 		A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+GIF.swift"; sourceTree = "<group>"; };
+		A1EE7D8722A41637002B53FF /* NSCNMaterialProperty.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNMaterialProperty.mm; sourceTree = "<group>"; };
+		A1EE7D8822A41637002B53FF /* NSCNMaterialProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNMaterialProperty.h; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1488,6 +1491,7 @@
 				A1646B9D229238630078CF4B /* NSCNGeometry */,
 				A1948930228A5D33007BF787 /* NSCNLight */,
 				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
+				A1EE7D8622A41637002B53FF /* NSCNMaterialProperty */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
 				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
@@ -2261,6 +2265,15 @@
 			path = NSCNFloor;
 			sourceTree = "<group>";
 		};
+		A1EE7D8622A41637002B53FF /* NSCNMaterialProperty */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D8822A41637002B53FF /* NSCNMaterialProperty.h */,
+				A1EE7D8722A41637002B53FF /* NSCNMaterialProperty.mm */,
+			);
+			path = NSCNMaterialProperty;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -2566,6 +2579,7 @@
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
+				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,

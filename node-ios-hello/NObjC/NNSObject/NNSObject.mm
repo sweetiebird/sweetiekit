@@ -455,10 +455,21 @@ NAN_METHOD(Nid::invokeMethod)
           double value = TO_DOUBLE(jsValue);
           [inv setArgument:&value atIndex:1+i];
         } break;
-        case 'Q':
+        case 'f':
+        {
+          float value = TO_FLOAT(jsValue);
+          [inv setArgument:&value atIndex:1+i];
+        } break;
+        case 'q':
         {
           double value = TO_DOUBLE(jsValue);
           long long value1 = (long long)value;
+          [inv setArgument:&value1 atIndex:1+i];
+        } break;
+        case 'Q':
+        {
+          double value = TO_DOUBLE(jsValue);
+          unsigned long long value1 = (unsigned long long)value;
           [inv setArgument:&value1 atIndex:1+i];
         } break;
         case '@':
@@ -508,9 +519,21 @@ NAN_METHOD(Nid::invokeMethod)
         [inv getReturnValue:&value];
         JS_SET_RETURN(JS_NUM(value));
       } break;
-      case 'Q':
+      case 'f':
+      {
+        float value = 0.0f;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_FLOAT(value));
+      } break;
+      case 'q':
       {
         long long value = 0;
+        [inv getReturnValue:&value];
+        JS_SET_RETURN(JS_NUM(value));
+      } break;
+      case 'Q':
+      {
+        unsigned long long value = 0;
         [inv getReturnValue:&value];
         JS_SET_RETURN(JS_NUM(value));
       } break;
@@ -686,6 +709,7 @@ NAN_METHOD(NNSObject::New) {
 #include "NSCNNode.h"
 #include "NSCNLight.h"
 #include "NSCNMaterial.h"
+#include "NSCNMaterialProperty.h"
 #include "NSCNBox.h"
 #include "NSCNCapsule.h"
 #include "NSCNCone.h"
@@ -847,6 +871,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsContactDelegate);
 
     // SceneKit
+    JS_EXPORT_TYPE(SCNMaterialProperty);
     JS_EXPORT_TYPE(SCNMaterial);
     JS_EXPORT_TYPE(SCNGeometry);
     JS_EXPORT_TYPE(SCNBox);
@@ -940,8 +965,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       
-      JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNMaterial);
+      JS_RETURN_TYPE(SCNMaterialProperty);
       JS_RETURN_TYPE(SCNBox);
       JS_RETURN_TYPE(SCNCapsule);
       JS_RETURN_TYPE(SCNCone);
@@ -950,6 +975,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNPlane);
       JS_RETURN_TYPE(SCNPyramid);
       JS_RETURN_TYPE(SCNSphere);
+      JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNTorus);
       JS_RETURN_TYPE(SCNTube);
       JS_RETURN_TYPE(SCNText);

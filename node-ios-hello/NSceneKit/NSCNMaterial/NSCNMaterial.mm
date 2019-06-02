@@ -6,8 +6,8 @@
 //
 #include "NSCNMaterial.h"
 
-NSCNMaterial::NSCNMaterial () {}
-NSCNMaterial::~NSCNMaterial () {}
+NSCNMaterial::NSCNMaterial() {}
+NSCNMaterial::~NSCNMaterial() {}
 
 JS_INIT_CLASS(SCNMaterial, NSObject);
   // instance members (proto)
@@ -77,9 +77,7 @@ NAN_SETTER(NSCNMaterial::nameSetter) {
   }
 }
 
-#define js_value_SCNMaterialProperty(x) js_value_wrapper_unknown(x, SCNMaterialProperty)
-#define to_value_SCNMaterialProperty(x) to_value_wrapper_unknown(x, SCNMaterialProperty)
-#define is_value_SCNMaterialProperty(x) is_value_wrapper_unknown(x, SCNMaterialProperty)
+#include "NSCNMaterialProperty.h"
 
 NAN_GETTER(NSCNMaterial::diffuseGetter) {
   JS_UNWRAP(SCNMaterial, self);

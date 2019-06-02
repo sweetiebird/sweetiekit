@@ -688,6 +688,8 @@ Local<Value> js_value_UIColor(UIColor* _Nullable color);
 CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
 #define to_value_SKColor to_value_UIColor
+bool is_value_UIColor(const Local<Value>& value);
+#define is_value_CGColor is_value_UIColor
 
 template<typename T>
 Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {

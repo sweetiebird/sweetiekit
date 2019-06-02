@@ -59,6 +59,31 @@ namespace sweetiekit
       if ([pThing isKindOfClass:[NSString class]]) {
         return JS_STR([(NSString*)pThing UTF8String]);
       }
+      if ([pThing isKindOfClass:[NSNumber class]]) {
+        __weak NSNumber* value = (NSNumber*)pThing;
+        if (value && value.objCType) {
+          switch (value.objCType[0])
+          {
+          case 'B':
+            return JS_BOOL(value.boolValue);
+          case 'i':
+            return JS_INT(value.intValue);
+          case 'I':
+            return JS_UINT(value.unsignedIntValue);
+          case 'd':
+            return JS_NUM(value.doubleValue);
+          case 'f':
+            return JS_FLOAT(value.floatValue);
+          case 'q':
+            return JS_NUM(value.longLongValue);
+          case 'Q':
+            return JS_NUM(value.unsignedLongLongValue);
+          }
+        }
+      }
+      if ([pThing isKindOfClass:[UIColor class]]) {
+        return js_value_UIColor((UIColor*)pThing);
+      }
       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
@@ -73,12 +98,12 @@ namespace sweetiekit
     if (failed) {
       *failed = false;
     }
+    if (value->IsNullOrUndefined()) {
+      return nullptr;
+    }
     if (JS_INSTANCEOF(value, Nid)) {
       JS_UNWRAPPED_(value, id, result);
       return result;
-    }
-    if (value->IsNullOrUndefined()) {
-      return nullptr;
     }
     if (value->IsExternal()) {
       id result = (__bridge id)(value.As<External>()->Value());
@@ -95,6 +120,9 @@ namespace sweetiekit
     }
     if (value->IsNumber()) {
       return [[NSNumber alloc] initWithDouble: TO_DOUBLE(value)];
+    }
+    if (is_value_UIColor(value)) {
+      return to_value_UIColor(value);
     }
     if (failed) {
       *failed = true;
@@ -763,4 +791,22 @@ UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable 
     }
   }
   return result;
+}
+
+bool is_value_UIColor(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("red"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("green"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("blue"))->IsNumber()) {
+    return false;
+  }
+  return true;
 }

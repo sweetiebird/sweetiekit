@@ -22,7 +22,11 @@ async function make(nav, demoVC) {
     return new SCNNode();
   });
   const scene = new SCNScene();
-  const node = new SCNNode(SCNTube(0.01, 0.02, 0.1));
+  const geo = SCNTube(0.01, 0.02, 0.1);
+  const mat = new SCNMaterial();
+  mat.diffuse.contents = {red: 1, green: 0.5, blue: 0.5};
+  geo.materials = [mat];
+  const node = new SCNNode(geo);
 
   arView.delegate = viewDel;
   arView.scene = scene;
