@@ -92,7 +92,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
   };
   field.backgroundColor = colors.clear;
   const placeholderText = 'Enter some text...';
-  const placeholderFont = new UIFont('Lato-Bold', 17);
+  const placeholderFont = UIFont('Lato-Bold', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
   attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
     location: 0,
@@ -353,7 +353,7 @@ async function make(nav, demoVC) {
 
       const attrTxt = new NSMutableAttributedString(str);
       attrTxt.addAttribute(NSForegroundColorAttributeName, colors.white, attrRange);
-      attrTxt.addAttribute(NSFontAttributeName, new UIFont('Lato-Bold', 17), attrRange);
+      attrTxt.addAttribute(NSFontAttributeName, UIFont('Lato-Bold', 17), attrRange);
       attrTxt.addAttribute(NSStrokeColorAttributeName, colors.black, attrRange);
       attrTxt.addAttribute(NSStrokeWidthAttributeName, -4.0, attrRange);
 

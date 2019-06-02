@@ -17,8 +17,8 @@ let defaults;
 let mgr;
 let table;
 
-const boldFont = new UIFont('Arial-BoldMT', 17);
-const regFont = new UIFont('Arial', 17);
+const boldFont = UIFont('Arial-BoldMT', 17);
+const regFont = UIFont('Arial', 17);
 
 function setupDefaults() {
   defaults = new NSUserDefaults();

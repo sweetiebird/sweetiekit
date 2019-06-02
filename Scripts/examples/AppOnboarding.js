@@ -66,9 +66,9 @@ const titles = [
   'Swag Hammock',
 ];
 
-const titleFont = new UIFont('Lato-Bold', 22);
-const contentFont = new UIFont('Lato-Bold', 16);
-const buttonFont = new UIFont('Lato-Bold', 17);
+const titleFont = UIFont('Lato-Bold', 22);
+const contentFont = UIFont('Lato-Bold', 16);
+const buttonFont = UIFont('Lato-Bold', 17);
 const pStyle = new NSMutableParagraphStyle();
 pStyle.lineSpacing = 10;
 

@@ -38,35 +38,30 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIFont::Initialize(Isolate *i
 }
 
 NAN_METHOD(NUIFont::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> obj = info.This();
-
-  NUIFont *ui = new NUIFont();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge UIFont *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      std::string str;
-      if (info[0]->IsString()) {
-        Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-        str = *utf8Value;
-      } else {
-        // throw
-      }
-      NSString* name = [NSString stringWithUTF8String:str.c_str()];
-      double size = TO_DOUBLE(info[1]);
-      ui->SetNSObject([UIFont fontWithName:name size:size]);
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIFont(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIFont, info);
+      return;
     }
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[UIFont alloc] init]);
+    UIFont* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIFont *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && info[0]->IsString()) {
+      self = [UIFont fontWithName:to_value_NSString(info[0]) size:(info[1]->IsNumber() ? TO_INT32(info[1]) : 17)];
+    } else if (info.Length() <= 0) {
+      self = [[UIFont alloc] init];
+    }
+    if (self) {
+      NUIFont *wrapper = new NUIFont();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIFont::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 NUIFont::NUIFont () {}

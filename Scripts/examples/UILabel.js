@@ -6,7 +6,7 @@ const {
   UIFont,
 } = SweetieKit;
 
-const font = new UIFont('Arial-BoldMT', 17);
+const font = UIFont('Arial-BoldMT', 17);
 
 async function make(demoVC) {
   const w = demoVC.view.frame.width;
