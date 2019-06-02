@@ -65,7 +65,7 @@ async function make(demoVC) {
   view.addSubview(view2);
   // view2.addSubview(ssView);
 
-  const button = new UIButton({
+  const button = UIButton({
     x: 20,
     y: h - 200,
     width: w - 40,

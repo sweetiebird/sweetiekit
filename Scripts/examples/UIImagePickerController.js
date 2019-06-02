@@ -1,5 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+const UIControlEvents = require('./enums').UIControlEvents;
+
 const {
   UIImagePickerController,
   UIImagePickerControllerDelegate,
@@ -12,7 +14,9 @@ async function make(nav, demoVC) {
 
   const w = demoVC.view.frame.width;
 
-  const btn = await UIButton.alloc('Take a 📸', 12, 80, w - 24, 50, async () => {
+  const btn = UIButton({x: 12, y: 80, width: w - 24, height: 50});
+  btn.title = 'Take a 📸';
+  btn.addTarget(() => {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
       const imgCtrl = new UIImagePickerController();
@@ -34,7 +38,7 @@ async function make(nav, demoVC) {
       imgCtrl.delegate = imgDel;
       demoVC.present(imgCtrl, true, () => {});
     }
-  });
+  }, UIControlEvents.touchUpInside);
 
   btn.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
   btn.layer.cornerRadius = 4;

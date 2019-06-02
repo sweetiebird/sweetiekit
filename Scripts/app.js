@@ -1,4 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
+
+const UIControlEvents = require('./enums').UIControlEvents;
+
 // const axios = require('axios');
 const https = require('https');
 
@@ -184,7 +187,9 @@ function createTable() {
 
   console.log('userPhoto2');
 
-   const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
+   const nextBtn = UIButton({x: 12, y: imgY + 124, width: elemW, height: 50});
+   nextBtn.title = `📸 Choose ${username}`;
+   nextBtn.addTarget(() => {
      if (img === undefined) {
        const imgDel = new UIImagePickerControllerDelegate();
        const imgCtrl = new UIImagePickerController();
@@ -208,7 +213,7 @@ function createTable() {
      } else {
        demo();
      }
-   });
+  }, UIControlEvents.touchUpInside);
   console.log('userPhoto3');
 
    nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
@@ -248,13 +253,15 @@ async function setupApp() {
   // nameField.delegate = nameVC;
   console.log('setupApp6b');
 
-  const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
+  const nextBtn = UIButton({x: 12, y: buttonY, width: elemW, height: 50});
+  nextBtn.title = '👍 Next';
+  nextBtn.addTarget(() => {
     console.log('UIButton');
     username = nameField.text;
     console.log('UIButton', username);
     if (username) { await userPhoto(); }
     console.log('UIButton', username);
-  });
+  }, UIControlEvents.touchUpInside);
   console.log('setupApp7');
 
   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };

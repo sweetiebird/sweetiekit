@@ -1210,6 +1210,7 @@ https.get(options, function(res) {
 //process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
 const sweetiekit = require('std:sweetiekit.node');
+const UIControlEvents = require('./enums').UIControlEvents;
 const {
   NSObject,
   NSUserDefaults,
@@ -1282,7 +1283,9 @@ console.log(sb, vc, view, subview);
 //  console.log('pre-button');
 //  // update alloc to init
 //  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
-//  const button = await UIButton.alloc("Tap me!", 0, 100, 100, 100, () => {
+//  const button = UIButton({x: 0, y: 100, width: 100, height: 100});
+//  button.title = "Tap me!";
+//  button.addTarget(() => {
 //
 //    const x = randi(400);
 //    const y = randi(400);
@@ -1297,7 +1300,7 @@ console.log(sb, vc, view, subview);
 //    //firstVC.view.addSubview(subview);
 //
 //    console.log(`Added a new UIView at ${x},${y}`);
-//  });
+//  }, UIControlEvents.touchUpInside);
 //  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
 //  console.log('post-button', button, button.frame);
 //  firstVC.view.addSubview(button);

@@ -62,7 +62,7 @@ function textWrap(s) {
 }
 
 function makeCamBtn(demoVC, btnSize) {
-  const camBtn = new UIButton({
+  const camBtn = UIButton({
     x: (demoVC.view.frame.width - btnSize) / 2,
     y: demoVC.view.frame.height - (124 + btnSize),
     width: btnSize,
@@ -114,7 +114,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
 
 function makeParticleButton(demoVC) {
   const size = 40;
-  const btn = new UIButton({
+  const btn = UIButton({
     x: demoVC.view.frame.width - size,
     y: 0,
     width: size,

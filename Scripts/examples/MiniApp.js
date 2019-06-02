@@ -118,7 +118,7 @@ function setInnerAppNavStyles(nav) {
 }
 
 function makeAppButton(title) {
-  const btn = new UIButton({
+  const btn = UIButton({
     x: 20,
     y: viewH - 100,
     width: w - 40,
@@ -294,7 +294,7 @@ function setSizes(vc) {
 }
 
 function makeTopToolbarTitle(title) {
-  const button = new UIButton();
+  const button = UIButton();
   button.setTitleForState(title, UIControlState.normal);
   button.sizeToFit();
   button.setTitleColorForState({

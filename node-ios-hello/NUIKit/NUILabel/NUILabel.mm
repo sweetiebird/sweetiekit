@@ -39,7 +39,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "alloc", Alloc);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }

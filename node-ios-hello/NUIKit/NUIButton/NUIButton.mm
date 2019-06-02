@@ -41,120 +41,39 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "alloc", Alloc);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
 NAN_METHOD(NUIButton::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> btnObj = info.This();
-
-  NUIButton *btn = new NUIButton();
-  
-  if (info[0]->IsExternal()) {
-    btn->SetNSObject((__bridge UIButton *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIButton(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIButton, info);
+      return;
     }
-  } else {
-    @autoreleasepool {
-      btn->SetNSObject([[UIButton alloc] init]);
+    UIButton* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIButton *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+      self = [[UIButton alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UIButton alloc] init];
+    }
+    if (self) {
+      NUIButton *wrapper = new NUIButton();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIButton::New: invalid arguments");
     }
   }
-  
-  btn->Wrap(btnObj);
-
-  JS_SET_RETURN(btnObj);
 }
 
 NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
 NUIButton::~NUIButton () { delete _callback; }
-
-NAN_METHOD(NUIButton::Alloc) {
-  Nan::EscapableHandleScope scope;
-  auto resolver = Promise::Resolver::New(JS_CONTEXT()).ToLocalChecked();
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> btnObj = JS_TYPE(NUIButton)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIButton *btn = ObjectWrap::Unwrap<NUIButton>(btnObj);
-
-  NSString* label = nullptr;
-  {
-    std::string str;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      str = *utf8Value;
-    } else {
-      Nan::ThrowError("info[0] isn't a string");
-      return;
-    }
-    label = [NSString stringWithUTF8String:str.c_str()];
-  }
-  
-  double x = TO_DOUBLE(info[1]);
-  double y = TO_DOUBLE(info[2]);
-  double width = TO_DOUBLE(info[3]);
-  double height = TO_DOUBLE(info[4]);
-
-  if (info[5]->IsFunction()) {
-    btn->_callback->Reset(Local<Function>::Cast(info[5]));
-  }
-  
-#if SYNC
-  Nan::Persistent<Promise::Resolver>* pResolver = new Nan::Persistent<Promise::Resolver>(resolver);
-  Nan::Persistent<Object>* pBtnObj = new Nan::Persistent<Object>(btnObj);
-  
-  @autoreleasepool {
-    dispatch_async(dispatch_get_main_queue(), ^ {
-      btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-      [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-      [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
-      [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
-        Nan::HandleScope scope;
-        sweetiekit::Resolve(btn->_callback);
-      }];
-     {
-        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-        sweetiekit::resCbs.push_back([pResolver, pBtnObj]() -> void {
-          Local<Promise::Resolver> res = Nan::New(*pResolver);
-          Local<Object> obj = Nan::New(*pBtnObj);
-          res->Resolve(JS_CONTEXT(), obj);
-          sweetiekit::Kick();
-          delete pBtnObj;
-          delete pResolver;
-      });
-    }
-    uv_async_send(&sweetiekit::resAsync);
-
-    });
-  }
-  JS_SET_RETURN(scope.Escape(resolver->GetPromise()));
-#else
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      btn->SetNSObject([[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-      [btn->As<UIButton>() setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-      [btn->As<UIButton>() setTitle:label forState:UIControlStateNormal];
-      btn->Ref();
-      [btn->As<UIButton>() addTargetClosureWithClosure:^(UIButton*){
-        Nan::HandleScope scope;
-        sweetiekit::Resolve(btn->_callback);
-      }];
-    });
-  }
-  JS_SET_RETURN(btnObj);
-#endif
-}
 
 NAN_GETTER(NUIButton::TitleGetter) {
   Nan::HandleScope scope;

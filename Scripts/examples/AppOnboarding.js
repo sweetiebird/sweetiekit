@@ -80,13 +80,12 @@ const contentTexts = [
 ];
 
 function setupQuizButton() {
-  const nextBtn = new UIButton({
+  const nextBtn = UIButton({
     x: 20,
     y: viewH - 100,
     width: w - 40,
     height: 50,
   });
-  // const nextBtn = UIButton.alloc('GET STARTED', 20, viewH - 100, w - 40, 50, startQuiz);
   nextBtn.title = 'GET STARTED';
   nextBtn.layer.cornerRadius = 25;
   nextBtn.layer.shadowOffset = { width: 0, height: 12 };
@@ -365,13 +364,12 @@ function setupWelcomeView() {
 }
 
 function setupStartButton() {
-  const nextBtn = new UIButton({
+  const nextBtn = UIButton({
     x: 20,
     y: viewH - 100,
     width: w - 40,
     height: 50,
   });
-  // const nextBtn = UIButton.alloc('GET STARTED', 20, viewH - 100, w - 40, 50, startQuiz);
   nextBtn.title = 'GET STARTED';
   nextBtn.layer.cornerRadius = 25;
   nextBtn.layer.shadowOffset = { width: 0, height: 12 };

@@ -152,7 +152,7 @@ async function make(demoVC) {
     text = field.text;
   });
 
-  const btn = new UIButton({
+  const btn = UIButton({
     x: 12,
     y: 150,
     width: w - 24,
