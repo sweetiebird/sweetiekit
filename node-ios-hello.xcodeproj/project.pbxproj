@@ -1282,8 +1282,8 @@
 			isa = PBXGroup;
 			children = (
 				A1948968228AA15C007BF787 /* NMKMapViewDelegate */,
-				A1948957228A84DB007BF787 /* NMKMapView.mm */,
 				A1948958228A84DB007BF787 /* NMKMapView.h */,
+				A1948957228A84DB007BF787 /* NMKMapView.mm */,
 				A1948966228A945E007BF787 /* SMKAnnotation.swift */,
 			);
 			path = NMKMapView;
@@ -1292,8 +1292,8 @@
 		A1948968228AA15C007BF787 /* NMKMapViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */,
 				A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */,
+				A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */,
 				A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */,
 			);
 			path = NMKMapViewDelegate;

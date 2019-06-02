@@ -9,23 +9,13 @@
 #ifndef NMKMapViewDelegate_h
 #define NMKMapViewDelegate_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_MKMapViewDelegate(x) js_value_wrapper(x, MKMapViewDelegate)
+#define to_value_MKMapViewDelegate(x) to_value_wrapper(x, MKMapViewDelegate)
+#define is_value_MKMapViewDelegate(x) is_value_wrapper(x, MKMapViewDelegate)
 
-class NMKMapViewDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NMKMapViewDelegate();
-  virtual ~NMKMapViewDelegate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(MKMapViewDelegate, NSObject);
   JS_PROP(DidFinishRendering);
   JS_PROP(DidUpdateUserLocation);
   JS_PROP(ViewForAnnotation);
@@ -34,6 +24,6 @@ public:
   sweetiekit::JSFunction _didUpdateUserLocation;
   sweetiekit::JSFunction _viewForAnnotation;
   sweetiekit::JSFunction _didSelectViewForAnnotation;
-};
+JS_WRAP_CLASS_END(MKMapViewDelegate);
 
 #endif /* NMKMapViewDelegate_h */

@@ -9,25 +9,15 @@
 #ifndef NMKAnnotationView_h
 #define NMKAnnotationView_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_MKAnnotationView(x) js_value_wrapper(x, MKAnnotationView)
+#define to_value_MKAnnotationView(x) to_value_wrapper(x, MKAnnotationView)
+#define is_value_MKAnnotationView(x) is_value_wrapper(x, MKAnnotationView)
 
-class NMKAnnotationView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NMKAnnotationView();
-  virtual ~NMKAnnotationView();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(MKAnnotationView, UIView);
   JS_PROP(Image);
   JS_PROP(Annotation);
-};
+JS_WRAP_CLASS_END(MKAnnotationView);
 
 #endif /* NMKAnnotationView_h */

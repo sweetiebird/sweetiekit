@@ -9,25 +9,15 @@
 #ifndef NMKMapView_h
 #define NMKMapView_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_MKMapView(x) js_value_wrapper(x, MKMapView)
+#define to_value_MKMapView(x) to_value_wrapper(x, MKMapView)
+#define is_value_MKMapView(x) is_value_wrapper(x, MKMapView)
 
-class NMKMapView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NMKMapView();
-  virtual ~NMKMapView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(SetRegion);
-  static NAN_METHOD(AddAnnotation);
-};
+JS_WRAP_CLASS(MKMapView, UIView);
+  JS_METHOD(SetRegion);
+  JS_METHOD(AddAnnotation);
+JS_WRAP_CLASS_END(MKMapView);
 
 #endif /* NMKMapView_h */
