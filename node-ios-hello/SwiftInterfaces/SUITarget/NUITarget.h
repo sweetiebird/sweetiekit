@@ -9,26 +9,14 @@
 #ifndef NUITarget_h
 #define NUITarget_h
 
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITarget(x) js_value_wrapper(x, UITarget)
+#define to_value_UITarget(x) to_value_wrapper(x, UITarget)
+#define is_value_UITarget(x) is_value_wrapper(x, UITarget)
 
-class NUITarget : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITarget();
-  virtual ~NUITarget();
-
-  static NAN_METHOD(New);
-  
+JS_WRAP_CLASS(UITarget, NSObject);
   sweetiekit::JSFunction _callback;
-};
+JS_WRAP_CLASS_END(UITarget);
 
 #endif /* NUITarget_h */

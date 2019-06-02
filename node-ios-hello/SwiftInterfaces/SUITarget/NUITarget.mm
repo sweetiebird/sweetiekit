@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "node_ios_hello-Swift.h"
 #include "defines.h"
 #include "NNSObject.h"
 #include "NUITarget.h"
