@@ -9,26 +9,16 @@
 #ifndef NCIImage_h
 #define NCIImage_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CIImage(x) js_value_wrapper(x, CIImage)
+#define to_value_CIImage(x) to_value_wrapper(x, CIImage)
+#define is_value_CIImage(x) is_value_wrapper(x, CIImage)
 
-class NCIImage : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCIImage();
-  virtual ~NCIImage();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(initWithCVPixelBuffer);
-  static NAN_METHOD(imageByApplyingTransform);
-  static NAN_METHOD(initWithImage);
-};
+JS_WRAP_CLASS(CIImage, NSObject);
+  JS_METHOD(initWithCVPixelBuffer);
+  JS_METHOD(imageByApplyingTransform);
+  JS_METHOD(initWithImage);
+JS_WRAP_CLASS_END(CIImage);
 
 #endif /* NCIImage_h */
