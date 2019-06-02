@@ -1,6 +1,5 @@
 //
-//  NARSKViewDelegate.m
-//  node-ios-hello
+//  NARSKViewDelegate.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
@@ -15,6 +14,7 @@
 #include "NARSession.h"
 #include "NARAnchor.h"
 #include "NSKNode.h"
+#include "NARSKView.h"
 #import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NARSKViewDelegate::type;
@@ -25,7 +25,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NARSKViewDelegate::Initialize(
 
   // constructor
   Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKView::type));
+  ctor->Inherit(Nan::New(NNSObject::type));
   ctor->InstanceTemplate()->SetInternalFieldCount(1);
   ctor->SetClassName(JS_STR("ARSKViewDelegate"));
   type.Reset(ctor);
@@ -54,7 +54,7 @@ NAN_METHOD(NARSKViewDelegate::New) {
       dispatch_sync(dispatch_get_main_queue(), ^ {
           del->SetNSObject([[SARSKViewDelegate alloc] initWithNodeForAnchor: ^ SKNode * _Nullable (ARSKView * _Nonnull view, ARAnchor * _Nonnull anchor) {
             Nan::HandleScope scope;
-            Local<Value> viewObj = sweetiekit::GetWrapperFor(view, NSKView::type);
+            Local<Value> viewObj = sweetiekit::GetWrapperFor(view, NARSKView::type);
             Local<Value> anchorObj = sweetiekit::GetWrapperFor(anchor, NARAnchor::type);
             Local<Value> result = del->_nodeForAnchor("NARSKViewDelegate::New",
             viewObj, anchorObj);

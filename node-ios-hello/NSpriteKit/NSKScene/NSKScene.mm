@@ -384,6 +384,8 @@ NAN_GETTER(NSKScene::physicsWorldGetter) {
   }
 }
 
+#include "NSKView.h"
+
 NAN_GETTER(NSKScene::viewGetter) {
   JS_UNWRAP(SKScene, self);
   @autoreleasepool

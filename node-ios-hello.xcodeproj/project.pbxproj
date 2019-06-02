@@ -137,7 +137,7 @@
 		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
 		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
 		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
-		A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */; };
+		A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */; };
 		A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */; };
 		A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */; };
 		A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B832287C369001D1F6E /* NSKNode.mm */; };
@@ -475,7 +475,7 @@
 		A1BD4B412287BCB5001D1F6E /* NSCNView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNView.h; sourceTree = "<group>"; };
 		A1BD4B422287BCBC001D1F6E /* NSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNView.mm; sourceTree = "<group>"; };
 		A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKViewDelegate.h; sourceTree = "<group>"; };
-		A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKViewDelegatem.mm; sourceTree = "<group>"; };
+		A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKViewDelegate.mm; sourceTree = "<group>"; };
 		A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSKViewDelegate.swift; sourceTree = "<group>"; };
 		A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARAnchor.h; sourceTree = "<group>"; };
 		A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARAnchor.mm; sourceTree = "<group>"; };
@@ -1515,7 +1515,7 @@
 			isa = PBXGroup;
 			children = (
 				A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */,
-				A1BD4B782287BF28001D1F6E /* NARSKViewDelegatem.mm */,
+				A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */,
 				A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */,
 			);
 			path = NARSKViewDelegate;
@@ -1868,11 +1868,11 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1948938228A6A8F007BF787 /* NARLightEstimate */,
-				A1948934228A68A0007BF787 /* NARConfiguration */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
+				A1948934228A68A0007BF787 /* NARConfiguration */,
 				A1BD4BAC22880999001D1F6E /* NARFrame */,
+				A1948938228A6A8F007BF787 /* NARLightEstimate */,
 				A18F1E62228A418300A42754 /* NARSCNView */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
@@ -2529,7 +2529,7 @@
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
-				A1BD4B792287BF28001D1F6E /* NARSKViewDelegatem.mm in Sources */,
+				A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,

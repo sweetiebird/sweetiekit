@@ -9,29 +9,19 @@
 #ifndef NARAnchor_h
 #define NARAnchor_h
 
-#import <UIKit/UIKit.h>
-#import "NNSObject.h"
-#include "defines.h"
+#include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARAnchor(x) js_value_wrapper(x, ARAnchor)
+#define to_value_ARAnchor(x) to_value_wrapper(x, ARAnchor)
+#define is_value_ARAnchor(x) is_value_wrapper(x, ARAnchor)
 
-class NARAnchor : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARAnchor();
-  virtual ~NARAnchor();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(InitWithTransform);
+JS_WRAP_CLASS(ARAnchor, NSObject);
+  JS_METHOD(InitWithTransform);
   
   JS_PROP(name);
   JS_PROP(identifier);
   JS_PROP(transform);
-};
+JS_WRAP_CLASS_END(ARAnchor);
 
 
 #endif /* NARAnchor_h */

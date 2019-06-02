@@ -10,23 +10,14 @@
 #define NARConfiguration_h
 
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARConfiguration(x) js_value_wrapper(x, ARConfiguration)
+#define to_value_ARConfiguration(x) to_value_wrapper(x, ARConfiguration)
+#define is_value_ARConfiguration(x) is_value_wrapper(x, ARConfiguration)
 
-class NARConfiguration : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARConfiguration();
-  virtual ~NARConfiguration();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(ARConfiguration, NSObject);
   JS_PROP(IsLightEstimationEnabled);
   JS_PROP(worldAlignment);
-};
+JS_WRAP_CLASS_END(ARConfiguration);
 
 #endif /* NARConfiguration_h */

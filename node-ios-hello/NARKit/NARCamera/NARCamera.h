@@ -10,22 +10,13 @@
 #define NARCamera_h
 
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARCamera(x) js_value_wrapper(x, ARCamera)
+#define to_value_ARCamera(x) to_value_wrapper(x, ARCamera)
+#define is_value_ARCamera(x) is_value_wrapper(x, ARCamera)
 
-class NARCamera : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARCamera();
-  virtual ~NARCamera();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(ARCamera, NSObject);
   JS_PROP(Transform);
-};
+JS_WRAP_CLASS_END(ARCamera);
 
 #endif /* NARCamera_h */

@@ -9,30 +9,19 @@
 #ifndef NARSKView_h
 #define NARSKView_h
 
-#import <UIKit/UIKit.h>
-#import "NSKView.h"
-#include "NUIView.h"
-#include "defines.h"
+#include "NSKView.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARSKView(x) js_value_wrapper(x, ARSKView)
+#define to_value_ARSKView(x) to_value_wrapper(x, ARSKView)
+#define is_value_ARSKView(x) is_value_wrapper(x, ARSKView)
 
-class NARSKView : public NSKView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARSKView();
-  virtual ~NARSKView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(PresentScene);
+JS_WRAP_CLASS(ARSKView, SKView);
+  JS_METHOD(PresentScene);
   JS_PROP(Session);
   JS_PROP(Delegate);
-  static NAN_METHOD(hitTest);
+  JS_METHOD(hitTest);
   
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(ARSKView);
 
 #endif /* NARSKView_h */

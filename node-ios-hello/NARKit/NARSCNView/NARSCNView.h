@@ -9,31 +9,20 @@
 #ifndef NARSCNView_h
 #define NARSCNView_h
 
-#import <UIKit/UIKit.h>
-#import "NSCNView.h"
-#include "NUIView.h"
-#include "defines.h"
+#include "NSCNView.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARSCNView(x) js_value_wrapper(x, ARSCNView)
+#define to_value_ARSCNView(x) to_value_wrapper(x, ARSCNView)
+#define is_value_ARSCNView(x) is_value_wrapper(x, ARSCNView)
 
-class NARSCNView : public NSCNView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARSCNView();
-  virtual ~NARSCNView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(PresentScene);
+JS_WRAP_CLASS(ARSCNView, SCNView);
+  JS_METHOD(PresentScene);
   JS_PROP(Session);
   JS_PROP(Delegate);
   JS_PROP(Scene);
   JS_PROP(AutomaticallyUpdatesLighting);
   
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(ARSCNView);
 
 #endif /* NARSCNView_h */

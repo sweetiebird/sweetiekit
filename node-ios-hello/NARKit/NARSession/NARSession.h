@@ -9,28 +9,17 @@
 #ifndef NARSession_h
 #define NARSession_h
 
-#import <UIKit/UIKit.h>
-#import "NSKView.h"
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARSession(x) js_value_wrapper(x, ARSession)
+#define to_value_ARSession(x) to_value_wrapper(x, ARSession)
+#define is_value_ARSession(x) is_value_wrapper(x, ARSession)
 
-class NARSession : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARSession();
-  virtual ~NARSession();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Run);
-  static NAN_METHOD(Add);
-  static NAN_METHOD(Remove);
+JS_WRAP_CLASS(ARSession, NSObject);
+  JS_METHOD(Run);
+  JS_METHOD(Add);
+  JS_METHOD(Remove);
   JS_PROP(CurrentFrame);
-};
+JS_WRAP_CLASS_END(ARSession);
 
 #endif /* NARSession_h */

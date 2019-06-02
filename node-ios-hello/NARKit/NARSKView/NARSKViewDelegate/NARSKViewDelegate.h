@@ -9,24 +9,14 @@
 #ifndef NARSKViewDelegate_h
 #define NARSKViewDelegate_h
 
-#import <UIKit/UIKit.h>
-#import "NNSObject.h"
-#include "defines.h"
+#include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARSKViewDelegate(x) js_value_wrapper(x, ARSKViewDelegate)
+#define to_value_ARSKViewDelegate(x) to_value_wrapper(x, ARSKViewDelegate)
+#define is_value_ARSKViewDelegate(x) is_value_wrapper(x, ARSKViewDelegate)
 
-class NARSKViewDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARSKViewDelegate();
-  virtual ~NARSKViewDelegate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(ARSKViewDelegate, NSObject);
   sweetiekit::JSFunction _nodeForAnchor;
-};
+JS_WRAP_CLASS_END(ARSKViewDelegate);
 
 #endif /* NARSKViewDelegate_h */

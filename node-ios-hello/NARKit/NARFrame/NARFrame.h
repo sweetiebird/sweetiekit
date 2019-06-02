@@ -10,25 +10,16 @@
 #define NARFrame_h
 
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARFrame(x) js_value_wrapper(x, ARFrame)
+#define to_value_ARFrame(x) to_value_wrapper(x, ARFrame)
+#define is_value_ARFrame(x) is_value_wrapper(x, ARFrame)
 
-class NARFrame : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARFrame();
-  virtual ~NARFrame();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(displayTransform);
+JS_WRAP_CLASS(ARFrame, NSObject);
+  JS_METHOD(displayTransform);
   JS_PROP(Camera);
   JS_PROP(LightEstimate);
   JS_PROP(capturedImage);
-};
+JS_WRAP_CLASS_END(ARFrame);
 
 #endif /* NARFrame_h */

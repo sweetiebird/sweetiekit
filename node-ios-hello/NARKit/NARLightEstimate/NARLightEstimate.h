@@ -10,23 +10,14 @@
 #define NARLightEstimate_h
 
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_ARLightEstimate(x) js_value_wrapper(x, ARLightEstimate)
+#define to_value_ARLightEstimate(x) to_value_wrapper(x, ARLightEstimate)
+#define is_value_ARLightEstimate(x) is_value_wrapper(x, ARLightEstimate)
 
-class NARLightEstimate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NARLightEstimate();
-  virtual ~NARLightEstimate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(ARLightEstimate, NSObject);
   JS_PROP(AmbientIntensity);
   JS_PROP(AmbientColorTemperature);
-};
+JS_WRAP_CLASS_END(ARLightEstimate);
 
 #endif /* NARLightEstimate_h */
