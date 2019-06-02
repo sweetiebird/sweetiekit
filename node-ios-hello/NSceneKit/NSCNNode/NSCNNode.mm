@@ -25,6 +25,27 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_PROTO_METHOD(enumerateHierarchy);
   JS_PROTO_METHOD(removeFromParentNode);
   JS_PROTO_METHOD(setWorldTransform);
+  JS_PROTO_METHOD(convertPositionToNode);
+  JS_PROTO_METHOD(convertPositionFromNode);
+  JS_PROTO_METHOD(convertVectorToNode);
+  JS_PROTO_METHOD(convertVectorFromNode);
+  JS_PROTO_METHOD(convertTransformToNode);
+  JS_PROTO_METHOD(convertTransformFromNode);
+  JS_PROTO_METHOD(hitTestWithSegmentFromPoint);
+  JS_PROTO_METHOD(lookAt);
+  JS_PROTO_METHOD(localTranslateBy);
+  JS_PROTO_METHOD(localRotateBy);
+  JS_PROTO_METHOD(rotateBy);
+  JS_PROTO_METHOD(simdConvertPositionToNode);
+  JS_PROTO_METHOD(simdConvertPositionFromNode);
+  JS_PROTO_METHOD(simdConvertVectorToNode);
+  JS_PROTO_METHOD(simdConvertVectorFromNode);
+  JS_PROTO_METHOD(simdConvertTransformToNode);
+  JS_PROTO_METHOD(simdConvertTransformFromNode);
+  JS_PROTO_METHOD(simdLookAt);
+  JS_PROTO_METHOD(simdLocalTranslateBy);
+  JS_PROTO_METHOD(simdLocalRotateBy);
+  JS_PROTO_METHOD(simdRotateBy);
   JS_ASSIGN_PROP(proto, name);
   JS_ASSIGN_PROP(proto, light);
   JS_ASSIGN_PROP(proto, camera);
@@ -287,6 +308,180 @@ NAN_METHOD(NSCNNode::setWorldTransform) {
   JS_UNWRAP(SCNNode, self);
   @autoreleasepool {
     [self setWorldTransform:to_value_SCNMatrix4(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::convertPositionToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 result([self convertPosition:to_value_SCNVector3(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNVector3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::convertPositionFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 result([self convertPosition:to_value_SCNVector3(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNVector3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::convertVectorToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 result([self convertVector:to_value_SCNVector3(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNVector3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::convertVectorFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 result([self convertVector:to_value_SCNVector3(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNVector3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::convertTransformToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNMatrix4 result([self convertTransform:to_value_SCNMatrix4(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNMatrix4(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::convertTransformFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNMatrix4 result([self convertTransform:to_value_SCNMatrix4(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_SCNMatrix4(result));
+  }
+}
+
+#include "NSCNHitTestResult.h"
+
+NAN_METHOD(NSCNNode::hitTestWithSegmentFromPoint) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 fromPoint(to_value_SCNVector3(info[0]));
+    SCNVector3 toPoint(to_value_SCNVector3(info[1]));
+    auto results([self hitTestWithSegmentFromPoint:fromPoint toPoint:toPoint options:nil]); // TODO: options
+    JS_SET_RETURN(js_value_NSArray<SCNHitTestResult*>(results));
+  }
+}
+
+NAN_METHOD(NSCNNode::lookAt) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    SCNVector3 up((info.Length() >= 2) ? to_value_SCNVector3(info[1]) : [self worldUp]);
+    SCNVector3 localFront((info.Length() >= 3) ? to_value_SCNVector3(info[2]) : [SCNNode localFront]);
+    [self lookAt:to_value_SCNVector3(info[0])
+          up:up
+          localFront:localFront];
+  }
+}
+
+NAN_METHOD(NSCNNode::localTranslateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self localTranslateBy:to_value_SCNVector3(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::localRotateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self localRotateBy:to_value_SCNQuaternion(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::rotateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self rotateBy:to_value_SCNQuaternion(info[0])
+          aroundTarget:to_value_SCNVector3(info[1])];
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertPositionToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float3 result([self simdConvertPosition:to_value_simd_float3(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertPositionFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float3 result([self simdConvertPosition:to_value_simd_float3(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertVectorToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float3 result([self simdConvertVector:to_value_simd_float3(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertVectorFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float3 result([self simdConvertVector:to_value_simd_float3(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float3(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertTransformToNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float4x4 result([self simdConvertTransform:to_value_simd_float4x4(info[0]) toNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float4x4(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdConvertTransformFromNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float4x4 result([self simdConvertTransform:to_value_simd_float4x4(info[0]) fromNode:to_value_SCNNode(info[1])]);
+    JS_SET_RETURN(js_value_simd_float4x4(result));
+  }
+}
+
+NAN_METHOD(NSCNNode::simdLookAt) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    simd_float3 up((info.Length() >= 2) ? to_value_simd_float3(info[1]) : [self simdWorldUp]);
+    simd_float3 localFront((info.Length() >= 3) ? to_value_simd_float3(info[2]) : [SCNNode simdLocalFront]);
+    [self simdLookAt:to_value_simd_float3(info[0])
+          up:up
+          localFront:localFront];
+  }
+}
+
+NAN_METHOD(NSCNNode::simdLocalTranslateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self simdLocalTranslateBy:to_value_simd_float3(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::simdLocalRotateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self simdLocalRotateBy:to_value_simd_quatf(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::simdRotateBy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self simdRotateBy:to_value_simd_quatf(info[0])
+          aroundTarget:to_value_simd_float3(info[1])];
   }
 }
 
