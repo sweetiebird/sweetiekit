@@ -9,21 +9,8 @@
 NSCNFloor::NSCNFloor () {}
 NSCNFloor::~NSCNFloor () {}
 
-Nan::Persistent<FunctionTemplate> NSCNFloor::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNFloor::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNFloor"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNFloor, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, reflectivity);
   JS_ASSIGN_PROP(proto, reflectionFalloffStart);
   JS_ASSIGN_PROP(proto, reflectionFalloffEnd);
@@ -31,15 +18,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNFloor::Initialize(Isolate 
   JS_ASSIGN_PROP(proto, width);
   JS_ASSIGN_PROP(proto, length);
   JS_ASSIGN_PROP(proto, reflectionResolutionScaleFactor);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, floor);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
-#include "NUIBezierPath.h"
+  // static members (ctor)
+  JS_INIT_CTOR(SCNFloor, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, floor);
+JS_INIT_CLASS_END(SCNFloor, SCNGeometry);
 
 SCNFloor*
 SCNFloor_floor()

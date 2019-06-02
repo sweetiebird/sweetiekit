@@ -1,42 +1,23 @@
 //
-//  SCNSphere.m
-//  node-ios-hello
+//  SCNSphere.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNSphere.h"
 
-Nan::Persistent<FunctionTemplate> NSCNSphere::type;
+NSCNSphere::NSCNSphere() {}
+NSCNSphere::~NSCNSphere() {}
 
-NSCNSphere::NSCNSphere () {}
-NSCNSphere::~NSCNSphere () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNSphere::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNSphere"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNSphere, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, radius);
   JS_ASSIGN_PROP(proto, geodesic);
   JS_ASSIGN_PROP(proto, segmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> type(JS_OBJ(ctorFn)); type = type;
-  JS_ASSIGN_METHOD(type, sphereWithRadius);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNSphere, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, sphereWithRadius);
+JS_INIT_CLASS_END(SCNSphere, SCNGeometry);
 
 SCNSphere*
 SCNSphere_sphereWithRadius(

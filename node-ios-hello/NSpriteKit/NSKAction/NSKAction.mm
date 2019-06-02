@@ -1,45 +1,26 @@
 //
-//  SKAction.m
-//  node-ios-hello
+//  SKAction.mm
 //
 //  Created by Emily Kolar on 2019-5-15.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NSKAction.h"
 
-Nan::Persistent<FunctionTemplate> NSKAction::type;
+NSKAction::NSKAction() {}
+NSKAction::~NSKAction() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKAction::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKAction"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "moveTo", moveTo);
-  Nan::SetMethod(ctorFn, "removeFromParent", removeFromParent);
-  Nan::SetMethod(ctorFn, "sequence", sequence);
-  Nan::SetMethod(ctorFn, "waitForDuration", waitForDuration);
-  Nan::SetMethod(ctorFn, "moveBy", moveBy);
-  Nan::SetMethod(ctorFn, "scaleBy", scaleBy);
-  Nan::SetMethod(ctorFn, "group", group);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(SKAction, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(SKAction, NSObject);
+  JS_ASSIGN_METHOD(ctor, moveTo);
+  JS_ASSIGN_METHOD(ctor, removeFromParent);
+  JS_ASSIGN_METHOD(ctor, sequence);
+  JS_ASSIGN_METHOD(ctor, waitForDuration);
+  JS_ASSIGN_METHOD(ctor, moveBy);
+  JS_ASSIGN_METHOD(ctor, scaleBy);
+  JS_ASSIGN_METHOD(ctor, group);
+JS_INIT_CLASS_END(SKAction, NSObject);
 
 NAN_METHOD(NSKAction::New) {
   Nan::HandleScope scope;
@@ -59,9 +40,6 @@ NAN_METHOD(NSKAction::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NSKAction::NSKAction () {}
-NSKAction::~NSKAction () {}
 
 // creates an action that will move to a point over time
 NAN_METHOD(NSKAction::moveTo) {

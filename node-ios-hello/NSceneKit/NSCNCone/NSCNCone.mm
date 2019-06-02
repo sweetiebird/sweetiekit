@@ -9,33 +9,17 @@
 NSCNCone::NSCNCone () {}
 NSCNCone::~NSCNCone () {}
 
-Nan::Persistent<FunctionTemplate> NSCNCone::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCone::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNCone"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNCone, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, topRadius);
   JS_ASSIGN_PROP(proto, bottomRadius);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, radialSegmentCount);
   JS_ASSIGN_PROP(proto, heightSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, coneWithTopRadiusBottomRadiusHeight);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNCone, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, coneWithTopRadiusBottomRadiusHeight);
+JS_INIT_CLASS_END(SCNCone, SCNGeometry);
 
 SCNCone*
 SCNCone_coneWithTopRadiusBottomRadiusHeight(

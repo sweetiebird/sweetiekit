@@ -1,42 +1,24 @@
 //
-//  SCNTorus.m
-//  node-ios-hello
+//  SCNTorus.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNTorus.h"
-
-Nan::Persistent<FunctionTemplate> NSCNTorus::type;
 
 NSCNTorus::NSCNTorus () {}
 NSCNTorus::~NSCNTorus () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNTorus::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNTorus"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNTorus, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, ringRadius);
   JS_ASSIGN_PROP(proto, pipeRadius);
   JS_ASSIGN_PROP(proto, ringSegmentCount);
   JS_ASSIGN_PROP(proto, pipeSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, torusWithRingRadiusPipeRadius);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNTorus, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, torusWithRingRadiusPipeRadius);
+JS_INIT_CLASS_END(SCNTorus, SCNGeometry);
 
 SCNTorus*
 SCNTorus_torusWithRingRadiusPipeRadius(

@@ -9,33 +9,17 @@
 NSCNCapsule::NSCNCapsule () {}
 NSCNCapsule::~NSCNCapsule () {}
 
-Nan::Persistent<FunctionTemplate> NSCNCapsule::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCapsule::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNCapsule"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNCapsule, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, capRadius);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, radialSegmentCount);
   JS_ASSIGN_PROP(proto, heightSegmentCount);
   JS_ASSIGN_PROP(proto, capSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, capsuleWithCapRadiusHeight);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNCapsule, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, capsuleWithCapRadiusHeight);
+JS_INIT_CLASS_END(SCNCapsule, SCNGeometry);
 
 SCNCapsule*
 SCNCapsule_capsuleWithCapRadiusHeight(

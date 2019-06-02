@@ -1,46 +1,26 @@
 //
-//  SCNPyramid.m
-//  node-ios-hello
+//  SCNPyramid.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNPyramid.h"
 
-Nan::Persistent<FunctionTemplate> NSCNPyramid::type;
+NSCNPyramid::NSCNPyramid() {}
+NSCNPyramid::~NSCNPyramid() {}
 
-NSCNPyramid::NSCNPyramid () {}
-NSCNPyramid::~NSCNPyramid () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNPyramid::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNPyramid"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNPyramid, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, width);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, length);
   JS_ASSIGN_PROP(proto, widthSegmentCount);
   JS_ASSIGN_PROP(proto, heightSegmentCount);
   JS_ASSIGN_PROP(proto, lengthSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> type(JS_OBJ(ctorFn));
-  JS_ASSIGN_METHOD(type, pyramidWithWidthHeightLength);
-
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNPyramid, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, pyramidWithWidthHeightLength);
+JS_INIT_CLASS_END(SCNPyramid, SCNGeometry);
 
 SCNPyramid*
 SCNPyramid_pyramidWithWidthHeightLength(

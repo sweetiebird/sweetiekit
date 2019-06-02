@@ -1,41 +1,21 @@
 //
-//  NSCNView.m
-//  node-ios-hello
+//  NSCNView.mk
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SceneKit/SceneKit.h>
-#include "defines.h"
 #include "NSCNView.h"
-#include "NUIView.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSCNView::type;
+NSCNView::NSCNView () {}
+NSCNView::~NSCNView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SCNView, UIView);
+  // instance members (proto)
   JS_SET_PROP(proto, "autoenablesDefaultLighting", AutoenablesDefaultLighting);
   JS_SET_PROP(proto, "playing", Playing);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNView, UIView);
+JS_INIT_CLASS_END(SCNView, UIView);
 
 NAN_METHOD(NSCNView::New) {
   Nan::HandleScope scope;
@@ -65,9 +45,6 @@ NAN_METHOD(NSCNView::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NSCNView::NSCNView () {}
-NSCNView::~NSCNView () {}
 
 NAN_GETTER(NSCNView::AutoenablesDefaultLightingGetter) {
   Nan::HandleScope scope;

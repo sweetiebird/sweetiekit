@@ -1,33 +1,16 @@
 //
-//  SCNText.m
-//  node-ios-hello
+//  SCNText.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <SceneKit/SceneKit.h>
-#include "defines.h"
-#include "NSCNGeometry.h"
 #include "NSCNText.h"
-#include "NUIFont.h"
 
-Nan::Persistent<FunctionTemplate> NSCNText::type;
+NSCNText::NSCNText () {}
+NSCNText::~NSCNText () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNText::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNText"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SCNText, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, textSize);
   JS_ASSIGN_PROP(proto, extrusionDepth);
   JS_ASSIGN_PROP(proto, string);
@@ -39,14 +22,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNText::Initialize(Isolate *
   JS_ASSIGN_PROP(proto, chamferRadius);
   JS_ASSIGN_PROP(proto, chamferProfile);
   JS_ASSIGN_PROP(proto, flatness);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> type(JS_OBJ(ctorFn)); type = type;
-  JS_ASSIGN_METHOD(type, textWithStringExtrusionDepth);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNText, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, textWithStringExtrusionDepth);
+JS_INIT_CLASS_END(SCNText, SCNGeometry);
 
 #include "NNSAttributedString.h"
 
@@ -123,9 +102,6 @@ NAN_METHOD(NSCNText::New) {
     }
   }
 }
-
-NSCNText::NSCNText () {}
-NSCNText::~NSCNText () {}
 
 NAN_GETTER(NSCNText::stringGetter) {
   Nan::HandleScope scope;

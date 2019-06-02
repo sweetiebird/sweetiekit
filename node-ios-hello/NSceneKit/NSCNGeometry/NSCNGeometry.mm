@@ -9,21 +9,8 @@
 NSCNGeometry::NSCNGeometry () {}
 NSCNGeometry::~NSCNGeometry () {}
 
-Nan::Persistent<FunctionTemplate> NSCNGeometry::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNGeometry::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNGeometry"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SCNGeometry, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, name);
   JS_ASSIGN_PROP(proto, materials);
   JS_ASSIGN_PROP(proto, firstMaterial);
@@ -38,12 +25,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNGeometry::Initialize(Isola
   JS_ASSIGN_PROP(proto, wantsAdaptiveSubdivision);
   JS_ASSIGN_PROP(proto, edgeCreasesElement);
   JS_ASSIGN_PROP(proto, edgeCreasesSource);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNGeometry, NSObject);
+JS_INIT_CLASS_END(SCNGeometry, NSObject);
 
 NAN_METHOD(NSCNGeometry::New) {
   @autoreleasepool {

@@ -9,34 +9,18 @@
 NSCNPlane::NSCNPlane () {}
 NSCNPlane::~NSCNPlane () {}
 
-Nan::Persistent<FunctionTemplate> NSCNPlane::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNPlane::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNPlane"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNPlane, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, width);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, widthSegmentCount);
   JS_ASSIGN_PROP(proto, heightSegmentCount);
   JS_ASSIGN_PROP(proto, cornerRadius);
   JS_ASSIGN_PROP(proto, cornerSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, planeWithWidthHeight);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNPlane, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, planeWithWidthHeight);
+JS_INIT_CLASS_END(SCNPlane, SCNGeometry);
 
 SCNPlane*
 SCNPlane_planeWithWidthHeight(

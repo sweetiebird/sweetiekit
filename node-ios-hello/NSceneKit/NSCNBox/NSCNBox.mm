@@ -9,21 +9,8 @@
 NSCNBox::NSCNBox () {}
 NSCNBox::~NSCNBox () {}
 
-Nan::Persistent<FunctionTemplate> NSCNBox::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNBox::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNBox"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNBox, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, width);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, length);
@@ -32,14 +19,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNBox::Initialize(Isolate *i
   JS_ASSIGN_PROP(proto, heightSegmentCount);
   JS_ASSIGN_PROP(proto, lengthSegmentCount);
   JS_ASSIGN_PROP(proto, chamferSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> type(JS_OBJ(ctorFn));
-  JS_ASSIGN_METHOD(type, boxWithWidthHeightLengthChamferRadius);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNBox, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, boxWithWidthHeightLengthChamferRadius);
+JS_INIT_CLASS_END(SCNBox, SCNGeometry);
 
 SCNBox*
 SCNBox_boxWithWidthHeightLengthChamferRadius(

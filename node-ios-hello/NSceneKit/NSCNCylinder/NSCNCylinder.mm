@@ -9,32 +9,16 @@
 NSCNCylinder::NSCNCylinder () {}
 NSCNCylinder::~NSCNCylinder () {}
 
-Nan::Persistent<FunctionTemplate> NSCNCylinder::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCylinder::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNGeometry::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNCylinder"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNCylinder, SCNGeometry);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, radius);
   JS_ASSIGN_PROP(proto, height);
   JS_ASSIGN_PROP(proto, radialSegmentCount);
   JS_ASSIGN_PROP(proto, heightSegmentCount);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, cylinderWithRadiusHeight);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNCylinder, SCNGeometry);
+  JS_ASSIGN_METHOD(ctor, cylinderWithRadiusHeight);
+JS_INIT_CLASS_END(SCNCylinder, SCNGeometry);
 
 SCNCylinder*
 SCNCylinder_cylinderWithRadiusHeight(
