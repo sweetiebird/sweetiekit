@@ -9,22 +9,13 @@
 #ifndef NCLHeading_h
 #define NCLHeading_h
 
-#import <CoreLocation/CoreLocation.h>
 #import "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CLHeading(x) js_value_wrapper(x, CLHeading)
+#define to_value_CLHeading(x) to_value_wrapper(x, CLHeading)
+#define is_value_CLHeading(x) is_value_wrapper(x, CLHeading)
 
-class NCLHeading : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCLHeading();
-  virtual ~NCLHeading();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(CLHeading, NSObject);
   JS_PROP(MagneticHeading);
   JS_PROP(TrueHeading);
   JS_PROP(HeadingAccuracy);
@@ -32,6 +23,6 @@ public:
   JS_PROP(X);
   JS_PROP(Y);
   JS_PROP(Z);
-};
+JS_WRAP_CLASS_END(CLHeading);
 
 #endif /* NCLHeading_h */

@@ -9,33 +9,23 @@
 #ifndef NCLLocationManager_h
 #define NCLLocationManager_h
 
-#import <CoreLocation/CoreLocation.h>
 #import "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CLLocationManager(x) js_value_wrapper(x, CLLocationManager)
+#define to_value_CLLocationManager(x) to_value_wrapper(x, CLLocationManager)
+#define is_value_CLLocationManager(x) is_value_wrapper(x, CLLocationManager)
 
-class NCLLocationManager : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCLLocationManager();
-  virtual ~NCLLocationManager();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(StartUpdatingLocation);
-  static NAN_METHOD(StartUpdatingHeading);
-  static NAN_METHOD(RequestAlwaysAuthorization);
-  static NAN_METHOD(RequestWhenInUseAuthorization);
+JS_WRAP_CLASS(CLLocationManager, NSObject);
+  JS_METHOD(StartUpdatingLocation);
+  JS_METHOD(StartUpdatingHeading);
+  JS_METHOD(RequestAlwaysAuthorization);
+  JS_METHOD(RequestWhenInUseAuthorization);
   JS_PROP(Delegate);
   JS_PROP(DesiredAccuracy);
   JS_PROP(DistanceFilter);
   JS_PROP(HeadingFilter);
   
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(CLLocationManager);
 
 #endif /* NCLLocationManager_h */

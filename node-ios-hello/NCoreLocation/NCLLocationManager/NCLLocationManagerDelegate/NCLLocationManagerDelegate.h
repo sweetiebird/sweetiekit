@@ -9,26 +9,16 @@
 #ifndef NCLLocationManagerDelegate_h
 #define NCLLocationManagerDelegate_h
 
-#import <CoreLocation/CoreLocation.h>
 #import "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CLLocationManagerDelegate(x) js_value_wrapper(x, CLLocationManagerDelegate)
+#define to_value_CLLocationManagerDelegate(x) to_value_wrapper(x, CLLocationManagerDelegate)
+#define is_value_CLLocationManagerDelegate(x) is_value_wrapper(x, CLLocationManagerDelegate)
 
-class NCLLocationManagerDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCLLocationManagerDelegate();
-  virtual ~NCLLocationManagerDelegate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(CLLocationManagerDelegate, NSObject);
   sweetiekit::JSFunction _onAuthorization;
   sweetiekit::JSFunction _didUpdateLocations;
   sweetiekit::JSFunction _didUpdateHeading;
-};
+JS_WRAP_CLASS_END(CLLocationManagerDelegate);
 
 #endif /* NCLLocationManagerDelegate_h */

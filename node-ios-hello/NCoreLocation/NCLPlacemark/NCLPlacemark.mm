@@ -7,6 +7,7 @@
 //
     
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 #include "defines.h"
 #include "NNSObject.h"

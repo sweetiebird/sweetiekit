@@ -1579,11 +1579,11 @@
 		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
 			isa = PBXGroup;
 			children = (
-				A1646B9122920E930078CF4B /* NCLPlacemark */,
 				A1646B8D22920CFC0078CF4B /* NCLGeocoder */,
 				A13768EA2288394C00CDB13B /* NCLHeading */,
 				A1BD4BA02287DE04001D1F6E /* NCLLocation */,
 				A1BD4B962287DA1A001D1F6E /* NCLLocationManager */,
+				A1646B9122920E930078CF4B /* NCLPlacemark */,
 			);
 			path = NCoreLocation;
 			sourceTree = "<group>";

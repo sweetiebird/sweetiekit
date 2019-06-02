@@ -9,24 +9,14 @@
 #ifndef NCLGeocoder_h
 #define NCLGeocoder_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CLGeocoder(x) js_value_wrapper(x, CLGeocoder)
+#define to_value_CLGeocoder(x) to_value_wrapper(x, CLGeocoder)
+#define is_value_CLGeocoder(x) is_value_wrapper(x, CLGeocoder)
 
-class NCLGeocoder : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCLGeocoder();
-  virtual ~NCLGeocoder();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(geocodeAddressString);
-};
+JS_WRAP_CLASS(CLGeocoder, NSObject);
+  JS_METHOD(geocodeAddressString);
+JS_WRAP_CLASS_END(CLGeocoder);
 
 #endif /* NCLGeocoder_h */
