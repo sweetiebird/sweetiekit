@@ -120,7 +120,7 @@ const UICollectionViewScrollPosition = {
 // }
 //
 // async function getTodoController() {
-//   todoVC = new UIViewController();
+//   todoVC = UIViewController();
 //
 //   todoVC.view.backgroundColor = mainBg;
 //
@@ -294,7 +294,7 @@ class ARApp {
   constructor(app) {
     this.app = app;
     this.targetAdded = false;
-    this.vc = new UIViewController();
+    this.vc = UIViewController();
     const view = this.vc.view;
     this.arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
     this.vc.view.addSubview(this.arView);
@@ -405,7 +405,7 @@ class MyApp {
     this.todos = [];
     this.sb = new UIStoryboard('Main');
     this.setupDefaults();
-    this.todoVC = new UIViewController();
+    this.todoVC = UIViewController();
     this.todoTable = new UITableView();
     this.todoVC.view.addSubview(this.todoTable);
     this.setupConstraints();
@@ -542,7 +542,7 @@ class CollectionApp {
     this.items = [];
     this.sb = new UIStoryboard('Main');
     this.setupDefaults();
-    this.vc = new UIViewController();
+    this.vc = UIViewController();
     this.collView = new UICollectionView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });
     this.collView.backgroundColor = { red: 1, green: 1, blue: 1 };
     this.vc.view.addSubview(this.collView);

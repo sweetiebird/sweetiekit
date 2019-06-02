@@ -5,7 +5,7 @@ const {
 } = SweetieKit;
 
 function make() {
-  return new UIViewController();
+  return UIViewController();
 }
 
 module.exports = make;

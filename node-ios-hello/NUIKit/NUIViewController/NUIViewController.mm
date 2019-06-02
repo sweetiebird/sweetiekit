@@ -60,24 +60,28 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
 }
 
 NAN_METHOD(NUIViewController::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> controllerObj = info.This();
-
-  NUIViewController *ctrl = new NUIViewController();
-  
-  UIViewController* vc = info[0]->IsExternal() ? (__bridge UIViewController *)(info[0].As<External>()->Value())  : [UIViewController alloc];
-
-  ctrl->SetNSObject(vc);
-  [ctrl->As<UIViewController>() addTargetClosureWithClosure:^(UITextField* field){
-    const char* text = [[field text] UTF8String];
-    iOSLog0(text);
-    //sweetiekit::Resolve(cb);
-    return true;
-  }];
-  ctrl->Wrap(controllerObj);
-
-  info.GetReturnValue().Set(controllerObj);
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIViewController(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIViewController, info);
+      return;
+    }
+    UIViewController* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIViewController *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UIViewController alloc] init];
+    }
+    if (self) {
+      NUIViewController *wrapper = new NUIViewController();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIViewController::New: invalid arguments");
+    }
+  }
 }
 
 NAN_GETTER(NUIViewController::ViewGetter) {
