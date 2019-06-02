@@ -177,7 +177,7 @@ function setupQuizView() {
       length: contentTexts[i].length,
     });
     contentLabel.attributedText = attrText;
-    const image = new UIImage(iconImages[i]);
+    const image = UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
@@ -237,7 +237,7 @@ function startQuiz() {
 
 function makeBgView() {
   const frame = { x: 0, y: -84, width: w, height: h + 84 };
-  const img = new UIImage('abstract_grey');
+  const img = UIImage('abstract_grey');
   const imgView = new UIImageView(img);
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
@@ -334,7 +334,7 @@ function setupWelcomeView() {
       length: contentTexts[i].length,
     });
     contentLabel.attributedText = attrText;
-    const image = new UIImage(iconImages[i]);
+    const image = UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
@@ -389,8 +389,8 @@ function setupStartButton() {
 
 function setupNavStyle(n) {
   n.navigationBar.setTranslucent(true);
-  n.navigationBar.setBackgroundImageForBarMetrics(new UIImage(), UIBarMetrics.default);
-  n.navigationBar.shadowImage = new UIImage();
+  n.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
+  n.navigationBar.shadowImage = UIImage();
   n.navigationBar.tintColor = colors.fitbodPink;
   n.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
 }

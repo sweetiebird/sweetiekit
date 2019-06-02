@@ -1278,7 +1278,7 @@ console.log(sb, vc, view, subview);
 //
 //  app.keyWindow.setRootViewController(vc); // update to { get, set }
 //
-//  const img = new UIImage('first');
+//  const img = UIImage('first');
 //
 //  console.log('pre-button');
 //  // update alloc to init

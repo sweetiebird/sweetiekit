@@ -107,8 +107,8 @@ const randomExpLevel = () => {
 
 function setNavStyles(nav) {
   nav.navigationBar.setTranslucent(true);
-  nav.navigationBar.setBackgroundImageForBarMetrics(new UIImage(), UIBarMetrics.default);
-  nav.navigationBar.shadowImage = new UIImage();
+  nav.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
+  nav.navigationBar.shadowImage = UIImage();
   nav.navigationBar.tintColor = colors.fitbodPink;
   nav.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
 }
@@ -205,7 +205,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 
     contentLabel.attributedText = attrText;
 
-    const image = new UIImage(iconImages[i]);
+    const image = UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
@@ -266,7 +266,7 @@ function makeStatusBarView() {
 
 function makeBgView() {
   const frame = { x: 0, y: -84, width: w, height: h + 84 };
-  const img = new UIImage('abstract_grey');
+  const img = UIImage('abstract_grey');
   const imgView = new UIImageView(img);
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
@@ -366,8 +366,8 @@ function makeInnerAppControllers(nav) {
   partyVC.view.backgroundColor = colors.fitbodDarkGrey;
   partyVC.tabBarItem = new UITabBarItem(
     'Party',
-    new UIImage('user_unselected'),
-    new UIImage('user'),
+    UIImage('user_unselected'),
+    UIImage('user'),
   );
   const partyToolbar = makeTopToolbarView();
   const partyTitle = makeTopToolbarTitle('YOUR PARTY 🕺');
@@ -399,8 +399,8 @@ function makeInnerAppControllers(nav) {
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
   wagonVC.tabBarItem = new UITabBarItem(
     'Wagon',
-    new UIImage('truck_unselected'),
-    new UIImage('truck'),
+    UIImage('truck_unselected'),
+    UIImage('truck'),
   );
   const wagonToolbar = makeTopToolbarView();
   const wagonTitle = makeTopToolbarTitle('➕ YOUR WAGON');
@@ -426,7 +426,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const labelY = imgY + imgSize + 50;
     const items = contentTexts[i];
 
-    const image = new UIImage(iconImages[i]);
+    const image = UIImage(iconImages[i]);
     const imageView = new UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };

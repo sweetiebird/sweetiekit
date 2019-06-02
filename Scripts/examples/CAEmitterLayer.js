@@ -16,7 +16,7 @@ async function make(demoVC) {
   cell.velocity = 100;
   cell.scale = 0.1;
   cell.emissionRange = Math.PI * 2.0;
-  cell.contents = new UIImage('laarc');
+  cell.contents = UIImage('laarc');
 
   layer.emitterCells = [cell];
 

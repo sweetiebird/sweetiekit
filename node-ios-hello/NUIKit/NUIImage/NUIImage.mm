@@ -37,30 +37,35 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *
 }
 
 NAN_METHOD(NUIImage::New) {
-  Nan::HandleScope scope;
   @autoreleasepool {
-    Local<Object> imgObj = info.This();
-
-    NUIImage *img = new NUIImage();
-
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIImage(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIImage, info);
+      return;
+    }
+    UIImage* self = nullptr;
     if (info[0]->IsExternal()) {
-      img->SetNSObject((__bridge UIImage *)(info[0].As<External>()->Value()));
-    } else if (info.Length() > 0 && info[0]->IsString()) {
-      NSString* result = NJSStringToNSString(info[0]);
-
-      img->SetNSObject([UIImage imageNamed:result]);
-    } else if (info.Length() > 0 && info[0]->IsArrayBuffer()) {
+      self = (__bridge UIImage *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && info[0]->IsString()) {
+      self = [UIImage imageNamed:to_value_NSString(info[0])];
+    } else if (info.Length() >= 1 && info[0]->IsArrayBuffer()) {
       Local<ArrayBuffer> value = Local<ArrayBuffer>::Cast(info[0]);
       NSUInteger length = value->GetContents().ByteLength();
       const void* data = value->GetContents().Data();
       CGFloat scale = info[1]->IsNumber() ? TO_FLOAT(info[1]) : 1.0;
-      img->SetNSObject([[UIImage alloc] initWithData:[[NSData alloc] initWithBytes:data length:length] scale:scale]);
-    } else {
-      img->SetNSObject([[UIImage alloc] init]);
+      self = [[UIImage alloc] initWithData:[[NSData alloc] initWithBytes:data length:length] scale:scale];
+    } else if (info.Length() <= 0) {
+      self = [[UIImage alloc] init];
     }
-    img->Wrap(imgObj);
-
-    info.GetReturnValue().Set(imgObj);
+    if (self) {
+      NUIImage *wrapper = new NUIImage();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIImage::New: invalid arguments");
+    }
   }
 }
 

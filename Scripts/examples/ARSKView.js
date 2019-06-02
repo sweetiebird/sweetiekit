@@ -43,8 +43,8 @@ const {
 } = SweetieKit;
 
 //let text = '👀';
-let text = new SKTexture(new UIImage("nic"));
-UIImage.transparent = UIImage.transparent || new UIImage("transparent");
+let text = new SKTexture(UIImage("nic"));
+UIImage.transparent = UIImage.transparent || UIImage("transparent");
 
 let isEffectMode = false;
 const sparkParticlePath = 'Spark.sks';
@@ -74,7 +74,7 @@ function makeCamBtn(demoVC, btnSize) {
   camBtn.layer.shadowColor = colors.fitbodDarkGrey;
   camBtn.layer.shadowRadius = 6;
   camBtn.showsTouchWhenHighlighted = true;
-  camBtn.setBackgroundImageForState(new UIImage('camera_btn_thin'), UIControlState.normal);
+  camBtn.setBackgroundImageForState(UIImage('camera_btn_thin'), UIControlState.normal);
   return camBtn;
 }
 
@@ -121,7 +121,7 @@ function makeParticleButton(demoVC) {
     height: size,
   });
   btn.backgroundColor = colors.clear;
-  btn.setBackgroundImageForState(new UIImage('fire'), UIControlState.normal);
+  btn.setBackgroundImageForState(UIImage('fire'), UIControlState.normal);
   btn.showsTouchWhenHighlighted = true;
   btn.contentMode = UIViewContentMode.scaleAspectFit;
   btn.alpha = 0.3;
