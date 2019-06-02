@@ -55,7 +55,7 @@ NAN_METHOD(NUIButton::New) {
     UIButton* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIButton *)(info[0].As<External>()->Value());
-    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+    } else if (is_value_CGRect(info[0])) {
       self = [[UIButton alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[UIButton alloc] init];

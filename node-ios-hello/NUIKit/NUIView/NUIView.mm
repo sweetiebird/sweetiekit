@@ -130,7 +130,7 @@ NAN_METHOD(NUIView::New) {
       self = (__bridge UIView *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 4) {
       self = [[UIView alloc] initWithFrame:CGRectMake(TO_FLOAT(info[0]), TO_FLOAT(info[1]), TO_FLOAT(info[2]), TO_FLOAT(info[3]))];
-    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+    } else if (is_value_CGRect(info[0])) {
       self = [[UIView alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[UIView alloc] init];
