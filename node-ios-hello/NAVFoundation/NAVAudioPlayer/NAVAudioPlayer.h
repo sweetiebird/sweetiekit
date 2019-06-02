@@ -9,25 +9,14 @@
 #ifndef NAVAudioPlayer_h
 #define NAVAudioPlayer_h
 
-#import <AVFoundation/AVFoundation.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_AVAudioPlayer(x) js_value_wrapper(x, AVAudioPlayer)
+#define to_value_AVAudioPlayer(x) to_value_wrapper(x, AVAudioPlayer)
+#define is_value_AVAudioPlayer(x) is_value_wrapper(x, AVAudioPlayer)
 
-class NAVAudioPlayer : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NAVAudioPlayer();
-  virtual ~NAVAudioPlayer();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Play);
-};
+JS_WRAP_CLASS(AVAudioPlayer, NSObject);
+  JS_METHOD(Play);
+JS_WRAP_CLASS_END(AVAudioPlayer);
 
 #endif /* NAVAudioPlayer_h */
