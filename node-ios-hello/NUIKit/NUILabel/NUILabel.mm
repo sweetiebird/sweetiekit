@@ -67,8 +67,9 @@ NAN_METHOD(NUILabel::New) {
     } else if (info.Length() >= 1 && IS_OBJ(info[0])) {
       Local<Object> args = JS_OBJ(info[0]);
 
-      if (IS_OBJ(args) && JS_HAS_STR(args, "frame")) {
-        Local<Object> frame = JS_OBJ_GET(args, "frame");
+      if (JS_HAS_STR(args, "frame")) {
+        Local<Object> frame = JS_OBJ(args->Get(JS_STR("frame")));
+
         self = [[UILabel alloc] initWithFrame:sweetiekit::FrameFromJSObj(frame)];
       } else if (JS_HAS_STR(args, "width")) {
         self = [[UILabel alloc] initWithFrame:sweetiekit::FrameFromJSObj(args)];

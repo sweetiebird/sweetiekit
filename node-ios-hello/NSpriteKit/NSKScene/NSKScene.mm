@@ -99,7 +99,7 @@ NAN_METHOD(NSKScene::sceneWithSize) {
 
   @autoreleasepool {
     CGSize size(to_value_CGSize(info[0]));
-    scene->SetNSObject([SSKScene sceneWithSize:size]);
+    scene->SetNSObject([SKScene sceneWithSize:size]);
   }
 
   JS_SET_RETURN(obj);

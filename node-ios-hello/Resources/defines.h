@@ -34,7 +34,6 @@ using namespace v8;
 #define JS_GLOBAL() (JS_CONTEXT()->Global())
 #define JS_HAS(obj, name) (obj)->Has(JS_CONTEXT(), name).FromJust()
 #define JS_HAS_STR(obj, name) (obj)->Has(JS_CONTEXT(), JS_STR(name)).FromJust()
-#define JS_OBJ_GET(obj, name) JS_OBJ(obj)->Get(JS_STR(name))
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
