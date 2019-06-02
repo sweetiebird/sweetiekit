@@ -92,6 +92,25 @@ using namespace node;
       JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
   }
 
+#define JS_SET_RETURN_NEW_1(type, arg0) \
+  { \
+      std::vector<Local<Value>> argv; \
+      argv.push_back(arg0); \
+      JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
+  }
+  
+#define JS_SET_RETURN_EXTERNAL(type, value) \
+    JS_SET_RETURN_NEW_1(type, Nan::New<External>((__bridge void*)value))
+
+#define JS_SET_RETURN_NEW_2(type, arg0, arg1) \
+  { \
+      std::vector<Local<Value>> argv; \
+      argv.push_back(arg0); \
+      argv.push_back(arg1); \
+      JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
+  }
+
+
 #define JS_PROP(name) \
   static NAN_GETTER(name##Getter); \
   static NAN_SETTER(name##Setter)
@@ -819,8 +838,6 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_SCNMorpher(x) to_value_wrapper_unknown(x, SCNMorpher)
 #define js_value_SCNSkinner(x) js_value_wrapper_unknown(x, SCNSkinner)
 #define to_value_SCNSkinner(x) to_value_wrapper_unknown(x, SCNSkinner)
-#define js_value_SCNPhysicsBody(x) js_value_wrapper_unknown(x, SCNPhysicsBody)
-#define to_value_SCNPhysicsBody(x) to_value_wrapper_unknown(x, SCNPhysicsBody)
 #define js_value_SCNPhysicsField(x) js_value_wrapper_unknown(x, SCNPhysicsField)
 #define to_value_SCNPhysicsField(x) to_value_wrapper_unknown(x, SCNPhysicsField)
 

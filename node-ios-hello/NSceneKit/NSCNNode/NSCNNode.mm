@@ -658,6 +658,8 @@ NAN_GETTER(NSCNNode::childNodesGetter) {
   }
 }
 
+#include "NSCNPhysicsBody.h"
+
 NAN_GETTER(NSCNNode::physicsBodyGetter) {
   JS_UNWRAP(SCNNode, self);
   @autoreleasepool
