@@ -1,11 +1,9 @@
 //
-//  NUIRefreshControl.m
-//  node-ios-hello
+//  NUIRefreshControl.mm
 //
 //  Created by Emily Kolar on 4/23/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
 #include "NUIRefreshControl.h"
 #include "ColorHelper.h"
 
@@ -89,33 +87,17 @@ typedef void (^BlockInvocationBlock)(id target);
 #endif
 
 
-Nan::Persistent<FunctionTemplate> NUIRefreshControl::type;
-
 NUIRefreshControl::NUIRefreshControl () {}
 NUIRefreshControl::~NUIRefreshControl () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIRefreshControl::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIRefreshControl"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addTargetFor", AddTargetFor);
-  Nan::SetMethod(proto, "endRefreshing", EndRefreshing);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "alloc", Alloc);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIRefreshControl, UIControl);
+  // instance members (proto)
+  JS_SET_METHOD(proto, "addTargetFor", AddTargetFor);
+  JS_SET_METHOD(proto, "endRefreshing", EndRefreshing);
+  // static members (ctor)
+  JS_INIT_CTOR(UIRefreshControl, UIControl);
+  Nan::SetMethod(ctor, "alloc", Alloc);
+JS_INIT_CLASS_END(UIRefreshControl, UIControl);
 
 NAN_METHOD(NUIRefreshControl::New) {
   Nan::HandleScope scope;

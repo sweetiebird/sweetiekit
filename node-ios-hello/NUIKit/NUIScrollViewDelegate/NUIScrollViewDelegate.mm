@@ -1,46 +1,25 @@
 //
-//  UIScrollViewDelegate.m
-//  node-ios-hello
+//  UIScrollViewDelegate.mm
 //
 //  Created by Emily Kolar on 2019-5-16.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIScrollViewDelegate.h"
-#include "NUIScrollView.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIScrollViewDelegate::type;
+NUIScrollViewDelegate::NUIScrollViewDelegate() {}
+NUIScrollViewDelegate::~NUIScrollViewDelegate() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIScrollViewDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIScrollViewDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIScrollViewDelegate, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, didScroll);
   JS_ASSIGN_PROP(proto, willBeginDecelerating);
   JS_ASSIGN_PROP(proto, didEndDecelerating);
   JS_ASSIGN_PROP(proto, didScrollToTop);
   JS_ASSIGN_PROP(proto, shouldScrollToTop);
   JS_ASSIGN_PROP(proto, didEndDragging);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIScrollViewDelegate, NSObject);
+JS_INIT_CLASS_END(UIScrollViewDelegate, NSObject);
 
 NAN_METHOD(NUIScrollViewDelegate::New) {
   Nan::HandleScope scope;
@@ -61,8 +40,7 @@ NAN_METHOD(NUIScrollViewDelegate::New) {
   JS_SET_RETURN(obj);
 }
 
-NUIScrollViewDelegate::NUIScrollViewDelegate () {}
-NUIScrollViewDelegate::~NUIScrollViewDelegate () {}
+#include "NUIScrollView.h"
 
 NAN_GETTER(NUIScrollViewDelegate::didScrollGetter) {
   Nan::HandleScope scope;

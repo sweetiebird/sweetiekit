@@ -1,47 +1,26 @@
 //
-//  NUITableViewManager.m
-//  node-ios-hello
+//  NUITableViewManager.mm
 //
 //  Created by Emily Kolar on 5/5/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUITableViewManager.h"
-#import "node_ios_hello-Swift.h"
-#include "NUITableView.h"
-#include "NUITableViewCell.h"
 
-Nan::Persistent<FunctionTemplate> NUITableViewManager::type;
+NUITableViewManager::NUITableViewManager() {}
+NUITableViewManager::~NUITableViewManager() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewManager::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITableViewManager"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITableViewManager, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "didSelectRowAt", DidSelectRowAt);
   JS_SET_PROP(proto, "numberOfSections", NumberOfSections);
   JS_ASSIGN_PROP(proto, heightForRowAtIndexPath);
   JS_ASSIGN_PROP(proto, titleForHeaderInSection);
+  // static members (ctor)
+  JS_INIT_CTOR(UITableViewManager, NSObject);
+JS_INIT_CLASS_END(UITableViewManager, NSObject);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
-NUITableViewManager::NUITableViewManager () {}
-NUITableViewManager::~NUITableViewManager () {}
+#include "NUITableView.h"
+#include "NUITableViewCell.h"
 
 NAN_METHOD(NUITableViewManager::New) {
   Nan::HandleScope scope;

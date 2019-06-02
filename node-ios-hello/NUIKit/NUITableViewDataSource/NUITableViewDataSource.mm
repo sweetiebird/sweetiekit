@@ -1,42 +1,33 @@
 //
-//  NUITableViewDataSourceDataSource.m
-//  node-ios-hello
+//  NUITableViewDataSourceDataSource.mm
 //
 //  Created by Emily Kolar on 4/22/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUITableViewDataSource.h"
-#include "NUITableViewCell.h"
-#include "NUIControl.h"
-#include "libs_main.hpp"
 
-Nan::Persistent<FunctionTemplate> NUITableViewDataSource::type;
+NUITableViewDataSource::NUITableViewDataSource()
+: _numberRowsCallback(new Nan::Persistent<Function>())
+, _cellCallback(new Nan::Persistent<Function>())
+, _displayCallback(new Nan::Persistent<Function>())
+{
+}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewDataSource::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
+NUITableViewDataSource::~NUITableViewDataSource()
+{
+  delete _numberRowsCallback;
+  delete _cellCallback;
+  delete _displayCallback;
+}
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITableViewDataSource"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITableViewDataSource, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "numberOfRowsInSection", NumberOfRowsInSection);
   JS_SET_PROP(proto, "cellForRowAt", CellForRowAt);
   JS_SET_PROP(proto, "willDisplayCellForRowAt", WillDisplayCellForRowAt);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UITableViewDataSource, NSObject);
+JS_INIT_CLASS_END(UITableViewDataSource, NSObject);
 
 NAN_METHOD(NUITableViewDataSource::New) {
   Nan::HandleScope scope;
@@ -502,6 +493,8 @@ NAN_SETTER(NUITableViewDataSource::NumberOfRowsInSectionSetter) {
   }
 }
 
+#include "NUITableViewCell.h"
+
 NAN_GETTER(NUITableViewDataSource::CellForRowAtGetter) {
   Nan::HandleScope scope;
 
@@ -643,17 +636,4 @@ NAN_GETTER(NUITableViewDataSource::WillDisplayCellForRowAtGetter) {
   NUITableViewDataSource *view = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
 
   info.GetReturnValue().Set(Nan::New(view->_displayCallback));
-}
-
-
-NUITableViewDataSource::NUITableViewDataSource ()
-: _numberRowsCallback(new Nan::Persistent<Function>())
-, _cellCallback(new Nan::Persistent<Function>())
-, _displayCallback(new Nan::Persistent<Function>())
-{}
-
-NUITableViewDataSource::~NUITableViewDataSource () {
-  delete _numberRowsCallback;
-  delete _cellCallback;
-  delete _displayCallback;
 }

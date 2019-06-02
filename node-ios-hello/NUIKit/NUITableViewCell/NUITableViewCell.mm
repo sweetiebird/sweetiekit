@@ -1,42 +1,24 @@
 //
-//  NUITableViewCell.m
-//  node-ios-hello
+//  NUITableViewCell.mm
 //
 //  Created by Emily Kolar on 4/22/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUITableViewCell.h"
-#include "NUILabel.h"
 
-Nan::Persistent<FunctionTemplate> NUITableViewCell::type;
+NUITableViewCell::NUITableViewCell() {}
+NUITableViewCell::~NUITableViewCell() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITableViewCell::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITableViewCell"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITableViewCell, UIView);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "textLabel", TextLabel);
   JS_SET_PROP_READONLY(proto, "detailTextLabel", DetailTextLabel);
   JS_SET_PROP(proto, "isEditing", IsEditing);
   JS_SET_PROP(proto, "isSelected", IsSelected);
   JS_ASSIGN_PROP(proto, selectionStyle);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UITableViewCell, UIView);
+JS_INIT_CLASS_END(UITableViewCell, UIView);
 
 NAN_METHOD(NUITableViewCell::New) {
   Nan::HandleScope scope;
@@ -72,6 +54,8 @@ NAN_METHOD(NUITableViewCell::New) {
   JS_SET_RETURN(ctrlObj);
 }
 
+#include "NUILabel.h"
+
 NAN_GETTER(NUITableViewCell::TextLabelGetter) {
   Nan::HandleScope scope;
 
@@ -93,9 +77,6 @@ NAN_GETTER(NUITableViewCell::TextLabelGetter) {
       JS_SET_RETURN(value);
   }
 }
-
-NUITableViewCell::NUITableViewCell () {}
-NUITableViewCell::~NUITableViewCell () {}
 
 NAN_GETTER(NUITableViewCell::DetailTextLabelGetter) {
   Nan::HandleScope scope;

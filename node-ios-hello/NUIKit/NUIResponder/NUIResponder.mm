@@ -1,36 +1,19 @@
 //
-//  NUIResponder.m
-//  node-ios-hello
+//  NUIResponder.mm
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #include "NUIResponder.h"
 
-Nan::Persistent<FunctionTemplate> NUIResponder::type;
+NUIResponder::NUIResponder() {}
+NUIResponder::~NUIResponder() {}
 
-NUIResponder::NUIResponder () {}
-NUIResponder::~NUIResponder () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIResponder::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIResponder"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "touchesBeganWithEvent", touchesBeganWithEvent);
-  Nan::SetMethod(proto, "touchesMovedWithEvent", touchesMovedWithEvent);
-  Nan::SetMethod(proto, "touchesEndedWithEvent", touchesEndedWithEvent);
+JS_INIT_CLASS(UIResponder, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, touchesBeganWithEvent);
+  JS_ASSIGN_METHOD(proto, touchesMovedWithEvent);
+  JS_ASSIGN_METHOD(proto, touchesEndedWithEvent);
   JS_ASSIGN_PROP_READONLY(proto, nextResponder);
   JS_ASSIGN_PROP_READONLY(proto, canBecomeFirstResponder);
   JS_ASSIGN_PROP_READONLY(proto, canResignFirstResponder);
@@ -53,12 +36,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIResponder::Initialize(Isola
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIResponder, NSObject);
+JS_INIT_CLASS_END(UIResponder, NSObject);
 
 NAN_METHOD(NUIResponder::New) {
   Nan::HandleScope scope;

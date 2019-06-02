@@ -1,42 +1,20 @@
 //
-//  NUIStoryboard.m
-//  node-ios-hello
+//  NUIStoryboard.mm
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIStoryboard.h"
-#include "NUIViewController.h"
-#include "NUITabBarController.h"
 
-Nan::Persistent<FunctionTemplate> NUIStoryboard::type;
+NUIStoryboard::NUIStoryboard() {}
+NUIStoryboard::~NUIStoryboard() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIStoryboard::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIStoryboard"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  Nan::SetMethod(proto, "instantiateViewController", InstantiateViewController);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
+JS_INIT_CLASS(UIStoryboard, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, instantiateViewController);
+  // static members (ctor)
+  JS_INIT_CTOR(UIStoryboard, NSObject);
+JS_INIT_CLASS_END(UIStoryboard, NSObject);
 
 NAN_METHOD(NUIStoryboard::New) {
   Nan::HandleScope scope;
@@ -69,7 +47,11 @@ NAN_METHOD(NUIStoryboard::New) {
   info.GetReturnValue().Set(storyboardObj);
 }
 
-NAN_METHOD(NUIStoryboard::InstantiateViewController) {
+
+#include "NUIViewController.h"
+#include "NUITabBarController.h"
+
+NAN_METHOD(NUIStoryboard::instantiateViewController) {
   NUIStoryboard *sb = ObjectWrap::Unwrap<NUIStoryboard>(Local<Object>::Cast(info.This()));
 
   std::string identifier;
@@ -97,8 +79,4 @@ NAN_METHOD(NUIStoryboard::InstantiateViewController) {
   Local<Object> vcObj = ctor->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
   info.GetReturnValue().Set(vcObj);
 }
-
-NUIStoryboard::NUIStoryboard () {}
-
-NUIStoryboard::~NUIStoryboard () {}
 

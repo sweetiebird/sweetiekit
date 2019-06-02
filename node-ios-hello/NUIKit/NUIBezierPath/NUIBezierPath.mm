@@ -1,44 +1,25 @@
 //
-//  UIBezierPath.m
-//  node-ios-hello
+//  UIBezierPath.mm
 //
 //  Created by Emily Kolar on 2019-5-16.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIBezierPath.h"
 
-Nan::Persistent<FunctionTemplate> NUIBezierPath::type;
+NUIBezierPath::NUIBezierPath() {}
+NUIBezierPath::~NUIBezierPath() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIBezierPath::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIBezierPath"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIBezierPath, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, lineWidth);
-  Nan::SetMethod(proto, "moveToPoint", moveToPoint);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(proto, "bezierPath", bezierPath);
-  Nan::SetMethod(proto, "bezierPathWithRect", bezierPathWithRect);
-  Nan::SetMethod(proto, "bezierPathWithOvalInRect", bezierPathWithOvalInRect);
-  Nan::SetMethod(proto, "bezierPathWithArcCenter", bezierPathWithArcCenter);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  JS_ASSIGN_METHOD(proto, moveToPoint);
+  // static members (ctor)
+  JS_INIT_CTOR(UIBezierPath, NSObject);
+  JS_ASSIGN_METHOD(ctor, bezierPath);
+  JS_ASSIGN_METHOD(ctor, bezierPathWithRect);
+  JS_ASSIGN_METHOD(ctor, bezierPathWithOvalInRect);
+  JS_ASSIGN_METHOD(ctor, bezierPathWithArcCenter);
+JS_INIT_CLASS_END(UIBezierPath, NSObject);
 
 NAN_METHOD(NUIBezierPath::New) {
   Nan::HandleScope scope;
@@ -58,9 +39,6 @@ NAN_METHOD(NUIBezierPath::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIBezierPath::NUIBezierPath () {}
-NUIBezierPath::~NUIBezierPath () {}
 
 // ======= static initializers
 

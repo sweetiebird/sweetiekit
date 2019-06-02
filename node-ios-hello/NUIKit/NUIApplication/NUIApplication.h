@@ -16,12 +16,9 @@
 #define is_value_UIApplication(x) is_value_wrapper(x, UIApplication)
 
 JS_WRAP_CLASS(UIApplication, NSObject);
-  JS_PROP(KeyWindow);
-  JS_METHOD(Main);
+  JS_PROP(keyWindow);
   JS_PROP(statusBarOrientation);
-
-private:
-  static UIWindow* tmp_UIWindow;
+  JS_METHOD(main);
 JS_WRAP_CLASS_END(UIApplication);
 
 

@@ -1,45 +1,24 @@
 //
-//  UINavigationItem.m
-//  node-ios-hello
+//  UINavigationItem.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
-#include "NUIView.h"
 #include "NUINavigationItem.h"
-#include "NUIBarButtonItem.h"
 
-Nan::Persistent<FunctionTemplate> NUINavigationItem::type;
+NUINavigationItem::NUINavigationItem() {}
+NUINavigationItem::~NUINavigationItem() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationItem::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UINavigationItem"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "initWithTitle", initWithTitle);
+JS_INIT_CLASS(UINavigationItem, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, initWithTitle);
   JS_ASSIGN_PROP(proto, title);
   JS_ASSIGN_PROP(proto, backBarButtonItem);
   JS_ASSIGN_PROP(proto, titleView);
   JS_ASSIGN_PROP(proto, prompt);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UINavigationItem, NSObject);
+JS_INIT_CLASS_END(UINavigationItem, NSObject);
 
 NAN_METHOD(NUINavigationItem::New) {
   Nan::HandleScope scope;
@@ -59,9 +38,6 @@ NAN_METHOD(NUINavigationItem::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUINavigationItem::NUINavigationItem () {}
-NUINavigationItem::~NUINavigationItem () {}
 
 NAN_METHOD(NUINavigationItem::initWithTitle) {
   Nan::EscapableHandleScope scope;
@@ -106,6 +82,8 @@ NAN_SETTER(NUINavigationItem::titleSetter) {
   }
 }
 
+#include "NUIBarButtonItem.h"
+
 NAN_GETTER(NUINavigationItem::backBarButtonItemGetter) {
   Nan::HandleScope scope;
   
@@ -125,6 +103,8 @@ NAN_SETTER(NUINavigationItem::backBarButtonItemSetter) {
     [ui setBackBarButtonItem:itemObj->As<UIBarButtonItem>()];
   }
 }
+
+#include "NUIView.h"
 
 NAN_GETTER(NUINavigationItem::titleViewGetter) {
   Nan::HandleScope scope;

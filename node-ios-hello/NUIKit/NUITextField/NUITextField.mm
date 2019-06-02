@@ -1,50 +1,33 @@
 //
-//  NUITextField.m
-//  node-ios-hello
+//  NUITextField.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUITextField.h"
-#include "NUIViewController.h"
-#include "NNSAttributedString.h"
 
-Nan::Persistent<FunctionTemplate> NUITextField::type;
+NUITextField::NUITextField()
+: _callback(new Nan::Persistent<Function>())
+{
+}
+NUITextField::~NUITextField()
+{
+  delete _callback;
+}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITextField::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITextField"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
-  Nan::SetAccessor(proto, JS_STR("delegate"), DelegateGetter, DelegateSetter);
-  Nan::SetAccessor(proto, JS_STR("callback"), CallbackGetter, CallbackSetter);
+JS_INIT_CLASS(UITextField, UIControl);
+  // instance members (proto)
+  JS_SET_PROP(proto, "text", Text);
+  JS_SET_PROP(proto, "delegate", Delegate);
+  JS_SET_PROP(proto, "callback", Callback);
   JS_ASSIGN_PROP(proto, textColor);
   JS_ASSIGN_PROP(proto, placeholder);
   JS_ASSIGN_PROP(proto, attributedPlaceholder);
   JS_ASSIGN_PROP(proto, autocorrectionType);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "alloc", Alloc);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
-NUITextField::NUITextField () : _callback(new Nan::Persistent<Function>()) {}
-NUITextField::~NUITextField () { delete _callback; }
+  // static members (ctor)
+  JS_INIT_CTOR(UITextField, UIControl);
+  JS_SET_METHOD(ctor, "alloc", Alloc);
+JS_INIT_CLASS_END(UITextField, UIControl);
 
 NAN_METHOD(NUITextField::New) {
   Nan::HandleScope scope;
@@ -261,6 +244,8 @@ NAN_SETTER(NUITextField::placeholderSetter) {
     [ui setText:text];
   }
 }
+
+#include "NNSAttributedString.h"
 
 NAN_GETTER(NUITextField::attributedPlaceholderGetter) {
   Nan::HandleScope scope;

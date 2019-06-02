@@ -16,9 +16,9 @@
 #define is_value_UISwitch(x) is_value_wrapper(x, UISwitch)
 
 JS_WRAP_CLASS(UISwitch, UIControl);
-  JS_PROP(IsOn);
-  JS_PROP(OnTintColor);
-  JS_METHOD(SetOn);
+  JS_PROP(isOn);
+  JS_PROP(onTintColor);
+  JS_METHOD(setOn);
 JS_WRAP_CLASS_END(UISwitch);
 
 #endif /* NUISwitch_h */

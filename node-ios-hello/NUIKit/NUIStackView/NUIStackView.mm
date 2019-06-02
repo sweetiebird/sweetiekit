@@ -1,45 +1,26 @@
 //
-//  UIStackView.m
-//  node-ios-hello
+//  NUIStackView.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NUIView.h"
 #include "NUIStackView.h"
 
-Nan::Persistent<FunctionTemplate> NUIStackView::type;
+NUIStackView::NUIStackView() {}
+NUIStackView::~NUIStackView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIStackView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIStackView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addArrangedSubview", addArrangedSubview);
-  Nan::SetMethod(proto, "insertArrangedSubview", insertArrangedSubview);
-  Nan::SetMethod(proto, "removeArrangedSubview", removeArrangedSubview);
+JS_INIT_CLASS(UIStackView, UIView);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, addArrangedSubview);
+  JS_ASSIGN_METHOD(proto, insertArrangedSubview);
+  JS_ASSIGN_METHOD(proto, removeArrangedSubview);
   JS_ASSIGN_PROP_READONLY(proto, arrangedSubviews);
   JS_ASSIGN_PROP(proto, axis);
   JS_ASSIGN_PROP(proto, distribution);
   JS_ASSIGN_PROP(proto, alignment);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIStackView, UIView);
+JS_INIT_CLASS_END(UIStackView, UIView);
 
 NAN_METHOD(NUIStackView::New) {
   Nan::HandleScope scope;
@@ -75,9 +56,6 @@ NAN_METHOD(NUIStackView::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIStackView::NUIStackView () {}
-NUIStackView::~NUIStackView () {}
 
 NAN_METHOD(NUIStackView::addArrangedSubview) {
   Nan::HandleScope scope;

@@ -1,49 +1,25 @@
 //
-//  NUIScrollView.m
-//  node-ios-hello
+//  NUIScrollView.mm
 //
 //  Created by Emily Kolar on 5/5/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NUITableView.h"
-#include "NUIView.h"
 #include "NUIScrollView.h"
-#include "NUIScrollViewDelegate.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIScrollView::type;
+NUIScrollView::NUIScrollView() {}
+NUIScrollView::~NUIScrollView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIScrollView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIScrollView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIScrollView, UIView);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, contentSize);
   JS_ASSIGN_PROP(proto, showsHorizontalScrollIndicator);
   JS_ASSIGN_PROP(proto, showsVerticalScrollIndicator);
   JS_ASSIGN_PROP_READONLY(proto, contentOffset);
-  Nan::SetMethod(proto, "setContentOffset", setContentOffset);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
-NUIScrollView::NUIScrollView () {}
-NUIScrollView::~NUIScrollView () {}
+  JS_ASSIGN_METHOD(proto, setContentOffset);
+  // static members (ctor)
+  JS_INIT_CTOR(UIScrollView, UIView);
+JS_INIT_CLASS_END(UIScrollView, UIView);
 
 NAN_METHOD(NUIScrollView::New) {
   Nan::HandleScope scope;
@@ -84,6 +60,8 @@ NAN_METHOD(NUIScrollView::setContentOffset) {
     [ui setContentOffset:CGPointMake(x, y) animated:animated];
   }
 }
+
+#include "NUIScrollViewDelegate.h"
 
 NAN_GETTER(NUIScrollView::delegateGetter) {
   Nan::HandleScope scope;

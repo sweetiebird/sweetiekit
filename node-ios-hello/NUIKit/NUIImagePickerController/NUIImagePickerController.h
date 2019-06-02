@@ -16,7 +16,7 @@
 #define is_value_UIImagePickerController(x) is_value_wrapper(x, UIImagePickerController)
 
 JS_WRAP_CLASS(UIImagePickerController, UINavigationController);
-  JS_PROP(Delegate);
+  JS_PROP(delegate);
 JS_WRAP_CLASS_END(UIImagePickerController);
 
 #endif /* NUIImagePickerController_h */

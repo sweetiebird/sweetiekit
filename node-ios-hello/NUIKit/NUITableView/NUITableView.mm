@@ -1,47 +1,27 @@
 //
-//  NUITableView.m
-//  node-ios-hello
+//  NUITableView.mm
 //
 //  Created by Emily Kolar on 4/22/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUITableView.h"
-#include "NUIScrollView.h"
-#include "NUITableViewDataSource.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUITableView::type;
+NUITableView::NUITableView() {}
+NUITableView::~NUITableView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITableView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIScrollView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITableView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITableView, UIScrollView);
+  // instance members (proto)
   JS_SET_PROP(proto, "dataSource", DataSource);
   JS_SET_PROP(proto, "rowHeight", RowHeight);
   JS_SET_PROP(proto, "estimatedRowHeight", EstimatedRowHeight);
   JS_SET_PROP(proto, "refreshControl", RefreshControl);
   JS_ASSIGN_PROP(proto, separatorStyle);
-  Nan::SetMethod(proto, "reloadData", ReloadData);
-  Nan::SetMethod(proto, "cellForRowAt", CellForRowAt);
-  Nan::SetMethod(proto, "scrollToRowAt", ScrollToRowAt);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  JS_SET_METHOD(proto, "reloadData", ReloadData);
+  JS_SET_METHOD(proto, "cellForRowAt", CellForRowAt);
+  JS_SET_METHOD(proto, "scrollToRowAt", ScrollToRowAt);
+  // static members (ctor)
+  JS_INIT_CTOR(UITableView, UIScrollView);
+JS_INIT_CLASS_END(UITableView, UIScrollView);
 
 NAN_METHOD(NUITableView::New) {
   Nan::HandleScope scope;
@@ -75,9 +55,6 @@ NAN_METHOD(NUITableView::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NUITableView::NUITableView () {}
-NUITableView::~NUITableView () {}
 
 NAN_METHOD(NUITableView::DequeueReusableCell) {
   JS_UNWRAP(UITableView, tv);
@@ -141,6 +118,8 @@ NAN_METHOD(NUITableView::DequeueReusableCellWithIdentifierForIndexPath) {
 
   JS_SET_RETURN(value);
 }
+
+#include "NUITableViewDataSource.h"
 
 NAN_GETTER(NUITableView::DataSourceGetter) {
   Nan::HandleScope scope;

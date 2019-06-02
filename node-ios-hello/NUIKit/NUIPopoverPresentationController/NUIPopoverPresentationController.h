@@ -9,13 +9,13 @@
 #ifndef NUIPopoverPresentationController_h
 #define NUIPopoverPresentationController_h    
 
-#include "NNSObject.h"
+#include "NUIPresentationController.h"
 
 #define js_value_UIPopoverPresentationController(x) js_value_wrapper(x, UIPopoverPresentationController)
 #define to_value_UIPopoverPresentationController(x) to_value_wrapper(x, UIPopoverPresentationController)
 #define is_value_UIPopoverPresentationController(x) is_value_wrapper(x, UIPopoverPresentationController)
 
-JS_WRAP_CLASS(UIPopoverPresentationController, NSObject);
+JS_WRAP_CLASS(UIPopoverPresentationController, UIPresentationController);
   JS_PROP(permittedArrowDirections);
   JS_PROP(sourceView);
   JS_PROP(sourceRect);

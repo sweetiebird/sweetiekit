@@ -48,9 +48,10 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   let UIViewAccessors = GetBoolAccessors(UIViewClass);
   let UIViewSetters = GetBoolSetters(UIViewClass);
   let UIViewVoids = GetVoidMethods(UIViewClass);
-  
+
   for (let method of UIViewVoids) {
     if (!nativeType.prototype.hasOwnProperty(method.name)) {
+      console.log(nativeType, method.name);
       nativeType.prototype[method.name] = function () {
         return this.invokeMethod(["v", method.name]);
       }
@@ -110,7 +111,7 @@ Object.getOwnPropertyNames(SweetieKit)
     BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
-   
+
 // gc periodically
 setInterval(() => {
   gc();

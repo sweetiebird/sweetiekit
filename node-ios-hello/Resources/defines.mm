@@ -425,6 +425,70 @@ namespace sweetiekit
 }
 @end
 
+Local<Value>
+js_value_NSDate(NSDate* _Nullable value)
+{
+  if (!value) {
+    return Nan::Undefined();
+  }
+  double milliseconds = 1000.0 * [value timeIntervalSince1970];
+  return Nan::New<Date>(milliseconds).ToLocalChecked();
+}
+
+NSDate* _Nullable
+to_value_NSDate(const Local<Value>& value, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  
+  if (value->IsNullOrUndefined()) {
+  } else if (value->IsDate()) {
+    double milliseconds = value->NumberValue(JS_CONTEXT()).FromJust();
+    return [[NSDate alloc] initWithTimeIntervalSince1970:(milliseconds / 1000.0)];
+  } else if (failed) {
+    *failed = true;
+  } else {
+    Nan::ThrowError("Expected NSDate");
+  }
+  return nil;
+}
+
+bool
+is_value_NSDate(const Local<Value>& value)
+{
+  return value->IsDate();
+}
+
+Local<Value>
+js_value_NSTimeInterval(const NSTimeInterval& value)
+{
+  return JS_NUM(value);
+}
+
+NSTimeInterval
+to_value_NSTimeInterval(const Local<Value>& value, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  
+  if (value->IsNumber()) {
+    double seconds = TO_DOUBLE(value);
+    return seconds;
+  } else if (failed) {
+    *failed = true;
+  } else {
+    Nan::ThrowError("Expected NSTimeInterval");
+  }
+  return 0.0;
+}
+
+bool is_value_NSTimeInterval(const Local<Value>& value)
+{
+  return value->IsNumber();
+}
+
 Local<Value> js_value_simd_quatf(const simd_quatf& value) {
   return createTypedArray<Float32Array>(4, (const float*)&value);
 }

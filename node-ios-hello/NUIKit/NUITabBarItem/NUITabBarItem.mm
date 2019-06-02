@@ -1,38 +1,21 @@
 //
-//  NUITabBarItem.m
-//  node-ios-hello
+//  NUITabBarItem.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUITabBarItem.h"
+
+NUITabBarItem::NUITabBarItem() {}
+NUITabBarItem::~NUITabBarItem() {}
+
+JS_INIT_CLASS(UITabBarItem, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(UITabBarItem, NSObject);
+JS_INIT_CLASS_END(UITabBarItem, NSObject);
+
 #include "NUIImage.h"
-
-Nan::Persistent<FunctionTemplate> NUITabBarItem::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITabBarItem::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITabBarItem"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
 
 NAN_METHOD(NUITabBarItem::New) {
   Nan::HandleScope scope;
@@ -69,6 +52,3 @@ NAN_METHOD(NUITabBarItem::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NUITabBarItem::NUITabBarItem () {}
-NUITabBarItem::~NUITabBarItem () {}

@@ -1,33 +1,17 @@
 //
-//  UITouch.m
-//  node-ios-hello
+//  UITouch.mm
 //
 //  Created by Emily Kolar on 2019-5-15.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUITouch.h"
 #include "NUIView.h"
 
-Nan::Persistent<FunctionTemplate> NUITouch::type;
+NUITouch::NUITouch() {}
+NUITouch::~NUITouch() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITouch::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITouch"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITouch, NSObject);
+  // instance members (proto)
   //@property(nonatomic,readonly) NSTimeInterval      timestamp;
   JS_PROTO_PROP_READONLY(timestamp);
   //@property(nonatomic,readonly) UITouchPhase        phase;
@@ -95,11 +79,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUITouch::Initialize(Isolate *
   //@property(nonatomic,readonly) UITouchProperties estimatedPropertiesExpectingUpdates NS_AVAILABLE_IOS(9_1);
   JS_PROTO_PROP_READONLY(estimatedPropertiesExpectingUpdates);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+  // static members (ctor)
+  JS_INIT_CTOR(UITouch, NSObject);
 
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(UITouch, NSObject);
 
 NAN_METHOD(NUITouch::New) {
   Nan::HandleScope scope;
@@ -119,9 +102,6 @@ NAN_METHOD(NUITouch::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUITouch::NUITouch () {}
-NUITouch::~NUITouch () {}
 
 //@property(nonatomic,readonly) NSTimeInterval      timestamp;
 JS_GETTER(UITouch, ui, timestamp,

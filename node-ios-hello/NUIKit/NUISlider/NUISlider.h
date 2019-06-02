@@ -16,8 +16,8 @@
 #define is_value_UISlider(x) is_value_wrapper(x, UISlider)
 
 JS_WRAP_CLASS(UISlider, UIControl);
-  JS_METHOD(SetValue);
-  JS_PROP(Value);
+  JS_METHOD(setValue);
+  JS_PROP(value);
   JS_METHOD(setThumbImage);
   JS_PROP(currentThumbImage);
   JS_PROP(thumbTintColor);

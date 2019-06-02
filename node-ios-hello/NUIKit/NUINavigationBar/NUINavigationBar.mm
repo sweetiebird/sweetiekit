@@ -1,47 +1,26 @@
 //
-//  UINavigationBar.m
-//  node-ios-hello
+//  UINavigationBar.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NUIView.h"
 #include "NUINavigationBar.h"
-#include "NUINavigationItem.h"
-#include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NUINavigationBar::type;
+NUINavigationBar::NUINavigationBar() {}
+NUINavigationBar::~NUINavigationBar() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationBar::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UINavigationBar"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "setBackgroundImageForBarMetrics", setBackgroundImageForBarMetrics);
+JS_INIT_CLASS(UINavigationBar, UIView);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, setBackgroundImageForBarMetrics);
   JS_ASSIGN_PROP(proto, barStyle);
   JS_ASSIGN_PROP_READONLY(proto, backItem);
   JS_ASSIGN_PROP(proto, barTintColor);
   JS_ASSIGN_PROP(proto, tintColor);
   JS_ASSIGN_PROP(proto, shadowImage);
 //  JS_ASSIGN_PROP(proto, isTranslucent);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UINavigationBar, UIView);
+JS_INIT_CLASS_END(UINavigationBar, UIView);
 
 NAN_METHOD(NUINavigationBar::New) {
   Nan::HandleScope scope;
@@ -62,8 +41,7 @@ NAN_METHOD(NUINavigationBar::New) {
   JS_SET_RETURN(obj);
 }
 
-NUINavigationBar::NUINavigationBar () {}
-NUINavigationBar::~NUINavigationBar () {}
+#include "NUIImage.h"
 
 NAN_METHOD(NUINavigationBar::setBackgroundImageForBarMetrics) {
   Nan::HandleScope scope;
@@ -182,6 +160,8 @@ NAN_SETTER(NUINavigationBar::tintColorSetter) {
     [ui setTintColor:color];
   }
 }
+
+#include "NUINavigationItem.h"
 
 NAN_GETTER(NUINavigationBar::backItemGetter) {
   Nan::HandleScope scope;

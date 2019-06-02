@@ -9,13 +9,13 @@
 #ifndef NUIWindow_h
 #define NUIWindow_h
 
-#include "NNSObject.h"
+#include "NUIView.h"
 
 #define js_value_UIWindow(x) js_value_wrapper(x, UIWindow)
 #define to_value_UIWindow(x) to_value_wrapper(x, UIWindow)
 #define is_value_UIWindow(x) is_value_wrapper(x, UIWindow)
 
-JS_WRAP_CLASS(UIWindow, NSObject);
+JS_WRAP_CLASS(UIWindow, UIView);
   JS_METHOD(SetRootViewController);
   JS_METHOD(MakeKeyAndVisible);
   JS_PROP(rootViewController);

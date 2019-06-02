@@ -1,42 +1,21 @@
 //
-//  UIPickerView.m
-//  node-ios-hello
+//  UIPickerView.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NUIView.h"
 #include "NUIPickerView.h"
-#include "NUIPickerViewManager.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIPickerView::type;
+NUIPickerView::NUIPickerView() {}
+NUIPickerView::~NUIPickerView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIPickerView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIPickerView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIPickerView, UIView);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, dataSource);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIPickerView, UIView);
+JS_INIT_CLASS_END(UIPickerView, UIView);
 
 NAN_METHOD(NUIPickerView::New) {
   Nan::HandleScope scope;
@@ -66,8 +45,7 @@ NAN_METHOD(NUIPickerView::New) {
   JS_SET_RETURN(obj);
 }
 
-NUIPickerView::NUIPickerView () {}
-NUIPickerView::~NUIPickerView () {}
+#include "NUIPickerViewManager.h"
 
 NAN_GETTER(NUIPickerView::delegateGetter) {
   Nan::HandleScope scope;

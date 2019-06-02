@@ -1,34 +1,16 @@
 //
-//  NUIButton.m
-//  node-ios-hello
+//  NUIButton.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUIButton.h"
-#include "NUIControl.h"
-#include "NUILabel.h"
-#include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NUIButton::type;
+NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
+NUIButton::~NUIButton () { delete _callback; }
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIButton"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIButton, UIControl);
+  // instance members (proto)
   JS_SET_PROP(proto, "title", Title);
   JS_SET_PROP(proto, "callback", Callback);
   JS_ASSIGN_PROP_READONLY(proto, titleLabel);
@@ -38,12 +20,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   JS_ASSIGN_METHOD(proto, setTitleColorForState);
   JS_ASSIGN_METHOD(proto, setTitleForState);
   JS_ASSIGN_METHOD(proto, setBackgroundImageForState);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIButton, UIControl);
+JS_INIT_CLASS_END(UIButton, UIControl);
 
 NAN_METHOD(NUIButton::New) {
   @autoreleasepool {
@@ -71,9 +50,6 @@ NAN_METHOD(NUIButton::New) {
     }
   }
 }
-
-NUIButton::NUIButton () : _callback(new Nan::Persistent<Function>()) {}
-NUIButton::~NUIButton () { delete _callback; }
 
 NAN_GETTER(NUIButton::TitleGetter) {
   Nan::HandleScope scope;
@@ -166,6 +142,8 @@ NAN_METHOD(NUIButton::setTitleForState) {
   }
 }
 
+#include "NUILabel.h"
+
 NAN_GETTER(NUIButton::titleLabelGetter) {
   Nan::HandleScope scope;
 
@@ -257,6 +235,8 @@ NAN_SETTER(NUIButton::imageEdgeInsetsSetter) {
     [ui setImageEdgeInsets:UIEdgeInsetsMake(t, l, b, r)];
   }
 }
+
+#include "NUIImage.h"
 
 NAN_METHOD(NUIButton::setBackgroundImageForState) {
   Nan::HandleScope scope;

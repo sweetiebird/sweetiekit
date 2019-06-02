@@ -1,42 +1,22 @@
 //
-//  NUISwitch.m
-//  node-ios-hello
+//  NUISwitch.mm
 //
 //  Created by Emily Kolar on 5/4/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-
 #include "NUISwitch.h"
-#include "ColorHelper.h"
 
-Nan::Persistent<FunctionTemplate> NUISwitch::type;
+NUISwitch::NUISwitch() {}
+NUISwitch::~NUISwitch() {}
 
-NUISwitch::NUISwitch () {}
-NUISwitch::~NUISwitch () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUISwitch::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-  
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UISwitch"));
-  type.Reset(ctor);
-  
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "setOn", SetOn);
-  JS_SET_PROP(proto, "isOn", IsOn);
-  JS_SET_PROP(proto, "onTintColor", OnTintColor);
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UISwitch, UIControl);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, setOn);
+  JS_ASSIGN_PROP(proto, isOn);
+  JS_ASSIGN_PROP(proto, onTintColor);
+  // static members (ctor)
+  JS_INIT_CTOR(UISwitch, UIControl);
+JS_INIT_CLASS_END(UISwitch, UIControl);
 
 NAN_METHOD(NUISwitch::New) {
   Nan::HandleScope scope;
@@ -64,7 +44,7 @@ NAN_METHOD(NUISwitch::New) {
   JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NUISwitch::IsOnGetter) {
+NAN_GETTER(NUISwitch::isOnGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(UISwitch, ui);
   
@@ -79,7 +59,7 @@ NAN_GETTER(NUISwitch::IsOnGetter) {
   JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NUISwitch::IsOnSetter) {
+NAN_SETTER(NUISwitch::isOnSetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(UISwitch, ui);
   
@@ -92,7 +72,7 @@ NAN_SETTER(NUISwitch::IsOnSetter) {
   }
 }
 
-NAN_GETTER(NUISwitch::OnTintColorGetter) {
+NAN_GETTER(NUISwitch::onTintColorGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(UISwitch, ui);
   
@@ -108,7 +88,7 @@ NAN_GETTER(NUISwitch::OnTintColorGetter) {
 //  JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NUISwitch::OnTintColorSetter) {
+NAN_SETTER(NUISwitch::onTintColorSetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(UISwitch, ui);
   
@@ -122,7 +102,7 @@ NAN_SETTER(NUISwitch::OnTintColorSetter) {
 //  }
 }
 
-NAN_METHOD(NUISwitch::SetOn) {
+NAN_METHOD(NUISwitch::setOn) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(UISwitch, ui);

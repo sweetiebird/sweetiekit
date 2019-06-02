@@ -1,41 +1,22 @@
 //
-//  UITabBar.m
-//  node-ios-hello
+//  UITabBar.mm
 //
 //  Created by Emily Kolar on 2019-5-20.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NUIView.h"
 #include "NUITabBar.h"
 
-Nan::Persistent<FunctionTemplate> NUITabBar::type;
+NUITabBar::NUITabBar() {}
+NUITabBar::~NUITabBar() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITabBar::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITabBar"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UITabBar, UIView);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, barTintColor);
   JS_ASSIGN_PROP(proto, tintColor);
   JS_ASSIGN_PROP(proto, unselectedItemTintColor);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UITabBar, UIView);
+JS_INIT_CLASS_END(UITabBar, UIView);
 
 NAN_METHOD(NUITabBar::New) {
   Nan::HandleScope scope;
@@ -55,9 +36,6 @@ NAN_METHOD(NUITabBar::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUITabBar::NUITabBar () {}
-NUITabBar::~NUITabBar () {}
 
 NAN_GETTER(NUITabBar::barTintColorGetter) {
   Nan::HandleScope scope;

@@ -1,14 +1,9 @@
 //
-//  NUIViewController.m
-//  node-ios-hello
+//  NUIViewController.mm
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
 #include "NUIViewControllerTransitioningDelegate.h"
@@ -18,27 +13,14 @@
 #include "NUINavigationItem.h"
 #include "NUIPopoverPresentationController.h"
 
-Nan::Persistent<FunctionTemplate> NUIViewController::type;
+NUIViewController::NUIViewController() {}
+NUIViewController::~NUIViewController() {}
 
-NUIViewController::NUIViewController () {}
-NUIViewController::~NUIViewController () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIResponder::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIViewController"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("view"), ViewGetter);
-  Nan::SetMethod(proto, "present", PresentViewController);
-  Nan::SetMethod(proto, "dismiss", DismissViewController);
+JS_INIT_CLASS(UIViewController, UIResponder);
+  // instance members (proto)
+  JS_SET_PROP_READONLY(proto, "view", View);
+  JS_SET_METHOD(proto, "present", PresentViewController);
+  JS_SET_METHOD(proto, "dismiss", DismissViewController);
   JS_SET_PROP(proto, "transitioningDelegate", TransitioningDelegate);
   JS_SET_PROP(proto, "modalPresentationStyle", ModalPresentationStyle);
   JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
@@ -52,12 +34,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewController::Initialize(
   JS_ASSIGN_PROP_READONLY(proto, navigationController);
   JS_ASSIGN_PROP_READONLY(proto, navigationItem);
   JS_ASSIGN_PROP_READONLY(proto, popoverPresentationController);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIViewController, UIResponder);
+JS_INIT_CLASS_END(UIViewController, UIResponder);
 
 NAN_METHOD(NUIViewController::New) {
   @autoreleasepool {

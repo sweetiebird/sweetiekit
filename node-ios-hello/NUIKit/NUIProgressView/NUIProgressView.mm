@@ -1,42 +1,23 @@
 //
-//  UIProgressView.m
-//  node-ios-hello
+//  UIProgressView.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NUIView.h"
 #include "NUIProgressView.h"
 
-Nan::Persistent<FunctionTemplate> NUIProgressView::type;
+NUIProgressView::NUIProgressView() {}
+NUIProgressView::~NUIProgressView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIProgressView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIProgressView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "setProgress", setProgress);
+JS_INIT_CLASS(UIProgressView, UIView);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, setProgress);
   JS_ASSIGN_PROP(proto, progress);
   JS_ASSIGN_PROP(proto, progressTintColor);
   JS_ASSIGN_PROP(proto, trackTintColor);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIProgressView, UIView);
+JS_INIT_CLASS_END(UIProgressView, UIView);
 
 NAN_METHOD(NUIProgressView::New) {
   Nan::HandleScope scope;
@@ -74,9 +55,6 @@ NAN_METHOD(NUIProgressView::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIProgressView::NUIProgressView () {}
-NUIProgressView::~NUIProgressView () {}
 
 NAN_METHOD(NUIProgressView::setProgress) {
   Nan::HandleScope scope;

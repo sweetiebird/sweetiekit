@@ -636,6 +636,14 @@ namespace sweetiekit
   }
 }
 
+Local<Value> js_value_NSDate(NSDate* _Nullable value);
+NSDate* _Nullable to_value_NSDate(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_NSDate(const Local<Value>& value);
+
+Local<Value> js_value_NSTimeInterval(const NSTimeInterval& value);
+NSTimeInterval to_value_NSTimeInterval(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_NSTimeInterval(const Local<Value>& value);
+
 #define js_value_vector_float3   js_value_simd_float3
 #define js_value_matrix_float3x3 js_value_simd_float3x3
 #define js_value_matrix_float4x4 js_value_simd_float4x4

@@ -1,45 +1,26 @@
 //
-//  NUINavigationController.m
-//  node-ios-hello
+//  NUINavigationController.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUINavigationController.h"
-#include "NUIViewController.h"
-#include "NUINavigationBar.h"
 
-Nan::Persistent<FunctionTemplate> NUINavigationController::type;
+NUINavigationController::NUINavigationController() {}
+NUINavigationController::~NUINavigationController() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUINavigationController::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIViewController::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UINavigationController"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "pushViewController", PushViewController);
-  Nan::SetMethod(proto, "popViewController", PopViewController);
-  Nan::SetMethod(proto, "popToRootViewController", PopToRootViewController);
-  Nan::SetMethod(proto, "popToViewController", PopToViewController);
-  Nan::SetMethod(proto, "setViewControllers", SetViewControllers);
+JS_INIT_CLASS(UINavigationController, UIViewController);
+  // instance members (proto)
+  JS_SET_METHOD(proto, "pushViewController", PushViewController);
+  JS_SET_METHOD(proto, "popViewController", PopViewController);
+  JS_SET_METHOD(proto, "popToRootViewController", PopToRootViewController);
+  JS_SET_METHOD(proto, "popToViewController", PopToViewController);
+  JS_SET_METHOD(proto, "setViewControllers", SetViewControllers);
   JS_SET_PROP(proto, "isToolbarHidden", IsToolbarHidden);
   JS_ASSIGN_PROP_READONLY(proto, navigationBar);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UINavigationController, UIViewController);
+JS_INIT_CLASS_END(UINavigationController, UIViewController);
 
 NAN_METHOD(NUINavigationController::New) {
   Nan::HandleScope scope;
@@ -65,9 +46,6 @@ NAN_METHOD(NUINavigationController::New) {
 
   info.GetReturnValue().Set(ctrlObj);
 }
-
-NUINavigationController::NUINavigationController () {}
-NUINavigationController::~NUINavigationController () {}
 
 NAN_METHOD(NUINavigationController::SetViewControllers) {
   NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
@@ -216,6 +194,8 @@ NAN_SETTER(NUINavigationController::IsToolbarHiddenSetter) {
 
   [ui setToolbarHidden:TO_BOOL(value)];
 }
+
+#include "NUINavigationBar.h"
 
 NAN_GETTER(NUINavigationController::navigationBarGetter) {
   Nan::HandleScope scope;

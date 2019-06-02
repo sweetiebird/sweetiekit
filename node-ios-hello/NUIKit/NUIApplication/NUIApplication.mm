@@ -1,41 +1,21 @@
 //
-//  NAppDelegate.m
-//  node-ios-hello
+//  NUIApplication.mm
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUIApplication.h"
-#include "NUIWindow.h"
-#include "main.h"
 
-Nan::Persistent<FunctionTemplate> NUIApplication::type;
-UIWindow* NUIApplication::tmp_UIWindow;
+NUIApplication::NUIApplication() {}
+NUIApplication::~NUIApplication() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIApplication::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIApplication"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("keyWindow"), KeyWindowGetter);
+JS_INIT_CLASS(UIApplication, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, keyWindow);
   JS_ASSIGN_PROP_READONLY(proto, statusBarOrientation);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIApplication, NSObject);
+JS_INIT_CLASS_END(UIApplication, NSObject);
 
 NAN_METHOD(NUIApplication::New) {
   Nan::HandleScope scope;
@@ -58,33 +38,23 @@ NAN_METHOD(NUIApplication::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NUIApplication::KeyWindowGetter)
+#include "NUIWindow.h"
+
+NAN_GETTER(NUIApplication::keyWindowGetter)
 {
   JS_UNWRAP(UIApplication, app)
-
-  tmp_UIWindow = nullptr;
-
+  
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      tmp_UIWindow = [app keyWindow];
-    });
-  }
-  if (tmp_UIWindow != nullptr) {
-    Local<Value> argv[] = {
-      Nan::New<v8::External>((__bridge void*)tmp_UIWindow)
-    };
-    Local<Object> winObj = JS_TYPE(NUIWindow)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    
-    info.GetReturnValue().Set(winObj);
+    JS_SET_RETURN(js_value_UIWindow([app keyWindow]));
   }
 }
 
-#import "node_ios_hello-Swift.h"
+#include "main.h"
 
 namespace sweetiekit {
   extern Isolate* nodeIsolate;
 }
-NAN_METHOD(NUIApplication::Main) {
+NAN_METHOD(NUIApplication::main) {
   Nan::HandleScope scope;
   
   std::string identifier("AppDelegate");
@@ -141,9 +111,6 @@ NAN_METHOD(NUIApplication::Main) {
 //  }
   
 }
-
-NUIApplication::NUIApplication () {}
-NUIApplication::~NUIApplication () {}
 
 NAN_GETTER(NUIApplication::statusBarOrientationGetter) {
   Nan::HandleScope scope;

@@ -1,38 +1,19 @@
 //
-//  UITapGestureRecognizer.m
-//  node-ios-hello
+//  UITapGestureRecognizer.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NUIGestureRecognizer.h"
 #include "NUITapGestureRecognizer.h"
 
-Nan::Persistent<FunctionTemplate> NUITapGestureRecognizer::type;
+NUITapGestureRecognizer::NUITapGestureRecognizer() {}
+NUITapGestureRecognizer::~NUITapGestureRecognizer() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITapGestureRecognizer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIGestureRecognizer::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITapGestureRecognizer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UITapGestureRecognizer, UIGestureRecognizer);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(UITapGestureRecognizer, UIGestureRecognizer);
+JS_INIT_CLASS_END(UITapGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUITapGestureRecognizer::New) {
   Nan::HandleScope scope;
@@ -52,6 +33,3 @@ NAN_METHOD(NUITapGestureRecognizer::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUITapGestureRecognizer::NUITapGestureRecognizer () {}
-NUITapGestureRecognizer::~NUITapGestureRecognizer () {}

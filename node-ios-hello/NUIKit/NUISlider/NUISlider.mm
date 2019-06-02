@@ -1,43 +1,24 @@
 //
-//  NUISlider.m
-//  node-ios-hello
+//  NUISlider.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUISlider.h"
-#include "NUIControl.h"
-#include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NUISlider::type;
+NUISlider::NUISlider() {}
+NUISlider::~NUISlider() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUISlider::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UISlider"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "value", Value);
-  Nan::SetMethod(proto, "setValue", SetValue);
-  Nan::SetMethod(proto, "setThumbImage", setThumbImage);
+JS_INIT_CLASS(UISlider, UIControl);
+  // instance members (proto)
+  JS_ASSIGN_PROP(proto, value);
+  JS_ASSIGN_METHOD(proto, setValue);
+  JS_ASSIGN_METHOD(proto, setThumbImage);
   JS_ASSIGN_PROP_READONLY(proto, currentThumbImage);
   JS_ASSIGN_PROP(proto, thumbTintColor);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UISlider, UIControl);
+JS_INIT_CLASS_END(UISlider, UIControl);
 
 NAN_METHOD(NUISlider::New) {
   Nan::HandleScope scope;
@@ -67,10 +48,7 @@ NAN_METHOD(NUISlider::New) {
   JS_SET_RETURN(obj);
 }
 
-NUISlider::NUISlider () {}
-NUISlider::~NUISlider () {}
-
-NAN_GETTER(NUISlider::ValueGetter) {
+NAN_GETTER(NUISlider::valueGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(UISlider, ui);
@@ -78,7 +56,7 @@ NAN_GETTER(NUISlider::ValueGetter) {
   JS_SET_RETURN(JS_NUM([ui value]));
 }
 
-NAN_SETTER(NUISlider::ValueSetter) {
+NAN_SETTER(NUISlider::valueSetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(UISlider, ui);
@@ -86,13 +64,15 @@ NAN_SETTER(NUISlider::ValueSetter) {
   [ui setValue:TO_DOUBLE(value)];
 }
 
-NAN_METHOD(NUISlider::SetValue) {
+NAN_METHOD(NUISlider::setValue) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(UISlider, ui);
 
   [ui setValue:TO_FLOAT(info[0]) animated:TO_BOOL(info[1])];
 }
+
+#include "NUIImage.h"
 
 NAN_METHOD(NUISlider::setThumbImage) {
   Nan::HandleScope scope;

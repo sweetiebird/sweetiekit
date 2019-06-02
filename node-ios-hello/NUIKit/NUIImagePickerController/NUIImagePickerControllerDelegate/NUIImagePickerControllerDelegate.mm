@@ -1,41 +1,31 @@
 //
-//  NUIImagePickerControllerDelegate.m
-//  node-ios-hello
+//  NUIImagePickerControllerDelegate.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUIImagePickerControllerDelegate.h"
 
-Nan::Persistent<FunctionTemplate> NUIImagePickerControllerDelegate::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIImagePickerControllerDelegate::Initialize(Isolate *isolate)
+NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate()
+: _onInfo(new Nan::Persistent<Function>())
+, _onCancel(new Nan::Persistent<Function>())
 {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIImagePickerControllerDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("result"), ResultGetter);
-  Nan::SetAccessor(proto, JS_STR("onInfo"), OnInfoGetter, OnInfoSetter);
-  Nan::SetAccessor(proto, JS_STR("onCancel"), OnCancelGetter, OnCancelSetter);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
+
+NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate()
+{
+  delete _onInfo;
+  delete _onCancel;
+}
+
+JS_INIT_CLASS(UIImagePickerControllerDelegate, NSObject);
+  // instance members (proto)
+  JS_SET_PROP_READONLY(proto, "result", Result);
+  JS_SET_PROP(proto, "onInfo", OnInfo);
+  JS_SET_PROP(proto, "onCancel", OnCancel);
+  // static members (ctor)
+  JS_INIT_CTOR(UIImagePickerControllerDelegate, NSObject);
+JS_INIT_CLASS_END(UIImagePickerControllerDelegate, NSObject);
 
 NAN_METHOD(NUIImagePickerControllerDelegate::New) {
   Nan::HandleScope scope;
@@ -117,9 +107,3 @@ NAN_GETTER(NUIImagePickerControllerDelegate::OnCancelGetter) {
 
   info.GetReturnValue().Set(Nan::New(view->_onCancel));
 }
-
-NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate ()
-: _onInfo(new Nan::Persistent<Function>())
-, _onCancel(new Nan::Persistent<Function>())
-{}
-NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate () { delete _onInfo; delete _onCancel; }

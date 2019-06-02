@@ -1,39 +1,20 @@
 //
-//  NUIViewControllerTransitioningDelegate.m
-//  node-ios-hello
+//  NUIViewControllerTransitioningDelegate.mm
 //
 //  Created by Emily Kolar on 5/4/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUIViewControllerTransitioningDelegate.h"
 
-Nan::Persistent<FunctionTemplate> NUIViewControllerTransitioningDelegate::type;
+NUIViewControllerTransitioningDelegate::NUIViewControllerTransitioningDelegate() {}
+NUIViewControllerTransitioningDelegate::~NUIViewControllerTransitioningDelegate() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIViewControllerTransitioningDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-  
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIViewControllerTransitioningDelegate"));
-  type.Reset(ctor);
-  
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIViewControllerTransitioningDelegate, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "presentationControllerFor", PresentationControllerFor);
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIViewControllerTransitioningDelegate, NSObject);
+JS_INIT_CLASS_END(UIViewControllerTransitioningDelegate, NSObject);
 
 NAN_METHOD(NUIViewControllerTransitioningDelegate::New) {
   Nan::HandleScope scope;
@@ -87,6 +68,3 @@ NAN_GETTER(NUIViewControllerTransitioningDelegate::PresentationControllerForGett
   
   info.GetReturnValue().Set(del->_presentationControllerFor.GetValue());
 }
-
-NUIViewControllerTransitioningDelegate::NUIViewControllerTransitioningDelegate () {}
-NUIViewControllerTransitioningDelegate::~NUIViewControllerTransitioningDelegate () {}

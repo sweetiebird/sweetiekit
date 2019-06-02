@@ -757,7 +757,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // UIKit
     JS_EXPORT_TYPE(UIApplication);
-    JS_EXPORT_TYPE(UIWindow);
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_TYPE(RPPreviewViewController);
@@ -770,6 +769,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIPopoverPresentationController);
     JS_EXPORT_TYPE(UIAlertController);
     JS_EXPORT_TYPE(UIView);
+    JS_EXPORT_TYPE(UIWindow);
     JS_EXPORT_TYPE(UICollectionReusableView);
     JS_EXPORT_TYPE(UIControl);
     JS_EXPORT_TYPE(UISlider);
@@ -1054,9 +1054,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIApplication class]]) {
         return NUIApplication::type;
       }
-      if ([obj isKindOfClass:[UIWindow class]]) {
-        return NUIWindow::type;
-      }
       if ([obj isKindOfClass:[UITouch class]]) {
         return NUITouch::type;
       }
@@ -1133,6 +1130,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIControl class]]) {
         return NUIControl::type;
       }
+      if ([obj isKindOfClass:[UIWindow class]]) {
+        return NUIWindow::type;
+      }
       if ([obj isKindOfClass:[UIView class]]) {
         return NUIView::type;
       }
@@ -1169,7 +1169,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[UIPopoverPresentationController class]]) {
         return NUIPopoverPresentationController::type;
       }
-      if ([obj isKindOfClass:[SUIPresentationController class]]) {
+      if ([obj isKindOfClass:[UIPresentationController class]]) {
         return NUIPresentationController::type;
       }
       // ========= delegates

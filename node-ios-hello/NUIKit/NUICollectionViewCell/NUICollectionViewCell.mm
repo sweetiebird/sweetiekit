@@ -1,42 +1,24 @@
 //
-//  NUICollectionViewCell.m
-//  node-ios-hello
+//  NUICollectionViewCell.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUICollectionViewCell.h"
-#include "NUICollectionReusableView.h"
 
-Nan::Persistent<FunctionTemplate> NUICollectionViewCell::type;
+NUICollectionViewCell::NUICollectionViewCell() {}
+NUICollectionViewCell::~NUICollectionViewCell() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionViewCell::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUICollectionReusableView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UICollectionViewCell"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UICollectionViewCell, UICollectionReusableView);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "contentView", ContentView);
   JS_SET_PROP(proto, "backgroundView", BackgroundView);
   JS_SET_PROP(proto, "selectedBackgroundView", SelectedBackgroundView);
   JS_SET_PROP(proto, "isSelected", IsSelected);
   JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UICollectionViewCell, UICollectionReusableView);
+JS_INIT_CLASS_END(UICollectionViewCell, UICollectionReusableView);
 
 NAN_METHOD(NUICollectionViewCell::New) {
   Nan::HandleScope scope;
@@ -82,9 +64,6 @@ NAN_METHOD(NUICollectionViewCell::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUICollectionViewCell::NUICollectionViewCell () {}
-NUICollectionViewCell::~NUICollectionViewCell () {}
 
 NAN_GETTER(NUICollectionViewCell::ContentViewGetter) {
   Nan::HandleScope scope;

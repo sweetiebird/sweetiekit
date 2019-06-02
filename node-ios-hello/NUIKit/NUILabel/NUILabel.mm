@@ -1,34 +1,17 @@
 //
-//  NUILabel.m
-//  node-ios-hello
+//  NUILabel.mm
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUILabel.h"
-#include "NUIView.h"
-#include "NUIFont.h"
-#include "NNSAttributedString.h"
 
-Nan::Persistent<FunctionTemplate> NUILabel::type;
+NUILabel::NUILabel() {}
+NUILabel::~NUILabel() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UILabel"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("text"), TextGetter, TextSetter);
+JS_INIT_CLASS(UILabel, UIView);
+  // instance members (proto)
+  JS_SET_PROP(proto, "text", Text);
   JS_SET_PROP(proto, "numberOfLines", NumberOfLines);
   JS_SET_PROP(proto, "font", Font);
   JS_SET_PROP(proto, "textColor", TextColor);
@@ -36,12 +19,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   JS_SET_PROP(proto, "isHighlighted", IsHighlighted);
   JS_ASSIGN_PROP(proto, textAlignment);
   JS_ASSIGN_PROP(proto, attributedText);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UILabel, UIView);
+JS_INIT_CLASS_END(UILabel, UIView);
 
 NAN_METHOD(NUILabel::New) {
   @autoreleasepool {
@@ -86,9 +66,6 @@ NAN_METHOD(NUILabel::New) {
     }
   }
 }
-
-NUILabel::NUILabel () {}
-NUILabel::~NUILabel () {}
 
 NAN_GETTER(NUILabel::TextGetter) {
   Nan::HandleScope scope;
@@ -145,6 +122,8 @@ NAN_SETTER(NUILabel::NumberOfLinesSetter) {
 
   [ui setNumberOfLines:lines];
 }
+
+#include "NUIFont.h"
 
 NAN_GETTER(NUILabel::FontGetter) {
   Nan::HandleScope scope;
@@ -279,6 +258,8 @@ NAN_SETTER(NUILabel::textAlignmentSetter) {
     [ui setTextAlignment:type];
   }
 }
+
+#include "NNSAttributedString.h"
 
 NAN_GETTER(NUILabel::attributedTextGetter) {
   Nan::HandleScope scope;

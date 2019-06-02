@@ -1,41 +1,20 @@
 //
-//  NUIImagePickerController.m
-//  node-ios-hello
+//  NUIImagePickerController.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUIImagePickerController.h"
-#include "NUIImagePickerControllerDelegate.h"
-#include "NUINavigationController.h"
-#include "NUIViewController.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIImagePickerController::type;
+NUIImagePickerController::NUIImagePickerController() {}
+NUIImagePickerController::~NUIImagePickerController() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIImagePickerController::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUINavigationController::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIImagePickerController"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetAccessor(proto, JS_STR("delegate"), DelegateGetter, DelegateSetter);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIImagePickerController, UINavigationController);
+  // instance members (proto)
+  JS_ASSIGN_PROP(proto, delegate);
+  // static members (ctor)
+  JS_INIT_CTOR(UIImagePickerController, UINavigationController);
+JS_INIT_CLASS_END(UIImagePickerController, UINavigationController);
 
 NAN_METHOD(NUIImagePickerController::New) {
   Nan::HandleScope scope;
@@ -60,13 +39,15 @@ NAN_METHOD(NUIImagePickerController::New) {
   info.GetReturnValue().Set(ctrlObj);
 }
 
-NAN_GETTER(NUIImagePickerController::DelegateGetter) {
+#include "NUIImagePickerControllerDelegate.h"
+
+NAN_GETTER(NUIImagePickerController::delegateGetter) {
   JS_UNWRAP(UIImagePickerController, ui);
   NUIImagePickerController *view = ObjectWrap::Unwrap<NUIImagePickerController>(info.This());
   Nan::ThrowError("NUIImagePickerController::DelegateGetter not yet implemented");
 }
 
-NAN_SETTER(NUIImagePickerController::DelegateSetter) {
+NAN_SETTER(NUIImagePickerController::delegateSetter) {
   Nan::HandleScope scope;
 
   NUIImagePickerController *ctrl = ObjectWrap::Unwrap<NUIImagePickerController>(info.This());
@@ -79,6 +60,3 @@ NAN_SETTER(NUIImagePickerController::DelegateSetter) {
     });
   }
 }
-
-NUIImagePickerController::NUIImagePickerController () {}
-NUIImagePickerController::~NUIImagePickerController () {}

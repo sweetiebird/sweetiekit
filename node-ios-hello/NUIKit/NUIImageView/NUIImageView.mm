@@ -1,38 +1,20 @@
 //
-//  NUIImageView.m
-//  node-ios-hello
+//  NUIImageView.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUIImageView.h"
-#include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NUIImageView::type;
+NUIImageView::NUIImageView() {}
+NUIImageView::~NUIImageView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIImageView::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIImageView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIImageView, UIView);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, image);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIImageView, UIView);
+JS_INIT_CLASS_END(UIImageView, UIView);
 
 #include "NUIImage.h"
 
@@ -66,9 +48,6 @@ NAN_METHOD(NUIImageView::New) {
     }
   }
 }
-
-NUIImageView::NUIImageView () {}
-NUIImageView::~NUIImageView () {}
 
 NAN_GETTER(NUIImageView::imageGetter) {
   Nan::HandleScope scope;

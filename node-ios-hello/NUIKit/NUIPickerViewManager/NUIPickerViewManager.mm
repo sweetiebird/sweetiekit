@@ -1,44 +1,24 @@
 //
-//  UIPickerViewManager.m
-//  node-ios-hello
+//  UIPickerViewManager.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIPickerViewManager.h"
-#include "NUIPickerView.h"
-#include "NNSAttributedString.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIPickerViewManager::type;
+NUIPickerViewManager::NUIPickerViewManager() {}
+NUIPickerViewManager::~NUIPickerViewManager() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIPickerViewManager::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIPickerViewManager"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIPickerViewManager, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, titleForRow);
   JS_ASSIGN_PROP(proto, didSelectRow);
   JS_ASSIGN_PROP(proto, attributedTitleForRow);
+  // static members (ctor)
+  JS_INIT_CTOR(UIPickerViewManager, NSObject);
+JS_INIT_CLASS_END(UIPickerViewManager, NSObject);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+#include "NUIPickerView.h"
 
 NAN_METHOD(NUIPickerViewManager::New) {
   Nan::HandleScope scope;
@@ -77,9 +57,6 @@ NAN_METHOD(NUIPickerViewManager::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIPickerViewManager::NUIPickerViewManager () {}
-NUIPickerViewManager::~NUIPickerViewManager () {}
 
 NAN_GETTER(NUIPickerViewManager::titleForRowGetter) {
   Nan::HandleScope scope;
@@ -122,6 +99,8 @@ NAN_SETTER(NUIPickerViewManager::didSelectRowSetter) {
     mgr->_didSelectRow("NUIScrollViewDelegate::didSelectRowSetter", pickerObj, JS_NUM(row), JS_NUM(component));
   }];
 }
+
+#include "NNSAttributedString.h"
 
 NAN_GETTER(NUIPickerViewManager::attributedTitleForRowGetter) {
   Nan::HandleScope scope;

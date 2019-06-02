@@ -1,40 +1,20 @@
 //
-//  UIGestureRecognizer.m
-//  node-ios-hello
+//  UIGestureRecognizer.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIGestureRecognizer.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIGestureRecognizer::type;
+NUIGestureRecognizer::NUIGestureRecognizer() {}
+NUIGestureRecognizer::~NUIGestureRecognizer() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIGestureRecognizer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIGestureRecognizer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addTarget", addTarget);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIGestureRecognizer, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, addTarget);
+  // static members (ctor)
+  JS_INIT_CTOR(UIGestureRecognizer, NSObject);
+JS_INIT_CLASS_END(UIGestureRecognizer, NSObject);
 
 NAN_METHOD(NUIGestureRecognizer::New) {
   Nan::HandleScope scope;
@@ -54,9 +34,6 @@ NAN_METHOD(NUIGestureRecognizer::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIGestureRecognizer::NUIGestureRecognizer () {}
-NUIGestureRecognizer::~NUIGestureRecognizer () {}
 
 NAN_METHOD(NUIGestureRecognizer::addTarget) {
   Nan::EscapableHandleScope scope;

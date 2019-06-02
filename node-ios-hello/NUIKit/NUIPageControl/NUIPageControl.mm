@@ -1,44 +1,24 @@
 //
-//  UIPageControl.m
-//  node-ios-hello
+//  UIPageControl.mm
 //
 //  Created by Emily Kolar on 2019-5-16.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NUIControl.h"
 #include "NUIPageControl.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIPageControl::type;
+NUIPageControl::NUIPageControl() {}
+NUIPageControl::~NUIPageControl() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIPageControl::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIControl::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIPageControl"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIPageControl, UIControl);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, currentPage);
   JS_ASSIGN_PROP(proto, numberOfPages);
   JS_ASSIGN_PROP(proto, pageIndicatorTintColor);
   JS_ASSIGN_PROP(proto, currentPageIndicatorTintColor);
-  Nan::SetMethod(proto, "sizeForNumberOfPages", sizeForNumberOfPages);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  JS_ASSIGN_METHOD(proto, sizeForNumberOfPages);
+  // static members (ctor)
+  JS_INIT_CTOR(UIPageControl, UIControl);
+JS_INIT_CLASS_END(UIPageControl, UIControl);
 
 NAN_METHOD(NUIPageControl::New) {
   Nan::HandleScope scope;
@@ -66,9 +46,6 @@ NAN_METHOD(NUIPageControl::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIPageControl::NUIPageControl () {}
-NUIPageControl::~NUIPageControl () {}
 
 NAN_GETTER(NUIPageControl::numberOfPagesGetter) {
   Nan::HandleScope scope;

@@ -1,36 +1,16 @@
 //
-//  NUIView.m
-//  node-ios-hello
+//  NUIView.mm
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
 #include "NUIView.h"
-#include "NUIButton.h"
-#include "NUIResponder.h"
-#include "NNSLayoutAnchor.h"
-#include "NUIGestureRecognizer.h"
 
-Nan::Persistent<FunctionTemplate> NUIView::type;
-CGSize NUIView::tmp_Size;
+NUIView::NUIView() {}
+NUIView::~NUIView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIResponder::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIView, UIResponder);
+  // instance members (proto)
   JS_SET_PROP(proto, "frame", Frame);
   JS_SET_PROP(proto, "bounds", Bounds);
   JS_SET_PROP(proto, "origin", Origin);
@@ -69,30 +49,29 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
   JS_ASSIGN_PROP(proto, drawRect);
   JS_ASSIGN_PROP(proto, contentMode);
   JS_ASSIGN_PROP(proto, transform);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  sweetiekit::Set(ctorFn, "beginAnimations", ^(JSInfo info) {
+  // static members (ctor)
+  JS_INIT_CTOR(UIView, UIResponder);
+  sweetiekit::Set(ctor, "beginAnimations", ^(JSInfo info) {
     [UIView beginAnimations:NJSStringToNSString(info[0]) context:nullptr];
   });
-  sweetiekit::Set(ctorFn, "setAnimationDuration", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "setAnimationDuration", ^(JSInfo info) {
     if (!info[0]->IsNumber()) {
       Nan::ThrowTypeError("setAnimationDuration: Expected a number");
     } else {
       [UIView setAnimationDuration:TO_DOUBLE(info[0])];
     }
   });
-  sweetiekit::Set(ctorFn, "setAnimationBeginsFromCurrentState", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "setAnimationBeginsFromCurrentState", ^(JSInfo info) {
     if (!info[0]->IsBoolean()) {
       Nan::ThrowTypeError("setAnimationBeginsFromCurrentState: Expected a boolean");
     } else {
       [UIView setAnimationBeginsFromCurrentState:TO_BOOL(info[0])];
     }
   });
-  sweetiekit::Set(ctorFn, "commitAnimations", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "commitAnimations", ^(JSInfo info) {
     [UIView commitAnimations];
   });
-  sweetiekit::Set(ctorFn, "animate", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "animate", ^(JSInfo info) {
     Isolate* isolate = info.GetIsolate();
     Nan::HandleScope handleScope;
     NSTimeInterval duration = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
@@ -111,12 +90,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIView::Initialize(Isolate *i
       }];
     }
   });
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
-NUIView::NUIView () {}
-NUIView::~NUIView () {}
+JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {
   @autoreleasepool {
@@ -486,6 +460,8 @@ CGRect NUIView::GetBounds() {
   return bounds;
 }
 
+CGSize NUIView::tmp_Size;
+
 NAN_METHOD(NUIView::SizeThatFits) {
   Nan::HandleScope scope;
 
@@ -643,6 +619,8 @@ NAN_SETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsSetter) {
   
   [view->As<UIView>() setTranslatesAutoresizingMaskIntoConstraints:TO_BOOL(value)];
 }
+
+#include "NNSLayoutAnchor.h"
 
 NAN_GETTER(NUIView::LeadingAnchorGetter) {
   Nan::HandleScope scope;
@@ -909,6 +887,8 @@ NAN_SETTER(NUIView::drawRectSetter) {
     [ui associateValue:func withKey:@"sweetiekit_drawRect"];
   }
 }
+
+#include "NUIGestureRecognizer.h"
 
 NAN_METHOD(NUIView::addGestureRecognizer) {
   Nan::HandleScope scope;

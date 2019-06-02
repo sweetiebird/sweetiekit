@@ -16,7 +16,7 @@
 #define is_value_UITabBarController(x) is_value_wrapper(x, UITabBarController)
 
 JS_WRAP_CLASS(UITabBarController, UIViewController);
-  JS_METHOD(SetViewControllers);
+  JS_METHOD(setViewControllers);
   JS_PROP(tabBar);
 JS_WRAP_CLASS_END(UITabBarController);
 

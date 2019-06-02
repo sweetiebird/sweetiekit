@@ -1,40 +1,22 @@
 //
-//  NUIWindow.m
-//  node-ios-hello
+//  NUIWindow.mm
 //
 //  Created by Emily Kolar on 4/18/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUIWindow.h"
-#include "NUIViewController.h"
 
-Nan::Persistent<FunctionTemplate> NUIWindow::type;
+NUIWindow::NUIWindow() {}
+NUIWindow::~NUIWindow() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIWindow::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIWindow"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIWindow, UIView);
+  // instance members (proto)
   Nan::SetMethod(proto, "setRootViewController", SetRootViewController);
   Nan::SetMethod(proto, "makeKeyAndVisible", MakeKeyAndVisible);
   JS_ASSIGN_PROP(proto, rootViewController);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIWindow, UIView);
+JS_INIT_CLASS_END(UIWindow, UIView);
 
 NAN_METHOD(NUIWindow::New) {
   Nan::HandleScope scope;
@@ -52,9 +34,6 @@ NAN_METHOD(NUIWindow::New) {
 
   info.GetReturnValue().Set(viewObj);
 }
-
-NUIWindow::NUIWindow () {}
-NUIWindow::~NUIWindow () {}
 
 
 NAN_METHOD(NUIWindow::SetRootViewController) {
@@ -78,6 +57,8 @@ NAN_METHOD(NUIWindow::MakeKeyAndVisible) {
     });
   }
 }
+
+#include "NUIViewController.h"
 
 NAN_GETTER(NUIWindow::rootViewControllerGetter) {
   Nan::HandleScope scope;

@@ -9,13 +9,13 @@
 #ifndef NUILabel_h
 #define NUILabel_h
 
-#include "NNSObject.h"
+#include "NUIView.h"
 
 #define js_value_UILabel(x) js_value_wrapper(x, UILabel)
 #define to_value_UILabel(x) to_value_wrapper(x, UILabel)
 #define is_value_UILabel(x) is_value_wrapper(x, UILabel)
 
-JS_WRAP_CLASS(UILabel, NSObject);
+JS_WRAP_CLASS(UILabel, UIView);
   JS_METHOD(Alloc);
   JS_PROP(Text);
   JS_METHOD(initWithXYWidthHeight);

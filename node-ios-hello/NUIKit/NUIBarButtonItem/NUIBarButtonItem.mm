@@ -1,39 +1,20 @@
 //
-//  NUIToolbar.m
-//  node-ios-hello
+//  NUIToolbar.mm
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIBarButtonItem.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIBarButtonItem::type;
+NUIBarButtonItem::NUIBarButtonItem() {}
+NUIBarButtonItem::~NUIBarButtonItem() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIBarButtonItem::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIBarButtonItem"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIBarButtonItem, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, title);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(UIBarButtonItem, NSObject);
+JS_INIT_CLASS_END(UIBarButtonItem, NSObject);
 
 NAN_METHOD(NUIBarButtonItem::New) {
   Nan::HandleScope scope;
@@ -86,9 +67,6 @@ NAN_METHOD(NUIBarButtonItem::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NUIBarButtonItem::NUIBarButtonItem () {}
-NUIBarButtonItem::~NUIBarButtonItem () {}
 
 NAN_GETTER(NUIBarButtonItem::titleGetter) {
   Nan::HandleScope scope;

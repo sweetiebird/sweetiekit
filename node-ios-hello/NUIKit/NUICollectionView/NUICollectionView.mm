@@ -1,49 +1,28 @@
 //
-//  NUICollectionView.m
-//  node-ios-hello
+//  NUICollectionView.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUICollectionView.h"
-#include "NUIScrollView.h"
-#include "NUICollectionViewManager.h"
-#include "NUINib.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUICollectionView::type;
+NUICollectionView::NUICollectionView() {}
+NUICollectionView::~NUICollectionView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUICollectionView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIScrollView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UICollectionView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UICollectionView, UIScrollView);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "visibleCells", VisibleCells);
   JS_SET_PROP_READONLY(proto, "indexPathsForSelectedItems", IndexPathsForSelectedItems);
   JS_SET_PROP(proto, "backgroundView", BackgroundView);
   JS_SET_PROP(proto, "delegate", Delegate);
   JS_SET_PROP(proto, "dataSource", DataSource);
-  Nan::SetMethod(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
-  Nan::SetMethod(proto, "dequeueReusableCellWithReuseIdentifier", DequeueReusableCellWithReuseIdentifier);
-  Nan::SetMethod(proto, "scrollToItemAtIndexPath", ScrollToItemAtIndexPath);
-  Nan::SetMethod(proto, "reloadData", ReloadData);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  JS_SET_METHOD(proto, "registerNibForCellWithReuseIdentifier", RegisterNibForCellWithReuseIdentifier);
+  JS_SET_METHOD(proto, "dequeueReusableCellWithReuseIdentifier", DequeueReusableCellWithReuseIdentifier);
+  JS_SET_METHOD(proto, "scrollToItemAtIndexPath", ScrollToItemAtIndexPath);
+  JS_SET_METHOD(proto, "reloadData", ReloadData);
+  // static members (ctor)
+  JS_INIT_CTOR(UICollectionView, UIScrollView);
+JS_INIT_CLASS_END(UICollectionView, UIScrollView);
 
 NAN_METHOD(NUICollectionView::New) {
   Nan::HandleScope scope;
@@ -81,8 +60,7 @@ NAN_METHOD(NUICollectionView::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NUICollectionView::NUICollectionView () {}
-NUICollectionView::~NUICollectionView () {}
+#include "NUINib.h"
 
 NAN_METHOD(NUICollectionView::RegisterNibForCellWithReuseIdentifier) {
   Nan::HandleScope scope;
@@ -194,11 +172,12 @@ NAN_METHOD(NUICollectionView::ReloadData) {
   [ui reloadData];
 }
 
+#include "NUICollectionViewManager.h"
+
 NAN_GETTER(NUICollectionView::DataSourceGetter) {
   Nan::HandleScope scope;
 
   Nan::ThrowError("NUICollectionView::DataSourceGetter not implemented");
-  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
 }
 
 NAN_SETTER(NUICollectionView::DataSourceSetter) {
@@ -222,7 +201,6 @@ NAN_GETTER(NUICollectionView::DelegateGetter) {
   Nan::HandleScope scope;
 
   Nan::ThrowError("NUICollectionView::DelegateGetter not implemented");
-  //info.GetReturnValue().Set(JS_STR([[view->As<UITextField>() text] UTF8String]));
 }
 
 NAN_SETTER(NUICollectionView::DelegateSetter) {

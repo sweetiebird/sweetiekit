@@ -1,40 +1,21 @@
 //
-//  NUIImage.m
-//  node-ios-hello
+//  NUIImage.mm
 //
 //  Created by Emily Kolar on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <CoreImage/CoreImage.h>
-#include "defines.h"
 #include "NUIImage.h"
-#include "NCIImage.h"
 
-Nan::Persistent<FunctionTemplate> NUIImage::type;
+NUIImage::NUIImage() {}
+NUIImage::~NUIImage() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIImage::Initialize(Isolate *isolate) {
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIImage"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "toArrayBuffer", toArrayBuffer);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "initWithCIImage", initWithCIImage);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIImage, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, toArrayBuffer);
+  // static members (ctor)
+  JS_INIT_CTOR(UIImage, NSObject);
+  JS_ASSIGN_METHOD(ctor, initWithCIImage);
+JS_INIT_CLASS_END(UIImage, NSObject);
 
 NAN_METHOD(NUIImage::New) {
   @autoreleasepool {
@@ -68,9 +49,6 @@ NAN_METHOD(NUIImage::New) {
     }
   }
 }
-
-NUIImage::NUIImage () {}
-NUIImage::~NUIImage () {}
 
 NAN_METHOD(NUIImage::toArrayBuffer)
 {
@@ -108,6 +86,8 @@ NAN_METHOD(NUIImage::toArrayBuffer)
     JS_SET_RETURN(result);
   }
 }
+
+#include "NCIImage.h"
 
 NAN_METHOD(NUIImage::initWithCIImage) {
   Nan::HandleScope scope;

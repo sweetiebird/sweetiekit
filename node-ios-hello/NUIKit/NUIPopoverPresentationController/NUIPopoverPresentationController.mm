@@ -1,44 +1,24 @@
 //
-//  UIPopoverPresentationController.m
-//  node-ios-hello
+//  UIPopoverPresentationController.mm
 //
 //  Created by Emily Kolar on 2019-5-23.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#include <UIKit/UIKit.h>
-#include "defines.h"
 #include "NUIPopoverPresentationController.h"
-#include "NUIViewController.h"
-#include "NUIPopoverPresentationControllerDelegate.h"
-#include "NUIView.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIPopoverPresentationController::type;
+NUIPopoverPresentationController::NUIPopoverPresentationController() {}
+NUIPopoverPresentationController::~NUIPopoverPresentationController() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIPopoverPresentationController::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIPopoverPresentationController"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIPopoverPresentationController, UIPresentationController);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, permittedArrowDirections);
   JS_ASSIGN_PROP(proto, sourceView);
   JS_ASSIGN_PROP(proto, sourceRect);
+  // static members (ctor)
+  JS_INIT_CTOR(UIPopoverPresentationController, UIPresentationController);
+JS_INIT_CLASS_END(UIPopoverPresentationController, UIPresentationController);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+#include "NUIViewController.h"
 
 NAN_METHOD(NUIPopoverPresentationController::New) {
   Nan::HandleScope scope;
@@ -67,9 +47,6 @@ NAN_METHOD(NUIPopoverPresentationController::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NUIPopoverPresentationController::NUIPopoverPresentationController () {}
-NUIPopoverPresentationController::~NUIPopoverPresentationController () {}
 
 NAN_GETTER(NUIPopoverPresentationController::permittedArrowDirectionsGetter) {
   Nan::HandleScope scope;
@@ -102,6 +79,8 @@ NAN_SETTER(NUIPopoverPresentationController::permittedArrowDirectionsSetter) {
     [ui setPermittedArrowDirections:arrowDir];
   }
 }
+
+#include "NUIView.h"
 
 NAN_GETTER(NUIPopoverPresentationController::sourceViewGetter) {
   Nan::HandleScope scope;

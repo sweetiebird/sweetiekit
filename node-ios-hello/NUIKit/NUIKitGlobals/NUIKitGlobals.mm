@@ -1,42 +1,21 @@
 //
-//  UIKitGlobals.m
-//  node-ios-hello
+//  UIKitGlobals.mm
 //
 //  Created by Emily Kolar on 2019-5-23.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIKitGlobals.h"
-#include "NUIImage.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIKitGlobals::type;
+NUIKitGlobals::NUIKitGlobals() {}
+NUIKitGlobals::~NUIKitGlobals() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIKitGlobals::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIKitGlobals"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "UIImageWriteToSavedPhotosAlbum", UIImageWriteToSavedPhotosAlbum);
-  Nan::SetMethod(ctorFn, "UIImageOrientation", UIImageOrientation);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIKitGlobals, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(UIKitGlobals, NSObject);
+  JS_ASSIGN_METHOD(ctor, UIImageWriteToSavedPhotosAlbum);
+  JS_ASSIGN_METHOD(ctor, UIImageOrientation);
+JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
   Nan::HandleScope scope;
@@ -57,8 +36,7 @@ NAN_METHOD(NUIKitGlobals::New) {
   JS_SET_RETURN(obj);
 }
 
-NUIKitGlobals::NUIKitGlobals () {}
-NUIKitGlobals::~NUIKitGlobals () {}
+#include "NUIImage.h"
 
 NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   Nan::HandleScope scope;

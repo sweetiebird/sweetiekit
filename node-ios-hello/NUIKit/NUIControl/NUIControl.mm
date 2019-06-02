@@ -1,49 +1,27 @@
 //
-//  NUIControl.m
-//  node-ios-hello
+//  NUIControl.mm
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #include "NUIControl.h"
-#include "NUIView.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NUIControl::type;
+NUIControl::NUIControl() {}
+NUIControl::~NUIControl() {}
 
-NUIControl::NUIControl () {}
-NUIControl::~NUIControl () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIControl::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIControl"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(UIControl, UIView);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "state", State);
   JS_SET_PROP(proto, "isSelected", Selected);
   JS_SET_PROP(proto, "isEnabled", Enabled);
   JS_SET_PROP(proto, "isHighlighted", Highlighted);
   JS_SET_PROP_READONLY(proto, "isTracking", Tracking);
   JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
-  Nan::SetMethod(proto, "addTarget", addTarget);
-  Nan::SetMethod(proto, "removeTarget", removeTarget);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  JS_ASSIGN_METHOD(proto, addTarget);
+  JS_ASSIGN_METHOD(proto, removeTarget);
+  // static members (ctor)
+  JS_INIT_CTOR(UIControl, UIView);
+JS_INIT_CLASS_END(UIControl, UIView);
 
 NAN_METHOD(NUIControl::New) {
   Nan::HandleScope scope;

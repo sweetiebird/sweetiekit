@@ -1,41 +1,22 @@
 //
-//  UIFont.m
-//  node-ios-hello
+//  UIFont.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUIFont.h"
 
-Nan::Persistent<FunctionTemplate> NUIFont::type;
+NUIFont::NUIFont() {}
+NUIFont::~NUIFont() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIFont::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIFont"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "systemFont", systemFont);
-  Nan::SetMethod(ctorFn, "boldSystemFont", boldSystemFont);
-  Nan::SetMethod(ctorFn, "italicSystemFont", italicSystemFont);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIFont, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(UIFont, NSObject);
+  JS_ASSIGN_METHOD(ctor, systemFont);
+  JS_ASSIGN_METHOD(ctor, boldSystemFont);
+  JS_ASSIGN_METHOD(ctor, italicSystemFont);
+JS_INIT_CLASS_END(UIFont, NSObject);
 
 NAN_METHOD(NUIFont::New) {
   @autoreleasepool {
@@ -63,9 +44,6 @@ NAN_METHOD(NUIFont::New) {
     }
   }
 }
-
-NUIFont::NUIFont () {}
-NUIFont::~NUIFont () {}
 
 NAN_METHOD(NUIFont::systemFont) {
   Nan::EscapableHandleScope scope;

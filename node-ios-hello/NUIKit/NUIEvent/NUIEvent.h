@@ -14,6 +14,15 @@
 #define to_value_UIEvent(x) to_value_wrapper(x, UIEvent)
 #define is_value_UIEvent(x) is_value_wrapper(x, UIEvent)
 
+// UIKit enums
+#define js_value_UIEventType(x) JS_ENUM(UIEventType, NSInteger, x)
+#define to_value_UIEventType(x) TO_ENUM(UIEventType, NSInteger, x)
+#define is_value_UIEventType(x) IS_ENUM(UIEventType, NSInteger, x)
+
+#define js_value_UIEventSubtype(x) JS_ENUM(UIEventSubtype, NSInteger, x)
+#define to_value_UIEventSubtype(x) TO_ENUM(UIEventSubtype, NSInteger, x)
+#define is_value_UIEventSubtype(x) IS_ENUM(UIEventSubtype, NSInteger, x)
+
 JS_WRAP_CLASS(UIEvent, NSObject);
   JS_PROP(type);
   JS_PROP(subtype);

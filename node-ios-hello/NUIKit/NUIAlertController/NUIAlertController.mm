@@ -1,39 +1,20 @@
 //
-//  NUIAlertController.m
-//  node-ios-hello
+//  NUIAlertController.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NUIAlertController.h"
-#include "NUIViewController.h"
-#include "NUIAlertAction.h"
 
-Nan::Persistent<FunctionTemplate> NUIAlertController::type;
+NUIAlertController::NUIAlertController() {}
+NUIAlertController::~NUIAlertController() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUIAlertController::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIViewController::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UIAlertController"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addAction", AddAction);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(UIAlertController, UIViewController);
+  // instance members (proto)
+  JS_SET_METHOD(proto, "addAction", AddAction);
+  // static members (ctor)
+  JS_INIT_CTOR(UIAlertController, UIViewController);
+JS_INIT_CLASS_END(UIAlertController, UIViewController);
 
 NAN_METHOD(NUIAlertController::New) {
   Nan::HandleScope scope;
@@ -71,8 +52,7 @@ NAN_METHOD(NUIAlertController::New) {
   info.GetReturnValue().Set(ctrlObj);
 }
 
-NUIAlertController::NUIAlertController () {}
-NUIAlertController::~NUIAlertController () {}
+#include "NUIAlertAction.h"
 
 NAN_METHOD(NUIAlertController::AddAction) {
   Nan::HandleScope scope;
