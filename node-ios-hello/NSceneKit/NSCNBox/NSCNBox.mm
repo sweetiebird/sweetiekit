@@ -67,7 +67,7 @@ NAN_METHOD(NSCNBox::boxWithWidthHeightLengthChamferRadius) {
     JS_SET_RETURN(JS_NEW_ARGV(NSCNBox, argv));
   }
 }
-  
+
 NAN_METHOD(NSCNBox::New) {
   @autoreleasepool {
    if (!info.IsConstructCall()) {

@@ -125,7 +125,7 @@ const UICollectionViewScrollPosition = {
 //   todoVC.view.backgroundColor = mainBg;
 //
 //   const scrollView = new UIScrollView();
-//   const contentView = new UIView();
+//   const contentView = UIView();
 //
 //   scrollView.translatesAutoresizingMaskIntoConstraints = false;
 //   contentView.translatesAutoresizingMaskIntoConstraints = false;
@@ -188,7 +188,7 @@ lblConsole = null;
 function attachConsole(vc) {
 
   const scrollView = new UIScrollView();
-  const contentView = new UIView();
+  const contentView = UIView();
   contentView.isUserInteractionEnabled = false;
   scrollView.isUserInteractionEnabled = false;
 
@@ -626,7 +626,7 @@ class CollectionApp {
       const label = UILabel.alloc();
       label.frame = { x: 0, y: 0, width: 200, height: 40 };
       label.text = item.text;
-      const view = new UIView({
+      const view = UIView({
         x: 0, y: 0, width: 200, height: 200,
       });
       view.addSubview(label);

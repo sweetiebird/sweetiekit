@@ -298,7 +298,7 @@ async function setupApp() {
       const containerView = showPresentationCtrl.containerView;
       console.log('container view', containerView);
       if (containerView) {
-        const transitionView = new UIView(0, 0, showVC.view.frame.width, 200);
+        const transitionView = UIView(0, 0, showVC.view.frame.width, 200);
         transitionView.backgroundColor = { red: 1, green: 0, blue: 1 };
         containerView.insertSubview(transitionView);
       }

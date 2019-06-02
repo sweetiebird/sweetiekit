@@ -213,13 +213,13 @@ function toggleRecordScreen(demoVC, recorder) {
 }
 
 function makeTopView(demoVC, fieldHeight) {
-  const borderView = new UIView({ x: 0, y: fieldHeight, width: demoVC.view.frame.width, height: 1 });
+  const borderView = UIView({ x: 0, y: fieldHeight, width: demoVC.view.frame.width, height: 1 });
   borderView.backgroundColor = {
     ...colors.white,
     alpha: 0.3,
   };
 
-  const topView = new UIView({ x: 0, y: 0, width: demoVC.view.frame.width, height: fieldHeight + 1 });
+  const topView = UIView({ x: 0, y: 0, width: demoVC.view.frame.width, height: fieldHeight + 1 });
   topView.backgroundColor = {
     ...colors.white,
     alpha: 0.1,

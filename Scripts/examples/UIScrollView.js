@@ -8,7 +8,7 @@ const {
 
 async function make(demoVC) {
   const scrollView = new UIScrollView();
-  const contentView = new UIView();
+  const contentView = UIView();
 
   scrollView.translatesAutoresizingMaskIntoConstraints = false;
   contentView.translatesAutoresizingMaskIntoConstraints = false;

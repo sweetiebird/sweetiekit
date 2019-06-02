@@ -119,36 +119,32 @@ NUIView::NUIView () {}
 NUIView::~NUIView () {}
 
 NAN_METHOD(NUIView::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> viewObj = info.This();
-
-  NUIView *view = new NUIView();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge UIView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-      });
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIView(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIView, info);
+      return;
     }
-  } else {
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[UIView alloc] init]);
-      });
+    UIView* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIView *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 4) {
+      self = [[UIView alloc] initWithFrame:CGRectMake(TO_FLOAT(info[0]), TO_FLOAT(info[1]), TO_FLOAT(info[2]), TO_FLOAT(info[3]))];
+    } else if (info.Length() >= 1 && info[0]->IsObject() && JS_HAS(JS_OBJ(info[0]), JS_STR("width"))) {
+      self = [[UIView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UIView alloc] init];
+    }
+    if (self) {
+      NUIView *wrapper = new NUIView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIView::New: invalid arguments");
     }
   }
-
-  view->Wrap(viewObj);
-  
-  JS_SET_RETURN(viewObj);
 }
 
 NAN_GETTER(NUIView::FrameGetter) {

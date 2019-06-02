@@ -158,7 +158,7 @@ function setupQuizView() {
     const imgX = (w - 100) / 2;
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
-    const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
+    const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
     const label = new UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
@@ -266,7 +266,7 @@ function makeDelegate(pageControl) {
 }
 
 function makeClippingView() {
-  const clippingView = new UIView({
+  const clippingView = UIView({
     x: 0,
     y: -88,
     width: w,
@@ -315,7 +315,7 @@ function setupWelcomeView() {
     const imgX = (w - 100) / 2;
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
-    const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
+    const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
     const label = new UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
@@ -398,7 +398,7 @@ function setupNavStyle(n) {
 }
 
 function makeStatusBarView() {
-  const barView = new UIView({
+  const barView = UIView({
     x: 0,
     y: -88,
     width: w,

@@ -1235,14 +1235,14 @@ console.log(sweetiekit);
 
 //const vc = new UIViewController();
 //console.log(vc);
-//const view = new UIView(0, 0, 200, 200);
+//const view = UIView(0, 0, 200, 200);
 //console.log(view, view.frame);
 
 /*
 const sb = new UIStoryboard('Main');
 const vc = sb.instantiateViewController('firstVC', UIViewController);
 const view = vc.view(UIView);
-const subview = new UIView(0, 0, 200, 200);
+const subview = UIView(0, 0, 200, 200);
 view.addSubview(subview);
 
 console.log(sb, vc, view, subview);
@@ -1270,7 +1270,7 @@ console.log(sb, vc, view, subview);
 //
 //  const subview = makeUIView(0, 0, 20, 20);
 //  firstVC.view.addSubview(subview);
-//  //firstVC.view.addSubview(new UIView(0, 400, 200, 200));
+//  //firstVC.view.addSubview(UIView(0, 400, 200, 200));
 //
 //  const secondVC = sb.instantiateViewController('secondVC');
 //  vc.setViewControllers([firstVC, secondVC], false);
@@ -1434,7 +1434,7 @@ function randi(n) {
 //}
 
 //function makeUIView(x, y, w, h) {
-//  const view = new UIView(x,y,w,h); // update to named arg ({ frame: { x, y, width, height } })
+//  const view = UIView(x,y,w,h); // update to named arg ({ frame: { x, y, width, height } })
 //  view.backgroundColor = ({red: 1.0, green: 0.0, blue: 0.0});
 //  return view;
 //}

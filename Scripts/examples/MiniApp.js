@@ -180,7 +180,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
 
-    const slideView = new UIView({ x: w * i, y: 0, width: w, height: viewH });
+    const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
 
     const label = new UILabel();
@@ -254,7 +254,7 @@ function makeScrollView(vc, numSlides) {
 }
 
 function makeStatusBarView() {
-  const barView = new UIView({
+  const barView = UIView({
     x: 0,
     y: -88,
     width: w,
@@ -309,7 +309,7 @@ function makeTopToolbarTitle(title) {
 
 function makeTopToolbarView() {
   const barHeight = 88;
-  const toolbar = new UIView({ x: 0, y: 0, width: w, height: barHeight });
+  const toolbar = UIView({ x: 0, y: 0, width: w, height: barHeight });
   toolbar.backgroundColor = colors.fitbodMedGrey;
   return toolbar;
 }

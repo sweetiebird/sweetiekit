@@ -11,7 +11,7 @@ const font = new UIFont('Arial-BoldMT', 17);
 async function make(demoVC) {
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
-  const labelsView = new UIView({ x: 12, y: 80, width: w - 24, height: h - 80 });
+  const labelsView = UIView({ x: 12, y: 80, width: w - 24, height: h - 80 });
   const label = new UILabel({ x: 12, y: 80, width: w - 24, height: 100 });
   label.numberOfLines = 0;
   label.text = 'Lorem ipsum dolor amet cray cronut pok pok veniam kitsch literally. Occupy letterpress mixtape mollit nostrud.';
