@@ -17,6 +17,10 @@
 
 JS_WRAP_CLASS(ARSCNView, SCNView);
   JS_METHOD(presentScene);
+  JS_METHOD(anchorForNode);
+  JS_METHOD(nodeForAnchor);
+  JS_METHOD(hitTest);
+  JS_METHOD(unprojectPointOntoPlaneWithTransform);
   JS_PROP(session);
   JS_PROP(delegate);
   JS_PROP(scene);

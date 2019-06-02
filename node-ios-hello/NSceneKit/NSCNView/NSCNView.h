@@ -23,14 +23,23 @@
 #define to_value_SCNAntialiasingMode(x) TO_ENUM(SCNAntialiasingMode, NSInteger, x)
 #define is_value_SCNAntialiasingMode(x) IS_ENUM(SCNAntialiasingMode, NSInteger, x)
 
+#define js_value_SCNDebugOptions(x) JS_ENUM(SCNDebugOptions, NSUInteger, x)
+#define to_value_SCNDebugOptions(x) TO_ENUM(SCNDebugOptions, NSUInteger, x)
+#define is_value_SCNDebugOptions(x) IS_ENUM(SCNDebugOptions, NSUInteger, x)
+
+#define js_value_SCNRenderingAPI(x) JS_ENUM(SCNRenderingAPI, NSInteger, x)
+#define to_value_SCNRenderingAPI(x) TO_ENUM(SCNRenderingAPI, NSInteger, x)
+#define is_value_SCNRenderingAPI(x) IS_ENUM(SCNRenderingAPI, NSInteger, x)
+
+#define js_value_MTLPixelFormat(x) JS_ENUM(MTLPixelFormat, NSInteger, x)
+#define to_value_MTLPixelFormat(x) TO_ENUM(MTLPixelFormat, NSInteger, x)
+#define is_value_MTLPixelFormat(x) IS_ENUM(MTLPixelFormat, NSInteger, x)
+
 JS_WRAP_CLASS(SCNView, UIView);
   JS_METHOD(hitTest);
   JS_METHOD(projectPoint);
   JS_METHOD(unprojectPoint);
-  JS_PROP(autoenablesDefaultLighting);
-  JS_PROP(playing);
   
-  JS_PROP(scene);
   JS_PROP(rendersContinuously);
   JS_PROP(allowsCameraControl);
   JS_PROP_READONLY(cameraControlConfiguration);
@@ -38,7 +47,30 @@ JS_WRAP_CLASS(SCNView, UIView);
   JS_PROP(preferredFramesPerSecond);
   JS_PROP(eaglContext);
   JS_PROP(antialiasingMode);
+  
+  JS_PROP(scene);
+  JS_PROP(sceneTime);
+  JS_PROP(delegate);
+  JS_PROP(playing);
+  JS_PROP(loops);
   JS_PROP(pointOfView);
+  JS_PROP(autoenablesDefaultLighting);
+  JS_PROP(jitteringEnabled);
+  JS_PROP(showsStatistics);
+  JS_PROP(debugOptions);
+  JS_PROP(overlaySKScene);
+  JS_PROP_READONLY(renderingAPI);
+  JS_PROP_READONLY(context);
+  JS_PROP_READONLY(currentRenderCommandEncoder);
+  JS_PROP_READONLY(device);
+  JS_PROP_READONLY(colorPixelFormat);
+  JS_PROP_READONLY(depthPixelFormat);
+  JS_PROP_READONLY(stencilPixelFormat);
+  JS_PROP_READONLY(commandQueue);
+  JS_PROP_READONLY(audioEngine);
+  JS_PROP_READONLY(audioEnvironmentNode);
+  JS_PROP(audioListener);
+
 
 JS_WRAP_CLASS_END(SCNView);
 

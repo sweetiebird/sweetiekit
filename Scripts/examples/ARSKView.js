@@ -234,13 +234,13 @@ async function make(nav, demoVC) {
   const recorder = new RPScreenRecorder();
   console.log(recorder);
 
-  const view = demoVC.view;
-  const arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
-  const config = new ARWorldTrackingConfiguration();
-  const chars = [];
-  let active = null;
+  view = demoVC.view;
+  arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
+  config = new ARWorldTrackingConfiguration();
+  chars = [];
+  active = null;
 
-  const _remove = (char, removeNode = true, removeAnchor = true) => {
+  _remove = (char, removeNode = true, removeAnchor = true) => {
     if (!char) {
       return true;
     }
@@ -272,7 +272,7 @@ async function make(nav, demoVC) {
     }
   };
 
-  const viewDel = new ARSKViewDelegate((view, anchor) => {
+  viewDel = new ARSKViewDelegate((view, anchor) => {
     const { identifier } = anchor;
     if (active && active.anchor && active.anchor.identifier === anchor.identifier) {
       if (!active.node) {
@@ -293,18 +293,19 @@ async function make(nav, demoVC) {
   });
   arView.delegate = viewDel;
 
-  const scene = SKScene.sceneWithSize({
+  scene = SKScene.sceneWithSize({
     width: view.frame.width,
     height: view.frame.height
   });
   arView.scene = scene;
 
-  const mat1 = new THREE.Matrix4();
-  const mat2 = new THREE.Matrix4();
+  mat1 = new THREE.Matrix4();
+  mat2 = new THREE.Matrix4();
 
-  const _xform = (xform) => {
-    if (xform && xform.hasOwnProperty("worldTransform")) {
-      xform = xform.worldTransform;
+  _xform = (xform) => {
+    let worldTransform = (xform ? xform.worldTransform : undefined);
+    if (worldTransform) {
+      xform = worldTransform;
     }
     if (!xform) {
       const camXform = arView.session.currentFrame.camera.transform;
@@ -316,11 +317,11 @@ async function make(nav, demoVC) {
     return xform;
   };
 
-  const _text = (txt) => {
+  _text = (txt) => {
     return txt || text || '👀';
   };
 
-  const _node = (text) => {
+  _node = (text) => {
     if (isEffectMode) {
       const wrapper = new SKNode();
       const moveWrapper = new SKNode();
@@ -362,7 +363,7 @@ async function make(nav, demoVC) {
     }
   };
 
-  const _update = (xform, txt = text, char = active) => {
+  _update = (xform, txt = text, char = active) => {
     if (!char) {
       char = {};
       chars.push(char);

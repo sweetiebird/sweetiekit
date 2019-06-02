@@ -712,7 +712,10 @@ CGPoint to_value_CGPoint(const Local<Value>& value);
 CGVector to_value_CGVector(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
 CGRect to_value_CGRect(const Local<Value>& value);
-#define is_value_CGRect sweetiekit::IsJSFrame
+bool is_value_CGPoint(const Local<Value>& value);
+bool is_value_CGVector(const Local<Value>& value);
+bool is_value_CGSize(const Local<Value>& value);
+bool is_value_CGRect(const Local<Value>& value);
 
 Local<Value> js_value_CGColor(CGColorRef _Nullable color);
 Local<Value> js_value_UIColor(UIColor* _Nullable color);
@@ -798,6 +801,20 @@ template<typename T>
 T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T*)sweetiekit::GetValueFor(value, failed);
 }
+
+template<typename T>
+Local<Value> js_value_id_(T _Nullable value) {
+  return sweetiekit::GetWrapperFor(value);
+}
+
+template<typename T>
+T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
+  return (T)sweetiekit::GetValueFor(value, failed);
+}
+
+#define js_value_void(x) Nan::New<External>(x)
+#define to_value_void(x) (x).As<External>()->Value()
+#define is_value_void(x) (x)->IsExternal()
 
 #define js_value_int32_t JS_INT
 #define to_value_int32_t TO_INT32

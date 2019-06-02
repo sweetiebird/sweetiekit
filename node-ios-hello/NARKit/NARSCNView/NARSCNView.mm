@@ -22,10 +22,14 @@ NARSCNView::~NARSCNView () {}
 
 JS_INIT_CLASS(ARSCNView, SCNView);
   // instance members (proto)
+  JS_PROTO_METHOD(presentScene);
+  JS_PROTO_METHOD(anchorForNode);
+  JS_PROTO_METHOD(nodeForAnchor);
+  JS_PROTO_METHOD(hitTest);
+  JS_PROTO_METHOD(unprojectPointOntoPlaneWithTransform);
   JS_ASSIGN_PROP_READONLY(proto, session);
   JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, scene);
-  JS_ASSIGN_METHOD(proto, presentScene);
   JS_ASSIGN_PROP(proto, automaticallyUpdatesLighting);
 
   // static members (ctor)
@@ -64,6 +68,48 @@ NAN_METHOD(NARSCNView::New) {
   view->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+#include "NSCNNode.h"
+#include "NARAnchor.h"
+
+NAN_METHOD(NARSCNView::anchorForNode) {
+  JS_UNWRAP(ARSCNView, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_ARAnchor([self anchorForNode:to_value_SCNNode(info[0])]));
+  }
+}
+
+NAN_METHOD(NARSCNView::nodeForAnchor) {
+  JS_UNWRAP(ARSCNView, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_SCNNode([self nodeForAnchor:to_value_ARAnchor(info[0])]));
+  }
+}
+
+#include "NARHitTestResult.h"
+
+NAN_METHOD(NARSCNView::hitTest) {
+  JS_UNWRAP(ARSCNView, self);
+  @autoreleasepool {
+    if (is_value_CGPoint(info[0]) && is_value_ARHitTestResultType(info[1])) {
+      CGPoint point(to_value_CGPoint(info[0]));
+      ARHitTestResultType types(to_value_ARHitTestResultType(info[1]));
+      NSArray<ARHitTestResult*>* results = [self hitTest:point types:types];
+      JS_SET_RETURN(js_value_NSArray<ARHitTestResult*>(results));
+    } else {
+      return NSCNView::hitTest(info);
+    }
+  }
+}
+
+NAN_METHOD(NARSCNView::unprojectPointOntoPlaneWithTransform) {
+  JS_UNWRAP(ARSCNView, self);
+  @autoreleasepool {
+    CGPoint point(to_value_CGPoint(info[0]));
+    simd_float3 result([self unprojectPoint:point ontoPlaneWithTransform:to_value_simd_float4x4(info[1])]);
+    JS_SET_RETURN(js_value_simd_float3(result)); 
+  }
 }
 
 NAN_GETTER(NARSCNView::sessionGetter) {

@@ -50,7 +50,7 @@ NAN_METHOD(N${name}::New) {
     ${name}* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge ${name} *)(info[0].As<External>()->Value());
-    } else if(info.Length() <= 0) {
+    } else if (info.Length() <= 0) {
       self = [[${name} alloc] init];
     }
     if (self) {

@@ -14,9 +14,6 @@ JS_INIT_CLASS(SCNView, UIView);
   JS_PROTO_METHOD(hitTest);
   JS_PROTO_METHOD(projectPoint);
   JS_PROTO_METHOD(unprojectPoint);
-  JS_ASSIGN_PROP(proto, autoenablesDefaultLighting);
-  JS_ASSIGN_PROP(proto, playing);
-  JS_ASSIGN_PROP(proto, scene);
   JS_ASSIGN_PROP(proto, rendersContinuously);
   JS_ASSIGN_PROP(proto, allowsCameraControl);
   JS_ASSIGN_PROP_READONLY(proto, cameraControlConfiguration);
@@ -24,7 +21,30 @@ JS_INIT_CLASS(SCNView, UIView);
   JS_ASSIGN_PROP(proto, preferredFramesPerSecond);
   JS_ASSIGN_PROP(proto, eaglContext);
   JS_ASSIGN_PROP(proto, antialiasingMode);
-  JS_PROTO_PROP(pointOfView);
+  // SCNRenderer
+  JS_ASSIGN_PROP(proto, scene);
+  JS_ASSIGN_PROP(proto, sceneTime);
+  JS_ASSIGN_PROP(proto, delegate);
+  JS_ASSIGN_PROP(proto, playing);
+  JS_ASSIGN_PROP(proto, loops);
+  JS_ASSIGN_PROP(proto, pointOfView);
+  JS_ASSIGN_PROP(proto, autoenablesDefaultLighting);
+  JS_ASSIGN_PROP(proto, jitteringEnabled);
+  JS_ASSIGN_PROP(proto, showsStatistics);
+  JS_ASSIGN_PROP(proto, debugOptions);
+  JS_ASSIGN_PROP(proto, overlaySKScene);
+  JS_ASSIGN_PROP_READONLY(proto, renderingAPI);
+  JS_ASSIGN_PROP_READONLY(proto, context);
+  JS_ASSIGN_PROP_READONLY(proto, currentRenderCommandEncoder);
+  JS_ASSIGN_PROP_READONLY(proto, device);
+  JS_ASSIGN_PROP_READONLY(proto, colorPixelFormat);
+  JS_ASSIGN_PROP_READONLY(proto, depthPixelFormat);
+  JS_ASSIGN_PROP_READONLY(proto, stencilPixelFormat);
+  JS_ASSIGN_PROP_READONLY(proto, commandQueue);
+  JS_ASSIGN_PROP_READONLY(proto, audioEngine);
+  JS_ASSIGN_PROP_READONLY(proto, audioEnvironmentNode);
+  JS_ASSIGN_PROP(proto, audioListener);
+
   // static members (ctor)
   JS_INIT_CTOR(SCNView, UIView);
 JS_INIT_CLASS_END(SCNView, UIView);
@@ -85,59 +105,6 @@ NAN_METHOD(NSCNView::unprojectPoint) {
   }
 }
 
-NAN_GETTER(NSCNView::autoenablesDefaultLightingGetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self autoenablesDefaultLighting]));
-    return;
-  }
-}
-
-NAN_SETTER(NSCNView::autoenablesDefaultLightingSetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    [self setAutoenablesDefaultLighting: TO_BOOL(value)];
-  }
-}
-
-NAN_GETTER(NSCNView::playingGetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isPlaying]));
-    return;
-  }
-}
-
-NAN_SETTER(NSCNView::playingSetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    [self setPlaying: TO_BOOL(value)];
-  }
-}
-
-#include "NSCNScene.h"
-
-NAN_GETTER(NSCNView::sceneGetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_SCNScene([self scene]));
-    return;
-  }
-}
-
-NAN_SETTER(NSCNView::sceneSetter) {
-  JS_UNWRAP(SCNView, self);
-  @autoreleasepool
-  {
-    [self setScene: to_value_SCNScene(value)];
-  }
-}
-
 NAN_GETTER(NSCNView::rendersContinuouslyGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
@@ -172,11 +139,13 @@ NAN_SETTER(NSCNView::allowsCameraControlSetter) {
   }
 }
 
+typedef NSObject SCNCameraControlConfiguration;
+
 NAN_GETTER(NSCNView::cameraControlConfigurationGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
-    JS_SET_RETURN(js_value_id/*<SCNCameraControlConfiguration>*/([self cameraControlConfiguration]));
+    JS_SET_RETURN(js_value_id <SCNCameraControlConfiguration>([self cameraControlConfiguration]));
     return;
   }
 }
@@ -243,6 +212,95 @@ NAN_SETTER(NSCNView::antialiasingModeSetter) {
   }
 }
 
+#include "NSCNScene.h"
+
+NAN_GETTER(NSCNView::sceneGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SCNScene([self scene]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::sceneSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setScene: to_value_SCNScene(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::sceneTimeGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSTimeInterval([self sceneTime]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::sceneTimeSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setSceneTime: to_value_NSTimeInterval(value)];
+  }
+}
+
+typedef NSObject SCNSceneRendererDelegate;
+
+NAN_GETTER(NSCNView::delegateGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id <SCNSceneRendererDelegate>([self delegate]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::delegateSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setDelegate: to_value_id <SCNSceneRendererDelegate>(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::playingGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self isPlaying]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::playingSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setPlaying: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::loopsGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self loops]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::loopsSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setLoops: TO_BOOL(value)];
+  }
+}
+
 #include "NSCNNode.h"
 
 NAN_GETTER(NSCNView::pointOfViewGetter) {
@@ -259,5 +317,213 @@ NAN_SETTER(NSCNView::pointOfViewSetter) {
   @autoreleasepool
   {
     [self setPointOfView: to_value_SCNNode(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::autoenablesDefaultLightingGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self autoenablesDefaultLighting]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::autoenablesDefaultLightingSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setAutoenablesDefaultLighting: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::jitteringEnabledGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self isJitteringEnabled]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::jitteringEnabledSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setJitteringEnabled: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::showsStatisticsGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_BOOL([self showsStatistics]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::showsStatisticsSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setShowsStatistics: TO_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::debugOptionsGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SCNDebugOptions([self debugOptions]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::debugOptionsSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setDebugOptions: to_value_SCNDebugOptions(value)];
+  }
+}
+
+#include "NSKScene.h"
+
+NAN_GETTER(NSCNView::overlaySKSceneGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKScene([self overlaySKScene]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::overlaySKSceneSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setOverlaySKScene: to_value_SKScene(value)];
+  }
+}
+
+NAN_GETTER(NSCNView::renderingAPIGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SCNRenderingAPI([self renderingAPI]));
+    return;
+  }
+}
+
+NAN_GETTER(NSCNView::contextGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self context]));
+    return;
+  }
+}
+
+typedef NSObject MTLRenderCommandEncoder;
+
+NAN_GETTER(NSCNView::currentRenderCommandEncoderGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id <MTLRenderCommandEncoder>([self currentRenderCommandEncoder]));
+    return;
+  }
+}
+
+typedef id MTLDevice;
+
+NAN_GETTER(NSCNView::deviceGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id_ <MTLDevice>([self device]));
+    return;
+  }
+}
+
+NAN_GETTER(NSCNView::colorPixelFormatGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self colorPixelFormat]));
+    return;
+  }
+}
+
+NAN_GETTER(NSCNView::depthPixelFormatGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self depthPixelFormat]));
+    return;
+  }
+}
+
+NAN_GETTER(NSCNView::stencilPixelFormatGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self stencilPixelFormat]));
+    return;
+  }
+}
+
+typedef id MTLCommandQueue;
+
+NAN_GETTER(NSCNView::commandQueueGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id_ <MTLCommandQueue>([self commandQueue]));
+    return;
+  }
+}
+
+#define js_value_AVAudioEngine(x) js_value_wrapper_unknown(x, AVAudioEngine)
+#define to_value_AVAudioEngine(x) to_value_wrapper_unknown(x, AVAudioEngine)
+#define is_value_AVAudioEngine(x) is_value_wrapper_unknown(x, AVAudioEngine)
+
+NAN_GETTER(NSCNView::audioEngineGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_AVAudioEngine([self audioEngine]));
+    return;
+  }
+}
+
+#define js_value_AVAudioEnvironmentNode(x) js_value_wrapper_unknown(x, AVAudioEnvironmentNode)
+#define to_value_AVAudioEnvironmentNode(x) to_value_wrapper_unknown(x, AVAudioEnvironmentNode)
+#define is_value_AVAudioEnvironmentNode(x) is_value_wrapper_unknown(x, AVAudioEnvironmentNode)
+
+NAN_GETTER(NSCNView::audioEnvironmentNodeGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_AVAudioEnvironmentNode([self audioEnvironmentNode]));
+    return;
+  }
+}
+
+NAN_GETTER(NSCNView::audioListenerGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SCNNode([self audioListener]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::audioListenerSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setAudioListener: to_value_SCNNode(value)];
   }
 }

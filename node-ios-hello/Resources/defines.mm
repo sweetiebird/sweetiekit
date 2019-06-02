@@ -755,6 +755,68 @@ CGRect to_value_CGRect(const Local<Value>& value) {
   );
 }
 
+bool is_value_CGPoint(const Local<Value>& value) {
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("x"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("y"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+bool is_value_CGVector(const Local<Value>& value) {
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("dx"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("dy"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+bool is_value_CGSize(const Local<Value>& value) {
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("width"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("height"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+bool is_value_CGRect(const Local<Value>& value) {
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("x"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("y"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("width"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("height"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
 Local<Value> js_value_CGColor(CGColorRef _Nullable color) {
   return sweetiekit::JSObjFromCGColor(color);
 }

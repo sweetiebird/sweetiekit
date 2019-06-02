@@ -701,6 +701,7 @@ NAN_METHOD(NNSObject::New) {
 #include "NARFrame.h"
 #include "NARCamera.h"
 #include "NARSCNView.h"
+#include "NARHitTestResult.h"
 #include "NARLightEstimate.h"
 #include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
@@ -903,6 +904,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARLightEstimate);
     JS_EXPORT_TYPE(ARSKView);
     JS_EXPORT_TYPE(ARSCNView);
+    JS_EXPORT_TYPE(ARHitTestResult);
     JS_EXPORT_TYPE(ARSession);
     JS_EXPORT_TYPE(ARConfiguration);
     JS_EXPORT_TYPE(ARWorldTrackingConfiguration);
@@ -967,6 +969,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(ARSKViewDelegate, SARSKViewDelegate);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
+      JS_RETURN_TYPE(ARSCNView);
+      JS_RETURN_TYPE(ARHitTestResult);
       JS_RETURN_TYPE(ARSession);
       JS_RETURN_TYPE(ARWorldTrackingConfiguration);
       JS_RETURN_TYPE(ARConfiguration);

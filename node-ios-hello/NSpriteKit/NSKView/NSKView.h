@@ -17,6 +17,22 @@
 
 JS_WRAP_CLASS(SKView, UIView);
   JS_METHOD(presentScene);
+  JS_PROP(paused);
+  JS_PROP(showsFPS);
+  JS_PROP(showsDrawCount);
+  JS_PROP(showsNodeCount);
+  JS_PROP(showsQuadCount);
+  JS_PROP(showsPhysics);
+  JS_PROP(showsFields);
+  JS_PROP(asynchronous);
+  JS_PROP(allowsTransparency);
+  JS_PROP(ignoresSiblingOrder);
+  JS_PROP(shouldCullNonVisibleNodes);
+  JS_PROP(preferredFramesPerSecond);
+  JS_PROP(delegate);
+  JS_PROP(frameInterval);
+  JS_PROP(preferredFrameRate);
+  JS_PROP_READONLY(scene);
 JS_WRAP_CLASS_END(SKView);
 
 #endif /* NSKView_h */

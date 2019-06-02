@@ -11,12 +11,12 @@ NSKScene::~NSKScene() {}
 
 JS_INIT_CLASS(SKScene, SKNode);
   // instance members (proto)
+  JS_PROTO_METHOD(convertPointFromView);
+  JS_PROTO_METHOD(convertPointToView);
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
   JS_ASSIGN_PROP(proto, update);
-  JS_ASSIGN_METHOD(proto, convertPointFromView);
-  JS_ASSIGN_METHOD(proto, convertPointToView);
   JS_ASSIGN_PROP(proto, size);
   JS_ASSIGN_PROP(proto, scaleMode);
   JS_ASSIGN_PROP(proto, camera);
@@ -76,6 +76,22 @@ NAN_METHOD(NSKScene::sceneWithSize) {
   }
 
   JS_SET_RETURN(obj);
+}
+
+NAN_METHOD(NSKScene::convertPointFromView) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool {
+    CGPoint converted([self convertPointFromView:to_value_CGPoint(info[0])]);
+    JS_SET_RETURN(js_value_CGPoint(converted));
+  }
+}
+
+NAN_METHOD(NSKScene::convertPointToView) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool {
+    CGPoint converted([self convertPointToView:to_value_CGPoint(info[0])]);
+    JS_SET_RETURN(js_value_CGPoint(converted));
+  }
 }
 
 NAN_GETTER(NSKScene::scaleModeGetter) {
@@ -192,22 +208,6 @@ NAN_SETTER(NSKScene::touchesEndedSetter) {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
     [sk associateValue:func withKey:@"sweetiekit_touchesEnded"];
-  }
-}
-
-NAN_METHOD(NSKScene::convertPointFromView) {
-  JS_UNWRAP(SKScene, node);
-  @autoreleasepool {
-    CGPoint converted([node convertPointFromView:to_value_CGPoint(info[0])]);
-    JS_SET_RETURN(js_value_CGPoint(converted));
-  }
-}
-
-NAN_METHOD(NSKScene::convertPointToView) {
-  JS_UNWRAP(SKScene, node);
-  @autoreleasepool {
-    CGPoint converted([node convertPointToView:to_value_CGPoint(info[0])]);
-    JS_SET_RETURN(js_value_CGPoint(converted));
   }
 }
 

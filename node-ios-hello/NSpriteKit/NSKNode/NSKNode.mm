@@ -16,9 +16,10 @@ JS_INIT_CLASS(SKNode, UIResponder);
   JS_ASSIGN_METHOD(proto, runAction);
   JS_ASSIGN_METHOD(proto, childNodeWithName);
   JS_ASSIGN_METHOD(proto, containsPoint);
-  JS_ASSIGN_METHOD(proto, nodeAtPoint);
   JS_ASSIGN_METHOD(proto, convertPointFromNode);
   JS_ASSIGN_METHOD(proto, convertPointToNode);
+  JS_PROTO_METHOD(nodeAtPoint);
+  JS_PROTO_METHOD(nodesAtPoint);
   JS_ASSIGN_PROP_READONLY(proto, frame);
   JS_ASSIGN_PROP_READONLY(proto, width);
   JS_ASSIGN_PROP_READONLY(proto, height);
@@ -130,18 +131,6 @@ NAN_METHOD(NSKNode::containsPoint) {
   JS_SET_RETURN(JS_BOOL(contains));
 }
 
-NAN_METHOD(NSKNode::nodeAtPoint) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKNode, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  id child = [node nodeAtPoint:CGPointMake(x, y)];
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor(child, NSKNode::type));
-}
-
 NAN_METHOD(NSKNode::convertPointFromNode) {
   Nan::HandleScope scope;
 
@@ -176,6 +165,20 @@ NAN_METHOD(NSKNode::convertPointToNode) {
 
   JS_SET_RETURN(result);
   return;
+}
+
+NAN_METHOD(NSKNode::nodeAtPoint) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_SKNode([self nodeAtPoint:to_value_CGPoint(info[0])]));
+  }
+}
+
+NAN_METHOD(NSKNode::nodesAtPoint) {
+  JS_UNWRAP(SKNode, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<SKNode*>([self nodesAtPoint:to_value_CGPoint(info[0])]));
+  }
 }
 
 
