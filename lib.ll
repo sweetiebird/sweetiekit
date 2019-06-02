@@ -364,9 +364,11 @@
                                  name))))
                   (add r (list kind))))))))))
 
-(define-global ios-header-path (framework type)
+(define-global ios-header-path (framework type subframework)
   (with r "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/"
     (cat! r framework)
+    (when subframework
+      (cat! r ".framework/Frameworks/" subframework))
     (cat! r ".framework/Headers/")
     (cat! r type ".h")))
 
@@ -384,8 +386,8 @@
        CL (return 'CoreLocation))))
   (error (cat "Unknown type " type)))
 
-(define-global test-parse-properties ((o type 'UIView) (o framework (ios-framework-from-type type)))
-  (let (path (ios-header-path framework type)
+(define-global test-parse-properties ((o type 'UIView) (o framework (ios-framework-from-type type)) (o subframework))
+  (let (path (ios-header-path framework type subframework)
         contents (read-file path)
         props (parse-properties contents)
         form `(do))
