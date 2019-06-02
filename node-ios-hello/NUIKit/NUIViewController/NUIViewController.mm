@@ -70,7 +70,7 @@ NAN_METHOD(NUIViewController::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIViewController *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIViewController alloc];
+      self = [UIViewController alloc]; // TODO: init causes layout issues
     }
     if (self) {
       NUIViewController *wrapper = new NUIViewController();
