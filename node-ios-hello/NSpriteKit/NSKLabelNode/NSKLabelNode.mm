@@ -1,47 +1,24 @@
 //
-//  NSKLabelNode.m
-//  node-ios-hello
+//  NSKLabelNode.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
-#include "NSKNode.h"
 #include "NSKLabelNode.h"
-#include "NARSession.h"
-#include "NNSAttributedString.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKLabelNode::type;
+NSKLabelNode::NSKLabelNode () {}
+NSKLabelNode::~NSKLabelNode () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKLabelNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKNode::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKLabelNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKLabelNode, SKNode);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, text);
   JS_ASSIGN_PROP(proto, attributedText);
   JS_ASSIGN_PROP(proto, preferredMaxLayoutWidth);
   JS_ASSIGN_PROP(proto, numberOfLines);
   JS_ASSIGN_PROP(proto, fontName);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKLabelNode, SKNode);
+JS_INIT_CLASS_END(SKLabelNode, SKNode);
 
 NAN_METHOD(NSKLabelNode::New) {
   Nan::HandleScope scope;
@@ -69,9 +46,6 @@ NAN_METHOD(NSKLabelNode::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NSKLabelNode::NSKLabelNode () {}
-NSKLabelNode::~NSKLabelNode () {}
 
 NAN_GETTER(NSKLabelNode::textGetter) {
   Nan::HandleScope scope;
@@ -110,6 +84,8 @@ NAN_SETTER(NSKLabelNode::textSetter) {
     });
   }
 }
+
+#include "NNSAttributedString.h"
 
 NAN_GETTER(NSKLabelNode::attributedTextGetter) {
   Nan::HandleScope scope;

@@ -1,32 +1,13 @@
 //
-//  NSKEmitterNode.m
-//  node-ios-hello
+//  NSKEmitterNode.mm
 //
 //  Created by Emily Kolar on 2019-5-27.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NSKNode.h"
 #include "NSKEmitterNode.h"
 
-Nan::Persistent<FunctionTemplate> NSKEmitterNode::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKEmitterNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKNode::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSKEmitterNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKEmitterNode, SKNode);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, particleTexture);
   JS_ASSIGN_PROP(proto, particleBlendMode);
   JS_ASSIGN_PROP(proto, particleColor);
@@ -76,11 +57,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKEmitterNode::Initialize(Iso
   JS_ASSIGN_PROP(proto, particleRenderOrder);
   JS_ASSIGN_PROP(proto, particleZPositionRange);
   JS_ASSIGN_PROP(proto, particleZPositionSpeed);
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKEmitterNode, SKNode);
+JS_INIT_CLASS_END(SKEmitterNode, SKNode);
 
 NAN_METHOD(NSKEmitterNode::New) {
   Nan::HandleScope scope;

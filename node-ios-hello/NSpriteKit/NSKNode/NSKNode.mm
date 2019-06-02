@@ -1,45 +1,24 @@
 //
-//  NSKNode.m
-//  node-ios-hello
+//  NSKNode.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NSKNode.h"
-#include "NUIResponder.h"
-#include "NARSession.h"
-#include "NSKPhysicsBody.h"
-#include "NSKAction.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKNode::type;
+NSKNode::NSKNode() {}
+NSKNode::~NSKNode() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIResponder::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addChild", addChild);
-  Nan::SetMethod(proto, "removeFromParent", removeFromParent);
-  Nan::SetMethod(proto, "runAction", runAction);
-  Nan::SetMethod(proto, "childNodeWithName", childNodeWithName);
-  Nan::SetMethod(proto, "containsPoint", containsPoint);
-  Nan::SetMethod(proto, "nodeAtPoint", nodeAtPoint);
-  Nan::SetMethod(proto, "convertPointFromNode", convertPointFromNode);
-  Nan::SetMethod(proto, "convertPointToNode", convertPointToNode);
+JS_INIT_CLASS(SKNode, UIResponder);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, addChild);
+  JS_ASSIGN_METHOD(proto, removeFromParent);
+  JS_ASSIGN_METHOD(proto, runAction);
+  JS_ASSIGN_METHOD(proto, childNodeWithName);
+  JS_ASSIGN_METHOD(proto, containsPoint);
+  JS_ASSIGN_METHOD(proto, nodeAtPoint);
+  JS_ASSIGN_METHOD(proto, convertPointFromNode);
+  JS_ASSIGN_METHOD(proto, convertPointToNode);
   JS_ASSIGN_PROP_READONLY(proto, frame);
   JS_ASSIGN_PROP_READONLY(proto, width);
   JS_ASSIGN_PROP_READONLY(proto, height);
@@ -66,12 +45,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKNode::Initialize(Isolate *i
   JS_ASSIGN_PROP(proto, reachConstraints);
   JS_ASSIGN_PROP(proto, constraints);
   JS_ASSIGN_PROP(proto, attributeValues);
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKNode, UIResponder);
+JS_INIT_CLASS_END(SKNode, UIResponder);
 
 NAN_METHOD(NSKNode::New) {
   Nan::HandleScope scope;
@@ -94,9 +70,6 @@ NAN_METHOD(NSKNode::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NSKNode::NSKNode () {}
-NSKNode::~NSKNode () {}
-
 NAN_METHOD(NSKNode::addChild) {
   Nan::HandleScope scope;
 
@@ -114,6 +87,8 @@ NAN_METHOD(NSKNode::removeFromParent) {
 
   [node removeFromParent];
 }
+
+#include "NSKAction.h"
 
 NAN_METHOD(NSKNode::runAction) {
   Nan::HandleScope scope;
@@ -630,6 +605,8 @@ NAN_GETTER(NSKNode::sceneGetter) {
     return;
   }
 }
+
+#include "NSKPhysicsBody.h"
 
 NAN_GETTER(NSKNode::physicsBodyGetter) {
   JS_UNWRAP(SKNode, self);
