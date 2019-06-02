@@ -44,6 +44,52 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+
+
+NAN_METHOD(NUILabel::New) {
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UILabel(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UILabel, info);
+      return;
+    }
+    UILabel* self = nullptr;
+    if (IS_EXT(info[0])) {
+      self = (__bridge UILabel *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 4) {
+      self = [[UILabel alloc]
+              initWithFrame:CGRectMake(
+                TO_FLOAT(info[0]),
+                TO_FLOAT(info[1]),
+                TO_FLOAT(info[2]),
+                TO_FLOAT(info[3])
+              )];
+    } else if (info.Length() >= 1 && IS_OBJ(info[0])) {
+      Local<Object> args = JS_OBJ(info[0]);
+
+      if (IS_OBJ(args) && JS_HAS_STR(args, "frame")) {
+        Local<Object> frame = JS_OBJ_GET(args, "frame");
+        self = [[UILabel alloc] initWithFrame:sweetiekit::FrameFromJSObj(frame)];
+      } else if (JS_HAS_STR(args, "width")) {
+        self = [[UILabel alloc] initWithFrame:sweetiekit::FrameFromJSObj(args)];
+      }
+    } else if (info.Length() <= 0) {
+      self = [[UILabel alloc] init];
+    }
+
+    if (self) {
+      NUILabel *wrapper = new NUILabel();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SCNBox::New: invalid arguments");
+    }
+  }
+}
+
+/*
 NAN_METHOD(NUILabel::New) {
   Nan::HandleScope scope;
 
@@ -71,6 +117,7 @@ NAN_METHOD(NUILabel::New) {
 
   info.GetReturnValue().Set(txtObj);
 }
+*/
 
 NUILabel::NUILabel () {}
 NUILabel::~NUILabel () {}
