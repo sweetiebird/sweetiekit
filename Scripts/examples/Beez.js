@@ -4,7 +4,13 @@ const SKSceneScaleMode = require('./enums').SKSceneScaleMode;
 
 const math = require('./helpers').math;
 
-const Player = require('./classes').Player;
+const v2 = (...args) => {
+  switch (args.length == 0) {
+    case 0: return new THREE.Vector2(0, 0);
+    case 1: return (args[0] instanceof THREE.Vector2) ? args[0] : new THREE.Vector2(args[0].x, args[0].y);
+    default: return new THREE.Vector2(args[0], args[1]);
+  }
+};
 
 const {
   SKScene,
@@ -16,22 +22,68 @@ const {
   SKNode,
 } = SweetieKit;
 
-const { v2 } = math;
-
 const distToLeftX = (parentSize, childSize) => (parentSize.width - childSize.width) * -0.5;
 const distToRightX = (parentSize, childSize) => (parentSize.width - childSize.width) * 0.5;
 const distToTopY = (parentSize, childSize) => (parentSize.width - childSize.width) * 0.5;
 const distToBtmY = (parentSize, childSize) => (parentSize.height - childSize.height) * -0.5;
 
+class Player {
+  constructor(node) {
+    this.node = node;
+    this.node.name = 'player';
+    this.refillJumps();
+  }
+
+  configure() {
+    this.node.colorBlendFactor = 0.5;
+    switch (this.jumps) {
+      case 0:
+        this.node.color = {red: 0.0, green: 0.0, blue: 1.0};
+        break;
+      case 1:
+        this.node.color = {red: 1.0, green: 0.0, blue: 0.0};
+        break;
+      default:
+        this.node.color = {red: 1.0, green: 1.0, blue: 1.0};
+        break;
+    }
+  }
+
+  refillJumps() {
+    this.jumps = 2;
+    this.configure();
+  }
+
+  jump(force) {
+    if (this.jumps > 0) {
+      --this.jumps;
+      this.configure();
+      this.node.physicsBody.velocity = { dx: 0, dy: 0 };
+      this.node.physicsBody.applyImpulse({ dx: force.x, dy: force.y });
+    }
+  }
+
+  move(force) {
+  }
+
+  touchedGround() {
+    this.refillJumps();
+  }
+
+  kill() {
+    this.refillJumps();
+    this.node.position = v2(0, 0);
+  }
+}
+
 function makeDemo(navigation, dvc) {
-  let player;
-  let scene;
-  let skView;
-  let contactDel;
-  let joystick;
-  let joystickArrows;
-  let joystickKnob;
-  let previousTime = 0;
+  //let player;
+  //let scene;
+  //let skView;
+  //let contactDel;
+  //let joystick;
+  //let joystickArrows;
+  //let joystickKnob;
 
   const PhysicsCategory = {
     none: 0,
@@ -39,11 +91,11 @@ function makeDemo(navigation, dvc) {
     ground: 2,
   };
 
-  function joystickTouchesMoved(touches = []) {
+  function touchesMoved(touches = []) {
     touches.forEach((t, idx) => {
       const viewLoc = t.locationInView(skView);
       const scnLoc = scene.convertPointFromView(viewLoc);
-      const jPos = scene.convertPointToNode(scnLoc, joystickArrows);
+      const jPos = joystick.convertPointFromNode(scnLoc, scene);
 
       const radius = Math.min(
         joystickArrows.size.width / 2,
@@ -59,15 +111,12 @@ function makeDemo(navigation, dvc) {
     });
   }
 
-  function joystickTouchesEnded() {
+  function touchesEnded() {
+    player.jump(joystickKnob.position);
     const action = SKAction.moveTo(v2(0, 0), 0.2);
     joystickKnob.runAction(action, () => {
       joystickKnob.position = v2(0, 0);
     });
-  }
-
-  function sceneTouchesBegan() {
-    player.jump(joystickKnob.position);
   }
 
   function addPlatforms() {
@@ -165,8 +214,8 @@ function makeDemo(navigation, dvc) {
     joystick.userInteractionEnabled = true;
     joystickArrows.userInteractionEnabled = true;
 
-    joystickArrows.touchesMoved = joystickTouchesMoved;
-    joystickArrows.touchesEnded = joystickTouchesEnded;
+    joystickArrows.touchesMoved = touchesMoved;
+    joystickArrows.touchesEnded = touchesEnded;
 
     scene.addChild(joystick);
   }
@@ -174,26 +223,22 @@ function makeDemo(navigation, dvc) {
   function makePlayer(demoVC) {
     const node = new SKSpriteNode('game_player');
     node.size = { width: 36, height: 49 };
-    const groundH = Math.round(scene.size.height * 0.05);
-    const startY = (scene.size.height * 0.5) - groundH - (node.size * 0.5);
-    node.position = { x: 0, y: startY};
+    node.position = v2(0, 0);
+    // node.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(node.size);
     return new Player(node);
   }
 
   function makeDelegate() {
     const del = new SKPhysicsContactDelegate();
     del.didBeginContact = (contact) => {
-      let firstBody = contact.bodyA;
-      let secBody = contact.bodyB;
-      console.log(contact.bodyA, contact.bodyB);
-      if (firstBody && firstBody.node) {
-        if (secBody && secBody.node) {
-          const firstName = firstBody.node.name;
-          const secName = secBody.node.name;
+      let bodyA = contact.bodyA;
+      let bodyB = contact.bodyB;
+      console.log(contact.bodyA.node.name, contact.bodyB.node.name);
+      if (bodyA && bodyA.node) {
+        if (bodyB && bodyB.node) {
           if (
-            (firstName && secName)
-            &&  ((firstName.includes('ground') && secName === 'player')
-            || (firstName === 'player' && secName.includes('ground')))
+            (bodyA.node.name.includes('ground') && bodyB.node.name === 'player') ||
+            (bodyA.node.name === 'player' && bodyB.node.name.includes('ground'))
           ) {
             player.touchedGround();
           }
@@ -243,38 +288,11 @@ function makeDemo(navigation, dvc) {
     player.node.physicsBody.contactTestBitMask = PhysicsCategory.ground;
     player.node.physicsBody.collisionBitMask = PhysicsCategory.ground;
     player.node.physicsBody.allowsRotation = false;
-    player.node.physicsBody.restitution = 0;
-
-    const borderBody = SKPhysicsBody.bodyWithEdgeLoopFromRect(scene.frame);
-    borderBody.friction = 0;
-    scene.physicsBody = borderBody;
   }
 
   function start() {
     skView.presentScene(scene);
     addPlatforms();
-    scene.update = update;
-    scene.touchesBegan = sceneTouchesBegan;
-  }
-
-  function update(time) {
-    let dt = time - previousTime;
-    if (dt > 0.02) dt = 0.02;
-    previousTime = time;
-    player.update(dt);
-
-    prevPos.x = curPos.x;
-    prevPos.y = curPos.y;
-    let pos = player.node.position;
-    if (!pos || pos.y < -scene.size.height) {
-      player.kill();
-    } else {
-      curPos.x = pos.x;
-      curPos.y = pos.y;
-      if (curPos.distanceTo(prevPos) < 0.01) {
-        player.touchedGround();
-      }
-    }
   }
 
   async function make(nav, demoVC) {
@@ -293,6 +311,10 @@ function makeDemo(navigation, dvc) {
     setPhysicsBodies();
 
     makeJoystick();
+
+    // scene.touchesBegan = touchesMoved;
+    // scene.touchesMoved = touchesMoved;
+    // scene.touchesEnded = touchesEnded;
 
     nav.pushViewController(demoVC);
 
