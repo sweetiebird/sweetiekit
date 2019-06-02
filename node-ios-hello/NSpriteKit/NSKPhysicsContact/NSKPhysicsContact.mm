@@ -1,41 +1,21 @@
 //
-//  SKPhysicsContact.m
-//  node-ios-hello
+//  SKPhysicsContact.mm
 //
 //  Created by Emily Kolar on 2019-5-15.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NSKPhysicsContact.h"
-#include "NSKPhysicsBody.h"
 
-Nan::Persistent<FunctionTemplate> NSKPhysicsContact::type;
+NSKPhysicsContact::NSKPhysicsContact() {}
+NSKPhysicsContact::~NSKPhysicsContact() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsContact::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKPhysicsContact"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKPhysicsContact, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, bodyA);
   JS_ASSIGN_PROP_READONLY(proto, bodyB);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKPhysicsContact, NSObject);
+JS_INIT_CLASS_END(SKPhysicsContact, NSObject);
 
 NAN_METHOD(NSKPhysicsContact::New) {
   Nan::HandleScope scope;
@@ -56,8 +36,7 @@ NAN_METHOD(NSKPhysicsContact::New) {
   JS_SET_RETURN(obj);
 }
 
-NSKPhysicsContact::NSKPhysicsContact () {}
-NSKPhysicsContact::~NSKPhysicsContact () {}
+#include "NSKPhysicsBody.h"
 
 NAN_GETTER(NSKPhysicsContact::bodyAGetter) {
   Nan::HandleScope scope;

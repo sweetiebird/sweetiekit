@@ -1,45 +1,24 @@
 //
-//  NSKTexture.m
-//  node-ios-hello
+//  NSKTexture.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NSKTexture.h"
-#include "NNSObject.h"
-#include "NARSession.h"
-#include "NUIImage.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKTexture::type;
+NSKTexture::NSKTexture() {}
+NSKTexture::~NSKTexture() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKTexture::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKTexture"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKTexture, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, size);
   JS_ASSIGN_PROP_READONLY(proto, textureRect);
+  // static members (ctor)
+  JS_INIT_CTOR(SKTexture, NSObject);
+  JS_ASSIGN_METHOD(ctor, textureWithImage);
+JS_INIT_CLASS_END(SKTexture, NSObject);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "textureWithImage", textureWithImage);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+#include "NUIImage.h"
 
 NAN_METHOD(NSKTexture::New) {
   Nan::HandleScope scope;
@@ -86,9 +65,6 @@ NAN_METHOD(NSKTexture::textureWithImage)
   };
   JS_SET_RETURN(JS_NEW_ARGV(NSKTexture, argv));
 }
-
-NSKTexture::NSKTexture () {}
-NSKTexture::~NSKTexture () {}
 
 JS_GETTER(SKTexture, tex, size, {
   CGSize size = [tex size];

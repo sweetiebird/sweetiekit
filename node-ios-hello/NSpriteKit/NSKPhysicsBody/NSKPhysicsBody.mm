@@ -1,34 +1,16 @@
 //
-//  SKPhysicsBody.m
-//  node-ios-hello
+//  SKPhysicsBody.mm
 //
 //  Created by Emily Kolar on 2019-5-14.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
 #include "NSKPhysicsBody.h"
-#include "NSKNode.h"
-#include "NSKTexture.h"
 
-Nan::Persistent<FunctionTemplate> NSKPhysicsBody::type;
+NSKPhysicsBody::NSKPhysicsBody() {}
+NSKPhysicsBody::~NSKPhysicsBody() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKPhysicsBody"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-//  JS_ASSIGN_PROP(proto, node);
-//  JS_ASSIGN_PROP(proto, categoryBitMask);
-//  JS_ASSIGN_PROP(proto, contactTestBitMask);
-//  JS_ASSIGN_PROP(proto, collisionBitMask);
+JS_INIT_CLASS(SKPhysicsBody, NSObject);
+  // instance members (proto)
   JS_ASSIGN_METHOD(proto, applyImpulse);
   JS_ASSIGN_METHOD(proto, applyAngularImpulse);
   JS_ASSIGN_METHOD(proto, applyImpulseAtPoint);
@@ -57,16 +39,13 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Iso
   JS_ASSIGN_PROP_READONLY(proto, node);
   JS_ASSIGN_PROP(proto, velocity);
   JS_ASSIGN_PROP(proto, angularVelocity);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, bodyWithCircleOfRadius);
-  JS_ASSIGN_METHOD(ctorFn, bodyWithTexture);
-  JS_ASSIGN_METHOD(ctorFn, bodyWithRectangleOfSize);
-  JS_ASSIGN_METHOD(ctorFn, bodyWithEdgeLoopFromRect);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKPhysicsBody, NSObject);
+  JS_ASSIGN_METHOD(ctor, bodyWithCircleOfRadius);
+  JS_ASSIGN_METHOD(ctor, bodyWithTexture);
+  JS_ASSIGN_METHOD(ctor, bodyWithRectangleOfSize);
+  JS_ASSIGN_METHOD(ctor, bodyWithEdgeLoopFromRect);
+JS_INIT_CLASS_END(SKPhysicsBody, NSObject);
 
 NAN_METHOD(NSKPhysicsBody::New) {
   Nan::HandleScope scope;
@@ -86,9 +65,6 @@ NAN_METHOD(NSKPhysicsBody::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NSKPhysicsBody::NSKPhysicsBody () {}
-NSKPhysicsBody::~NSKPhysicsBody () {}
 
 NAN_METHOD(NSKPhysicsBody::bodyWithCircleOfRadius) {
   Nan::EscapableHandleScope scope;
@@ -116,6 +92,8 @@ NAN_METHOD(NSKPhysicsBody::bodyWithCircleOfRadius) {
 
   JS_SET_RETURN(obj);
 }
+
+#include "NSKTexture.h"
 
 NAN_METHOD(NSKPhysicsBody::bodyWithTexture) {
   Nan::EscapableHandleScope scope;
@@ -604,6 +582,8 @@ NAN_GETTER(NSKPhysicsBody::jointsGetter) {
     return;
   }
 }
+
+#include "NSKNode.h"
 
 NAN_GETTER(NSKPhysicsBody::nodeGetter) {
   JS_UNWRAP(SKPhysicsBody, self);

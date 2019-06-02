@@ -1,37 +1,16 @@
 //
-//  NSKScene.m
-//  node-ios-hello
+//  NSKScene.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NSKNode.h"
 #include "NSKScene.h"
-#include "NARSession.h"
-#include "NSKPhysicsWorld.h"
-#include "NSKCameraNode.h"
-#include "NUITouch.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKScene::type;
+NSKScene::NSKScene() {}
+NSKScene::~NSKScene() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKNode::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKScene"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKScene, SKNode);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
@@ -48,13 +27,10 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
   JS_ASSIGN_PROP(proto, anchorPoint);
   JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
   JS_ASSIGN_PROP_READONLY(proto, view);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_METHOD(ctorFn, sceneWithSize);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKScene, SKNode);
+  JS_ASSIGN_METHOD(ctor, sceneWithSize);
+JS_INIT_CLASS_END(SKScene, SKNode);
 
 NAN_METHOD(NSKScene::New) {
   Nan::HandleScope scope;
@@ -86,9 +62,6 @@ NAN_METHOD(NSKScene::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NSKScene::NSKScene () {}
-NSKScene::~NSKScene () {}
 
 NAN_METHOD(NSKScene::sceneWithSize) {
   Local<Value> argv[] = {
@@ -273,6 +246,8 @@ NAN_SETTER(NSKScene::scaleModeSetter) {
   }
 }*/
 
+#include "NSKCameraNode.h"
+
 NAN_GETTER(NSKScene::cameraGetter) {
   JS_UNWRAP(SKScene, self);
   @autoreleasepool
@@ -374,6 +349,8 @@ NAN_SETTER(NSKScene::anchorPointSetter) {
     [self setAnchorPoint: to_value_CGPoint(value)];
   }
 }
+
+#include "NSKPhysicsWorld.h"
 
 NAN_GETTER(NSKScene::physicsWorldGetter) {
   JS_UNWRAP(SKScene, self);

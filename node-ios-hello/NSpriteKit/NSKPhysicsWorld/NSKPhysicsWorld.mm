@@ -1,43 +1,22 @@
 //
-//  SKPhysicsWorld.m
-//  node-ios-hello
+//  SKPhysicsWorld.mm
 //
 //  Created by Emily Kolar on 2019-5-15.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NSKPhysicsWorld.h"
-#include "NSKPhysicsContactDelegate.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKPhysicsWorld::type;
+NSKPhysicsWorld::NSKPhysicsWorld() {}
+NSKPhysicsWorld::~NSKPhysicsWorld() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsWorld::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKPhysicsWorld"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SKPhysicsWorld, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, gravity);
   JS_ASSIGN_PROP(proto, speed);
   JS_ASSIGN_PROP(proto, contactDelegate);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKPhysicsWorld, NSObject);
+JS_INIT_CLASS_END(SKPhysicsWorld, NSObject);
 
 NAN_METHOD(NSKPhysicsWorld::New) {
   Nan::HandleScope scope;
@@ -57,9 +36,6 @@ NAN_METHOD(NSKPhysicsWorld::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NSKPhysicsWorld::NSKPhysicsWorld () {}
-NSKPhysicsWorld::~NSKPhysicsWorld () {}
 
 NAN_GETTER(NSKPhysicsWorld::gravityGetter) {
   JS_UNWRAP(SKPhysicsWorld, self);
@@ -94,6 +70,8 @@ NAN_SETTER(NSKPhysicsWorld::speedSetter) {
     [self setSpeed: TO_FLOAT(value)];
   }
 }
+
+#include "NSKPhysicsContactDelegate.h"
 
 NAN_GETTER(NSKPhysicsWorld::contactDelegateGetter) {
   JS_UNWRAP(SKPhysicsWorld, self);

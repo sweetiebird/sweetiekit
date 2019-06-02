@@ -1,46 +1,24 @@
 //
-//  SKTransformNode.m
-//  node-ios-hello
+//  SKTransformNode.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NSKNode.h"
 #include "NSKTransformNode.h"
 
-Nan::Persistent<FunctionTemplate> NSKTransformNode::type;
+NSKTransformNode::NSKTransformNode() {}
+NSKTransformNode::~NSKTransformNode() {}
 
-NSKTransformNode::NSKTransformNode () {}
-NSKTransformNode::~NSKTransformNode () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKTransformNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKNode::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKTransformNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
+JS_INIT_CLASS(SKTransformNode, SKNode);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, xRotation);
   JS_ASSIGN_PROP(proto, yRotation);
   JS_ASSIGN_PROP(proto, eulerAngles);
   JS_ASSIGN_PROP(proto, rotationMatrix);
   JS_ASSIGN_PROP(proto, quaternion);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SKTransformNode, SKNode);
+JS_INIT_CLASS_END(SKTransformNode, SKNode);
 
 NAN_METHOD(NSKTransformNode::New) {
   Nan::HandleScope scope;

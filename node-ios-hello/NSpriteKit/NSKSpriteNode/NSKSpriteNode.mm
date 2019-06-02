@@ -1,38 +1,16 @@
 //
-//  NSKSpriteNode.m
-//  node-ios-hello
+//  NSKSpriteNode.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
-#include "NSKNode.h"
 #include "NSKSpriteNode.h"
-#include "NSKTexture.h"
-#include "NUIImage.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKSpriteNode::type;
+NSKSpriteNode::NSKSpriteNode () {}
+NSKSpriteNode::~NSKSpriteNode () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKNode::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKSpriteNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-//  JS_ASSIGN_PROP(proto, size);
-//  JS_ASSIGN_PROP(proto, colorBlendFactor);
-//  JS_ASSIGN_PROP(proto, color);
+JS_INIT_CLASS(SKSpriteNode, SKNode);
+  // instance members (proto)
   JS_ASSIGN_METHOD(proto, scaleToSize);
   JS_ASSIGN_METHOD(proto, animateWithRemoteGIF);
   JS_ASSIGN_PROP(proto, texture);
@@ -48,12 +26,12 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKSpriteNode::Initialize(Isol
   JS_ASSIGN_PROP(proto, size);
   JS_ASSIGN_PROP(proto, shader);
   JS_ASSIGN_PROP(proto, attributeValues);
+  // static members (ctor)
+  JS_INIT_CTOR(SKSpriteNode, SKNode);
+JS_INIT_CLASS_END(SKSpriteNode, SKNode);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+#include "NSKTexture.h"
+#include "NUIImage.h"
 
 NAN_METHOD(NSKSpriteNode::New) {
   Nan::HandleScope scope;
@@ -118,114 +96,6 @@ NAN_METHOD(NSKSpriteNode::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NSKSpriteNode::NSKSpriteNode () {}
-NSKSpriteNode::~NSKSpriteNode () {}
-/*
-NAN_GETTER(NSKSpriteNode::sizeGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  __block double w = 0;
-  __block double h = 0;
-  @autoreleasepool {
-    CGSize size = [node size];
-    w = size.width;
-    h = size.height;
-  }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("width"), JS_NUM(w));
-  result->Set(JS_STR("height"), JS_NUM(h));
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NSKSpriteNode::sizeSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  @autoreleasepool {
-    double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-    CGSize size = CGSizeMake(width, height);
-    [node setSize:size];
-  }
-}
-
-NAN_GETTER(NSKSpriteNode::colorBlendFactorGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
-}
-
-NAN_SETTER(NSKSpriteNode::colorBlendFactorSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      double factor = TO_DOUBLE(value);
-      [node setColorBlendFactor:factor];
-    });
-  }
-}
-
-NAN_GETTER(NSKSpriteNode::colorGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NSKSpriteNode::ColorBlendFactorGetter not implemented");
-}
-
-NAN_SETTER(NSKSpriteNode::colorSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  @autoreleasepool {
-    double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
-    double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
-    double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
-    double alpha = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha")));
-    UIColor *color = [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
-    [node setColor:color];
-  }
-}
-
-NAN_GETTER(NSKSpriteNode::anchorPointGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  __block float x = 0;
-  __block float y = 0;
-
-  @autoreleasepool {
-    x = [node anchorPoint].x;
-    y = [node anchorPoint].y;
-  }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(x));
-  result->Set(JS_STR("y"), JS_FLOAT(y));
-  
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NSKSpriteNode::anchorPointSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKSpriteNode, node);
-
-  @autoreleasepool {
-    float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-    float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-    [node setAnchorPoint:CGPointMake(x, y)];
-  }
-}
-*/
 
 NAN_METHOD(NSKSpriteNode::scaleToSize) {
   JS_UNWRAP(SKSpriteNode, node);

@@ -1,41 +1,20 @@
 //
-//  NSKView.m
-//  node-ios-hello
+//  NSKView.mm
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#include "defines.h"
 #include "NSKView.h"
-#include "NUIView.h"
-#include "NSKScene.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSKView::type;
+NSKView::NSKView() {}
+NSKView::~NSKView() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSKView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SKView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "presentScene", presentScene);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(SKView, UIView);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, presentScene);
+  // static members (ctor)
+  JS_INIT_CTOR(SKView, UIView);
+JS_INIT_CLASS_END(SKView, UIView);
 
 NAN_METHOD(NSKView::New) {
   Nan::HandleScope scope;
@@ -66,8 +45,7 @@ NAN_METHOD(NSKView::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NSKView::NSKView () {}
-NSKView::~NSKView () {}
+#include "NSKScene.h"
 
 NAN_METHOD(NSKView::presentScene) {
   Nan::HandleScope scope;
