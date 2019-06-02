@@ -9,25 +9,15 @@
 #ifndef NRPPreviewViewController_h
 #define NRPPreviewViewController_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_RPPreviewViewController(x) js_value_wrapper(x, RPPreviewViewController)
+#define to_value_RPPreviewViewController(x) to_value_wrapper(x, RPPreviewViewController)
+#define is_value_RPPreviewViewController(x) is_value_wrapper(x, RPPreviewViewController)
 
-class NRPPreviewViewController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NRPPreviewViewController();
-  virtual ~NRPPreviewViewController();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(RPPreviewViewController, UIViewController);
   JS_PROP(previewControllerDelegate);
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(RPPreviewViewController);
 
 #endif /* NRPPreviewViewController_h */

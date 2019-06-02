@@ -1068,8 +1068,8 @@
 		A1710E9F229A58A100EC7C86 /* NReplayKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */,
 				A1710EA4229A648900EC7C86 /* NRPPreviewViewController */,
+				A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */,
 				A1710EA0229A58A100EC7C86 /* NRPScreenRecorder */,
 			);
 			path = NReplayKit;

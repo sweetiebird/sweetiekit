@@ -9,25 +9,15 @@
 #ifndef NRPPreviewViewControllerDelegate_h
 #define NRPPreviewViewControllerDelegate_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_RPPreviewViewControllerDelegate(x) js_value_wrapper(x, RPPreviewViewControllerDelegate)
+#define to_value_RPPreviewViewControllerDelegate(x) to_value_wrapper(x, RPPreviewViewControllerDelegate)
+#define is_value_RPPreviewViewControllerDelegate(x) is_value_wrapper(x, RPPreviewViewControllerDelegate)
 
-class NRPPreviewViewControllerDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NRPPreviewViewControllerDelegate();
-  virtual ~NRPPreviewViewControllerDelegate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(RPPreviewViewControllerDelegate, NSObject);
   JS_PROP(previewControllerDidFinish);
   sweetiekit::JSFunction _didFinish;
-};
+JS_WRAP_CLASS_END(RPPreviewViewControllerDelegate);
 
 #endif /* NRPPreviewViewControllerDelegate_h */

@@ -9,25 +9,15 @@
 #ifndef NRPScreenRecorder_h
 #define NRPScreenRecorder_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_RPScreenRecorder(x) js_value_wrapper(x, RPScreenRecorder)
+#define to_value_RPScreenRecorder(x) to_value_wrapper(x, RPScreenRecorder)
+#define is_value_RPScreenRecorder(x) is_value_wrapper(x, RPScreenRecorder)
 
-class NRPScreenRecorder : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NRPScreenRecorder();
-  virtual ~NRPScreenRecorder();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(startRecordingWithHandler);
-  static NAN_METHOD(stopRecordingWithHandler);
-};
+JS_WRAP_CLASS(RPScreenRecorder, NSObject);
+  JS_METHOD(startRecordingWithHandler);
+  JS_METHOD(stopRecordingWithHandler);
+JS_WRAP_CLASS_END(RPScreenRecorder);
 
 #endif /* NRPScreenRecorder_h */
