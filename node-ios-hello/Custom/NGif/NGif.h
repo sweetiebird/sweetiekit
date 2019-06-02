@@ -9,23 +9,13 @@
 #ifndef NGif_h
 #define NGif_h
 
-#import <UIKit/UIKit.h>
 #include "NUIImage.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_Gif(x) js_value_wrapper(x, Gif)
+#define to_value_Gif(x) to_value_wrapper(x, Gif)
+#define is_value_Gif(x) is_value_wrapper(x, Gif)
 
-class NGif : public NUIImage {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NGif();
-  virtual ~NGif();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(Gif, UIImage);
+JS_WRAP_CLASS_END(Gif);
 
 #endif /* NGif_h */

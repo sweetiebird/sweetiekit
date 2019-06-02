@@ -9,19 +9,13 @@
 #ifndef NGifManager_h
 #define NGifManager_h
 
-using namespace v8;
-using namespace node;
+#include "NNSObject.h"
 
-class NGifManager : public NNSObject {
-public:
+#define js_value_GifManager(x) js_value_wrapper(x, GifManager)
+#define to_value_GifManager(x) to_value_wrapper(x, GifManager)
+#define is_value_GifManager(x) is_value_wrapper(x, GifManager)
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NGifManager();
-  virtual ~NGifManager();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(GifManager, NSObject);
+JS_WRAP_CLASS_END(GifManager);
 
 #endif /* NGifManager_h */

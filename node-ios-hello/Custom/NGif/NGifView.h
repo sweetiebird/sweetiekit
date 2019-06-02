@@ -9,25 +9,15 @@
 #ifndef NGifView_h
 #define NGifView_h
 
-#import <UIKit/UIKit.h>
 #include "NUIImageView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_GifView(x) js_value_wrapper(x, GifView)
+#define to_value_GifView(x) to_value_wrapper(x, GifView)
+#define is_value_GifView(x) is_value_wrapper(x, GifView)
 
-class NGifView : public NUIImageView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NGifView();
-  virtual ~NGifView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(setGifImage);
-  static NAN_METHOD(setGifFromUrl);
-};
+JS_WRAP_CLASS(GifView, UIImageView);
+  JS_METHOD(setGifImage);
+  JS_METHOD(setGifFromUrl);
+JS_WRAP_CLASS_END(GifView);
 
 #endif /* NGifView_h */
