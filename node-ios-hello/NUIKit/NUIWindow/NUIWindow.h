@@ -9,27 +9,16 @@
 #ifndef NUIWindow_h
 #define NUIWindow_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIWindow(x) js_value_wrapper(x, UIWindow)
+#define to_value_UIWindow(x) to_value_wrapper(x, UIWindow)
+#define is_value_UIWindow(x) is_value_wrapper(x, UIWindow)
 
-class NUIWindow : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIWindow();
-  virtual ~NUIWindow();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(SetRootViewController);
-  static NAN_METHOD(MakeKeyAndVisible);
+JS_WRAP_CLASS(UIWindow, NSObject);
+  JS_METHOD(SetRootViewController);
+  JS_METHOD(MakeKeyAndVisible);
   JS_PROP(rootViewController);
-};
+JS_WRAP_CLASS_END(UIWindow);
 
 #endif /* NUIWindow_h */

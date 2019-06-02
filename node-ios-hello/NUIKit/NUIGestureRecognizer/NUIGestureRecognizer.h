@@ -9,24 +9,14 @@
 #ifndef NUIGestureRecognizer_h
 #define NUIGestureRecognizer_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIGestureRecognizer(x) js_value_wrapper(x, UIGestureRecognizer)
+#define to_value_UIGestureRecognizer(x) to_value_wrapper(x, UIGestureRecognizer)
+#define is_value_UIGestureRecognizer(x) is_value_wrapper(x, UIGestureRecognizer)
 
-class NUIGestureRecognizer : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIGestureRecognizer();
-  virtual ~NUIGestureRecognizer();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(addTarget);
-};
+JS_WRAP_CLASS(UIGestureRecognizer, NSObject);
+  JS_METHOD(addTarget);
+JS_WRAP_CLASS_END(UIGestureRecognizer);
 
 #endif /* NUIGestureRecognizer_h */

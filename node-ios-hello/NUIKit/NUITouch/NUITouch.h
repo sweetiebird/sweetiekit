@@ -9,23 +9,13 @@
 #ifndef NUITouch_h
 #define NUITouch_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITouch(x) js_value_wrapper(x, UITouch)
+#define to_value_UITouch(x) to_value_wrapper(x, UITouch)
+#define is_value_UITouch(x) is_value_wrapper(x, UITouch)
 
-class NUITouch : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITouch();
-  virtual ~NUITouch();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UITouch, NSObject);
   
   //@property(nonatomic,readonly) NSTimeInterval      timestamp;
   JS_PROP(timestamp);
@@ -93,6 +83,6 @@ public:
   // This happens e.g. for azimuth/altitude values when entering from the edges
   //@property(nonatomic,readonly) UITouchProperties estimatedPropertiesExpectingUpdates NS_AVAILABLE_IOS(9_1);
   JS_PROP(estimatedPropertiesExpectingUpdates);
-};
+JS_WRAP_CLASS_END(UITouch);
 
 #endif /* NUITouch_h */

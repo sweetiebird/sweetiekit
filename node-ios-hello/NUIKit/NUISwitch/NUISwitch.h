@@ -11,10 +11,14 @@
 
 #include "NUIControl.h"
 
+#define js_value_UISwitch(x) js_value_wrapper(x, UISwitch)
+#define to_value_UISwitch(x) to_value_wrapper(x, UISwitch)
+#define is_value_UISwitch(x) is_value_wrapper(x, UISwitch)
+
 JS_WRAP_CLASS(UISwitch, UIControl);
   JS_PROP(IsOn);
   JS_PROP(OnTintColor);
-  static NAN_METHOD(SetOn);
+  JS_METHOD(SetOn);
 JS_WRAP_CLASS_END(UISwitch);
 
 #endif /* NUISwitch_h */

@@ -9,23 +9,13 @@
 #ifndef NUINib_h
 #define NUINib_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UINib(x) js_value_wrapper(x, UINib)
+#define to_value_UINib(x) to_value_wrapper(x, UINib)
+#define is_value_UINib(x) is_value_wrapper(x, UINib)
 
-class NUINib : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUINib();
-  virtual ~NUINib();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(UINib, NSObject);
+JS_WRAP_CLASS_END(UINib);
 
 #endif /* NUINib_h */

@@ -9,27 +9,17 @@
 #ifndef NUIProgressView_h
 #define NUIProgressView_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIProgressView(x) js_value_wrapper(x, UIProgressView)
+#define to_value_UIProgressView(x) to_value_wrapper(x, UIProgressView)
+#define is_value_UIProgressView(x) is_value_wrapper(x, UIProgressView)
 
-class NUIProgressView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIProgressView();
-  virtual ~NUIProgressView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(setProgress);
+JS_WRAP_CLASS(UIProgressView, UIView);
+  JS_METHOD(setProgress);
   JS_PROP(progress);
   JS_PROP(progressTintColor);
   JS_PROP(trackTintColor);
-};
+JS_WRAP_CLASS_END(UIProgressView);
 
 #endif /* NUIProgressView_h */

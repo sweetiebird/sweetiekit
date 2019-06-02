@@ -9,30 +9,20 @@
 #ifndef NUINavigationBar_h
 #define NUINavigationBar_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UINavigationBar(x) js_value_wrapper(x, UINavigationBar)
+#define to_value_UINavigationBar(x) to_value_wrapper(x, UINavigationBar)
+#define is_value_UINavigationBar(x) is_value_wrapper(x, UINavigationBar)
 
-class NUINavigationBar : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUINavigationBar();
-  virtual ~NUINavigationBar();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(setBackgroundImageForBarMetrics);
+JS_WRAP_CLASS(UINavigationBar, UIView);
+  JS_METHOD(setBackgroundImageForBarMetrics);
   JS_PROP(barStyle);
   JS_PROP(backItem);
   JS_PROP(barTintColor);
   JS_PROP(tintColor);
   JS_PROP(shadowImage);
 //  JS_PROP(isTranslucent);
-};
+JS_WRAP_CLASS_END(UINavigationBar);
 
 #endif /* NUINavigationBar_h */

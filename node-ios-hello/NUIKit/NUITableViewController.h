@@ -9,24 +9,13 @@
 #ifndef NUITableViewController_h
 #define NUITableViewController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITableViewController(x) js_value_wrapper(x, UITableViewController)
+#define to_value_UITableViewController(x) to_value_wrapper(x, UITableViewController)
+#define is_value_UITableViewController(x) is_value_wrapper(x, UITableViewController)
 
-class NUITableViewController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITableViewController();
-  virtual ~NUITableViewController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-};
+JS_WRAP_CLASS(UITableViewController, UIViewController);
+JS_WRAP_CLASS_END(UITableViewController);
 
 #endif /* NUITableViewController_h */

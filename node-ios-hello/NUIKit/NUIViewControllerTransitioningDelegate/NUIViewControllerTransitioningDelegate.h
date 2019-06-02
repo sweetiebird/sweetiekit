@@ -9,21 +9,15 @@
 #ifndef NUIViewControllerTransitioningDelegate_h
 #define NUIViewControllerTransitioningDelegate_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
 
-class NUIViewControllerTransitioningDelegate : public NNSObject {
-public:
-  
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-  
-  NUIViewControllerTransitioningDelegate();
-  virtual ~NUIViewControllerTransitioningDelegate();
-  
-  static NAN_METHOD(New);
+#define js_value_UIViewControllerTransitioningDelegate(x) js_value_wrapper(x, UIViewControllerTransitioningDelegate)
+#define to_value_UIViewControllerTransitioningDelegate(x) to_value_wrapper(x, UIViewControllerTransitioningDelegate)
+#define is_value_UIViewControllerTransitioningDelegate(x) is_value_wrapper(x, UIViewControllerTransitioningDelegate)
+
+JS_WRAP_CLASS(UIViewControllerTransitioningDelegate, NSObject);
   JS_PROP(PresentationControllerFor);
   sweetiekit::JSFunction _presentationControllerFor;
-};
+JS_WRAP_CLASS_END(UIViewControllerTransitioningDelegate);
 
 #endif /* NUIViewControllerTransitioningDelegate_h */

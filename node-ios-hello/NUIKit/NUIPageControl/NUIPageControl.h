@@ -9,29 +9,18 @@
 #ifndef NUIPageControl_h
 #define NUIPageControl_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIControl.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIPageControl(x) js_value_wrapper(x, UIPageControl)
+#define to_value_UIPageControl(x) to_value_wrapper(x, UIPageControl)
+#define is_value_UIPageControl(x) is_value_wrapper(x, UIPageControl)
 
-class NUIPageControl : public NUIControl {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIPageControl();
-  virtual ~NUIPageControl();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(sizeForNumberOfPages);
-
+JS_WRAP_CLASS(UIPageControl, UIControl);
+  JS_METHOD(sizeForNumberOfPages);
   JS_PROP(currentPage);
   JS_PROP(numberOfPages);
   JS_PROP(pageIndicatorTintColor);
   JS_PROP(currentPageIndicatorTintColor);
-};
+JS_WRAP_CLASS_END(UIPageControl);
 
 #endif /* NUIPageControl_h */

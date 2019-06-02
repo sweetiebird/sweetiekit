@@ -9,23 +9,13 @@
 #ifndef NUICollectionViewController_h
 #define NUICollectionViewController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UICollectionViewController(x) js_value_wrapper(x, UICollectionViewController)
+#define to_value_UICollectionViewController(x) to_value_wrapper(x, UICollectionViewController)
+#define is_value_UICollectionViewController(x) is_value_wrapper(x, UICollectionViewController)
 
-class NUICollectionViewController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUICollectionViewController();
-  virtual ~NUICollectionViewController();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(UICollectionViewController, UIViewController);
+JS_WRAP_CLASS_END(UICollectionViewController);
 
 #endif /* NUICollectionViewController_h */

@@ -9,24 +9,13 @@
 #ifndef NUITabBarItem_h
 #define NUITabBarItem_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITabBarItem(x) js_value_wrapper(x, UITabBarItem)
+#define to_value_UITabBarItem(x) to_value_wrapper(x, UITabBarItem)
+#define is_value_UITabBarItem(x) is_value_wrapper(x, UITabBarItem)
 
-class NUITabBarItem : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITabBarItem();
-  virtual ~NUITabBarItem();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(UITabBarItem, NSObject);
+JS_WRAP_CLASS_END(UITabBarItem);
 
 #endif /* NUITabBarItem_h */

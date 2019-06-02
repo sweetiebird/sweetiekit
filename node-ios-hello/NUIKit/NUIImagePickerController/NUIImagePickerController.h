@@ -9,27 +9,14 @@
 #ifndef NUIImagePickerController_h
 #define NUIImagePickerController_h
 
-#import <UIKit/UIKit.h>
 #include "NUINavigationController.h"
-#include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIImagePickerController(x) js_value_wrapper(x, UIImagePickerController)
+#define to_value_UIImagePickerController(x) to_value_wrapper(x, UIImagePickerController)
+#define is_value_UIImagePickerController(x) is_value_wrapper(x, UIImagePickerController)
 
-class NUIImagePickerController : public NUINavigationController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIImagePickerController();
-  virtual ~NUIImagePickerController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(DelegateGetter);
-  static NAN_SETTER(DelegateSetter);
-};
+JS_WRAP_CLASS(UIImagePickerController, UINavigationController);
+  JS_PROP(Delegate);
+JS_WRAP_CLASS_END(UIImagePickerController);
 
 #endif /* NUIImagePickerController_h */

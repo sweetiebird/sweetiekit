@@ -9,26 +9,15 @@
 #ifndef NUITabBarController_h
 #define NUITabBarController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITabBarController(x) js_value_wrapper(x, UITabBarController)
+#define to_value_UITabBarController(x) to_value_wrapper(x, UITabBarController)
+#define is_value_UITabBarController(x) is_value_wrapper(x, UITabBarController)
 
-class NUITabBarController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITabBarController();
-  virtual ~NUITabBarController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(SetViewControllers);
+JS_WRAP_CLASS(UITabBarController, UIViewController);
+  JS_METHOD(SetViewControllers);
   JS_PROP(tabBar);
-};
+JS_WRAP_CLASS_END(UITabBarController);
 
 #endif /* NUITabBarController_h */

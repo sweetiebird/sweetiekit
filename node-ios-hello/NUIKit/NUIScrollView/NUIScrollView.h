@@ -9,25 +9,14 @@
 #ifndef NUIScrollView_h
 #define NUIScrollView_h
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIScrollView(x) js_value_wrapper(x, UIScrollView)
+#define to_value_UIScrollView(x) to_value_wrapper(x, UIScrollView)
+#define is_value_UIScrollView(x) is_value_wrapper(x, UIScrollView)
 
-class NUIScrollView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIScrollView();
-  virtual ~NUIScrollView();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(setContentOffset);
-  
+JS_WRAP_CLASS(UIScrollView, UIView);
+  JS_METHOD(setContentOffset);
   JS_PROP(delegate);
   JS_PROP(contentOffset);
   JS_PROP(contentSize);
@@ -35,6 +24,6 @@ public:
   JS_PROP(showsVerticalScrollIndicator);
   
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(UIScrollView);
 
 #endif /* NUIScrollView_h */

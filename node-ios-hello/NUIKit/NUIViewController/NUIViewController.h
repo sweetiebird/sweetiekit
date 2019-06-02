@@ -11,14 +11,14 @@
 
 #include "NUIResponder.h"
 
+#define js_value_UIViewController(x) js_value_wrapper(x, UIViewController)
+#define to_value_UIViewController(x) to_value_wrapper(x, UIViewController)
+#define is_value_UIViewController(x) is_value_wrapper(x, UIViewController)
+
 // UIKit enums
 #define js_value_UIModalPresentationStyle(x) JS_ENUM(UIModalPresentationStyle, NSInteger, x)
 #define to_value_UIModalPresentationStyle(x) TO_ENUM(UIModalPresentationStyle, NSInteger, x)
 #define is_value_UIModalPresentationStyle(x) IS_ENUM(UIModalPresentationStyle, NSInteger, x)
-
-#define js_value_UIViewController(x) js_value_wrapper(x, UIViewController)
-#define to_value_UIViewController(x) to_value_wrapper(x, UIViewController)
-#define is_value_UIViewController(x) is_value_wrapper(x, UIViewController)
 
 JS_WRAP_CLASS(UIViewController, UIResponder);
   JS_PROP(View);

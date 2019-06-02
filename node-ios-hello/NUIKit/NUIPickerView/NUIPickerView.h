@@ -9,28 +9,18 @@
 #ifndef NUIPickerView_h
 #define NUIPickerView_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIPickerView(x) js_value_wrapper(x, UIPickerView)
+#define to_value_UIPickerView(x) to_value_wrapper(x, UIPickerView)
+#define is_value_UIPickerView(x) is_value_wrapper(x, UIPickerView)
 
-class NUIPickerView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIPickerView();
-  virtual ~NUIPickerView();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIPickerView, UIView);
   JS_PROP(delegate);
   JS_PROP(dataSource);
   
   Nan::Persistent<Value> _dataSource;
   Nan::Persistent<Value> _delegate;
-};
+JS_WRAP_CLASS_END(UIPickerView);
 
 #endif /* NUIPickerView_h */

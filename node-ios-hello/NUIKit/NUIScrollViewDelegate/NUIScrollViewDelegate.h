@@ -9,24 +9,13 @@
 #ifndef NUIScrollViewDelegate_h
 #define NUIScrollViewDelegate_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIScrollViewDelegate(x) js_value_wrapper(x, UIScrollViewDelegate)
+#define to_value_UIScrollViewDelegate(x) to_value_wrapper(x, UIScrollViewDelegate)
+#define is_value_UIScrollViewDelegate(x) is_value_wrapper(x, UIScrollViewDelegate)
 
-class NUIScrollViewDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIScrollViewDelegate();
-  virtual ~NUIScrollViewDelegate();
-
-  static NAN_METHOD(New);
-
+JS_WRAP_CLASS(UIScrollViewDelegate, NSObject);
   JS_PROP(didScroll);
   JS_PROP(didEndDecelerating);
   JS_PROP(didScrollToTop);
@@ -40,6 +29,6 @@ public:
   sweetiekit::JSFunction _didScrollToTop;
   sweetiekit::JSFunction _shouldScrollToTop;
   sweetiekit::JSFunction _didEndDragging;
-};
+JS_WRAP_CLASS_END(UIScrollViewDelegate);
 
 #endif /* NUIScrollViewDelegate_h */

@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "NNSObject.h"
 #include "NUIBarButtonItem.h"
+#import "node_ios_hello-Swift.h"
 
 Nan::Persistent<FunctionTemplate> NUIBarButtonItem::type;
 

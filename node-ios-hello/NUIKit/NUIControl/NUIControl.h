@@ -9,32 +9,21 @@
 #ifndef NUIControl_h
 #define NUIControl_h
 
-#include "defines.h"
 #include "NUIView.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIControl(x) js_value_wrapper(x, UIControl)
+#define to_value_UIControl(x) to_value_wrapper(x, UIControl)
+#define is_value_UIControl(x) is_value_wrapper(x, UIControl)
 
-class NUIControl : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIControl();
-  virtual ~NUIControl();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(addTarget);
-  static NAN_METHOD(removeTarget);
+JS_WRAP_CLASS(UIControl, UIView);
+  JS_METHOD(addTarget);
+  JS_METHOD(removeTarget);
   JS_PROP(State);
   JS_PROP(Enabled);
   JS_PROP(Selected);
   JS_PROP(Highlighted);
   JS_PROP(Tracking);
   JS_PROP(TouchInside);
-};
-
+JS_WRAP_CLASS_END(UIControl);
 
 #endif /* NUIControl_h */

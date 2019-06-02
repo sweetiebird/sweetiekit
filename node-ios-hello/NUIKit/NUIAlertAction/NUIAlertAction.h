@@ -9,24 +9,9 @@
 #ifndef NUIAlertAction_h
 #define NUIAlertAction_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
-
-class NUIAlertAction : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIAlertAction();
-  virtual ~NUIAlertAction();
-
-  static NAN_METHOD(New);
-};
-
+JS_WRAP_CLASS(UIAlertAction, NSObject);
+JS_WRAP_CLASS_END(UIAlertAction);
 
 #endif /* NUIAlertAction_h */

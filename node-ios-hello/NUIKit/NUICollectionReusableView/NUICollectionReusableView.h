@@ -9,24 +9,14 @@
 #ifndef NUICollectionReusableView_h
 #define NUICollectionReusableView_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UICollectionReusableView(x) js_value_wrapper(x, UICollectionReusableView)
+#define to_value_UICollectionReusableView(x) to_value_wrapper(x, UICollectionReusableView)
+#define is_value_UICollectionReusableView(x) is_value_wrapper(x, UICollectionReusableView)
 
-class NUICollectionReusableView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUICollectionReusableView();
-  virtual ~NUICollectionReusableView();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UICollectionReusableView, UIView);
   JS_PROP(reuseIdentifier);
-};
+JS_WRAP_CLASS_END(UICollectionReusableView);
 
 #endif /* NUICollectionReusableView_h */

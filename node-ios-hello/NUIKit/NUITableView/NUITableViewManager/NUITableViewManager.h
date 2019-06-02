@@ -9,24 +9,13 @@
 #ifndef NUITableViewManager_h
 #define NUITableViewManager_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITableViewManager(x) js_value_wrapper(x, UITableViewManager)
+#define to_value_UITableViewManager(x) to_value_wrapper(x, UITableViewManager)
+#define is_value_UITableViewManager(x) JS_INSTANCEOF(x, SUITableViewManager)
 
-class NUITableViewManager : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITableViewManager();
-  virtual ~NUITableViewManager();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UITableViewManager, NSObject);
   JS_PROP(DidSelectRowAt);
   JS_PROP(NumberOfSections);
   JS_PROP(heightForRowAtIndexPath);
@@ -37,6 +26,6 @@ public:
   sweetiekit::JSFunction _didSelectRowAt;
   sweetiekit::JSFunction _titleForSection;
   sweetiekit::JSFunction _heightForRow;
-};
+JS_WRAP_CLASS_END(UITableViewManager);
 
 #endif /* NUITableViewManager_h */

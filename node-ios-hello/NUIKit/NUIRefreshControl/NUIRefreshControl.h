@@ -11,10 +11,14 @@
 
 #include "NUIControl.h"
 
+#define js_value_UIRefreshControl(x) js_value_wrapper(x, UIRefreshControl)
+#define to_value_UIRefreshControl(x) to_value_wrapper(x, UIRefreshControl)
+#define is_value_UIRefreshControl(x) is_value_wrapper(x, UIRefreshControl)
+
 JS_WRAP_CLASS(UIRefreshControl, UIControl);
-  static NAN_METHOD(Alloc);
-  static NAN_METHOD(AddTargetFor);
-  static NAN_METHOD(EndRefreshing);
+  JS_METHOD(Alloc);
+  JS_METHOD(AddTargetFor);
+  JS_METHOD(EndRefreshing);
 JS_WRAP_CLASS_END(UIRefreshControl);
 
 #endif /* NUIRefreshControl_h */

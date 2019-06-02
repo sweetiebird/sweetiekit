@@ -9,25 +9,15 @@
 #ifndef NUIKitGlobals_h
 #define NUIKitGlobals_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIKitGlobals(x) js_value_wrapper(x, UIKitGlobals)
+#define to_value_UIKitGlobals(x) to_value_wrapper(x, UIKitGlobals)
+#define is_value_UIKitGlobals(x) is_value_wrapper(x, UIKitGlobals)
 
-class NUIKitGlobals : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIKitGlobals();
-  virtual ~NUIKitGlobals();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(UIImageWriteToSavedPhotosAlbum);
-  static NAN_METHOD(UIImageOrientation);
-};
+JS_WRAP_CLASS(UIKitGlobals, NSObject);
+  JS_METHOD(UIImageWriteToSavedPhotosAlbum);
+  JS_METHOD(UIImageOrientation);
+JS_WRAP_CLASS_END(UIKitGlobals);
 
 #endif /* NUIKitGlobals_h */

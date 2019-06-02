@@ -9,28 +9,18 @@
 #ifndef NUISlider_h
 #define NUISlider_h
 
-#import <UIKit/UIKit.h>
 #include "NUIControl.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UISlider(x) js_value_wrapper(x, UISlider)
+#define to_value_UISlider(x) to_value_wrapper(x, UISlider)
+#define is_value_UISlider(x) is_value_wrapper(x, UISlider)
 
-class NUISlider : public NUIControl {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUISlider();
-  virtual ~NUISlider();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(SetValue);
+JS_WRAP_CLASS(UISlider, UIControl);
+  JS_METHOD(SetValue);
   JS_PROP(Value);
-  static NAN_METHOD(setThumbImage);
+  JS_METHOD(setThumbImage);
   JS_PROP(currentThumbImage);
   JS_PROP(thumbTintColor);
-};
+JS_WRAP_CLASS_END(UISlider);
 
 #endif /* NUISlider_h */

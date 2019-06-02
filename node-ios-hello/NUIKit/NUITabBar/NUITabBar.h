@@ -7,28 +7,20 @@
 //
 
 #ifndef NUITabBar_h
-#define NUITabBar_h    
+#define NUITabBar_h   
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITabBar(x) js_value_wrapper(x, UITabBar)
+#define to_value_UITabBar(x) to_value_wrapper(x, UITabBar)
+#define is_value_UITabBar(x) is_value_wrapper(x, UITabBar)
 
-class NUITabBar : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITabBar();
-  virtual ~NUITabBar();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UITabBar, UIView);
+  JS_METHOD(SetViews);
+  JS_PROP(tabBar);
   JS_PROP(barTintColor);
   JS_PROP(tintColor);
   JS_PROP(unselectedItemTintColor);
-};
+JS_WRAP_CLASS_END(UITabBar);
 
 #endif /* NUITabBar_h */

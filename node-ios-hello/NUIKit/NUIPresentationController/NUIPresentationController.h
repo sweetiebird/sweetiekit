@@ -11,19 +11,11 @@
 
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIPresentationController(x) js_value_wrapper(x, UIPresentationController)
+#define to_value_UIPresentationController(x) to_value_wrapper(x, UIPresentationController)
+#define is_value_UIPresentationController(x) is_value_wrapper(x, UIPresentationController)
 
-class NUIPresentationController : public NNSObject {
-public:
-  
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-  
-  NUIPresentationController();
-  virtual ~NUIPresentationController();
-  
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIPresentationController, NSObject);
   JS_PROP(FrameOfPresentedViewInContainerView);
   JS_PROP(PresentationTransitionWillBegin);
   JS_PROP(DismissalTransitionWillBegin);
@@ -36,6 +28,6 @@ public:
   sweetiekit::JSFunction _dismissalTransitionWillBegin;
   sweetiekit::JSFunction _containerWillLayoutSubviews;
   sweetiekit::JSFunction _sizeForChildContentContainer;
-};
+JS_WRAP_CLASS_END(UIPresentationController);
 
 #endif /* NUIPresentationController_h */

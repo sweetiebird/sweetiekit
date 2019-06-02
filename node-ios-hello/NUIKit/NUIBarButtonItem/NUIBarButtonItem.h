@@ -9,26 +9,15 @@
 #ifndef NUIToolbar_h
 #define NUIToolbar_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIBarButtonItem(x) js_value_wrapper(x, UIBarButtonItem)
+#define to_value_UIBarButtonItem(x) to_value_wrapper(x, UIBarButtonItem)
+#define is_value_UIBarButtonItem(x) is_value_wrapper(x, UIBarButtonItem)
 
-class NUIBarButtonItem : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIBarButtonItem();
-  virtual ~NUIBarButtonItem();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIBarButtonItem, NSObject);
   JS_PROP(title);
   sweetiekit::JSFunction _callback;
-};
+JS_WRAP_CLASS_END(UIBarButtonItem);
 
 #endif /* NUIToolbar_h */

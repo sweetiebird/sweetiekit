@@ -9,29 +9,19 @@
 #ifndef NUINavigationItem_h
 #define NUINavigationItem_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UINavigationItem(x) js_value_wrapper(x, UINavigationItem)
+#define to_value_UINavigationItem(x) to_value_wrapper(x, UINavigationItem)
+#define is_value_UINavigationItem(x) is_value_wrapper(x, UINavigationItem)
 
-class NUINavigationItem : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUINavigationItem();
-  virtual ~NUINavigationItem();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(initWithTitle);
+JS_WRAP_CLASS(UINavigationItem, NSObject);
+  JS_METHOD(initWithTitle);
   
   JS_PROP(title);
   JS_PROP(backBarButtonItem);
   JS_PROP(titleView);
   JS_PROP(prompt);
-};
+JS_WRAP_CLASS_END(UINavigationItem);
 
 #endif /* NUINavigationItem_h */

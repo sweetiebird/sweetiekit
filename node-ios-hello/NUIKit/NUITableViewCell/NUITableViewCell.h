@@ -10,30 +10,19 @@
 #ifndef NUITableViewCell_h
 #define NUITableViewCell_h
 
-#import <UIKit/UIKit.h>
 #include "NUIView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITableViewCell(x) js_value_wrapper(x, UITableViewCell)
+#define to_value_UITableViewCell(x) to_value_wrapper(x, UITableViewCell)
+#define is_value_UITableViewCell(x) is_value_wrapper(x, UITableViewCell)
 
-class NUITableViewCell : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITableViewCell();
-  virtual ~NUITableViewCell();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
+JS_WRAP_CLASS(UITableViewCell, UIView);
   JS_PROP(TextLabel);
   JS_PROP(DetailTextLabel);
   JS_PROP(IsEditing);
   JS_PROP(IsSelected);
   JS_PROP(selectionStyle);
   JS_PROP(cellStyle);
-};
+JS_WRAP_CLASS_END(UITableViewCell);
 
 #endif /* NUITableViewCell_h */

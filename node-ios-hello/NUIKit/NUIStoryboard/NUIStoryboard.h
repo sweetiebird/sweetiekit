@@ -9,16 +9,14 @@
 #ifndef NUIStoryboard_h
 #define NUIStoryboard_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIStoryboard(x) js_value_wrapper(x, UIStoryboard)
+#define to_value_UIStoryboard(x) to_value_wrapper(x, UIStoryboard)
+#define is_value_UIStoryboard(x) is_value_wrapper(x, UIStoryboard)
 
 JS_WRAP_CLASS(UIStoryboard, NSObject);
-  static NAN_METHOD(InstantiateViewController);
+  JS_METHOD(InstantiateViewController);
 JS_WRAP_CLASS_END(UIStoryboard);
-
 
 #endif /* NUIStoryboard_h */

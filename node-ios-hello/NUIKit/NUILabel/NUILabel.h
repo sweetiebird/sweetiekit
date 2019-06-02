@@ -9,27 +9,15 @@
 #ifndef NUILabel_h
 #define NUILabel_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UILabel(x) js_value_wrapper(x, UILabel)
+#define to_value_UILabel(x) to_value_wrapper(x, UILabel)
+#define is_value_UILabel(x) is_value_wrapper(x, UILabel)
 
-class NUILabel : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUILabel();
-  virtual ~NUILabel();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Alloc);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(TextGetter);
-  static NAN_SETTER(TextSetter);
+JS_WRAP_CLASS(UILabel, NSObject);
+  JS_METHOD(Alloc);
+  JS_PROP(Text);
   JS_METHOD(initWithXYWidthHeight);
   JS_PROP(NumberOfLines);
   JS_PROP(Font);
@@ -38,6 +26,6 @@ public:
   JS_PROP(IsHighlighted);
   JS_PROP(textAlignment);
   JS_PROP(attributedText);
-};
+JS_WRAP_CLASS_END(UILabel);
 
 #endif /* NUILabel_h */

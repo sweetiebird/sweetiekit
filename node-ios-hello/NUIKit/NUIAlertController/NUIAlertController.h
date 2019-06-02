@@ -9,24 +9,14 @@
 #ifndef NUIAlertController_h
 #define NUIAlertController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIAlertController(x) js_value_wrapper(x, UIAlertController)
+#define to_value_UIAlertController(x) to_value_wrapper(x, UIAlertController)
+#define is_value_UIAlertController(x) is_value_wrapper(x, UIAlertController)
 
-class NUIAlertController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIAlertController();
-  virtual ~NUIAlertController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(AddAction);
-};
+JS_WRAP_CLASS(UIAlertController, UIViewController);
+  JS_METHOD(AddAction);
+JS_WRAP_CLASS_END(UIAlertController);
 
 #endif /* NUIAlertController_h */

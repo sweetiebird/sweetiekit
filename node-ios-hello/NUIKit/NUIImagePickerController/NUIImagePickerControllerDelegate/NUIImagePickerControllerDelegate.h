@@ -9,28 +9,18 @@
 #ifndef NUIImagePickerControllerDelegate_h
 #define NUIImagePickerControllerDelegate_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
 
-class NUIImagePickerControllerDelegate : public NNSObject {
-public:
+#define js_value_UIImagePickerControllerDelegate(x) js_value_wrapper(x, UIImagePickerControllerDelegate)
+#define to_value_UIImagePickerControllerDelegate(x) to_value_wrapper(x, UIImagePickerControllerDelegate)
+#define is_value_UIImagePickerControllerDelegate(x) is_value_wrapper(x, UIImagePickerControllerDelegate)
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIImagePickerControllerDelegate();
-  virtual ~NUIImagePickerControllerDelegate();
-  
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(ResultGetter);
-  static NAN_GETTER(OnInfoGetter);
-  static NAN_SETTER(OnInfoSetter);
-  static NAN_GETTER(OnCancelGetter);
-  static NAN_SETTER(OnCancelSetter);
+JS_WRAP_CLASS(UIImagePickerControllerDelegate, NSObject);
+  JS_PROP(Result);
+  JS_PROP(OnInfo);
+  JS_PROP(OnCancel);
   Nan::Persistent<Function>* _onInfo;
   Nan::Persistent<Function>* _onCancel;
-};
-
+JS_WRAP_CLASS_END(UIImagePickerControllerDelegate);
 
 #endif /* NUIImagePickerControllerDelegate_h */

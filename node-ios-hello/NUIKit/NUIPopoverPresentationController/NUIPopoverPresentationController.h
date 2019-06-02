@@ -9,26 +9,16 @@
 #ifndef NUIPopoverPresentationController_h
 #define NUIPopoverPresentationController_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIPopoverPresentationController(x) js_value_wrapper(x, UIPopoverPresentationController)
+#define to_value_UIPopoverPresentationController(x) to_value_wrapper(x, UIPopoverPresentationController)
+#define is_value_UIPopoverPresentationController(x) is_value_wrapper(x, UIPopoverPresentationController)
 
-class NUIPopoverPresentationController : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIPopoverPresentationController();
-  virtual ~NUIPopoverPresentationController();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UIPopoverPresentationController, NSObject);
   JS_PROP(permittedArrowDirections);
   JS_PROP(sourceView);
   JS_PROP(sourceRect);
-};
+JS_WRAP_CLASS_END(UIPopoverPresentationController);
 
 #endif /* NUIPopoverPresentationController_h */

@@ -9,34 +9,20 @@
 #ifndef NUIApplication_h
 #define NUIApplication_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIApplication(x) js_value_wrapper(x, UIApplication)
+#define to_value_UIApplication(x) to_value_wrapper(x, UIApplication)
+#define is_value_UIApplication(x) is_value_wrapper(x, UIApplication)
 
-class NUIApplication : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIApplication();
-  virtual ~NUIApplication();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(KeyWindowGetter);
-  
-  static NAN_METHOD(Main);
-  
+JS_WRAP_CLASS(UIApplication, NSObject);
+  JS_PROP(KeyWindow);
+  JS_METHOD(Main);
   JS_PROP(statusBarOrientation);
 
 private:
   static UIWindow* tmp_UIWindow;
-  
-};
+JS_WRAP_CLASS_END(UIApplication);
 
 
 #endif /* NUIApplication_h */

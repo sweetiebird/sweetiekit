@@ -9,26 +9,16 @@
 #ifndef NUIResponder_h
 #define NUIResponder_h
 
-#include "defines.h"
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIResponder(x) js_value_wrapper(x, UIResponder)
+#define to_value_UIResponder(x) to_value_wrapper(x, UIResponder)
+#define is_value_UIResponder(x) is_value_wrapper(x, UIResponder)
 
-class NUIResponder : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIResponder();
-  virtual ~NUIResponder();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(touchesBeganWithEvent);
-  static NAN_METHOD(touchesMovedWithEvent);
-  static NAN_METHOD(touchesEndedWithEvent);
+JS_WRAP_CLASS(UIResponder, NSObject);
+  JS_METHOD(touchesBeganWithEvent);
+  JS_METHOD(touchesMovedWithEvent);
+  JS_METHOD(touchesEndedWithEvent);
   JS_PROP(nextResponder);
   JS_PROP(canBecomeFirstResponder);
   JS_PROP(canResignFirstResponder);
@@ -51,6 +41,6 @@ public:
   JS_PROP(touchesBegan);
   JS_PROP(touchesMoved);
   JS_PROP(touchesEnded);
-};
+JS_WRAP_CLASS_END(UIResponder);
 
 #endif /* NUIResponder_h */

@@ -1235,8 +1235,8 @@
 		A19476C0226F5BCD003BB393 /* NUIRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
-				A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */,
 				A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */,
+				A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */,
 				A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */,
 			);
 			path = NUIRefreshControl;
@@ -1480,23 +1480,23 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
-				A1EE7D7D229D97C0002B53FF /* NSCNFloor */,
 				A1EE7D6A229D8EEE002B53FF /* NSCNBox */,
 				A1EE7D70229D8EEE002B53FF /* NSCNCapsule */,
 				A1EE7D67229D8EEE002B53FF /* NSCNCone */,
 				A1EE7D5B229D8EEE002B53FF /* NSCNCylinder */,
-				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
-				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
-				A1EE7D61229D8EEE002B53FF /* NSCNShape */,
-				A1EE7D64229D8EEE002B53FF /* NSCNSphere */,
-				A1EE7D5E229D8EEE002B53FF /* NSCNTorus */,
-				A1EE7D58229D8EEE002B53FF /* NSCNTube */,
+				A1EE7D7D229D97C0002B53FF /* NSCNFloor */,
 				A1646B9D229238630078CF4B /* NSCNGeometry */,
 				A1948930228A5D33007BF787 /* NSCNLight */,
 				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
+				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
+				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
+				A1EE7D61229D8EEE002B53FF /* NSCNShape */,
+				A1EE7D64229D8EEE002B53FF /* NSCNSphere */,
 				A1646BA0229238630078CF4B /* NSCNText */,
+				A1EE7D5E229D8EEE002B53FF /* NSCNTorus */,
+				A1EE7D58229D8EEE002B53FF /* NSCNTube */,
 				A1BD4B402287BC9E001D1F6E /* NSCNView */,
 			);
 			path = NSceneKit;
@@ -1647,7 +1647,6 @@
 		A1BD4BB622882116001D1F6E /* NUICollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */,
 				A1BD4BBE228823FA001D1F6E /* NUICollectionViewManager */,
 				A1BD4BB72288212A001D1F6E /* NUICollectionView.h */,
 				A1BD4BB822882131001D1F6E /* NUICollectionView.mm */,
@@ -1692,18 +1691,11 @@
 			path = NUINib;
 			sourceTree = "<group>";
 		};
-		A1BD4BCE22883EEB001D1F6E /* NUICollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NUICollectionViewDataSource;
-			sourceTree = "<group>";
-		};
 		A1CC12CE228E5935008C10A0 /* NUICollectionReusableView */ = {
 			isa = PBXGroup;
 			children = (
-				A1CC12CF228E5935008C10A0 /* NUICollectionReusableView.mm */,
 				A1CC12D0228E5935008C10A0 /* NUICollectionReusableView.h */,
+				A1CC12CF228E5935008C10A0 /* NUICollectionReusableView.mm */,
 			);
 			path = NUICollectionReusableView;
 			sourceTree = "<group>";
@@ -1941,10 +1933,6 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
-				A1B2057E2297A423006CA4C6 /* NUIPopoverPresentationController */,
-				A1B2057822979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate */,
-				A1B20572229799A9006CA4C6 /* NUIKitGlobals */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -1956,11 +1944,13 @@
 				A1BD4BC42288283A001D1F6E /* NUICollectionViewCell */,
 				A1BD4BBA228821AD001D1F6E /* NUICollectionViewController */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
+				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
 				A1CE2B66228EA6EC00D9B3B8 /* NUIFont */,
 				A1646B9522922B8F0078CF4B /* NUIGestureRecognizer */,
 				A1D672BD2269A05700562A42 /* NUIImage */,
 				A1E48226226AB0AE002AF96F /* NUIImagePickerController */,
 				211E76AC226A1BF100B838AF /* NUIImageView */,
+				A1B20572229799A9006CA4C6 /* NUIKitGlobals */,
 				211E76BA226A52AC00B838AF /* NUILabel */,
 				A1CE2B82228EFCAC00D9B3B8 /* NUINavigationBar */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
@@ -1969,6 +1959,8 @@
 				A1CE2B42228E605100D9B3B8 /* NUIPageControl */,
 				A1CE2B93228F03D100D9B3B8 /* NUIPickerView */,
 				A1CE2B97228F050700D9B3B8 /* NUIPickerViewManager */,
+				A1B2057E2297A423006CA4C6 /* NUIPopoverPresentationController */,
+				A1B2057822979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate */,
 				A1649775227E1F6D00CA943F /* NUIPresentationController */,
 				A10BD04E228F8ACB00184286 /* NUIProgressView */,
 				A19476C0226F5BCD003BB393 /* NUIRefreshControl */,

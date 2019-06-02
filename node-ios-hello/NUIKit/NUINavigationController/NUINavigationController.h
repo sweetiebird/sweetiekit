@@ -9,31 +9,20 @@
 #ifndef NUINavigationController_h
 #define NUINavigationController_h
 
-#import <UIKit/UIKit.h>
 #include "NUIViewController.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UINavigationController(x) js_value_wrapper(x, UINavigationController)
+#define to_value_UINavigationController(x) to_value_wrapper(x, UINavigationController)
+#define is_value_UINavigationController(x) is_value_wrapper(x, UINavigationController)
 
-class NUINavigationController : public NUIViewController {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUINavigationController();
-  virtual ~NUINavigationController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(SetViewControllers);
-  static NAN_METHOD(PushViewController);
-  static NAN_METHOD(PopViewController);
-  static NAN_METHOD(PopToRootViewController);
-  static NAN_METHOD(PopToViewController);
+JS_WRAP_CLASS(UINavigationController, UIViewController);
+  JS_METHOD(SetViewControllers);
+  JS_METHOD(PushViewController);
+  JS_METHOD(PopViewController);
+  JS_METHOD(PopToRootViewController);
+  JS_METHOD(PopToViewController);
   JS_PROP(IsToolbarHidden);
   JS_PROP(navigationBar);
-};
+JS_WRAP_CLASS_END(UINavigationController);
 
 #endif /* NUINavigationController_h */

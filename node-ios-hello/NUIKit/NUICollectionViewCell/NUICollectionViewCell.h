@@ -9,28 +9,18 @@
 #ifndef NUICollectionViewCell_h
 #define NUICollectionViewCell_h
 
-#import <UIKit/UIKit.h>
 #include "NUICollectionReusableView.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UICollectionViewCell(x) js_value_wrapper(x, UICollectionViewCell)
+#define to_value_UICollectionViewCell(x) to_value_wrapper(x, UICollectionViewCell)
+#define is_value_UICollectionViewCell(x) is_value_wrapper(x, UICollectionViewCell)
 
-class NUICollectionViewCell : public NUICollectionReusableView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUICollectionViewCell();
-  virtual ~NUICollectionViewCell();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UICollectionViewCell, UICollectionReusableView);
   JS_PROP(ContentView);
   JS_PROP(BackgroundView);
   JS_PROP(SelectedBackgroundView);
   JS_PROP(IsSelected);
   JS_PROP(IsHighlighted);
-};
+JS_WRAP_CLASS_END(UICollectionViewCell);
 
 #endif /* NUICollectionViewCell_h */

@@ -9,24 +9,13 @@
 #ifndef NUIPickerViewManager_h
 #define NUIPickerViewManager_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIPickerViewManager(x) js_value_wrapper(x, UIPickerViewManager)
+#define to_value_UIPickerViewManager(x) to_value_wrapper(x, UIPickerViewManager)
+#define is_value_UIPickerViewManager(x) is_value_wrapper(x, UIPickerViewManager)
 
-class NUIPickerViewManager : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIPickerViewManager();
-  virtual ~NUIPickerViewManager();
-
-  static NAN_METHOD(New);
-  
+JS_WRAP_CLASS(UIPickerViewManager, NSObject);
   JS_PROP(titleForRow);
   JS_PROP(didSelectRow);
   JS_PROP(attributedTitleForRow);
@@ -36,6 +25,6 @@ public:
   sweetiekit::JSFunction _titleForRow;
   sweetiekit::JSFunction _attributedTitleForRow;
   sweetiekit::JSFunction _didSelectRow;
-};
+JS_WRAP_CLASS_END(UIPickerViewManager);
 
 #endif /* NUIPickerViewManager_h */

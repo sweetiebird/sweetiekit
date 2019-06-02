@@ -9,28 +9,17 @@
 #ifndef NUICollectionViewManager_h
 #define NUICollectionViewManager_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UICollectionViewManager(x) js_value_wrapper(x, UICollectionViewManager)
+#define to_value_UICollectionViewManager(x) to_value_wrapper(x, UICollectionViewManager)
+#define is_value_UICollectionViewManager(x) is_value_wrapper(x, UICollectionViewManager)
 
-class NUICollectionViewManager : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUICollectionViewManager();
-  virtual ~NUICollectionViewManager();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(UICollectionViewManager, NSObject);
   JS_PROP(DidSelectItemAt);
   sweetiekit::JSFunction _numberItemsInSection;
   sweetiekit::JSFunction _cellForItemAt;
   sweetiekit::JSFunction _didSelectItemAt;
-};
+JS_WRAP_CLASS_END(UICollectionViewManager);
 
 #endif /* NUICollectionViewManager_h */

@@ -16,13 +16,10 @@ using namespace node;
 #include "NUIControl.h"
 
 JS_WRAP_CLASS(UITextField, UIControl);
-  static NAN_METHOD(Alloc);
-  static NAN_GETTER(TextGetter);
-  static NAN_SETTER(TextSetter);
-  static NAN_GETTER(DelegateGetter);
-  static NAN_SETTER(DelegateSetter);
-  static NAN_GETTER(CallbackGetter);
-  static NAN_SETTER(CallbackSetter);
+  JS_METHOD(Alloc);
+  JS_PROP(Text);
+  JS_PROP(Delegate);
+  JS_PROP(Callback);
   JS_PROP(textColor);
   JS_PROP(placeholder);
   JS_PROP(attributedPlaceholder);

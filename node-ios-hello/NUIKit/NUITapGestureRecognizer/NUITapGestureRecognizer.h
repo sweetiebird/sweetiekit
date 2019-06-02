@@ -9,23 +9,13 @@
 #ifndef NUITapGestureRecognizer_h
 #define NUITapGestureRecognizer_h    
 
-#import <UIKit/UIKit.h>
 #include "NUIGestureRecognizer.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UITapGestureRecognizer(x) js_value_wrapper(x, UITapGestureRecognizer)
+#define to_value_UITapGestureRecognizer(x) to_value_wrapper(x, UITapGestureRecognizer)
+#define is_value_UITapGestureRecognizer(x) is_value_wrapper(x, UITapGestureRecognizer)
 
-class NUITapGestureRecognizer : public NUIGestureRecognizer {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUITapGestureRecognizer();
-  virtual ~NUITapGestureRecognizer();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(UITapGestureRecognizer, UIGestureRecognizer);
+JS_WRAP_CLASS_END(UITapGestureRecognizer);
 
 #endif /* NUITapGestureRecognizer_h */

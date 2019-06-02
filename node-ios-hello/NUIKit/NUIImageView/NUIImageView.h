@@ -9,10 +9,11 @@
 #ifndef NUIImageView_h
 #define NUIImageView_h
 
-#include "defines.h"
-using namespace v8;
-using namespace node;
 #include "NUIView.h"
+
+#define js_value_UIImageView(x) js_value_wrapper(x, UIImageView)
+#define to_value_UIImageView(x) to_value_wrapper(x, UIImageView)
+#define is_value_UIImageView(x) is_value_wrapper(x, UIImageView)
 
 JS_WRAP_CLASS(UIImageView, UIView);
   JS_PROP(image);
