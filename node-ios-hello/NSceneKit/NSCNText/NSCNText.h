@@ -13,6 +13,7 @@
 
 #define js_value_SCNText(x) js_value_wrapper(x, SCNText)
 #define to_value_SCNText(x) to_value_wrapper(x, SCNText)
+#define is_value_SCNText(x) is_value_wrapper(x, SCNText)
 
 JS_WRAP_CLASS(SCNText, SCNGeometry);
   JS_METHOD(textWithStringExtrusionDepth);

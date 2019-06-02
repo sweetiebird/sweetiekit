@@ -13,25 +13,20 @@
 
 #define js_value_SCNNode(x) js_value_wrapper(x, SCNNode)
 #define to_value_SCNNode(x) to_value_wrapper(x, SCNNode)
+#define is_value_SCNNode(x) is_value_wrapper(x, SCNNode)
 
 // SpriteKit enums
 #define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
 #define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
+#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
+
 #define js_value_SCNNodeFocusBehavior(x) JS_ENUM(SCNNodeFocusBehavior, NSInteger, x)
 #define to_value_SCNNodeFocusBehavior(x) TO_ENUM(SCNNodeFocusBehavior, NSInteger, x)
+#define is_value_SCNNodeFocusBehavior(x) IS_ENUM(SCNNodeFocusBehavior, NSInteger, x)
 
-class NSCNNode : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSCNNode();
-  virtual ~NSCNNode();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(AddChildNode);
-  static NAN_METHOD(Clone);
+JS_WRAP_CLASS(SCNNode, NSObject);
+  JS_METHOD(AddChildNode);
+  JS_METHOD(Clone);
   JS_PROP(SimdTransform);
   JS_PROP(SimdWorldTransform);
   JS_PROP(Light);
@@ -94,7 +89,6 @@ public:
   JS_PROP(simdWorldUp);
   JS_PROP(simdWorldRight);
   JS_PROP(simdWorldFront);
-
-};
+JS_WRAP_CLASS_END(SCNNode);
 
 #endif /* NSCNNode_h */

@@ -13,6 +13,7 @@
 
 #define js_value_SCNCapsule(x) js_value_wrapper(x, SCNCapsule)
 #define to_value_SCNCapsule(x) to_value_wrapper(x, SCNCapsule)
+#define is_value_SCNCapsule(x) is_value_wrapper(x, SCNCapsule)
 
 JS_WRAP_CLASS(SCNCapsule, SCNGeometry);
   JS_METHOD(capsuleWithCapRadiusHeight);

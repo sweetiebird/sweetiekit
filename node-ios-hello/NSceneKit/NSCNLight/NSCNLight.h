@@ -13,17 +13,9 @@
 
 #define js_value_SCNLight(x) js_value_wrapper(x, SCNLight)
 #define to_value_SCNLight(x) to_value_wrapper(x, SCNLight)
+#define is_value_SCNLight(x) is_value_wrapper(x, SCNLight)
 
-class NSCNLight : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSCNLight();
-  virtual ~NSCNLight();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SCNLight, NSObject);
   JS_PROP(type);
   JS_PROP(color);
   JS_PROP(spotInnerAngle);
@@ -35,5 +27,6 @@ public:
   JS_PROP(attenuationStartDistance);
   JS_PROP(attenuationEndDistance);
   JS_PROP(attenuationFalloffExponent);
-};
+JS_WRAP_CLASS_END(SCNLight);
+
 #endif /* NSCNLight_h */

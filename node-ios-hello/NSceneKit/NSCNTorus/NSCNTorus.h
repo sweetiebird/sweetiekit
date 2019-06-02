@@ -13,6 +13,7 @@
 
 #define js_value_SCNTorus(x) js_value_wrapper(x, SCNTorus)
 #define to_value_SCNTorus(x) to_value_wrapper(x, SCNTorus)
+#define is_value_SCNTorus(x) is_value_wrapper(x, SCNTorus)
 
 JS_WRAP_CLASS(SCNTorus, SCNGeometry);
   JS_METHOD(torusWithRingRadiusPipeRadius);

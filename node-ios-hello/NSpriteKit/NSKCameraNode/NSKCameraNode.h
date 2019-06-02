@@ -9,21 +9,13 @@
 #ifndef NSKCameraNode_h
 #define NSKCameraNode_h  
 
-#include "NNSObject.h"
+#include "NSKNode.h"
 
 #define js_value_SKCameraNode(x) js_value_wrapper(x, SKCameraNode)
 #define to_value_SKCameraNode(x) to_value_wrapper(x, SKCameraNode)
+#define is_value_SKCameraNode(x) is_value_wrapper(x, SKCameraNode)
 
-class NSKCameraNode : public NSKNode {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKCameraNode();
-  virtual ~NSKCameraNode();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(SKCameraNode, SKNode);
+JS_WRAP_CLASS_END(SKCameraNode);
 
 #endif /* NSKCameraNode_h */

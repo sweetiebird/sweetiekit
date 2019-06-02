@@ -437,6 +437,7 @@ NAN_SETTER(NSKSpriteNode::sizeSetter) {
 
 #define js_value_SKShader(x) js_value_wrapper_unknown(x, SKShader)
 #define to_value_SKShader(x) to_value_wrapper_unknown(x, SKShader)
+#define is_value_SKShader(x) is_value_wrapper_unknown(x, SKShader)
 
 NAN_GETTER(NSKSpriteNode::shaderGetter) {
   JS_UNWRAP(SKSpriteNode, self);
@@ -457,6 +458,7 @@ NAN_SETTER(NSKSpriteNode::shaderSetter) {
 
 #define js_value_SKAttributeValue(x) js_value_wrapper_unknown(x, SKAttributeValue)
 #define to_value_SKAttributeValue(x) to_value_wrapper_unknown(x, SKAttributeValue)
+#define is_value_SKAttributeValue(x) is_value_wrapper_unknown(x, SKAttributeValue)
 
 NAN_GETTER(NSKSpriteNode::attributeValuesGetter) {
   JS_UNWRAP(SKSpriteNode, self);

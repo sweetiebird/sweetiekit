@@ -716,21 +716,27 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 
 #define js_value_NSInteger JS_INT
 #define to_value_NSInteger TO_INT32
+#define is_value_NSInteger(x) (x)->IsInt32()
+
 #define js_value_NSUInteger JS_UINT
 #define to_value_NSUInteger TO_UINT32
+#define is_value_NSUInteger(x) (x)->IsUint32()
+
 #define js_value_NSString NSStringToJSString
 #define to_value_NSString NJSStringToNSString
+#define is_value_NSString(x) (x)->IsString()
 
 #define JS_ENUM(type, c, x) js_value_##c(x)
 #define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
+#define IS_ENUM(type, c, x) is_value_##c(x)
 
-#define js_value_wrapper(x, t) js_value_wrapper_known(x, t)
+#define js_value_wrapper(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
 #define to_value_wrapper(x, t) (t*)sweetiekit::GetValueFor(x)
 #define is_value_wrapper(x, t) JS_INSTANCEOF(x, N##t)
+
 #define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
 #define to_value_wrapper_unknown(x, t) to_value_wrapper(x, t)
-#define js_value_wrapper_known(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
-#define to_value_wrapper_known(x, t) to_value_wrapper(x, t)
+#define is_value_wrapper_unknown(x, t) is_value_wrapper(x, NSObject)
 
 // SceneKit types
 #define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)

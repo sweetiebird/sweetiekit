@@ -13,6 +13,7 @@
 
 #define js_value_SCNGeometry(x) js_value_wrapper(x, SCNGeometry)
 #define to_value_SCNGeometry(x) to_value_wrapper(x, SCNGeometry)
+#define is_value_SCNGeometry(x) is_value_wrapper(x, SCNGeometry)
 
 JS_WRAP_CLASS(SCNGeometry, NSObject);
   JS_PROP(name);

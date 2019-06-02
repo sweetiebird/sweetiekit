@@ -13,19 +13,11 @@
 
 #define js_value_SCNView(x) js_value_wrapper(x, SCNView)
 #define to_value_SCNView(x) to_value_wrapper(x, SCNView)
+#define is_value_SCNView(x) is_value_wrapper(x, SCNView)
 
-class NSCNView : public NUIView {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSCNView();
-  virtual ~NSCNView();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SCNView, UIView);
   JS_PROP(AutoenablesDefaultLighting);
   JS_PROP(Playing);
-};
+JS_WRAP_CLASS_END(SCNView);
 
 #endif /* NSCNView_h */

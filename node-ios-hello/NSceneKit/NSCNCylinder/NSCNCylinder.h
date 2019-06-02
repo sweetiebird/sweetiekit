@@ -13,6 +13,7 @@
 
 #define js_value_SCNCylinder(x) js_value_wrapper(x, SCNCylinder)
 #define to_value_SCNCylinder(x) to_value_wrapper(x, SCNCylinder)
+#define is_value_SCNCylinder(x) is_value_wrapper(x, SCNCylinder)
 
 JS_WRAP_CLASS(SCNCylinder, SCNGeometry);
   JS_METHOD(cylinderWithRadiusHeight);

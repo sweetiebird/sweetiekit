@@ -13,6 +13,7 @@
 
 #define js_value_SCNBox(x) js_value_wrapper(x, SCNBox)
 #define to_value_SCNBox(x) to_value_wrapper(x, SCNBox)
+#define is_value_SCNBox(x) is_value_wrapper(x, SCNBox)
 
 JS_WRAP_CLASS(SCNBox, SCNGeometry);
   JS_METHOD(boxWithWidthHeightLengthChamferRadius);

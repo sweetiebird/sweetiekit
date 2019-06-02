@@ -13,6 +13,7 @@
 
 #define js_value_SCNPlane(x) js_value_wrapper(x, SCNPlane)
 #define to_value_SCNPlane(x) to_value_wrapper(x, SCNPlane)
+#define is_value_SCNPlane(x) is_value_wrapper(x, SCNPlane)
 
 JS_WRAP_CLASS(SCNPlane, SCNGeometry);
   JS_METHOD(planeWithWidthHeight);

@@ -13,22 +13,14 @@
 
 #define js_value_SKTransformNode(x) js_value_wrapper(x, SKTransformNode)
 #define to_value_SKTransformNode(x) to_value_wrapper(x, SKTransformNode)
+#define is_value_SKTransformNode(x) is_value_wrapper(x, SKTransformNode)
 
-class NSKTransformNode : public NSKNode {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKTransformNode();
-  virtual ~NSKTransformNode();
-
-  JS_METHOD(New);
+JS_WRAP_CLASS(SKTransformNode, SKNode);
   JS_PROP(xRotation);
   JS_PROP(yRotation);
   JS_PROP(eulerAngles);
   JS_PROP(rotationMatrix);
   JS_PROP(quaternion);
-};
+JS_WRAP_CLASS_END(SKTransformNode);
 
 #endif /* NSKTransformNode_h */

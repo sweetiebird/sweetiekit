@@ -13,6 +13,7 @@
 
 #define js_value_SCNCone(x) js_value_wrapper(x, SCNCone)
 #define to_value_SCNCone(x) to_value_wrapper(x, SCNCone)
+#define is_value_SCNCone(x) is_value_wrapper(x, SCNCone)
 
 JS_WRAP_CLASS(SCNCone, SCNGeometry);
   JS_METHOD(coneWithTopRadiusBottomRadiusHeight);

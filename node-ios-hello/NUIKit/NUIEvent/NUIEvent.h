@@ -12,10 +12,7 @@
 
 #define js_value_UIEvent(x) js_value_wrapper(x, UIEvent)
 #define to_value_UIEvent(x) to_value_wrapper(x, UIEvent)
-
-// SpriteKit enums
-//#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
-//#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
+#define is_value_UIEvent(x) is_value_wrapper(x, UIEvent)
 
 JS_WRAP_CLASS(UIEvent, NSObject);
   JS_PROP(type);

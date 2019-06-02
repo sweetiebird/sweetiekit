@@ -13,23 +13,15 @@
 
 #define js_value_SKLabelNode(x) js_value_wrapper(x, SKLabelNode)
 #define to_value_SKLabelNode(x) to_value_wrapper(x, SKLabelNode)
+#define is_value_SKLabelNode(x) is_value_wrapper(x, SKLabelNode)
 
-class NSKLabelNode : public NSKNode {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKLabelNode();
-  virtual ~NSKLabelNode();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKLabelNode, SKNode);
   JS_PROP(text);
   JS_PROP(attributedText);
   JS_PROP(preferredMaxLayoutWidth);
   JS_PROP(numberOfLines);
   JS_PROP(fontName);
-};
+JS_WRAP_CLASS_END(SKLabelNode);
 
 
 #endif /* NSKLabelNode_h */

@@ -77,6 +77,7 @@ JS_WRAP_CLASS_END(id);
 
 #define js_value_NSObject(x) js_value_wrapper(x, NSObject)
 #define to_value_NSObject(x) to_value_wrapper(x, NSObject)
+#define is_value_NSObject(x) is_value_wrapper(x, NSObject)
 
 JS_WRAP_CLASS(NSObject, id);
   NSObject* SetNSObject(NSObject* obj) {

@@ -13,21 +13,32 @@
 
 #define js_value_SCNMaterial(x) js_value_wrapper(x, SCNMaterial)
 #define to_value_SCNMaterial(x) to_value_wrapper(x, SCNMaterial)
+#define is_value_SCNMaterial(x) is_value_wrapper(x, SCNMaterial)
 
 #define js_value_SCNLightingModel js_value_NSString
 #define to_value_SCNLightingModel to_value_NSString
+#define is_value_SCNLightingModel is_value_NSString
 
 // SceneKit enums
 #define js_value_SCNTransparencyMode(x) JS_ENUM(SCNTransparencyMode, NSInteger, x)
 #define to_value_SCNTransparencyMode(x) TO_ENUM(SCNTransparencyMode, NSInteger, x)
+#define is_value_SCNTransparencyMode(x) IS_ENUM(SCNTransparencyMode, NSInteger, x)
+
 #define js_value_SCNBlendMode(x) JS_ENUM(SCNBlendMode, NSInteger, x)
 #define to_value_SCNBlendMode(x) TO_ENUM(SCNBlendMode, NSInteger, x)
+#define is_value_SCNBlendMode(x) IS_ENUM(SCNBlendMode, NSInteger, x)
+
 #define js_value_SCNColorMask(x) JS_ENUM(SCNColorMask, NSInteger, x)
 #define to_value_SCNColorMask(x) TO_ENUM(SCNColorMask, NSInteger, x)
+#define is_value_SCNColorMask(x) IS_ENUM(SCNColorMask, NSInteger, x)
+
 #define js_value_SCNCullMode(x) JS_ENUM(SCNCullMode, NSInteger, x)
 #define to_value_SCNCullMode(x) TO_ENUM(SCNCullMode, NSInteger, x)
+#define is_value_SCNCullMode(x) IS_ENUM(SCNCullMode, NSInteger, x)
+
 #define js_value_SCNFillMode(x) JS_ENUM(SCNFillMode, NSInteger, x)
 #define to_value_SCNFillMode(x) TO_ENUM(SCNFillMode, NSInteger, x)
+#define is_value_SCNFillMode(x) IS_ENUM(SCNFillMode, NSInteger, x)
 
 JS_WRAP_CLASS(SCNMaterial, NSObject);
   JS_PROP(name);

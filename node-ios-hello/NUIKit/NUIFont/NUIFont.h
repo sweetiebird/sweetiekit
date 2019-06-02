@@ -13,6 +13,7 @@
 
 #define js_value_UIFont(x) js_value_wrapper(x, UIFont)
 #define to_value_UIFont(x) to_value_wrapper(x, UIFont)
+#define is_value_UIFont(x) is_value_wrapper(x, UIFont)
 
 JS_WRAP_CLASS(UIFont, NSObject);
   JS_METHOD(systemFont);

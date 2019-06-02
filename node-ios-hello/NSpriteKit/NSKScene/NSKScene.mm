@@ -309,6 +309,7 @@ NAN_SETTER(NSKScene::listenerSetter) {
 
 #define js_value_AVAudioEngine(x) js_value_wrapper_unknown(x, AVAudioEngine)
 #define to_value_AVAudioEngine(x) to_value_wrapper_unknown(x, AVAudioEngine)
+#define is_value_AVAudioEngine(x) is_value_wrapper_unknown(x, AVAudioEngine)
 
 NAN_GETTER(NSKScene::audioEngineGetter) {
   JS_UNWRAP(SKScene, self);
@@ -338,6 +339,7 @@ NAN_SETTER(NSKScene::backgroundColorSetter) {
 
 #define js_value_SKSceneDelegate(x) js_value_wrapper_unknown(x, SKSceneDelegate)
 #define to_value_SKSceneDelegate(x) to_value_wrapper_unknown(x, SKSceneDelegate)
+#define is_value_SKSceneDelegate(x) is_value_wrapper_unknown(x, SKSceneDelegate)
 
 NAN_GETTER(NSKScene::delegateGetter) {
   JS_UNWRAP(SKScene, self);

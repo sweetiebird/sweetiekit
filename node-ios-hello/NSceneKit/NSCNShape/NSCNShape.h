@@ -13,9 +13,11 @@
 
 #define js_value_SCNShape(x) js_value_wrapper(x, SCNShape)
 #define to_value_SCNShape(x) to_value_wrapper(x, SCNShape)
+#define is_value_SCNShape(x) is_value_wrapper(x, SCNShape)
 
 #define js_value_SCNChamferMode(x) JS_ENUM(SCNChamferMode, NSInteger, x)
 #define to_value_SCNChamferMode(x) TO_ENUM(SCNChamferMode, NSInteger, x)
+#define is_value_SCNChamferMode(x) IS_ENUM(SCNChamferMode, NSInteger, x)
 
 JS_WRAP_CLASS(SCNShape, SCNGeometry);
   JS_METHOD(shapeWithPathExtrusionDepth);

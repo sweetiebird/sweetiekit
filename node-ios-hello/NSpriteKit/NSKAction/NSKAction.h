@@ -13,24 +13,16 @@
 
 #define js_value_SKAction(x) js_value_wrapper(x, SKAction)
 #define to_value_SKAction(x) to_value_wrapper(x, SKAction)
+#define is_value_SKAction(x) is_value_wrapper(x, SKAction)
 
-class NSKAction : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKAction();
-  virtual ~NSKAction();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(moveTo);
-  static NAN_METHOD(removeFromParent);
-  static NAN_METHOD(sequence);
-  static NAN_METHOD(waitForDuration);
-  static NAN_METHOD(moveBy);
-  static NAN_METHOD(scaleBy);
-  static NAN_METHOD(group);
-};
+JS_WRAP_CLASS(SKAction, NSObject);
+  JS_METHOD(moveTo);
+  JS_METHOD(removeFromParent);
+  JS_METHOD(sequence);
+  JS_METHOD(waitForDuration);
+  JS_METHOD(moveBy);
+  JS_METHOD(scaleBy);
+  JS_METHOD(group);
+JS_WRAP_CLASS_END(SKAction);
 
 #endif /* NSKAction_h */

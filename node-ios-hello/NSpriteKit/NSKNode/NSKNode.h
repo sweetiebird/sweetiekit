@@ -13,28 +13,21 @@
 
 #define js_value_SKNode(x) js_value_wrapper(x, SKNode)
 #define to_value_SKNode(x) to_value_wrapper(x, SKNode)
+#define is_value_SKNode(x) is_value_wrapper(x, SKNode)
 
 #define js_value_SKNodeFocusBehavior(x) JS_ENUM(SKNodeFocusBehavior, NSInteger, x)
 #define to_value_SKNodeFocusBehavior(x) TO_ENUM(SKNodeFocusBehavior, NSInteger, x)
+#define is_value_SKNodeFocusBehavior(x) IS_ENUM(SKNodeFocusBehavior, NSInteger, x)
 
-class NSKNode : public NUIResponder {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKNode();
-  virtual ~NSKNode();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(addChild);
-  static NAN_METHOD(removeFromParent);
-  static NAN_METHOD(runAction);
-  static NAN_METHOD(childNodeWithName);
-  static NAN_METHOD(containsPoint);
-  static NAN_METHOD(nodeAtPoint);
-  static NAN_METHOD(convertPointFromNode);
-  static NAN_METHOD(convertPointToNode);
+JS_WRAP_CLASS(SKNode, UIResponder);
+  JS_METHOD(addChild);
+  JS_METHOD(removeFromParent);
+  JS_METHOD(runAction);
+  JS_METHOD(childNodeWithName);
+  JS_METHOD(containsPoint);
+  JS_METHOD(nodeAtPoint);
+  JS_METHOD(convertPointFromNode);
+  JS_METHOD(convertPointToNode);
   JS_PROP(frame);
   JS_PROP(width);
   JS_PROP(height);
@@ -61,6 +54,6 @@ public:
   JS_PROP(reachConstraints);
   JS_PROP(constraints);
   JS_PROP(attributeValues);
-};
+JS_WRAP_CLASS_END(SKNode);
 
 #endif /* NSKNode_h */

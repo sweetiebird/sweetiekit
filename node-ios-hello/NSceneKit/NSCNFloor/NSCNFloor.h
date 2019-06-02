@@ -12,6 +12,7 @@
 
 #define js_value_SCNFloor(x) js_value_wrapper(x, SCNFloor)
 #define to_value_SCNFloor(x) to_value_wrapper(x, SCNFloor)
+#define is_value_SCNFloor(x) is_value_wrapper(x, SCNFloor)
 
 JS_WRAP_CLASS(SCNFloor, SCNGeometry);
   JS_METHOD(floor);

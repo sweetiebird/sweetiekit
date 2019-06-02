@@ -13,22 +13,14 @@
 
 #define js_value_SKPhysicsContactDelegate(x) js_value_wrapper(x, SKPhysicsContactDelegate)
 #define to_value_SKPhysicsContactDelegate(x) to_value_wrapper(x, SSKPhysicsContactDelegate)
+#define is_value_SKPhysicsContactDelegate(x) JS_INSTANCEOF(x, SSKPhysicsContactDelegate)
 
-class NSKPhysicsContactDelegate : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKPhysicsContactDelegate();
-  virtual ~NSKPhysicsContactDelegate();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKPhysicsContactDelegate, NSObject);
   JS_PROP(didBeginContact);
   JS_PROP(didEndContact);
   
   sweetiekit::JSFunction _didBeginContact;
   sweetiekit::JSFunction _didEndContact;
-};
+JS_WRAP_CLASS_END(SKPhysicsContactDelegate);
 
 #endif /* NSKPhysicsContactDelegate_h */

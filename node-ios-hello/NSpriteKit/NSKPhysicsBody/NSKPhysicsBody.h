@@ -13,6 +13,7 @@
 
 #define js_value_SKPhysicsBody(x) js_value_wrapper(x, SKPhysicsBody)
 #define to_value_SKPhysicsBody(x) to_value_wrapper(x, SKPhysicsBody)
+#define is_value_SKPhysicsBody(x) is_value_wrapper(x, SKPhysicsBody)
 
 JS_WRAP_CLASS(SKPhysicsBody, NSObject);
   JS_METHOD(bodyWithCircleOfRadius);

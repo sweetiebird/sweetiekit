@@ -13,18 +13,10 @@
 
 #define js_value_SCNScene(x) js_value_wrapper(x, SCNScene)
 #define to_value_SCNScene(x) to_value_wrapper(x, SCNScene)
+#define is_value_SCNScene(x) is_value_wrapper(x, SCNScene)
 
-class NSCNScene : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSCNScene();
-  virtual ~NSCNScene();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SCNScene, NSObject);
   JS_PROP(RootNode);
-};
+JS_WRAP_CLASS_END(SCNScene);
 
 #endif /* NSCNScene_h */

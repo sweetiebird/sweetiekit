@@ -13,22 +13,13 @@
 
 #define js_value_SKEmitterNode(x) js_value_wrapper(x, SKEmitterNode)
 #define to_value_SKEmitterNode(x) to_value_wrapper(x, SKEmitterNode)
+#define is_value_SKEmitterNode(x) is_value_wrapper(x, SKEmitterNode)
 
-//#define js_value_SKBlendMode JS_INT
-//#define to_value_SKBlendMode(x) static_cast<SKBlendMode>(TO_INT32(x))
 #define js_value_SKBlendMode(x) JS_ENUM(SKBlendMode, NSInteger, x)
 #define to_value_SKBlendMode(x) TO_ENUM(SKBlendMode, NSInteger, x)
+#define is_value_SKBlendMode(x) IS_ENUM(SKBlendMode, NSInteger, x)
 
-class NSKEmitterNode : public NSKNode {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKEmitterNode();
-  virtual ~NSKEmitterNode();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKEmitterNode, SKNode);
   JS_PROP(particleTexture);
   JS_PROP(particleBlendMode);
   JS_PROP(particleColor);
@@ -78,6 +69,6 @@ public:
   JS_PROP(particleRenderOrder);
   JS_PROP(particleZPositionRange);
   JS_PROP(particleZPositionSpeed);
-};
+JS_WRAP_CLASS_END(SKEmitterNode);
 
 #endif /* NNSKEmitterNode_h */

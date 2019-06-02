@@ -100,10 +100,12 @@ NAN_METHOD(N${name}::New) {
 
 #define js_value_${name}(x) js_value_wrapper(x, ${name})
 #define to_value_${name}(x) to_value_wrapper(x, ${name})
+#define is_value_${name}(x) is_value_wrapper(x, ${name})
 
 // SpriteKit enums
 //#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
 //#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
+//#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(${name}, ${superClass});
   //JS_METHOD(iosMethodName);

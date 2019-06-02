@@ -13,19 +13,11 @@
 
 #define js_value_SKPhysicsContact(x) js_value_wrapper(x, SKPhysicsContact)
 #define to_value_SKPhysicsContact(x) to_value_wrapper(x, SKPhysicsContact)
+#define is_value_SKPhysicsContact(x) is_value_wrapper(x, SKPhysicsContact)
 
-class NSKPhysicsContact : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKPhysicsContact();
-  virtual ~NSKPhysicsContact();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKPhysicsContact, NSObject);
   JS_PROP(bodyA);
   JS_PROP(bodyB);
-};
+JS_WRAP_CLASS_END(SKPhysicsContact);
 
 #endif /* NSKPhysicsContact_h */

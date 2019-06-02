@@ -176,6 +176,7 @@ NAN_SETTER(NSCNGeometry::levelsOfDetailSetter) {
 #if SCN_ENABLE_METAL
 #define js_value_SCNGeometryTessellator(x) js_value_wrapper_unknown(x, SCNGeometryTessellator)
 #define to_value_SCNGeometryTessellator(x) to_value_wrapper_unknown(x, SCNGeometryTessellator)
+#define is_value_SCNGeometryTessellator(x) is_value_wrapper_unknown(x, SCNGeometryTessellator)
 
 NAN_GETTER(NSCNGeometry::tessellatorGetter) {
   JS_UNWRAP(SCNGeometry, self);
@@ -231,6 +232,7 @@ NAN_SETTER(NSCNGeometry::wantsAdaptiveSubdivisionSetter) {
 
 #define js_value_SCNGeometryElement(x) js_value_wrapper_unknown(x, SCNGeometryElement)
 #define to_value_SCNGeometryElement(x) to_value_wrapper_unknown(x, SCNGeometryElement)
+#define is_value_SCNGeometryElement(x) is_value_wrapper_unknown(x, SCNGeometryElement)
 
 NAN_GETTER(NSCNGeometry::edgeCreasesElementGetter) {
   JS_UNWRAP(SCNGeometry, self);
@@ -251,6 +253,7 @@ NAN_SETTER(NSCNGeometry::edgeCreasesElementSetter) {
 
 #define js_value_SCNGeometrySource(x) js_value_wrapper_unknown(x, SCNGeometrySource)
 #define to_value_SCNGeometrySource(x) to_value_wrapper_unknown(x, SCNGeometrySource)
+#define is_value_SCNGeometrySource(x) is_value_wrapper_unknown(x, SCNGeometrySource)
 
 NAN_GETTER(NSCNGeometry::edgeCreasesSourceGetter) {
   JS_UNWRAP(SCNGeometry, self);

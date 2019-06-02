@@ -13,20 +13,12 @@
 
 #define js_value_SKTexture(x) js_value_wrapper(x, SKTexture)
 #define to_value_SKTexture(x) to_value_wrapper(x, SKTexture)
+#define is_value_SKTexture(x) is_value_wrapper(x, SKTexture)
 
-class NSKTexture : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKTexture();
-  virtual ~NSKTexture();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(textureWithImage);
+JS_WRAP_CLASS(SKTexture, NSObject);
+  JS_METHOD(textureWithImage);
   JS_PROP(size);
   JS_PROP(textureRect);
-};
+JS_WRAP_CLASS_END(SKTexture);
 
 #endif /* NSKTexture_h */

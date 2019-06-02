@@ -13,6 +13,7 @@
 
 #define js_value_SCNTube(x) js_value_wrapper(x, SCNTube)
 #define to_value_SCNTube(x) to_value_wrapper(x, SCNTube)
+#define is_value_SCNTube(x) is_value_wrapper(x, SCNTube)
 
 JS_WRAP_CLASS(SCNTube, SCNGeometry);
   JS_METHOD(tubeWithInnerRadiusOuterRadiusHeight);

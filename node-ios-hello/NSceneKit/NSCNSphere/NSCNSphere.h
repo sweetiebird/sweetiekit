@@ -13,6 +13,7 @@
 
 #define js_value_SCNSphere(x) js_value_wrapper(x, SCNSphere)
 #define to_value_SCNSphere(x) to_value_wrapper(x, SCNSphere)
+#define is_value_SCNSphere(x) is_value_wrapper(x, SCNSphere)
 
 JS_WRAP_CLASS(SCNSphere, SCNGeometry);
   JS_METHOD(sphereWithRadius);
