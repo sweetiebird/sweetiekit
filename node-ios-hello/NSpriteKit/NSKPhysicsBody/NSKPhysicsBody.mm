@@ -63,6 +63,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsBody::Initialize(Iso
   JS_ASSIGN_METHOD(ctorFn, bodyWithCircleOfRadius);
   JS_ASSIGN_METHOD(ctorFn, bodyWithTexture);
   JS_ASSIGN_METHOD(ctorFn, bodyWithRectangleOfSize);
+  JS_ASSIGN_METHOD(ctorFn, bodyWithEdgeLoopFromRect);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -149,6 +150,27 @@ NAN_METHOD(NSKPhysicsBody::bodyWithRectangleOfSize) {
     double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
     CGSize size = CGSizeMake(w, h);
     body->SetNSObject([SKPhysicsBody bodyWithRectangleOfSize:size]);
+  }
+
+  JS_SET_RETURN(obj);
+}
+
+NAN_METHOD(NSKPhysicsBody::bodyWithEdgeLoopFromRect) {
+  Nan::EscapableHandleScope scope;
+
+  Local<Value> argv[] = {
+  };
+  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+
+  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
+
+  @autoreleasepool {
+    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
+    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
+    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
+    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
+    CGRect frame = CGRectMake(x, y, w, h);
+    body->SetNSObject([SKPhysicsBody bodyWithEdgeLoopFromRect:frame]);
   }
 
   JS_SET_RETURN(obj);

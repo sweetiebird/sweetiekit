@@ -128,7 +128,6 @@
 		A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B205802297A423006CA4C6 /* NUIPopoverPresentationController.mm */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
-		A1B65486228CBA7200976024 /* SSKScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65485228CBA7200976024 /* SSKScene.swift */; };
 		A1B6548A228CD87600976024 /* NSKAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65489228CD87500976024 /* NSKAction.mm */; };
 		A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */; };
 		A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */; };
@@ -456,7 +455,6 @@
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
 		A1B65482228CB87E00976024 /* NUITouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITouch.mm; sourceTree = "<group>"; };
 		A1B65483228CB87E00976024 /* NUITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITouch.h; sourceTree = "<group>"; };
-		A1B65485228CBA7200976024 /* SSKScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKScene.swift; sourceTree = "<group>"; };
 		A1B65488228CD87500976024 /* NSKAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKAction.h; sourceTree = "<group>"; };
 		A1B65489228CD87500976024 /* NSKAction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKAction.mm; sourceTree = "<group>"; };
 		A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsWorld.mm; sourceTree = "<group>"; };
@@ -1562,7 +1560,6 @@
 			children = (
 				A1BD4B8A2287CA39001D1F6E /* NSKScene.h */,
 				A1BD4B8B2287CA3F001D1F6E /* NSKScene.mm */,
-				A1B65485228CBA7200976024 /* SSKScene.swift */,
 			);
 			path = NSKScene;
 			sourceTree = "<group>";
@@ -2597,7 +2594,6 @@
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
 				A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */,
-				A1B65486228CBA7200976024 /* SSKScene.swift in Sources */,
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,

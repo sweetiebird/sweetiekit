@@ -264,7 +264,7 @@ NAN_GETTER(NUIResponder::touchesBeganGetter) {
   JS_UNWRAP(UIResponder, ui);
   
   @autoreleasepool {
-    id fn = [ui associatedValueForKey:@"sweetiekit_uiResponder_touchesBegan"];
+    id fn = [ui associatedValueForKey:@"sweetiekit_touchesBegan"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -282,7 +282,7 @@ NAN_SETTER(NUIResponder::touchesBeganSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [ui associateValue:func withKey:@"sweetiekit_uiResponder_touchesBegan"];
+    [ui associateValue:func withKey:@"sweetiekit_touchesBegan"];
   }
 }
 
@@ -292,7 +292,7 @@ NAN_GETTER(NUIResponder::touchesMovedGetter) {
   JS_UNWRAP(UIResponder, ui);
   
   @autoreleasepool {
-    id fn = [ui associatedValueForKey:@"sweetiekit_uiResponder_touchesMoved"];
+    id fn = [ui associatedValueForKey:@"sweetiekit_touchesMoved"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -310,7 +310,7 @@ NAN_SETTER(NUIResponder::touchesMovedSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [ui associateValue:func withKey:@"sweetiekit_uiResponder_touchesMoved"];
+    [ui associateValue:func withKey:@"sweetiekit_touchesMoved"];
   }
 }
 
@@ -320,7 +320,7 @@ NAN_GETTER(NUIResponder::touchesEndedGetter) {
   JS_UNWRAP(UIResponder, ui);
 
   @autoreleasepool {
-    id fn = [ui associatedValueForKey:@"sweetiekit_uiResponder_touchesEnded"];
+    id fn = [ui associatedValueForKey:@"sweetiekit_touchesEnded"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -338,6 +338,6 @@ NAN_SETTER(NUIResponder::touchesEndedSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [ui associateValue:func withKey:@"sweetiekit_uiResponder_touchesEnded"];
+    [ui associateValue:func withKey:@"sweetiekit_touchesEnded"];
   }
 }
