@@ -145,7 +145,7 @@ function takeScreenshot(view) {
 
     if (img) {
       const ssFrame = { x: 0, y: 0, width: w * 0.4, height: h * 0.4 };
-      const ssView = new UIImageView(img);
+      const ssView = UIImageView(img);
       ssView.frame = ssFrame;
       ssView.layer.borderWidth = 1;
       ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
@@ -179,7 +179,7 @@ function getCapturedImage(arView) {
     console.log(xformedImg);
     const uiImg = UIImage.initWithCIImage(xformedImg, 1, orientation);
     console.log(ciImg, xformedImg, uiImg);
-    const ssView = new UIImageView(uiImg);
+    const ssView = UIImageView(uiImg);
     ssView.frame = { x: 0, y: 0, width: arView.frame.width, height: arView.frame.height };
     return ssView;
   } catch (err) {

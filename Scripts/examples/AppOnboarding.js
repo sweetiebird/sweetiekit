@@ -178,7 +178,7 @@ function setupQuizView() {
     });
     contentLabel.attributedText = attrText;
     const image = UIImage(iconImages[i]);
-    const imageView = new UIImageView(image);
+    const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
     quizScroll.addSubview(slideView);
@@ -238,7 +238,7 @@ function startQuiz() {
 function makeBgView() {
   const frame = { x: 0, y: -84, width: w, height: h + 84 };
   const img = UIImage('abstract_grey');
-  const imgView = new UIImageView(img);
+  const imgView = UIImageView(img);
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
   imgView.alpha = 0.2;
@@ -335,7 +335,7 @@ function setupWelcomeView() {
     });
     contentLabel.attributedText = attrText;
     const image = UIImage(iconImages[i]);
-    const imageView = new UIImageView(image);
+    const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
     scrollView.addSubview(slideView);

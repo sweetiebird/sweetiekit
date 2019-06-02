@@ -206,7 +206,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     contentLabel.attributedText = attrText;
 
     const image = UIImage(iconImages[i]);
-    const imageView = new UIImageView(image);
+    const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
     imageView.contentMode = UIViewContentMode.scaleAspectFit;
@@ -267,7 +267,7 @@ function makeStatusBarView() {
 function makeBgView() {
   const frame = { x: 0, y: -84, width: w, height: h + 84 };
   const img = UIImage('abstract_grey');
-  const imgView = new UIImageView(img);
+  const imgView = UIImageView(img);
   imgView.frame = frame;
   imgView.contentMode = UIViewContentMode.scaleAspectFill;
   imgView.alpha = 0.2;
@@ -427,7 +427,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const items = contentTexts[i];
 
     const image = UIImage(iconImages[i]);
-    const imageView = new UIImageView(image);
+    const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };
     imageView.contentMode = UIViewContentMode.scaleAspectFit;

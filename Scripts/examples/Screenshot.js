@@ -31,7 +31,7 @@ function takeSS() {
 
     if (img) {
       const ssFrame = { x: 0, y: 0, width: w * 0.4, height: h * 0.4 };
-      ssView = new UIImageView(img);
+      ssView = UIImageView(img);
       ssView.frame = ssFrame;
       ssView.layer.borderWidth = 1;
       ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };

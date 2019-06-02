@@ -199,7 +199,7 @@ function createTable() {
 
          if (i) {
            img = i;
-           const imgView = new UIImageView(img);
+           const imgView = UIImageView(img);
            imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
            imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
            photoVC.view.addSubview(imgView);

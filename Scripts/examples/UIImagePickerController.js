@@ -26,7 +26,7 @@ async function make(nav, demoVC) {
 
         if (i) {
           img = i;
-          const imgView = new UIImageView(img);
+          const imgView = UIImageView(img);
           imgView.frame = { x: 12, y: 140, width: w - 24, height: w - 24 };
           imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
           demoVC.view.addSubview(imgView);

@@ -629,6 +629,7 @@ CGPoint to_value_CGPoint(const Local<Value>& value);
 CGVector to_value_CGVector(const Local<Value>& value);
 CGSize to_value_CGSize(const Local<Value>& value);
 CGRect to_value_CGRect(const Local<Value>& value);
+#define is_value_CGRect sweetiekit::IsJSFrame
 
 Local<Value> js_value_CGColor(CGColorRef _Nullable color);
 Local<Value> js_value_UIColor(UIColor* _Nullable color);

@@ -34,37 +34,37 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIImageView::Initialize(Isola
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
+#include "NUIImage.h"
+
 NAN_METHOD(NUIImageView::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> imgObj = info.This();
-
-  NUIImageView *imgView = new NUIImageView();
-
-  if (info[0]->IsExternal()) {
-    imgView->SetNSObject((__bridge UIImageView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      if (sweetiekit::IsJSFrame(info[0])) {
-        CGRect frame = sweetiekit::FrameFromJSObj(info[0]);
-        imgView->SetNSObject([[UIImageView alloc] initWithFrame:frame]);
-      } else if (info[0]->IsObject() && info[1]->IsObject()) {
-        auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
-        auto hlImg = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[1]))->As<UIImage>();
-        imgView->SetNSObject([[UIImageView alloc] initWithImage:img highlightedImage:hlImg]);
-      } else if (info[0]->IsObject()) {
-        auto img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(info[0]))->As<UIImage>();
-        imgView->SetNSObject([[UIImageView alloc] initWithImage:img]);
-      }
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIImageView(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIImageView, info);
+      return;
     }
-  } else {
-    @autoreleasepool {
-      imgView->SetNSObject([[UIImageView alloc] init]);
+    UIImageView* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIImageView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UIImageView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (is_value_UIImage(info[0]) && is_value_UIImage(info[1])) {
+      self = [[UIImageView alloc] initWithImage:to_value_UIImage(info[0]) highlightedImage:to_value_UIImage(info[1])];
+    } else if (is_value_UIImage(info[0])) {
+      self = [[UIImageView alloc] initWithImage:to_value_UIImage(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UIImageView alloc] init];
+    }
+    if (self) {
+      NUIImageView *wrapper = new NUIImageView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIImageView::New: invalid arguments");
     }
   }
-  imgView->Wrap(imgObj);
-
-  info.GetReturnValue().Set(imgObj);
 }
 
 NUIImageView::NUIImageView () {}

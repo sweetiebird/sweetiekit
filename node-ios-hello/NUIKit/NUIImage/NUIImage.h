@@ -11,6 +11,10 @@
 
 #include "NNSObject.h"
 
+#define js_value_UIImage(x) js_value_wrapper(x, UIImage)
+#define to_value_UIImage(x) to_value_wrapper(x, UIImage)
+#define is_value_UIImage(x) JS_INSTANCEOF(x, NUIImage)
+
 JS_WRAP_CLASS(UIImage, NSObject);
   JS_METHOD(toArrayBuffer);
   JS_METHOD(initWithCIImage);

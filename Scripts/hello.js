@@ -1290,7 +1290,7 @@ console.log(sb, vc, view, subview);
 //    const x = randi(400);
 //    const y = randi(400);
 //
-//    const subview = new UIImageView(img); // named argument ({ image })
+//    const subview = UIImageView(img); // named argument ({ image })
 //    subview.x = x;
 //    subview.y = y;
 //    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
@@ -1315,13 +1315,13 @@ console.log(sb, vc, view, subview);
 //  firstVC.view.addSubview(tf);
 //
 //  const tabCtrl = new UITabBarController();
-//  const imgView1 = new UIImageView(img);
+//  const imgView1 = UIImageView(img);
 //  {
 //    let p = firstVC.view.center;
 //    p.x -= 2*(imgView1.width + 5) + 5/2;
 //    p.y -= 100;
 //    for (let i = 0; i < 5; i++) {
-//      const imgView = new UIImageView(img);
+//      const imgView = UIImageView(img);
 //      imgView.center = p;
 //      firstVC.view.addSubview(imgView);
 //      p.x += imgView.width + 5;
@@ -1355,7 +1355,7 @@ console.log(sb, vc, view, subview);
 //      let img = del.result
 //      console.log(img);
 //      if (img) {
-//        const subview = new UIImageView(img); // named argument ({ image })
+//        const subview = UIImageView(img); // named argument ({ image })
 //        const viewWidth = vc.view.width;
 //        const newHeight = (subview.height / subview.width) * viewWidth;
 //        subview.frame = { x: 0, y: 0, width: viewWidth, height: newHeight };
@@ -1488,7 +1488,7 @@ function iosApp() {
       if (img) {
         const vc2 = sb.instantiateViewController('photoVC');
 
-        const imgView = new UIImageView(img); // named argument ({ image })
+        const imgView = UIImageView(img); // named argument ({ image })
         const viewWidth = vc2.view.width;
         const viewHeight = vc2.view.height;
         const newHeight = (imgView.height / imgView.width) * viewWidth;
