@@ -23,41 +23,21 @@ function makeBindingSet(group, name, superClass, me) {
   const d = new Date();
 
   const mData = `//
-//  ${name}.mm
+//  N${name}.mm
 //
 //  Created by ${me} on ${d.toLocaleDateString()}.
 //  Copyright © ${d.getFullYear()} sweetiebird. All rights reserved.
 //
-    
 #include "N${name}.h"
 
-Nan::Persistent<FunctionTemplate> N${name}::type;
+N${name}::N${name}() {}
+N${name}::~N${name}() {}
 
-N${name}::N${name} () {}
-N${name}::~N${name} () {}
-
-std::pair<Local<Object>, Local<FunctionTemplate>> N${name}::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(N${superClass}::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("${name}"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> type(JS_OBJ(ctorFn)); type = type;
-  //JS_ASSIGN_METHOD(type, someStaticMethod);
-  //JS_ASSIGN_PROP(type, someStaticProperty);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(${name}, ${superClass});
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(${name}, ${superClass});
+JS_INIT_CLASS_END(${name}, ${superClass});
 
 NAN_METHOD(N${name}::New) {
   @autoreleasepool {
@@ -131,9 +111,13 @@ JS_WRAP_CLASS_END(${name});
 
 const args = process.argv;
 
-const group = args[2];
-const name = args[3];
-const superClass = args[4] || 'NSObject';
-const me = args[5] !== undefined ? args[5] : process.env.USER_FULL_NAME;
+if (args.length < 4) {
+  console.log("  makeBindingSet <group> <name> [<superclass>] [<process.env.USER_FULL_NAME>]");
+} else {
+  const group = args[2];
+  const name = args[3];
+  const superClass = args[4] || 'NSObject';
+  const me = args[5] !== undefined ? args[5] : process.env.USER_FULL_NAME;
 
-makeBindingSet(group, name, superClass, me);
+  makeBindingSet(group, name, superClass, me);
+}
