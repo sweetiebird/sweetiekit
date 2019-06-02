@@ -901,69 +901,37 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
     
       // ========= core animation
-      if ([obj isKindOfClass:[CAEmitterCell class]]) {
-        return NCAEmitterCell::type;
-      }
-      if ([obj isKindOfClass:[CAEmitterLayer class]]) {
-        return NCAEmitterLayer::type;
-      }
-      if ([obj isKindOfClass:[CAShapeLayer class]]) {
-        return NCAShapeLayer::type;
-      }
-      if ([obj isKindOfClass:[CALayer class]]) {
-        return NCALayer::type;
-      }
-      if ([obj isKindOfClass:[CABasicAnimation class]]) {
-        return NCABasicAnimation::type;
-      }
+      JS_RETURN_TYPE(CAEmitterCell);
+      JS_RETURN_TYPE(CAEmitterLayer);
+      JS_RETURN_TYPE(CAShapeLayer);
+      JS_RETURN_TYPE(CALayer);
+      JS_RETURN_TYPE(CABasicAnimation);
       
       // ========= core image
 
-       if ([obj isKindOfClass:[CIImage class]]) {
-        return NCIImage::type;
-      }
+      JS_RETURN_TYPE(CIImage);
 
       // MapKit
       
-      if ([obj isKindOfClass:[MKMapView class]]) {
-        return NMKMapView::type;
-      }
-      if ([obj isKindOfClass:[MKAnnotationView class]]) {
-        return NMKAnnotationView::type;
-      }
+      JS_RETURN_TYPE(MKMapView);
+      JS_RETURN_TYPE(MKAnnotationView);
       if ([obj isKindOfClass:[SMKMapViewDelegate class]]) {
         return NMKMapViewDelegate::type;
       }
 
       // ARKit
 
-      if ([obj isKindOfClass:[ARLightEstimate class]]) {
-        return NARLightEstimate::type;
-      }
-      if ([obj isKindOfClass:[ARCamera class]]) {
-        return NARCamera::type;
-      }
-      if ([obj isKindOfClass:[ARFrame class]]) {
-        return NARFrame::type;
-      }
+      JS_RETURN_TYPE(ARLightEstimate);
+      JS_RETURN_TYPE(ARCamera);
+      JS_RETURN_TYPE(ARFrame);
       if ([obj isKindOfClass:[SARSKViewDelegate class]]) {
         return NARSKViewDelegate::type;
       }
-      if ([obj isKindOfClass:[ARAnchor class]]) {
-        return NARAnchor::type;
-      }
-      if ([obj isKindOfClass:[ARSKView class]]) {
-        return NARSKView::type;
-      }
-      if ([obj isKindOfClass:[ARSession class]]) {
-        return NARSession::type;
-      }
-      if ([obj isKindOfClass:[ARWorldTrackingConfiguration class]]) {
-        return NARWorldTrackingConfiguration::type;
-      }
-      if ([obj isKindOfClass:[ARConfiguration class]]) {
-        return NARConfiguration::type;
-      }
+      JS_RETURN_TYPE(ARAnchor);
+      JS_RETURN_TYPE(ARSKView);
+      JS_RETURN_TYPE(ARSession);
+      JS_RETURN_TYPE(ARWorldTrackingConfiguration);
+      JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
       JS_RETURN_TYPE(SCNText);
@@ -988,66 +956,32 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // SpriteKit
       
-      if ([obj isKindOfClass:[SKTexture class]]) {
-        return NSKTexture::type;
-      }
-      if ([obj isKindOfClass:[SKEmitterNode class]]) {
-        return NSKEmitterNode::type;
-      }
-      if ([obj isKindOfClass:[SKCameraNode class]]) {
-        return NSKCameraNode::type;
-      }
-      if ([obj isKindOfClass:[SKPhysicsWorld class]]) {
-        return NSKPhysicsWorld::type;
-      }
-      if ([obj isKindOfClass:[SKPhysicsContact class]]) {
-        return NSKPhysicsContact::type;
-      }
+      JS_RETURN_TYPE(SKTexture);
+      JS_RETURN_TYPE(SKEmitterNode);
+      JS_RETURN_TYPE(SKCameraNode);
+      JS_RETURN_TYPE(SKPhysicsWorld);
+      JS_RETURN_TYPE(SKPhysicsContact);
       if ([NSStringFromClass([obj class]) isEqual: @"PKPhysicsContact"]) {
         return NSKPhysicsContact::type;
       }
       if ([obj isKindOfClass:[SSKPhysicsContactDelegate class]]) {
         return NSKPhysicsContactDelegate::type;
       }
-      if ([obj isKindOfClass:[SKPhysicsWorld class]]) {
-        return NSKPhysicsWorld::type;
-      }
-      if ([obj isKindOfClass:[SKPhysicsBody class]]) {
-        return NSKPhysicsBody::type;
-      }
-      if ([obj isKindOfClass:[SKSpriteNode class]]) {
-        return NSKSpriteNode::type;
-      }
-      if ([obj isKindOfClass:[SKScene class]]) {
-        return NSKScene::type;
-      }
-      if ([obj isKindOfClass:[SKLabelNode class]]) {
-        return NSKLabelNode::type;
-      }
-      if ([obj isKindOfClass:[SKTransformNode class]]) {
-        return NSKTransformNode::type;
-      }
-      if ([obj isKindOfClass:[SKNode class]]) {
-        return NSKNode::type;
-      }
-      if ([obj isKindOfClass:[SKView class]]) {
-        return NSKView::type;
-      }
-      if ([obj isKindOfClass:[SKAction class]]) {
-        return NSKAction::type;
-      }
+      JS_RETURN_TYPE(SKPhysicsWorld);
+      JS_RETURN_TYPE(SKPhysicsBody);
+      JS_RETURN_TYPE(SKSpriteNode);
+      JS_RETURN_TYPE(SKScene);
+      JS_RETURN_TYPE(SKLabelNode);
+      JS_RETURN_TYPE(SKTransformNode);
+      JS_RETURN_TYPE(SKNode);
+      JS_RETURN_TYPE(SKView);
+      JS_RETURN_TYPE(SKAction);
 
       // Custom UIKit
 
-      if ([obj isKindOfClass:[GifManager class]]) {
-        return NGifManager::type;
-      }
-      if ([obj isKindOfClass:[Gif class]]) {
-        return NGif::type;
-      }
-      if ([obj isKindOfClass:[GifView class]]) {
-        return NGifView::type;
-      }
+      JS_RETURN_TYPE(GifManager);
+      JS_RETURN_TYPE(Gif);
+      JS_RETURN_TYPE(GifView);
 
       // UIKit
       
@@ -1202,77 +1136,37 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       }
 
       // ========= core location
-      if ([obj isKindOfClass:[CLGeocoder class]]) {
-        return NCLGeocoder::type;
-      }
-      if ([obj isKindOfClass:[CLPlacemark class]]) {
-        return NCLPlacemark::type;
-      }
-      if ([obj isKindOfClass:[CLLocation class]]) {
-        return NCLLocation::type;
-      }
-      if ([obj isKindOfClass:[CLHeading class]]) {
-        return NCLHeading::type;
-      }
-      if ([obj isKindOfClass:[CLLocationManager class]]) {
-        return NCLLocationManager::type;
-      }
+      JS_RETURN_TYPE(CLGeocoder);
+      JS_RETURN_TYPE(CLPlacemark);
+      JS_RETURN_TYPE(CLLocation);
+      JS_RETURN_TYPE(CLHeading);
+      JS_RETURN_TYPE(CLLocationManager);
       if ([obj isKindOfClass:[SCLLocationManagerDelegate class]]) {
         return NCLLocationManagerDelegate::type;
       }
 
       // ========= objects
-      if ([obj isKindOfClass:[RPScreenRecorder class]]) {
-        return NRPScreenRecorder::type;
-      }
+      JS_RETURN_TYPE(RPScreenRecorder);
       if ([obj isKindOfClass:[SUIKitGlobals class]]) {
         return NUIKitGlobals::type;
       }
       if ([obj isKindOfClass:[SCoreGraphicsGlobals class]]) {
         return NCoreGraphicsGlobals::type;
       }
-      if ([obj isKindOfClass:[NSMutableAttributedString class]]) {
-        return NNSMutableAttributedString::type;
-      }
-      if ([obj isKindOfClass:[NSAttributedString class]]) {
-        return NNSAttributedString::type;
-      }
-      if ([obj isKindOfClass:[NSMutableParagraphStyle class]]) {
-        return NNSMutableParagraphStyle::type;
-      }
-      if ([obj isKindOfClass:[NSParagraphStyle class]]) {
-        return NNSParagraphStyle::type;
-      }
-      if ([obj isKindOfClass:[UIAlertAction class]]) {
-        return NUIAlertAction::type;
-      }
-      if ([obj isKindOfClass:[UINib class]]) {
-        return NUINib::type;
-      }
-      if ([obj isKindOfClass:[UITabBarItem class]]) {
-        return NUITabBarItem::type;
-      }
-      if ([obj isKindOfClass:[UIBarButtonItem class]]) {
-        return NUIBarButtonItem::type;
-      }
-      if ([obj isKindOfClass:[AVAudioPlayer class]]) {
-        return NAVAudioPlayer::type;
-      }
-      if ([obj isKindOfClass:[NSBundle class]]) {
-        return NNSBundle::type;
-      }
-      if ([obj isKindOfClass:[NSLayoutConstraint class]]) {
-        return NNSLayoutConstraint::type;
-      }
-      if ([obj isKindOfClass:[NSLayoutAnchor class]]) {
-        return NNSLayoutAnchor::type;
-      }
-      if ([obj isKindOfClass:[NSUserDefaults class]]) {
-        return NNSUserDefaults::type;
-      }
-      if ([obj isKindOfClass:[NSObject class]]) {
-        return NNSObject::type;
-      }
+      JS_RETURN_TYPE(NSMutableAttributedString);
+      JS_RETURN_TYPE(NSAttributedString);
+      JS_RETURN_TYPE(NSMutableParagraphStyle);
+      JS_RETURN_TYPE(NSParagraphStyle);
+      JS_RETURN_TYPE(UIAlertAction);
+      JS_RETURN_TYPE(UINib);
+      JS_RETURN_TYPE(UITabBarItem);
+      JS_RETURN_TYPE(UIBarButtonItem);
+      JS_RETURN_TYPE(AVAudioPlayer);
+      JS_RETURN_TYPE(NSBundle);
+      JS_RETURN_TYPE(NSLayoutConstraint);
+      JS_RETURN_TYPE(NSLayoutAnchor);
+      JS_RETURN_TYPE(NSUserDefaults);
+      JS_RETURN_TYPE(NSObject);
       return Nid::type;
     }
   }
