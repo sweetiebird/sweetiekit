@@ -14,8 +14,14 @@ NSCNNode::~NSCNNode () {}
 
 JS_INIT_CLASS(SCNNode, NSObject);
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, addChildNode);
-  JS_ASSIGN_METHOD(proto, clone);
+  JS_PROTO_METHOD(clone);
+  JS_PROTO_METHOD(flattenedClone);
+  JS_PROTO_METHOD(addChildNode);
+  JS_PROTO_METHOD(insertChildNode);
+  JS_PROTO_METHOD(replaceChildNode);
+  JS_PROTO_METHOD(childNodeWithName);
+  JS_PROTO_METHOD(removeFromParentNode);
+  JS_PROTO_METHOD(setWorldTransform);
   JS_ASSIGN_PROP(proto, name);
   JS_ASSIGN_PROP(proto, light);
   JS_ASSIGN_PROP(proto, camera);
@@ -44,6 +50,7 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_ASSIGN_PROP(proto, constraints);
   JS_ASSIGN_PROP(proto, filters);
   JS_ASSIGN_PROP_READONLY(proto, presentationNode);
+  JS_SET_PROP_READONLY(proto, "presentation", presentationNode);
   JS_ASSIGN_PROP(proto, paused);
   JS_ASSIGN_PROP(proto, rendererDelegate);
   JS_ASSIGN_PROP(proto, categoryBitMask);
@@ -66,6 +73,7 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_ASSIGN_PROP_READONLY(proto, simdWorldFront);
   // static members (ctor)
   JS_INIT_CTOR(SCNNode, NSObject);
+  JS_ASSIGN_METHOD(ctor, nodeWithGeometry);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localUp);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localRight);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localFront);
@@ -125,165 +133,75 @@ NAN_METHOD(NSCNNode::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_METHOD(NSCNNode::addChildNode) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNNode, node);
-
-  NSCNNode *child = ObjectWrap::Unwrap<NSCNNode>(Local<Object>::Cast(info[0]));
-  
-  [node addChildNode:child->As<SCNNode>()];
+NAN_METHOD(NSCNNode::nodeWithGeometry) {
+  @autoreleasepool {
+    JS_SET_RETURN_EXTERNAL(SCNNode,
+      [SCNNode nodeWithGeometry:to_value_SCNGeometry(info[0])]);
+  }
 }
 
 NAN_METHOD(NSCNNode::clone) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNNode, node);
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([node clone], NSCNNode::type));
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_SCNNode([self clone]));
+  }
 }
-//
-//NAN_GETTER(NSCNNode::SimdTransformGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  auto xform = node.simdTransform;
-//  const float* matrix = (const float*)&xform;
-//  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
-//}
-//
-//NAN_SETTER(NSCNNode::SimdTransformSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  auto xform = node.simdWorldTransform;
-//  if (!sweetiekit::SetTransform(xform, value)) {
-//    Nan::ThrowError("SCNNode:setSimdTransform: invalid transform type");
-//  } else {
-//    [node setSimdTransform:xform];
-//  }
-//}
-//
-//NAN_GETTER(NSCNNode::SimdWorldTransformGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  auto xform = node.simdWorldTransform;
-//  const float* matrix = (const float*)&xform;
-//  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
-//}
-//
-//NAN_SETTER(NSCNNode::SimdWorldTransformSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  auto xform = node.simdWorldTransform;
-//  if (!sweetiekit::SetTransform(xform, value)) {
-//    Nan::ThrowError("SCNNode:setSimdWorldTransform: invalid transform type");
-//  } else {
-//    [node setSimdWorldTransform:xform];
-//  }
-//}
-//
-//
-//NAN_GETTER(NSCNNode::LightGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  JS_SET_RETURN(sweetiekit::GetWrapperFor([node light], NSCNLight::type));
-//}
-//
-//NAN_SETTER(NSCNNode::LightSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  NSCNLight *light = ObjectWrap::Unwrap<NSCNLight>(Local<Object>::Cast(value));
-//
-//  @autoreleasepool {
-//    [node setLight:light->As<SCNLight>()];
-//  }
-//}
-//
-//NAN_GETTER(NSCNNode::PositionGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  __block float x = 0;
-//  __block float y = 0;
-//  __block float z = 0;
-//  @autoreleasepool {
-//    SCNVector3 v = [node position];
-//    x = v.x;
-//    y = v.y;
-//    z = v.z;
-//  }
-//  
-//  Local<Object> result = Object::New(Isolate::GetCurrent());
-//  result->Set(JS_STR("x"), JS_FLOAT(x));
-//  result->Set(JS_STR("y"), JS_FLOAT(y));
-//  result->Set(JS_STR("z"), JS_FLOAT(z));
-//
-//  JS_SET_RETURN(result);
-//}
-//
-//NAN_SETTER(NSCNNode::PositionSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-//  float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-//  float z = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
-//
-//  @autoreleasepool {
-//    [node setPosition:SCNVector3Make(x, y, z)];
-//  }
-//}
-//
-//NAN_GETTER(NSCNNode::EulerAnglesGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  __block float x = 0;
-//  __block float y = 0;
-//  __block float z = 0;
-//  @autoreleasepool {
-//    SCNVector3 v = [node eulerAngles];
-//    x = v.x;
-//    y = v.y;
-//    z = v.z;
-//  }
-//  
-//  Local<Object> result = Object::New(Isolate::GetCurrent());
-//  result->Set(JS_STR("x"), JS_FLOAT(x));
-//  result->Set(JS_STR("y"), JS_FLOAT(y));
-//  result->Set(JS_STR("z"), JS_FLOAT(z));
-//
-//  JS_SET_RETURN(result);
-//}
-//
-//NAN_SETTER(NSCNNode::EulerAnglesSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SCNNode, node);
-//
-//  float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-//  float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-//  float z = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
-//
-//  @autoreleasepool {
-//    [node setEulerAngles:SCNVector3Make(x, y, z)];
-//  }
-//}
 
-// --------- begin source --------------
+NAN_METHOD(NSCNNode::flattenedClone) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_SCNNode([self flattenedClone]));
+  }
+}
+
+NAN_METHOD(NSCNNode::addChildNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self addChildNode:to_value_SCNNode(info[0])];
+  }
+}
+
+NAN_METHOD(NSCNNode::insertChildNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    NSUInteger index(info[1]->IsUint32() ? to_value_NSUInteger(info[1]) : 0);
+    [self insertChildNode:to_value_SCNNode(info[0]) atIndex:index];
+  }
+}
+
+NAN_METHOD(NSCNNode::replaceChildNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self replaceChildNode:to_value_SCNNode(info[0]) with:to_value_SCNNode(info[1])];
+  }
+}
+
+NAN_METHOD(NSCNNode::childNodeWithName) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    if (!is_value_NSString(info[0])) {
+      Nan::ThrowError("NSCNNode::childNodeWithName: expected first argument to be a string");
+      return;
+    }
+    NSString* name(to_value_NSString(info[0]));
+    bool recursively(info[1]->IsBoolean() ? TO_BOOL(info[1]) : false);
+    [self childNodeWithName:name recursively:recursively];
+  }
+}
+
+NAN_METHOD(NSCNNode::removeFromParentNode) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self removeFromParentNode];
+  }
+}
+
+NAN_METHOD(NSCNNode::setWorldTransform) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    [self setWorldTransform:to_value_SCNMatrix4(info[0])];
+  }
+}
 
 NAN_GETTER(NSCNNode::nameGetter) {
   JS_UNWRAP(SCNNode, self);
@@ -664,6 +582,7 @@ NAN_GETTER(NSCNNode::physicsBodyGetter) {
   JS_UNWRAP(SCNNode, self);
   @autoreleasepool
   {
+    [self presentationNode];
     JS_SET_RETURN(js_value_SCNPhysicsBody([self physicsBody]));
     return;
   }

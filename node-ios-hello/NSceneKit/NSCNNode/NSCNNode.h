@@ -25,16 +25,20 @@
 #define is_value_SCNNodeFocusBehavior(x) IS_ENUM(SCNNodeFocusBehavior, NSInteger, x)
 
 JS_WRAP_CLASS(SCNNode, NSObject);
-  JS_METHOD(addChildNode);
+  JS_METHOD(nodeWithGeometry);
   JS_METHOD(clone);
+  JS_METHOD(flattenedClone);
+  JS_METHOD(addChildNode);
+  JS_METHOD(insertChildNode);
+  JS_METHOD(replaceChildNode);
+  JS_METHOD(childNodeWithName);
+  JS_METHOD(removeFromParentNode);
+  JS_METHOD(setWorldTransform);
   JS_PROP(SimdTransform);
   JS_PROP(SimdWorldTransform);
   JS_PROP(Light);
   JS_PROP(Position);
   JS_PROP(EulerAngles);
-//  JS_PROP(scale);
-//  JS_PROP(geometry);
-  
   JS_PROP(name);
   JS_PROP(light);
   JS_PROP(camera);

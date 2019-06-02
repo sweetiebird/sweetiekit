@@ -42,7 +42,7 @@ JS_WRAP_CLASS(id, ObjectWrap);
   JS_PROP(properties);
   JS_METHOD(invokeBooleanGetter);
   JS_METHOD(invokeBooleanSetter);
-  JS_METHOD(invokeMethod);
+  JS_METHOD(invoke);
 
   id _self;
   id set_self(id self);

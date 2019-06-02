@@ -53,7 +53,7 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
     if (!nativeType.prototype.hasOwnProperty(method.name)) {
       console.log(nativeType, method.name);
       nativeType.prototype[method.name] = function () {
-        return this.invokeMethod(["v", method.name]);
+        return this.invoke(["v", method.name]);
       }
     }
   }

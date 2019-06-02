@@ -51,9 +51,9 @@ JS_INIT_CLASS_BASE(id);
   JS_ASSIGN_PROP_READONLY(proto, debugDescription);
   JS_ASSIGN_PROP_READONLY(proto, methods);
   JS_ASSIGN_PROP_READONLY(proto, properties);
-  Nan::SetMethod(proto, "invokeBooleanGetter", invokeBooleanGetter);
-  Nan::SetMethod(proto, "invokeBooleanSetter", invokeBooleanSetter);
-  Nan::SetMethod(proto, "invokeMethod", invokeMethod);
+  JS_ASSIGN_METHOD(proto, invokeBooleanGetter);
+  JS_ASSIGN_METHOD(proto, invokeBooleanSetter);
+  JS_ASSIGN_METHOD(proto, invoke);
   // static members (ctor)
   JS_INIT_CTOR(id, objc);
   Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
@@ -354,19 +354,19 @@ NAN_METHOD(Nid::_objc_msgSend)
   }
 }
 
-NAN_METHOD(Nid::invokeMethod)
+NAN_METHOD(Nid::invoke)
 {
   Nan::HandleScope scope;
   
   JS_UNWRAP_(id, self);
   @autoreleasepool {
     if (!self) {
-      Nan::ThrowError("Nid::invokeMethod: self is nil");
+      Nan::ThrowError("Nid::invoke: self is nil");
       return;
     }
     
     if (!info[0]->IsArray()) {
-      Nan::ThrowError("Nid::invokeMethod: expected first argument to be an array");
+      Nan::ThrowError("Nid::invoke: expected first argument to be an array");
       return;
     }
     
@@ -374,19 +374,19 @@ NAN_METHOD(Nid::invokeMethod)
     
     NSString* returnTypeSpec = NJSStringToNSString(spec->Get(0));
     if (!returnTypeSpec) {
-      Nan::ThrowError("Nid::invokeMethod: expected first value of first argument to be a string");
+      Nan::ThrowError("Nid::invoke: expected first value of first argument to be a string");
       return;
     }
     
     NSString* name = NJSStringToNSString(spec->Get(1));
     if (!name) {
-      Nan::ThrowError("Nid::invokeMethod: expected last value of first argument to be a string");
+      Nan::ThrowError("Nid::invoke: expected last value of first argument to be a string");
       return;
     }
     
     SEL sel = NSSelectorFromString(name);
     if (!sel) {
-      Nan::ThrowError("Nid::invokeMethod: NSSelectorFromString returned nil");
+      Nan::ThrowError("Nid::invoke: NSSelectorFromString returned nil");
       return;
     }
     
@@ -394,25 +394,25 @@ NAN_METHOD(Nid::invokeMethod)
     if (object_isClass(self)) {
       sig = [self methodSignatureForSelector:sel];
       if (!sig) {
-        Nan::ThrowError("Nid::invokeMethod: [self methodSignatureForSelector:] returned nil");
+        Nan::ThrowError("Nid::invoke: [self methodSignatureForSelector:] returned nil");
         return;
       }
     } else {
       Class cls = [self class];
       if (!cls) {
-        Nan::ThrowError("Nid::invokeMethod: [self class] is nil");
+        Nan::ThrowError("Nid::invoke: [self class] is nil");
         return;
       }
       sig = [cls instanceMethodSignatureForSelector:sel];
       if (!sig) {
-        Nan::ThrowError("Nid::invokeMethod: [[self class] instanceMethodSignatureForSelector:] returned nil");
+        Nan::ThrowError("Nid::invoke: [[self class] instanceMethodSignatureForSelector:] returned nil");
         return;
       }
     }
     
     NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
     if (!inv) {
-      Nan::ThrowError("Nid::invokeMethod: [NSInvocation invocationWithMethodSignature:] returned nil");
+      Nan::ThrowError("Nid::invoke: [NSInvocation invocationWithMethodSignature:] returned nil");
       return;
     }
     
@@ -420,14 +420,14 @@ NAN_METHOD(Nid::invokeMethod)
     
     for (unsigned int i = 1; i < info.Length(); i++) {
       if (!info[i]->IsArray()) {
-        Nan::ThrowError("Nid::invokeMethod: expected argument to be an array");
+        Nan::ThrowError("Nid::invoke: expected argument to be an array");
         return;
       }
       Local<Array> arg = Local<Array>::Cast(info[i]);
       
       NSString* typeSpec = NJSStringToNSString(arg->Get(0));
       if (!typeSpec) {
-        Nan::ThrowError("Nid::invokeMethod: expected first value of argument to be a string");
+        Nan::ThrowError("Nid::invoke: expected first value of argument to be a string");
         return;
       }
       
@@ -477,14 +477,14 @@ NAN_METHOD(Nid::invokeMethod)
           bool failed = false;
           id value = to_id(jsValue, &failed);
           if (failed) {
-            Nan::ThrowError("id::invokeMethod: Failed to convert argument to id");
+            Nan::ThrowError("id::invoke: Failed to convert argument to id");
             return;
           }
           [inv setArgument:&value atIndex:1+i];
         } break;
         default:
         {
-          Nan::ThrowError("id::invokeMethod: Unknown type specifier");
+          Nan::ThrowError("id::invoke: Unknown type specifier");
           return;
         } break;
       }
@@ -547,7 +547,7 @@ NAN_METHOD(Nid::invokeMethod)
         [inv getReturnValue:&value];
         if (value) {
           if (![(__bridge id)value isKindOfClass:[NSString class]]) {
-            Nan::ThrowError("id::invokeMethod: returned value was not an NSString");
+            Nan::ThrowError("id::invoke: returned value was not an NSString");
             return;
           }
           JS_SET_RETURN(JS_STR([(__bridge NSString*)value UTF8String]));
@@ -561,7 +561,7 @@ NAN_METHOD(Nid::invokeMethod)
       } break;
       default:
       {
-        Nan::ThrowError("id::invokeMethod: Unknown return type specifier");
+        Nan::ThrowError("id::invoke: Unknown return type specifier");
         return;
       } break;
     }

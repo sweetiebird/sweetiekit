@@ -25,6 +25,8 @@
 
 JS_WRAP_CLASS(SCNView, UIView);
   JS_METHOD(hitTest);
+  JS_METHOD(projectPoint);
+  JS_METHOD(unprojectPoint);
   JS_PROP(autoenablesDefaultLighting);
   JS_PROP(playing);
   

@@ -12,6 +12,21 @@ function UIColorRandom() {
   return {red: Math.random(), green: Math.random(), blue: Math.random()};
 }
 
+function V3(v, ...args) {
+  switch (args.length) {
+  case 0:
+    return v.set(0,0,0);
+  case 1:
+    return v.set(args[0].x, args[0].y, args[0].z);
+  case 2:
+    return v.set(args[0], args[1], 0.0);
+  case 3:
+    return v.set(args[0], args[1], args[2]);
+  default:
+    throw new Error("V3: Bad arguments");
+  }
+}
+
 async function make(demoVC) {
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
@@ -23,6 +38,69 @@ async function make(demoVC) {
   scnView.autoenablesDefaultLighting = true;
   //scnView.allowsCameraControl = true;
   rootNode = scene.rootNode;
+
+  pos1 = new THREE.Vector3();
+  isImpulse = false;
+  physNormalize = false;
+  physScale = 1.0;
+  hitExpr = (hit) => {
+    return moveExpr(hit.worldCoordinates);
+  };
+  currentPos = (node) => node.presentation.position;
+  moveExpr = (xyz, node=sphereNode) => {
+    dir = V3(pos1, xyz).sub(currentPos(node));
+    if (physNormalize) {
+      dir.normalize();
+    }
+    dir.multiplyScalar(physScale);
+    node.physicsBody.applyForce(dir, isImpulse);
+  };
+
+  scnView.touchesBegan = (touches, evt) => {
+    let touch = touches[0];
+    let pt = touches[0].locationInView(touch.view);
+    pt.y -= Math.trunc(0.1*touch.view.height);
+    console.log('touchesBegan', touches.length, pt, evt);
+    let hits = scnView.hitTest(pt);
+    if (hits && hits.length > 0) {
+      let hit = hits[0];
+      hitExpr(hit);
+    }
+  };
+
+  scnView.touchesMoved = (touches, evt) => {
+    let touch = touches[0];
+    let pt = touches[0].locationInView(touch.view);
+    pt.y -= Math.trunc(0.1*touch.view.height);
+    //console.log('touchesMoved', touches.length, pt, evt);
+    let hits = scnView.hitTest(pt);
+    if (hits && hits.length > 0) {
+      let hit = hits[0];
+      hitExpr(hit);
+    }
+    /*
+    //console.log('touchesMoved', touches.length, pt);
+    if (hits && hits.length > 0) {
+      active = _update(hits ? hits[0] : null);
+      console.log(active.node.xScale, active.node.yScale,
+        active.node.size ? active.node.size.width : -1,
+        active.node.size ? active.node.size.height : -1);
+    }
+    */
+  };
+
+  scnView.touchesEnded = (touches, evt) => {
+    let touch = touches[0];
+    let pt = touches[0].locationInView(touch.view);
+    pt.y -= Math.trunc(0.1*touch.view.height);
+    console.log('touchesEnded', touches.length, pt, evt);
+    /*
+    let hits = scnView.hitTest(pt);
+    if (hits && hits.length > 0) {
+      active = _update(hits ? hits[0] : null);
+    }
+    */
+  };
 
   scnView.viewWillAppear = (animated) => {
     console.log('scnView.viewWillAppear', animated, this);

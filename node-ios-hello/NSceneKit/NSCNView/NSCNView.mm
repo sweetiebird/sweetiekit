@@ -12,6 +12,8 @@ NSCNView::~NSCNView () {}
 JS_INIT_CLASS(SCNView, UIView);
   // instance members (proto)
   JS_PROTO_METHOD(hitTest);
+  JS_PROTO_METHOD(projectPoint);
+  JS_PROTO_METHOD(unprojectPoint);
   JS_ASSIGN_PROP(proto, autoenablesDefaultLighting);
   JS_ASSIGN_PROP(proto, playing);
   JS_ASSIGN_PROP(proto, scene);
@@ -62,6 +64,24 @@ NAN_METHOD(NSCNView::hitTest) {
     CGPoint point(to_value_CGPoint(info[0]));
     NSArray<SCNHitTestResult*>* results = [self hitTest:point options:nil];
     JS_SET_RETURN(js_value_NSArray<SCNHitTestResult*>(results)); // TODO: options
+  }
+}
+
+NAN_METHOD(NSCNView::projectPoint) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool {
+    SCNVector3 point(to_value_SCNVector3(info[0]));
+    SCNVector3 result([self projectPoint:point]);
+    JS_SET_RETURN(js_value_SCNVector3(result)); 
+  }
+}
+
+NAN_METHOD(NSCNView::unprojectPoint) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool {
+    SCNVector3 point(to_value_SCNVector3(info[0]));
+    SCNVector3 result([self unprojectPoint:point]);
+    JS_SET_RETURN(js_value_SCNVector3(result)); 
   }
 }
 
