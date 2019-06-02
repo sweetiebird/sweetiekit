@@ -11,7 +11,7 @@ NSCNScene::~NSCNScene () {}
 
 JS_INIT_CLASS(SCNScene, NSObject);
   // instance members (proto)
-  JS_SET_PROP(proto, "rootNode", RootNode);
+  JS_ASSIGN_PROP(proto, rootNode);
   // static members (ctor)
   JS_INIT_CTOR(SCNScene, NSObject);
 JS_INIT_CLASS_END(SCNScene, NSObject);
@@ -50,7 +50,7 @@ NAN_METHOD(NSCNScene::New) {
 
 #include "NSCNNode.h"
 
-NAN_GETTER(NSCNScene::RootNodeGetter) {
+NAN_GETTER(NSCNScene::rootNodeGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(SCNScene, scene);
@@ -58,7 +58,7 @@ NAN_GETTER(NSCNScene::RootNodeGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([scene rootNode], NSCNNode::type));
 }
 
-NAN_SETTER(NSCNScene::RootNodeSetter) {
+NAN_SETTER(NSCNScene::rootNodeSetter) {
   Nan::HandleScope scope;
   
   Nan::ThrowError("NSCNScene::RootNodeSetter is read-only; use scene.rootNode.addChildNode instead");

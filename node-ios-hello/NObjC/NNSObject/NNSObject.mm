@@ -711,6 +711,7 @@ NAN_METHOD(NNSObject::New) {
 #include "NSCNMaterial.h"
 #include "NSCNMaterialProperty.h"
 #include "NSCNCamera.h"
+#include "NSCNCameraController.h"
 #include "NSCNBox.h"
 #include "NSCNCapsule.h"
 #include "NSCNCone.h"
@@ -873,6 +874,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // SceneKit
     JS_EXPORT_TYPE(SCNCamera);
+    JS_EXPORT_TYPE(SCNCameraController);
     JS_EXPORT_TYPE(SCNMaterialProperty);
     JS_EXPORT_TYPE(SCNMaterial);
     JS_EXPORT_TYPE(SCNGeometry);
@@ -970,6 +972,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNMaterial);
       JS_RETURN_TYPE(SCNMaterialProperty);
       JS_RETURN_TYPE(SCNCamera);
+      JS_RETURN_TYPE(SCNCameraController);
       JS_RETURN_TYPE(SCNBox);
       JS_RETURN_TYPE(SCNCapsule);
       JS_RETURN_TYPE(SCNCone);

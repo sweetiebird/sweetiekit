@@ -16,7 +16,7 @@
 #define is_value_SCNScene(x) is_value_wrapper(x, SCNScene)
 
 JS_WRAP_CLASS(SCNScene, NSObject);
-  JS_PROP(RootNode);
+  JS_PROP(rootNode);
 JS_WRAP_CLASS_END(SCNScene);
 
 #endif /* NSCNScene_h */

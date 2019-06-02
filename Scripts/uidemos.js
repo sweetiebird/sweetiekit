@@ -21,6 +21,7 @@ const makePageControl = require('./examples/UIPageControl');
 const makePicker = require('./examples/UIPickerView');
 const makeMapView = require('./examples/MKMapView');
 const makeSKScene = require('./examples/SKScene');
+const makeSCNScene = require('./examples/SCNScene');
 // const makeSKSceneSockets = require('./examples/SKSceneSockets');
 const makeScrollView = require('./examples/UIScrollView');
 const makeSlider = require('./examples/UISlider');
@@ -61,6 +62,7 @@ const demoTypes = {
   RemoteGifView: makeRemoteGifView,
   Screenshot: makeScreenshotDemo,
   SKScene: makeSKScene,
+  SCNScene: makeSCNScene,
   // SKSceneSockets: makeSKSceneSockets,
   ThreeOBJ: makeThreeObj,
   UIButton: makeButton,

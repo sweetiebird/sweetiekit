@@ -95,6 +95,9 @@ using namespace node;
 #define JS_PROP(name) \
   static NAN_GETTER(name##Getter); \
   static NAN_SETTER(name##Setter)
+  
+#define JS_PROP_READONLY(name) \
+  JS_PROP(name)
 
 #define JS_METHOD(name) \
   static NAN_METHOD(name)

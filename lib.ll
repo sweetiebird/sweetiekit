@@ -274,7 +274,10 @@
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
       header
-      (js-print-type class `(JS_PROP ,name))
+      (js-print-type class 
+        (if readonly?
+          `(JS_PROP_READONLY ,name)
+          `(JS_PROP ,name)))
       ctor
       (js-print-type class
         (if readonly?
