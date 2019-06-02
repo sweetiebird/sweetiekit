@@ -14,24 +14,11 @@
 #include "NCABasicAnimation.h"
 #include "defines.h"
 
-Nan::Persistent<FunctionTemplate> NCALayer::type;
-
 NCALayer::NCALayer () {}
 NCALayer::~NCALayer () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CALayer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CALayer, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "cornerRadius", CornerRadius);
   JS_SET_PROP(proto, "borderWidth", BorderWidth);
   JS_SET_PROP(proto, "borderColor", BorderColor);
@@ -39,18 +26,15 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCALayer::Initialize(Isolate *
   JS_SET_PROP(proto, "shadowColor", ShadowColor);
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
   JS_SET_PROP(proto, "position", Position);
-  Nan::SetMethod(proto, "addAnimation", AddAnimation);
-  Nan::SetMethod(proto, "addSublayer", addSublayer);
-  Nan::SetMethod(proto, "renderInContext", renderInContext);
+  JS_SET_METHOD(proto, "addAnimation", AddAnimation);
+  JS_SET_METHOD(proto, "addSublayer", addSublayer);
+  JS_SET_METHOD(proto, "renderInContext", renderInContext);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds);
   JS_ASSIGN_PROP(proto, shadowOpacity);
   JS_ASSIGN_PROP(proto, frame);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CALayer, NSObject);
+JS_INIT_CLASS_END(CALayer, NSObject);
 
 NAN_METHOD(NCALayer::New) {
   Nan::HandleScope scope;

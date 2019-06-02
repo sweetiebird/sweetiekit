@@ -7,10 +7,10 @@
     
 #include "NSCNCone.h"
 
-Nan::Persistent<FunctionTemplate> NSCNCone::type;
-
 NSCNCone::NSCNCone () {}
 NSCNCone::~NSCNCone () {}
+
+Nan::Persistent<FunctionTemplate> NSCNCone::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCone::Initialize(Isolate *isolate)
 {

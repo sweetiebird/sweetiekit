@@ -1,41 +1,21 @@
 //
-//  CLPlacemark.m
-//  node-ios-hello
+//  CLPlacemark.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NCLPlacemark.h"
 #include "NCLLocation.h"
 
-Nan::Persistent<FunctionTemplate> NCLPlacemark::type;
+NCLPlacemark::NCLPlacemark () {}
+NCLPlacemark::~NCLPlacemark () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCLPlacemark::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CLPlacemark"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CLPlacemark, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, location);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CLPlacemark, NSObject);
+JS_INIT_CLASS_END(CLPlacemark, NSObject);
 
 NAN_METHOD(NCLPlacemark::New) {
   Nan::HandleScope scope;
@@ -55,9 +35,6 @@ NAN_METHOD(NCLPlacemark::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCLPlacemark::NCLPlacemark () {}
-NCLPlacemark::~NCLPlacemark () {}
 
 NAN_GETTER(NCLPlacemark::locationGetter) {
   Nan::HandleScope scope;

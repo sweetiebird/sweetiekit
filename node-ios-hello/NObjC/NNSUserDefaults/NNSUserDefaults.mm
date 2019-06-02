@@ -1,15 +1,14 @@
 //
-//  NAppDelegate.m
-//  node-ios-hello
+//  NAppDelegate.mm
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NNSUserDefaults.h"
 #include "NUIWindow.h"
+
+NNSUserDefaults::NNSUserDefaults () {}
+NNSUserDefaults::~NNSUserDefaults () {}
 
 Nan::Persistent<FunctionTemplate> NNSUserDefaults::type;
 
@@ -176,8 +175,5 @@ NAN_METHOD(NNSUserDefaults::StringForKey)
     info.GetReturnValue().Set(result);
   }
 }
-
-NNSUserDefaults::NNSUserDefaults () {}
-NNSUserDefaults::~NNSUserDefaults () {}
 
 

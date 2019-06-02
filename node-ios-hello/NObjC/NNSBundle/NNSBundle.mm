@@ -1,39 +1,21 @@
 //
 //  NNSBundle.mm
-//  node-ios-hello
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NNSBundle.h"
 
-Nan::Persistent<FunctionTemplate> NNSBundle::type;
+NNSBundle::NNSBundle () {}
+NNSBundle::~NNSBundle () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSBundle::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSBundle"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "pathForResource", pathForResource);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "main", main);
-  
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(NSBundle, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, pathForResource);
+  // static members (ctor)
+  JS_INIT_CTOR(NSBundle, NSObject);
+  JS_ASSIGN_METHOD(ctor, main);
+JS_INIT_CLASS_END(NSBundle, NSObject);
 
 NAN_METHOD(NNSBundle::New) {
   Nan::HandleScope scope;
@@ -94,6 +76,3 @@ NAN_METHOD(NNSBundle::pathForResource) {
 
   info.GetReturnValue().Set(JS_STR([path UTF8String]));
 }
-
-NNSBundle::NNSBundle () {}
-NNSBundle::~NNSBundle () {}

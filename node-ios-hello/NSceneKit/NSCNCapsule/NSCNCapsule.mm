@@ -8,10 +8,10 @@
     
 #include "NSCNCapsule.h"
 
-Nan::Persistent<FunctionTemplate> NSCNCapsule::type;
-
 NSCNCapsule::NSCNCapsule () {}
 NSCNCapsule::~NSCNCapsule () {}
+
+Nan::Persistent<FunctionTemplate> NSCNCapsule::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCapsule::Initialize(Isolate *isolate)
 {

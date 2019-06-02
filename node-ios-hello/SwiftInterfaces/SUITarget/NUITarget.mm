@@ -12,27 +12,13 @@
 #include "NNSObject.h"
 #include "NUITarget.h"
 
-Nan::Persistent<FunctionTemplate> NUITarget::type;
+JS_INIT_CLASS(UITarget, NSObject);
+  // prototype members (proto)
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NUITarget::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+  JS_INIT_CTOR(UITarget, NSObject);
+  // static members (ctor)
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("UITarget"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(UITarget, NSObject);
 
 NAN_METHOD(NUITarget::New) {
   Nan::HandleScope scope;

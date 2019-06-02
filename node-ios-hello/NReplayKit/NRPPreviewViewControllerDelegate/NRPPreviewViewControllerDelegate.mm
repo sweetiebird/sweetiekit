@@ -5,14 +5,12 @@
 //  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <ReplayKit/ReplayKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NRPPreviewViewController.h"
 #import "node_ios_hello-Swift.h"
+
+NRPPreviewViewControllerDelegate::NRPPreviewViewControllerDelegate () {}
+NRPPreviewViewControllerDelegate::~NRPPreviewViewControllerDelegate () {}
 
 Nan::Persistent<FunctionTemplate> NRPPreviewViewControllerDelegate::type;
 
@@ -55,9 +53,6 @@ NAN_METHOD(NRPPreviewViewControllerDelegate::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NRPPreviewViewControllerDelegate::NRPPreviewViewControllerDelegate () {}
-NRPPreviewViewControllerDelegate::~NRPPreviewViewControllerDelegate () {}
 
 NAN_GETTER(NRPPreviewViewControllerDelegate::previewControllerDidFinishGetter) {
   Nan::HandleScope scope;

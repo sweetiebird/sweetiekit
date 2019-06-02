@@ -1,42 +1,22 @@
 //
-//  MKAnnotationView.m
-//  node-ios-hello
+//  MKAnnotationView.mm
 //
 //  Created by Emily Kolar on 2019-5-14.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
-#include "defines.h"
-#include "NUIView.h"
 #include "NMKAnnotationView.h"
 #include "NUIImage.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NMKAnnotationView::type;
+NMKAnnotationView::NMKAnnotationView () {}
+NMKAnnotationView::~NMKAnnotationView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NMKAnnotationView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("MKAnnotationView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(MKAnnotationView, UIView);
+  // instance members (proto)
   JS_SET_PROP(proto, "image", Image);
   JS_SET_PROP(proto, "annotation", Annotation);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(MKAnnotationView, UIView);
+JS_INIT_CLASS_END(MKAnnotationView, UIView);
 
 NAN_METHOD(NMKAnnotationView::New) {
   Nan::HandleScope scope;
@@ -72,9 +52,6 @@ NAN_METHOD(NMKAnnotationView::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NMKAnnotationView::NMKAnnotationView () {}
-NMKAnnotationView::~NMKAnnotationView () {}
 
 NAN_GETTER(NMKAnnotationView::ImageGetter) {
   Nan::HandleScope scope;

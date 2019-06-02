@@ -5,12 +5,11 @@
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
 
-#include "defines.h"
-#include "NNSObject.h"
 #include "NSCNGeometry.h"
+
+NSCNGeometry::NSCNGeometry () {}
+NSCNGeometry::~NSCNGeometry () {}
 
 Nan::Persistent<FunctionTemplate> NSCNGeometry::type;
 
@@ -72,9 +71,6 @@ NAN_METHOD(NSCNGeometry::New) {
     }
   }
 }
-
-NSCNGeometry::NSCNGeometry () {}
-NSCNGeometry::~NSCNGeometry () {}
 
 NAN_GETTER(NSCNGeometry::nameGetter) {
   JS_UNWRAP(SCNGeometry, self);

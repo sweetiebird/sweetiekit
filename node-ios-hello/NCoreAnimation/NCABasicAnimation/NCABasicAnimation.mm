@@ -11,33 +11,17 @@
 #include "NCABasicAnimation.h"
 #include "ColorHelper.h"
 
-Nan::Persistent<FunctionTemplate> NCABasicAnimation::type;
-
 NCABasicAnimation::NCABasicAnimation () {}
 NCABasicAnimation::~NCABasicAnimation () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCABasicAnimation::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-  
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CABasicAnimation"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "fromValue", FromValue);
-  JS_SET_PROP(proto, "toValue", ToValue);
-  JS_SET_PROP(proto, "duration", Duration);
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(CABasicAnimation, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP(proto, fromValue);
+  JS_ASSIGN_PROP(proto, toValue);
+  JS_ASSIGN_PROP(proto, duration);
+  // static members (ctor)
+  JS_INIT_CTOR(CABasicAnimation, NSObject);
+JS_INIT_CLASS_END(CABasicAnimation, NSObject);
 
 NAN_METHOD(NCABasicAnimation::New) {
   Nan::HandleScope scope;
@@ -68,7 +52,7 @@ NAN_METHOD(NCABasicAnimation::New) {
   JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NCABasicAnimation::FromValueGetter) {
+NAN_GETTER(NCABasicAnimation::fromValueGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   
@@ -83,7 +67,7 @@ NAN_GETTER(NCABasicAnimation::FromValueGetter) {
 //  JS_SET_RETURN(JS_FLOAT(from));
 }
 
-NAN_SETTER(NCABasicAnimation::FromValueSetter) {
+NAN_SETTER(NCABasicAnimation::fromValueSetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   
@@ -98,7 +82,7 @@ NAN_SETTER(NCABasicAnimation::FromValueSetter) {
   }
 }
 
-NAN_GETTER(NCABasicAnimation::ToValueGetter) {
+NAN_GETTER(NCABasicAnimation::toValueGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   
@@ -113,7 +97,7 @@ NAN_GETTER(NCABasicAnimation::ToValueGetter) {
 //  JS_SET_RETURN(JS_FLOAT(to));
 }
 
-NAN_SETTER(NCABasicAnimation::ToValueSetter) {
+NAN_SETTER(NCABasicAnimation::toValueSetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   
@@ -128,7 +112,7 @@ NAN_SETTER(NCABasicAnimation::ToValueSetter) {
   }
 }
 
-NAN_GETTER(NCABasicAnimation::DurationGetter) {
+NAN_GETTER(NCABasicAnimation::durationGetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   
@@ -143,7 +127,7 @@ NAN_GETTER(NCABasicAnimation::DurationGetter) {
   JS_SET_RETURN(JS_FLOAT(duration));
 }
 
-NAN_SETTER(NCABasicAnimation::DurationSetter) {
+NAN_SETTER(NCABasicAnimation::durationSetter) {
   Nan::HandleScope scope;
   JS_UNWRAP(CABasicAnimation, anim);
   

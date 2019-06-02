@@ -17,31 +17,20 @@
 #include "NARWorldTrackingConfiguration.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARSession::type;
+NARSession::NARSession () {}
+NARSession::~NARSession () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARSession::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARSession, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, currentFrame);
+  JS_ASSIGN_METHOD(proto, run);
+  JS_ASSIGN_METHOD(proto, add);
+  JS_ASSIGN_METHOD(proto, remove);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSession"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "currentFrame", CurrentFrame);
-  Nan::SetMethod(proto, "run", Run);
-  Nan::SetMethod(proto, "add", Add);
-  Nan::SetMethod(proto, "remove", Remove);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(ARSession, NSObject);
+  
+JS_INIT_CLASS_END(ARSession, NSObject);
 
 NAN_METHOD(NARSession::New) {
   Nan::HandleScope scope;
@@ -60,7 +49,7 @@ NAN_METHOD(NARSession::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_METHOD(NARSession::Run) {
+NAN_METHOD(NARSession::run) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSession, session);
@@ -70,7 +59,7 @@ NAN_METHOD(NARSession::Run) {
   [session runWithConfiguration:config->As<ARWorldTrackingConfiguration>()];
 }
 
-NAN_METHOD(NARSession::Add) {
+NAN_METHOD(NARSession::add) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSession, session);
@@ -80,7 +69,7 @@ NAN_METHOD(NARSession::Add) {
   [session addAnchor:anchor->As<ARAnchor>()];
 }
 
-NAN_METHOD(NARSession::Remove) {
+NAN_METHOD(NARSession::remove) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSession, session);
@@ -90,13 +79,10 @@ NAN_METHOD(NARSession::Remove) {
   [session removeAnchor:anchor->As<ARAnchor>()];
 }
 
-NAN_GETTER(NARSession::CurrentFrameGetter) {
+NAN_GETTER(NARSession::currentFrameGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSession, session);
   
   JS_SET_RETURN(sweetiekit::GetWrapperFor([session currentFrame], NARFrame::type));
 }
-
-NARSession::NARSession () {}
-NARSession::~NARSession () {}

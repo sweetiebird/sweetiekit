@@ -16,10 +16,10 @@
 #define is_value_ARSession(x) is_value_wrapper(x, ARSession)
 
 JS_WRAP_CLASS(ARSession, NSObject);
-  JS_METHOD(Run);
-  JS_METHOD(Add);
-  JS_METHOD(Remove);
-  JS_PROP(CurrentFrame);
+  JS_METHOD(run);
+  JS_METHOD(add);
+  JS_METHOD(remove);
+  JS_PROP(currentFrame);
 JS_WRAP_CLASS_END(ARSession);
 
 #endif /* NARSession_h */

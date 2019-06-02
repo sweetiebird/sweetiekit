@@ -177,6 +177,49 @@ public: \
     [func jsFunction]->Reset(jsValue); \
     [objcValue associateValue:func withKey:keyName]; \
   }
+
+#define JS_INIT_CLASS_BASE(name) \
+\
+Nan::Persistent<FunctionTemplate> N##name::type; \
+\
+std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate) \
+{ \
+  Nan::EscapableHandleScope scope; \
+\
+  /* constructor */ \
+  Local<FunctionTemplate> ctorObj = Nan::New<FunctionTemplate>(New); \
+  ctorObj->InstanceTemplate()->SetInternalFieldCount(1); \
+  ctorObj->SetClassName(JS_STR(#name)); \
+  type.Reset(ctorObj); \
+\
+  /* prototype */ \
+  Local<ObjectTemplate> proto = ctorObj->PrototypeTemplate(); proto = proto
+
+
+#define JS_INIT_CLASS(name, base) \
+\
+Nan::Persistent<FunctionTemplate> N##name::type; \
+\
+std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate) \
+{ \
+  Nan::EscapableHandleScope scope; \
+\
+  /* constructor */ \
+  Local<FunctionTemplate> ctorObj = Nan::New<FunctionTemplate>(New); \
+  ctorObj->Inherit(Nan::New(N##base::type)); \
+  ctorObj->InstanceTemplate()->SetInternalFieldCount(1); \
+  ctorObj->SetClassName(JS_STR(#name)); \
+  type.Reset(ctorObj); \
+\
+  /* prototype */ \
+  Local<ObjectTemplate> proto = ctorObj->PrototypeTemplate(); proto = proto
+
+#define JS_INIT_CTOR(name, base) \
+  Local<Function> ctor = Nan::GetFunction(ctorObj).ToLocalChecked();
+
+#define JS_INIT_CLASS_END(name, base) \
+  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctor), ctorObj); \
+}
   
 #define JS_GET_FUNCTION(varName, objc, keyName) \
   auto& varName = *[(SweetJSFunction*)[objc associatedValueForKey:keyName] jsFunction];
@@ -755,5 +798,9 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_SKKeyframeSequence(x) to_value_wrapper_unknown(x, SKKeyframeSequence)
 #define js_value_SKReachConstraints(x) js_value_wrapper_unknown(x, SKReachConstraints)
 #define to_value_SKReachConstraints(x) to_value_wrapper_unknown(x, SKReachConstraints)
+
+#ifdef __OBJC__
+#import "node_ios_hello-Swift.h"
+#endif
 
 #endif /* defines_h */

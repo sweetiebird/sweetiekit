@@ -1,16 +1,14 @@
 //
-//  NSMutableAttributedString.m
+//  NSMutableAttributedString.mm
 //  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSAttributedString.h"
 #include "NNSMutableAttributedString.h"
+
+NNSMutableAttributedString::NNSMutableAttributedString () {}
+NNSMutableAttributedString::~NNSMutableAttributedString () {}
 
 Nan::Persistent<FunctionTemplate> NNSMutableAttributedString::type;
 
@@ -62,9 +60,6 @@ NAN_METHOD(NNSMutableAttributedString::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NNSMutableAttributedString::NNSMutableAttributedString () {}
-NNSMutableAttributedString::~NNSMutableAttributedString () {}
 
 NAN_METHOD(NNSMutableAttributedString::addAttribute) {
   Nan::HandleScope scope;

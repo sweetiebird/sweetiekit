@@ -1,16 +1,13 @@
 //
-//  NSNotification.m
-//  node-ios-hello
+//  NSNotification.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NNSNotification.h"
+
+NNSNotification::NNSNotification () {}
+NNSNotification::~NNSNotification () {}
 
 Nan::Persistent<FunctionTemplate> NNSNotification::type;
 
@@ -72,9 +69,6 @@ NAN_METHOD(NNSNotification::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NNSNotification::NNSNotification () {}
-NNSNotification::~NNSNotification () {}
 
 NAN_METHOD(NNSNotification::notificationWithName) {
   Nan::EscapableHandleScope scope;

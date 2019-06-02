@@ -16,7 +16,7 @@
 #define is_value_AVAudioPlayer(x) is_value_wrapper(x, AVAudioPlayer)
 
 JS_WRAP_CLASS(AVAudioPlayer, NSObject);
-  JS_METHOD(Play);
+  JS_METHOD(play);
 JS_WRAP_CLASS_END(AVAudioPlayer);
 
 #endif /* NAVAudioPlayer_h */

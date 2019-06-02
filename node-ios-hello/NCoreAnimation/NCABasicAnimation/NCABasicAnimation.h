@@ -11,9 +11,9 @@
 #include "NNSObject.h"
 
 JS_WRAP_CLASS(CABasicAnimation, NSObject);
-  JS_PROP(FromValue);
-  JS_PROP(ToValue);
-  JS_PROP(Duration);
+  JS_PROP(fromValue);
+  JS_PROP(toValue);
+  JS_PROP(duration);
 JS_WRAP_CLASS_END(CABasicAnimation);
 
 #endif /* NCABasicAnimation_h */

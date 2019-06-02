@@ -7,10 +7,10 @@
     
 #include "NSCNFloor.h"
 
-Nan::Persistent<FunctionTemplate> NSCNFloor::type;
-
 NSCNFloor::NSCNFloor () {}
 NSCNFloor::~NSCNFloor () {}
+
+Nan::Persistent<FunctionTemplate> NSCNFloor::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNFloor::Initialize(Isolate *isolate)
 {

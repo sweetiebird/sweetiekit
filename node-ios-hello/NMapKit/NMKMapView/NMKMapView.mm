@@ -1,41 +1,21 @@
 //
-//  MKMapView.m
-//  node-ios-hello
+//  MKMapView.mm
 //
 //  Created by Emily Kolar on 2019-5-14.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
-#include "defines.h"
-#include "NUIView.h"
 #include "NMKMapView.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NMKMapView::type;
+NMKMapView::NMKMapView () {}
+NMKMapView::~NMKMapView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NMKMapView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("MKMapView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "setRegion", SetRegion);
-  Nan::SetMethod(proto, "addAnnotation", AddAnnotation);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(MKMapView, UIView);
+  // instance members (proto)
+  JS_SET_METHOD(proto, "setRegion", SetRegion);
+  JS_SET_METHOD(proto, "addAnnotation", AddAnnotation);
+  // static members (ctor)
+  JS_INIT_CTOR(MKMapView, UIView);
+JS_INIT_CLASS_END(MKMapView, UIView);
 
 NAN_METHOD(NMKMapView::New) {
   Nan::HandleScope scope;
@@ -63,9 +43,6 @@ NAN_METHOD(NMKMapView::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NMKMapView::NMKMapView () {}
-NMKMapView::~NMKMapView () {}
 
 NAN_METHOD(NMKMapView::SetRegion) {
   Nan::HandleScope scope;

@@ -16,8 +16,8 @@
 #define is_value_ARLightEstimate(x) is_value_wrapper(x, ARLightEstimate)
 
 JS_WRAP_CLASS(ARLightEstimate, NSObject);
-  JS_PROP(AmbientIntensity);
-  JS_PROP(AmbientColorTemperature);
+  JS_PROP(ambientIntensity);
+  JS_PROP(ambientColorTemperature);
 JS_WRAP_CLASS_END(ARLightEstimate);
 
 #endif /* NARLightEstimate_h */

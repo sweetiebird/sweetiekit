@@ -13,34 +13,21 @@
 #include "NCAEmitterCell.h"
 #include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NCAEmitterCell::type;
+NCAEmitterCell::NCAEmitterCell () {}
+NCAEmitterCell::~NCAEmitterCell () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCAEmitterCell::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CAEmitterCell"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CAEmitterCell, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, contents);
   JS_ASSIGN_PROP(proto, birthrate);
   JS_ASSIGN_PROP(proto, lifetime);
   JS_ASSIGN_PROP(proto, velocity);
   JS_ASSIGN_PROP(proto, scale);
   JS_ASSIGN_PROP(proto, emissionRange);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "emitterCell", emitterCell);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CAEmitterCell, NSObject);
+  JS_ASSIGN_METHOD(ctor, emitterCell);
+JS_INIT_CLASS_END(CAEmitterCell, NSObject);
 
 NAN_METHOD(NCAEmitterCell::New) {
   Nan::HandleScope scope;
@@ -60,9 +47,6 @@ NAN_METHOD(NCAEmitterCell::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCAEmitterCell::NCAEmitterCell () {}
-NCAEmitterCell::~NCAEmitterCell () {}
 
 NAN_METHOD(NCAEmitterCell::emitterCell) {
   Nan::EscapableHandleScope scope;

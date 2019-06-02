@@ -1,16 +1,13 @@
 //
-//  NSMutableParagraphStyle.m
-//  node-ios-hello
+//  NSMutableParagraphStyle.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSParagraphStyle.h"
 #include "NNSMutableParagraphStyle.h"
+
+NNSMutableParagraphStyle::NNSMutableParagraphStyle () {}
+NNSMutableParagraphStyle::~NNSMutableParagraphStyle () {}
 
 Nan::Persistent<FunctionTemplate> NNSMutableParagraphStyle::type;
 
@@ -53,9 +50,6 @@ NAN_METHOD(NNSMutableParagraphStyle::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NNSMutableParagraphStyle::NNSMutableParagraphStyle () {}
-NNSMutableParagraphStyle::~NNSMutableParagraphStyle () {}
 
 NAN_GETTER(NNSMutableParagraphStyle::lineSpacingGetter) {
   Nan::HandleScope scope;

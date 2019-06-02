@@ -16,29 +16,18 @@
 #include "NGifManager.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NGifView::type;
+NGifView::NGifView () {}
+NGifView::~NGifView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NGifView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(GifView, UIImageView);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, setGifImage);
+  JS_ASSIGN_METHOD(proto, setGifFromUrl);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIImageView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("GifView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "setGifImage", setGifImage);
-  Nan::SetMethod(proto, "setGifFromUrl", setGifFromUrl);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(GifView, UIImageView);
+  
+JS_INIT_CLASS_END(GifView, UIImageView);
 
 NAN_METHOD(NGifView::New) {
   Nan::HandleScope scope;
@@ -62,9 +51,6 @@ NAN_METHOD(NGifView::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NGifView::NGifView () {}
-NGifView::~NGifView () {}
 
 NAN_METHOD(NGifView::setGifFromUrl) {
   Nan::HandleScope scope;

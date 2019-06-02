@@ -37,24 +37,11 @@
 
 @end
 
-Nan::Persistent<FunctionTemplate> Nid::type;
-
 Nid::Nid() : _self(nullptr) {}
 Nid::~Nid() {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(Nid::New);
-
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSObject"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS_BASE(id);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, self);
   JS_ASSIGN_PROP_READONLY(proto, class);
   JS_ASSIGN_PROP_READONLY(proto, superclass);
@@ -67,17 +54,16 @@ std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isola
   Nan::SetMethod(proto, "invokeBooleanGetter", invokeBooleanGetter);
   Nan::SetMethod(proto, "invokeBooleanSetter", invokeBooleanSetter);
   Nan::SetMethod(proto, "invokeMethod", invokeMethod);
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "NSClassFromString", _NSClassFromString);
-  Nan::SetMethod(ctorFn, "objc_msgSend", _objc_msgSend);
-  sweetiekit::Set(ctorFn, "classFromString", ^(JSInfo info) {
+  // static members (ctor)
+  JS_INIT_CTOR(id, objc);
+  Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
+  Nan::SetMethod(ctor, "objc_msgSend", _objc_msgSend);
+  sweetiekit::Set(ctor, "classFromString", ^(JSInfo info) {
     Nan::HandleScope scope;
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
     JS_SET_RETURN(sweetiekit::GetWrapperFor(cls, NNSObject::type));
   });
-  sweetiekit::Set(ctorFn, "metaclassFromString", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "metaclassFromString", ^(JSInfo info) {
     Nan::HandleScope scope;
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
     if (cls != nullptr) {
@@ -85,7 +71,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isola
       JS_SET_RETURN(sweetiekit::GetWrapperFor(cls, NNSObject::type));
     }
   });
-  sweetiekit::Set(ctorFn, "stringFromClass", ^(JSInfo info) {
+  sweetiekit::Set(ctor, "stringFromClass", ^(JSInfo info) {
     Nan::HandleScope scope;
     NNSObject* ncls = ObjectWrap::Unwrap<NNSObject>(JS_OBJ(info[0]));
     @autoreleasepool {
@@ -98,9 +84,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> Nid::Initialize(Isolate *isola
       }
     }
   });
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(id, objc);
 
 NAN_METHOD(Nid::New) {
   @autoreleasepool {
@@ -581,32 +565,14 @@ NAN_GETTER(Nid::selfGetter) {
   JS_SET_RETURN(Nan::New<External>((__bridge void*)self));
 }
 
-Nan::Persistent<FunctionTemplate> NNSObject::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSObject::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(NNSObject::New);
-
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSObject"));
-  ctor->Inherit(Nan::New(Nid::type));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
 NNSObject::NNSObject() {}
-
 NNSObject::~NNSObject() {}
+
+JS_INIT_CLASS(NSObject, id);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(NSObject, id);
+JS_INIT_CLASS_END(NSObject, id);
 
 NAN_METHOD(NNSObject::New) {
   @autoreleasepool {

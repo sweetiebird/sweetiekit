@@ -16,11 +16,11 @@
 #define is_value_ARSCNView(x) is_value_wrapper(x, ARSCNView)
 
 JS_WRAP_CLASS(ARSCNView, SCNView);
-  JS_METHOD(PresentScene);
-  JS_PROP(Session);
-  JS_PROP(Delegate);
-  JS_PROP(Scene);
-  JS_PROP(AutomaticallyUpdatesLighting);
+  JS_METHOD(presentScene);
+  JS_PROP(session);
+  JS_PROP(delegate);
+  JS_PROP(scene);
+  JS_PROP(automaticallyUpdatesLighting);
   
   Nan::Persistent<Value> _delegate;
 JS_WRAP_CLASS_END(ARSCNView);

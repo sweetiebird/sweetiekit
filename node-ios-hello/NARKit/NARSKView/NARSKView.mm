@@ -18,31 +18,21 @@
 #include "NARAnchor.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARSKView::type;
+NARSKView::NARSKView () {}
+NARSKView::~NARSKView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARSKView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARSKView, SKView);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, session);
+  JS_ASSIGN_PROP(proto, delegate);
+  JS_ASSIGN_METHOD(proto, presentScene);
+  JS_ASSIGN_METHOD(proto, hitTest);
+  
+  // static members (ctor)
+  JS_INIT_CTOR(ARSKView, SKView);
+  
+JS_INIT_CLASS_END(ARSKView, SKView);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSKView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSKView"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "session", Session);
-  JS_SET_PROP(proto, "delegate", Delegate);
-  Nan::SetMethod(proto, "presentScene", PresentScene);
-  Nan::SetMethod(proto, "hitTest", hitTest);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
 
 NAN_METHOD(NARSKView::New) {
   Nan::HandleScope scope;
@@ -77,7 +67,7 @@ NAN_METHOD(NARSKView::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NARSKView::SessionGetter) {
+NAN_GETTER(NARSKView::sessionGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSKView, ui);
@@ -85,7 +75,7 @@ NAN_GETTER(NARSKView::SessionGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
 }
 
-NAN_GETTER(NARSKView::DelegateGetter) {
+NAN_GETTER(NARSKView::delegateGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSKView, ui);
@@ -93,7 +83,7 @@ NAN_GETTER(NARSKView::DelegateGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSKViewDelegate::type));
 }
 
-NAN_SETTER(NARSKView::DelegateSetter) {
+NAN_SETTER(NARSKView::delegateSetter) {
   Nan::HandleScope scope;
   
   NARSKView *view = ObjectWrap::Unwrap<NARSKView>(info.This());
@@ -110,7 +100,7 @@ NAN_SETTER(NARSKView::DelegateSetter) {
   }
 }
 
-NAN_METHOD(NARSKView::PresentScene) {
+NAN_METHOD(NARSKView::presentScene) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSKView, ui);
@@ -195,6 +185,3 @@ NAN_METHOD(NARSKView::hitTest) {
     }
   }
 }
-
-NARSKView::NARSKView () {}
-NARSKView::~NARSKView () {}

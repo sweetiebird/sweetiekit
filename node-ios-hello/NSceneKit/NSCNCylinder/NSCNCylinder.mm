@@ -8,10 +8,10 @@
     
 #include "NSCNCylinder.h"
 
-Nan::Persistent<FunctionTemplate> NSCNCylinder::type;
-
 NSCNCylinder::NSCNCylinder () {}
 NSCNCylinder::~NSCNCylinder () {}
+
+Nan::Persistent<FunctionTemplate> NSCNCylinder::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNCylinder::Initialize(Isolate *isolate)
 {

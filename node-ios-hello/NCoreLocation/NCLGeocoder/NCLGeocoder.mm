@@ -13,28 +13,15 @@
 #include "NCLGeocoder.h"
 #include "NCLPlacemark.h"
 
-Nan::Persistent<FunctionTemplate> NCLGeocoder::type;
+NCLGeocoder::NCLGeocoder () {}
+NCLGeocoder::~NCLGeocoder () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCLGeocoder::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CLGeocoder"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "geocodeAddressString", geocodeAddressString);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(CLGeocoder, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, geocodeAddressString);
+  // static members (ctor)
+  JS_INIT_CTOR(CLGeocoder, NSObject);
+JS_INIT_CLASS_END(CLGeocoder, NSObject);
 
 NAN_METHOD(NCLGeocoder::New) {
   Nan::HandleScope scope;
@@ -54,9 +41,6 @@ NAN_METHOD(NCLGeocoder::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCLGeocoder::NCLGeocoder () {}
-NCLGeocoder::~NCLGeocoder () {}
 
 NAN_METHOD(NCLGeocoder::geocodeAddressString) {
   Nan::HandleScope scope;

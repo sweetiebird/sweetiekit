@@ -1,42 +1,22 @@
 //
-//  NCLLocationManagerDelegate.m
-//  node-ios-hello
+//  NCLLocationManagerDelegate.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#include "defines.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocationManager.h"
 #include "NCLLocation.h"
 #include "NCLHeading.h"
-#include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NCLLocationManagerDelegate::type;
+NCLLocationManagerDelegate::NCLLocationManagerDelegate () {}
+NCLLocationManagerDelegate::~NCLLocationManagerDelegate () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCLLocationManagerDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CLLocationManagerDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(CLLocationManagerDelegate, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(CLLocationManagerDelegate, NSObject);
+JS_INIT_CLASS_END(CLLocationManagerDelegate, NSObject);
 
 NAN_METHOD(NCLLocationManagerDelegate::New) {
   Nan::HandleScope scope;
@@ -86,6 +66,3 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NCLLocationManagerDelegate::NCLLocationManagerDelegate () {}
-NCLLocationManagerDelegate::~NCLLocationManagerDelegate () {}

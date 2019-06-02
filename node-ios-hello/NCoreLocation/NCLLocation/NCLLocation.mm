@@ -1,48 +1,28 @@
 //
-//  NCLLocation.m
-//  node-ios-hello
+//  NCLLocation.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#include "defines.h"
 #include "NCLLocation.h"
-#include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NCLLocation::type;
+NCLLocation::NCLLocation () {}
+NCLLocation::~NCLLocation () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCLLocation::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CLLocation"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CLLocation, NSObject);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "coordinate", Coordinate);
   JS_SET_PROP_READONLY(proto, "altitude", Altitude);
   JS_SET_PROP_READONLY(proto, "floor", Floor);
   JS_SET_PROP_READONLY(proto, "horizontalAccuracy", HorizontalAccuracy);
   JS_SET_PROP_READONLY(proto, "verticalAccuracy", VerticalAccuracy);
   JS_SET_PROP_READONLY(proto, "timestamp", Timestamp);
-  Nan::SetMethod(proto, "distance", Distance);
+  JS_SET_METHOD(proto, "distance", Distance);
   JS_SET_PROP_READONLY(proto, "speed", Speed);
   JS_SET_PROP_READONLY(proto, "course", Course);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CLLocation, NSObject);
+JS_INIT_CLASS_END(CLLocation, NSObject);
 
 NAN_METHOD(NCLLocation::New) {
   Nan::HandleScope scope;
@@ -68,9 +48,6 @@ NAN_METHOD(NCLLocation::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NCLLocation::NCLLocation () {}
-NCLLocation::~NCLLocation () {}
 
 NAN_GETTER(NCLLocation::CoordinateGetter) {
   Nan::HandleScope scope;

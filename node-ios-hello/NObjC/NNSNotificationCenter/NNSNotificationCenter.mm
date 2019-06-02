@@ -1,41 +1,22 @@
 //
-//  NSNotificationCenter.m
-//  node-ios-hello
+//  NSNotificationCenter.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NNSNotificationCenter.h"
 #include "NNSNotification.h"
 
-Nan::Persistent<FunctionTemplate> NNSNotificationCenter::type;
+NNSNotificationCenter::NNSNotificationCenter () {}
+NNSNotificationCenter::~NNSNotificationCenter () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSNotificationCenter::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSNotificationCenter"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "postNotification", postNotification);
-  Nan::SetMethod(proto, "addObserverForName", addObserverForName);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(NSNotificationCenter, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, postNotification);
+  JS_ASSIGN_METHOD(proto, addObserverForName);
+  // static members (ctor)
+  JS_INIT_CTOR(NSNotificationCenter, NSObject);
+JS_INIT_CLASS_END(NSNotificationCenter, NSObject);
 
 NAN_METHOD(NNSNotificationCenter::New) {
   Nan::HandleScope scope;
@@ -55,9 +36,6 @@ NAN_METHOD(NNSNotificationCenter::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NNSNotificationCenter::NNSNotificationCenter () {}
-NNSNotificationCenter::~NNSNotificationCenter () {}
 
 NAN_METHOD(NNSNotificationCenter::postNotification) {
   Nan::HandleScope scope;

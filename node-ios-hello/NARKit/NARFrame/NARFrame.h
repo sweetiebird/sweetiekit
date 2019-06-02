@@ -17,8 +17,8 @@
 
 JS_WRAP_CLASS(ARFrame, NSObject);
   JS_METHOD(displayTransform);
-  JS_PROP(Camera);
-  JS_PROP(LightEstimate);
+  JS_PROP(camera);
+  JS_PROP(lightEstimate);
   JS_PROP(capturedImage);
 JS_WRAP_CLASS_END(ARFrame);
 

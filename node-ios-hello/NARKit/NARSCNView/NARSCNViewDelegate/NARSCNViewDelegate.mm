@@ -18,26 +18,16 @@
 #include "NSCNNode.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARSCNViewDelegate::type;
+NARSCNViewDelegate::NARSCNViewDelegate () {}
+NARSCNViewDelegate::~NARSCNViewDelegate () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNViewDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSCNViewDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(ARSCNViewDelegate, NSObject);
+  // instance members (proto)
+  
+  // static members (ctor)
+  JS_INIT_CTOR(ARSCNViewDelegate, NSObject);
+  
+JS_INIT_CLASS_END(ARSCNViewDelegate, NSObject);
 
 NAN_METHOD(NARSCNViewDelegate::New) {
   Nan::HandleScope scope;
@@ -69,6 +59,3 @@ NAN_METHOD(NARSCNViewDelegate::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NARSCNViewDelegate::NARSCNViewDelegate () {}
-NARSCNViewDelegate::~NARSCNViewDelegate () {}

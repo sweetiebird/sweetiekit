@@ -1,38 +1,19 @@
 //
-//  NSAttributedString.m
-//  node-ios-hello
+//  NSAttributedString.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NNSAttributedString.h"
 
-Nan::Persistent<FunctionTemplate> NNSAttributedString::type;
+NNSAttributedString::NNSAttributedString () {}
+NNSAttributedString::~NNSAttributedString () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSAttributedString::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSAttributedString"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(NSAttributedString, NSObject);
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(NSAttributedString, NSObject);
+JS_INIT_CLASS_END(NSAttributedString, NSObject);
 
 NAN_METHOD(NNSAttributedString::New) {
   Nan::HandleScope scope;
@@ -89,6 +70,3 @@ NAN_METHOD(NNSAttributedString::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NNSAttributedString::NNSAttributedString () {}
-NNSAttributedString::~NNSAttributedString () {}

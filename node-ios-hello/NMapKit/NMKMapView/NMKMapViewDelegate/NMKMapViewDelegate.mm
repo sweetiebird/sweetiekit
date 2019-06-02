@@ -1,44 +1,23 @@
 //
-//  MKMapViewDelegate.m
-//  node-ios-hello
+//  MKMapViewDelegate.mm
 //
 //  Created by Emily Kolar on 2019-5-14.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
-
-#include "defines.h"
-#include "NNSObject.h"
 #include "NMKMapViewDelegate.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NMKMapViewDelegate::type;
+NMKMapViewDelegate::NMKMapViewDelegate () {}
+NMKMapViewDelegate::~NMKMapViewDelegate () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NMKMapViewDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("MKMapViewDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(MKMapViewDelegate, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "didFinishRendering", DidFinishRendering);
   JS_SET_PROP(proto, "didUpdateUserLocation", DidUpdateUserLocation);
   JS_SET_PROP(proto, "viewForAnnotation", ViewForAnnotation);
   JS_SET_PROP(proto, "didSelectViewForAnnotation", DidSelectViewForAnnotation);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(MKMapViewDelegate, NSObject);
+JS_INIT_CLASS_END(MKMapViewDelegate, NSObject);
 
 NAN_METHOD(NMKMapViewDelegate::New) {
   Nan::HandleScope scope;
@@ -58,9 +37,6 @@ NAN_METHOD(NMKMapViewDelegate::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NMKMapViewDelegate::NMKMapViewDelegate () {}
-NMKMapViewDelegate::~NMKMapViewDelegate () {}
 
 NAN_GETTER(NMKMapViewDelegate::DidFinishRenderingGetter) {
   Nan::HandleScope scope;

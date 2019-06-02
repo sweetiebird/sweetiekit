@@ -5,13 +5,11 @@
 ////  Created by Emily Kolar on 2019-5-26.
 ////  Copyright © 2019 sweetiebird. All rights reserved.
 ////
-
-#import <Foundation/Foundation.h>
-#import <ReplayKit/ReplayKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
+
+NRPScreenRecorder::NRPScreenRecorder () {}
+NRPScreenRecorder::~NRPScreenRecorder () {}
 
 Nan::Persistent<FunctionTemplate> NRPScreenRecorder::type;
 
@@ -55,9 +53,6 @@ NAN_METHOD(NRPScreenRecorder::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NRPScreenRecorder::NRPScreenRecorder () {}
-NRPScreenRecorder::~NRPScreenRecorder () {}
 
 NAN_METHOD(NRPScreenRecorder::startRecordingWithHandler) {
   JS_UNWRAP(RPScreenRecorder, rp);

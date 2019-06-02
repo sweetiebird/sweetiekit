@@ -13,29 +13,18 @@
 #include "NNSObject.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARLightEstimate::type;
+NARLightEstimate::NARLightEstimate () {}
+NARLightEstimate::~NARLightEstimate () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARLightEstimate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARLightEstimate, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, ambientIntensity);
+  JS_ASSIGN_PROP_READONLY(proto, ambientColorTemperature);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARLightEstimate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "ambientIntensity", AmbientIntensity);
-  JS_SET_PROP_READONLY(proto, "ambientColorTemperature", AmbientColorTemperature);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(ARLightEstimate, NSObject);
+  
+JS_INIT_CLASS_END(ARLightEstimate, NSObject);
 
 NAN_METHOD(NARLightEstimate::New) {
   Nan::HandleScope scope;
@@ -54,10 +43,7 @@ NAN_METHOD(NARLightEstimate::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NARLightEstimate::NARLightEstimate () {}
-NARLightEstimate::~NARLightEstimate () {}
-
-NAN_GETTER(NARLightEstimate::AmbientIntensityGetter) {
+NAN_GETTER(NARLightEstimate::ambientIntensityGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARLightEstimate, est);
@@ -65,7 +51,7 @@ NAN_GETTER(NARLightEstimate::AmbientIntensityGetter) {
   JS_SET_RETURN(JS_FLOAT([est ambientIntensity]));
 }
 
-NAN_GETTER(NARLightEstimate::AmbientColorTemperatureGetter) {
+NAN_GETTER(NARLightEstimate::ambientColorTemperatureGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARLightEstimate, est);

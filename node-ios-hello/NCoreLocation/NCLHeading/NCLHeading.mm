@@ -1,29 +1,16 @@
 //
-//  NCLHeading.m
-//  node-ios-hello
+//  NCLHeading.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
 #include "NCLHeading.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NCLHeading::type;
+NCLHeading::NCLHeading () {}
+NCLHeading::~NCLHeading () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCLHeading::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CLHeading"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CLHeading, NSObject);
+  // instance members (proto)
   JS_SET_PROP_READONLY(proto, "magneticHeading", MagneticHeading);
   JS_SET_PROP_READONLY(proto, "trueHeading", TrueHeading);
   JS_SET_PROP_READONLY(proto, "headingAccuracy", HeadingAccuracy);
@@ -31,12 +18,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NCLHeading::Initialize(Isolate
   JS_SET_PROP_READONLY(proto, "x", X);
   JS_SET_PROP_READONLY(proto, "y", Y);
   JS_SET_PROP_READONLY(proto, "z", Z);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CLHeading, NSObject);
+JS_INIT_CLASS_END(CLHeading, NSObject);
 
 NAN_METHOD(NCLHeading::New) {
   Nan::HandleScope scope;
@@ -58,9 +42,6 @@ NAN_METHOD(NCLHeading::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NCLHeading::NCLHeading () {}
-NCLHeading::~NCLHeading () {}
 
 NAN_GETTER(NCLHeading::MagneticHeadingGetter) {
   Nan::HandleScope scope;

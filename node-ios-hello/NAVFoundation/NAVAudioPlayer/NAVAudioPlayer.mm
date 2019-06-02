@@ -12,28 +12,17 @@
 #include "NNSObject.h"
 #include "NAVAudioPlayer.h"
 
-Nan::Persistent<FunctionTemplate> NAVAudioPlayer::type;
+NAVAudioPlayer::NAVAudioPlayer () {}
+NAVAudioPlayer::~NAVAudioPlayer () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NAVAudioPlayer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("AVAudioPlayer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "play", Play);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(AVAudioPlayer, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, play);
+  
+  // static members (ctor)
+  JS_INIT_CTOR(AVAudioPlayer, NSObject);
+  
+JS_INIT_CLASS_END(AVAudioPlayer, NSObject);
 
 NAN_METHOD(NAVAudioPlayer::New) {
   Nan::HandleScope scope;
@@ -63,13 +52,10 @@ NAN_METHOD(NAVAudioPlayer::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_METHOD(NAVAudioPlayer::Play) {
+NAN_METHOD(NAVAudioPlayer::play) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(AVAudioPlayer, av);
 
   [av play];
 }
-
-NAVAudioPlayer::NAVAudioPlayer () {}
-NAVAudioPlayer::~NAVAudioPlayer () {}

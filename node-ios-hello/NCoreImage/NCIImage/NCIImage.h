@@ -16,7 +16,6 @@
 #define is_value_CIImage(x) is_value_wrapper(x, CIImage)
 
 JS_WRAP_CLASS(CIImage, NSObject);
-  JS_METHOD(initWithCVPixelBuffer);
   JS_METHOD(imageByApplyingTransform);
   JS_METHOD(initWithImage);
 JS_WRAP_CLASS_END(CIImage);

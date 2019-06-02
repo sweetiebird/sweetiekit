@@ -14,27 +14,16 @@
 #include "NGif.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NGif::type;
+NGif::NGif () {}
+NGif::~NGif () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NGif::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(Gif, UIImage);
+  // instance members (proto)
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NUIImage::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("Gif"));
-  type.Reset(ctor);
+  // static members (ctor)
+  JS_INIT_CTOR(Gif, UIImage);
 
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(Gif, UIImage);
 
 NAN_METHOD(NGif::New) {
   Nan::HandleScope scope;
@@ -63,6 +52,3 @@ NAN_METHOD(NGif::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NGif::NGif () {}
-NGif::~NGif () {}

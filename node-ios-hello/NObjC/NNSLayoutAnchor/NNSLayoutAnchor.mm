@@ -1,17 +1,14 @@
 //
-//  NNSLayoutAnchor.m
-//  node-ios-hello
+//  NNSLayoutAnchor.mm
 //
 //  Created by Emily Kolar on 5/5/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
-#import "node_ios_hello-Swift.h"
+
+NNSLayoutAnchor::NNSLayoutAnchor () {}
+NNSLayoutAnchor::~NNSLayoutAnchor () {}
 
 Nan::Persistent<FunctionTemplate> NNSLayoutAnchor::type;
 
@@ -35,9 +32,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NNSLayoutAnchor::Initialize(Is
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
-
-NNSLayoutAnchor::NNSLayoutAnchor () {}
-NNSLayoutAnchor::~NNSLayoutAnchor () {}
 
 NAN_METHOD(NNSLayoutAnchor::New) {
   Nan::HandleScope scope;

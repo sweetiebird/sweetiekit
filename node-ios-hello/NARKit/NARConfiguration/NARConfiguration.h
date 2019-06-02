@@ -16,7 +16,7 @@
 #define is_value_ARConfiguration(x) is_value_wrapper(x, ARConfiguration)
 
 JS_WRAP_CLASS(ARConfiguration, NSObject);
-  JS_PROP(IsLightEstimationEnabled);
+  JS_PROP(isLightEstimationEnabled);
   JS_PROP(worldAlignment);
 JS_WRAP_CLASS_END(ARConfiguration);
 

@@ -16,9 +16,9 @@
 #define is_value_ARSKView(x) is_value_wrapper(x, ARSKView)
 
 JS_WRAP_CLASS(ARSKView, SKView);
-  JS_METHOD(PresentScene);
-  JS_PROP(Session);
-  JS_PROP(Delegate);
+  JS_METHOD(presentScene);
+  JS_PROP(session);
+  JS_PROP(delegate);
   JS_METHOD(hitTest);
   
   Nan::Persistent<Value> _delegate;

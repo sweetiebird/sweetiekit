@@ -17,26 +17,16 @@
 #include "NARSKView.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARSKViewDelegate::type;
+NARSKViewDelegate::NARSKViewDelegate () {}
+NARSKViewDelegate::~NARSKViewDelegate () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARSKViewDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSKViewDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(ARSKViewDelegate, NSObject);
+  // instance members (proto)
+  
+  // static members (ctor)
+  JS_INIT_CTOR(ARSKViewDelegate, NSObject);
+  
+JS_INIT_CLASS_END(ARSKViewDelegate, NSObject);
 
 NAN_METHOD(NARSKViewDelegate::New) {
   Nan::HandleScope scope;
@@ -78,6 +68,3 @@ NAN_METHOD(NARSKViewDelegate::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NARSKViewDelegate::NARSKViewDelegate () {}
-NARSKViewDelegate::~NARSKViewDelegate () {}

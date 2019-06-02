@@ -17,32 +17,21 @@
 #include "NSCNScene.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARSCNView::type;
+NARSCNView::NARSCNView () {}
+NARSCNView::~NARSCNView () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARSCNView::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARSCNView, SCNView);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, session);
+  JS_ASSIGN_PROP(proto, delegate);
+  JS_ASSIGN_PROP(proto, scene);
+  JS_ASSIGN_METHOD(proto, presentScene);
+  JS_ASSIGN_PROP(proto, automaticallyUpdatesLighting);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NSCNView::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARSCNView"));
-  type.Reset(ctor);
+  // static members (ctor)
+  JS_INIT_CTOR(ARSCNView, SCNView);
 
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "session", Session);
-  JS_SET_PROP(proto, "delegate", Delegate);
-  JS_SET_PROP(proto, "scene", Scene);
-  Nan::SetMethod(proto, "presentScene", PresentScene);
-  JS_SET_PROP(proto, "automaticallyUpdatesLighting", AutomaticallyUpdatesLighting);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(ARSCNView, SCNView);
 
 NAN_METHOD(NARSCNView::New) {
   Nan::HandleScope scope;
@@ -77,7 +66,7 @@ NAN_METHOD(NARSCNView::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NARSCNView::SessionGetter) {
+NAN_GETTER(NARSCNView::sessionGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSCNView, ui);
@@ -85,7 +74,7 @@ NAN_GETTER(NARSCNView::SessionGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
 }
 
-NAN_GETTER(NARSCNView::DelegateGetter) {
+NAN_GETTER(NARSCNView::delegateGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSCNView, ui);
@@ -93,7 +82,7 @@ NAN_GETTER(NARSCNView::DelegateGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSCNViewDelegate::type));
 }
 
-NAN_SETTER(NARSCNView::DelegateSetter) {
+NAN_SETTER(NARSCNView::delegateSetter) {
   Nan::HandleScope scope;
   
   NARSCNView *view = ObjectWrap::Unwrap<NARSCNView>(info.This());
@@ -108,7 +97,7 @@ NAN_SETTER(NARSCNView::DelegateSetter) {
   }
 }
 
-NAN_METHOD(NARSCNView::PresentScene) {
+NAN_METHOD(NARSCNView::presentScene) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSCNView, ui);
@@ -121,7 +110,7 @@ NAN_METHOD(NARSCNView::PresentScene) {
   }];
 }
 
-NAN_GETTER(NARSCNView::SceneGetter) {
+NAN_GETTER(NARSCNView::sceneGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSCNView, ui);
@@ -129,7 +118,7 @@ NAN_GETTER(NARSCNView::SceneGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([ui scene], NSCNScene::type));
 }
 
-NAN_SETTER(NARSCNView::SceneSetter) {
+NAN_SETTER(NARSCNView::sceneSetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARSCNView, ui);
@@ -138,7 +127,7 @@ NAN_SETTER(NARSCNView::SceneSetter) {
   [ui setScene:scene->As<SCNScene>()];
 }
 
-NAN_GETTER(NARSCNView::AutomaticallyUpdatesLightingGetter) {
+NAN_GETTER(NARSCNView::automaticallyUpdatesLightingGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSCNView, ui);
@@ -146,13 +135,10 @@ NAN_GETTER(NARSCNView::AutomaticallyUpdatesLightingGetter) {
   JS_SET_RETURN(JS_BOOL([ui automaticallyUpdatesLighting]));
 }
 
-NAN_SETTER(NARSCNView::AutomaticallyUpdatesLightingSetter) {
+NAN_SETTER(NARSCNView::automaticallyUpdatesLightingSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARSCNView, ui);
   
   [ui setAutomaticallyUpdatesLighting:TO_BOOL(value)];
 }
-
-NARSCNView::NARSCNView () {}
-NARSCNView::~NARSCNView () {}

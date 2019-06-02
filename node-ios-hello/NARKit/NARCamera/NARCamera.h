@@ -16,7 +16,7 @@
 #define is_value_ARCamera(x) is_value_wrapper(x, ARCamera)
 
 JS_WRAP_CLASS(ARCamera, NSObject);
-  JS_PROP(Transform);
+  JS_PROP(transform);
 JS_WRAP_CLASS_END(ARCamera);
 
 #endif /* NARCamera_h */

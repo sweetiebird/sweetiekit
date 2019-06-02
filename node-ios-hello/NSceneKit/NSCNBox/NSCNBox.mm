@@ -8,10 +8,10 @@
     
 #include "NSCNBox.h"
 
-Nan::Persistent<FunctionTemplate> NSCNBox::type;
-
 NSCNBox::NSCNBox () {}
 NSCNBox::~NSCNBox () {}
+
+Nan::Persistent<FunctionTemplate> NSCNBox::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNBox::Initialize(Isolate *isolate)
 {

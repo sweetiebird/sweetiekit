@@ -15,28 +15,17 @@
 #include "NARWorldTrackingConfiguration.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARCamera::type;
+NARCamera::NARCamera () {}
+NARCamera::~NARCamera () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARCamera::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARCamera, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, transform);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARCamera"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "transform", Transform);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(ARCamera, NSObject);
+  
+JS_INIT_CLASS_END(ARCamera, NSObject);
 
 NAN_METHOD(NARCamera::New) {
   Nan::HandleScope scope;
@@ -55,7 +44,7 @@ NAN_METHOD(NARCamera::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NARCamera::TransformGetter) {
+NAN_GETTER(NARCamera::transformGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARCamera, cam);
@@ -64,6 +53,3 @@ NAN_GETTER(NARCamera::TransformGetter) {
   const float* matrix = (const float*)&xform;
   JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
 }
-
-NARCamera::NARCamera () {}
-NARCamera::~NARCamera () {}

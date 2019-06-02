@@ -13,29 +13,13 @@
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
 
-Nan::Persistent<FunctionTemplate> NCAEmitterLayer::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NCAEmitterLayer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NCALayer::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CAEmitterLayer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CAEmitterLayer, CALayer);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, emitterCells);
   JS_ASSIGN_PROP(proto, emitterPosition);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CAEmitterLayer, CALayer);
+JS_INIT_CLASS_END(CAEmitterLayer, CALayer);
 
 NAN_METHOD(NCAEmitterLayer::New) {
   Nan::HandleScope scope;

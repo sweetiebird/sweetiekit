@@ -13,29 +13,18 @@
 #include "NNSObject.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARConfiguration::type;
+NARConfiguration::NARConfiguration () {}
+NARConfiguration::~NARConfiguration () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARConfiguration::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARConfiguration"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP(proto, "isLightEstimationEnabled", IsLightEstimationEnabled);
+JS_INIT_CLASS(ARConfiguration, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP(proto, isLightEstimationEnabled);
   JS_ASSIGN_PROP(proto, worldAlignment);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(ARConfiguration, NSObject);
+  
+JS_INIT_CLASS_END(ARConfiguration, NSObject);
 
 NAN_METHOD(NARConfiguration::New) {
   Nan::HandleScope scope;
@@ -54,10 +43,7 @@ NAN_METHOD(NARConfiguration::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NARConfiguration::NARConfiguration () {}
-NARConfiguration::~NARConfiguration () {}
-
-NAN_GETTER(NARConfiguration::IsLightEstimationEnabledGetter) {
+NAN_GETTER(NARConfiguration::isLightEstimationEnabledGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARConfiguration, config);
@@ -65,7 +51,7 @@ NAN_GETTER(NARConfiguration::IsLightEstimationEnabledGetter) {
   JS_SET_RETURN(JS_BOOL([config isLightEstimationEnabled]));
 }
 
-NAN_SETTER(NARConfiguration::IsLightEstimationEnabledSetter) {
+NAN_SETTER(NARConfiguration::isLightEstimationEnabledSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(ARConfiguration, config);

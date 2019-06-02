@@ -14,31 +14,20 @@
 #include "NNSObject.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARAnchor::type;
+NARAnchor::NARAnchor () {}
+NARAnchor::~NARAnchor () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARAnchor::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARAnchor"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(ARAnchor, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, name);
   JS_ASSIGN_PROP_READONLY(proto, identifier);
   JS_ASSIGN_PROP_READONLY(proto, transform);
 
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "initWithTransform", InitWithTransform);
+  // static members (ctor)
+  JS_INIT_CTOR(ARAnchor, NSObject);
+  JS_ASSIGN_METHOD(ctor, initWithTransform);
 
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS_END(ARAnchor, NSObject);
 
 NAN_METHOD(NARAnchor::New) {
   Nan::HandleScope scope;
@@ -60,7 +49,7 @@ NAN_METHOD(NARAnchor::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_METHOD(NARAnchor::InitWithTransform) {
+NAN_METHOD(NARAnchor::initWithTransform) {
   Nan::HandleScope scope;
   
   Local<Object> anchorObj = JS_TYPE(NARAnchor)->NewInstance(JS_CONTEXT(), 0, nullptr).ToLocalChecked();
@@ -114,6 +103,3 @@ NAN_GETTER(NARAnchor::transformGetter) {
   const float* matrix = (const float*)&xform;
   JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
 }
-
-NARAnchor::NARAnchor () {}
-NARAnchor::~NARAnchor () {}

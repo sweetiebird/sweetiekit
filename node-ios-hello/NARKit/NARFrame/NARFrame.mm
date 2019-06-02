@@ -20,34 +20,20 @@
 #include "NCIImage.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARFrame::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NARFrame::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARFrame"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_SET_PROP_READONLY(proto, "camera", Camera);
-  JS_SET_PROP_READONLY(proto, "lightEstimate", LightEstimate);
-  JS_ASSIGN_PROP_READONLY(proto, capturedImage);
-  Nan::SetMethod(proto, "displayTransform", displayTransform);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
-
 NARFrame::NARFrame () {}
 NARFrame::~NARFrame () {}
+
+JS_INIT_CLASS(ARFrame, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_PROP_READONLY(proto, camera);
+  JS_ASSIGN_PROP_READONLY(proto, lightEstimate);
+  JS_ASSIGN_PROP_READONLY(proto, capturedImage);
+  JS_ASSIGN_METHOD(proto, displayTransform);
+
+  // static members (ctor)
+  JS_INIT_CTOR(ARFrame, NSObject);
+  
+JS_INIT_CLASS_END(ARFrame, NSObject);
 
 NAN_METHOD(NARFrame::New) {
   Nan::HandleScope scope;
@@ -66,7 +52,7 @@ NAN_METHOD(NARFrame::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NARFrame::CameraGetter) {
+NAN_GETTER(NARFrame::cameraGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARFrame, frame);
@@ -74,7 +60,7 @@ NAN_GETTER(NARFrame::CameraGetter) {
   JS_SET_RETURN(sweetiekit::GetWrapperFor([frame camera], NARCamera::type));
 }
 
-NAN_GETTER(NARFrame::LightEstimateGetter) {
+NAN_GETTER(NARFrame::lightEstimateGetter) {
   Nan::HandleScope scope;
   
   JS_UNWRAP(ARFrame, frame);

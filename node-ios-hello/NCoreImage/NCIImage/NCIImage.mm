@@ -13,29 +13,16 @@
 #include "NCIImage.h"
 #include "NUIImage.h"
 
-Nan::Persistent<FunctionTemplate> NCIImage::type;
+NCIImage::NCIImage () {}
+NCIImage::~NCIImage () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCIImage::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CIImage"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "imageByApplyingTransform", imageByApplyingTransform);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "initWithImage", initWithImage);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(CIImage, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, imageByApplyingTransform);
+  // static members (ctor)
+  JS_INIT_CTOR(CIImage, NSObject);
+  JS_ASSIGN_METHOD(ctor, initWithImage);
+JS_INIT_CLASS_END(CIImage, NSObject);
 
 NAN_METHOD(NCIImage::New) {
   Nan::HandleScope scope;
@@ -55,9 +42,6 @@ NAN_METHOD(NCIImage::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCIImage::NCIImage () {}
-NCIImage::~NCIImage () {}
 
 NAN_METHOD(NCIImage::imageByApplyingTransform) {
   Nan::HandleScope scope;

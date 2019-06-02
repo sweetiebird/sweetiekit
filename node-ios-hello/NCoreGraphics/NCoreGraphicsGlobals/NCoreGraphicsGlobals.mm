@@ -14,30 +14,15 @@
 #include "NUIImage.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NCoreGraphicsGlobals::type;
+NCoreGraphicsGlobals::NCoreGraphicsGlobals () {}
+NCoreGraphicsGlobals::~NCoreGraphicsGlobals () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCoreGraphicsGlobals::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CoreGraphics"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "UIGraphicsBeginImageContextWithOptions", UIGraphicsBeginImageContextWithOptions);
-  Nan::SetMethod(ctorFn, "UIGraphicsGetImageFromCurrentImageContext", UIGraphicsGetImageFromCurrentImageContext);
-  Nan::SetMethod(ctorFn, "UIGraphicsEndImageContext", UIGraphicsEndImageContext);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(CoreGraphicsGlobals, NSObject);
+JS_INIT_CTOR(CoreGraphicsGlobals, NSObject);
+  JS_ASSIGN_METHOD(ctor, UIGraphicsBeginImageContextWithOptions);
+  JS_ASSIGN_METHOD(ctor, UIGraphicsGetImageFromCurrentImageContext);
+  JS_ASSIGN_METHOD(ctor, UIGraphicsEndImageContext);
+JS_INIT_CLASS_END(CoreGraphicsGlobals, NSObject);
 
 NAN_METHOD(NCoreGraphicsGlobals::New) {
   Nan::HandleScope scope;
@@ -57,9 +42,6 @@ NAN_METHOD(NCoreGraphicsGlobals::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCoreGraphicsGlobals::NCoreGraphicsGlobals () {}
-NCoreGraphicsGlobals::~NCoreGraphicsGlobals () {}
 
 NAN_METHOD(NCoreGraphicsGlobals::UIGraphicsBeginImageContextWithOptions) {
   Nan::HandleScope scope;

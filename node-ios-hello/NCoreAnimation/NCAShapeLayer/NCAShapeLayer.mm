@@ -14,31 +14,18 @@
 #include "NCAShapeLayer.h"
 #include "NUIBezierPath.h"
 
-Nan::Persistent<FunctionTemplate> NCAShapeLayer::type;
+NCAShapeLayer::NCAShapeLayer () {}
+NCAShapeLayer::~NCAShapeLayer () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NCAShapeLayer::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NCALayer::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("CAShapeLayer"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(CAShapeLayer, CALayer);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, lineWidth);
   JS_ASSIGN_PROP(proto, fillColor);
   JS_ASSIGN_PROP(proto, strokeColor);
   JS_ASSIGN_PROP(proto, path);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(CAShapeLayer, CALayer);
+JS_INIT_CLASS_END(CAShapeLayer, CALayer);
 
 NAN_METHOD(NCAShapeLayer::New) {
   Nan::HandleScope scope;
@@ -58,9 +45,6 @@ NAN_METHOD(NCAShapeLayer::New) {
 
   JS_SET_RETURN(obj);
 }
-
-NCAShapeLayer::NCAShapeLayer () {}
-NCAShapeLayer::~NCAShapeLayer () {}
 
 NAN_GETTER(NCAShapeLayer::lineWidthGetter) {
   Nan::HandleScope scope;

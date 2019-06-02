@@ -16,7 +16,7 @@
 #define is_value_ARAnchor(x) is_value_wrapper(x, ARAnchor)
 
 JS_WRAP_CLASS(ARAnchor, NSObject);
-  JS_METHOD(InitWithTransform);
+  JS_METHOD(initWithTransform);
   
   JS_PROP(name);
   JS_PROP(identifier);

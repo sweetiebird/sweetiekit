@@ -13,27 +13,17 @@
 #include "NARConfiguration.h"
 #import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NARWorldTrackingConfiguration::type;
+NARWorldTrackingConfiguration::NARWorldTrackingConfiguration () {}
+NARWorldTrackingConfiguration::~NARWorldTrackingConfiguration () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NARWorldTrackingConfiguration::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
+JS_INIT_CLASS(ARWorldTrackingConfiguration, ARConfiguration);
+  // instance members (proto)
+  
+  // static members (ctor)
+  JS_INIT_CTOR(ARWorldTrackingConfiguration, ARConfiguration);
 
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NARConfiguration::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("ARWorldTrackingConfiguration"));
-  type.Reset(ctor);
+JS_INIT_CLASS_END(ARWorldTrackingConfiguration, ARConfiguration);
 
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
 
 NAN_METHOD(NARWorldTrackingConfiguration::New) {
   Nan::HandleScope scope;
@@ -51,6 +41,3 @@ NAN_METHOD(NARWorldTrackingConfiguration::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NARWorldTrackingConfiguration::NARWorldTrackingConfiguration () {}
-NARWorldTrackingConfiguration::~NARWorldTrackingConfiguration () {}
