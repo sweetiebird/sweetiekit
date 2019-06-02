@@ -9,31 +9,15 @@
 NNSNotification::NNSNotification () {}
 NNSNotification::~NNSNotification () {}
 
-Nan::Persistent<FunctionTemplate> NNSNotification::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSNotification::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSNotification"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(NSNotification, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, name);
   JS_ASSIGN_PROP_READONLY(proto, object);
   JS_ASSIGN_PROP_READONLY(proto, userInfo);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "notificationWithName", notificationWithName);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(NSNotification, NSObject);
+  JS_ASSIGN_METHOD(ctor, notificationWithName);
+JS_INIT_CLASS_END(NSNotification, NSObject);
 
 NAN_METHOD(NNSNotification::New) {
   Nan::HandleScope scope;

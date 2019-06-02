@@ -10,28 +10,12 @@
 NNSLayoutAnchor::NNSLayoutAnchor () {}
 NNSLayoutAnchor::~NNSLayoutAnchor () {}
 
-Nan::Persistent<FunctionTemplate> NNSLayoutAnchor::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSLayoutAnchor::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSLayoutAnchor"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(NSLayoutAnchor, NSObject);
+  // instance members (proto)
   Nan::SetMethod(proto, "constraintEqualToAnchor", ConstraintEqualToAnchor);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(NSLayoutAnchor, NSObject);
+JS_INIT_CLASS_END(NSLayoutAnchor, NSObject);
 
 NAN_METHOD(NNSLayoutAnchor::New) {
   Nan::HandleScope scope;

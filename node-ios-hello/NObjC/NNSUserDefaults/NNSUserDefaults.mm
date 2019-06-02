@@ -1,42 +1,24 @@
 //
-//  NAppDelegate.mm
+//  NNSUserDefaults.mm
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NNSUserDefaults.h"
-#include "NUIWindow.h"
 
 NNSUserDefaults::NNSUserDefaults () {}
 NNSUserDefaults::~NNSUserDefaults () {}
 
-Nan::Persistent<FunctionTemplate> NNSUserDefaults::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSUserDefaults::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSUserDefaults"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "synchronize", Synchronize);
-  Nan::SetMethod(proto, "setValueForKey", SetValueForKey);
-  Nan::SetMethod(proto, "objectForKey", ObjectForKey);
-  Nan::SetMethod(proto, "stringForKey", ObjectForKey);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Local<Object> ctorObj = scope.Escape(ctorFn);
-  Nan::SetAccessor(ctorObj, JS_STR("standardUserDefaults"), StandardUserDefaultsGetter);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(ctorObj, ctor);
-}
+JS_INIT_CLASS(NSUserDefaults, NSObject);
+  // instance members (proto)
+  JS_SET_METHOD(proto, "synchronize", Synchronize);
+  JS_SET_METHOD(proto, "setValueForKey", SetValueForKey);
+  JS_SET_METHOD(proto, "objectForKey", ObjectForKey);
+  JS_SET_METHOD(proto, "stringForKey", ObjectForKey);
+  // static members (ctor)
+  JS_INIT_CTOR(NSUserDefaults, NSObject);
+  JS_SET_PROP_READONLY(JS_OBJ(ctor), "standardUserDefaults", StandardUserDefaults);
+JS_INIT_CLASS_END(NSUserDefaults, NSObject);
 
 NAN_METHOD(NNSUserDefaults::New) {
   Nan::HandleScope scope;

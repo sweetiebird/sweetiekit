@@ -9,31 +9,15 @@
 NNSLayoutConstraint::NNSLayoutConstraint () {}
 NNSLayoutConstraint::~NNSLayoutConstraint () {}
 
-Nan::Persistent<FunctionTemplate> NNSLayoutConstraint::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSLayoutConstraint::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSLayoutConstraint"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(NSLayoutConstraint, NSObject);
+  // instance members (proto)
   JS_SET_PROP(proto, "isActive", IsActive);
   JS_SET_PROP(proto, "priority", Priority);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "activateConstraints", ActivateConstraints);
-  Nan::SetMethod(ctorFn, "deactivateConstraints", DeactivateConstraints);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(NSLayoutConstraint, NSObject);
+  JS_SET_METHOD(ctor, "activateConstraints", ActivateConstraints);
+  JS_SET_METHOD(ctor, "deactivateConstraints", DeactivateConstraints);
+JS_INIT_CLASS_END(NSLayoutConstraint, NSObject);
 
 NAN_METHOD(NNSLayoutConstraint::New) {
   Nan::HandleScope scope;

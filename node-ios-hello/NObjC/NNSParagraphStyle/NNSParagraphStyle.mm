@@ -9,28 +9,12 @@
 NNSParagraphStyle::NNSParagraphStyle () {}
 NNSParagraphStyle::~NNSParagraphStyle () {}
 
-Nan::Persistent<FunctionTemplate> NNSParagraphStyle::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSParagraphStyle::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSParagraphStyle"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(NSParagraphStyle, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, lineSpacing);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(NSParagraphStyle, NSObject);
+JS_INIT_CLASS_END(NSParagraphStyle, NSObject);
 
 NAN_METHOD(NNSParagraphStyle::New) {
   Nan::HandleScope scope;

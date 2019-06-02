@@ -10,28 +10,12 @@
 NNSMutableAttributedString::NNSMutableAttributedString () {}
 NNSMutableAttributedString::~NNSMutableAttributedString () {}
 
-Nan::Persistent<FunctionTemplate> NNSMutableAttributedString::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NNSMutableAttributedString::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSAttributedString::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("NSMutableAttributedString"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addAttribute", addAttribute);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(NSMutableAttributedString, NSAttributedString);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, addAttribute);
+  // static members (ctor)
+  JS_INIT_CTOR(NSMutableAttributedString, NSAttributedString);
+JS_INIT_CLASS_END(NSMutableAttributedString, NSAttributedString);
 
 NAN_METHOD(NNSMutableAttributedString::New) {
   Nan::HandleScope scope;
