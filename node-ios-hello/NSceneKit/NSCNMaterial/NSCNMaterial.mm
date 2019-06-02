@@ -95,8 +95,8 @@ NAN_SETTER(NSCNMaterial::nameSetter) {
   }
 }
 
-#define js_value_SCNMaterialProperty(x) js_value_wrapper_unknown(x, MaterialProperty)
-#define to_value_SCNMaterialProperty(x) to_value_wrapper_unknown(x, MaterialProperty)
+#define js_value_SCNMaterialProperty(x) js_value_wrapper_unknown(x, SCNMaterialProperty)
+#define to_value_SCNMaterialProperty(x) to_value_wrapper_unknown(x, SCNMaterialProperty)
 
 NAN_GETTER(NSCNMaterial::diffuseGetter) {
   JS_UNWRAP(SCNMaterial, self);

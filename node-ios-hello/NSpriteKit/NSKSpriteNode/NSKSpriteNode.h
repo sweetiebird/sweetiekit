@@ -14,21 +14,30 @@
 #define js_value_SKSpriteNode(x) js_value_wrapper(x, SKSpriteNode)
 #define to_value_SKSpriteNode(x) to_value_wrapper(x, SKSpriteNode)
 
-class NSKSpriteNode : public NSKNode {
-public:
+// SpriteKit enums
+#define js_value_SKBlendMode(x) JS_ENUM(SKBlendMode, NSInteger, x)
+#define to_value_SKBlendMode(x) TO_ENUM(SKBlendMode, NSInteger, x)
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NSKSpriteNode();
-  virtual ~NSKSpriteNode();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(SKSpriteNode, SKNode);
   JS_METHOD(scaleToSize);
-  JS_PROP(size);
+  JS_METHOD(animateWithRemoteGIF);
+//  JS_PROP(size);
+//  JS_PROP(colorBlendFactor);
+//  JS_PROP(color);
+//  JS_PROP(anchorPoint);
+  JS_PROP(texture);
+  JS_PROP(normalTexture);
+  JS_PROP(lightingBitMask);
+  JS_PROP(shadowCastBitMask);
+  JS_PROP(shadowedBitMask);
+  JS_PROP(centerRect);
   JS_PROP(colorBlendFactor);
   JS_PROP(color);
+  JS_PROP(blendMode);
   JS_PROP(anchorPoint);
-};
+  JS_PROP(size);
+  JS_PROP(shader);
+  JS_PROP(attributeValues);
+JS_WRAP_CLASS_END(SKSpriteNode);
 
 #endif /* NSKSpriteNode_h */

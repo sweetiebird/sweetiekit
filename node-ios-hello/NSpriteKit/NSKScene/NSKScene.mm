@@ -32,22 +32,26 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKScene::Initialize(Isolate *
 
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  JS_ASSIGN_PROP(proto, backgroundColor);
-  JS_ASSIGN_PROP(proto, scaleMode);
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);
   JS_ASSIGN_PROP(proto, update);
+  JS_ASSIGN_METHOD(proto, convertPointFromView);
+  JS_ASSIGN_METHOD(proto, convertPointToView);
   JS_ASSIGN_PROP(proto, size);
+  JS_ASSIGN_PROP(proto, scaleMode);
+  JS_ASSIGN_PROP(proto, camera);
+  JS_ASSIGN_PROP(proto, listener);
+  JS_ASSIGN_PROP_READONLY(proto, audioEngine);
+  JS_ASSIGN_PROP(proto, backgroundColor);
+  JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, anchorPoint);
   JS_ASSIGN_PROP_READONLY(proto, physicsWorld);
-  JS_ASSIGN_PROP_READONLY(proto, camera);
-  Nan::SetMethod(proto, "convertPointFromView", convertPointFromView);
-  Nan::SetMethod(proto, "convertPointToView", convertPointToView);
+  JS_ASSIGN_PROP_READONLY(proto, view);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  Nan::SetMethod(ctorFn, "sceneWithSize", sceneWithSize);
+  JS_ASSIGN_METHOD(ctorFn, sceneWithSize);
 
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
@@ -87,8 +91,6 @@ NSKScene::NSKScene () {}
 NSKScene::~NSKScene () {}
 
 NAN_METHOD(NSKScene::sceneWithSize) {
-  Nan::EscapableHandleScope scope;
-
   Local<Value> argv[] = {
   };
   Local<Object> obj = JS_TYPE(NSKScene)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
@@ -96,46 +98,11 @@ NAN_METHOD(NSKScene::sceneWithSize) {
   NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(obj);
 
   @autoreleasepool {
-    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    scene->SetNSObject([SKScene sceneWithSize:CGSizeMake(w, h)]);
+    CGSize size(to_value_CGSize(info[0]));
+    scene->SetNSObject([SSKScene sceneWithSize:size]);
   }
 
   JS_SET_RETURN(obj);
-}
-
-NAN_GETTER(NSKScene::backgroundColorGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-  
-  __block double r = 0;
-  __block double g = 0;
-  __block double b = 0;
-  __block double a = 0;
-  @autoreleasepool {
-    [[scene backgroundColor] getRed:&r green:&g blue:&b alpha:&a];
-  }
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("red"), JS_FLOAT(r));
-  result->Set(JS_STR("green"), JS_FLOAT(g));
-  result->Set(JS_STR("blue"), JS_FLOAT(b));
-  result->Set(JS_STR("alpha"), JS_FLOAT(a));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NSKScene::backgroundColorSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-
-  double r = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
-  double g = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
-  double b = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
-
-  [scene setBackgroundColor:[[UIColor alloc] initWithRed:r green:g blue:b alpha:1]];
 }
 
 NAN_GETTER(NSKScene::scaleModeGetter) {
@@ -255,117 +222,173 @@ NAN_SETTER(NSKScene::touchesEndedSetter) {
   }
 }
 
-NAN_GETTER(NSKScene::physicsWorldGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([scene physicsWorld], NSKPhysicsWorld::type));
+NAN_METHOD(NSKScene::convertPointFromView) {
+  JS_UNWRAP(SKScene, node);
+  @autoreleasepool {
+    CGPoint converted([node convertPointFromView:to_value_CGPoint(info[0])]);
+    JS_SET_RETURN(js_value_CGPoint(converted));
+  }
 }
 
-NAN_GETTER(NSKScene::cameraGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([scene camera], NSKCameraNode::type));
+NAN_METHOD(NSKScene::convertPointToView) {
+  JS_UNWRAP(SKScene, node);
+  @autoreleasepool {
+    CGPoint converted([node convertPointToView:to_value_CGPoint(info[0])]);
+    JS_SET_RETURN(js_value_CGPoint(converted));
+  }
 }
 
 NAN_GETTER(NSKScene::sizeGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-  
-  __block float w = 0;
-  __block float h = 0;
-  @autoreleasepool {
-    CGSize size = [scene size];
-    w = size.width;
-    h = size.height;
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGSize([self size]));
+    return;
   }
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("width"), JS_FLOAT(w));
-  result->Set(JS_STR("height"), JS_FLOAT(h));
-
-  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NSKScene::sizeSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setSize: to_value_CGSize(value)];
+  }
+}
 
-  float w = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width")));
-  float h = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")));
+/*
+NAN_GETTER(NSKScene::scaleModeGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKSceneScaleMode([self scaleMode]));
+    return;
+  }
+}
 
-  @autoreleasepool {
-    [scene setSize:CGSizeMake(w, h)];
+NAN_SETTER(NSKScene::scaleModeSetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setScaleMode: to_value_SKSceneScaleMode(value)];
+  }
+}*/
+
+NAN_GETTER(NSKScene::cameraGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKCameraNode([self camera]));
+    return;
+  }
+}
+
+NAN_SETTER(NSKScene::cameraSetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setCamera: to_value_SKCameraNode(value)];
+  }
+}
+
+NAN_GETTER(NSKScene::listenerGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKNode([self listener]));
+    return;
+  }
+}
+
+NAN_SETTER(NSKScene::listenerSetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setListener: to_value_SKNode(value)];
+  }
+}
+
+#define js_value_AVAudioEngine(x) js_value_wrapper_unknown(x, AVAudioEngine)
+#define to_value_AVAudioEngine(x) to_value_wrapper_unknown(x, AVAudioEngine)
+
+NAN_GETTER(NSKScene::audioEngineGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_AVAudioEngine([self audioEngine]));
+    return;
+  }
+}
+
+NAN_GETTER(NSKScene::backgroundColorGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKColor([self backgroundColor]));
+    return;
+  }
+}
+
+NAN_SETTER(NSKScene::backgroundColorSetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setBackgroundColor: to_value_SKColor(value)];
+  }
+}
+
+#define js_value_SKSceneDelegate(x) js_value_wrapper_unknown(x, SKSceneDelegate)
+#define to_value_SKSceneDelegate(x) to_value_wrapper_unknown(x, SKSceneDelegate)
+
+NAN_GETTER(NSKScene::delegateGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_id/*<SKSceneDelegate>*/([self delegate]));
+    return;
+  }
+}
+
+NAN_SETTER(NSKScene::delegateSetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setDelegate: to_value_id/*<SKSceneDelegate>*/(value)];
   }
 }
 
 NAN_GETTER(NSKScene::anchorPointGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKScene, sk);
-
-  __block float x = 0;
-  __block float y = 0;
-
-  @autoreleasepool {
-    x = [sk anchorPoint].x;
-    y = [sk anchorPoint].y;
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGPoint([self anchorPoint]));
+    return;
   }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(x));
-  result->Set(JS_STR("y"), JS_FLOAT(y));
-  
-  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NSKScene::anchorPointSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKScene, sk);
-
-  @autoreleasepool {
-    float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-    float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-    [sk setAnchorPoint:CGPointMake(x, y)];
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    [self setAnchorPoint: to_value_CGPoint(value)];
   }
 }
 
-NAN_METHOD(NSKScene::convertPointFromView) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKScene, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  CGPoint converted = [node convertPointFromView:CGPointMake(x, y)];
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(converted.x));
-  result->Set(JS_STR("y"), JS_FLOAT(converted.y));
-
-  JS_SET_RETURN(result);
+NAN_GETTER(NSKScene::physicsWorldGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKPhysicsWorld([self physicsWorld]));
+    return;
+  }
 }
 
-NAN_METHOD(NSKScene::convertPointToView) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKScene, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  CGPoint converted = [node convertPointToView:CGPointMake(x, y)];
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(converted.x));
-  result->Set(JS_STR("y"), JS_FLOAT(converted.y));
-
-  JS_SET_RETURN(result);
+NAN_GETTER(NSKScene::viewGetter) {
+  JS_UNWRAP(SKScene, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKView([self view]));
+    return;
+  }
 }
 
 NAN_GETTER(NSKScene::updateGetter) {

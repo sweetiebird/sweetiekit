@@ -398,8 +398,8 @@ namespace sweetiekit {
 #endif
 
 namespace sweetiekit {
-  Local<Value> GetWrapperFor(id _Nullable pThing, Nan::Persistent<FunctionTemplate>& defaultType);
-  Local<Value> GetWrapperFor(id _Nullable pThing);
+  Local<Value> GetWrapperFor(__weak id _Nullable pThing, Nan::Persistent<FunctionTemplate>& defaultType);
+  Local<Value> GetWrapperFor(__weak id _Nullable pThing);
   id _Nullable GetValueFor(Local<Value> value, bool* _Nullable failed = nullptr);
   id _Nullable FromJS(Local<Value> jsThing);
   Local<Object> JSObjFromFrame(CGRect frame);

@@ -30,6 +30,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSKPhysicsWorld::Initialize(Is
   // prototype
   Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
   JS_ASSIGN_PROP(proto, gravity);
+  JS_ASSIGN_PROP(proto, speed);
   JS_ASSIGN_PROP(proto, contactDelegate);
 
   // ctor
@@ -61,52 +62,52 @@ NSKPhysicsWorld::NSKPhysicsWorld () {}
 NSKPhysicsWorld::~NSKPhysicsWorld () {}
 
 NAN_GETTER(NSKPhysicsWorld::gravityGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKPhysicsWorld, world);
-  
-  __block double dx = 0;
-  __block double dy = 0;
-  @autoreleasepool {
-    CGVector v = [world gravity];
-    dx = v.dx;
-    dy = v.dy;
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGVector([self gravity]));
+    return;
   }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("dx"), JS_NUM(dx));
-  result->Set(JS_STR("dy"), JS_NUM(dy));
-  
-  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NSKPhysicsWorld::gravitySetter) {
-  Nan::HandleScope scope;
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    [self setGravity: to_value_CGVector(value)];
+  }
+}
 
-  JS_UNWRAP(SKPhysicsWorld, world);
+NAN_GETTER(NSKPhysicsWorld::speedGetter) {
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_FLOAT([self speed]));
+    return;
+  }
+}
 
-  @autoreleasepool {
-    double dx = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("dx")));
-    double dy = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("dy")));
-    CGVector v = CGVectorMake(dx, dy);
-    [world setGravity:v];
+NAN_SETTER(NSKPhysicsWorld::speedSetter) {
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    [self setSpeed: TO_FLOAT(value)];
   }
 }
 
 NAN_GETTER(NSKPhysicsWorld::contactDelegateGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKPhysicsWorld, world);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([world contactDelegate], NSKPhysicsContactDelegate::type));
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SKPhysicsContactDelegate([self contactDelegate]));
+    return;
+  }
 }
 
 NAN_SETTER(NSKPhysicsWorld::contactDelegateSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKPhysicsWorld, world);
-
-  NSKPhysicsContactDelegate *del = ObjectWrap::Unwrap<NSKPhysicsContactDelegate>(Local<Object>::Cast(value));
-
-  [world setContactDelegate:del->As<SSKPhysicsContactDelegate>()];
+  JS_UNWRAP(SKPhysicsWorld, self);
+  @autoreleasepool
+  {
+    [self setContactDelegate: to_value_SKPhysicsContactDelegate(value)];
+  }
 }

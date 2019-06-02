@@ -121,8 +121,9 @@ function makeDemo(navigation, dvc) {
     scn.addChild(stars);
     const ground = new SKSpriteNode('game_ground');
     const groundH = Math.round(demoVC.view.bounds.height * 0.08);
-    ground.size = { width: demoVC.view.bounds.width, height: groundH };
-    ground.position = { x: 0, y: (demoVC.view.bounds.height / -2) + groundH };
+    const groundW = demoVC.view.bounds.width * 1000;
+    ground.size = { width: 2*groundW, height: groundH };
+    ground.position = { x: -groundW, y: (demoVC.view.bounds.height / -2) + groundH };
     ground.name = 'ground';
 
     ground.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(ground.size);
@@ -147,12 +148,12 @@ function makeDemo(navigation, dvc) {
     joystick.size = joystickSize;
     joystickArrows.size = joystickSize;
 
-    joystickKnob.position = { x: 0, y: 0 };
-    joystickArrows.position = { x: 0, y: 0 };
-    joystick.position = {
-      x: distToLeftX(scene.size, joystickSize) + 30,
-      y: distToBtmY(scene.size, joystickSize) + 30,
-    };
+    joystickKnob.position = v2(0, 0);
+    joystickArrows.position = v2(0, 0);
+    joystick.position = v2(
+      distToRightX(scene.size, joystickSize) - 30,
+      distToBtmY(scene.size, joystickSize) + 30,
+    );
 
     joystickKnob.name = 'knob';
     joystickArrows.name = 'arrows';
@@ -201,6 +202,24 @@ function makeDemo(navigation, dvc) {
     };
     return del;
   }
+
+  // sometimes the ground contact never seems to fire. This unsticks the player.
+  let prevPos = v2(0, 0);
+  let curPos = v2(0, 0);
+  setInterval(() => {
+    prevPos.x = curPos.x;
+    prevPos.y = curPos.y;
+    let pos = player.node.position;
+    if (!pos || pos.y < -scene.size.height) {
+      player.kill();
+    } else {
+      curPos.x = pos.x;
+      curPos.y = pos.y;
+      if (curPos.distanceTo(prevPos) < 0.01) {
+        player.touchedGround();
+      }
+    }
+  }, 1000);
 
   function makeView(demoVC) {
     const w = demoVC.view.frame.width;
@@ -280,7 +299,9 @@ function makeDemo(navigation, dvc) {
 
     nav.pushViewController(demoVC);
 
-    setTimeout(start, 2000);
+    skView.viewWillAppear = () => {
+      start();
+    }
   }
 
   make(navigation, dvc);
