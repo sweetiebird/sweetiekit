@@ -33,6 +33,7 @@ using namespace v8;
 #define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
 #define JS_GLOBAL() (JS_CONTEXT()->Global())
 #define JS_HAS(obj, name) (obj)->Has(JS_CONTEXT(), name).FromJust()
+#define JS_HAS_STR(obj, name) (obj)->Has(JS_CONTEXT(), JS_STR(name)).FromJust()
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
@@ -40,6 +41,9 @@ using namespace v8;
 #define TO_INT32(x) (Nan::To<int>(x).FromJust())
 #define TO_FLOAT(x) static_cast<float>((Nan::To<double>(x).FromJust()))
 #define TO_FUNC(x) (Nan::To<Function>(x).ToLocalChecked())
+
+#define IS_OBJ(x) x->IsObject()
+#define IS_EXT(x) x->IsExternal()
 
 template <typename T>
 class shared_ptr_release_deleter {

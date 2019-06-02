@@ -14,6 +14,9 @@ async function make(demoVC) {
   view.backgroundColor = { red: 0, green: 174/255, blue: 174/255 };
   view2.backgroundColor = { red: 205/255, green: 37/255, blue: 83/255 };
   view.addSubview(view2);
+  view2.drawRect = () => {
+    console.log('js draw');
+  };
   return view;
 }
 

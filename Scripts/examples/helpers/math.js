@@ -45,6 +45,14 @@ const radToDeg = (rad) => {
   return rad * (180 / Math.PI);
 };
 
+const v2 = (...args) => {
+  switch (args.length === 0) {
+    case 0: return new THREE.Vector2(0, 0);
+    case 1: return (args[0] instanceof THREE.Vector2) ? args[0] : new THREE.Vector2(args[0].x, args[0].y);
+    default: return new THREE.Vector2(args[0], args[1]);
+  }
+};
+
 
 module.exports.point = {
   add: pointAdd,
@@ -62,3 +70,4 @@ module.exports.vec = {
 
 module.exports.degToRad = degToRad;
 module.exports.radToDeg = radToDeg;
+module.exports.v2 = v2;

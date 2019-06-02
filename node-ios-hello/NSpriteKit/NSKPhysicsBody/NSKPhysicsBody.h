@@ -18,6 +18,7 @@ JS_WRAP_CLASS(SKPhysicsBody, NSObject);
   JS_METHOD(bodyWithCircleOfRadius);
   JS_METHOD(bodyWithTexture);
   JS_METHOD(bodyWithRectangleOfSize);
+  JS_METHOD(bodyWithEdgeLoopFromRect);
   JS_METHOD(applyImpulse);
   JS_METHOD(applyTorque);
   JS_METHOD(applyForce);

@@ -30,6 +30,7 @@ public:
   static NAN_METHOD(Destroy);
   static NAN_GETTER(TextGetter);
   static NAN_SETTER(TextSetter);
+  JS_METHOD(initWithXYWidthHeight);
   JS_PROP(NumberOfLines);
   JS_PROP(Font);
   JS_PROP(TextColor);

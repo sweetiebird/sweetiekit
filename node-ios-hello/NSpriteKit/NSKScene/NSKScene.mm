@@ -64,7 +64,7 @@ NAN_METHOD(NSKScene::New) {
   NSKScene *scene = new NSKScene();
 
   if (info[0]->IsExternal()) {
-    scene->SetNSObject((__bridge SSKScene *)(info[0].As<External>()->Value()));
+    scene->SetNSObject((__bridge SKScene *)(info[0].As<External>()->Value()));
   } else if (info.Length() > 0) {
     std::string file;
     if (info[0]->IsString()) {
@@ -75,11 +75,11 @@ NAN_METHOD(NSKScene::New) {
     }
     @autoreleasepool {
       NSString *fileName = [NSString stringWithUTF8String:file.c_str()];
-      scene->SetNSObject([SSKScene nodeWithFileNamed:fileName]);
+      scene->SetNSObject([SKScene nodeWithFileNamed:fileName]);
     }
   } else {
     @autoreleasepool {
-      scene->SetNSObject([[SSKScene alloc] init]);
+      scene->SetNSObject([[SKScene alloc] init]);
     }
   }
   scene->Wrap(obj);
@@ -99,7 +99,7 @@ NAN_METHOD(NSKScene::sceneWithSize) {
 
   @autoreleasepool {
     CGSize size(to_value_CGSize(info[0]));
-    scene->SetNSObject([SSKScene sceneWithSize:size]);
+    scene->SetNSObject([SKScene sceneWithSize:size]);
   }
 
   JS_SET_RETURN(obj);
@@ -114,8 +114,7 @@ NAN_GETTER(NSKScene::scaleModeGetter) {
 NAN_SETTER(NSKScene::scaleModeSetter) {
   Nan::HandleScope scope;
   
-  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
-  SSKScene* scene = wrap->As<SSKScene>();
+  JS_UNWRAP(SKScene, scene);
 
   std::string mode;
   if (value->IsString()) {
@@ -140,101 +139,87 @@ NAN_SETTER(NSKScene::scaleModeSetter) {
 }
 
 NAN_GETTER(NSKScene::touchesBeganGetter) {
-  Nan::HandleScope scope;
+  Nan::EscapableHandleScope scope;
   
-  Nan::ThrowError("NSKScene::touchesBeganGetter not yet implemented");
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesBegan"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
 }
 
 NAN_SETTER(NSKScene::touchesBeganSetter) {
   Nan::EscapableHandleScope scope;
 
-  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
-  SSKScene* scene = wrap->As<SSKScene>();
+  JS_UNWRAP(SKScene, sk);
 
-  wrap->_touchesBegan.Reset(Local<Function>::Cast(value));
-  
-  [scene setTouchesBegan: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
-    Nan::HandleScope scope;
-
-    __block uint32_t count = 0;
-    auto value = Nan::New<Array>();
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-    }];
-    wrap->_touchesBegan("NSKScene::touchesBeganSetter", value, sweetiekit::GetWrapperFor(evt));
-  }];
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [sk associateValue:func withKey:@"sweetiekit_touchesBegan"];
+  }
 }
 
 NAN_GETTER(NSKScene::touchesMovedGetter) {
-  Nan::HandleScope scope;
+  Nan::EscapableHandleScope scope;
   
-  Nan::ThrowError("NSKScene::touchesMovedGetter not yet implemented");
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesMoved"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
 }
 
 NAN_SETTER(NSKScene::touchesMovedSetter) {
   Nan::EscapableHandleScope scope;
 
-  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
-  SSKScene* scene = wrap->As<SSKScene>();
+  JS_UNWRAP(SKScene, sk);
 
-  wrap->_touchesMoved.Reset(Local<Function>::Cast(value));
-  
-  [scene setTouchesMoved: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
-    Nan::HandleScope scope;
-
-    __block uint32_t count = 0;
-    auto value = Nan::New<Array>();
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-    }];
-    wrap->_touchesMoved("NSKScene::touchesMovedSetter", value, sweetiekit::GetWrapperFor(evt));
-  }];
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [sk associateValue:func withKey:@"sweetiekit_touchesMoved"];
+  }
 }
 
 NAN_GETTER(NSKScene::touchesEndedGetter) {
-  Nan::HandleScope scope;
+  Nan::EscapableHandleScope scope;
   
-  Nan::ThrowError("NSKScene::touchesEndedGetter not yet implemented");
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesEnded"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
 }
 
 NAN_SETTER(NSKScene::touchesEndedSetter) {
   Nan::EscapableHandleScope scope;
 
-  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
-  SSKScene* scene = wrap->As<SSKScene>();
+  JS_UNWRAP(SKScene, sk);
 
-  wrap->_touchesEnded.Reset(Local<Function>::Cast(value));
-  
-  [scene setTouchesEnded: ^ (NSSet<UITouch *> * _Nonnull touches, UIEvent * _Nullable evt) {
-    Nan::HandleScope scope;
-
-    __block uint32_t count = 0;
-    auto value = Nan::New<Array>();
-    [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-      Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-    }];
-    wrap->_touchesEnded("NSKScene::touchesEndedSetter", value, sweetiekit::GetWrapperFor(evt));
-  }];
-}
-
-NAN_GETTER(NSKScene::updateGetter) {
-  Nan::HandleScope scope;
-  
-  Nan::ThrowError("NSKScene::updateGetter not yet implemented");
-}
-
-NAN_SETTER(NSKScene::updateSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NSKScene *wrap = ObjectWrap::Unwrap<NSKScene>(info.This());
-  SSKScene* scene = wrap->As<SSKScene>();
-
-  wrap->_update.Reset(Local<Function>::Cast(value));
-  
-  [scene setUpdate: ^ (NSTimeInterval currentTime) {
-    Nan::HandleScope scope;
-    wrap->_update("NSKScene::updateSetter", JS_FLOAT(currentTime));
-  }];
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [sk associateValue:func withKey:@"sweetiekit_touchesEnded"];
+  }
 }
 
 NAN_METHOD(NSKScene::convertPointFromView) {
@@ -403,5 +388,33 @@ NAN_GETTER(NSKScene::viewGetter) {
   {
     JS_SET_RETURN(js_value_SKView([self view]));
     return;
+  }
+}
+
+NAN_GETTER(NSKScene::updateGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    id fn = [sk associatedValueForKey:@"sweetiekit_update"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NSKScene::updateSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(SKScene, sk);
+
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [sk associateValue:func withKey:@"sweetiekit_update"];
   }
 }
