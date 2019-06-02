@@ -257,9 +257,6 @@ function makeDemo(navigation, dvc) {
     scene.touchesBegan = sceneTouchesBegan;
   }
 
-  let prevPos = v2(0, 0);
-  let curPos = v2(0, 0);
-
   function update(time) {
     let dt = time - previousTime;
     if (dt > 0.02) dt = 0.02;

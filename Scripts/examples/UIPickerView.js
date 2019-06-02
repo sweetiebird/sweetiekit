@@ -52,7 +52,7 @@ async function make(demoVC) {
   };
   picker = new UIPickerView(frame);
   setPickerManager();
-  label = new UILabel({
+  label = UILabel({
     x: 12,
     y: 60,
     width: demoVC.view.frame.width - 24,

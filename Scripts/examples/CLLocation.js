@@ -177,7 +177,7 @@ async function make(demoVC) {
   btn.setTitleColorForState(colors.black, UIControlState.normal);
   btn.backgroundColor = colors.fitbodPink;
 
-  distLabel = new UILabel({
+  distLabel = UILabel({
     x: 12,
     y: 220,
     width: w - 24,

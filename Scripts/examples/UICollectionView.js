@@ -22,7 +22,7 @@ function getCell(collectionView, { section, row }) {
   console.log('getCell', collectionView, { section, row });
   cell = cells[`${section}:${row}`] = new UICollectionViewCell(frame);
   cell.backgroundColor = {red: Math.random(), green: Math.random(), blue: Math.random()};
-  const label = new UILabel(frame);
+  const label = UILabel(frame);
   label.numberOfLines = 0;
   label.text = 'Lorem ipsum dolor amet cray cronut pok pok veniam kitsch literally. Occupy letterpress mixtape mollit nostrud.';
   label.sizeToFit();

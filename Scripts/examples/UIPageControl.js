@@ -48,7 +48,7 @@ async function make(demoVC) {
   for (let i = 0; i < numSlides; i++) {
     const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = colors[i];
-    const label = new UILabel();
+    const label = UILabel();
     label.text = `Label ${i + 1}`;
     label.sizeToFit();
     scrollView.addSubview(slideView);

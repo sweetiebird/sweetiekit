@@ -183,14 +183,14 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
 
-    const label = new UILabel();
+    const label = UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
     label.textAlignment = NSTextAlignment.center;
 
-    const contentLabel = new UILabel();
+    const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
     contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
@@ -432,7 +432,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };
     imageView.contentMode = UIViewContentMode.scaleAspectFit;
 
-    const label = new UILabel();
+    const label = UILabel();
     label.frame = { x: (w * i) + 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
     label.textColor = colors.white;

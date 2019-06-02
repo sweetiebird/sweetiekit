@@ -160,13 +160,13 @@ function setupQuizView() {
     const contentY = labelY + 70;
     const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
     slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
-    const label = new UILabel();
+    const label = UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
     label.textAlignment = NSTextAlignment.center;
-    const contentLabel = new UILabel();
+    const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
     contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
@@ -323,7 +323,7 @@ function setupWelcomeView() {
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
     label.textAlignment = NSTextAlignment.center;
-    const contentLabel = new UILabel();
+    const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
     contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
