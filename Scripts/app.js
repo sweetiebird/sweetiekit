@@ -87,7 +87,7 @@ function CGRect(x, y, width, height) {
 
 function createTable() {
   const tbl = new UITableView(0, 0, 300, 400);
-  const label = UILabel.alloc(0, 0, 200, 40);
+  const label = UILabel(0, 0, 200, 40);
   label.text = "Esimate";
   label.sizeToFit()
   tbl.estimatedRowHeight = label.frame.height;

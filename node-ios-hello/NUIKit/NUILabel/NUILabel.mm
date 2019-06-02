@@ -44,8 +44,6 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUILabel::Initialize(Isolate *
   return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
 }
 
-
-
 NAN_METHOD(NUILabel::New) {
   @autoreleasepool {
    if (!info.IsConstructCall()) {
@@ -90,91 +88,8 @@ NAN_METHOD(NUILabel::New) {
   }
 }
 
-/*
-NAN_METHOD(NUILabel::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> txtObj = info.This();
-
-  NUILabel *txt = new NUILabel();
-  
-  if (info[0]->IsExternal()) {
-    txt->SetNSObject((__bridge UILabel *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      txt->SetNSObject([[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-    }
-  } else {
-    @autoreleasepool {
-      txt->SetNSObject([[UILabel alloc] init]);
-    }
-  }
-  txt->Wrap(txtObj);
-
-  info.GetReturnValue().Set(txtObj);
-}
-*/
-
 NUILabel::NUILabel () {}
 NUILabel::~NUILabel () {}
-
-NAN_METHOD(NUILabel::Alloc) {
-  Nan::EscapableHandleScope scope;
-  //auto resolver = Promise::Resolver::New(JS_CONTEXT()).ToLocalChecked();
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> tfObj = JS_TYPE(NUILabel)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUILabel *field = ObjectWrap::Unwrap<NUILabel>(tfObj);
-
-  double x = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
-  double y = info[1]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
-  double width = info[2]->IsNumber() ? TO_DOUBLE(info[2]) : 0.0;
-  double height = info[3]->IsNumber() ? TO_DOUBLE(info[3]) : 0.0;
-
-  //Nan::Persistent<Function>* cb = new Nan::Persistent<Function>(Local<Function>::Cast(info[4]));
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      UIFont * customFont = [UIFont systemFontOfSize:15]; //custom font
-
-      UILabel* fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-      field->SetNSObject(fromLabel);
-      fromLabel.text = @"";
-      fromLabel.font = customFont;
-      fromLabel.numberOfLines = 1;
-      fromLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
-      fromLabel.adjustsFontSizeToFitWidth = YES;
-      //fromLabel.adjustsLetterSpacingToFitWidth = YES;
-      fromLabel.lineBreakMode = NSLineBreakByWordWrapping;
-      fromLabel.minimumScaleFactor = 10.0f/12.0f;
-      fromLabel.clipsToBounds = YES;
-      fromLabel.backgroundColor = [UIColor clearColor];
-      fromLabel.textColor = [UIColor blackColor];
-      fromLabel.textAlignment = NSTextAlignmentLeft;
-      /*
-      [txt setPlaceholder:@"Enter text here"];
-      [txt setBorderStyle:UITextBorderStyleRoundedRect];
-      [txt setAutocorrectionType:UITextAutocorrectionTypeNo];
-      [txt setKeyboardType:UIKeyboardTypeDefault];
-      [txt setReturnKeyType:UIReturnKeyDone];
-      [txt setClearButtonMode:UILabelViewModeWhileEditing];
-      [txt setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-      [txt setTargetClosureWithClosure:^(UILabel*){
-        sweetiekit::Resolve(cb);
-        return true;
-      }];*/
-    });
-  }
-
-  info.GetReturnValue().Set(tfObj);
-}
 
 NAN_GETTER(NUILabel::TextGetter) {
   Nan::HandleScope scope;

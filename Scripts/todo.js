@@ -211,7 +211,7 @@ function attachConsole(vc) {
   contentView.topAnchor.constraintEqualToAnchor(scrollView.topAnchor, 0).isActive = true;
   contentView.bottomAnchor.constraintEqualToAnchor(scrollView.bottomAnchor, 0).isActive = true;
 
-  lblConsole = UILabel.alloc();
+  lblConsole = UILabel();
   lblConsole.numberOfLines = 0;
   lblConsole.font = "Courier-Bold";
   lblConsole.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
@@ -623,7 +623,7 @@ class CollectionApp {
     const item = this.items[row];
     console.log(cell, item);
     if (item && item.text) {
-      const label = UILabel.alloc();
+      const label = UILabel();
       label.frame = { x: 0, y: 0, width: 200, height: 40 };
       label.text = item.text;
       const view = UIView({
