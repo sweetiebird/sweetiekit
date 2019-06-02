@@ -9,26 +9,16 @@
 #ifndef NCoreGraphicsGlobals_h
 #define NCoreGraphicsGlobals_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CoreGraphicsGlobals(x) js_value_wrapper(x, CoreGraphicsGlobals)
+#define to_value_CoreGraphicsGlobals(x) to_value_wrapper(x, CoreGraphicsGlobals)
+#define is_value_CoreGraphicsGlobals(x) is_value_wrapper(x, CoreGraphicsGlobals)
 
-class NCoreGraphicsGlobals : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCoreGraphicsGlobals();
-  virtual ~NCoreGraphicsGlobals();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(UIGraphicsBeginImageContextWithOptions);
-  static NAN_METHOD(UIGraphicsGetImageFromCurrentImageContext);
-  static NAN_METHOD(UIGraphicsEndImageContext);
-};
+JS_WRAP_CLASS(CoreGraphicsGlobals, NSObject);
+  JS_METHOD(UIGraphicsBeginImageContextWithOptions);
+  JS_METHOD(UIGraphicsGetImageFromCurrentImageContext);
+  JS_METHOD(UIGraphicsEndImageContext);
+JS_WRAP_CLASS_END(CoreGraphicsGlobals);
 
 #endif /* NCoreGraphicsGlobals_h */
