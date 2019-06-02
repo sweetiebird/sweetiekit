@@ -9,24 +9,14 @@
 #ifndef NNSMutableParagraphStyle_h
 #define NNSMutableParagraphStyle_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSParagraphStyle.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSMutableParagraphStyle(x) js_value_wrapper(x, NSMutableParagraphStyle)
+#define to_value_NSMutableParagraphStyle(x) to_value_wrapper(x, NSMutableParagraphStyle)
+#define is_value_NSMutableParagraphStyle(x) is_value_wrapper(x, NSMutableParagraphStyle)
 
-class NNSMutableParagraphStyle : public NNSParagraphStyle {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSMutableParagraphStyle();
-  virtual ~NNSMutableParagraphStyle();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(NSMutableParagraphStyle, NSParagraphStyle);
   JS_PROP(lineSpacing);
-};
+JS_WRAP_CLASS_END(NSMutableParagraphStyle);
 
 #endif /* NNSMutableParagraphStyle_h */

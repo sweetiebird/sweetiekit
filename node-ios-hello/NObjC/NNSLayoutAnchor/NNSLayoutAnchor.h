@@ -9,24 +9,14 @@
 #ifndef NNSLayoutAnchor_h
 #define NNSLayoutAnchor_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSLayoutAnchor(x) js_value_wrapper(x, NSLayoutAnchor)
+#define to_value_NSLayoutAnchor(x) to_value_wrapper(x, NSLayoutAnchor)
+#define is_value_NSLayoutAnchor(x) is_value_wrapper(x, NSLayoutAnchor)
 
-class NNSLayoutAnchor : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSLayoutAnchor();
-  virtual ~NNSLayoutAnchor();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(ConstraintEqualToAnchor);
-};
+JS_WRAP_CLASS(NSLayoutAnchor, NSObject);
+  JS_METHOD(ConstraintEqualToAnchor);
+JS_WRAP_CLASS_END(NSLayoutAnchor);
 
 #endif /* NNSLayoutAnchor_h */

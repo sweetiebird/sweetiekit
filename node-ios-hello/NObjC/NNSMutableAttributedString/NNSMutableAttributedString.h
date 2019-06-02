@@ -9,24 +9,14 @@
 #ifndef NNSMutableAttributedString_h
 #define NNSMutableAttributedString_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSAttributedString.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSMutableAttributedString(x) js_value_wrapper(x, NSMutableAttributedString)
+#define to_value_NSMutableAttributedString(x) to_value_wrapper(x, NSMutableAttributedString)
+#define is_value_NSMutableAttributedString(x) is_value_wrapper(x, NSMutableAttributedString)
 
-class NNSMutableAttributedString : public NNSAttributedString {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSMutableAttributedString();
-  virtual ~NNSMutableAttributedString();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(addAttribute);
-};
+JS_WRAP_CLASS(NSMutableAttributedString, NSAttributedString);
+  JS_METHOD(addAttribute);
+JS_WRAP_CLASS_END(NSMutableAttributedString);
 
 #endif /* NNSMutableAttributedString_h */

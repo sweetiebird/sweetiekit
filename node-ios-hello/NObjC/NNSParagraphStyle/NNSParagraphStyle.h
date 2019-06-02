@@ -9,24 +9,10 @@
 #ifndef NNSParagraphStyle_h
 #define NNSParagraphStyle_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
-
-class NNSParagraphStyle : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSParagraphStyle();
-  virtual ~NNSParagraphStyle();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(NSParagraphStyle, NSObject);
   JS_PROP(lineSpacing);
-};
+JS_WRAP_CLASS_END(NSParagraphStyle);
 
 #endif /* NNSParagraphStyle_h */

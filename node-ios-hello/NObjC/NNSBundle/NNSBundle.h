@@ -9,26 +9,15 @@
 #ifndef NNSBundle_h
 #define NNSBundle_h
 
-#import <Foundation/Foundation.h>
-#include "defines.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSBundle(x) js_value_wrapper(x, NSBundle)
+#define to_value_NSBundle(x) to_value_wrapper(x, NSBundle)
+#define is_value_NSBundle(x) is_value_wrapper(x, NSBundle)
 
-class NNSBundle : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSBundle();
-  virtual ~NNSBundle();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(pathForResource);
-  static NAN_METHOD(main);
-};
+JS_WRAP_CLASS(NSBundle, NSObject);
+  JS_METHOD(pathForResource);
+  JS_METHOD(main);
+JS_WRAP_CLASS_END(NSBundle);
 
 #endif /* NNSBundle_h */

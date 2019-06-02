@@ -9,31 +9,18 @@
 #ifndef NNSUserDefaults_h
 #define NNSUserDefaults_h
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSUserDefaults(x) js_value_wrapper(x, NSUserDefaults)
+#define to_value_NSUserDefaults(x) to_value_wrapper(x, NSUserDefaults)
+#define is_value_NSUserDefaults(x) is_value_wrapper(x, NSUserDefaults)
 
-class NNSUserDefaults : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSUserDefaults();
-  virtual ~NNSUserDefaults();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(StandardUserDefaultsGetter);
-  static NAN_METHOD(Synchronize);
-  static NAN_METHOD(SetValueForKey);
-  static NAN_METHOD(ObjectForKey);
-  static NAN_METHOD(StringForKey);
-  
-};
-
+JS_WRAP_CLASS(NSUserDefaults, NSObject);
+  JS_PROP(StandardUserDefaults);
+  JS_METHOD(Synchronize);
+  JS_METHOD(SetValueForKey);
+  JS_METHOD(ObjectForKey);
+  JS_METHOD(StringForKey);
+JS_WRAP_CLASS_END(NSUserDefaults);
 
 #endif /* NNSUserDefaults_h */

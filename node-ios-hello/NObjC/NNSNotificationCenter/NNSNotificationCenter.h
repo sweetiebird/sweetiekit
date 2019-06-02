@@ -9,25 +9,15 @@
 #ifndef NNSNotificationCenter_h
 #define NNSNotificationCenter_h    
 
-#import <UIKit/UIKit.h>
 #include "NNSObject.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSNotificationCenter(x) js_value_wrapper(x, NSNotificationCenter)
+#define to_value_NSNotificationCenter(x) to_value_wrapper(x, NSNotificationCenter)
+#define is_value_NSNotificationCenter(x) is_value_wrapper(x, NSNotificationCenter)
 
-class NNSNotificationCenter : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSNotificationCenter();
-  virtual ~NNSNotificationCenter();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(postNotification);
-  static NAN_METHOD(addObserverForName);
-};
+JS_WRAP_CLASS(NSNotificationCenter, NSObject);
+  JS_METHOD(postNotification);
+  JS_METHOD(addObserverForName);
+JS_WRAP_CLASS_END(NSNotificationCenter);
 
 #endif /* NNSNotificationCenter_h */

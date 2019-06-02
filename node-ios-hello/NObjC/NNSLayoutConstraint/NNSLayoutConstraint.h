@@ -9,27 +9,17 @@
 #ifndef NNSLayoutConstraint_h
 #define NNSLayoutConstraint_h
 
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSLayoutConstraint(x) js_value_wrapper(x, NSLayoutConstraint)
+#define to_value_NSLayoutConstraint(x) to_value_wrapper(x, NSLayoutConstraint)
+#define is_value_NSLayoutConstraint(x) is_value_wrapper(x, NSLayoutConstraint)
 
-class NNSLayoutConstraint : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSLayoutConstraint();
-  virtual ~NNSLayoutConstraint();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(ActivateConstraints);
-  static NAN_METHOD(DeactivateConstraints);
+JS_WRAP_CLASS(NSLayoutConstraint, NSObject);
+  JS_METHOD(ActivateConstraints);
+  JS_METHOD(DeactivateConstraints);
   JS_PROP(IsActive);
   JS_PROP(Priority);
-};
+JS_WRAP_CLASS_END(NSLayoutConstraint);
 
 #endif /* NNSLayoutConstraint_h */

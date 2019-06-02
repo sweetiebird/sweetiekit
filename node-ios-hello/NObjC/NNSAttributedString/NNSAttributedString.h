@@ -11,19 +11,11 @@
 
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_NSAttributedString(x) js_value_wrapper(x, NSAttributedString)
+#define to_value_NSAttributedString(x) to_value_wrapper(x, NSAttributedString)
+#define is_value_NSAttributedString(x) is_value_wrapper(x, NSAttributedString)
 
-class NNSAttributedString : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NNSAttributedString();
-  virtual ~NNSAttributedString();
-
-  static NAN_METHOD(New);
-};
+JS_WRAP_CLASS(NSAttributedString, NSObject);
+JS_WRAP_CLASS_END(NSAttributedString);
 
 #endif /* NNSAttributedString_h */
