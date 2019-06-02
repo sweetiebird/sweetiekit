@@ -9,25 +9,15 @@
 #ifndef NCAEmitterLayer_h
 #define NCAEmitterLayer_h    
 
-#import <UIKit/UIKit.h>
 #include "NCALayer.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CAEmitterLayer(x) js_value_wrapper(x, CAEmitterLayer)
+#define to_value_CAEmitterLayer(x) to_value_wrapper(x, CAEmitterLayer)
+#define is_value_CAEmitterLayer(x) is_value_wrapper(x, CAEmitterLayer)
 
-class NCAEmitterLayer : public NCALayer {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCAEmitterLayer();
-  virtual ~NCAEmitterLayer();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(CAEmitterLayer, CALayer);
   JS_PROP(emitterCells);
   JS_PROP(emitterPosition);
-};
+JS_WRAP_CLASS_END(CAEmitterLayer);
 
 #endif /* NCAEmitterLayer_h */

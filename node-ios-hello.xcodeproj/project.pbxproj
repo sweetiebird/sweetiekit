@@ -755,11 +755,11 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				A158FD86229A292F000F7ABA /* NCAShapeLayer */,
-				A1646B89229201B50078CF4B /* NCAEmitterLayer */,
+				A1B5ABCE227D1114004B3CB2 /* NCABasicAnimation */,
 				A1646B7C2291E6E90078CF4B /* NCAEmitterCell */,
-				A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */,
+				A1646B89229201B50078CF4B /* NCAEmitterLayer */,
 				216392A3226BD48A00051DE0 /* NCALayer */,
+				A158FD86229A292F000F7ABA /* NCAShapeLayer */,
 			);
 			path = NCoreAnimation;
 			sourceTree = "<group>";
@@ -1404,13 +1404,13 @@
 			path = NUIPopoverPresentationController;
 			sourceTree = "<group>";
 		};
-		A1B5ABCE227D1114004B3CB2 /* CABasicAnimation */ = {
+		A1B5ABCE227D1114004B3CB2 /* NCABasicAnimation */ = {
 			isa = PBXGroup;
 			children = (
 				A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */,
 				A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */,
 			);
-			path = CABasicAnimation;
+			path = NCABasicAnimation;
 			sourceTree = "<group>";
 		};
 		A1B65481228CB87E00976024 /* NUITouch */ = {

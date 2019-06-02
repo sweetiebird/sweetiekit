@@ -9,27 +9,17 @@
 #ifndef NCAShapeLayer_h
 #define NCAShapeLayer_h    
 
-#import <UIKit/UIKit.h>
 #include "NCALayer.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CAShapeLayer(x) js_value_wrapper(x, CAShapeLayer)
+#define to_value_CAShapeLayer(x) to_value_wrapper(x, CAShapeLayer)
+#define is_value_CAShapeLayer(x) is_value_wrapper(x, CAShapeLayer)
 
-class NCAShapeLayer : public NCALayer {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCAShapeLayer();
-  virtual ~NCAShapeLayer();
-
-  static NAN_METHOD(New);
+JS_WRAP_CLASS(CAShapeLayer, CALayer);
   JS_PROP(lineWidth);
   JS_PROP(fillColor);
   JS_PROP(strokeColor);
   JS_PROP(path);
-};
+JS_WRAP_CLASS_END(CAShapeLayer);
 
 #endif /* NCAShapeLayer_h */

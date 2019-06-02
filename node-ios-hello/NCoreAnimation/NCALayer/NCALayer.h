@@ -9,26 +9,16 @@
 #ifndef NCALayer_h
 #define NCALayer_h
 
-#include "defines.h"
 #include "NNSObject.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_CALayer(x) js_value_wrapper(x, CALayer)
+#define to_value_CALayer(x) to_value_wrapper(x, CALayer)
+#define is_value_CALayer(x) is_value_wrapper(x, CALayer)
 
-class NCALayer : public NNSObject {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NCALayer();
-  virtual ~NCALayer();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_METHOD(AddAnimation);
-  static NAN_METHOD(addSublayer);
-  static NAN_METHOD(renderInContext);
+JS_WRAP_CLASS(CALayer, NSObject);
+  JS_METHOD(AddAnimation);
+  JS_METHOD(addSublayer);
+  JS_METHOD(renderInContext);
   JS_PROP(CornerRadius);
   JS_PROP(BorderWidth);
   JS_PROP(BorderColor);
@@ -39,7 +29,7 @@ public:
   JS_PROP(MasksToBounds);
   JS_PROP(shadowOpacity);
   JS_PROP(frame);
-};
+JS_WRAP_CLASS_END(CALayer);
 
 
 #endif /* NCALayer_h */
