@@ -21,7 +21,7 @@ const {
 
 const modelFile = 'dot.obj';
 
-const font = new UIFont('RobotoMono-Medium', 8);
+const font = UIFont('RobotoMono-Medium', 8);
 
 let mgr;
 let navAnchor;

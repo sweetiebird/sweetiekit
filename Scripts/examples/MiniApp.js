@@ -91,10 +91,10 @@ const quizResponses = [
 
 const responseSelections = [0, 0, 0];
 
-const titleFont = new UIFont('Lato-Bold', 22);
-const contentFont = new UIFont('Lato-Bold', 17);
-const buttonFont = new UIFont('Lato-Bold', 17);
-const barTitleFont = new UIFont('Lato-Black', 14);
+const titleFont = UIFont('Lato-Bold', 22);
+const contentFont = UIFont('Lato-Bold', 17);
+const buttonFont = UIFont('Lato-Bold', 17);
+const barTitleFont = UIFont('Lato-Black', 14);
 
 const pStyle = new NSMutableParagraphStyle();
 pStyle.lineSpacing = 10;
