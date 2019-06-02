@@ -8,8 +8,6 @@
 
 #import <SceneKit/SceneKit.h>
 #import <SceneKit/ModelIO.h>
-#include "NSCNLight.h"
-#include "NSCNGeometry.h"
 
 NSCNNode::NSCNNode () {}
 NSCNNode::~NSCNNode () {}
@@ -76,6 +74,8 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalFront);
 JS_INIT_CLASS_END(SCNNode, NSObject);
 
+#include "NSCNGeometry.h"
+
 NAN_METHOD(NSCNNode::New) {
   Nan::HandleScope scope;
 
@@ -110,7 +110,7 @@ NAN_METHOD(NSCNNode::New) {
         node->SetNSObject(scnNode);
       }
     }
-  } else if (info[0]->IsObject() && JS_INSTANCEOF(info[0], NSCNGeometry)) {
+  } else if (is_value_SCNGeometry(info[0])) {
     @autoreleasepool {
       NSCNGeometry *child = ObjectWrap::Unwrap<NSCNGeometry>(Local<Object>::Cast(info[0]));
       node->SetNSObject([SCNNode nodeWithGeometry:child->As<SCNGeometry>()]);
@@ -302,6 +302,8 @@ NAN_SETTER(NSCNNode::nameSetter) {
   }
 }
 
+#include "NSCNLight.h"
+
 NAN_GETTER(NSCNNode::lightGetter) {
   JS_UNWRAP(SCNNode, self);
   @autoreleasepool
@@ -319,6 +321,8 @@ NAN_SETTER(NSCNNode::lightSetter) {
   }
 }
 
+#include "NSCNCamera.h"
+
 NAN_GETTER(NSCNNode::cameraGetter) {
   JS_UNWRAP(SCNNode, self);
   @autoreleasepool
@@ -335,6 +339,8 @@ NAN_SETTER(NSCNNode::cameraSetter) {
     [self setCamera: to_value_SCNCamera(value)];
   }
 }
+
+#include "NSCNGeometry.h"
 
 NAN_GETTER(NSCNNode::geometryGetter) {
   JS_UNWRAP(SCNNode, self);

@@ -15,23 +15,23 @@ const {
 const modelFile = 'model.obj';
 
 async function make(nav, demoVC) {
-  const view = demoVC.view;
-  const arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
-  const config = new ARWorldTrackingConfiguration();
-  const viewDel = new ARSCNViewDelegate(() => {
+  view = demoVC.view;
+  arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
+  config = new ARWorldTrackingConfiguration();
+  viewDel = new ARSCNViewDelegate(() => {
     return new SCNNode();
   });
-  const scene = new SCNScene();
-  const geo = SCNTube(0.01, 0.02, 0.1);
-  const mat = new SCNMaterial();
+  scene = new SCNScene();
+  geo = SCNTube(0.01, 0.02, 0.1);
+  mat = new SCNMaterial();
   mat.diffuse.contents = {red: 1, green: 0.5, blue: 0.5};
   geo.materials = [mat];
-  const node = new SCNNode(geo);
+  node = new SCNNode(geo);
 
   arView.delegate = viewDel;
   arView.scene = scene;
 
-  const spotlight = new SCNLight();
+  spotlight = new SCNLight();
   spotlight.type = SCNLightType.spot;
   spotlight.spotInnerAngle = 45;
   spotlight.spotOuterAngle = 45;

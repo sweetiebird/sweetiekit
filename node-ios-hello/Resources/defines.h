@@ -767,6 +767,22 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T*)sweetiekit::GetValueFor(value, failed);
 }
 
+#define js_value_int32_t JS_INT
+#define to_value_int32_t TO_INT32
+#define is_value_int32_t(x) (x)->IsInt32()
+
+#define js_value_uint32_t JS_UINT
+#define to_value_uint32_t TO_UINT32
+#define is_value_uint32_t(x) (x)->IsUint32()
+
+#define js_value_double JS_NUM
+#define to_value_double TO_DOUBLE
+#define is_value_double(x) (x)->IsNumber()
+
+#define js_value_float JS_FLOAT
+#define to_value_float TO_FLOAT
+#define is_value_float(x) (x)->IsNumber()
+
 #define js_value_NSInteger JS_INT
 #define to_value_NSInteger TO_INT32
 #define is_value_NSInteger(x) (x)->IsInt32()
@@ -774,6 +790,10 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define js_value_NSUInteger JS_UINT
 #define to_value_NSUInteger TO_UINT32
 #define is_value_NSUInteger(x) (x)->IsUint32()
+
+#define js_value_CGFloat JS_FLOAT
+#define to_value_CGFloat TO_FLOAT
+#define is_value_CGFloat(x) (x)->IsNumber()
 
 #define js_value_NSString NSStringToJSString
 #define to_value_NSString NJSStringToNSString
@@ -794,8 +814,6 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 // SceneKit types
 #define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)
 #define to_value_SCNMorpher(x) to_value_wrapper_unknown(x, SCNMorpher)
-#define js_value_SCNCamera(x) js_value_wrapper_unknown(x, SCNCamera)
-#define to_value_SCNCamera(x) to_value_wrapper_unknown(x, SCNCamera)
 #define js_value_SCNSkinner(x) js_value_wrapper_unknown(x, SCNSkinner)
 #define to_value_SCNSkinner(x) to_value_wrapper_unknown(x, SCNSkinner)
 #define js_value_SCNPhysicsBody(x) js_value_wrapper_unknown(x, SCNPhysicsBody)

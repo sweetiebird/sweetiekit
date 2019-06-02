@@ -223,6 +223,7 @@
 		A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D81229E77FE002B53FF /* Nobjc.cpp */; };
 		A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */; };
 		A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D8722A41637002B53FF /* NSCNMaterialProperty.mm */; };
+		A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D8C22A41FEC002B53FF /* NSCNCamera.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -625,6 +626,8 @@
 		A1EE7D84229EF5FC002B53FF /* SKSpriteNode+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+GIF.swift"; sourceTree = "<group>"; };
 		A1EE7D8722A41637002B53FF /* NSCNMaterialProperty.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNMaterialProperty.mm; sourceTree = "<group>"; };
 		A1EE7D8822A41637002B53FF /* NSCNMaterialProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNMaterialProperty.h; sourceTree = "<group>"; };
+		A1EE7D8B22A41FEC002B53FF /* NSCNCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNCamera.h; sourceTree = "<group>"; };
+		A1EE7D8C22A41FEC002B53FF /* NSCNCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCamera.mm; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1484,6 +1487,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EE7D6A229D8EEE002B53FF /* NSCNBox */,
+				A1EE7D8A22A41FEC002B53FF /* NSCNCamera */,
 				A1EE7D70229D8EEE002B53FF /* NSCNCapsule */,
 				A1EE7D67229D8EEE002B53FF /* NSCNCone */,
 				A1EE7D5B229D8EEE002B53FF /* NSCNCylinder */,
@@ -2274,6 +2278,15 @@
 			path = NSCNMaterialProperty;
 			sourceTree = "<group>";
 		};
+		A1EE7D8A22A41FEC002B53FF /* NSCNCamera */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D8B22A41FEC002B53FF /* NSCNCamera.h */,
+				A1EE7D8C22A41FEC002B53FF /* NSCNCamera.mm */,
+			);
+			path = NSCNCamera;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -2646,6 +2659,7 @@
 				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
+				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
