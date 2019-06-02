@@ -726,6 +726,7 @@ T* _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
 
 #define js_value_wrapper(x, t) js_value_wrapper_known(x, t)
 #define to_value_wrapper(x, t) (t*)sweetiekit::GetValueFor(x)
+#define is_value_wrapper(x, t) JS_INSTANCEOF(x, N##t)
 #define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
 #define to_value_wrapper_unknown(x, t) to_value_wrapper(x, t)
 #define js_value_wrapper_known(x, t) sweetiekit::GetWrapperFor(x, N##t::type)

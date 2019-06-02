@@ -9,27 +9,16 @@
 #ifndef NUIButton_h
 #define NUIButton_h
 
-#import <UIKit/UIKit.h>
 #include "NUIControl.h"
-#include "defines.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIButon(x) js_value_wrapper(x, UIButon)
+#define to_value_UIButon(x) to_value_wrapper(x, UIButon)
+#define is_value_UIButon(x) is_value_wrapper(x, UIButon)
 
-class NUIButton : public NUIControl {
-public:
-
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIButton();
-  virtual ~NUIButton();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Alloc);
-  static NAN_METHOD(setTitleColorForState);
-  static NAN_METHOD(setTitleForState);
-  static NAN_METHOD(setBackgroundImageForState);
+JS_WRAP_CLASS(UIButton, UIControl);
+  JS_METHOD(setTitleColorForState);
+  JS_METHOD(setTitleForState);
+  JS_METHOD(setBackgroundImageForState);
 
   JS_PROP(Title);
   JS_PROP(Callback);
@@ -38,18 +27,6 @@ public:
   JS_PROP(contentEdgeInsets);
   JS_PROP(imageEdgeInsets);
   Nan::Persistent<Function>* _callback;
-};
-
-//#include "NUIControl.h"
-//
-//JS_WRAP_CLASS(UIButton, UIControl);
-//  static NAN_METHOD(Alloc);
-//  static NAN_METHOD(setTitleColorForState);
-//  static NAN_METHOD(setTitleForState);
-//  JS_PROP(Title);
-//  JS_PROP(Callback);
-//  JS_PROP(titleLabel);
-//  Nan::Persistent<Function>* _callback;
-//JS_WRAP_CLASS_END(UIButton);
+JS_WRAP_CLASS_END(UIButton);
 
 #endif /* NUIButton_h */

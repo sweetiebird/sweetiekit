@@ -9,45 +9,34 @@
 #ifndef NUIView_h
 #define NUIView_h
 
-#import <UIKit/UIKit.h>
-
-#include "defines.h"
 #include "NUIResponder.h"
 
-using namespace v8;
-using namespace node;
+#define js_value_UIView(x) js_value_wrapper(x, UIView)
+#define to_value_UIView(x) to_value_wrapper(x, UIView)
+#define is_value_UIView(x) is_value_wrapper(x, UIView)
 
 JS_WRAP_CLASS(UIView, UIResponder);
   CGRect GetFrame();
   CGRect GetBounds();
-  static NAN_METHOD(AddSubview);
+  JS_METHOD(AddSubview);
   JS_PROP(Frame);
   JS_PROP(Bounds);
-  static NAN_GETTER(OriginGetter);
-  static NAN_SETTER(OriginSetter);
-  static NAN_GETTER(CenterGetter);
-  static NAN_SETTER(CenterSetter);
-  static NAN_GETTER(SizeGetter);
-  static NAN_SETTER(SizeSetter);
-  static NAN_GETTER(XGetter);
-  static NAN_SETTER(XSetter);
-  static NAN_GETTER(YGetter);
-  static NAN_SETTER(YSetter);
-  static NAN_GETTER(WidthGetter);
-  static NAN_SETTER(WidthSetter);
-  static NAN_GETTER(HeightGetter);
-  static NAN_SETTER(HeightSetter);
-  static NAN_GETTER(AutoresizesSubviewsGetter);
-  static NAN_SETTER(AutoresizesSubviewsSetter);
-  static NAN_GETTER(SubviewsGetter);
-  static NAN_METHOD(SizeThatFits);
-  static NAN_METHOD(SizeToFit);
-  static NAN_GETTER(BackgroundColorGetter);
-  static NAN_SETTER(BackgroundColorSetter);
-  static NAN_METHOD(ViewWithStringTag);
-  static NAN_METHOD(RemoveFromSuperview);
-  static NAN_METHOD(bringSubviewToFront);
-  static NAN_METHOD(addGestureRecognizer);
+  JS_PROP(Origin);
+  JS_PROP(Center);
+  JS_PROP(Size);
+  JS_PROP(X);
+  JS_PROP(Y);
+  JS_PROP(Width);
+  JS_PROP(Height);
+  JS_PROP(AutoresizesSubviews);
+  JS_PROP(Subviews);
+  JS_METHOD(SizeThatFits);
+  JS_METHOD(SizeToFit);
+  JS_PROP(BackgroundColor);
+  JS_METHOD(ViewWithStringTag);
+  JS_METHOD(RemoveFromSuperview);
+  JS_METHOD(bringSubviewToFront);
+  JS_METHOD(addGestureRecognizer);
   JS_PROP(Layer);
   JS_PROP(TranslatesAutoresizingMaskIntoConstraints);
   JS_PROP(LeadingAnchor);

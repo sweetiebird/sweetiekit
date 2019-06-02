@@ -15,20 +15,14 @@
 #define js_value_UIModalPresentationStyle(x) JS_ENUM(UIModalPresentationStyle, NSInteger, x)
 #define to_value_UIModalPresentationStyle(x) TO_ENUM(UIModalPresentationStyle, NSInteger, x)
 
-class NUIViewController : public NUIResponder {
-public:
+#define js_value_UIViewController(x) js_value_wrapper(x, UIViewController)
+#define to_value_UIViewController(x) to_value_wrapper(x, UIViewController)
+#define is_value_UIViewController(x) is_value_wrapper(x, UIViewController)
 
-  static Nan::Persistent<FunctionTemplate> type;
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate);
-
-  NUIViewController();
-  virtual ~NUIViewController();
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(Destroy);
-  static NAN_GETTER(ViewGetter);
-  static NAN_METHOD(PresentViewController);
-  static NAN_METHOD(DismissViewController);
+JS_WRAP_CLASS(UIViewController, UIResponder);
+  JS_PROP(View);
+  JS_METHOD(PresentViewController);
+  JS_METHOD(DismissViewController);
   JS_PROP(TransitioningDelegate);
   JS_PROP(ModalPresentationStyle);
   JS_PROP(ToolbarItems);
@@ -42,6 +36,6 @@ public:
   JS_PROP(modalPresentationStyle);
   JS_PROP(popoverPresentationController);
   JS_PROP(preferredContentSize);
-};
+JS_WRAP_CLASS_END(UIViewController);
 
 #endif /* NUIViewController_h */

@@ -35,9 +35,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NUIButton::Initialize(Isolate 
   JS_ASSIGN_PROP(proto, titleEdgeInsets);
   JS_ASSIGN_PROP(proto, contentEdgeInsets);
   JS_ASSIGN_PROP(proto, imageEdgeInsets);
-  Nan::SetMethod(proto, "setTitleColorForState", setTitleColorForState);
-  Nan::SetMethod(proto, "setTitleForState", setTitleForState);
-  Nan::SetMethod(proto, "setBackgroundImageForState", setBackgroundImageForState);
+  JS_ASSIGN_METHOD(proto, setTitleColorForState);
+  JS_ASSIGN_METHOD(proto, setTitleForState);
+  JS_ASSIGN_METHOD(proto, setBackgroundImageForState);
 
   // ctor
   Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
