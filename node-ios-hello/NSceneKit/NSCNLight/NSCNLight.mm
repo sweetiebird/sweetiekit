@@ -1,34 +1,16 @@
 //
-//  NSCNLight.m
-//  node-ios-hello
+//  NSCNLight.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <SceneKit/SceneKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NSCNLight.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSCNLight::type;
+NSCNLight::NSCNLight () {}
+NSCNLight::~NSCNLight () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNLight::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNLight"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(SCNLight, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, type);
   JS_ASSIGN_PROP(proto, color);
   JS_ASSIGN_PROP(proto, spotInnerAngle);
@@ -40,12 +22,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNLight::Initialize(Isolate 
   JS_ASSIGN_PROP(proto, attenuationStartDistance);
   JS_ASSIGN_PROP(proto, attenuationEndDistance);
   JS_ASSIGN_PROP(proto, attenuationFalloffExponent);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNLight, NSObject);
+JS_INIT_CLASS_END(SCNLight, NSObject);
 
 NAN_METHOD(NSCNLight::New) {
   Nan::HandleScope scope;
@@ -65,9 +44,6 @@ NAN_METHOD(NSCNLight::New) {
 
   info.GetReturnValue().Set(obj);
 }
-
-NSCNLight::NSCNLight () {}
-NSCNLight::~NSCNLight () {}
 
 NAN_GETTER(NSCNLight::typeGetter) {
   Nan::HandleScope scope;

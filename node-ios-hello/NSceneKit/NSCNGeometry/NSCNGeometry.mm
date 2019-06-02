@@ -1,11 +1,9 @@
 //
-//  SCNGeometry.m
-//  node-ios-hello
+//  SCNGeometry.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
 #include "NSCNGeometry.h"
 
 NSCNGeometry::NSCNGeometry () {}

@@ -7,33 +7,16 @@
 //
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NRPPreviewViewController.h"
-#import "node_ios_hello-Swift.h"
 
 NRPPreviewViewControllerDelegate::NRPPreviewViewControllerDelegate () {}
 NRPPreviewViewControllerDelegate::~NRPPreviewViewControllerDelegate () {}
 
-Nan::Persistent<FunctionTemplate> NRPPreviewViewControllerDelegate::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NRPPreviewViewControllerDelegate::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("RPPreviewViewControllerDelegate"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
+JS_INIT_CLASS(RPPreviewViewControllerDelegate, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, previewControllerDidFinish);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(RPPreviewViewControllerDelegate, NSObject);
+JS_INIT_CLASS_END(RPPreviewViewControllerDelegate, NSObject);
 
 NAN_METHOD(NRPPreviewViewControllerDelegate::New) {
   Nan::HandleScope scope;

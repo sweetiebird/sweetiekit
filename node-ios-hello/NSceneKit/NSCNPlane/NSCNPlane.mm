@@ -1,17 +1,15 @@
 //
-//  SCNPlane.m
-//  node-ios-hello
+//  SCNPlane.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNPlane.h"
-
-Nan::Persistent<FunctionTemplate> NSCNPlane::type;
 
 NSCNPlane::NSCNPlane () {}
 NSCNPlane::~NSCNPlane () {}
+
+Nan::Persistent<FunctionTemplate> NSCNPlane::type;
 
 std::pair<Local<Object>, Local<FunctionTemplate>> NSCNPlane::Initialize(Isolate *isolate)
 {

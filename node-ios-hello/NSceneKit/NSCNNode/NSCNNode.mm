@@ -1,46 +1,23 @@
 //
-//  NSCNNode.m
-//  node-ios-hello
+//  NSCNNode.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
+#include "NSCNNode.h"
 
-#import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
 #import <SceneKit/ModelIO.h>
-#include "defines.h"
-#include "NSCNNode.h"
-#include "NNSObject.h"
 #include "NSCNLight.h"
 #include "NSCNGeometry.h"
-#import "node_ios_hello-Swift.h"
 
-Nan::Persistent<FunctionTemplate> NSCNNode::type;
+NSCNNode::NSCNNode () {}
+NSCNNode::~NSCNNode () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNNode"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "addChildNode", AddChildNode);
-  Nan::SetMethod(proto, "clone", Clone);
-//  JS_SET_PROP(proto, "simdTransform", SimdTransform);
-//  JS_SET_PROP(proto, "simdWorldTransform", SimdWorldTransform);
-//  JS_SET_PROP(proto, "light", Light);
-//  JS_SET_PROP(proto, "position", Position);
-//  JS_SET_PROP(proto, "eulerAngles", EulerAngles);
-//  JS_ASSIGN_PROP(proto, scale);
-//  JS_ASSIGN_PROP(proto, geometry);
-  
+JS_INIT_CLASS(SCNNode, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, addChildNode);
+  JS_ASSIGN_METHOD(proto, clone);
   JS_ASSIGN_PROP(proto, name);
   JS_ASSIGN_PROP(proto, light);
   JS_ASSIGN_PROP(proto, camera);
@@ -89,18 +66,15 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNNode::Initialize(Isolate *
   JS_ASSIGN_PROP_READONLY(proto, simdWorldUp);
   JS_ASSIGN_PROP_READONLY(proto, simdWorldRight);
   JS_ASSIGN_PROP_READONLY(proto, simdWorldFront);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), localUp);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), localRight);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), localFront);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), simdLocalUp);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), simdLocalRight);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctorFn), simdLocalFront);
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNNode, NSObject);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localUp);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localRight);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), localFront);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalUp);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalRight);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalFront);
+JS_INIT_CLASS_END(SCNNode, NSObject);
 
 NAN_METHOD(NSCNNode::New) {
   Nan::HandleScope scope;
@@ -151,10 +125,7 @@ NAN_METHOD(NSCNNode::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NSCNNode::NSCNNode () {}
-NSCNNode::~NSCNNode () {}
-
-NAN_METHOD(NSCNNode::AddChildNode) {
+NAN_METHOD(NSCNNode::addChildNode) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNNode, node);
@@ -164,7 +135,7 @@ NAN_METHOD(NSCNNode::AddChildNode) {
   [node addChildNode:child->As<SCNNode>()];
 }
 
-NAN_METHOD(NSCNNode::Clone) {
+NAN_METHOD(NSCNNode::clone) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(SCNNode, node);

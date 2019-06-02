@@ -25,8 +25,8 @@
 #define is_value_SCNNodeFocusBehavior(x) IS_ENUM(SCNNodeFocusBehavior, NSInteger, x)
 
 JS_WRAP_CLASS(SCNNode, NSObject);
-  JS_METHOD(AddChildNode);
-  JS_METHOD(Clone);
+  JS_METHOD(addChildNode);
+  JS_METHOD(clone);
   JS_PROP(SimdTransform);
   JS_PROP(SimdWorldTransform);
   JS_PROP(Light);

@@ -1,31 +1,16 @@
 //
-//  SCNMaterial.m
-//  node-ios-hello
+//  SCNMaterial.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNMaterial.h"
-
-Nan::Persistent<FunctionTemplate> NSCNMaterial::type;
 
 NSCNMaterial::NSCNMaterial () {}
 NSCNMaterial::~NSCNMaterial () {}
 
-std::pair<Local<Object>, Local<FunctionTemplate>> NSCNMaterial::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("SCNMaterial"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate(); proto = proto;
+JS_INIT_CLASS(SCNMaterial, NSObject);
+  // instance members (proto)
   JS_ASSIGN_PROP(proto, name);
   JS_ASSIGN_PROP_READONLY(proto, diffuse);
   JS_ASSIGN_PROP_READONLY(proto, ambient);
@@ -54,12 +39,9 @@ std::pair<Local<Object>, Local<FunctionTemplate>> NSCNMaterial::Initialize(Isola
   JS_ASSIGN_PROP(proto, readsFromDepthBuffer);
   JS_ASSIGN_PROP(proto, fresnelExponent);
   JS_ASSIGN_PROP(proto, blendMode);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+  // static members (ctor)
+  JS_INIT_CTOR(SCNMaterial, NSObject);
+JS_INIT_CLASS_END(SCNMaterial, NSObject);
 
 NAN_METHOD(NSCNMaterial::New) {
   @autoreleasepool {

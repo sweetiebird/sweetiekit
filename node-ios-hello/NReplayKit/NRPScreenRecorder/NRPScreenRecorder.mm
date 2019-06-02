@@ -11,29 +11,13 @@
 NRPScreenRecorder::NRPScreenRecorder () {}
 NRPScreenRecorder::~NRPScreenRecorder () {}
 
-Nan::Persistent<FunctionTemplate> NRPScreenRecorder::type;
-
-std::pair<Local<Object>, Local<FunctionTemplate>> NRPScreenRecorder::Initialize(Isolate *isolate)
-{
-  Nan::EscapableHandleScope scope;
-
-  // constructor
-  Local<FunctionTemplate> ctor = Nan::New<FunctionTemplate>(New);
-  ctor->Inherit(Nan::New(NNSObject::type));
-  ctor->InstanceTemplate()->SetInternalFieldCount(1);
-  ctor->SetClassName(JS_STR("RPScreenRecorder"));
-  type.Reset(ctor);
-
-  // prototype
-  Local<ObjectTemplate> proto = ctor->PrototypeTemplate();
-  Nan::SetMethod(proto, "startRecordingWithHandler", startRecordingWithHandler);
-  Nan::SetMethod(proto, "stopRecordingWithHandler", stopRecordingWithHandler);
-
-  // ctor
-  Local<Function> ctorFn = Nan::GetFunction(ctor).ToLocalChecked();
-  
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctorFn), ctor);
-}
+JS_INIT_CLASS(RPScreenRecorder, NSObject);
+  // instance members (proto)
+  JS_ASSIGN_METHOD(proto, startRecordingWithHandler);
+  JS_ASSIGN_METHOD(proto, stopRecordingWithHandler);
+  // static members (ctor)
+  JS_INIT_CTOR(RPScreenRecorder, NSObject);
+JS_INIT_CLASS_END(RPScreenRecorder, NSObject);
 
 NAN_METHOD(NRPScreenRecorder::New) {
   Nan::HandleScope scope;

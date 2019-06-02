@@ -1,11 +1,9 @@
 //
-//  SCNCylinder.m
-//  node-ios-hello
+//  SCNCylinder.mm
 //
 //  Created by Shawn Presser on 5/28/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
 #include "NSCNCylinder.h"
 
 NSCNCylinder::NSCNCylinder () {}
