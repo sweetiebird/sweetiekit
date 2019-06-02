@@ -8,7 +8,7 @@ const {
 async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const btn = await UIButton.alloc('Push View Controller', 12, 80, w - 24, 50, () => {
-    const lastVC = new UIViewController();
+    const lastVC = UIViewController();
     lastVC.view.backgroundColor = { red: 205/255, green: 37/255, blue: 83/255 };
     nav.pushViewController(lastVC);
   });

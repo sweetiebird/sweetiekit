@@ -35,7 +35,7 @@ const {
 function make(nav, demoVC) {
   nav.pushViewController(demoVC);
   const del = new UIPopoverPresentationControllerDelegate();
-  const vc = new UIViewController();
+  const vc = UIViewController();
   vc.view.backgroundColor = colors.fitbodPink;
   vc.modalPresentationStyle = UIModalPresentationStyle.popover;
   vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection.up;

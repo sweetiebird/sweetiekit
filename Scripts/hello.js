@@ -1233,7 +1233,7 @@ const {
                 
 console.log(sweetiekit);
 
-//const vc = new UIViewController();
+//const vc = UIViewController();
 //console.log(vc);
 //const view = UIView(0, 0, 200, 200);
 //console.log(view, view.frame);

@@ -110,7 +110,7 @@ const allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'Ap
 class UIDemosApp {
   constructor(app) {
     this.app = app;
-    this.vc = new UIViewController();
+    this.vc = UIViewController();
     this.table = new UITableView();
     this.vc.view.addSubview(this.table);
     this.setupConstraints();
@@ -124,7 +124,7 @@ class UIDemosApp {
 
   createDemoVC() {
     gc();
-    this.demoVC = new UIViewController();
+    this.demoVC = UIViewController();
     gc();
     this.demoVC.view.backgroundColor = { red: 1, green: 1, blue: 1 };
     gc();

@@ -362,7 +362,7 @@ function makeInnerAppControllers(nav) {
     alpha: 0.8,
   };
 
-  const partyVC = new UIViewController();
+  const partyVC = UIViewController();
   partyVC.view.backgroundColor = colors.fitbodDarkGrey;
   partyVC.tabBarItem = new UITabBarItem(
     'Party',
@@ -395,7 +395,7 @@ function makeInnerAppControllers(nav) {
   partyTable.backgroundColor = colors.clear;
   partyVC.view.addSubview(partyTable);
 
-  const wagonVC = new UIViewController();
+  const wagonVC = UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
   wagonVC.tabBarItem = new UITabBarItem(
     'Wagon',
@@ -503,7 +503,7 @@ function startQuiz(nav) {
   const numQuestions = 3;
   let quizStep = 0;
 
-  const vc = new UIViewController();
+  const vc = UIViewController();
   vc.view.backgroundColor = colors.fitbodDarkGrey;
 
   const clippingView = makeClippingView();

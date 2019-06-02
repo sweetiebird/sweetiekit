@@ -208,7 +208,7 @@ function setupQuizView() {
 }
 
 function startQuiz() {
-  quizVC = new UIViewController();
+  quizVC = UIViewController();
   quizVC.view.layer.maskToBounds = true;
   quizVC.view.backgroundColor = colors.fitbodDarkGrey;
 
