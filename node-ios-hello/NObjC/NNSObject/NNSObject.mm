@@ -734,32 +734,21 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSBundle);
-    JS_EXPORT_TYPE(AVAudioPlayer);
     JS_EXPORT_TYPE(NSUserDefaults);
     JS_EXPORT_TYPE(NSLayoutAnchor);
     JS_EXPORT_TYPE(NSLayoutConstraint);
-    JS_EXPORT_TYPE(UIBarButtonItem);
-    JS_EXPORT_TYPE(UITabBarItem);
-    JS_EXPORT_TYPE(UIAlertAction);
     JS_EXPORT_TYPE(NSParagraphStyle);
     JS_EXPORT_TYPE(NSMutableParagraphStyle);
     JS_EXPORT_TYPE(NSAttributedString);
     JS_EXPORT_TYPE(NSMutableAttributedString);
-    JS_EXPORT_TYPE(RPScreenRecorder);
-
-    // Core Location
-    JS_EXPORT_TYPE(CLHeading);
-    JS_EXPORT_TYPE(CLLocation);
-    JS_EXPORT_TYPE(CLLocationManager);
-    JS_EXPORT_TYPE(CLLocationManagerDelegate);
-    JS_EXPORT_TYPE(CLGeocoder);
-    JS_EXPORT_TYPE(CLPlacemark);
 
     // UIKit
+    JS_EXPORT_TYPE(UIBarButtonItem);
+    JS_EXPORT_TYPE(UITabBarItem);
+    JS_EXPORT_TYPE(UIAlertAction);
     JS_EXPORT_TYPE(UIApplication);
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
-    JS_EXPORT_TYPE(RPPreviewViewController);
     JS_EXPORT_TYPE(UITabBarController);
     JS_EXPORT_TYPE(UITableViewController);
     JS_EXPORT_TYPE(UICollectionViewController);
@@ -796,9 +785,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIProgressView);
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
+    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
+    
+    // Core Graphics
+    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
 
     // UIKit delegates
-    JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
     JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
     JS_EXPORT_TYPE(UIPickerViewManager);
     JS_EXPORT_TYPE(UIScrollViewDelegate);
@@ -807,6 +799,22 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
+    
+    // AVFoundation
+    JS_EXPORT_TYPE(AVAudioPlayer);
+
+    // Core Location
+    JS_EXPORT_TYPE(CLHeading);
+    JS_EXPORT_TYPE(CLLocation);
+    JS_EXPORT_TYPE(CLLocationManager);
+    JS_EXPORT_TYPE(CLLocationManagerDelegate);
+    JS_EXPORT_TYPE(CLGeocoder);
+    JS_EXPORT_TYPE(CLPlacemark);
+    
+    // ReplayKit
+    JS_EXPORT_TYPE(RPScreenRecorder);
+    JS_EXPORT_TYPE(RPPreviewViewController);
+    JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
 
     // UIKit Custom
     JS_EXPORT_TYPE(GifManager);
@@ -876,10 +884,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // core image
     JS_EXPORT_TYPE(CIImage);
-
-    // misc
-    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
-    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
 }
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -895,38 +899,37 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
     }
     if (wrapper == nullptr) {
     
-#define JS_RETURN_TYPE(Type) \
-      if ([obj isKindOfClass:[Type class]]) { \
+#define JS_RETURN_TYPE_FROM(Type, ObjcType) \
+      if ([obj isKindOfClass:[ObjcType class]]) { \
         return N##Type::type; \
       }
     
-      // ========= core animation
+#define JS_RETURN_TYPE(Type) \
+      JS_RETURN_TYPE_FROM(Type, Type)
+    
+      // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
       JS_RETURN_TYPE(CAEmitterLayer);
       JS_RETURN_TYPE(CAShapeLayer);
       JS_RETURN_TYPE(CALayer);
       JS_RETURN_TYPE(CABasicAnimation);
       
-      // ========= core image
-
+      // Core Image
+      
       JS_RETURN_TYPE(CIImage);
 
       // MapKit
       
       JS_RETURN_TYPE(MKMapView);
       JS_RETURN_TYPE(MKAnnotationView);
-      if ([obj isKindOfClass:[SMKMapViewDelegate class]]) {
-        return NMKMapViewDelegate::type;
-      }
+      JS_RETURN_TYPE_FROM(MKMapViewDelegate, SMKMapViewDelegate);
 
       // ARKit
 
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
-      if ([obj isKindOfClass:[SARSKViewDelegate class]]) {
-        return NARSKViewDelegate::type;
-      }
+      JS_RETURN_TYPE_FROM(ARSKViewDelegate, SARSKViewDelegate);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
       JS_RETURN_TYPE(ARSession);
@@ -934,6 +937,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
+      
       JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNMaterial);
       JS_RETURN_TYPE(SCNBox);
@@ -964,9 +968,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([NSStringFromClass([obj class]) isEqual: @"PKPhysicsContact"]) {
         return NSKPhysicsContact::type;
       }
-      if ([obj isKindOfClass:[SSKPhysicsContactDelegate class]]) {
-        return NSKPhysicsContactDelegate::type;
-      }
+      JS_RETURN_TYPE_FROM(SKPhysicsContactDelegate, SSKPhysicsContactDelegate);
       JS_RETURN_TYPE(SKPhysicsWorld);
       JS_RETURN_TYPE(SKPhysicsBody);
       JS_RETURN_TYPE(SKSpriteNode);
@@ -983,185 +985,92 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(Gif);
       JS_RETURN_TYPE(GifView);
 
-      // UIKit
+      // Core Location
       
-      if ([obj isKindOfClass:[UIApplication class]]) {
-        return NUIApplication::type;
-      }
-      if ([obj isKindOfClass:[UITouch class]]) {
-        return NUITouch::type;
-      }
-      // ========= views
-      if ([obj isKindOfClass:[UIStackView class]]) {
-        return NUIStackView::type;
-      }
-      if ([obj isKindOfClass:[UITabBar class]]) {
-        return NUITabBar::type;
-      }
-      if ([obj isKindOfClass:[UIProgressView class]]) {
-        return NUIProgressView::type;
-      }
-      if ([obj isKindOfClass:[UIPickerView class]]) {
-        return NUIPickerView::type;
-      }
-      if ([obj isKindOfClass:[UINavigationItem class]]) {
-        return NUINavigationItem::type;
-      }
-      if ([obj isKindOfClass:[UINavigationBar class]]) {
-        return NUINavigationBar::type;
-      }
-      if ([obj isKindOfClass:[UIPageControl class]]) {
-        return NUIPageControl::type;
-      }
-      if ([obj isKindOfClass:[UISlider class]]) {
-        return NUISlider::type;
-      }
-      if ([obj isKindOfClass:[UICollectionViewCell class]]) {
-        return NUICollectionViewCell::type;
-      }
-      if ([obj isKindOfClass:[UICollectionReusableView class]]) {
-        return NUICollectionReusableView::type;
-      }
-      if ([obj isKindOfClass:[UICollectionView class]]) {
-        return NUICollectionView::type;
-      }
-      if ([obj isKindOfClass:[UITableView class]]) {
-        return NUITableView::type;
-      }
-      if ([obj isKindOfClass:[UIScrollView class]]) {
-        return NUIScrollView::type;
-      }
-      if ([obj isKindOfClass:[UITableViewCell class]]) {
-        return NUITableViewCell::type;
-      }
-      if ([obj isKindOfClass:[UILabel class]]) {
-        return NUILabel::type;
-      }
-      if ([obj isKindOfClass:[UIFont class]]) {
-        return NUIFont::type;
-      }
-      if ([obj isKindOfClass:[UIButton class]]) {
-        return NUIButton::type;
-      }
-      if ([obj isKindOfClass:[UIImage class]]) {
-        return NUIImage::type;
-      }
-      if ([obj isKindOfClass:[UIImageView class]]) {
-        return NUIImageView::type;
-      }
-      if ([obj isKindOfClass:[UIStoryboard class]]) {
-        return NUIStoryboard::type;
-      }
-      if ([obj isKindOfClass:[UITextField class]]) {
-        return NUITextField::type;
-      }
-      if ([obj isKindOfClass:[UISwitch class]]) {
-        return NUISwitch::type;
-      }
-      if ([obj isKindOfClass:[UIRefreshControl class]]) {
-        return NUIRefreshControl::type;
-      }
-      if ([obj isKindOfClass:[UIControl class]]) {
-        return NUIControl::type;
-      }
-      if ([obj isKindOfClass:[UIWindow class]]) {
-        return NUIWindow::type;
-      }
-      if ([obj isKindOfClass:[UIView class]]) {
-        return NUIView::type;
-      }
-      if ([obj isKindOfClass:[UIResponder class]]) {
-        return NUIResponder::type;
-      }
-
-      // ======== controllers
-
-      if ([obj isKindOfClass:[RPPreviewViewController class]]) {
-        return NRPPreviewViewController::type;
-      }
-      if ([obj isKindOfClass:[UIAlertController class]]) {
-        return NUIAlertController::type;
-      }
-      if ([obj isKindOfClass:[UICollectionViewController class]]) {
-        return NUICollectionViewController::type;
-      }
-      if ([obj isKindOfClass:[UITableViewController class]]) {
-        return NUITableViewController::type;
-      }
-      if ([obj isKindOfClass:[UIImagePickerController class]]) {
-        return NUIImagePickerController::type;
-      }
-      if ([obj isKindOfClass:[UINavigationController class]]) {
-        return NUINavigationController::type;
-      }
-      if ([obj isKindOfClass:[UITabBarController class]]) {
-        return NUITabBarController::type;
-      }
-      if ([obj isKindOfClass:[UIViewController class]]) {
-        return NUIViewController::type;
-      }
-      if ([obj isKindOfClass:[UIPopoverPresentationController class]]) {
-        return NUIPopoverPresentationController::type;
-      }
-      if ([obj isKindOfClass:[UIPresentationController class]]) {
-        return NUIPresentationController::type;
-      }
-      // ========= delegates
-      if ([obj isKindOfClass:[SRPPreviewViewControllerDelegate class]]) {
-        return NRPPreviewViewControllerDelegate::type;
-      }
-      if ([obj isKindOfClass:[SUIPopoverPresentationControllerDelegate class]]) {
-        return NUIPopoverPresentationControllerDelegate::type;
-      }
-      if ([obj isKindOfClass:[SUIPickerViewManager class]]) {
-        return NUIPickerViewManager::type;
-      }
-      if ([obj isKindOfClass:[SUIScrollViewDelegate class]]) {
-        return NUIScrollViewDelegate::type;
-      }
-      if ([obj isKindOfClass:[SUICollectionViewManager class]]) {
-        return NUICollectionViewManager::type;
-      }
-      if ([obj isKindOfClass:[SUITableViewManager class]]) {
-        return NUITableViewManager::type;
-      }
-      if ([obj isKindOfClass:[SUIImagePickerControllerDelegate class]]) {
-        return NUIImagePickerControllerDelegate::type;
-      }
-      if ([obj isKindOfClass:[SUITableViewDataSource class]]) {
-        return NUITableViewDataSource::type;
-      }
-      if ([obj isKindOfClass:[SUIViewControllerTransitioningDelegate class]]) {
-        return NUIViewControllerTransitioningDelegate::type;
-      }
-
-      // ========= core location
       JS_RETURN_TYPE(CLGeocoder);
       JS_RETURN_TYPE(CLPlacemark);
       JS_RETURN_TYPE(CLLocation);
       JS_RETURN_TYPE(CLHeading);
       JS_RETURN_TYPE(CLLocationManager);
-      if ([obj isKindOfClass:[SCLLocationManagerDelegate class]]) {
-        return NCLLocationManagerDelegate::type;
-      }
-
-      // ========= objects
+      JS_RETURN_TYPE_FROM(CLLocationManagerDelegate, SCLLocationManagerDelegate);
+      
+      // ReplayKit
+      
+      JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
       JS_RETURN_TYPE(RPScreenRecorder);
-      if ([obj isKindOfClass:[SUIKitGlobals class]]) {
-        return NUIKitGlobals::type;
-      }
-      if ([obj isKindOfClass:[SCoreGraphicsGlobals class]]) {
-        return NCoreGraphicsGlobals::type;
-      }
-      JS_RETURN_TYPE(NSMutableAttributedString);
-      JS_RETURN_TYPE(NSAttributedString);
-      JS_RETURN_TYPE(NSMutableParagraphStyle);
-      JS_RETURN_TYPE(NSParagraphStyle);
+      JS_RETURN_TYPE(RPPreviewViewController);
+      
+      // AVFoundation
+      
+      JS_RETURN_TYPE(AVAudioPlayer);
+
+      // UIKit
+      
+      JS_RETURN_TYPE(UIApplication);
+      JS_RETURN_TYPE(UITouch);
+      // ========= views
+      JS_RETURN_TYPE(UIStackView);
+      JS_RETURN_TYPE(UITabBar);
+      JS_RETURN_TYPE(UIProgressView);
+      JS_RETURN_TYPE(UIPickerView);
+      JS_RETURN_TYPE(UINavigationItem);
+      JS_RETURN_TYPE(UINavigationBar);
+      JS_RETURN_TYPE(UIPageControl);
+      JS_RETURN_TYPE(UISlider);
+      JS_RETURN_TYPE(UICollectionViewCell);
+      JS_RETURN_TYPE(UICollectionReusableView);
+      JS_RETURN_TYPE(UICollectionView);
+      JS_RETURN_TYPE(UITableView);
+      JS_RETURN_TYPE(UIScrollView);
+      JS_RETURN_TYPE(UITableViewCell);
+      JS_RETURN_TYPE(UILabel);
+      JS_RETURN_TYPE(UIFont);
+      JS_RETURN_TYPE(UIButton);
+      JS_RETURN_TYPE(UIImage);
+      JS_RETURN_TYPE(UIImageView);
+      JS_RETURN_TYPE(UIStoryboard);
+      JS_RETURN_TYPE(UITextField);
+      JS_RETURN_TYPE(UISwitch);
+      JS_RETURN_TYPE(UIRefreshControl);
+      JS_RETURN_TYPE(UIControl);
+      JS_RETURN_TYPE(UIWindow);
+      JS_RETURN_TYPE(UIView);
+      JS_RETURN_TYPE(UIResponder);
       JS_RETURN_TYPE(UIAlertAction);
       JS_RETURN_TYPE(UINib);
       JS_RETURN_TYPE(UITabBarItem);
       JS_RETURN_TYPE(UIBarButtonItem);
-      JS_RETURN_TYPE(AVAudioPlayer);
+      // ======== controllers
+      JS_RETURN_TYPE(UIAlertController);
+      JS_RETURN_TYPE(UICollectionViewController);
+      JS_RETURN_TYPE(UITableViewController);
+      JS_RETURN_TYPE(UIImagePickerController);
+      JS_RETURN_TYPE(UINavigationController);
+      JS_RETURN_TYPE(UITabBarController);
+      JS_RETURN_TYPE(UIViewController);
+      JS_RETURN_TYPE(UIPopoverPresentationController);
+      JS_RETURN_TYPE(UIPresentationController);
+      // ========= delegates
+      JS_RETURN_TYPE_FROM(UIPopoverPresentationControllerDelegate, SUIPopoverPresentationControllerDelegate);
+      JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
+      JS_RETURN_TYPE_FROM(UIScrollViewDelegate, SUIScrollViewDelegate);
+      JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
+      JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
+      JS_RETURN_TYPE_FROM(UIImagePickerControllerDelegate, SUIImagePickerControllerDelegate);
+      JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
+      JS_RETURN_TYPE_FROM(UIViewControllerTransitioningDelegate, SUIViewControllerTransitioningDelegate);
+      
+      // Globals
+      
+      JS_RETURN_TYPE_FROM(UIKitGlobals, SUIKitGlobals);
+      JS_RETURN_TYPE_FROM(CoreGraphicsGlobals, SCoreGraphicsGlobals);
+
+      // Objects
+      
+      JS_RETURN_TYPE(NSMutableAttributedString);
+      JS_RETURN_TYPE(NSAttributedString);
+      JS_RETURN_TYPE(NSMutableParagraphStyle);
+      JS_RETURN_TYPE(NSParagraphStyle);
       JS_RETURN_TYPE(NSBundle);
       JS_RETURN_TYPE(NSLayoutConstraint);
       JS_RETURN_TYPE(NSLayoutAnchor);
