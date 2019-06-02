@@ -164,7 +164,7 @@ public: \
  \
   static Nan::Persistent<FunctionTemplate> type; \
   virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; } \
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate); \
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate, Local<Object> exports); \
   static NAN_METHOD(New);
   
   
@@ -182,7 +182,7 @@ public: \
 \
 Nan::Persistent<FunctionTemplate> N##name::type; \
 \
-std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate) \
+std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate, Local<Object> exports) \
 { \
   Nan::EscapableHandleScope scope; \
 \
@@ -200,7 +200,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
 \
 Nan::Persistent<FunctionTemplate> N##name::type; \
 \
-std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate) \
+std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate, Local<Object> exports) \
 { \
   Nan::EscapableHandleScope scope; \
 \

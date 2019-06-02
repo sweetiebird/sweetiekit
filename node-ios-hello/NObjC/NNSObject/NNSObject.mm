@@ -724,13 +724,15 @@ NAN_METHOD(NNSObject::New) {
 #include "NCIImage.h"
 
 #define JS_EXPORT_TYPE_AS(type, name) \
-        auto N_##type = N##type::Initialize(Isolate::GetCurrent()); \
+        auto N_##type = N##type::Initialize(isolate, exports); \
         exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
 
 #define JS_EXPORT_TYPE(type) \
         JS_EXPORT_TYPE_AS(type, #type)
 
 void NNSObject::RegisterTypes(Local<Object> exports) {
+    Isolate* isolate = Isolate::GetCurrent();
+
     JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSBundle);
@@ -844,18 +846,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsWorld);
     JS_EXPORT_TYPE(SKPhysicsContactDelegate);
 
-    // ARKit
-    JS_EXPORT_TYPE(ARLightEstimate);
-    JS_EXPORT_TYPE(ARSKView);
-    JS_EXPORT_TYPE(ARSession);
-    JS_EXPORT_TYPE(ARConfiguration);
-    JS_EXPORT_TYPE(ARWorldTrackingConfiguration);
-    JS_EXPORT_TYPE(ARCamera);
-    JS_EXPORT_TYPE(ARFrame);
-    JS_EXPORT_TYPE(ARAnchor);
-    JS_EXPORT_TYPE(ARSKViewDelegate);
-    JS_EXPORT_TYPE(ARSCNViewDelegate);
-
     // SceneKit
     JS_EXPORT_TYPE(SCNMaterial);
     JS_EXPORT_TYPE(SCNGeometry);
@@ -874,8 +864,20 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNNode);
     JS_EXPORT_TYPE(SCNScene);
     JS_EXPORT_TYPE(SCNView);
-    JS_EXPORT_TYPE(ARSCNView);
     JS_EXPORT_TYPE(SCNLight);
+
+    // ARKit
+    JS_EXPORT_TYPE(ARLightEstimate);
+    JS_EXPORT_TYPE(ARSKView);
+    JS_EXPORT_TYPE(ARSCNView);
+    JS_EXPORT_TYPE(ARSession);
+    JS_EXPORT_TYPE(ARConfiguration);
+    JS_EXPORT_TYPE(ARWorldTrackingConfiguration);
+    JS_EXPORT_TYPE(ARCamera);
+    JS_EXPORT_TYPE(ARFrame);
+    JS_EXPORT_TYPE(ARAnchor);
+    JS_EXPORT_TYPE(ARSKViewDelegate);
+    JS_EXPORT_TYPE(ARSCNViewDelegate);
 
     // MapKit
     JS_EXPORT_TYPE(MKMapView);
