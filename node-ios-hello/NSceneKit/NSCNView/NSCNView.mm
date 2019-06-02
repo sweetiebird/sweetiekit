@@ -11,6 +11,7 @@ NSCNView::~NSCNView () {}
 
 JS_INIT_CLASS(SCNView, UIView);
   // instance members (proto)
+  JS_PROTO_METHOD(hitTest);
   JS_ASSIGN_PROP(proto, autoenablesDefaultLighting);
   JS_ASSIGN_PROP(proto, playing);
   JS_ASSIGN_PROP(proto, scene);
@@ -21,6 +22,7 @@ JS_INIT_CLASS(SCNView, UIView);
   JS_ASSIGN_PROP(proto, preferredFramesPerSecond);
   JS_ASSIGN_PROP(proto, eaglContext);
   JS_ASSIGN_PROP(proto, antialiasingMode);
+  JS_PROTO_PROP(pointOfView);
   // static members (ctor)
   JS_INIT_CTOR(SCNView, UIView);
 JS_INIT_CLASS_END(SCNView, UIView);
@@ -52,6 +54,15 @@ NAN_METHOD(NSCNView::New) {
   view->Wrap(obj);
 
   info.GetReturnValue().Set(obj);
+}
+
+NAN_METHOD(NSCNView::hitTest) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool {
+    CGPoint point(to_value_CGPoint(info[0]));
+    NSArray<SCNHitTestResult*>* results = [self hitTest:point options:nil];
+    JS_SET_RETURN(js_value_NSArray<SCNHitTestResult*>(results)); // TODO: options
+  }
 }
 
 NAN_GETTER(NSCNView::autoenablesDefaultLightingGetter) {
@@ -212,3 +223,21 @@ NAN_SETTER(NSCNView::antialiasingModeSetter) {
   }
 }
 
+#include "NSCNNode.h"
+
+NAN_GETTER(NSCNView::pointOfViewGetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_SCNNode([self pointOfView]));
+    return;
+  }
+}
+
+NAN_SETTER(NSCNView::pointOfViewSetter) {
+  JS_UNWRAP(SCNView, self);
+  @autoreleasepool
+  {
+    [self setPointOfView: to_value_SCNNode(value)];
+  }
+}

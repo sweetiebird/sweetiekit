@@ -21,12 +21,20 @@ async function make(demoVC) {
   scene = new SCNScene();
   scnView.scene = scene;
   scnView.autoenablesDefaultLighting = true;
-  scnView.allowsCameraControl = true;
+  //scnView.allowsCameraControl = true;
   rootNode = scene.rootNode;
 
   scnView.viewWillAppear = (animated) => {
     console.log('scnView.viewWillAppear', animated, this);
     scnView.backgroundColor = UIColorRandom();
+
+    povNode = new SCNNode();
+    cam = new SCNCamera();
+    povNode.camera = cam;
+    povNode.eulerAngles = {x: -0.8357508, y: -0.552055, z: 1.75009517988e-8};
+    povNode.position = {x: -5.12623739, y: 6.3341617, z: 9.9800148};
+    rootNode.addChildNode(povNode);
+    scnView.pointOfView = povNode;
 
     floor = SCNFloor();
     floor.firstMaterial.diffuse.contents = UIColorRandom();

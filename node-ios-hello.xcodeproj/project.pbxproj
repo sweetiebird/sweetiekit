@@ -226,6 +226,7 @@
 		A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D8C22A41FEC002B53FF /* NSCNCamera.mm */; };
 		A1EE7D9122A428D6002B53FF /* NSCNCameraController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9022A428D5002B53FF /* NSCNCameraController.mm */; };
 		A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9422A435FD002B53FF /* NSCNPhysicsBody.mm */; };
+		A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9822A4401B002B53FF /* NSCNHitTestResult.mm */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -634,6 +635,8 @@
 		A1EE7D9022A428D5002B53FF /* NSCNCameraController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNCameraController.mm; sourceTree = "<group>"; };
 		A1EE7D9322A435FD002B53FF /* NSCNPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsBody.h; sourceTree = "<group>"; };
 		A1EE7D9422A435FD002B53FF /* NSCNPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsBody.mm; sourceTree = "<group>"; };
+		A1EE7D9722A4401B002B53FF /* NSCNHitTestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNHitTestResult.h; sourceTree = "<group>"; };
+		A1EE7D9822A4401B002B53FF /* NSCNHitTestResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNHitTestResult.mm; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1492,6 +1495,7 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1EE7D9622A4401B002B53FF /* NSCNHitTestResult */,
 				A1EE7D6A229D8EEE002B53FF /* NSCNBox */,
 				A1EE7D8A22A41FEC002B53FF /* NSCNCamera */,
 				A1EE7D8E22A428D5002B53FF /* NSCNCameraController */,
@@ -2313,6 +2317,15 @@
 			path = NSCNPhysicsBody;
 			sourceTree = "<group>";
 		};
+		A1EE7D9622A4401B002B53FF /* NSCNHitTestResult */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE7D9722A4401B002B53FF /* NSCNHitTestResult.h */,
+				A1EE7D9822A4401B002B53FF /* NSCNHitTestResult.mm */,
+			);
+			path = NSCNHitTestResult;
+			sourceTree = "<group>";
+		};
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
@@ -2711,6 +2724,7 @@
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */,
+				A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */,
 				A1058B412267FE7E00CEAA5C /* embedded-file-writer.cc in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,

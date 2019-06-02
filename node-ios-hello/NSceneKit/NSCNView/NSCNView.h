@@ -24,6 +24,7 @@
 #define is_value_SCNAntialiasingMode(x) IS_ENUM(SCNAntialiasingMode, NSInteger, x)
 
 JS_WRAP_CLASS(SCNView, UIView);
+  JS_METHOD(hitTest);
   JS_PROP(autoenablesDefaultLighting);
   JS_PROP(playing);
   
@@ -35,6 +36,7 @@ JS_WRAP_CLASS(SCNView, UIView);
   JS_PROP(preferredFramesPerSecond);
   JS_PROP(eaglContext);
   JS_PROP(antialiasingMode);
+  JS_PROP(pointOfView);
 
 JS_WRAP_CLASS_END(SCNView);
 
