@@ -20,6 +20,9 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_PROTO_METHOD(insertChildNode);
   JS_PROTO_METHOD(replaceChildNode);
   JS_PROTO_METHOD(childNodeWithName);
+  JS_PROTO_METHOD(childNodesPassingTest);
+  JS_PROTO_METHOD(enumerateChildNodes);
+  JS_PROTO_METHOD(enumerateHierarchy);
   JS_PROTO_METHOD(removeFromParentNode);
   JS_PROTO_METHOD(setWorldTransform);
   JS_ASSIGN_PROP(proto, name);
@@ -186,6 +189,90 @@ NAN_METHOD(NSCNNode::childNodeWithName) {
     NSString* name(to_value_NSString(info[0]));
     bool recursively(info[1]->IsBoolean() ? TO_BOOL(info[1]) : false);
     [self childNodeWithName:name recursively:recursively];
+  }
+}
+
+NAN_METHOD(NSCNNode::childNodesPassingTest) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    if (!info[0]->IsFunction()) {
+      Nan::ThrowError("NSCNNode::childNodesPassingTest: expected first argument to be a function");
+      return;
+    }
+  
+    sweetiekit::JSFunction fn(info[0]);
+    __block bool onStopCalled = false;
+    __block bool onStopResult = false;
+    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateChildNodesCallbackStop", ^(JSInfo info) {
+      onStopCalled = true;
+      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
+    }));
+    auto results([self childNodesPassingTest:^BOOL(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
+      __block bool result = false;
+      dispatch_main(^{
+        result = TO_BOOL(fn("NSCNNode::childNodesPassingTestCallback", js_value_SCNNode(child), onStop.Get()));
+        if (onStopCalled) {
+          *stop = onStopResult;
+          onStopCalled = false;
+        }
+      });
+      return result;
+    }]);
+    JS_SET_RETURN(js_value_NSArray<SCNNode*>(results));
+  }
+}
+
+NAN_METHOD(NSCNNode::enumerateChildNodes) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    if (!info[0]->IsFunction()) {
+      Nan::ThrowError("NSCNNode::enumerateChildNodes: expected first argument to be a function");
+      return;
+    }
+  
+    sweetiekit::JSFunction fn(info[0]);
+    __block bool onStopCalled = false;
+    __block bool onStopResult = false;
+    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateChildNodesCallbackStop", ^(JSInfo info) {
+      onStopCalled = true;
+      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
+    }));
+    [self enumerateChildNodesUsingBlock:^(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
+      dispatch_main(^{
+        fn("NSCNNode::enumerateChildNodesCallback", js_value_SCNNode(child), onStop.Get());
+        if (onStopCalled) {
+          *stop = onStopResult;
+          onStopCalled = false;
+        }
+      });  
+    }];
+  }
+}
+
+NAN_METHOD(NSCNNode::enumerateHierarchy) {
+  JS_UNWRAP(SCNNode, self);
+  @autoreleasepool {
+    if (!info[0]->IsFunction()) {
+      Nan::ThrowError("NSCNNode::enumerateHierarchy: expected first argument to be a function");
+      return;
+    }
+  
+    sweetiekit::JSFunction fn(info[0]);
+    __block bool onStopCalled = false;
+    __block bool onStopResult = false;
+    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateHierarchyCallbackStop", ^(JSInfo info) {
+      onStopCalled = true;
+      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
+    }));
+    [self enumerateHierarchyUsingBlock:^(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
+      dispatch_main(^{
+        fn("NSCNNode::enumerateHierarchyCallback", js_value_SCNNode(child), onStop.Get());
+        if (onStopCalled) {
+          *stop = onStopResult;
+          onStopCalled = false;
+        }
+      });  
+    }];
   }
 }
 

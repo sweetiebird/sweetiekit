@@ -493,6 +493,7 @@ void iOSLog0(const char* _Nonnull msg);
 #include <dispatch/queue.h>
 void dispatch_ui_sync(dispatch_queue_t _Nonnull queue, dispatch_block_t _Nonnull block);
 #define dispatch_sync dispatch_ui_sync
+#define dispatch_main(block) dispatch_ui_sync(dispatch_get_main_queue(), block)
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr);
 
@@ -629,6 +630,15 @@ namespace sweetiekit {
       forEachView(subview, callback);
     }
   }
+}
+
+extern "C" {
+    // Forward declare some Objective-C runtime internal methods that are not API.
+    const char * _Nullable _protocol_getMethodTypeEncoding(Protocol * _Nonnull, SEL, BOOL isRequiredMethod, BOOL isInstanceMethod);
+    id _Nullable objc_initWeak(id _Nullable * _Nonnull, id _Nonnull);
+    void objc_destroyWeak(id _Nullable * _Nonnull);
+    bool _Block_has_signature(void * _Nonnull);
+    const char * _Nullable _Block_signature(void * _Nonnull);
 }
 
 namespace sweetiekit
