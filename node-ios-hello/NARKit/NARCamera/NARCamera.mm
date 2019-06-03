@@ -21,6 +21,12 @@ NARCamera::~NARCamera () {}
 JS_INIT_CLASS(ARCamera, NSObject);
   // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, transform);
+  JS_ASSIGN_PROP_READONLY(proto, eulerAngles);
+  JS_ASSIGN_PROP_READONLY(proto, trackingState);
+  JS_ASSIGN_PROP_READONLY(proto, trackingStateReason);
+  JS_ASSIGN_PROP_READONLY(proto, intrinsics);
+  JS_ASSIGN_PROP_READONLY(proto, imageResolution);
+  JS_ASSIGN_PROP_READONLY(proto, projectionMatrix);
 
   // static members (ctor)
   JS_INIT_CTOR(ARCamera, NSObject);
@@ -45,11 +51,57 @@ NAN_METHOD(NARCamera::New) {
 }
 
 NAN_GETTER(NARCamera::transformGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARCamera, cam);
-  
-  auto xform = cam.transform;
-  const float* matrix = (const float*)&xform;
-  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_simd_float4x4([self transform]));
+  }
+}
+
+NAN_GETTER(NARCamera::eulerAnglesGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_simd_float3([self eulerAngles]));
+  }
+}
+
+NAN_GETTER(NARCamera::trackingStateGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_ARTrackingState([self trackingState]));
+  }
+}
+
+NAN_GETTER(NARCamera::trackingStateReasonGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_ARTrackingStateReason([self trackingStateReason]));
+  }
+}
+
+NAN_GETTER(NARCamera::intrinsicsGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_simd_float3x3([self intrinsics]));
+  }
+}
+
+NAN_GETTER(NARCamera::imageResolutionGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGSize([self imageResolution]));
+  }
+}
+
+NAN_GETTER(NARCamera::projectionMatrixGetter) {
+  JS_UNWRAP(ARCamera, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_simd_float4x4([self projectionMatrix]));
+  }
 }
