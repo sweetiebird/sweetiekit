@@ -568,21 +568,6 @@ NAN_METHOD(Nid::invoke)
   }
 }
 
-id Nid::set_self(id self) {
-  _self = self;
-  /*
-  auto wrapper = objc_getAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"]);
-  if (wrapper == nullptr) {
-    Nan::Persistent<FunctionTemplate>** p = new Nan::Persistent<FunctionTemplate>*(&GetDerivedType());
-    auto w = [NSObjectWrapper alloc];
-    w.ptr = p;
-    
-    objc_setAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"], w, objc_AssociationPolicy::OBJC_ASSOCIATION_RETAIN);
-    //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
-  }*/
-  return _self;
-}
-
 NAN_GETTER(Nid::selfGetter) {
   JS_UNWRAP_(id, self);
   JS_SET_RETURN(Nan::New<External>((__bridge void*)self));
@@ -618,6 +603,37 @@ NAN_METHOD(NNSObject::New) {
       JS_SET_RETURN(obj);
     } else {
       Nan::ThrowError("NSObject::New: invalid arguments");
+    }
+  }
+}
+
+NClass::NClass() {}
+NClass::~NClass() {}
+
+JS_INIT_CLASS(Class, id);
+  JS_INIT_CTOR(Class, id);
+JS_INIT_CLASS_END(Class, id);
+
+NAN_METHOD(NClass::New) {
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'Class(...)', turn into construct call.
+      JS_SET_RETURN_NEW(Class, info);
+      return;
+    }
+
+    Class self = nil;
+    if (info[0]->IsExternal()) {
+      self = (__bridge Class)(info[0].As<External>()->Value());
+    }
+    if (self) {
+      NClass* wrapper = new NClass();
+      wrapper->set_self(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NClass::New: invalid arguments");
     }
   }
 }
@@ -763,6 +779,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     Isolate* isolate = Isolate::GetCurrent();
 
     JS_EXPORT_TYPE(id);
+    JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
@@ -1050,8 +1067,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // UIKit
       
-      JS_RETURN_TYPE(UIApplication);
-      JS_RETURN_TYPE(UITouch);
+      // ======== controllers
+      JS_RETURN_TYPE(UIAlertController);
+      JS_RETURN_TYPE(UICollectionViewController);
+      JS_RETURN_TYPE(UITableViewController);
+      JS_RETURN_TYPE(UIImagePickerController);
+      JS_RETURN_TYPE(UINavigationController);
+      JS_RETURN_TYPE(UITabBarController);
+      JS_RETURN_TYPE(UIViewController);
+      JS_RETURN_TYPE(UIPopoverPresentationController);
+      JS_RETURN_TYPE(UIPresentationController);
       // ========= views
       JS_RETURN_TYPE(UIStackView);
       JS_RETURN_TYPE(UITabBar);
@@ -1079,21 +1104,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIControl);
       JS_RETURN_TYPE(UIWindow);
       JS_RETURN_TYPE(UIView);
-      JS_RETURN_TYPE(UIResponder);
-      JS_RETURN_TYPE(UIAlertAction);
-      JS_RETURN_TYPE(UINib);
       JS_RETURN_TYPE(UITabBarItem);
       JS_RETURN_TYPE(UIBarButtonItem);
-      // ======== controllers
-      JS_RETURN_TYPE(UIAlertController);
-      JS_RETURN_TYPE(UICollectionViewController);
-      JS_RETURN_TYPE(UITableViewController);
-      JS_RETURN_TYPE(UIImagePickerController);
-      JS_RETURN_TYPE(UINavigationController);
-      JS_RETURN_TYPE(UITabBarController);
-      JS_RETURN_TYPE(UIViewController);
-      JS_RETURN_TYPE(UIPopoverPresentationController);
-      JS_RETURN_TYPE(UIPresentationController);
       // ========= delegates
       JS_RETURN_TYPE_FROM(UIPopoverPresentationControllerDelegate, SUIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
@@ -1103,6 +1115,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(UIImagePickerControllerDelegate, SUIImagePickerControllerDelegate);
       JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
       JS_RETURN_TYPE_FROM(UIViewControllerTransitioningDelegate, SUIViewControllerTransitioningDelegate);
+      // ========= objects
+      JS_RETURN_TYPE(UIApplication);
+      JS_RETURN_TYPE(UITouch);
+      JS_RETURN_TYPE(UIResponder);
+      JS_RETURN_TYPE(UIAlertAction);
+      JS_RETURN_TYPE(UINib);
       
       // Globals
       

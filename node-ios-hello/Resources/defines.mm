@@ -42,9 +42,272 @@ Local<Value> NSStringToJSString(NSString* value) {
   }
 }
 #include "NNSObject.h"
+#include <unordered_map>
+
+typedef Isolate* NJSContextRef;
+typedef Isolate* NJSGlobalContextRef;
+typedef Local<Value> NJSValueRef;
+typedef Local<Object> NJSObjectRef;
+
+@interface NJSValue : NSObject
+- (instancetype)initWithValue:(NJSValueRef)value;
+- (Local<Value>)toJS;
+@end
+
+@implementation NJSValue {
+  Nan::Persistent<Value> m_value;
+}
+- (instancetype)initWithValue:(NJSValueRef)value
+{
+  self = [super init];
+  if (!self)
+    return nil;
+  self->m_value.Reset(value);
+//  self->m_value.SetWeak<Value>(value);
+  return self;
+}
+- (Local<Value>)toJS
+{
+  if (m_value.IsEmpty()) {
+    return Nan::Undefined();
+  }
+  return Nan::New(m_value);
+}
+@end
+
+@interface NJSObject : NJSValue
+@end
+
+@implementation NJSObject {
+}
+@end
+
+@interface NJSObjCClassInfo : NJSObject
+- (instancetype)initForClass:(Class)cls;
+- (NJSObject*)constructorInContext:(NJSContextRef)context;
+- (NJSObject*)wrapperForObject:(id)value inContext:(NJSContextRef)context;
+@end
+
+@implementation NJSObjCClassInfo {
+  Class m_cls;
+  Nan::Persistent<FunctionTemplate> m_type;
+}
+- (instancetype)initForClass:(Class)cls
+{
+    self = [super init];
+    if (!self)
+        return nil;
+    m_cls = cls;
+    return self;
+}
+Nan::NAN_METHOD_RETURN_TYPE New(Nan::NAN_METHOD_ARGS_TYPE info) {
+  Nan::HandleScope scope;
+
+  Local<Object> obj = info.This();
+
+  Nid *la = new Nid();
+
+  if (info[0]->IsExternal()) {
+    la->set_self((__bridge id)(info[0].As<External>()->Value()));
+  } else {
+    delete la;
+    la = nullptr;
+    Nan::ThrowError("NJSObjCClassInfo::New: failed");
+    return;
+  }
+  la->wrap(obj);
+
+  info.GetReturnValue().Set(obj);
+}
+- (NJSObject*)constructorInContext:(NJSContextRef)context
+{
+//  NNSObject::GetNSObjectType(NSObject *obj, Nan::Persistent<FunctionTemplate> &unset);
+#if 1
+//  Nan::EscapableHandleScope scope;
+
+  /* constructor */
+  Local<FunctionTemplate> ctorObj = Nan::New<FunctionTemplate>(New);
+//  ctorObj->Inherit(Nan::New(Nid::type));
+  ctorObj->InstanceTemplate()->SetInternalFieldCount(1);
+  ctorObj->SetClassName(JS_STR(object_getClassName(m_cls)));
+//  type.Reset(ctorObj);
+  
+  /* prototype */
+  Local<ObjectTemplate> proto = ctorObj->PrototypeTemplate(); proto = proto;
+
+  Local<Function> ctor = Nan::GetFunction(ctorObj).ToLocalChecked();
+//  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctor), ctorObj);
+  return [[NJSObject alloc] initWithValue:ctor];
+#else
+  return nil;
+#endif
+}
+- (NJSObject*)wrapperForObject:(id)value inContext:(NJSContextRef)context
+{
+  return nil;
+}
+@end
+
+@interface NJSWrapperMap : NSObject
+- (instancetype)initWithContext:(NJSContextRef)context;
+- (NJSObjCClassInfo*)classInfoForClass:(Class)cls;
+@end
+
+struct ObjCWeakRef {
+  ObjCWeakRef(__weak id ref) : ref(ref) {}
+  ObjCWeakRef(const ObjCWeakRef& rhs) : ref(rhs.ref) {}
+  ObjCWeakRef& operator =(const ObjCWeakRef& rhs) {
+    this->ref = rhs.ref;
+    return *this;
+  }
+  
+  bool operator == (__weak id src) const { return this->ref == src; }
+  bool operator == (const ObjCWeakRef& src) const { return this->ref == src.ref; }
+  operator size_t() const {
+    return (size_t)ref;
+  }
+  id ref;
+};
+
+struct ObjCWeakRefHash { 
+  size_t operator()(__weak id ref) const
+  { 
+    return (size_t)ref;
+  } 
+}; 
+
+@implementation NJSWrapperMap {
+  NSMutableDictionary *m_classMap;
+  std::unordered_map<__weak id, NJSValue*, ObjCWeakRefHash> m_cachedJSWrappers;
+  NSMapTable *m_cachedObjCWrappers;
+}
+
+- (instancetype)initWithContext:(NJSContextRef)context
+{
+  self = [super init];
+  if (!self)
+      return nil;
+
+  NSPointerFunctionsOptions keyOptions = NSPointerFunctionsOpaqueMemory | NSPointerFunctionsOpaquePersonality;
+  NSPointerFunctionsOptions valueOptions = NSPointerFunctionsWeakMemory | NSPointerFunctionsObjectPersonality;
+  m_cachedObjCWrappers = [[NSMapTable alloc] initWithKeyOptions:keyOptions valueOptions:valueOptions capacity:0];
+  
+//    m_cachedJSWrappers = std::make_unique<JSC::WeakGCMap<id, JSC::JSObject>>(toJS(context)->vm());
+
+//    ASSERT(!toJSGlobalObject(context)->wrapperMap());
+//    toJSGlobalObject(context)->setWrapperMap(self);
+  m_classMap = [[NSMutableDictionary alloc] init];
+  return self;
+}
+
+- (NJSObjCClassInfo*)classInfoForClass:(Class)cls
+{
+  if (!cls)
+      return nil;
+
+  // Check if we've already created a JSObjCClassInfo for this Class.
+  if (NJSObjCClassInfo* classInfo = (NJSObjCClassInfo*)m_classMap[cls])
+      return classInfo;
+
+  // Skip internal classes beginning with '_' - just copy link to the parent class's info.
+  if ('_' == *class_getName(cls)) {
+#if 0
+      bool conformsToExportProtocol = false;
+      forEachProtocolImplementingProtocol(cls, getJSExportProtocol(), [&conformsToExportProtocol](Protocol *, bool& stop) {
+          conformsToExportProtocol = true;
+          stop = true;
+      });
+
+      if (!conformsToExportProtocol)
+          return m_classMap[cls] = [self classInfoForClass:class_getSuperclass(cls)];
+#endif
+  }
+
+  return m_classMap[cls] = [[NJSObjCClassInfo alloc] initForClass:cls];
+}
+
+- (NJSValue *)findJSWrapperForObject:(id)object inContext:(NJSContextRef)context
+{
+  NJSValue* jsWrapper = nil;
+  ObjCWeakRef objcRef(object);
+  auto it(m_cachedJSWrappers.find(object));
+  if (it != m_cachedJSWrappers.end())
+  {
+    jsWrapper = it->second;
+    if (jsWrapper) {
+      auto value([jsWrapper toJS]);
+      if (value.IsEmpty() || value->IsNullOrUndefined()) {
+        m_cachedJSWrappers.erase(it);
+      } else {
+        return jsWrapper;
+      }
+    }
+//        return [JSValue valueWithJSValueRef:toRef(jsWrapper) inContext:context];
+  }
+  return nil;
+}
+
+- (void)setJSWrapperForObject:(id)object wrapper:(NJSValue*)wrapper inContext:(NJSContextRef)context
+{
+  auto it(m_cachedJSWrappers.find(object));
+  if (it != m_cachedJSWrappers.end()) {
+    m_cachedJSWrappers.erase(it);
+  }
+  if (wrapper) {
+    auto value([wrapper toJS]);
+    if (!(value.IsEmpty() || value->IsNullOrUndefined())) {
+      m_cachedJSWrappers[object] = wrapper;
+    }
+  }
+}
+
+- (NJSValue *)jsWrapperForObject:(id)object inContext:(NJSContextRef)context
+{
+//    ASSERT(toJSGlobalObject([context JSGlobalContextRef])->wrapperMap() == self);
+  NJSValue* jsWrapper = nil;
+  ObjCWeakRef objcRef(object);
+  if (m_cachedJSWrappers.find(object) != m_cachedJSWrappers.end())
+  {
+    jsWrapper = m_cachedJSWrappers[object];
+    if (jsWrapper)
+      return jsWrapper;
+//        return [JSValue valueWithJSValueRef:toRef(jsWrapper) inContext:context];
+  }
+
+  if (class_isMetaClass(object_getClass(object)))
+      jsWrapper = [[self classInfoForClass:(Class)object] constructorInContext:context];
+  else {
+      NJSObjCClassInfo* classInfo = [self classInfoForClass:[object class]];
+      jsWrapper = [classInfo wrapperForObject:object inContext:context];
+  }
+
+  // FIXME: https://bugs.webkit.org/show_bug.cgi?id=105891
+  // This general approach to wrapper caching is pretty effective, but there are a couple of problems:
+  // (1) For immortal objects JSValues will effectively leak and this results in error output being logged - we should avoid adding associated objects to immortal objects.
+  // (2) A long lived object may rack up many JSValues. When the contexts are released these will unprotect the associated JavaScript objects,
+  //     but still, would probably nicer if we made it so that only one associated object was required, broadcasting object dealloc.
+//    m_cachedJSWrappers->set(object, jsWrapper);
+  m_cachedJSWrappers[object] = jsWrapper;
+//    return [JSValue valueWithJSValueRef:toRef(jsWrapper) inContext:context];
+  return jsWrapper;
+}
+
+@end
+
+//id tryUnwrapObjcObject(JSGlobalContextRef, JSValueRef);
+
 
 namespace sweetiekit
 {
+  NJSWrapperMap* g_wrapperMap;
+  
+  NJSWrapperMap* GetWrapperMap() {
+    if (!g_wrapperMap) {
+      g_wrapperMap = [[NJSWrapperMap alloc] initWithContext:Isolate::GetCurrent()];
+    }
+    return g_wrapperMap;
+  }
+  
   Local<Value> GetWrapperFor(__weak id pThing)
   {
     return GetWrapperFor(pThing, NNSObject::type);
@@ -84,12 +347,23 @@ namespace sweetiekit
       if ([pThing isKindOfClass:[UIColor class]]) {
         return js_value_UIColor((UIColor*)pThing);
       }
+      NJSWrapperMap* wrappers = GetWrapperMap();
+      if (wrappers) {
+        NJSValue* wrapper = [wrappers findJSWrapperForObject:pThing inContext:JS_ISOLATE()];
+        if (wrapper) {
+          return [wrapper toJS];
+        }
+      }
       Nan::EscapableHandleScope scope;
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
       auto result(JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
 //      auto kind(NNSObject::GetNSObjectType(pThing, defaultType));
+      if (wrappers) {
+        NJSValue* wrapper = [[NJSValue alloc] initWithValue:result];
+        [wrappers setJSWrapperForObject:pThing wrapper:wrapper inContext:JS_ISOLATE()];
+      }
       return scope.Escape(result);
     }
   }
@@ -886,4 +1160,28 @@ extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
       block();
     });
   }
+}
+
+id Nid::set_self(__weak id self) {
+  _self = self;
+  if (_self) {
+    auto wrappers = sweetiekit::GetWrapperMap();
+    if (wrappers) {
+      NJSValue* wrapper = [[NJSValue alloc] initWithValue:this->handle()];
+      if (wrapper) {
+        [wrappers setJSWrapperForObject:_self wrapper:wrapper inContext:JS_ISOLATE()];
+      }
+    }
+  }
+  /*
+  auto wrapper = objc_getAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"]);
+  if (wrapper == nullptr) {
+    Nan::Persistent<FunctionTemplate>** p = new Nan::Persistent<FunctionTemplate>*(&GetDerivedType());
+    auto w = [NSObjectWrapper alloc];
+    w.ptr = p;
+    
+    objc_setAssociatedObject(obj, [obj associatedObjectKey:@"sweetiekit.type"], w, objc_AssociationPolicy::OBJC_ASSOCIATION_RETAIN);
+    //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
+  }*/
+  return _self;
 }

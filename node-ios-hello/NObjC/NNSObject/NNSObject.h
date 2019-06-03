@@ -78,6 +78,12 @@ JS_WRAP_CLASS(id, ObjectWrap);
   }
 JS_WRAP_CLASS_END(id);
 
+#define js_value_Class(x) js_value_wrapper(x, Class)
+#define to_value_Class(x) to_value_wrapper(x, Class)
+#define is_value_Class(x) is_value_wrapper(x, Class)
+
+JS_WRAP_CLASS(Class, id);
+JS_WRAP_CLASS_END(Class);
 
 #define js_value_NSObject(x) js_value_wrapper(x, NSObject)
 #define to_value_NSObject(x) to_value_wrapper(x, NSObject)
