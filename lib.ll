@@ -89,6 +89,14 @@
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
 
+(define-macro js-define-method (self-type self name args rest: body)
+  `(nan-method (js-wrapper ,self-type ,(rtrim name ":"))
+     (declare-type ,self-type %self)
+     (JS_UNWRAP ,self-type ,self)
+     (autoreleasepool
+       ;(NSLog @"%@\n" [[(%self-type) alloc] init])
+       ,@body)))
+
 (define-macro js-new-object ()
   `((:: Nan New<Object>)))
 
@@ -222,6 +230,22 @@
        [self ,(cat ":set-" name)
              (,(cat "to-value-" input-type) (declare-type ,input-type ,@body))])))
 
+(during-compilation
+  (define-global js-gen-method-part (name)
+    (if (and (string? name)
+             (= (char name (edge name)) ":"))
+        (cat ":" (rtrim name ":"))
+        (obj? name) nil
+       name))
+  (define-global js-gen-method-call (self name args)
+    `([,self ,(js-gen-method-part name) ,@(map js-gen-method-part args)])))
+
+(define-macro js-type-method (self-type return-type name args rest: body)
+  (let (return-type (expand return-type)
+        body (if (none? body) (js-gen-method-call `self name args) body))
+    `(js-define-method ,self-type self ,name ,args
+       (js-return (,(cat "js-value-" return-type) (declare-type ,return-type ,@body))))))
+
 '(print (compile (expand '(%do
   (js-type-getter UIView CGRect frame)
   (js-type-getter UIView CGRect bounds)
@@ -261,6 +285,9 @@
           (set (get attrs x) true)))
     `(js-property ,@attrs type: ,type name: ,name))))
 
+(define-macro method (spec return-type name rest: args)
+  `(js-method type: ,return-type name: ,name args: ,args static: ,(if (= spec "+") true false)))
+
 (during-compilation
   (define-global js-print-type (type form)
     (if (= type (getenv 'js-print-type_%prev 'type))
@@ -288,6 +315,29 @@
          ,(unless readonly?
             `(js-type-setter ,class ,type ,name))))))
 
+(during-compilation
+  (define-global js-gen-method-name (name args)
+    (rtrim name ":")))
+
+
+(define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
+  (let class (if (obj? class) (hd class) class)
+    (case (getenv '%%flags 'stage)
+      header
+      (js-print-type class 
+        (let name (js-gen-method-name name args static: static?)
+          (if static?
+            `(JS_METHOD ,name)
+            `(JS_METHOD ,name))))
+      ctor
+      (js-print-type class
+        (let name (js-gen-method-name name args static: static?)
+          (if static?
+              `(JS_ASSIGN_METHOD ctor ,name)
+              `(JS_ASSIGN_METHOD proto ,name))))
+      source
+      `(js-type-method ,class ,type ,name ,args))))
+
 (define-global str-replace (s before after rest: more)
   (let ((a rest: bs) (split s before))
     (let r a
@@ -298,6 +348,10 @@
          r))))
 
 (set reader (require 'reader))
+
+(define-global prn (x)
+  (print (str x))
+  x)
 
 (define-global parse-properties (s)
   (let hdr (str-replace s
@@ -324,12 +378,12 @@
               (let (stream (reader (.stream (clip line 1)))
                     (ok x) (guard (reader (.read-all stream))))
                  (when ok
-                   (print (str `(+ ,@x)))))
+                   (add r (prn `(method + ,@x)))))
               (= (char line 0) "-")
               (let (stream (reader (.stream (clip line 1)))
                     (ok x) (guard (reader (.read-all stream))))
                  (when ok
-                   (print (str `(- ,@x)))))
+                   (add r (prn `(method - ,@x)))))
 ;                (when (and ok (two? x))
 ;                  (let ((type name) x)
 ;                    (when (obj? type)
@@ -391,6 +445,12 @@
         contents (read-file path)
         props (parse-properties contents)
         form `(do))
+    (step x props
+      (when (and (hd? x 'method) (= (at x 1) "+"))
+        (add form x)))
+    (step x props
+      (when (and (hd? x 'method) (= (at x 1) "-"))
+        (add form x)))
     (step x props
       ;(print (str x))
       (when (hd? x 'interface)
