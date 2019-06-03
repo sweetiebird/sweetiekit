@@ -89,10 +89,16 @@
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
 
-(define-macro js-define-method (self-type self name args rest: body)
-  `(nan-method (js-wrapper ,self-type ,(rtrim name ":"))
+(define-global objc-named-arg? (x)
+  (and (string? x) (str-ends? x ":")))
+
+(define-global objc-method-name (name args)
+  (camel-case (str-replace (rtrim (apply cat name (keep objc-named-arg? args)) ":") ":" "-")))
+
+(define-macro js-define-method (self-type self name args static: static? rest: body)
+  `(nan-method (js-wrapper ,self-type ,(objc-method-name name args))
      (declare-type ,self-type %self)
-     (JS_UNWRAP ,self-type ,self)
+     ,(unless static? `(JS_UNWRAP ,self-type ,self))
      (autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
@@ -152,7 +158,7 @@
   `(to-value auto ,x))
 
 (define-macro js-return (x)
-  `(do (JS_SET_RETURN (js-value ,x)) (return)))
+  `(JS_SET_RETURN (js-value ,x)))
 
 ;(define-macro js-value-NSString* (x)
 ;  `(js-value (aif ,x (JS_STR [it UTF8String]) (js-nil))))
@@ -217,11 +223,22 @@
 ;(define-macro js-value-Array<id> (seq)
 ;  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
 
+(define-global objc-return-type (return-type)
+  (while (in (hd? return-type) "nullable" "const")
+    (set return-type (tl return-type)))
+  (let r (if (obj? return-type)
+             (apply concat "_" return-type)
+             return-type)
+    (str-replace r "const " "")))
+
+(define-global js-return-type (return-type)
+  (cat "js-value-" (objc-return-type return-type)))
+
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
         body (if (none? body) `([self ,(if (= return-type 'BOOL) (camel-case (cat "is-" name)) name)]) body))
     `(js-getter ,self-type self ,name
-       (js-return (,(cat "js-value-" return-type) (declare-type ,return-type ,@body))))))
+       (js-return (,(js-return-type return-type) (declare-type ,return-type ,@body))))))
 
 (define-macro js-type-setter (self-type input-type name rest: body)
   (let (input-type (expand input-type)
@@ -240,11 +257,19 @@
   (define-global js-gen-method-call (self name args)
     `([,self ,(js-gen-method-part name) ,@(map js-gen-method-part args)])))
 
-(define-macro js-type-method (self-type return-type name args rest: body)
+(during-compilation
+  (define-global js-self-class ()
+    (let r (getenv 'Class 'type)
+      (if (obj? r) (hd r) r))))
+
+(define-macro %instancetype ()
+  (js-self-class))
+
+(define-macro js-type-method (self-type return-type name args static: static? rest: body)
   (let (return-type (expand return-type)
-        body (if (none? body) (js-gen-method-call `self name args) body))
-    `(js-define-method ,self-type self ,name ,args
-       (js-return (,(cat "js-value-" return-type) (declare-type ,return-type ,@body))))))
+        body (if (none? body) (js-gen-method-call (if static? `(%instancetype) `self) name args) body))
+    `(js-define-method ,self-type self ,name ,args static: ,static?
+       (js-return (,(js-return-type return-type) (declare-type ,return-type ,@body))))))
 
 '(print (compile (expand '(%do
   (js-type-getter UIView CGRect frame)
@@ -315,28 +340,25 @@
          ,(unless readonly?
             `(js-type-setter ,class ,type ,name))))))
 
-(during-compilation
-  (define-global js-gen-method-name (name args)
-    (rtrim name ":")))
-
-
 (define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
+  (when (str-starts? name "init")
+    (set static? true))
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
       header
       (js-print-type class 
-        (let name (js-gen-method-name name args static: static?)
+        (let name (objc-method-name name args static: static?)
           (if static?
             `(JS_METHOD ,name)
             `(JS_METHOD ,name))))
       ctor
       (js-print-type class
-        (let name (js-gen-method-name name args static: static?)
+        (let name (objc-method-name name args static: static?)
           (if static?
               `(JS_ASSIGN_METHOD ctor ,name)
               `(JS_ASSIGN_METHOD proto ,name))))
       source
-      `(js-type-method ,class ,type ,name ,args))))
+      `(js-type-method ,class ,type ,name ,args static: ,static?))))
 
 (define-global str-replace (s before after rest: more)
   (let ((a rest: bs) (split s before))
@@ -346,6 +368,12 @@
       (if (some? more)
           (apply str-replace r more)
          r))))
+
+(define-global str-starts? (str s)
+  (= (clip str 0 (# s)) s))
+
+(define-global str-ends? (str s)
+  (= (clip str (- (# str) (# s))) s))
 
 (set reader (require 'reader))
 
@@ -368,7 +396,7 @@
       (let lines (map (fn (line)
                         (when (search line " @")
                           (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
-                        (step pre (list " NS_" " UI_" " API_" " __TVOS")
+                        (step pre (list " NS_" " UI_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
                           (when (search line pre)
                             (set line (hd (split line pre)))))
                         (set line (rtrim line (fn (c) (or (whitec c) (= c "{"))))))
@@ -401,6 +429,8 @@
                   class
                   (unless (= (last line) ";")
                     (add r (join (list kind (reader (.read-all stream))))))
+                  protocol
+                  (add r (join (list kind (reader (.read-all stream)))))
                   interface
                   (add r (join (list kind (reader (.read-all stream)))))
                   property 
@@ -433,11 +463,18 @@
        AR (return 'ARKit)
        AV (return 'AVFoundation)
        CA (return 'CoreAnimation)
-       SCN (return 'SceneKit)
+       CL (return 'CoreLocation)
+       CM (return 'CoreMotion)
+       GK (return 'GameplayKit)
        SK (return 'SpriteKit)
+       SCN (return 'SceneKit)
+       MDL (return 'ModelIO)
+       MTL (return 'Metal)
+       MTK (return 'MetalKit)
        MK (return 'MapKit)
        UI (return 'UIKit)
-       CL (return 'CoreLocation))))
+       NS (return 'Foundation)
+       )))
   (error (cat "Unknown type " type)))
 
 (define-global test-parse-properties ((o type 'UIView) (o framework (ios-framework-from-type type)) (o subframework))
@@ -446,14 +483,18 @@
         props (parse-properties contents)
         form `(do))
     (step x props
+      (when (in (hd? x) 'interface 'protocol)
+        (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
       (when (and (hd? x 'method) (= (at x 1) "+"))
         (add form x)))
     (step x props
+      (when (in (hd? x) 'interface 'protocol)
+        (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
       (when (and (hd? x 'method) (= (at x 1) "-"))
         (add form x)))
     (step x props
       ;(print (str x))
-      (when (hd? x 'interface)
+      (when (in (hd? x) 'interface 'protocol)
         (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
       (when (hd? x 'property)
         (add form x)))
