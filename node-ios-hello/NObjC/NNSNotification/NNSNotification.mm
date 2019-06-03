@@ -55,40 +55,31 @@ NAN_METHOD(NNSNotification::New) {
 }
 
 NAN_METHOD(NNSNotification::notificationWithName) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NNSNotification)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NNSNotification *ns = ObjectWrap::Unwrap<NNSNotification>(obj);
-
-  if (info.Length() == 2) {
-    @autoreleasepool {
-      NSString *name = NJSStringToNSString(info[0]);
-      id nsValue = sweetiekit::FromJS(info[1]);
-      ns->SetNSObject([NSNotification notificationWithName:name object:nsValue]);
-    }
-  } else if (info.Length() > 2) {
-    @autoreleasepool {
-      NSString *name = NJSStringToNSString(info[0]);
-
-      id nsValue = sweetiekit::FromJS(info[1]);
+  @autoreleasepool {
+    NSNotification* self = nil;
+    if (info.Length() == 2) {
+      NSString *name = to_value_NSString(info[0]);
+      id nsValue = to_value_id(info[1]);
+      self = [NSNotification notificationWithName:name object:nsValue];
+    } else if (info.Length() > 2) {
+      NSString *name = to_value_NSString(info[0]);
+      id nsValue = to_value_id(info[1]);
 
       Local<Object> infoObj = JS_OBJ(info[2]);
       NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
       sweetiekit::forEachEntryInObject(infoObj, ^(Local<Value> key, Local<Value> value) {
         Nan::HandleScope scope;
-        NSString* nsKey = NJSStringToNSString(key);
-        id nsValue = sweetiekit::FromJS(value);
+        NSString* nsKey = to_value_NSString(key);
+        id nsValue = to_value_id(value);
         dict[nsKey] = nsValue;
       });
 
-      ns->SetNSObject([NSNotification notificationWithName:name object:nsValue userInfo:dict]);
+      self = [NSNotification notificationWithName:name object:nsValue userInfo:dict];
+    }
+    if (self) {
+      JS_SET_RETURN_EXTERNAL(NSNotification, self);
     }
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_GETTER(NNSNotification::nameGetter) {

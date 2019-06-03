@@ -405,36 +405,11 @@ NAN_SETTER(NUIView::AutoresizesSubviewsSetter) {
 }
 
 NAN_GETTER(NUIView::SubviewsGetter) {
-  Nan::HandleScope scope;
-
-  NUIView* view = ObjectWrap::Unwrap<NUIView>(info.This());
-  UIView* pView = view->As<UIView>();
-  __block NSArray* subviews = nullptr;
-  __block NSInteger count = 0;
-
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      subviews = [pView subviews];
-      count = [subviews count];
-    });
+    JS_SET_RETURN(js_value_NSArray<UIView*>([self subviews]));
   }
-  
-  auto result = Nan::New<Array>();
-
-  for (NSInteger i = 0; i < count; i++) {
-    UIView* pSubview = [subviews objectAtIndex:i];
-    if (pSubview != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)pSubview)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pSubview, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(result, static_cast<uint32_t>(i), value);
-    }
-  }
-
-  JS_SET_RETURN(result);
 }
-
 
 CGRect NUIView::GetFrame() {
   __block CGRect frame = CGRectMake(0,0,0,0);

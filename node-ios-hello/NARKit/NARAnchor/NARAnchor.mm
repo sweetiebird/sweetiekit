@@ -50,56 +50,32 @@ NAN_METHOD(NARAnchor::New) {
 }
 
 NAN_METHOD(NARAnchor::initWithTransform) {
-  Nan::HandleScope scope;
-  
-  Local<Object> anchorObj = JS_TYPE(NARAnchor)->NewInstance(JS_CONTEXT(), 0, nullptr).ToLocalChecked();
-
-  JS_UNWRAPPED(anchorObj, ARAnchor, anchor);
-
   @autoreleasepool {
-    simd_float4x4 transform = matrix_identity_float4x4;
-    if (!sweetiekit::SetTransform(transform, info[0])) {
-      Nan::ThrowError("ARAnchor:initWithTransform: Invalid transform type");
-    } else {
-      nanchor->SetNSObject([anchor initWithTransform:transform]);
-    }
+    JS_SET_RETURN_EXTERNAL(ARAnchor,
+      [[ARAnchor alloc] initWithTransform:to_value_simd_float4x4(info[0])]);
   }
-
-  info.GetReturnValue().Set(anchorObj);
 }
 
 NAN_GETTER(NARAnchor::nameGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARAnchor, ar);
-  
+  JS_UNWRAP(ARAnchor, self);
   @autoreleasepool {
-    NSString* name = [ar name];
-    if (name != nullptr) {
-      JS_SET_RETURN(JS_STR([name UTF8String]));
-    }
+    JS_SET_RETURN(js_value_NSString([self name]));
   }
 }
 
 NAN_GETTER(NARAnchor::identifierGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARAnchor, ar);
-  
+  JS_UNWRAP(ARAnchor, self);
   @autoreleasepool {
-    NSUUID* identifier = [ar identifier];
+    NSUUID* identifier = [self identifier];
     if (identifier != nullptr) {
-      JS_SET_RETURN(JS_STR([[identifier UUIDString] UTF8String]));
+      JS_SET_RETURN(js_value_NSString([identifier UUIDString]));
     }
   }
 }
 
 NAN_GETTER(NARAnchor::transformGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARAnchor, ar);
-
-  auto xform = ar.transform;
-  const float* matrix = (const float*)&xform;
-  JS_SET_RETURN(createTypedArray<Float32Array>(16, matrix));
+  JS_UNWRAP(ARAnchor, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_simd_float4x4([self transform]));
+  }
 }

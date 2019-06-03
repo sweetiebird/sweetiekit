@@ -10,6 +10,10 @@
 
 #include "NNSObject.h"
 
+#define js_value_CABasicAnimation(x) js_value_wrapper(x, CABasicAnimation)
+#define to_value_CABasicAnimation(x) to_value_wrapper(x, CABasicAnimation)
+#define is_value_CABasicAnimation(x) is_value_wrapper(x, CABasicAnimation)
+
 JS_WRAP_CLASS(CABasicAnimation, NSObject);
   JS_PROP(fromValue);
   JS_PROP(toValue);

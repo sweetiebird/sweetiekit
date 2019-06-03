@@ -48,6 +48,8 @@ NAN_METHOD(NSKScene::New) {
       file = *utf8Value;
     } else {
       Nan::ThrowError("invalid argument");
+      delete scene;
+      return;
     }
     @autoreleasepool {
       NSString *fileName = [NSString stringWithUTF8String:file.c_str()];
@@ -64,18 +66,10 @@ NAN_METHOD(NSKScene::New) {
 }
 
 NAN_METHOD(NSKScene::sceneWithSize) {
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NSKScene)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(obj);
-
   @autoreleasepool {
-    CGSize size(to_value_CGSize(info[0]));
-    scene->SetNSObject([SKScene sceneWithSize:size]);
+    JS_SET_RETURN_EXTERNAL(SKScene,
+      [SKScene sceneWithSize:to_value_CGSize(info[0])]);
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NSKScene::convertPointFromView) {

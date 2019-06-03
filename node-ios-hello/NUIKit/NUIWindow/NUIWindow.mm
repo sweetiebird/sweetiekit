@@ -11,9 +11,9 @@ NUIWindow::~NUIWindow() {}
 
 JS_INIT_CLASS(UIWindow, UIView);
   // instance members (proto)
-  Nan::SetMethod(proto, "setRootViewController", SetRootViewController);
-  Nan::SetMethod(proto, "makeKeyAndVisible", MakeKeyAndVisible);
-  JS_ASSIGN_PROP(proto, rootViewController);
+  JS_PROTO_METHOD(setRootViewController);
+  JS_PROTO_METHOD(makeKeyAndVisible);
+  JS_PROTO_PROP(rootViewController);
   // static members (ctor)
   JS_INIT_CTOR(UIWindow, UIView);
 JS_INIT_CLASS_END(UIWindow, UIView);
@@ -35,48 +35,34 @@ NAN_METHOD(NUIWindow::New) {
   info.GetReturnValue().Set(viewObj);
 }
 
-
-NAN_METHOD(NUIWindow::SetRootViewController) {
-  NUIWindow *win = ObjectWrap::Unwrap<NUIWindow>(Local<Object>::Cast(info.This()));
-  NNSObject *vc = ObjectWrap::Unwrap<NNSObject>(Local<Object>::Cast(info[0]));
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [win->As<UIWindow>() setRootViewController:vc->As<UITabBarController>()];
-      [win->As<UIWindow>() makeKeyAndVisible];
-    });
-  }
-}
-
-NAN_METHOD(NUIWindow::MakeKeyAndVisible) {
-  NUIWindow *win = ObjectWrap::Unwrap<NUIWindow>(Local<Object>::Cast(info.This()));
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [win->As<UIWindow>() makeKeyAndVisible];
-    });
-  }
-}
-
 #include "NUIViewController.h"
 
+NAN_METHOD(NUIWindow::setRootViewController) {
+  JS_UNWRAP(UIWindow, self);
+  @autoreleasepool {
+    [self setRootViewController:to_value_UIViewController(info[0])];
+    [self makeKeyAndVisible];
+  }
+}
+
+NAN_METHOD(NUIWindow::makeKeyAndVisible) {
+  JS_UNWRAP(UIWindow, self);
+  @autoreleasepool {
+    [self makeKeyAndVisible];
+  }
+}
+
 NAN_GETTER(NUIWindow::rootViewControllerGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIWindow, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui rootViewController], NUIViewController::type));
+  JS_UNWRAP(UIWindow, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_UIViewController([self rootViewController]));
+  }
 }
 
 NAN_SETTER(NUIWindow::rootViewControllerSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIWindow, ui);
-
-  NNSObject *vc = ObjectWrap::Unwrap<NNSObject>(Local<Object>::Cast(value));
-
+  JS_UNWRAP(UIWindow, self);
   @autoreleasepool {
-    [ui setRootViewController:vc->As<UITabBarController>()];
-    [ui makeKeyAndVisible];
+    [self setRootViewController:to_value_UIViewController(value)];
+    [self makeKeyAndVisible];
   }
 }

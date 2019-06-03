@@ -49,19 +49,9 @@ NAN_METHOD(NCAEmitterCell::New) {
 }
 
 NAN_METHOD(NCAEmitterCell::emitterCell) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NCAEmitterCell)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NCAEmitterCell *ui = ObjectWrap::Unwrap<NCAEmitterCell>(obj);
-
   @autoreleasepool {
-    ui->SetNSObject([CAEmitterCell emitterCell]);
+    JS_SET_RETURN_EXTERNAL(CAEmitterCell, [CAEmitterCell emitterCell]);
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_GETTER(NCAEmitterCell::contentsGetter) {

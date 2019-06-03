@@ -876,7 +876,10 @@ bool is_value_UIColor(const Local<Value>& value)
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
   if ([NSThread isMainThread]) {
-    block();
+    {
+      Nan::HandleScope scope;
+      block();
+    }
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
       Nan::HandleScope scope;

@@ -43,22 +43,7 @@ NAN_METHOD(NNSUserDefaults::New) {
 
 NAN_GETTER(NNSUserDefaults::StandardUserDefaultsGetter)
 {
-  Nan::HandleScope scope;
-
-  __block NSUserDefaults* ns = nullptr;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      ns = [NSUserDefaults standardUserDefaults];
-    });
-  }
-
-  Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)ns)
-  };
-  Local<Object> viewObj = JS_TYPE(NNSUserDefaults)->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  info.GetReturnValue().Set(viewObj);
+  JS_SET_RETURN_EXTERNAL(NSUserDefaults, [NSUserDefaults standardUserDefaults]);
 }
 
 NAN_METHOD(NNSUserDefaults::Synchronize)

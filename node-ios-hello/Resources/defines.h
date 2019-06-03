@@ -100,7 +100,10 @@ using namespace node;
   }
   
 #define JS_SET_RETURN_EXTERNAL(type, value) \
-    JS_SET_RETURN_NEW_1(type, Nan::New<External>((__bridge void*)value))
+{ \
+    id JS_RETURN_VALUE(value); \
+    JS_SET_RETURN_NEW_1(type, Nan::New<External>((__bridge void*)JS_RETURN_VALUE)); \
+}
 
 #define JS_SET_RETURN_NEW_2(type, arg0, arg1) \
   { \
@@ -342,7 +345,11 @@ namespace sweetiekit {
      }
     
      void Reset(Local<Value> fn) {
-       cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
+       if (fn->IsFunction()) {
+        cb.reset(new Nan::Persistent<Function>(Local<Function>::Cast(fn)));
+       } else {
+        Reset();
+       }
      }
     
      JSFunction& operator = (Local<Function> fn) {

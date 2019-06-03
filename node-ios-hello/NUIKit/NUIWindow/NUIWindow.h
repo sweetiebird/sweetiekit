@@ -16,8 +16,8 @@
 #define is_value_UIWindow(x) is_value_wrapper(x, UIWindow)
 
 JS_WRAP_CLASS(UIWindow, UIView);
-  JS_METHOD(SetRootViewController);
-  JS_METHOD(MakeKeyAndVisible);
+  JS_METHOD(setRootViewController);
+  JS_METHOD(makeKeyAndVisible);
   JS_PROP(rootViewController);
 JS_WRAP_CLASS_END(UIWindow);
 

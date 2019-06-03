@@ -44,41 +44,18 @@ NAN_METHOD(NCIImage::New) {
 }
 
 NAN_METHOD(NCIImage::imageByApplyingTransform) {
-  Nan::HandleScope scope;
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NCIImage)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-  NCIImage *ciObj = ObjectWrap::Unwrap<NCIImage>(obj);
-
-  JS_UNWRAP(CIImage, ci);
-
+  JS_UNWRAP(CIImage, self);
   @autoreleasepool {
-    UInt32 orient = [[UIApplication sharedApplication] statusBarOrientation];
     simd_float3x3 xform = matrix_identity_float3x3;
     if (sweetiekit::SetTransform3(xform, info[0])) {
-        CGAffineTransform aff = CGAffineTransformMake(xform.columns[0][0], xform.columns[0][1], xform.columns[1][0], xform.columns[1][1], xform.columns[2][0], xform.columns[2][1]);
-      ciObj->SetNSObject([ci imageByApplyingTransform:aff]);
+      CGAffineTransform aff = CGAffineTransformMake(xform.columns[0][0], xform.columns[0][1], xform.columns[1][0], xform.columns[1][1], xform.columns[2][0], xform.columns[2][1]);
+      JS_SET_RETURN_EXTERNAL(CIImage, [self imageByApplyingTransform:aff]);
     }
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NCIImage::initWithImage) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NCIImage)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-  NCIImage *ci = ObjectWrap::Unwrap<NCIImage>(obj);
-
-  Local<Object> imgObj = JS_OBJ(info[0]);
-  NUIImage *img = ObjectWrap::Unwrap<NUIImage>(imgObj);
-
   @autoreleasepool {
-    ci->SetNSObject([[CIImage alloc] initWithImage:img->As<UIImage>()]);
+    JS_SET_RETURN_EXTERNAL(CIImage, [[CIImage alloc] initWithImage:to_value_UIImage(info[0])]);
   }
-
-  JS_SET_RETURN(obj);
 }

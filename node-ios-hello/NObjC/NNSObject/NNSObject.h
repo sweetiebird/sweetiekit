@@ -45,7 +45,11 @@ JS_WRAP_CLASS(id, ObjectWrap);
   JS_METHOD(invoke);
 
   id _self;
-  id set_self(id self);
+  id set_self(__weak id self);
+  
+  inline void wrap(v8::Local<v8::Object> handle) {
+    Wrap(handle);
+  }
   
   template<typename T>
   T self() {
@@ -80,7 +84,7 @@ JS_WRAP_CLASS_END(id);
 #define is_value_NSObject(x) is_value_wrapper(x, NSObject)
 
 JS_WRAP_CLASS(NSObject, id);
-  NSObject* SetNSObject(NSObject* obj) {
+  NSObject* SetNSObject(__weak NSObject* obj) {
     set_self(obj);
     return self<NSObject*>();
   }

@@ -313,29 +313,19 @@ NAN_SETTER(NCALayer::PositionSetter) {
   }
 }
 
-NAN_METHOD(NCALayer::AddAnimation) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CALayer, layer)
+#include "NCABasicAnimation.h"
 
-  Local<Object> obj = JS_OBJ(info[0]);
-  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NCABasicAnimation)).FromJust()) {
-    NCABasicAnimation *anim = ObjectWrap::Unwrap<NCABasicAnimation>(obj);
-    
-    std::string kp;
-    if (info[1]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
-      kp = *utf8Value;
-    } else {
-      Nan::ThrowError("invalid argument: key path");
+NAN_METHOD(NCALayer::AddAnimation) {
+  JS_UNWRAP(CALayer, self);
+  @autoreleasepool {
+    if (info[0]->IsNullOrUndefined()) {
+      return;
     }
-    
-    @autoreleasepool {
-      NSString *keyPath = [NSString stringWithUTF8String:kp.c_str()];
-      
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        [layer addAnimation:anim->As<CABasicAnimation>() forKey:keyPath];
-      });
+    if (!is_value_CABasicAnimation(info[0])) {
+      Nan::ThrowError("NCALayer::AddAnimation: expected first argument to be a CABasicAnimation");
+      return;
     }
+    [self addAnimation:to_value_CABasicAnimation(info[0]) forKey:to_value_NSString(info[1])];
   }
 }
 
@@ -372,17 +362,9 @@ NAN_SETTER(NCALayer::shadowOpacitySetter) {
 }
 
 NAN_METHOD(NCALayer::addSublayer) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CALayer, layer)
-
-  Local<Object> obj = JS_OBJ(info[0]);
-  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NCALayer)).FromJust()) {
-    NCALayer *sublayer = ObjectWrap::Unwrap<NCALayer>(obj);
-  
-    @autoreleasepool {
-      [layer addSublayer:sublayer->As<CALayer>()];
-    }
+  JS_UNWRAP(CALayer, self);
+  @autoreleasepool {
+    [self addSublayer:to_value_CALayer(info[0])];
   }
 }
 

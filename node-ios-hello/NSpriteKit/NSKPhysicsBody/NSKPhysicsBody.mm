@@ -67,91 +67,45 @@ NAN_METHOD(NSKPhysicsBody::New) {
 }
 
 NAN_METHOD(NSKPhysicsBody::bodyWithCircleOfRadius) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
-
-  if (info.Length() == 1) {
-    @autoreleasepool {
-      float radius = TO_FLOAT(info[0]);
-      body->SetNSObject([SKPhysicsBody bodyWithCircleOfRadius:radius]);
-    }
-  } else if (info.Length() > 1) {
-    @autoreleasepool {
-      float radius = TO_FLOAT(info[0]);
-      double x = TO_DOUBLE(JS_OBJ(info[1])->Get(JS_STR("x")));
-      double y = TO_DOUBLE(JS_OBJ(info[1])->Get(JS_STR("y")));
-      CGPoint center = CGPointMake(x, y);
-      body->SetNSObject([SKPhysicsBody bodyWithCircleOfRadius:radius center:center]);
-    }
+  if (info.Length() >= 2) {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithCircleOfRadius:to_value_CGFloat(info[0])
+                     center:to_value_CGPoint(info[1])]);
+  } else {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithCircleOfRadius:to_value_CGFloat(info[0])]);
   }
-
-  JS_SET_RETURN(obj);
 }
 
 #include "NSKTexture.h"
 
 NAN_METHOD(NSKPhysicsBody::bodyWithTexture) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
-
-  @autoreleasepool {
-    NSKTexture *tx = ObjectWrap::Unwrap<NSKTexture>(Local<Object>::Cast(info[0]));
-    double w = TO_DOUBLE(JS_OBJ(info[1])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[1])->Get(JS_STR("height")));
-    body->SetNSObject([SKPhysicsBody bodyWithTexture:tx->As<SKTexture>() size:CGSizeMake(w, h)]);
+  if (info.Length() >= 3) {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithTexture:to_value_SKTexture(info[0])
+                     alphaThreshold:to_value_float(info[1])
+                     size:to_value_CGSize(info[2])]);
+  } else {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithTexture:to_value_SKTexture(info[0])
+                     size:to_value_CGSize(info[1])]);
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NSKPhysicsBody::bodyWithRectangleOfSize) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
-
-  @autoreleasepool {
-    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    CGSize size = CGSizeMake(w, h);
-    body->SetNSObject([SKPhysicsBody bodyWithRectangleOfSize:size]);
+  if (info.Length() >= 2) {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithRectangleOfSize:to_value_CGSize(info[0])
+                     center:to_value_CGPoint(info[1])]);
+  } else {
+    JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+      [SKPhysicsBody bodyWithRectangleOfSize:to_value_CGSize(info[0])]);
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NSKPhysicsBody::bodyWithEdgeLoopFromRect) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NSKPhysicsBody)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(obj);
-
-  @autoreleasepool {
-    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    CGRect frame = CGRectMake(x, y, w, h);
-    body->SetNSObject([SKPhysicsBody bodyWithEdgeLoopFromRect:frame]);
-  }
-
-  JS_SET_RETURN(obj);
+  JS_SET_RETURN_EXTERNAL(SKPhysicsBody,
+    [SKPhysicsBody bodyWithEdgeLoopFromRect:to_value_CGRect(info[0])]);
 }
 
 //NAN_GETTER(NSKPhysicsBody::nodeGetter) {
