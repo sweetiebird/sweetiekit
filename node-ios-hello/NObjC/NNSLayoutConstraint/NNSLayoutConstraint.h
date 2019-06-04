@@ -15,6 +15,11 @@
 #define to_value_NSLayoutConstraint(x) to_value_wrapper(x, NSLayoutConstraint)
 #define is_value_NSLayoutConstraint(x) is_value_wrapper(x, NSLayoutConstraint)
 
+// constants
+#define js_value_UILayoutPriority(x) js_enum_wrapper(x, UILayoutPriority)
+#define to_value_UILayoutPriority(x) to_enum_wrapper(x, UILayoutPriority)
+#define is_value_UILayoutPriority(x) is_enum_wrapper(x, UILayoutPriority)
+
 JS_WRAP_CLASS(NSLayoutConstraint, NSObject);
   JS_METHOD(ActivateConstraints);
   JS_METHOD(DeactivateConstraints);

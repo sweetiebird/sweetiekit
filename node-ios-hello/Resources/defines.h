@@ -840,6 +840,15 @@ NSArray<T>* _Nullable to_value_NSArray(Local<Value> arr) {
   }
 }
 
+template<typename T>
+bool is_value_NSArray(Local<Value> arr) {
+  if (!arr->IsArray()) {
+    return false;
+  }
+  // TODO: check the type of each object in the array against T
+  return true;
+}
+
 static inline Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable dict) {
   if (dict == nullptr) {
     return Nan::Undefined();
@@ -971,9 +980,15 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type name(to_value_##type(info[name##_argument_index]));
   
-#define declare_pointer_(index, type, name, nullable) \
+#define declare_pointer_(index, type, name) \
   auto name##_argument_index(index); \
-  if (!nullable && !is_value_##type(info[name##_argument_index])) \
+  if (info[name##_argument_index]->IsNullOrUndefined() || !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  type* name(to_value_##type(info[name##_argument_index]));
+  
+#define declare_nullable_pointer_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(to_value_##type(info[name##_argument_index]));
 
@@ -993,10 +1008,10 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   declare_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_pointer(...) \
-  declare_pointer_(JS_ARGC, __VA_ARGS__, false); JS_ARGC++;
+  declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
 
 #define declare_nullable_pointer(...) \
-  declare_pointer_(JS_ARGC, __VA_ARGS__, true); JS_ARGC++;
+  declare_nullable_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;

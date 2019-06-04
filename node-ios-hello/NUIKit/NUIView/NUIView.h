@@ -53,6 +53,10 @@
 #define to_value_UISemanticContentAttribute(x) to_enum_wrapper(x, UISemanticContentAttribute)
 #define is_value_UISemanticContentAttribute(x) is_enum_wrapper(x, UISemanticContentAttribute)
 
+#define js_value_UILayoutConstraintAxis(x) js_enum_wrapper(x, UILayoutConstraintAxis)
+#define to_value_UILayoutConstraintAxis(x) to_enum_wrapper(x, UILayoutConstraintAxis)
+#define is_value_UILayoutConstraintAxis(x) is_enum_wrapper(x, UILayoutConstraintAxis)
+
 // UIInterface.h constants
 
 #define js_value_UIBarStyle(x) js_enum_wrapper(x, UIBarStyle)
@@ -78,7 +82,6 @@
 #define js_value_UIDisplayGamut(x) js_enum_wrapper(x, UIDisplayGamut)
 #define to_value_UIDisplayGamut(x) to_enum_wrapper(x, UIDisplayGamut)
 #define is_value_UIDisplayGamut(x) is_enum_wrapper(x, UIDisplayGamut)
-
 
 JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(origin);
@@ -113,6 +116,34 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_METHOD(setNeedsDisplayInRect);
   JS_METHOD(addGestureRecognizer);
   JS_METHOD(removeGestureRecognizer);
+    
+  JS_METHOD(addMotionEffect);
+  JS_METHOD(removeMotionEffect);
+  JS_METHOD(addConstraint);
+  JS_METHOD(addConstraints);
+  JS_METHOD(removeConstraint);
+  JS_METHOD(removeConstraints);
+  JS_METHOD(updateConstraintsIfNeeded);
+  JS_METHOD(updateConstraints);
+  JS_METHOD(needsUpdateConstraints);
+  JS_METHOD(setNeedsUpdateConstraints);
+  JS_METHOD(alignmentRectForFrame);
+  JS_METHOD(frameForAlignmentRect);
+  JS_METHOD(viewForBaselineLayout);
+  JS_METHOD(invalidateIntrinsicContentSize);
+  JS_METHOD(contentHuggingPriorityForAxis);
+  JS_METHOD(setContentHuggingPriorityForAxis);
+  JS_METHOD(contentCompressionResistancePriorityForAxis);
+  JS_METHOD(setContentCompressionResistancePriorityForAxis);
+  JS_METHOD(systemLayoutSizeFittingSize);
+  JS_METHOD(systemLayoutSizeFittingSizeWithHorizontalFittingPriorityVerticalFittingPriority);
+  JS_METHOD(addLayoutGuide);
+  JS_METHOD(removeLayoutGuide);
+  JS_METHOD(constraintsAffectingLayoutForAxis);
+  JS_METHOD(exerciseAmbiguityInLayout);
+  JS_METHOD(snapshotViewAfterScreenUpdates);
+  JS_METHOD(resizableSnapshotViewFromRectAfterScreenUpdatesWithCapInsets);
+  JS_METHOD(drawViewHierarchyInRectAfterScreenUpdates);
 
   JS_PROP(viewDidAppear);
   JS_PROP(viewWillAppear);

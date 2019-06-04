@@ -43,6 +43,35 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_PROTO_METHOD(layoutSubviews);
   JS_PROTO_METHOD(addGestureRecognizer);
   JS_PROTO_METHOD(removeGestureRecognizer);
+
+  JS_PROTO_METHOD(addMotionEffect);
+  JS_PROTO_METHOD(removeMotionEffect);
+  JS_PROTO_METHOD(addConstraint);
+  JS_PROTO_METHOD(addConstraints);
+  JS_PROTO_METHOD(removeConstraint);
+  JS_PROTO_METHOD(removeConstraints);
+  JS_PROTO_METHOD(updateConstraintsIfNeeded);
+  JS_PROTO_METHOD(updateConstraints);
+  JS_PROTO_METHOD(needsUpdateConstraints);
+  JS_PROTO_METHOD(setNeedsUpdateConstraints);
+  JS_PROTO_METHOD(alignmentRectForFrame);
+  JS_PROTO_METHOD(frameForAlignmentRect);
+  JS_PROTO_METHOD(viewForBaselineLayout);
+  JS_PROTO_METHOD(invalidateIntrinsicContentSize);
+  JS_PROTO_METHOD(contentHuggingPriorityForAxis);
+  JS_PROTO_METHOD(setContentHuggingPriorityForAxis);
+  JS_PROTO_METHOD(contentCompressionResistancePriorityForAxis);
+  JS_PROTO_METHOD(setContentCompressionResistancePriorityForAxis);
+  JS_PROTO_METHOD(systemLayoutSizeFittingSize);
+  JS_PROTO_METHOD(systemLayoutSizeFittingSizeWithHorizontalFittingPriorityVerticalFittingPriority);
+  JS_PROTO_METHOD(addLayoutGuide);
+  JS_PROTO_METHOD(removeLayoutGuide);
+  JS_PROTO_METHOD(constraintsAffectingLayoutForAxis);
+  JS_PROTO_METHOD(exerciseAmbiguityInLayout);
+  JS_PROTO_METHOD(snapshotViewAfterScreenUpdates);
+  JS_PROTO_METHOD(resizableSnapshotViewFromRectAfterScreenUpdatesWithCapInsets);
+  JS_PROTO_METHOD(drawViewHierarchyInRectAfterScreenUpdates);
+
   JS_PROTO_PROP(viewDidAppear);
   JS_PROTO_PROP(viewWillAppear);
   JS_PROTO_PROP(viewDidDisappear);
@@ -54,8 +83,8 @@ JS_INIT_CLASS(UIView, UIResponder);
 //  JS_PROTO_PROP(willMoveToWindow);
 //  JS_PROTO_PROP(didMoveToWindow);
   JS_PROTO_PROP(drawRect);
-  JS_PROTO_PROP(layoutMarginsDidChange);
-  JS_PROTO_PROP(safeAreaInsetsDidChange);
+  JS_SET_PROP(proto, "onLayoutMarginsDidChange", layoutMarginsDidChange);
+  JS_SET_PROP(proto, "onSafeAreaInsetsDidChange", safeAreaInsetsDidChange);
   
   JS_SET_PROP(proto, "isUserInteractionEnabled", userInteractionEnabled);
   JS_ASSIGN_PROP(proto, userInteractionEnabled);
@@ -552,6 +581,275 @@ NAN_METHOD(NUIView::removeGestureRecognizer) {
     declare_args();
     declare_pointer(UIGestureRecognizer, ui);
     JS_SET_RETURN(js_value_void([self removeGestureRecognizer:ui]));
+  }
+}
+
+#include "NUIMotionEffect.h"
+
+NAN_METHOD(NUIView::addMotionEffect) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIMotionEffect, effect);
+    JS_SET_RETURN(js_value_void([self addMotionEffect: effect]));
+  }
+}
+
+NAN_METHOD(NUIView::removeMotionEffect) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIMotionEffect, effect);
+    JS_SET_RETURN(js_value_void([self removeMotionEffect: effect]));
+  }
+}
+
+#include "NNSLayoutConstraint.h"
+
+NAN_METHOD(NUIView::addConstraint) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSLayoutConstraint, constraint);
+    JS_SET_RETURN(js_value_void([self addConstraint: constraint]));
+  }
+}
+
+NAN_METHOD(NUIView::addConstraints) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSArray<NSLayoutConstraint*>, constraints);
+    JS_SET_RETURN(js_value_void([self addConstraints: constraints]));
+  }
+}
+
+NAN_METHOD(NUIView::removeConstraint) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSLayoutConstraint, constraint);
+    JS_SET_RETURN(js_value_void([self removeConstraint: constraint]));
+  }
+}
+
+NAN_METHOD(NUIView::removeConstraints) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSArray<NSLayoutConstraint*>, constraints);
+    JS_SET_RETURN(js_value_void([self removeConstraints: constraints]));
+  }
+}
+
+NAN_METHOD(NUIView::updateConstraintsIfNeeded) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self updateConstraintsIfNeeded]));
+  }
+}
+
+NAN_METHOD(NUIView::updateConstraints) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self updateConstraints]));
+  }
+}
+
+NAN_METHOD(NUIView::needsUpdateConstraints) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self needsUpdateConstraints]));
+  }
+}
+
+NAN_METHOD(NUIView::setNeedsUpdateConstraints) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self setNeedsUpdateConstraints]));
+  }
+}
+
+NAN_METHOD(NUIView::alignmentRectForFrame) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, frame);
+    JS_SET_RETURN(js_value_CGRect([self alignmentRectForFrame: frame]));
+  }
+}
+
+NAN_METHOD(NUIView::frameForAlignmentRect) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, alignmentRect);
+    JS_SET_RETURN(js_value_CGRect([self frameForAlignmentRect: alignmentRect]));
+  }
+}
+
+NAN_METHOD(NUIView::viewForBaselineLayout) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIView([self viewForBaselineLayout]));
+  }
+}
+
+NAN_METHOD(NUIView::invalidateIntrinsicContentSize) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self invalidateIntrinsicContentSize]));
+  }
+}
+
+NAN_METHOD(NUIView::contentHuggingPriorityForAxis) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UILayoutConstraintAxis, axis);
+    JS_SET_RETURN(js_value_UILayoutPriority([self contentHuggingPriorityForAxis: axis]));
+  }
+}
+
+NAN_METHOD(NUIView::setContentHuggingPriorityForAxis) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UILayoutPriority, priority);
+    declare_value(UILayoutConstraintAxis, axis);
+    JS_SET_RETURN(js_value_void([self setContentHuggingPriority: priority forAxis: axis]));
+  }
+}
+
+NAN_METHOD(NUIView::contentCompressionResistancePriorityForAxis) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UILayoutConstraintAxis, axis);
+    JS_SET_RETURN(js_value_UILayoutPriority([self contentCompressionResistancePriorityForAxis: axis]));
+  }
+}
+
+NAN_METHOD(NUIView::setContentCompressionResistancePriorityForAxis) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UILayoutPriority, priority);
+    declare_value(UILayoutConstraintAxis, axis);
+    JS_SET_RETURN(js_value_void([self setContentCompressionResistancePriority: priority forAxis: axis]));
+  }
+}
+
+NAN_METHOD(NUIView::systemLayoutSizeFittingSize) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGSize, targetSize);
+    JS_SET_RETURN(js_value_CGSize([self systemLayoutSizeFittingSize: targetSize]));
+  }
+}
+
+NAN_METHOD(NUIView::systemLayoutSizeFittingSizeWithHorizontalFittingPriorityVerticalFittingPriority) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGSize, targetSize);
+    declare_value(UILayoutPriority, horizontalFittingPriority);
+    declare_value(UILayoutPriority, verticalFittingPriority);
+    JS_SET_RETURN(js_value_CGSize([self systemLayoutSizeFittingSize: targetSize withHorizontalFittingPriority: horizontalFittingPriority verticalFittingPriority: verticalFittingPriority]));
+  }
+}
+
+#include "NUILayoutGuide.h"
+
+NAN_METHOD(NUIView::addLayoutGuide) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UILayoutGuide, layoutGuide);
+    JS_SET_RETURN(js_value_void([self addLayoutGuide: layoutGuide]));
+  }
+}
+
+NAN_METHOD(NUIView::removeLayoutGuide) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UILayoutGuide, layoutGuide);
+    JS_SET_RETURN(js_value_void([self removeLayoutGuide: layoutGuide]));
+  }
+}
+
+NAN_METHOD(NUIView::constraintsAffectingLayoutForAxis) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UILayoutConstraintAxis, axis);
+    JS_SET_RETURN(js_value_NSArray<NSLayoutConstraint*>([self constraintsAffectingLayoutForAxis: axis]));
+  }
+}
+
+NAN_METHOD(NUIView::exerciseAmbiguityInLayout) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self exerciseAmbiguityInLayout]));
+  }
+}
+
+NAN_METHOD(NUIView::snapshotViewAfterScreenUpdates) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(BOOL, afterUpdates);
+    JS_SET_RETURN(js_value_UIView([self snapshotViewAfterScreenUpdates: afterUpdates]));
+  }
+}
+
+NAN_METHOD(NUIView::resizableSnapshotViewFromRectAfterScreenUpdatesWithCapInsets) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_value(BOOL, afterUpdates);
+    declare_value(UIEdgeInsets, capInsets);
+    JS_SET_RETURN(js_value_UIView([self resizableSnapshotViewFromRect: rect afterScreenUpdates: afterUpdates withCapInsets: capInsets]));
+  }
+}
+
+NAN_METHOD(NUIView::drawViewHierarchyInRectAfterScreenUpdates) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_value(BOOL, afterUpdates);
+    JS_SET_RETURN(js_value_BOOL([self drawViewHierarchyInRect: rect afterScreenUpdates: afterUpdates]));
   }
 }
 
@@ -1059,8 +1357,6 @@ NAN_GETTER(NUIView::safeAreaInsetsGetter) {
   }
 }
 
-#include "NUILayoutGuide.h"
-
 NAN_GETTER(NUIView::layoutMarginsGuideGetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
@@ -1279,8 +1575,6 @@ NAN_SETTER(NUIView::gestureRecognizersSetter) {
   }
 }
 
-#include "NUIMotionEffect.h"
-
 NAN_GETTER(NUIView::motionEffectsGetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
@@ -1296,8 +1590,6 @@ NAN_SETTER(NUIView::motionEffectsSetter) {
     [self setMotionEffects: to_value_NSArray< UIMotionEffect* >(value)];
   }
 }
-
-#include "NNSLayoutConstraint.h"
 
 NAN_GETTER(NUIView::constraintsGetter) {
   JS_UNWRAP(UIView, self);
@@ -1354,8 +1646,6 @@ NAN_GETTER(NUIView::intrinsicContentSizeGetter) {
     JS_SET_RETURN(js_value_CGSize([self intrinsicContentSize]));
   }
 }
-
-#include "NUILayoutGuide.h"
 
 NAN_GETTER(NUIView::layoutGuidesGetter) {
   JS_UNWRAP(UIView, self);

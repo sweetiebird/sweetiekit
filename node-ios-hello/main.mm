@@ -103,12 +103,6 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
         xxx_swizzle(class_,
           @selector(viewDidDisappear:),
           @selector(xxx_viewDidDisappear:));
-        xxx_swizzle(class_,
-          @selector(layoutMarginsDidChange),
-          @selector(xxx_layoutMarginsDidChange));
-        xxx_swizzle(class_,
-          @selector(safeAreaInsetsDidChange),
-          @selector(xxx_safeAreaInsetsDidChange));
     });
 }
 
@@ -172,7 +166,7 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
 }
 
 - (void)xxx_viewDidDisappear:(BOOL)animated {
-    [self xxx_viewWillDisappear:animated];
+    [self xxx_viewDidDisappear:animated];
     //NSLog(@"viewDidDisappear: %@", self);
     id fn = [self associatedValueForKey:@"sweetiekit_viewDidDisappear"];
     if (fn != nullptr) {
@@ -186,44 +180,6 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
         Nan::HandleScope scope;
         SweetJSFunction* func = (SweetJSFunction*)fn;
         [func jsFunction]->Call("UIView::viewDidDisappear", JS_BOOL(animated));
-      }
-    });
-}
-
-- (void)xxx_layoutMarginsDidChange {
-    [self xxx_layoutMarginsDidChange];
-    //NSLog(@"layoutMarginsDidChange: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_layoutMarginsDidChange"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::layoutMarginsDidChange");
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_layoutMarginsDidChange"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::layoutMarginsDidChange");
-      }
-    });
-}
-
-- (void)xxx_safeAreaInsetsDidChange {
-    [self xxx_safeAreaInsetsDidChange];
-    //NSLog(@"safeAreaInsetsDidChange: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_safeAreaInsetsDidChange"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::safeAreaInsetsDidChange");
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_safeAreaInsetsDidChange"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::safeAreaInsetsDidChange");
       }
     });
 }
