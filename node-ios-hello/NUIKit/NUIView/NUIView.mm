@@ -17,18 +17,45 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_PROTO_PROP(y);
   JS_PROTO_PROP(width);
   JS_PROTO_PROP(height);
-  JS_PROTO_METHOD(addSubview);
+  JS_SET_METHOD(proto, "hitTest", hitTestWithEvent);
+  JS_ASSIGN_METHOD(proto, hitTestWithEvent);
+  JS_SET_METHOD(proto, "pointInside", pointInsideWithEvent);
+  JS_ASSIGN_METHOD(proto, pointInsideWithEvent);
+  JS_ASSIGN_METHOD(proto, convertPointToView);
+  JS_ASSIGN_METHOD(proto, convertPointFromView);
+  JS_ASSIGN_METHOD(proto, convertRectToView);
+  JS_ASSIGN_METHOD(proto, convertRectFromView);
   JS_PROTO_METHOD(sizeThatFits);
   JS_PROTO_METHOD(sizeToFit);
-  JS_PROTO_METHOD(viewWithStringTag);
   JS_PROTO_METHOD(removeFromSuperview);
+  JS_PROTO_METHOD(insertSubviewAtIndex);
+  JS_PROTO_METHOD(exchangeSubviewAtIndexWithSubviewAtIndex);
+  JS_PROTO_METHOD(addSubview);
+  JS_PROTO_METHOD(insertSubviewBelowSubview);
+  JS_PROTO_METHOD(insertSubviewAboveSubview);
   JS_PROTO_METHOD(bringSubviewToFront);
+  JS_PROTO_METHOD(sendSubviewToBack);
+  JS_PROTO_METHOD(isDescendantOfView);
+  JS_PROTO_METHOD(viewWithTag);
+  JS_PROTO_METHOD(viewWithStringTag);
+  JS_PROTO_METHOD(setNeedsLayout);
+  JS_PROTO_METHOD(layoutIfNeeded);
+  JS_PROTO_METHOD(layoutSubviews);
   JS_PROTO_METHOD(addGestureRecognizer);
+  JS_PROTO_METHOD(removeGestureRecognizer);
   JS_PROTO_PROP(viewDidAppear);
   JS_PROTO_PROP(viewWillAppear);
   JS_PROTO_PROP(viewDidDisappear);
   JS_PROTO_PROP(viewWillDisappear);
+//  JS_PROTO_PROP(didAddSubview);
+//  JS_PROTO_PROP(willRemoveSubview);
+//  JS_PROTO_PROP(willMoveToSuperview);
+//  JS_PROTO_PROP(didMoveToSuperview);
+//  JS_PROTO_PROP(willMoveToWindow);
+//  JS_PROTO_PROP(didMoveToWindow);
   JS_PROTO_PROP(drawRect);
+  JS_PROTO_PROP(layoutMarginsDidChange);
+  JS_PROTO_PROP(safeAreaInsetsDidChange);
   
   JS_SET_PROP(proto, "isUserInteractionEnabled", userInteractionEnabled);
   JS_ASSIGN_PROP(proto, userInteractionEnabled);
@@ -267,6 +294,74 @@ NAN_SETTER(NUIView::heightSetter) {
   }
 }
 
+#include "NUIEvent.h"
+
+NAN_METHOD(NUIView::hitTestWithEvent) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_nullable_pointer(UIEvent, event);
+    JS_SET_RETURN(js_value_UIView([self hitTest: point withEvent: event]));
+  }
+}
+
+NAN_METHOD(NUIView::pointInsideWithEvent) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_nullable_pointer(UIEvent, event);
+    JS_SET_RETURN(js_value_BOOL([self pointInside: point withEvent: event]));
+  }
+}
+
+NAN_METHOD(NUIView::convertPointToView) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point toView: view]));
+  }
+}
+
+NAN_METHOD(NUIView::convertPointFromView) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point fromView: view]));
+  }
+}
+
+NAN_METHOD(NUIView::convertRectToView) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_CGRect([self convertRect: rect toView: view]));
+  }
+}
+
+NAN_METHOD(NUIView::convertRectFromView) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_CGRect([self convertRect: rect fromView: view]));
+  }
+}
+
 NAN_METHOD(NUIView::sizeThatFits) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
@@ -284,6 +379,36 @@ NAN_METHOD(NUIView::sizeToFit) {
   }
 }
 
+NAN_METHOD(NUIView::removeFromSuperview) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self removeFromSuperview]));
+  }
+}
+
+NAN_METHOD(NUIView::insertSubviewAtIndex) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIView, view);
+    declare_value(NSInteger, index);
+    JS_SET_RETURN(js_value_void([self insertSubview: view atIndex: index]));
+  }
+}
+
+NAN_METHOD(NUIView::exchangeSubviewAtIndexWithSubviewAtIndex) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(NSInteger, index1);
+    declare_value(NSInteger, index2);
+    JS_SET_RETURN(js_value_void([self exchangeSubviewAtIndex: index1 withSubviewAtIndex: index2]));
+  }
+}
+
 NAN_METHOD(NUIView::addSubview) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
@@ -294,21 +419,25 @@ NAN_METHOD(NUIView::addSubview) {
   }
 }
 
-NAN_METHOD(NUIView::viewWithStringTag) {
+NAN_METHOD(NUIView::insertSubviewBelowSubview) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
     declare_args();
-    declare_pointer(NSString, key);
-    JS_SET_RETURN(js_value_UIView([self viewWithStringTagWithStrTag:key]));
+    declare_pointer(UIView, view);
+    declare_pointer(UIView, siblingSubview);
+    JS_SET_RETURN(js_value_void([self insertSubview: view belowSubview: siblingSubview]));
   }
 }
 
-NAN_METHOD(NUIView::removeFromSuperview) {
+NAN_METHOD(NUIView::insertSubviewAboveSubview) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self removeFromSuperview];
+    declare_args();
+    declare_pointer(UIView, view);
+    declare_pointer(UIView, siblingSubview);
+    JS_SET_RETURN(js_value_void([self insertSubview: view aboveSubview: siblingSubview]));
   }
 }
 
@@ -322,6 +451,88 @@ NAN_METHOD(NUIView::bringSubviewToFront) {
   }
 }
 
+NAN_METHOD(NUIView::sendSubviewToBack) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_void([self sendSubviewToBack: view]));
+  }
+}
+
+NAN_METHOD(NUIView::isDescendantOfView) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_BOOL([self isDescendantOfView: view]));
+  }
+}
+
+NAN_METHOD(NUIView::setNeedsLayout) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self setNeedsLayout]));
+  }
+}
+
+NAN_METHOD(NUIView::layoutIfNeeded) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self layoutIfNeeded]));
+  }
+}
+
+NAN_METHOD(NUIView::layoutSubviews) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self layoutSubviews]));
+  }
+}
+
+NAN_METHOD(NUIView::viewWithTag) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(NSInteger, tag);
+    JS_SET_RETURN(js_value_UIView([self viewWithTag: tag]));
+  }
+}
+
+NAN_METHOD(NUIView::viewWithStringTag) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_UIView([self viewWithStringTagWithStrTag:key]));
+  }
+}
+
+NAN_METHOD(NUIView::setNeedsDisplay) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self setNeedsDisplay]));
+  }
+}
+
+NAN_METHOD(NUIView::setNeedsDisplayInRect) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    JS_SET_RETURN(js_value_void([self setNeedsDisplayInRect: rect]));
+  }
+}
+
 #include "NUIGestureRecognizer.h"
 
 NAN_METHOD(NUIView::addGestureRecognizer) {
@@ -331,6 +542,16 @@ NAN_METHOD(NUIView::addGestureRecognizer) {
     declare_args();
     declare_pointer(UIGestureRecognizer, ui);
     JS_SET_RETURN(js_value_void([self addGestureRecognizer: ui]));
+  }
+}
+
+NAN_METHOD(NUIView::removeGestureRecognizer) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIGestureRecognizer, ui);
+    JS_SET_RETURN(js_value_void([self removeGestureRecognizer:ui]));
   }
 }
 
@@ -443,8 +664,6 @@ NAN_SETTER(NUIView::viewWillDisappearSetter) {
 }
 
 NAN_GETTER(NUIView::drawRectGetter) {
-  Nan::EscapableHandleScope scope;
-
   JS_UNWRAP(UIView, ui);
   
   @autoreleasepool {
@@ -453,19 +672,63 @@ NAN_GETTER(NUIView::drawRectGetter) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
       Local<Function> handle = Nan::New(*f.cb);
-      JS_SET_RETURN(scope.Escape(handle));
+      JS_SET_RETURN(handle);
     }
   }
 }
 
 NAN_SETTER(NUIView::drawRectSetter) {
-  Nan::EscapableHandleScope scope;
-
   JS_UNWRAP(UIView, ui);
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
-    [func jsFunction]->Reset(scope.Escape(value));
+    [func jsFunction]->Reset(value);
     [ui associateValue:func withKey:@"sweetiekit_drawRect"];
+  }
+}
+
+NAN_GETTER(NUIView::layoutMarginsDidChangeGetter) {
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_layoutMarginsDidChange"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(handle);
+    }
+  }
+}
+
+NAN_SETTER(NUIView::layoutMarginsDidChangeSetter) {
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(value);
+    [ui associateValue:func withKey:@"sweetiekit_layoutMarginsDidChange"];
+  }
+}
+
+NAN_GETTER(NUIView::safeAreaInsetsDidChangeGetter) {
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_safeAreaInsetsDidChange"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(handle);
+    }
+  }
+}
+
+NAN_SETTER(NUIView::safeAreaInsetsDidChangeSetter) {
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(value);
+    [ui associateValue:func withKey:@"sweetiekit_safeAreaInsetsDidChange"];
   }
 }
 

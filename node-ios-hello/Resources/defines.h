@@ -971,9 +971,9 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type name(to_value_##type(info[name##_argument_index]));
   
-#define declare_pointer_(index, type, name) \
+#define declare_pointer_(index, type, name, nullable) \
   auto name##_argument_index(index); \
-  if (!is_value_##type(info[name##_argument_index])) \
+  if (!nullable && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(to_value_##type(info[name##_argument_index]));
 
@@ -993,7 +993,10 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   declare_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_pointer(...) \
-  declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  declare_pointer_(JS_ARGC, __VA_ARGS__, false); JS_ARGC++;
+
+#define declare_nullable_pointer(...) \
+  declare_pointer_(JS_ARGC, __VA_ARGS__, true); JS_ARGC++;
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
