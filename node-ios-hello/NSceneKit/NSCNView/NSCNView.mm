@@ -431,7 +431,9 @@ NAN_GETTER(NSCNView::currentRenderCommandEncoderGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_id <MTLRenderCommandEncoder>([self currentRenderCommandEncoder]));
+#endif
     return;
   }
 }
@@ -442,7 +444,9 @@ NAN_GETTER(NSCNView::deviceGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_id_ <MTLDevice>([self device]));
+#endif
     return;
   }
 }
@@ -451,7 +455,9 @@ NAN_GETTER(NSCNView::colorPixelFormatGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_MTLPixelFormat([self colorPixelFormat]));
+#endif
     return;
   }
 }
@@ -460,7 +466,9 @@ NAN_GETTER(NSCNView::depthPixelFormatGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_MTLPixelFormat([self depthPixelFormat]));
+#endif
     return;
   }
 }
@@ -469,7 +477,9 @@ NAN_GETTER(NSCNView::stencilPixelFormatGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_MTLPixelFormat([self stencilPixelFormat]));
+#endif
     return;
   }
 }
@@ -480,7 +490,9 @@ NAN_GETTER(NSCNView::commandQueueGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
+#if SCN_ENABLE_METAL
     JS_SET_RETURN(js_value_id_ <MTLCommandQueue>([self commandQueue]));
+#endif
     return;
   }
 }
