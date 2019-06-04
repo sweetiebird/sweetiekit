@@ -777,6 +777,40 @@ Local<Value> js_value_NSData(NSData* _Nullable value);
 NSData* _Nullable to_value_NSData(const Local<Value>& value, bool* _Nullable failed = nullptr);
 bool is_value_NSData(const Local<Value>& value);
 
+#define js_value_CGAffineTransform(x) sweetiekit::JSArrayFromCGAffineTransform(x)
+#define to_value_CGAffineTransform(x) sweetiekit::CGAffineXFormFromJSArray(x)
+bool is_value_CGAffineTransform(const Local<Value>& value);
+
+/*
+typedef struct UIEdgeInsets {
+    CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+} UIEdgeInsets;
+*/
+Local<Value> js_value_UIEdgeInsets(const UIEdgeInsets& pt);
+UIEdgeInsets to_value_UIEdgeInsets(const Local<Value>& value);
+bool is_value_UIEdgeInsets(const Local<Value>& value);
+
+/* Specifically for use in methods and functions supporting user interface layout direction
+ */
+/*
+typedef struct NSDirectionalEdgeInsets {
+    CGFloat top, leading, bottom, trailing;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+} NSDirectionalEdgeInsets API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
+*/
+Local<Value> js_value_NSDirectionalEdgeInsets(const NSDirectionalEdgeInsets& pt);
+NSDirectionalEdgeInsets to_value_NSDirectionalEdgeInsets(const Local<Value>& value);
+bool is_value_NSDirectionalEdgeInsets(const Local<Value>& value);
+
+/*
+typedef struct UIOffset {
+    CGFloat horizontal, vertical; // specify amount to offset a position, positive for right or down, negative for left or up
+} UIOffset;
+*/
+Local<Value> js_value_UIOffset(const UIOffset& pt);
+UIOffset to_value_UIOffset(const Local<Value>& value);
+bool is_value_UIOffset(const Local<Value>& value);
+
+
 template<typename T>
 Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
   if (arr == nullptr) {
@@ -867,36 +901,44 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_void_pointer(x) (x).As<External>()->Value()
 #define is_value_void_pointer(x) (x)->IsExternal()
 
-#define js_value_int32_t JS_INT
-#define to_value_int32_t TO_INT32
+#define js_value_bool(x) JS_BOOL(x)
+#define to_value_bool(x) TO_BOOL(x)
+#define is_value_bool(x) (x)->IsBoolean()
+
+#define js_value_int32_t(x) JS_INT(x)
+#define to_value_int32_t(x) TO_INT32(x)
 #define is_value_int32_t(x) (x)->IsInt32()
 
-#define js_value_uint32_t JS_UINT
-#define to_value_uint32_t TO_UINT32
+#define js_value_uint32_t(x) JS_UINT(x)
+#define to_value_uint32_t(x) TO_UINT32(x)
 #define is_value_uint32_t(x) (x)->IsUint32()
 
-#define js_value_double JS_NUM
-#define to_value_double TO_DOUBLE
+#define js_value_double(x) JS_NUM(x)
+#define to_value_double(x) TO_DOUBLE(x)
 #define is_value_double(x) (x)->IsNumber()
 
-#define js_value_float JS_FLOAT
-#define to_value_float TO_FLOAT
+#define js_value_float(x) JS_FLOAT(x)
+#define to_value_float(x) TO_FLOAT(x)
 #define is_value_float(x) (x)->IsNumber()
 
-#define js_value_NSInteger JS_INT
-#define to_value_NSInteger TO_INT32
+#define js_value_BOOL(x) JS_BOOL(x)
+#define to_value_BOOL(x) TO_BOOL(x)
+#define is_value_BOOL(x) (x)->IsBoolean()
+
+#define js_value_NSInteger(x) JS_INT(x)
+#define to_value_NSInteger(x) TO_INT32(x)
 #define is_value_NSInteger(x) (x)->IsInt32()
 
-#define js_value_NSUInteger JS_UINT
-#define to_value_NSUInteger TO_UINT32
+#define js_value_NSUInteger(x) JS_UINT(x)
+#define to_value_NSUInteger(x) TO_UINT32(x)
 #define is_value_NSUInteger(x) (x)->IsUint32()
 
-#define js_value_CGFloat JS_FLOAT
-#define to_value_CGFloat TO_FLOAT
+#define js_value_CGFloat(x) JS_FLOAT(x)
+#define to_value_CGFloat(x) TO_FLOAT(x)
 #define is_value_CGFloat(x) (x)->IsNumber()
 
-#define js_value_NSString NSStringToJSString
-#define to_value_NSString NJSStringToNSString
+#define js_value_NSString(x) NSStringToJSString(x)
+#define to_value_NSString(x) NJSStringToNSString(x)
 #define is_value_NSString(x) (x)->IsString()
 
 #define JS_ENUM(type, c, x) js_value_##c(x)

@@ -696,6 +696,8 @@ NAN_METHOD(NClass::New) {
 #include "NNSLayoutDimension.h"
 #include "NNSLayoutXAxisAnchor.h"
 #include "NNSLayoutYAxisAnchor.h"
+#include "NUIMotionEffect.h"
+#include "NUILayoutGuide.h"
 #include "NUITableViewManager.h"
 #include "NUITouch.h"
 #include "NUIBarButtonItem.h"
@@ -797,6 +799,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSLayoutDimension);
     JS_EXPORT_TYPE(NSLayoutXAxisAnchor);
     JS_EXPORT_TYPE(NSLayoutYAxisAnchor);
+    JS_EXPORT_TYPE(UIMotionEffect);
+    JS_EXPORT_TYPE(UILayoutGuide);
     JS_EXPORT_TYPE(UIBarButtonItem);
     JS_EXPORT_TYPE(UITabBarItem);
     JS_EXPORT_TYPE(UIAlertAction);
@@ -1127,6 +1131,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSLayoutDimension);
       JS_RETURN_TYPE(NSLayoutConstraint);
       JS_RETURN_TYPE(NSLayoutAnchor);
+      JS_RETURN_TYPE(UIMotionEffect);
+      JS_RETURN_TYPE(UILayoutGuide);
       JS_RETURN_TYPE(UIApplication);
       JS_RETURN_TYPE(UITouch);
       JS_RETURN_TYPE(UIResponder);

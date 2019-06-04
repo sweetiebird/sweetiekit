@@ -11,46 +11,94 @@ NUIView::~NUIView() {}
 
 JS_INIT_CLASS(UIView, UIResponder);
   // instance members (proto)
-  JS_SET_PROP(proto, "frame", Frame);
-  JS_SET_PROP(proto, "bounds", Bounds);
-  JS_SET_PROP(proto, "origin", Origin);
-  JS_SET_PROP(proto, "center", Center);
-  JS_SET_PROP(proto, "size", Size);
-  JS_SET_PROP(proto, "x", X);
-  JS_SET_PROP(proto, "y", Y);
-  JS_SET_PROP(proto, "width", Width);
-  JS_SET_PROP(proto, "height", Height);
-  JS_ASSIGN_PROP(proto, alpha);
-  Nan::SetAccessor(proto, JS_STR("autoresizesSubviews"), AutoresizesSubviewsGetter, AutoresizesSubviewsSetter);
-  Nan::SetAccessor(proto, JS_STR("subviews"), SubviewsGetter);
-  Nan::SetAccessor(proto, JS_STR("layer"), LayerGetter);
-  Nan::SetMethod(proto, "addSubview", AddSubview);
-  Nan::SetMethod(proto, "sizeThatFits", SizeThatFits);
-  Nan::SetMethod(proto, "sizeToFit", SizeToFit);
-  Nan::SetAccessor(proto, JS_STR("backgroundColor"), BackgroundColorGetter, BackgroundColorSetter);
-  Nan::SetMethod(proto, "viewWithStringTag", ViewWithStringTag);
-  Nan::SetMethod(proto, "removeFromSuperview", RemoveFromSuperview);
-  Nan::SetMethod(proto, "bringSubviewToFront", bringSubviewToFront);
-  Nan::SetMethod(proto, "addGestureRecognizer", addGestureRecognizer);
-  JS_SET_PROP(proto, "translatesAutoresizingMaskIntoConstraints", TranslatesAutoresizingMaskIntoConstraints);
-  JS_SET_PROP_READONLY(proto, "leadingAnchor", LeadingAnchor);
-  JS_SET_PROP_READONLY(proto, "trailingAnchor", TrailingAnchor);
-  JS_SET_PROP_READONLY(proto, "topAnchor", TopAnchor);
-  JS_SET_PROP_READONLY(proto, "bottomAnchor", BottomAnchor);
-  JS_SET_PROP_READONLY(proto, "centerXAnchor", CenterXAnchor);
-  JS_SET_PROP_READONLY(proto, "centerYAnchor", centerYAnchor);
-  JS_SET_PROP_READONLY(proto, "widthAnchor", WidthAnchor);
-  JS_ASSIGN_PROP_READONLY(proto, heightAnchor);
-  JS_SET_PROP(proto, "isUserInteractionEnabled", UserInteractionEnabled);
-  JS_ASSIGN_PROP(proto, viewDidAppear);
-  JS_ASSIGN_PROP(proto, viewWillAppear);
-  JS_ASSIGN_PROP(proto, viewDidDisappear);
-  JS_ASSIGN_PROP(proto, viewWillDisappear);
-  JS_ASSIGN_PROP(proto, drawRect);
-  JS_ASSIGN_PROP(proto, contentMode);
+  JS_PROTO_PROP(origin);
+  JS_PROTO_PROP(size);
+  JS_PROTO_PROP(x);
+  JS_PROTO_PROP(y);
+  JS_PROTO_PROP(width);
+  JS_PROTO_PROP(height);
+  JS_PROTO_METHOD(addSubview);
+  JS_PROTO_METHOD(sizeThatFits);
+  JS_PROTO_METHOD(sizeToFit);
+  JS_PROTO_METHOD(viewWithStringTag);
+  JS_PROTO_METHOD(removeFromSuperview);
+  JS_PROTO_METHOD(bringSubviewToFront);
+  JS_PROTO_METHOD(addGestureRecognizer);
+  JS_PROTO_PROP(viewDidAppear);
+  JS_PROTO_PROP(viewWillAppear);
+  JS_PROTO_PROP(viewDidDisappear);
+  JS_PROTO_PROP(viewWillDisappear);
+  JS_PROTO_PROP(drawRect);
+  
+  JS_SET_PROP(proto, "isUserInteractionEnabled", userInteractionEnabled);
+  JS_ASSIGN_PROP(proto, userInteractionEnabled);
+  JS_ASSIGN_PROP(proto, tag);
+  JS_ASSIGN_PROP_READONLY(proto, layer);
+  JS_ASSIGN_PROP_READONLY(proto, canBecomeFocused);
+  JS_ASSIGN_PROP_READONLY(proto, focused);
+  JS_ASSIGN_PROP(proto, semanticContentAttribute);
+  JS_ASSIGN_PROP_READONLY(proto, effectiveUserInterfaceLayoutDirection);
+  JS_ASSIGN_PROP(proto, frame);
+  JS_ASSIGN_PROP(proto, bounds);
+  JS_ASSIGN_PROP(proto, center);
   JS_ASSIGN_PROP(proto, transform);
+  JS_ASSIGN_PROP(proto, contentScaleFactor);
+  JS_ASSIGN_PROP(proto, multipleTouchEnabled);
+  JS_ASSIGN_PROP(proto, exclusiveTouch);
+  JS_ASSIGN_PROP(proto, autoresizesSubviews);
+  JS_ASSIGN_PROP(proto, autoresizingMask);
+  JS_ASSIGN_PROP_READONLY(proto, superview);
+  JS_ASSIGN_PROP_READONLY(proto, subviews);
+  JS_ASSIGN_PROP_READONLY(proto, window);
+  JS_ASSIGN_PROP(proto, layoutMargins);
+  JS_ASSIGN_PROP(proto, directionalLayoutMargins);
+  JS_ASSIGN_PROP(proto, preservesSuperviewLayoutMargins);
+  JS_ASSIGN_PROP(proto, insetsLayoutMarginsFromSafeArea);
+  JS_ASSIGN_PROP_READONLY(proto, safeAreaInsets);
+  JS_ASSIGN_PROP_READONLY(proto, layoutMarginsGuide);
+  JS_ASSIGN_PROP_READONLY(proto, readableContentGuide);
+  JS_ASSIGN_PROP_READONLY(proto, safeAreaLayoutGuide);
+  JS_ASSIGN_PROP(proto, clipsToBounds);
+  JS_ASSIGN_PROP(proto, backgroundColor);
+  JS_ASSIGN_PROP(proto, alpha);
+  JS_ASSIGN_PROP(proto, opaque);
+  JS_ASSIGN_PROP(proto, clearsContextBeforeDrawing);
+  JS_ASSIGN_PROP(proto, hidden);
+  JS_ASSIGN_PROP(proto, contentMode);
+  JS_ASSIGN_PROP(proto, contentStretch);
+  JS_ASSIGN_PROP(proto, maskView);
+  JS_ASSIGN_PROP(proto, tintColor);
+  JS_ASSIGN_PROP(proto, tintAdjustmentMode);
+  JS_ASSIGN_PROP(proto, gestureRecognizers);
+  JS_ASSIGN_PROP(proto, motionEffects);
+  JS_ASSIGN_PROP_READONLY(proto, constraints);
+  JS_ASSIGN_PROP(proto, translatesAutoresizingMaskIntoConstraints);
+  JS_ASSIGN_PROP_READONLY(proto, alignmentRectInsets);
+  JS_ASSIGN_PROP_READONLY(proto, viewForFirstBaselineLayout);
+  JS_ASSIGN_PROP_READONLY(proto, viewForLastBaselineLayout);
+  JS_ASSIGN_PROP_READONLY(proto, intrinsicContentSize);
+  JS_ASSIGN_PROP_READONLY(proto, layoutGuides);
+  JS_ASSIGN_PROP_READONLY(proto, leadingAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, trailingAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, leftAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, rightAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, topAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, bottomAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, widthAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, heightAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, centerXAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, centerYAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, firstBaselineAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, lastBaselineAnchor);
+  JS_ASSIGN_PROP_READONLY(proto, hasAmbiguousLayout);
+  JS_ASSIGN_PROP(proto, restorationIdentifier);
+  
   // static members (ctor)
   JS_INIT_CTOR(UIView, UIResponder);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), areAnimationsEnabled);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), inheritedAnimationDuration);
+  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), requiresConstraintBasedLayout);
+
   sweetiekit::Set(ctor, "beginAnimations", ^(JSInfo info) {
     [UIView beginAnimations:NJSStringToNSString(info[0]) context:nullptr];
   });
@@ -121,610 +169,168 @@ NAN_METHOD(NUIView::New) {
   }
 }
 
-NAN_GETTER(NUIView::FrameGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-#if 1
-  Local<Object> origin = result;
-  Local<Object> size = result;
-#else
-  Local<Object> origin = Object::New(Isolate::GetCurrent());
-  Local<Object> size = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("origin"), JS_OBJ(origin));
-  result->Set(JS_STR("size"), JS_OBJ(size));
-#endif
-  CGRect frame(nui->GetFrame());
-  double width = frame.size.width;
-  double height = frame.size.height;
-  double x = frame.origin.x;
-  double y = frame.origin.y;
-  origin->Set(JS_STR("x"), JS_NUM(x));
-  origin->Set(JS_STR("y"), JS_NUM(y));
-  size->Set(JS_STR("width"), JS_NUM(width));
-  size->Set(JS_STR("height"), JS_NUM(height));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NUIView::FrameSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-//  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
-//  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
-//  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
-//  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
-
-  @autoreleasepool {
-      float width = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("width")));
-      float height = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("height")));
-      float x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-      float y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-      [view->As<UIView>() setFrame:CGRectMake(x, y, width, height)];
-  }
-}
-
-
-NAN_GETTER(NUIView::BoundsGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-#if 1
-  Local<Object> origin = result;
-  Local<Object> size = result;
-#else
-  Local<Object> origin = Object::New(Isolate::GetCurrent());
-  Local<Object> size = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("origin"), JS_OBJ(origin));
-  result->Set(JS_STR("size"), JS_OBJ(size));
-#endif
-  CGRect bounds(nui->GetBounds());
-  double width = bounds.size.width;
-  double height = bounds.size.height;
-  double x = bounds.origin.x;
-  double y = bounds.origin.y;
-  origin->Set(JS_STR("x"), JS_NUM(x));
-  origin->Set(JS_STR("y"), JS_NUM(y));
-  size->Set(JS_STR("width"), JS_NUM(width));
-  size->Set(JS_STR("height"), JS_NUM(height));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NUIView::BoundsSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  double width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-  double height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-//  double width = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("width")));
-//  double height = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("size")))->Get(JS_STR("height")));
-//  double x = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("x")));
-//  double y = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("origin")))->Get(JS_STR("y")));
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setBounds:CGRectMake(x, y, width, height)];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::OriginGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(view->GetFrame().origin.x));
-  result->Set(JS_STR("y"), JS_FLOAT(view->GetFrame().origin.y));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NUIView::OriginSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect frame(view->GetFrame());
-  frame.origin.x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-  frame.origin.y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::CenterGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  CGRect frame(view->GetFrame());
-  result->Set(JS_STR("x"), JS_FLOAT(frame.origin.x + frame.size.width/2));
-  result->Set(JS_STR("y"), JS_FLOAT(frame.origin.y + frame.size.height/2));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NUIView::CenterSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect frame(view->GetFrame());
-  double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-  double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-  double dx = x - (frame.origin.x + frame.size.width/2);
-  double dy = y - (frame.origin.y + frame.size.height/2);
-  frame.origin.x += dx;
-  frame.origin.y += dy;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::SizeGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("width"), JS_FLOAT(view->GetFrame().size.width));
-  result->Set(JS_STR("height"), JS_FLOAT(view->GetFrame().size.height));
-
-  JS_SET_RETURN(result);
-}
-
-NAN_SETTER(NUIView::SizeSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect frame(view->GetFrame());
-  frame.size.width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
-  frame.size.height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::XGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetFrame().origin.x));
-}
-
-NAN_SETTER(NUIView::XSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect frame(view->GetFrame());
-  frame.origin.x = TO_DOUBLE(value);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::YGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetFrame().origin.y));
-}
-
-NAN_SETTER(NUIView::YSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect frame(view->GetFrame());
-  frame.origin.y = TO_DOUBLE(value);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setFrame:frame];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::WidthGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetBounds().size.width));
-}
-
-NAN_SETTER(NUIView::WidthSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect bounds(view->GetBounds());
-  bounds.size.width = TO_DOUBLE(value);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setBounds:bounds];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::HeightGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  JS_SET_RETURN(JS_NUM(view->GetBounds().size.height));
-}
-
-NAN_SETTER(NUIView::HeightSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  CGRect bounds(view->GetBounds());
-  bounds.size.height = TO_DOUBLE(value);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setBounds:bounds];
-    });
-  }
-}
-
-NAN_GETTER(NUIView::AutoresizesSubviewsGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  JS_SET_RETURN(JS_BOOL([view->As<UIView>() autoresizesSubviews]));
-}
-
-NAN_SETTER(NUIView::AutoresizesSubviewsSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  
-  [view->As<UIView>() setAutoresizesSubviews:TO_BOOL(value)];
-}
-
-NAN_GETTER(NUIView::SubviewsGetter) {
+NAN_GETTER(NUIView::originGetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<UIView*>([self subviews]));
+    JS_SET_RETURN(js_value_CGPoint(self.frame.origin));
   }
 }
 
-CGRect NUIView::GetFrame() {
-  __block CGRect frame = CGRectMake(0,0,0,0);
+NAN_SETTER(NUIView::originSetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      if (As<UIView>()) {
-        frame = [As<UIView>() frame];
-      }
-    });
+    CGRect rect(self.frame);
+    rect.origin.x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
+    rect.origin.y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
+    [self setFrame:rect];
   }
-  return frame;
 }
 
-CGRect NUIView::GetBounds() {
-  __block CGRect bounds = CGRectMake(0,0,0,0);
+NAN_GETTER(NUIView::sizeGetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      if (As<UIView>()) {
-        bounds = [As<UIView>() bounds];
-      }
-    });
+    JS_SET_RETURN(js_value_CGSize(self.frame.size));
   }
-  return bounds;
 }
 
-CGSize NUIView::tmp_Size;
-
-NAN_METHOD(NUIView::SizeThatFits) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  
-  tmp_Size.width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-  tmp_Size.height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-  
+NAN_SETTER(NUIView::sizeSetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      CGSize size = [view->As<UIView>() sizeThatFits:tmp_Size];
-      tmp_Size.width = size.width;
-      tmp_Size.height = size.height;
-    });
+    CGRect rect(self.frame);
+    rect.size.width = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("width")));
+    rect.size.height = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("height")));
+    [self setFrame:rect];
   }
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("width"), JS_FLOAT(tmp_Size.width));
-  result->Set(JS_STR("height"), JS_FLOAT(tmp_Size.height));
-
-  JS_SET_RETURN(result);
 }
 
-NAN_METHOD(NUIView::SizeToFit) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
+NAN_GETTER(NUIView::xGetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() sizeToFit];
-    });
+    JS_SET_RETURN(js_value_CGFloat(self.frame.origin.x));
   }
 }
 
-NAN_GETTER(NUIView::BackgroundColorGetter) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-  
-  __block CGFloat red = 0;
-  __block CGFloat green = 0;
-  __block CGFloat blue = 0;
-  __block CGFloat alpha = 1;
+NAN_SETTER(NUIView::xSetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(),  ^ {
-      UIColor* color = [view->As<UIView>() backgroundColor];
-      [color getRed:&red green:&green blue:&blue alpha:&alpha];
-    });
+    CGRect rect(self.frame);
+    rect.origin.x = to_value_CGFloat(value);
+    [self setFrame:rect];
   }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("red"), JS_NUM(red));
-  result->Set(JS_STR("green"), JS_NUM(green));
-  result->Set(JS_STR("blue"), JS_NUM(blue));
-  result->Set(JS_STR("alpha"), JS_NUM(alpha));
-
-  JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NUIView::BackgroundColorSetter) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-
-  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
-  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
-  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
-  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
-  
-  UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-
+NAN_GETTER(NUIView::yGetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [view->As<UIView>() setBackgroundColor:color];
-    });
+    JS_SET_RETURN(js_value_CGFloat(self.frame.origin.y));
   }
 }
 
-NAN_METHOD(NUIView::AddSubview) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-  Local<Object> obj = JS_OBJ(info[0]);
-  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIView)).FromJust()) {
-    NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
-
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        [view->As<UIView>() addSubview:subview->As<UIView>()];
-      });
-    }
-  } else {
-    Nan::ThrowError("Unknown addSubview type");
-  }
-}
-
-NAN_METHOD(NUIView::ViewWithStringTag) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-
-  std::string key;
-  if (info[0]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-    key = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
-  }
-  
-  __block UIView* obj = nullptr;
+NAN_SETTER(NUIView::ySetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      obj = [view->As<UIView>() viewWithStringTagWithStrTag:[NSString stringWithUTF8String:key.c_str()]];
-    });
-  }
-  if (obj != nullptr) {
-    Local<Value> argv[] = {
-      Nan::New<v8::External>((__bridge void*)obj)
-    };
-    Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    JS_SET_RETURN(value);
+    CGRect rect(self.frame);
+    rect.origin.y = to_value_CGFloat(value);
+    [self setFrame:rect];
   }
 }
 
-NAN_METHOD(NUIView::RemoveFromSuperview) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  [ui removeFromSuperview];
-}
-
-NAN_GETTER(NUIView::LayerGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIView, ui);
-  __block CALayer* theLayer = nullptr;
-
+NAN_GETTER(NUIView::widthGetter) {
+  JS_UNWRAP(UIView, self);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      theLayer = [ui layer];
-    });
-  }
-  
-  if (theLayer != nullptr) {
-    Local<Value> argv[] = {
-      Nan::New<v8::External>((__bridge void*)theLayer)
-    };
-    Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(theLayer, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    JS_SET_RETURN(value);
+    JS_SET_RETURN(js_value_CGFloat(self.bounds.size.width));
   }
 }
 
-NAN_GETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsGetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-
-  JS_SET_RETURN(JS_BOOL([view->As<UIView>() translatesAutoresizingMaskIntoConstraints]));
+NAN_SETTER(NUIView::widthSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool {
+    CGRect rect(self.bounds);
+    rect.size.width = to_value_CGFloat(value);
+    [self setBounds:rect];
+  }
 }
 
-NAN_SETTER(NUIView::TranslatesAutoresizingMaskIntoConstraintsSetter) {
-  Nan::HandleScope scope;
-
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(info.This());
-  
-  [view->As<UIView>() setTranslatesAutoresizingMaskIntoConstraints:TO_BOOL(value)];
+NAN_GETTER(NUIView::heightGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat(self.bounds.size.height));
+  }
 }
 
-#include "NNSLayoutAnchor.h"
-
-NAN_GETTER(NUIView::LeadingAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui leadingAnchor], NNSLayoutAnchor::type));
+NAN_SETTER(NUIView::heightSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool {
+    CGRect rect(self.bounds);
+    rect.size.height = to_value_CGFloat(value);
+    [self setBounds:rect];
+  }
 }
 
-NAN_GETTER(NUIView::TrailingAnchorGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui trailingAnchor], NNSLayoutAnchor::type));
+NAN_METHOD(NUIView::sizeThatFits) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGSize, size);
+    JS_SET_RETURN(js_value_CGSize([self sizeThatFits: size]));
+  }
 }
 
-NAN_GETTER(NUIView::TopAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui topAnchor], NNSLayoutAnchor::type));
+NAN_METHOD(NUIView::sizeToFit) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool {
+    [self sizeToFit];
+  }
 }
 
-NAN_GETTER(NUIView::BottomAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui bottomAnchor], NNSLayoutAnchor::type));
+NAN_METHOD(NUIView::addSubview) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_void([self addSubview: view]));
+  }
 }
 
-NAN_GETTER(NUIView::CenterXAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerXAnchor], NNSLayoutAnchor::type));
+NAN_METHOD(NUIView::viewWithStringTag) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_UIView([self viewWithStringTagWithStrTag:key]));
+  }
 }
 
-NAN_GETTER(NUIView::centerYAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui centerYAnchor], NNSLayoutAnchor::type));
-}
-
-NAN_GETTER(NUIView::WidthAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui widthAnchor], NNSLayoutAnchor::type));
-}
-
-NAN_GETTER(NUIView::heightAnchorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui heightAnchor], NNSLayoutAnchor::type));
-}
-
-NAN_GETTER(NUIView::UserInteractionEnabledGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  JS_SET_RETURN(JS_BOOL([ui isUserInteractionEnabled]));
-}
-
-NAN_SETTER(NUIView::UserInteractionEnabledSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-  
-  [ui setUserInteractionEnabled:TO_BOOL(value)];
+NAN_METHOD(NUIView::removeFromSuperview) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self removeFromSuperview];
+  }
 }
 
 NAN_METHOD(NUIView::bringSubviewToFront) {
-  NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(info.This()));
-  Local<Object> obj = JS_OBJ(info[0]);
-  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUIView)).FromJust()) {
-    NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
-    @autoreleasepool {
-      [view->As<UIView>() bringSubviewToFront:subview->As<UIView>()];
-    }
-  } else {
-    Nan::ThrowError("Unknown addSubview type");
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIView, view);
+    JS_SET_RETURN(js_value_void([self bringSubviewToFront: view]));
   }
 }
 
-NAN_GETTER(NUIView::alphaGetter) {
-  Nan::HandleScope scope;
+#include "NUIGestureRecognizer.h"
 
-  JS_UNWRAP(UIView, ui);
-  
-  JS_SET_RETURN(JS_NUM([ui alpha]));
-}
-
-NAN_SETTER(NUIView::alphaSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  @autoreleasepool {
-    double alpha = TO_DOUBLE(value);
-    [ui setAlpha:alpha];
-  }
-}
-
-NAN_GETTER(NUIView::contentModeGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-  
-  JS_SET_RETURN(JS_NUM([ui contentMode]));
-}
-
-NAN_SETTER(NUIView::contentModeSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-
-  @autoreleasepool {
-    UIViewContentMode mode = UIViewContentMode(TO_INT32(value));
-    [ui setContentMode:mode];
+NAN_METHOD(NUIView::addGestureRecognizer) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_pointer(UIGestureRecognizer, ui);
+    JS_SET_RETURN(js_value_void([self addGestureRecognizer: ui]));
   }
 }
 
@@ -865,29 +471,780 @@ NAN_SETTER(NUIView::drawRectSetter) {
 
 #include "NUIGestureRecognizer.h"
 
-NAN_METHOD(NUIView::addGestureRecognizer) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIView, ui);
-  
-  Local<Object> obj = JS_OBJ(info[0]);
-  NUIGestureRecognizer *gest = ObjectWrap::Unwrap<NUIGestureRecognizer>(obj);
+NAN_GETTER(NUIView::userInteractionEnabledGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isUserInteractionEnabled]));
+  }
+}
+
+NAN_SETTER(NUIView::userInteractionEnabledSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setUserInteractionEnabled: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::tagGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSInteger([self tag]));
+  }
+}
+
+NAN_SETTER(NUIView::tagSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setTag: to_value_NSInteger(value)];
+  }
+}
+
+#include "NCALayer.h"
+
+NAN_GETTER(NUIView::layerGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CALayer([self layer]));
+  }
+}
+
+NAN_GETTER(NUIView::canBecomeFocusedGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self canBecomeFocused]));
+  }
+}
+
+NAN_GETTER(NUIView::focusedGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isFocused]));
+  }
+}
+
+NAN_GETTER(NUIView::semanticContentAttributeGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UISemanticContentAttribute([self semanticContentAttribute]));
+  }
+}
+
+NAN_SETTER(NUIView::semanticContentAttributeSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setSemanticContentAttribute: to_value_UISemanticContentAttribute(value)];
+  }
+}
+
+NAN_GETTER(NUIView::effectiveUserInterfaceLayoutDirectionGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    UIUserInterfaceLayoutDirection value([self effectiveUserInterfaceLayoutDirection]);
+    JS_SET_RETURN(js_value_UIUserInterfaceLayoutDirection(value));
+  }
+}
+
+NAN_GETTER(NUIView::frameGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGRect([self frame]));
+  }
+}
+
+NAN_SETTER(NUIView::frameSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setFrame: to_value_CGRect(value)];
+  }
+}
+
+NAN_GETTER(NUIView::boundsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGRect([self bounds]));
+  }
+}
+
+NAN_SETTER(NUIView::boundsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setBounds: to_value_CGRect(value)];
+  }
+}
+
+NAN_GETTER(NUIView::centerGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGPoint([self center]));
+  }
+}
+
+NAN_SETTER(NUIView::centerSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setCenter: to_value_CGPoint(value)];
+  }
 }
 
 NAN_GETTER(NUIView::transformGetter) {
-  Nan::EscapableHandleScope scope;
-
-  JS_UNWRAP(UIView, ui);
-  
-  JS_SET_RETURN(sweetiekit::JSArrayFromCGAffineTransform([ui transform]));
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGAffineTransform([self transform]));
+  }
 }
 
 NAN_SETTER(NUIView::transformSetter) {
-  Nan::EscapableHandleScope scope;
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setTransform: to_value_CGAffineTransform(value)];
+  }
+}
 
-  JS_UNWRAP(UIView, ui);
+NAN_GETTER(NUIView::contentScaleFactorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGFloat([self contentScaleFactor]));
+  }
+}
 
-  @autoreleasepool {
-    [ui setTransform:sweetiekit::CGAffineXFormFromJSArray(value)];
+NAN_SETTER(NUIView::contentScaleFactorSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setContentScaleFactor: to_value_CGFloat(value)];
+  }
+}
+
+NAN_GETTER(NUIView::multipleTouchEnabledGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isMultipleTouchEnabled]));
+  }
+}
+
+NAN_SETTER(NUIView::multipleTouchEnabledSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setMultipleTouchEnabled: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::exclusiveTouchGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isExclusiveTouch]));
+  }
+}
+
+NAN_SETTER(NUIView::exclusiveTouchSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setExclusiveTouch: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::autoresizesSubviewsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self autoresizesSubviews]));
+  }
+}
+
+NAN_SETTER(NUIView::autoresizesSubviewsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setAutoresizesSubviews: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::autoresizingMaskGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIViewAutoresizing([self autoresizingMask]));
+  }
+}
+
+NAN_SETTER(NUIView::autoresizingMaskSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setAutoresizingMask: to_value_UIViewAutoresizing(value)];
+  }
+}
+
+NAN_GETTER(NUIView::superviewGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIView ([self superview]));
+  }
+}
+
+NAN_GETTER(NUIView::subviewsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSArray< UIView* >([self subviews]));
+  }
+}
+
+#include "NUIWindow.h"
+
+NAN_GETTER(NUIView::windowGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIWindow([self window]));
+  }
+}
+
+NAN_GETTER(NUIView::layoutMarginsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIEdgeInsets([self layoutMargins]));
+  }
+}
+
+NAN_SETTER(NUIView::layoutMarginsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setLayoutMargins: to_value_UIEdgeInsets(value)];
+  }
+}
+
+NAN_GETTER(NUIView::directionalLayoutMarginsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSDirectionalEdgeInsets([self directionalLayoutMargins]));
+  }
+}
+
+NAN_SETTER(NUIView::directionalLayoutMarginsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setDirectionalLayoutMargins: to_value_NSDirectionalEdgeInsets(value)];
+  }
+}
+
+NAN_GETTER(NUIView::preservesSuperviewLayoutMarginsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self preservesSuperviewLayoutMargins]));
+  }
+}
+
+NAN_SETTER(NUIView::preservesSuperviewLayoutMarginsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setPreservesSuperviewLayoutMargins: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::insetsLayoutMarginsFromSafeAreaGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self insetsLayoutMarginsFromSafeArea]));
+  }
+}
+
+NAN_SETTER(NUIView::insetsLayoutMarginsFromSafeAreaSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setInsetsLayoutMarginsFromSafeArea: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::safeAreaInsetsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIEdgeInsets([self safeAreaInsets]));
+  }
+}
+
+#include "NUILayoutGuide.h"
+
+NAN_GETTER(NUIView::layoutMarginsGuideGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UILayoutGuide([self layoutMarginsGuide]));
+  }
+}
+
+NAN_GETTER(NUIView::readableContentGuideGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UILayoutGuide([self readableContentGuide]));
+  }
+}
+
+NAN_GETTER(NUIView::safeAreaLayoutGuideGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UILayoutGuide([self safeAreaLayoutGuide]));
+  }
+}
+
+NAN_GETTER(NUIView::clipsToBoundsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self clipsToBounds]));
+  }
+}
+
+NAN_SETTER(NUIView::clipsToBoundsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setClipsToBounds: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::backgroundColorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIColor([self backgroundColor]));
+  }
+}
+
+NAN_SETTER(NUIView::backgroundColorSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setBackgroundColor: to_value_UIColor(value)];
+  }
+}
+
+NAN_GETTER(NUIView::alphaGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGFloat([self alpha]));
+  }
+}
+
+NAN_SETTER(NUIView::alphaSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setAlpha: to_value_CGFloat(value)];
+  }
+}
+
+NAN_GETTER(NUIView::opaqueGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isOpaque]));
+  }
+}
+
+NAN_SETTER(NUIView::opaqueSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setOpaque: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::clearsContextBeforeDrawingGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self clearsContextBeforeDrawing]));
+  }
+}
+
+NAN_SETTER(NUIView::clearsContextBeforeDrawingSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setClearsContextBeforeDrawing: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::hiddenGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self isHidden]));
+  }
+}
+
+NAN_SETTER(NUIView::hiddenSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setHidden: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::contentModeGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIViewContentMode([self contentMode]));
+  }
+}
+
+NAN_SETTER(NUIView::contentModeSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setContentMode: to_value_UIViewContentMode(value)];
+  }
+}
+
+NAN_GETTER(NUIView::contentStretchGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGRect([self contentStretch]));
+  }
+}
+
+NAN_SETTER(NUIView::contentStretchSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setContentStretch: to_value_CGRect(value)];
+  }
+}
+
+NAN_GETTER(NUIView::maskViewGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIView([self maskView]));
+  }
+}
+
+NAN_SETTER(NUIView::maskViewSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setMaskView: to_value_UIView (value)];
+  }
+}
+
+NAN_GETTER(NUIView::tintColorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIColor([self tintColor]));
+  }
+}
+
+NAN_SETTER(NUIView::tintColorSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setTintColor: to_value_UIColor(value)];
+  }
+}
+
+NAN_GETTER(NUIView::tintAdjustmentModeGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIViewTintAdjustmentMode([self tintAdjustmentMode]));
+  }
+}
+
+NAN_SETTER(NUIView::tintAdjustmentModeSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setTintAdjustmentMode: to_value_UIViewTintAdjustmentMode(value)];
+  }
+}
+
+#include "NUIGestureRecognizer.h"
+
+NAN_GETTER(NUIView::gestureRecognizersGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSArray< UIGestureRecognizer* >([self gestureRecognizers]));
+  }
+}
+
+NAN_SETTER(NUIView::gestureRecognizersSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setGestureRecognizers: to_value_NSArray< UIGestureRecognizer* >(value)];
+  }
+}
+
+#include "NUIMotionEffect.h"
+
+NAN_GETTER(NUIView::motionEffectsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSArray< UIMotionEffect* >([self motionEffects]));
+  }
+}
+
+NAN_SETTER(NUIView::motionEffectsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setMotionEffects: to_value_NSArray< UIMotionEffect* >(value)];
+  }
+}
+
+#include "NNSLayoutConstraint.h"
+
+NAN_GETTER(NUIView::constraintsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSArray< NSLayoutConstraint* >([self constraints]));
+  }
+}
+
+NAN_GETTER(NUIView::translatesAutoresizingMaskIntoConstraintsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self translatesAutoresizingMaskIntoConstraints]));
+  }
+}
+
+NAN_SETTER(NUIView::translatesAutoresizingMaskIntoConstraintsSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setTranslatesAutoresizingMaskIntoConstraints: to_value_BOOL(value)];
+  }
+}
+
+NAN_GETTER(NUIView::alignmentRectInsetsGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIEdgeInsets([self alignmentRectInsets]));
+  }
+}
+
+NAN_GETTER(NUIView::viewForFirstBaselineLayoutGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIView([self viewForFirstBaselineLayout]));
+  }
+}
+
+NAN_GETTER(NUIView::viewForLastBaselineLayoutGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_UIView([self viewForLastBaselineLayout]));
+  }
+}
+
+NAN_GETTER(NUIView::intrinsicContentSizeGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_CGSize([self intrinsicContentSize]));
+  }
+}
+
+#include "NUILayoutGuide.h"
+
+NAN_GETTER(NUIView::layoutGuidesGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSArray< UILayoutGuide* >([self layoutGuides]));
+  }
+}
+
+#include "NNSLayoutXAxisAnchor.h"
+
+NAN_GETTER(NUIView::leadingAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutXAxisAnchor([self leadingAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::trailingAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutXAxisAnchor([self trailingAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::leftAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutXAxisAnchor([self leftAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::rightAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutXAxisAnchor([self rightAnchor]));
+  }
+}
+
+#include "NNSLayoutYAxisAnchor.h"
+
+NAN_GETTER(NUIView::topAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutYAxisAnchor([self topAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::bottomAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutYAxisAnchor([self bottomAnchor]));
+  }
+}
+
+#include "NNSLayoutDimension.h"
+
+NAN_GETTER(NUIView::widthAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutDimension([self widthAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::heightAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutDimension([self heightAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::centerXAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutXAxisAnchor([self centerXAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::centerYAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutYAxisAnchor([self centerYAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::firstBaselineAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutYAxisAnchor([self firstBaselineAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::lastBaselineAnchorGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSLayoutYAxisAnchor([self lastBaselineAnchor]));
+  }
+}
+
+NAN_GETTER(NUIView::hasAmbiguousLayoutGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([self hasAmbiguousLayout]));
+  }
+}
+
+NAN_GETTER(NUIView::restorationIdentifierGetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSString([self restorationIdentifier]));
+  }
+}
+
+NAN_SETTER(NUIView::restorationIdentifierSetter) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    [self setRestorationIdentifier: to_value_NSString(value)];
+  }
+}
+
+NAN_GETTER(NUIView::areAnimationsEnabledGetter) {
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([UIView areAnimationsEnabled]));
+  }
+}
+
+NAN_GETTER(NUIView::inheritedAnimationDurationGetter) {
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_NSTimeInterval([UIView inheritedAnimationDuration]));
+  }
+}
+
+NAN_GETTER(NUIView::requiresConstraintBasedLayoutGetter) {
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_BOOL([UIView requiresConstraintBasedLayout]));
   }
 }

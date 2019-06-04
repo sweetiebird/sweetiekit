@@ -56,6 +56,8 @@
 		A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */; };
 		A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */; };
 		A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */; };
+		A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF822A6702400FA3768 /* NUILayoutGuide.mm */; };
+		A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -350,6 +352,10 @@
 		A1336FEF22A660FE00FA3768 /* NNSLayoutYAxisAnchor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLayoutYAxisAnchor.h; sourceTree = "<group>"; };
 		A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutDimension.mm; sourceTree = "<group>"; };
 		A1336FF222A660FE00FA3768 /* NNSLayoutDimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLayoutDimension.h; sourceTree = "<group>"; };
+		A1336FF722A6702400FA3768 /* NUILayoutGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILayoutGuide.h; sourceTree = "<group>"; };
+		A1336FF822A6702400FA3768 /* NUILayoutGuide.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILayoutGuide.mm; sourceTree = "<group>"; };
+		A1336FFB22A673C900FA3768 /* NUIMotionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIMotionEffect.h; sourceTree = "<group>"; };
+		A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIMotionEffect.mm; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -972,6 +978,24 @@
 				A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */,
 			);
 			path = NNSLayoutDimension;
+			sourceTree = "<group>";
+		};
+		A1336FF622A6702400FA3768 /* NUILayoutGuide */ = {
+			isa = PBXGroup;
+			children = (
+				A1336FF722A6702400FA3768 /* NUILayoutGuide.h */,
+				A1336FF822A6702400FA3768 /* NUILayoutGuide.mm */,
+			);
+			path = NUILayoutGuide;
+			sourceTree = "<group>";
+		};
+		A1336FFA22A673C900FA3768 /* NUIMotionEffect */ = {
+			isa = PBXGroup;
+			children = (
+				A1336FFB22A673C900FA3768 /* NUIMotionEffect.h */,
+				A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */,
+			);
+			path = NUIMotionEffect;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -1995,6 +2019,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1336FFA22A673C900FA3768 /* NUIMotionEffect */,
+				A1336FF622A6702400FA3768 /* NUILayoutGuide */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
@@ -2702,6 +2728,7 @@
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
+				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
@@ -2789,6 +2816,7 @@
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
 				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
+				A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */,
 				A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */,
 				A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,

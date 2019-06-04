@@ -1200,11 +1200,6 @@ Local<Value> js_value_NSData(NSData* _Nullable data)
   return result;
 }
 
-bool is_value_NSData(const Local<Value>& value)
-{
-  return value->IsArrayBuffer(); // unsure about this
-}
-
 NSData* _Nullable to_value_NSData(const Local<Value>& value, bool * _Nullable failed)
 {
   if (failed) {
@@ -1225,6 +1220,168 @@ NSData* _Nullable to_value_NSData(const Local<Value>& value, bool * _Nullable fa
   const void* bytes = buffer->GetContents().Data();
   NSData* result = [NSData dataWithBytes:bytes length:length];
   return result;
+}
+
+bool is_value_NSData(const Local<Value>& value)
+{
+  return value->IsArrayBuffer(); // unsure about this
+}
+
+bool is_value_CGAffineTransform(const Local<Value>& value)
+{
+  if (!value->IsArray()) {
+    return false;
+  }
+  Local<Array> array(value.As<Array>());
+  if (array->Length() != 6) {
+    return false;
+  }
+  for (uint32_t i = 0; i < 6; i++) {
+    if (!array->Get(i)->IsNumber()) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
+
+
+/*
+typedef struct UIEdgeInsets {
+    CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+} UIEdgeInsets;
+*/
+Local<Value> js_value_UIEdgeInsets(const UIEdgeInsets& value)
+{
+  Nan::EscapableHandleScope handleScope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("top"), js_value_CGFloat(value.top));
+  result->Set(JS_STR("left"), js_value_CGFloat(value.left));
+  result->Set(JS_STR("bottom"), js_value_CGFloat(value.bottom));
+  result->Set(JS_STR("right"), js_value_CGFloat(value.right));
+
+  return handleScope.Escape(result);
+}
+
+UIEdgeInsets to_value_UIEdgeInsets(const Local<Value>& value)
+{
+  CGFloat top = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("top")));
+  CGFloat left = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("left")));
+  CGFloat bottom = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("bottom")));
+  CGFloat right = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("right")));
+  return UIEdgeInsetsMake(top, left, bottom, right);
+}
+
+bool is_value_UIEdgeInsets(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("top"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("left"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("bottom"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("right"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+/* Specifically for use in methods and functions supporting user interface layout direction
+ */
+/*
+typedef struct NSDirectionalEdgeInsets {
+    CGFloat top, leading, bottom, trailing;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+} NSDirectionalEdgeInsets API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
+*/
+Local<Value> js_value_NSDirectionalEdgeInsets(const NSDirectionalEdgeInsets& value)
+{
+  Nan::EscapableHandleScope handleScope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("top"), js_value_CGFloat(value.top));
+  result->Set(JS_STR("leading"), js_value_CGFloat(value.leading));
+  result->Set(JS_STR("bottom"), js_value_CGFloat(value.bottom));
+  result->Set(JS_STR("trailing"), js_value_CGFloat(value.trailing));
+
+  return handleScope.Escape(result);
+}
+
+NSDirectionalEdgeInsets to_value_NSDirectionalEdgeInsets(const Local<Value>& value)
+{
+  CGFloat top = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("top")));
+  CGFloat leading = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("leading")));
+  CGFloat bottom = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("bottom")));
+  CGFloat trailing = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("trailing")));
+  return NSDirectionalEdgeInsetsMake(top, leading, bottom, trailing);
+}
+
+bool is_value_NSDirectionalEdgeInsets(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("top"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("leading"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("bottom"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("trailing"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+/*
+typedef struct UIOffset {
+    CGFloat horizontal, vertical; // specify amount to offset a position, positive for right or down, negative for left or up
+} UIOffset;
+*/
+Local<Value> js_value_UIOffset(const UIOffset& value)
+{
+  Nan::EscapableHandleScope handleScope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("horizontal"), js_value_CGFloat(value.horizontal));
+  result->Set(JS_STR("vertical"), js_value_CGFloat(value.vertical));
+
+  return handleScope.Escape(result);
+}
+
+UIOffset to_value_UIOffset(const Local<Value>& value)
+{
+  CGFloat horizontal = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("horizontal")));
+  CGFloat vertical = to_value_CGFloat(JS_OBJ(value)->Get(JS_STR("vertical")));
+  return UIOffsetMake(horizontal, vertical);
+}
+
+bool is_value_UIOffset(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("horizontal"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("vertical"))->IsNumber()) {
+    return false;
+  }
+  return true;
 }
 
 
