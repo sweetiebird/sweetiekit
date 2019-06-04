@@ -420,7 +420,7 @@ NAN_GETTER(NSCNView::contextGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
   {
-    JS_SET_RETURN(js_value_void([self context]));
+    JS_SET_RETURN(js_value_void_pointer([self context]));
     return;
   }
 }

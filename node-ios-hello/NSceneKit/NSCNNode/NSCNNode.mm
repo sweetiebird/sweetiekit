@@ -222,19 +222,13 @@ NAN_METHOD(NSCNNode::childNodesPassingTest) {
     }
   
     sweetiekit::JSFunction fn(info[0]);
-    __block bool onStopCalled = false;
-    __block bool onStopResult = false;
-    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateChildNodesCallbackStop", ^(JSInfo info) {
-      onStopCalled = true;
-      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
-    }));
+    sweetiekit::JSEnumerateShouldStop shouldStop("NSCNNode::childNodesPassingTestCallbackStop");
     auto results([self childNodesPassingTest:^BOOL(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
       __block bool result = false;
       dispatch_main(^{
-        result = TO_BOOL(fn("NSCNNode::childNodesPassingTestCallback", js_value_SCNNode(child), onStop.Get()));
-        if (onStopCalled) {
-          *stop = onStopResult;
-          onStopCalled = false;
+        result = TO_BOOL(fn("NSCNNode::childNodesPassingTestCallback", js_value_SCNNode(child), shouldStop));
+        if (shouldStop) {
+          *stop = true;
         }
       });
       return result;
@@ -252,18 +246,12 @@ NAN_METHOD(NSCNNode::enumerateChildNodes) {
     }
   
     sweetiekit::JSFunction fn(info[0]);
-    __block bool onStopCalled = false;
-    __block bool onStopResult = false;
-    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateChildNodesCallbackStop", ^(JSInfo info) {
-      onStopCalled = true;
-      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
-    }));
+    sweetiekit::JSEnumerateShouldStop shouldStop("NSCNNode::enumerateChildNodesCallbackStop");
     [self enumerateChildNodesUsingBlock:^(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
       dispatch_main(^{
-        fn("NSCNNode::enumerateChildNodesCallback", js_value_SCNNode(child), onStop.Get());
-        if (onStopCalled) {
-          *stop = onStopResult;
-          onStopCalled = false;
+        fn("NSCNNode::enumerateChildNodesCallback", js_value_SCNNode(child), shouldStop);
+        if (shouldStop) {
+          *stop = true;
         }
       });  
     }];
@@ -279,20 +267,14 @@ NAN_METHOD(NSCNNode::enumerateHierarchy) {
     }
   
     sweetiekit::JSFunction fn(info[0]);
-    __block bool onStopCalled = false;
-    __block bool onStopResult = false;
-    __block sweetiekit::JSFunction onStop(sweetiekit::FromBlock("NSCNNode::enumerateHierarchyCallbackStop", ^(JSInfo info) {
-      onStopCalled = true;
-      onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
-    }));
+    sweetiekit::JSEnumerateShouldStop shouldStop("NSCNNode::enumerateHierarchyCallbackStop");
     [self enumerateHierarchyUsingBlock:^(SCNNode * _Nonnull child, BOOL * _Nonnull stop) {
       dispatch_main(^{
-        fn("NSCNNode::enumerateHierarchyCallback", js_value_SCNNode(child), onStop.Get());
-        if (onStopCalled) {
-          *stop = onStopResult;
-          onStopCalled = false;
+        fn("NSCNNode::enumerateHierarchyCallback", js_value_SCNNode(child), shouldStop);
+        if (shouldStop) {
+          *stop = true;
         }
-      });  
+      });
     }];
   }
 }

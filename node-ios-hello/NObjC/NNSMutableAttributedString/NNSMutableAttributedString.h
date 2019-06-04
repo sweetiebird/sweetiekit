@@ -17,6 +17,18 @@
 
 JS_WRAP_CLASS(NSMutableAttributedString, NSAttributedString);
   JS_METHOD(addAttribute);
+  JS_METHOD(replaceCharactersInRangeWithString);
+  JS_METHOD(setAttributesRange);
+  JS_METHOD(addAttributeValueRange);
+  JS_METHOD(addAttributesRange);
+  JS_METHOD(removeAttributeRange);
+  JS_METHOD(replaceCharactersInRangeWithAttributedString);
+  JS_METHOD(insertAttributedStringAtIndex);
+  JS_METHOD(appendAttributedString);
+  JS_METHOD(deleteCharactersInRange);
+  JS_METHOD(setAttributedString);
+  JS_METHOD(beginEditing);
+  JS_METHOD(endEditing);
 JS_WRAP_CLASS_END(NSMutableAttributedString);
 
 #endif /* NNSMutableAttributedString_h */

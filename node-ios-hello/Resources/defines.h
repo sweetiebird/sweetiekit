@@ -45,6 +45,14 @@ using namespace v8;
 #define IS_OBJ(x) x->IsObject()
 #define IS_EXT(x) x->IsExternal()
 
+#define JS_PANIC(fmt, ...) \
+  { \
+    char js_panic_msg[4096]; \
+    snprintf(js_panic_msg, 4096, "%s: " fmt, __PRETTY_FUNCTION__, __VA_ARGS__); \
+    Nan::ThrowError(js_panic_msg); \
+    return; \
+  }
+
 template <typename T>
 class shared_ptr_release_deleter {
 public:
@@ -129,6 +137,8 @@ using namespace node;
   type name = n##name->self<type>(); name = name;
 
 #define JS_UNWRAP(type, name) \
+  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type* name = n##name->As<type>(); name = name;
   
@@ -450,6 +460,28 @@ namespace sweetiekit {
   };
 }
 
+namespace sweetiekit {
+  struct JSEnumerateShouldStop
+  {
+    JSEnumerateShouldStop(const char* methodName)
+    {
+      m_onStop.Reset(sweetiekit::FromBlock(methodName, ^(JSInfo info) {
+        m_onStopCalled = true;
+        m_onStopResult = (info.Length() > 0) ? TO_BOOL(info[0]) : YES;
+      }));
+    }
+    bool Stopped() const { return m_onStopCalled && m_onStopResult; }
+    Local<Value> Get() const { return m_onStop.Get(); }
+    
+    operator bool() const { return Stopped(); }
+    operator Local<Value>() const { return m_onStop.Get(); }
+  private:
+    JSFunction m_onStop;
+    bool m_onStopCalled = false;
+    bool m_onStopResult = false;
+  };
+}
+
 #ifdef __OBJC__
 @interface SweetJSFunction : NSObject
 {
@@ -674,6 +706,10 @@ namespace sweetiekit
     }
   }
 }
+  
+#define is_value_JSFunction(x) (x)->IsFunction()
+
+#define js_value_void(...) (__VA_ARGS__, Nan::Undefined())
 
 Local<Value> js_value_NSDate(NSDate* _Nullable value);
 NSDate* _Nullable to_value_NSDate(const Local<Value>& value, bool* _Nullable failed = nullptr);
@@ -732,6 +768,14 @@ UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable 
 #define to_value_SKColor to_value_UIColor
 bool is_value_UIColor(const Local<Value>& value);
 #define is_value_CGColor is_value_UIColor
+
+Local<Value> js_value_NSRange(const NSRange& pt);
+NSRange to_value_NSRange(const Local<Value>& value);
+bool is_value_NSRange(const Local<Value>& value);
+
+Local<Value> js_value_NSData(NSData* _Nullable value);
+NSData* _Nullable to_value_NSData(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_NSData(const Local<Value>& value);
 
 template<typename T>
 Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
@@ -819,9 +863,9 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T)sweetiekit::GetValueFor(value, failed);
 }
 
-#define js_value_void(x) Nan::New<External>(x)
-#define to_value_void(x) (x).As<External>()->Value()
-#define is_value_void(x) (x)->IsExternal()
+#define js_value_void_pointer(x) Nan::New<External>(x)
+#define to_value_void_pointer(x) (x).As<External>()->Value()
+#define is_value_void_pointer(x) (x)->IsExternal()
 
 #define js_value_int32_t JS_INT
 #define to_value_int32_t TO_INT32
@@ -859,6 +903,18 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
 #define IS_ENUM(type, c, x) is_value_##c(x)
 
+#define JS_OPTS(type, c, x) js_value_##c(x)
+#define TO_OPTS(type, c, x) static_cast<type>(to_value_##c(x))
+#define IS_OPTS(type, c, x) is_value_##c(x)
+
+#define js_enum_wrapper(x, c) JS_ENUM(c, NSInteger, x)
+#define to_enum_wrapper(x, c) TO_ENUM(c, NSInteger, x)
+#define is_enum_wrapper(x, c) IS_ENUM(c, NSInteger, x)
+
+#define js_opts_wrapper(x, c) JS_OPTS(c, NSUInteger, x)
+#define to_opts_wrapper(x, c) TO_OPTS(c, NSUInteger, x)
+#define is_opts_wrapper(x, c) IS_OPTS(c, NSUInteger, x)
+
 #define js_value_wrapper(x, t) sweetiekit::GetWrapperFor(x, N##t::type)
 #define to_value_wrapper(x, t) (t*)sweetiekit::GetValueFor(x)
 #define is_value_wrapper(x, t) JS_INSTANCEOF(x, N##t)
@@ -866,6 +922,45 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
 #define to_value_wrapper_unknown(x, t) to_value_wrapper(x, t)
 #define is_value_wrapper_unknown(x, t) is_value_wrapper(x, NSObject)
+  
+#define declare_value_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  type name(to_value_##type(info[name##_argument_index]));
+  
+#define declare_pointer_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  type* name(to_value_##type(info[name##_argument_index]));
+
+#define declare_value_pointer_(index, type, name) \
+  auto name##_argument_index(index); \
+  type name##_; \
+  type* name = (info[name##_argument_index]->IsObject()) ? &(name##_) : nullptr; \
+  Local<Object> name##Obj; \
+  if (info[name##_argument_index]->IsObject()) { \
+    name##Obj = JS_OBJ(info[name##_argument_index]); \
+  }
+
+#define declare_args() \
+  int JS_ARGC = 0;
+
+#define declare_value(...) \
+  declare_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define declare_pointer(...) \
+  declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define declare_value_pointer(...) \
+  declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define JS_TODO() JS_PANIC("Not implemented")
+
+#define is_value_NSDictionary(x) (x)->IsObject()
+#define to_value_NSDictionary(x) to_value_id<NSDictionary>(x)
+#define js_value_NSDictionary(x) js_value_id(x)
 
 // SceneKit types
 #define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)

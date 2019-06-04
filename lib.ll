@@ -175,10 +175,10 @@
 ;(define-macro js-value-int32_t (x) `(js-value (JS_INT ,x)))
 ;(define-macro to-value-int32_t (x) `(to-value int32_t (TO_INT32 ,x)))
 
-(define-macro js-value-BOOL (x) `(js-value (JS_BOOL ,x)))
-(define-macro to-value-BOOL (x) `(to-value BOOL (TO_BOOL ,x)))
-(define-macro js-value-bool (x) `(js-value (JS_BOOL ,x)))
-(define-macro to-value-bool (x) `(to-value BOOL (TO_BOOL ,x)))
+;(define-macro js-value-BOOL (x) `(js-value (JS_BOOL ,x)))
+;(define-macro to-value-BOOL (x) `(to-value BOOL (TO_BOOL ,x)))
+;(define-macro js-value-bool (x) `(js-value (JS_BOOL ,x)))
+;(define-macro to-value-bool (x) `(to-value BOOL (TO_BOOL ,x)))
 
 ; (define-macro js-value-CGRect (x)
 ;   `(let (rect ,x
@@ -229,7 +229,9 @@
   (let r (if (obj? return-type)
              (apply concat "_" return-type)
              return-type)
-    (str-replace r "const " "")))
+    (str-replace r
+                 "const " ""
+                 "*" "_pointer")))
 
 (define-global js-return-type (return-type)
   (cat "js-value-" (objc-return-type return-type)))
@@ -359,21 +361,6 @@
               `(JS_ASSIGN_METHOD proto ,name))))
       source
       `(js-type-method ,class ,type ,name ,args static: ,static?))))
-
-(define-global str-replace (s before after rest: more)
-  (let ((a rest: bs) (split s before))
-    (let r a
-      (step x bs
-        (cat! r (or after "") x))
-      (if (some? more)
-          (apply str-replace r more)
-         r))))
-
-(define-global str-starts? (str s)
-  (= (clip str 0 (# s)) s))
-
-(define-global str-ends? (str s)
-  (= (clip str (- (# str) (# s))) s))
 
 (set reader (require 'reader))
 

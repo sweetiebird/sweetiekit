@@ -347,6 +347,9 @@ namespace sweetiekit
       if ([pThing isKindOfClass:[UIColor class]]) {
         return js_value_UIColor((UIColor*)pThing);
       }
+      if ([pThing isKindOfClass:[NSData class]]) {
+        return js_value_NSData((NSData*)pThing);
+      }
       NJSWrapperMap* wrappers = GetWrapperMap();
       if (wrappers) {
         NJSValue* wrapper = [wrappers findJSWrapperForObject:pThing inContext:JS_ISOLATE()];
@@ -397,6 +400,9 @@ namespace sweetiekit
     }
     if (is_value_UIColor(value)) {
       return to_value_UIColor(value);
+    }
+    if (is_value_NSData(value)) {
+      return to_value_NSData(value);
     }
     if (failed) {
       *failed = true;
@@ -1146,6 +1152,81 @@ bool is_value_UIColor(const Local<Value>& value)
   }
   return true;
 }
+
+Local<Value> js_value_NSRange(const NSRange& value)
+{
+  Nan::EscapableHandleScope handleScope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("location"), js_value_NSUInteger(value.location));
+  result->Set(JS_STR("length"), js_value_NSUInteger(value.length));
+
+  return handleScope.Escape(result);
+}
+
+NSRange to_value_NSRange(const Local<Value>& value)
+{
+  NSUInteger loc = to_value_NSUInteger(JS_OBJ(value)->Get(JS_STR("location")));
+  NSUInteger len = to_value_NSUInteger(JS_OBJ(value)->Get(JS_STR("length")));
+  return NSMakeRange(loc, len);
+}
+
+bool is_value_NSRange(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!obj->Get(JS_STR("length"))->IsNumber()) {
+    return false;
+  }
+  if (!obj->Get(JS_STR("location"))->IsNumber()) {
+    return false;
+  }
+  return true;
+}
+
+Local<Value> js_value_NSData(NSData* _Nullable data)
+{
+  if (!data) {
+    return Nan::Undefined();
+  }
+
+  NSUInteger length = [data length];
+  const void* bytes = [data bytes];
+
+  Local<ArrayBuffer> result = ArrayBuffer::New(Isolate::GetCurrent(), length);
+  memcpy(result->GetContents().Data(), bytes, length);
+  return result;
+}
+
+bool is_value_NSData(const Local<Value>& value)
+{
+  return value->IsArrayBuffer(); // unsure about this
+}
+
+NSData* _Nullable to_value_NSData(const Local<Value>& value, bool * _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  
+  if (!is_value_NSData(value)) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected NSData");
+    }
+    return nil;
+  }
+  
+  Local<ArrayBuffer> buffer(value.As<ArrayBuffer>());
+  NSUInteger length = buffer->GetContents().ByteLength();
+  const void* bytes = buffer->GetContents().Data();
+  NSData* result = [NSData dataWithBytes:bytes length:length];
+  return result;
+}
+
 
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
