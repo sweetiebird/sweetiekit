@@ -20,20 +20,29 @@ JS_INIT_CLASS(NSLayoutConstraint, NSObject);
 JS_INIT_CLASS_END(NSLayoutConstraint, NSObject);
 
 NAN_METHOD(NNSLayoutConstraint::New) {
-  Nan::HandleScope scope;
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'NSLayoutConstraint(...)', turn into construct call.
+      JS_SET_RETURN_NEW(NSLayoutConstraint, info);
+      return;
+    }
 
-  Local<Object> obj = info.This();
-
-  NNSLayoutConstraint *lc = new NNSLayoutConstraint();
-
-  if (info[0]->IsExternal()) {
-    lc->SetNSObject((__bridge NSLayoutConstraint *)(info[0].As<External>()->Value()));
-  } else {
-    // error
+    NSLayoutConstraint* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSLayoutConstraint *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[NSLayoutConstraint alloc] init];
+    }
+    if (self) {
+      NNSLayoutConstraint *wrapper = new NNSLayoutConstraint();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NSLayoutConstraint::New: invalid arguments");
+    }
   }
-  lc->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
 }
 
 NAN_GETTER(NNSLayoutConstraint::IsActiveGetter) {

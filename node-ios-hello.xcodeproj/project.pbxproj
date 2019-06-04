@@ -53,6 +53,9 @@
 		A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12C1503228A3718005BDD9D /* NSCNScene.mm */; };
 		A1311C4E2292BF340064FE1D /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
+		A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */; };
+		A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */; };
+		A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -341,6 +344,12 @@
 		A12655F822719CE400D3DF47 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		A12C1502228A3710005BDD9D /* NSCNScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNScene.h; sourceTree = "<group>"; };
 		A12C1503228A3718005BDD9D /* NSCNScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNScene.mm; sourceTree = "<group>"; };
+		A1336FEB22A660FE00FA3768 /* NNSLayoutXAxisAnchor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLayoutXAxisAnchor.h; sourceTree = "<group>"; };
+		A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutXAxisAnchor.mm; sourceTree = "<group>"; };
+		A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutYAxisAnchor.mm; sourceTree = "<group>"; };
+		A1336FEF22A660FE00FA3768 /* NNSLayoutYAxisAnchor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLayoutYAxisAnchor.h; sourceTree = "<group>"; };
+		A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutDimension.mm; sourceTree = "<group>"; };
+		A1336FF222A660FE00FA3768 /* NNSLayoutDimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLayoutDimension.h; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -905,7 +914,8 @@
 				A11D129B227F6AB70038C262 /* NNSLayoutConstraint.h */,
 				A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */,
 			);
-			path = NNSLayoutConstraint;
+			name = NNSLayoutConstraint;
+			path = ../NObjC/NNSLayoutConstraint;
 			sourceTree = "<group>";
 		};
 		A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */ = {
@@ -914,7 +924,8 @@
 				A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */,
 				A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */,
 			);
-			path = NNSLayoutAnchor;
+			name = NNSLayoutAnchor;
+			path = ../NObjC/NNSLayoutAnchor;
 			sourceTree = "<group>";
 		};
 		A11D12A2227F8D780038C262 /* NUITableViewManager */ = {
@@ -934,6 +945,33 @@
 				A12C1503228A3718005BDD9D /* NSCNScene.mm */,
 			);
 			path = NSCNScene;
+			sourceTree = "<group>";
+		};
+		A1336FEA22A660FE00FA3768 /* NNSLayoutXAxisAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A1336FEB22A660FE00FA3768 /* NNSLayoutXAxisAnchor.h */,
+				A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */,
+			);
+			path = NNSLayoutXAxisAnchor;
+			sourceTree = "<group>";
+		};
+		A1336FED22A660FE00FA3768 /* NNSLayoutYAxisAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				A1336FEF22A660FE00FA3768 /* NNSLayoutYAxisAnchor.h */,
+				A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */,
+			);
+			path = NNSLayoutYAxisAnchor;
+			sourceTree = "<group>";
+		};
+		A1336FF022A660FE00FA3768 /* NNSLayoutDimension */ = {
+			isa = PBXGroup;
+			children = (
+				A1336FF222A660FE00FA3768 /* NNSLayoutDimension.h */,
+				A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */,
+			);
+			path = NNSLayoutDimension;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -1957,6 +1995,11 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
+				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
+				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
+				A1336FEA22A660FE00FA3768 /* NNSLayoutXAxisAnchor */,
+				A1336FED22A660FE00FA3768 /* NNSLayoutYAxisAnchor */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -2135,8 +2178,6 @@
 			children = (
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
-				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
-				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
 				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
 				A10BD042228F490400184286 /* NNSNotification */,
@@ -2678,7 +2719,10 @@
 				A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
+				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
+				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
+				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
 				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,

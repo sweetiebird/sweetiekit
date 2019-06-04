@@ -16,7 +16,12 @@
 #define is_value_NSLayoutAnchor(x) is_value_wrapper(x, NSLayoutAnchor)
 
 JS_WRAP_CLASS(NSLayoutAnchor, NSObject);
-  JS_METHOD(ConstraintEqualToAnchor);
+  JS_METHOD(constraintEqualToAnchor);
+  JS_METHOD(constraintGreaterThanOrEqualToAnchor);
+  JS_METHOD(constraintLessThanOrEqualToAnchor);
+  JS_METHOD(constraintEqualToAnchorConstant);
+  JS_METHOD(constraintGreaterThanOrEqualToAnchorConstant);
+  JS_METHOD(constraintLessThanOrEqualToAnchorConstant);
 JS_WRAP_CLASS_END(NSLayoutAnchor);
 
 #endif /* NNSLayoutAnchor_h */

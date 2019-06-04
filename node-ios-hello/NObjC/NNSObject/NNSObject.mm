@@ -693,6 +693,9 @@ NAN_METHOD(NClass::New) {
 #include "NUIStackView.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
+#include "NNSLayoutDimension.h"
+#include "NNSLayoutXAxisAnchor.h"
+#include "NNSLayoutYAxisAnchor.h"
 #include "NUITableViewManager.h"
 #include "NUITouch.h"
 #include "NUIBarButtonItem.h"
@@ -783,14 +786,17 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
-    JS_EXPORT_TYPE(NSLayoutAnchor);
-    JS_EXPORT_TYPE(NSLayoutConstraint);
     JS_EXPORT_TYPE(NSParagraphStyle);
     JS_EXPORT_TYPE(NSMutableParagraphStyle);
     JS_EXPORT_TYPE(NSAttributedString);
     JS_EXPORT_TYPE(NSMutableAttributedString);
 
     // UIKit
+    JS_EXPORT_TYPE(NSLayoutAnchor);
+    JS_EXPORT_TYPE(NSLayoutConstraint);
+    JS_EXPORT_TYPE(NSLayoutDimension);
+    JS_EXPORT_TYPE(NSLayoutXAxisAnchor);
+    JS_EXPORT_TYPE(NSLayoutYAxisAnchor);
     JS_EXPORT_TYPE(UIBarButtonItem);
     JS_EXPORT_TYPE(UITabBarItem);
     JS_EXPORT_TYPE(UIAlertAction);
@@ -1116,6 +1122,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
       JS_RETURN_TYPE_FROM(UIViewControllerTransitioningDelegate, SUIViewControllerTransitioningDelegate);
       // ========= objects
+      JS_RETURN_TYPE(NSLayoutYAxisAnchor);
+      JS_RETURN_TYPE(NSLayoutXAxisAnchor);
+      JS_RETURN_TYPE(NSLayoutDimension);
+      JS_RETURN_TYPE(NSLayoutConstraint);
+      JS_RETURN_TYPE(NSLayoutAnchor);
       JS_RETURN_TYPE(UIApplication);
       JS_RETURN_TYPE(UITouch);
       JS_RETURN_TYPE(UIResponder);
@@ -1134,8 +1145,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSMutableParagraphStyle);
       JS_RETURN_TYPE(NSParagraphStyle);
       JS_RETURN_TYPE(NSBundle);
-      JS_RETURN_TYPE(NSLayoutConstraint);
-      JS_RETURN_TYPE(NSLayoutAnchor);
       JS_RETURN_TYPE(NSUserDefaults);
       JS_RETURN_TYPE(NSObject);
       return Nid::type;
