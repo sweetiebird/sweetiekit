@@ -691,6 +691,8 @@ NAN_METHOD(NClass::New) {
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
 #include "NUIStackView.h"
+#include "NUIGestureRecognizer.h"
+#include "NUITapGestureRecognizer.h"
 #include "NNSLayoutAnchor.h"
 #include "NNSLayoutConstraint.h"
 #include "NNSLayoutDimension.h"
@@ -794,6 +796,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSMutableAttributedString);
 
     // UIKit
+    JS_EXPORT_TYPE(UIGestureRecognizer);
+    JS_EXPORT_TYPE(UITapGestureRecognizer);
+    JS_EXPORT_TYPE(UIPinchGestureRecognizer);
+    JS_EXPORT_TYPE(UIRotationGestureRecognizer);
+    JS_EXPORT_TYPE(UISwipeGestureRecognizer);
+    JS_EXPORT_TYPE(UIPanGestureRecognizer);
+    JS_EXPORT_TYPE(UIScreenEdgePanGestureRecognizer);
+    JS_EXPORT_TYPE(UILongPressGestureRecognizer);
+    
     JS_EXPORT_TYPE(NSLayoutAnchor);
     JS_EXPORT_TYPE(NSLayoutConstraint);
     JS_EXPORT_TYPE(NSLayoutDimension);
@@ -1131,6 +1142,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSLayoutDimension);
       JS_RETURN_TYPE(NSLayoutConstraint);
       JS_RETURN_TYPE(NSLayoutAnchor);
+            
+      JS_RETURN_TYPE(UILongPressGestureRecognizer);
+      JS_RETURN_TYPE(UIScreenEdgePanGestureRecognizer);
+      JS_RETURN_TYPE(UIPanGestureRecognizer);
+      JS_RETURN_TYPE(UISwipeGestureRecognizer);
+      JS_RETURN_TYPE(UIRotationGestureRecognizer);
+      JS_RETURN_TYPE(UIPinchGestureRecognizer);
+      JS_RETURN_TYPE(UITapGestureRecognizer);
+      JS_RETURN_TYPE(UIGestureRecognizer);
+
       JS_RETURN_TYPE(UIMotionEffect);
       JS_RETURN_TYPE(UILayoutGuide);
       JS_RETURN_TYPE(UIApplication);
