@@ -321,7 +321,10 @@ namespace sweetiekit
         return Nan::Undefined();
       }
       if ([pThing isKindOfClass:[NSString class]]) {
-        return JS_STR([(NSString*)pThing UTF8String]);
+        return js_value_NSString((NSString*)pThing);
+      }
+      if ([pThing isKindOfClass:[NSDate class]]) {
+        return js_value_NSDate((NSDate*)pThing);
       }
       if ([pThing isKindOfClass:[NSNumber class]]) {
         __weak NSNumber* value = (NSNumber*)pThing;
@@ -363,7 +366,6 @@ namespace sweetiekit
         Nan::New<v8::External>((__bridge void*)pThing)
       };
       auto result(JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
-//      auto kind(NNSObject::GetNSObjectType(pThing, defaultType));
       if (wrappers) {
         NJSValue* wrapper = [[NJSValue alloc] initWithValue:result];
         [wrappers setJSWrapperForObject:pThing wrapper:wrapper inContext:JS_ISOLATE()];
@@ -389,6 +391,9 @@ namespace sweetiekit
     }
     if (value->IsString()) {
       return to_value_NSString(value);
+    }
+    if (is_value_NSDate(value)) {
+      return to_value_NSDate(value);
     }
     if (value->IsInt32()) {
       return [[NSNumber alloc] initWithInt: TO_INT32(value)];
