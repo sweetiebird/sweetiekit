@@ -302,7 +302,9 @@ namespace sweetiekit
   
   NJSWrapperMap* GetWrapperMap() {
     if (!g_wrapperMap) {
+#if SWEETIEKIT_WRAPPER_MAP
       g_wrapperMap = [[NJSWrapperMap alloc] initWithContext:Isolate::GetCurrent()];
+#endif
     }
     return g_wrapperMap;
   }
