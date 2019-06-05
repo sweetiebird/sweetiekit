@@ -14,6 +14,12 @@
 (define-macro awhen (expr rest: body)
   `(aif (do ,expr) (do ,@body) (do)))
 
+(define-global tuples (xs (o n 2))
+  (if (none? xs)
+      (list)
+      (join (list (cut xs 0 n))
+            (tuples (cut xs n) n))))
+
 (define-macro foreach (v l type: (o type 'auto) rest: body)
   `(do (%block prefix: (%stmt "for (" ',type " " ,v " : " ,l ")")
          (%local ,v ephemeral: true)
@@ -94,6 +100,52 @@
 
 (define-global objc-method-name (name args)
   (camel-case (str-replace (rtrim (apply cat name (keep objc-named-arg? args)) ":") ":" "-")))
+
+(define-global objc-arg-name (name args)
+  (camel-case (str-replace (rtrim (apply cat name (keep objc-named-arg? args)) ":") ":" "-")))
+
+(define-global objc-gen-type (type)
+ (if (obj? type)
+     (objc-gen-type (apply concat "-" type))
+     (trim (str-replace type
+                        "const " ""
+                        "*" "-pointer"
+                        "-<" "<" ">-" ">"
+                        "<-" "<" "->" ">"
+                        " <" "<" "> " ">"
+                        "< " "<" " >" ">"
+                        "-pointer>" "*>"
+                        ">pointer" ">-pointer")
+           " ")))
+
+(define-global objc-parse-type (type)
+  (let (type (objc-gen-type type)
+        nullable? false
+        pointer? false)
+    (when (str-starts? type "nullable-")
+      (set type (clip type (# "nullable-")))
+      (set nullable? true))
+    (when (str-ends? type "-pointer")
+      (set type (clip type 0 (- (# type) (# "-pointer"))))
+      (set pointer? true))
+    (list type nullable: nullable? pointer: pointer?)))
+
+(define-global js-gen-method-args (name args)
+  (with forms ()
+    (when (some? args)
+      (let spec `(,name ,@args)
+        (add forms `(declare-args))
+        (step (dispatch-name arg-type arg-name) (tuples spec 3)
+         ;(print (str (list dispatch-name arg-type arg-name)))
+          (let ((type nullable: nullable? pointer: pointer?) (objc-parse-type arg-type))
+            ;(print (str `(type: ,type pointer: ,pointer? nullable: ,nullable?)))
+            (if (and nullable? pointer?)
+                (add forms `(declare-nullable-pointer (%literal ,(escape type)) ,arg-name))
+                pointer?
+                (add forms `(declare-pointer (%literal ,(escape type)) ,arg-name))
+                nullable?
+                (add forms `(declare-nullable-value (%literal ,(escape type)) ,arg-name))
+              (add forms `(declare-value (%literal ,(escape type)) ,arg-name)))))))))
 
 (define-macro js-define-method (self-type self name args static: static? rest: body)
   `(nan-method (js-wrapper ,self-type ,(objc-method-name name args))
@@ -223,24 +275,26 @@
 ;(define-macro js-value-Array<id> (seq)
 ;  `(js-map-NSArray ,seq x (js-wrap x NSObject)))
 
-(define-global objc-return-type (return-type)
+(define-global js-return-type (return-type)
   (while (in (hd? return-type) "nullable" "const")
     (set return-type (tl return-type)))
-  (let r (if (obj? return-type)
-             (apply concat "_" return-type)
-             return-type)
-    (str-replace r
-                 "const " ""
-                 "*" "_pointer")))
+  (let ((type nullable: nullable? pointer: pointer?) (objc-parse-type return-type))
+    (if (and pointer? (= type "void"))
+        "js-value-void-pointer"
+      (cat "js-value-" type))))
 
-(define-global js-return-type (return-type)
-  (cat "js-value-" (objc-return-type return-type)))
+(define js-return-body (return-type body)
+  (let (type (js-return-type return-type)
+        body `(declare-type ,return-type ,@body))
+    (if (= type "js-value-void")
+        body
+        `(js-return (,type ,body)))))
 
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
         body (if (none? body) `([self ,(if (= return-type 'BOOL) (camel-case (cat "is-" name)) name)]) body))
     `(js-getter ,self-type self ,name
-       (js-return (,(js-return-type return-type) (declare-type ,return-type ,@body))))))
+       ,(js-return-body return-type body))))
 
 (define-macro js-type-setter (self-type input-type name rest: body)
   (let (input-type (expand input-type)
@@ -271,7 +325,8 @@
   (let (return-type (expand return-type)
         body (if (none? body) (js-gen-method-call (if static? `(%instancetype) `self) name args) body))
     `(js-define-method ,self-type self ,name ,args static: ,static?
-       (js-return (,(js-return-type return-type) (declare-type ,return-type ,@body))))))
+       ,@(js-gen-method-args name args)
+       ,(js-return-body return-type body))))
 
 '(print (compile (expand '(%do
   (js-type-getter UIView CGRect frame)
@@ -449,7 +504,7 @@
      (case pre
        AR (return 'ARKit)
        AV (return 'AVFoundation)
-       CA (return 'CoreAnimation)
+       CA (return 'QuartzCore)
        CL (return 'CoreLocation)
        CM (return 'CoreMotion)
        GK (return 'GameplayKit)
