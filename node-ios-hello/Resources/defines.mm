@@ -165,7 +165,7 @@ struct ObjCWeakRef {
   operator size_t() const {
     return (size_t)ref;
   }
-  id ref;
+  __weak id ref;
 };
 
 struct ObjCWeakRefHash { 
