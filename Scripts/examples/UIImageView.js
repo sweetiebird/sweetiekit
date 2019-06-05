@@ -5,7 +5,7 @@ const {
   UIImageView,
 } = SweetieKit;
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const img = UIImage('laarc');
   const view = UIImageView(img);
   const w = demoVC.view.frame.width;

@@ -8,7 +8,7 @@ const {
 
 const font = UIFont('Arial-BoldMT', 17);
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
   const labelsView = UIView({ x: 12, y: 80, width: w - 24, height: h - 80 });

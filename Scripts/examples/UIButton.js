@@ -6,7 +6,7 @@ const {
   UIButton,
 } = SweetieKit;
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const button = UIButton({x: 12, y: 80, width: w - 24, height: 50});
   button.title = '👋 Hello Button';

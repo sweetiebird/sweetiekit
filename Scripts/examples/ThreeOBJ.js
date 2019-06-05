@@ -3,7 +3,7 @@ const fs = require('fs');
 THREE = require('../vendor/three/three');
 require('../vendor/three/OBJExporter');
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const exporter = new THREE.OBJExporter();
   const geometry = new THREE.RingGeometry(0.3, 0.5, 32);
   const material = new THREE.MeshNormalMaterial();

@@ -189,7 +189,7 @@ class UIDemosApp {
 
       if (demoTypes[type]) {
         this.createDemoVC();
-        const ui = await demoTypes[type](this.demoVC);
+        const ui = await demoTypes[type](this.nav, this.demoVC);
         this.showDemoUI(ui);
       }
     } else if (section === 1) {

@@ -43,7 +43,7 @@ function setPickerManager() {
   picker.delegate = mgr;
 }
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const frame = {
     x: 0,
     y: demoVC.view.frame.height / 3,

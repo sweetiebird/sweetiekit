@@ -6,7 +6,7 @@ const {
   UILabel,
 } = SweetieKit;
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const scrollView = new UIScrollView();
   const contentView = UIView();
 

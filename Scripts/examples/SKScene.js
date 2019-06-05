@@ -141,7 +141,7 @@ function start(demoVC) {
   }, 500);
 }
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   makePlayer(demoVC);
   makeScene(demoVC);
   makeDelegate();

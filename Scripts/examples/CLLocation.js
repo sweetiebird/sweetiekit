@@ -141,7 +141,7 @@ function doMath(lat1, lat2, long1, long2, heading) {
   return v;
 }
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   makeMap(demoVC);
 
   const geocoder = new CLGeocoder();

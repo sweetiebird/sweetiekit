@@ -6,7 +6,7 @@ const {
   CAEmitterCell,
 } = SweetieKit;
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const view = demoVC.view;
   const layer = new CAEmitterLayer();
   layer.emitterPosition = { x: view.frame.width / 2, y: view.frame.height / 2 };

@@ -26,7 +26,7 @@ function makeDelegate(demoVC, pageControl) {
   scrollView.delegate = del;
 }
 
-async function make(demoVC) {
+async function make(nav, demoVC) {
   const numSlides = 4;
 
   const w = demoVC.view.frame.width;
