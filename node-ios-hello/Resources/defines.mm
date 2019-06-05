@@ -1,6 +1,5 @@
 //
 //  defines.m
-//  node-ios-hello
 //
 //  Created by BB on 5/4/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.

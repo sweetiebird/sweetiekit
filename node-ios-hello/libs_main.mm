@@ -1,6 +1,5 @@
 //
 //  libs_main.mm
-//  node-ios-hello
 //
 //  Created by Shawn on 3/20/19.
 //  Copyright © 2019 Sweetiebird. All rights reserved.

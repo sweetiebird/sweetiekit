@@ -1,6 +1,5 @@
 //
 //  NUIResponder.h
-//  node-ios-hello
 //
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.

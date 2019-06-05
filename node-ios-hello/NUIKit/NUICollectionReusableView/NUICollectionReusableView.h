@@ -1,6 +1,5 @@
 //
 //  NUICollectionReusableView.h
-//  node-ios-hello
 //
 //  Created by Shawn Presser on 5/16/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.

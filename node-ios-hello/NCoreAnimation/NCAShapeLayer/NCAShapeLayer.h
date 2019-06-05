@@ -1,6 +1,5 @@
 //
 //  NCAShapeLayer.h
-//  node-ios-hello
 //
 //  Created by Emily Kolar on 2019-5-25.
 //  Copyright © 2019 sweetiebird. All rights reserved.

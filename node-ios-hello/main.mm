@@ -1,6 +1,5 @@
 //
 //  main.m
-//  node-ios-hello
 //
 //  Created by Emily Kolar on 5/10/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.

@@ -1,6 +1,5 @@
 //
 //  Nobjc.h
-//  node-ios-hello
 //
 //  Created by Emily Kolar on 5/29/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
