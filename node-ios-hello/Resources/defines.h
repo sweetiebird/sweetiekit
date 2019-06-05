@@ -877,13 +877,9 @@ static inline NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<
   }
 }
 
-inline Local<Value> js_value_id(id _Nullable value) {
-  return sweetiekit::GetWrapperFor(value);
-}
-
-inline id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr) {
-  return sweetiekit::GetValueFor(value, failed);
-}
+Local<Value> js_value_id(id _Nullable value);
+id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_id(Local<Value> value);
 
 template<typename T>
 Local<Value> js_value_id(T* _Nullable value) {

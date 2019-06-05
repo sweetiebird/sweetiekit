@@ -290,7 +290,7 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
   static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       __block IMP originalUpdateIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(update:), ^(SKScene *_self, NSTimeInterval currentTime) {
-          NSLog(@"update: implementation");
+//          NSLog(@"update: implementation");
 
           id fn = [_self associatedValueForKey:@"sweetiekit_update"];
           if (fn != nullptr) {

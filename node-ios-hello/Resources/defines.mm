@@ -1383,6 +1383,23 @@ bool is_value_UIOffset(const Local<Value>& value)
   return true;
 }
 
+Local<Value> js_value_id(id _Nullable value) {
+  return sweetiekit::GetWrapperFor(value);
+}
+
+id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed) {
+  return sweetiekit::GetValueFor(value, failed);
+}
+
+bool is_value_id(Local<Value> value) {
+  bool failed = false;
+  sweetiekit::GetValueFor(value, &failed);
+  if (failed) {
+    return false;
+  }
+  return true;
+}
+
 
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {

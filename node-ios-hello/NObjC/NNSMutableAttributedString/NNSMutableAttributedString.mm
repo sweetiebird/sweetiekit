@@ -57,16 +57,6 @@ NAN_METHOD(NNSMutableAttributedString::New) {
   JS_SET_RETURN(obj);
 }
 
-bool is_value_id(Local<Value> value) {
-  if (value->IsNullOrUndefined()) {
-    return true;
-  }
-  if (!value->IsObject()) {
-    return false;
-  }
-  return JS_INSTANCEOF(JS_OBJ(value), Nid);
-}
-
 NAN_METHOD(NNSMutableAttributedString::addAttribute) {
   JS_UNWRAP(NSMutableAttributedString, ns);
   
