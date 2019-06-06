@@ -26,9 +26,6 @@
          ,@body)
      (do)))
 
-(define-macro autoreleasepool body
-  `(%do (%stmt "@autoreleasepool") (%block ,@body)))
-
 (define-special cast (type x)
   (cat "(" (dequoted type) ")" "(" (compile x) ")"))
 
@@ -46,19 +43,25 @@
   (let f compiled-type
     (reduce (fn (a b) (cat a "-" b)) (map f (list ...)) (f (or s "")))))
 
-(define-macro scope (head rest: body)
+(define-macro %scope (head rest: body)
   `(%do (%newline) (%block prefix: ,head ,@body)))
 
+(define-macro %autoreleasepool ()
+  `(%stmt declare-autoreleasepool))
+
+(define-macro with-autoreleasepool body
+  `(%block prefix: (%autoreleasepool) ,@body))
+
 (define-macro nan-method (method rest: body)
-  `(scope (NAN_METHOD ,method)
+  `(%scope (NAN_METHOD ,method)
       ,@body))
 
 (define-macro nan-getter (getter rest: body)
-  `(scope (NAN_GETTER ,getter)
+  `(%scope (NAN_GETTER ,getter)
       ,@body))
 
 (define-macro nan-setter (setter rest: body)
-  `(scope (NAN_SETTER ,setter)
+  `(%scope (NAN_SETTER ,setter)
       ,@body))
 
 (during-compilation
@@ -83,7 +86,7 @@
   `(nan-getter (js-wrapper ,self-type (%literal ,name "Getter"))
      (declare-type ,self-type %self)
      (JS_UNWRAP ,self-type ,self)
-     (autoreleasepool
+     (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
 
@@ -91,7 +94,7 @@
   `(nan-setter (js-wrapper ,self-type (%literal ,name "Setter"))
      (declare-type ,self-type %self)
      (JS_UNWRAP ,self-type ,self)
-     (autoreleasepool
+     (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
 
@@ -130,6 +133,17 @@
       (set pointer? true))
     (list type nullable: nullable? pointer: pointer?)))
 
+(define-global js-declare-arg (arg-type arg-name)
+  (let ((type nullable: nullable? pointer: pointer?) (objc-parse-type arg-type))
+    ;(print (str `(type: ,type pointer: ,pointer? nullable: ,nullable?)))
+    (if (and nullable? pointer?)
+        `(declare-nullable-pointer (%literal ,(escape type)) ,arg-name)
+        pointer?
+        `(declare-pointer (%literal ,(escape type)) ,arg-name)
+        nullable?
+        `(declare-nullable-value (%literal ,(escape type)) ,arg-name)
+      `(declare-value (%literal ,(escape type)) ,arg-name))))
+
 (define-global js-gen-method-args (name args)
   (with forms ()
     (when (some? args)
@@ -137,21 +151,13 @@
         (add forms `(declare-args))
         (step (dispatch-name arg-type arg-name) (tuples spec 3)
          ;(print (str (list dispatch-name arg-type arg-name)))
-          (let ((type nullable: nullable? pointer: pointer?) (objc-parse-type arg-type))
-            ;(print (str `(type: ,type pointer: ,pointer? nullable: ,nullable?)))
-            (if (and nullable? pointer?)
-                (add forms `(declare-nullable-pointer (%literal ,(escape type)) ,arg-name))
-                pointer?
-                (add forms `(declare-pointer (%literal ,(escape type)) ,arg-name))
-                nullable?
-                (add forms `(declare-nullable-value (%literal ,(escape type)) ,arg-name))
-              (add forms `(declare-value (%literal ,(escape type)) ,arg-name)))))))))
+           (add forms (js-declare-arg arg-type arg-name)))))))
 
 (define-macro js-define-method (self-type self name args static: static? rest: body)
   `(nan-method (js-wrapper ,self-type ,(objc-method-name name args))
      (declare-type ,self-type %self)
      ,(unless static? `(JS_UNWRAP ,self-type ,self))
-     (autoreleasepool
+     (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
 
@@ -290,18 +296,33 @@
         body
         `(js-return (,type ,body)))))
 
+(define-global objc-prefix? (name x)
+  (and (str-starts? name x)
+       (uppercase-code? (or (code x (+ (# name) 1)) 0))))
+
+(define-global objc-boolean-prefix (name)
+  (if (objc-prefix? name "has") "has"
+      (objc-prefix? name "is") "is"
+      (objc-prefix? name "can") "can"))
+
+(define-global objc-boolean-name (arg-type name)
+  (if (and (in arg-type "BOOL" "bool")
+           (objc-boolean-prefix name))
+      name
+    (camel-case (cat "is-" name))))
+
 (define-macro js-type-getter (self-type return-type name rest: body)
   (let (return-type (expand return-type)
-        body (if (none? body) `([self ,(if (= return-type 'BOOL) (camel-case (cat "is-" name)) name)]) body))
+        body (if (none? body) `([self ,name]) body))
     `(js-getter ,self-type self ,name
        ,(js-return-body return-type body))))
 
-(define-macro js-type-setter (self-type input-type name rest: body)
-  (let (input-type (expand input-type)
-        body (if (none? body) `(do value) body))
+(define-macro js-type-setter (self-type input-type name)
+  (let input-type (expand input-type)
     `(js-setter ,self-type self ,name
-       [self ,(cat ":set-" name)
-             (,(cat "to-value-" input-type) (declare-type ,input-type ,@body))])))
+       (declare-setter)
+       ,(js-declare-arg input-type "input")
+       [self ,(cat ":set-" name) input])))
 
 (during-compilation
   (define-global js-gen-method-part (name)
@@ -384,14 +405,14 @@
     (case (getenv '%%flags 'stage)
       header
       (js-print-type class 
-        (if readonly?
+        `(%indent ,(if readonly?
           `(JS_PROP_READONLY ,name)
-          `(JS_PROP ,name)))
+          `(JS_PROP ,name))))
       ctor
       (js-print-type class
-        (if readonly?
+        `(%indent ,(if readonly?
             `(JS_ASSIGN_PROP_READONLY proto ,name)
-            `(JS_ASSIGN_PROP          proto ,name)))
+            `(JS_ASSIGN_PROP          proto ,name))))
       source
       `(do (js-type-getter ,class ,type ,name)
          ,(unless readonly?
@@ -405,15 +426,15 @@
       header
       (js-print-type class 
         (let name (objc-method-name name args static: static?)
-          (if static?
+          `(%indent ,(if static?
             `(JS_METHOD ,name)
-            `(JS_METHOD ,name))))
+            `(JS_METHOD ,name)))))
       ctor
       (js-print-type class
         (let name (objc-method-name name args static: static?)
-          (if static?
+          `(%indent ,(if static?
               `(JS_ASSIGN_METHOD ctor ,name)
-              `(JS_ASSIGN_METHOD proto ,name))))
+              `(JS_ASSIGN_METHOD proto ,name)))))
       source
       `(js-type-method ,class ,type ,name ,args static: ,static?))))
 
@@ -692,7 +713,7 @@
 ;        ))
 ))))
 
-;(print (with-indent (with-indent (compile (expand '(%block prefix: (%stmt (NAN_GETTER (:: NUIImage nameGetter))) (JS_UNWRAP UIImage ui) (autoreleasepool (aif [ui name] (JS_SET_RETURN (JS_STR [it UTF8String]))))))))))
+;(print (with-indent (with-indent (compile (expand '(%block prefix: (%stmt (NAN_GETTER (:: NUIImage nameGetter))) (JS_UNWRAP UIImage ui) (with-autoreleasepool (aif [ui name] (JS_SET_RETURN (JS_STR [it UTF8String]))))))))))
 
 ;(define-macro nan-method (self-type self method rest: body)
 ;  `(%do (%stmt (NAN_METHOD (.. ,(cat "N" self-type) "::" ,method)))
