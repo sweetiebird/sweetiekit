@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "SweetieKit"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

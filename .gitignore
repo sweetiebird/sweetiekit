@@ -7,3 +7,4 @@ xcuserdata/*
 .DS_Store
 node_modules
 notes.txt
+/build

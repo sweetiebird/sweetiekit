@@ -2522,6 +2522,7 @@
 			buildPhases = (
 				A1FC19FA225C65DC00085571 /* Sources */,
 				A1FC19FB225C65DC00085571 /* Frameworks */,
+				A1A7749122A891BA00CBFE89 /* Autoincrement Build */,
 				A1FC19FC225C65DC00085571 /* Resources */,
 			);
 			buildRules = (
@@ -2632,6 +2633,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1A7749122A891BA00CBFE89 /* Autoincrement Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Autoincrement Build";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A1FC19FA225C65DC00085571 /* Sources */ = {
