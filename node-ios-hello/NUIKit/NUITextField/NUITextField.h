@@ -23,6 +23,11 @@ JS_WRAP_CLASS(UITextField, UIControl);
   JS_PROP(placeholder);
   JS_PROP(attributedPlaceholder);
   JS_PROP(autocorrectionType);
+  JS_PROP(font);
+  JS_PROP(leftView);
+  JS_PROP(rightView);
+  JS_PROP(leftViewMode);
+  JS_PROP(rightViewMode);
   Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 
