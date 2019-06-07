@@ -31,6 +31,8 @@ JS_WRAP_CLASS(id, ObjectWrap);
   JS_METHOD(_objc_msgSend);
   
   JS_PROP(self);
+  JS_PROP(selfPointer);
+  JS_PROP(selfAddress);
   JS_PROP(class);
   JS_PROP(superclass);
   JS_PROP(metaclass);

@@ -42,6 +42,8 @@ Nid::~Nid() {}
 JS_INIT_CLASS_BASE(id);
   // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, self);
+  JS_ASSIGN_PROP_READONLY(proto, selfPointer);
+  JS_ASSIGN_PROP_READONLY(proto, selfAddress);
   JS_ASSIGN_PROP_READONLY(proto, class);
   JS_ASSIGN_PROP_READONLY(proto, superclass);
   JS_ASSIGN_PROP_READONLY(proto, metaclass);
@@ -568,8 +570,22 @@ NAN_METHOD(Nid::invoke)
 }
 
 NAN_GETTER(Nid::selfGetter) {
+  JS_SET_RETURN(info.This());
+}
+
+NAN_GETTER(Nid::selfPointerGetter) {
   JS_UNWRAP_(id, self);
   JS_SET_RETURN(Nan::New<External>((__bridge void*)self));
+}
+
+NAN_GETTER(Nid::selfAddressGetter) {
+  JS_UNWRAP_(id, self);
+
+  Local<Array> array = Nan::New<Array>(2);
+  size_t address = (size_t)(__bridge void*)self;
+  array->Set(0, Nan::New<Integer>((uint32_t)(address >> 32)));
+  array->Set(1, Nan::New<Integer>((uint32_t)(address & 0xFFFFFFFF)));
+  JS_SET_RETURN(array);
 }
 
 NNSObject::NNSObject() {}
