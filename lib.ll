@@ -85,7 +85,8 @@
 (define-macro js-getter (self-type self name rest: body)
   `(nan-getter (js-wrapper ,self-type (%literal ,name "Getter"))
      (declare-type ,self-type %self)
-     (JS_UNWRAP ,self-type ,self)
+     ,(unless (= self-type self)
+       `(JS_UNWRAP ,self-type ,self))
      (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
@@ -93,7 +94,8 @@
 (define-macro js-setter (self-type self name rest: body)
   `(nan-setter (js-wrapper ,self-type (%literal ,name "Setter"))
      (declare-type ,self-type %self)
-     (JS_UNWRAP ,self-type ,self)
+     ,(unless (= self-type self)
+       `(JS_UNWRAP ,self-type ,self))
      (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
@@ -145,13 +147,14 @@
       `(declare-value (%literal ,(escape type)) ,arg-name))))
 
 (define-global js-gen-method-args (name args)
+  ;(prn `(js-gen-method-args ,name ,@args))
   (with forms ()
     (when (some? args)
       (let spec `(,name ,@args)
         (add forms `(declare-args))
         (step (dispatch-name arg-type arg-name) (tuples spec 3)
+           ;(print (str (list dispatch-name arg-type arg-name)))
            (unless (= dispatch-name "...")
-             ;(print (str (list dispatch-name arg-type arg-name)))
              (add forms (js-declare-arg arg-type arg-name))))))))
 
 (define-macro js-define-method (self-type self name args static: static? rest: body)
@@ -312,18 +315,21 @@
       name
     (camel-case (cat "is-" name))))
 
-(define-macro js-type-getter (self-type return-type name rest: body)
+(define-macro js-type-getter (self-type return-type name (o setter name) (o static?))
+  ;(prn `(js-type-getter ,self-type ,return-type ,name ,@body))
   (let (return-type (expand return-type)
-        body (if (none? body) `([self ,name]) body))
-    `(js-getter ,self-type self ,name
+        self (if static? self-type `self)
+        body `([,self ,name]))
+    `(js-getter ,self-type ,self ,name
        ,(js-return-body return-type body))))
 
-(define-macro js-type-setter (self-type input-type name (o setter name))
-  (let input-type (expand input-type)
-    `(js-setter ,self-type self ,name
+(define-macro js-type-setter (self-type input-type name (o setter name) (o static?))
+  (let (input-type (expand input-type)
+        self (if static? self-type `self))
+    `(js-setter ,self-type ,self ,name
        (declare-setter)
        ,(js-declare-arg input-type "input")
-       [self ,(cat ":set-" setter) input])))
+       [,self ,(cat ":set-" setter) input])))
 
 (during-compilation
   (define-global js-gen-method-part (name)
@@ -393,7 +399,8 @@
           (let ((k v) (split x "="))
             (set (get attrs k) v))
           (set (get attrs x) true)))
-    `(js-property ,@attrs type: ,type name: ,name))))
+    ;(prn `(property ,spec))
+    `(js-property ,@attrs type: ,type name: ,name attrs: ,attrs))))
 
 (define-macro method (spec return-type name rest: args)
   `(js-method type: ,return-type name: ,name args: ,args static: ,(if (= spec "+") true false)))
@@ -407,27 +414,36 @@
                   ,form)))))
 
 
-(define-macro js-property (name: name type: type class: (o class (getenv 'Class 'type)) readonly: readonly? getter: getter setter: setter)
+(define-macro js-property (name: name type: type attrs: attrs class-type: (o class-type (getenv 'Class 'type)) class: static? readonly: readonly? getter: getter setter: setter)
+  (prn `(js-property name: ,name type: ,type attrs: ,attrs class-type: ,class-type class: ,static? readonly: ,readonly? getter: ,getter setter: ,setter))
   (unless getter
     (set getter name))
   (unless setter
     (set setter name))
-  (let class (if (obj? class) (hd class) class)
+  (let class (if (obj? class-type) (hd class-type) class-type)
     (case (getenv '%%flags 'stage)
       header
       (js-print-type class 
-        `(%indent ,(if readonly?
-          `(JS_PROP_READONLY ,getter)
-          `(JS_PROP ,getter))))
+        (if static?
+          `(%indent ,(if readonly?
+            `(JS_STATIC_PROP_READONLY ,getter)
+            `(JS_STATIC_PROP ,getter)))
+          `(%indent ,(if readonly?
+            `(JS_PROP_READONLY ,getter)
+            `(JS_PROP ,getter)))))
       ctor
       (js-print-type class
-        `(%indent ,(if readonly?
-            `(JS_ASSIGN_PROTO_PROP_READONLY ,getter)
-            `(JS_ASSIGN_PROTO_PROP          ,getter))))
+        (if static?
+          `(%indent ,(if readonly?
+              `(JS_ASSIGN_STATIC_PROP_READONLY ,getter)
+              `(JS_ASSIGN_STATIC_PROP          ,getter)))
+          `(%indent ,(if readonly?
+              `(JS_ASSIGN_PROTO_PROP_READONLY ,getter)
+              `(JS_ASSIGN_PROTO_PROP          ,getter)))))
       source
-      `(do (js-type-getter ,class ,type ,getter)
+      `(do (js-type-getter ,class ,type ,getter ,setter ,static?)
          ,(unless readonly?
-            `(js-type-setter ,class ,type ,getter ,setter))))))
+            `(js-type-setter ,class ,type ,getter ,setter ,static?))))))
 
 (define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
   (when (objc-init? name)
@@ -492,7 +508,7 @@
 ;                      (set type (apply concat " " type)))
 ;                    (print (str `(,type ,name)))
 ;                    (unless (in type "instancetype" "void")
-;                      (add r (list 'property '(nonatomic) type name)))
+;                      (add r (prn (list 'property '(nonatomic) type name))))
 ;                    )))
               (= (char line 0) "@")
               (let (stream (reader (.stream (clip line 1)))
@@ -515,11 +531,12 @@
                       (set rest (tl rest)))
                     (let (name (drop rest)
                           type (trim (apply concat " " (map trim rest))))
-                      (add r
-                           (list kind 
-                                 attrs
-                                 type
-                                 name))))
+                      (when (some? type)
+                        (add r
+                          (prn (list kind 
+                                   attrs
+                                   type
+                                   name))))))
                   (add r (list kind))))))))))
 
 (define-global ios-header-path (framework type subframework)
