@@ -941,9 +941,33 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_uint32_t(x) TO_UINT32(x)
 #define is_value_uint32_t(x) (x)->IsUint32()
 
+#define js_value_int(x) JS_INT(x)
+#define to_value_int(x) TO_INT32(x)
+#define is_value_int(x) (x)->IsInt32()
+
 #define js_value_unsigned(x) JS_UINT(x)
 #define to_value_unsigned(x) TO_UINT32(x)
 #define is_value_unsigned(x) (x)->IsUint32()
+
+#define js_value_unsigned_int(x) JS_UINT(x)
+#define to_value_unsigned_int(x) TO_UINT32(x)
+#define is_value_unsigned_int(x) (x)->IsUint32()
+
+// unsure about these, but they should work for integers from -2^52 to 2^52
+#define JS_INT64(x) JS_NUM(static_cast<double>(x))
+#define TO_INT64(x) static_cast<int64_t>(TO_DOUBLE(x))
+#define IS_INT64(x) (x)->IsNumber()
+#define JS_UINT64(x) JS_NUM(static_cast<double>(x))
+#define TO_UINT64(x) static_cast<uint64_t>(TO_DOUBLE(x))
+#define IS_UINT64(x) (x)->IsNumber()
+
+#define js_value_int64_t(x) JS_INT64(x)
+#define to_value_int64_t(x) TO_INT64(x)
+#define is_value_int64_t(x) IS_INT64(x)
+
+#define js_value_uint64_t(x) JS_UINT64(x)
+#define to_value_uint64_t(x) TO_UINT64(x)
+#define is_value_uint64_t(x) IS_UINT64(x)
 
 #define js_value_double(x) JS_NUM(x)
 #define to_value_double(x) TO_DOUBLE(x)
