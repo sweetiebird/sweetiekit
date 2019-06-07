@@ -346,7 +346,7 @@
 (define-global objc-init? (name)
   (or (= name "init")
       (and (str-starts? name "init") 
-           (uppercase-code? (or (code name 5) 0)))))
+           (uppercase-code? (or (code name 4) 0)))))
 
 (define-macro js-type-method (self-type return-type name args static: static? rest: body)
   (let (return-type (expand return-type)
