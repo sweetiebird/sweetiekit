@@ -15,7 +15,7 @@ const {
 //    */
 //   let xPosition = view.frame.width / 2
 //   let yPosition = view.frame.height / 2
-//   let popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "maptrackTableVC") as! MaptrackTableViewController
+//   let popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "maptrackTableVC") as! MaptrackTableViewController
 //   popover.delegate = self
 //   popover.modalPresentationStyle = UIModalPresentationStyle.popover
 //   popover.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up

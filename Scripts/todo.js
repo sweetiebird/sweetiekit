@@ -403,7 +403,7 @@ class MyApp {
   constructor(app) {
     this.app = app;
     this.todos = [];
-    this.sb = new UIStoryboard('Main');
+    this.sb = UIStoryboard.storyboardWithNameBundle('Main');
     this.setupDefaults();
     this.todoVC = UIViewController();
     this.todoTable = new UITableView();
@@ -540,7 +540,7 @@ class CollectionApp {
   constructor(app) {
     this.app = app;
     this.items = [];
-    this.sb = new UIStoryboard('Main');
+    this.sb = UIStoryboard.storyboardWithNameBundle('Main');
     this.setupDefaults();
     this.vc = UIViewController();
     this.collView = new UICollectionView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });

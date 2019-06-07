@@ -6,77 +6,91 @@
 //
 #include "NUIStoryboard.h"
 
+#define instancetype UIStoryboard
+#define js_value_instancetype js_value_UIStoryboard
+
 NUIStoryboard::NUIStoryboard() {}
 NUIStoryboard::~NUIStoryboard() {}
 
 JS_INIT_CLASS(UIStoryboard, NSObject);
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, instantiateViewController);
+  JS_ASSIGN_PROTO_METHOD(instantiateInitialViewController);
+  JS_ASSIGN_PROTO_METHOD(instantiateViewControllerWithIdentifier);
+  JS_ASSIGN_PROTO_METHOD(instantiateViewController);
   // static members (ctor)
   JS_INIT_CTOR(UIStoryboard, NSObject);
+  JS_ASSIGN_STATIC_METHOD(storyboardWithNameBundle);
 JS_INIT_CLASS_END(UIStoryboard, NSObject);
 
+#include "NNSBundle.h"
+
 NAN_METHOD(NUIStoryboard::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> storyboardObj = info.This();
-
-  NUIStoryboard *sb = new NUIStoryboard();
-
-  if (info[0]->IsExternal()) {
-    sb->SetNSObject((__bridge UIStoryboard *)(info[0].As<External>()->Value()));
-  } else {
-    std::string type;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      type = *utf8Value;
-    } else {
-      type = "Main";
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'UIStoryboard(...)', turn into construct call.
+      JS_SET_RETURN_NEW(UIStoryboard, info);
+      return;
     }
-    NSString* result = [NSString stringWithUTF8String:type.c_str()];
 
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        sb->SetNSObject([UIStoryboard storyboardWithName:result bundle:nil]);
-      });
+    UIStoryboard* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIStoryboard *)(info[0].As<External>()->Value());
+    } else if (is_value_NSString(info[0])) {
+      declare_args();
+      declare_pointer(NSString, name);
+      declare_nullable_pointer(NSBundle, bundle);
+      self = [UIStoryboard storyboardWithName:name bundle:bundle];
+    } else if (info.Length() <= 0) {
+      self = [[UIStoryboard alloc] init];
+    }
+    if (self) {
+      NUIStoryboard *wrapper = new NUIStoryboard();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIStoryboard::New: invalid arguments");
     }
   }
-
-  sb->Wrap(storyboardObj);
-
-  info.GetReturnValue().Set(storyboardObj);
 }
 
+NAN_METHOD(NUIStoryboard::storyboardWithNameBundle) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    declare_nullable_pointer(NSBundle, storyboardBundleOrNil);
+    JS_SET_RETURN(js_value_UIStoryboard([UIStoryboard storyboardWithName: name bundle: storyboardBundleOrNil]));
+  }
+}
 
 #include "NUIViewController.h"
-#include "NUITabBarController.h"
+
+NAN_METHOD(NUIStoryboard::instantiateInitialViewController) {
+  JS_UNWRAP(UIStoryboard, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIViewController([self instantiateInitialViewController]));
+  }
+}
+
+NAN_METHOD(NUIStoryboard::instantiateViewControllerWithIdentifier) {
+  JS_UNWRAP(UIStoryboard, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, identifier);
+    JS_SET_RETURN(js_value_UIViewController([self instantiateViewControllerWithIdentifier: identifier]));
+  }
+}
 
 NAN_METHOD(NUIStoryboard::instantiateViewController) {
-  NUIStoryboard *sb = ObjectWrap::Unwrap<NUIStoryboard>(Local<Object>::Cast(info.This()));
-
-  std::string identifier;
-  if (info[0]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-    identifier = *utf8Value;
-  } else {
-    // throw
+  JS_UNWRAP(UIStoryboard, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSString, identifier);
+    if (identifier)
+      JS_SET_RETURN(js_value_UIViewController([self instantiateViewControllerWithIdentifier: identifier]));
+    else
+      JS_SET_RETURN(js_value_UIViewController([self instantiateInitialViewController]));
   }
-  NSString* result = [NSString stringWithUTF8String:identifier.c_str()];
-  UIViewController* vc = [sb->As<UIStoryboard>() instantiateViewControllerWithIdentifier:result];
-
-  Local<Value> argv[] = {
-    Nan::New<v8::External>((__bridge void*)vc)
-  };
-  
-  Local<Function> ctor;
-  if (info[1]->IsFunction()) {
-    ctor = Local<Function>::Cast(info[1]);
-  } else if ([vc isKindOfClass:UITabBarController.class]) {
-    ctor = JS_FUNC(Nan::New(NUITabBarController::type));
-  } else {
-    ctor = JS_FUNC(Nan::New(NUIViewController::type));
-  }
-  Local<Object> vcObj = ctor->NewInstance(Isolate::GetCurrent()->GetCurrentContext(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-  info.GetReturnValue().Set(vcObj);
 }
 

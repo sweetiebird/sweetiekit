@@ -15,6 +15,9 @@
 #define is_value_UINib(x) is_value_wrapper(x, UINib)
 
 JS_WRAP_CLASS(UINib, NSObject);
+  JS_STATIC_METHOD(nibWithNibNameBundle);
+  JS_STATIC_METHOD(nibWithDataBundle);
+  JS_METHOD(instantiateWithOwnerOptions);
 JS_WRAP_CLASS_END(UINib);
 
 #endif /* NUINib_h */

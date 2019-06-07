@@ -167,7 +167,7 @@ function createTable() {
 }
 
  async function demo() {
-   const dashboardVC = sb.instantiateViewController(ctrls.DASH);
+   const dashboardVC = sb.instantiateViewControllerWithIdentifier(ctrls.DASH);
    dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
    const table = createTable();
    dashboardVC.view.addSubview(table);
@@ -176,7 +176,7 @@ function createTable() {
 
  async function userPhoto() {
   console.log('userPhoto');
-  const photoVC = sb.instantiateViewController(ctrls.PHOTO);
+  const photoVC = sb.instantiateViewControllerWithIdentifier(ctrls.PHOTO);
   console.log('userPhoto1');
 
    const viewW = photoVC.view.width;
@@ -230,10 +230,10 @@ async function setupApp() {
   console.log('setupApp');
   app = new UIApplication();
   console.log('setupApp2');
-  sb = new UIStoryboard('Main');
+  sb = UIStoryboard('Main');
   console.log('setupApp3');
 
-  const nameVC = sb.instantiateViewController(ctrls.NAME);
+  const nameVC = sb.instantiateViewControllerWithIdentifier(ctrls.NAME);
   console.log('setupApp4');
 
   const viewH = nameVC.view.height;

@@ -184,10 +184,12 @@ using namespace node;
 #define JS_ASSIGN_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
 #define JS_ASSIGN_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
 #define JS_ASSIGN_PROTO_METHOD(jsName)         JS_ASSIGN_METHOD(proto, jsName)
+#define JS_ASSIGN_PROTO_METHOD_AS(cppName, jsName) JS_SET_METHOD(proto, jsName, cppName)
 
 #define JS_ASSIGN_STATIC_PROP(jsName)           JS_ASSIGN_PROP(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
+#define JS_ASSIGN_STATIC_METHOD_AS(cppName, jsName) JS_SET_METHOD(ctor, jsName, cppName)
 
 #define JS_GETTER(ElType, el, jsName, ...) \
 NAN_GETTER(N##ElType::jsName##Getter) { \
@@ -1140,6 +1142,12 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define declare_error() \
+  NSError* error = nullptr
+  
+#define check_error() \
+  js_panic_NSError(error)
   
 // Foundation
 #define js_panic_NSError(error) \

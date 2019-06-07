@@ -622,6 +622,7 @@ NAN_METHOD(NNSObject::New) {
   }
 }
 
+
 NClass::NClass() {}
 NClass::~NClass() {}
 

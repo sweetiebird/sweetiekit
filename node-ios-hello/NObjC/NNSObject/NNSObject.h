@@ -91,6 +91,7 @@ JS_WRAP_CLASS_END(Class);
 #define is_value_NSObject(x) is_value_wrapper(x, NSObject)
 
 JS_WRAP_CLASS(NSObject, id);
+
   NSObject* SetNSObject(__weak NSObject* obj) {
     set_self(obj);
     return self<NSObject*>();

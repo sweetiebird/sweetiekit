@@ -1,5 +1,5 @@
 //////////////
-// ms 
+// ms
 //////////////
 {
     ms = {};
@@ -172,7 +172,7 @@
 }
 
 //////////////
-// debug 
+// debug
 //////////////
 {
     /**
@@ -1231,7 +1231,7 @@ const {
   UIImagePickerControllerDelegate,
   CALayer,
 } = sweetiekit;
-                
+
 console.log(sweetiekit);
 
 //const vc = UIViewController();
@@ -1240,8 +1240,8 @@ console.log(sweetiekit);
 //console.log(view, view.frame);
 
 /*
-const sb = new UIStoryboard('Main');
-const vc = sb.instantiateViewController('firstVC', UIViewController);
+const sb = UIStoryboard('Main');
+const vc = sb.instantiateViewControllerWithIdentifier('firstVC', UIViewController);
 const view = vc.view(UIView);
 const subview = UIView(0, 0, 200, 200);
 view.addSubview(subview);
@@ -1251,20 +1251,20 @@ console.log(sb, vc, view, subview);
 
 /*
 
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
-        let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
-        let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "secondVC") as! SecondViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "tabVC") as! UITabBarController
+        let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "firstVC") as! FirstViewController
+        let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "secondVC") as! SecondViewController
         vc.setViewControllers([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;
 */
 
 //async function buildMainUI() {
 //  const app = new UIApplication();
-//  const sb = new UIStoryboard('Main');
-//  const vc = sb.instantiateViewController('tabVC');
+//  const sb = UIStoryboard('Main');
+//  const vc = sb.instantiateViewControllerWithIdentifier('tabVC');
 //  console.log(vc);
 //
-//  const firstVC = sb.instantiateViewController('firstVC'); // update to named arg: ({ identifier })
+//  const firstVC = sb.instantiateViewControllerWithIdentifier('firstVC'); // update to named arg: ({ identifier })
 //  console.log(firstVC.view.subviews.filter(x => (x instanceof UILabel)).map(x => [x.center, x.text]));
 //  console.log("TKTK", firstVC.view.backgroundColor);
 //  firstVC.view.backgroundColor = ({red: 1.0, green: 0.0, blue: 1.0})
@@ -1273,7 +1273,7 @@ console.log(sb, vc, view, subview);
 //  firstVC.view.addSubview(subview);
 //  //firstVC.view.addSubview(UIView(0, 400, 200, 200));
 //
-//  const secondVC = sb.instantiateViewController('secondVC');
+//  const secondVC = sb.instantiateViewControllerWithIdentifier('secondVC');
 //  vc.setViewControllers([firstVC, secondVC], false);
 //
 //  app.keyWindow.setRootViewController(vc); // update to { get, set }
@@ -1342,8 +1342,8 @@ console.log(sb, vc, view, subview);
 
 //async function makeNav(nav) {
 //  const app = new UIApplication();
-//  const sb = new UIStoryboard('Main');
-//  const vc = sb.instantiateViewController('loginVC');
+//  const sb = UIStoryboard('Main');
+//  const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
 //  if (!nav) {
 //    nav = new UINavigationController(vc);
 //    app.keyWindow.setRootViewController(nav);
@@ -1393,8 +1393,8 @@ console.log(sb, vc, view, subview);
 //  console.log(kv.setValueForKey("Asdf", "Foo"));
 //  console.log(kv.synchronize());
 //  console.log(kv.stringForKey("Foo"));
-//  const sb = new UIStoryboard('Main');
-//  const vc = sb.instantiateViewController('loginVC');
+//  const sb = UIStoryboard('Main');
+//  const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
 //  app.keyWindow.setRootViewController(vc);
 //  console.log(vc, vc.view);
 //  const sv = vc.view.subviews;
@@ -1417,7 +1417,7 @@ console.log(sb, vc, view, subview);
 //    console.log(`Try to login with ${userField.text} / ${passField.text}`);
 //    kv.setValueForKey(userField.text, "me");
 //    //await buildMainUI();
-//    const vc2 = sb.instantiateViewController('loginVC');
+//    const vc2 = sb.instantiateViewControllerWithIdentifier('loginVC');
 //    vc.present(vc2, true, (success) => {
 //      console.log("Finsihed!", success)
 //      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
@@ -1444,19 +1444,19 @@ function randi(n) {
 
 function iosApp() {
   const app = new UIApplication();
-  const sb = new UIStoryboard('Main');
-  const vc = sb.instantiateViewController('loginVC');
+  const sb = UIStoryboard('Main');
+  const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
   const nav = new UINavigationController(vc);
 
   app.keyWindow.setRootViewController(nav);
-  
-  
+
+
   console.log(vc, vc.view);
   const sv = vc.view.subviews;
   console.log(sv);
   console.log(sv[0].subviews)
   console.log(sv[1].subviews)
-  
+
   const userField = vc.view.viewWithStringTag("txtEmail");
   const passField = vc.view.viewWithStringTag("txtPassword");
   /*
@@ -1467,7 +1467,7 @@ function iosApp() {
   passField.callback = () => {
     console.log('password', passField.text);
   }*/
-  
+
   console.log({
     cornerRadius: userField.layer.cornerRadius,
     borderColor: userField.layer.borderColor,
@@ -1486,7 +1486,7 @@ function iosApp() {
       let img = del.result
 
       if (img) {
-        const vc2 = sb.instantiateViewController('photoVC');
+        const vc2 = sb.instantiateViewControllerWithIdentifier('photoVC');
 
         const imgView = UIImageView(img); // named argument ({ image })
         const viewWidth = vc2.view.width;
@@ -1498,7 +1498,7 @@ function iosApp() {
         imgView.frame = { x: x, y: y, width: viewWidth, height: newHeight };
 
         vc2.view.addSubview(imgView);
-        
+
         nav.pushViewController(vc2);
       }
     };

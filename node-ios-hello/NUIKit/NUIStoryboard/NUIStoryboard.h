@@ -15,6 +15,9 @@
 #define is_value_UIStoryboard(x) is_value_wrapper(x, UIStoryboard)
 
 JS_WRAP_CLASS(UIStoryboard, NSObject);
+  JS_STATIC_METHOD(storyboardWithNameBundle);
+  JS_METHOD(instantiateInitialViewController);
+  JS_METHOD(instantiateViewControllerWithIdentifier);
   JS_METHOD(instantiateViewController);
 JS_WRAP_CLASS_END(UIStoryboard);
 
