@@ -354,6 +354,15 @@ namespace sweetiekit
       if ([pThing isKindOfClass:[NSData class]]) {
         return js_value_NSData((NSData*)pThing);
       }
+      if ([pThing isKindOfClass:[NSArray class]]) {
+        return js_value_NSArray<id>((NSArray*)pThing);
+      }
+      if ([pThing isKindOfClass:[NSDictionary class]]) {
+        return js_value_NSDictionary((NSDictionary*)pThing);
+      }
+      if ([pThing isKindOfClass:[NSSet class]]) {
+        return js_value_NSSet((NSSet*)pThing);
+      }
       NJSWrapperMap* wrappers = GetWrapperMap();
       if (wrappers) {
         NJSValue* wrapper = [wrappers findJSWrapperForObject:pThing inContext:JS_ISOLATE()];
@@ -409,6 +418,15 @@ namespace sweetiekit
     }
     if (is_value_NSData(value)) {
       return to_value_NSData(value);
+    }
+    if (is_value_NSArray<id>(value)) {
+      return to_value_NSArray<id>(value);
+    }
+    if (is_value_NSDictionary(value)) {
+      return to_value_NSDictionary(value);
+    }
+    if (is_value_NSSet(value)) {
+      return to_value_NSSet(value);
     }
     if (failed) {
       *failed = true;
@@ -1487,4 +1505,139 @@ id Nid::set_self(__weak id self) {
     //[_NSObject assignAssociatedWrapperWithPtr:p forKey:@"sweetiekit.type"];
   }*/
   return _self;
+}
+
+
+
+Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Map> result(Map::New(JS_ISOLATE()));
+    [value enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * _Nonnull stop) {
+      Local<Value> k = js_value_id(key);
+      Local<Value> v = js_value_id(obj);
+      result->Set(JS_CONTEXT(), k, v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (dict->IsMap()) {
+    Nan::HandleScope();
+    Local<Array> value(Local<Map>::Cast(dict)->AsArray());
+    auto result = [[NSMutableDictionary alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i += 2) {
+      id k = to_value_id(value->Get(i));
+      id v = to_value_id(value->Get(i+1));
+      [result setObject:v forKey:k];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSMutableDictionary failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSMutableDictionary(Local<Value> value) {
+  if (!value->IsMap()) {
+    return false;
+  }
+  return true;
+}
+
+Local<Value> js_value_NSDictionary(NSDictionary* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Map> result(Map::New(JS_ISOLATE()));
+    [value enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * _Nonnull stop) {
+      Local<Value> k = js_value_id(key);
+      Local<Value> v = js_value_id(obj);
+      result->Set(JS_CONTEXT(), k, v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSDictionary* _Nullable to_value_NSDictionary(Local<Value> dict, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (dict->IsMap()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Map>::Cast(dict)->AsArray());
+    auto result = [[NSMutableDictionary alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i += 2) {
+      id k = to_value_id(value->Get(i));
+      id v = to_value_id(value->Get(i+1));
+      [result setObject:v forKey:k];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSDictionary failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSDictionary(Local<Value> value) {
+  if (!value->IsMap()) {
+    return false;
+  }
+  return true;
+}
+
+Local<Value> js_value_NSSet(NSSet* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Set> result(Set::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> v = js_value_id(obj);
+      result->Add(JS_CONTEXT(), v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSSet* _Nullable to_value_NSSet(Local<Value> dict, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (dict->IsSet()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Set>::Cast(dict)->AsArray());
+    auto result = [[NSMutableSet alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id v = to_value_id(value->Get(i));
+      [result addObject:v];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSSet failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSSet(Local<Value> value) {
+  if (!value->IsSet()) {
+    return false;
+  }
+  return true;
 }

@@ -13,7 +13,8 @@
 #include "main.h"
 
 using namespace v8;
-
+  
+#define JS_TODO() { Nan::ThrowError("Not implemented"); return; }
 #define JS_STR(...) Nan::New<v8::String>(__VA_ARGS__).ToLocalChecked()
 #define JS_INT(val) Nan::New<v8::Integer>(static_cast<int32_t>(val))
 #define JS_UINT(val) Nan::New<v8::Integer>(static_cast<uint32_t>(val))
@@ -872,38 +873,66 @@ bool is_value_NSArray(Local<Value> arr) {
   return true;
 }
 
-static inline Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable dict) {
-  if (dict == nullptr) {
+
+template<typename K, typename T>
+Local<Value> js_value_NSDictionary(NSDictionary<K, T>* _Nullable value) {
+  if (value == nullptr) {
     return Nan::Undefined();
   } else {
-    auto result = Nan::New<Object>();
-    Nan::ThrowError("js_value_NSMutableDictionary: not yet implemented");
-//    for (NSInteger i = 0, n = [arr count]; i < n; i++) {
-//      T item = [arr objectAtIndex:i];
-//      Nan::Set(result, static_cast<uint32_t>(i), sweetiekit::GetWrapperFor(item));
-//    }
+    Local<Map> result(Map::New(JS_ISOLATE()));
+    [value enumerateKeysAndObjectsUsingBlock:^(K key, T obj, BOOL * _Nonnull stop) {
+      Local<Value> k = js_value_id(key);
+      Local<Value> v = js_value_id(obj);
+      result->Set(JS_CONTEXT(), k, v);
+    }];
     return result;
   }
 }
 
-static inline NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict) {
-  if (!dict->IsObject()) {
+template<typename K, typename T>
+NSDictionary<K, T>* _Nullable to_value_NSDictionary(Local<Value> dict) {
+  if (!dict->IsMap()) {
     return nullptr;
   } else {
-    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
-    Nan::ThrowError("to_value_NSMutableDictionary: not yet implemented");
-//    auto value = Local<Object>::Cast(dict);
-//    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
-//      id item = sweetiekit::GetValueFor(value->Get(i));
-//      [result setObject:item atIndexedSubscript:i];
-//    }
+    Local<Array> value(Local<Map>::Cast(dict)->AsArray());
+    auto result = [[NSMutableDictionary alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i += 2) {
+      id k = sweetiekit::GetValueFor(value->Get(i));
+      id v = sweetiekit::GetValueFor(value->Get(i+1));
+      [result setObject:v forKey:k];
+    }
     return result;
   }
+}
+
+template<typename K, typename T>
+bool is_value_NSDictionary(Local<Value> value) {
+  if (!value->IsMap()) {
+    return false;
+  }
+  // TODO: check the type of each object in the dictionary against K and T
+  return true;
 }
 
 Local<Value> js_value_id(id _Nullable value);
 id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_id(Local<Value> value);
+
+Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable value);
+NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict, bool* _Nullable failed = nullptr);
+bool is_value_NSMutableDictionary(Local<Value> value);
+
+Local<Value> js_value_NSDictionary(NSDictionary* _Nullable value);
+NSDictionary* _Nullable to_value_NSDictionary(Local<Value> dict, bool* _Nullable failed = nullptr);
+bool is_value_NSDictionary(Local<Value> value);
+
+Local<Value> js_value_NSMutableSet(NSMutableSet* _Nullable value);
+NSMutableSet* _Nullable to_value_NSMutableSet(Local<Value> dict, bool* _Nullable failed = nullptr);
+bool is_value_NSMutableSet(Local<Value> value);
+
+Local<Value> js_value_NSSet(NSSet* _Nullable value);
+NSSet* _Nullable to_value_NSSet(Local<Value> dict, bool* _Nullable failed = nullptr);
+bool is_value_NSSet(Local<Value> value);
 
 template<typename T>
 Local<Value> js_value_id(T* _Nullable value) {
@@ -1089,12 +1118,6 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
-  
-#define JS_TODO() { Nan::ThrowError("Not implemented"); return; }
-
-#define is_value_NSDictionary(x) (x)->IsObject()
-#define to_value_NSDictionary(x) to_value_id<NSDictionary>(x)
-#define js_value_NSDictionary(x) js_value_id(x)
 
 // CoreGraphics types
 
