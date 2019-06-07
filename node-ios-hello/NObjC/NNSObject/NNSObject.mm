@@ -739,6 +739,7 @@ NAN_METHOD(NClass::New) {
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
 #include "NARSKViewDelegate.h"
+#include "NNSCoder.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARAnchor.h"
@@ -809,6 +810,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
+    JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
     JS_EXPORT_TYPE(NSParagraphStyle);
@@ -1207,6 +1209,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSMutableParagraphStyle);
       JS_RETURN_TYPE(NSParagraphStyle);
       JS_RETURN_TYPE(NSBundle);
+      JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
       JS_RETURN_TYPE(NSObject);
       return Nid::type;

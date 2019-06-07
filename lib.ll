@@ -342,9 +342,15 @@
 (define-macro %instancetype ()
   (js-self-class))
 
+(define-global objc-init? (name)
+  (or (= name "init")
+      (and (str-starts? name "init") 
+           (uppercase-code? (or (code name 5) 0)))))
+
 (define-macro js-type-method (self-type return-type name args static: static? rest: body)
   (let (return-type (expand return-type)
-        body (if (none? body) (js-gen-method-call (if static? `(%instancetype) `self) name args) body))
+        self (if (objc-init? name) `[(%instancetype) alloc] static? `(%instancetype) `self)
+        body (if (none? body) (js-gen-method-call self name args) body))
     `(js-define-method ,self-type self ,name ,args static: ,static?
        ,@(js-gen-method-args name args)
        ,(js-return-body return-type body))))
@@ -423,7 +429,7 @@
             `(js-type-setter ,class ,type ,getter ,setter))))))
 
 (define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
-  (when (str-starts? name "init")
+  (when (objc-init? name)
     (set static? true))
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
@@ -567,6 +573,9 @@
         (add form x)))
     (step stage '(header ctor source)
       (print (cat "// --------- begin " stage " --------------"))
+      (when (= stage "source")
+        (print (cat "#define instancetype " type))
+        (print (cat "#define js_value_instancetype js_value_" type)))
       (setenv '%%flags stage: stage)
       (print (compile (expand form)))
       (print (cat "// --------- end " stage " ----------------"))

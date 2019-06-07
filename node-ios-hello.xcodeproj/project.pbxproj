@@ -62,6 +62,7 @@
 		A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700822AAA8FF00FA3768 /* NUIGraphicsRendererFormat.mm */; };
 		A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */; };
 		A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */; };
+		A133701522AAAF9600FA3768 /* NNSCoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133701422AAAF9500FA3768 /* NNSCoder.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -371,6 +372,8 @@
 		A133700B22AAA8FF00FA3768 /* NUIImageAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIImageAsset.h; sourceTree = "<group>"; };
 		A133700D22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIGraphicsImageRendererFormat.h; sourceTree = "<group>"; };
 		A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGraphicsImageRendererFormat.mm; sourceTree = "<group>"; };
+		A133701322AAAF9500FA3768 /* NNSCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSCoder.h; sourceTree = "<group>"; };
+		A133701422AAAF9500FA3768 /* NNSCoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSCoder.mm; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -1043,8 +1046,8 @@
 		A133700922AAA8FF00FA3768 /* NUIImageAsset */ = {
 			isa = PBXGroup;
 			children = (
-				A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */,
 				A133700B22AAA8FF00FA3768 /* NUIImageAsset.h */,
+				A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */,
 			);
 			path = NUIImageAsset;
 			sourceTree = "<group>";
@@ -1056,6 +1059,15 @@
 				A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */,
 			);
 			path = NUIGraphicsImageRendererFormat;
+			sourceTree = "<group>";
+		};
+		A133701222AAAF9500FA3768 /* NNSCoder */ = {
+			isa = PBXGroup;
+			children = (
+				A133701322AAAF9500FA3768 /* NNSCoder.h */,
+				A133701422AAAF9500FA3768 /* NNSCoder.mm */,
+			);
+			path = NNSCoder;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -2267,6 +2279,7 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A133701222AAAF9500FA3768 /* NNSCoder */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
@@ -2840,6 +2853,7 @@
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
+				A133701522AAAF9600FA3768 /* NNSCoder.mm in Sources */,
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
 				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,

@@ -20,8 +20,11 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(UIImageAsset, NSObject);
-  //JS_METHOD(iosMethodName);
-  //JS_PROP(iosPropertyName);
+  JS_STATIC_METHOD(init);
+  JS_METHOD(initWithCoder);
+  JS_METHOD(imageWithTraitCollection);
+  JS_METHOD(registerImageWithTraitCollection);
+  JS_METHOD(unregisterImageWithTraitCollection);
 JS_WRAP_CLASS_END(UIImageAsset);
 
 #endif /* NUIImageAsset_h */
