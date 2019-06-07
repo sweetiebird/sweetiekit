@@ -1,12 +1,12 @@
 //
-//  NUIToolbar.h
+//  NUIBarButtonItem.h
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#ifndef NUIToolbar_h
-#define NUIToolbar_h
+#ifndef NUIBarButtonItem_h
+#define NUIBarButtonItem_h
 
 #include "NNSObject.h"
 
@@ -19,4 +19,4 @@ JS_WRAP_CLASS(UIBarButtonItem, NSObject);
   sweetiekit::JSFunction _callback;
 JS_WRAP_CLASS_END(UIBarButtonItem);
 
-#endif /* NUIToolbar_h */
+#endif /* NUIBarButtonItem_h */
