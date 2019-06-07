@@ -5,6 +5,7 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUITextField.h"
+#include "NUIFont.h"
 
 NUITextField::NUITextField()
 : _callback(new Nan::Persistent<Function>())
@@ -24,25 +25,41 @@ JS_INIT_CLASS(UITextField, UIControl);
   JS_ASSIGN_PROP(proto, placeholder);
   JS_ASSIGN_PROP(proto, attributedPlaceholder);
   JS_ASSIGN_PROP(proto, autocorrectionType);
+  JS_ASSIGN_PROP(proto, font);
+  JS_ASSIGN_PROP(proto, leftView);
+  JS_ASSIGN_PROP(proto, rightView);
+  JS_ASSIGN_PROP(proto, leftViewMode);
+  JS_ASSIGN_PROP(proto, rightViewMode);
+
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
   JS_SET_METHOD(ctor, "alloc", Alloc);
 JS_INIT_CLASS_END(UITextField, UIControl);
 
 NAN_METHOD(NUITextField::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> txtObj = info.This();
-
-  NUITextField *txt = new NUITextField();
-  
-  if (info[0]->IsExternal()) {
-    txt->SetNSObject((__bridge UITextField *)(info[0].As<External>()->Value()));
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      JS_SET_RETURN_NEW(UITextField, info);
+      return;
+    }
+    UITextField* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UITextField *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UITextField alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UITextField alloc] init];
+    }
+    if (self) {
+      NUITextField *wrapper = new NUITextField();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NUITextField::New: invalid arguments");
+    }
   }
-  
-  txt->Wrap(txtObj);
-
-  info.GetReturnValue().Set(txtObj);
 }
 
 NAN_METHOD(NUITextField::Alloc) {
@@ -282,5 +299,93 @@ NAN_SETTER(NUITextField::autocorrectionTypeSetter) {
 
   @autoreleasepool {
     [ui setAutocorrectionType:type];
+  }
+}
+
+NAN_GETTER(NUITextField::fontGetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+
+  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui font], NUIFont::type));
+}
+
+NAN_SETTER(NUITextField::fontSetter) {
+  Nan::HandleScope scope;
+
+  JS_UNWRAP(UITextField, ui);
+
+  NUIFont *font = ObjectWrap::Unwrap<NUIFont>(Local<Object>::Cast(value));
+
+  @autoreleasepool {
+    [ui setFont:font->As<UIFont>()];
+  }
+}
+
+NAN_GETTER(NUITextField::leftViewGetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(sweetiekit::GetWrapperFor([self leftView], NUIView::type));
+  }
+}
+
+NAN_SETTER(NUITextField::leftViewSetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
+    [self setLeftView:view->As<UIView>()];
+  }
+}
+
+NAN_GETTER(NUITextField::rightViewGetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(sweetiekit::GetWrapperFor([self rightView], NUIView::type));
+  }
+}
+
+NAN_SETTER(NUITextField::rightViewSetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    NUIView *view = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
+    [self setRightView:view->As<UIView>()];
+  }
+}
+
+NAN_GETTER(NUITextField::rightViewModeGetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_NUM([self rightViewMode]));
+  }
+}
+
+NAN_SETTER(NUITextField::rightViewModeSetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    UITextFieldViewMode mode = UITextFieldViewMode(TO_UINT32(value));
+    [self setRightViewMode:mode];
+  }
+}
+
+NAN_GETTER(NUITextField::leftViewModeGetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(JS_NUM([self leftViewMode]));
+  }
+}
+
+NAN_SETTER(NUITextField::leftViewModeSetter) {
+  JS_UNWRAP(UITextField, self);
+  @autoreleasepool
+  {
+    UITextFieldViewMode mode = UITextFieldViewMode(TO_UINT32(value));
+    [self setLeftViewMode:mode];
   }
 }

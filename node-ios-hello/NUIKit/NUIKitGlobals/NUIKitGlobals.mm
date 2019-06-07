@@ -15,6 +15,7 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   JS_INIT_CTOR(UIKitGlobals, NSObject);
   JS_ASSIGN_METHOD(ctor, UIImageWriteToSavedPhotosAlbum);
   JS_ASSIGN_METHOD(ctor, UIImageOrientation);
+  JS_ASSIGN_METHOD(ctor, UITextFieldViewMode);
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
@@ -79,6 +80,19 @@ NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
   result->Set(JS_STR("downMirrored"), JS_NUM(UIImageOrientationDownMirrored));
   result->Set(JS_STR("leftMirrored"), JS_NUM(UIImageOrientationLeftMirrored));
   result->Set(JS_STR("rightMirrored"), JS_NUM(UIImageOrientationRightMirrored));
+  
+  JS_SET_RETURN(result);
+}
+
+NAN_METHOD(NUIKitGlobals::UITextFieldViewMode) {
+  Nan::HandleScope scope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  
+  result->Set(JS_STR("never"), JS_NUM(UITextFieldViewModeNever));
+  result->Set(JS_STR("whileEditing"), JS_NUM(UITextFieldViewModeWhileEditing));
+  result->Set(JS_STR("unlessEditing"), JS_NUM(UITextFieldViewModeUnlessEditing));
+  result->Set(JS_STR("always"), JS_NUM(UITextFieldViewModeAlways));
   
   JS_SET_RETURN(result);
 }

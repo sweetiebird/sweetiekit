@@ -17,6 +17,7 @@
 JS_WRAP_CLASS(UIKitGlobals, NSObject);
   JS_METHOD(UIImageWriteToSavedPhotosAlbum);
   JS_METHOD(UIImageOrientation);
+  JS_METHOD(UITextFieldViewMode);
 JS_WRAP_CLASS_END(UIKitGlobals);
 
 #endif /* NUIKitGlobals_h */
