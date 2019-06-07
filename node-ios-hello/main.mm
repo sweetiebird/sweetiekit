@@ -209,8 +209,6 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
   static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       __block IMP originalEndedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesEnded:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          NSLog(@"touches ended implementation");
-
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesEnded"];
           if (fn != nullptr) {
             Nan::HandleScope scope;
@@ -227,8 +225,6 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
         });
 
       __block IMP originalMovedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesMoved:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          NSLog(@"touches moved implementation");
-
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesMoved"];
           if (fn != nullptr) {
             Nan::HandleScope scope;
@@ -245,8 +241,6 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
         });
 
       __block IMP originalBeganIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesBegan:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          NSLog(@"touches began implementation");
-
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesBegan"];
           if (fn != nullptr) {
             Nan::HandleScope scope;
@@ -263,8 +257,6 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
         });
 
     __block IMP touchesCancelledIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesCancelled:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          NSLog(@"touches cancelled implementation");
-
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesCancelled"];
           if (fn != nullptr) {
             Nan::HandleScope scope;
@@ -290,8 +282,6 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
   static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       __block IMP originalUpdateIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(update:), ^(SKScene *_self, NSTimeInterval currentTime) {
-//          NSLog(@"update: implementation");
-
           id fn = [_self associatedValueForKey:@"sweetiekit_update"];
           if (fn != nullptr) {
             Nan::HandleScope scope;

@@ -3,4 +3,5 @@ module.exports = (nav, demoVC) => {
   VC = demoVC;
   Require = require;
   win=(skdom = require('sweetiekit-dom')).load('http://localhost:8080');
+  __PLATFORM__ = 'ios';
 };
