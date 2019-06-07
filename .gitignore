@@ -8,3 +8,4 @@ xcuserdata/*
 node_modules
 notes.txt
 /build
+/node-ios-hello/Info.plist

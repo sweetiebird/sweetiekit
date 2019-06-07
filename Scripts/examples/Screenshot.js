@@ -25,7 +25,7 @@ function takeSS() {
       0.0,
     );
 
-    view.layer.renderInContext('current');
+    view.layer.renderInContext();
 
     const img = CoreGraphics.UIGraphicsGetImageFromCurrentImageContext();
 

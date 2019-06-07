@@ -749,6 +749,14 @@ SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable f
 SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 
+#define js_value_CFTimeInterval(x) JS_NUM(x)
+#define to_value_CFTimeInterval(x) TO_DOUBLE(x)
+#define is_value_CFTimeInterval(x) (x)->IsNumber()
+
+Local<Value> js_value_CATransform3D(const CATransform3D& value);
+CATransform3D to_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
+
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 Local<Value> js_value_CGVector(const CGVector& pt);
 Local<Value> js_value_CGSize(const CGSize& size);
@@ -762,14 +770,20 @@ bool is_value_CGVector(const Local<Value>& value);
 bool is_value_CGSize(const Local<Value>& value);
 bool is_value_CGRect(const Local<Value>& value);
 
-Local<Value> js_value_CGColor(CGColorRef _Nullable color);
+Local<Value> js_value_CGColorRef(CGColorRef _Nullable color);
+Local<Value> js_value_CGPathRef(CGPathRef _Nullable color);
+Local<Value> js_value_CGContextRef(CGPathRef _Nullable color);
 Local<Value> js_value_UIColor(UIColor* _Nullable color);
 #define js_value_SKColor js_value_UIColor
-CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGColorRef _Nullable to_value_CGColorRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
 #define to_value_SKColor to_value_UIColor
 bool is_value_UIColor(const Local<Value>& value);
-#define is_value_CGColor is_value_UIColor
+#define is_value_CGColorRef is_value_UIColor
+bool is_value_CGPathRef(const Local<Value>& value);
+bool is_value_CGContextRef(const Local<Value>& value);
 
 Local<Value> js_value_NSRange(const NSRange& pt);
 NSRange to_value_NSRange(const Local<Value>& value);
@@ -920,6 +934,10 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_uint32_t(x) TO_UINT32(x)
 #define is_value_uint32_t(x) (x)->IsUint32()
 
+#define js_value_unsigned(x) JS_UINT(x)
+#define to_value_unsigned(x) TO_UINT32(x)
+#define is_value_unsigned(x) (x)->IsUint32()
+
 #define js_value_double(x) JS_NUM(x)
 #define to_value_double(x) TO_DOUBLE(x)
 #define is_value_double(x) (x)->IsNumber()
@@ -960,6 +978,9 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_enum_wrapper(x, c) TO_ENUM(c, NSInteger, x)
 #define is_enum_wrapper(x, c) IS_ENUM(c, NSInteger, x)
 
+#define js_enum_string_wrapper(x, c) JS_ENUM(c, NSString, x)
+#define to_enum_string_wrapper(x, c) TO_ENUM(c, NSString, x)
+#define is_enum_string_wrapper(x, c) IS_ENUM(c, NSString, x)
 #define js_opts_wrapper(x, c) JS_OPTS(c, NSUInteger, x)
 #define to_opts_wrapper(x, c) TO_OPTS(c, NSUInteger, x)
 #define is_opts_wrapper(x, c) IS_OPTS(c, NSUInteger, x)
@@ -984,6 +1005,12 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(to_value_##type(info[name##_argument_index]));
   
+#define declare_nullable_value_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  type name(to_value_##type(info[name##_argument_index]));
+  
 #define declare_nullable_pointer_(index, type, name) \
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
@@ -998,9 +1025,24 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   if (info[name##_argument_index]->IsObject()) { \
     name##Obj = JS_OBJ(info[name##_argument_index]); \
   }
+  
+#ifdef __OBJC__
+#define declare_autoreleasepool @autoreleasepool
+#else
+#define declare_autoreleasepool
+#endif
 
 #define declare_args() \
-  int JS_ARGC = 0;
+  int JS_ARGC = 0
+
+#define declare_getter() \
+  std::vector< Local<Value> > info; \
+  declare_args()
+
+#define declare_setter() \
+  std::vector< Local<Value> > info; \
+  info.push_back(value); \
+  declare_args()
 
 #define declare_value(...) \
   declare_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
@@ -1011,10 +1053,13 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define declare_nullable_pointer(...) \
   declare_nullable_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
+#define declare_nullable_value(...) \
+  declare_nullable_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
-#define JS_TODO() JS_PANIC("Not implemented")
+#define JS_TODO() { Nan::ThrowError("Not implemented"); return; }
 
 #define is_value_NSDictionary(x) (x)->IsObject()
 #define to_value_NSDictionary(x) to_value_id<NSDictionary>(x)

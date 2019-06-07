@@ -1103,15 +1103,23 @@ bool is_value_CGRect(const Local<Value>& value) {
   return true;
 }
 
-Local<Value> js_value_CGColor(CGColorRef _Nullable color) {
+Local<Value> js_value_CGColorRef(CGColorRef _Nullable color) {
   return sweetiekit::JSObjFromCGColor(color);
+}
+
+Local<Value> js_value_CGPathRef(CGPathRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+Local<Value> js_value_CGContextRef(CGPathRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
 }
 
 Local<Value> js_value_UIColor(UIColor* _Nullable color) {
   return sweetiekit::JSObjFromUIColor(color);
 }
 
-CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullable failed) {
+CGColorRef _Nullable to_value_CGColorRef(const Local<Value>& value, bool * _Nullable failed) {
   if (failed) {
     *failed = false;
   }
@@ -1124,6 +1132,14 @@ CGColorRef _Nullable to_value_CGColor(const Local<Value>& value, bool * _Nullabl
     }
   }
   return result;
+}
+
+CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CGPathRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CGContextRef)sweetiekit::GetValueFor(value, failed);
 }
 
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed) {
@@ -1157,6 +1173,17 @@ bool is_value_UIColor(const Local<Value>& value)
     return false;
   }
   return true;
+}
+
+bool is_value_CGPathRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+bool is_value_CGContextRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
 }
 
 Local<Value> js_value_NSRange(const NSRange& value)

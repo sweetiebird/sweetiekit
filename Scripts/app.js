@@ -284,7 +284,7 @@ async function setupApp() {
   anim.fromValue = { x: layerPos.x, y: layerPos.y };
   nextBtn.layer.position = { x: layerPos.x + 100, y: layerPos.y + 100 };
   anim.toValue = { x: layerPos.x + 100, y: layerPos.y + 100 };
-  nextBtn.layer.addAnimation(anim, 'position');
+  nextBtn.layer.addAnimationForKey(anim, 'position');
 
   const showVC = UIViewController();
   const showTransitionDel = new UIViewControllerTransitioningDelegate();

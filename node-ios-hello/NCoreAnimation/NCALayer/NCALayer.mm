@@ -25,14 +25,113 @@ JS_INIT_CLASS(CALayer, NSObject);
   JS_SET_PROP(proto, "shadowColor", ShadowColor);
   JS_SET_PROP(proto, "shadowRadius", ShadowRadius);
   JS_SET_PROP(proto, "position", Position);
-  JS_SET_METHOD(proto, "addAnimation", AddAnimation);
-  JS_SET_METHOD(proto, "addSublayer", addSublayer);
-  JS_SET_METHOD(proto, "renderInContext", renderInContext);
+//  JS_SET_METHOD(proto, "addAnimation", AddAnimation);
+//  JS_SET_METHOD(proto, "addSublayer", AddSublayer);
+//  JS_SET_METHOD(proto, "renderInContext", RenderInContext);
   JS_SET_PROP(proto, "masksToBounds", MasksToBounds);
-  JS_ASSIGN_PROP(proto, shadowOpacity);
+  JS_SET_PROP(proto, "shadowOpacity", ShadowOpacity);
+  JS_SET_PROP(proto, "frame", Frame);
+  
+  JS_ASSIGN_METHOD(proto, presentationLayer);
+  JS_ASSIGN_METHOD(proto, modelLayer);
+  JS_ASSIGN_METHOD(proto, shouldArchiveValueForKey);
+  JS_ASSIGN_METHOD(proto, affineTransform);
+  JS_ASSIGN_METHOD(proto, setAffineTransform);
+  JS_ASSIGN_METHOD(proto, contentsAreFlipped);
+  JS_ASSIGN_METHOD(proto, removeFromSuperlayer);
+  JS_ASSIGN_METHOD(proto, addSublayer);
+  JS_ASSIGN_METHOD(proto, insertSublayerAtIndex);
+  JS_ASSIGN_METHOD(proto, insertSublayerBelow);
+  JS_ASSIGN_METHOD(proto, insertSublayerAbove);
+  JS_ASSIGN_METHOD(proto, replaceSublayerWith);
+  JS_ASSIGN_METHOD(proto, convertPointFromLayer);
+  JS_ASSIGN_METHOD(proto, convertPointToLayer);
+  JS_ASSIGN_METHOD(proto, convertRectFromLayer);
+  JS_ASSIGN_METHOD(proto, convertRectToLayer);
+  JS_ASSIGN_METHOD(proto, convertTimeFromLayer);
+  JS_ASSIGN_METHOD(proto, convertTimeToLayer);
+  JS_ASSIGN_METHOD(proto, hitTest);
+  JS_ASSIGN_METHOD(proto, containsPoint);
+  JS_ASSIGN_METHOD(proto, display);
+  JS_ASSIGN_METHOD(proto, setNeedsDisplay);
+  JS_ASSIGN_METHOD(proto, setNeedsDisplayInRect);
+  JS_ASSIGN_METHOD(proto, needsDisplay);
+  JS_ASSIGN_METHOD(proto, displayIfNeeded);
+  JS_ASSIGN_METHOD(proto, drawInContext);
+  JS_ASSIGN_METHOD(proto, renderInContext);
+  JS_ASSIGN_METHOD(proto, preferredFrameSize);
+  JS_ASSIGN_METHOD(proto, setNeedsLayout);
+  JS_ASSIGN_METHOD(proto, needsLayout);
+  JS_ASSIGN_METHOD(proto, layoutIfNeeded);
+  JS_ASSIGN_METHOD(proto, layoutSublayers);
+  JS_ASSIGN_METHOD(proto, actionForKey);
+  JS_ASSIGN_METHOD(proto, addAnimationForKey);
+  JS_ASSIGN_METHOD(proto, removeAllAnimations);
+  JS_ASSIGN_METHOD(proto, removeAnimationForKey);
+  JS_ASSIGN_METHOD(proto, animationKeys);
+  JS_ASSIGN_METHOD(proto, animationForKey);
+  
+  /*
+  JS_ASSIGN_PROP(proto, bounds);
+  JS_ASSIGN_PROP(proto, position);
+  JS_ASSIGN_PROP(proto, zPosition);
+  JS_ASSIGN_PROP(proto, anchorPoint);
+  JS_ASSIGN_PROP(proto, anchorPointZ);
+  JS_ASSIGN_PROP(proto, transform);
   JS_ASSIGN_PROP(proto, frame);
+  JS_ASSIGN_PROP(proto, hidden);
+  JS_ASSIGN_PROP(proto, doubleSided);
+  JS_ASSIGN_PROP(proto, geometryFlipped);
+  JS_ASSIGN_PROP_READONLY(proto, superlayer);
+  JS_ASSIGN_PROP(proto, sublayers);
+  JS_ASSIGN_PROP(proto, sublayerTransform);
+  JS_ASSIGN_PROP(proto, mask);
+  JS_ASSIGN_PROP(proto, masksToBounds);
+  JS_ASSIGN_PROP(proto, contents);
+  JS_ASSIGN_PROP(proto, contentsRect);
+  JS_ASSIGN_PROP(proto, contentsGravity);
+  JS_ASSIGN_PROP(proto, contentsScale);
+  JS_ASSIGN_PROP(proto, contentsCenter);
+  JS_ASSIGN_PROP(proto, contentsFormat);
+  JS_ASSIGN_PROP(proto, minificationFilter);
+  JS_ASSIGN_PROP(proto, magnificationFilter);
+  JS_ASSIGN_PROP(proto, minificationFilterBias);
+  JS_ASSIGN_PROP(proto, opaque);
+  JS_ASSIGN_PROP(proto, needsDisplayOnBoundsChange);
+  JS_ASSIGN_PROP(proto, drawsAsynchronously);
+  JS_ASSIGN_PROP(proto, edgeAntialiasingMask);
+  JS_ASSIGN_PROP(proto, allowsEdgeAntialiasing);
+  JS_ASSIGN_PROP(proto, backgroundColor);
+  JS_ASSIGN_PROP(proto, cornerRadius);
+  JS_ASSIGN_PROP(proto, maskedCorners);
+  JS_ASSIGN_PROP(proto, borderWidth);
+  JS_ASSIGN_PROP(proto, borderColor);
+  JS_ASSIGN_PROP(proto, opacity);
+  JS_ASSIGN_PROP(proto, allowsGroupOpacity);
+  JS_ASSIGN_PROP(proto, compositingFilter);
+  JS_ASSIGN_PROP(proto, filters);
+  JS_ASSIGN_PROP(proto, backgroundFilters);
+  JS_ASSIGN_PROP(proto, shouldRasterize);
+  JS_ASSIGN_PROP(proto, rasterizationScale);
+  JS_ASSIGN_PROP(proto, shadowColor);
+  JS_ASSIGN_PROP(proto, shadowOpacity);
+  JS_ASSIGN_PROP(proto, shadowOffset);
+  JS_ASSIGN_PROP(proto, shadowRadius);
+  JS_ASSIGN_PROP(proto, shadowPath);
+  JS_ASSIGN_PROP(proto, actions);
+  JS_ASSIGN_PROP(proto, name);
+  JS_ASSIGN_PROP(proto, delegate);
+  JS_ASSIGN_PROP(proto, style);
+*/
+
   // static members (ctor)
   JS_INIT_CTOR(CALayer, NSObject);
+  JS_ASSIGN_METHOD(ctor, layer);
+  JS_ASSIGN_METHOD(ctor, defaultValueForKey);
+  JS_ASSIGN_METHOD(ctor, needsDisplayForKey);
+  JS_ASSIGN_METHOD(ctor, defaultActionForKey);
+  JS_ASSIGN_METHOD(ctor, init);
+  JS_ASSIGN_METHOD(ctor, initWithLayer);
 JS_INIT_CLASS_END(CALayer, NSObject);
 
 NAN_METHOD(NCALayer::New) {
@@ -51,6 +150,443 @@ NAN_METHOD(NCALayer::New) {
 
   JS_SET_RETURN(viewObj);
 }
+
+#define js_value_instancetype js_value_CALayer
+
+NAN_METHOD(NCALayer::layer) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([CALayer layer]));
+  }
+}
+
+NAN_METHOD(NCALayer::defaultValueForKey) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([CALayer defaultValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NCALayer::needsDisplayForKey) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_BOOL([CALayer needsDisplayForKey: key]));
+  }
+}
+
+#define js_value_CAAction(x) js_value_wrapper_unknown(x, CAAction)
+#define to_value_CAAction(x) to_value_wrapper_unknown(x, CAAction)
+#define is_value_CAAction(x) is_value_wrapper_unknown(x, CAAction)
+
+NAN_METHOD(NCALayer::defaultActionForKey) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, event);
+    JS_SET_RETURN(js_value_id/* <CAAction>*/([CALayer defaultActionForKey: event]));
+  }
+}
+
+NAN_METHOD(NCALayer::init) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([[CALayer alloc] init]));
+  }
+}
+
+NAN_METHOD(NCALayer::initWithLayer) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(id, layer);
+    JS_SET_RETURN(js_value_instancetype([[CALayer alloc] initWithLayer: layer]));
+  }
+}
+
+NAN_METHOD(NCALayer::presentationLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([self presentationLayer]));
+  }
+}
+
+NAN_METHOD(NCALayer::modelLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([self modelLayer]));
+  }
+}
+
+NAN_METHOD(NCALayer::shouldArchiveValueForKey) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_BOOL([self shouldArchiveValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NCALayer::affineTransform) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGAffineTransform([self affineTransform]));
+  }
+}
+
+NAN_METHOD(NCALayer::setAffineTransform) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGAffineTransform, m);
+    [self setAffineTransform: m];
+  }
+}
+
+NAN_METHOD(NCALayer::contentsAreFlipped) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self contentsAreFlipped]));
+  }
+}
+
+NAN_METHOD(NCALayer::removeFromSuperlayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self removeFromSuperlayer];
+  }
+}
+
+NAN_METHOD(NCALayer::addSublayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    [self addSublayer: layer];
+  }
+}
+
+NAN_METHOD(NCALayer::insertSublayerAtIndex) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    declare_value(unsigned, idx);
+    [self insertSublayer: layer atIndex: idx];
+  }
+}
+
+NAN_METHOD(NCALayer::insertSublayerBelow) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    declare_nullable_pointer(CALayer, sibling);
+    [self insertSublayer: layer below: sibling];
+  }
+}
+
+NAN_METHOD(NCALayer::insertSublayerAbove) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    declare_nullable_pointer(CALayer, sibling);
+    [self insertSublayer: layer above: sibling];
+  }
+}
+
+NAN_METHOD(NCALayer::replaceSublayerWith) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, oldLayer);
+    declare_pointer(CALayer, newLayer);
+    [self replaceSublayer: oldLayer with: newLayer];
+  }
+}
+
+NAN_METHOD(NCALayer::convertPointFromLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: p fromLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::convertPointToLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: p toLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::convertRectFromLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, r);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CGRect([self convertRect: r fromLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::convertRectToLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, r);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CGRect([self convertRect: r toLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::convertTimeFromLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CFTimeInterval, t);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CFTimeInterval([self convertTime: t fromLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::convertTimeToLayer) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CFTimeInterval, t);
+    declare_nullable_pointer(CALayer, l);
+    JS_SET_RETURN(js_value_CFTimeInterval([self convertTime: t toLayer: l]));
+  }
+}
+
+NAN_METHOD(NCALayer::hitTest) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    JS_SET_RETURN(js_value_CALayer([self hitTest: p]));
+  }
+}
+
+NAN_METHOD(NCALayer::containsPoint) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    JS_SET_RETURN(js_value_BOOL([self containsPoint: p]));
+  }
+}
+
+NAN_METHOD(NCALayer::display) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self display];
+  }
+}
+
+NAN_METHOD(NCALayer::setNeedsDisplay) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self setNeedsDisplay];
+  }
+}
+
+NAN_METHOD(NCALayer::setNeedsDisplayInRect) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, r);
+    [self setNeedsDisplayInRect: r];
+  }
+}
+
+NAN_METHOD(NCALayer::needsDisplay) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self needsDisplay]));
+  }
+}
+
+NAN_METHOD(NCALayer::displayIfNeeded) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self displayIfNeeded];
+  }
+}
+
+NAN_METHOD(NCALayer::drawInContext) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGContextRef, ctx);
+    [self drawInContext: ctx];
+  }
+}
+
+NAN_METHOD(NCALayer::renderInContext) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(CGContextRef, ctx);
+    if (!ctx) {
+      ctx = UIGraphicsGetCurrentContext();
+    }
+    [self renderInContext: ctx];
+  }
+}
+
+NAN_METHOD(NCALayer::preferredFrameSize) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGSize([self preferredFrameSize]));
+  }
+}
+
+NAN_METHOD(NCALayer::setNeedsLayout) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self setNeedsLayout];
+  }
+}
+
+NAN_METHOD(NCALayer::needsLayout) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self needsLayout]));
+  }
+}
+
+NAN_METHOD(NCALayer::layoutIfNeeded) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self layoutIfNeeded];
+  }
+}
+
+NAN_METHOD(NCALayer::layoutSublayers) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self layoutSublayers];
+  }
+}
+
+NAN_METHOD(NCALayer::actionForKey) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, event);
+    JS_SET_RETURN(js_value_id/* <CAAction>*/([self actionForKey: event]));
+  }
+}
+
+#define js_value_CAAnimation(x) js_value_wrapper_unknown(x, CAAnimation)
+#define to_value_CAAnimation(x) to_value_wrapper_unknown(x, CAAnimation)
+#define is_value_CAAnimation(x) is_value_wrapper_unknown(x, CAAnimation)
+
+NAN_METHOD(NCALayer::addAnimationForKey) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CAAnimation, anim);
+    declare_nullable_pointer(NSString, key);
+    [self addAnimation: anim forKey: key];
+  }
+}
+
+NAN_METHOD(NCALayer::removeAllAnimations) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    [self removeAllAnimations];
+  }
+}
+
+NAN_METHOD(NCALayer::removeAnimationForKey) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self removeAnimationForKey: key];
+  }
+}
+
+NAN_METHOD(NCALayer::animationKeys) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<NSString*>([self animationKeys]));
+  }
+}
+
+NAN_METHOD(NCALayer::animationForKey) {
+  JS_UNWRAP(CALayer, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_CAAnimation([self animationForKey: key]));
+  }
+}
+
+#if TODO
+NAN_METHOD(NCAAction::runActionForKeyObject) {
+  JS_UNWRAP(CAAction, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, event);
+    declare_value(id, anObject);
+    [self runActionForKey: event object: anObject];
+  }
+}
+
+NAN_METHOD(NCALayerDelegate::displayLayer) {
+  JS_UNWRAP(CALayerDelegate, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    [self displayLayer: layer];
+  }
+}
+
+NAN_METHOD(NCALayerDelegate::drawLayerInContext) {
+  JS_UNWRAP(CALayerDelegate, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    declare_value(CGContextRef, ctx);
+    [self drawLayer: layer inContext: ctx];
+  }
+}
+
+NAN_METHOD(NCALayerDelegate::layerWillDraw) {
+  JS_UNWRAP(CALayerDelegate, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    [self layerWillDraw: layer];
+  }
+}
+
+NAN_METHOD(NCALayerDelegate::layoutSublayersOfLayer) {
+  JS_UNWRAP(CALayerDelegate, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    [self layoutSublayersOfLayer: layer];
+  }
+}
+
+NAN_METHOD(NCALayerDelegate::actionForLayerForKey) {
+  JS_UNWRAP(CALayerDelegate, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CALayer, layer);
+    declare_pointer(NSString, event);
+    JS_SET_RETURN(js_value_id/* <CAAction>*/([self actionForLayer: layer forKey: event]));
+  }
+}
+#endif
 
 NAN_GETTER(NCALayer::CornerRadiusGetter) {
   Nan::HandleScope scope;
@@ -344,7 +880,7 @@ NAN_SETTER(NCALayer::MasksToBoundsSetter) {
   [ui setMasksToBounds:TO_BOOL(value)];
 }
 
-NAN_GETTER(NCALayer::shadowOpacityGetter) {
+NAN_GETTER(NCALayer::ShadowOpacityGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(CALayer, ui);
@@ -352,7 +888,7 @@ NAN_GETTER(NCALayer::shadowOpacityGetter) {
   JS_SET_RETURN(JS_NUM([ui shadowOpacity]));
 }
 
-NAN_SETTER(NCALayer::shadowOpacitySetter) {
+NAN_SETTER(NCALayer::ShadowOpacitySetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(CALayer, ui);
@@ -360,28 +896,21 @@ NAN_SETTER(NCALayer::shadowOpacitySetter) {
   [ui setShadowOpacity:TO_FLOAT(value)];
 }
 
-NAN_METHOD(NCALayer::addSublayer) {
-  JS_UNWRAP(CALayer, self);
-  @autoreleasepool {
-    [self addSublayer:to_value_CALayer(info[0])];
-  }
-}
+//NAN_METHOD(NCALayer::RenderInContext) {
+//  Nan::HandleScope scope;
+//
+//  JS_UNWRAP(CALayer, layer)
+//
+//  NSString *ctxType = NJSStringToNSString(info[0]);
+//
+//  if ([ctxType  isEqual: @"current"]) {
+//    @autoreleasepool {
+//      [layer renderInContext:UIGraphicsGetCurrentContext()];
+//    }
+//  }
+//}
 
-NAN_METHOD(NCALayer::renderInContext) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CALayer, layer)
-
-  NSString *ctxType = NJSStringToNSString(info[0]);
-
-  if ([ctxType  isEqual: @"current"]) {
-    @autoreleasepool {
-      [layer renderInContext:UIGraphicsGetCurrentContext()];
-    }
-  }
-}
-
-NAN_GETTER(NCALayer::frameGetter) {
+NAN_GETTER(NCALayer::FrameGetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(CALayer, ca);
@@ -389,7 +918,7 @@ NAN_GETTER(NCALayer::frameGetter) {
   JS_SET_RETURN(sweetiekit::JSObjFromFrame([ca frame]));
 }
 
-NAN_SETTER(NCALayer::frameSetter) {
+NAN_SETTER(NCALayer::FrameSetter) {
   Nan::HandleScope scope;
 
   JS_UNWRAP(CALayer, ca);
