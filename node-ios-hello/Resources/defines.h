@@ -770,20 +770,27 @@ bool is_value_CGVector(const Local<Value>& value);
 bool is_value_CGSize(const Local<Value>& value);
 bool is_value_CGRect(const Local<Value>& value);
 
-Local<Value> js_value_CGColorRef(CGColorRef _Nullable color);
-Local<Value> js_value_CGPathRef(CGPathRef _Nullable color);
-Local<Value> js_value_CGContextRef(CGPathRef _Nullable color);
-Local<Value> js_value_UIColor(UIColor* _Nullable color);
-#define js_value_SKColor js_value_UIColor
+Local<Value> js_value_CGColorRef(CGColorRef _Nullable value);
+Local<Value> js_value_CGPathRef(CGPathRef _Nullable value);
+Local<Value> js_value_CGContextRef(CGContextRef _Nullable value);
+Local<Value> js_value_CGImageRef(CGImageRef _Nullable value);
+Local<Value> js_value_UIColor(UIColor* _Nullable value);
+
 CGColorRef _Nullable to_value_CGColorRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGImageRef _Nullable to_value_CGImageRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
-#define to_value_SKColor to_value_UIColor
-bool is_value_UIColor(const Local<Value>& value);
+
 #define is_value_CGColorRef is_value_UIColor
 bool is_value_CGPathRef(const Local<Value>& value);
 bool is_value_CGContextRef(const Local<Value>& value);
+bool is_value_CGImageRef(const Local<Value>& value);
+bool is_value_UIColor(const Local<Value>& value);
+
+#define js_value_SKColor js_value_UIColor
+#define to_value_SKColor to_value_UIColor
+#define is_value_SKColor is_value_UIColor
 
 Local<Value> js_value_NSRange(const NSRange& pt);
 NSRange to_value_NSRange(const Local<Value>& value);
@@ -1064,6 +1071,12 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define is_value_NSDictionary(x) (x)->IsObject()
 #define to_value_NSDictionary(x) to_value_id<NSDictionary>(x)
 #define js_value_NSDictionary(x) js_value_id(x)
+
+// CoreGraphics types
+
+#define js_value_CGBlendMode(x) JS_ENUM(CGBlendMode, NSInteger, x)
+#define to_value_CGBlendMode(x) TO_ENUM(CGBlendMode, NSInteger, x)
+#define is_value_CGBlendMode(x) IS_ENUM(CGBlendMode, NSInteger, x)
 
 // SceneKit types
 #define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)

@@ -97,6 +97,18 @@ JS_WRAP_CLASS_END(${name});
   const hPath = path.resolve(__dirname, '../../node-ios-hello', `N${group}`, `N${name}`, `N${name}.h`);
   const mPath = path.resolve(__dirname, '../../node-ios-hello', `N${group}`, `N${name}`, `N${name}.mm`);
 
+  if (fs.existsSync(hPath)) {
+    console.log(`file exists: ${hPath}`);
+    process.exit(1);
+    return;
+  }
+
+  if (fs.existsSync(mPath)) {
+    console.log(`file exists: ${mPath}`);
+    process.exit(1);
+    return;
+  }
+
   try {
     fs.writeFileSync(hPath, hData);
     fs.writeFileSync(mPath, mData);

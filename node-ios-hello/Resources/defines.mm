@@ -1111,7 +1111,11 @@ Local<Value> js_value_CGPathRef(CGPathRef _Nullable value) {
   return sweetiekit::GetWrapperFor((__bridge id)value);
 }
 
-Local<Value> js_value_CGContextRef(CGPathRef _Nullable value) {
+Local<Value> js_value_CGContextRef(CGContextRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+Local<Value> js_value_CGImageRef(CGImageRef _Nullable value) {
   return sweetiekit::GetWrapperFor((__bridge id)value);
 }
 
@@ -1140,6 +1144,10 @@ CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullab
 
 CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed) {
   return (__bridge CGContextRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CGImageRef _Nullable to_value_CGImageRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CGImageRef)sweetiekit::GetValueFor(value, failed);
 }
 
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed) {
@@ -1180,7 +1188,14 @@ bool is_value_CGPathRef(const Local<Value>& value)
   // TODO: test type.
   return is_value_id(value);
 }
+
 bool is_value_CGContextRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
+bool is_value_CGImageRef(const Local<Value>& value)
 {
   // TODO: test type.
   return is_value_id(value);
