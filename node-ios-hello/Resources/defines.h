@@ -130,6 +130,9 @@ using namespace node;
 
 #define JS_METHOD(name) \
   static NAN_METHOD(name)
+
+#define JS_STATIC_METHOD(name) \
+  static NAN_METHOD(name)
   
 #define JS_UNWRAP_(type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \

@@ -427,7 +427,7 @@
       (js-print-type class 
         (let name (objc-method-name name args static: static?)
           `(%indent ,(if static?
-            `(JS_METHOD ,name)
+            `(JS_STATIC_METHOD ,name)
             `(JS_METHOD ,name)))))
       ctor
       (js-print-type class
