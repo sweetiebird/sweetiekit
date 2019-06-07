@@ -256,7 +256,7 @@ async function start() {
   gc();
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
-    const myApp = this.myApp = new UIDemosApp(sharedApp);
+    const myApp = this.myApp = SweetieKitApp = new UIDemosApp(sharedApp);
     myApp.launch();
   } else {
     setTimeout(start, 10);
