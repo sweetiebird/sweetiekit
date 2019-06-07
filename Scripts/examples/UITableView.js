@@ -21,7 +21,7 @@ const boldFont = UIFont('Arial-BoldMT', 17);
 const regFont = UIFont('Arial', 17);
 
 function setupDefaults() {
-  defaults = new NSUserDefaults();
+  defaults = NSUserDefaults.standardUserDefaults;
 
   const existingTodos = defaults.stringForKey('TODOS');
   if (existingTodos) {

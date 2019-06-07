@@ -11,9 +11,9 @@ NSCNView::~NSCNView () {}
 
 JS_INIT_CLASS(SCNView, UIView);
   // instance members (proto)
-  JS_PROTO_METHOD(hitTest);
-  JS_PROTO_METHOD(projectPoint);
-  JS_PROTO_METHOD(unprojectPoint);
+  JS_ASSIGN_PROTO_METHOD(hitTest);
+  JS_ASSIGN_PROTO_METHOD(projectPoint);
+  JS_ASSIGN_PROTO_METHOD(unprojectPoint);
   JS_ASSIGN_PROP(proto, rendersContinuously);
   JS_ASSIGN_PROP(proto, allowsCameraControl);
   JS_ASSIGN_PROP_READONLY(proto, cameraControlConfiguration);

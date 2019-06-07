@@ -327,26 +327,7 @@ namespace sweetiekit
         return js_value_NSDate((NSDate*)pThing);
       }
       if ([pThing isKindOfClass:[NSNumber class]]) {
-        __weak NSNumber* value = (NSNumber*)pThing;
-        if (value && value.objCType) {
-          switch (value.objCType[0])
-          {
-          case 'B':
-            return JS_BOOL(value.boolValue);
-          case 'i':
-            return JS_INT(value.intValue);
-          case 'I':
-            return JS_UINT(value.unsignedIntValue);
-          case 'd':
-            return JS_NUM(value.doubleValue);
-          case 'f':
-            return JS_FLOAT(value.floatValue);
-          case 'q':
-            return JS_NUM(value.longLongValue);
-          case 'Q':
-            return JS_NUM(value.unsignedLongLongValue);
-          }
-        }
+        return js_value_NSNumber((NSNumber*)pThing);
       }
       if ([pThing isKindOfClass:[UIColor class]]) {
         return js_value_UIColor((UIColor*)pThing);
@@ -404,14 +385,8 @@ namespace sweetiekit
     if (is_value_NSDate(value)) {
       return to_value_NSDate(value);
     }
-    if (value->IsInt32()) {
-      return [[NSNumber alloc] initWithInt: TO_INT32(value)];
-    }
-    if (value->IsUint32()) {
-      return [[NSNumber alloc] initWithUnsignedInt: TO_UINT32(value)];
-    }
-    if (value->IsNumber()) {
-      return [[NSNumber alloc] initWithDouble: TO_DOUBLE(value)];
+    if (is_value_NSNumber(value)) {
+      return to_value_NSNumber(value);
     }
     if (is_value_UIColor(value)) {
       return to_value_UIColor(value);
@@ -1467,6 +1442,85 @@ bool is_value_id(Local<Value> value) {
   return true;
 }
 
+Local<Value> js_value_NSNumber(NSNumber* _Nullable value)
+{
+  if (value && value.objCType) {
+    switch (value.objCType[0])
+    {
+    case 'B':
+      return JS_BOOL(value.boolValue);
+    case 'i':
+      return JS_INT(value.intValue);
+    case 'I':
+      return JS_UINT(value.unsignedIntValue);
+    case 'd':
+      return JS_NUM(value.doubleValue);
+    case 'f':
+      return JS_FLOAT(value.floatValue);
+    case 'q':
+      return JS_INT64(value.longLongValue);
+    case 'Q':
+      return JS_UINT64(value.unsignedLongLongValue);
+    }
+  }
+  return Nan::Undefined();
+}
+
+NSNumber* _Nullable to_value_NSNumber(Local<Value> value, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  if (value->IsBoolean()) {
+    return [[NSNumber alloc] initWithBool: TO_BOOL(value)];
+  }
+  if (value->IsInt32()) {
+    return [[NSNumber alloc] initWithInt: TO_INT32(value)];
+  }
+  if (value->IsUint32()) {
+    return [[NSNumber alloc] initWithUnsignedInt:TO_UINT32(value)];
+  }
+  if (IS_INT64(value)) {
+    return [[NSNumber alloc] initWithLongLong: TO_INT64(value)];
+  }
+  if (IS_UINT64(value)) {
+    return [[NSNumber alloc] initWithUnsignedLongLong:TO_UINT64(value)];
+  }
+  if (value->IsNumber()) {
+    return [[NSNumber alloc] initWithDouble: TO_DOUBLE(value)];
+  }
+  if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSNumber: expected a number");
+    return nullptr;
+  }
+}
+
+bool is_value_NSNumber(Local<Value> value)
+{
+  if (value->IsBoolean()) {
+    return true;
+  }
+  if (value->IsInt32()) {
+    return true;
+  }
+  if (value->IsUint32()) {
+    return true;
+  }
+  if (IS_INT64(value)) {
+    return true;
+  }
+  if (IS_UINT64(value)) {
+    return true;
+  }
+  if (value->IsNumber()) {
+    return true;
+  }
+  return false;
+}
+
 
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
@@ -1637,6 +1691,50 @@ NSSet* _Nullable to_value_NSSet(Local<Value> dict, bool* _Nullable failed) {
 
 bool is_value_NSSet(Local<Value> value) {
   if (!value->IsSet()) {
+    return false;
+  }
+  return true;
+}
+
+Local<Value> js_value_NSArray(NSArray* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Array> result(Array::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      Local<Value> i(js_value_NSUInteger(idx));
+      Local<Value> v(js_value_id(obj));
+      result->Set(i, v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSArray* _Nullable to_value_NSArray(Local<Value> arr, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (arr->IsArray()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Array>::Cast(arr));
+    auto result = [[NSMutableArray alloc] initWithCapacity:value->Length()];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id v = to_value_id(value->Get(i));
+      [result setObject:v atIndexedSubscript:i];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSArray failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSArray(Local<Value> value) {
+  if (!value->IsArray()) {
     return false;
   }
   return true;

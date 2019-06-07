@@ -11,12 +11,12 @@ NSCNPhysicsBody::~NSCNPhysicsBody() {}
 
 JS_INIT_CLASS(SCNPhysicsBody, NSObject);
   // instance members (proto)
-  JS_PROTO_METHOD(applyForce);
-  JS_PROTO_METHOD(applyForceAtPosition);
-  JS_PROTO_METHOD(applyTorque);
-  JS_PROTO_METHOD(clearAllForces);
-  JS_PROTO_METHOD(resetTransform);
-  JS_PROTO_METHOD(setResting);
+  JS_ASSIGN_PROTO_METHOD(applyForce);
+  JS_ASSIGN_PROTO_METHOD(applyForceAtPosition);
+  JS_ASSIGN_PROTO_METHOD(applyTorque);
+  JS_ASSIGN_PROTO_METHOD(clearAllForces);
+  JS_ASSIGN_PROTO_METHOD(resetTransform);
+  JS_ASSIGN_PROTO_METHOD(setResting);
   JS_ASSIGN_PROP(proto, type);
   JS_ASSIGN_PROP(proto, mass);
   JS_ASSIGN_PROP(proto, momentOfInertia);

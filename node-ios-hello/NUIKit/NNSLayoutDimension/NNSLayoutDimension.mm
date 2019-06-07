@@ -11,15 +11,15 @@ NNSLayoutDimension::~NNSLayoutDimension() {}
 
 JS_INIT_CLASS(NSLayoutDimension, NSLayoutAnchor);
   // instance members (proto)
-  JS_PROTO_METHOD(constraintEqualToConstant);
-  JS_PROTO_METHOD(constraintGreaterThanOrEqualToConstant);
-  JS_PROTO_METHOD(constraintLessThanOrEqualToConstant);
-  JS_PROTO_METHOD(constraintEqualToAnchorMultiplier);
-  JS_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorMultiplier);
-  JS_PROTO_METHOD(constraintLessThanOrEqualToAnchorMultiplier);
-  JS_PROTO_METHOD(constraintEqualToAnchorMultiplierConstant);
-  JS_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorMultiplierConstant);
-  JS_PROTO_METHOD(constraintLessThanOrEqualToAnchorMultiplierConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintEqualToConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintGreaterThanOrEqualToConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintLessThanOrEqualToConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintEqualToAnchorMultiplier);
+  JS_ASSIGN_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorMultiplier);
+  JS_ASSIGN_PROTO_METHOD(constraintLessThanOrEqualToAnchorMultiplier);
+  JS_ASSIGN_PROTO_METHOD(constraintEqualToAnchorMultiplierConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorMultiplierConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintLessThanOrEqualToAnchorMultiplierConstant);
   // static members (ctor)
   JS_INIT_CTOR(NSLayoutDimension, NSLayoutAnchor);
 JS_INIT_CLASS_END(NSLayoutDimension, NSLayoutAnchor);

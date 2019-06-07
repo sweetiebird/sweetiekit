@@ -12,12 +12,12 @@ NNSLayoutAnchor::~NNSLayoutAnchor () {}
 
 JS_INIT_CLASS(NSLayoutAnchor, NSObject);
   // instance members (proto)
-  JS_PROTO_METHOD(constraintEqualToAnchor);
-  JS_PROTO_METHOD(constraintGreaterThanOrEqualToAnchor);
-  JS_PROTO_METHOD(constraintLessThanOrEqualToAnchor);
-  JS_PROTO_METHOD(constraintEqualToAnchorConstant);
-  JS_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorConstant);
-  JS_PROTO_METHOD(constraintLessThanOrEqualToAnchorConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintEqualToAnchor);
+  JS_ASSIGN_PROTO_METHOD(constraintGreaterThanOrEqualToAnchor);
+  JS_ASSIGN_PROTO_METHOD(constraintLessThanOrEqualToAnchor);
+  JS_ASSIGN_PROTO_METHOD(constraintEqualToAnchorConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintGreaterThanOrEqualToAnchorConstant);
+  JS_ASSIGN_PROTO_METHOD(constraintLessThanOrEqualToAnchorConstant);
   // static members (ctor)
   JS_INIT_CTOR(NSLayoutAnchor, NSObject);
 JS_INIT_CLASS_END(NSLayoutAnchor, NSObject);

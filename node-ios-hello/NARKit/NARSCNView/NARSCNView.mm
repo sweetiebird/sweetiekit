@@ -21,11 +21,11 @@ NARSCNView::~NARSCNView () {}
 
 JS_INIT_CLASS(ARSCNView, SCNView);
   // instance members (proto)
-  JS_PROTO_METHOD(presentScene);
-  JS_PROTO_METHOD(anchorForNode);
-  JS_PROTO_METHOD(nodeForAnchor);
-  JS_PROTO_METHOD(hitTest);
-  JS_PROTO_METHOD(unprojectPointOntoPlaneWithTransform);
+  JS_ASSIGN_PROTO_METHOD(presentScene);
+  JS_ASSIGN_PROTO_METHOD(anchorForNode);
+  JS_ASSIGN_PROTO_METHOD(nodeForAnchor);
+  JS_ASSIGN_PROTO_METHOD(hitTest);
+  JS_ASSIGN_PROTO_METHOD(unprojectPointOntoPlaneWithTransform);
   JS_ASSIGN_PROP_READONLY(proto, session);
   JS_ASSIGN_PROP(proto, delegate);
   JS_ASSIGN_PROP(proto, scene);

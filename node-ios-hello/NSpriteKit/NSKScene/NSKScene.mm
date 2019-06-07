@@ -11,8 +11,8 @@ NSKScene::~NSKScene() {}
 
 JS_INIT_CLASS(SKScene, SKNode);
   // instance members (proto)
-  JS_PROTO_METHOD(convertPointFromView);
-  JS_PROTO_METHOD(convertPointToView);
+  JS_ASSIGN_PROTO_METHOD(convertPointFromView);
+  JS_ASSIGN_PROTO_METHOD(convertPointToView);
   JS_ASSIGN_PROP(proto, touchesBegan);
   JS_ASSIGN_PROP(proto, touchesMoved);
   JS_ASSIGN_PROP(proto, touchesEnded);

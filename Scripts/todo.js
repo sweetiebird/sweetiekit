@@ -415,7 +415,7 @@ class MyApp {
   }
 
   setupDefaults() {
-    this.defaults = new NSUserDefaults();
+    this.defaults = NSUserDefaults.standardUserDefaults;
 
     const existingTodos = this.defaults.stringForKey('TODOS');
     if (existingTodos) {
@@ -553,7 +553,7 @@ class CollectionApp {
   }
 
   setupDefaults() {
-    this.defaults = new NSUserDefaults();
+    this.defaults = NSUserDefaults.standardUserDefaults;
 
     const existingItems = this.defaults.stringForKey('ITEMS');
     if (existingItems) {

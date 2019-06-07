@@ -11,9 +11,9 @@ NUIWindow::~NUIWindow() {}
 
 JS_INIT_CLASS(UIWindow, UIView);
   // instance members (proto)
-  JS_PROTO_METHOD(setRootViewController);
-  JS_PROTO_METHOD(makeKeyAndVisible);
-  JS_PROTO_PROP(rootViewController);
+  JS_ASSIGN_PROTO_METHOD(setRootViewController);
+  JS_ASSIGN_PROTO_METHOD(makeKeyAndVisible);
+  JS_ASSIGN_PROTO_PROP(rootViewController);
   // static members (ctor)
   JS_INIT_CTOR(UIWindow, UIView);
 JS_INIT_CLASS_END(UIWindow, UIView);

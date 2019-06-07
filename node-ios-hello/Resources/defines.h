@@ -52,6 +52,9 @@ using namespace v8;
     Nan::ThrowError(js_panic_msg); \
     return; \
   }
+  
+#define js_panic_deprecated() \
+    JS_PANIC("deprecated");
 
 template <typename T>
 class shared_ptr_release_deleter {
@@ -129,6 +132,13 @@ using namespace node;
 #define JS_PROP_READONLY(name) \
   JS_PROP(name)
 
+#define JS_STATIC_PROP(name) \
+  static NAN_GETTER(name##Getter); \
+  static NAN_SETTER(name##Setter)
+  
+#define JS_STATIC_PROP_READONLY(name) \
+  JS_PROP(name)
+
 #define JS_METHOD(name) \
   static NAN_METHOD(name)
 
@@ -171,9 +181,13 @@ using namespace node;
 #define JS_ASSIGN_METHOD(proto, jsName) \
   Nan::SetMethod(proto, #jsName, jsName)
 
-#define JS_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
-#define JS_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
-#define JS_PROTO_METHOD(jsName)         Nan::SetMethod(proto, #jsName, jsName)
+#define JS_ASSIGN_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
+#define JS_ASSIGN_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
+#define JS_ASSIGN_PROTO_METHOD(jsName)         JS_ASSIGN_METHOD(proto, jsName)
+
+#define JS_ASSIGN_STATIC_PROP(jsName)           JS_ASSIGN_PROP(JS_OBJ(ctor), jsName)
+#define JS_ASSIGN_STATIC_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), jsName)
+#define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
 
 #define JS_GETTER(ElType, el, jsName, ...) \
 NAN_GETTER(N##ElType::jsName##Getter) { \
@@ -918,6 +932,10 @@ Local<Value> js_value_id(id _Nullable value);
 id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_id(Local<Value> value);
 
+Local<Value> js_value_NSNumber(NSNumber* _Nullable value);
+NSNumber* _Nullable to_value_NSNumber(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_NSNumber(Local<Value> value);
+
 Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable value);
 NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict, bool* _Nullable failed = nullptr);
 bool is_value_NSMutableDictionary(Local<Value> value);
@@ -933,6 +951,10 @@ bool is_value_NSMutableSet(Local<Value> value);
 Local<Value> js_value_NSSet(NSSet* _Nullable value);
 NSSet* _Nullable to_value_NSSet(Local<Value> dict, bool* _Nullable failed = nullptr);
 bool is_value_NSSet(Local<Value> value);
+
+Local<Value> js_value_NSArray(NSArray* _Nullable value);
+NSArray* _Nullable to_value_NSArray(Local<Value> dict, bool* _Nullable failed = nullptr);
+bool is_value_NSArray(Local<Value> value);
 
 template<typename T>
 Local<Value> js_value_id(T* _Nullable value) {
@@ -1118,6 +1140,13 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+// Foundation
+#define js_panic_NSError(error) \
+    if (error) { \
+      Nan::ThrowError([[error localizedDescription] UTF8String]); \
+      return; \
+    }
 
 // CoreGraphics types
 
