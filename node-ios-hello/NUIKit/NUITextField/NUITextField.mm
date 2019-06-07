@@ -30,6 +30,16 @@ JS_INIT_CLASS(UITextField, UIControl);
   JS_ASSIGN_PROP(proto, rightView);
   JS_ASSIGN_PROP(proto, leftViewMode);
   JS_ASSIGN_PROP(proto, rightViewMode);
+  
+  JS_ASSIGN_METHOD(proto, borderRectForBounds);
+  JS_ASSIGN_METHOD(proto, textRectForBounds);
+  JS_ASSIGN_METHOD(proto, placeholderRectForBounds);
+  JS_ASSIGN_METHOD(proto, editingRectForBounds);
+  JS_ASSIGN_METHOD(proto, clearButtonRectForBounds);
+  JS_ASSIGN_METHOD(proto, leftViewRectForBounds);
+  JS_ASSIGN_METHOD(proto, rightViewRectForBounds);
+  JS_ASSIGN_METHOD(proto, drawTextInRect);
+  JS_ASSIGN_METHOD(proto, drawPlaceholderInRect);
 
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
@@ -389,3 +399,85 @@ NAN_SETTER(NUITextField::leftViewModeSetter) {
     [self setLeftViewMode:mode];
   }
 }
+
+NAN_METHOD(NUITextField::borderRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self borderRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::textRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self textRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::placeholderRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self placeholderRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::editingRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self editingRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::clearButtonRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self clearButtonRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::leftViewRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self leftViewRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::rightViewRectForBounds) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self rightViewRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUITextField::drawTextInRect) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    [self drawTextInRect: rect];
+  }
+}
+
+NAN_METHOD(NUITextField::drawPlaceholderInRect) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    [self drawPlaceholderInRect: rect];
+  }
+}
+

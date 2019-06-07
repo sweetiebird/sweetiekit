@@ -28,6 +28,17 @@ JS_WRAP_CLASS(UITextField, UIControl);
   JS_PROP(rightView);
   JS_PROP(leftViewMode);
   JS_PROP(rightViewMode);
+  
+  JS_METHOD(borderRectForBounds);
+  JS_METHOD(textRectForBounds);
+  JS_METHOD(placeholderRectForBounds);
+  JS_METHOD(editingRectForBounds);
+  JS_METHOD(clearButtonRectForBounds);
+  JS_METHOD(leftViewRectForBounds);
+  JS_METHOD(rightViewRectForBounds);
+  JS_METHOD(drawTextInRect);
+  JS_METHOD(drawPlaceholderInRect);
+
   Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 
