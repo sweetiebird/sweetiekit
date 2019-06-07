@@ -20,8 +20,23 @@ JS_WRAP_CLASS(UINavigationController, UIViewController);
   JS_METHOD(PopViewController);
   JS_METHOD(PopToRootViewController);
   JS_METHOD(PopToViewController);
-  JS_PROP(IsToolbarHidden);
-  JS_PROP(navigationBar);
+  
+  JS_PROP_READONLY(topViewController);
+  JS_PROP_READONLY(visibleViewController);
+  JS_PROP(viewControllers);
+  JS_PROP(navigationBarHidden);
+  JS_PROP_READONLY(navigationBar);
+  JS_PROP(toolbarHidden);
+  JS_PROP_READONLY(toolbar);
+  JS_PROP(delegate);
+  JS_PROP_READONLY(interactivePopGestureRecognizer);
+  JS_PROP(hidesBarsWhenKeyboardAppears);
+  JS_PROP(hidesBarsOnSwipe);
+  JS_PROP_READONLY(barHideOnSwipeGestureRecognizer);
+  JS_PROP(hidesBarsWhenVerticallyCompact);
+  JS_PROP(hidesBarsOnTap);
+  JS_PROP_READONLY(barHideOnTapGestureRecognizer);
+
 JS_WRAP_CLASS_END(UINavigationController);
 
 #endif /* NUINavigationController_h */
