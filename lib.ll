@@ -150,8 +150,9 @@
       (let spec `(,name ,@args)
         (add forms `(declare-args))
         (step (dispatch-name arg-type arg-name) (tuples spec 3)
-         ;(print (str (list dispatch-name arg-type arg-name)))
-           (add forms (js-declare-arg arg-type arg-name)))))))
+           (unless (= dispatch-name "...")
+             ;(print (str (list dispatch-name arg-type arg-name)))
+             (add forms (js-declare-arg arg-type arg-name))))))))
 
 (define-macro js-define-method (self-type self name args static: static? rest: body)
   `(nan-method (js-wrapper ,self-type ,(objc-method-name name args))
