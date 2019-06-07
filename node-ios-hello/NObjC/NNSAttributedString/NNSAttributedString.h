@@ -19,6 +19,10 @@
 #define to_value_NSAttributedStringEnumerationOptions(x) to_opts_wrapper(x, NSAttributedStringEnumerationOptions)
 #define is_value_NSAttributedStringEnumerationOptions(x) is_opts_wrapper(x, NSAttributedStringEnumerationOptions)
 
+#define js_value_NSAttributedStringKey(x) js_enum_string_wrapper(x, NSAttributedStringKey)
+#define to_value_NSAttributedStringKey(x) to_enum_string_wrapper(x, NSAttributedStringKey)
+#define is_value_NSAttributedStringKey(x) is_enum_string_wrapper(x, NSAttributedStringKey)
+
 JS_WRAP_CLASS(NSAttributedString, NSObject);
   JS_METHOD(attributesAtIndexEffectiveRange);
   JS_METHOD(attributeAtIndexEffectiveRange);
