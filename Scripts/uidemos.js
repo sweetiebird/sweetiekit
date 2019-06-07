@@ -212,12 +212,12 @@ class UIDemosApp {
       const type = appDemoNames[row];
       if (appDemos[type]) {
         this.createDemoVC();
-        gc();
+        // gc();
         // if (appDemos[type].lazy) {
         //   appDemos[type] = await appDemos[type]();
         // }
         await appDemos[type](this.nav, this.demoVC);
-        gc();
+        // gc();
       }
     }
   }
