@@ -57,6 +57,11 @@
 		A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */; };
 		A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF822A6702400FA3768 /* NUILayoutGuide.mm */; };
 		A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */; };
+		A133700122AA805100FA3768 /* NUIToolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FFF22AA805100FA3768 /* NUIToolbar.mm */; };
+		A133700522AAA5F200FA3768 /* NUITraitCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700322AAA5F200FA3768 /* NUITraitCollection.mm */; };
+		A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700822AAA8FF00FA3768 /* NUIGraphicsRendererFormat.mm */; };
+		A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */; };
+		A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -356,6 +361,16 @@
 		A1336FF822A6702400FA3768 /* NUILayoutGuide.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILayoutGuide.mm; sourceTree = "<group>"; };
 		A1336FFB22A673C900FA3768 /* NUIMotionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIMotionEffect.h; sourceTree = "<group>"; };
 		A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIMotionEffect.mm; sourceTree = "<group>"; };
+		A1336FFF22AA805100FA3768 /* NUIToolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIToolbar.mm; sourceTree = "<group>"; };
+		A133700022AA805100FA3768 /* NUIToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIToolbar.h; sourceTree = "<group>"; };
+		A133700322AAA5F200FA3768 /* NUITraitCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITraitCollection.mm; sourceTree = "<group>"; };
+		A133700422AAA5F200FA3768 /* NUITraitCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITraitCollection.h; sourceTree = "<group>"; };
+		A133700722AAA8FF00FA3768 /* NUIGraphicsRendererFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIGraphicsRendererFormat.h; sourceTree = "<group>"; };
+		A133700822AAA8FF00FA3768 /* NUIGraphicsRendererFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGraphicsRendererFormat.mm; sourceTree = "<group>"; };
+		A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImageAsset.mm; sourceTree = "<group>"; };
+		A133700B22AAA8FF00FA3768 /* NUIImageAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIImageAsset.h; sourceTree = "<group>"; };
+		A133700D22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIGraphicsImageRendererFormat.h; sourceTree = "<group>"; };
+		A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGraphicsImageRendererFormat.mm; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -996,6 +1011,51 @@
 				A1336FFC22A673C900FA3768 /* NUIMotionEffect.mm */,
 			);
 			path = NUIMotionEffect;
+			sourceTree = "<group>";
+		};
+		A1336FFE22AA805100FA3768 /* NUIToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				A133700022AA805100FA3768 /* NUIToolbar.h */,
+				A1336FFF22AA805100FA3768 /* NUIToolbar.mm */,
+			);
+			path = NUIToolbar;
+			sourceTree = "<group>";
+		};
+		A133700222AAA5F200FA3768 /* NUITraitCollection */ = {
+			isa = PBXGroup;
+			children = (
+				A133700422AAA5F200FA3768 /* NUITraitCollection.h */,
+				A133700322AAA5F200FA3768 /* NUITraitCollection.mm */,
+			);
+			path = NUITraitCollection;
+			sourceTree = "<group>";
+		};
+		A133700622AAA8FF00FA3768 /* NUIGraphicsRendererFormat */ = {
+			isa = PBXGroup;
+			children = (
+				A133700722AAA8FF00FA3768 /* NUIGraphicsRendererFormat.h */,
+				A133700822AAA8FF00FA3768 /* NUIGraphicsRendererFormat.mm */,
+			);
+			path = NUIGraphicsRendererFormat;
+			sourceTree = "<group>";
+		};
+		A133700922AAA8FF00FA3768 /* NUIImageAsset */ = {
+			isa = PBXGroup;
+			children = (
+				A133700A22AAA8FF00FA3768 /* NUIImageAsset.mm */,
+				A133700B22AAA8FF00FA3768 /* NUIImageAsset.h */,
+			);
+			path = NUIImageAsset;
+			sourceTree = "<group>";
+		};
+		A133700C22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat */ = {
+			isa = PBXGroup;
+			children = (
+				A133700D22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.h */,
+				A133700E22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat.mm */,
+			);
+			path = NUIGraphicsImageRendererFormat;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -2019,6 +2079,11 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A133700C22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat */,
+				A133700622AAA8FF00FA3768 /* NUIGraphicsRendererFormat */,
+				A133700922AAA8FF00FA3768 /* NUIImageAsset */,
+				A133700222AAA5F200FA3768 /* NUITraitCollection */,
+				A1336FFE22AA805100FA3768 /* NUIToolbar */,
 				A1336FFA22A673C900FA3768 /* NUIMotionEffect */,
 				A1336FF622A6702400FA3768 /* NUILayoutGuide */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
@@ -2670,6 +2735,7 @@
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
+				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
@@ -2717,6 +2783,7 @@
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
+				A133700522AAA5F200FA3768 /* NUITraitCollection.mm in Sources */,
 				A1EE7D9122A428D6002B53FF /* NSCNCameraController.mm in Sources */,
 				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A1CE2B57228E808200D9B3B8 /* UIImageView+NGif.swift in Sources */,
@@ -2724,6 +2791,7 @@
 				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
+				A133700122AA805100FA3768 /* NUIToolbar.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
@@ -2784,6 +2852,7 @@
 				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
+				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
@@ -2827,6 +2896,7 @@
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
+				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,

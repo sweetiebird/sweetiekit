@@ -666,12 +666,18 @@ NAN_METHOD(NClass::New) {
 #include "NUIButton.h"
 #include "NUIRefreshControl.h"
 #include "NUISwitch.h"
+#include "NUIGraphicsRendererFormat.h"
+#include "NUIGraphicsImageRendererFormat.h"
+#include "NUIImageAsset.h"
+#include "NUITraitCollection.h"
+#include "NUIToolbar.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUITextField.h"
 #include "NUIStoryboard.h"
 #include "NUITabBarController.h"
 #include "NUITabBarItem.h"
+#include "NUIBarButtonItem.h"
 #include "NUITabBar.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
@@ -851,6 +857,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIStoryboard);
     JS_EXPORT_TYPE(UIButton);
     JS_EXPORT_TYPE(UITextField);
+    
+    JS_EXPORT_TYPE(UIGraphicsRendererFormat);
+    JS_EXPORT_TYPE(UIGraphicsImageRendererFormat);
+    JS_EXPORT_TYPE(UIImageAsset);
+    JS_EXPORT_TYPE(UITraitCollection);
+    JS_EXPORT_TYPE(UIToolbar);
+    
     JS_EXPORT_TYPE(UIImage);
     JS_EXPORT_TYPE(UIImageView);
     JS_EXPORT_TYPE(UIFont);
@@ -1131,6 +1144,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UILabel);
       JS_RETURN_TYPE(UIFont);
       JS_RETURN_TYPE(UIButton);
+    
+      JS_RETURN_TYPE(UIToolbar);
+      JS_RETURN_TYPE(UITraitCollection);
+      JS_RETURN_TYPE(UIImageAsset);
+      JS_RETURN_TYPE(UIGraphicsImageRendererFormat);
+      JS_RETURN_TYPE(UIGraphicsRendererFormat);
+      
       JS_RETURN_TYPE(UIImage);
       JS_RETURN_TYPE(UIImageView);
       JS_RETURN_TYPE(UIStoryboard);

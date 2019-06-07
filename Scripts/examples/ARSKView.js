@@ -177,7 +177,7 @@ function getCapturedImage(arView) {
     const ciImg = arView.session.currentFrame.capturedImage;
     const xformedImg = ciImg.imageByApplyingTransform(xFormMatrix);
     console.log(xformedImg);
-    const uiImg = UIImage.initWithCIImage(xformedImg, 1, orientation);
+    const uiImg = UIImage.initWithCIImageScaleOrientation(xformedImg, 1, orientation);
     console.log(ciImg, xformedImg, uiImg);
     const ssView = UIImageView(uiImg);
     ssView.frame = { x: 0, y: 0, width: arView.frame.width, height: arView.frame.height };
