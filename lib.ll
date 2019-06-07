@@ -565,6 +565,7 @@
        MK (return 'MapKit)
        UI (return 'UIKit)
        NS (return 'Foundation)
+       WK (return 'WebKit)
        )))
   (error (cat "Unknown type " type)))
 

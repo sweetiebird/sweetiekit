@@ -741,6 +741,10 @@ NAN_METHOD(NClass::New) {
 #include "NARSKViewDelegate.h"
 #include "NNSCoder.h"
 #include "NNSURL.h"
+#include "NNSURLRequest.h"
+#include "NNSMutableURLRequest.h"
+#include "NNSStream.h"
+#include "NNSInputStream.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARAnchor.h"
@@ -797,6 +801,7 @@ NAN_METHOD(NClass::New) {
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIImage.h"
+#include "NWKWebView.h"
 
 #define JS_EXPORT_TYPE_AS(type, name) \
         auto N_##type = N##type::Initialize(isolate, exports); \
@@ -813,6 +818,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
+    JS_EXPORT_TYPE(NSURLRequest);
+    JS_EXPORT_TYPE(NSMutableURLRequest);
+    JS_EXPORT_TYPE(NSStream);
+    JS_EXPORT_TYPE(NSInputStream);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
     JS_EXPORT_TYPE(NSParagraphStyle);
@@ -887,9 +896,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
     JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
-    
-    // Core Graphics
-    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
 
     // UIKit delegates
     JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
@@ -900,6 +906,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
+    
+    // WebKit
+    JS_EXPORT_TYPE(WKWebView);
+    
+    // Core Graphics
+    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     
     // AVFoundation
     JS_EXPORT_TYPE(AVAudioPlayer);
@@ -1117,6 +1129,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // AVFoundation
       
       JS_RETURN_TYPE(AVAudioPlayer);
+      
+      // WebKit
+      JS_RETURN_TYPE(WKWebView);
 
       // UIKit
       
@@ -1211,6 +1226,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSMutableParagraphStyle);
       JS_RETURN_TYPE(NSParagraphStyle);
       JS_RETURN_TYPE(NSBundle);
+      JS_RETURN_TYPE(NSInputStream);
+      JS_RETURN_TYPE(NSStream);
+      JS_RETURN_TYPE(NSMutableURLRequest);
+      JS_RETURN_TYPE(NSURLRequest);
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
