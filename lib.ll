@@ -422,8 +422,8 @@
       ctor
       (js-print-type class
         `(%indent ,(if readonly?
-            `(JS_ASSIGN_PROP_READONLY proto ,getter)
-            `(JS_ASSIGN_PROP          proto ,getter))))
+            `(JS_ASSIGN_PROTO_PROP_READONLY ,getter)
+            `(JS_ASSIGN_PROTO_PROP          ,getter))))
       source
       `(do (js-type-getter ,class ,type ,getter)
          ,(unless readonly?
@@ -444,8 +444,8 @@
       (js-print-type class
         (let name (objc-method-name name args static: static?)
           `(%indent ,(if static?
-              `(JS_ASSIGN_METHOD ctor ,name)
-              `(JS_ASSIGN_METHOD proto ,name)))))
+              `(JS_ASSIGN_STATIC_METHOD ,name)
+              `(JS_ASSIGN_PROTO_METHOD ,name)))))
       source
       `(js-type-method ,class ,type ,name ,args static: ,static?))))
 
