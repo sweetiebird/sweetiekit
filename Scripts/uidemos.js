@@ -109,6 +109,8 @@ const appDemoNames = Object.keys(appDemos).sort();
 const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames, appDemoNames];
 const allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demos'];
 
+global.SweetieKitEnums = require('./examples/enums');
+
 class UIDemosApp {
   constructor(app) {
     this.app = app;
@@ -211,9 +213,9 @@ class UIDemosApp {
       if (appDemos[type]) {
         this.createDemoVC();
         gc();
-        if (appDemos[type].lazy) {
-          appDemos[type] = await appDemos[type]();
-        }
+        // if (appDemos[type].lazy) {
+        //   appDemos[type] = await appDemos[type]();
+        // }
         await appDemos[type](this.nav, this.demoVC);
         gc();
       }
