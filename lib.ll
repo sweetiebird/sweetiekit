@@ -317,12 +317,12 @@
     `(js-getter ,self-type self ,name
        ,(js-return-body return-type body))))
 
-(define-macro js-type-setter (self-type input-type name)
+(define-macro js-type-setter (self-type input-type name (o setter name))
   (let input-type (expand input-type)
     `(js-setter ,self-type self ,name
        (declare-setter)
        ,(js-declare-arg input-type "input")
-       [self ,(cat ":set-" name) input])))
+       [self ,(cat ":set-" setter) input])))
 
 (during-compilation
   (define-global js-gen-method-part (name)
@@ -400,23 +400,27 @@
                   ,form)))))
 
 
-(define-macro js-property (name: name type: type class: (o class (getenv 'Class 'type)) readonly: readonly?)
+(define-macro js-property (name: name type: type class: (o class (getenv 'Class 'type)) readonly: readonly? getter: getter setter: setter)
+  (unless getter
+    (set getter name))
+  (unless setter
+    (set setter name))
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
       header
       (js-print-type class 
         `(%indent ,(if readonly?
-          `(JS_PROP_READONLY ,name)
-          `(JS_PROP ,name))))
+          `(JS_PROP_READONLY ,getter)
+          `(JS_PROP ,getter))))
       ctor
       (js-print-type class
         `(%indent ,(if readonly?
-            `(JS_ASSIGN_PROP_READONLY proto ,name)
-            `(JS_ASSIGN_PROP          proto ,name))))
+            `(JS_ASSIGN_PROP_READONLY proto ,getter)
+            `(JS_ASSIGN_PROP          proto ,getter))))
       source
-      `(do (js-type-getter ,class ,type ,name)
+      `(do (js-type-getter ,class ,type ,getter)
          ,(unless readonly?
-            `(js-type-setter ,class ,type ,name))))))
+            `(js-type-setter ,class ,type ,getter ,setter))))))
 
 (define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
   (when (str-starts? name "init")
