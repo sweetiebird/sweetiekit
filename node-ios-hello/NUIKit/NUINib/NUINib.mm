@@ -15,44 +15,43 @@ NUINib::~NUINib() {}
 JS_INIT_CLASS(UINib, NSObject);
   // instance members (proto)
   JS_ASSIGN_PROTO_METHOD(instantiateWithOwnerOptions);
+  JS_ASSIGN_PROTO_METHOD_AS(instantiateWithOwnerOptions, "instantiate");
   // static members (ctor)
   JS_INIT_CTOR(UINib, NSObject);
   JS_ASSIGN_STATIC_METHOD(nibWithNibNameBundle);
   JS_ASSIGN_STATIC_METHOD(nibWithDataBundle);
 JS_INIT_CLASS_END(UINib, NSObject);
 
+#include "NNSBundle.h"
+
 NAN_METHOD(NUINib::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> obj = info.This();
-
-  NUINib *nib = new NUINib();
-
-  if (info[0]->IsExternal()) {
-    nib->SetNSObject((__bridge UINib *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    std::string name;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      name = *utf8Value;
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      JS_SET_RETURN_NEW(UINib, info);
+      return;
+    }
+    UINib* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UINib *)(info[0].As<External>()->Value());
+    } else if (is_value_NSString(info[0])) {
+      declare_args();
+      declare_pointer(NSString, name);
+      declare_nullable_pointer(NSBundle, bundle);
+      self = [UINib nibWithNibName:name bundle:bundle];
+    } else if (info.Length() <= 0) {
+      self = [[UINib alloc] init];
+    }
+    if (self) {
+      NUINib *wrapper = new NUINib();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
     } else {
-      Nan::ThrowError("invalid argument");
-    }
-    @autoreleasepool {
-      NSString *nibName = [NSString stringWithUTF8String:name.c_str()];
-      nib->SetNSObject([UINib nibWithNibName:nibName bundle:nullptr]);
-    }
-  } else {
-    @autoreleasepool {
-      nib->SetNSObject([[UINib alloc] init]);
+      Nan::ThrowError("NUINib::New: invalid arguments");
     }
   }
-  nib->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
-
-#include "NNSBundle.h"
 
 NAN_METHOD(NUINib::nibWithNibNameBundle) {
   declare_autoreleasepool {

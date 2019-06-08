@@ -214,17 +214,16 @@ NAN_METHOD(NNSAttributedString::enumerateAttributesInRangeOptionsUsingBlock) {
     declare_args();
     declare_value(NSRange, enumerationRange);
     declare_value(NSAttributedStringEnumerationOptions, opts);
-    
-    if (!is_value_JSFunction(info[JS_ARGC]))
-      JS_PANIC("Expected arg[%u] to be a callback function", JS_ARGC);
-    sweetiekit::JSFunction fn(info[JS_ARGC++]);
+    declare_value(NJSFunction, fn);
     sweetiekit::JSEnumerateShouldStop shouldStop(JS_PRETTY_METHOD_NAME);
     
     auto block = ^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-      fn(JS_PRETTY_METHOD_NAME, js_value_id(value), js_value_NSRange(range), shouldStop);
-      if (shouldStop) {
-        *stop = true;
-      }
+      dispatch_main(^{
+        fn(JS_PRETTY_METHOD_NAME, js_value_id(value), js_value_NSRange(range), shouldStop);
+        if (shouldStop) {
+          *stop = true;
+        }
+      });
     };
     
     JS_SET_RETURN(js_value_void(
@@ -241,17 +240,16 @@ NAN_METHOD(NNSAttributedString::enumerateAttributeInRangeOptionsUsingBlock) {
     declare_pointer(NSString, attrName);
     declare_value(NSRange, enumerationRange);
     declare_value(NSAttributedStringEnumerationOptions, opts);
-    
-    if (!is_value_JSFunction(info[JS_ARGC]))
-      JS_PANIC("Expected arg[%u] to be a callback function", JS_ARGC);
-    sweetiekit::JSFunction fn(info[JS_ARGC++]);
+    declare_value(NJSFunction, fn);
     sweetiekit::JSEnumerateShouldStop shouldStop(JS_PRETTY_METHOD_NAME);
     
     auto block = ^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-      fn(JS_PRETTY_METHOD_NAME, js_value_id(value), js_value_NSRange(range), shouldStop);
-      if (shouldStop) {
-        *stop = true;
-      }
+      dispatch_main(^{
+        fn(JS_PRETTY_METHOD_NAME, js_value_id(value), js_value_NSRange(range), shouldStop);
+        if (shouldStop) {
+          *stop = true;
+        }
+      });
     };
     
     JS_SET_RETURN(js_value_void(

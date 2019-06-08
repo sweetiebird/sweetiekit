@@ -482,6 +482,7 @@ namespace sweetiekit {
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
   };
+  typedef JSFunction NJSFunction;
 }
 
 namespace sweetiekit {
@@ -730,8 +731,10 @@ namespace sweetiekit
     }
   }
 }
-  
-#define is_value_JSFunction(x) (x)->IsFunction()
+
+using sweetiekit::NJSFunction;
+#define is_value_NJSFunction(x) (x)->IsFunction()
+#define to_value_NJSFunction(x) (x)
 
 #define js_value_void(...) (__VA_ARGS__, Nan::Undefined())
 
@@ -1098,13 +1101,13 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
-  type name(to_value_##type(info[name##_argument_index]));
+  type name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
   
 #define declare_nullable_pointer_(index, type, name) \
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
-  type* name(to_value_##type(info[name##_argument_index]));
+  type* name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
 
 #define declare_value_pointer_(index, type, name) \
   auto name##_argument_index(index); \
@@ -1151,6 +1154,9 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define declare_error() \
   NSError* error = nullptr
   
+#define declare_callback_function(name) \
+  sweetiekit::JSFunction name(info[JS_ARGC++]);
+  
 #define check_error() \
   js_panic_NSError(error)
   
@@ -1160,6 +1166,8 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
       Nan::ThrowError([[error localizedDescription] UTF8String]); \
       return; \
     }
+    
+
 
 // CoreGraphics types
 

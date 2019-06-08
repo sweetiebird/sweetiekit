@@ -351,14 +351,37 @@ namespace sweetiekit
           return [wrapper toJS];
         }
       }
+      Local<Value> result(Nan::Undefined());
       Nan::EscapableHandleScope scope;
+      Isolate* isolate(Isolate::GetCurrent());
+      Local<Context> context(isolate->GetCurrentContext());
+      Nan::Persistent<FunctionTemplate>& type(NNSObject::GetNSObjectType(pThing, defaultType));
+      Local<FunctionTemplate> fnTemplate(Nan::New(type));
+      MaybeLocal<Function> ctorMaybe(fnTemplate->GetFunction(context));
+      if (ctorMaybe.IsEmpty()) {
+        iOSLog0("GetWrapperFor failed to get constructor");
+        return scope.Escape(result);
+      }
+      auto ctor(ctorMaybe.ToLocalChecked());
       Local<Value> argv[] = {
         Nan::New<v8::External>((__bridge void*)pThing)
       };
-      auto result(JS_FUNC(Nan::New(NNSObject::GetNSObjectType(pThing, defaultType)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
+      MaybeLocal<Object> inst(ctor->NewInstance(context, sizeof(argv)/sizeof(argv[0]), argv));
+      if (!inst.IsEmpty()) {
+        result = Local<Value>::Cast(inst.ToLocalChecked());
+      } else {
+        iOSLog0("GetWrapperFor failed to get instance");
+        MaybeLocal<Object> inst(JS_FUNC(defaultType.Get(isolate))->NewInstance(context, sizeof(argv)/sizeof(argv[0]), argv));
+        if (!inst.IsEmpty()) {
+          result = Local<Value>::Cast(inst.ToLocalChecked());
+        } else {
+          iOSLog0("GetWrapperFor failed to get default instance");
+          return scope.Escape(result);
+        }
+      }
       if (wrappers) {
         NJSValue* wrapper = [[NJSValue alloc] initWithValue:result];
-        [wrappers setJSWrapperForObject:pThing wrapper:wrapper inContext:JS_ISOLATE()];
+        [wrappers setJSWrapperForObject:pThing wrapper:wrapper inContext:isolate];
       }
       return scope.Escape(result);
     }
