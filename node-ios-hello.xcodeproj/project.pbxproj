@@ -69,6 +69,7 @@
 		A133702622AAEF2400FA3768 /* NNSMutableURLRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133702422AAEF2400FA3768 /* NNSMutableURLRequest.mm */; };
 		A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133702922AAF29C00FA3768 /* NNSStream.mm */; };
 		A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133702B22AAF29C00FA3768 /* NNSInputStream.mm */; };
+		A133708022AB34E600FA3768 /* NNSCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133707E22AB34E600FA3768 /* NNSCache.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -392,6 +393,8 @@
 		A133702922AAF29C00FA3768 /* NNSStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSStream.mm; sourceTree = "<group>"; };
 		A133702B22AAF29C00FA3768 /* NNSInputStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSInputStream.mm; sourceTree = "<group>"; };
 		A133702C22AAF29C00FA3768 /* NNSInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSInputStream.h; sourceTree = "<group>"; };
+		A133707E22AB34E600FA3768 /* NNSCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSCache.mm; sourceTree = "<group>"; };
+		A133707F22AB34E600FA3768 /* NNSCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSCache.h; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -1148,6 +1151,15 @@
 				A133702B22AAF29C00FA3768 /* NNSInputStream.mm */,
 			);
 			path = NNSInputStream;
+			sourceTree = "<group>";
+		};
+		A133707D22AB34E600FA3768 /* NNSCache */ = {
+			isa = PBXGroup;
+			children = (
+				A133707E22AB34E600FA3768 /* NNSCache.mm */,
+				A133707F22AB34E600FA3768 /* NNSCache.h */,
+			);
+			path = NNSCache;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -2359,20 +2371,21 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
-				A133702A22AAF29C00FA3768 /* NNSInputStream */,
-				A133702722AAF29C00FA3768 /* NNSStream */,
-				A133702322AAEF2400FA3768 /* NNSMutableURLRequest */,
-				A133701F22AAE76E00FA3768 /* NNSURLRequest */,
-				A133701622AACEC700FA3768 /* NNSURL */,
-				A133701222AAAF9500FA3768 /* NNSCoder */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
+				A133707D22AB34E600FA3768 /* NNSCache */,
+				A133701222AAAF9500FA3768 /* NNSCoder */,
+				A133702A22AAF29C00FA3768 /* NNSInputStream */,
 				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
 				A1CE2B72228EB96000D9B3B8 /* NNSMutableParagraphStyle */,
+				A133702322AAEF2400FA3768 /* NNSMutableURLRequest */,
 				A10BD042228F490400184286 /* NNSNotification */,
 				A10BD03E228F483B00184286 /* NNSNotificationCenter */,
 				211E769E2269EF5E00B838AF /* NNSObject */,
 				A1CE2B75228EB96000D9B3B8 /* NNSParagraphStyle */,
+				A133702722AAF29C00FA3768 /* NNSStream */,
+				A133701622AACEC700FA3768 /* NNSURL */,
+				A133701F22AAE76E00FA3768 /* NNSURLRequest */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 			);
 			path = NObjC;
@@ -2902,6 +2915,7 @@
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
+				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,

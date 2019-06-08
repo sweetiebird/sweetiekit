@@ -746,6 +746,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSMutableURLRequest.h"
 #include "NNSStream.h"
 #include "NNSInputStream.h"
+#include "NNSCache.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NARAnchor.h"
@@ -823,6 +824,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSMutableURLRequest);
     JS_EXPORT_TYPE(NSStream);
     JS_EXPORT_TYPE(NSInputStream);
+    JS_EXPORT_TYPE(NSCache);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
     JS_EXPORT_TYPE(NSParagraphStyle);
@@ -1226,6 +1228,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSAttributedString);
       JS_RETURN_TYPE(NSMutableParagraphStyle);
       JS_RETURN_TYPE(NSParagraphStyle);
+      JS_RETURN_TYPE(NSCache);
       JS_RETURN_TYPE(NSBundle);
       JS_RETURN_TYPE(NSInputStream);
       JS_RETURN_TYPE(NSStream);
