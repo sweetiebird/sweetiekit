@@ -13,9 +13,9 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UIKitGlobals, NSObject);
-  JS_ASSIGN_METHOD(ctor, UIImageWriteToSavedPhotosAlbum);
-  JS_ASSIGN_METHOD(ctor, UIImageOrientation);
-  JS_ASSIGN_METHOD(ctor, UITextFieldViewMode);
+  JS_ASSIGN_STATIC_METHOD(UIImageWriteToSavedPhotosAlbum);
+  JS_ASSIGN_STATIC_PROP_READONLY(UIImageOrientation);
+  JS_ASSIGN_STATIC_PROP_READONLY(UITextFieldViewMode);
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
@@ -67,7 +67,7 @@ NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   [SUIKitGlobals uiImageWriteToSavedPhotosAlbumWithImage:img target:target selector:[target callbackSelector] contextInfo:nullptr];
 }
 
-NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
+NAN_GETTER(NUIKitGlobals::UIImageOrientationGetter) {
   Nan::HandleScope scope;
 
   Local<Object> result = Object::New(Isolate::GetCurrent());
@@ -84,7 +84,7 @@ NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
   JS_SET_RETURN(result);
 }
 
-NAN_METHOD(NUIKitGlobals::UITextFieldViewMode) {
+NAN_GETTER(NUIKitGlobals::UITextFieldViewModeGetter) {
   Nan::HandleScope scope;
 
   Local<Object> result = Object::New(Isolate::GetCurrent());

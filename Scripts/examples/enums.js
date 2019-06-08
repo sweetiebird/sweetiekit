@@ -248,4 +248,4 @@ module.exports.UIModalPresentationStyle = UIModalPresentationStyle;
 module.exports.UIPopoverArrowDirection = UIPopoverArrowDirection;
 module.exports.UITextAutocorrectionType = UITextAutocorrectionType;
 module.exports.UITextSpellCheckingType = UITextSpellCheckingType;
-module.exports.UIImageOrientation = UIKit.UIImageOrientation();
+module.exports.UIImageOrientation = UIKit.UIImageOrientation;
