@@ -70,6 +70,15 @@
 		A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133702922AAF29C00FA3768 /* NNSStream.mm */; };
 		A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133702B22AAF29C00FA3768 /* NNSInputStream.mm */; };
 		A133708022AB34E600FA3768 /* NNSCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133707E22AB34E600FA3768 /* NNSCache.mm */; };
+		A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133708422AB382200FA3768 /* NMPMusicPlayerController.mm */; };
+		A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133708822AB399D00FA3768 /* NMPMediaQuery.mm */; };
+		A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133708C22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm */; };
+		A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133708F22AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm */; };
+		A133709522AB418200FA3768 /* NNSError.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709422AB418200FA3768 /* NNSError.mm */; };
+		A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709822AB480400FA3768 /* NMPMediaPlaylist.mm */; };
+		A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709A22AB480400FA3768 /* NMPMediaItem.mm */; };
+		A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709E22AB480400FA3768 /* NMPMediaItemCollection.mm */; };
+		A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370A122AB480400FA3768 /* NMPMediaEntity.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -395,6 +404,24 @@
 		A133702C22AAF29C00FA3768 /* NNSInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSInputStream.h; sourceTree = "<group>"; };
 		A133707E22AB34E600FA3768 /* NNSCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSCache.mm; sourceTree = "<group>"; };
 		A133707F22AB34E600FA3768 /* NNSCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSCache.h; sourceTree = "<group>"; };
+		A133708322AB382200FA3768 /* NMPMusicPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMusicPlayerController.h; sourceTree = "<group>"; };
+		A133708422AB382200FA3768 /* NMPMusicPlayerController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMusicPlayerController.mm; sourceTree = "<group>"; };
+		A133708722AB399D00FA3768 /* NMPMediaQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaQuery.h; sourceTree = "<group>"; };
+		A133708822AB399D00FA3768 /* NMPMediaQuery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaQuery.mm; sourceTree = "<group>"; };
+		A133708B22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMusicPlayerQueueDescriptor.h; sourceTree = "<group>"; };
+		A133708C22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMusicPlayerQueueDescriptor.mm; sourceTree = "<group>"; };
+		A133708F22AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMusicPlayerApplicationController.mm; sourceTree = "<group>"; };
+		A133709022AB3F5100FA3768 /* NMPMusicPlayerApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMusicPlayerApplicationController.h; sourceTree = "<group>"; };
+		A133709322AB418200FA3768 /* NNSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSError.h; sourceTree = "<group>"; };
+		A133709422AB418200FA3768 /* NNSError.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSError.mm; sourceTree = "<group>"; };
+		A133709722AB480400FA3768 /* NMPMediaPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaPlaylist.h; sourceTree = "<group>"; };
+		A133709822AB480400FA3768 /* NMPMediaPlaylist.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaPlaylist.mm; sourceTree = "<group>"; };
+		A133709A22AB480400FA3768 /* NMPMediaItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaItem.mm; sourceTree = "<group>"; };
+		A133709B22AB480400FA3768 /* NMPMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaItem.h; sourceTree = "<group>"; };
+		A133709D22AB480400FA3768 /* NMPMediaItemCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaItemCollection.h; sourceTree = "<group>"; };
+		A133709E22AB480400FA3768 /* NMPMediaItemCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaItemCollection.mm; sourceTree = "<group>"; };
+		A13370A022AB480400FA3768 /* NMPMediaEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaEntity.h; sourceTree = "<group>"; };
+		A13370A122AB480400FA3768 /* NMPMediaEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaEntity.mm; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -1160,6 +1187,102 @@
 				A133707F22AB34E600FA3768 /* NNSCache.h */,
 			);
 			path = NNSCache;
+			sourceTree = "<group>";
+		};
+		A133708122AB382200FA3768 /* NMediaPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A133709F22AB480400FA3768 /* NMPMediaEntity */,
+				A133709922AB480400FA3768 /* NMPMediaItem */,
+				A133709C22AB480400FA3768 /* NMPMediaItemCollection */,
+				A133709622AB480400FA3768 /* NMPMediaPlaylist */,
+				A133708E22AB3F5100FA3768 /* NMPMusicPlayerApplicationController */,
+				A133708A22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor */,
+				A133708622AB399C00FA3768 /* NMPMediaQuery */,
+				A133708222AB382200FA3768 /* NMPMusicPlayerController */,
+			);
+			path = NMediaPlayer;
+			sourceTree = "<group>";
+		};
+		A133708222AB382200FA3768 /* NMPMusicPlayerController */ = {
+			isa = PBXGroup;
+			children = (
+				A133708322AB382200FA3768 /* NMPMusicPlayerController.h */,
+				A133708422AB382200FA3768 /* NMPMusicPlayerController.mm */,
+			);
+			path = NMPMusicPlayerController;
+			sourceTree = "<group>";
+		};
+		A133708622AB399C00FA3768 /* NMPMediaQuery */ = {
+			isa = PBXGroup;
+			children = (
+				A133708722AB399D00FA3768 /* NMPMediaQuery.h */,
+				A133708822AB399D00FA3768 /* NMPMediaQuery.mm */,
+			);
+			path = NMPMediaQuery;
+			sourceTree = "<group>";
+		};
+		A133708A22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor */ = {
+			isa = PBXGroup;
+			children = (
+				A133708B22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.h */,
+				A133708C22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm */,
+			);
+			path = NMPMusicPlayerQueueDescriptor;
+			sourceTree = "<group>";
+		};
+		A133708E22AB3F5100FA3768 /* NMPMusicPlayerApplicationController */ = {
+			isa = PBXGroup;
+			children = (
+				A133708F22AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm */,
+				A133709022AB3F5100FA3768 /* NMPMusicPlayerApplicationController.h */,
+			);
+			path = NMPMusicPlayerApplicationController;
+			sourceTree = "<group>";
+		};
+		A133709222AB418200FA3768 /* NNSError */ = {
+			isa = PBXGroup;
+			children = (
+				A133709322AB418200FA3768 /* NNSError.h */,
+				A133709422AB418200FA3768 /* NNSError.mm */,
+			);
+			path = NNSError;
+			sourceTree = "<group>";
+		};
+		A133709622AB480400FA3768 /* NMPMediaPlaylist */ = {
+			isa = PBXGroup;
+			children = (
+				A133709722AB480400FA3768 /* NMPMediaPlaylist.h */,
+				A133709822AB480400FA3768 /* NMPMediaPlaylist.mm */,
+			);
+			path = NMPMediaPlaylist;
+			sourceTree = "<group>";
+		};
+		A133709922AB480400FA3768 /* NMPMediaItem */ = {
+			isa = PBXGroup;
+			children = (
+				A133709A22AB480400FA3768 /* NMPMediaItem.mm */,
+				A133709B22AB480400FA3768 /* NMPMediaItem.h */,
+			);
+			path = NMPMediaItem;
+			sourceTree = "<group>";
+		};
+		A133709C22AB480400FA3768 /* NMPMediaItemCollection */ = {
+			isa = PBXGroup;
+			children = (
+				A133709D22AB480400FA3768 /* NMPMediaItemCollection.h */,
+				A133709E22AB480400FA3768 /* NMPMediaItemCollection.mm */,
+			);
+			path = NMPMediaItemCollection;
+			sourceTree = "<group>";
+		};
+		A133709F22AB480400FA3768 /* NMPMediaEntity */ = {
+			isa = PBXGroup;
+			children = (
+				A13370A022AB480400FA3768 /* NMPMediaEntity.h */,
+				A13370A122AB480400FA3768 /* NMPMediaEntity.mm */,
+			);
+			path = NMPMediaEntity;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -2371,6 +2494,7 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A133709222AB418200FA3768 /* NNSError */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A133707D22AB34E600FA3768 /* NNSCache */,
@@ -2612,6 +2736,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A133708122AB382200FA3768 /* NMediaPlayer */,
 				A1482A93229D4DAC001502C0 /* GameFiles */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
@@ -2842,6 +2967,8 @@
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
+				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
+				A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
@@ -2857,6 +2984,7 @@
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
+				A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
@@ -2894,6 +3022,7 @@
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
 				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
+				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
@@ -2932,6 +3061,7 @@
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
+				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
@@ -2953,6 +3083,7 @@
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
 				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
+				A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */,
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
@@ -2997,6 +3128,7 @@
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
@@ -3010,12 +3142,14 @@
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
+				A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */,
 				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */,
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
+				A133709522AB418200FA3768 /* NNSError.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,

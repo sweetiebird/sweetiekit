@@ -805,6 +805,15 @@ NAN_METHOD(NClass::New) {
 #include "NCIImage.h"
 #include "NWKWebView.h"
 
+#include "NMPMediaEntity.h"
+#include "NMPMediaItem.h"
+#include "NMPMediaItemCollection.h"
+#include "NMPMediaPlaylist.h"
+#include "NMPMediaQuery.h"
+#include "NMPMusicPlayerController.h"
+#include "NMPMusicPlayerApplicationController.h"
+#include "NMPMusicPlayerQueueDescriptor.h"
+
 #define JS_EXPORT_TYPE_AS(type, name) \
         auto N_##type = N##type::Initialize(isolate, exports); \
         exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
@@ -918,6 +927,16 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // AVFoundation
     JS_EXPORT_TYPE(AVAudioPlayer);
+    
+    // MediaPlayer
+    JS_EXPORT_TYPE(MPMediaEntity);
+    JS_EXPORT_TYPE(MPMediaItem);
+    JS_EXPORT_TYPE(MPMediaItemCollection);
+    JS_EXPORT_TYPE(MPMediaPlaylist);
+    JS_EXPORT_TYPE(MPMediaQuery);
+    JS_EXPORT_TYPE(MPMusicPlayerController);
+    JS_EXPORT_TYPE(MPMusicPlayerApplicationController);
+    JS_EXPORT_TYPE(MPMusicPlayerQueueDescriptor);
 
     // Core Location
     JS_EXPORT_TYPE(CLHeading);
@@ -1037,17 +1056,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CABasicAnimation);
       
       // Core Image
-      
       JS_RETURN_TYPE(CIImage);
 
       // MapKit
-      
       JS_RETURN_TYPE(MKMapView);
       JS_RETURN_TYPE(MKAnnotationView);
       JS_RETURN_TYPE_FROM(MKMapViewDelegate, SMKMapViewDelegate);
 
       // ARKit
-
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
@@ -1061,7 +1077,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
-      
       JS_RETURN_TYPE(SCNMaterial);
       JS_RETURN_TYPE(SCNMaterialProperty);
       JS_RETURN_TYPE(SCNCamera);
@@ -1088,7 +1103,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNView);
       
       // SpriteKit
-      
       JS_RETURN_TYPE(SKTexture);
       JS_RETURN_TYPE(SKEmitterNode);
       JS_RETURN_TYPE(SKCameraNode);
@@ -1109,13 +1123,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKAction);
 
       // Custom UIKit
-
       JS_RETURN_TYPE(GifManager);
       JS_RETURN_TYPE(Gif);
       JS_RETURN_TYPE(GifView);
 
       // Core Location
-      
       JS_RETURN_TYPE(CLGeocoder);
       JS_RETURN_TYPE(CLPlacemark);
       JS_RETURN_TYPE(CLLocation);
@@ -1124,13 +1136,21 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(CLLocationManagerDelegate, SCLLocationManagerDelegate);
       
       // ReplayKit
-      
       JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
       JS_RETURN_TYPE(RPScreenRecorder);
       JS_RETURN_TYPE(RPPreviewViewController);
       
-      // AVFoundation
+      // MediaPlayer
+      JS_RETURN_TYPE(MPMusicPlayerQueueDescriptor);
+      JS_RETURN_TYPE(MPMusicPlayerApplicationController);
+      JS_RETURN_TYPE(MPMusicPlayerController);
+      JS_RETURN_TYPE(MPMediaQuery);
+      JS_RETURN_TYPE(MPMediaPlaylist);
+      JS_RETURN_TYPE(MPMediaItemCollection);
+      JS_RETURN_TYPE(MPMediaItem);
+      JS_RETURN_TYPE(MPMediaEntity);
       
+      // AVFoundation
       JS_RETURN_TYPE(AVAudioPlayer);
       
       // WebKit

@@ -102,7 +102,7 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   return nativeType;
 }
 Object.getOwnPropertyNames(SweetieKit)
-  .filter(x => ["AR", "AV", "CA", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK"]
+  .filter(x => ["AR", "AV", "CA", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP"]
                  .filter(y => x.startsWith(y))
                  .length > 0)
   .sort()
@@ -111,6 +111,8 @@ Object.getOwnPropertyNames(SweetieKit)
     BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
+
+global.id = SweetieKit.id;
 
 // gc periodically
 setInterval(() => {

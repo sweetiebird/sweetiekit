@@ -192,7 +192,6 @@ NAN_SETTER(NNSCache::countLimitSetter) {
     [self setCountLimit: input];
   }
 }
-
 NAN_GETTER(NNSCache::evictsObjectsWithDiscardedContentGetter) {
   JS_UNWRAP(NSCache, self);
   declare_autoreleasepool {
