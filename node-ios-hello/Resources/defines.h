@@ -1093,13 +1093,13 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
-  type name(to_value_##type(info[name##_argument_index]));
+  type name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
   
 #define declare_nullable_pointer_(index, type, name) \
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
-  type* name(to_value_##type(info[name##_argument_index]));
+  type* name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
 
 #define declare_value_pointer_(index, type, name) \
   auto name##_argument_index(index); \
