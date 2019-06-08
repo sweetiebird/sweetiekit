@@ -14,6 +14,12 @@
 #define to_value_NSURL(x) to_value_wrapper(x, NSURL)
 #define is_value_NSURL(x) is_value_wrapper(x, NSURL)
 
+NSString* to_value_URLString(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_URLString(Local<Value> value);
+
+NSURL* to_value_URL(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_URL(Local<Value> value);
+
 // Foundation enums
 #define js_value_NSURLResourceKey(x) JS_ENUM(NSURLResourceKey, NSString, x)
 #define to_value_NSURLResourceKey(x) TO_ENUM(NSURLResourceKey, NSString, x)
