@@ -486,7 +486,7 @@
       (let lines (map (fn (line)
                         (when (search line " @")
                           (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
-                        (step pre (list " NS_" " UI_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
+                        (step pre (list " NS_" " UI_" " MP_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
                           (when (search line pre)
                             (set line (hd (split line pre)))))
                         (set line (rtrim line (fn (c) (or (whitec c) (= c "{"))))))
@@ -566,6 +566,7 @@
        UI (return 'UIKit)
        NS (return 'Foundation)
        WK (return 'WebKit)
+       MP (return 'MediaPlayer)
        )))
   (error (cat "Unknown type " type)))
 
