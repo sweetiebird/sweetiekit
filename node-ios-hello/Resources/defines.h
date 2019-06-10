@@ -98,6 +98,14 @@ Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::val
   return result;
 };
 
+template <typename T>
+Local<T> createExternalTypedArray(size_t size, size_t stride, const typename V8TypedArrayTraits<T>::value_type* _Nonnull data) {
+  size_t byteLength = size * sizeof(typename V8TypedArrayTraits<T>::value_type);
+  Local<ArrayBuffer> buffer = ArrayBuffer::New(Isolate::GetCurrent(), (void*)data, byteLength);
+  Local<T> result = T::New(buffer, 0, size);
+  return result;
+};
+
 #include <v8.h>
 #include <node.h>
 #include <nan.h>

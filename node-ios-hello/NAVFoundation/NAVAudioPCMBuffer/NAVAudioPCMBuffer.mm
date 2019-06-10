@@ -93,14 +93,6 @@ NAN_GETTER(NAVAudioPCMBuffer::strideGetter) {
   }
 }
 
-template <typename T>
-Local<T> createExternalTypedArray(size_t size, size_t stride, const typename V8TypedArrayTraits<T>::value_type* _Nonnull data) {
-  size_t byteLength = size * sizeof(typename V8TypedArrayTraits<T>::value_type);
-  Local<ArrayBuffer> buffer = ArrayBuffer::New(Isolate::GetCurrent(), (void*)data, byteLength);
-  Local<T> result = T::New(buffer, 0, size);
-  return result;
-};
-
 NAN_GETTER(NAVAudioPCMBuffer::floatChannelDataGetter) {
   JS_UNWRAP(AVAudioPCMBuffer, self);
   declare_autoreleasepool {
