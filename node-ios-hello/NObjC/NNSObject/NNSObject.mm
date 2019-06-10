@@ -750,6 +750,11 @@ NAN_METHOD(NClass::New) {
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
+#include "NAVAudioSession.h"
+#include "NAVAudioSessionChannelDescription.h"
+#include "NAVAudioSessionDataSourceDescription.h"
+#include "NAVAudioSessionPortDescription.h"
+#include "NAVAudioSessionRouteDescription.h"
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
@@ -927,8 +932,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     
     // AVFoundation
-    JS_EXPORT_TYPE(AVAudioFormat);
     JS_EXPORT_TYPE(AVAudioPlayer);
+    JS_EXPORT_TYPE(AVAudioFormat);
+    JS_EXPORT_TYPE(AVAudioSession);
+    JS_EXPORT_TYPE(AVAudioSessionChannelDescription);
+    JS_EXPORT_TYPE(AVAudioSessionDataSourceDescription);
+    JS_EXPORT_TYPE(AVAudioSessionPortDescription);
+    JS_EXPORT_TYPE(AVAudioSessionRouteDescription);
     
     // MediaPlayer
     JS_EXPORT_TYPE(MPMediaEntity);
@@ -1155,7 +1165,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // AVFoundation
       JS_RETURN_TYPE(AVAudioPlayer);
       JS_RETURN_TYPE(AVAudioFormat);
-      
+      JS_RETURN_TYPE(AVAudioSession);
+      JS_RETURN_TYPE(AVAudioSessionChannelDescription);
+      JS_RETURN_TYPE(AVAudioSessionDataSourceDescription);
+      JS_RETURN_TYPE(AVAudioSessionPortDescription);
+      JS_RETURN_TYPE(AVAudioSessionRouteDescription);
+
       // WebKit
       JS_RETURN_TYPE(WKWebView);
 
