@@ -6,13 +6,136 @@
 //
 #include "NAVAudioFormat.h"
 
+/*
+struct AudioStreamBasicDescription
+{
+    Float64             mSampleRate;
+    AudioFormatID       mFormatID;
+    AudioFormatFlags    mFormatFlags;
+    UInt32              mBytesPerPacket;
+    UInt32              mFramesPerPacket;
+    UInt32              mBytesPerFrame;
+    UInt32              mChannelsPerFrame;
+    UInt32              mBitsPerChannel;
+    UInt32              mReserved;
+};
+*/
+
+Local<Value>
+js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* value)
+{
+  if (!value) {
+    return Nan::Undefined();
+  }
+  Nan::EscapableHandleScope scope;
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  result->Set(JS_STR("SampleRate"), js_value_double(value->mSampleRate));
+  result->Set(JS_STR("FormatID"), js_value_uint32_t(value->mFormatID));
+  result->Set(JS_STR("FormatFlags"), js_value_uint32_t(value->mFormatFlags));
+  result->Set(JS_STR("BytesPerPacket"), js_value_uint32_t(value->mBytesPerPacket));
+  result->Set(JS_STR("FramesPerPacket"), js_value_uint32_t(value->mFramesPerPacket));
+  result->Set(JS_STR("BytesPerFrame"), js_value_uint32_t(value->mBytesPerFrame));
+  result->Set(JS_STR("ChannelsPerFrame"), js_value_uint32_t(value->mChannelsPerFrame));
+  result->Set(JS_STR("BitsPerChannel"), js_value_uint32_t(value->mBitsPerChannel));
+  result->Set(JS_STR("Reserved"), js_value_uint32_t(value->mReserved));
+  return scope.Escape(result);
+}
+
+AudioStreamBasicDescription
+to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed)
+{
+  AudioStreamBasicDescription result;
+  if (failed) {
+    *failed = false;
+  }
+  if (!is_value_AudioStreamBasicDescription(value))
+  {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected a AudioStreamBasicDescription");
+    }
+    return result;
+  }
+  Local<Object> object(JS_OBJ(value));
+  result.mSampleRate = to_value_double(object->Get(JS_STR("SampleRate")));
+  result.mFormatID = to_value_uint32_t(object->Get(JS_STR("FormatID")));
+  result.mFormatFlags = to_value_uint32_t(object->Get(JS_STR("FormatFlags")));
+  result.mBytesPerPacket = to_value_uint32_t(object->Get(JS_STR("BytesPerPacket")));
+  result.mFramesPerPacket = to_value_uint32_t(object->Get(JS_STR("FramesPerPacket")));
+  result.mBytesPerFrame = to_value_uint32_t(object->Get(JS_STR("BytesPerFrame")));
+  result.mChannelsPerFrame = to_value_uint32_t(object->Get(JS_STR("ChannelsPerFrame")));
+  result.mBitsPerChannel = to_value_uint32_t(object->Get(JS_STR("BitsPerChannel")));
+  result.mReserved = to_value_uint32_t(object->Get(JS_STR("Reserved")));
+  return result;
+}
+
+bool
+is_value_AudioStreamBasicDescription(Local<Value> value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> object(JS_OBJ(value));
+  if (!is_value_double(object->Get(JS_STR("SampleRate")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("FormatID")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("FormatFlags")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("BytesPerPacket")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("FramesPerPacket")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("BytesPerFrame")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("ChannelsPerFrame")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("BitsPerChannel")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("Reserved")))) {
+    return false;
+  }
+  return true;
+}
+
+#define instancetype AVAudioFormat
+#define js_value_instancetype js_value_AVAudioFormat
+
 NAVAudioFormat::NAVAudioFormat() {}
 NAVAudioFormat::~NAVAudioFormat() {}
 
 JS_INIT_CLASS(AVAudioFormat, NSObject);
   // instance members (proto)
+  JS_ASSIGN_PROTO_METHOD(isEqual);
+  JS_ASSIGN_PROTO_PROP_READONLY(isStandard);
+  JS_ASSIGN_PROTO_PROP_READONLY(commonFormat);
+  JS_ASSIGN_PROTO_PROP_READONLY(channelCount);
+  JS_ASSIGN_PROTO_PROP_READONLY(sampleRate);
+  JS_ASSIGN_PROTO_PROP_READONLY(isInterleaved);
+  JS_ASSIGN_PROTO_PROP_READONLY(streamDescription);
+  JS_ASSIGN_PROTO_PROP_READONLY(channelLayout);
+  JS_ASSIGN_PROTO_PROP(magicCookie);
+  JS_ASSIGN_PROTO_PROP_READONLY(settings);
+  JS_ASSIGN_PROTO_PROP_READONLY(formatDescription);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioFormat, NSObject);
+  JS_ASSIGN_STATIC_METHOD(initWithStreamDescription);
+  JS_ASSIGN_STATIC_METHOD(initWithStreamDescriptionChannelLayout);
+  JS_ASSIGN_STATIC_METHOD(initStandardFormatWithSampleRateChannels);
+  JS_ASSIGN_STATIC_METHOD(initStandardFormatWithSampleRateChannelLayout);
+  JS_ASSIGN_STATIC_METHOD(initWithCommonFormatSampleRateChannelsInterleaved);
+  JS_ASSIGN_STATIC_METHOD(initWithCommonFormatSampleRateInterleavedChannelLayout);
+  JS_ASSIGN_STATIC_METHOD(initWithSettings);
+  JS_ASSIGN_STATIC_METHOD(initWithCMAudioFormatDescription);
 JS_INIT_CLASS_END(AVAudioFormat, NSObject);
 
 NAN_METHOD(NAVAudioFormat::New) {
@@ -40,3 +163,175 @@ NAN_METHOD(NAVAudioFormat::New) {
     }
   }
 }
+
+NAN_METHOD(NAVAudioFormat::initWithStreamDescription) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioStreamBasicDescription, asbd);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithStreamDescription: &asbd]));
+  }
+}
+
+#include "NAVAudioChannelLayout.h"
+
+NAN_METHOD(NAVAudioFormat::initWithStreamDescriptionChannelLayout) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioStreamBasicDescription, asbd);
+    declare_nullable_pointer(AVAudioChannelLayout, layout);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithStreamDescription: &asbd channelLayout: layout]));
+  }
+}
+
+#include "NAVAudioNode.h"
+
+NAN_METHOD(NAVAudioFormat::initStandardFormatWithSampleRateChannels) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(double, sampleRate);
+    declare_value(AVAudioChannelCount, channels);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initStandardFormatWithSampleRate: sampleRate channels: channels]));
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::initStandardFormatWithSampleRateChannelLayout) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(double, sampleRate);
+    declare_pointer(AVAudioChannelLayout, layout);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initStandardFormatWithSampleRate: sampleRate channelLayout: layout]));
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::initWithCommonFormatSampleRateChannelsInterleaved) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AVAudioCommonFormat, format);
+    declare_value(double, sampleRate);
+    declare_value(AVAudioChannelCount, channels);
+    declare_value(BOOL, interleaved);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCommonFormat: format sampleRate: sampleRate channels: channels interleaved: interleaved]));
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::initWithCommonFormatSampleRateInterleavedChannelLayout) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AVAudioCommonFormat, format);
+    declare_value(double, sampleRate);
+    declare_value(BOOL, interleaved);
+    declare_pointer(AVAudioChannelLayout, layout);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCommonFormat: format sampleRate: sampleRate interleaved: interleaved channelLayout: layout]));
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::initWithSettings) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDictionary/* <NSString*, id>*/, settings);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithSettings: settings]));
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::initWithCMAudioFormatDescription) {
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(CMAudioFormatDescriptionRef, formatDescription);
+    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCMAudioFormatDescription: formatDescription]));
+    #endif
+  }
+}
+
+NAN_METHOD(NAVAudioFormat::isEqual) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(id, object);
+    JS_SET_RETURN(js_value_BOOL([self isEqual: object]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::isStandardGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isStandard]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::commonFormatGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioCommonFormat([self commonFormat]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::channelCountGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioChannelCount([self channelCount]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::sampleRateGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_double([self sampleRate]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::isInterleavedGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isInterleaved]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::streamDescriptionGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AudioStreamBasicDescription([self streamDescription]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::channelLayoutGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioChannelLayout([self channelLayout]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::magicCookieGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSData([self magicCookie]));
+  }
+}
+
+NAN_SETTER(NAVAudioFormat::magicCookieSetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSData, input);
+    [self setMagicCookie: input];
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::settingsGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSDictionary/* <NSString*, id>*/([self settings]));
+  }
+}
+
+NAN_GETTER(NAVAudioFormat::formatDescriptionGetter) {
+  JS_UNWRAP(AVAudioFormat, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    JS_SET_RETURN(js_value_CMAudioFormatDescriptionRef([self formatDescription]));
+    #endif
+  }
+}
+

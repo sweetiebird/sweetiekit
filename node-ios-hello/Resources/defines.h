@@ -14,10 +14,11 @@
 
 using namespace v8;
   
-#define JS_TODO() { Nan::ThrowError("Not implemented"); return; }
+#define JS_TODO(...) { Nan::ThrowError("Not implemented"); return __VA_ARGS__; }
 #define JS_STR(...) Nan::New<v8::String>(__VA_ARGS__).ToLocalChecked()
 #define JS_INT(val) Nan::New<v8::Integer>(static_cast<int32_t>(val))
 #define JS_UINT(val) Nan::New<v8::Integer>(static_cast<uint32_t>(val))
+#define JS_BYTE(val) Nan::New<v8::Integer>(static_cast<uint8_t>(val))
 #define JS_NUM(val) Nan::New<v8::Number>(val)
 #define JS_FLOAT(val) Nan::New<v8::Number>(val)
 #define JS_BOOL(val) Nan::New<v8::Boolean>(val)
@@ -37,6 +38,7 @@ using namespace v8;
 
 #define TO_DOUBLE(x) (Nan::To<double>(x).FromJust())
 #define TO_BOOL(x) (Nan::To<bool>(x).FromJust())
+#define TO_BYTE(x) static_cast<uint8_t>(Nan::To<unsigned int>(x).FromJust())
 #define TO_UINT32(x) (Nan::To<unsigned int>(x).FromJust())
 #define TO_INT32(x) (Nan::To<int>(x).FromJust())
 #define TO_FLOAT(x) static_cast<float>((Nan::To<double>(x).FromJust()))
@@ -44,6 +46,7 @@ using namespace v8;
 
 #define IS_OBJ(x) x->IsObject()
 #define IS_EXT(x) x->IsExternal()
+#define IS_BYTE(x) ((x)->IsUint32() && (TO_UINT32(x) <= 255))
 
 #define JS_PANIC(fmt, ...) \
   { \
@@ -51,6 +54,13 @@ using namespace v8;
     snprintf(js_panic_msg, 4096, "%s: " fmt, __PRETTY_FUNCTION__, __VA_ARGS__); \
     Nan::ThrowError(js_panic_msg); \
     return; \
+  }
+
+#define js_panic_noreturn(msg) \
+  { \
+    char js_panic_msg[4096]; \
+    snprintf(js_panic_msg, 4096, "%s: %s", __PRETTY_FUNCTION__, msg); \
+    Nan::ThrowError(js_panic_msg); \
   }
   
 #define js_panic_deprecated() \
@@ -453,27 +463,38 @@ namespace sweetiekit {
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
+     }
      Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, 3, argv));
      }
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 4, argv));
+     }
      static JSArgs Args() {
       return JSArgs();
      }
      static JSArgs Args(Local<Value> x0) {
-       Nan::EscapableHandleScope scope;
-       Local<Value> argv[] = { scope.Escape(x0) };
+       Local<Value> argv[] = { x0 };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
      static JSArgs Args(Local<Value> x0, Local<Value> x1) {
-       Nan::EscapableHandleScope scope;
-       Local<Value> argv[] = { scope.Escape(x0), scope.Escape(x1) };
+       Local<Value> argv[] = { x0, x1 };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
      static JSArgs Args(Local<Value> x0, Local<Value> x1, Local<Value> x2) {
-       Nan::EscapableHandleScope scope;
-       Local<Value> argv[] = { scope.Escape(x0), scope.Escape(x1), scope.Escape(x2) };
+       Local<Value> argv[] = { x0, x1, x2 };
+       return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
+     }
+     static JSArgs Args(Local<Value> x0, Local<Value> x1, Local<Value> x2, Local<Value> x3) {
+       Local<Value> argv[] = { x0, x1, x2, x3 };
        return JSArgs(argv, argv + sizeof(argv[0]) / sizeof(argv));
      }
   };
@@ -543,7 +564,11 @@ namespace sweetiekit {
   bool SetTransform(float* _Nonnull transform, Local<Value> value);
   bool SetQuaternion(float* _Nonnull quat, Local<Value> value);
   bool SetVector3(float* _Nonnull xyz, Local<Value> value);
+  
+  Local<Value> CreateArrayBufferFromPointerLength(const void* _Nonnull bytes, size_t length);
 }
+
+Local<Value> js_value_ArrayBuffer(const void* _Nonnull bytes, size_t length);
 
 extern "C" {
 
@@ -989,14 +1014,6 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_bool(x) TO_BOOL(x)
 #define is_value_bool(x) (x)->IsBoolean()
 
-#define js_value_int32_t(x) JS_INT(x)
-#define to_value_int32_t(x) TO_INT32(x)
-#define is_value_int32_t(x) (x)->IsInt32()
-
-#define js_value_uint32_t(x) JS_UINT(x)
-#define to_value_uint32_t(x) TO_UINT32(x)
-#define is_value_uint32_t(x) (x)->IsUint32()
-
 #define js_value_int(x) JS_INT(x)
 #define to_value_int(x) TO_INT32(x)
 #define is_value_int(x) (x)->IsInt32()
@@ -1008,6 +1025,18 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define js_value_unsigned_int(x) JS_UINT(x)
 #define to_value_unsigned_int(x) TO_UINT32(x)
 #define is_value_unsigned_int(x) (x)->IsUint32()
+
+#define js_value_uint8_t(x) JS_BYTE(x)
+#define to_value_uint8_t(x) TO_BYTE(x)
+#define is_value_uint8_t(x) IS_BYTE(x)
+
+#define js_value_int32_t(x) JS_INT(x)
+#define to_value_int32_t(x) TO_INT32(x)
+#define is_value_int32_t(x) (x)->IsInt32()
+
+#define js_value_uint32_t(x) JS_UINT(x)
+#define to_value_uint32_t(x) TO_UINT32(x)
+#define is_value_uint32_t(x) (x)->IsUint32()
 
 // unsure about these, but they should work for integers from -2^52 to 2^52
 #define JS_INT64(x) JS_NUM(static_cast<double>(x))
