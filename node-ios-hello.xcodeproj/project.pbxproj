@@ -79,6 +79,7 @@
 		A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709A22AB480400FA3768 /* NMPMediaItem.mm */; };
 		A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = A133709E22AB480400FA3768 /* NMPMediaItemCollection.mm */; };
 		A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370A122AB480400FA3768 /* NMPMediaEntity.mm */; };
+		A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370A722AEE60900FA3768 /* NAVAudioFormat.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -422,6 +423,8 @@
 		A133709E22AB480400FA3768 /* NMPMediaItemCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaItemCollection.mm; sourceTree = "<group>"; };
 		A13370A022AB480400FA3768 /* NMPMediaEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMPMediaEntity.h; sourceTree = "<group>"; };
 		A13370A122AB480400FA3768 /* NMPMediaEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMPMediaEntity.mm; sourceTree = "<group>"; };
+		A13370A722AEE60900FA3768 /* NAVAudioFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioFormat.mm; sourceTree = "<group>"; };
+		A13370A822AEE60900FA3768 /* NAVAudioFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioFormat.h; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -1285,6 +1288,15 @@
 			path = NMPMediaEntity;
 			sourceTree = "<group>";
 		};
+		A13370A622AEE60900FA3768 /* NAVAudioFormat */ = {
+			isa = PBXGroup;
+			children = (
+				A13370A822AEE60900FA3768 /* NAVAudioFormat.h */,
+				A13370A722AEE60900FA3768 /* NAVAudioFormat.mm */,
+			);
+			path = NAVAudioFormat;
+			sourceTree = "<group>";
+		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
 			isa = PBXGroup;
 			children = (
@@ -1490,6 +1502,7 @@
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				A13370A622AEE60900FA3768 /* NAVAudioFormat */,
 				A174A16822822152002A8216 /* NAVAudioPlayer */,
 			);
 			path = NAVFoundation;
@@ -2983,6 +2996,7 @@
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
+				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
 				A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
@@ -3292,6 +3306,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -3357,6 +3372,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

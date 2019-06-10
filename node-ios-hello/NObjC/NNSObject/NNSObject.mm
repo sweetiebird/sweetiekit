@@ -749,6 +749,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSCache.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
+#include "NAVAudioFormat.h"
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
@@ -926,6 +927,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     
     // AVFoundation
+    JS_EXPORT_TYPE(AVAudioFormat);
     JS_EXPORT_TYPE(AVAudioPlayer);
     
     // MediaPlayer
@@ -1152,6 +1154,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // AVFoundation
       JS_RETURN_TYPE(AVAudioPlayer);
+      JS_RETURN_TYPE(AVAudioFormat);
       
       // WebKit
       JS_RETURN_TYPE(WKWebView);
