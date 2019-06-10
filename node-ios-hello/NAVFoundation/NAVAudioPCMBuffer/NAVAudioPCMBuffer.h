@@ -14,14 +14,14 @@
 #define to_value_AVAudioPCMBuffer(x) to_value_wrapper(x, AVAudioPCMBuffer)
 #define is_value_AVAudioPCMBuffer(x) is_value_wrapper(x, AVAudioPCMBuffer)
 
-// SpriteKit enums
-//#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
-//#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
-//#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
-
 JS_WRAP_CLASS(AVAudioPCMBuffer, AVAudioBuffer);
-  //JS_METHOD(iosMethodName);
-  //JS_PROP(iosPropertyName);
+  JS_STATIC_METHOD(initWithPCMFormatFrameCapacity);
+  JS_PROP_READONLY(frameCapacity);
+  JS_PROP(frameLength);
+  JS_PROP_READONLY(stride);
+  JS_PROP_READONLY(floatChannelData);
+  JS_PROP_READONLY(int16ChannelData);
+  JS_PROP_READONLY(int32ChannelData);
 JS_WRAP_CLASS_END(AVAudioPCMBuffer);
 
 #endif /* NAVAudioPCMBuffer_h */

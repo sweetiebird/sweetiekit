@@ -11,6 +11,9 @@ NAVAudioBuffer::~NAVAudioBuffer() {}
 
 JS_INIT_CLASS(AVAudioBuffer, NSObject);
   // instance members (proto)
+  JS_ASSIGN_PROTO_PROP_READONLY(format);
+  JS_ASSIGN_PROTO_PROP_READONLY(audioBufferList);
+  JS_ASSIGN_PROTO_PROP_READONLY(mutableAudioBufferList);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioBuffer, NSObject);
 JS_INIT_CLASS_END(AVAudioBuffer, NSObject);
@@ -38,5 +41,34 @@ NAN_METHOD(NAVAudioBuffer::New) {
     } else {
       Nan::ThrowError("AVAudioBuffer::New: invalid arguments");
     }
+  }
+}
+
+#include "NAVAudioFormat.h"
+
+NAN_GETTER(NAVAudioBuffer::formatGetter) {
+  JS_UNWRAP(AVAudioBuffer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioFormat([self format]));
+  }
+}
+
+NAN_GETTER(NAVAudioBuffer::audioBufferListGetter) {
+  JS_UNWRAP(AVAudioBuffer, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    JS_SET_RETURN(js_value_AudioBufferList([self audioBufferList]));
+    #endif
+  }
+}
+
+NAN_GETTER(NAVAudioBuffer::mutableAudioBufferListGetter) {
+  JS_UNWRAP(AVAudioBuffer, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    JS_SET_RETURN(js_value_AudioBufferList([self mutableAudioBufferList]));
+    #endif
   }
 }

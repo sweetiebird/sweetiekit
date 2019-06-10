@@ -76,10 +76,14 @@ private:
 };
 
 template <typename T> struct V8TypedArrayTraits;
-template<> struct V8TypedArrayTraits<Float32Array> { typedef float value_type; };
 template<> struct V8TypedArrayTraits<Float64Array> { typedef double value_type; };
-template<> struct V8TypedArrayTraits<Int32Array> { typedef int value_type; };
-template<> struct V8TypedArrayTraits<Uint32Array> { typedef unsigned int value_type; };
+template<> struct V8TypedArrayTraits<Float32Array> { typedef float value_type; };
+template<> struct V8TypedArrayTraits<Int32Array> { typedef int32_t value_type; };
+template<> struct V8TypedArrayTraits<Uint32Array> { typedef uint32_t value_type; };
+template<> struct V8TypedArrayTraits<Int16Array> { typedef int16_t value_type; };
+template<> struct V8TypedArrayTraits<Uint16Array> { typedef uint16_t value_type; };
+template<> struct V8TypedArrayTraits<Int8Array> { typedef int8_t value_type; };
+template<> struct V8TypedArrayTraits<Uint8Array> { typedef uint8_t value_type; };
 
 template <typename T>
 Local<T> createTypedArray(size_t size, const typename V8TypedArrayTraits<T>::value_type* _Nullable data = NULL) {

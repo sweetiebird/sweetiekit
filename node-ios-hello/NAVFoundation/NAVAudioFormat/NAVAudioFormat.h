@@ -18,10 +18,6 @@
 #define to_value_AVAudioCommonFormat(x) TO_ENUM(AVAudioCommonFormat, NSInteger, x)
 #define is_value_AVAudioCommonFormat(x) IS_ENUM(AVAudioCommonFormat, NSInteger, x)
 
-Local<Value> js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* value);
-AudioStreamBasicDescription to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed = nullptr);
-bool is_value_AudioStreamBasicDescription(Local<Value> value);
-
 JS_WRAP_CLASS(AVAudioFormat, NSObject);
   JS_STATIC_METHOD(initWithStreamDescription);
   JS_STATIC_METHOD(initWithStreamDescriptionChannelLayout);
