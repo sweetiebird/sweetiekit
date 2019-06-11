@@ -172,6 +172,81 @@ is_value_AudioStreamBasicDescription(Local<Value> value)
   return true;
 }
 
+/*
+typedef struct AudioComponentDescription {
+    OSType              componentType;
+    OSType              componentSubType;
+    OSType              componentManufacturer;
+    UInt32              componentFlags;
+    UInt32              componentFlagsMask;
+} AudioComponentDescription;
+*/
+
+#include "NAUAudioUnit.h"
+
+Local<Value>
+js_value_AudioComponentDescription(const AudioComponentDescription& value)
+{
+  Nan::EscapableHandleScope scope;
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  result->Set(JS_STR("componentType"), js_value_OSType(value.componentType));
+  result->Set(JS_STR("componentSubType"), js_value_OSType(value.componentSubType));
+  result->Set(JS_STR("componentManufacturer"), js_value_OSType(value.componentManufacturer));
+  result->Set(JS_STR("componentFlags"), js_value_uint32_t(value.componentFlags));
+  result->Set(JS_STR("componentFlagsMask"), js_value_uint32_t(value.componentFlagsMask));
+  return scope.Escape(result);
+}
+
+AudioComponentDescription
+to_value_AudioComponentDescription(Local<Value> value, bool* _Nullable failed)
+{
+  AudioComponentDescription result;
+  if (failed) {
+    *failed = false;
+  }
+  if (!is_value_AudioComponentDescription(value))
+  {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected a AudioComponentDescription");
+    }
+    return result;
+  }
+  Local<Object> object(JS_OBJ(value));
+  result.componentType = to_value_OSType(object->Get(JS_STR("componentType")));
+  result.componentSubType = to_value_OSType(object->Get(JS_STR("componentSubType")));
+  result.componentManufacturer = to_value_OSType(object->Get(JS_STR("componentManufacturer")));
+  result.componentFlags = to_value_uint32_t(object->Get(JS_STR("componentFlags")));
+  result.componentFlagsMask = to_value_uint32_t(object->Get(JS_STR("componentFlagsMask")));
+  return result;
+}
+
+bool
+is_value_AudioComponentDescription(Local<Value> value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  Local<Object> object(JS_OBJ(value));
+  if (!is_value_OSType(object->Get(JS_STR("componentType")))) {
+    return false;
+  }
+  if (!is_value_OSType(object->Get(JS_STR("componentSubType")))) {
+    return false;
+  }
+  if (!is_value_OSType(object->Get(JS_STR("componentManufacturer")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("componentFlags")))) {
+    return false;
+  }
+  if (!is_value_uint32_t(object->Get(JS_STR("componentFlagsMask")))) {
+    return false;
+  }
+  return true;
+}
+
 @implementation CoreAudioTypes : NSObject
 @end
 

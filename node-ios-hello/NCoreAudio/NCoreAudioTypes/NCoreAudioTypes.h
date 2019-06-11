@@ -22,6 +22,10 @@ Local<Value> js_value_AudioStreamBasicDescription(const AudioStreamBasicDescript
 AudioStreamBasicDescription to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_AudioStreamBasicDescription(Local<Value> value);
 
+Local<Value> js_value_AudioComponentDescription(const AudioComponentDescription& value);
+AudioComponentDescription to_value_AudioComponentDescription(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_AudioComponentDescription(Local<Value> value);
+
 #ifdef __OBJC__
 @interface CoreAudioTypes : NSObject
 @end

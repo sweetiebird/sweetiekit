@@ -756,6 +756,10 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioSessionPortDescription.h"
 #include "NAVAudioSessionRouteDescription.h"
 #include "NAUAudioUnit.h"
+#include "NAUParameterTree.h"
+#include "NAUParameterNode.h"
+#include "NAUParameterGroup.h"
+#include "NAUAudioUnitPreset.h"
 #include "NAVAudioEngine.h"
 #include "NAVAudioNode.h"
 #include "NAVAudioTime.h"
@@ -948,6 +952,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // Audio Toolbox
     JS_EXPORT_TYPE(AUAudioUnit);
+    JS_EXPORT_TYPE(AUParameterNode);
+    JS_EXPORT_TYPE(AUParameterGroup);
+    JS_EXPORT_TYPE(AUParameterTree);
+    JS_EXPORT_TYPE(AUAudioUnitPreset);
     
     // AVFoundation
     JS_EXPORT_TYPE(AVAudioPlayer);
@@ -1196,7 +1204,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // Audio Toolbox
       JS_RETURN_TYPE(AUAudioUnit);
-
+      JS_RETURN_TYPE(AUAudioUnitPreset);
+      JS_RETURN_TYPE(AUParameterTree);
+      JS_RETURN_TYPE(AUParameterGroup);
+      JS_RETURN_TYPE(AUParameterNode);
       
       // AVFoundation
       JS_RETURN_TYPE(AVAudioPlayer);
