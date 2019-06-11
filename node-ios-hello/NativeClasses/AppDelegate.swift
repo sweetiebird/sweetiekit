@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
       AppDelegate.fetchCallback?(completionHandler);
     }
-
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         /*
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
@@ -1318,6 +1318,11 @@ process.stderr.write('sweetiekit-node\\n');
         let path = components.path else {
               print("Invalid URL")
               return false
+      }
+
+      if (url.absoluteString == "maptracks-sweetiekit://spotify" || url.absoluteString == "maptracks-sweetiekit://spotify/") {
+        print("handle url");
+        return true;
       }
 
       if let appId = path.split(separator: "/").first  {

@@ -828,6 +828,7 @@ NAN_METHOD(NClass::New) {
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIImage.h"
+#include "NWKNavigationDelegate.h"
 #include "NWKWebView.h"
 
 #include "NMPMediaEntity.h"
@@ -946,6 +947,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // WebKit
     JS_EXPORT_TYPE(WKWebView);
+    JS_EXPORT_TYPE(WKNavigationDelegate);
     
     // Core Graphics
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");

@@ -30,9 +30,19 @@
 				<string>node-ios-hello-2</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.emilykolar.node-ios-hello-2</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>maptracks-sweetiekit</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>105</string>
+	<string>137</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

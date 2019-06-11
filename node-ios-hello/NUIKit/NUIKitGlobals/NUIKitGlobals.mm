@@ -13,9 +13,10 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UIKitGlobals, NSObject);
-  JS_ASSIGN_METHOD(ctor, UIImageWriteToSavedPhotosAlbum);
-  JS_ASSIGN_METHOD(ctor, UIImageOrientation);
-  JS_ASSIGN_METHOD(ctor, UITextFieldViewMode);
+  JS_ASSIGN_STATIC_METHOD(UIImageWriteToSavedPhotosAlbum);
+  JS_ASSIGN_STATIC_PROP_READONLY(UIImageOrientation);
+  JS_ASSIGN_STATIC_PROP_READONLY(UITextFieldViewMode);
+  JS_ASSIGN_STATIC_PROP_READONLY(UIControlEvents);
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
@@ -67,7 +68,7 @@ NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   [SUIKitGlobals uiImageWriteToSavedPhotosAlbumWithImage:img target:target selector:[target callbackSelector] contextInfo:nullptr];
 }
 
-NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
+NAN_GETTER(NUIKitGlobals::UIImageOrientationGetter) {
   Nan::HandleScope scope;
 
   Local<Object> result = Object::New(Isolate::GetCurrent());
@@ -84,7 +85,7 @@ NAN_METHOD(NUIKitGlobals::UIImageOrientation) {
   JS_SET_RETURN(result);
 }
 
-NAN_METHOD(NUIKitGlobals::UITextFieldViewMode) {
+NAN_GETTER(NUIKitGlobals::UITextFieldViewModeGetter) {
   Nan::HandleScope scope;
 
   Local<Object> result = Object::New(Isolate::GetCurrent());
@@ -94,5 +95,29 @@ NAN_METHOD(NUIKitGlobals::UITextFieldViewMode) {
   result->Set(JS_STR("unlessEditing"), JS_NUM(UITextFieldViewModeUnlessEditing));
   result->Set(JS_STR("always"), JS_NUM(UITextFieldViewModeAlways));
   
+  JS_SET_RETURN(result);
+}
+
+NAN_GETTER(NUIKitGlobals::UIControlEventsGetter) {
+  Nan::HandleScope scope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  
+  result->Set(JS_STR("touchDown"), js_value_NSUInteger(UIControlEventTouchDown));
+  result->Set(JS_STR("touchDownRepeat"), js_value_NSUInteger(UIControlEventTouchDownRepeat));
+  result->Set(JS_STR("touchDragInside"), js_value_NSUInteger(UIControlEventTouchDragInside));
+  result->Set(JS_STR("touchDragOutside"), js_value_NSUInteger(UIControlEventTouchDragOutside));
+  result->Set(JS_STR("touchDragEnter"), js_value_NSUInteger(UIControlEventTouchDragEnter));
+  result->Set(JS_STR("touchDragExit"), js_value_NSUInteger(UIControlEventTouchDragExit));
+  result->Set(JS_STR("touchUpInside"), js_value_NSUInteger(UIControlEventTouchUpInside));
+  result->Set(JS_STR("touchUpOutside"), js_value_NSUInteger(UIControlEventTouchUpOutside));
+  result->Set(JS_STR("touchCancel"), js_value_NSUInteger(UIControlEventTouchCancel));
+  result->Set(JS_STR("valueChanged"), js_value_NSUInteger(UIControlEventValueChanged));
+  result->Set(JS_STR("primaryActionTriggered"), js_value_NSUInteger(UIControlEventPrimaryActionTriggered));
+  result->Set(JS_STR("editingDidBegin"), js_value_NSUInteger(UIControlEventEditingDidBegin));
+  result->Set(JS_STR("editingChanged"), js_value_NSUInteger(UIControlEventEditingChanged));
+  result->Set(JS_STR("editingDidEnd"), js_value_NSUInteger(UIControlEventEditingDidEnd));
+  result->Set(JS_STR("editingDidEndOnExit"), js_value_NSUInteger(UIControlEventEditingDidEndOnExit));
+
   JS_SET_RETURN(result);
 }

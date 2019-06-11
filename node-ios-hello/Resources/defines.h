@@ -146,7 +146,6 @@ using namespace node;
       JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
   }
 
-
 #define JS_PROP(name) \
   static NAN_GETTER(name##Getter); \
   static NAN_SETTER(name##Setter)
@@ -176,6 +175,12 @@ using namespace node;
   auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type* name = n##name->As<type>(); name = name;
+
+#define JS_UNWRAP_SWIFT(type, name) \
+  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  S##type* name = n##name->As<S##type>(); name = name;
   
 #define JS_UNWRAPPED_(info, type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
