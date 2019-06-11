@@ -6,191 +6,237 @@
 //
 #include "NUIStackView.h"
 
+#define instancetype UIStackView
+#define js_value_instancetype js_value_UIStackView
+
 NUIStackView::NUIStackView() {}
 NUIStackView::~NUIStackView() {}
 
 JS_INIT_CLASS(UIStackView, UIView);
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, addArrangedSubview);
-  JS_ASSIGN_METHOD(proto, insertArrangedSubview);
-  JS_ASSIGN_METHOD(proto, removeArrangedSubview);
-  JS_ASSIGN_PROP_READONLY(proto, arrangedSubviews);
-  JS_ASSIGN_PROP(proto, axis);
-  JS_ASSIGN_PROP(proto, distribution);
-  JS_ASSIGN_PROP(proto, alignment);
+  JS_ASSIGN_PROTO_METHOD(addArrangedSubview);
+  JS_ASSIGN_PROTO_METHOD(removeArrangedSubview);
+  JS_ASSIGN_PROTO_METHOD(insertArrangedSubviewAtIndex);
+  JS_ASSIGN_PROTO_METHOD(setCustomSpacingAfterView);
+  JS_ASSIGN_PROTO_METHOD(customSpacingAfterView);
+  JS_ASSIGN_PROTO_PROP_READONLY(arrangedSubviews);
+  JS_ASSIGN_PROTO_PROP(axis);
+  JS_ASSIGN_PROTO_PROP(distribution);
+  JS_ASSIGN_PROTO_PROP(alignment);
+  JS_ASSIGN_PROTO_PROP(spacing);
+  JS_ASSIGN_PROTO_PROP(isBaselineRelativeArrangement);
+  JS_ASSIGN_PROTO_PROP(isLayoutMarginsRelativeArrangement);
   // static members (ctor)
   JS_INIT_CTOR(UIStackView, UIView);
+  JS_ASSIGN_STATIC_METHOD(initWithFrame);
+  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_STATIC_METHOD(initWithArrangedSubviews);
 JS_INIT_CLASS_END(UIStackView, UIView);
 
+#include "NNSCoder.h"
+
 NAN_METHOD(NUIStackView::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> obj = info.This();
-
-  NUIStackView *ui = new NUIStackView();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge UIStackView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0 && info[0]->IsArray()) {
-    Local<Array> array = Local<Array>::Cast(info[0]);
-    NSMutableArray *views = [NSMutableArray array];
-    for (unsigned int i = 0; i < array->Length(); i++ ) {
-      if (Nan::Has(array, i).FromJust()) {
-        NUIView *view = ObjectWrap::Unwrap<NUIView>(JS_OBJ(array->Get(i)));
-        [views addObject:view->As<UIView>()];
-      }
+  @autoreleasepool {
+   if (!info.IsConstructCall()) {
+      // Invoked as plain function `UIStackView(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(UIStackView, info);
+      return;
     }
-    ui->SetNSObject([[UIStackView alloc] initWithArrangedSubviews:views]);
-  } else if (info.Length() > 0 && info[0]->IsObject()) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    ui->SetNSObject([[UIStackView alloc] initWithFrame:CGRectMake(x, y, width, height)]);
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[UIStackView alloc] init]);
+    UIStackView* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIStackView *)(info[0].As<External>()->Value());
+    } else if (is_value_NSCoder(info[0])) {
+      self = [[UIStackView alloc] initWithCoder:to_value_NSCoder(info[0])];
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UIStackView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (is_value_NSArray(info[0])) {
+      self = [[UIStackView alloc] initWithArrangedSubviews:to_value_NSArray<UIView*>(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UIStackView alloc] init];
+    }
+    if (self) {
+      NUIStackView *wrapper = new NUIStackView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIStackView::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
+}
 
-  JS_SET_RETURN(obj);
+NAN_METHOD(NUIStackView::initWithFrame) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithFrame: frame]));
+  }
+}
+
+NAN_METHOD(NUIStackView::initWithCoder) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, coder);
+    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithCoder: coder]));
+  }
+}
+
+NAN_METHOD(NUIStackView::initWithArrangedSubviews) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<UIView*>, views);
+    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithArrangedSubviews: views]));
+  }
 }
 
 NAN_METHOD(NUIStackView::addArrangedSubview) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  Local<Object> obj = JS_OBJ(info[0]);
-  NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
-
-  @autoreleasepool {
-    [ui addArrangedSubview:subview->As<UIView>()];
-  }
-}
-
-NAN_METHOD(NUIStackView::insertArrangedSubview) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIStackView, ui);
-  
-  Local<Object> obj = JS_OBJ(info[0]);
-  NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
-  double idx = TO_DOUBLE(info[1]);
-
-  @autoreleasepool {
-    [ui insertArrangedSubview:subview->As<UIView>() atIndex:idx];
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, view);
+    [self addArrangedSubview: view];
   }
 }
 
 NAN_METHOD(NUIStackView::removeArrangedSubview) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  Local<Object> obj = JS_OBJ(info[0]);
-  NUIView *subview = ObjectWrap::Unwrap<NUIView>(obj);
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, view);
+    [self removeArrangedSubview: view];
+  }
+}
 
-  @autoreleasepool {
-    [ui removeArrangedSubview:subview->As<UIView>()];
+NAN_METHOD(NUIStackView::insertArrangedSubviewAtIndex) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, view);
+    declare_value(NSUInteger, stackIndex);
+    [self insertArrangedSubview: view atIndex: stackIndex];
+  }
+}
+
+NAN_METHOD(NUIStackView::setCustomSpacingAfterView) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGFloat, spacing);
+    declare_pointer(UIView, arrangedSubview);
+    [self setCustomSpacing: spacing afterView: arrangedSubview];
+  }
+}
+
+NAN_METHOD(NUIStackView::customSpacingAfterView) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, arrangedSubview);
+    JS_SET_RETURN(js_value_CGFloat([self customSpacingAfterView: arrangedSubview]));
   }
 }
 
 NAN_GETTER(NUIStackView::arrangedSubviewsGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  __block NSArray* subviews = nullptr;
-  __block NSInteger count = 0;
-
-  @autoreleasepool {
-    subviews = [ui arrangedSubviews];
-    count = [subviews count];
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIView*>([self arrangedSubviews]));
   }
-  
-  auto result = Nan::New<Array>();
-
-  for (NSInteger i = 0; i < count; i++) {
-    UIView* subview = [subviews objectAtIndex:i];
-    if (subview != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)subview)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(subview, type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(result, static_cast<uint32_t>(i), value);
-    }
-  }
-
-  JS_SET_RETURN(result);
 }
 
 NAN_GETTER(NUIStackView::axisGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  NSInteger axisVal = [ui axis];
-  
-  JS_SET_RETURN(JS_NUM(axisVal));
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UILayoutConstraintAxis([self axis]));
+  }
 }
 
 NAN_SETTER(NUIStackView::axisSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  double axisVal = TO_DOUBLE(value);
-  UILayoutConstraintAxis axis = UILayoutConstraintAxis(axisVal);
-  
-  @autoreleasepool {
-    [ui setAxis:axis];
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UILayoutConstraintAxis, input);
+    [self setAxis: input];
   }
 }
 
 NAN_GETTER(NUIStackView::distributionGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  NSInteger distVal = [ui distribution];
-
-  JS_SET_RETURN(JS_NUM(distVal));
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIStackViewDistribution([self distribution]));
+  }
 }
 
 NAN_SETTER(NUIStackView::distributionSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  double distVal = TO_DOUBLE(value);
-  UIStackViewDistribution dist = UIStackViewDistribution(distVal);
-
-  @autoreleasepool {
-    [ui setDistribution:dist];
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIStackViewDistribution, input);
+    [self setDistribution: input];
   }
 }
 
 NAN_GETTER(NUIStackView::alignmentGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  NSInteger align = [ui alignment];
-
-  JS_SET_RETURN(JS_NUM(align));
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIStackViewAlignment([self alignment]));
+  }
 }
 
 NAN_SETTER(NUIStackView::alignmentSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIStackView, ui);
-  
-  double alignVal = TO_DOUBLE(value);
-  UIStackViewAlignment align = UIStackViewAlignment(alignVal);
-
-  @autoreleasepool {
-    [ui setAlignment:align];
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIStackViewAlignment, input);
+    [self setAlignment: input];
   }
 }
+
+NAN_GETTER(NUIStackView::spacingGetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self spacing]));
+  }
+}
+
+NAN_SETTER(NUIStackView::spacingSetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setSpacing: input];
+  }
+}
+
+NAN_GETTER(NUIStackView::isBaselineRelativeArrangementGetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isBaselineRelativeArrangement]));
+  }
+}
+
+NAN_SETTER(NUIStackView::isBaselineRelativeArrangementSetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setBaselineRelativeArrangement: input];
+  }
+}
+
+NAN_GETTER(NUIStackView::isLayoutMarginsRelativeArrangementGetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isLayoutMarginsRelativeArrangement]));
+  }
+}
+
+NAN_SETTER(NUIStackView::isLayoutMarginsRelativeArrangementSetter) {
+  JS_UNWRAP(UIStackView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setLayoutMarginsRelativeArrangement: input];
+  }
+}
+

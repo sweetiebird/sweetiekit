@@ -6,27 +6,39 @@
 //
 #include "NSCNGeometry.h"
 
+#define instancetype SCNGeometry
+#define js_value_instancetype js_value_SCNGeometry
+
 NSCNGeometry::NSCNGeometry () {}
 NSCNGeometry::~NSCNGeometry () {}
 
 JS_INIT_CLASS(SCNGeometry, NSObject);
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, name);
-  JS_ASSIGN_PROP(proto, materials);
-  JS_ASSIGN_PROP(proto, firstMaterial);
-  JS_ASSIGN_PROP_READONLY(proto, geometrySources);
-  JS_ASSIGN_PROP_READONLY(proto, geometryElements);
-  JS_ASSIGN_PROP_READONLY(proto, geometryElementCount);
-  JS_ASSIGN_PROP(proto, levelsOfDetail);
+// SCNGeometry
+  JS_ASSIGN_PROTO_METHOD(insertMaterialAtIndex);
+  JS_ASSIGN_PROTO_METHOD(removeMaterialAtIndex);
+  JS_ASSIGN_PROTO_METHOD(replaceMaterialAtIndexWithMaterial);
+  JS_ASSIGN_PROTO_METHOD(materialWithName);
+  JS_ASSIGN_PROTO_METHOD(geometrySourcesForSemantic);
+  JS_ASSIGN_PROTO_METHOD(geometryElementAtIndex);
+  JS_ASSIGN_PROTO_PROP(name);
+  JS_ASSIGN_PROTO_PROP(materials);
+  JS_ASSIGN_PROTO_PROP(firstMaterial);
+  JS_ASSIGN_PROTO_PROP_READONLY(geometrySources);
+  JS_ASSIGN_PROTO_PROP_READONLY(geometryElements);
+  JS_ASSIGN_PROTO_PROP_READONLY(geometryElementCount);
+  JS_ASSIGN_PROTO_PROP(levelsOfDetail);
 #if SCN_ENABLE_METAL
-  JS_ASSIGN_PROP(proto, tessellator);
+  JS_ASSIGN_PROTO_PROP(tessellator);
 #endif
-  JS_ASSIGN_PROP(proto, subdivisionLevel);
-  JS_ASSIGN_PROP(proto, wantsAdaptiveSubdivision);
-  JS_ASSIGN_PROP(proto, edgeCreasesElement);
-  JS_ASSIGN_PROP(proto, edgeCreasesSource);
+  JS_ASSIGN_PROTO_PROP(subdivisionLevel);
+  JS_ASSIGN_PROTO_PROP(wantsAdaptiveSubdivision);
+  JS_ASSIGN_PROTO_PROP(edgeCreasesElement);
+  JS_ASSIGN_PROTO_PROP(edgeCreasesSource);
   // static members (ctor)
   JS_INIT_CTOR(SCNGeometry, NSObject);
+  JS_ASSIGN_STATIC_METHOD(geometry);
+  JS_ASSIGN_STATIC_METHOD(geometryWithSourcesElements);
 JS_INIT_CLASS_END(SCNGeometry, NSObject);
 
 NAN_METHOD(NSCNGeometry::New) {
@@ -54,198 +66,242 @@ NAN_METHOD(NSCNGeometry::New) {
   }
 }
 
-NAN_GETTER(NSCNGeometry::nameGetter) {
-  JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_NSString([self name]));
-    return;
+NAN_METHOD(NSCNGeometry::geometry) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([SCNGeometry geometry]));
   }
 }
 
-NAN_SETTER(NSCNGeometry::nameSetter) {
-  JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setName: to_value_NSString(value)];
-  }
-}
-
-NAN_GETTER(NSCNGeometry::materialsGetter) {
-  JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_NSArray<SCNMaterial* >([self materials]));
-    return;
-  }
-}
-
-NAN_SETTER(NSCNGeometry::materialsSetter) {
-  JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setMaterials: to_value_NSArray<SCNMaterial* >(value)];
+NAN_METHOD(NSCNGeometry::geometryWithSourcesElements) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<SCNGeometrySource*>, sources);
+    declare_nullable_pointer(NSArray<SCNGeometryElement*>, elements);
+    JS_SET_RETURN(js_value_instancetype([SCNGeometry geometryWithSources: sources elements: elements]));
   }
 }
 
 #include "NSCNMaterial.h"
 
+NAN_METHOD(NSCNGeometry::insertMaterialAtIndex) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SCNMaterial, material);
+    declare_value(NSUInteger, index);
+    [self insertMaterial: material atIndex: index];
+  }
+}
+
+NAN_METHOD(NSCNGeometry::removeMaterialAtIndex) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSUInteger, index);
+    [self removeMaterialAtIndex: index];
+  }
+}
+
+NAN_METHOD(NSCNGeometry::replaceMaterialAtIndexWithMaterial) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSUInteger, index);
+    declare_pointer(SCNMaterial, material);
+    [self replaceMaterialAtIndex: index withMaterial: material];
+  }
+}
+
+NAN_METHOD(NSCNGeometry::materialWithName) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    JS_SET_RETURN(js_value_SCNMaterial([self materialWithName: name]));
+  }
+}
+
+NAN_METHOD(NSCNGeometry::geometrySourcesForSemantic) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(SCNGeometrySourceSemantic, semantic);
+    JS_SET_RETURN(js_value_NSArray<SCNGeometrySource*>([self geometrySourcesForSemantic: semantic]));
+  }
+}
+
+NAN_METHOD(NSCNGeometry::geometryElementAtIndex) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSInteger, elementIndex);
+    JS_SET_RETURN(js_value_SCNGeometryElement([self geometryElementAtIndex: elementIndex]));
+  }
+}
+
+NAN_GETTER(NSCNGeometry::nameGetter) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self name]));
+  }
+}
+
+NAN_SETTER(NSCNGeometry::nameSetter) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setName: input];
+  }
+}
+
+NAN_GETTER(NSCNGeometry::materialsGetter) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<SCNMaterial*>([self materials]));
+  }
+}
+
+NAN_SETTER(NSCNGeometry::materialsSetter) {
+  JS_UNWRAP(SCNGeometry, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<SCNMaterial*>, input);
+    [self setMaterials: input];
+  }
+}
+
 NAN_GETTER(NSCNGeometry::firstMaterialGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SCNMaterial([self firstMaterial]));
-    return;
   }
 }
 
 NAN_SETTER(NSCNGeometry::firstMaterialSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setFirstMaterial: to_value_SCNMaterial(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNMaterial, input);
+    [self setFirstMaterial: input];
   }
 }
 
 NAN_GETTER(NSCNGeometry::geometrySourcesGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_NSArray<SCNGeometrySource* >([self geometrySources]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<SCNGeometrySource*>([self geometrySources]));
   }
 }
 
 NAN_GETTER(NSCNGeometry::geometryElementsGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_NSArray<SCNGeometryElement* >([self geometryElements]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<SCNGeometryElement*>([self geometryElements]));
   }
 }
 
 NAN_GETTER(NSCNGeometry::geometryElementCountGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSInteger([self geometryElementCount]));
-    return;
   }
 }
 
 NAN_GETTER(NSCNGeometry::levelsOfDetailGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_NSArray<SCNLevelOfDetail* >([self levelsOfDetail]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<SCNLevelOfDetail*>([self levelsOfDetail]));
   }
 }
 
 NAN_SETTER(NSCNGeometry::levelsOfDetailSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setLevelsOfDetail: to_value_NSArray<SCNLevelOfDetail* >(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<SCNLevelOfDetail*>, input);
+    [self setLevelsOfDetail: input];
   }
 }
 
 #if SCN_ENABLE_METAL
-#define js_value_SCNGeometryTessellator(x) js_value_wrapper_unknown(x, SCNGeometryTessellator)
-#define to_value_SCNGeometryTessellator(x) to_value_wrapper_unknown(x, SCNGeometryTessellator)
-#define is_value_SCNGeometryTessellator(x) is_value_wrapper_unknown(x, SCNGeometryTessellator)
-
 NAN_GETTER(NSCNGeometry::tessellatorGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SCNGeometryTessellator([self tessellator]));
-    return;
   }
 }
 
 NAN_SETTER(NSCNGeometry::tessellatorSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setTessellator: to_value_SCNGeometryTessellator(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNGeometryTessellator, input);
+    [self setTessellator: input];
   }
 }
 #endif
 
 NAN_GETTER(NSCNGeometry::subdivisionLevelGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSUInteger([self subdivisionLevel]));
-    return;
   }
 }
 
 NAN_SETTER(NSCNGeometry::subdivisionLevelSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setSubdivisionLevel: to_value_NSUInteger(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSUInteger, input);
+    [self setSubdivisionLevel: input];
   }
 }
 
 NAN_GETTER(NSCNGeometry::wantsAdaptiveSubdivisionGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self wantsAdaptiveSubdivision]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self wantsAdaptiveSubdivision]));
   }
 }
 
 NAN_SETTER(NSCNGeometry::wantsAdaptiveSubdivisionSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setWantsAdaptiveSubdivision: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setWantsAdaptiveSubdivision: input];
   }
 }
 
-#define js_value_SCNGeometryElement(x) js_value_wrapper_unknown(x, SCNGeometryElement)
-#define to_value_SCNGeometryElement(x) to_value_wrapper_unknown(x, SCNGeometryElement)
-#define is_value_SCNGeometryElement(x) is_value_wrapper_unknown(x, SCNGeometryElement)
-
 NAN_GETTER(NSCNGeometry::edgeCreasesElementGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SCNGeometryElement([self edgeCreasesElement]));
-    return;
   }
 }
 
 NAN_SETTER(NSCNGeometry::edgeCreasesElementSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setEdgeCreasesElement: to_value_SCNGeometryElement(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNGeometryElement, input);
+    [self setEdgeCreasesElement: input];
   }
 }
 
-#define js_value_SCNGeometrySource(x) js_value_wrapper_unknown(x, SCNGeometrySource)
-#define to_value_SCNGeometrySource(x) to_value_wrapper_unknown(x, SCNGeometrySource)
-#define is_value_SCNGeometrySource(x) is_value_wrapper_unknown(x, SCNGeometrySource)
-
 NAN_GETTER(NSCNGeometry::edgeCreasesSourceGetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SCNGeometrySource([self edgeCreasesSource]));
-    return;
   }
 }
 
 NAN_SETTER(NSCNGeometry::edgeCreasesSourceSetter) {
   JS_UNWRAP(SCNGeometry, self);
-  @autoreleasepool
-  {
-    [self setEdgeCreasesSource: to_value_SCNGeometrySource(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNGeometrySource, input);
+    [self setEdgeCreasesSource: input];
   }
 }
