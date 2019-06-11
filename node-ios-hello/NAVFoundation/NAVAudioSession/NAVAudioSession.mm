@@ -498,7 +498,7 @@ NAN_GETTER(NAVAudioSession::promptStyleGetter) {
   JS_UNWRAP(AVAudioSession, self);
   declare_autoreleasepool {
     if (@available(iOS 12.2, *)) {
-      JS_SET_RETURN(js_value_AVAudioSessionPromptStyle([self promptStyle]));
+//      JS_SET_RETURN(js_value_AVAudioSessionPromptStyle([self promptStyle]));
     } else {
       js_panic_noreturn("promptStyle available on iOS 12.2 or later");
     }
