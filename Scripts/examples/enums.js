@@ -219,6 +219,38 @@ module.exports.UITouchPhase = {
   cancelled:4,         // whenever a touch doesn't end but we need to stop tracking (e.g. putting device to face)
 };
 
+module.exports.MDLMaterialSemantic = {
+
+  baseColor: 0,
+  subsurface: 1,
+  metallic: 2,
+  specular: 3,
+  specularExponent: 4,
+  specularTint: 5,
+  roughness: 6,
+  anisotropic: 7,
+  anisotropicRotation: 8,
+  sheen: 9,
+  sheenTint: 10,
+  clearcoat: 11,
+  clearcoatGloss: 12,
+
+  emission: 13,
+  bump: 14,
+  opacity: 15,
+  interfaceIndexOfRefraction: 16,
+  materialIndexOfRefraction: 17,
+  objectSpaceNormal: 18,
+  tangentSpaceNormal: 19,
+  displacement: 20,
+  displacementScale: 21,
+  ambientOcclusion: 22,
+  ambientOcclusionScale: 23,
+
+  none: 0x8000,
+  userDefined: 0x8001
+};
+
 module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
