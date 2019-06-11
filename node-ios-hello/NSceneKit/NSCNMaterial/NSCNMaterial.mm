@@ -6,6 +6,9 @@
 //
 #include "NSCNMaterial.h"
 
+#define instancetype SCNMaterial
+#define js_value_instancetype js_value_SCNMaterial
+
 NSCNMaterial::NSCNMaterial() {}
 NSCNMaterial::~NSCNMaterial() {}
 
@@ -41,10 +44,16 @@ JS_INIT_CLASS(SCNMaterial, NSObject);
   JS_ASSIGN_PROP(proto, blendMode);
   // static members (ctor)
   JS_INIT_CTOR(SCNMaterial, NSObject);
+  JS_ASSIGN_STATIC_METHOD(materialWithMDLMaterial);
 JS_INIT_CLASS_END(SCNMaterial, NSObject);
 
 NAN_METHOD(NSCNMaterial::New) {
   @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function `SCNMaterial(...)`, turn into construct call.
+      JS_SET_RETURN_NEW(SCNMaterial, info);
+      return;
+    }
     Local<Object> obj = info.This();
 
     NSCNMaterial *ui = new NSCNMaterial();
@@ -434,3 +443,13 @@ NAN_SETTER(NSCNMaterial::blendModeSetter) {
   }
 }
 
+#include <SceneKit/ModelIO.h>
+#include "NMDLMaterial.h"
+
+NAN_METHOD(NSCNMaterial::materialWithMDLMaterial) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLMaterial, mdlMaterial);
+    JS_SET_RETURN(js_value_instancetype([SCNMaterial materialWithMDLMaterial: mdlMaterial]));
+  }
+}

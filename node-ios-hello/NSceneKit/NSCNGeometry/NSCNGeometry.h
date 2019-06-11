@@ -49,6 +49,8 @@ JS_WRAP_CLASS(SCNGeometry, NSObject);
   JS_PROP(wantsAdaptiveSubdivision);
   JS_PROP(edgeCreasesElement);
   JS_PROP(edgeCreasesSource);
+
+  JS_STATIC_METHOD(geometryWithMDLMesh);
 JS_WRAP_CLASS_END(SCNGeometry);
 
 #define js_value_SCNGeometrySource(x) js_value_wrapper(x, SCNGeometrySource)
@@ -87,6 +89,8 @@ JS_WRAP_CLASS(SCNGeometryElement, NSObject);
   JS_PROP(pointSize);
   JS_PROP(minimumPointScreenSpaceRadius);
   JS_PROP(maximumPointScreenSpaceRadius);
+
+  JS_STATIC_METHOD(geometryElementWithMDLSubmesh);
 JS_WRAP_CLASS_END(SCNGeometryElement);
 
 #if SCN_ENABLE_METAL

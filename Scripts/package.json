@@ -19,6 +19,7 @@
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.8.2",
     "socket.io-client": "^2.2.0",
+    "sweetiekit-art": "^0.0.0",
     "sweetiekit-dom": "^0.0.2"
   }
 }

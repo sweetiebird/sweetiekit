@@ -26,6 +26,8 @@ JS_WRAP_CLASS(SCNLight, NSObject);
   JS_PROP(attenuationStartDistance);
   JS_PROP(attenuationEndDistance);
   JS_PROP(attenuationFalloffExponent);
+
+  JS_STATIC_METHOD(lightWithMDLLight);
 JS_WRAP_CLASS_END(SCNLight);
 
 #endif /* NSCNLight_h */

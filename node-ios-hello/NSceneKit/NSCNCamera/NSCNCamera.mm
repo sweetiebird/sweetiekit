@@ -6,6 +6,9 @@
 //
 #include "NSCNCamera.h"
 
+#define instancetype SCNCamera
+#define js_value_instancetype js_value_SCNCamera
+
 NSCNCamera::NSCNCamera() {}
 NSCNCamera::~NSCNCamera() {}
 
@@ -61,6 +64,8 @@ JS_INIT_CLASS(SCNCamera, NSObject);
   JS_ASSIGN_PROP(proto, focalDistance);
   // static members (ctor)
   JS_INIT_CTOR(SCNCamera, NSObject);
+// SCNCamera
+  JS_ASSIGN_STATIC_METHOD(cameraWithMDLCamera);
 JS_INIT_CLASS_END(SCNCamera, NSObject);
 
 NAN_METHOD(NSCNCamera::New) {
@@ -896,5 +901,16 @@ NAN_SETTER(NSCNCamera::focalDistanceSetter) {
   @autoreleasepool
   {
     [self setFocalDistance: to_value_CGFloat(value)];
+  }
+}
+
+#include <SceneKit/ModelIO.h>
+#include "NMDLCamera.h"
+
+NAN_METHOD(NSCNCamera::cameraWithMDLCamera) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLCamera, mdlCamera);
+    JS_SET_RETURN(js_value_instancetype([SCNCamera cameraWithMDLCamera: mdlCamera]));
   }
 }

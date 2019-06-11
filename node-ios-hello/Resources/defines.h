@@ -576,11 +576,24 @@ namespace sweetiekit {
   bool SetTransform3(simd_float3x3& transform, Local<Value> value);
   bool SetTransform(simd_float4x4& transform, Local<Value> value);
   bool SetQuaternion(simd_quatf& quat, Local<Value> value);
+  bool SetVector1(simd_float1& xyz, Local<Value> value);
+  bool SetVector2(simd_float2& xyz, Local<Value> value);
   bool SetVector3(simd_float3& xyz, Local<Value> value);
+  bool SetVector4(simd_float4& xyz, Local<Value> value);
   bool SetTransform3(float* _Nonnull transform, Local<Value> value);
   bool SetTransform(float* _Nonnull transform, Local<Value> value);
   bool SetQuaternion(float* _Nonnull quat, Local<Value> value);
+  bool SetVector1(float* _Nonnull x, Local<Value> value);
+  bool SetVector2(float* _Nonnull xy, Local<Value> value);
   bool SetVector3(float* _Nonnull xyz, Local<Value> value);
+  bool SetVector4(float* _Nonnull xyzw, Local<Value> value);
+  bool IsTransform3(Local<Value> value);
+  bool IsTransform(Local<Value> value);
+  bool IsQuaternion(Local<Value> value);
+  bool IsVector1(Local<Value> value);
+  bool IsVector2(Local<Value> value);
+  bool IsVector3(Local<Value> value);
+  bool IsVector4(Local<Value> value);
   
   Local<Value> CreateArrayBufferFromPointerLength(const void* _Nonnull bytes, size_t length);
 }
@@ -783,24 +796,46 @@ Local<Value> js_value_NSTimeInterval(const NSTimeInterval& value);
 NSTimeInterval to_value_NSTimeInterval(const Local<Value>& value, bool* _Nullable failed = nullptr);
 bool is_value_NSTimeInterval(const Local<Value>& value);
 
-#define js_value_vector_float3   js_value_simd_float3
-#define js_value_matrix_float3x3 js_value_simd_float3x3
-#define js_value_matrix_float4x4 js_value_simd_float4x4
-#define to_value_vector_float3   to_value_simd_float3
-#define to_value_matrix_float3x3 to_value_simd_float3x3
-#define to_value_matrix_float4x4 to_value_simd_float4x4
-
 Local<Value> js_value_simd_quatf(const simd_quatf& value);
+Local<Value> js_value_simd_float1(const simd_float1& value);
+Local<Value> js_value_simd_float2(const simd_float2& value);
 Local<Value> js_value_simd_float3(const simd_float3& value);
 Local<Value> js_value_simd_float4(const simd_float4& value);
 Local<Value> js_value_simd_float3x3(const simd_float3x3& value);
 Local<Value> js_value_simd_float4x4(const simd_float4x4& value);
 simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float1   to_value_simd_float1(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float2   to_value_simd_float2(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float4   to_value_simd_float4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_simd_quatf(const Local<Value>& value);
+bool is_value_simd_float1(const Local<Value>& value);
+bool is_value_simd_float2(const Local<Value>& value);
+bool is_value_simd_float3(const Local<Value>& value);
+bool is_value_simd_float4(const Local<Value>& value);
+bool is_value_simd_float3x3(const Local<Value>& value);
+bool is_value_simd_float4x4(const Local<Value>& value);
 
+#define js_value_vector_float1   js_value_simd_float1
+#define js_value_vector_float2   js_value_simd_float2
+#define js_value_vector_float3   js_value_simd_float3
+#define js_value_vector_float4   js_value_simd_float4
+#define js_value_matrix_float3x3 js_value_simd_float3x3
+#define js_value_matrix_float4x4 js_value_simd_float4x4
+#define to_value_vector_float1   to_value_simd_float1
+#define to_value_vector_float2   to_value_simd_float2
+#define to_value_vector_float3   to_value_simd_float3
+#define to_value_vector_float4   to_value_simd_float4
+#define to_value_matrix_float3x3 to_value_simd_float3x3
+#define to_value_matrix_float4x4 to_value_simd_float4x4
+#define is_value_vector_float1   is_value_simd_float1
+#define is_value_vector_float2   is_value_simd_float2
+#define is_value_vector_float3   is_value_simd_float3
+#define is_value_vector_float4   is_value_simd_float4
+#define is_value_matrix_float3x3 is_value_simd_float3x3
+#define is_value_matrix_float4x4 is_value_simd_float4x4
 
 Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value);
 Local<Value> js_value_SCNVector3(const SCNVector3& value);

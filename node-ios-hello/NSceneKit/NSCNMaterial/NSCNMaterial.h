@@ -68,6 +68,8 @@ JS_WRAP_CLASS(SCNMaterial, NSObject);
   JS_PROP(readsFromDepthBuffer);
   JS_PROP(fresnelExponent);
   JS_PROP(blendMode);
+
+  JS_STATIC_METHOD(materialWithMDLMaterial);
 JS_WRAP_CLASS_END(SCNMaterial);
 
 #endif /* NSCNMaterial_h */

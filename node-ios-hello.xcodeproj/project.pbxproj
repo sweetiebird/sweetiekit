@@ -176,6 +176,25 @@
 		A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39CF22AF33BC00606332 /* NSCNGeometrySource.mm */; };
 		A19F39D222AF364800606332 /* NSCNGeometryElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39D122AF364800606332 /* NSCNGeometryElement.mm */; };
 		A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39D322AF375200606332 /* NSCNGeometryTessellator.mm */; };
+		A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39D822AF4AE100606332 /* NMDLAsset.mm */; };
+		A19F39DD22AF4BDD00606332 /* NMDLObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39DC22AF4BDC00606332 /* NMDLObject.mm */; };
+		A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39DF22AF4C1900606332 /* NMDLTypes.mm */; };
+		A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39E322AF4F3600606332 /* NMDLVertexDescriptor.mm */; };
+		A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39E722AF63D800606332 /* NMDLMaterial.mm */; };
+		A19F39ED22AF651E00606332 /* NMDLMaterialProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39EC22AF651E00606332 /* NMDLMaterialProperty.mm */; };
+		A19F39F122AF65F400606332 /* NMDLScatteringFunction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39EF22AF65F400606332 /* NMDLScatteringFunction.mm */; };
+		A19F39F522AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39F322AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm */; };
+		A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39F722AF678400606332 /* NMDLTextureFilter.mm */; };
+		A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39FB22AF678500606332 /* NMDLTextureSampler.mm */; };
+		A19F3A0122AF68B400606332 /* NMDLTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F39FF22AF68B400606332 /* NMDLTexture.mm */; };
+		A19F3A0522AF68F400606332 /* NMDLTransform.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A0322AF68F300606332 /* NMDLTransform.mm */; };
+		A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A0822AF72AA00606332 /* NMDLSubmesh.mm */; };
+		A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A0A22AF72AA00606332 /* NMDLLight.mm */; };
+		A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A0D22AF72AA00606332 /* NMDLMesh.mm */; };
+		A19F3A1822AF75A400606332 /* NMDLVertexAttributeData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A1422AF75A300606332 /* NMDLVertexAttributeData.mm */; };
+		A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A1622AF75A400606332 /* NMDLMeshBufferMap.mm */; };
+		A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A1B22AF7C8100606332 /* NMDLCamera.mm */; };
+		A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A2022AF90F000606332 /* NMDLSubmeshTopology.mm */; };
 		A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */; };
 		A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */; };
 		A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */; };
@@ -615,6 +634,44 @@
 		A19F39CF22AF33BC00606332 /* NSCNGeometrySource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNGeometrySource.mm; sourceTree = "<group>"; };
 		A19F39D122AF364800606332 /* NSCNGeometryElement.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNGeometryElement.mm; sourceTree = "<group>"; };
 		A19F39D322AF375200606332 /* NSCNGeometryTessellator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNGeometryTessellator.mm; sourceTree = "<group>"; };
+		A19F39D722AF4AE100606332 /* NMDLAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLAsset.h; sourceTree = "<group>"; };
+		A19F39D822AF4AE100606332 /* NMDLAsset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLAsset.mm; sourceTree = "<group>"; };
+		A19F39DB22AF4BDC00606332 /* NMDLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLObject.h; sourceTree = "<group>"; };
+		A19F39DC22AF4BDC00606332 /* NMDLObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLObject.mm; sourceTree = "<group>"; };
+		A19F39DF22AF4C1900606332 /* NMDLTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLTypes.mm; sourceTree = "<group>"; };
+		A19F39E022AF4C1900606332 /* NMDLTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLTypes.h; sourceTree = "<group>"; };
+		A19F39E322AF4F3600606332 /* NMDLVertexDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexDescriptor.mm; sourceTree = "<group>"; };
+		A19F39E422AF4F3600606332 /* NMDLVertexDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLVertexDescriptor.h; sourceTree = "<group>"; };
+		A19F39E722AF63D800606332 /* NMDLMaterial.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMaterial.mm; sourceTree = "<group>"; };
+		A19F39E822AF63D800606332 /* NMDLMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMaterial.h; sourceTree = "<group>"; };
+		A19F39EB22AF651E00606332 /* NMDLMaterialProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMaterialProperty.h; sourceTree = "<group>"; };
+		A19F39EC22AF651E00606332 /* NMDLMaterialProperty.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMaterialProperty.mm; sourceTree = "<group>"; };
+		A19F39EF22AF65F400606332 /* NMDLScatteringFunction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLScatteringFunction.mm; sourceTree = "<group>"; };
+		A19F39F022AF65F400606332 /* NMDLScatteringFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLScatteringFunction.h; sourceTree = "<group>"; };
+		A19F39F322AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLPhysicallyPlausibleScatteringFunction.mm; sourceTree = "<group>"; };
+		A19F39F422AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLPhysicallyPlausibleScatteringFunction.h; sourceTree = "<group>"; };
+		A19F39F722AF678400606332 /* NMDLTextureFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLTextureFilter.mm; sourceTree = "<group>"; };
+		A19F39F822AF678400606332 /* NMDLTextureFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLTextureFilter.h; sourceTree = "<group>"; };
+		A19F39FA22AF678500606332 /* NMDLTextureSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLTextureSampler.h; sourceTree = "<group>"; };
+		A19F39FB22AF678500606332 /* NMDLTextureSampler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLTextureSampler.mm; sourceTree = "<group>"; };
+		A19F39FF22AF68B400606332 /* NMDLTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLTexture.mm; sourceTree = "<group>"; };
+		A19F3A0022AF68B400606332 /* NMDLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLTexture.h; sourceTree = "<group>"; };
+		A19F3A0322AF68F300606332 /* NMDLTransform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLTransform.mm; sourceTree = "<group>"; };
+		A19F3A0422AF68F300606332 /* NMDLTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLTransform.h; sourceTree = "<group>"; };
+		A19F3A0722AF72AA00606332 /* NMDLSubmesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLSubmesh.h; sourceTree = "<group>"; };
+		A19F3A0822AF72AA00606332 /* NMDLSubmesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLSubmesh.mm; sourceTree = "<group>"; };
+		A19F3A0A22AF72AA00606332 /* NMDLLight.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLLight.mm; sourceTree = "<group>"; };
+		A19F3A0B22AF72AA00606332 /* NMDLLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLLight.h; sourceTree = "<group>"; };
+		A19F3A0D22AF72AA00606332 /* NMDLMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMesh.mm; sourceTree = "<group>"; };
+		A19F3A0E22AF72AA00606332 /* NMDLMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMesh.h; sourceTree = "<group>"; };
+		A19F3A1322AF75A300606332 /* NMDLVertexAttributeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLVertexAttributeData.h; sourceTree = "<group>"; };
+		A19F3A1422AF75A300606332 /* NMDLVertexAttributeData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexAttributeData.mm; sourceTree = "<group>"; };
+		A19F3A1622AF75A400606332 /* NMDLMeshBufferMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMeshBufferMap.mm; sourceTree = "<group>"; };
+		A19F3A1722AF75A400606332 /* NMDLMeshBufferMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMeshBufferMap.h; sourceTree = "<group>"; };
+		A19F3A1B22AF7C8100606332 /* NMDLCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLCamera.mm; sourceTree = "<group>"; };
+		A19F3A1C22AF7C8100606332 /* NMDLCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLCamera.h; sourceTree = "<group>"; };
+		A19F3A1F22AF90F000606332 /* NMDLSubmeshTopology.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLSubmeshTopology.h; sourceTree = "<group>"; };
+		A19F3A2022AF90F000606332 /* NMDLSubmeshTopology.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLSubmeshTopology.mm; sourceTree = "<group>"; };
 		A19F4DA0229F7D5A00E7F593 /* NUIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIEvent.h; sourceTree = "<group>"; };
 		A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIEvent.mm; sourceTree = "<group>"; };
 		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
@@ -2092,6 +2149,203 @@
 			path = NAUAudioUnitPreset;
 			sourceTree = "<group>";
 		};
+		A19F39D522AF4AE100606332 /* NModelIO */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A1E22AF90F000606332 /* NMDLSubmeshTopology */,
+				A19F3A1A22AF7C8100606332 /* NMDLCamera */,
+				A19F3A1522AF75A400606332 /* NMDLMeshBufferMap */,
+				A19F3A1222AF75A300606332 /* NMDLVertexAttributeData */,
+				A19F3A0922AF72AA00606332 /* NMDLLight */,
+				A19F3A0C22AF72AA00606332 /* NMDLMesh */,
+				A19F3A0622AF72AA00606332 /* NMDLSubmesh */,
+				A19F3A0222AF68F300606332 /* NMDLTransform */,
+				A19F39FE22AF68B400606332 /* NMDLTexture */,
+				A19F39F622AF678400606332 /* NMDLTextureFilter */,
+				A19F39F922AF678500606332 /* NMDLTextureSampler */,
+				A19F39F222AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction */,
+				A19F39EE22AF65F400606332 /* NMDLScatteringFunction */,
+				A19F39EA22AF651E00606332 /* NMDLMaterialProperty */,
+				A19F39E622AF63D800606332 /* NMDLMaterial */,
+				A19F39E222AF4F3600606332 /* NMDLVertexDescriptor */,
+				A19F39DE22AF4C1900606332 /* NMDLTypes */,
+				A19F39DA22AF4BDC00606332 /* NMDLObject */,
+				A19F39D622AF4AE100606332 /* NMDLAsset */,
+			);
+			path = NModelIO;
+			sourceTree = "<group>";
+		};
+		A19F39D622AF4AE100606332 /* NMDLAsset */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39D722AF4AE100606332 /* NMDLAsset.h */,
+				A19F39D822AF4AE100606332 /* NMDLAsset.mm */,
+			);
+			path = NMDLAsset;
+			sourceTree = "<group>";
+		};
+		A19F39DA22AF4BDC00606332 /* NMDLObject */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39DB22AF4BDC00606332 /* NMDLObject.h */,
+				A19F39DC22AF4BDC00606332 /* NMDLObject.mm */,
+			);
+			path = NMDLObject;
+			sourceTree = "<group>";
+		};
+		A19F39DE22AF4C1900606332 /* NMDLTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39E022AF4C1900606332 /* NMDLTypes.h */,
+				A19F39DF22AF4C1900606332 /* NMDLTypes.mm */,
+			);
+			path = NMDLTypes;
+			sourceTree = "<group>";
+		};
+		A19F39E222AF4F3600606332 /* NMDLVertexDescriptor */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39E422AF4F3600606332 /* NMDLVertexDescriptor.h */,
+				A19F39E322AF4F3600606332 /* NMDLVertexDescriptor.mm */,
+			);
+			path = NMDLVertexDescriptor;
+			sourceTree = "<group>";
+		};
+		A19F39E622AF63D800606332 /* NMDLMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39E822AF63D800606332 /* NMDLMaterial.h */,
+				A19F39E722AF63D800606332 /* NMDLMaterial.mm */,
+			);
+			path = NMDLMaterial;
+			sourceTree = "<group>";
+		};
+		A19F39EA22AF651E00606332 /* NMDLMaterialProperty */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39EB22AF651E00606332 /* NMDLMaterialProperty.h */,
+				A19F39EC22AF651E00606332 /* NMDLMaterialProperty.mm */,
+			);
+			path = NMDLMaterialProperty;
+			sourceTree = "<group>";
+		};
+		A19F39EE22AF65F400606332 /* NMDLScatteringFunction */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39F022AF65F400606332 /* NMDLScatteringFunction.h */,
+				A19F39EF22AF65F400606332 /* NMDLScatteringFunction.mm */,
+			);
+			path = NMDLScatteringFunction;
+			sourceTree = "<group>";
+		};
+		A19F39F222AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39F422AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.h */,
+				A19F39F322AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm */,
+			);
+			path = NMDLPhysicallyPlausibleScatteringFunction;
+			sourceTree = "<group>";
+		};
+		A19F39F622AF678400606332 /* NMDLTextureFilter */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39F822AF678400606332 /* NMDLTextureFilter.h */,
+				A19F39F722AF678400606332 /* NMDLTextureFilter.mm */,
+			);
+			path = NMDLTextureFilter;
+			sourceTree = "<group>";
+		};
+		A19F39F922AF678500606332 /* NMDLTextureSampler */ = {
+			isa = PBXGroup;
+			children = (
+				A19F39FA22AF678500606332 /* NMDLTextureSampler.h */,
+				A19F39FB22AF678500606332 /* NMDLTextureSampler.mm */,
+			);
+			path = NMDLTextureSampler;
+			sourceTree = "<group>";
+		};
+		A19F39FE22AF68B400606332 /* NMDLTexture */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A0022AF68B400606332 /* NMDLTexture.h */,
+				A19F39FF22AF68B400606332 /* NMDLTexture.mm */,
+			);
+			path = NMDLTexture;
+			sourceTree = "<group>";
+		};
+		A19F3A0222AF68F300606332 /* NMDLTransform */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A0422AF68F300606332 /* NMDLTransform.h */,
+				A19F3A0322AF68F300606332 /* NMDLTransform.mm */,
+			);
+			path = NMDLTransform;
+			sourceTree = "<group>";
+		};
+		A19F3A0622AF72AA00606332 /* NMDLSubmesh */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A0722AF72AA00606332 /* NMDLSubmesh.h */,
+				A19F3A0822AF72AA00606332 /* NMDLSubmesh.mm */,
+			);
+			path = NMDLSubmesh;
+			sourceTree = "<group>";
+		};
+		A19F3A0922AF72AA00606332 /* NMDLLight */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A0B22AF72AA00606332 /* NMDLLight.h */,
+				A19F3A0A22AF72AA00606332 /* NMDLLight.mm */,
+			);
+			path = NMDLLight;
+			sourceTree = "<group>";
+		};
+		A19F3A0C22AF72AA00606332 /* NMDLMesh */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A0E22AF72AA00606332 /* NMDLMesh.h */,
+				A19F3A0D22AF72AA00606332 /* NMDLMesh.mm */,
+			);
+			path = NMDLMesh;
+			sourceTree = "<group>";
+		};
+		A19F3A1222AF75A300606332 /* NMDLVertexAttributeData */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A1322AF75A300606332 /* NMDLVertexAttributeData.h */,
+				A19F3A1422AF75A300606332 /* NMDLVertexAttributeData.mm */,
+			);
+			path = NMDLVertexAttributeData;
+			sourceTree = "<group>";
+		};
+		A19F3A1522AF75A400606332 /* NMDLMeshBufferMap */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A1622AF75A400606332 /* NMDLMeshBufferMap.mm */,
+				A19F3A1722AF75A400606332 /* NMDLMeshBufferMap.h */,
+			);
+			path = NMDLMeshBufferMap;
+			sourceTree = "<group>";
+		};
+		A19F3A1A22AF7C8100606332 /* NMDLCamera */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A1C22AF7C8100606332 /* NMDLCamera.h */,
+				A19F3A1B22AF7C8100606332 /* NMDLCamera.mm */,
+			);
+			path = NMDLCamera;
+			sourceTree = "<group>";
+		};
+		A19F3A1E22AF90F000606332 /* NMDLSubmeshTopology */ = {
+			isa = PBXGroup;
+			children = (
+				A19F3A1F22AF90F000606332 /* NMDLSubmeshTopology.h */,
+				A19F3A2022AF90F000606332 /* NMDLSubmeshTopology.mm */,
+			);
+			path = NMDLSubmeshTopology;
+			sourceTree = "<group>";
+		};
 		A19F4D9F229F7D5A00E7F593 /* NUIEvent */ = {
 			isa = PBXGroup;
 			children = (
@@ -3113,6 +3367,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A19F39D522AF4AE100606332 /* NModelIO */,
 				A133708122AB382200FA3768 /* NMediaPlayer */,
 				A1482A93229D4DAC001502C0 /* GameFiles */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
@@ -3361,6 +3616,7 @@
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
+				A19F39F522AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
@@ -3381,6 +3637,7 @@
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
 				A133701E22AAE65100FA3768 /* NWKWebView.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
+				A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */,
 				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
@@ -3394,6 +3651,7 @@
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
 				A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */,
+				A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
@@ -3436,6 +3694,7 @@
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
+				A19F39DD22AF4BDD00606332 /* NMDLObject.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
@@ -3446,6 +3705,7 @@
 				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
 				A133701922AACEC800FA3768 /* NNSURL.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
+				A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
 				A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */,
@@ -3457,6 +3717,7 @@
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
+				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
@@ -3472,6 +3733,8 @@
 				A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */,
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
+				A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */,
+				A19F39F122AF65F400606332 /* NMDLScatteringFunction.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
 				A1EE7D78229D8EEF002B53FF /* NSCNSphere.mm in Sources */,
@@ -3480,6 +3743,7 @@
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
 				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
 				A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */,
+				A19F3A0522AF68F400606332 /* NMDLTransform.mm in Sources */,
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
@@ -3488,6 +3752,7 @@
 				A133701522AAAF9600FA3768 /* NNSCoder.mm in Sources */,
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
+				A19F3A0122AF68B400606332 /* NMDLTexture.mm in Sources */,
 				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,
 				A1EE7D7A229D8EEF002B53FF /* NSCNBox.mm in Sources */,
 				A13370FF22AF1C9100FA3768 /* NCoreAudioTypes.mm in Sources */,
@@ -3500,6 +3765,7 @@
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
+				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
@@ -3508,6 +3774,7 @@
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
+				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
 				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
@@ -3525,6 +3792,7 @@
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
+				A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
@@ -3533,6 +3801,8 @@
 				A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */,
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
+				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
+				A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */,
 				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
@@ -3545,6 +3815,7 @@
 				A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */,
 				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
+				A19F3A1822AF75A400606332 /* NMDLVertexAttributeData.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
@@ -3555,10 +3826,12 @@
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
+				A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */,
 				A13370EE22AF031D00FA3768 /* NAVAudioMixerNode.mm in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */,
 				A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */,
+				A19F39ED22AF651E00606332 /* NMDLMaterialProperty.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
@@ -3585,6 +3858,7 @@
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
+				A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */,
 				A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */,
 				A13370B122AEEBBF00FA3768 /* NAVAudioSessionPortDescription.mm in Sources */,
 				A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */,

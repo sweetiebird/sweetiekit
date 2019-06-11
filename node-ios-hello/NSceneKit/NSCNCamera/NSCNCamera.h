@@ -68,6 +68,8 @@ JS_WRAP_CLASS(SCNCamera, NSObject);
   JS_PROP(aperture);
   JS_PROP(focalSize);
   JS_PROP(focalDistance);
+  
+  JS_STATIC_METHOD(cameraWithMDLCamera);
 JS_WRAP_CLASS_END(SCNCamera);
 
 #endif /* NSCNCamera_h */

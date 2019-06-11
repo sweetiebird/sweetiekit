@@ -6,6 +6,9 @@
 //
 #include "NSCNNode.h"
 
+#define instancetype SCNNode
+#define js_value_instancetype js_value_SCNNode
+
 #import <SceneKit/SceneKit.h>
 #import <SceneKit/ModelIO.h>
 
@@ -104,11 +107,17 @@ JS_INIT_CLASS(SCNNode, NSObject);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalUp);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalRight);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), simdLocalFront);
+  JS_ASSIGN_STATIC_METHOD(nodeWithMDLObject);
 JS_INIT_CLASS_END(SCNNode, NSObject);
 
 #include "NSCNGeometry.h"
 
 NAN_METHOD(NSCNNode::New) {
+  if (!info.IsConstructCall()) {
+    // Invoked as plain function `SCNNode(...)`, turn into construct call.
+    JS_SET_RETURN_NEW(SCNNode, info);
+    return;
+  }
   Nan::HandleScope scope;
 
   Local<Object> obj = info.This();
@@ -1264,4 +1273,13 @@ NAN_GETTER(NSCNNode::simdWorldFrontGetter) {
   }
 }
 
-// --------- end source ----------------
+#include <SceneKit/ModelIO.h>
+#include "NMDLObject.h"
+
+NAN_METHOD(NSCNNode::nodeWithMDLObject) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLObject, mdlObject);
+    JS_SET_RETURN(js_value_instancetype([SCNNode nodeWithMDLObject: mdlObject]));
+  }
+}

@@ -102,7 +102,7 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   return nativeType;
 }
 Object.getOwnPropertyNames(SweetieKit)
-  .filter(x => ["AR", "AU", "AV", "CA", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP"]
+  .filter(x => ["AR", "AU", "AV", "CA", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP", "MDL"]
                  .filter(y => x.startsWith(y))
                  .length > 0)
   .sort()
@@ -113,6 +113,15 @@ Object.getOwnPropertyNames(SweetieKit)
    });
 
 global.id = SweetieKit.id;
+global.objc = SweetieKit.id;
+global.NSClassFromString = objc.NSClassFromString;
+global.NSSearchPathForDirectoriesInDomains = objc.NSSearchPathForDirectoriesInDomains;
+
+global.FS = require('fs');
+global.Path = require('path');
+global.DocumentsPath = objc.NSSearchPathForDirectoriesInDomains(9, 1, true)[0]
+
+global.Require = require;
 
 // gc periodically
 setInterval(() => {
