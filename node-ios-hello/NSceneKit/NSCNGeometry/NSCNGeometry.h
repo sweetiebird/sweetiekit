@@ -29,12 +29,20 @@
 #define is_value_MTLVertexFormat(x) IS_ENUM(MTLVertexFormat, NSUInteger, x)
 
 JS_WRAP_CLASS(SCNGeometry, NSObject);
+  JS_STATIC_METHOD(geometry);
+  JS_STATIC_METHOD(geometryWithSourcesElements);
+  JS_METHOD(insertMaterialAtIndex);
+  JS_METHOD(removeMaterialAtIndex);
+  JS_METHOD(replaceMaterialAtIndexWithMaterial);
+  JS_METHOD(materialWithName);
+  JS_METHOD(geometrySourcesForSemantic);
+  JS_METHOD(geometryElementAtIndex);
   JS_PROP(name);
   JS_PROP(materials);
   JS_PROP(firstMaterial);
-  JS_PROP(geometrySources);
-  JS_PROP(geometryElements);
-  JS_PROP(geometryElementCount);
+  JS_PROP_READONLY(geometrySources);
+  JS_PROP_READONLY(geometryElements);
+  JS_PROP_READONLY(geometryElementCount);
   JS_PROP(levelsOfDetail);
   JS_PROP(tessellator);
   JS_PROP(subdivisionLevel);
