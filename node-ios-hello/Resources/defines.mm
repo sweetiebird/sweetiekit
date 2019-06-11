@@ -747,6 +747,20 @@ namespace sweetiekit
     }
     return true;
   }
+  
+  Local<Value>
+  CreateArrayBufferFromPointerLength(const void* _Nonnull bytes, size_t length)
+  {
+    Local<ArrayBuffer> result = ArrayBuffer::New(JS_ISOLATE(), length);
+    memcpy(result->GetContents().Data(), bytes, length);
+    return result;
+  }
+}
+
+Local<Value>
+js_value_ArrayBuffer(const void* _Nonnull bytes, size_t length)
+{
+  return sweetiekit::CreateArrayBufferFromPointerLength(bytes, length);
 }
 
 @implementation SweetJSFunction

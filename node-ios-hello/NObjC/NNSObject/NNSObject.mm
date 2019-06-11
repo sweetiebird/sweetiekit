@@ -749,6 +749,31 @@ NAN_METHOD(NClass::New) {
 #include "NNSCache.h"
 #include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
+#include "NAVAudioFormat.h"
+#include "NAVAudioSession.h"
+#include "NAVAudioSessionChannelDescription.h"
+#include "NAVAudioSessionDataSourceDescription.h"
+#include "NAVAudioSessionPortDescription.h"
+#include "NAVAudioSessionRouteDescription.h"
+#include "NAUAudioUnit.h"
+#include "NAUParameterTree.h"
+#include "NAUParameterNode.h"
+#include "NAUParameterGroup.h"
+#include "NAUAudioUnitPreset.h"
+#include "NAVAudioEngine.h"
+#include "NAVAudioNode.h"
+#include "NAVAudioTime.h"
+#include "NAVAudioConnectionPoint.h"
+#include "NAVAudioBuffer.h"
+#include "NAVAudioCompressedBuffer.h"
+#include "NAVAudioPCMBuffer.h"
+#include "NAVAudioIONode.h"
+#include "NAVAudioOutputNode.h"
+#include "NAVAudioInputNode.h"
+#include "NAVAudioMixerNode.h"
+#include "NAVAudioPlayerNode.h"
+#include "NAVAudioFile.h"
+#include "NAVAudioChannelLayout.h"
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
@@ -927,8 +952,35 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Core Graphics
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     
+    // Audio Toolbox
+    JS_EXPORT_TYPE(AUAudioUnit);
+    JS_EXPORT_TYPE(AUParameterNode);
+    JS_EXPORT_TYPE(AUParameterGroup);
+    JS_EXPORT_TYPE(AUParameterTree);
+    JS_EXPORT_TYPE(AUAudioUnitPreset);
+    
     // AVFoundation
     JS_EXPORT_TYPE(AVAudioPlayer);
+    JS_EXPORT_TYPE(AVAudioFormat);
+    JS_EXPORT_TYPE(AVAudioSession);
+    JS_EXPORT_TYPE(AVAudioSessionChannelDescription);
+    JS_EXPORT_TYPE(AVAudioSessionDataSourceDescription);
+    JS_EXPORT_TYPE(AVAudioSessionPortDescription);
+    JS_EXPORT_TYPE(AVAudioSessionRouteDescription);
+    JS_EXPORT_TYPE(AVAudioEngine);
+    JS_EXPORT_TYPE(AVAudioNode);
+    JS_EXPORT_TYPE(AVAudioTime);
+    JS_EXPORT_TYPE(AVAudioConnectionPoint);
+    JS_EXPORT_TYPE(AVAudioBuffer);
+    JS_EXPORT_TYPE(AVAudioCompressedBuffer);
+    JS_EXPORT_TYPE(AVAudioPCMBuffer);
+    JS_EXPORT_TYPE(AVAudioIONode);
+    JS_EXPORT_TYPE(AVAudioOutputNode);
+    JS_EXPORT_TYPE(AVAudioInputNode);
+    JS_EXPORT_TYPE(AVAudioMixerNode);
+    JS_EXPORT_TYPE(AVAudioPlayerNode);
+    JS_EXPORT_TYPE(AVAudioFile);
+    JS_EXPORT_TYPE(AVAudioChannelLayout);
     
     // MediaPlayer
     JS_EXPORT_TYPE(MPMediaEntity);
@@ -1152,9 +1204,37 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MPMediaItem);
       JS_RETURN_TYPE(MPMediaEntity);
       
+      // Audio Toolbox
+      JS_RETURN_TYPE(AUAudioUnit);
+      JS_RETURN_TYPE(AUAudioUnitPreset);
+      JS_RETURN_TYPE(AUParameterTree);
+      JS_RETURN_TYPE(AUParameterGroup);
+      JS_RETURN_TYPE(AUParameterNode);
+      
       // AVFoundation
       JS_RETURN_TYPE(AVAudioPlayer);
-      
+      JS_RETURN_TYPE(AVAudioFormat);
+      JS_RETURN_TYPE(AVAudioSession);
+      JS_RETURN_TYPE(AVAudioSessionChannelDescription);
+      JS_RETURN_TYPE(AVAudioSessionDataSourceDescription);
+      JS_RETURN_TYPE(AVAudioSessionPortDescription);
+      JS_RETURN_TYPE(AVAudioSessionRouteDescription);
+
+      JS_RETURN_TYPE(AVAudioChannelLayout);
+      JS_RETURN_TYPE(AVAudioFile);
+      JS_RETURN_TYPE(AVAudioPlayerNode);
+      JS_RETURN_TYPE(AVAudioMixerNode);
+      JS_RETURN_TYPE(AVAudioInputNode);
+      JS_RETURN_TYPE(AVAudioOutputNode);
+      JS_RETURN_TYPE(AVAudioIONode);
+      JS_RETURN_TYPE(AVAudioPCMBuffer);
+      JS_RETURN_TYPE(AVAudioCompressedBuffer);
+      JS_RETURN_TYPE(AVAudioBuffer);
+      JS_RETURN_TYPE(AVAudioConnectionPoint);
+      JS_RETURN_TYPE(AVAudioTime);
+      JS_RETURN_TYPE(AVAudioNode);
+      JS_RETURN_TYPE(AVAudioEngine);
+
       // WebKit
       JS_RETURN_TYPE(WKWebView);
 

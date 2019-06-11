@@ -29,11 +29,10 @@
 (define-special cast (type x)
   (cat "(" (dequoted type) ")" "(" (compile x) ")"))
 
-(during-compilation
-  (define-global pointer-chars (any-of "*"))
+(define-global pointer-chars (any-of "*"))
 
-  (define-global compiled-type (x)
-    (rtrim (compile x) pointer-chars)))
+(define-global compiled-type (x)
+  (rtrim (compile x) pointer-chars))
 
 (define-special :: (s ...)
   (let f compiled-type
@@ -64,13 +63,11 @@
   `(%scope (NAN_SETTER ,setter)
       ,@body))
 
-(during-compilation
-  (define-macro %%decltype ((o name '%%type) (o default 'auto))
-    `(either (getenv ',(macroexpand name) 'type) ',(macroexpand default))))
+(define-macro %%decltype ((o name '%%type) (o default 'auto))
+  `(either (getenv ',(macroexpand name) 'type) ',(macroexpand default)))
 
-(during-compilation
-  (define-macro %decltype ((o name '%%type) (o default 'auto))
-    `(when-compiling (%%decltype ,name ',default))))
+(define-macro %decltype ((o name '%%type) (o default 'auto))
+  `(when-compiling (%%decltype ,name ',default)))
 
 (define-macro js-wrapper (type ...)
   `(:: (%literal "N" ,type)
@@ -331,20 +328,18 @@
        ,(js-declare-arg input-type "input")
        [,self ,(cat ":set-" setter) input])))
 
-(during-compilation
-  (define-global js-gen-method-part (name)
-    (if (and (string? name)
-             (= (char name (edge name)) ":"))
-        (cat ":" (rtrim name ":"))
-        (obj? name) nil
-       name))
-  (define-global js-gen-method-call (self name args)
-    `([,self ,(js-gen-method-part name) ,@(map js-gen-method-part args)])))
+(define-global js-gen-method-part (name)
+  (if (and (string? name)
+           (= (char name (edge name)) ":"))
+      (cat ":" (rtrim name ":"))
+      (obj? name) nil
+     name))
+(define-global js-gen-method-call (self name args)
+  `([,self ,(js-gen-method-part name) ,@(map js-gen-method-part args)]))
 
-(during-compilation
-  (define-global js-self-class ()
-    (let r (getenv 'Class 'type)
-      (if (obj? r) (hd r) r))))
+(define-global js-self-class ()
+  (let r (getenv 'Class 'type)
+    (if (obj? r) (hd r) r)))
 
 (define-macro %instancetype ()
   (js-self-class))
@@ -405,14 +400,12 @@
 (define-macro method (spec return-type name rest: args)
   `(js-method type: ,return-type name: ,name args: ,args static: ,(if (= spec "+") true false)))
 
-(during-compilation
-  (define-global js-print-type (type form)
-    (if (= type (getenv 'js-print-type_%prev 'type))
-        form
-        (do (setenv 'js-print-type_%prev type: type)
-            `(%do (%stmt "// " ,(escape type))
-                  ,form)))))
-
+(define-global js-print-type (type form)
+  (if (= type (getenv 'js-print-type_%prev 'type))
+      form
+      (do (setenv 'js-print-type_%prev type: type)
+          `(%do (%stmt "// " ,(escape type))
+                ,form))))
 
 (define-macro js-property (name: name type: type attrs: attrs class-type: (o class-type (getenv 'Class 'type)) class: static? readonly: readonly? getter: getter setter: setter)
   (prn `(js-property name: ,name type: ,type attrs: ,attrs class-type: ,class-type class: ,static? readonly: ,readonly? getter: ,getter setter: ,setter))

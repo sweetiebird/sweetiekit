@@ -170,7 +170,7 @@ JS_INIT_CLASS(NSURL, NSObject);
 #endif
 JS_INIT_CLASS_END(NSURL, NSObject);
 
-NSString* to_value_URLString(Local<Value> value, bool* _Nullable failed = nullptr) {
+NSString* to_value_URLString(Local<Value> value, bool* _Nullable failed) {
   if (failed) {
     *failed = false;
   }
@@ -198,7 +198,7 @@ bool is_value_URLString(Local<Value> value) {
   return false;
 }
 
-NSURL* to_value_URL(Local<Value> value, bool* _Nullable failed = nullptr) {
+NSURL* to_value_URL(Local<Value> value, bool* _Nullable failed) {
   if (failed) {
     *failed = false;
   }

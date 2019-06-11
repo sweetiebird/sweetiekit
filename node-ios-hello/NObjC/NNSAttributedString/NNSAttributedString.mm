@@ -29,59 +29,37 @@ JS_INIT_CLASS(NSAttributedString, NSObject);
 JS_INIT_CLASS_END(NSAttributedString, NSObject);
 
 NAN_METHOD(NNSAttributedString::New) {
-  Nan::HandleScope scope;
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'NSAttributedString(...)', turn into construct call.
+      JS_SET_RETURN_NEW(NSAttributedString, info);
+      return;
+    }
 
-  Local<Object> obj = info.This();
-
-  NNSAttributedString *ui = new NNSAttributedString();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge NSAttributedString *)(info[0].As<External>()->Value()));
-  } else if (info.Length() == 1) {
-    std::string str;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      str = *utf8Value;
+    declare_args();
+    NSAttributedString* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSAttributedString *)(info[0].As<External>()->Value());
+    } else if (is_value_NSString(info[0])) {
+      declare_pointer(NSString, string);
+      declare_nullable_pointer(NSDictionary, attributes);
+      self = [[NSAttributedString alloc] initWithString:string attributes:attributes];
+    } else if (is_value_NSAttributedString(info[0])) {
+      declare_pointer(NSAttributedString, string);
+      self = [[NSAttributedString alloc] initWithAttributedString:string];
+    } else if (info.Length() <= 0) {
+      self = [[NSAttributedString alloc] init];
+    }
+    if (self) {
+      NNSAttributedString *wrapper = new NNSAttributedString();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
     } else {
-      Nan::ThrowError("Invalid argument");
-    }
-    NSString* string = [NSString stringWithUTF8String:str.c_str()];
-    @autoreleasepool {
-      ui->SetNSObject([[NSAttributedString alloc] initWithString:string]);
-    }
-  } else if (info.Length() == 2) {
-    std::string str;
-    if (info[0]->IsString()) {
-      Nan::Utf8String utf8Value(Local<String>::Cast(info[0]));
-      str = *utf8Value;
-    } else {
-      Nan::ThrowError("Invalid argument");
-    }
-    NSString* string = [NSString stringWithUTF8String:str.c_str()];
-
-    Local<Object> attrs = JS_OBJ(info[1]);
-    NSMutableDictionary<NSAttributedStringKey, id> *dict = [[NSMutableDictionary<NSAttributedStringKey, id> alloc] init];
-
-    sweetiekit::forEachEntryInObject(attrs, ^(Local<Value> key, Local<Value> value) {
-      @autoreleasepool {
-        Nan::HandleScope scope;
-        NSString* nsKey = NJSStringToNSString(key);
-        id nsValue = sweetiekit::FromJS(value);
-        dict[nsKey] = nsValue;
-      }
-    });
-
-    @autoreleasepool {
-      ui->SetNSObject([[NSAttributedString alloc] initWithString:string attributes:dict]);
-    }
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[NSAttributedString alloc] init]);
+      Nan::ThrowError("NSAttributedString::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 void copy_value_NSRange(Local<Value> dst, const NSRange* _Nullable value)

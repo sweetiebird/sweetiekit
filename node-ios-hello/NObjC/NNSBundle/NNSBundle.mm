@@ -107,24 +107,39 @@ JS_INIT_CLASS(NSBundle, NSObject);
   JS_ASSIGN_STATIC_METHOD(initWithURL);
 JS_INIT_CLASS_END(NSBundle, NSObject);
 
+#include "NNSURL.h"
+
 NAN_METHOD(NNSBundle::New) {
-  Nan::HandleScope scope;
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'NSBundle(...)', turn into construct call.
+      JS_SET_RETURN_NEW(NSBundle, info);
+      return;
+    }
 
-  Local<Object> obj = info.This();
-
-  NNSBundle *bundle = new NNSBundle();
-
-  if (info[0]->IsExternal()) {
-    bundle->SetNSObject((__bridge NSBundle *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      bundle->SetNSObject([[NSBundle alloc] init]);
+    declare_args();
+    NSBundle* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSBundle *)(info[0].As<External>()->Value());
+    } else if (is_value_NSString(info[0])) {
+      declare_pointer(NSString, path);
+      self = [[NSBundle alloc] initWithPath:path];
+    } else if (is_value_NSURL(info[0])) {
+      declare_pointer(NSURL, url);
+      self = [[NSBundle alloc] initWithURL:url];
+    } else if (info.Length() <= 0) {
+      self = [[NSBundle alloc] init];
+    }
+    if (self) {
+      NNSBundle *wrapper = new NNSBundle();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NSBundle::New: invalid arguments");
     }
   }
-
-  bundle->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
 }
 
 NAN_METHOD(NNSBundle::main) {

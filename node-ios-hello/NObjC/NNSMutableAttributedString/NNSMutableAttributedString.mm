@@ -30,31 +30,37 @@ JS_INIT_CLASS(NSMutableAttributedString, NSAttributedString);
 JS_INIT_CLASS_END(NSMutableAttributedString, NSAttributedString);
 
 NAN_METHOD(NNSMutableAttributedString::New) {
-  Nan::HandleScope scope;
-
-  Local<Object> obj = info.This();
-
-  NNSMutableAttributedString *ui = new NNSMutableAttributedString();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge NSMutableAttributedString *)(info[0].As<External>()->Value()));
-  } else if (info.Length() == 1) {
-    NSString* string = NJSStringToNSString(info[0]);
-    if (string == nullptr) {
-      Nan::ThrowError("Invalid argument");
+  @autoreleasepool {
+    if (!info.IsConstructCall()) {
+      // Invoked as plain function 'NSMutableAttributedString(...)', turn into construct call.
+      JS_SET_RETURN_NEW(NSMutableAttributedString, info);
       return;
     }
-    @autoreleasepool {
-      ui->SetNSObject([[NSMutableAttributedString alloc] initWithString:string]);
+
+    declare_args();
+    NSMutableAttributedString* self = nullptr;
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSMutableAttributedString *)(info[0].As<External>()->Value());
+    } else if (is_value_NSString(info[0])) {
+      declare_pointer(NSString, string);
+      declare_nullable_pointer(NSDictionary, attributes);
+      self = [[NSMutableAttributedString alloc] initWithString:string attributes:attributes];
+    } else if (is_value_NSAttributedString(info[0])) {
+      declare_pointer(NSAttributedString, string);
+      self = [[NSMutableAttributedString alloc] initWithAttributedString:string];
+    } else if (info.Length() <= 0) {
+      self = [[NSMutableAttributedString alloc] init];
     }
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[NSMutableAttributedString alloc] init]);
+    if (self) {
+      NNSMutableAttributedString *wrapper = new NNSMutableAttributedString();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NSMutableAttributedString::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NNSMutableAttributedString::addAttribute) {
