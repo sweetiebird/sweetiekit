@@ -38,7 +38,7 @@ JS_INIT_CLASS(MDLMaterialProperty, NSObject);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat3);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat4);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticMatrix4x4);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemantic_URL);
+  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticURL);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticString);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticTextureSampler);
   JS_ASSIGN_STATIC_METHOD(initWithNameSemanticColor);
@@ -129,7 +129,7 @@ NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticMatrix4x4) {
 
 #include "NNSURL.h"
 
-NAN_METHOD(NMDLMaterialProperty::initWithNameSemantic_URL) {
+NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticURL) {
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);

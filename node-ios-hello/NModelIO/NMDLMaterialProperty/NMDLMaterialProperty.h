@@ -27,7 +27,7 @@ JS_WRAP_CLASS(MDLMaterialProperty, NSObject);
   JS_STATIC_METHOD(initWithNameSemanticFloat3);
   JS_STATIC_METHOD(initWithNameSemanticFloat4);
   JS_STATIC_METHOD(initWithNameSemanticMatrix4x4);
-  JS_STATIC_METHOD(initWithNameSemantic_URL);
+  JS_STATIC_METHOD(initWithNameSemanticURL);
   JS_STATIC_METHOD(initWithNameSemanticString);
   JS_STATIC_METHOD(initWithNameSemanticTextureSampler);
   JS_STATIC_METHOD(initWithNameSemanticColor);
