@@ -76,37 +76,34 @@ NAN_METHOD(NSCNGeometrySource::geometrySourceWithDataSemanticVectorCountFloatCom
 
 NAN_METHOD(NSCNGeometrySource::geometrySourceWithVerticesCount) {
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_args();
-    declare_pointer(const-SCNVector3, vertices);
+    declare_pointer(NSData, vertices);
     declare_value(NSInteger, count);
-    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithVertices: vertices count: count]));
-    #endif
+
+    const SCNVector3* bytes = (const SCNVector3 *)[vertices bytes];
+    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithVertices: bytes count: count]));
   }
 }
 
 NAN_METHOD(NSCNGeometrySource::geometrySourceWithNormalsCount) {
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_args();
-    declare_pointer(const-SCNVector3, normals);
+    declare_pointer(NSData, normals);
     declare_value(NSInteger, count);
-    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithNormals: normals count: count]));
-    #endif
+
+    const SCNVector3* bytes = (const SCNVector3 *)[normals bytes];
+    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithNormals: bytes count: count]));
   }
 }
 
 NAN_METHOD(NSCNGeometrySource::geometrySourceWithTextureCoordinatesCount) {
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_args();
-    declare_pointer(const-CGPoint, texcoord);
+    declare_pointer(NSData, texcoord);
     declare_value(NSInteger, count);
-    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithTextureCoordinates: texcoord count: count]));
-    #endif
+
+    const CGPoint* bytes = (const CGPoint *)[texcoord bytes];
+    JS_SET_RETURN(js_value_instancetype([SCNGeometrySource geometrySourceWithTextureCoordinates: bytes count: count]));
   }
 }
 
