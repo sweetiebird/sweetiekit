@@ -1039,6 +1039,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNPhysicsBody);
     JS_EXPORT_TYPE(SCNHitTestResult);
     JS_EXPORT_TYPE(SCNGeometry);
+    JS_EXPORT_TYPE(SCNGeometrySource);
+    JS_EXPORT_TYPE(SCNGeometryElement);
+#if SCN_ENABLE_METAL
+    JS_EXPORT_TYPE(SCNGeometryTessellator);
+#endif
     JS_EXPORT_TYPE(SCNBox);
     JS_EXPORT_TYPE(SCNCapsule);
     JS_EXPORT_TYPE(SCNCone);
@@ -1148,6 +1153,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNTube);
       JS_RETURN_TYPE(SCNText);
       JS_RETURN_TYPE(SCNShape);
+#if SCN_ENABLE_METAL
+      JS_RETURN_TYPE(SCNGeometryTessellator);
+#endif
+      JS_RETURN_TYPE(SCNGeometryElement);
+      JS_RETURN_TYPE(SCNGeometrySource);
       JS_RETURN_TYPE(SCNGeometry);
       JS_RETURN_TYPE(SCNLight);
       JS_RETURN_TYPE(SCNScene);
