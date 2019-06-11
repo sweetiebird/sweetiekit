@@ -857,6 +857,8 @@ NAN_METHOD(NClass::New) {
 #include "NMDLLight.h"
 #include "NMDLCamera.h"
 #include "NMDLMesh.h"
+#include "NMDLMeshBufferData.h"
+#include "NMDLMeshBufferDataAllocator.h"
 #include "NMDLMeshBufferMap.h"
 #include "NMDLVertexAttributeData.h"
 #include "NMDLSubmesh.h"
@@ -1054,6 +1056,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLCamera);
     JS_EXPORT_TYPE(MDLLight);
     JS_EXPORT_TYPE(MDLMesh);
+    JS_EXPORT_TYPE(MDLMeshBufferData);
+    JS_EXPORT_TYPE(MDLMeshBufferDataAllocator);
     JS_EXPORT_TYPE(MDLMeshBufferMap);
     JS_EXPORT_TYPE(MDLVertexAttributeData);
     JS_EXPORT_TYPE(MDLSubmesh);
@@ -1247,6 +1251,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MDLTextureFilter);
       JS_RETURN_TYPE(MDLTexture);
       JS_RETURN_TYPE(MDLTransform);
+      JS_RETURN_TYPE(MDLMeshBufferDataAllocator);
+      JS_RETURN_TYPE(MDLMeshBufferData);
       JS_RETURN_TYPE(MDLMeshBufferMap);
       JS_RETURN_TYPE(MDLVertexAttributeData);
       JS_RETURN_TYPE(MDLCamera);

@@ -27,6 +27,10 @@
 #define to_value_MDLProbePlacement(x) TO_ENUM(MDLProbePlacement, NSInteger, x)
 #define is_value_MDLProbePlacement(x) IS_ENUM(MDLProbePlacement, NSInteger, x)
 
+#define js_value_MDLMeshBufferType(x) JS_ENUM(MDLMeshBufferType, NSUInteger, x)
+#define to_value_MDLMeshBufferType(x) TO_ENUM(MDLMeshBufferType, NSUInteger, x)
+#define is_value_MDLMeshBufferType(x) IS_ENUM(MDLMeshBufferType, NSUInteger, x)
+
 /*
 typedef struct MDL_CLASS_EXPORT {
     vector_float3 maxBounds;

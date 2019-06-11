@@ -20,8 +20,11 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(MDLVertexAttributeData, NSObject);
-  //JS_METHOD(iosMethodName);
-  //JS_PROP(iosPropertyName);
+  JS_PROP(map);
+  JS_PROP(dataStart);
+  JS_PROP(stride);
+  JS_PROP(format);
+  JS_PROP(bufferSize);
 JS_WRAP_CLASS_END(MDLVertexAttributeData);
 
 #endif /* NMDLVertexAttributeData_h */

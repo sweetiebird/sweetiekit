@@ -21,19 +21,18 @@
 
 JS_WRAP_CLASS(MDLMesh, MDLObject);
 // MDLMesh
-#if TODO
-  JS_STATIC_METHOD(newBoxWithDimensions);
-  JS_STATIC_METHOD(newEllipsoidWithRadii);
-  JS_STATIC_METHOD(newCylinderWithHeight);
-  JS_STATIC_METHOD(newCapsuleWithHeight);
-  JS_STATIC_METHOD(newEllipticalConeWithHeight);
-  JS_STATIC_METHOD(newPlaneWithDimensions);
-  JS_STATIC_METHOD(newIcosahedronWithRadius);
-  JS_STATIC_METHOD(newSubdividedMesh);
-#endif
+  JS_STATIC_METHOD(newBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator);
+  JS_STATIC_METHOD(newEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator);
+  JS_STATIC_METHOD(newCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator);
+  JS_STATIC_METHOD(newCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator);
+  JS_STATIC_METHOD(newEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator);
+  JS_STATIC_METHOD(newPlaneWithDimensionsSegmentsGeometryTypeAllocator);
+  JS_STATIC_METHOD(newIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator);
+  JS_STATIC_METHOD(newIcosahedronWithRadiusInwardNormalsAllocator);
+  JS_STATIC_METHOD(newSubdividedMeshSubmeshIndexSubdivisionLevels);
   JS_STATIC_METHOD(initWithBufferAllocator);
-  JS_STATIC_METHOD(initWithVertexBuffer);
-  JS_STATIC_METHOD(initWithVertexBuffers);
+  JS_STATIC_METHOD(initWithVertexBufferVertexCountDescriptorSubmeshes);
+  JS_STATIC_METHOD(initWithVertexBuffersVertexCountDescriptorSubmeshes);
   JS_METHOD(vertexAttributeDataForAttributeNamed);
   JS_METHOD(vertexAttributeDataForAttributeNamedAsFormat);
   JS_METHOD(addAttributeWithNameFormat);
@@ -50,33 +49,22 @@ JS_WRAP_CLASS(MDLMesh, MDLObject);
   JS_METHOD(replaceAttributeNamed);
   JS_METHOD(updateAttributeNamed);
   JS_METHOD(removeAttributeNamed);
-#if TODO
-  JS_STATIC_METHOD(initBoxWithExtent);
-  JS_STATIC_METHOD(initSphereWithExtent);
-  JS_STATIC_METHOD(initHemisphereWithExtent);
-  JS_STATIC_METHOD(initCylinderWithExtent);
-  JS_STATIC_METHOD(initCapsuleWithExtent);
-  JS_STATIC_METHOD(initConeWithExtent);
-  JS_STATIC_METHOD(initPlaneWithExtent);
-  JS_STATIC_METHOD(initIcosahedronWithExtent);
-  JS_STATIC_METHOD(initMeshBySubdividingMesh);
-  JS_METHOD(generateAmbientOcclusionTextureWithSize);
-  JS_METHOD(generateAmbientOcclusionTextureWithQuality);
-  JS_METHOD(generateAmbientOcclusionVertexColorsWithRaysPerSample);
-  JS_METHOD(generateAmbientOcclusionVertexColorsWithQuality);
-  JS_METHOD(generateLightMapTextureWithTextureSize);
-  JS_METHOD(generateLightMapTextureWithQuality);
-  JS_METHOD(generateLightMapVertexColorsWithLightsToConsider);
-#endif
-#if TODO
-// MDLVertexAttributeData
-  JS_PROP(map);
-  JS_PROP(dataStart);
-  JS_PROP(stride);
-  JS_PROP(format);
-  JS_PROP(bufferSize);
-#endif
-// MDLMesh
+  JS_STATIC_METHOD(initBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator);
+  JS_STATIC_METHOD(initSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator);
+  JS_STATIC_METHOD(initHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator);
+  JS_STATIC_METHOD(initCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator);
+  JS_STATIC_METHOD(initCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator);
+  JS_STATIC_METHOD(initConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator);
+  JS_STATIC_METHOD(initPlaneWithExtentSegmentsGeometryTypeAllocator);
+  JS_STATIC_METHOD(initIcosahedronWithExtentInwardNormalsGeometryTypeAllocator);
+  JS_STATIC_METHOD(initMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator);
+  JS_METHOD(generateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed);
+  JS_METHOD(generateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed);
+  JS_METHOD(generateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed);
+  JS_METHOD(generateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed);
+  JS_METHOD(generateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed);
+  JS_METHOD(generateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed);
+  JS_METHOD(generateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed);
   JS_PROP_READONLY(boundingBox);
   JS_PROP(vertexDescriptor);
   JS_PROP(vertexCount);

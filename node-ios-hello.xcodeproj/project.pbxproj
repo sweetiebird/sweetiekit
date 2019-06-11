@@ -136,6 +136,8 @@
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
 		A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16E2282229B002A8216 /* NNSBundle.mm */; };
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
+		A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47222B0199800415AD8 /* NMDLMeshBufferData.mm */; };
+		A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */; };
 		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
@@ -572,6 +574,10 @@
 		A174A16D22822290002A8216 /* NNSBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSBundle.h; sourceTree = "<group>"; };
 		A174A16E2282229B002A8216 /* NNSBundle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSBundle.mm; sourceTree = "<group>"; };
 		A174A170228227A2002A8216 /* sunflower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sunflower.mp3; sourceTree = "<group>"; };
+		A174A47122B0199800415AD8 /* NMDLMeshBufferData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMeshBufferData.h; sourceTree = "<group>"; };
+		A174A47222B0199800415AD8 /* NMDLMeshBufferData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMeshBufferData.mm; sourceTree = "<group>"; };
+		A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMeshBufferDataAllocator.mm; sourceTree = "<group>"; };
+		A174A47522B0199800415AD8 /* NMDLMeshBufferDataAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMeshBufferDataAllocator.h; sourceTree = "<group>"; };
 		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
 		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
 		A178B2712288790C005184EE /* NUITabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITabBarItem.h; sourceTree = "<group>"; };
@@ -1911,6 +1917,24 @@
 			path = NNSBundle;
 			sourceTree = "<group>";
 		};
+		A174A47022B0199800415AD8 /* NMDLMeshBufferData */ = {
+			isa = PBXGroup;
+			children = (
+				A174A47122B0199800415AD8 /* NMDLMeshBufferData.h */,
+				A174A47222B0199800415AD8 /* NMDLMeshBufferData.mm */,
+			);
+			path = NMDLMeshBufferData;
+			sourceTree = "<group>";
+		};
+		A174A47322B0199800415AD8 /* NMDLMeshBufferDataAllocator */ = {
+			isa = PBXGroup;
+			children = (
+				A174A47522B0199800415AD8 /* NMDLMeshBufferDataAllocator.h */,
+				A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */,
+			);
+			path = NMDLMeshBufferDataAllocator;
+			sourceTree = "<group>";
+		};
 		A178B26C228863B5005184EE /* NUIAlertAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2152,6 +2176,8 @@
 		A19F39D522AF4AE100606332 /* NModelIO */ = {
 			isa = PBXGroup;
 			children = (
+				A174A47022B0199800415AD8 /* NMDLMeshBufferData */,
+				A174A47322B0199800415AD8 /* NMDLMeshBufferDataAllocator */,
 				A19F3A1E22AF90F000606332 /* NMDLSubmeshTopology */,
 				A19F3A1A22AF7C8100606332 /* NMDLCamera */,
 				A19F3A1522AF75A400606332 /* NMDLMeshBufferMap */,
@@ -3625,6 +3651,7 @@
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
+				A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */,
 				A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				A13370D922AEFC6A00FA3768 /* NAVAudioBuffer.mm in Sources */,
@@ -3809,6 +3836,7 @@
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
 				A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */,
 				A13370D822AEFC6A00FA3768 /* NAVAudioCompressedBuffer.mm in Sources */,
+				A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */,
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,

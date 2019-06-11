@@ -595,6 +595,32 @@ namespace sweetiekit {
   bool IsVector3(Local<Value> value);
   bool IsVector4(Local<Value> value);
   
+  bool SetVector1i(simd_int1& x, Local<Value> value);
+  bool SetVector2i(simd_int2& xy, Local<Value> value);
+  bool SetVector3i(simd_int3& xyz, Local<Value> value);
+  bool SetVector4i(simd_int4& xyzw, Local<Value> value);
+  bool SetVector1i(int32_t* _Nonnull x, Local<Value> value);
+  bool SetVector2i(int32_t* _Nonnull xy, Local<Value> value);
+  bool SetVector3i(int32_t* _Nonnull xyz, Local<Value> value);
+  bool SetVector4i(int32_t* _Nonnull xyzw, Local<Value> value);
+  bool IsVector1i(Local<Value> value);
+  bool IsVector2i(Local<Value> value);
+  bool IsVector3i(Local<Value> value);
+  bool IsVector4i(Local<Value> value);
+  
+  bool SetVector1u(simd_uint1& x, Local<Value> value);
+  bool SetVector2u(simd_uint2& xy, Local<Value> value);
+  bool SetVector3u(simd_uint3& xyz, Local<Value> value);
+  bool SetVector4u(simd_uint4& xyzw, Local<Value> value);
+  bool SetVector1u(uint32_t* _Nonnull x, Local<Value> value);
+  bool SetVector2u(uint32_t* _Nonnull xy, Local<Value> value);
+  bool SetVector3u(uint32_t* _Nonnull xyz, Local<Value> value);
+  bool SetVector4u(uint32_t* _Nonnull xyzw, Local<Value> value);
+  bool IsVector1u(Local<Value> value);
+  bool IsVector2u(Local<Value> value);
+  bool IsVector3u(Local<Value> value);
+  bool IsVector4u(Local<Value> value);
+  
   Local<Value> CreateArrayBufferFromPointerLength(const void* _Nonnull bytes, size_t length);
 }
 
@@ -836,6 +862,58 @@ bool is_value_simd_float4x4(const Local<Value>& value);
 #define is_value_vector_float4   is_value_simd_float4
 #define is_value_matrix_float3x3 is_value_simd_float3x3
 #define is_value_matrix_float4x4 is_value_simd_float4x4
+
+Local<Value> js_value_simd_int1(const simd_int1& value);
+Local<Value> js_value_simd_int2(const simd_int2& value);
+Local<Value> js_value_simd_int3(const simd_int3& value);
+Local<Value> js_value_simd_int4(const simd_int4& value);
+simd_int1   to_value_simd_int1(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_int2   to_value_simd_int2(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_int3   to_value_simd_int3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_int4   to_value_simd_int4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_simd_int1(const Local<Value>& value);
+bool is_value_simd_int2(const Local<Value>& value);
+bool is_value_simd_int3(const Local<Value>& value);
+bool is_value_simd_int4(const Local<Value>& value);
+
+#define js_value_vector_int1   js_value_simd_int1
+#define js_value_vector_int2   js_value_simd_int2
+#define js_value_vector_int3   js_value_simd_int3
+#define js_value_vector_int4   js_value_simd_int4
+#define to_value_vector_int1   to_value_simd_int1
+#define to_value_vector_int2   to_value_simd_int2
+#define to_value_vector_int3   to_value_simd_int3
+#define to_value_vector_int4   to_value_simd_int4
+#define is_value_vector_int1   is_value_simd_int1
+#define is_value_vector_int2   is_value_simd_int2
+#define is_value_vector_int3   is_value_simd_int3
+#define is_value_vector_int4   is_value_simd_int4
+
+Local<Value> js_value_simd_uint1(const simd_uint1& value);
+Local<Value> js_value_simd_uint2(const simd_uint2& value);
+Local<Value> js_value_simd_uint3(const simd_uint3& value);
+Local<Value> js_value_simd_uint4(const simd_uint4& value);
+simd_uint1   to_value_simd_uint1(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_uint2   to_value_simd_uint2(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_uint3   to_value_simd_uint3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_uint4   to_value_simd_uint4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_simd_uint1(const Local<Value>& value);
+bool is_value_simd_uint2(const Local<Value>& value);
+bool is_value_simd_uint3(const Local<Value>& value);
+bool is_value_simd_uint4(const Local<Value>& value);
+
+#define js_value_vector_uint1   js_value_simd_uint1
+#define js_value_vector_uint2   js_value_simd_uint2
+#define js_value_vector_uint3   js_value_simd_uint3
+#define js_value_vector_uint4   js_value_simd_uint4
+#define to_value_vector_uint1   to_value_simd_uint1
+#define to_value_vector_uint2   to_value_simd_uint2
+#define to_value_vector_uint3   to_value_simd_uint3
+#define to_value_vector_uint4   to_value_simd_uint4
+#define is_value_vector_uint1   is_value_simd_uint1
+#define is_value_vector_uint2   is_value_simd_uint2
+#define is_value_vector_uint3   is_value_simd_uint3
+#define is_value_vector_uint4   is_value_simd_uint4
 
 Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value);
 Local<Value> js_value_SCNVector3(const SCNVector3& value);
