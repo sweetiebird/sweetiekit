@@ -103,21 +103,21 @@ NAN_GETTER(NUIKitGlobals::UIControlEventsGetter) {
 
   Local<Object> result = Object::New(Isolate::GetCurrent());
   
-  result->Set(JS_STR("touchDown"), JS_NUM(UIControlEventTouchDown));
-  result->Set(JS_STR("touchDownRepeat"), JS_NUM(UIControlEventTouchDownRepeat));
-  result->Set(JS_STR("touchDragInside"), JS_NUM(UIControlEventTouchDragInside));
-  result->Set(JS_STR("touchDragOutside"), JS_NUM(UIControlEventTouchDragOutside));
-  result->Set(JS_STR("touchDragEnter"), JS_NUM(UIControlEventTouchDragEnter));
-  result->Set(JS_STR("touchDragExit"), JS_NUM(UIControlEventTouchDragExit));
-  result->Set(JS_STR("touchUpInside"), JS_NUM(UIControlEventTouchUpInside));
-  result->Set(JS_STR("touchUpOutside"), JS_NUM(UIControlEventTouchUpOutside));
-  result->Set(JS_STR("touchCancel"), JS_NUM(UIControlEventTouchCancel));
-  result->Set(JS_STR("valueChanged"), JS_NUM(UIControlEventValueChanged));
-  result->Set(JS_STR("primaryActionTriggered"), JS_NUM(UIControlEventPrimaryActionTriggered));
-  result->Set(JS_STR("editingDidBegin"), JS_NUM(UIControlEventEditingDidBegin));
-  result->Set(JS_STR("editingChanged"), JS_NUM(UIControlEventEditingChanged));
-  result->Set(JS_STR("editingDidEnd"), JS_NUM(UIControlEventEditingDidEnd));
-  result->Set(JS_STR("editingDidEndOnExit"), JS_NUM(UIControlEventEditingDidEndOnExit));
+  result->Set(JS_STR("touchDown"), js_value_NSUInteger(UIControlEventTouchDown));
+  result->Set(JS_STR("touchDownRepeat"), js_value_NSUInteger(UIControlEventTouchDownRepeat));
+  result->Set(JS_STR("touchDragInside"), js_value_NSUInteger(UIControlEventTouchDragInside));
+  result->Set(JS_STR("touchDragOutside"), js_value_NSUInteger(UIControlEventTouchDragOutside));
+  result->Set(JS_STR("touchDragEnter"), js_value_NSUInteger(UIControlEventTouchDragEnter));
+  result->Set(JS_STR("touchDragExit"), js_value_NSUInteger(UIControlEventTouchDragExit));
+  result->Set(JS_STR("touchUpInside"), js_value_NSUInteger(UIControlEventTouchUpInside));
+  result->Set(JS_STR("touchUpOutside"), js_value_NSUInteger(UIControlEventTouchUpOutside));
+  result->Set(JS_STR("touchCancel"), js_value_NSUInteger(UIControlEventTouchCancel));
+  result->Set(JS_STR("valueChanged"), js_value_NSUInteger(UIControlEventValueChanged));
+  result->Set(JS_STR("primaryActionTriggered"), js_value_NSUInteger(UIControlEventPrimaryActionTriggered));
+  result->Set(JS_STR("editingDidBegin"), js_value_NSUInteger(UIControlEventEditingDidBegin));
+  result->Set(JS_STR("editingChanged"), js_value_NSUInteger(UIControlEventEditingChanged));
+  result->Set(JS_STR("editingDidEnd"), js_value_NSUInteger(UIControlEventEditingDidEnd));
+  result->Set(JS_STR("editingDidEndOnExit"), js_value_NSUInteger(UIControlEventEditingDidEndOnExit));
 
   JS_SET_RETURN(result);
 }
