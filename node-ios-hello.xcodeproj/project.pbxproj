@@ -228,6 +228,7 @@
 		A1D672B722699DB300562A42 /* NUITextField.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672B622699DB300562A42 /* NUITextField.mm */; };
 		A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672B922699DB900562A42 /* NUITabBarController.mm */; };
 		A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D672BF2269A06F00562A42 /* NUIImage.mm */; };
+		A1DE16D922AD86790055E891 /* DashButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1DE16D822AD86790055E891 /* DashButton.xib */; };
 		A1E2D7A7226A59C800FA1562 /* EmailTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E2D7A6226A59C800FA1562 /* EmailTextField.xib */; };
 		A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */; };
 		A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */; };
@@ -675,6 +676,7 @@
 		A1D672BA22699DB900562A42 /* NUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarController.h; sourceTree = "<group>"; };
 		A1D672BE2269A06500562A42 /* NUIImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImage.h; sourceTree = "<group>"; };
 		A1D672BF2269A06F00562A42 /* NUIImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImage.mm; sourceTree = "<group>"; };
+		A1DE16D822AD86790055E891 /* DashButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashButton.xib; sourceTree = "<group>"; };
 		A1E2D7A6226A59C800FA1562 /* EmailTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailTextField.xib; sourceTree = "<group>"; };
 		A1E2D7B6226A5BC100FA1562 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
 		A1E2D7BA226A5E0200FA1562 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -2464,6 +2466,7 @@
 				A1FC1A0C225C65DD00085571 /* LaunchScreen.storyboard */,
 				A1E2D7A6226A59C800FA1562 /* EmailTextField.xib */,
 				A1E2D7BE226A63C900FA1562 /* PasswordTextField.xib */,
+				A1DE16D822AD86790055E891 /* DashButton.xib */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2945,6 +2948,7 @@
 				A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */,
 				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
 				A16EF590229D07D4007BCB49 /* Fire.sks in Resources */,
+				A1DE16D922AD86790055E891 /* DashButton.xib in Resources */,
 				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
