@@ -209,7 +209,7 @@ NAN_METHOD(NMDLMaterial::resolveTexturesWithResolver) {
   JS_UNWRAP(MDLMaterial, self);
   declare_autoreleasepool {
     declare_args();
-    declare_value(id/* <MDLAssetResolver>*/, resolver);
+    declare_nullable_value(id/* <MDLAssetResolver>*/, resolver);
     [self resolveTexturesWithResolver: resolver];
   }
 }
@@ -218,7 +218,7 @@ NAN_METHOD(NMDLMaterial::loadTexturesUsingResolver) {
   JS_UNWRAP(MDLMaterial, self);
   declare_autoreleasepool {
     declare_args();
-    declare_value(id/* <MDLAssetResolver>*/, resolver);
+    declare_nullable_value(id/* <MDLAssetResolver>*/, resolver);
     [self loadTexturesUsingResolver: resolver];
   }
 }
