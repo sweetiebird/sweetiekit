@@ -1102,8 +1102,8 @@
 		A124EFE122AF383800F29727 /* NWKNavigationDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */,
 				A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */,
+				A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */,
 				A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */,
 			);
 			path = NWKNavigationDelegate;
