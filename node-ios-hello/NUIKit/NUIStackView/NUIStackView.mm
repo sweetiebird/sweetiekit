@@ -33,6 +33,8 @@ JS_INIT_CLASS(UIStackView, UIView);
   JS_ASSIGN_STATIC_METHOD(initWithArrangedSubviews);
 JS_INIT_CLASS_END(UIStackView, UIView);
 
+#include "NNSCoder.h"
+
 NAN_METHOD(NUIStackView::New) {
   @autoreleasepool {
    if (!info.IsConstructCall()) {
@@ -43,6 +45,12 @@ NAN_METHOD(NUIStackView::New) {
     UIStackView* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIStackView *)(info[0].As<External>()->Value());
+    } else if (is_value_NSCoder(info[0])) {
+      self = [[UIStackView alloc] initWithCoder:to_value_NSCoder(info[0])];
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UIStackView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (is_value_NSArray(info[0])) {
+      self = [[UIStackView alloc] initWithArrangedSubviews:to_value_NSArray<UIView*>(info[0])];
     } else if (info.Length() <= 0) {
       self = [[UIStackView alloc] init];
     }
@@ -65,8 +73,6 @@ NAN_METHOD(NUIStackView::initWithFrame) {
     JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithFrame: frame]));
   }
 }
-
-#include "NNSCoder.h"
 
 NAN_METHOD(NUIStackView::initWithCoder) {
   declare_autoreleasepool {
