@@ -40,6 +40,9 @@ GetVoidMethods = function GetVoidMethods(cls) {
 }
 
 BindClass = function BindClass(nativeType, className = nativeType.name) {
+  if (!(nativeType instanceof SweetieKit.id)) {
+    return;
+  }
   let UIViewClass = SweetieKit.id.classFromString(className);
   if (!UIViewClass) {
     return;

@@ -860,6 +860,9 @@ NAN_METHOD(NClass::New) {
 #include "NMDLMeshBufferData.h"
 #include "NMDLMeshBufferDataAllocator.h"
 #include "NMDLMeshBufferMap.h"
+#include "NMDLVertexDescriptor.h"
+#include "NMDLVertexBufferLayout.h"
+#include "NMDLVertexAttribute.h"
 #include "NMDLVertexAttributeData.h"
 #include "NMDLSubmesh.h"
 #include "NMDLSubmeshTopology.h"
@@ -871,7 +874,6 @@ NAN_METHOD(NClass::New) {
 #include "NMDLPhysicallyPlausibleScatteringFunction.h"
 #include "NMDLMaterialProperty.h"
 #include "NMDLMaterial.h"
-#include "NMDLVertexDescriptor.h"
 
 #define JS_EXPORT_TYPE_AS(type, name) \
         auto N_##type = N##type::Initialize(isolate, exports); \
@@ -1059,7 +1061,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLMeshBufferData);
     JS_EXPORT_TYPE(MDLMeshBufferDataAllocator);
     JS_EXPORT_TYPE(MDLMeshBufferMap);
+    JS_EXPORT_TYPE(MDLVertexBufferLayout);
+    JS_EXPORT_TYPE(MDLVertexAttribute);
     JS_EXPORT_TYPE(MDLVertexAttributeData);
+    JS_EXPORT_TYPE(MDLVertexDescriptor);
     JS_EXPORT_TYPE(MDLSubmesh);
     JS_EXPORT_TYPE(MDLSubmeshTopology);
     JS_EXPORT_TYPE(MDLTransform);
@@ -1070,7 +1075,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLPhysicallyPlausibleScatteringFunction);
     JS_EXPORT_TYPE(MDLMaterialProperty);
     JS_EXPORT_TYPE(MDLMaterial);
-    JS_EXPORT_TYPE(MDLVertexDescriptor);
 
     // SpriteKit
     JS_EXPORT_TYPE(SKPhysicsContact);
@@ -1242,7 +1246,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKAction);
 
       // ModelIO
-      JS_RETURN_TYPE(MDLVertexDescriptor);
       JS_RETURN_TYPE(MDLMaterial);
       JS_RETURN_TYPE(MDLMaterialProperty);
       JS_RETURN_TYPE(MDLPhysicallyPlausibleScatteringFunction);
@@ -1254,6 +1257,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MDLMeshBufferDataAllocator);
       JS_RETURN_TYPE(MDLMeshBufferData);
       JS_RETURN_TYPE(MDLMeshBufferMap);
+      JS_RETURN_TYPE(MDLVertexDescriptor);
+      JS_RETURN_TYPE(MDLVertexBufferLayout);
+      JS_RETURN_TYPE(MDLVertexAttribute);
       JS_RETURN_TYPE(MDLVertexAttributeData);
       JS_RETURN_TYPE(MDLCamera);
       JS_RETURN_TYPE(MDLLight);

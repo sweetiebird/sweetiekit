@@ -1010,6 +1010,45 @@ bool is_value_UIOffset(const Local<Value>& value);
 
 
 template<typename T>
+Local<Value> js_value_NSMutableArray(NSMutableArray<T>* _Nullable arr) {
+  if (arr == nullptr) {
+    return Nan::Undefined();
+  } else {
+    auto result = Nan::New<Array>();
+    for (NSInteger i = 0, n = [arr count]; i < n; i++) {
+      T item = [arr objectAtIndex:i];
+      Nan::Set(result, static_cast<uint32_t>(i), sweetiekit::GetWrapperFor(item));
+    }
+    return result;
+  }
+}
+
+template<typename T>
+NSMutableArray<T>* _Nullable to_value_NSMutableArray(Local<Value> arr) {
+  if (!arr->IsArray()) {
+    return nullptr;
+  } else {
+    auto value = Local<Array>::Cast(arr);
+    auto result = [[NSMutableArray alloc] initWithCapacity:value->Length()];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id item = sweetiekit::GetValueFor(value->Get(i));
+      [result setObject:item atIndexedSubscript:i];
+    }
+    return result;
+  }
+}
+
+template<typename T>
+bool is_value_NSMutableArray(Local<Value> arr) {
+  if (!arr->IsArray()) {
+    return false;
+  }
+  // TODO: check the type of each object in the array against T
+  return true;
+}
+
+
+template<typename T>
 Local<Value> js_value_NSArray(NSArray<T>* _Nullable arr) {
   if (arr == nullptr) {
     return Nan::Undefined();
@@ -1097,23 +1136,27 @@ NSNumber* _Nullable to_value_NSNumber(Local<Value> value, bool* _Nullable failed
 bool is_value_NSNumber(Local<Value> value);
 
 Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable value);
-NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> dict, bool* _Nullable failed = nullptr);
+NSMutableDictionary* _Nullable to_value_NSMutableDictionary(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSMutableDictionary(Local<Value> value);
 
 Local<Value> js_value_NSDictionary(NSDictionary* _Nullable value);
-NSDictionary* _Nullable to_value_NSDictionary(Local<Value> dict, bool* _Nullable failed = nullptr);
+NSDictionary* _Nullable to_value_NSDictionary(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSDictionary(Local<Value> value);
 
 Local<Value> js_value_NSMutableSet(NSMutableSet* _Nullable value);
-NSMutableSet* _Nullable to_value_NSMutableSet(Local<Value> dict, bool* _Nullable failed = nullptr);
+NSMutableSet* _Nullable to_value_NSMutableSet(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSMutableSet(Local<Value> value);
 
 Local<Value> js_value_NSSet(NSSet* _Nullable value);
-NSSet* _Nullable to_value_NSSet(Local<Value> dict, bool* _Nullable failed = nullptr);
+NSSet* _Nullable to_value_NSSet(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSSet(Local<Value> value);
 
+Local<Value> js_value_NSMutableArray(NSMutableArray* _Nullable value);
+NSMutableArray* _Nullable to_value_NSMutableArray(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_NSMutableArray(Local<Value> value);
+
 Local<Value> js_value_NSArray(NSArray* _Nullable value);
-NSArray* _Nullable to_value_NSArray(Local<Value> dict, bool* _Nullable failed = nullptr);
+NSArray* _Nullable to_value_NSArray(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSArray(Local<Value> value);
 
 template<typename T>

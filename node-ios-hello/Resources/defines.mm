@@ -2667,6 +2667,50 @@ bool is_value_NSSet(Local<Value> value) {
   return true;
 }
 
+Local<Value> js_value_NSMutableArray(NSMutableArray* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Array> result(Array::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      Local<Value> i(js_value_NSUInteger(idx));
+      Local<Value> v(js_value_id(obj));
+      result->Set(i, v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSMutableArray* _Nullable to_value_NSMutableArray(Local<Value> arr, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (arr->IsArray()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Array>::Cast(arr));
+    auto result = [[NSMutableArray alloc] initWithCapacity:value->Length()];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id v = to_value_id(value->Get(i));
+      [result setObject:v atIndexedSubscript:i];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSMutableArray failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSMutableArray(Local<Value> value) {
+  if (!value->IsArray()) {
+    return false;
+  }
+  return true;
+}
+
 Local<Value> js_value_NSArray(NSArray* _Nullable value) {
   if (value == nullptr) {
     return Nan::Undefined();

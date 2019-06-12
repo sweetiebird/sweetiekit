@@ -1,3 +1,5 @@
+#!/usr/bin/env ../lumen-ios/bin/lumen-node
+
 (define-macro var (type name rest: value)
   `(%local type: ,(quoted type) ,name ,@value))
 
@@ -133,6 +135,7 @@
     (list type nullable: nullable? pointer: pointer?)))
 
 (define-global js-declare-arg (arg-type arg-name)
+  (print (str `(js-declare-arg ,arg-type ,arg-name)))
   (let ((type nullable: nullable? pointer: pointer?) (objc-parse-type arg-type))
     ;(print (str `(type: ,type pointer: ,pointer? nullable: ,nullable?)))
     (if (and nullable? pointer?)
@@ -144,7 +147,7 @@
       `(declare-value (%literal ,(escape type)) ,arg-name))))
 
 (define-global js-gen-method-args (name args)
-  ;(prn `(js-gen-method-args ,name ,@args))
+  (prn `(js-gen-method-args ,name ,@args))
   (with forms ()
     (when (some? args)
       (let spec `(,name ,@args)
@@ -464,8 +467,31 @@
   (print (str x))
   x)
 
+(define-global strip-c-comments (s)
+  (with r ""
+    (while true
+      (let (i1 (search s "//")
+            i2 (search s "/*")
+            n (# s)
+            i (min (either i1 n) (either i2 n)))
+        (unless (or (is? i1) (is? i2))
+          (cat! r s)
+          (break))
+        (cat! r (clip s 0 i))
+        (set s (clip s i))
+        (if (str-starts? s "//")
+            (let j (or (search s "\n")
+                       (edge s))
+              (set s (clip s j)))
+            (let j (or (search s "*/")
+                       (- (edge s) 1))
+              (set s (clip s (+ j 2)))))))))
+
 (define-global parse-properties (s)
+  (set s (strip-c-comments s))
+  (print s)
   (let hdr (str-replace s
+                        ;";" ";\n"
                         "," " "
                         "__kindof" ""
                         "> *" ">* "
@@ -476,61 +502,67 @@
                         " *" "* " 
                         " *" "* ")
     (with r (list)
-      (let lines (map (fn (line)
+      (let (lines (map (fn (line)
                         (when (search line " @")
                           (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
                         (step pre (list " NS_" " UI_" " MP_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
                           (when (search line pre)
-                            (set line (hd (split line pre)))))
+                            (set line (cat (hd (split line pre)) ";"))))
                         (set line (rtrim line (fn (c) (or (whitec c) (= c "{"))))))
                    (split hdr "\n"))
-        (step line lines
-          (if (= (char line 0) "+")
-              (let (stream (reader (.stream (clip line 1)))
-                    (ok x) (guard (reader (.read-all stream))))
-                 (when ok
-                   (add r (prn `(method + ,@x)))))
-              (= (char line 0) "-")
-              (let (stream (reader (.stream (clip line 1)))
-                    (ok x) (guard (reader (.read-all stream))))
-                 (when ok
-                   (add r (prn `(method - ,@x)))))
-;                (when (and ok (two? x))
-;                  (let ((type name) x)
-;                    (when (obj? type)
-;                      (set type (apply concat " " type)))
-;                    (print (str `(,type ,name)))
-;                    (unless (in type "instancetype" "void")
-;                      (add r (prn (list 'property '(nonatomic) type name))))
-;                    )))
-              (= (char line 0) "@")
-              (let (stream (reader (.stream (clip line 1)))
-                    kind (reader (.read stream)))
-                ;(print (str kind))
-                (case kind
-                  private (do)
-                  class
-                  (unless (= (last line) ";")
-                    (add r (join (list kind (reader (.read-all stream))))))
-                  protocol
-                  (add r (join (list kind (reader (.read-all stream)))))
-                  interface
-                  (add r (join (list kind (reader (.read-all stream)))))
-                  property 
-                  (let (rest (reader (.read-all stream))
-                        attrs (list))
-                    (when (obj? (hd rest))
-                      (set attrs (hd rest))
-                      (set rest (tl rest)))
-                    (let (name (drop rest)
-                          type (trim (apply concat " " (map trim rest))))
-                      (when (some? type)
-                        (add r
-                          (prn (list kind 
-                                   attrs
-                                   type
-                                   name))))))
-                  (add r (list kind))))))))))
+            n (# lines))
+        (for i n
+          (let line (trim (at lines i))
+            ;(when (in (char line 0) "+" "-")
+            ;  (while (and (nil? (search line ";"))
+            ;              (< i n))
+            ;    (inc i)
+            ;    (if (in (char (at lines i) 0) "+" "-")
+            ;        (break)
+            ;      (cat! line " " (trim (at lines i))))))
+            (if (in (char line 0) "+" "-")
+                (let (stream (reader (.stream (clip line 1)))
+                      (ok x) (guard (reader (.read-all stream))))
+                   (when ok
+                     (let form `(method ,(char line 0) ,@x)
+                       (while (and (< i (- n 1))
+                                   (not (= (last line) ";"))
+                                   (let c (char (trim (at lines (+ i 1))) 0)
+                                    (not (in c "-" "+" "@"))))
+                         (inc i)
+                         (set line (trim (at lines i)))
+                         (let ((ok x) (guard (reader (.read-all (reader (.stream line))))))
+                           (if ok
+                               (join! form x))))
+                       (add r (prn form)))))
+                (= (char line 0) "@")
+                (let (stream (reader (.stream (clip line 1)))
+                      kind (reader (.read stream)))
+                  ;(print (str kind))
+                  (case kind
+                    private (do)
+                    class
+                    (unless (= (last line) ";")
+                      (add r (join (list kind (reader (.read-all stream))))))
+                    protocol
+                    (add r (join (list kind (reader (.read-all stream)))))
+                    interface
+                    (add r (join (list kind (reader (.read-all stream)))))
+                    property 
+                    (let (rest (reader (.read-all stream))
+                          attrs (list))
+                      (when (obj? (hd rest))
+                        (set attrs (hd rest))
+                        (set rest (tl rest)))
+                      (let (name (drop rest)
+                            type (trim (apply concat " " (map trim rest))))
+                        (when (some? type)
+                          (add r
+                            (prn (list kind 
+                                     attrs
+                                     type
+                                     name))))))
+                    (add r (list kind)))))))))))
 
 (define-global ios-header-path (framework type subframework)
   (with r "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/"
@@ -563,8 +595,15 @@
        )))
   (error (cat "Unknown type " type)))
 
-(define-global test-parse-properties ((o type 'UIView) (o framework (ios-framework-from-type type)) (o subframework))
-  (let (path (ios-header-path framework type subframework)
+(define-global objc-resolve (type framework subframework)
+  (let framework (or framework (ios-framework-from-type type))
+    (obj framework: framework
+         path: (ios-header-path framework type subframework)
+         subframework: subframework)))
+
+(define-global test-parse-properties (type framework subframework)
+  (let ((framework: framework subframework: subframework path: path)
+        (objc-resolve type framework subframework)
         contents (read-file path)
         props (parse-properties contents)
         form `(do))
@@ -744,3 +783,16 @@
 ;(define-macro nan-method (self-type self method rest: body)
 ;  `(%do (%stmt (NAN_METHOD (.. ,(cat "N" self-type) "::" ,method)))
 ;        (%block (var Nan::HandleScope scope) (autoreleasepool (var Local<Object> ,(cat self "Obj") (info (.This))) (var ,(cat "N" el-type "*") ,self (new (,(cat "N" el-type)))) ,@body))))
+
+(define-global main (argv)
+  (let ((type (o framework) (o subframework) resolve: (o resolve))
+        (keep (fn (x) (not (obj? x)))
+              (parse-arguments (obj r: "resolve") argv)))
+    (set target* 'c)
+    (if resolve
+        (let ((path: path) (objc-resolve type framework subframework)
+              contents (read-file path))
+          (print path))
+      (test-parse-properties type framework subframework))))
+
+(export main)

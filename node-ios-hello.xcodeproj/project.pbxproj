@@ -138,6 +138,8 @@
 		A174A171228227A2002A8216 /* sunflower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A174A170228227A2002A8216 /* sunflower.mp3 */; };
 		A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47222B0199800415AD8 /* NMDLMeshBufferData.mm */; };
 		A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */; };
+		A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47A22B01FD600415AD8 /* NMDLVertexBufferLayout.mm */; };
+		A174A47F22B0207B00415AD8 /* NMDLVertexAttribute.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */; };
 		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
@@ -578,6 +580,10 @@
 		A174A47222B0199800415AD8 /* NMDLMeshBufferData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMeshBufferData.mm; sourceTree = "<group>"; };
 		A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLMeshBufferDataAllocator.mm; sourceTree = "<group>"; };
 		A174A47522B0199800415AD8 /* NMDLMeshBufferDataAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLMeshBufferDataAllocator.h; sourceTree = "<group>"; };
+		A174A47922B01FD600415AD8 /* NMDLVertexBufferLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLVertexBufferLayout.h; sourceTree = "<group>"; };
+		A174A47A22B01FD600415AD8 /* NMDLVertexBufferLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexBufferLayout.mm; sourceTree = "<group>"; };
+		A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexAttribute.mm; sourceTree = "<group>"; };
+		A174A47E22B0207B00415AD8 /* NMDLVertexAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLVertexAttribute.h; sourceTree = "<group>"; };
 		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
 		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
 		A178B2712288790C005184EE /* NUITabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITabBarItem.h; sourceTree = "<group>"; };
@@ -1935,6 +1941,24 @@
 			path = NMDLMeshBufferDataAllocator;
 			sourceTree = "<group>";
 		};
+		A174A47822B01FD600415AD8 /* NMDLVertexBufferLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A174A47922B01FD600415AD8 /* NMDLVertexBufferLayout.h */,
+				A174A47A22B01FD600415AD8 /* NMDLVertexBufferLayout.mm */,
+			);
+			path = NMDLVertexBufferLayout;
+			sourceTree = "<group>";
+		};
+		A174A47C22B0207B00415AD8 /* NMDLVertexAttribute */ = {
+			isa = PBXGroup;
+			children = (
+				A174A47E22B0207B00415AD8 /* NMDLVertexAttribute.h */,
+				A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */,
+			);
+			path = NMDLVertexAttribute;
+			sourceTree = "<group>";
+		};
 		A178B26C228863B5005184EE /* NUIAlertAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2176,6 +2200,9 @@
 		A19F39D522AF4AE100606332 /* NModelIO */ = {
 			isa = PBXGroup;
 			children = (
+				A174A47822B01FD600415AD8 /* NMDLVertexBufferLayout */,
+				A174A47C22B0207B00415AD8 /* NMDLVertexAttribute */,
+				A19F39E222AF4F3600606332 /* NMDLVertexDescriptor */,
 				A174A47022B0199800415AD8 /* NMDLMeshBufferData */,
 				A174A47322B0199800415AD8 /* NMDLMeshBufferDataAllocator */,
 				A19F3A1E22AF90F000606332 /* NMDLSubmeshTopology */,
@@ -2193,7 +2220,6 @@
 				A19F39EE22AF65F400606332 /* NMDLScatteringFunction */,
 				A19F39EA22AF651E00606332 /* NMDLMaterialProperty */,
 				A19F39E622AF63D800606332 /* NMDLMaterial */,
-				A19F39E222AF4F3600606332 /* NMDLVertexDescriptor */,
 				A19F39DE22AF4C1900606332 /* NMDLTypes */,
 				A19F39DA22AF4BDC00606332 /* NMDLObject */,
 				A19F39D622AF4AE100606332 /* NMDLAsset */,
@@ -3716,10 +3742,12 @@
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */,
+				A174A47F22B0207B00415AD8 /* NMDLVertexAttribute.mm in Sources */,
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
+				A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
 				A19F39DD22AF4BDD00606332 /* NMDLObject.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
