@@ -23,7 +23,7 @@ JS_INIT_CLASS_END(UITableViewManager, NSObject);
 #include "NUITableViewCell.h"
 
 NAN_METHOD(NUITableViewManager::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITableViewManager);
 
   Local<Object> obj = info.This();
 

@@ -43,13 +43,10 @@ NAN_METHOD(NSCNCapsule::capsuleWithCapRadiusHeight) {
 }
 
 NAN_METHOD(NSCNCapsule::New) {
+  JS_RECONSTRUCT(SCNCapsule);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNCapsule(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNCapsule, info);
-      return;
-    }
     SCNCapsule* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNCapsule *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2 && info[0]->IsNumber()) {

@@ -19,7 +19,7 @@ JS_INIT_CLASS(MKAnnotationView, UIView);
 JS_INIT_CLASS_END(MKAnnotationView, UIView);
 
 NAN_METHOD(NMKAnnotationView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(MKAnnotationView);
 
   Local<Object> obj = info.This();
 

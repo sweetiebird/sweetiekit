@@ -23,7 +23,7 @@ JS_INIT_CLASS(CLHeading, NSObject);
 JS_INIT_CLASS_END(CLHeading, NSObject);
 
 NAN_METHOD(NCLHeading::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CLHeading);
 
   Local<Object> obj = info.This();
 

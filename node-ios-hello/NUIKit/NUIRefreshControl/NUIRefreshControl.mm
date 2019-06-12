@@ -100,7 +100,7 @@ JS_INIT_CLASS(UIRefreshControl, UIControl);
 JS_INIT_CLASS_END(UIRefreshControl, UIControl);
 
 NAN_METHOD(NUIRefreshControl::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIRefreshControl);
 
   Local<Object> viewObj = info.This();
 

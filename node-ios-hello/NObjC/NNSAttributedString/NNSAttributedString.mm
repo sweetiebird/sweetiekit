@@ -29,15 +29,11 @@ JS_INIT_CLASS(NSAttributedString, NSObject);
 JS_INIT_CLASS_END(NSAttributedString, NSObject);
 
 NAN_METHOD(NNSAttributedString::New) {
+  JS_RECONSTRUCT(NSAttributedString);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSAttributedString(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSAttributedString, info);
-      return;
-    }
-
-    declare_args();
     NSAttributedString* self = nullptr;
+    
+    declare_args();
     if (info[0]->IsExternal()) {
       self = (__bridge NSAttributedString *)(info[0].As<External>()->Value());
     } else if (is_value_NSString(info[0])) {

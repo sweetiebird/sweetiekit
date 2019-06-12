@@ -36,13 +36,10 @@ JS_INIT_CLASS_END(UIStackView, UIView);
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIStackView::New) {
+  JS_RECONSTRUCT(UIStackView);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIStackView(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIStackView, info);
-      return;
-    }
     UIStackView* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UIStackView *)(info[0].As<External>()->Value());
     } else if (is_value_NSCoder(info[0])) {

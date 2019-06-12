@@ -4,11 +4,6 @@
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import "node_ios_hello-Swift.h"
-#include "defines.h"
-#include "NNSObject.h"
 #include "NUITarget.h"
 
 JS_INIT_CLASS(UITarget, NSObject);
@@ -20,7 +15,7 @@ JS_INIT_CLASS(UITarget, NSObject);
 JS_INIT_CLASS_END(UITarget, NSObject);
 
 NAN_METHOD(NUITarget::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITarget);
 
   Local<Object> obj = info.This();
 

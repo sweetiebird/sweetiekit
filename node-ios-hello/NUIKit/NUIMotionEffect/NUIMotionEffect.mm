@@ -16,14 +16,10 @@ JS_INIT_CLASS(UIMotionEffect, NSObject);
 JS_INIT_CLASS_END(UIMotionEffect, NSObject);
 
 NAN_METHOD(NUIMotionEffect::New) {
+  JS_RECONSTRUCT(UIMotionEffect);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIMotionEffect(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIMotionEffect, info);
-      return;
-    }
-
     UIMotionEffect* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIMotionEffect *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

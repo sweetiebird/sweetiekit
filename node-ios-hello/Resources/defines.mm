@@ -1945,6 +1945,31 @@ SCNMatrix4 to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable faile
   return result;
 }
 
+Local<Value> js_value_CATransform3D(const CATransform3D& value) {
+  return createTypedArray<Float32Array>(16, (const float*)&value);
+}
+
+CATransform3D to_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed) {
+  CATransform3D result = {
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1,
+  };
+  bool ok = sweetiekit::SetTransform((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected SCNMatrix4");
+  }
+  return result;
+}
+
+bool is_value_CATransform3D(const Local<Value>& value) {
+  return sweetiekit::IsTransform(value);
+}
+
 Local<Value> js_value_CGPoint(const CGPoint& pt) {
   auto result = Nan::New<Object>();
   Nan::Set(result, JS_STR("x"), JS_NUM(pt.x));
@@ -2103,7 +2128,11 @@ CGColorRef _Nullable to_value_CGColorRef(const Local<Value>& value, bool * _Null
 }
 
 CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullable failed) {
-  return (__bridge CGPathRef)sweetiekit::GetValueFor(value, failed);
+  id result = sweetiekit::GetValueFor(value, failed);
+  if (result && [result isKindOfClass:[UIBezierPath class]]) {
+    return [result CGPath];
+  }
+  return (__bridge CGPathRef)result;
 }
 
 CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed) {
@@ -2752,5 +2781,63 @@ bool is_value_NSArray(Local<Value> value) {
   if (!value->IsArray()) {
     return false;
   }
+  return true;
+}
+
+Local<Value> js_value_NSArrayOfCGColors(NSArray* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Array> result(Array::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      if ([obj isKindOfClass:[UIColor class]]) {
+        Local<Value> i(js_value_NSUInteger(idx));
+        Local<Value> v(js_value_UIColor(obj));
+        result->Set(i, v);
+      }
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSArray* _Nullable to_value_NSArrayOfCGColors(Local<Value> arr, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (arr->IsArray()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Array>::Cast(arr));
+    auto result = [[NSMutableArray alloc] initWithCapacity:value->Length()];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      if (is_value_UIColor(value->Get(i))) {
+        UIColor* v(to_value_UIColor(value->Get(i)));
+        CGColorRef color = [v CGColor];
+        [result setObject:(__bridge id)color atIndexedSubscript:i];
+      } else {
+        if (failed) {
+          *failed = true;
+          return nil;
+        } else {
+          Nan::ThrowError("to_value_NSArrayOfCGColors failed: one of the items wasn't a CGColorRef");
+          return nil;
+        }
+      }
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSArray failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSArrayOfCGColors(Local<Value> value) {
+  if (!value->IsArray()) {
+    return false;
+  }
+  // TODO: check each item in the array.
   return true;
 }

@@ -21,7 +21,7 @@ JS_INIT_CLASS(SKTransformNode, SKNode);
 JS_INIT_CLASS_END(SKTransformNode, SKNode);
 
 NAN_METHOD(NSKTransformNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKTransformNode);
 
   Local<Object> obj = info.This();
 

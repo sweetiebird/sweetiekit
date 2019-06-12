@@ -4,18 +4,11 @@
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NARSKViewDelegate.h"
 #include "NARSession.h"
 #include "NARAnchor.h"
 #include "NSKNode.h"
 #include "NARSKView.h"
-#import "node_ios_hello-Swift.h"
 
 NARSKViewDelegate::NARSKViewDelegate () {}
 NARSKViewDelegate::~NARSKViewDelegate () {}
@@ -29,7 +22,7 @@ JS_INIT_CLASS(ARSKViewDelegate, NSObject);
 JS_INIT_CLASS_END(ARSKViewDelegate, NSObject);
 
 NAN_METHOD(NARSKViewDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARSKViewDelegate);
 
   Local<Object> obj = info.This();
 

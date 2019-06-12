@@ -25,7 +25,7 @@ JS_INIT_CLASS(UICollectionView, UIScrollView);
 JS_INIT_CLASS_END(UICollectionView, UIScrollView);
 
 NAN_METHOD(NUICollectionView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UICollectionView);
 
   Local<Object> obj = info.This();
 

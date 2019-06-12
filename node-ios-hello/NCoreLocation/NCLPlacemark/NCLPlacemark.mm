@@ -18,7 +18,7 @@ JS_INIT_CLASS(CLPlacemark, NSObject);
 JS_INIT_CLASS_END(CLPlacemark, NSObject);
 
 NAN_METHOD(NCLPlacemark::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CLPlacemark);
 
   Local<Object> obj = info.This();
 

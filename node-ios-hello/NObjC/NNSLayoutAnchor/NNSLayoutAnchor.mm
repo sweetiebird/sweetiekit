@@ -23,14 +23,10 @@ JS_INIT_CLASS(NSLayoutAnchor, NSObject);
 JS_INIT_CLASS_END(NSLayoutAnchor, NSObject);
 
 NAN_METHOD(NNSLayoutAnchor::New) {
+  JS_RECONSTRUCT(NSLayoutAnchor);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSLayoutAnchor(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSLayoutAnchor, info);
-      return;
-    }
-
     NSLayoutAnchor* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSLayoutAnchor *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

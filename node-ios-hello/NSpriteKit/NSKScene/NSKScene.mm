@@ -33,7 +33,7 @@ JS_INIT_CLASS(SKScene, SKNode);
 JS_INIT_CLASS_END(SKScene, SKNode);
 
 NAN_METHOD(NSKScene::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKScene);
 
   Local<Object> obj = info.This();
 

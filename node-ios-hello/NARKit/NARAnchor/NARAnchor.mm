@@ -1,17 +1,11 @@
 //
-//  NARAnchor.m
+//  NARAnchor.mm
 //
 //  Created by Emily Kolar on 5/11/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARAnchor.h"
 #include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
 NARAnchor::NARAnchor () {}
 NARAnchor::~NARAnchor () {}
@@ -29,7 +23,7 @@ JS_INIT_CLASS(ARAnchor, NSObject);
 JS_INIT_CLASS_END(ARAnchor, NSObject);
 
 NAN_METHOD(NARAnchor::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARAnchor);
 
   Local<Object> obj = info.This();
 

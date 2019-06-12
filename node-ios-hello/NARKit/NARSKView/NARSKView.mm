@@ -25,7 +25,7 @@ JS_INIT_CLASS_END(ARSKView, SKView);
 
 
 NAN_METHOD(NARSKView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARSKView);
 
   Local<Object> obj = info.This();
 

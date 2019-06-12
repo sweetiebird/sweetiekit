@@ -20,7 +20,7 @@ JS_INIT_CLASS(NSNotification, NSObject);
 JS_INIT_CLASS_END(NSNotification, NSObject);
 
 NAN_METHOD(NNSNotification::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(NSNotification);
 
   Local<Object> obj = info.This();
 

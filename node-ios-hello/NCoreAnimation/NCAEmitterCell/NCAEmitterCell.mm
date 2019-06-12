@@ -1,14 +1,9 @@
 //
-//  CAEmitterCell.m
+//  CAEmitterCell.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NCAEmitterCell.h"
 #include "NUIImage.h"
 
@@ -29,7 +24,7 @@ JS_INIT_CLASS(CAEmitterCell, NSObject);
 JS_INIT_CLASS_END(CAEmitterCell, NSObject);
 
 NAN_METHOD(NCAEmitterCell::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CAEmitterCell);
 
   Local<Object> obj = info.This();
 

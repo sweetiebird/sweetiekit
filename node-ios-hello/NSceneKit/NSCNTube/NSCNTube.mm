@@ -45,13 +45,10 @@ NAN_METHOD(NSCNTube::tubeWithInnerRadiusOuterRadiusHeight) {
 }
   
 NAN_METHOD(NSCNTube::New) {
+  JS_RECONSTRUCT(SCNTube);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNTube(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNTube, info);
-      return;
-    }
     SCNTube* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNTube *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 3) {

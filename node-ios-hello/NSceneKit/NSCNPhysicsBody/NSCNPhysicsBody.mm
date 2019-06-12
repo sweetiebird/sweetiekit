@@ -52,14 +52,10 @@ JS_INIT_CLASS(SCNPhysicsBody, NSObject);
 JS_INIT_CLASS_END(SCNPhysicsBody, NSObject);
 
 NAN_METHOD(NSCNPhysicsBody::New) {
+  JS_RECONSTRUCT(SCNPhysicsBody);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'SCNPhysicsBody(...)', turn into construct call.
-      JS_SET_RETURN_NEW(SCNPhysicsBody, info);
-      return;
-    }
-
     SCNPhysicsBody* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNPhysicsBody *)(info[0].As<External>()->Value());
     } else if(info.Length() <= 0) {

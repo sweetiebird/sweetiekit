@@ -44,13 +44,10 @@ NAN_METHOD(NSCNPlane::planeWithWidthHeight) {
 }
 
 NAN_METHOD(NSCNPlane::New) {
+  JS_RECONSTRUCT(SCNPlane);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNPlane(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNPlane, info);
-      return;
-    }
     SCNPlane* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNPlane *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2) {

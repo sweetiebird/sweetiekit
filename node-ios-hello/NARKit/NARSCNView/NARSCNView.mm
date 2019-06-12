@@ -1,20 +1,13 @@
 //
-//  NARSCNView.m
+//  NARSCNView.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SceneKit/SceneKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARSCNView.h"
-#include "NSCNView.h"
 #include "NARSession.h"
 #include "NARSCNViewDelegate.h"
 #include "NSCNScene.h"
-#import "node_ios_hello-Swift.h"
 
 NARSCNView::NARSCNView () {}
 NARSCNView::~NARSCNView () {}
@@ -37,7 +30,7 @@ JS_INIT_CLASS(ARSCNView, SCNView);
 JS_INIT_CLASS_END(ARSCNView, SCNView);
 
 NAN_METHOD(NARSCNView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARSCNView);
 
   Local<Object> obj = info.This();
 

@@ -4,14 +4,6 @@
 //  Created by BB on 4/19/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <SceneKit/SceneKit.h>
-#import <MapKit/MapKit.h>
-#import <ARKit/ARKit.h>
-#import <CoreImage/CoreImage.h>
-#import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 
 #import <objc/runtime.h>
@@ -89,13 +81,10 @@ JS_INIT_CLASS_BASE(id);
 JS_INIT_CLASS_END(id, objc);
 
 NAN_METHOD(Nid::New) {
+  JS_RECONSTRUCT(id);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `id(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(id, info);
-      return;
-    }
     id self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge id)(info[0].As<External>()->Value());
     }
@@ -610,13 +599,10 @@ JS_INIT_CLASS(NSObject, id);
 JS_INIT_CLASS_END(NSObject, id);
 
 NAN_METHOD(NNSObject::New) {
+  JS_RECONSTRUCT(NSObject);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `NSObject(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(NSObject, info);
-      return;
-    }
     NSObject* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSObject *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
@@ -643,14 +629,10 @@ JS_INIT_CLASS(Class, id);
 JS_INIT_CLASS_END(Class, id);
 
 NAN_METHOD(NClass::New) {
+  JS_RECONSTRUCT(Class);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'Class(...)', turn into construct call.
-      JS_SET_RETURN_NEW(Class, info);
-      return;
-    }
-
     Class self = nil;
+
     if (info[0]->IsExternal()) {
       self = (__bridge Class)(info[0].As<External>()->Value());
     }
@@ -671,6 +653,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSParagraphStyle.h"
 #include "NNSAttributedString.h"
 #include "NNSMutableAttributedString.h"
+#include "NUIBezierPath.h"
 #include "NUILabel.h"
 #include "NUIFont.h"
 #include "NUISlider.h"
@@ -715,6 +698,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NCALayer.h"
+#include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
 #include "NCABasicAnimation.h"
@@ -917,6 +901,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSLayoutDimension);
     JS_EXPORT_TYPE(NSLayoutXAxisAnchor);
     JS_EXPORT_TYPE(NSLayoutYAxisAnchor);
+    JS_EXPORT_TYPE(UIBezierPath);
     JS_EXPORT_TYPE(UIMotionEffect);
     JS_EXPORT_TYPE(UILayoutGuide);
     JS_EXPORT_TYPE(UIBarButtonItem);
@@ -1047,6 +1032,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // CoreAnimation
     JS_EXPORT_TYPE(CALayer);
+    JS_EXPORT_TYPE(CAGradientLayer);
     JS_EXPORT_TYPE(CAShapeLayer);
     JS_EXPORT_TYPE(CABasicAnimation);
     JS_EXPORT_TYPE(CAEmitterCell);
@@ -1170,6 +1156,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CAEmitterCell);
       JS_RETURN_TYPE(CAEmitterLayer);
       JS_RETURN_TYPE(CAShapeLayer);
+      JS_RETURN_TYPE(CAGradientLayer);
       JS_RETURN_TYPE(CALayer);
       JS_RETURN_TYPE(CABasicAnimation);
       
@@ -1405,6 +1392,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UITapGestureRecognizer);
       JS_RETURN_TYPE(UIGestureRecognizer);
 
+      JS_RETURN_TYPE(UIBezierPath);
       JS_RETURN_TYPE(UIMotionEffect);
       JS_RETURN_TYPE(UILayoutGuide);
       JS_RETURN_TYPE(UIApplication);

@@ -25,7 +25,7 @@ JS_INIT_CLASS(CLLocation, NSObject);
 JS_INIT_CLASS_END(CLLocation, NSObject);
 
 NAN_METHOD(NCLLocation::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CLLocation);
 
   Local<Object> obj = info.This();
 

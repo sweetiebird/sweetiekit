@@ -17,7 +17,7 @@ JS_INIT_CLASS(UIAlertController, UIViewController);
 JS_INIT_CLASS_END(UIAlertController, UIViewController);
 
 NAN_METHOD(NUIAlertController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIAlertController);
 
   Local<Object> ctrlObj = info.This();
 

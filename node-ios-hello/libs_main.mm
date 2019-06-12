@@ -21,7 +21,6 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
-#import "node_ios_hello-Swift.h"
 #import "libs_main.hpp"
 
 extern "C" void iOSLog(const char* format, ...);

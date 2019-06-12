@@ -48,12 +48,8 @@ JS_INIT_CLASS(SCNMaterial, NSObject);
 JS_INIT_CLASS_END(SCNMaterial, NSObject);
 
 NAN_METHOD(NSCNMaterial::New) {
+  JS_RECONSTRUCT(SCNMaterial);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNMaterial(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNMaterial, info);
-      return;
-    }
     Local<Object> obj = info.This();
 
     NSCNMaterial *ui = new NSCNMaterial();

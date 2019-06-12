@@ -16,14 +16,10 @@ JS_INIT_CLASS(NSStream, NSObject);
 JS_INIT_CLASS_END(NSStream, NSObject);
 
 NAN_METHOD(NNSStream::New) {
+  JS_RECONSTRUCT(NSStream);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSStream(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSStream, info);
-      return;
-    }
-
     NSStream* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSStream *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

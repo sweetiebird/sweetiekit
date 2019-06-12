@@ -50,7 +50,7 @@ JS_INIT_CLASS(SCNView, UIView);
 JS_INIT_CLASS_END(SCNView, UIView);
 
 NAN_METHOD(NSCNView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SCNView);
 
   Local<Object> obj = info.This();
 

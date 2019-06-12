@@ -19,7 +19,7 @@ JS_INIT_CLASS(NSNotificationCenter, NSObject);
 JS_INIT_CLASS_END(NSNotificationCenter, NSObject);
 
 NAN_METHOD(NNSNotificationCenter::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(NSNotificationCenter);
 
   Local<Object> obj = info.This();
 

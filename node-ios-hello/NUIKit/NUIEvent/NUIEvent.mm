@@ -20,14 +20,10 @@ JS_INIT_CLASS(UIEvent, NSObject);
 JS_INIT_CLASS_END(UIEvent, NSObject);
 
 NAN_METHOD(NUIEvent::New) {
+  JS_RECONSTRUCT(UIEvent);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIEvent(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIEvent, info);
-      return;
-    }
-
     UIEvent* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIEvent *)(info[0].As<External>()->Value());
     } else if(info.Length() <= 0) {

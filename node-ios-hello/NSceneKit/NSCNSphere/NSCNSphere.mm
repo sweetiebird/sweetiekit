@@ -39,13 +39,10 @@ NAN_METHOD(NSCNSphere::sphereWithRadius) {
 }
 
 NAN_METHOD(NSCNSphere::New) {
+  JS_RECONSTRUCT(SCNSphere);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNSphere(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNSphere, info);
-      return;
-    }
     SCNSphere* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNSphere *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 1 && info[0]->IsNumber()) {

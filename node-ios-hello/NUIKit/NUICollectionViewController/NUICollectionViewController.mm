@@ -16,7 +16,7 @@ JS_INIT_CLASS(UICollectionViewController, UIViewController);
 JS_INIT_CLASS_END(UICollectionViewController, UIViewController);
 
 NAN_METHOD(NUICollectionViewController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UICollectionViewController);
 
   Local<Object> ctrlObj = info.This();
 

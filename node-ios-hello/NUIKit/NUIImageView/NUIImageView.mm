@@ -19,13 +19,10 @@ JS_INIT_CLASS_END(UIImageView, UIView);
 #include "NUIImage.h"
 
 NAN_METHOD(NUIImageView::New) {
+  JS_RECONSTRUCT(UIImageView);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIImageView(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIImageView, info);
-      return;
-    }
     UIImageView* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIImageView *)(info[0].As<External>()->Value());
     } else if (is_value_CGRect(info[0])) {

@@ -24,13 +24,10 @@ JS_INIT_CLASS(UILabel, UIView);
 JS_INIT_CLASS_END(UILabel, UIView);
 
 NAN_METHOD(NUILabel::New) {
+  JS_RECONSTRUCT(UILabel);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UILabel(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UILabel, info);
-      return;
-    }
     UILabel* self = nullptr;
+
     if (IS_EXT(info[0])) {
       self = (__bridge UILabel *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 4) {

@@ -1,5 +1,5 @@
 //
-//  RPPreviewViewController.m
+//  RPPreviewViewController.mm
 //
 //  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
@@ -18,7 +18,7 @@ JS_INIT_CLASS(RPPreviewViewController, UIViewController);
 JS_INIT_CLASS_END(RPPreviewViewController, UIViewController);
 
 NAN_METHOD(NRPPreviewViewController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(RPPreviewViewController);
 
   Local<Object> obj = info.This();
 

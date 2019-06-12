@@ -61,7 +61,7 @@ JS_INIT_CLASS(NSUserDefaults, NSObject);
 JS_INIT_CLASS_END(NSUserDefaults, NSObject);
 
 NAN_METHOD(NNSUserDefaults::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(NSUserDefaults);
 
   Local<Object> obj = info.This();
 

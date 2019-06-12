@@ -140,6 +140,7 @@
 		A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47422B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm */; };
 		A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47A22B01FD600415AD8 /* NMDLVertexBufferLayout.mm */; };
 		A174A47F22B0207B00415AD8 /* NMDLVertexAttribute.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */; };
+		A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A48222B14A2000415AD8 /* NCAGradientLayer.mm */; };
 		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
@@ -584,6 +585,8 @@
 		A174A47A22B01FD600415AD8 /* NMDLVertexBufferLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexBufferLayout.mm; sourceTree = "<group>"; };
 		A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLVertexAttribute.mm; sourceTree = "<group>"; };
 		A174A47E22B0207B00415AD8 /* NMDLVertexAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDLVertexAttribute.h; sourceTree = "<group>"; };
+		A174A48122B14A2000415AD8 /* NCAGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAGradientLayer.h; sourceTree = "<group>"; };
+		A174A48222B14A2000415AD8 /* NCAGradientLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAGradientLayer.mm; sourceTree = "<group>"; };
 		A178B26D228863C2005184EE /* NUIAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIAlertAction.h; sourceTree = "<group>"; };
 		A178B26E228863C9005184EE /* NUIAlertAction.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAlertAction.mm; sourceTree = "<group>"; };
 		A178B2712288790C005184EE /* NUITabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITabBarItem.h; sourceTree = "<group>"; };
@@ -1012,6 +1015,7 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A174A48022B14A2000415AD8 /* NCAGradientLayer */,
 				A1B5ABCE227D1114004B3CB2 /* NCABasicAnimation */,
 				A1646B7C2291E6E90078CF4B /* NCAEmitterCell */,
 				A1646B89229201B50078CF4B /* NCAEmitterLayer */,
@@ -1289,8 +1293,8 @@
 		A133701622AACEC700FA3768 /* NNSURL */ = {
 			isa = PBXGroup;
 			children = (
-				A133701722AACEC800FA3768 /* NNSURL.mm */,
 				A133701822AACEC800FA3768 /* NNSURL.h */,
+				A133701722AACEC800FA3768 /* NNSURL.mm */,
 			);
 			path = NNSURL;
 			sourceTree = "<group>";
@@ -1352,8 +1356,8 @@
 		A133707D22AB34E600FA3768 /* NNSCache */ = {
 			isa = PBXGroup;
 			children = (
-				A133707E22AB34E600FA3768 /* NNSCache.mm */,
 				A133707F22AB34E600FA3768 /* NNSCache.h */,
+				A133707E22AB34E600FA3768 /* NNSCache.mm */,
 			);
 			path = NNSCache;
 			sourceTree = "<group>";
@@ -1957,6 +1961,15 @@
 				A174A47D22B0207B00415AD8 /* NMDLVertexAttribute.mm */,
 			);
 			path = NMDLVertexAttribute;
+			sourceTree = "<group>";
+		};
+		A174A48022B14A2000415AD8 /* NCAGradientLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A174A48122B14A2000415AD8 /* NCAGradientLayer.h */,
+				A174A48222B14A2000415AD8 /* NCAGradientLayer.mm */,
+			);
+			path = NCAGradientLayer;
 			sourceTree = "<group>";
 		};
 		A178B26C228863B5005184EE /* NUIAlertAction */ = {
@@ -3844,6 +3857,7 @@
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
+				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,

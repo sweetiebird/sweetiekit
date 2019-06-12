@@ -16,14 +16,10 @@ JS_INIT_CLASS(UIToolbar, UIView);
 JS_INIT_CLASS_END(UIToolbar, UIView);
 
 NAN_METHOD(NUIToolbar::New) {
+  JS_RECONSTRUCT(UIToolbar);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIToolbar(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIToolbar, info);
-      return;
-    }
-
     UIToolbar* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UIToolbar *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

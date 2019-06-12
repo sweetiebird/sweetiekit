@@ -1,14 +1,10 @@
 //
-//  CAEmitterLayer.m
+//  CAEmitterLayer.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
     
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NCALayer.h"
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
 
@@ -21,7 +17,7 @@ JS_INIT_CLASS(CAEmitterLayer, CALayer);
 JS_INIT_CLASS_END(CAEmitterLayer, CALayer);
 
 NAN_METHOD(NCAEmitterLayer::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CAEmitterLayer);
 
   Local<Object> obj = info.This();
 

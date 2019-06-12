@@ -19,12 +19,10 @@ JS_INIT_CLASS(WKNavigationDelegate, NSObject);
 JS_INIT_CLASS_END(WKNavigationDelegate, NSObject);
 
 NAN_METHOD(NWKNavigationDelegate::New) {
+  JS_RECONSTRUCT(WKNavigationDelegate);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      JS_SET_RETURN_NEW(WKNavigationDelegate, info);
-      return;
-    }
     SWKNavigationDelegate* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge SWKNavigationDelegate *)(info[0].As<External>()->Value());
     } else {

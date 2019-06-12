@@ -28,14 +28,10 @@ JS_INIT_CLASS(SCNMaterialProperty, NSObject);
 JS_INIT_CLASS_END(SCNMaterialProperty, NSObject);
 
 NAN_METHOD(NSCNMaterialProperty::New) {
+  JS_RECONSTRUCT(SCNMaterialProperty);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'SCNMaterialProperty(...)', turn into construct call.
-      JS_SET_RETURN_NEW(SCNMaterialProperty, info);
-      return;
-    }
-
     SCNMaterialProperty* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNMaterialProperty *)(info[0].As<External>()->Value());
     } else if(info.Length() <= 0) {

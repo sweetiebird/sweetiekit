@@ -22,7 +22,7 @@ JS_INIT_CLASS(UIScrollView, UIView);
 JS_INIT_CLASS_END(UIScrollView, UIView);
 
 NAN_METHOD(NUIScrollView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIScrollView);
 
   Local<Object> obj = info.This();
 

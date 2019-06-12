@@ -25,14 +25,10 @@ JS_INIT_CLASS(NSLayoutDimension, NSLayoutAnchor);
 JS_INIT_CLASS_END(NSLayoutDimension, NSLayoutAnchor);
 
 NAN_METHOD(NNSLayoutDimension::New) {
+  JS_RECONSTRUCT(NSLayoutDimension);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSLayoutDimension(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSLayoutDimension, info);
-      return;
-    }
-
     NSLayoutDimension* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSLayoutDimension *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

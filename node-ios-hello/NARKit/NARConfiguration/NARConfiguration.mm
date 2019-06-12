@@ -1,16 +1,10 @@
 //
-//  NARConfiguration.m
+//  NARConfiguration.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARConfiguration.h"
-#include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
 NARConfiguration::NARConfiguration () {}
 NARConfiguration::~NARConfiguration () {}
@@ -26,7 +20,7 @@ JS_INIT_CLASS(ARConfiguration, NSObject);
 JS_INIT_CLASS_END(ARConfiguration, NSObject);
 
 NAN_METHOD(NARConfiguration::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARConfiguration);
 
   Local<Object> obj = info.This();
 

@@ -16,14 +16,10 @@ JS_INIT_CLASS(UIGraphicsImageRendererFormat, UIGraphicsRendererFormat);
 JS_INIT_CLASS_END(UIGraphicsImageRendererFormat, UIGraphicsRendererFormat);
 
 NAN_METHOD(NUIGraphicsImageRendererFormat::New) {
+  JS_RECONSTRUCT(UIGraphicsImageRendererFormat);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIGraphicsImageRendererFormat(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIGraphicsImageRendererFormat, info);
-      return;
-    }
-
     UIGraphicsImageRendererFormat* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIGraphicsImageRendererFormat *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

@@ -24,7 +24,7 @@ JS_INIT_CLASS(UITableView, UIScrollView);
 JS_INIT_CLASS_END(UITableView, UIScrollView);
 
 NAN_METHOD(NUITableView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITableView);
 
   Local<Object> obj = info.This();
 

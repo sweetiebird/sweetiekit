@@ -1,15 +1,9 @@
 //
-//  CAShapeLayer.m
+//  CAShapeLayer.mm
 //
 //  Created by Emily Kolar on 2019-5-25.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-
-#include "defines.h"
-#include "NNSObject.h"
-#include "NCALayer.h"
 #include "NCAShapeLayer.h"
 #include "NUIBezierPath.h"
 
@@ -27,7 +21,7 @@ JS_INIT_CLASS(CAShapeLayer, CALayer);
 JS_INIT_CLASS_END(CAShapeLayer, CALayer);
 
 NAN_METHOD(NCAShapeLayer::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CAShapeLayer);
 
   Local<Object> obj = info.This();
 

@@ -1,19 +1,12 @@
 //
-//  NGifView.m
+//  NGifView.mm
 //
 //  Created by Emily Kolar on 5/17/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
-#include "NUIImageView.h"
 #include "NGifView.h"
 #include "NGif.h"
 #include "NGifManager.h"
-#import "node_ios_hello-Swift.h"
 
 NGifView::NGifView () {}
 NGifView::~NGifView () {}
@@ -29,7 +22,7 @@ JS_INIT_CLASS(GifView, UIImageView);
 JS_INIT_CLASS_END(GifView, UIImageView);
 
 NAN_METHOD(NGifView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(GifView);
 
   Local<Object> obj = info.This();
 

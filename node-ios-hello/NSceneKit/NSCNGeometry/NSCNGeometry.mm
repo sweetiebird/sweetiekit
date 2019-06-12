@@ -43,13 +43,10 @@ JS_INIT_CLASS(SCNGeometry, NSObject);
 JS_INIT_CLASS_END(SCNGeometry, NSObject);
 
 NAN_METHOD(NSCNGeometry::New) {
+  JS_RECONSTRUCT(SCNGeometry);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNGeometry(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNGeometry, info);
-      return;
-    }
     SCNGeometry* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNGeometry *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

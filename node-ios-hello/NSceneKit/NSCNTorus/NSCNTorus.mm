@@ -42,13 +42,10 @@ NAN_METHOD(NSCNTorus::torusWithRingRadiusPipeRadius) {
 }
 
 NAN_METHOD(NSCNTorus::New) {
+  JS_RECONSTRUCT(SCNTorus);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNTorus(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNTorus, info);
-      return;
-    }
     SCNTorus* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNTorus *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2 && info[0]->IsNumber()) {

@@ -17,7 +17,7 @@ JS_INIT_CLASS(UIViewControllerTransitioningDelegate, NSObject);
 JS_INIT_CLASS_END(UIViewControllerTransitioningDelegate, NSObject);
 
 NAN_METHOD(NUIViewControllerTransitioningDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIViewControllerTransitioningDelegate);
   
   Local<Object> ctrlObj = info.This();
   

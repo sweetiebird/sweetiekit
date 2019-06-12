@@ -20,7 +20,7 @@ JS_INIT_CLASS_END(UICollectionViewManager, NSObject);
 #include "NUICollectionViewCell.h"
 
 NAN_METHOD(NUICollectionViewManager::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UICollectionViewManager);
 
   Local<Object> obj = info.This();
 

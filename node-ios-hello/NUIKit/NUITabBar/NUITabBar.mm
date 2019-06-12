@@ -19,7 +19,7 @@ JS_INIT_CLASS(UITabBar, UIView);
 JS_INIT_CLASS_END(UITabBar, UIView);
 
 NAN_METHOD(NUITabBar::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITabBar);
 
   Local<Object> obj = info.This();
 

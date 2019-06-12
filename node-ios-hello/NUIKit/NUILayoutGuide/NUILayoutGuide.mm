@@ -29,14 +29,10 @@ JS_INIT_CLASS(UILayoutGuide, NSObject);
 JS_INIT_CLASS_END(UILayoutGuide, NSObject);
 
 NAN_METHOD(NUILayoutGuide::New) {
+  JS_RECONSTRUCT(UILayoutGuide);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UILayoutGuide(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UILayoutGuide, info);
-      return;
-    }
-
     UILayoutGuide* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UILayoutGuide *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

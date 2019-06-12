@@ -18,7 +18,7 @@ JS_INIT_CLASS(SKPhysicsContact, NSObject);
 JS_INIT_CLASS_END(SKPhysicsContact, NSObject);
 
 NAN_METHOD(NSKPhysicsContact::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKPhysicsContact);
 
   Local<Object> obj = info.This();
 

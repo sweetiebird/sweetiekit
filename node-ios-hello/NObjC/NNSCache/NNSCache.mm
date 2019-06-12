@@ -46,14 +46,10 @@ JS_INIT_CLASS(NSCache, NSObject);
 JS_INIT_CLASS_END(NSCache, NSObject);
 
 NAN_METHOD(NNSCache::New) {
+  JS_RECONSTRUCT(NSCache);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSCache(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSCache, info);
-      return;
-    }
-
     NSCache* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSCache *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

@@ -1,6 +1,5 @@
 ////
-////  RPScreenRecorder.m
-////  node-ios-hello
+////  RPScreenRecorder.mm
 ////
 ////  Created by Emily Kolar on 2019-5-26.
 ////  Copyright © 2019 sweetiebird. All rights reserved.
@@ -20,7 +19,7 @@ JS_INIT_CLASS(RPScreenRecorder, NSObject);
 JS_INIT_CLASS_END(RPScreenRecorder, NSObject);
 
 NAN_METHOD(NRPScreenRecorder::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(RPScreenRecorder);
 
   Local<Object> obj = info.This();
 

@@ -38,14 +38,10 @@ JS_INIT_CLASS(NSURLRequest, NSObject);
 JS_INIT_CLASS_END(NSURLRequest, NSObject);
 
 NAN_METHOD(NNSURLRequest::New) {
+  JS_RECONSTRUCT(NSURLRequest);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSURLRequest(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSURLRequest, info);
-      return;
-    }
-
     NSURLRequest* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSURLRequest *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

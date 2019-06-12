@@ -25,12 +25,10 @@ JS_INIT_CLASS_END(UINib, NSObject);
 #include "NNSBundle.h"
 
 NAN_METHOD(NUINib::New) {
+  JS_RECONSTRUCT(UINib);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      JS_SET_RETURN_NEW(UINib, info);
-      return;
-    }
     UINib* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UINib *)(info[0].As<External>()->Value());
     } else if (is_value_NSString(info[0])) {

@@ -38,13 +38,10 @@ JS_INIT_CLASS(UIViewController, UIResponder);
 JS_INIT_CLASS_END(UIViewController, UIResponder);
 
 NAN_METHOD(NUIViewController::New) {
+  JS_RECONSTRUCT(UIViewController);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIViewController(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIViewController, info);
-      return;
-    }
     UIViewController* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UIViewController *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

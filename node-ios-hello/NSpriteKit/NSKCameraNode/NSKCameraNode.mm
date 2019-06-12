@@ -16,7 +16,7 @@ JS_INIT_CLASS(SKCameraNode, SKNode);
 JS_INIT_CLASS_END(SKCameraNode, SKNode);
 
 NAN_METHOD(NSKCameraNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKCameraNode);
 
   Local<Object> obj = info.This();
 

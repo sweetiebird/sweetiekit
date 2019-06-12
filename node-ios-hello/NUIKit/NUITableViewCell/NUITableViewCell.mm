@@ -21,7 +21,7 @@ JS_INIT_CLASS(UITableViewCell, UIView);
 JS_INIT_CLASS_END(UITableViewCell, UIView);
 
 NAN_METHOD(NUITableViewCell::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITableViewCell);
 
   Local<Object> ctrlObj = info.This();
 

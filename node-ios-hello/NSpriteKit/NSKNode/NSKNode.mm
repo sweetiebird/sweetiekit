@@ -51,7 +51,7 @@ JS_INIT_CLASS(SKNode, UIResponder);
 JS_INIT_CLASS_END(SKNode, UIResponder);
 
 NAN_METHOD(NSKNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKNode);
 
   Local<Object> obj = info.This();
 

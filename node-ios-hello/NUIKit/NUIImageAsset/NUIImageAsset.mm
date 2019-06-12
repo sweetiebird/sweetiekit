@@ -21,14 +21,10 @@ JS_INIT_CLASS(UIImageAsset, NSObject);
 JS_INIT_CLASS_END(UIImageAsset, NSObject);
 
 NAN_METHOD(NUIImageAsset::New) {
+  JS_RECONSTRUCT(UIImageAsset);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIImageAsset(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIImageAsset, info);
-      return;
-    }
-
     UIImageAsset* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIImageAsset *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

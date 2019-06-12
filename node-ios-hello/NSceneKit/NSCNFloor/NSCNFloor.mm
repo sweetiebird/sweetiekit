@@ -41,13 +41,10 @@ NAN_METHOD(NSCNFloor::floor) {
 }
 
 NAN_METHOD(NSCNFloor::New) {
+  JS_RECONSTRUCT(SCNFloor);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNFloor(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNFloor, info);
-      return;
-    }
     SCNFloor* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNFloor *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 1 && info[0]->IsObject()) {

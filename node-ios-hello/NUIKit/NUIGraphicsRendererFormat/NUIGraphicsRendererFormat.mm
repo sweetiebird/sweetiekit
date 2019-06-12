@@ -16,14 +16,10 @@ JS_INIT_CLASS(UIGraphicsRendererFormat, NSObject);
 JS_INIT_CLASS_END(UIGraphicsRendererFormat, NSObject);
 
 NAN_METHOD(NUIGraphicsRendererFormat::New) {
+  JS_RECONSTRUCT(UIGraphicsRendererFormat);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIGraphicsRendererFormat(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIGraphicsRendererFormat, info);
-      return;
-    }
-
     UIGraphicsRendererFormat* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIGraphicsRendererFormat *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

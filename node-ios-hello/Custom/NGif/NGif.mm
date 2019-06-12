@@ -1,17 +1,10 @@
 //
-//  Gif.m
+//  Gif.mm
 //
 //  Created by Emily Kolar on 2019-5-17.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
-#include "NNSObject.h"
-#include "NUIImage.h"
 #include "NGif.h"
-#import "node_ios_hello-Swift.h"
 
 NGif::NGif () {}
 NGif::~NGif () {}
@@ -25,7 +18,7 @@ JS_INIT_CLASS(Gif, UIImage);
 JS_INIT_CLASS_END(Gif, UIImage);
 
 NAN_METHOD(NGif::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(Gif);
 
   Local<Object> obj = info.This();
 

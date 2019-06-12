@@ -32,7 +32,7 @@ JS_INIT_CLASS(SCNLight, NSObject);
 JS_INIT_CLASS_END(SCNLight, NSObject);
 
 NAN_METHOD(NSCNLight::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SCNLight);
 
   Local<Object> obj = info.This();
 

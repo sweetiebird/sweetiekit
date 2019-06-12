@@ -21,7 +21,7 @@ JS_INIT_CLASS(UINavigationItem, NSObject);
 JS_INIT_CLASS_END(UINavigationItem, NSObject);
 
 NAN_METHOD(NUINavigationItem::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UINavigationItem);
 
   Local<Object> obj = info.This();
 

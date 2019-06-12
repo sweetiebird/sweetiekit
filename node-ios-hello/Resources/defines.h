@@ -125,6 +125,13 @@ using namespace node;
       JS_SET_RETURN(JS_NEW(N##type, static_cast<int>(argv.size()), &argv[0])); \
   }
 
+#define JS_RECONSTRUCT(type) \
+  if (!info.IsConstructCall()) { \
+    /* Invoked as plain function, turn into construct call. */ \
+    JS_SET_RETURN_NEW(type, info); \
+    return; \
+  }
+
 #define JS_SET_RETURN_NEW_1(type, arg0) \
   { \
       std::vector<Local<Value>> argv; \
@@ -219,6 +226,12 @@ using namespace node;
 #define JS_ASSIGN_STATIC_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
 #define JS_ASSIGN_STATIC_METHOD_AS(cppName, jsName) JS_SET_METHOD(ctor, jsName, cppName)
+
+#define JS_ASSIGN_ENUM(name, type) \
+  exports->Set(JS_STR(#name), js_value_##type(name))
+
+#define JS_ASSIGN_VALUE(name) \
+  JS_ASSIGN_ENUM(name, id)
 
 #define JS_GETTER(ElType, el, jsName, ...) \
 NAN_GETTER(N##ElType::jsName##Getter) { \
@@ -816,6 +829,10 @@ using sweetiekit::NJSFunction;
 
 #define js_value_void(...) (__VA_ARGS__, Nan::Undefined())
 
+#define js_value_CFTimeInterval(x) js_value_double(x)
+#define to_value_CFTimeInterval(x) to_value_double(x)
+#define is_value_CFTimeInterval(x) is_value_double(x)
+
 Local<Value> js_value_NSDate(NSDate* _Nullable value);
 NSDate* _Nullable to_value_NSDate(const Local<Value>& value, bool* _Nullable failed = nullptr);
 bool is_value_NSDate(const Local<Value>& value);
@@ -926,13 +943,9 @@ SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable f
 SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 
-#define js_value_CFTimeInterval(x) JS_NUM(x)
-#define to_value_CFTimeInterval(x) TO_DOUBLE(x)
-#define is_value_CFTimeInterval(x) (x)->IsNumber()
-
 Local<Value> js_value_CATransform3D(const CATransform3D& value);
 CATransform3D to_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
-bool is_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_CATransform3D(const Local<Value>& value);
 
 Local<Value> js_value_CGPoint(const CGPoint& pt);
 Local<Value> js_value_CGVector(const CGVector& pt);
@@ -1160,6 +1173,10 @@ bool is_value_NSMutableArray(Local<Value> value);
 Local<Value> js_value_NSArray(NSArray* _Nullable value);
 NSArray* _Nullable to_value_NSArray(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_NSArray(Local<Value> value);
+
+Local<Value> js_value_NSArrayOfCGColors(NSArray* _Nullable value);
+NSArray* _Nullable to_value_NSArrayOfCGColors(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_NSArrayOfCGColors(Local<Value> value);
 
 template<typename T>
 Local<Value> js_value_id(T* _Nullable value) {

@@ -21,7 +21,7 @@ JS_INIT_CLASS_END(UIPopoverPresentationController, UIPresentationController);
 #include "NUIViewController.h"
 
 NAN_METHOD(NUIPopoverPresentationController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIPopoverPresentationController);
 
   Local<Object> obj = info.This();
 

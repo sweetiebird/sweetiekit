@@ -45,13 +45,10 @@ NAN_METHOD(NSCNCone::coneWithTopRadiusBottomRadiusHeight) {
 }
   
 NAN_METHOD(NSCNCone::New) {
+  JS_RECONSTRUCT(SCNCone);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNCone(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNCone, info);
-      return;
-    }
     SCNCone* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNCone *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 3) {

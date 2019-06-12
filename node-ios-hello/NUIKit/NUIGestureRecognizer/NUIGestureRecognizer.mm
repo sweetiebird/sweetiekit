@@ -43,7 +43,7 @@ JS_INIT_CLASS(UIGestureRecognizer, NSObject);
 JS_INIT_CLASS_END(UIGestureRecognizer, NSObject);
 
 NAN_METHOD(NUIGestureRecognizer::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIGestureRecognizer);
 
   Local<Object> obj = info.This();
 

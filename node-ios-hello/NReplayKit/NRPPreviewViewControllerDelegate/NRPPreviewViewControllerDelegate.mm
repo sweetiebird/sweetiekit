@@ -1,5 +1,5 @@
 //
-//  RPPreviewViewControllerDelegate.m
+//  RPPreviewViewControllerDelegate.mm
 //
 //  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
@@ -18,7 +18,7 @@ JS_INIT_CLASS(RPPreviewViewControllerDelegate, NSObject);
 JS_INIT_CLASS_END(RPPreviewViewControllerDelegate, NSObject);
 
 NAN_METHOD(NRPPreviewViewControllerDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(RPPreviewViewControllerDelegate);
 
   Local<Object> obj = info.This();
 

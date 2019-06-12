@@ -18,7 +18,7 @@ JS_INIT_CLASS(UITabBarController, UIViewController);
 JS_INIT_CLASS_END(UITabBarController, UIViewController);
 
 NAN_METHOD(NUITabBarController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITabBarController);
 
   Local<Object> ctrlObj = info.This();
 

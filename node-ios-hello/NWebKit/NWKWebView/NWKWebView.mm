@@ -63,14 +63,10 @@ JS_INIT_CLASS(WKWebView, UIView);
 JS_INIT_CLASS_END(WKWebView, UIView);
 
 NAN_METHOD(NWKWebView::New) {
+  JS_RECONSTRUCT(WKWebView);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'WKWebView(...)', turn into construct call.
-      JS_SET_RETURN_NEW(WKWebView, info);
-      return;
-    }
-
     WKWebView* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge WKWebView *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #include "main.h"
-#import "node_ios_hello-Swift.h"
 #include "NNSObject.h"
 #import <objc/runtime.h>
 #include "defines.h"

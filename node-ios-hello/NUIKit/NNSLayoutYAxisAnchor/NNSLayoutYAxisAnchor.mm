@@ -20,14 +20,10 @@ JS_INIT_CLASS(NSLayoutYAxisAnchor, NSLayoutAnchor);
 JS_INIT_CLASS_END(NSLayoutYAxisAnchor, NSLayoutAnchor);
 
 NAN_METHOD(NNSLayoutYAxisAnchor::New) {
+  JS_RECONSTRUCT(NSLayoutYAxisAnchor);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSLayoutYAxisAnchor(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSLayoutYAxisAnchor, info);
-      return;
-    }
-
     NSLayoutYAxisAnchor* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSLayoutYAxisAnchor *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

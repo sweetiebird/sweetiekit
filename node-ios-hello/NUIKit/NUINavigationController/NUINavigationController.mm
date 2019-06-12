@@ -39,7 +39,7 @@ JS_INIT_CLASS(UINavigationController, UIViewController);
 JS_INIT_CLASS_END(UINavigationController, UIViewController);
 
 NAN_METHOD(NUINavigationController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UINavigationController);
 
   Local<Object> ctrlObj = info.This();
 

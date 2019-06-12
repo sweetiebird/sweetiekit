@@ -17,7 +17,7 @@ JS_INIT_CLASS(NSMutableParagraphStyle, NSParagraphStyle);
 JS_INIT_CLASS_END(NSMutableParagraphStyle, NSParagraphStyle);
 
 NAN_METHOD(NNSMutableParagraphStyle::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(NSMutableParagraphStyle);
 
   Local<Object> obj = info.This();
 

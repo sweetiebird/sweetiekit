@@ -1,18 +1,12 @@
 //
-//  NARCamera.m
+//  NARCamera.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARCamera.h"
 #include "NNSObject.h"
 #include "NARWorldTrackingConfiguration.h"
-#import "node_ios_hello-Swift.h"
 
 NARCamera::NARCamera () {}
 NARCamera::~NARCamera () {}
@@ -33,7 +27,7 @@ JS_INIT_CLASS(ARCamera, NSObject);
 JS_INIT_CLASS_END(ARCamera, NSObject);
 
 NAN_METHOD(NARCamera::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARCamera);
 
   Local<Object> obj = info.This();
 

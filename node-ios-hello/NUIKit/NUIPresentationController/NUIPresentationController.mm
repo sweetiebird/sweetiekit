@@ -25,7 +25,7 @@ JS_INIT_CLASS_END(UIPresentationController, NSObject);
 #include "NUIViewController.h"
 
 NAN_METHOD(NUIPresentationController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIPresentationController);
   
   Local<Object> obj = info.This();
   

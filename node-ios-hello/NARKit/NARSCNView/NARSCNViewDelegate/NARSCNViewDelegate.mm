@@ -1,21 +1,14 @@
 //
-//  NARSCNViewDelegate.m
+//  NARSCNViewDelegate.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SceneKit/SceneKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NARSCNViewDelegate.h"
 #include "NARSession.h"
 #include "NARAnchor.h"
 #include "NSCNView.h"
 #include "NSCNNode.h"
-#import "node_ios_hello-Swift.h"
 
 NARSCNViewDelegate::NARSCNViewDelegate () {}
 NARSCNViewDelegate::~NARSCNViewDelegate () {}
@@ -29,7 +22,7 @@ JS_INIT_CLASS(ARSCNViewDelegate, NSObject);
 JS_INIT_CLASS_END(ARSCNViewDelegate, NSObject);
 
 NAN_METHOD(NARSCNViewDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARSCNViewDelegate);
 
   Local<Object> obj = info.This();
 

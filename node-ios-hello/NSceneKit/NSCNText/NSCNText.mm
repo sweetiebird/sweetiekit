@@ -70,13 +70,10 @@ NAN_METHOD(NSCNText::textWithStringExtrusionDepth) {
 }
 
 NAN_METHOD(NSCNText::New) {
+  JS_RECONSTRUCT(SCNText);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNText(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNText, info);
-      return;
-    }
     SCNText* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNText *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2) {

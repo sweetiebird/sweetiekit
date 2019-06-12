@@ -23,7 +23,7 @@ JS_INIT_CLASS(UINavigationBar, UIView);
 JS_INIT_CLASS_END(UINavigationBar, UIView);
 
 NAN_METHOD(NUINavigationBar::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UINavigationBar);
 
   Local<Object> obj = info.This();
 

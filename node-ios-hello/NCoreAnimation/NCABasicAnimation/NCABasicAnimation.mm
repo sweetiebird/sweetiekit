@@ -1,14 +1,10 @@
 //
-//  CABasicAnimation.m
+//  CABasicAnimation.mm
 //
 //  Created by Emily Kolar on 5/3/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #include "NCABasicAnimation.h"
-#include "ColorHelper.h"
 
 NCABasicAnimation::NCABasicAnimation () {}
 NCABasicAnimation::~NCABasicAnimation () {}
@@ -23,7 +19,7 @@ JS_INIT_CLASS(CABasicAnimation, NSObject);
 JS_INIT_CLASS_END(CABasicAnimation, NSObject);
 
 NAN_METHOD(NCABasicAnimation::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CABasicAnimation);
   
   Local<Object> obj = info.This();
   

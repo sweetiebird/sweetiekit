@@ -85,7 +85,7 @@ JS_INIT_CLASS(UITouch, NSObject);
 JS_INIT_CLASS_END(UITouch, NSObject);
 
 NAN_METHOD(NUITouch::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITouch);
 
   Local<Object> obj = info.This();
 

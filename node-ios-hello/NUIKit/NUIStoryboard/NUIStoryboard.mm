@@ -25,14 +25,10 @@ JS_INIT_CLASS_END(UIStoryboard, NSObject);
 #include "NNSBundle.h"
 
 NAN_METHOD(NUIStoryboard::New) {
+  JS_RECONSTRUCT(UIStoryboard);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIStoryboard(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIStoryboard, info);
-      return;
-    }
-
     UIStoryboard* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UIStoryboard *)(info[0].As<External>()->Value());
     } else if (is_value_NSString(info[0])) {

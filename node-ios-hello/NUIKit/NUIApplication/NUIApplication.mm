@@ -18,7 +18,7 @@ JS_INIT_CLASS(UIApplication, NSObject);
 JS_INIT_CLASS_END(UIApplication, NSObject);
 
 NAN_METHOD(NUIApplication::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIApplication);
 
   Local<Object> obj = info.This();
 

@@ -30,7 +30,7 @@ JS_INIT_CLASS(UITableViewDataSource, NSObject);
 JS_INIT_CLASS_END(UITableViewDataSource, NSObject);
 
 NAN_METHOD(NUITableViewDataSource::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITableViewDataSource);
 
   Local<Object> dObj = info.This();
 

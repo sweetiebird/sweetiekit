@@ -1,16 +1,10 @@
 //
-//  NARWorldTrackingConfiguration.m
+//  NARWorldTrackingConfiguration.mm
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARWorldTrackingConfiguration.h"
-#include "NARConfiguration.h"
-#import "node_ios_hello-Swift.h"
 
 NARWorldTrackingConfiguration::NARWorldTrackingConfiguration () {}
 NARWorldTrackingConfiguration::~NARWorldTrackingConfiguration () {}
@@ -25,7 +19,7 @@ JS_INIT_CLASS_END(ARWorldTrackingConfiguration, ARConfiguration);
 
 
 NAN_METHOD(NARWorldTrackingConfiguration::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARWorldTrackingConfiguration);
 
   Local<Object> obj = info.This();
 

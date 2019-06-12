@@ -34,14 +34,10 @@ JS_INIT_CLASS(NSMutableURLRequest, NSURLRequest);
 JS_INIT_CLASS_END(NSMutableURLRequest, NSURLRequest);
 
 NAN_METHOD(NNSMutableURLRequest::New) {
+  JS_RECONSTRUCT(NSMutableURLRequest);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSMutableURLRequest(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSMutableURLRequest, info);
-      return;
-    }
-
     NSMutableURLRequest* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSMutableURLRequest *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

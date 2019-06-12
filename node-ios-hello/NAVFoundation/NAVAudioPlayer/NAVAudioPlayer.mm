@@ -1,14 +1,10 @@
 //
-//  NAVAudioPlayer.m
+//  NAVAudioPlayer.mm
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NAVAudioPlayer.h"
 
 #define instancetype AVAudioPlayer
@@ -69,7 +65,7 @@ JS_INIT_CLASS(AVAudioPlayer, NSObject);
 JS_INIT_CLASS_END(AVAudioPlayer, NSObject);
 
 NAN_METHOD(NAVAudioPlayer::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(AVAudioPlayer);
 
   Local<Object> obj = info.This();
 

@@ -1,14 +1,9 @@
 //
-//  CIImage.m
+//  CIImage.mm
 //
 //  Created by Emily Kolar on 2019-5-26.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <CoreImage/CoreImage.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NCIImage.h"
 #include "NUIImage.h"
 
@@ -24,7 +19,7 @@ JS_INIT_CLASS(CIImage, NSObject);
 JS_INIT_CLASS_END(CIImage, NSObject);
 
 NAN_METHOD(NCIImage::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CIImage);
 
   Local<Object> obj = info.This();
 

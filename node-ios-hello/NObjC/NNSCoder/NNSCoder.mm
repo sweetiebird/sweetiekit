@@ -82,14 +82,10 @@ JS_INIT_CLASS(NSCoder, NSObject);
 JS_INIT_CLASS_END(NSCoder, NSObject);
 
 NAN_METHOD(NNSCoder::New) {
+  JS_RECONSTRUCT(NSCoder);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSCoder(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSCoder, info);
-      return;
-    }
-
     NSCoder* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSCoder *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

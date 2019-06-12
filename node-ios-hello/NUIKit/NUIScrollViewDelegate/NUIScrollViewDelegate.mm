@@ -22,7 +22,7 @@ JS_INIT_CLASS(UIScrollViewDelegate, NSObject);
 JS_INIT_CLASS_END(UIScrollViewDelegate, NSObject);
 
 NAN_METHOD(NUIScrollViewDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIScrollViewDelegate);
 
   Local<Object> obj = info.This();
 

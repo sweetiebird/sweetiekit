@@ -110,15 +110,11 @@ JS_INIT_CLASS_END(NSBundle, NSObject);
 #include "NNSURL.h"
 
 NAN_METHOD(NNSBundle::New) {
+  JS_RECONSTRUCT(NSBundle);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSBundle(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSBundle, info);
-      return;
-    }
-
-    declare_args();
     NSBundle* self = nullptr;
+    
+    declare_args();
     if (info[0]->IsExternal()) {
       self = (__bridge NSBundle *)(info[0].As<External>()->Value());
     } else if (is_value_NSString(info[0])) {

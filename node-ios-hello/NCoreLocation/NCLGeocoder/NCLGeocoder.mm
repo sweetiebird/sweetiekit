@@ -1,14 +1,9 @@
 //
-//  CLGeocoder.m
+//  CLGeocoder.mm
 //
 //  Created by Emily Kolar on 2019-5-19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NCLGeocoder.h"
 #include "NCLPlacemark.h"
 
@@ -23,7 +18,7 @@ JS_INIT_CLASS(CLGeocoder, NSObject);
 JS_INIT_CLASS_END(CLGeocoder, NSObject);
 
 NAN_METHOD(NCLGeocoder::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CLGeocoder);
 
   Local<Object> obj = info.This();
 

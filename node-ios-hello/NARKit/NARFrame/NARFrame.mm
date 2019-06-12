@@ -1,23 +1,15 @@
 //
-//  NARFrame.m
+//  NARFrame.mm
 //
 //  Created by Emily Kolar on 5/12/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include <CoreImage/CoreImage.h>
-#include "defines.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
 #include "NARLightEstimate.h"
-#include "NNSObject.h"
 #include "NARWorldTrackingConfiguration.h"
 #include "NUIImage.h"
 #include "NCIImage.h"
-#import "node_ios_hello-Swift.h"
 
 NARFrame::NARFrame () {}
 NARFrame::~NARFrame () {}
@@ -35,7 +27,7 @@ JS_INIT_CLASS(ARFrame, NSObject);
 JS_INIT_CLASS_END(ARFrame, NSObject);
 
 NAN_METHOD(NARFrame::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARFrame);
 
   Local<Object> obj = info.This();
 

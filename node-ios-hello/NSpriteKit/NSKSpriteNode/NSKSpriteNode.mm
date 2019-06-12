@@ -34,7 +34,7 @@ JS_INIT_CLASS_END(SKSpriteNode, SKNode);
 #include "NUIImage.h"
 
 NAN_METHOD(NSKSpriteNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKSpriteNode);
 
   Local<Object> obj = info.This();
 

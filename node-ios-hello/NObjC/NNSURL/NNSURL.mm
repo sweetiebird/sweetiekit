@@ -227,14 +227,10 @@ bool is_value_URL(Local<Value> value) {
 }
 
 NAN_METHOD(NNSURL::New) {
+  JS_RECONSTRUCT(NSURL);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSURL(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSURL, info);
-      return;
-    }
-
     NSURL* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSURL *)(info[0].As<External>()->Value());
     } else if (is_value_URL(info[0])) {

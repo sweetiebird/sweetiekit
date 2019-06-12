@@ -18,7 +18,7 @@ JS_INIT_CLASS_END(UITabBarItem, NSObject);
 #include "NUIImage.h"
 
 NAN_METHOD(NUITabBarItem::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITabBarItem);
 
   Local<Object> obj = info.This();
 

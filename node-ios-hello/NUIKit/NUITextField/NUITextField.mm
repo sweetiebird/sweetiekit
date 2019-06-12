@@ -64,12 +64,10 @@ JS_INIT_CLASS(UITextField, UIControl);
 JS_INIT_CLASS_END(UITextField, UIControl);
 
 NAN_METHOD(NUITextField::New) {
+  JS_RECONSTRUCT(UITextField);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      JS_SET_RETURN_NEW(UITextField, info);
-      return;
-    }
     UITextField* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UITextField *)(info[0].As<External>()->Value());
     } else if (is_value_CGRect(info[0])) {

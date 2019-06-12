@@ -24,7 +24,7 @@ JS_INIT_CLASS(UIControl, UIView);
 JS_INIT_CLASS_END(UIControl, UIView);
 
 NAN_METHOD(NUIControl::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIControl);
 
   Local<Object> viewObj = info.This();
 

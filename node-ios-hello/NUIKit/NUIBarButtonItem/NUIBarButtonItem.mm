@@ -17,7 +17,7 @@ JS_INIT_CLASS(UIBarButtonItem, NSObject);
 JS_INIT_CLASS_END(UIBarButtonItem, NSObject);
 
 NAN_METHOD(NUIBarButtonItem::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIBarButtonItem);
 
   Local<Object> obj = info.This();
 

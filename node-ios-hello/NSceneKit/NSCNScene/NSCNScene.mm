@@ -21,12 +21,7 @@ JS_INIT_CLASS(SCNScene, NSObject);
 JS_INIT_CLASS_END(SCNScene, NSObject);
 
 NAN_METHOD(NSCNScene::New) {
-  if (!info.IsConstructCall()) {
-    // Invoked as plain function `SCNScene(...)`, turn into construct call.
-    JS_SET_RETURN_NEW(SCNScene, info);
-    return;
-  }
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SCNScene);
 
   Local<Object> obj = info.This();
 

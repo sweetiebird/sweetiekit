@@ -21,7 +21,7 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIKitGlobals);
 
   Local<Object> obj = info.This();
 

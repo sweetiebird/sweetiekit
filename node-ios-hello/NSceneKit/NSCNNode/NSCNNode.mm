@@ -113,12 +113,7 @@ JS_INIT_CLASS_END(SCNNode, NSObject);
 #include "NSCNGeometry.h"
 
 NAN_METHOD(NSCNNode::New) {
-  if (!info.IsConstructCall()) {
-    // Invoked as plain function `SCNNode(...)`, turn into construct call.
-    JS_SET_RETURN_NEW(SCNNode, info);
-    return;
-  }
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SCNNode);
 
   Local<Object> obj = info.This();
 

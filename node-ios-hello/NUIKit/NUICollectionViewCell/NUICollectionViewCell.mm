@@ -21,7 +21,7 @@ JS_INIT_CLASS(UICollectionViewCell, UICollectionReusableView);
 JS_INIT_CLASS_END(UICollectionViewCell, UICollectionReusableView);
 
 NAN_METHOD(NUICollectionViewCell::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UICollectionViewCell);
 
   Local<Object> obj = info.This();
 

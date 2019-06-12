@@ -41,7 +41,7 @@ JS_INIT_CLASS(UIResponder, NSObject);
 JS_INIT_CLASS_END(UIResponder, NSObject);
 
 NAN_METHOD(NUIResponder::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIResponder);
 
   Local<Object> viewObj = info.This();
 

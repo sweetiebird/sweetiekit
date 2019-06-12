@@ -197,13 +197,10 @@ JS_INIT_CLASS(UIView, UIResponder);
 JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {
+  JS_RECONSTRUCT(UIView);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIView(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIView, info);
-      return;
-    }
     UIView* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge UIView *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 4) {

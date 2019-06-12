@@ -19,7 +19,7 @@ JS_INIT_CLASS(SKPhysicsWorld, NSObject);
 JS_INIT_CLASS_END(SKPhysicsWorld, NSObject);
 
 NAN_METHOD(NSKPhysicsWorld::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKPhysicsWorld);
 
   Local<Object> obj = info.This();
 

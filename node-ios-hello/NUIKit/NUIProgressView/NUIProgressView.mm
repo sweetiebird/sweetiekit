@@ -20,7 +20,7 @@ JS_INIT_CLASS(UIProgressView, UIView);
 JS_INIT_CLASS_END(UIProgressView, UIView);
 
 NAN_METHOD(NUIProgressView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIProgressView);
 
   Local<Object> obj = info.This();
 

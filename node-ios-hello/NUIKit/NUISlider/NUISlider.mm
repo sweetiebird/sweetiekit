@@ -21,7 +21,7 @@ JS_INIT_CLASS(UISlider, UIControl);
 JS_INIT_CLASS_END(UISlider, UIControl);
 
 NAN_METHOD(NUISlider::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UISlider);
 
   Local<Object> obj = info.This();
 

@@ -21,7 +21,7 @@ JS_INIT_CLASS(SKLabelNode, SKNode);
 JS_INIT_CLASS_END(SKLabelNode, SKNode);
 
 NAN_METHOD(NSKLabelNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKLabelNode);
 
   Local<Object> obj = info.This();
 

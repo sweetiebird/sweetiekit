@@ -1,16 +1,10 @@
 //
-//  NARLightEstimate.m
+//  NARLightEstimate.mm
 //
 //  Created by Emily Kolar on 5/13/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARLightEstimate.h"
-#include "NNSObject.h"
-#import "node_ios_hello-Swift.h"
 
 NARLightEstimate::NARLightEstimate () {}
 NARLightEstimate::~NARLightEstimate () {}
@@ -26,7 +20,7 @@ JS_INIT_CLASS(ARLightEstimate, NSObject);
 JS_INIT_CLASS_END(ARLightEstimate, NSObject);
 
 NAN_METHOD(NARLightEstimate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARLightEstimate);
 
   Local<Object> obj = info.This();
 

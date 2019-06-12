@@ -45,13 +45,10 @@ NAN_METHOD(NSCNShape::shapeWithPathExtrusionDepth) {
 }
 
 NAN_METHOD(NSCNShape::New) {
+  JS_RECONSTRUCT(SCNShape);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNShape(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNShape, info);
-      return;
-    }
     SCNShape* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNShape *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2 && info[0]->IsNumber()) {

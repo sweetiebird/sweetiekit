@@ -50,13 +50,10 @@ NAN_METHOD(NSCNBox::boxWithWidthHeightLengthChamferRadius) {
 }
 
 NAN_METHOD(NSCNBox::New) {
+  JS_RECONSTRUCT(SCNBox);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNBox(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNBox, info);
-      return;
-    }
     SCNBox* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNBox *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 4) {

@@ -23,7 +23,7 @@ JS_INIT_CLASS(SKAction, NSObject);
 JS_INIT_CLASS_END(SKAction, NSObject);
 
 NAN_METHOD(NSKAction::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKAction);
 
   Local<Object> obj = info.This();
 

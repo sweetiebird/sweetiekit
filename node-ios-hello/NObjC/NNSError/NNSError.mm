@@ -61,14 +61,10 @@ JS_INIT_CLASS(NSError, NSObject);
 JS_INIT_CLASS_END(NSError, NSObject);
 
 NAN_METHOD(NNSError::New) {
+  JS_RECONSTRUCT(NSError);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSError(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSError, info);
-      return;
-    }
-
     NSError* self = nullptr;
+    
     if (info[0]->IsExternal()) {
       self = (__bridge NSError *)(info[0].As<External>()->Value());
     } else if (info[0]->InstanceOf(JS_CONTEXT(), Nan::New<Object>(JSErrorType)).FromJust()) {

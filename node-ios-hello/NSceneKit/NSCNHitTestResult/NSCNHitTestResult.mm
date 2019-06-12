@@ -25,14 +25,10 @@ JS_INIT_CLASS(SCNHitTestResult, NSObject);
 JS_INIT_CLASS_END(SCNHitTestResult, NSObject);
 
 NAN_METHOD(NSCNHitTestResult::New) {
+  JS_RECONSTRUCT(SCNHitTestResult);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'SCNHitTestResult(...)', turn into construct call.
-      JS_SET_RETURN_NEW(SCNHitTestResult, info);
-      return;
-    }
-
     SCNHitTestResult* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNHitTestResult *)(info[0].As<External>()->Value());
     } else if(info.Length() <= 0) {

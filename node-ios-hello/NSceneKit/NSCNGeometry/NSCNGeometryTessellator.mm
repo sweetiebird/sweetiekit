@@ -29,13 +29,10 @@ JS_INIT_CLASS(SCNGeometryTessellator, NSObject);
 JS_INIT_CLASS_END(SCNGeometryTessellator, NSObject);
 
 NAN_METHOD(NSCNGeometryTessellator::New) {
+  JS_RECONSTRUCT(SCNGeometryTessellator);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNGeometryTessellator(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNGeometryTessellator, info);
-      return;
-    }
     SCNGeometryTessellator* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNGeometryTessellator *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

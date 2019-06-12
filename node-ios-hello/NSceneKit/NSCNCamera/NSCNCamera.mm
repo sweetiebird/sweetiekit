@@ -69,14 +69,10 @@ JS_INIT_CLASS(SCNCamera, NSObject);
 JS_INIT_CLASS_END(SCNCamera, NSObject);
 
 NAN_METHOD(NSCNCamera::New) {
+  JS_RECONSTRUCT(SCNCamera);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'SCNCamera(...)', turn into construct call.
-      JS_SET_RETURN_NEW(SCNCamera, info);
-      return;
-    }
-
     SCNCamera* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNCamera *)(info[0].As<External>()->Value());
     } else if(info.Length() <= 0) {

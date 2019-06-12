@@ -33,7 +33,7 @@ JS_INIT_CLASS(SKView, UIView);
 JS_INIT_CLASS_END(SKView, UIView);
 
 NAN_METHOD(NSKView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKView);
 
   Local<Object> obj = info.This();
 

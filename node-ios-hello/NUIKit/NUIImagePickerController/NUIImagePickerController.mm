@@ -17,7 +17,7 @@ JS_INIT_CLASS(UIImagePickerController, UINavigationController);
 JS_INIT_CLASS_END(UIImagePickerController, UINavigationController);
 
 NAN_METHOD(NUIImagePickerController::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIImagePickerController);
 
   Local<Object> ctrlObj = info.This();
 

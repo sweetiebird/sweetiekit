@@ -19,7 +19,7 @@ JS_INIT_CLASS(UIWindow, UIView);
 JS_INIT_CLASS_END(UIWindow, UIView);
 
 NAN_METHOD(NUIWindow::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIWindow);
 
   Local<Object> viewObj = info.This();
 

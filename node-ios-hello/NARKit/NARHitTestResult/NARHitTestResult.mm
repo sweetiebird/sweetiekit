@@ -21,13 +21,8 @@ JS_INIT_CLASS(ARHitTestResult, NSObject);
 JS_INIT_CLASS_END(ARHitTestResult, NSObject);
 
 NAN_METHOD(NARHitTestResult::New) {
+  JS_RECONSTRUCT(ARHitTestResult);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'ARHitTestResult(...)', turn into construct call.
-      JS_SET_RETURN_NEW(ARHitTestResult, info);
-      return;
-    }
-
     ARHitTestResult* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge ARHitTestResult *)(info[0].As<External>()->Value());

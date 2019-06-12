@@ -16,7 +16,7 @@ JS_INIT_CLASS(UIAlertAction, NSObject);
 JS_INIT_CLASS_END(UIAlertAction, NSObject);
 
 NAN_METHOD(NUIAlertAction::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIAlertAction);
 
   Local<Object> obj = info.This();
 

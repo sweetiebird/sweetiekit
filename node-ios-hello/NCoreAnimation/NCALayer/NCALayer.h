@@ -14,21 +14,31 @@
 #define to_value_CALayer(x) to_value_wrapper(x, CALayer)
 #define is_value_CALayer(x) is_value_wrapper(x, CALayer)
 
+#define js_value_CAEdgeAntialiasingMask(x) JS_OPTS(CAEdgeAntialiasingMask, uint32_t, x)
+#define to_value_CAEdgeAntialiasingMask(x) TO_OPTS(CAEdgeAntialiasingMask, uint32_t, x)
+#define is_value_CAEdgeAntialiasingMask(x) IS_OPTS(CAEdgeAntialiasingMask, uint32_t, x)
+
+#define js_value_CACornerMask(x) JS_OPTS(CACornerMask, NSUInteger, x)
+#define to_value_CACornerMask(x) TO_OPTS(CACornerMask, NSUInteger, x)
+#define is_value_CACornerMask(x) IS_OPTS(CACornerMask, NSUInteger, x)
+
+#define js_value_CALayerContentsGravity(x) JS_ENUM(CALayerContentsGravity, NSString, x)
+#define to_value_CALayerContentsGravity(x) TO_ENUM(CALayerContentsGravity, NSString, x)
+#define is_value_CALayerContentsGravity(x) IS_ENUM(CALayerContentsGravity, NSString, x)
+
+#define js_value_CALayerContentsFormat(x) JS_ENUM(CALayerContentsFormat, NSString, x)
+#define to_value_CALayerContentsFormat(x) TO_ENUM(CALayerContentsFormat, NSString, x)
+#define is_value_CALayerContentsFormat(x) IS_ENUM(CALayerContentsFormat, NSString, x)
+
+#define js_value_CALayerContentsFilter(x) JS_ENUM(CALayerContentsFilter, NSString, x)
+#define to_value_CALayerContentsFilter(x) TO_ENUM(CALayerContentsFilter, NSString, x)
+#define is_value_CALayerContentsFilter(x) IS_ENUM(CALayerContentsFilter, NSString, x)
+
 JS_WRAP_CLASS(CALayer, NSObject);
   JS_METHOD(AddAnimation);
   JS_METHOD(AddSublayer);
-  JS_METHOD(RenderInContext);
-  JS_PROP(CornerRadius);
-  JS_PROP(BorderWidth);
-  JS_PROP(BorderColor);
-  JS_PROP(ShadowOffset);
-  JS_PROP(ShadowColor);
-  JS_PROP(ShadowRadius);
-  JS_PROP(Position);
-  JS_PROP(MasksToBounds);
-  JS_PROP(ShadowOpacity);
-  JS_PROP(Frame);
-  
+
+ // CALayer
   JS_STATIC_METHOD(layer);
   JS_STATIC_METHOD(defaultValueForKey);
   JS_STATIC_METHOD(needsDisplayForKey);
@@ -73,6 +83,17 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_METHOD(removeAnimationForKey);
   JS_METHOD(animationKeys);
   JS_METHOD(animationForKey);
+#if TODO
+// CAAction
+  JS_METHOD(runActionForKeyObjectArguments);
+// CALayerDelegate
+  JS_METHOD(displayLayer);
+  JS_METHOD(drawLayerInContext);
+  JS_METHOD(layerWillDraw);
+  JS_METHOD(layoutSublayersOfLayer);
+  JS_METHOD(actionForLayerForKey);
+#endif
+// CALayer
   JS_PROP(bounds);
   JS_PROP(position);
   JS_PROP(zPosition);
@@ -80,9 +101,9 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_PROP(anchorPointZ);
   JS_PROP(transform);
   JS_PROP(frame);
-  JS_PROP(hidden);
-  JS_PROP(doubleSided);
-  JS_PROP(geometryFlipped);
+  JS_PROP(isHidden);
+  JS_PROP(isDoubleSided);
+  JS_PROP(isGeometryFlipped);
   JS_PROP_READONLY(superlayer);
   JS_PROP(sublayers);
   JS_PROP(sublayerTransform);
@@ -97,7 +118,7 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_PROP(minificationFilter);
   JS_PROP(magnificationFilter);
   JS_PROP(minificationFilterBias);
-  JS_PROP(opaque);
+  JS_PROP(isOpaque);
   JS_PROP(needsDisplayOnBoundsChange);
   JS_PROP(drawsAsynchronously);
   JS_PROP(edgeAntialiasingMask);
@@ -123,6 +144,7 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_PROP(name);
   JS_PROP(delegate);
   JS_PROP(style);
+
 
 JS_WRAP_CLASS_END(CALayer);
 

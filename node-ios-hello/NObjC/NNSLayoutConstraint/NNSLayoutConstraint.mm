@@ -20,14 +20,10 @@ JS_INIT_CLASS(NSLayoutConstraint, NSObject);
 JS_INIT_CLASS_END(NSLayoutConstraint, NSObject);
 
 NAN_METHOD(NNSLayoutConstraint::New) {
+  JS_RECONSTRUCT(NSLayoutConstraint);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'NSLayoutConstraint(...)', turn into construct call.
-      JS_SET_RETURN_NEW(NSLayoutConstraint, info);
-      return;
-    }
-
     NSLayoutConstraint* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge NSLayoutConstraint *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {

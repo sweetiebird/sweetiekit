@@ -6,23 +6,87 @@
 //
 #include "NUIBezierPath.h"
 
+#define instancetype UIBezierPath
+#define js_value_instancetype js_value_UIBezierPath
+
 NUIBezierPath::NUIBezierPath() {}
 NUIBezierPath::~NUIBezierPath() {}
 
 JS_INIT_CLASS(UIBezierPath, NSObject);
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, lineWidth);
-  JS_ASSIGN_METHOD(proto, moveToPoint);
+  JS_ASSIGN_PROTO_METHOD(moveToPoint);
+  JS_ASSIGN_PROTO_METHOD(addLineToPoint);
+  JS_ASSIGN_PROTO_METHOD(addCurveToPointControlPoint1_controlPoint2);
+  JS_ASSIGN_PROTO_METHOD(addQuadCurveToPointControlPoint);
+  JS_ASSIGN_PROTO_METHOD(addArcWithCenterRadiusStartAngleEndAngleClockwise);
+  JS_ASSIGN_PROTO_METHOD(closePath);
+  JS_ASSIGN_PROTO_METHOD(removeAllPoints);
+  JS_ASSIGN_PROTO_METHOD(appendPath);
+  JS_ASSIGN_PROTO_METHOD(bezierPathByReversingPath);
+  JS_ASSIGN_PROTO_METHOD(applyTransform);
+  JS_ASSIGN_PROTO_METHOD(containsPoint);
+  JS_ASSIGN_PROTO_METHOD(setLineDashCountPhase);
+  JS_ASSIGN_PROTO_METHOD(getLineDashCountPhase);
+  JS_ASSIGN_PROTO_METHOD(fill);
+  JS_ASSIGN_PROTO_METHOD(stroke);
+  JS_ASSIGN_PROTO_METHOD(fillWithBlendModeAlpha);
+  JS_ASSIGN_PROTO_METHOD(strokeWithBlendModeAlpha);
+  JS_ASSIGN_PROTO_METHOD(addClip);
+  JS_ASSIGN_PROTO_PROP(CGPath);
+  JS_ASSIGN_PROTO_PROP_READONLY(isEmpty);
+  JS_ASSIGN_PROTO_PROP_READONLY(bounds);
+  JS_ASSIGN_PROTO_PROP_READONLY(currentPoint);
+  JS_ASSIGN_PROTO_PROP(lineWidth);
+  JS_ASSIGN_PROTO_PROP(lineCapStyle);
+  JS_ASSIGN_PROTO_PROP(lineJoinStyle);
+  JS_ASSIGN_PROTO_PROP(miterLimit);
+  JS_ASSIGN_PROTO_PROP(flatness);
+  JS_ASSIGN_PROTO_PROP(usesEvenOddFillRule);
   // static members (ctor)
   JS_INIT_CTOR(UIBezierPath, NSObject);
-  JS_ASSIGN_METHOD(ctor, bezierPath);
-  JS_ASSIGN_METHOD(ctor, bezierPathWithRect);
-  JS_ASSIGN_METHOD(ctor, bezierPathWithOvalInRect);
-  JS_ASSIGN_METHOD(ctor, bezierPathWithArcCenter);
+  JS_ASSIGN_STATIC_METHOD(bezierPath);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithRect);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithOvalInRect);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithRoundedRectCornerRadius);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithRoundedRectByRoundingCornersCornerRadii);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithArcCenterRadiusStartAngleEndAngleClockwise);
+  JS_ASSIGN_STATIC_METHOD(bezierPathWithCGPath);
+  JS_ASSIGN_STATIC_METHOD(init);
+  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  
+  // constants
+
+//typedef NS_OPTIONS(NSUInteger, UIRectCorner)
+{
+  JS_ASSIGN_ENUM(UIRectCornerTopLeft, NSUInteger);
+  JS_ASSIGN_ENUM(UIRectCornerTopRight, NSUInteger);
+  JS_ASSIGN_ENUM(UIRectCornerBottomLeft, NSUInteger);
+  JS_ASSIGN_ENUM(UIRectCornerBottomRight, NSUInteger);
+  JS_ASSIGN_ENUM(UIRectCornerAllCorners, NSUInteger);
+};
+
+/* Line join styles. */
+
+//typedef CF_ENUM(int32_t, CGLineJoin)
+{
+    JS_ASSIGN_ENUM(kCGLineJoinMiter, int32_t);
+    JS_ASSIGN_ENUM(kCGLineJoinRound, int32_t);
+    JS_ASSIGN_ENUM(kCGLineJoinBevel, int32_t);
+};
+
+/* Line cap styles. */
+
+//typedef CF_ENUM(int32_t, CGLineCap)
+{
+    JS_ASSIGN_ENUM(kCGLineCapButt, int32_t);
+    JS_ASSIGN_ENUM(kCGLineCapRound, int32_t);
+    JS_ASSIGN_ENUM(kCGLineCapSquare, int32_t);
+};
+
 JS_INIT_CLASS_END(UIBezierPath, NSObject);
 
 NAN_METHOD(NUIBezierPath::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIBezierPath);
 
   Local<Object> obj = info.This();
 
@@ -40,128 +104,383 @@ NAN_METHOD(NUIBezierPath::New) {
   JS_SET_RETURN(obj);
 }
 
-// ======= static initializers
-
 NAN_METHOD(NUIBezierPath::bezierPath) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIBezierPath)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIBezierPath *ui = ObjectWrap::Unwrap<NUIBezierPath>(obj);
-
-  @autoreleasepool {
-    ui->SetNSObject([UIBezierPath bezierPath]);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPath]));
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NUIBezierPath::bezierPathWithRect) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIBezierPath)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIBezierPath *ui = ObjectWrap::Unwrap<NUIBezierPath>(obj);
-
-  @autoreleasepool {
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    ui->SetNSObject([UIBezierPath bezierPathWithRect:CGRectMake(x, y, w, h)]);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithRect: rect]));
   }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NUIBezierPath::bezierPathWithOvalInRect) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIBezierPath)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIBezierPath *ui = ObjectWrap::Unwrap<NUIBezierPath>(obj);
-
-  @autoreleasepool {
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    double w = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double h = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    ui->SetNSObject([UIBezierPath bezierPathWithOvalInRect:CGRectMake(x, y, w, h)]);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithOvalInRect: rect]));
   }
-
-  JS_SET_RETURN(obj);
 }
 
-NAN_METHOD(NUIBezierPath::bezierPathWithArcCenter) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIBezierPath)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIBezierPath *ui = ObjectWrap::Unwrap<NUIBezierPath>(obj);
-
-  @autoreleasepool {
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    CGPoint center = CGPointMake(x, y);
-    double radius = TO_DOUBLE(info[1]);
-    double startAngle = TO_DOUBLE(info[2]);
-    double endAngle = TO_DOUBLE(info[3]);
-    BOOL clockwise = TO_BOOL(info[4]);
-    ui->SetNSObject([UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:clockwise]);
+NAN_METHOD(NUIBezierPath::bezierPathWithRoundedRectCornerRadius) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_value(CGFloat, cornerRadius);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithRoundedRect: rect cornerRadius: cornerRadius]));
   }
-
-  JS_SET_RETURN(obj);
 }
 
-// ======= methods
+NAN_METHOD(NUIBezierPath::bezierPathWithRoundedRectByRoundingCornersCornerRadii) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, rect);
+    declare_value(UIRectCorner, corners);
+    declare_value(CGSize, cornerRadii);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithRoundedRect: rect byRoundingCorners: corners cornerRadii: cornerRadii]));
+  }
+}
+
+NAN_METHOD(NUIBezierPath::bezierPathWithArcCenterRadiusStartAngleEndAngleClockwise) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, center);
+    declare_value(CGFloat, radius);
+    declare_value(CGFloat, startAngle);
+    declare_value(CGFloat, endAngle);
+    declare_value(BOOL, clockwise);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithArcCenter: center radius: radius startAngle: startAngle endAngle: endAngle clockwise: clockwise]));
+  }
+}
+
+NAN_METHOD(NUIBezierPath::bezierPathWithCGPath) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPathRef, CGPath);
+    JS_SET_RETURN(js_value_instancetype([UIBezierPath bezierPathWithCGPath: CGPath]));
+  }
+}
+
+NAN_METHOD(NUIBezierPath::init) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([[UIBezierPath alloc] init]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NUIBezierPath::initWithCoder) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([[UIBezierPath alloc] initWithCoder: aDecoder]));
+  }
+}
 
 NAN_METHOD(NUIBezierPath::moveToPoint) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIBezierPath, ui);
-
-  __block CGPoint pt;
-
-  @autoreleasepool {
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-    pt = CGPointMake(x, y);
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    [self moveToPoint: point];
   }
-
-  [ui moveToPoint:pt];
 }
 
-// ======= getters/setters
+NAN_METHOD(NUIBezierPath::addLineToPoint) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    [self addLineToPoint: point];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::addCurveToPointControlPoint1_controlPoint2) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, endPoint);
+    declare_value(CGPoint, controlPoint1);
+    declare_value(CGPoint, controlPoint2);
+    [self addCurveToPoint: endPoint controlPoint1: controlPoint1 controlPoint2: controlPoint2];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::addQuadCurveToPointControlPoint) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, endPoint);
+    declare_value(CGPoint, controlPoint);
+    [self addQuadCurveToPoint: endPoint controlPoint: controlPoint];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::addArcWithCenterRadiusStartAngleEndAngleClockwise) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, center);
+    declare_value(CGFloat, radius);
+    declare_value(CGFloat, startAngle);
+    declare_value(CGFloat, endAngle);
+    declare_value(BOOL, clockwise);
+    [self addArcWithCenter: center radius: radius startAngle: startAngle endAngle: endAngle clockwise: clockwise];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::closePath) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    [self closePath];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::removeAllPoints) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    [self removeAllPoints];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::appendPath) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIBezierPath, bezierPath);
+    [self appendPath: bezierPath];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::bezierPathByReversingPath) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIBezierPath([self bezierPathByReversingPath]));
+  }
+}
+
+NAN_METHOD(NUIBezierPath::applyTransform) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGAffineTransform, transform);
+    [self applyTransform: transform];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::containsPoint) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    JS_SET_RETURN(js_value_BOOL([self containsPoint: point]));
+  }
+}
+
+NAN_METHOD(NUIBezierPath::setLineDashCountPhase) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSData, pattern);
+    declare_value(NSInteger, count);
+    declare_value(CGFloat, phase);
+    const CGFloat* lineDash = nullptr;
+    if (pattern) {
+      lineDash = (const CGFloat*)[pattern bytes];
+    }
+    [self setLineDash: lineDash count: count phase: phase];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::getLineDashCountPhase) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_nullable_pointer(CGFloat, pattern);
+    declare_nullable_pointer(NSInteger, count);
+    declare_nullable_pointer(CGFloat, phase);
+    [self getLineDash: pattern count: count phase: phase];
+    #endif
+  }
+}
+
+NAN_METHOD(NUIBezierPath::fill) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    [self fill];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::stroke) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    [self stroke];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::fillWithBlendModeAlpha) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGBlendMode, blendMode);
+    declare_value(CGFloat, alpha);
+    [self fillWithBlendMode: blendMode alpha: alpha];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::strokeWithBlendModeAlpha) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGBlendMode, blendMode);
+    declare_value(CGFloat, alpha);
+    [self strokeWithBlendMode: blendMode alpha: alpha];
+  }
+}
+
+NAN_METHOD(NUIBezierPath::addClip) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    [self addClip];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::CGPathGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPathRef([self CGPath]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::CGPathSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPathRef, input);
+    [self setCGPath: input];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::isEmptyGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isEmpty]));
+  }
+}
+
+NAN_GETTER(NUIBezierPath::boundsGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGRect([self bounds]));
+  }
+}
+
+NAN_GETTER(NUIBezierPath::currentPointGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self currentPoint]));
+  }
+}
 
 NAN_GETTER(NUIBezierPath::lineWidthGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIBezierPath, ui);
-  
-  __block CGFloat width;
-  
-  @autoreleasepool {
-    width = [ui lineWidth];
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self lineWidth]));
   }
-  
-  JS_SET_RETURN(JS_FLOAT(width));
 }
 
 NAN_SETTER(NUIBezierPath::lineWidthSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIBezierPath, ui);
-  
-  @autoreleasepool {
-    float width = TO_FLOAT(value);
-    [ui setLineWidth:width];
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setLineWidth: input];
   }
 }
+
+NAN_GETTER(NUIBezierPath::lineCapStyleGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGLineCap([self lineCapStyle]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::lineCapStyleSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGLineCap, input);
+    [self setLineCapStyle: input];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::lineJoinStyleGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGLineJoin([self lineJoinStyle]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::lineJoinStyleSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGLineJoin, input);
+    [self setLineJoinStyle: input];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::miterLimitGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self miterLimit]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::miterLimitSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setMiterLimit: input];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::flatnessGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self flatness]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::flatnessSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setFlatness: input];
+  }
+}
+
+NAN_GETTER(NUIBezierPath::usesEvenOddFillRuleGetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self usesEvenOddFillRule]));
+  }
+}
+
+NAN_SETTER(NUIBezierPath::usesEvenOddFillRuleSetter) {
+  JS_UNWRAP(UIBezierPath, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setUsesEvenOddFillRule: input];
+  }
+}
+

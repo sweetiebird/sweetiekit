@@ -18,7 +18,7 @@ JS_INIT_CLASS(UITapGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UITapGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUITapGestureRecognizer::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UITapGestureRecognizer);
 
   Local<Object> obj = info.This();
 
@@ -42,13 +42,8 @@ JS_INIT_CLASS(UIPinchGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UIPinchGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUIPinchGestureRecognizer::New) {
+  JS_RECONSTRUCT(UIPinchGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIPinchGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIPinchGestureRecognizer, info);
-      return;
-    }
-
     UIPinchGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIPinchGestureRecognizer *)(info[0].As<External>()->Value());
@@ -73,13 +68,8 @@ JS_INIT_CLASS(UIRotationGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UIRotationGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUIRotationGestureRecognizer::New) {
+  JS_RECONSTRUCT(UIRotationGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIRotationGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIRotationGestureRecognizer, info);
-      return;
-    }
-
     UIRotationGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIRotationGestureRecognizer *)(info[0].As<External>()->Value());
@@ -104,13 +94,8 @@ JS_INIT_CLASS(UISwipeGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UISwipeGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUISwipeGestureRecognizer::New) {
+  JS_RECONSTRUCT(UISwipeGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UISwipeGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UISwipeGestureRecognizer, info);
-      return;
-    }
-
     UISwipeGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UISwipeGestureRecognizer *)(info[0].As<External>()->Value());
@@ -135,13 +120,8 @@ JS_INIT_CLASS(UIPanGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UIPanGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUIPanGestureRecognizer::New) {
+  JS_RECONSTRUCT(UIPanGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIPanGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIPanGestureRecognizer, info);
-      return;
-    }
-
     UIPanGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIPanGestureRecognizer *)(info[0].As<External>()->Value());
@@ -166,13 +146,8 @@ JS_INIT_CLASS(UIScreenEdgePanGestureRecognizer, UIPanGestureRecognizer);
 JS_INIT_CLASS_END(UIScreenEdgePanGestureRecognizer, UIPanGestureRecognizer);
 
 NAN_METHOD(NUIScreenEdgePanGestureRecognizer::New) {
+  JS_RECONSTRUCT(UIScreenEdgePanGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UIScreenEdgePanGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UIScreenEdgePanGestureRecognizer, info);
-      return;
-    }
-
     UIScreenEdgePanGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UIScreenEdgePanGestureRecognizer *)(info[0].As<External>()->Value());
@@ -197,13 +172,8 @@ JS_INIT_CLASS(UILongPressGestureRecognizer, UIGestureRecognizer);
 JS_INIT_CLASS_END(UILongPressGestureRecognizer, UIGestureRecognizer);
 
 NAN_METHOD(NUILongPressGestureRecognizer::New) {
+  JS_RECONSTRUCT(UILongPressGestureRecognizer);
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function 'UILongPressGestureRecognizer(...)', turn into construct call.
-      JS_SET_RETURN_NEW(UILongPressGestureRecognizer, info);
-      return;
-    }
-
     UILongPressGestureRecognizer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge UILongPressGestureRecognizer *)(info[0].As<External>()->Value());

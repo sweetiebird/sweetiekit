@@ -21,7 +21,7 @@ JS_INIT_CLASS(UIPageControl, UIControl);
 JS_INIT_CLASS_END(UIPageControl, UIControl);
 
 NAN_METHOD(NUIPageControl::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIPageControl);
 
   Local<Object> obj = info.This();
 

@@ -21,7 +21,7 @@ JS_INIT_CLASS_END(SKTexture, NSObject);
 #include "NUIImage.h"
 
 NAN_METHOD(NSKTexture::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKTexture);
 
   Local<Object> obj = info.This();
 

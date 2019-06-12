@@ -62,7 +62,7 @@ JS_INIT_CLASS(SKEmitterNode, SKNode);
 JS_INIT_CLASS_END(SKEmitterNode, SKNode);
 
 NAN_METHOD(NSKEmitterNode::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(SKEmitterNode);
 
   Local<Object> obj = info.This();
 

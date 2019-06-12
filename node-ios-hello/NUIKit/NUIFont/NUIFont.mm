@@ -41,13 +41,10 @@ JS_INIT_CLASS(UIFont, NSObject);
 JS_INIT_CLASS_END(UIFont, NSObject);
 
 NAN_METHOD(NUIFont::New) {
+  JS_RECONSTRUCT(UIFont);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIFont(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIFont, info);
-      return;
-    }
     UIFont* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIFont *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 1 && info[0]->IsString()) {

@@ -26,88 +26,85 @@ JS_INIT_CLASS(MDLVertexDescriptor, NSObject);
   JS_ASSIGN_PROTO_METHOD(setPackedStrides);
   JS_ASSIGN_PROTO_METHOD(setPackedOffsets);
   // constants
-#define JS_ASSIGN_ENUM(name, type) \
-  exports->Set(JS_STR(#name), js_value_##type(name))
+  JS_ASSIGN_ENUM(MDLVertexFormatInvalid, NSUInteger);
   
-    JS_ASSIGN_ENUM(MDLVertexFormatInvalid, NSUInteger);
-    
-    JS_ASSIGN_ENUM(MDLVertexFormatPackedBit, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatPackedBit, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatUCharBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatCharBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUCharNormalizedBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatCharNormalizedBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShortBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShortBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShortNormalizedBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShortNormalizedBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUIntBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatIntBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatHalfBits, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatFloatBits, NSUInteger);
-    
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUCharBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatCharBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUCharNormalizedBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatCharNormalizedBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShortBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShortBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShortNormalizedBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShortNormalizedBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUIntBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatIntBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatHalfBits, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatFloatBits, NSUInteger);
+  
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatChar, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatUCharNormalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar2Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar3Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUChar4Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUCharNormalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar2Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar3Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUChar4Normalized, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatCharNormalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar2Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar3Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatChar4Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatCharNormalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar2Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar3Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatChar4Normalized, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatShort, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatUShortNormalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort2Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort3Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUShort4Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShortNormalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort2Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort3Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUShort4Normalized, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatShortNormalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort2Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort3Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatShort4Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShortNormalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort2Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort3Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatShort4Normalized, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatUInt, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUInt2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUInt3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUInt4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUInt, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUInt2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUInt3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUInt4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatInt, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatInt2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatInt3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatInt4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatInt, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatInt2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatInt3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatInt4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatHalf, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatHalf2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatHalf3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatHalf4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatHalf, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatHalf2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatHalf3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatHalf4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatFloat, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatFloat2, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatFloat3, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatFloat4, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatFloat, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatFloat2, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatFloat3, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatFloat4, NSUInteger);
 
-    JS_ASSIGN_ENUM(MDLVertexFormatInt1010102Normalized, NSUInteger);
-    JS_ASSIGN_ENUM(MDLVertexFormatUInt1010102Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatInt1010102Normalized, NSUInteger);
+  JS_ASSIGN_ENUM(MDLVertexFormatUInt1010102Normalized, NSUInteger);
 
 JS_INIT_CLASS_END(MDLVertexDescriptor, NSObject);
 

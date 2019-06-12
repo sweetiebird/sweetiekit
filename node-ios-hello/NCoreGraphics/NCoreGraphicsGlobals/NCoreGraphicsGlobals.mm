@@ -4,14 +4,8 @@
 //  Created by Emily Kolar on 2019-5-23.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-    
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#include "defines.h"
-#include "NNSObject.h"
 #include "NCoreGraphicsGlobals.h"
 #include "NUIImage.h"
-#import "node_ios_hello-Swift.h"
 
 NCoreGraphicsGlobals::NCoreGraphicsGlobals () {}
 NCoreGraphicsGlobals::~NCoreGraphicsGlobals () {}
@@ -24,7 +18,7 @@ JS_INIT_CTOR(CoreGraphicsGlobals, NSObject);
 JS_INIT_CLASS_END(CoreGraphicsGlobals, NSObject);
 
 NAN_METHOD(NCoreGraphicsGlobals::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(CoreGraphicsGlobals);
 
   Local<Object> obj = info.This();
 

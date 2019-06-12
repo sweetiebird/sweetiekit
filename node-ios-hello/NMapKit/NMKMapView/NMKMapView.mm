@@ -18,7 +18,7 @@ JS_INIT_CLASS(MKMapView, UIView);
 JS_INIT_CLASS_END(MKMapView, UIView);
 
 NAN_METHOD(NMKMapView::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(MKMapView);
 
   Local<Object> obj = info.This();
 

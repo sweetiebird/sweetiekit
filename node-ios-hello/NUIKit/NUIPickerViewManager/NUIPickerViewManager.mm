@@ -21,7 +21,7 @@ JS_INIT_CLASS_END(UIPickerViewManager, NSObject);
 #include "NUIPickerView.h"
 
 NAN_METHOD(NUIPickerViewManager::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UIPickerViewManager);
 
   Local<Object> obj = info.This();
 

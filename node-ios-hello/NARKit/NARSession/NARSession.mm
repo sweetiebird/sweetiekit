@@ -1,20 +1,13 @@
 //
-//  NARSession.m
+//  NARSession.mm
 //
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <SpriteKit/SpriteKit.h>
-#import <ARKit/ARKit.h>
-#include "defines.h"
 #include "NARSession.h"
 #include "NARAnchor.h"
-#include "NNSObject.h"
 #include "NARFrame.h"
 #include "NARWorldTrackingConfiguration.h"
-#import "node_ios_hello-Swift.h"
 
 NARSession::NARSession () {}
 NARSession::~NARSession () {}
@@ -32,7 +25,7 @@ JS_INIT_CLASS(ARSession, NSObject);
 JS_INIT_CLASS_END(ARSession, NSObject);
 
 NAN_METHOD(NARSession::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(ARSession);
 
   Local<Object> obj = info.This();
 

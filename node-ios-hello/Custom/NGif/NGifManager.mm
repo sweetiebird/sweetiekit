@@ -1,17 +1,12 @@
 //
-//  NGifManager.m
+//  NGifManager.mm
 //
 //  Created by Emily Kolar on 5/17/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#include "defines.h"
 #include "NNSObject.h"
 #include "NGif.h"
 #include "NGifManager.h"
-#import "node_ios_hello-Swift.h"
 
 NGifManager::NGifManager () {}
 NGifManager::~NGifManager () {}
@@ -25,7 +20,7 @@ JS_INIT_CLASS(GifManager, NSObject);
 JS_INIT_CLASS_END(GifManager, NSObject);
 
 NAN_METHOD(NGifManager::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(GifManager);
 
   Local<Object> obj = info.This();
 

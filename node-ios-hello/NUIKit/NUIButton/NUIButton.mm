@@ -25,13 +25,10 @@ JS_INIT_CLASS(UIButton, UIControl);
 JS_INIT_CLASS_END(UIButton, UIControl);
 
 NAN_METHOD(NUIButton::New) {
+  JS_RECONSTRUCT(UIButton);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `UIButton(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(UIButton, info);
-      return;
-    }
     UIButton* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge UIButton *)(info[0].As<External>()->Value());
     } else if (is_value_CGRect(info[0])) {

@@ -19,7 +19,7 @@ JS_INIT_CLASS(UISwitch, UIControl);
 JS_INIT_CLASS_END(UISwitch, UIControl);
 
 NAN_METHOD(NUISwitch::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(UISwitch);
   
   Local<Object> obj = info.This();
   

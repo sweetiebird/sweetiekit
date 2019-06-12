@@ -46,13 +46,10 @@ NAN_METHOD(NSCNPyramid::pyramidWithWidthHeightLength) {
 }
 
 NAN_METHOD(NSCNPyramid::New) {
+  JS_RECONSTRUCT(SCNPyramid);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNPyramid(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNPyramid, info);
-      return;
-    }
     SCNPyramid* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNPyramid *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 3) {

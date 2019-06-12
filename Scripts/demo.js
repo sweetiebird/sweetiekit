@@ -105,8 +105,8 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   return nativeType;
 }
 Object.getOwnPropertyNames(SweetieKit)
-  .filter(x => ["AR", "AU", "AV", "CA", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP", "MDL"]
-                 .filter(y => x.startsWith(y))
+  .filter(x => ["AR", "AU", "AV", "CA", "CG", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP", "MDL"]
+                 .filter(y => (x.startsWith(y) || x.startsWith("k"+y)))
                  .length > 0)
   .sort()
   .forEach(x => {

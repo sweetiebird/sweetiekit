@@ -20,7 +20,7 @@ JS_INIT_CLASS(MKMapViewDelegate, NSObject);
 JS_INIT_CLASS_END(MKMapViewDelegate, NSObject);
 
 NAN_METHOD(NMKMapViewDelegate::New) {
-  Nan::HandleScope scope;
+  JS_RECONSTRUCT(MKMapViewDelegate);
 
   Local<Object> obj = info.This();
 

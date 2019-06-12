@@ -42,13 +42,10 @@ NAN_METHOD(NSCNCylinder::cylinderWithRadiusHeight) {
 }
 
 NAN_METHOD(NSCNCylinder::New) {
+  JS_RECONSTRUCT(SCNCylinder);
   @autoreleasepool {
-   if (!info.IsConstructCall()) {
-      // Invoked as plain function `SCNCylinder(...)`, turn into construct call.
-      JS_SET_RETURN_NEW(SCNCylinder, info);
-      return;
-    }
     SCNCylinder* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge SCNCylinder *)(info[0].As<External>()->Value());
     } else if (info.Length() >= 2 && info[0]->IsNumber()) {

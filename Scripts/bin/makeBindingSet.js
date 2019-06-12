@@ -40,17 +40,14 @@ JS_INIT_CLASS(${name}, ${superClass});
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(${name}, ${superClass});
+  // constant values (exports)
 JS_INIT_CLASS_END(${name}, ${superClass});
 
 NAN_METHOD(N${name}::New) {
+  JS_RECONSTRUCT(${name});
   @autoreleasepool {
-    if (!info.IsConstructCall()) {
-      // Invoked as plain function '${name}(...)', turn into construct call.
-      JS_SET_RETURN_NEW(${name}, info);
-      return;
-    }
-
     ${name}* self = nullptr;
+
     if (info[0]->IsExternal()) {
       self = (__bridge ${name} *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
@@ -85,14 +82,7 @@ NAN_METHOD(N${name}::New) {
 #define to_value_${name}(x) to_value_wrapper(x, ${name})
 #define is_value_${name}(x) is_value_wrapper(x, ${name})
 
-// ${group} constants
-//#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
-//#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
-//#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
-
 JS_WRAP_CLASS(${name}, ${superClass});
-  //JS_METHOD(iosMethodName);
-  //JS_PROP(iosPropertyName);
 JS_WRAP_CLASS_END(${name});
 
 #endif /* N${name}_h */`;
