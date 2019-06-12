@@ -15,6 +15,7 @@ class SWKNavigationDelegate: NSObject, WKNavigationDelegate {
   var didFinishNavCallback: SWKNavigationDelegate_DidFinishNav?
   
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    print(webView.url)
     didFinishNavCallback?(webView, navigation)
   }
 }

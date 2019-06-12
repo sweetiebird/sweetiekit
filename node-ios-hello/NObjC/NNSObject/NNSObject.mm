@@ -1162,10 +1162,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([obj isKindOfClass:[ObjcType class]]) { \
         return N##Type::type; \
       }
-    
+
 #define JS_RETURN_TYPE(Type) \
       JS_RETURN_TYPE_FROM(Type, Type)
-    
+
       // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
       JS_RETURN_TYPE(CAEmitterLayer);
@@ -1330,6 +1330,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // WebKit
       JS_RETURN_TYPE(WKWebView);
+      JS_RETURN_TYPE_FROM(WKNavigationDelegate, SWKNavigationDelegate);
 
       // UIKit
       
