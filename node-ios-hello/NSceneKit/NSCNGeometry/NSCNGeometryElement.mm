@@ -25,6 +25,7 @@ JS_INIT_CLASS(SCNGeometryElement, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(SCNGeometryElement, NSObject);
   JS_ASSIGN_STATIC_METHOD(geometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex);
+  JS_ASSIGN_STATIC_METHOD(geometryElementWithMDLSubmesh);
 JS_INIT_CLASS_END(SCNGeometryElement, NSObject);
 
 NAN_METHOD(NSCNGeometryElement::New) {
@@ -152,5 +153,16 @@ NAN_SETTER(NSCNGeometryElement::maximumPointScreenSpaceRadiusSetter) {
     declare_setter();
     declare_value(CGFloat, input);
     [self setMaximumPointScreenSpaceRadius: input];
+  }
+}
+
+#include <SceneKit/ModelIO.h>
+#include "NMDLSubmesh.h"
+
+NAN_METHOD(NSCNGeometryElement::geometryElementWithMDLSubmesh) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLSubmesh, mdlSubMesh);
+    JS_SET_RETURN(js_value_instancetype([SCNGeometryElement geometryElementWithMDLSubmesh: mdlSubMesh]));
   }
 }

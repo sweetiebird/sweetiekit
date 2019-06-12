@@ -116,6 +116,8 @@ JS_WRAP_CLASS(SCNNode, NSObject);
   JS_PROP(simdWorldUp);
   JS_PROP(simdWorldRight);
   JS_PROP(simdWorldFront);
+
+  JS_STATIC_METHOD(nodeWithMDLObject);
 JS_WRAP_CLASS_END(SCNNode);
 
 #endif /* NSCNNode_h */

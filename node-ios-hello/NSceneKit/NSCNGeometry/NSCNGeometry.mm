@@ -39,6 +39,7 @@ JS_INIT_CLASS(SCNGeometry, NSObject);
   JS_INIT_CTOR(SCNGeometry, NSObject);
   JS_ASSIGN_STATIC_METHOD(geometry);
   JS_ASSIGN_STATIC_METHOD(geometryWithSourcesElements);
+  JS_ASSIGN_STATIC_METHOD(geometryWithMDLMesh);
 JS_INIT_CLASS_END(SCNGeometry, NSObject);
 
 NAN_METHOD(NSCNGeometry::New) {
@@ -303,5 +304,16 @@ NAN_SETTER(NSCNGeometry::edgeCreasesSourceSetter) {
     declare_setter();
     declare_pointer(SCNGeometrySource, input);
     [self setEdgeCreasesSource: input];
+  }
+}
+
+#include <SceneKit/ModelIO.h>
+#include "NMDLMesh.h"
+
+NAN_METHOD(NSCNGeometry::geometryWithMDLMesh) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLMesh, mdlMesh);
+    JS_SET_RETURN(js_value_instancetype([SCNGeometry geometryWithMDLMesh: mdlMesh]));
   }
 }

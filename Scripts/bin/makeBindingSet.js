@@ -30,6 +30,9 @@ function makeBindingSet(group, name, superClass, me) {
 //
 #include "N${name}.h"
 
+#define instancetype ${name}
+#define js_value_instancetype js_value_${name}
+
 N${name}::N${name}() {}
 N${name}::~N${name}() {}
 
@@ -82,7 +85,7 @@ NAN_METHOD(N${name}::New) {
 #define to_value_${name}(x) to_value_wrapper(x, ${name})
 #define is_value_${name}(x) is_value_wrapper(x, ${name})
 
-// SpriteKit enums
+// ${group} constants
 //#define js_value_SCNMovabilityHint(x) JS_ENUM(SCNMovabilityHint, NSInteger, x)
 //#define to_value_SCNMovabilityHint(x) TO_ENUM(SCNMovabilityHint, NSInteger, x)
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)

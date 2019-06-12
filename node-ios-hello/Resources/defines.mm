@@ -630,6 +630,35 @@ namespace sweetiekit
   bool SetTransform(simd_float4x4& transform, Local<Value> value) {
     return SetTransform((float*)&transform, value);
   }
+  bool IsTransform(Local<Value> value) {
+    Nan::HandleScope scope;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      return IsTransform(JS_OBJ(value)->Get(JS_STR("elements")));
+    }
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      if (xform->Length() >= 16) {
+        return true;
+      }
+      return true;
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 16; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      if (xform->Length() >= 16) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
   bool SetTransform(float* matrix, Local<Value> value) {
     Nan::HandleScope scope;
     if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
@@ -658,6 +687,35 @@ namespace sweetiekit
   
   bool SetTransform3(simd_float3x3& transform, Local<Value> value) {
     return SetTransform3((float*)&transform, value);
+  }
+  bool IsTransform3(Local<Value> value) {
+    Nan::HandleScope scope;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      return IsTransform3(JS_OBJ(value)->Get(JS_STR("elements")));
+    }
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      if (xform->Length() >= 9) {
+        return true;
+      }
+      return true;
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 9; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      if (xform->Length() >= 9) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+    return true;
   }
   bool SetTransform3(float* matrix, Local<Value> value) {
     Nan::HandleScope scope;
@@ -716,25 +774,177 @@ namespace sweetiekit
     }
     return true;
   }
+
+  bool SetVector1(simd_float1& quat, Local<Value> value) {
+    return SetVector1((float*)&quat, value);
+  }
+  bool IsVector1(Local<Value> value) {
+    const int size = 1;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsObject()) {
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector1(float* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 1;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+
+  bool SetVector2(simd_float2& quat, Local<Value> value) {
+    return SetVector2((float*)&quat, value);
+  }
+  bool IsVector2(Local<Value> value) {
+    const int size = 2;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsObject()) {
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector2(float* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 2;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+    } else {
+      return false;
+    }
+    return true;
+  }
   
   bool SetVector3(simd_float3& quat, Local<Value> value) {
     return SetVector3((float*)&quat, value);
+  }
+  bool IsVector3(Local<Value> value) {
+    const int size = 3;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsObject()) {
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
   bool SetVector3(float* elements, Local<Value> value) {
     Nan::HandleScope scope;
     const int size = 3;
     if (value->IsFloat32Array()) {
-      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
         elements[i] = TO_FLOAT(xform->Get(i));
       }
     } else if (value->IsArray()) {
-      Local<Array> xform = Local<Array>::Cast(value);
+      Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
         elements[i] = TO_FLOAT(xform->Get(i));
       }
     } else if (value->IsFloat64Array()) {
-      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
         elements[i] = TO_FLOAT(xform->Get(i));
       }
@@ -748,6 +958,508 @@ namespace sweetiekit
     return true;
   }
   
+  bool SetVector4(simd_float3& quat, Local<Value> value) {
+    return SetVector4((float*)&quat, value);
+  }
+  bool IsVector4(Local<Value> value) {
+    const int size = 4;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsObject()) {
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("w")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector4(float* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 4;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("z")));
+      elements[3] = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("w")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+}
+
+namespace sweetiekit
+{
+  bool SetVector1i(simd_int1& xyzw, Local<Value> value) {
+    return SetVector1i((int32_t*)&xyzw, value);
+  }
+  bool IsVector1i(Local<Value> value) {
+    const int size = 1;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_int32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector1i(int32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 1;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+
+  bool SetVector2i(simd_int2& xyzw, Local<Value> value) {
+    return SetVector2i((int32_t*)&xyzw, value);
+  }
+  bool IsVector2i(Local<Value> value) {
+    const int size = 2;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_int32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector2i(int32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 2;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetVector3i(simd_int3& xyzw, Local<Value> value) {
+    return SetVector3i((int32_t*)&xyzw, value);
+  }
+  bool IsVector3i(Local<Value> value) {
+    const int size = 3;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_int32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector3i(int32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 3;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("z")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetVector4i(simd_int3& xyzw, Local<Value> value) {
+    return SetVector4i((int32_t*)&xyzw, value);
+  }
+  bool IsVector4i(Local<Value> value) {
+    const int size = 4;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_int32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      if (!is_value_int32_t(JS_OBJ(value)->Get(JS_STR("w")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector4i(int32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 4;
+    if (value->IsInt32Array()) {
+      Local<Int32Array> xform(Local<Int32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_int32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("z")));
+      elements[3] = to_value_int32_t(JS_OBJ(value)->Get(JS_STR("w")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+}
+
+namespace sweetiekit
+{
+  bool SetVector1u(simd_uint1& xyzw, Local<Value> value) {
+    return SetVector1u((uint32_t*)&xyzw, value);
+  }
+  bool IsVector1u(Local<Value> value) {
+    const int size = 1;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_uint32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector1u(uint32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 1;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+
+  bool SetVector2u(simd_uint2& xyzw, Local<Value> value) {
+    return SetVector2u((uint32_t*)&xyzw, value);
+  }
+  bool IsVector2u(Local<Value> value) {
+    const int size = 2;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_uint32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector2u(uint32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 2;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetVector3u(simd_uint3& xyzw, Local<Value> value) {
+    return SetVector3u((uint32_t*)&xyzw, value);
+  }
+  bool IsVector3u(Local<Value> value) {
+    const int size = 3;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_uint32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector3u(uint32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 3;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("z")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  bool SetVector4u(simd_uint3& xyzw, Local<Value> value) {
+    return SetVector4u((uint32_t*)&xyzw, value);
+  }
+  bool IsVector4u(Local<Value> value) {
+    const int size = 4;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_uint32_t(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsObject()) {
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      if (!is_value_uint32_t(JS_OBJ(value)->Get(JS_STR("w")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  bool SetVector4u(uint32_t* elements, Local<Value> value) {
+    Nan::HandleScope scope;
+    const int size = 4;
+    if (value->IsUint32Array()) {
+      Local<Uint32Array> xform(Local<Uint32Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        elements[i] = to_value_uint32_t(xform->Get(i));
+      }
+    } else if (value->IsObject()) {
+      elements[0] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("x")));
+      elements[1] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("y")));
+      elements[2] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("z")));
+      elements[3] = to_value_uint32_t(JS_OBJ(value)->Get(JS_STR("w")));
+    } else {
+      return false;
+    }
+    return true;
+  }
+}
+
+namespace sweetiekit
+{
   Local<Value>
   CreateArrayBufferFromPointerLength(const void* _Nonnull bytes, size_t length)
   {
@@ -837,6 +1549,14 @@ Local<Value> js_value_simd_quatf(const simd_quatf& value) {
   return createTypedArray<Float32Array>(4, (const float*)&value);
 }
 
+Local<Value> js_value_simd_float1(const simd_float1& value) {
+  return createTypedArray<Float32Array>(1, (const float*)&value);
+}
+
+Local<Value> js_value_simd_float2(const simd_float2& value) {
+  return createTypedArray<Float32Array>(2, (const float*)&value);
+}
+
 Local<Value> js_value_simd_float3(const simd_float3& value) {
   return createTypedArray<Float32Array>(3, (const float*)&value);
 }
@@ -855,7 +1575,7 @@ Local<Value> js_value_simd_float4x4(const simd_float4x4& value) {
 
 simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed) {
   simd_quatf result = { { 0, 0, 0, 1 } };
-  bool ok = sweetiekit::SetQuaternion(result, value);
+  bool ok = sweetiekit::SetQuaternion((float*)&result, value);
   if (failed) {
     *failed = ok;
   }
@@ -865,9 +1585,33 @@ simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable fa
   return result;
 }
 
+simd_float1   to_value_simd_float1(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float1 result = { 0 };
+  bool ok = sweetiekit::SetVector1((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float1");
+  }
+  return result;
+}
+
+simd_float2   to_value_simd_float2(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float2 result = { 0, 0 };
+  bool ok = sweetiekit::SetVector2((float*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float2");
+  }
+  return result;
+}
+
 simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed) {
   simd_float3 result = { 0, 0, 0 };
-  bool ok = sweetiekit::SetVector3(result, value);
+  bool ok = sweetiekit::SetVector3((float*)&result, value);
   if (failed) {
     *failed = ok;
   }
@@ -879,7 +1623,7 @@ simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable f
 
 simd_float4   to_value_simd_float4(const Local<Value>& value, bool * _Nullable failed) {
   simd_float4 result = { 0, 0, 0, 1 };
-  bool ok = sweetiekit::SetQuaternion((float*)&result, value);
+  bool ok = sweetiekit::SetVector4((float*)&result, value);
   if (failed) {
     *failed = ok;
   }
@@ -921,6 +1665,196 @@ simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable
   }
   return result;
 }
+
+bool  is_value_simd_float1(const Local<Value>& value) {
+  return sweetiekit::IsVector1(value);
+}
+
+bool  is_value_simd_float2(const Local<Value>& value) {
+  return sweetiekit::IsVector2(value);
+}
+
+bool  is_value_simd_float3(const Local<Value>& value) {
+  return sweetiekit::IsVector3(value);
+}
+
+bool  is_value_simd_float4(const Local<Value>& value) {
+  return sweetiekit::IsVector4(value);
+}
+
+bool  is_value_simd_float3x3(const Local<Value>& value) {
+  return sweetiekit::IsTransform3(value);
+}
+
+bool  is_value_simd_float4x4(const Local<Value>& value) {
+  return sweetiekit::IsTransform(value);
+}
+
+
+
+Local<Value> js_value_simd_int1(const simd_int1& value) {
+  return createTypedArray<Int32Array>(1, (const int*)&value);
+}
+
+Local<Value> js_value_simd_int2(const simd_int2& value) {
+  return createTypedArray<Int32Array>(2, (const int*)&value);
+}
+
+Local<Value> js_value_simd_int3(const simd_int3& value) {
+  return createTypedArray<Int32Array>(3, (const int*)&value);
+}
+
+Local<Value> js_value_simd_int4(const simd_int4& value) {
+  return createTypedArray<Int32Array>(4, (const int*)&value);
+}
+
+simd_int1   to_value_simd_int1(const Local<Value>& value, bool * _Nullable failed) {
+  simd_int1 result = { 0 };
+  bool ok = sweetiekit::SetVector1i((int32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_int1");
+  }
+  return result;
+}
+
+simd_int2   to_value_simd_int2(const Local<Value>& value, bool * _Nullable failed) {
+  simd_int2 result = { 0, 0 };
+  bool ok = sweetiekit::SetVector2i((int32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_int2");
+  }
+  return result;
+}
+
+simd_int3   to_value_simd_int3(const Local<Value>& value, bool * _Nullable failed) {
+  simd_int3 result = { 0, 0, 0 };
+  bool ok = sweetiekit::SetVector3i((int32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_int3");
+  }
+  return result;
+}
+
+simd_int4   to_value_simd_int4(const Local<Value>& value, bool * _Nullable failed) {
+  simd_int4 result = { 0, 0, 0, 1 };
+  bool ok = sweetiekit::SetVector4i((int32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_int4");
+  }
+  return result;
+}
+
+bool  is_value_simd_int1(const Local<Value>& value) {
+  return sweetiekit::IsVector1i(value);
+}
+
+bool  is_value_simd_int2(const Local<Value>& value) {
+  return sweetiekit::IsVector2i(value);
+}
+
+bool  is_value_simd_int3(const Local<Value>& value) {
+  return sweetiekit::IsVector3i(value);
+}
+
+bool  is_value_simd_int4(const Local<Value>& value) {
+  return sweetiekit::IsVector4i(value);
+}
+
+
+
+Local<Value> js_value_simd_uint1(const simd_uint1& value) {
+  return createTypedArray<Uint32Array>(1, (const uint32_t*)&value);
+}
+
+Local<Value> js_value_simd_uint2(const simd_uint2& value) {
+  return createTypedArray<Uint32Array>(2, (const uint32_t*)&value);
+}
+
+Local<Value> js_value_simd_uint3(const simd_uint3& value) {
+  return createTypedArray<Uint32Array>(3, (const uint32_t*)&value);
+}
+
+Local<Value> js_value_simd_uint4(const simd_uint4& value) {
+  return createTypedArray<Uint32Array>(4, (const uint32_t*)&value);
+}
+
+simd_uint1   to_value_simd_uint1(const Local<Value>& value, bool * _Nullable failed) {
+  simd_uint1 result = { 0 };
+  bool ok = sweetiekit::SetVector1u((uint32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_uint1");
+  }
+  return result;
+}
+
+simd_uint2   to_value_simd_uint2(const Local<Value>& value, bool * _Nullable failed) {
+  simd_uint2 result = { 0, 0 };
+  bool ok = sweetiekit::SetVector2u((uint32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_uint2");
+  }
+  return result;
+}
+
+simd_uint3   to_value_simd_uint3(const Local<Value>& value, bool * _Nullable failed) {
+  simd_uint3 result = { 0, 0, 0 };
+  bool ok = sweetiekit::SetVector3u((uint32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_uint3");
+  }
+  return result;
+}
+
+simd_uint4   to_value_simd_uint4(const Local<Value>& value, bool * _Nullable failed) {
+  simd_uint4 result = { 0, 0, 0, 1 };
+  bool ok = sweetiekit::SetVector4u((uint32_t*)&result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_uint4");
+  }
+  return result;
+}
+
+bool  is_value_simd_uint1(const Local<Value>& value) {
+  return sweetiekit::IsVector1u(value);
+}
+
+bool  is_value_simd_uint2(const Local<Value>& value) {
+  return sweetiekit::IsVector2u(value);
+}
+
+bool  is_value_simd_uint3(const Local<Value>& value) {
+  return sweetiekit::IsVector3u(value);
+}
+
+bool  is_value_simd_uint4(const Local<Value>& value) {
+  return sweetiekit::IsVector4u(value);
+}
+
+
 
 Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value) {
   //return createTypedArray<Float32Array>(4, (const float*)&value);

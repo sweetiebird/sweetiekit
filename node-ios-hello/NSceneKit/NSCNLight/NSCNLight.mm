@@ -6,6 +6,9 @@
 //
 #include "NSCNLight.h"
 
+#define instancetype SCNLight
+#define js_value_instancetype js_value_SCNLight
+
 NSCNLight::NSCNLight () {}
 NSCNLight::~NSCNLight () {}
 
@@ -24,6 +27,8 @@ JS_INIT_CLASS(SCNLight, NSObject);
   JS_ASSIGN_PROP(proto, attenuationFalloffExponent);
   // static members (ctor)
   JS_INIT_CTOR(SCNLight, NSObject);
+// SCNLight
+  JS_ASSIGN_STATIC_METHOD(lightWithMDLLight);
 JS_INIT_CLASS_END(SCNLight, NSObject);
 
 NAN_METHOD(NSCNLight::New) {
@@ -308,5 +313,16 @@ NAN_SETTER(NSCNLight::attenuationFalloffExponentSetter) {
 
   @autoreleasepool {
     [light setAttenuationFalloffExponent:fValue];
+  }
+}
+
+#include <SceneKit/ModelIO.h>
+#include "NMDLLight.h"
+
+NAN_METHOD(NSCNLight::lightWithMDLLight) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MDLLight, mdlLight);
+    JS_SET_RETURN(js_value_instancetype([SCNLight lightWithMDLLight: mdlLight]));
   }
 }

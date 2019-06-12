@@ -59,6 +59,7 @@ JS_INIT_CLASS_BASE(id);
   JS_INIT_CTOR(id, objc);
   Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
   Nan::SetMethod(ctor, "objc_msgSend", _objc_msgSend);
+  Nan::SetMethod(ctor, "NSSearchPathForDirectoriesInDomains", _NSSearchPathForDirectoriesInDomains);
   sweetiekit::Set(ctor, "classFromString", ^(JSInfo info) {
     Nan::HandleScope scope;
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
@@ -309,6 +310,17 @@ NAN_METHOD(Nid::_NSClassFromString)
       Nan::New<External>((__bridge void*)result)
     };
     JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+  }
+}
+
+NAN_METHOD(Nid::_NSSearchPathForDirectoriesInDomains)
+{
+  @autoreleasepool {
+    declare_args();
+    declare_value(NSSearchPathDirectory, directory);
+    declare_value(NSSearchPathDomainMask, domainMask);
+    declare_value(BOOL, expandTilde);
+    JS_SET_RETURN(js_value_NSArray(NSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)));
   }
 }
 
@@ -840,6 +852,27 @@ NAN_METHOD(NClass::New) {
 #include "NMPMusicPlayerApplicationController.h"
 #include "NMPMusicPlayerQueueDescriptor.h"
 
+#include "NMDLAsset.h"
+#include "NMDLObject.h"
+#include "NMDLLight.h"
+#include "NMDLCamera.h"
+#include "NMDLMesh.h"
+#include "NMDLMeshBufferData.h"
+#include "NMDLMeshBufferDataAllocator.h"
+#include "NMDLMeshBufferMap.h"
+#include "NMDLVertexAttributeData.h"
+#include "NMDLSubmesh.h"
+#include "NMDLSubmeshTopology.h"
+#include "NMDLTransform.h"
+#include "NMDLTexture.h"
+#include "NMDLTextureFilter.h"
+#include "NMDLTextureSampler.h"
+#include "NMDLScatteringFunction.h"
+#include "NMDLPhysicallyPlausibleScatteringFunction.h"
+#include "NMDLMaterialProperty.h"
+#include "NMDLMaterial.h"
+#include "NMDLVertexDescriptor.h"
+
 #define JS_EXPORT_TYPE_AS(type, name) \
         auto N_##type = N##type::Initialize(isolate, exports); \
         exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
@@ -1016,6 +1049,28 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CABasicAnimation);
     JS_EXPORT_TYPE(CAEmitterCell);
     JS_EXPORT_TYPE(CAEmitterLayer);
+    
+    // ModelIO
+    JS_EXPORT_TYPE(MDLAsset);
+    JS_EXPORT_TYPE(MDLObject);
+    JS_EXPORT_TYPE(MDLCamera);
+    JS_EXPORT_TYPE(MDLLight);
+    JS_EXPORT_TYPE(MDLMesh);
+    JS_EXPORT_TYPE(MDLMeshBufferData);
+    JS_EXPORT_TYPE(MDLMeshBufferDataAllocator);
+    JS_EXPORT_TYPE(MDLMeshBufferMap);
+    JS_EXPORT_TYPE(MDLVertexAttributeData);
+    JS_EXPORT_TYPE(MDLSubmesh);
+    JS_EXPORT_TYPE(MDLSubmeshTopology);
+    JS_EXPORT_TYPE(MDLTransform);
+    JS_EXPORT_TYPE(MDLTexture);
+    JS_EXPORT_TYPE(MDLTextureFilter);
+    JS_EXPORT_TYPE(MDLTextureSampler);
+    JS_EXPORT_TYPE(MDLScatteringFunction);
+    JS_EXPORT_TYPE(MDLPhysicallyPlausibleScatteringFunction);
+    JS_EXPORT_TYPE(MDLMaterialProperty);
+    JS_EXPORT_TYPE(MDLMaterial);
+    JS_EXPORT_TYPE(MDLVertexDescriptor);
 
     // SpriteKit
     JS_EXPORT_TYPE(SKPhysicsContact);
@@ -1185,6 +1240,28 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKNode);
       JS_RETURN_TYPE(SKView);
       JS_RETURN_TYPE(SKAction);
+
+      // ModelIO
+      JS_RETURN_TYPE(MDLVertexDescriptor);
+      JS_RETURN_TYPE(MDLMaterial);
+      JS_RETURN_TYPE(MDLMaterialProperty);
+      JS_RETURN_TYPE(MDLPhysicallyPlausibleScatteringFunction);
+      JS_RETURN_TYPE(MDLScatteringFunction);
+      JS_RETURN_TYPE(MDLTextureSampler);
+      JS_RETURN_TYPE(MDLTextureFilter);
+      JS_RETURN_TYPE(MDLTexture);
+      JS_RETURN_TYPE(MDLTransform);
+      JS_RETURN_TYPE(MDLMeshBufferDataAllocator);
+      JS_RETURN_TYPE(MDLMeshBufferData);
+      JS_RETURN_TYPE(MDLMeshBufferMap);
+      JS_RETURN_TYPE(MDLVertexAttributeData);
+      JS_RETURN_TYPE(MDLCamera);
+      JS_RETURN_TYPE(MDLLight);
+      JS_RETURN_TYPE(MDLMesh);
+      JS_RETURN_TYPE(MDLSubmeshTopology);
+      JS_RETURN_TYPE(MDLSubmesh);
+      JS_RETURN_TYPE(MDLObject);
+      JS_RETURN_TYPE(MDLAsset);
 
       // Custom UIKit
       JS_RETURN_TYPE(GifManager);

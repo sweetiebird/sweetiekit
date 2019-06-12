@@ -26,9 +26,18 @@ class NObjectWrap : public ObjectWrap
 {
 };
 
+#define js_value_NSSearchPathDirectory(x) JS_ENUM(NSSearchPathDirectory, NSUInteger, x)
+#define to_value_NSSearchPathDirectory(x) TO_ENUM(NSSearchPathDirectory, NSUInteger, x)
+#define is_value_NSSearchPathDirectory(x) IS_ENUM(NSSearchPathDirectory, NSUInteger, x)
+
+#define js_value_NSSearchPathDomainMask(x) JS_ENUM(NSSearchPathDomainMask, NSUInteger, x)
+#define to_value_NSSearchPathDomainMask(x) TO_ENUM(NSSearchPathDomainMask, NSUInteger, x)
+#define is_value_NSSearchPathDomainMask(x) IS_ENUM(NSSearchPathDomainMask, NSUInteger, x)
+
 JS_WRAP_CLASS(id, ObjectWrap);
   JS_METHOD(_NSClassFromString);
   JS_METHOD(_objc_msgSend);
+  JS_METHOD(_NSSearchPathForDirectoriesInDomains);
   
   JS_PROP(self);
   JS_PROP(selfPointer);
