@@ -40,8 +40,8 @@
 		A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */; };
 		A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */; };
 		A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */; };
-		A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */; };
-		A124EFE622AF383800F29727 /* SWKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */; };
+		A12046B022B09A2200689593 /* NWKNavigationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12046AD22B09A2200689593 /* NWKNavigationDelegate.mm */; };
+		A12046B122B09A2200689593 /* SWKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12046AF22B09A2200689593 /* SWKNavigationDelegate.swift */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
@@ -387,9 +387,9 @@
 		A11D12A3227F8D950038C262 /* NUITableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewManager.h; sourceTree = "<group>"; };
 		A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewManager.mm; sourceTree = "<group>"; };
 		A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewManager.swift; sourceTree = "<group>"; };
-		A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWKNavigationDelegate.mm; sourceTree = "<group>"; };
-		A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWKNavigationDelegate.h; sourceTree = "<group>"; };
-		A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWKNavigationDelegate.swift; sourceTree = "<group>"; };
+		A12046AD22B09A2200689593 /* NWKNavigationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWKNavigationDelegate.mm; sourceTree = "<group>"; };
+		A12046AE22B09A2200689593 /* NWKNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWKNavigationDelegate.h; sourceTree = "<group>"; };
+		A12046AF22B09A2200689593 /* SWKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWKNavigationDelegate.swift; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
@@ -1099,12 +1099,12 @@
 			path = NUITableViewManager;
 			sourceTree = "<group>";
 		};
-		A124EFE122AF383800F29727 /* NWKNavigationDelegate */ = {
+		A12046AC22B09A2200689593 /* NWKNavigationDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */,
-				A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */,
-				A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */,
+				A12046AD22B09A2200689593 /* NWKNavigationDelegate.mm */,
+				A12046AE22B09A2200689593 /* NWKNavigationDelegate.h */,
+				A12046AF22B09A2200689593 /* SWKNavigationDelegate.swift */,
 			);
 			path = NWKNavigationDelegate;
 			sourceTree = "<group>";
@@ -1229,7 +1229,7 @@
 		A133701A22AAE65000FA3768 /* NWebKit */ = {
 			isa = PBXGroup;
 			children = (
-				A124EFE122AF383800F29727 /* NWKNavigationDelegate */,
+				A12046AC22B09A2200689593 /* NWKNavigationDelegate */,
 				A133701B22AAE65100FA3768 /* NWKWebView */,
 			);
 			path = NWebKit;
@@ -3350,7 +3350,6 @@
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
 				A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */,
-				A124EFE622AF383800F29727 /* SWKNavigationDelegate.swift in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
@@ -3437,6 +3436,7 @@
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
+				A12046B022B09A2200689593 /* NWKNavigationDelegate.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */,
@@ -3515,6 +3515,7 @@
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
+				A12046B122B09A2200689593 /* SWKNavigationDelegate.swift in Sources */,
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
 				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */,
@@ -3584,7 +3585,6 @@
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
-				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
 				A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */,
 				A13370B122AEEBBF00FA3768 /* NAVAudioSessionPortDescription.mm in Sources */,
 				A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */,

@@ -327,6 +327,7 @@ NAN_SETTER(NWKWebView::navigationDelegateSetter) {
   declare_autoreleasepool {
     declare_setter();
     declare_value(id/* <WKNavigationDelegate>*/, input);
+    [self associateValue:input withKey:@"sweetiekit.NWKWebView.navigationDelegate"];
     [self setNavigationDelegate: input];
   }
 }
@@ -343,6 +344,7 @@ NAN_SETTER(NWKWebView::UIDelegateSetter) {
   declare_autoreleasepool {
     declare_setter();
     declare_value(id/* <WKUIDelegate>*/, input);
+    [self associateValue:input withKey:@"sweetiekit.NWKWebView.UIDelegate"];
     [self setUIDelegate: input];
   }
 }

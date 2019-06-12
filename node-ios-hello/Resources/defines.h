@@ -167,6 +167,8 @@ using namespace node;
   static NAN_METHOD(name)
   
 #define JS_UNWRAP_(type, name) \
+  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
   type name = n##name->self<type>(); name = name;
 
@@ -1194,9 +1196,14 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   
 #define declare_error() \
   NSError* error = nullptr
-  
+
 #define declare_callback_function(name) \
   sweetiekit::JSFunction name(info[JS_ARGC++]);
+
+#define declare_persistent_function(name, keyName) \
+  SweetJSFunction* name = [[SweetJSFunction alloc] init]; \
+  [name jsFunction]->Reset(info[JS_ARGC++]); \
+  [self associateValue:name withKey:keyName];
   
 #define check_error() \
   js_panic_NSError(error)

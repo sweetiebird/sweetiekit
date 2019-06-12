@@ -13,7 +13,7 @@ NWKNavigationDelegate::~NWKNavigationDelegate() {}
 
 JS_INIT_CLASS(WKNavigationDelegate, NSObject);
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, didFinishNavigation);
+  JS_ASSIGN_PROTO_PROP(didFinishNavigation);
   // static members (ctor)
   JS_INIT_CTOR(WKNavigationDelegate, NSObject);
 JS_INIT_CLASS_END(WKNavigationDelegate, NSObject);
@@ -49,16 +49,18 @@ NAN_GETTER(NWKNavigationDelegate::didFinishNavigationGetter) {
 }
 
 NAN_SETTER(NWKNavigationDelegate::didFinishNavigationSetter) {
-  Nan::EscapableHandleScope scope;
+  JS_UNWRAP_SWIFT(WKNavigationDelegate, self);
+  @autoreleasepool {
+    declare_setter();
+    declare_persistent_function(cb, @"sweetiekit.WKNavigationDelegate.didFinishNavigation");
+    [self setDidFinishNavigation:^(WKWebView * _Nonnull webView, WKNavigation * _Nonnull nav)
+    {
+      dispatch_main(^ {
+        [cb jsFunction]->Call("NWKNavigationDelegate::didFinishNavigationSetter",
+          js_value_id(webView),
+          js_value_id(nav));
+      });
+    }];
+  }
 
-  NWKNavigationDelegate *wrap = ObjectWrap::Unwrap<NWKNavigationDelegate>(info.This());
-  SWKNavigationDelegate* del = wrap->As<SWKNavigationDelegate>();
-
-  wrap->_didFinishNavigation.Reset(Local<Function>::Cast(value));
-
-  [del setDidFinishNavigation:^(WKWebView * _Nonnull webView, WKNavigation * _Nonnull nav) {
-    Nan::HandleScope scope;
-    Local<Value> obj = sweetiekit::GetWrapperFor(webView, NWKWebView::type);
-    wrap->_didFinishNavigation("NWKNavigationDelegate::didFinishNavigationSetter", obj);
-  }];
 }

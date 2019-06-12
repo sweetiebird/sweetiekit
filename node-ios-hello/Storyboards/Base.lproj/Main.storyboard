@@ -548,23 +548,7 @@
                     <view key="view" contentMode="scaleToFill" id="mKx-QW-IdD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xq-gj-BVV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
                         <color key="backgroundColor" red="0.062745098040000002" green="0.094117647060000004" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="0xq-gj-BVV" firstAttribute="leading" secondItem="rzu-HN-kFN" secondAttribute="leading" id="Gid-fm-wOE"/>
-                            <constraint firstItem="rzu-HN-kFN" firstAttribute="bottom" secondItem="0xq-gj-BVV" secondAttribute="bottom" id="HfL-2X-gMG"/>
-                            <constraint firstItem="rzu-HN-kFN" firstAttribute="top" secondItem="0xq-gj-BVV" secondAttribute="top" constant="20" id="V5f-S0-h9D"/>
-                            <constraint firstItem="rzu-HN-kFN" firstAttribute="trailing" secondItem="0xq-gj-BVV" secondAttribute="trailing" id="oGd-dR-NqG"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rzu-HN-kFN"/>
                     </view>
                 </viewController>
