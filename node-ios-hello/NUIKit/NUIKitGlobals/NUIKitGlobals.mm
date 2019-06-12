@@ -17,6 +17,7 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   JS_ASSIGN_STATIC_PROP_READONLY(UIImageOrientation);
   JS_ASSIGN_STATIC_PROP_READONLY(UITextFieldViewMode);
   JS_ASSIGN_STATIC_PROP_READONLY(UIControlEvents);
+  JS_ASSIGN_STATIC_PROP_READONLY(UIControlState);
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
@@ -118,6 +119,21 @@ NAN_GETTER(NUIKitGlobals::UIControlEventsGetter) {
   result->Set(JS_STR("editingChanged"), js_value_NSUInteger(UIControlEventEditingChanged));
   result->Set(JS_STR("editingDidEnd"), js_value_NSUInteger(UIControlEventEditingDidEnd));
   result->Set(JS_STR("editingDidEndOnExit"), js_value_NSUInteger(UIControlEventEditingDidEndOnExit));
+
+  JS_SET_RETURN(result);
+}
+
+NAN_GETTER(NUIKitGlobals::UIControlStateGetter) {
+  Nan::HandleScope scope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  
+  result->Set(JS_STR("normal"), js_value_NSUInteger(UIControlStateNormal));
+  result->Set(JS_STR("highlighted"), js_value_NSUInteger(UIControlStateHighlighted));
+  result->Set(JS_STR("disabled"), js_value_NSUInteger(UIControlStateDisabled));
+  result->Set(JS_STR("selected"), js_value_NSUInteger(UIControlStateSelected));
+  result->Set(JS_STR("focused"), js_value_NSUInteger(UIControlStateFocused));
+  result->Set(JS_STR("application"), js_value_NSUInteger(UIControlStateApplication));
 
   JS_SET_RETURN(result);
 }
