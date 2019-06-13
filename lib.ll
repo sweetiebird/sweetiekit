@@ -572,27 +572,34 @@
     (cat! r ".framework/Headers/")
     (cat! r type ".h")))
 
+ 
+(define-global apple-framework-prefixes*
+  (obj AR: "ARKit"
+       AU: "AudioToolbox"
+       AV: "AVFoundation"
+       CA: "QuartzCore"
+       CG: "CoreGraphics"
+       CI: "CoreImage"
+       CL: "CoreLocation"
+       CM: "CoreMotion"
+       GK: "GameplayKit"
+      MDL: "ModelIO"
+       MK: "MapKit"
+       MP: "MediaPlayer"
+      MTK: "MetalKit"
+      MTL: "Metal"
+       NS: "Foundation"
+       RP: "ReplayKit"
+      SCN: "SceneKit"
+       SK: "SpriteKit"
+       UI: "UIKit"
+       WK: "WebKit"))
+
 (define-global ios-framework-from-type (type)
   (for i (# type)
     (let pre (clip type 0 i)
-     (case pre
-       AR (return 'ARKit)
-       AV (return 'AVFoundation)
-       CA (return 'QuartzCore)
-       CL (return 'CoreLocation)
-       CM (return 'CoreMotion)
-       GK (return 'GameplayKit)
-       SK (return 'SpriteKit)
-       SCN (return 'SceneKit)
-       MDL (return 'ModelIO)
-       MTL (return 'Metal)
-       MTK (return 'MetalKit)
-       MK (return 'MapKit)
-       UI (return 'UIKit)
-       NS (return 'Foundation)
-       WK (return 'WebKit)
-       MP (return 'MediaPlayer)
-       )))
+      (let-when framework (get apple-framework-prefixes* pre)
+        (return framework))))
   (error (cat "Unknown type " type)))
 
 (define-global objc-resolve (type framework subframework)
