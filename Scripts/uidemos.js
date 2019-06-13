@@ -192,41 +192,44 @@ class UIDemosApp {
       if (demoTypes[type]) {
         this.createDemoVC();
         const ui = await demoTypes[type](this.nav, this.demoVC);
-        this.showDemoUI(ui);
+        this.showDemoUI(ui, true);
       }
     } else if (section === 1) {
       const type = demoCtrlNames[row];
       if (demoCtrls[type]) {
         this.createDemoVC();
-        await demoCtrls[type](this.nav, this.demoVC);
+        const ui = await demoCtrls[type](this.nav, this.demoVC);
+        this.showDemoUI(ui);
       }
     } else if (section === 2 ) {
       const type = arDemoNames[row];
       if (arDemos[type]) {
         this.createDemoVC();
         gc();
-        await arDemos[type](this.nav, this.demoVC);
+        const ui = await arDemos[type](this.nav, this.demoVC);
         gc();
+        this.showDemoUI(ui);
       }
     } else {
       const type = appDemoNames[row];
       if (appDemos[type]) {
         this.createDemoVC();
+        let makeApp = appDemos[type].lazy ? await appDemos[type]() : appDemos[type];
         // gc();
-        // if (appDemos[type].lazy) {
-        //   appDemos[type] = await appDemos[type]();
-        // }
-        await appDemos[type](this.nav, this.demoVC);
+        const ui = await makeApp(this.nav, this.demoVC);
         // gc();
+        this.showDemoUI(ui);
       }
     }
   }
 
-  showDemoUI(view) {
+  showDemoUI(view, shouldPush) {
     if (view) {
       this.demoVC.view.addSubview(view);
     }
-    this.nav.pushViewController(this.demoVC);
+    if (shouldPush) {
+      this.nav.pushViewController(this.demoVC);
+    }
   }
 
   setTableManager() {
