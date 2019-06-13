@@ -104,8 +104,32 @@ BindClass = function BindClass(nativeType, className = nativeType.name) {
   }
   return nativeType;
 }
+
+SweetieKitPrefixes = {
+  AR: "ARKit",
+  AU: "AudioToolbox",
+  AV: "AVFoundation",
+  CA: "QuartzCore",
+  CG: "CoreGraphics",
+  CI: "CoreImage",
+  CL: "CoreLocation",
+  CM: "CoreMotion",
+  GK: "GameplayKit",
+  MDL: "ModelIO",
+  MK: "MapKit",
+  MP: "MediaPlayer",
+  MTK: "MetalKit",
+  MTL: "Metal",
+  NS: "Foundation",
+  RP: "ReplayKit",
+  SCN: "SceneKit",
+  SK: "SpriteKit",
+  UI: "UIKit",
+  WK: "WebKit",
+};
+
 Object.getOwnPropertyNames(SweetieKit)
-  .filter(x => ["AR", "AU", "AV", "CA", "CG", "CL", "MK", "NS", "RP", "SCN", "SK", "UI", "WK", "MP", "MDL"]
+  .filter(x => Object.keys(SweetieKitPrefixes)
                  .filter(y => (x.startsWith(y) || x.startsWith("k"+y)))
                  .length > 0)
   .sort()
