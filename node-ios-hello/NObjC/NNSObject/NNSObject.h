@@ -110,4 +110,73 @@ JS_WRAP_CLASS(NSObject, id);
   static Nan::Persistent<FunctionTemplate>& GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset);
 JS_WRAP_CLASS_END(NSObject);
 
+
+
+// suppport for protocols
+
+template <typename T> struct ObjCProtocolTraits;
+
+#define JS_WRAP_PROTOCOL(name, base)     JS_WRAP_CLASS(name, base)
+#define JS_WRAP_PROTOCOL_END(name, base) JS_WRAP_CLASS_END(name); \
+\
+extern Protocol* name##Protocol; \
+\
+template<> struct ObjCProtocolTraits< id<name> > { static Protocol* protocol() { return name##Protocol; } };
+
+
+#define JS_INIT_PROTOCOL(name, base)     JS_INIT_CLASS(name, base) \
+  name##Protocol = NSProtocolFromString(@#name);
+
+#define JS_INIT_PROTOCOL_END(name, base) JS_INIT_CLASS_END(name, base) \
+Protocol* name##Protocol;
+
+
+template<typename T>
+Local<Value>
+js_value_protocol(T x, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
+{
+  if (protocol && x && ![x conformsToProtocol: protocol]) {
+    return Nan::Undefined();
+  }
+  return js_value_id(x);
+}
+
+template<typename T, typename K>
+T
+to_value_protocol(K self, bool* failed = nullptr, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
+{
+  if (failed) {
+    *failed = false;
+  }
+  if (!protocol || [self conformsToProtocol: protocol]) {
+    T result(static_cast< T >(self));
+    return result;
+  }
+  if (failed) {
+    *failed = true;
+  } else {
+    js_panic_noreturn("Failed to cast as protocol");
+  }
+  return nil;
+}
+
+template<typename T>
+bool
+is_value_protocol(Local<Value> x, Protocol* protocol = ObjCProtocolTraits<T>::protocol()) {
+  if (!is_value_id(x)) {
+    return false;
+  }
+  JS_UNWRAPPED_(x, id, self);
+  if (protocol && ![self conformsToProtocol: protocol]) {
+    return false;
+  }
+  return true;
+}
+
+#define js_protocol_wrapper(x, type, base) js_value_protocol<type>(x)
+#define to_protocol_wrapper(x, type, base) to_value_protocol<type>(x)
+#define is_protocol_wrapper(x, type, base) is_value_protocol<type>(x)
+
+
+
 #endif /* NNSObject_h */
