@@ -274,25 +274,10 @@ public: \
     [objcValue associateValue:func withKey:keyName]; \
   }
 
-#define JS_INIT_CLASS_BASE(name) \
-\
-Nan::Persistent<FunctionTemplate> N##name::type; \
-\
-std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate, Local<Object> exports) \
-{ \
-  Nan::EscapableHandleScope scope; \
-\
-  /* constructor */ \
-  Local<FunctionTemplate> ctorObj = Nan::New<FunctionTemplate>(New); \
-  ctorObj->InstanceTemplate()->SetInternalFieldCount(1); \
-  ctorObj->SetClassName(JS_STR(#name)); \
-  type.Reset(ctorObj); \
-\
-  /* prototype */ \
-  Local<ObjectTemplate> proto = ctorObj->PrototypeTemplate(); proto = proto
-
-
 #define JS_INIT_CLASS(name, base) \
+  JS_INIT_CLASS_BASE(name, ctorSpec->Inherit(Nan::New(N##base::type)))
+
+#define JS_INIT_CLASS_BASE(name, ...) \
 \
 Nan::Persistent<FunctionTemplate> N##name::type; \
 \
@@ -301,20 +286,32 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
   Nan::EscapableHandleScope scope; \
 \
   /* constructor */ \
-  Local<FunctionTemplate> ctorObj = Nan::New<FunctionTemplate>(New); \
-  ctorObj->Inherit(Nan::New(N##base::type)); \
-  ctorObj->InstanceTemplate()->SetInternalFieldCount(1); \
-  ctorObj->SetClassName(JS_STR(#name)); \
-  type.Reset(ctorObj); \
+  Local<FunctionTemplate> ctorSpec = Nan::New<FunctionTemplate>(New); \
+  ctorSpec->InstanceTemplate()->SetInternalFieldCount(1); \
+  ctorSpec->SetClassName(JS_STR(#name)); \
+  __VA_ARGS__; \
+  Local<Function> ctor(Nan::GetFunction(ctorSpec).ToLocalChecked()); \
+  auto result(std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctor), ctorSpec)); \
 \
   /* prototype */ \
-  Local<ObjectTemplate> proto = ctorObj->PrototypeTemplate(); proto = proto
+  MaybeLocal<Value> proto_m = ctor->Get(JS_CONTEXT(), JS_STR("prototype")); \
+  if (proto_m.IsEmpty()) { \
+    js_panic_noreturn("Constructor prototype gave an internal error"); \
+    return result; \
+  } \
+  Local<Value> proto_v(proto_m.ToLocalChecked()); \
+  if (!proto_v->IsObject()) { \
+    js_panic_noreturn("Constructor prototype isn't an object"); \
+    return result; \
+  } \
+  Local<Object> proto(JS_OBJ(proto_v))
 
 #define JS_INIT_CTOR(name, base) \
-  Local<Function> ctor = Nan::GetFunction(ctorObj).ToLocalChecked();
+  { }; 
 
 #define JS_INIT_CLASS_END(name, base) \
-  return std::pair<Local<Object>, Local<FunctionTemplate>>(scope.Escape(ctor), ctorObj); \
+  type.Reset(ctorSpec); \
+  return result; \
 }
   
 #define JS_GET_FUNCTION(varName, objc, keyName) \

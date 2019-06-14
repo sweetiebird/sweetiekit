@@ -670,8 +670,12 @@ NAN_METHOD(NClass::New) {
 #include "NUIImage.h"
 #include "NUIImageView.h"
 #include "NUITextField.h"
+#include "NUITextInputMode.h"
 #include "NUIStoryboard.h"
+#include "NUISearchController.h"
 #include "NUITabBarController.h"
+#include "NUISplitViewController.h"
+#include "NUIBarCommon.h"
 #include "NUITabBarItem.h"
 #include "NUIBarButtonItem.h"
 #include "NUITabBar.h"
@@ -905,12 +909,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIMotionEffect);
     JS_EXPORT_TYPE(UILayoutGuide);
     JS_EXPORT_TYPE(UIBarButtonItem);
+    JS_EXPORT_TYPE(UIBarCommon);
     JS_EXPORT_TYPE(UITabBarItem);
     JS_EXPORT_TYPE(UIAlertAction);
     JS_EXPORT_TYPE(UIApplication);
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_TYPE(UITabBarController);
+    JS_EXPORT_TYPE(UISplitViewController);
+    JS_EXPORT_TYPE(UISearchController);
     JS_EXPORT_TYPE(UITableViewController);
     JS_EXPORT_TYPE(UICollectionViewController);
     JS_EXPORT_TYPE(UINavigationController);
@@ -927,6 +934,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UISwitch);
     JS_EXPORT_TYPE(UIStoryboard);
     JS_EXPORT_TYPE(UIButton);
+    JS_EXPORT_TYPE(UITextInputMode);
     JS_EXPORT_TYPE(UITextField);
     
     JS_EXPORT_TYPE(UIGraphicsRendererFormat);
@@ -1327,6 +1335,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UITableViewController);
       JS_RETURN_TYPE(UIImagePickerController);
       JS_RETURN_TYPE(UINavigationController);
+      JS_RETURN_TYPE(UISearchController);
+      JS_RETURN_TYPE(UISplitViewController);
       JS_RETURN_TYPE(UITabBarController);
       JS_RETURN_TYPE(UIViewController);
       JS_RETURN_TYPE(UIPopoverPresentationController);
@@ -1360,6 +1370,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIImageView);
       JS_RETURN_TYPE(UIStoryboard);
       JS_RETURN_TYPE(UITextField);
+      JS_RETURN_TYPE(UITextInputMode);
       JS_RETURN_TYPE(UISwitch);
       JS_RETURN_TYPE(UIRefreshControl);
       JS_RETURN_TYPE(UIControl);
@@ -1367,6 +1378,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIView);
       JS_RETURN_TYPE(UITabBarItem);
       JS_RETURN_TYPE(UIBarButtonItem);
+      JS_RETURN_TYPE(UIBarCommon);
       // ========= delegates
       JS_RETURN_TYPE_FROM(UIPopoverPresentationControllerDelegate, SUIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);

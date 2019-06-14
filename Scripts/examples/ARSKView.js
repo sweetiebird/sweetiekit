@@ -79,13 +79,13 @@ function makeCamBtn(demoVC, btnSize) {
 }
 
 async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
-  const field = await UITextField.alloc(
+  const frame = CGRectMake(
     horOffset,
     0,
     demoVC.view.frame.width - (horOffset * 2),
-    fieldHeight,
-    callback,
-  );
+    fieldHeight);
+
+  const field = UITextField.initWithFrameCallback(frame, callback);
   field.textColor = {
     ...colors.white,
     alpha: 0.8,
@@ -148,7 +148,7 @@ function takeScreenshot(view) {
       const ssView = UIImageView(img);
       ssView.frame = ssFrame;
       ssView.layer.borderWidth = 1;
-      ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+      ssView.layer.borderColor = UIColor.white;
       view.addSubview(ssView);
       view.bringSubviewToFront(ssView);
 

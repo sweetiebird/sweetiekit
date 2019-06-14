@@ -10,6 +10,10 @@
 
 #include "NUIControl.h"
 
+#define js_value_UITextField(x) js_value_wrapper(x, UITextField)
+#define to_value_UITextField(x) to_value_wrapper(x, UITextField)
+#define is_value_UITextField(x) is_value_wrapper(x, UITextField)
+
 #define js_value_NSTextAlignment(x) JS_ENUM(NSTextAlignment, NSInteger, x)
 #define to_value_NSTextAlignment(x) TO_ENUM(NSTextAlignment, NSInteger, x)
 #define is_value_NSTextAlignment(x) IS_ENUM(NSTextAlignment, NSInteger, x)
@@ -28,8 +32,8 @@
 
 
 JS_WRAP_CLASS(UITextField, UIControl);
-  JS_METHOD(Alloc);
-  JS_PROP(Callback);
+  JS_STATIC_METHOD(initWithFrameCallback);
+  JS_PROP(callback);
   JS_PROP(autocorrectionType);
   
   JS_METHOD(borderRectForBounds);

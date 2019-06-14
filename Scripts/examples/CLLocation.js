@@ -148,7 +148,8 @@ async function make(nav, demoVC) {
 
   const w = demoVC.view.frame.width;
 
-  const field = await UITextField.alloc(12, 80, w - 24, 50, () => {
+  const frame = {x: 12, y: 80, width: w - 24, height: 50};
+  const field = UITextField.initWithFrameCallback(frame, () => {
     text = field.text;
   });
 

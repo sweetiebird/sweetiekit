@@ -168,13 +168,13 @@ function createTable() {
 
  async function demo() {
    const dashboardVC = sb.instantiateViewControllerWithIdentifier(ctrls.DASH);
-   dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
+   dashboardVC.view.backgroundColor = RGB(111, 174, 175);
    const table = createTable();
    dashboardVC.view.addSubview(table);
    nav.setViewControllers([dashboardVC], false);
  }
 
- async function userPhoto() {
+ function userPhoto() {
   console.log('userPhoto');
   const photoVC = sb.instantiateViewControllerWithIdentifier(ctrls.PHOTO);
   console.log('userPhoto1');
@@ -201,7 +201,7 @@ function createTable() {
            img = i;
            const imgView = UIImageView(img);
            imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
-           imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+           imgView.backgroundColor = UIColor.white;
            photoVC.view.addSubview(imgView);
            nextBtn.title = '✅ Lovely';
          }
@@ -216,7 +216,7 @@ function createTable() {
   }, UIControlEvents.touchUpInside);
   console.log('userPhoto3');
 
-   nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+   nextBtn.backgroundColor = UIColor.white;
 
   console.log('userPhoto4');
    photoVC.view.addSubview(nextBtn);
@@ -244,7 +244,7 @@ async function setupApp() {
   console.log('setupApp5');
 
 
-  const nameField = await UITextField.alloc(12, fieldY, elemW, 50, () => {
+  const nameField = UITextField.initWithFrameCallback(CGRectMake(12, fieldY, elemW, 50), () => {
     console.log('nameField');
     username = nameField.text;
     console.log(username);
@@ -253,18 +253,18 @@ async function setupApp() {
   // nameField.delegate = nameVC;
   console.log('setupApp6b');
 
-  const nextBtn = UIButton({x: 12, y: buttonY, width: elemW, height: 50});
+  const nextBtn = UIButton(CGRectMake(12, buttonY, elemW, 50));
   nextBtn.title = '👍 Next';
   nextBtn.addTarget(() => {
     console.log('UIButton');
     username = nameField.text;
     console.log('UIButton', username);
-    if (username) { await userPhoto(); }
+    if (username) { userPhoto(); }
     console.log('UIButton', username);
   }, UIControlEvents.touchUpInside);
   console.log('setupApp7');
 
-  nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+  nextBtn.backgroundColor = UIColor.white;
   nameVC.view.addSubview(nameField);
   nameVC.view.addSubview(nextBtn);
 
@@ -306,7 +306,7 @@ async function setupApp() {
       console.log('container view', containerView);
       if (containerView) {
         const transitionView = UIView(0, 0, showVC.view.frame.width, 200);
-        transitionView.backgroundColor = { red: 1, green: 0, blue: 1 };
+        transitionView.backgroundColor = UIColor.magenta;
         containerView.insertSubview(transitionView);
       }
     };

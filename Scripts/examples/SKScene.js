@@ -78,7 +78,7 @@ function makeScene(demoVC) {
   const h = (demoVC.view.frame.height - 84);
   const size = { width: w, height: h };
   scene = SKScene.sceneWithSize(size);
-  scene.backgroundColor = { red: 135/255, green: 206/255, blue: 250/255 };
+  scene.backgroundColor = RGB( 135, 206, 250 );
   scene.scaleMode = SKSceneScaleMode.resizeFill;
   scene.touchesEnded = touchesEnded;
   scene.physicsWorld.gravity = { dx: 0, dy: 0 };

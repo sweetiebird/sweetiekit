@@ -5,8 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUIRefreshControl.h"
-#include "ColorHelper.h"
 
+#define instancetype UIRefreshControl
+#define js_value_instancetype js_value_UIRefreshControl
 
 #ifdef __OBJC__
 
@@ -92,82 +93,96 @@ NUIRefreshControl::~NUIRefreshControl () {}
 
 JS_INIT_CLASS(UIRefreshControl, UIControl);
   // instance members (proto)
-  JS_SET_METHOD(proto, "addTargetFor", AddTargetFor);
-  JS_SET_METHOD(proto, "endRefreshing", EndRefreshing);
+  JS_ASSIGN_PROTO_METHOD(beginRefreshing);
+  JS_ASSIGN_PROTO_METHOD(endRefreshing);
+  JS_ASSIGN_PROTO_PROP_READONLY(isRefreshing);
+  JS_ASSIGN_PROTO_PROP(tintColor);
+  JS_ASSIGN_PROTO_PROP(attributedTitle);
   // static members (ctor)
   JS_INIT_CTOR(UIRefreshControl, UIControl);
-  Nan::SetMethod(ctor, "alloc", Alloc);
+  JS_ASSIGN_STATIC_METHOD(init);
 JS_INIT_CLASS_END(UIRefreshControl, UIControl);
 
 NAN_METHOD(NUIRefreshControl::New) {
   JS_RECONSTRUCT(UIRefreshControl);
-
-  Local<Object> viewObj = info.This();
-
-  NUIRefreshControl *view = new NUIRefreshControl();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge UIRefreshControl *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[UIRefreshControl alloc] init]);
-      });
-    }
-  }
-  view->Wrap(viewObj);
-
-  JS_SET_RETURN(viewObj);
-}
-
-NAN_METHOD(NUIRefreshControl::Alloc) {
-  Nan::EscapableHandleScope scope;
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> result = JS_TYPE(NUIRefreshControl)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-  JS_SET_RETURN(result);
-
-  JS_UNWRAPPED(result, UIRefreshControl, ui);
-}
-
-#include "NUITableView.h"
-NAN_METHOD(NUIRefreshControl::AddTargetFor) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIControl, ui);
-
-  Local<Object> obj = JS_OBJ(info[0]);
-  if (obj->InstanceOf(JS_CONTEXT(), JS_TYPE(NUITableView)).FromJust()) {
-    JS_UNWRAPPED(obj, UITableView, tv);
-    
-    __block Nan::Global<Function> cb(TO_FUNC(info[1]));
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        // https://stackoverflow.com/questions/4581782/can-i-pass-a-block-as-a-selector-with-objective-c
-  //      [ui addTarget:[^{
-  //        sweetiekit::CallAsync(cb, "NUIRefreshControl::AddTargetFor");
-  //      } copy]
-        [ui addTarget:[NSInvocation invocationWithTarget:tv block:^(id target) {
-          sweetiekit::CallAsync(cb, "NUIRefreshControl::AddTargetFor");
-              }]
-        action:@selector(invoke)
-        forControlEvents:UIControlEventAllEvents];
-      });
-    }
-    
-  } else {
-    Nan::ThrowError("Unknown addTargetFor type");
-  }
-}
-
-NAN_METHOD(NUIRefreshControl::EndRefreshing) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UIRefreshControl, ui);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui endRefreshing];
-    });
+    UIRefreshControl* self = nullptr;
+
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIRefreshControl *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UIRefreshControl alloc] init];
+    }
+    if (self) {
+      NUIRefreshControl *wrapper = new NUIRefreshControl();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIRefreshControl::New: invalid arguments");
+    }
   }
 }
+
+NAN_METHOD(NUIRefreshControl::init) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([[UIRefreshControl alloc] init]));
+  }
+}
+
+NAN_METHOD(NUIRefreshControl::beginRefreshing) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    [self beginRefreshing];
+  }
+}
+
+NAN_METHOD(NUIRefreshControl::endRefreshing) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    [self endRefreshing];
+  }
+}
+
+NAN_GETTER(NUIRefreshControl::isRefreshingGetter) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isRefreshing]));
+  }
+}
+
+NAN_GETTER(NUIRefreshControl::tintColorGetter) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self tintColor]));
+  }
+}
+
+NAN_SETTER(NUIRefreshControl::tintColorSetter) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setTintColor: input];
+  }
+}
+
+#include "NNSAttributedString.h"
+
+NAN_GETTER(NUIRefreshControl::attributedTitleGetter) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSAttributedString([self attributedTitle]));
+  }
+}
+
+NAN_SETTER(NUIRefreshControl::attributedTitleSetter) {
+  JS_UNWRAP(UIRefreshControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSAttributedString, input);
+    [self setAttributedTitle: input];
+  }
+}
+

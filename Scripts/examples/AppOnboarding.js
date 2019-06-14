@@ -88,8 +88,8 @@ function setupQuizButton() {
   });
   nextBtn.title = 'GET STARTED';
   nextBtn.layer.cornerRadius = 25;
-  nextBtn.layer.shadowOffset = { width: 0, height: 12 };
-  nextBtn.layer.shadowColor = { red: 0.33, green: 0.33, blue: 0.33, alpha: 1 };
+  nextBtn.layer.shadowOffset = CGSizeMake(0, 12);
+  nextBtn.layer.shadowColor = RGB(85, 85, 85);
   nextBtn.layer.shadowOpacity = 0.2;
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
@@ -112,7 +112,7 @@ function setupProgressView() {
     width: quizVC.view.frame.width - 200,
     height: 20,
   });
-  progressView.progressTintColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+  progressView.progressTintColor = UIColor.white;
   progressView.trackTintColor = colors.fitbodMedGrey;
 }
 
@@ -158,7 +158,7 @@ function setupQuizView() {
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
     const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
-    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    slideView.backgroundColor = UIColor.clear;
     const label = UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
@@ -168,7 +168,7 @@ function setupQuizView() {
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
-    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
     const attrText = new NSMutableAttributedString(contentTexts[i]);
@@ -315,7 +315,7 @@ function setupWelcomeView() {
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
     const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
-    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    slideView.backgroundColor = UIColor.clear;
     const label = new UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
     label.text = titles[i];
@@ -325,7 +325,7 @@ function setupWelcomeView() {
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
-    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
     const attrText = new NSMutableAttributedString(contentTexts[i]);
@@ -372,8 +372,8 @@ function setupStartButton() {
   });
   nextBtn.title = 'GET STARTED';
   nextBtn.layer.cornerRadius = 25;
-  nextBtn.layer.shadowOffset = { width: 0, height: 12 };
-  nextBtn.layer.shadowColor = { red: 0.33, green: 0.33, blue: 0.33, alpha: 1 };
+  nextBtn.layer.shadowOffset = CGSizeMake(0, 12);
+  nextBtn.layer.shadowColor = RGB(85, 85, 85);
   nextBtn.layer.shadowOpacity = 0.2;
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
@@ -392,7 +392,7 @@ function setupNavStyle(n) {
   n.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
   n.navigationBar.shadowImage = UIImage();
   n.navigationBar.tintColor = colors.fitbodPink;
-  n.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+  n.navigationBar.backgroundColor = UIColor.clear;
 }
 
 function makeStatusBarView() {

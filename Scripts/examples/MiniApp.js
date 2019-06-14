@@ -106,11 +106,11 @@ const randomExpLevel = () => {
 };
 
 function setNavStyles(nav) {
-  nav.navigationBar.setTranslucent(true);
+  nav.navigationBar.opaque = false;
   nav.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
   nav.navigationBar.shadowImage = UIImage();
   nav.navigationBar.tintColor = colors.fitbodPink;
-  nav.navigationBar.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+  nav.navigationBar.backgroundColor = UIColor.clear;
 }
 
 function setInnerAppNavStyles(nav) {
@@ -127,8 +127,8 @@ function makeAppButton(title) {
 
   btn.title = title;
   btn.layer.cornerRadius = 25;
-  btn.layer.shadowOffset = { width: 0, height: 12 };
-  btn.layer.shadowColor = { red: 0.33, green: 0.33, blue: 0.33, alpha: 1 };
+  btn.layer.shadowOffset = CGSizeMake(0, 12);
+  btn.layer.shadowColor = RGB(85, 85, 85);
   btn.layer.shadowOpacity = 0.2;
   btn.layer.shadowRadius = 8;
   btn.layer.maskToBounds = false;
@@ -148,7 +148,7 @@ function makeProgressView() {
     width: w - 200,
     height: 20,
   });
-  progressView.progressTintColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+  progressView.progressTintColor = UIColor.white;
   progressView.trackTintColor = colors.fitbodMedGrey;
   return progressView;
 }
@@ -180,8 +180,8 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const labelY = imgY + imgSize + 50;
     const contentY = labelY + 70;
 
-    const slideView = UIView({ x: w * i, y: 0, width: w, height: viewH });
-    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    const slideView = UIView(CGRectMake(w * i, 0, w, viewH));
+    slideView.backgroundColor = UIColor.clear;
 
     const label = UILabel();
     label.frame = { x: 20, y: labelY, width: w - 40, height: 25 };
@@ -193,7 +193,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignment.left;
-    contentLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+    contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
 
@@ -455,10 +455,10 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
       if (indexPath.row === responseSelections[i]) {
         cell.textLabel.textColor = colors.fitbodPink;
       } else {
-        cell.textLabel.textColor = { red: 1, green: 1, blue: 1, alpha: 0.9 };
+        cell.textLabel.textColor = RGB(255, 255, 255, 0.9);
       }
 
-      cell.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+      cell.backgroundColor = UIColor.clear;
 
       const attrText = new NSMutableAttributedString(text);
       attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
@@ -488,7 +488,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     };
 
     const slideView = new UITableView({ x: w * i, y: contentY, width: w, height: viewH - contentY });
-    slideView.backgroundColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+    slideView.backgroundColor = UIColor.clear;
     slideView.separatorStyle = UITableViewCellSeparatorStyle.none;
     slideView.delegate = del;
     slideView.dataSource = del;

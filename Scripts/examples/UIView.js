@@ -13,16 +13,16 @@ async function make(nav, demoVC) {
   const fgFrame = { x: 40, y: 80, width: bgFrame.width - 80, height: bgFrame.width - 80 };
   const bgView = global.bgView = UIView(bgFrame);
   const fgView = global.fgView = UIView(fgFrame);
-  bgView.backgroundColor = { red: 221/255, green: 105/255, blue: 28/255 };
-  fgView.backgroundColor = { red: 205/255, green: 37/255, blue: 83/255 };
+  bgView.backgroundColor = RGB(221, 105, 28);
+  fgView.backgroundColor = RGB(205, 37, 83);
   bgView.addSubview(fgView);
 
   // https://stackoverflow.com/questions/23074539/programmatically-create-a-uiview-with-color-gradient
   global.gradient = CAGradientLayer();
   gradient.frame = fgView.bounds;
   gradient.colors = [
-    { red:73/255, green:236/255, blue:187/255 },
-    { red:77/255, green:188/255, blue:250/255 },
+    RGB(73, 236, 187),
+    RGB(77, 188, 250),
   ];
   fgView.layer.insertSublayerAtIndex(gradient, 0);
 

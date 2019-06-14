@@ -25,9 +25,6 @@ JS_INIT_CLASS(UIFont, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(UIFont, NSObject);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), familyNames);
-  JS_ASSIGN_METHOD(ctor, systemFont);
-  JS_ASSIGN_METHOD(ctor, boldSystemFont);
-  JS_ASSIGN_METHOD(ctor, italicSystemFont);
   JS_ASSIGN_METHOD(ctor, preferredFontForTextStyle);
   JS_ASSIGN_METHOD(ctor, preferredFontForTextStyleCompatibleWithTraitCollection);
   JS_ASSIGN_METHOD(ctor, fontWithNameSize);
@@ -62,57 +59,6 @@ NAN_METHOD(NUIFont::New) {
       Nan::ThrowError("UIFont::New: invalid arguments");
     }
   }
-}
-
-NAN_METHOD(NUIFont::systemFont) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIFont)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIFont *ui = ObjectWrap::Unwrap<NUIFont>(obj);
-
-  @autoreleasepool {
-    double size = TO_DOUBLE(info[0]);
-    ui->SetNSObject([UIFont systemFontOfSize:size]);
-  }
-
-  JS_SET_RETURN(obj);
-}
-
-NAN_METHOD(NUIFont::boldSystemFont) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIFont)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIFont *ui = ObjectWrap::Unwrap<NUIFont>(obj);
-
-  @autoreleasepool {
-    double size = TO_DOUBLE(info[0]);
-    ui->SetNSObject([UIFont boldSystemFontOfSize:size]);
-  }
-
-  JS_SET_RETURN(obj);
-}
-
-NAN_METHOD(NUIFont::italicSystemFont) {
-  Nan::EscapableHandleScope scope;
-
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUIFont)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUIFont *ui = ObjectWrap::Unwrap<NUIFont>(obj);
-
-  @autoreleasepool {
-    double size = TO_DOUBLE(info[0]);
-    ui->SetNSObject([UIFont italicSystemFontOfSize:size]);
-  }
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NUIFont::preferredFontForTextStyle) {

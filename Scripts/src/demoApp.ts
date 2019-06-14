@@ -213,7 +213,7 @@ function createTable() {
 
 async function demo() {
   const dashboardVC = sb.instantiateViewControllerWithIdentifier(ctrls.DASH);
-  dashboardVC.view.backgroundColor = { red: 111/255, green: 174/255, blue: 175/255 };
+  dashboardVC.view.backgroundColor = RGB(111, 174, 175);
   const table = createTable();
   dashboardVC.view.addSubview(table);
   nav.setViewControllers([dashboardVC], false);
@@ -240,7 +240,7 @@ async function userPhoto() {
           img = i;
           const imgView = new UIImageView(img);
           imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
-          imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+          imgView.backgroundColor = UIColor.white;
           photoVC.view.addSubview(imgView);
           nextBtn.title = '✅ Lovely';
         }
@@ -254,7 +254,7 @@ async function userPhoto() {
     }
   });
 
-  nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+  nextBtn.backgroundColor = UIColor.white;
 
   photoVC.view.addSubview(nextBtn);
 
@@ -273,7 +273,7 @@ async function setupApp() {
   const elemW = viewW - 24;
   const buttonY = fieldY + 74;
 
-  const nameField = await UITextField.alloc(12, fieldY, elemW, 50, () => {
+  const nameField = UITextField.initWithFrameCallback(CGRectMake(12, fieldY, elemW, 50), () => {
     username = nameField.text;
     console.log(username);
   });
@@ -284,7 +284,7 @@ async function setupApp() {
     if (username) userPhoto();
   });
 
-  nextBtn.backgroundColor = { red: 1.0, green: 1.0, blue: 1.0 };
+  nextBtn.backgroundColor = UIColor.white;
   // nameVC.view.addSubview(nameField);
   // nameVC.view.addSubview(nextBtn);
 

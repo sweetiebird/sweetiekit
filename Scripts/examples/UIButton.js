@@ -21,10 +21,10 @@ async function make(nav, demoVC) {
     alert.addAction(action);
     demoVC.present(alert, true, () => {});
   }, UIControlEvents.touchUpInside);
-  button.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 4;
   button.layer.shadowRadius = 12;
-  button.layer.shadowColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  button.layer.shadowColor = RGB(87, 174, 176);
   button.layer.shadowOffset = { width: 0, height: 12 };
   return button;
 }

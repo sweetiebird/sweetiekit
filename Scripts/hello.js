@@ -1293,7 +1293,7 @@ console.log(sb, vc, view, subview);
 //    const subview = UIImageView(img); // named argument ({ image })
 //    subview.x = x;
 //    subview.y = y;
-//    subview.backgroundColor = ({red: randi(255)/255, green: randi(255)/255, blue: randi(255)/255, alpha: randi(255)/255})
+//    subview.backgroundColor = RGB(randi(255), randi(255), randi(255), randi(255)/255);
 //    console.log(firstVC.view.subviews.filter(x => (x instanceof UIImageView)).map(x => [x.center, x.backgroundColor]));
 //    firstVC.view.addSubview(subview);
 //   //const subview = makeUIView(x, y, 20, 20);

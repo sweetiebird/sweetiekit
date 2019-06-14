@@ -91,8 +91,8 @@ const UICollectionViewScrollPosition = {
 // let defaults;
 //
 // let todos = [];
-// const mainBlue = { red: 17/255, green: 205/255, blue: 239/255 };
-// const mainBg = { red: 248/255, green: 249/255, blue: 244/255 };
+// const mainBlue = RGB( 17, 205, 239 );
+// const mainBg = RGB( 248, 249, 244 );
 
 // async function renderTodos() {
 //   const startY = (todoVC.view.frame.height / 2) - 100;
@@ -133,7 +133,7 @@ const UICollectionViewScrollPosition = {
 //   todoVC.view.addSubview(scrollView);
 //   scrollView.addSubview(contentView);
 //
-//   scrollView.backgroundColor = { red: 248/255, green: 236/255, blue: 194/255 };
+//   scrollView.backgroundColor = RGB( 248, 236, 194 );
 //
 //   scrollView.leadingAnchor.constraintEqualToAnchor(todoVC.view.leadingAnchor, 20).isActive = true;
 //   scrollView.trailingAnchor.constraintEqualToAnchor(todoVC.view.trailingAnchor, 0).isActive = true;
@@ -198,8 +198,8 @@ function attachConsole(vc) {
   vc.view.addSubview(scrollView);
   scrollView.addSubview(contentView);
 
-  scrollView.backgroundColor = { red: 248/255, green: 236/255, blue: 194/255, alpha: 0/255 };
-  scrollView.backgroundColor = { red: 0.5*248/255, green: 0.5*236/255, blue: 0.5*194/255, alpha: 192/255 };
+  scrollView.backgroundColor = RGB(248, 236, 194, 0);
+  scrollView.backgroundColor = ColorScaleRGB(RGB(248, 236, 194, 0.75), 0.5);
 
   scrollView.leadingAnchor.constraintEqualToAnchor(vc.view.leadingAnchor, 20).isActive = true;
   scrollView.trailingAnchor.constraintEqualToAnchor(vc.view.trailingAnchor, 0).isActive = true;
@@ -214,7 +214,7 @@ function attachConsole(vc) {
   lblConsole = UILabel();
   lblConsole.numberOfLines = 0;
   lblConsole.font = "Courier-Bold";
-  lblConsole.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
+  lblConsole.textColor = RGB( 248, 236, 194 );
   lblConsole.text = 'Lorem ipsum dolor amet aliqua sunt lumbersexual cardigan. Authentic live-edge chia everyday carry, selfies id est. Coloring book activated charcoal dreamcatcher flannel direct trade wayfarers put a bird on it retro locavore health goth seitan enamel pin esse. Excepteur non irony, kitsch nulla pok pok raw denim plaid. Messenger bag deep v ut, photo booth raclette crucifix XOXO glossier veniam ugh labore. Tumblr celiac irure labore, beard live-edge street art health goth non marfa gochujang poke la croix plaid. Duis roof party poutine, copper mug normcore pickled microdosing swag messenger bag. Meggings nulla man braid 8-bit distillery, authentic affogato poke poutine selvage proident actually ullamco sartorial blog. Tattooed letterpress street art four loko. Photo booth hexagon mlkshk, cupidatat officia pinterest distillery. Portland hashtag labore dolore deserunt gochujang, tacos taxidermy ut selfies.';
   lblConsole.sizeToFit();
   lblConsole.translatesAutoresizingMaskIntoConstraints = false;
@@ -222,7 +222,7 @@ function attachConsole(vc) {
   const label2 = UILabel.alloc();
   label2.numberOfLines = 0;
   label2.font = "Courier-Bold";
-  label2.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
+  label2.textColor = RGB( 248, 236, 194 );
   label2.text = 'Pop-up brooklyn kitsch distillery. Celiac austin minim live-edge distillery. Ut succulents deserunt, reprehenderit nisi locavore in beard bicycle rights voluptate venmo. Viral quis hammock, mlkshk microdosing aute truffaut lomo. Echo park sed activated charcoal iPhone sriracha irony shoreditch gastropub dreamcatcher disrupt butcher VHS man braid neutra DIY. Chillwave actually sartorial trust fund DIY irony copper mug. Ea enamel pin irure est. Williamsburg adipisicing neutra, cupidatat mollit tofu bitters forage. Messenger bag crucifix commodo jean shorts viral meditation.';
   label2.sizeToFit();
   label2.translatesAutoresizingMaskIntoConstraints = false;
@@ -230,7 +230,7 @@ function attachConsole(vc) {
   const label3 = UILabel.alloc();
   label3.numberOfLines = 0;
   label3.font = "Courier-Bold";
-  label3.textColor = { red: 248/255, green: 236/255, blue: 194/255 };
+  label3.textColor = RGB( 248, 236, 194 );
   label3.text = 'Pop-up brooklyn kitsch distillery. Celiac austin minim live-edge distillery. Ut succulents deserunt, reprehenderit nisi locavore in beard bicycle rights voluptate venmo. Viral quis hammock, mlkshk microdosing aute truffaut lomo. Echo park sed activated charcoal iPhone sriracha irony shoreditch gastropub dreamcatcher disrupt butcher VHS man braid neutra DIY. Chillwave actually sartorial trust fund DIY irony copper mug. Ea enamel pin irure est. Williamsburg adipisicing neutra, cupidatat mollit tofu bitters forage. Messenger bag crucifix commodo jean shorts viral meditation.';
   label3.sizeToFit();
   label3.translatesAutoresizingMaskIntoConstraints = false;
@@ -276,11 +276,11 @@ function print(txt) {
 
 const randomColor = () => {
   const colors = [
-    { red: 205/255, green: 37/255, blue: 83/255, alpha: 1 },
-    { red: 205/255, green: 223/255, blue: 206/255, alpha: 1 },
-    { red: 87/255, green: 174/255, blue: 176/255, alpha: 1 },
-    { red: 1, green: 1, blue: 1, alpha: 1 },
-    { red: 0, green: 0, blue: 0, alpha: 1 },
+    RGB( 205, 37, 83 ),
+    RGB( 205, 223, 206 ),
+    RGB( 87, 174, 176 ),
+    UIColor.white,
+    UIColor.black,
   ];
   const index = Math.floor(Math.random() * colors.length);
   return colors[index];
@@ -544,7 +544,7 @@ class CollectionApp {
     this.setupDefaults();
     this.vc = UIViewController();
     this.collView = new UICollectionView({ x: 0, y: 0, width: this.vc.view.frame.width, height: this.vc.view.frame.height });
-    this.collView.backgroundColor = { red: 1, green: 1, blue: 1 };
+    this.collView.backgroundColor = UIColor.white;
     this.vc.view.addSubview(this.collView);
     this.addBarItem();
     this.setupConstraints();

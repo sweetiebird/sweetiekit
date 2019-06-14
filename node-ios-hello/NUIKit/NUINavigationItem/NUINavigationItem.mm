@@ -6,18 +6,51 @@
 //
 #include "NUINavigationItem.h"
 
+#define instancetype UINavigationItem
+#define js_value_instancetype js_value_UINavigationItem
+
 NUINavigationItem::NUINavigationItem() {}
 NUINavigationItem::~NUINavigationItem() {}
 
 JS_INIT_CLASS(UINavigationItem, NSObject);
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, initWithTitle);
-  JS_ASSIGN_PROP(proto, title);
-  JS_ASSIGN_PROP(proto, backBarButtonItem);
-  JS_ASSIGN_PROP(proto, titleView);
-  JS_ASSIGN_PROP(proto, prompt);
+  JS_ASSIGN_STATIC_METHOD(initWithTitle);
+  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(setHidesBackButtonAnimated);
+  JS_ASSIGN_PROTO_METHOD(setLeftBarButtonItemsAnimated);
+  JS_ASSIGN_PROTO_METHOD(setRightBarButtonItemsAnimated);
+  JS_ASSIGN_PROTO_METHOD(setLeftBarButtonItemAnimated);
+  JS_ASSIGN_PROTO_METHOD(setRightBarButtonItemAnimated);
+  JS_ASSIGN_PROTO_PROP(title);
+  JS_ASSIGN_PROTO_PROP(titleView);
+  JS_ASSIGN_PROTO_PROP(prompt);
+  JS_ASSIGN_PROTO_PROP(backBarButtonItem);
+  JS_ASSIGN_PROTO_PROP(hidesBackButton);
+  JS_ASSIGN_PROTO_PROP(leftBarButtonItems);
+  JS_ASSIGN_PROTO_PROP(rightBarButtonItems);
+  JS_ASSIGN_PROTO_PROP(leftItemsSupplementBackButton);
+  JS_ASSIGN_PROTO_PROP(leftBarButtonItem);
+  JS_ASSIGN_PROTO_PROP(rightBarButtonItem);
+  JS_ASSIGN_PROTO_PROP(largeTitleDisplayMode);
+  JS_ASSIGN_PROTO_PROP(searchController);
+  JS_ASSIGN_PROTO_PROP(hidesSearchBarWhenScrolling);
   // static members (ctor)
   JS_INIT_CTOR(UINavigationItem, NSObject);
+  // global members (exports)
+/*
+typedef NS_ENUM(NSInteger, UINavigationItemLargeTitleDisplayMode) {
+    /// Automatically use the large out-of-line title based on the state of the previous item in the navigation bar. An item with largeTitleDisplayMode=Automatic will show or hide the large title based on the request of the previous navigation item. If the first item pushed is set to Automatic, then it will show the large title if the navigation bar has prefersLargeTitles=YES.
+    UINavigationItemLargeTitleDisplayModeAutomatic,
+    /// Always use a larger title when this item is top most.
+    UINavigationItemLargeTitleDisplayModeAlways,
+    /// Never use a larger title when this item is top most.
+    UINavigationItemLargeTitleDisplayModeNever,
+} NS_SWIFT_NAME(UINavigationItem.LargeTitleDisplayMode);
+*/
+  JS_ASSIGN_ENUM(UINavigationItemLargeTitleDisplayModeAutomatic, NSInteger);
+  JS_ASSIGN_ENUM(UINavigationItemLargeTitleDisplayModeAlways, NSInteger);
+  JS_ASSIGN_ENUM(UINavigationItemLargeTitleDisplayModeNever, NSInteger);
+  
 JS_INIT_CLASS_END(UINavigationItem, NSObject);
 
 NAN_METHOD(NUINavigationItem::New) {
@@ -40,114 +73,284 @@ NAN_METHOD(NUINavigationItem::New) {
 }
 
 NAN_METHOD(NUINavigationItem::initWithTitle) {
-  Nan::EscapableHandleScope scope;
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> obj = JS_TYPE(NUINavigationItem)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-
-  NUINavigationItem *ui = ObjectWrap::Unwrap<NUINavigationItem>(obj);
-
-  @autoreleasepool {
-    NSString *title = NJSStringToNSString(info[0]);
-    ui->SetNSObject([[UINavigationItem alloc] initWithTitle:title]);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, title);
+    JS_SET_RETURN(js_value_instancetype([[UINavigationItem alloc] initWithTitle: title]));
   }
-
-  JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NUINavigationItem::titleGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  auto result = JS_STR([[ui title] UTF8String]);
-  JS_SET_RETURN(result);
+#include "NNSCoder.h"
+
+NAN_METHOD(NUINavigationItem::initWithCoder) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, coder);
+    JS_SET_RETURN(js_value_instancetype([[UINavigationItem alloc] initWithCoder: coder]));
+  }
 }
 
-NAN_SETTER(NUINavigationItem::titleSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  std::string title;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    title = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
+NAN_METHOD(NUINavigationItem::setHidesBackButtonAnimated) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, hidesBackButton);
+    declare_value(BOOL, animated);
+    [self setHidesBackButton: hidesBackButton animated: animated];
   }
-  @autoreleasepool {
-    [ui setTitle:[NSString stringWithUTF8String:title.c_str()]];
+}
+
+NAN_METHOD(NUINavigationItem::setLeftBarButtonItemsAnimated) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSArray<UIBarButtonItem*>, items);
+    declare_value(BOOL, animated);
+    [self setLeftBarButtonItems: items animated: animated];
+  }
+}
+
+NAN_METHOD(NUINavigationItem::setRightBarButtonItemsAnimated) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSArray<UIBarButtonItem*>, items);
+    declare_value(BOOL, animated);
+    [self setRightBarButtonItems: items animated: animated];
   }
 }
 
 #include "NUIBarButtonItem.h"
 
-NAN_GETTER(NUINavigationItem::backBarButtonItemGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui backBarButtonItem], NUIBarButtonItem::type)));
+NAN_METHOD(NUINavigationItem::setLeftBarButtonItemAnimated) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIBarButtonItem, item);
+    declare_value(BOOL, animated);
+    [self setLeftBarButtonItem: item animated: animated];
+  }
 }
 
-NAN_SETTER(NUINavigationItem::backBarButtonItemSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  NUIBarButtonItem *itemObj = ObjectWrap::Unwrap<NUIBarButtonItem>(Local<Object>::Cast(value));
+NAN_METHOD(NUINavigationItem::setRightBarButtonItemAnimated) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIBarButtonItem, item);
+    declare_value(BOOL, animated);
+    [self setRightBarButtonItem: item animated: animated];
+  }
+}
 
-  @autoreleasepool {
-    [ui setBackBarButtonItem:itemObj->As<UIBarButtonItem>()];
+NAN_GETTER(NUINavigationItem::titleGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString ([self title]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::titleSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString , input);
+    [self setTitle: input];
   }
 }
 
 #include "NUIView.h"
 
 NAN_GETTER(NUINavigationItem::titleViewGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui titleView], NUIView::type)));
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView ([self titleView]));
+  }
 }
 
 NAN_SETTER(NUINavigationItem::titleViewSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  NUIView *itemObj = ObjectWrap::Unwrap<NUIView>(Local<Object>::Cast(value));
-
-  @autoreleasepool {
-    [ui setTitleView:itemObj->As<UIView>()];
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView , input);
+    [self setTitleView: input];
   }
 }
 
 NAN_GETTER(NUINavigationItem::promptGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  auto result = JS_STR([[ui prompt] UTF8String]);
-  JS_SET_RETURN(result);
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self prompt]));
+  }
 }
 
 NAN_SETTER(NUINavigationItem::promptSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UINavigationItem, ui);
-  
-  std::string prompt;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    prompt = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
-  }
-  @autoreleasepool {
-    [ui setTitle:[NSString stringWithUTF8String:prompt.c_str()]];
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setPrompt: input];
   }
 }
+
+NAN_GETTER(NUINavigationItem::backBarButtonItemGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIBarButtonItem([self backBarButtonItem]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::backBarButtonItemSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIBarButtonItem, input);
+    [self setBackBarButtonItem: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::hidesBackButtonGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hidesBackButton]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::hidesBackButtonSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidesBackButton: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::leftBarButtonItemsGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self leftBarButtonItems]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::leftBarButtonItemsSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<UIBarButtonItem*>, input);
+    [self setLeftBarButtonItems: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::rightBarButtonItemsGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self rightBarButtonItems]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::rightBarButtonItemsSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<UIBarButtonItem*>, input);
+    [self setRightBarButtonItems: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::leftItemsSupplementBackButtonGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self leftItemsSupplementBackButton]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::leftItemsSupplementBackButtonSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setLeftItemsSupplementBackButton: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::leftBarButtonItemGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIBarButtonItem([self leftBarButtonItem]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::leftBarButtonItemSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIBarButtonItem, input);
+    [self setLeftBarButtonItem: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::rightBarButtonItemGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIBarButtonItem([self rightBarButtonItem]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::rightBarButtonItemSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIBarButtonItem, input);
+    [self setRightBarButtonItem: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::largeTitleDisplayModeGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UINavigationItemLargeTitleDisplayMode([self largeTitleDisplayMode]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::largeTitleDisplayModeSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UINavigationItemLargeTitleDisplayMode, input);
+    [self setLargeTitleDisplayMode: input];
+  }
+}
+
+#include "NUISearchController.h"
+
+NAN_GETTER(NUINavigationItem::searchControllerGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UISearchController([self searchController]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::searchControllerSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UISearchController, input);
+    [self setSearchController: input];
+  }
+}
+
+NAN_GETTER(NUINavigationItem::hidesSearchBarWhenScrollingGetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hidesSearchBarWhenScrolling]));
+  }
+}
+
+NAN_SETTER(NUINavigationItem::hidesSearchBarWhenScrollingSetter) {
+  JS_UNWRAP(UINavigationItem, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidesSearchBarWhenScrolling: input];
+  }
+}
+

@@ -11,10 +11,10 @@ const {
 let scrollView;
 
 const colors = [
-  { red: 0, green: 174/255, blue: 174/255 },
-  { red: 205/255, green: 37/255, blue: 83/255 },
-  { red: 0, green: 174/255, blue: 174/255 },
-  { red: 205/255, green: 37/255, blue: 83/255 },
+  RGB(  0, 174, 174),
+  RGB(205,  37,  83),
+  RGB(  0, 174, 174),
+  RGB(205,  37,  83),
 ];
 
 function makeDelegate(demoVC, pageControl) {
@@ -58,8 +58,8 @@ async function make(nav, demoVC) {
   const pageControl = new UIPageControl({ x: 12, y: viewH - 140, width: w - 24, height: 60 });
   pageControl.numberOfPages = numSlides;
   pageControl.currentPage = 0;
-  pageControl.currentPageIndicatorTintColor = { red: 1, green: 0, blue: 1, alpha: 1 };
-  pageControl.pageIndicatorTintColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+  pageControl.currentPageIndicatorTintColor = UIColor.magenta;
+  pageControl.pageIndicatorTintColor = UIColor.white;
 
   makeDelegate(demoVC, pageControl);
 

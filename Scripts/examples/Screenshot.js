@@ -34,7 +34,7 @@ function takeSS() {
       ssView = UIImageView(img);
       ssView.frame = ssFrame;
       ssView.layer.borderWidth = 1;
-      ssView.layer.borderColor = { red: 1, green: 1, blue: 1, alpha: 1 };
+      ssView.layer.borderColor = UIColor.white;
       view.addSubview(ssView);
 
       // ==========
@@ -59,9 +59,9 @@ async function make(nav, demoVC) {
   view2 = UIView(frame2);
   // const ssFrame = { x: 0, y: 0, width: frame2.width * 0.4, height: frame2.height * 0.4 };
   // ssView = UIView(ssFrame);
-  view.backgroundColor = { red: 0, green: 174/255, blue: 174/255 };
-  view2.backgroundColor = { red: 205/255, green: 37/255, blue: 83/255 };
-  // view2.backgroundColor = { red: 1, green: 1, blue: 1 };
+  view.backgroundColor = RGB(0, 174, 174);
+  view2.backgroundColor = RGB(205, 37, 83);
+  // view2.backgroundColor = UIColor.white;
   view.addSubview(view2);
   // view2.addSubview(ssView);
 
@@ -72,10 +72,10 @@ async function make(nav, demoVC) {
     height: 50,
   });
   button.title = '📷 Screenshot';
-  button.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 25;
   button.layer.shadowRadius = 12;
-  button.layer.shadowColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  button.layer.shadowColor = RGB(87, 174, 176);
   button.layer.shadowOffset = { width: 0, height: 12 };
   button.layer.shadowOpacity = 1;
   button.addTarget(takeSS, UIControlEvents.touchUpInside);

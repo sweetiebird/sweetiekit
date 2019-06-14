@@ -7,60 +7,61 @@
 #include "NUITextField.h"
 #include "NUIFont.h"
 
+#define instancetype UITextField
+#define js_value_instancetype js_value_UITextField
+
 NUITextField::NUITextField()
-: _callback(new Nan::Persistent<Function>())
 {
 }
 NUITextField::~NUITextField()
 {
-  delete _callback;
 }
 
 JS_INIT_CLASS(UITextField, UIControl);
   // instance members (proto)
-  JS_SET_PROP(proto, "callback", Callback);
-  JS_ASSIGN_PROP(proto, autocorrectionType);
+  JS_ASSIGN_PROTO_PROP(callback);
+  JS_ASSIGN_PROTO_PROP(autocorrectionType);
   
-  JS_ASSIGN_METHOD(proto, borderRectForBounds);
-  JS_ASSIGN_METHOD(proto, textRectForBounds);
-  JS_ASSIGN_METHOD(proto, placeholderRectForBounds);
-  JS_ASSIGN_METHOD(proto, editingRectForBounds);
-  JS_ASSIGN_METHOD(proto, clearButtonRectForBounds);
-  JS_ASSIGN_METHOD(proto, leftViewRectForBounds);
-  JS_ASSIGN_METHOD(proto, rightViewRectForBounds);
-  JS_ASSIGN_METHOD(proto, drawTextInRect);
-  JS_ASSIGN_METHOD(proto, drawPlaceholderInRect);
+  JS_ASSIGN_PROTO_METHOD(borderRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(textRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(placeholderRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(editingRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(clearButtonRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(leftViewRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(rightViewRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(drawTextInRect);
+  JS_ASSIGN_PROTO_METHOD(drawPlaceholderInRect);
   
-  JS_ASSIGN_PROP(proto, text);
-  JS_ASSIGN_PROP(proto, attributedText);
-  JS_ASSIGN_PROP(proto, textColor);
-  JS_ASSIGN_PROP(proto, font);
-  JS_ASSIGN_PROP(proto, textAlignment);
-  JS_ASSIGN_PROP(proto, borderStyle);
-  JS_ASSIGN_PROP(proto, defaultTextAttributes);
-  JS_ASSIGN_PROP(proto, placeholder);
-  JS_ASSIGN_PROP(proto, attributedPlaceholder);
-  JS_ASSIGN_PROP(proto, clearsOnBeginEditing);
-  JS_ASSIGN_PROP(proto, adjustsFontSizeToFitWidth);
-  JS_ASSIGN_PROP(proto, minimumFontSize);
-  JS_ASSIGN_PROP(proto, delegate);
-  JS_ASSIGN_PROP(proto, background);
-  JS_ASSIGN_PROP(proto, disabledBackground);
-  JS_ASSIGN_PROP_READONLY(proto, isEditing);
-  JS_ASSIGN_PROP(proto, allowsEditingTextAttributes);
-  JS_ASSIGN_PROP(proto, typingAttributes);
-  JS_ASSIGN_PROP(proto, clearButtonMode);
-  JS_ASSIGN_PROP(proto, leftView);
-  JS_ASSIGN_PROP(proto, leftViewMode);
-  JS_ASSIGN_PROP(proto, rightView);
-  JS_ASSIGN_PROP(proto, rightViewMode);
-  JS_ASSIGN_PROP(proto, inputView);
-  JS_ASSIGN_PROP(proto, inputAccessoryView);
-  JS_ASSIGN_PROP(proto, clearsOnInsertion);
+  JS_ASSIGN_PROTO_PROP(text);
+  JS_ASSIGN_PROTO_PROP(attributedText);
+  JS_ASSIGN_PROTO_PROP(textColor);
+  JS_ASSIGN_PROTO_PROP(font);
+  JS_ASSIGN_PROTO_PROP(textAlignment);
+  JS_ASSIGN_PROTO_PROP(borderStyle);
+  JS_ASSIGN_PROTO_PROP(defaultTextAttributes);
+  JS_ASSIGN_PROTO_PROP(placeholder);
+  JS_ASSIGN_PROTO_PROP(attributedPlaceholder);
+  JS_ASSIGN_PROTO_PROP(clearsOnBeginEditing);
+  JS_ASSIGN_PROTO_PROP(adjustsFontSizeToFitWidth);
+  JS_ASSIGN_PROTO_PROP(minimumFontSize);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP(background);
+  JS_ASSIGN_PROTO_PROP(disabledBackground);
+  JS_ASSIGN_PROTO_PROP_READONLY(isEditing);
+  JS_ASSIGN_PROTO_PROP(allowsEditingTextAttributes);
+  JS_ASSIGN_PROTO_PROP(typingAttributes);
+  JS_ASSIGN_PROTO_PROP(clearButtonMode);
+  JS_ASSIGN_PROTO_PROP(leftView);
+  JS_ASSIGN_PROTO_PROP(leftViewMode);
+  JS_ASSIGN_PROTO_PROP(rightView);
+  JS_ASSIGN_PROTO_PROP(rightViewMode);
+  JS_ASSIGN_PROTO_PROP(inputView);
+  JS_ASSIGN_PROTO_PROP(inputAccessoryView);
+  JS_ASSIGN_PROTO_PROP(clearsOnInsertion);
 
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
-  JS_SET_METHOD(ctor, "alloc", Alloc);
+  JS_ASSIGN_STATIC_METHOD(initWithFrameCallback);
 JS_INIT_CLASS_END(UITextField, UIControl);
 
 NAN_METHOD(NUITextField::New) {
@@ -87,93 +88,68 @@ NAN_METHOD(NUITextField::New) {
   }
 }
 
-NAN_METHOD(NUITextField::Alloc) {
-  Nan::EscapableHandleScope scope;
-  //auto resolver = Promise::Resolver::New(JS_CONTEXT()).ToLocalChecked();
-  
-  Local<Value> argv[] = {
-  };
-  Local<Object> tfObj = JS_TYPE(NUITextField)->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
+#define get_persistent_function(from, name, key) \
+      SweetJSFunction* name = (SweetJSFunction*)[from associatedValueForKey:key];
 
-  JS_UNWRAPPED(tfObj, UITextField, ui);
-
-  double x = TO_DOUBLE(info[0]);
-  double y = TO_DOUBLE(info[1]);
-  double width = TO_DOUBLE(info[2]);
-  double height = TO_DOUBLE(info[3]);
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      ui = [[UITextField alloc] initWithFrame:CGRectMake(x, y, width, height)];
-      nui->SetNSObject(ui);
-      [ui setPlaceholder:@"Enter text here"];
-      [ui setFont:[UIFont systemFontOfSize:15]];
-      [ui setBorderStyle:UITextBorderStyleRoundedRect];
-      [ui setAutocorrectionType:UITextAutocorrectionTypeNo];
-      [ui setKeyboardType:UIKeyboardTypeDefault];
-      [ui setReturnKeyType:UIReturnKeyDone];
-      [ui setClearButtonMode:UITextFieldViewModeWhileEditing];
-      [ui setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-      [ui setTargetClosureWithClosure:^(UITextField*){
-        Nan::HandleScope scope;
-        sweetiekit::Resolve(nui->_callback);
-        return true;
-      }];
-    });
+NAN_METHOD(NUITextField::initWithFrameCallback) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    UITextField* self = [[UITextField alloc] initWithFrame:frame];
+    declare_persistent_function(callback, @"sweetiekit.UITextField.initWithFrameCallback");
+    [self setPlaceholder:@"Enter text here"];
+    [self setFont:[UIFont systemFontOfSize:15]];
+    [self setBorderStyle:UITextBorderStyleRoundedRect];
+    [self setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [self setKeyboardType:UIKeyboardTypeDefault];
+    [self setReturnKeyType:UIReturnKeyDone];
+    [self setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [self setTargetClosureWithClosure:^(UITextField* sender){
+      __block bool result = true;
+      dispatch_main(^{
+        get_persistent_function(sender, callback, @"sweetiekit.UITextField.initWithFrameCallback");
+        if (callback) {
+          result = to_value_BOOL([callback jsFunction]->Call("NUITextField::initWithFrameCallback"));
+        }
+      });
+      return result;
+    }];
+    JS_SET_RETURN(js_value_instancetype(self));
   }
-  
-  if (info[4]->IsFunction()) {
-    nui->_callback->Reset(Local<Function>::Cast(info[4]));
-    NodeUIViewController* del = [[NodeUIViewController alloc] init];
-    [ui associateValue:del withKey:@"sweetiekit.UITextField.callback"];
-    [ui setDelegate:del];
-  }
-
-  info.GetReturnValue().Set(tfObj);
 }
 
-NAN_GETTER(NUITextField::CallbackGetter) {
-  Nan::HandleScope scope;
-
-  NUITextField *view = ObjectWrap::Unwrap<NUITextField>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_callback));
+NAN_GETTER(NUITextField::callbackGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"sweetiekit.UITextField.initWithFrameCallback");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
 }
 
-NAN_SETTER(NUITextField::CallbackSetter) {
-  Nan::HandleScope scope;
-
-  NUITextField *field = ObjectWrap::Unwrap<NUITextField>(info.This());
-  field->_callback->Reset(Local<Function>::Cast(value));
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      UITextField* txt = field->As<UITextField>();
-      [txt setTargetClosureWithClosure:^(UITextField*){
-        sweetiekit::Resolve(field->_callback);
-        return true;
-      }];
-    });
+NAN_SETTER(NUITextField::callbackSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"sweetiekit.UITextField.initWithFrameCallback");
   }
 }
 
 NAN_GETTER(NUITextField::autocorrectionTypeGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITextField, ui);
-  
-  JS_SET_RETURN(JS_NUM([ui autocorrectionType]));
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSInteger([self autocorrectionType]));
+  }
 }
 
 NAN_SETTER(NUITextField::autocorrectionTypeSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITextField, ui);
-  
-  UITextAutocorrectionType type = value->IsNumber() ? UITextAutocorrectionType(TO_INT32(value)) : UITextAutocorrectionTypeDefault;
-
-  @autoreleasepool {
-    [ui setAutocorrectionType:type];
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSInteger, input);
+    [self setAutocorrectionType:(UITextAutocorrectionType)input];
   }
 }
 

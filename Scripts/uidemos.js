@@ -130,7 +130,7 @@ class UIDemosApp {
     gc();
     this.demoVC = UIViewController();
     gc();
-    this.demoVC.view.backgroundColor = { red: 1, green: 1, blue: 1 };
+    this.demoVC.view.backgroundColor = UIColor.white;
     gc();
   }
 

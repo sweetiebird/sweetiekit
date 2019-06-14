@@ -28,7 +28,7 @@ async function make(nav, demoVC) {
           img = i;
           const imgView = UIImageView(img);
           imgView.frame = { x: 12, y: 140, width: w - 24, height: w - 24 };
-          imgView.backgroundColor = { red: 1, blue: 1, green: 1 };
+          imgView.backgroundColor = UIColor.white;
           demoVC.view.addSubview(imgView);
           btn.title = '✅';
         }
@@ -40,7 +40,7 @@ async function make(nav, demoVC) {
     }
   }, UIControlEvents.touchUpInside);
 
-  btn.backgroundColor = { red: 87/255, green: 174/255, blue: 176/255 };
+  btn.backgroundColor = RGB(87, 174, 176);
   btn.layer.cornerRadius = 4;
 
   demoVC.view.addSubview(btn);
