@@ -6,6 +6,9 @@
 //
 #include "NUIView.h"
 
+#define instancetype UIView
+#define js_value_instancetype js_value_UIView
+
 NUIView::NUIView() {}
 NUIView::~NUIView() {}
 
@@ -17,14 +20,14 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROTO_PROP(y);
   JS_ASSIGN_PROTO_PROP(width);
   JS_ASSIGN_PROTO_PROP(height);
-  JS_SET_METHOD(proto, "hitTest", hitTestWithEvent);
-  JS_ASSIGN_METHOD(proto, hitTestWithEvent);
-  JS_SET_METHOD(proto, "pointInside", pointInsideWithEvent);
-  JS_ASSIGN_METHOD(proto, pointInsideWithEvent);
-  JS_ASSIGN_METHOD(proto, convertPointToView);
-  JS_ASSIGN_METHOD(proto, convertPointFromView);
-  JS_ASSIGN_METHOD(proto, convertRectToView);
-  JS_ASSIGN_METHOD(proto, convertRectFromView);
+  JS_ASSIGN_PROTO_METHOD_AS(hitTestWithEvent, "hitTest");
+  JS_ASSIGN_PROTO_METHOD(hitTestWithEvent);
+  JS_ASSIGN_PROTO_METHOD_AS(pointInsideWithEvent, "pointInside");
+  JS_ASSIGN_PROTO_METHOD(pointInsideWithEvent);
+  JS_ASSIGN_PROTO_METHOD(convertPointToView);
+  JS_ASSIGN_PROTO_METHOD(convertPointFromView);
+  JS_ASSIGN_PROTO_METHOD(convertRectToView);
+  JS_ASSIGN_PROTO_METHOD(convertRectFromView);
   JS_ASSIGN_PROTO_METHOD(sizeThatFits);
   JS_ASSIGN_PROTO_METHOD(sizeToFit);
   JS_ASSIGN_PROTO_METHOD(removeFromSuperview);
@@ -181,6 +184,8 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_STATIC_METHOD(performSystemAnimationOnViewsOptionsAnimationsCompletion);
   JS_ASSIGN_STATIC_METHOD(animateKeyframesWithDurationDelayOptionsAnimationsCompletion);
   JS_ASSIGN_STATIC_METHOD(addKeyframeWithRelativeStartTimeRelativeDurationAnimations);
+  JS_ASSIGN_STATIC_METHOD(initWithFrame);
+  JS_ASSIGN_STATIC_METHOD(initWithCoder);
 
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), areAnimationsEnabled);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), inheritedAnimationDuration);
@@ -194,8 +199,6 @@ NAN_METHOD(NUIView::New) {
     
     if (info[0]->IsExternal()) {
       self = (__bridge UIView *)(info[0].As<External>()->Value());
-    } else if (info.Length() >= 4) {
-      self = [[UIView alloc] initWithFrame:CGRectMake(TO_FLOAT(info[0]), TO_FLOAT(info[1]), TO_FLOAT(info[2]), TO_FLOAT(info[3]))];
     } else if (is_value_CGRect(info[0])) {
       self = [[UIView alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
@@ -598,6 +601,23 @@ NAN_METHOD(NUIView::addKeyframeWithRelativeStartTimeRelativeDurationAnimations) 
   }
 }
 
+NAN_METHOD(NUIView::initWithFrame) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    JS_SET_RETURN(js_value_instancetype([[UIView alloc] initWithFrame: frame]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NUIView::initWithCoder) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([[UIView alloc] initWithCoder: aDecoder]));
+  }
+}
 
 NAN_GETTER(NUIView::originGetter) {
   JS_UNWRAP(UIView, self);
