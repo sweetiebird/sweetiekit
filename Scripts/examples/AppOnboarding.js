@@ -93,7 +93,7 @@ function setupQuizButton() {
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
-  nextBtn.addTarget(() => {
+  nextBtn.addTargetActionForControlEvents(() => {
 
   }, UIControlEvents.touchUpInside);
 
@@ -190,7 +190,7 @@ function setupQuizView() {
     ...colors.fitbodPink,
     alpha: 0.5,
   };
-  pageControl.addTarget(() => {
+  pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     quizScroll.setContentOffset({ x: offsetX, y: 0 }, true);
@@ -347,7 +347,7 @@ function setupWelcomeView() {
     ...colors.fitbodPink,
     alpha: 0.5,
   };
-  pageControl.addTarget(() => {
+  pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
@@ -372,7 +372,7 @@ function setupStartButton() {
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
-  nextBtn.addTarget(startQuiz, UIControlEvents.touchUpInside);
+  nextBtn.addTargetActionForControlEvents(startQuiz, UIControlEvents.touchUpInside);
 
   demoVC.view.addSubview(nextBtn);
 }

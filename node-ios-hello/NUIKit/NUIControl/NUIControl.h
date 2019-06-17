@@ -31,14 +31,29 @@
 #define is_value_UIControlState(x) IS_OPTS(UIControlState, NSUInteger, x)
 
 JS_WRAP_CLASS(UIControl, UIView);
-  JS_METHOD(addTarget);
-  JS_METHOD(removeTarget);
-  JS_PROP(State);
-  JS_PROP(Enabled);
-  JS_PROP(Selected);
-  JS_PROP(Highlighted);
-  JS_PROP(Tracking);
-  JS_PROP(TouchInside);
+  JS_METHOD(beginTrackingWithTouchWithEvent);
+  JS_METHOD(continueTrackingWithTouchWithEvent);
+  JS_METHOD(endTrackingWithTouchWithEvent);
+  JS_METHOD(cancelTrackingWithEvent);
+  JS_METHOD(addTargetActionForControlEvents);
+  JS_METHOD(removeTargetActionForControlEvents);
+  JS_METHOD(allTargets);
+  JS_METHOD(allControlEvents);
+  JS_METHOD(actionsForTargetForControlEvent);
+  JS_METHOD(sendActionToForEvent);
+  JS_METHOD(sendActionsForControlEvents);
+  JS_PROP(isEnabled);
+  JS_PROP(isSelected);
+  JS_PROP(isHighlighted);
+  JS_PROP(contentVerticalAlignment);
+  JS_PROP(contentHorizontalAlignment);
+  JS_PROP_READONLY(effectiveContentHorizontalAlignment);
+  JS_PROP_READONLY(state);
+  JS_PROP_READONLY(isTracking);
+  JS_PROP_READONLY(isTouchInside);
+  JS_PROP_READONLY(allTargets);
+  JS_PROP_READONLY(allControlEvents);
+
 JS_WRAP_CLASS_END(UIControl);
 
 #endif /* NUIControl_h */

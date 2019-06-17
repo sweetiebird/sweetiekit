@@ -11,7 +11,7 @@ async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const btn = UIButton(CGRectMake(12, 80, w - 24, 50));
   btn.setTitleForState('Push View Controller', UIControlStateNormal);
-  btn.addTarget(() => {
+  btn.addTargetActionForControlEvents(() => {
     const lastVC = UIViewController();
     lastVC.view.backgroundColor = RGB(205, 37, 83);
     nav.pushViewController(lastVC);

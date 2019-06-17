@@ -373,7 +373,7 @@ function makeInnerAppControllers(nav) {
   partyVC.view.addSubview(partyToolbar);
   partyVC.view.bringSubviewToFront(partyToolbar);
 
-  partyTitle.addTarget(() => {
+  partyTitle.addTargetActionForControlEvents(() => {
     const adj = faker.random.bs_adjective();
     const noun = faker.random.bs_noun();
     party.push({
@@ -406,7 +406,7 @@ function makeInnerAppControllers(nav) {
   wagonVC.view.addSubview(wagonToolbar);
   wagonVC.view.bringSubviewToFront(wagonToolbar);
 
-  wagonTitle.addTarget(() => {
+  wagonTitle.addTargetActionForControlEvents(() => {
     console.log('editor view controller');
   }, UIControlEvents.touchUpInside);
 
@@ -514,7 +514,7 @@ function startQuiz(nav) {
   makeQuizSlides(scrollView, numQuestions, quizTitles, quizResponses, quizImages);
 
   const pageControl = makePageControl(scrollView, numQuestions);
-  pageControl.addTarget(() => {
+  pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
@@ -527,7 +527,7 @@ function startQuiz(nav) {
   clippingView.addSubview(progressView);
 
   const nextButton = makeAppButton('NEXT');
-  nextButton.addTarget(() => {
+  nextButton.addTargetActionForControlEvents(() => {
     if (quizStep === numQuestions - 1) {
       party.push({
         name: 'Me',
@@ -620,7 +620,7 @@ async function make(nav, demoVC) {
 
   const pageControl = makePageControl(scrollView, 4);
   scrollView.delegate = makeScrollDelegate(pageControl);
-  pageControl.addTarget(() => {
+  pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
@@ -628,7 +628,7 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(pageControl);
 
   const startButton = makeAppButton('GET STARTED');
-  startButton.addTarget(() => {
+  startButton.addTargetActionForControlEvents(() => {
     startQuiz(nav);
   }, UIControlEvents.touchUpInside);
   demoVC.view.addSubview(startButton);

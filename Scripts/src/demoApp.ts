@@ -230,7 +230,7 @@ async function userPhoto() {
 
   const nextBtn = UIButton(CGRectMake(12, imgY + 124, elemW, 50));
   nextBtn.setTitleForState(`📸 Choose ${username}`, UIControlStateNormal);
-  nextBtn.addTarget(() => {
+  nextBtn.addTargetActionForControlEvents(() => {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
       const imgCtrl = new UIImagePickerController();
@@ -282,7 +282,7 @@ async function setupApp() {
   nameField.delegate = nameVC;
 
   const nextBtn = UIButton(CGRectMake(12, buttonY, elemW, 50));
-  nextBtn.addTarget(() => {
+  nextBtn.addTargetActionForControlEvents(() => {
     username = nameField.text;
     if (username) userPhoto();
   }, UIControlEventsTouchUpInside);

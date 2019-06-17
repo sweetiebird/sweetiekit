@@ -1284,7 +1284,7 @@ console.log(sb, vc, view, subview);
 //  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
 //  const button = UIButton(CGRectMake(0, 100, 100, 100));
 //  button.setTitleForState("Tap me!", UIControlStateNormal);
-//  button.addTarget(() => {
+//  button.addTargetActionForControlEvents(() => {
 //
 //    const x = randi(400);
 //    const y = randi(400);
@@ -1508,7 +1508,7 @@ function iosApp() {
     vc.present(imgVC, true, () => {});
   }
 
-  btnLogin.addTarget(handleButtonPress, UIControlEventsTouchUpInside);
+  btnLogin.addTargetActionForControlEvents(handleButtonPress, UIControlEventsTouchUpInside);
 }
 
 setTimeout(async () => {

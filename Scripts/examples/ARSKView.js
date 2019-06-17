@@ -450,7 +450,7 @@ async function make(nav, demoVC) {
   // const btnSize = 70;
 
   // const camBtn = makeCamBtn(demoVC, btnSize);
-  // camBtn.addTarget(() => {
+  // camBtn.addTargetActionForControlEvents(() => {
   //   console.log('recording');
   //   //toggleRecordScreen(demoVC, recorder);
   //   // takeScreenshot(demoVC.view);
@@ -459,7 +459,7 @@ async function make(nav, demoVC) {
   // }, UIControlEvents.touchUpInside);
 
   const fireBtn = makeParticleButton(demoVC);
-  fireBtn.addTarget(() => {
+  fireBtn.addTargetActionForControlEvents(() => {
     isEffectMode = !isEffectMode;
     fireBtn.alpha = isEffectMode ? 1 : 0.3;
   }, UIControlEvents.touchUpInside);
@@ -484,7 +484,7 @@ async function make(nav, demoVC) {
   });
   scaleSlider.value = 0.5;
   scaleSlider.setThumbImage(UIImage.transparent);
-  scaleSlider.addTarget(() => {
+  scaleSlider.addTargetActionForControlEvents(() => {
     console.log('scale slider changed', scaleSlider.value);
     if (active && active.node) {
       active.node.removeFromParent();
@@ -498,7 +498,7 @@ async function make(nav, demoVC) {
   });
   distSlider.value = 0.5;
   distSlider.setThumbImage(UIImage.transparent);
-  distSlider.addTarget(() => {
+  distSlider.addTargetActionForControlEvents(() => {
     console.log('distance slider changed', distSlider.value);
   }, UIControlEvents.valueChanged);
 
@@ -507,7 +507,7 @@ async function make(nav, demoVC) {
   });
   rotSlider.value = 0.5;
   rotSlider.setThumbImage(UIImage.transparent);
-  rotSlider.addTarget(() => {
+  rotSlider.addTargetActionForControlEvents(() => {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEvents.valueChanged);
 

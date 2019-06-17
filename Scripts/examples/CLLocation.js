@@ -155,7 +155,7 @@ async function make(nav, demoVC) {
 
   const btn = UIButton(CGRectMake(12, 150, w - 24, 40));
 
-  btn.addTarget(() => {
+  btn.addTargetActionForControlEvents(() => {
     if (text) {
       geocoder.geocodeAddressString(text, (placemarks) => {
         if (Array.isArray(placemarks)) {

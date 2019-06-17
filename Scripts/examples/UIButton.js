@@ -10,7 +10,7 @@ async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const button = UIButton(CGRectMake(12, 80, w - 24, 50));
   button.setTitleForState('👋 Hello Button', UIControlStateNormal);
-  button.addTarget(() => {
+  button.addTargetActionForControlEvents(() => {
     const alert = new UIAlertController(
       'Button pressed',
       'Hello',

@@ -11,14 +11,29 @@ NUIControl::~NUIControl() {}
 
 JS_INIT_CLASS(UIControl, UIView);
   // instance members (proto)
-  JS_SET_PROP_READONLY(proto, "state", State);
-  JS_SET_PROP(proto, "isSelected", Selected);
-  JS_SET_PROP(proto, "isEnabled", Enabled);
-  JS_SET_PROP(proto, "isHighlighted", Highlighted);
-  JS_SET_PROP_READONLY(proto, "isTracking", Tracking);
-  JS_SET_PROP_READONLY(proto, "isTouchInside", TouchInside);
-  JS_ASSIGN_METHOD(proto, addTarget);
-  JS_ASSIGN_METHOD(proto, removeTarget);
+  JS_ASSIGN_PROTO_METHOD(beginTrackingWithTouchWithEvent);
+  JS_ASSIGN_PROTO_METHOD(continueTrackingWithTouchWithEvent);
+  JS_ASSIGN_PROTO_METHOD(endTrackingWithTouchWithEvent);
+  JS_ASSIGN_PROTO_METHOD(cancelTrackingWithEvent);
+  JS_ASSIGN_PROTO_METHOD(addTargetActionForControlEvents);
+  JS_ASSIGN_PROTO_METHOD(removeTargetActionForControlEvents);
+  JS_ASSIGN_PROTO_METHOD(allTargets);
+  JS_ASSIGN_PROTO_METHOD(allControlEvents);
+  JS_ASSIGN_PROTO_METHOD(actionsForTargetForControlEvent);
+  JS_ASSIGN_PROTO_METHOD(sendActionToForEvent);
+  JS_ASSIGN_PROTO_METHOD(sendActionsForControlEvents);
+  JS_ASSIGN_PROTO_PROP(isEnabled);
+  JS_ASSIGN_PROTO_PROP(isSelected);
+  JS_ASSIGN_PROTO_PROP(isHighlighted);
+  JS_ASSIGN_PROTO_PROP(contentVerticalAlignment);
+  JS_ASSIGN_PROTO_PROP(contentHorizontalAlignment);
+  JS_ASSIGN_PROTO_PROP_READONLY(effectiveContentHorizontalAlignment);
+  JS_ASSIGN_PROTO_PROP_READONLY(state);
+  JS_ASSIGN_PROTO_PROP_READONLY(isTracking);
+  JS_ASSIGN_PROTO_PROP_READONLY(isTouchInside);
+  JS_ASSIGN_PROTO_PROP_READONLY(allTargets);
+  JS_ASSIGN_PROTO_PROP_READONLY(allControlEvents);
+
   // static members (ctor)
   JS_INIT_CTOR(UIControl, UIView);
   // constants
@@ -94,154 +109,6 @@ NAN_METHOD(NUIControl::New) {
   JS_SET_RETURN(viewObj);
 }
 
-NAN_GETTER(NUIControl::EnabledGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block bool isEnabled = false;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isEnabled = [ui isEnabled];
-    });
-  }
-  
-  JS_SET_RETURN(JS_BOOL(isEnabled));
-}
-
-NAN_SETTER(NUIControl::EnabledSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  bool isEnabled = value->IsBoolean() ? TO_BOOL(value) : true;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui setEnabled:isEnabled];
-    });
-  }
-}
-
-NAN_GETTER(NUIControl::StateGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block const char* theState = "normal";
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      UIControlState state = [ui state];
-      if (state == UIControlStateNormal) {
-        theState = "normal";
-      }
-      else if (state == UIControlStateHighlighted) {
-        theState = "highlighted";
-      }
-      else if (state == UIControlStateDisabled) {
-        theState = "disabled";
-      }
-      else if (state == UIControlStateSelected) {
-        theState = "selected";
-      }
-      else if (state == UIControlStateFocused) {
-        theState = "focused";
-      }
-      else if (state == UIControlStateApplication) {
-        theState = "application";
-      } else {
-        iOSLog0("Unknown UIControlState");
-      }
-    });
-  }
-  JS_SET_RETURN(JS_STR(theState));
-}
-
-NAN_GETTER(NUIControl::SelectedGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block bool isSelected = false;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isSelected = [ui isSelected];
-    });
-  }
-  
-  JS_SET_RETURN(JS_BOOL(isSelected));
-}
-
-NAN_SETTER(NUIControl::SelectedSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  bool isSelected = value->IsBoolean() ? TO_BOOL(value) : true;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui setSelected:isSelected];
-    });
-  }
-}
-
-NAN_GETTER(NUIControl::HighlightedGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block bool isHighlighted = false;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isHighlighted = [ui isHighlighted];
-    });
-  }
-  
-  JS_SET_RETURN(JS_BOOL(isHighlighted));
-}
-
-NAN_SETTER(NUIControl::HighlightedSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  bool isHighlighted = value->IsBoolean() ? TO_BOOL(value) : true;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui setHighlighted:isHighlighted];
-    });
-  }
-}
-
-NAN_GETTER(NUIControl::TrackingGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block bool isTracking = false;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isTracking = [ui isTracking];
-    });
-  }
-  
-  JS_SET_RETURN(JS_BOOL(isTracking));
-}
-
-NAN_GETTER(NUIControl::TouchInsideGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UIControl, ui);
-  
-  __block bool isTouchInside = false;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isTouchInside = [ui isTouchInside];
-    });
-  }
-  
-  JS_SET_RETURN(JS_BOOL(isTouchInside));
-}
-
 NSString* UIControlEventsName(UIControlEvents event)
 {
   switch (event) {
@@ -282,7 +149,49 @@ NSString* UIControlEventsName(UIControlEvents event)
   }
 }
 
-NAN_METHOD(NUIControl::addTarget) {
+#include "NUITouch.h"
+#include "NUIEvent.h"
+
+NAN_METHOD(NUIControl::beginTrackingWithTouchWithEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UITouch, touch);
+    declare_nullable_pointer(UIEvent, event);
+    JS_SET_RETURN(js_value_BOOL([self beginTrackingWithTouch: touch withEvent: event]));
+  }
+}
+
+NAN_METHOD(NUIControl::continueTrackingWithTouchWithEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UITouch, touch);
+    declare_nullable_pointer(UIEvent, event);
+    JS_SET_RETURN(js_value_BOOL([self continueTrackingWithTouch: touch withEvent: event]));
+  }
+}
+
+NAN_METHOD(NUIControl::endTrackingWithTouchWithEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UITouch, touch);
+    declare_nullable_pointer(UIEvent, event);
+    [self endTrackingWithTouch: touch withEvent: event];
+  }
+}
+
+NAN_METHOD(NUIControl::cancelTrackingWithEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIEvent, event);
+    [self cancelTrackingWithEvent: event];
+  }
+}
+
+NAN_METHOD(NUIControl::addTargetActionForControlEvents) {
   JS_UNWRAP(UIControl, self);
   declare_autoreleasepool {
     __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[0]);
@@ -316,10 +225,11 @@ NAN_METHOD(NUIControl::addTarget) {
   }
 }
 
-NAN_METHOD(NUIControl::removeTarget) {
+NAN_METHOD(NUIControl::removeTargetActionForControlEvents) {
   JS_UNWRAP(UIControl, self);
   declare_autoreleasepool {
-    UIControlEvents events = UIControlEvents(TO_UINT32(info[0]));
+    declare_args();
+    declare_value(UIControlEvents, events);
 
     SUITarget* target = (SUITarget*)[self associatedValueForKey:UIControlEventsName(events)];
     if (target) {
@@ -332,3 +242,173 @@ NAN_METHOD(NUIControl::removeTarget) {
     }
   }
 }
+
+NAN_METHOD(NUIControl::allTargets) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSSet([self allTargets]));
+  }
+}
+
+NAN_METHOD(NUIControl::allControlEvents) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlEvents([self allControlEvents]));
+  }
+}
+
+NAN_METHOD(NUIControl::actionsForTargetForControlEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, target);
+    declare_value(UIControlEvents, controlEvent);
+    JS_SET_RETURN(js_value_NSArray<NSString*>([self actionsForTarget: target forControlEvent: controlEvent]));
+  }
+}
+
+NAN_METHOD(NUIControl::sendActionToForEvent) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(SEL, action);
+    declare_nullable_value(id, target);
+    declare_nullable_pointer(UIEvent, event);
+    [self sendAction: action to: target forEvent: event];
+    #endif
+  }
+}
+
+NAN_METHOD(NUIControl::sendActionsForControlEvents) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIControlEvents, controlEvents);
+    [self sendActionsForControlEvents: controlEvents];
+  }
+}
+
+NAN_GETTER(NUIControl::isEnabledGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isEnabled]));
+  }
+}
+
+NAN_SETTER(NUIControl::isEnabledSetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setEnabled: input];
+  }
+}
+
+NAN_GETTER(NUIControl::isSelectedGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isSelected]));
+  }
+}
+
+NAN_SETTER(NUIControl::isSelectedSetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setSelected: input];
+  }
+}
+
+NAN_GETTER(NUIControl::isHighlightedGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isHighlighted]));
+  }
+}
+
+NAN_SETTER(NUIControl::isHighlightedSetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHighlighted: input];
+  }
+}
+
+NAN_GETTER(NUIControl::contentVerticalAlignmentGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlContentVerticalAlignment([self contentVerticalAlignment]));
+  }
+}
+
+NAN_SETTER(NUIControl::contentVerticalAlignmentSetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIControlContentVerticalAlignment, input);
+    [self setContentVerticalAlignment: input];
+  }
+}
+
+NAN_GETTER(NUIControl::contentHorizontalAlignmentGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlContentHorizontalAlignment([self contentHorizontalAlignment]));
+  }
+}
+
+NAN_SETTER(NUIControl::contentHorizontalAlignmentSetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIControlContentHorizontalAlignment, input);
+    [self setContentHorizontalAlignment: input];
+  }
+}
+
+NAN_GETTER(NUIControl::effectiveContentHorizontalAlignmentGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlContentHorizontalAlignment([self effectiveContentHorizontalAlignment]));
+  }
+}
+
+NAN_GETTER(NUIControl::stateGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlState([self state]));
+  }
+}
+
+NAN_GETTER(NUIControl::isTrackingGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isTracking]));
+  }
+}
+
+NAN_GETTER(NUIControl::isTouchInsideGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isTouchInside]));
+  }
+}
+
+NAN_GETTER(NUIControl::allTargetsGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSSet([self allTargets]));
+  }
+}
+
+NAN_GETTER(NUIControl::allControlEventsGetter) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIControlEvents([self allControlEvents]));
+  }
+}
+

@@ -16,7 +16,7 @@ async function make(nav, demoVC) {
 
   const btn = UIButton(CGRectMake(12, 80, w - 24, 50));
   btn.setTitleForState('Take a 📸', UIControlStateNormal);
-  btn.addTarget(() => {
+  btn.addTargetActionForControlEvents(() => {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
       const imgCtrl = new UIImagePickerController();

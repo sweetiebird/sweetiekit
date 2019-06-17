@@ -73,7 +73,7 @@ async function make(nav, demoVC) {
   button.layer.shadowColor = RGB(87, 174, 176);
   button.layer.shadowOffset = { width: 0, height: 12 };
   button.layer.shadowOpacity = 1;
-  button.addTarget(takeSS, UIControlEvents.touchUpInside);
+  button.addTargetActionForControlEvents(takeSS, UIControlEvents.touchUpInside);
   button.showsTouchWhenHighlighted = true;
 
   view.addSubview(button);
