@@ -43,6 +43,8 @@ NAN_METHOD(NUIStepper::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge UIStepper *)(info[0].As<External>()->Value());
+    } else if (info.Length() > 0 && is_value_CGRect(info[0])) {
+      self = [[UIStepper alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[UIStepper alloc] init];
     }
