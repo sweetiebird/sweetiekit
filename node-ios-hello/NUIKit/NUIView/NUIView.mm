@@ -151,49 +151,40 @@ JS_INIT_CLASS(UIView, UIResponder);
   
   // static members (ctor)
   JS_INIT_CTOR(UIView, UIResponder);
+  JS_ASSIGN_STATIC_METHOD(layerClass);
+  JS_ASSIGN_STATIC_METHOD(userInterfaceLayoutDirectionForSemanticContentAttribute);
+  JS_ASSIGN_STATIC_METHOD(userInterfaceLayoutDirectionForSemanticContentAttributeRelativeToLayoutDirection);
+  JS_ASSIGN_STATIC_METHOD(beginAnimationsContext);
+  JS_ASSIGN_STATIC_METHOD_AS(beginAnimationsContext, "beginAnimations");
+  JS_ASSIGN_STATIC_METHOD(commitAnimations);
+  JS_ASSIGN_STATIC_METHOD(setAnimationDelegate);
+  JS_ASSIGN_STATIC_METHOD(setAnimationWillStartSelector);
+  JS_ASSIGN_STATIC_METHOD(setAnimationDidStopSelector);
+  JS_ASSIGN_STATIC_METHOD(setAnimationDuration);
+  JS_ASSIGN_STATIC_METHOD(setAnimationDelay);
+  JS_ASSIGN_STATIC_METHOD(setAnimationStartDate);
+  JS_ASSIGN_STATIC_METHOD(setAnimationCurve);
+  JS_ASSIGN_STATIC_METHOD(setAnimationRepeatCount);
+  JS_ASSIGN_STATIC_METHOD(setAnimationRepeatAutoreverses);
+  JS_ASSIGN_STATIC_METHOD(setAnimationBeginsFromCurrentState);
+  JS_ASSIGN_STATIC_METHOD(setAnimationTransitionForViewCache);
+  JS_ASSIGN_STATIC_METHOD(setAnimationsEnabled);
+  JS_ASSIGN_STATIC_METHOD(areAnimationsEnabled);
+  JS_ASSIGN_STATIC_METHOD(performWithoutAnimation);
+  JS_ASSIGN_STATIC_METHOD(inheritedAnimationDuration);
+  JS_ASSIGN_STATIC_METHOD(animateWithDurationDelayOptionsAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(animateWithDurationAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(animateWithDurationAnimations);
+  JS_ASSIGN_STATIC_METHOD(animateWithDurationDelayUsingSpringWithDampingInitialSpringVelocityOptionsAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(transitionWithViewDurationOptionsAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(transitionFromViewToViewDurationOptionsCompletion);
+  JS_ASSIGN_STATIC_METHOD(performSystemAnimationOnViewsOptionsAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(animateKeyframesWithDurationDelayOptionsAnimationsCompletion);
+  JS_ASSIGN_STATIC_METHOD(addKeyframeWithRelativeStartTimeRelativeDurationAnimations);
+
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), areAnimationsEnabled);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), inheritedAnimationDuration);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), requiresConstraintBasedLayout);
-
-  sweetiekit::Set(ctor, "beginAnimations", ^(JSInfo info) {
-    [UIView beginAnimations:NJSStringToNSString(info[0]) context:nullptr];
-  });
-  sweetiekit::Set(ctor, "setAnimationDuration", ^(JSInfo info) {
-    if (!info[0]->IsNumber()) {
-      Nan::ThrowTypeError("setAnimationDuration: Expected a number");
-    } else {
-      [UIView setAnimationDuration:TO_DOUBLE(info[0])];
-    }
-  });
-  sweetiekit::Set(ctor, "setAnimationBeginsFromCurrentState", ^(JSInfo info) {
-    if (!info[0]->IsBoolean()) {
-      Nan::ThrowTypeError("setAnimationBeginsFromCurrentState: Expected a boolean");
-    } else {
-      [UIView setAnimationBeginsFromCurrentState:TO_BOOL(info[0])];
-    }
-  });
-  sweetiekit::Set(ctor, "commitAnimations", ^(JSInfo info) {
-    [UIView commitAnimations];
-  });
-  sweetiekit::Set(ctor, "animate", ^(JSInfo info) {
-    Isolate* isolate = info.GetIsolate();
-    Nan::HandleScope handleScope;
-    NSTimeInterval duration = info[0]->IsNumber() ? TO_DOUBLE(info[0]) : 0.0;
-    NSTimeInterval delay = info[1]->IsNumber() ? TO_DOUBLE(info[1]) : 0.0;
-    auto options = info[2]; // TODO
-    __block sweetiekit::JSFunction animations(info[3]);
-    __block sweetiekit::JSFunction completion(info[4]);
-    
-    @autoreleasepool {
-      [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        Nan::HandleScope handleScope;
-        animations("UIView:animateWithDuration:animations");
-      } completion:^(BOOL finished) {
-        Nan::HandleScope handleScope;
-        completion("UIView:animateWithDuration:animations", JS_BOOL(finished));
-      }];
-    }
-  });
 JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {
@@ -221,6 +212,392 @@ NAN_METHOD(NUIView::New) {
     }
   }
 }
+
+NAN_METHOD(NUIView::layerClass) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_Class([UIView layerClass]));
+  }
+}
+
+NAN_METHOD(NUIView::userInterfaceLayoutDirectionForSemanticContentAttribute) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UISemanticContentAttribute, attribute);
+    JS_SET_RETURN(js_value_UIUserInterfaceLayoutDirection([UIView userInterfaceLayoutDirectionForSemanticContentAttribute: attribute]));
+  }
+}
+
+NAN_METHOD(NUIView::userInterfaceLayoutDirectionForSemanticContentAttributeRelativeToLayoutDirection) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UISemanticContentAttribute, semanticContentAttribute);
+    declare_value(UIUserInterfaceLayoutDirection, layoutDirection);
+    JS_SET_RETURN(js_value_UIUserInterfaceLayoutDirection([UIView userInterfaceLayoutDirectionForSemanticContentAttribute: semanticContentAttribute relativeToLayoutDirection: layoutDirection]));
+  }
+}
+
+NAN_METHOD(NUIView::beginAnimationsContext) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSString, animationID);
+//    declare_nullable_pointer(void, context);
+    void* context = nullptr; // TODO
+    [UIView beginAnimations: animationID context: context];
+  }
+}
+
+NAN_METHOD(NUIView::commitAnimations) {
+  declare_autoreleasepool {
+    [UIView commitAnimations];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationDelegate) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, delegate);
+    [UIView setAnimationDelegate: delegate];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationWillStartSelector) {
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_nullable_value(SEL, selector);
+    [UIView setAnimationWillStartSelector: selector];
+    #endif
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationDidStopSelector) {
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_nullable_value(SEL, selector);
+    [UIView setAnimationDidStopSelector: selector];
+    #endif
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationDuration) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    [UIView setAnimationDuration: duration];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationDelay) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, delay);
+    [UIView setAnimationDelay: delay];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationStartDate) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDate, startDate);
+    [UIView setAnimationStartDate: startDate];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationCurve) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIViewAnimationCurve, curve);
+    [UIView setAnimationCurve: curve];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationRepeatCount) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(float, repeatCount);
+    [UIView setAnimationRepeatCount: repeatCount];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationRepeatAutoreverses) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, repeatAutoreverses);
+    [UIView setAnimationRepeatAutoreverses: repeatAutoreverses];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationBeginsFromCurrentState) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, fromCurrentState);
+    [UIView setAnimationBeginsFromCurrentState: fromCurrentState];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationTransitionForViewCache) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIViewAnimationTransition, transition);
+    declare_pointer(UIView, view);
+    declare_value(BOOL, cache);
+    [UIView setAnimationTransition: transition forView: view cache: cache];
+  }
+}
+
+NAN_METHOD(NUIView::setAnimationsEnabled) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, enabled);
+    [UIView setAnimationsEnabled: enabled];
+  }
+}
+
+NAN_METHOD(NUIView::areAnimationsEnabled) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([UIView areAnimationsEnabled]));
+  }
+}
+
+NAN_METHOD(NUIView::performWithoutAnimation) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_callback(actionsWithoutAnimation);
+    [UIView performWithoutAnimation:^{
+      dispatch_main(^{
+        if (actionsWithoutAnimation) {
+          [actionsWithoutAnimation jsFunction]->Call("NUIView::performWithoutAnimation");
+          clear_callback(actionsWithoutAnimation);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::inheritedAnimationDuration) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSTimeInterval([UIView inheritedAnimationDuration]));
+  }
+}
+
+NAN_METHOD(NUIView::animateWithDurationDelayOptionsAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    declare_value(NSTimeInterval, delay);
+    declare_value(UIViewAnimationOptions, options);
+    declare_callback(animations);
+    declare_callback(completion);
+    [UIView animateWithDuration: duration delay: delay options: options animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::animateWithDurationDelayOptionsAnimationsCompletion::animations");
+          clear_callback(animations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::animateWithDurationDelayOptionsAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::animateWithDurationAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    declare_callback(animations);
+    declare_callback(completion);
+    [UIView animateWithDuration: duration animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::animateWithDurationAnimationsCompletion::animations");
+          clear_callback(animations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::animateWithDurationAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::animateWithDurationAnimations) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    declare_callback(animations);
+    [UIView animateWithDuration: duration animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::animateWithDurationAnimations::animations");
+          clear_callback(animations);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::animateWithDurationDelayUsingSpringWithDampingInitialSpringVelocityOptionsAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    declare_value(NSTimeInterval, delay);
+    declare_value(CGFloat, dampingRatio);
+    declare_value(CGFloat, velocity);
+    declare_value(UIViewAnimationOptions, options);
+    declare_callback(animations);
+    declare_callback(completion);
+    [UIView animateWithDuration: duration delay: delay usingSpringWithDamping: dampingRatio initialSpringVelocity: velocity options: options animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::animateWithDurationDelayUsingSpringWithDampingInitialSpringVelocityOptionsAnimationsCompletion::animations");
+          clear_callback(animations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::animateWithDurationDelayUsingSpringWithDampingInitialSpringVelocityOptionsAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::transitionWithViewDurationOptionsAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, view);
+    declare_value(NSTimeInterval, duration);
+    declare_value(UIViewAnimationOptions, options);
+    declare_callback(animations);
+    declare_callback(completion);
+    [UIView transitionWithView: view duration: duration options: options animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::transitionWithViewDurationOptionsAnimationsCompletion::animations");
+          clear_callback(animations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::transitionWithViewDurationOptionsAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::transitionFromViewToViewDurationOptionsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIView, fromView);
+    declare_pointer(UIView, toView);
+    declare_value(NSTimeInterval, duration);
+    declare_value(UIViewAnimationOptions, options);
+    declare_callback(completion);
+    [UIView transitionFromView: fromView toView: toView duration: duration options: options completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::transitionFromViewToViewDurationOptionsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::performSystemAnimationOnViewsOptionsAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UISystemAnimation, animation);
+    declare_pointer(NSArray<UIView*>, views);
+    declare_value(UIViewAnimationOptions, options);
+    declare_callback(parallelAnimations);
+    declare_callback(completion);
+    [UIView performSystemAnimation: animation onViews: views options: options animations:^{
+      dispatch_main(^{
+        if (parallelAnimations) {
+          [parallelAnimations jsFunction]->Call("NUIView::performSystemAnimationOnViewsOptionsAnimationsCompletion::parallelAnimations");
+          clear_callback(parallelAnimations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::performSystemAnimationOnViewsOptionsAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::animateKeyframesWithDurationDelayOptionsAnimationsCompletion) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSTimeInterval, duration);
+    declare_value(NSTimeInterval, delay);
+    declare_value(UIViewKeyframeAnimationOptions, options);
+    declare_callback(animations);
+    declare_callback(completion);
+    [UIView animateKeyframesWithDuration: duration delay: delay options: options animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::animateKeyframesWithDurationDelayOptionsAnimationsCompletion::animations");
+          clear_callback(animations);
+        }
+      });
+    } completion:^(BOOL finished) {
+      dispatch_main(^{
+        if (completion) {
+          [completion jsFunction]->Call("NUIView::animateKeyframesWithDurationDelayOptionsAnimationsCompletion::completion",
+            js_value_BOOL(finished));
+          clear_callback(completion);
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NUIView::addKeyframeWithRelativeStartTimeRelativeDurationAnimations) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(double, frameStartTime);
+    declare_value(double, frameDuration);
+    declare_callback(animations);
+    [UIView addKeyframeWithRelativeStartTime: frameStartTime relativeDuration: frameDuration animations:^{
+      dispatch_main(^{
+        if (animations) {
+          [animations jsFunction]->Call("NUIView::addKeyframeWithRelativeStartTimeRelativeDurationAnimations::animations");
+          clear_callback(animations);
+        }
+      });
+    }];
+  }
+}
+
 
 NAN_GETTER(NUIView::originGetter) {
   JS_UNWRAP(UIView, self);

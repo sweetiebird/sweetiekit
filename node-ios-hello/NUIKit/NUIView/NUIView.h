@@ -83,6 +83,36 @@
 #define is_value_UIDisplayGamut(x) is_enum_wrapper(x, UIDisplayGamut)
 
 JS_WRAP_CLASS(UIView, UIResponder);
+  JS_STATIC_METHOD(layerClass);
+  JS_STATIC_METHOD(userInterfaceLayoutDirectionForSemanticContentAttribute);
+  JS_STATIC_METHOD(userInterfaceLayoutDirectionForSemanticContentAttributeRelativeToLayoutDirection);
+  JS_STATIC_METHOD(beginAnimationsContext);
+  JS_STATIC_METHOD(commitAnimations);
+  JS_STATIC_METHOD(setAnimationDelegate);
+  JS_STATIC_METHOD(setAnimationWillStartSelector);
+  JS_STATIC_METHOD(setAnimationDidStopSelector);
+  JS_STATIC_METHOD(setAnimationDuration);
+  JS_STATIC_METHOD(setAnimationDelay);
+  JS_STATIC_METHOD(setAnimationStartDate);
+  JS_STATIC_METHOD(setAnimationCurve);
+  JS_STATIC_METHOD(setAnimationRepeatCount);
+  JS_STATIC_METHOD(setAnimationRepeatAutoreverses);
+  JS_STATIC_METHOD(setAnimationBeginsFromCurrentState);
+  JS_STATIC_METHOD(setAnimationTransitionForViewCache);
+  JS_STATIC_METHOD(setAnimationsEnabled);
+  JS_STATIC_METHOD(areAnimationsEnabled);
+  JS_STATIC_METHOD(performWithoutAnimation);
+  JS_STATIC_METHOD(inheritedAnimationDuration);
+  JS_STATIC_METHOD(animateWithDurationDelayOptionsAnimationsCompletion);
+  JS_STATIC_METHOD(animateWithDurationAnimationsCompletion);
+  JS_STATIC_METHOD(animateWithDurationAnimations);
+  JS_STATIC_METHOD(animateWithDurationDelayUsingSpringWithDampingInitialSpringVelocityOptionsAnimationsCompletion);
+  JS_STATIC_METHOD(transitionWithViewDurationOptionsAnimationsCompletion);
+  JS_STATIC_METHOD(transitionFromViewToViewDurationOptionsCompletion);
+  JS_STATIC_METHOD(performSystemAnimationOnViewsOptionsAnimationsCompletion);
+  JS_STATIC_METHOD(animateKeyframesWithDurationDelayOptionsAnimationsCompletion);
+  JS_STATIC_METHOD(addKeyframeWithRelativeStartTimeRelativeDurationAnimations);
+
   JS_PROP(origin);
   JS_PROP(size);
   JS_PROP(x);

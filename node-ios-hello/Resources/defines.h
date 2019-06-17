@@ -1379,6 +1379,16 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define declare_callback_function(name) \
   sweetiekit::JSFunction name(info[JS_ARGC++]);
 
+#define declare_callback(name) \
+  __block SweetJSFunction* name = [[SweetJSFunction alloc] init]; \
+  [name jsFunction]->Reset(info[JS_ARGC++]);
+  
+#define clear_callback(name) \
+  if (name) { \
+    [name jsFunction]->Reset(); \
+    name = nil; \
+  }
+
 #define declare_persistent_function(name, keyName) \
   SweetJSFunction* name = [[SweetJSFunction alloc] init]; \
   [name jsFunction]->Reset(info[JS_ARGC++]); \
