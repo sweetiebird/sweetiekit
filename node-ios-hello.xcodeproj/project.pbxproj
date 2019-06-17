@@ -108,6 +108,9 @@
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
+		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
+		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -535,6 +538,12 @@
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		A1482A94229D4E3F001502C0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
+		A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreen.mm; sourceTree = "<group>"; };
+		A1574E7A22B7FB57006CC5F2 /* NUIScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScreen.h; sourceTree = "<group>"; };
+		A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreenMode.mm; sourceTree = "<group>"; };
+		A1574E7E22B7FC1C006CC5F2 /* NUIScreenMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScreenMode.h; sourceTree = "<group>"; };
+		A1574E8122B7FD40006CC5F2 /* NUIFocusSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFocusSystem.h; sourceTree = "<group>"; };
+		A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFocusSystem.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1706,6 +1715,33 @@
 				A1482A94229D4E3F001502C0 /* GameScene.sks */,
 			);
 			path = GameFiles;
+			sourceTree = "<group>";
+		};
+		A1574E7822B7FB57006CC5F2 /* NUIScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E7A22B7FB57006CC5F2 /* NUIScreen.h */,
+				A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */,
+			);
+			path = NUIScreen;
+			sourceTree = "<group>";
+		};
+		A1574E7C22B7FC1C006CC5F2 /* NUIScreenMode */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E7E22B7FC1C006CC5F2 /* NUIScreenMode.h */,
+				A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */,
+			);
+			path = NUIScreenMode;
+			sourceTree = "<group>";
+		};
+		A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E8122B7FD40006CC5F2 /* NUIFocusSystem.h */,
+				A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */,
+			);
+			path = NUIFocusSystem;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3035,6 +3071,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */,
+				A1574E7C22B7FC1C006CC5F2 /* NUIScreenMode */,
+				A1574E7822B7FB57006CC5F2 /* NUIScreen */,
 				A1E5849722B1DFFC00A967EF /* NUIPopoverController */,
 				A1E5849322B1DD1000A967EF /* NUISplitViewController */,
 				A174A48B22B1A5EF00415AD8 /* NUITextInputMode */,
@@ -3846,6 +3885,7 @@
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
+				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
@@ -3973,6 +4013,7 @@
 				A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */,
 				A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */,
 				A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */,
+				A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A13370C522AEF87500FA3768 /* NAVAudioNode.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
@@ -3982,6 +4023,7 @@
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
 				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,

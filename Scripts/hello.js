@@ -1276,7 +1276,7 @@ console.log(sb, vc, view, subview);
 //  const secondVC = sb.instantiateViewControllerWithIdentifier('secondVC');
 //  vc.setViewControllers([firstVC, secondVC], false);
 //
-//  app.keyWindow.setRootViewController(vc); // update to { get, set }
+//  app.keyWindow.rootViewController = vc; // update to { get, set }
 //
 //  const img = UIImage('first');
 //
@@ -1346,7 +1346,7 @@ console.log(sb, vc, view, subview);
 //  const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
 //  if (!nav) {
 //    nav = new UINavigationController(vc);
-//    app.keyWindow.setRootViewController(nav);
+//    app.keyWindow.rootViewController = nav;
 //  }
 //  const btnLogin = vc.view.viewWithStringTag("btnLogin");
 //  btnLogin.callback = async () => {
@@ -1395,7 +1395,7 @@ console.log(sb, vc, view, subview);
 //  console.log(kv.stringForKey("Foo"));
 //  const sb = UIStoryboard('Main');
 //  const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
-//  app.keyWindow.setRootViewController(vc);
+//  app.keyWindow.rootViewController = vc;
 //  console.log(vc, vc.view);
 //  const sv = vc.view.subviews;
 //  console.log(sv);
@@ -1448,7 +1448,7 @@ function iosApp() {
   const vc = sb.instantiateViewControllerWithIdentifier('loginVC');
   const nav = new UINavigationController(vc);
 
-  app.keyWindow.setRootViewController(nav);
+  app.keyWindow.rootViewController = nav;
 
 
   console.log(vc, vc.view);

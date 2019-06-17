@@ -388,7 +388,7 @@ class ARApp {
   }
 
   launch() {
-    this.app.keyWindow.setRootViewController(this.vc);
+    this.app.keyWindow.rootViewController = this.vc;
     console.log(this.config, this.vc.view);
     setTimeout(() => {
       this.arView.session.run(this.config);
@@ -532,7 +532,7 @@ class MyApp {
   // }
 
   launch() {
-    this.app.keyWindow.setRootViewController(this.nav);
+    this.app.keyWindow.rootViewController = this.nav;
   }
 }
 
@@ -655,7 +655,7 @@ class CollectionApp {
   }
 
   launch() {
-    this.app.keyWindow.setRootViewController(this.nav);
+    this.app.keyWindow.rootViewController = this.nav;
   }
 }
 

@@ -293,7 +293,7 @@ async function setupApp() {
   nameVC.view.addSubview(table);
   nav = new UINavigationController(nameVC);
 
-  app.keyWindow.setRootViewController(nav);
+  app.keyWindow.rootViewController = nav;
 }
 
 process.nextTick(async () => {

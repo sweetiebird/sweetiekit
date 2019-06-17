@@ -251,7 +251,7 @@ class UIDemosApp {
   }
 
   launch() {
-    this.app.keyWindow.setRootViewController(this.nav);
+    this.app.keyWindow.rootViewController = this.nav;
   }
 }
 
