@@ -121,6 +121,7 @@
 		A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EA122B812DB006CC5F2 /* NNSMutableCharacterSet.mm */; };
 		A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EA522B81650006CC5F2 /* NNSDateComponents.mm */; };
 		A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */; };
+		A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -574,6 +575,8 @@
 		A1574EA622B81650006CC5F2 /* NNSDateComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSDateComponents.h; sourceTree = "<group>"; };
 		A1574EA922B81CA9006CC5F2 /* NUIStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIStepper.h; sourceTree = "<group>"; };
 		A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStepper.mm; sourceTree = "<group>"; };
+		A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISegmentedControl.mm; sourceTree = "<group>"; };
+		A1574EAE22B82030006CC5F2 /* NUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISegmentedControl.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1862,6 +1865,15 @@
 				A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */,
 			);
 			path = NUIStepper;
+			sourceTree = "<group>";
+		};
+		A1574EAC22B82030006CC5F2 /* NUISegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EAE22B82030006CC5F2 /* NUISegmentedControl.h */,
+				A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */,
+			);
+			path = NUISegmentedControl;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3191,6 +3203,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EAC22B82030006CC5F2 /* NUISegmentedControl */,
 				A1574EA822B81CA9006CC5F2 /* NUIStepper */,
 				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
 				A1574E8822B80464006CC5F2 /* NUIUserNotificationSettings */,
@@ -4168,6 +4181,7 @@
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A133702622AAEF2400FA3768 /* NNSMutableURLRequest.mm in Sources */,
+				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
