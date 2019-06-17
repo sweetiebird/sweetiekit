@@ -671,6 +671,7 @@ NAN_METHOD(NClass::New) {
 #include "NUILocalNotification.h"
 #include "NUIUserNotificationSettings.h"
 #include "NUIButton.h"
+#include "NUIStepper.h"
 #include "NUIRefreshControl.h"
 #include "NUISwitch.h"
 #include "NUIGraphicsRendererFormat.h"
@@ -955,6 +956,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIRefreshControl);
     JS_EXPORT_TYPE(UISwitch);
     JS_EXPORT_TYPE(UIStoryboard);
+    JS_EXPORT_TYPE(UIStepper);
     JS_EXPORT_TYPE(UIButton);
     JS_EXPORT_TYPE(UITextInputMode);
     JS_EXPORT_TYPE(UITextField);
@@ -1383,6 +1385,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UILabel);
       JS_RETURN_TYPE(UIFont);
       JS_RETURN_TYPE(UIButton);
+      JS_RETURN_TYPE(UIStepper);
     
       JS_RETURN_TYPE(UIToolbar);
       JS_RETURN_TYPE(UITraitCollection);

@@ -21,6 +21,60 @@ JS_INIT_CLASS(UIControl, UIView);
   JS_ASSIGN_METHOD(proto, removeTarget);
   // static members (ctor)
   JS_INIT_CTOR(UIControl, UIView);
+  // constants
+  
+//typedef NS_OPTIONS(NSUInteger, UIControlEvents) {
+  JS_ASSIGN_ENUM(UIControlEventTouchDown, NSUInteger); //                                          = 1 <<  0,      // on all touch downs
+  JS_ASSIGN_ENUM(UIControlEventTouchDownRepeat, NSUInteger); //                                    = 1 <<  1,      // on multiple touchdowns (tap count > 1)
+  JS_ASSIGN_ENUM(UIControlEventTouchDragInside, NSUInteger); //                                    = 1 <<  2,
+  JS_ASSIGN_ENUM(UIControlEventTouchDragOutside, NSUInteger); //                                   = 1 <<  3,
+  JS_ASSIGN_ENUM(UIControlEventTouchDragEnter, NSUInteger); //                                     = 1 <<  4,
+  JS_ASSIGN_ENUM(UIControlEventTouchDragExit, NSUInteger); //                                      = 1 <<  5,
+  JS_ASSIGN_ENUM(UIControlEventTouchUpInside, NSUInteger); //                                      = 1 <<  6,
+  JS_ASSIGN_ENUM(UIControlEventTouchUpOutside, NSUInteger); //                                     = 1 <<  7,
+  JS_ASSIGN_ENUM(UIControlEventTouchCancel, NSUInteger); //                                        = 1 <<  8,
+
+  JS_ASSIGN_ENUM(UIControlEventValueChanged, NSUInteger); //                                       = 1 << 12,     // sliders, etc.
+  JS_ASSIGN_ENUM(UIControlEventPrimaryActionTriggered, NSUInteger); //  NS_ENUM_AVAILABLE_IOS(9_0) = 1 << 13,     // semantic action: for buttons, etc.
+
+  JS_ASSIGN_ENUM(UIControlEventEditingDidBegin, NSUInteger); //                                    = 1 << 16,     // UITextField
+  JS_ASSIGN_ENUM(UIControlEventEditingChanged, NSUInteger); //                                     = 1 << 17,
+  JS_ASSIGN_ENUM(UIControlEventEditingDidEnd, NSUInteger); //                                      = 1 << 18,
+  JS_ASSIGN_ENUM(UIControlEventEditingDidEndOnExit, NSUInteger); //                                = 1 << 19,     // 'return key' ending editing
+
+  JS_ASSIGN_ENUM(UIControlEventAllTouchEvents, NSUInteger); //                                     = 0x00000FFF,  // for touch events
+  JS_ASSIGN_ENUM(UIControlEventAllEditingEvents, NSUInteger); //                                   = 0x000F0000,  // for UITextField
+  JS_ASSIGN_ENUM(UIControlEventApplicationReserved, NSUInteger); //                                = 0x0F000000,  // range available for application use
+  JS_ASSIGN_ENUM(UIControlEventSystemReserved, NSUInteger); //                                     = 0xF0000000,  // range reserved for internal framework use
+  JS_ASSIGN_ENUM(UIControlEventAllEvents, NSUInteger); //                                          = 0xFFFFFFFF
+//};
+
+//typedef NS_ENUM(NSInteger, UIControlContentVerticalAlignment) {
+  JS_ASSIGN_ENUM(UIControlContentVerticalAlignmentCenter, NSInteger); //   = 0,
+  JS_ASSIGN_ENUM(UIControlContentVerticalAlignmentTop, NSInteger); //      = 1,
+  JS_ASSIGN_ENUM(UIControlContentVerticalAlignmentBottom, NSInteger); //   = 2,
+  JS_ASSIGN_ENUM(UIControlContentVerticalAlignmentFill, NSInteger); //     = 3,
+//};
+
+//typedef NS_ENUM(NSInteger, UIControlContentHorizontalAlignment) {
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentCenter, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentLeft, NSInteger); //    = 1,
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentRight, NSInteger); //   = 2,
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentFill, NSInteger); //    = 3,
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentLeading, NSInteger); //   API_AVAILABLE(ios(11.0), tvos(11.0)) = 4,
+  JS_ASSIGN_ENUM(UIControlContentHorizontalAlignmentTrailing, NSInteger); //  API_AVAILABLE(ios(11.0), tvos(11.0)) = 5,
+//};
+
+//typedef NS_OPTIONS(NSUInteger, UIControlState) {
+  JS_ASSIGN_ENUM(UIControlStateNormal, NSUInteger); //        = 0,
+  JS_ASSIGN_ENUM(UIControlStateHighlighted, NSUInteger); //   = 1 << 0,                  // used when UIControl isHighlighted is set
+  JS_ASSIGN_ENUM(UIControlStateDisabled, NSUInteger); //      = 1 << 1,
+  JS_ASSIGN_ENUM(UIControlStateSelected, NSUInteger); //      = 1 << 2,                  // flag usable by app (see below)
+  JS_ASSIGN_ENUM(UIControlStateFocused, NSUInteger); //  NS_ENUM_AVAILABLE_IOS(9_0) = 1 << 3, // Applicable only when the screen supports focus
+  JS_ASSIGN_ENUM(UIControlStateApplication, NSUInteger); //   = 0x00FF0000,              // additional flags available for application use
+  JS_ASSIGN_ENUM(UIControlStateReserved, NSUInteger); //      = 0xFF000000               // flags reserved for internal framework use
+//};
+
 JS_INIT_CLASS_END(UIControl, UIView);
 
 NAN_METHOD(NUIControl::New) {
