@@ -7,7 +7,6 @@ const ObjC = SweetieKit;
 const CoreAnimation = SweetieKit;
 
 const {
-  UIApplicationMain,
   UIApplication,
   UIBarButtonItem,
   UIWindow,

@@ -88,9 +88,6 @@ NAN_METHOD(NUITextField::New) {
   }
 }
 
-#define get_persistent_function(from, name, key) \
-      SweetJSFunction* name = (SweetJSFunction*)[from associatedValueForKey:key];
-
 NAN_METHOD(NUITextField::initWithFrameCallback) {
   declare_autoreleasepool {
     declare_args();

@@ -662,6 +662,8 @@ NAN_METHOD(NClass::New) {
 #include "NUIScreen.h"
 #include "NUIScreenMode.h"
 #include "NUIFocusSystem.h"
+#include "NUILocalNotification.h"
+#include "NUIUserNotificationSettings.h"
 #include "NUIButton.h"
 #include "NUIRefreshControl.h"
 #include "NUISwitch.h"
@@ -933,6 +935,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIScreen);
     JS_EXPORT_TYPE(UIScreenMode);
     JS_EXPORT_TYPE(UIFocusSystem);
+    JS_EXPORT_TYPE(UILocalNotification);
+    JS_EXPORT_TYPE(UIUserNotificationSettings);
     JS_EXPORT_TYPE(UICollectionReusableView);
     JS_EXPORT_TYPE(UIControl);
     JS_EXPORT_TYPE(UISlider);
@@ -1380,6 +1384,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UISwitch);
       JS_RETURN_TYPE(UIRefreshControl);
       JS_RETURN_TYPE(UIControl);
+      JS_RETURN_TYPE(UIUserNotificationSettings);
+      JS_RETURN_TYPE(UILocalNotification);
       JS_RETURN_TYPE(UIFocusSystem);
       JS_RETURN_TYPE(UIScreenMode);
       JS_RETURN_TYPE(UIScreen);

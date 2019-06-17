@@ -220,7 +220,7 @@ void InitExports(Local<Object> exports) {
         initFunctionAddressArray->Set(0, Nan::New<Integer>((uint32_t)(initFunctionAddress >> 32)));
         initFunctionAddressArray->Set(1, Nan::New<Integer>((uint32_t)(initFunctionAddress & 0xFFFFFFFF)));
         exports->Set(Nan::New("initFunctionAddress").ToLocalChecked(), initFunctionAddressArray);
-        Nan::SetMethod(exports, "UIApplicationMain", NUIApplication::main);
+//        Nan::SetMethod(exports, "UIApplicationMain", NUIApplication::main);
         
         iOSLog("initialized!\n");
     }

@@ -22,14 +22,6 @@
 #define to_value_UISplitViewControllerPrimaryEdge(x) TO_ENUM(UISplitViewControllerPrimaryEdge, NSInteger, x)
 #define is_value_UISplitViewControllerPrimaryEdge(x) IS_ENUM(UISplitViewControllerPrimaryEdge, NSInteger, x)
 
-#define js_value_UIInterfaceOrientationMask(x) JS_OPTS(UIInterfaceOrientationMask, NSUInteger, x)
-#define to_value_UIInterfaceOrientationMask(x) TO_OPTS(UIInterfaceOrientationMask, NSUInteger, x)
-#define is_value_UIInterfaceOrientationMask(x) IS_OPTS(UIInterfaceOrientationMask, NSUInteger, x)
-
-#define js_value_UIInterfaceOrientation(x) JS_ENUM(UIInterfaceOrientation, NSInteger, x)
-#define to_value_UIInterfaceOrientation(x) TO_ENUM(UIInterfaceOrientation, NSInteger, x)
-#define is_value_UIInterfaceOrientation(x) IS_ENUM(UIInterfaceOrientation, NSInteger, x)
-
 JS_WRAP_CLASS(UISplitViewController, UIViewController);
 // UISplitViewController
   JS_METHOD(displayModeButtonItem);

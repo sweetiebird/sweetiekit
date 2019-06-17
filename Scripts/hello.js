@@ -1215,7 +1215,6 @@ const {
   NSObject,
   NSUserDefaults,
   UIApplication,
-  UIApplicationMain,
   UIWindow,
   UIStoryboard,
   UIViewController,
@@ -1515,8 +1514,6 @@ function iosApp() {
 setTimeout(async () => {
   await iosApp();
 },1000);
-
-UIApplicationMain();
 
 //httpServer = require('./server.js')
 //

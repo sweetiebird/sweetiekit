@@ -111,6 +111,8 @@
 		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
 		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
+		A1574E8722B803FC006CC5F2 /* NUILocalNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8522B803FC006CC5F2 /* NUILocalNotification.mm */; };
+		A1574E8B22B80464006CC5F2 /* NUIUserNotificationSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -544,6 +546,10 @@
 		A1574E7E22B7FC1C006CC5F2 /* NUIScreenMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScreenMode.h; sourceTree = "<group>"; };
 		A1574E8122B7FD40006CC5F2 /* NUIFocusSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFocusSystem.h; sourceTree = "<group>"; };
 		A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFocusSystem.mm; sourceTree = "<group>"; };
+		A1574E8522B803FC006CC5F2 /* NUILocalNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILocalNotification.mm; sourceTree = "<group>"; };
+		A1574E8622B803FC006CC5F2 /* NUILocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILocalNotification.h; sourceTree = "<group>"; };
+		A1574E8922B80464006CC5F2 /* NUIUserNotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIUserNotificationSettings.h; sourceTree = "<group>"; };
+		A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIUserNotificationSettings.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1742,6 +1748,24 @@
 				A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */,
 			);
 			path = NUIFocusSystem;
+			sourceTree = "<group>";
+		};
+		A1574E8422B803FC006CC5F2 /* NUILocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E8622B803FC006CC5F2 /* NUILocalNotification.h */,
+				A1574E8522B803FC006CC5F2 /* NUILocalNotification.mm */,
+			);
+			path = NUILocalNotification;
+			sourceTree = "<group>";
+		};
+		A1574E8822B80464006CC5F2 /* NUIUserNotificationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E8922B80464006CC5F2 /* NUIUserNotificationSettings.h */,
+				A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */,
+			);
+			path = NUIUserNotificationSettings;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3071,6 +3095,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574E8822B80464006CC5F2 /* NUIUserNotificationSettings */,
+				A1574E8422B803FC006CC5F2 /* NUILocalNotification */,
 				A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */,
 				A1574E7C22B7FC1C006CC5F2 /* NUIScreenMode */,
 				A1574E7822B7FB57006CC5F2 /* NUIScreen */,
@@ -3818,6 +3844,7 @@
 				A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
+				A1574E8B22B80464006CC5F2 /* NUIUserNotificationSettings.mm in Sources */,
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
@@ -3857,6 +3884,7 @@
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
+				A1574E8722B803FC006CC5F2 /* NUILocalNotification.mm in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,

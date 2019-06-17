@@ -183,7 +183,8 @@ using namespace node;
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
   auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
-  type* name = n##name->As<type>(); name = name;
+  type* name##_ = n##name->As<type>(); \
+  __weak type* name = name##_; name = name;
 
 #define JS_UNWRAP_SWIFT(type, name) \
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
@@ -645,7 +646,7 @@ void iOSLog0(const char* _Nonnull msg);
 #include <dispatch/queue.h>
 void dispatch_ui_sync(dispatch_queue_t _Nonnull queue, dispatch_block_t _Nonnull block);
 #define dispatch_sync dispatch_ui_sync
-#define dispatch_main(block) dispatch_ui_sync(dispatch_get_main_queue(), block)
+#define dispatch_main(block) declare_autoreleasepool { dispatch_ui_sync(dispatch_get_main_queue(), block); }
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr);
 
@@ -1375,6 +1376,9 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   [name jsFunction]->Reset(info[JS_ARGC++]); \
   [self associateValue:name withKey:keyName];
   
+#define get_persistent_function(from, name, key) \
+      SweetJSFunction* name = (SweetJSFunction*)[from associatedValueForKey:key];
+      
 #define check_error() \
   js_panic_NSError(error)
   

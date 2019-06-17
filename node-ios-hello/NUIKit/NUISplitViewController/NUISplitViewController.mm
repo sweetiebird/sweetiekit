@@ -87,26 +87,6 @@ JS_INIT_CLASS(UISplitViewController, UIViewController);
   JS_ASSIGN_ENUM(UISplitViewControllerPrimaryEdgeTrailing, NSInteger);
 //} API_AVAILABLE(ios(11.0), tvos(11.0));
 
-//typedef NS_OPTIONS(NSUInteger, UIInterfaceOrientationMask) {
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskPortrait, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskLandscapeLeft, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskLandscapeRight, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskPortraitUpsideDown, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskLandscape, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskAll, NSUInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationMaskAllButUpsideDown, NSUInteger);
-//} __TVOS_PROHIBITED;
-
-// Note that UIInterfaceOrientationLandscapeLeft is equal to UIDeviceOrientationLandscapeRight (and vice versa).
-// This is because rotating the device to the left requires rotating the content to the right.
-//typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
-  JS_ASSIGN_ENUM(UIInterfaceOrientationUnknown, NSInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationPortrait, NSInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationPortraitUpsideDown, NSInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationLandscapeLeft, NSInteger);
-  JS_ASSIGN_ENUM(UIInterfaceOrientationLandscapeRight, NSInteger);
-//} __TVOS_PROHIBITED;
-
 JS_INIT_CLASS_END(UISplitViewController, UIViewController);
 
 NAN_METHOD(NUISplitViewController::New) {
@@ -250,6 +230,8 @@ NAN_METHOD(NUISplitViewControllerDelegate::splitViewControllerSeparateSecondaryV
     JS_SET_RETURN(js_value_UIViewController([self splitViewController: splitViewController separateSecondaryViewControllerFromPrimaryViewController: primaryViewController]));
   }
 }
+
+#include "NUIApplication.h"
 
 NAN_METHOD(NUISplitViewControllerDelegate::splitViewControllerSupportedInterfaceOrientations) {
   JS_UNWRAP_PROTOCOL(UISplitViewControllerDelegate, self);

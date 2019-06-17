@@ -11,7 +11,6 @@ const ObjC = SweetieKit;
 const CoreAnimation = SweetieKit;
 
 const {
-  UIApplicationMain,
   UIApplication,
   UIWindow,
   UIStoryboard,
@@ -417,5 +416,3 @@ const options =
     // }
   }
 };
-
-UIApplicationMain(options);
