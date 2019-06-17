@@ -14,10 +14,6 @@
 #define to_value_UILocalNotification(x) to_value_wrapper(x, UILocalNotification)
 #define is_value_UILocalNotification(x) is_value_wrapper(x, UILocalNotification)
 
-#define js_value_NSCalendarUnit(x) JS_OPTS(NSCalendarUnit, NSUInteger, x)
-#define to_value_NSCalendarUnit(x) TO_OPTS(NSCalendarUnit, NSUInteger, x)
-#define is_value_NSCalendarUnit(x) IS_OPTS(NSCalendarUnit, NSUInteger, x)
-
 JS_WRAP_CLASS(UILocalNotification, NSObject);
   JS_STATIC_METHOD(init);
   JS_STATIC_METHOD(initWithCoder);

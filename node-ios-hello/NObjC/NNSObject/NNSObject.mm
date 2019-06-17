@@ -653,6 +653,12 @@ NAN_METHOD(NClass::New) {
 #include "NNSParagraphStyle.h"
 #include "NNSAttributedString.h"
 #include "NNSMutableAttributedString.h"
+#include "NNSCharacterSet.h"
+#include "NNSMutableCharacterSet.h"
+#include "NNSTimeZone.h"
+#include "NNSDateComponents.h"
+#include "NNSCalendar.h"
+
 #include "NUIBezierPath.h"
 #include "NUILabel.h"
 #include "NUIFont.h"
@@ -706,6 +712,7 @@ NAN_METHOD(NClass::New) {
 #include "NUITableViewDataSource.h"
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
+#include "NUIDatePicker.h"
 #include "NCALayer.h"
 #include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
@@ -894,6 +901,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSMutableParagraphStyle);
     JS_EXPORT_TYPE(NSAttributedString);
     JS_EXPORT_TYPE(NSMutableAttributedString);
+    JS_EXPORT_TYPE(NSCharacterSet);
+    JS_EXPORT_TYPE(NSMutableCharacterSet);
+    JS_EXPORT_TYPE(NSTimeZone);
+    JS_EXPORT_TYPE(NSDateComponents);
+    JS_EXPORT_TYPE(NSCalendar);
 
     // UIKit
     JS_EXPORT_TYPE(UIGestureRecognizer);
@@ -969,6 +981,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIPageControl);
     JS_EXPORT_TYPE(UIPickerView);
     JS_EXPORT_TYPE(UIProgressView);
+    JS_EXPORT_TYPE(UIDatePicker);
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
     JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
@@ -1354,6 +1367,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // ========= views
       JS_RETURN_TYPE(UIStackView);
       JS_RETURN_TYPE(UITabBar);
+      JS_RETURN_TYPE(UIDatePicker);
       JS_RETURN_TYPE(UIProgressView);
       JS_RETURN_TYPE(UIPickerView);
       JS_RETURN_TYPE(UINavigationItem);
@@ -1435,6 +1449,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // Objects
       
+      JS_RETURN_TYPE(NSCalendar);
+      JS_RETURN_TYPE(NSDateComponents);
+      JS_RETURN_TYPE(NSTimeZone);
+      JS_RETURN_TYPE(NSMutableCharacterSet);
+      JS_RETURN_TYPE(NSCharacterSet);
       JS_RETURN_TYPE(NSMutableAttributedString);
       JS_RETURN_TYPE(NSAttributedString);
       JS_RETURN_TYPE(NSMutableParagraphStyle);

@@ -113,6 +113,13 @@
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
 		A1574E8722B803FC006CC5F2 /* NUILocalNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8522B803FC006CC5F2 /* NUILocalNotification.mm */; };
 		A1574E8B22B80464006CC5F2 /* NUIUserNotificationSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */; };
+		A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8E22B80F2E006CC5F2 /* NUIDatePicker.mm */; };
+		A1574E9922B8108F006CC5F2 /* NNSCalendar.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E9122B8108E006CC5F2 /* NNSCalendar.mm */; };
+		A1574E9A22B8108F006CC5F2 /* NNSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E9522B8108E006CC5F2 /* NNSLocale.mm */; };
+		A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E9822B8108F006CC5F2 /* NNSTimeZone.mm */; };
+		A1574E9F22B811E9006CC5F2 /* NNSCharacterSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E9E22B811E8006CC5F2 /* NNSCharacterSet.mm */; };
+		A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EA122B812DB006CC5F2 /* NNSMutableCharacterSet.mm */; };
+		A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EA522B81650006CC5F2 /* NNSDateComponents.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -550,6 +557,20 @@
 		A1574E8622B803FC006CC5F2 /* NUILocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILocalNotification.h; sourceTree = "<group>"; };
 		A1574E8922B80464006CC5F2 /* NUIUserNotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIUserNotificationSettings.h; sourceTree = "<group>"; };
 		A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIUserNotificationSettings.mm; sourceTree = "<group>"; };
+		A1574E8D22B80F2E006CC5F2 /* NUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDatePicker.h; sourceTree = "<group>"; };
+		A1574E8E22B80F2E006CC5F2 /* NUIDatePicker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDatePicker.mm; sourceTree = "<group>"; };
+		A1574E9122B8108E006CC5F2 /* NNSCalendar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSCalendar.mm; sourceTree = "<group>"; };
+		A1574E9222B8108E006CC5F2 /* NNSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSCalendar.h; sourceTree = "<group>"; };
+		A1574E9422B8108E006CC5F2 /* NNSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSLocale.h; sourceTree = "<group>"; };
+		A1574E9522B8108E006CC5F2 /* NNSLocale.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLocale.mm; sourceTree = "<group>"; };
+		A1574E9722B8108F006CC5F2 /* NNSTimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSTimeZone.h; sourceTree = "<group>"; };
+		A1574E9822B8108F006CC5F2 /* NNSTimeZone.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSTimeZone.mm; sourceTree = "<group>"; };
+		A1574E9D22B811E8006CC5F2 /* NNSCharacterSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSCharacterSet.h; sourceTree = "<group>"; };
+		A1574E9E22B811E8006CC5F2 /* NNSCharacterSet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSCharacterSet.mm; sourceTree = "<group>"; };
+		A1574EA122B812DB006CC5F2 /* NNSMutableCharacterSet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableCharacterSet.mm; sourceTree = "<group>"; };
+		A1574EA222B812DB006CC5F2 /* NNSMutableCharacterSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableCharacterSet.h; sourceTree = "<group>"; };
+		A1574EA522B81650006CC5F2 /* NNSDateComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSDateComponents.mm; sourceTree = "<group>"; };
+		A1574EA622B81650006CC5F2 /* NNSDateComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSDateComponents.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1766,6 +1787,69 @@
 				A1574E8A22B80464006CC5F2 /* NUIUserNotificationSettings.mm */,
 			);
 			path = NUIUserNotificationSettings;
+			sourceTree = "<group>";
+		};
+		A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E8D22B80F2E006CC5F2 /* NUIDatePicker.h */,
+				A1574E8E22B80F2E006CC5F2 /* NUIDatePicker.mm */,
+			);
+			path = NUIDatePicker;
+			sourceTree = "<group>";
+		};
+		A1574E9022B8108E006CC5F2 /* NNSCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E9222B8108E006CC5F2 /* NNSCalendar.h */,
+				A1574E9122B8108E006CC5F2 /* NNSCalendar.mm */,
+			);
+			path = NNSCalendar;
+			sourceTree = "<group>";
+		};
+		A1574E9322B8108E006CC5F2 /* NNSLocale */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E9422B8108E006CC5F2 /* NNSLocale.h */,
+				A1574E9522B8108E006CC5F2 /* NNSLocale.mm */,
+			);
+			path = NNSLocale;
+			sourceTree = "<group>";
+		};
+		A1574E9622B8108F006CC5F2 /* NNSTimeZone */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E9722B8108F006CC5F2 /* NNSTimeZone.h */,
+				A1574E9822B8108F006CC5F2 /* NNSTimeZone.mm */,
+			);
+			path = NNSTimeZone;
+			sourceTree = "<group>";
+		};
+		A1574E9C22B811E8006CC5F2 /* NNSCharacterSet */ = {
+			isa = PBXGroup;
+			children = (
+				A1574E9D22B811E8006CC5F2 /* NNSCharacterSet.h */,
+				A1574E9E22B811E8006CC5F2 /* NNSCharacterSet.mm */,
+			);
+			path = NNSCharacterSet;
+			sourceTree = "<group>";
+		};
+		A1574EA022B812DB006CC5F2 /* NNSMutableCharacterSet */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EA222B812DB006CC5F2 /* NNSMutableCharacterSet.h */,
+				A1574EA122B812DB006CC5F2 /* NNSMutableCharacterSet.mm */,
+			);
+			path = NNSMutableCharacterSet;
+			sourceTree = "<group>";
+		};
+		A1574EA422B81650006CC5F2 /* NNSDateComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EA622B81650006CC5F2 /* NNSDateComponents.h */,
+				A1574EA522B81650006CC5F2 /* NNSDateComponents.mm */,
+			);
+			path = NNSDateComponents;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3095,6 +3179,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
 				A1574E8822B80464006CC5F2 /* NUIUserNotificationSettings */,
 				A1574E8422B803FC006CC5F2 /* NUILocalNotification */,
 				A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */,
@@ -3294,6 +3379,12 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EA422B81650006CC5F2 /* NNSDateComponents */,
+				A1574EA022B812DB006CC5F2 /* NNSMutableCharacterSet */,
+				A1574E9C22B811E8006CC5F2 /* NNSCharacterSet */,
+				A1574E9022B8108E006CC5F2 /* NNSCalendar */,
+				A1574E9322B8108E006CC5F2 /* NNSLocale */,
+				A1574E9622B8108F006CC5F2 /* NNSTimeZone */,
 				A133709222AB418200FA3768 /* NNSError */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
@@ -3844,6 +3935,7 @@
 				A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
+				A1574E9A22B8108F006CC5F2 /* NNSLocale.mm in Sources */,
 				A1574E8B22B80464006CC5F2 /* NUIUserNotificationSettings.mm in Sources */,
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
@@ -3894,6 +3986,7 @@
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
+				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
 				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
@@ -3908,8 +4001,10 @@
 				A13370BD22AEEE1800FA3768 /* NAVAudioSessionChannelDescription.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
+				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
+				A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
 				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
@@ -3957,6 +4052,7 @@
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
 				A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */,
+				A1574E9F22B811E9006CC5F2 /* NNSCharacterSet.mm in Sources */,
 				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
@@ -3968,6 +4064,7 @@
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
+				A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */,
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
@@ -4013,6 +4110,7 @@
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */,
+				A1574E9922B8108F006CC5F2 /* NNSCalendar.mm in Sources */,
 				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				A19F3A1822AF75A400606332 /* NMDLVertexAttributeData.mm in Sources */,

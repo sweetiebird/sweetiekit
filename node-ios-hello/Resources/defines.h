@@ -1220,6 +1220,14 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #define to_value_uint8_t(x) TO_BYTE(x)
 #define is_value_uint8_t(x) IS_BYTE(x)
 
+#define js_value_int16_t(x) JS_INT(static_cast<int16_t>(x))
+#define to_value_int16_t(x) static_cast<int16_t>(TO_INT32(x))
+#define is_value_int16_t(x) (x)->IsInt32() // TODO
+
+#define js_value_uint16_t(x) JS_UINT(static_cast<uint16_t>(x))
+#define to_value_uint16_t(x) static_cast<uint16_t>(TO_UINT32(x))
+#define is_value_uint16_t(x) ((x)->IsUint32() && (TO_UINT32(x) <= 65535))
+
 #define js_value_int32_t(x) JS_INT(x)
 #define to_value_int32_t(x) TO_INT32(x)
 #define is_value_int32_t(x) (x)->IsInt32()

@@ -34,26 +34,6 @@ JS_INIT_CLASS(UILocalNotification, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(UILocalNotification, NSObject);
   // constant values (exports)
-  
-
-//typedef NS_OPTIONS(NSUInteger, NSCalendarUnit) {
-  JS_ASSIGN_ENUM(NSCalendarUnitEra, NSUInteger); //                = kCFCalendarUnitEra,
-  JS_ASSIGN_ENUM(NSCalendarUnitYear, NSUInteger); //               = kCFCalendarUnitYear,
-  JS_ASSIGN_ENUM(NSCalendarUnitMonth, NSUInteger); //              = kCFCalendarUnitMonth,
-  JS_ASSIGN_ENUM(NSCalendarUnitDay, NSUInteger); //                = kCFCalendarUnitDay,
-  JS_ASSIGN_ENUM(NSCalendarUnitHour, NSUInteger); //               = kCFCalendarUnitHour,
-  JS_ASSIGN_ENUM(NSCalendarUnitMinute, NSUInteger); //             = kCFCalendarUnitMinute,
-  JS_ASSIGN_ENUM(NSCalendarUnitSecond, NSUInteger); //             = kCFCalendarUnitSecond,
-  JS_ASSIGN_ENUM(NSCalendarUnitWeekday, NSUInteger); //            = kCFCalendarUnitWeekday,
-  JS_ASSIGN_ENUM(NSCalendarUnitWeekdayOrdinal, NSUInteger); //     = kCFCalendarUnitWeekdayOrdinal,
-  JS_ASSIGN_ENUM(NSCalendarUnitQuarter, NSUInteger); //            API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) = kCFCalendarUnitQuarter,
-  JS_ASSIGN_ENUM(NSCalendarUnitWeekOfMonth, NSUInteger); //        API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = kCFCalendarUnitWeekOfMonth,
-  JS_ASSIGN_ENUM(NSCalendarUnitWeekOfYear, NSUInteger); //         API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = kCFCalendarUnitWeekOfYear,
-  JS_ASSIGN_ENUM(NSCalendarUnitYearForWeekOfYear, NSUInteger); //  API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = kCFCalendarUnitYearForWeekOfYear,
-  JS_ASSIGN_ENUM(NSCalendarUnitNanosecond, NSUInteger); //         API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = (1 << 15),
-  JS_ASSIGN_ENUM(NSCalendarUnitCalendar, NSUInteger); //           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 20),
-  JS_ASSIGN_ENUM(NSCalendarUnitTimeZone, NSUInteger); //           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 21),
-//};
 
 JS_INIT_CLASS_END(UILocalNotification, NSObject);
 
@@ -111,9 +91,7 @@ NAN_SETTER(NUILocalNotification::fireDateSetter) {
   }
 }
 
-#define js_value_NSTimeZone(x) js_value_wrapper_unknown(x, NSTimeZone)
-#define to_value_NSTimeZone(x) to_value_wrapper_unknown(x, NSTimeZone)
-#define is_value_NSTimeZone(x) is_value_wrapper_unknown(x, NSTimeZone)
+#include "NNSTimeZone.h"
 
 NAN_GETTER(NUILocalNotification::timeZoneGetter) {
   JS_UNWRAP(UILocalNotification, self);
@@ -131,6 +109,8 @@ NAN_SETTER(NUILocalNotification::timeZoneSetter) {
   }
 }
 
+#include "NNSCalendar.h"
+
 NAN_GETTER(NUILocalNotification::repeatIntervalGetter) {
   JS_UNWRAP(UILocalNotification, self);
   declare_autoreleasepool {
@@ -146,10 +126,6 @@ NAN_SETTER(NUILocalNotification::repeatIntervalSetter) {
     [self setRepeatInterval: input];
   }
 }
-
-#define js_value_NSCalendar(x) js_value_wrapper_unknown(x, NSCalendar)
-#define to_value_NSCalendar(x) to_value_wrapper_unknown(x, NSCalendar)
-#define is_value_NSCalendar(x) is_value_wrapper_unknown(x, NSCalendar)
 
 NAN_GETTER(NUILocalNotification::repeatCalendarGetter) {
   JS_UNWRAP(UILocalNotification, self);
