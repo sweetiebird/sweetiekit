@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		211E76952269AED300B838AF /* NUIApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76942269AED300B838AF /* NUIApplication.mm */; };
 		211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76992269B10A00B838AF /* NUIWindow.mm */; };
-		211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E769C2269E1DD00B838AF /* UIButton+AddTargetClosure.swift */; };
 		211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */; };
 		211E76A22269F41D00B838AF /* NNSObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76A12269F41D00B838AF /* NNSObject.mm */; };
 		211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211E76A8226A0DE400B838AF /* NUIResponder.mm */; };
@@ -375,7 +374,6 @@
 		211E76962269AF3100B838AF /* NUIApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIApplication.h; sourceTree = "<group>"; };
 		211E76992269B10A00B838AF /* NUIWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIWindow.mm; sourceTree = "<group>"; };
 		211E769A2269B10A00B838AF /* NUIWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIWindow.h; sourceTree = "<group>"; };
-		211E769C2269E1DD00B838AF /* UIButton+AddTargetClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AddTargetClosure.swift"; sourceTree = "<group>"; };
 		211E769F2269EF7500B838AF /* NSObject+AssociatedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+AssociatedObject.swift"; sourceTree = "<group>"; };
 		211E76A12269F41D00B838AF /* NNSObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSObject.mm; sourceTree = "<group>"; };
 		211E76A32269F42B00B838AF /* NNSObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSObject.h; sourceTree = "<group>"; };
@@ -3368,7 +3366,6 @@
 			children = (
 				A1D672A6226994C800562A42 /* NUIButton.h */,
 				A1D672A4226994BD00562A42 /* NUIButton.mm */,
-				211E769C2269E1DD00B838AF /* UIButton+AddTargetClosure.swift */,
 			);
 			path = NUIButton;
 			sourceTree = "<group>";
@@ -4104,7 +4101,6 @@
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
-				211E769D2269E1DD00B838AF /* UIButton+AddTargetClosure.swift in Sources */,
 				A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,

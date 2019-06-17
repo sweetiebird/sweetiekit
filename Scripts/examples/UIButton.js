@@ -8,8 +8,8 @@ const {
 
 async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
-  const button = UIButton({x: 12, y: 80, width: w - 24, height: 50});
-  button.title = '👋 Hello Button';
+  const button = UIButton(CGRectMake(12, 80, w - 24, 50));
+  button.setTitleForState('👋 Hello Button', UIControlStateNormal);
   button.addTarget(() => {
     const alert = new UIAlertController(
       'Button pressed',

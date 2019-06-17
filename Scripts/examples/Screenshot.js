@@ -65,13 +65,8 @@ async function make(nav, demoVC) {
   view.addSubview(view2);
   // view2.addSubview(ssView);
 
-  const button = UIButton({
-    x: 20,
-    y: h - 200,
-    width: w - 40,
-    height: 50,
-  });
-  button.title = '📷 Screenshot';
+  const button = UIButton(CGRectMake(20, h - 200, w - 40, 50));
+  button.setTitleForState('📷 Screenshot', UIControlStateNormal);
   button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 25;
   button.layer.shadowRadius = 12;

@@ -114,18 +114,12 @@ function setNavStyles(nav) {
 }
 
 function setInnerAppNavStyles(nav) {
-  nav.setNavigationBarHidden(true);
+  //nav.setNavigationBarHidden(true);
 }
 
 function makeAppButton(title) {
-  const btn = UIButton({
-    x: 20,
-    y: viewH - 100,
-    width: w - 40,
-    height: 50,
-  });
+  const btn = UIButton(CGRectMake(20, viewH - 100, w - 40, 50));
 
-  btn.title = title;
   btn.layer.cornerRadius = 25;
   btn.layer.shadowOffset = CGSizeMake(0, 12);
   btn.layer.shadowColor = RGB(85, 85, 85);
@@ -136,6 +130,7 @@ function makeAppButton(title) {
   btn.backgroundColor = colors.fitbodPink;
 
   btn.setTitleColorForState(colors.black, UIControlState.normal);
+  btn.setTitleForState(title, UIControlState.normal);
   btn.titleLabel.font = buttonFont;
 
   return btn;

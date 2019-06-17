@@ -1282,8 +1282,8 @@ console.log(sb, vc, view, subview);
 //  console.log('pre-button');
 //  // update alloc to init
 //  // UIButton shouldn't title as an argument, use inherited init with frame, title is set after init
-//  const button = UIButton({x: 0, y: 100, width: 100, height: 100});
-//  button.title = "Tap me!";
+//  const button = UIButton(CGRectMake(0, 100, 100, 100));
+//  button.setTitleForState("Tap me!", UIControlStateNormal);
 //  button.addTarget(() => {
 //
 //    const x = randi(400);
@@ -1306,7 +1306,7 @@ console.log(sb, vc, view, subview);
 //
 //  const tf = UITextField.alloc(0, 0, 140, 50, () => {
 //    console.log("Done editing text!", tf.text);
-//    button.title = tf.text;
+//    button.setTitleForState(tf.text, UIControlStateNormal);
 //  });
 //  tf.text = button.title;
 //  tf.delegate = firstVC;
@@ -1508,7 +1508,7 @@ function iosApp() {
     vc.present(imgVC, true, () => {});
   }
 
-  btnLogin.callback = handleButtonPress;
+  btnLogin.addTarget(handleButtonPress, UIControlEventsTouchUpInside);
 }
 
 setTimeout(async () => {

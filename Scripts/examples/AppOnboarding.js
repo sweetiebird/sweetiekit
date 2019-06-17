@@ -80,13 +80,7 @@ const contentTexts = [
 ];
 
 function setupQuizButton() {
-  const nextBtn = UIButton({
-    x: 20,
-    y: viewH - 100,
-    width: w - 40,
-    height: 50,
-  });
-  nextBtn.title = 'GET STARTED';
+  const nextBtn = UIButton(CGRectMake(20, viewH - 100, w - 40, 50));
   nextBtn.layer.cornerRadius = 25;
   nextBtn.layer.shadowOffset = CGSizeMake(0, 12);
   nextBtn.layer.shadowColor = RGB(85, 85, 85);
@@ -94,6 +88,7 @@ function setupQuizButton() {
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
   nextBtn.backgroundColor = colors.fitbodPink;
+  nextBtn.setTitleForState('GET STARTED', UIControlState.normal);
   nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
@@ -364,13 +359,7 @@ function setupWelcomeView() {
 }
 
 function setupStartButton() {
-  const nextBtn = UIButton({
-    x: 20,
-    y: viewH - 100,
-    width: w - 40,
-    height: 50,
-  });
-  nextBtn.title = 'GET STARTED';
+  const nextBtn = UIButton(CGRectMake(20, viewH - 100, w - 40, 50));
   nextBtn.layer.cornerRadius = 25;
   nextBtn.layer.shadowOffset = CGSizeMake(0, 12);
   nextBtn.layer.shadowColor = RGB(85, 85, 85);
@@ -378,6 +367,7 @@ function setupStartButton() {
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
   nextBtn.backgroundColor = colors.fitbodPink;
+  nextBtn.setTitleForState('GET STARTED', UIControlState.normal);
   nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;

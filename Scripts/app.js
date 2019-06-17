@@ -186,8 +186,8 @@ function createTable() {
 
   console.log('userPhoto2');
 
-   const nextBtn = UIButton({x: 12, y: imgY + 124, width: elemW, height: 50});
-   nextBtn.title = `📸 Choose ${username}`;
+   const nextBtn = UIButton(CGRectMake(12, imgY + 124, elemW, 50));
+   nextBtn.setTitleForState(`📸 Choose ${username}`, UIControlStateNormal);
    nextBtn.addTarget(() => {
      if (img === undefined) {
        const imgDel = new UIImagePickerControllerDelegate();
@@ -202,7 +202,7 @@ function createTable() {
            imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
            imgView.backgroundColor = UIColor.white;
            photoVC.view.addSubview(imgView);
-           nextBtn.title = '✅ Lovely';
+           nextBtn.setTitleForState('✅ Lovely', UIControlStateNormal);
          }
        };
 
@@ -253,7 +253,7 @@ async function setupApp() {
   console.log('setupApp6b');
 
   const nextBtn = UIButton(CGRectMake(12, buttonY, elemW, 50));
-  nextBtn.title = '👍 Next';
+  nextBtn.setTitleForState('👍 Next', UIControlStateNormal);
   nextBtn.addTarget(() => {
     console.log('UIButton');
     username = nameField.text;

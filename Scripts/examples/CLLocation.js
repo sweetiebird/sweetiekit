@@ -153,14 +153,7 @@ async function make(nav, demoVC) {
     text = field.text;
   });
 
-  const btn = UIButton({
-    x: 12,
-    y: 150,
-    width: w - 24,
-    height: 40,
-  });
-
-  btn.title = 'Geocode Address';
+  const btn = UIButton(CGRectMake(12, 150, w - 24, 40));
 
   btn.addTarget(() => {
     if (text) {
@@ -175,6 +168,7 @@ async function make(nav, demoVC) {
     }
   }, UIControlEvents.touchUpInside);
 
+  btn.setTitleForState('Geocode Address', UIControlState.normal);
   btn.setTitleColorForState(colors.black, UIControlState.normal);
   btn.backgroundColor = colors.fitbodPink;
 

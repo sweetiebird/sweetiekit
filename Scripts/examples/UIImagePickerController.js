@@ -14,8 +14,8 @@ async function make(nav, demoVC) {
 
   const w = demoVC.view.frame.width;
 
-  const btn = UIButton({x: 12, y: 80, width: w - 24, height: 50});
-  btn.title = 'Take a 📸';
+  const btn = UIButton(CGRectMake(12, 80, w - 24, 50));
+  btn.setTitleForState('Take a 📸', UIControlStateNormal);
   btn.addTarget(() => {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
@@ -30,7 +30,7 @@ async function make(nav, demoVC) {
           imgView.frame = { x: 12, y: 140, width: w - 24, height: w - 24 };
           imgView.backgroundColor = UIColor.white;
           demoVC.view.addSubview(imgView);
-          btn.title = '✅';
+          btn.setTitleForState('✅', UIControlStateNormal);
         }
       };
 

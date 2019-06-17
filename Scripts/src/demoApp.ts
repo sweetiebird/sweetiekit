@@ -228,7 +228,9 @@ async function userPhoto() {
   const imgY = ((viewH - 100) / 2) - 40;
   const imgX = (viewW - 100) / 2;
 
-  const nextBtn = await UIButton.alloc(`📸 Choose ${username}`, 12, imgY + 124, elemW, 50, async () => {
+  const nextBtn = UIButton(CGRectMake(12, imgY + 124, elemW, 50));
+  nextBtn.setTitleForState(`📸 Choose ${username}`, UIControlStateNormal);
+  nextBtn.addTarget(() => {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
       const imgCtrl = new UIImagePickerController();
@@ -242,7 +244,7 @@ async function userPhoto() {
           imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
           imgView.backgroundColor = UIColor.white;
           photoVC.view.addSubview(imgView);
-          nextBtn.title = '✅ Lovely';
+          nextBtn.setTitleForState('✅ Lovely', UIControlStateNormal);
         }
       };
 
@@ -252,7 +254,7 @@ async function userPhoto() {
     } else {
       demo();
     }
-  });
+  }, UIControlEventsTouchUpInside);
 
   nextBtn.backgroundColor = UIColor.white;
 
@@ -279,10 +281,12 @@ async function setupApp() {
   });
   nameField.delegate = nameVC;
 
-  const nextBtn = await UIButton.alloc('👍 Next', 12, buttonY, elemW, 50, async () => {
+  const nextBtn = UIButton(CGRectMake(12, buttonY, elemW, 50));
+  nextBtn.addTarget(() => {
     username = nameField.text;
     if (username) userPhoto();
-  });
+  }, UIControlEventsTouchUpInside);
+  nextBtn.setTitleForState('👍 Next', UIControlStateNormal);
 
   nextBtn.backgroundColor = UIColor.white;
   // nameVC.view.addSubview(nameField);

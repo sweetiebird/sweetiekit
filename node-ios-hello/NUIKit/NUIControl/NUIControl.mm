@@ -242,51 +242,93 @@ NAN_GETTER(NUIControl::TouchInsideGetter) {
   JS_SET_RETURN(JS_BOOL(isTouchInside));
 }
 
+NSString* UIControlEventsName(UIControlEvents event)
+{
+  switch (event) {
+  case UIControlEventTouchDown: //                                         = 1 <<  0,      // on all touch downs
+    return @"UIControlEventTouchDown";
+  case UIControlEventTouchDownRepeat: //                                   = 1 <<  1,      // on multiple touchdowns (tap count > 1)
+    return @"UIControlEventTouchDownRepeat";
+  case UIControlEventTouchDragInside: //                                   = 1 <<  2,
+    return @"UIControlEventTouchDragInside";
+  case UIControlEventTouchDragOutside: //                                  = 1 <<  3,
+    return @"UIControlEventTouchDragOutside";
+  case UIControlEventTouchDragEnter: //                                    = 1 <<  4,
+    return @"UIControlEventTouchDragEnter";
+  case UIControlEventTouchDragExit: //                                     = 1 <<  5,
+    return @"UIControlEventTouchDragExit";
+  case UIControlEventTouchUpInside: //                                     = 1 <<  6,
+    return @"UIControlEventTouchUpInside";
+  case UIControlEventTouchUpOutside: //                                    = 1 <<  7,
+    return @"UIControlEventTouchUpOutside";
+  case UIControlEventTouchCancel: //                                       = 1 <<  8,
+    return @"UIControlEventTouchCancel";
+
+  case UIControlEventValueChanged: //                                      = 1 << 12,     // sliders, etc.
+    return @"UIControlEventTouchCancel";
+  case UIControlEventPrimaryActionTriggered: //NS_ENUM_AVAILABLE_IOS(9_0) = 1 << 13,     // semantic action: for buttons, etc.
+    return @"UIControlEventPrimaryActionTriggered";
+
+  case UIControlEventEditingDidBegin: //                                   = 1 << 16,     // UITextField
+    return @"UIControlEventEditingDidBegin";
+  case UIControlEventEditingChanged: //                                    = 1 << 17,
+    return @"UIControlEventEditingChanged";
+  case UIControlEventEditingDidEnd: //                                     = 1 << 18,
+    return @"UIControlEventEditingDidEnd";
+  case UIControlEventEditingDidEndOnExit: //                               = 1 << 19,     // 'return key' ending editing
+    return @"UIControlEventEditingDidEndOnExit";
+  default:
+    return @"UIControlEventUnknown";
+  }
+}
+
 NAN_METHOD(NUIControl::addTarget) {
-  Nan::EscapableHandleScope scope;
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[0]);
 
-  NUIControl *ctrl = ObjectWrap::Unwrap<NUIControl>(Local<Object>::Cast(info.This()));
+    UIControlEvents events = UIControlEvents(TO_UINT32(info[1]));
 
-  __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[0]);
+    SUITarget* target = [[SUITarget alloc] init];
+    
+    [target setCallbackClosure:^(id _Nullable sender) {
+      dispatch_main(^{
+        if (fn) {
+          (*fn)("NUIControl::addTarget");
+        }
+      });
+    }];
 
-  SUITarget* target = [[SUITarget alloc] init];
-  
-  [target setCallbackClosure:^(id _Nullable) {
-    Nan::HandleScope scope;
-    (*fn)("NUIControl::addTarget");
-  }];
+    [target setDeinitClosure:^() {
+      dispatch_main(^{
+        if (fn) {
+          delete fn; fn = nullptr;
+          iOSLog0("fn deleted");
+        }
+      });
+    }];
+    
+    [self addTarget:target action:[target callbackSelector] forControlEvents:events];
+    
+    [self associateValue:target withKey:UIControlEventsName(events)];
 
-  [target setDeinitClosure:^() {
-    Nan::HandleScope scope;
-    delete fn; fn = nullptr;
-    iOSLog0("fn deleted");
-  }];
-
-  UIControlEvents events = UIControlEvents(TO_UINT32(info[1]));
-
-  UIControl *ui = ctrl->As<UIControl>();
-  
-  [ui addTarget:target action:[target callbackSelector] forControlEvents:events];
-  
-  [ui associateValue:target withKey:@"sweetiekit.nuicontrol.target"];
-
-  ctrl->SetNSObject(ui);
+    nself->SetNSObject(self);
+  }
 }
 
 NAN_METHOD(NUIControl::removeTarget) {
-  Nan::EscapableHandleScope scope;
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    UIControlEvents events = UIControlEvents(TO_UINT32(info[0]));
 
-  NUIControl *ctrl = ObjectWrap::Unwrap<NUIControl>(Local<Object>::Cast(info.This()));
+    SUITarget* target = (SUITarget*)[self associatedValueForKey:UIControlEventsName(events)];
+    if (target) {
+      
+      [self removeTarget:target action:[target callbackSelector] forControlEvents:events];
 
-  UIControl *ui = ctrl->As<UIControl>();
+      [self dissociateValueForKey:UIControlEventsName(events)];
 
-  id t = (SUITarget*)[ui associatedValueForKey:@"sweetiekit.nuicontrol.target"];
-
-  UIControlEvents events = UIControlEvents(TO_UINT32(info[1]));
-  
-  [ui removeTarget:t action:[t callbackSelector] forControlEvents:events];
-
-  [ui dissociateValueForKey:@"sweetiekit.nuicontrol.target"];
-
-  ctrl->SetNSObject(ui);
+      nself->SetNSObject(self);
+    }
+  }
 }

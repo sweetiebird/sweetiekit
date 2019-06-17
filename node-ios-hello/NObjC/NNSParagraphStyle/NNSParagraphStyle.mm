@@ -14,6 +14,17 @@ JS_INIT_CLASS(NSParagraphStyle, NSObject);
   JS_ASSIGN_PROP_READONLY(proto, lineSpacing);
   // static members (ctor)
   JS_INIT_CTOR(NSParagraphStyle, NSObject);
+  // constants (exports)
+
+//typedef NS_ENUM(NSInteger, NSLineBreakMode) {
+  JS_ASSIGN_ENUM(NSLineBreakByWordWrapping, NSInteger); // Wrap at word boundaries, default
+  JS_ASSIGN_ENUM(NSLineBreakByCharWrapping, NSInteger); // Wrap at character boundaries
+  JS_ASSIGN_ENUM(NSLineBreakByClipping, NSInteger); // Simply clip
+  JS_ASSIGN_ENUM(NSLineBreakByTruncatingHead, NSInteger); // Truncate at head of line: "...wxyz"
+  JS_ASSIGN_ENUM(NSLineBreakByTruncatingTail, NSInteger); // Truncate at tail of line: "abcd..."
+  JS_ASSIGN_ENUM(NSLineBreakByTruncatingMiddle, NSInteger); // Truncate middle of line:  "ab...yz"
+//} NS_ENUM_AVAILABLE(10_0, 6_0);
+
 JS_INIT_CLASS_END(NSParagraphStyle, NSObject);
 
 NAN_METHOD(NNSParagraphStyle::New) {

@@ -62,12 +62,12 @@ function textWrap(s) {
 }
 
 function makeCamBtn(demoVC, btnSize) {
-  const camBtn = UIButton({
-    x: (demoVC.view.frame.width - btnSize) / 2,
-    y: demoVC.view.frame.height - (124 + btnSize),
-    width: btnSize,
-    height: btnSize,
-  });
+  const camBtn = UIButton(CGRectMake(
+    (demoVC.view.frame.width - btnSize) / 2,
+    demoVC.view.frame.height - (124 + btnSize),
+    btnSize,
+    btnSize
+  ));
   camBtn.layer.cornerRadius = btnSize / 2;
   camBtn.layer.shadowOpacity = 1;
   camBtn.layer.shadowOffset = { width: 0, height: 4 };
@@ -114,12 +114,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
 
 function makeParticleButton(demoVC) {
   const size = 40;
-  const btn = UIButton({
-    x: demoVC.view.frame.width - size,
-    y: 0,
-    width: size,
-    height: size,
-  });
+  const btn = UIButton(CGRectMake(demoVC.view.frame.width - size, 0, size, size));
   btn.backgroundColor = colors.clear;
   btn.setBackgroundImageForState(UIImage('fire'), UIControlState.normal);
   btn.showsTouchWhenHighlighted = true;

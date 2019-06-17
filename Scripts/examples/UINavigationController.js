@@ -9,8 +9,8 @@ const {
 
 async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
-  const btn = UIButton({x: 12, y: 80, width: w - 24, height: 50});
-  btn.title = 'Push View Controller';
+  const btn = UIButton(CGRectMake(12, 80, w - 24, 50));
+  btn.setTitleForState('Push View Controller', UIControlStateNormal);
   btn.addTarget(() => {
     const lastVC = UIViewController();
     lastVC.view.backgroundColor = RGB(205, 37, 83);
