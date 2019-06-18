@@ -114,15 +114,6 @@ const UIModalPresentationStyle = {
   popover: 8,
 };
 
-const UIPopoverArrowDirection = {
-  up: 0,
-  down: 1,
-  left: 2,
-  right: 3,
-  any: 4,
-  unknown: -1,
-};
-
 module.exports.ARHitTestResultType = {
   /** Result type from intersecting the nearest feature point. */
   featurePoint                                        : (1 << 0),
@@ -207,7 +198,6 @@ module.exports.UIStackViewDistribution = UIStackViewDistribution;
 module.exports.UIStackViewAlignment = UIStackViewAlignment;
 module.exports.UITableViewCellStyle = UITableViewCellStyle;
 module.exports.UIModalPresentationStyle = UIModalPresentationStyle;
-module.exports.UIPopoverArrowDirection = UIPopoverArrowDirection;
 module.exports.UITextAutocorrectionType = UITextAutocorrectionType;
 module.exports.UITextSpellCheckingType = UITextSpellCheckingType;
 module.exports.UIImageOrientation = UIKit.UIImageOrientation;

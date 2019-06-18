@@ -1,5 +1,4 @@
 const SweetieKit = require('std:sweetiekit.node');
-const { UIModalPresentationStyle, UIPopoverArrowDirection } = require('./enums');
 const colors = require('./colors');
 
 const {
@@ -30,13 +29,12 @@ function make(nav, demoVC) {
     const ppc = vc.popoverPresentationController;
     if (ppc) {
       ppc.permittedArrowDirections = UIPopoverArrowDirectionUp;
+
       const del = new UIPopoverPresentationControllerDelegate();
       ppc.delegate = del;
 
       ppc.sourceView = view;
       ppc.sourceRect = CGRectMake(xPosition, yPosition, 0, 0);
-
-      ppc.permittedArrowDirections = UIPopoverArrowDirectionUp;
     }
     demoVC.present(vc, true, () => {});
   }, UIControlEventTouchUpInside);
