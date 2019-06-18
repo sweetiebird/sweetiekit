@@ -1992,7 +1992,9 @@ NAN_SETTER(NUIView::backgroundColorSetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self setBackgroundColor: to_value_UIColor(value)];
+    declare_setter();
+    declare_pointer(UIColor, value);
+    [self setBackgroundColor: value];
   }
 }
 
@@ -2008,7 +2010,9 @@ NAN_SETTER(NUIView::alphaSetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self setAlpha: to_value_CGFloat(value)];
+    declare_setter();
+    declare_value(CGFloat, value);
+    [self setAlpha: value];
   }
 }
 
@@ -2024,7 +2028,9 @@ NAN_SETTER(NUIView::opaqueSetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self setOpaque: to_value_BOOL(value)];
+    declare_setter();
+    declare_value(BOOL, value);
+    [self setOpaque: value];
   }
 }
 
@@ -2056,7 +2062,9 @@ NAN_SETTER(NUIView::hiddenSetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self setHidden: to_value_BOOL(value)];
+    declare_setter();
+    declare_value(BOOL, value);
+    [self setHidden: value];
   }
 }
 
@@ -2120,7 +2128,9 @@ NAN_SETTER(NUIView::tintColorSetter) {
   JS_UNWRAP(UIView, self);
   @autoreleasepool
   {
-    [self setTintColor: to_value_UIColor(value)];
+    declare_setter();
+    declare_pointer(UIColor, value);
+    [self setTintColor: value];
   }
 }
 

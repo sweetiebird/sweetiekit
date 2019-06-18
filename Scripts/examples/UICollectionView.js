@@ -1,5 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+const colors = require('./colors');
+
 const {
   UIView,
 } = SweetieKit;
@@ -47,6 +49,7 @@ global.getCell = function getCell({ section, row }, construct) {
     const label = UILabel(frame);
     label.numberOfLines = 0;
     label.text = 'Lorem ipsum dolor amet cray cronut pok pok veniam kitsch literally. Occupy letterpress mixtape mollit nostrud.';
+    label.textColor = colors.getTheme().textColor;
     label.sizeToFit();
     cell.contentView.addSubview(label);
     label.pinToSuperviewWithInsets(UIEdgeInsetsMake(20, 20, 20, 20));
@@ -59,9 +62,9 @@ function handleCellSelected(collectionView, path) {
   console.log('handleCellSelected', collectionView, path, cell);
   if (cell) {
     cell.layer.borderColor = UIColor.clear;
-    cell.layer.borderWidth = 1;
+    cell.layer.borderWidth = 3;
     UIView.animateWithDurationAnimations(0.5, () => {
-      cell.layer.borderColor = UIColor.white;
+      cell.layer.borderColor = colors.getTheme().activeColor;
     });
   }
 }
@@ -106,15 +109,25 @@ function setCollectionManager() {
   collection.delegate = mgr;
 }
 
+function setNavStyles(nav) {
+  nav.navigationBar.opaque = false;
+  nav.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetricsDefault);
+  nav.navigationBar.shadowImage = UIImage();
+  nav.navigationBar.tintColor = colors.getTheme().tintColor;
+  nav.navigationBar.backgroundColor = colors.getTheme().backgroundColor;
+}
+
 async function make(nav, demoVC) {
   layout = makeColumnFlowLayout(2, 20, 20, UIEdgeInsetsMake(20, 20, 20, 20));
   collection = new UICollectionView(frame = demoVC.view.frame, layout);
+  collection.backgroundColor = colors.getTheme().backgroundColor;
   setCollectionManager();
   collection.viewWillAppear = () => {
     prepareColumnFlowLayout(layout, 2);
   };
   demoVC.view.addSubview(collection);
   collection.pinToSuperview();
+  setNavStyles(nav);
   nav.pushViewController(demoVC);
 }
 

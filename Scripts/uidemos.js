@@ -1,5 +1,7 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+const colors = require('./examples/colors');
+
 // apps
 const makeMiniApp = () => require('./examples/MiniApp');
 makeMiniApp.lazy = true;
@@ -130,7 +132,7 @@ class UIDemosApp {
     gc();
     this.demoVC = UIViewController();
     gc();
-    this.demoVC.view.backgroundColor = UIColor.white;
+    this.demoVC.view.backgroundColor = colors.getTheme().backgroundColor;
     gc();
   }
 
