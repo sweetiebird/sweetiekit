@@ -14,6 +14,14 @@
 #define to_value_SCNLight(x) to_value_wrapper(x, SCNLight)
 #define is_value_SCNLight(x) is_value_wrapper(x, SCNLight)
 
+#define js_value_SCNLightType(x) JS_ENUM(SCNLightType, NSString, x)
+#define to_value_SCNLightType(x) TO_ENUM(SCNLightType, NSString, x)
+#define is_value_SCNLightType(x) IS_ENUM(SCNLightType, NSString, x)
+
+#define js_value_SCNShadowMode(x) JS_ENUM(SCNShadowMode, NSInteger, x)
+#define to_value_SCNShadowMode(x) TO_ENUM(SCNShadowMode, NSInteger, x)
+#define is_value_SCNShadowMode(x) IS_ENUM(SCNShadowMode, NSInteger, x)
+
 JS_WRAP_CLASS(SCNLight, NSObject);
   JS_PROP(type);
   JS_PROP(color);

@@ -1,6 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 const math = require('./helpers/math');
-const SCNLightType = require('./enums').SCNLightType;
 THREE = require('../vendor/three/three');
 
 const {
@@ -90,7 +89,7 @@ async function make(nav, demoVC) {
   arView.scene = scene;
 
   const spotlight = new SCNLight();
-  spotlight.type = SCNLightType.spot;
+  spotlight.type = SCNLightTypeSpot;
   spotlight.spotInnerAngle = 45;
   spotlight.spotOuterAngle = 45;
 

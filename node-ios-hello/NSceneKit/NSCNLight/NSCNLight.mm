@@ -27,6 +27,28 @@ JS_INIT_CLASS(SCNLight, NSObject);
   JS_ASSIGN_PROP(proto, attenuationFalloffExponent);
   // static members (ctor)
   JS_INIT_CTOR(SCNLight, NSObject);
+  // constants (exports)
+
+  //typedef NSString * SCNLightType NS_STRING_ENUM;
+  JS_ASSIGN_ENUM(SCNLightTypeAmbient, NSString); //                                                    // Ambient light
+  JS_ASSIGN_ENUM(SCNLightTypeOmni, NSString); //                                                       // Omnidirectional light
+  JS_ASSIGN_ENUM(SCNLightTypeDirectional, NSString); //                                                // Directional light
+  JS_ASSIGN_ENUM(SCNLightTypeSpot, NSString); //                                                       // Spot light
+  JS_ASSIGN_ENUM(SCNLightTypeIES, NSString); //    API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)); // IES light
+  JS_ASSIGN_ENUM(SCNLightTypeProbe, NSString); //  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)); // Light probe
+
+  /*! @enum SCNShadowMode
+   @abstract The different modes available to compute shadows.
+   @discussion When the shadow mode is set to SCNShadowModeForward, shadows are computed while computing the lighting. In this mode only the alpha component of the shadow color is used to alter the lighting contribution.
+   When the shadow mode is set to SCNShadowModeDeferred shadows are applied as a post process. Shadows are blend over the final image and can therefor be of any arbitrary color. However it is most of the time less efficient than SCNShadowModeForward, except when a scene has a lot of overdraw.
+   When the shadow mode is set to SCNShadowModeModulated the light doesn't illuminate the scene anymore, it only casts shadows. Therefore setting the light color has no effect. In this mode gobos act as a shadow projector: the gobo image is modulated with the shadow receiver's fragments. The typical usage is to use an image of a radial gradient (black to white) that is projected under a character (and use the categoryBitMask of the light and nodes to exclude the character from the shadow receiver).
+   */
+  //typedef NS_ENUM(NSInteger, SCNShadowMode) {
+    JS_ASSIGN_ENUM(SCNShadowModeForward, NSInteger); //    = 0,
+    JS_ASSIGN_ENUM(SCNShadowModeDeferred, NSInteger); //   = 1,
+    JS_ASSIGN_ENUM(SCNShadowModeModulated, NSInteger); //  = 2
+  //} API_AVAILABLE(macos(10.10));
+
 // SCNLight
   JS_ASSIGN_STATIC_METHOD(lightWithMDLLight);
 JS_INIT_CLASS_END(SCNLight, NSObject);
@@ -51,88 +73,34 @@ NAN_METHOD(NSCNLight::New) {
 }
 
 NAN_GETTER(NSCNLight::typeGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNLight, light);
-
-  JS_SET_RETURN(JS_STR([[light type] UTF8String]));
+  JS_UNWRAP(SCNLight, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNLightType([self type]));
+  }
 }
 
 NAN_SETTER(NSCNLight::typeSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNLight, light);
-
-  std::string t;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    t = *utf8Value;
-  } else {
-    Nan::ThrowError("SCNLight:setType: invaid argument");
-    return;
-  }
-  
-  @autoreleasepool {
-    NSString *str = [NSString stringWithUTF8String:t.c_str()];
-    SCNLightType type = SCNLightTypeAmbient;
-
-    if ([str isEqualToString:@"spot"]) {
-      type = SCNLightTypeSpot;
-    } else if ([str isEqualToString:@"IES"]) {
-      type = SCNLightTypeIES;
-    } else if ([str isEqualToString:@"ambient"]) {
-      type = SCNLightTypeAmbient;
-    } else if ([str isEqualToString:@"omni"]) {
-      type = SCNLightTypeOmni;
-    } else if ([str isEqualToString:@"directional"]) {
-      type = SCNLightTypeDirectional;
-    } else if ([str isEqualToString:@"probe"]) {
-      type = SCNLightTypeProbe;
-    } else {
-      Nan::ThrowError("No valid light type specified");
-      return;
-    }
-
-    [light setType:type];
+  JS_UNWRAP(SCNLight, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SCNLightType, input);
+    [self setType: input];
   }
 }
 
 NAN_GETTER(NSCNLight::colorGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNLight, light);
-  
-  __block CGFloat red = 0;
-  __block CGFloat green = 0;
-  __block CGFloat blue = 0;
-  __block CGFloat alpha = 1;
-  @autoreleasepool {
-    UIColor *color = [light color];
-    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+  JS_UNWRAP(SCNLight, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self color]));
   }
-  
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("red"), JS_NUM(red));
-  result->Set(JS_STR("green"), JS_NUM(green));
-  result->Set(JS_STR("blue"), JS_NUM(blue));
-  result->Set(JS_STR("alpha"), JS_NUM(alpha));
-
-  JS_SET_RETURN(result);
 }
 
 NAN_SETTER(NSCNLight::colorSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SCNLight, light);
-
-  double red = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("red")));
-  double green = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("green")));
-  double blue = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("blue")));
-  double alpha = JS_HAS(JS_OBJ(value), JS_STR("alpha")) ? TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("alpha"))) : 1.0;
-
-  @autoreleasepool {
-    UIColor* color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-    [light setColor:color];
+  JS_UNWRAP(SCNLight, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id, input);
+    [self setColor: input];
   }
 }
 
