@@ -63,6 +63,17 @@ async function make(nav, demoVC) {
   });
   bgView.addGestureRecognizer(bgPan);
 
+  const fgPan = UIPanGestureRecognizer();
+  fgPan.addTarget(() => {
+    const translation = fgPan.translationInView(fgView);
+    const frame = fgView.frame;
+    console.log('fgPan', translation, frame);
+    frame.y += translation.y;
+    fgView.frame = frame;
+    fgPan.setTranslationInView(CGPointMake(0, 0), fgView);
+  });
+  fgView.addGestureRecognizer(fgPan);
+
   return bgView;
 }
 
