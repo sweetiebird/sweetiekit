@@ -4,7 +4,6 @@ const colors = require('./colors');
 
 const {
   NSParagraphStyleAttributeName,
-  UIViewContentMode,
   UIBarMetrics,
   UITableViewSelectionStyle,
   UITableViewCellSeparatorStyle,
@@ -201,7 +200,7 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: imgX, y: imgY, width: imgSize, height: imgSize };
-    imageView.contentMode = UIViewContentMode.scaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
 
     slideView.addSubview(label);
     slideView.addSubview(imageView);
@@ -261,7 +260,7 @@ function makeBgView() {
   const img = UIImage('abstract_grey');
   const imgView = UIImageView(img);
   imgView.frame = frame;
-  imgView.contentMode = UIViewContentMode.scaleAspectFill;
+  imgView.contentMode = UIViewContentModeScaleAspectFill;
   imgView.alpha = 0.2;
   imgView.layer.maskToBounds = true;
   return imgView;
@@ -422,7 +421,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const imageView = UIImageView(image);
     imageView.alpha = 0.5;
     imageView.frame = { x: (w * i) + imgX, y: imgY, width: imgSize, height: imgSize };
-    imageView.contentMode = UIViewContentMode.scaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
 
     const label = UILabel();
     label.frame = { x: (w * i) + 20, y: labelY, width: w - 40, height: 25 };

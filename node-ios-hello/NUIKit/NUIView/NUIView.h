@@ -16,41 +16,41 @@
 
 // UIKit constants
 
-#define js_value_UIViewAnimationCurve(x) js_enum_wrapper(x, UIViewAnimationCurve)
-#define to_value_UIViewAnimationCurve(x) to_enum_wrapper(x, UIViewAnimationCurve)
-#define is_value_UIViewAnimationCurve(x) is_enum_wrapper(x, UIViewAnimationCurve)
+#define js_value_UIViewAnimationCurve(x) JS_ENUM(UIViewAnimationCurve, NSInteger, x)
+#define to_value_UIViewAnimationCurve(x) TO_ENUM(UIViewAnimationCurve, NSInteger, x)
+#define is_value_UIViewAnimationCurve(x) IS_ENUM(UIViewAnimationCurve, NSInteger, x)
 
-#define js_value_UIViewContentMode(x) js_enum_wrapper(x, UIViewContentMode)
-#define to_value_UIViewContentMode(x) to_enum_wrapper(x, UIViewContentMode)
-#define is_value_UIViewContentMode(x) is_enum_wrapper(x, UIViewContentMode)
+#define js_value_UIViewContentMode(x) JS_ENUM(UIViewContentMode, NSInteger, x)
+#define to_value_UIViewContentMode(x) TO_ENUM(UIViewContentMode, NSInteger, x)
+#define is_value_UIViewContentMode(x) IS_ENUM(UIViewContentMode, NSInteger, x)
 
-#define js_value_UIViewAnimationTransition(x) js_enum_wrapper(x, UIViewAnimationTransition)
-#define to_value_UIViewAnimationTransition(x) to_enum_wrapper(x, UIViewAnimationTransition)
-#define is_value_UIViewAnimationTransition(x) is_enum_wrapper(x, UIViewAnimationTransition)
+#define js_value_UIViewAnimationTransition(x) JS_ENUM(UIViewAnimationTransition, NSInteger, x)
+#define to_value_UIViewAnimationTransition(x) TO_ENUM(UIViewAnimationTransition, NSInteger, x)
+#define is_value_UIViewAnimationTransition(x) IS_ENUM(UIViewAnimationTransition, NSInteger, x)
 
-#define js_value_UIViewAutoresizing(x) js_opts_wrapper(x, UIViewAutoresizing)
-#define to_value_UIViewAutoresizing(x) to_opts_wrapper(x, UIViewAutoresizing)
-#define is_value_UIViewAutoresizing(x) is_opts_wrapper(x, UIViewAutoresizing)
+#define js_value_UIViewAutoresizing(x) JS_OPTS(UIViewAutoresizing, NSUInteger, x)
+#define to_value_UIViewAutoresizing(x) TO_OPTS(UIViewAutoresizing, NSUInteger, x)
+#define is_value_UIViewAutoresizing(x) IS_OPTS(UIViewAutoresizing, NSUInteger, x)
 
-#define js_value_UIViewAnimationOptions(x) js_opts_wrapper(x, UIViewAnimationOptions)
-#define to_value_UIViewAnimationOptions(x) to_opts_wrapper(x, UIViewAnimationOptions)
-#define is_value_UIViewAnimationOptions(x) is_opts_wrapper(x, UIViewAnimationOptions)
+#define js_value_UIViewAnimationOptions(x) JS_OPTS(UIViewAnimationOptions, NSUInteger, x)
+#define to_value_UIViewAnimationOptions(x) TO_OPTS(UIViewAnimationOptions, NSUInteger, x)
+#define is_value_UIViewAnimationOptions(x) IS_OPTS(UIViewAnimationOptions, NSUInteger, x)
 
-#define js_value_UIViewKeyframeAnimationOptions(x) js_opts_wrapper(x, UIViewKeyframeAnimationOptions)
-#define to_value_UIViewKeyframeAnimationOptions(x) to_opts_wrapper(x, UIViewKeyframeAnimationOptions)
-#define is_value_UIViewKeyframeAnimationOptions(x) is_opts_wrapper(x, UIViewKeyframeAnimationOptions)
+#define js_value_UIViewKeyframeAnimationOptions(x) JS_OPTS(UIViewKeyframeAnimationOptions, NSUInteger, x)
+#define to_value_UIViewKeyframeAnimationOptions(x) TO_OPTS(UIViewKeyframeAnimationOptions, NSUInteger, x)
+#define is_value_UIViewKeyframeAnimationOptions(x) IS_OPTS(UIViewKeyframeAnimationOptions, NSUInteger, x)
+    
+#define js_value_UISystemAnimation(x) JS_OPTS(UISystemAnimation, NSUInteger, x)
+#define to_value_UISystemAnimation(x) TO_OPTS(UISystemAnimation, NSUInteger, x)
+#define is_value_UISystemAnimation(x) IS_OPTS(UISystemAnimation, NSUInteger, x)
 
-#define js_value_UISystemAnimation(x) js_enum_wrapper(x, UISystemAnimation)
-#define to_value_UISystemAnimation(x) to_enum_wrapper(x, UISystemAnimation)
-#define is_value_UISystemAnimation(x) is_enum_wrapper(x, UISystemAnimation)
+#define js_value_UIViewTintAdjustmentMode(x) JS_ENUM(UIViewTintAdjustmentMode, NSInteger, x)
+#define to_value_UIViewTintAdjustmentMode(x) TO_ENUM(UIViewTintAdjustmentMode, NSInteger, x)
+#define is_value_UIViewTintAdjustmentMode(x) IS_ENUM(UIViewTintAdjustmentMode, NSInteger, x)
 
-#define js_value_UIViewTintAdjustmentMode(x) js_enum_wrapper(x, UIViewTintAdjustmentMode)
-#define to_value_UIViewTintAdjustmentMode(x) to_enum_wrapper(x, UIViewTintAdjustmentMode)
-#define is_value_UIViewTintAdjustmentMode(x) is_enum_wrapper(x, UIViewTintAdjustmentMode)
-
-#define js_value_UISemanticContentAttribute(x) js_enum_wrapper(x, UISemanticContentAttribute)
-#define to_value_UISemanticContentAttribute(x) to_enum_wrapper(x, UISemanticContentAttribute)
-#define is_value_UISemanticContentAttribute(x) is_enum_wrapper(x, UISemanticContentAttribute)
+#define js_value_UISemanticContentAttribute(x) JS_ENUM(UISemanticContentAttribute, NSInteger, x)
+#define to_value_UISemanticContentAttribute(x) TO_ENUM(UISemanticContentAttribute, NSInteger, x)
+#define is_value_UISemanticContentAttribute(x) IS_ENUM(UISemanticContentAttribute, NSInteger, x)
 
 #define js_value_UILayoutConstraintAxis(x) JS_ENUM(UILayoutConstraintAxis, NSInteger, x)
 #define to_value_UILayoutConstraintAxis(x) TO_ENUM(UILayoutConstraintAxis, NSInteger, x)

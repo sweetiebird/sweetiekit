@@ -192,10 +192,117 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), requiresConstraintBasedLayout);
   
   // constants (exports)
+
+//typedef NS_ENUM(NSInteger, UIViewAnimationCurve) {
+  JS_ASSIGN_ENUM(UIViewAnimationCurveEaseInOut, NSInteger); //           // slow at beginning and end
+  JS_ASSIGN_ENUM(UIViewAnimationCurveEaseIn, NSInteger); //              // slow at beginning
+  JS_ASSIGN_ENUM(UIViewAnimationCurveEaseOut, NSInteger); //             // slow at end
+  JS_ASSIGN_ENUM(UIViewAnimationCurveLinear, NSInteger); //  
+//};
+
+//typedef NS_ENUM(NSInteger, UIViewContentMode) {
+  JS_ASSIGN_ENUM(UIViewContentModeScaleToFill, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeScaleAspectFit, NSInteger); //        // contents scaled to fit with fixed aspect. remainder is transparent
+  JS_ASSIGN_ENUM(UIViewContentModeScaleAspectFill, NSInteger); //       // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+  JS_ASSIGN_ENUM(UIViewContentModeRedraw, NSInteger); //                // redraw on bounds change (calls -setNeedsDisplay)
+  JS_ASSIGN_ENUM(UIViewContentModeCenter, NSInteger); //                // contents remain same size. positioned adjusted.
+  JS_ASSIGN_ENUM(UIViewContentModeTop, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeBottom, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeLeft, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeRight, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeTopLeft, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeTopRight, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeBottomLeft, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewContentModeBottomRight, NSInteger); //  
+//};
+
+//typedef NS_ENUM(NSInteger, UIViewAnimationTransition) {
+  JS_ASSIGN_ENUM(UIViewAnimationTransitionNone, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewAnimationTransitionFlipFromLeft, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewAnimationTransitionFlipFromRight, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewAnimationTransitionCurlUp, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewAnimationTransitionCurlDown, NSInteger); //  
+//};
+
+//typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
+  JS_ASSIGN_ENUM(UIViewAutoresizingNone, NSUInteger); //                  = 0,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleLeftMargin, NSUInteger); //    = 1 << 0,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleWidth, NSUInteger); //         = 1 << 1,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleRightMargin, NSUInteger); //   = 1 << 2,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleTopMargin, NSUInteger); //     = 1 << 3,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleHeight, NSUInteger); //        = 1 << 4,
+  JS_ASSIGN_ENUM(UIViewAutoresizingFlexibleBottomMargin, NSUInteger); //  = 1 << 5
+//};
+
+//typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
+  JS_ASSIGN_ENUM(UIViewAnimationOptionLayoutSubviews, NSUInteger); //             = 1 <<  0,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionAllowUserInteraction, NSUInteger); //       = 1 <<  1, // turn on user interaction while animating
+  JS_ASSIGN_ENUM(UIViewAnimationOptionBeginFromCurrentState, NSUInteger); //      = 1 <<  2, // start all views from current value, not initial value
+  JS_ASSIGN_ENUM(UIViewAnimationOptionRepeat, NSUInteger); //                     = 1 <<  3, // repeat animation indefinitely
+  JS_ASSIGN_ENUM(UIViewAnimationOptionAutoreverse, NSUInteger); //                = 1 <<  4, // if repeat, run animation back and forth
+  JS_ASSIGN_ENUM(UIViewAnimationOptionOverrideInheritedDuration, NSUInteger); //  = 1 <<  5, // ignore nested duration
+  JS_ASSIGN_ENUM(UIViewAnimationOptionOverrideInheritedCurve, NSUInteger); //     = 1 <<  6, // ignore nested curve
+  JS_ASSIGN_ENUM(UIViewAnimationOptionAllowAnimatedContent, NSUInteger); //       = 1 <<  7, // animate contents (applies to transitions only)
+  JS_ASSIGN_ENUM(UIViewAnimationOptionShowHideTransitionViews, NSUInteger); //    = 1 <<  8, // flip to/from hidden state instead of adding/removing
+  JS_ASSIGN_ENUM(UIViewAnimationOptionOverrideInheritedOptions, NSUInteger); //   = 1 <<  9, // do not inherit any options or animation type
   
+  JS_ASSIGN_ENUM(UIViewAnimationOptionCurveEaseInOut, NSUInteger); //             = 0 << 16, // default
+  JS_ASSIGN_ENUM(UIViewAnimationOptionCurveEaseIn, NSUInteger); //                = 1 << 16,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionCurveEaseOut, NSUInteger); //               = 2 << 16,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionCurveLinear, NSUInteger); //                = 3 << 16,
+  
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionNone, NSUInteger); //             = 0 << 20, // default
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionFlipFromLeft, NSUInteger); //     = 1 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionFlipFromRight, NSUInteger); //    = 2 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionCurlUp, NSUInteger); //           = 3 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionCurlDown, NSUInteger); //         = 4 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionCrossDissolve, NSUInteger); //    = 5 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionFlipFromTop, NSUInteger); //      = 6 << 20,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionTransitionFlipFromBottom, NSUInteger); //   = 7 << 20,
+
+  JS_ASSIGN_ENUM(UIViewAnimationOptionPreferredFramesPerSecondDefault, NSUInteger); //      = 0 << 24,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionPreferredFramesPerSecond60, NSUInteger); //           = 3 << 24,
+  JS_ASSIGN_ENUM(UIViewAnimationOptionPreferredFramesPerSecond30, NSUInteger); //           = 7 << 24,
+  
+//} NS_ENUM_AVAILABLE_IOS(4_0);
+
+//typedef NS_OPTIONS(NSUInteger, UIViewKeyframeAnimationOptions) {
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionLayoutSubviews, NSUInteger); //             = UIViewAnimationOptionLayoutSubviews,
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionAllowUserInteraction, NSUInteger); //       = UIViewAnimationOptionAllowUserInteraction, // turn on user interaction while animating
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionBeginFromCurrentState, NSUInteger); //      = UIViewAnimationOptionBeginFromCurrentState, // start all views from current value, not initial value
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionRepeat, NSUInteger); //                     = UIViewAnimationOptionRepeat, // repeat animation indefinitely
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionAutoreverse, NSUInteger); //                = UIViewAnimationOptionAutoreverse, // if repeat, run animation back and forth
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionOverrideInheritedDuration, NSUInteger); //  = UIViewAnimationOptionOverrideInheritedDuration, // ignore nested duration
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionOverrideInheritedOptions, NSUInteger); //   = UIViewAnimationOptionOverrideInheritedOptions, // do not inherit any options or animation type
+  
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionCalculationModeLinear, NSUInteger); //      = 0 << 10, // default
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionCalculationModeDiscrete, NSUInteger); //    = 1 << 10,
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionCalculationModePaced, NSUInteger); //       = 2 << 10,
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionCalculationModeCubic, NSUInteger); //       = 3 << 10,
+  JS_ASSIGN_ENUM(UIViewKeyframeAnimationOptionCalculationModeCubicPaced, NSUInteger); //  = 4 << 10
+//} NS_ENUM_AVAILABLE_IOS(7_0);
+
+//typedef NS_ENUM(NSUInteger, UISystemAnimation) {
+  JS_ASSIGN_ENUM(UISystemAnimationDelete, NSUInteger); //      // removes the views from the hierarchy when complete
+//} NS_ENUM_AVAILABLE_IOS(7_0);
+
+//typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
+  JS_ASSIGN_ENUM(UIViewTintAdjustmentModeAutomatic, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewTintAdjustmentModeNormal, NSInteger); //  
+  JS_ASSIGN_ENUM(UIViewTintAdjustmentModeDimmed, NSInteger); //  
+//} NS_ENUM_AVAILABLE_IOS(7_0);
+
+//typedef NS_ENUM(NSInteger, UISemanticContentAttribute) {
+  JS_ASSIGN_ENUM(UISemanticContentAttributeUnspecified, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UISemanticContentAttributePlayback, NSInteger); //   // for playback controls such as Play/RW/FF buttons and playhead scrubbers
+  JS_ASSIGN_ENUM(UISemanticContentAttributeSpatial, NSInteger); //   // for controls that result in some sort of directional change in the UI, e.g. a segmented control for text alignment or a D-pad in a game
+  JS_ASSIGN_ENUM(UISemanticContentAttributeForceLeftToRight, NSInteger); //  
+  JS_ASSIGN_ENUM(UISemanticContentAttributeForceRightToLeft, NSInteger); // 
+//} NS_ENUM_AVAILABLE_IOS(9_0);
+
 //typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
-    JS_ASSIGN_ENUM(UILayoutConstraintAxisHorizontal, NSInteger); //  = 0,
-    JS_ASSIGN_ENUM(UILayoutConstraintAxisVertical, NSInteger); //  = 1
+  JS_ASSIGN_ENUM(UILayoutConstraintAxisHorizontal, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UILayoutConstraintAxisVertical, NSInteger); //  = 1
 //};
 
 JS_INIT_CLASS_END(UIView, UIResponder);

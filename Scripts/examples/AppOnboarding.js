@@ -2,7 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
 const {
   NSParagraphStyleAttributeName,
-  UIViewContentMode,
   UIBarStyle,
   UIBarMetrics,
 }= require('./enums');
@@ -231,7 +230,7 @@ function makeBgView() {
   const img = UIImage('abstract_grey');
   const imgView = UIImageView(img);
   imgView.frame = frame;
-  imgView.contentMode = UIViewContentMode.scaleAspectFill;
+  imgView.contentMode = UIViewContentModeScaleAspectFill;
   imgView.alpha = 0.2;
   imgView.layer.maskToBounds = true;
   return imgView;

@@ -12,7 +12,6 @@ const {
   UITextAutocorrectionType,
   UITextSpellCheckingType,
   UIImageOrientation,
-  UIViewContentMode,
 } = require('./enums');
 
 const {
@@ -116,7 +115,7 @@ function makeParticleButton(demoVC) {
   btn.backgroundColor = colors.clear;
   btn.setBackgroundImageForState(UIImage('fire'), UIControlStateNormal);
   btn.showsTouchWhenHighlighted = true;
-  btn.contentMode = UIViewContentMode.scaleAspectFit;
+  btn.contentMode = UIViewContentModeScaleAspectFit;
   btn.alpha = 0.3;
   return btn;
 }

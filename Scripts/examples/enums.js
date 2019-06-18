@@ -18,22 +18,6 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
-const UIViewContentMode = {
-  scaleToFill: 0,
-  scaleAspectFit: 1,
-  scaleAspectFill: 2,
-  redraw: 3,
-  center: 4,
-  top: 5,
-  bottom: 6,
-  left: 7,
-  right: 8,
-  topLeft: 9,
-  topRight: 10,
-  bottomLeft: 11,
-  bottomRight: 12,
-};
-
 const UIBarStyle = {
   default: 0,
   black: 1,
@@ -176,7 +160,6 @@ module.exports.NSFontAttributeName = 'NSFont';
 module.exports.NSKernAttributeName = 'NSKern';
 module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
-module.exports.UIViewContentMode = UIViewContentMode;
 module.exports.UIBarStyle = UIBarStyle;
 module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
