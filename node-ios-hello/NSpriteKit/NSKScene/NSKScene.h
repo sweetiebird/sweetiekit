@@ -14,6 +14,10 @@
 #define to_value_SKScene(x) to_value_wrapper(x, SKScene)
 #define is_value_SKScene(x) is_value_wrapper(x, SKScene)
 
+#define js_value_SKSceneScaleMode(x) JS_ENUM(SKSceneScaleMode, NSInteger, x)
+#define to_value_SKSceneScaleMode(x) TO_ENUM(SKSceneScaleMode, NSInteger, x)
+#define is_value_SKSceneScaleMode(x) IS_ENUM(SKSceneScaleMode, NSInteger, x)
+
 JS_WRAP_CLASS(SKScene, SKNode);
   JS_METHOD(sceneWithSize);
   JS_METHOD(convertPointFromView);

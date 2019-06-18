@@ -30,6 +30,15 @@ JS_INIT_CLASS(SKScene, SKNode);
   // static members (ctor)
   JS_INIT_CTOR(SKScene, SKNode);
   JS_ASSIGN_METHOD(ctor, sceneWithSize);
+  // constants (exports)
+
+  //typedef NS_ENUM(NSInteger, SKSceneScaleMode) {
+    JS_ASSIGN_ENUM(SKSceneScaleModeFill, NSInteger); //             /* Scale the SKScene to fill the entire SKView. */
+    JS_ASSIGN_ENUM(SKSceneScaleModeAspectFill, NSInteger); //       /* Scale the SKScene to fill the SKView while preserving the scene's aspect ratio. Some cropping may occur if the view has a different aspect ratio. */
+    JS_ASSIGN_ENUM(SKSceneScaleModeAspectFit, NSInteger); //        /* Scale the SKScene to fit within the SKView while preserving the scene's aspect ratio. Some letterboxing may occur if the view has a different aspect ratio. */
+    JS_ASSIGN_ENUM(SKSceneScaleModeResizeFill, NSInteger); //       /* Modify the SKScene's actual size to exactly match the SKView. */
+  //} NS_ENUM_AVAILABLE(10_9, 7_0);
+
 JS_INIT_CLASS_END(SKScene, SKNode);
 
 NAN_METHOD(NSKScene::New) {
@@ -89,36 +98,19 @@ NAN_METHOD(NSKScene::convertPointToView) {
 }
 
 NAN_GETTER(NSKScene::scaleModeGetter) {
-  Nan::HandleScope scope;
-  
-  Nan::ThrowError("NSKScene::scaleModeGetter not yet implemented");
+  JS_UNWRAP(SKScene, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SKSceneScaleMode([self scaleMode]));
+  }
 }
 
 NAN_SETTER(NSKScene::scaleModeSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKScene, scene);
-
-  std::string mode;
-  if (value->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(value));
-    mode = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
+  JS_UNWRAP(SKScene, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SKSceneScaleMode, input);
+    [self setScaleMode: input];
   }
-  
-  NSString *str = [NSString stringWithUTF8String:mode.c_str()];
-  SKSceneScaleMode scaleMode = SKSceneScaleModeFill;
-
-  if ([str isEqualToString:@"aspectFill"]) {
-    scaleMode = SKSceneScaleModeAspectFill;
-  } else if ([str isEqualToString:@"aspectFit"]) {
-    scaleMode = SKSceneScaleModeAspectFit;
-  } else if ([str isEqualToString:@"resizeFill"]) {
-    scaleMode = SKSceneScaleModeResizeFill;
-  }
-  
-  [scene setScaleMode:scaleMode];
 }
 
 NAN_GETTER(NSKScene::touchesBeganGetter) {

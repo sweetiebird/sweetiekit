@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const SKSceneScaleMode = require('./enums').SKSceneScaleMode;
-
 const math = require('./helpers').math;
 
 const v2 = (...args) => {
@@ -156,7 +154,7 @@ function makeDemo(navigation, dvc) {
   function makeScene(demoVC) {
     const scn = new SKScene();
     scn.anchorPoint = { x: 0.5, y: 0.5 };
-    scn.scaleMode = SKSceneScaleMode.aspectFill;
+    scn.scaleMode = SKSceneScaleModeAspectFill;
     scn.size = { width: demoVC.view.bounds.width, height: demoVC.view.bounds.height };
     const bg = new SKSpriteNode('game_bg');
     bg.size = { width: demoVC.view.bounds.width, height: demoVC.view.bounds.height };

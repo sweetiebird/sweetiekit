@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const SKSceneScaleMode = require('./enums').SKSceneScaleMode;
-
 const math = require('./helpers').math;
 
 const {
@@ -79,7 +77,7 @@ function makeScene(demoVC) {
   const size = { width: w, height: h };
   scene = SKScene.sceneWithSize(size);
   scene.backgroundColor = RGB( 135, 206, 250 );
-  scene.scaleMode = SKSceneScaleMode.resizeFill;
+  scene.scaleMode = SKSceneScaleModeResizeFill;
   scene.touchesEnded = touchesEnded;
   scene.physicsWorld.gravity = { dx: 0, dy: 0 };
 }
