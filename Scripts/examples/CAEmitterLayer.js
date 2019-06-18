@@ -16,7 +16,7 @@ async function make(nav, demoVC) {
   cell.velocity = 100;
   cell.scale = 0.1;
   cell.emissionRange = Math.PI * 2.0;
-  cell.contents = UIImage('laarc');
+  cell.contents = UIImage('nic');
 
   layer.emitterCells = [cell];
 

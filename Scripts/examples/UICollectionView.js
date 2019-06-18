@@ -62,9 +62,9 @@ function handleCellSelected(collectionView, path) {
   console.log('handleCellSelected', collectionView, path, cell);
   if (cell) {
     cell.layer.borderColor = UIColor.clear;
-    cell.layer.borderWidth = 3;
+    cell.layer.borderWidth = 2;
     UIView.animateWithDurationAnimations(0.5, () => {
-      cell.layer.borderColor = colors.getTheme().activeColor;
+      cell.layer.borderColor = colors.getTheme().trimColor;
     });
   }
 }

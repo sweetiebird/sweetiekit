@@ -94,8 +94,8 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     length: placeholderText.length,
   });
   field.attributedPlaceholder = attrPlaceholder;
-  field.autocorrectionType = UITextAutocorrectionTypeNone;
-  field.spellCheckingType = UITextSpellCheckingTypeNone;
+  field.autocorrectionType = UITextAutocorrectionTypeNo;
+  field.spellCheckingType = UITextSpellCheckingTypeNo;
   return field;
 }
 
