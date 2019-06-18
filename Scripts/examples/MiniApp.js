@@ -4,9 +4,6 @@ const colors = require('./colors');
 
 const {
   NSParagraphStyleAttributeName,
-  UITableViewSelectionStyle,
-  UITableViewCellSeparatorStyle,
-  UITableViewCellStyle,
 }= require('./enums');
 
 const {
@@ -317,7 +314,7 @@ function makePartyTable() {
   const mgr = new UITableViewManager(() => {
     return party.length;
   }, (_, { row }) => {
-    const cell = new UITableViewCell(UITableViewCellStyle.subtitle);
+    const cell = new UITableViewCell(UITableViewCellStyleSubtitle);
     const person = party[row];
     cell.textLabel.text = person.name;
     cell.textLabel.textColor = colors.white;
@@ -329,7 +326,7 @@ function makePartyTable() {
       };
     }
     cell.backgroundColor = colors.clear;
-    cell.selectionStyle = UITableViewSelectionStyle.none;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
   });
 
@@ -381,7 +378,7 @@ function makeInnerAppControllers(nav) {
   }, UIControlEventTouchUpInside);
 
   makePartyTable();
-  partyTable.separatorStyle = UITableViewCellSeparatorStyle.none;
+  partyTable.separatorStyle = UITableViewCellSeparatorStyleNone;
   partyTable.backgroundColor = colors.clear;
   partyVC.view.addSubview(partyTable);
 
@@ -458,7 +455,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 
       cell.textLabel.attributedText = attrText;
 
-      cell.selectionStyle = UITableViewSelectionStyle.none;
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
       return cell;
     });
@@ -479,7 +476,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 
     const slideView = new UITableView({ x: w * i, y: contentY, width: w, height: viewH - contentY });
     slideView.backgroundColor = UIColor.clear;
-    slideView.separatorStyle = UITableViewCellSeparatorStyle.none;
+    slideView.separatorStyle = UITableViewCellSeparatorStyleNone;
     slideView.delegate = del;
     slideView.dataSource = del;
 

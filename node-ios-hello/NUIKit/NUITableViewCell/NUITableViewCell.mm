@@ -18,6 +18,59 @@ JS_INIT_CLASS(UITableViewCell, UIView);
   JS_ASSIGN_PROP(proto, selectionStyle);
   // static members (ctor)
   JS_INIT_CTOR(UITableViewCell, UIView);
+  // constants (exports)
+
+//typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
+  JS_ASSIGN_ENUM(UITableViewCellStyleDefault, NSInteger); //    // Simple cell with text label and optional image view (behavior of UITableViewCell in iPhoneOS 2.x)
+  JS_ASSIGN_ENUM(UITableViewCellStyleValue1, NSInteger); //      // Left aligned label on left and right aligned label on right with blue text (Used in Settings)
+  JS_ASSIGN_ENUM(UITableViewCellStyleValue2, NSInteger); //      // Right aligned label on left with blue text and left aligned label on right (Used in Phone/Contacts)
+  JS_ASSIGN_ENUM(UITableViewCellStyleSubtitle, NSInteger); //   // Left aligned label on top and left aligned label on bottom with gray text (Used in iPod).
+//};             // available in iPhone OS 3.0
+
+//typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
+  JS_ASSIGN_ENUM(UITableViewCellSeparatorStyleNone, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellSeparatorStyleSingleLine, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellSeparatorStyleSingleLineEtched, NSInteger); //  NS_ENUM_DEPRECATED_IOS(2_0, 11_0, "Use UITableViewCellSeparatorStyleSingleLine for a single line separator.")
+//} __TVOS_PROHIBITED;
+
+//typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
+  JS_ASSIGN_ENUM(UITableViewCellSelectionStyleNone, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellSelectionStyleBlue, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellSelectionStyleGray, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellSelectionStyleDefault, NSInteger); //  NS_ENUM_AVAILABLE_IOS(7_0)
+//};
+
+//typedef NS_ENUM(NSInteger, UITableViewCellFocusStyle) {
+  JS_ASSIGN_ENUM(UITableViewCellFocusStyleDefault, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellFocusStyleCustom, NSInteger);
+//} NS_ENUM_AVAILABLE_IOS(9_0);
+
+//typedef NS_ENUM(NSInteger, UITableViewCellEditingStyle) {
+  JS_ASSIGN_ENUM(UITableViewCellEditingStyleNone, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellEditingStyleDelete, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellEditingStyleInsert, NSInteger);
+//};
+
+//typedef NS_ENUM(NSInteger, UITableViewCellAccessoryType) {
+  JS_ASSIGN_ENUM(UITableViewCellAccessoryNone, NSInteger); //                                                        // don't show any accessory view
+  JS_ASSIGN_ENUM(UITableViewCellAccessoryDisclosureIndicator, NSInteger); //                                         // regular chevron. doesn't track
+  JS_ASSIGN_ENUM(UITableViewCellAccessoryDetailDisclosureButton, NSInteger); //  __TVOS_PROHIBITED,                 // info button w/ chevron. tracks
+  JS_ASSIGN_ENUM(UITableViewCellAccessoryCheckmark, NSInteger); //                                                   // checkmark. doesn't track
+  JS_ASSIGN_ENUM(UITableViewCellAccessoryDetailButton, NSInteger); //  NS_ENUM_AVAILABLE_IOS(7_0)  __TVOS_PROHIBITED // info button. tracks
+//};
+
+//typedef NS_OPTIONS(NSUInteger, UITableViewCellStateMask) {
+  JS_ASSIGN_ENUM(UITableViewCellStateDefaultMask, NSUInteger); //                      = 0,
+  JS_ASSIGN_ENUM(UITableViewCellStateShowingEditControlMask, NSUInteger); //           = 1 << 0,
+  JS_ASSIGN_ENUM(UITableViewCellStateShowingDeleteConfirmationMask, NSUInteger); //    = 1 << 1
+//};
+
+//typedef NS_ENUM(NSInteger, UITableViewCellDragState) {
+  JS_ASSIGN_ENUM(UITableViewCellDragStateNone, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewCellDragStateLifting, NSInteger); //   // The cell is lifting from the table view before it joins the drag session.
+  JS_ASSIGN_ENUM(UITableViewCellDragStateDragging, NSInteger); //  // The cell is involved in a drag session.
+//} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
 JS_INIT_CLASS_END(UITableViewCell, UIView);
 
 NAN_METHOD(NUITableViewCell::New) {

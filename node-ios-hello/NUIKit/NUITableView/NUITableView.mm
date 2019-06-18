@@ -56,6 +56,46 @@ JS_INIT_CLASS(UITableView, UIScrollView);
 //UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension NS_AVAILABLE_IOS(5_0);
   JS_ASSIGN_ENUM(UITableViewAutomaticDimension, CGFloat);
 
+//typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) {
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleDefault, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleDestructive, NSInteger); //  = UITableViewRowActionStyleDefault,
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleNormal, NSInteger);
+//} NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;
+
+//typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) {
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleDefault, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleDestructive, NSInteger); //  = UITableViewRowActionStyleDefault,
+  JS_ASSIGN_ENUM(UITableViewRowActionStyleNormal, NSInteger);
+//} NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;
+
+//typedef NS_ENUM(NSInteger, UITableViewSeparatorInsetReference) {
+  // The value set to the separatorInset property is interpreted as an offset from the edges of the cell.
+  JS_ASSIGN_ENUM(UITableViewSeparatorInsetFromCellEdges, NSInteger);
+  
+  // The value set to the separatorInset property is interpreted as an offset from the automatic separator insets.
+  JS_ASSIGN_ENUM(UITableViewSeparatorInsetFromAutomaticInsets, NSInteger);
+//} API_AVAILABLE(ios(11.0), tvos(11.0));
+
+//typedef NS_ENUM(NSInteger, UITableViewDropIntent) {
+  // Table view will accept the drop, but the location is not yet known and will be determined later.
+  // Will not open a gap. You may wish to provide some visual treatment to communicate this to the user.
+  JS_ASSIGN_ENUM(UITableViewDropIntentUnspecified, NSInteger);
+  
+  // The drop will be placed in row(s) inserted at the destination index path.
+  // Opens a gap at the specified location simulating the final dropped layout.
+  JS_ASSIGN_ENUM(UITableViewDropIntentInsertAtDestinationIndexPath, NSInteger);
+  
+  // The drop will be placed inside the row at the destination index path (e.g. the row is a container of other items).
+  // Will not open a gap. Table view will highlight the row at the destination index path.
+  JS_ASSIGN_ENUM(UITableViewDropIntentInsertIntoDestinationIndexPath, NSInteger);
+  
+  // The table view will automatically choose between .insertAtDestinationIndexPath and
+  // .insertIntoDestinationIndexPath depending on the position of the drop. This should be used instead
+  // of .insertIntoDestinationIndexPath when the item being dropped can either be placed inside the row
+  // at the destination index path or inserted in a new row at the index path of the container row.
+  JS_ASSIGN_ENUM(UITableViewDropIntentAutomatic, NSInteger);
+//} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
 JS_INIT_CLASS_END(UITableView, UIScrollView);
 
 NAN_METHOD(NUITableView::New) {

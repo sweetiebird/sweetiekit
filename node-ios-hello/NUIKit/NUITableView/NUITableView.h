@@ -26,6 +26,18 @@
 #define to_value_UITableViewRowAnimation(x) TO_ENUM(UITableViewRowAnimation, NSInteger, x)
 #define is_value_UITableViewRowAnimation(x) IS_ENUM(UITableViewRowAnimation, NSInteger, x)
 
+#define js_value_UITableViewRowActionStyle(x) JS_ENUM(UITableViewRowActionStyle, NSInteger, x)
+#define to_value_UITableViewRowActionStyle(x) TO_ENUM(UITableViewRowActionStyle, NSInteger, x)
+#define is_value_UITableViewRowActionStyle(x) IS_ENUM(UITableViewRowActionStyle, NSInteger, x)
+
+#define js_value_UITableViewSeparatorInsetReference(x) JS_ENUM(UITableViewSeparatorInsetReference, NSInteger, x)
+#define to_value_UITableViewSeparatorInsetReference(x) TO_ENUM(UITableViewSeparatorInsetReference, NSInteger, x)
+#define is_value_UITableViewSeparatorInsetReference(x) IS_ENUM(UITableViewSeparatorInsetReference, NSInteger, x)
+
+#define js_value_UITableViewDropIntent(x) JS_ENUM(UITableViewDropIntent, NSInteger, x)
+#define to_value_UITableViewDropIntent(x) TO_ENUM(UITableViewDropIntent, NSInteger, x)
+#define is_value_UITableViewDropIntent(x) IS_ENUM(UITableViewDropIntent, NSInteger, x)
+
 JS_WRAP_CLASS(UITableView, UIScrollView);
   JS_METHOD(DequeueReusableCell);
   JS_METHOD(DequeueReusableCellWithIdentifierForIndexPath);

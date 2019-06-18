@@ -24,18 +24,6 @@ const ARWorldAlignment = {
   gravityAndHeading: 2,
 };
 
-const UITableViewSelectionStyle = {
-  none: 0,
-  blue: 1,
-  gray: 2,
-  default: 3,
-};
-
-const UITableViewCellSeparatorStyle = {
-  none: 0,
-  singleLine: 1,
-};
-
 const UIStackViewDistribution = {
   fill: 0,
   fillEqually: 1,
@@ -53,13 +41,6 @@ const UIStackViewAlignment = {
   trailing: 5,
   bottom: 6,
   lastBaseline: 7,
-};
-
-const UITableViewCellStyle = {
-  default: 0,
-  value1: 1,
-  value2: 2,
-  subtitle: 3,
 };
 
 module.exports.ARHitTestResultType = {
@@ -123,8 +104,5 @@ module.exports.NSKernAttributeName = 'NSKern';
 module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
 module.exports.ARWorldAlignment = ARWorldAlignment;
-module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;
-module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;
 module.exports.UIStackViewDistribution = UIStackViewDistribution;
 module.exports.UIStackViewAlignment = UIStackViewAlignment;
-module.exports.UITableViewCellStyle = UITableViewCellStyle;
