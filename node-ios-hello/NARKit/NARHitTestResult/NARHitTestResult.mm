@@ -26,8 +26,6 @@ NAN_METHOD(NARHitTestResult::New) {
     ARHitTestResult* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge ARHitTestResult *)(info[0].As<External>()->Value());
-    } else if (info.Length() <= 0) {
-      self = [ARHitTestResult alloc];
     }
     if (self) {
       NARHitTestResult *wrapper = new NARHitTestResult();

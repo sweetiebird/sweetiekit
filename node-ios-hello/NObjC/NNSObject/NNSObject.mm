@@ -682,6 +682,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIToolbar.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
+#include "NUITextInputPasswordRules.h"
 #include "NUITextField.h"
 #include "NUITextInputMode.h"
 #include "NUIStoryboard.h"
@@ -959,6 +960,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIStoryboard);
     JS_EXPORT_TYPE(UIButton);
     JS_EXPORT_TYPE(UITextInputMode);
+    JS_EXPORT_TYPE(UITextInputPasswordRules);
     JS_EXPORT_TYPE(UITextField);
     JS_EXPORT_TYPE(UIStepper);
     JS_EXPORT_TYPE(UISegmentedControl);
@@ -1399,6 +1401,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIImage);
       JS_RETURN_TYPE(UIImageView);
       JS_RETURN_TYPE(UIStoryboard);
+      JS_RETURN_TYPE(UITextInputPasswordRules);
       JS_RETURN_TYPE(UITextField);
       JS_RETURN_TYPE(UITextInputMode);
       JS_RETURN_TYPE(UISwitch);

@@ -59,9 +59,200 @@ JS_INIT_CLASS(UITextField, UIControl);
   JS_ASSIGN_PROTO_PROP(inputAccessoryView);
   JS_ASSIGN_PROTO_PROP(clearsOnInsertion);
 
+// UITextField
+  JS_ASSIGN_PROTO_PROP(autocapitalizationType);
+  JS_ASSIGN_PROTO_PROP(autocorrectionType);
+  JS_ASSIGN_PROTO_PROP(spellCheckingType);
+  JS_ASSIGN_PROTO_PROP(smartQuotesType);
+  JS_ASSIGN_PROTO_PROP(smartDashesType);
+  JS_ASSIGN_PROTO_PROP(smartInsertDeleteType);
+  JS_ASSIGN_PROTO_PROP(keyboardType);
+  JS_ASSIGN_PROTO_PROP(keyboardAppearance);
+  JS_ASSIGN_PROTO_PROP(returnKeyType);
+  JS_ASSIGN_PROTO_PROP(enablesReturnKeyAutomatically);
+  JS_ASSIGN_PROTO_PROP(isSecureTextEntry);
+  JS_ASSIGN_PROTO_PROP(textContentType);
+  JS_ASSIGN_PROTO_PROP(passwordRules);
+
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
   JS_ASSIGN_STATIC_METHOD(initWithFrameCallback);
+  
+  // constants (exports)
+
+//
+// UITextAutocapitalizationType
+//
+// Controls autocapitalization behavior for a text widget.
+// Note: Capitalization does not apply in all script systems. In such
+// cases, these values are ignored by the keyboard/input method implementation.
+//
+
+//typedef NS_ENUM(NSInteger, UITextAutocapitalizationType) {
+  JS_ASSIGN_ENUM(UITextAutocapitalizationTypeNone, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextAutocapitalizationTypeWords, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextAutocapitalizationTypeSentences, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextAutocapitalizationTypeAllCharacters, NSInteger); //  
+//};
+
+//
+// UITextAutocorrectionType
+//
+// Controls keyboard autocorrection behavior for a text widget.
+// Note: Some input methods do not support inline autocorrection, and 
+// instead use a conversion and/or candidate selection methodology. In such
+// cases, these values are ignored by the keyboard/input method implementation.
+//
+
+//typedef NS_ENUM(NSInteger, UITextAutocorrectionType) {
+  JS_ASSIGN_ENUM(UITextAutocorrectionTypeDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextAutocorrectionTypeNo, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextAutocorrectionTypeYes, NSInteger); //  
+//};
+
+//
+// UITextSpellCheckingType
+//
+// Controls the annotation of misspelled words for a text widget.
+// Note: Some input methods do not support spell checking.
+
+//typedef NS_ENUM(NSInteger, UITextSpellCheckingType) {
+  JS_ASSIGN_ENUM(UITextSpellCheckingTypeDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSpellCheckingTypeNo, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSpellCheckingTypeYes, NSInteger); //  
+//} NS_ENUM_AVAILABLE_IOS(5_0);
+
+//
+// UITextSmartQuotesType
+//
+// Controls the automatic conversion of typographic quote characters for a text widget.
+
+//typedef NS_ENUM(NSInteger, UITextSmartQuotesType) {
+  JS_ASSIGN_ENUM(UITextSmartQuotesTypeDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartQuotesTypeNo, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartQuotesTypeYes, NSInteger); //  
+//} NS_ENUM_AVAILABLE_IOS(11_0);
+
+//
+// UITextSmartDashesType
+//
+// Controls the automatic conversion of hyphens into en/em-dashes for a text widget.
+
+//typedef NS_ENUM(NSInteger, UITextSmartDashesType) {
+  JS_ASSIGN_ENUM(UITextSmartDashesTypeDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartDashesTypeNo, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartDashesTypeYes, NSInteger); //  
+//} NS_ENUM_AVAILABLE_IOS(11_0);
+
+//
+// UITextSmartInsertDeleteType
+//
+// Controls the automatic insertion/removal of spaces for a text widget.
+
+//typedef NS_ENUM(NSInteger, UITextSmartInsertDeleteType) {
+  JS_ASSIGN_ENUM(UITextSmartInsertDeleteTypeDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartInsertDeleteTypeNo, NSInteger); //  
+  JS_ASSIGN_ENUM(UITextSmartInsertDeleteTypeYes, NSInteger); //  
+//} NS_ENUM_AVAILABLE_IOS(11_0);
+
+//
+// UIKeyboardType
+//
+// Requests that a particular keyboard type be displayed when a text widget
+// becomes first responder. 
+// Note: Some keyboard/input methods types may not support every variant. 
+// In such cases, the input method will make a best effort to find a close 
+// match to the requested type (e.g. displaying UIKeyboardTypeNumbersAndPunctuation 
+// type if UIKeyboardTypeNumberPad is not supported).
+//
+
+//typedef NS_ENUM(NSInteger, UIKeyboardType) {
+  JS_ASSIGN_ENUM(UIKeyboardTypeDefault, NSInteger); //                  // Default type for the current input method.
+  JS_ASSIGN_ENUM(UIKeyboardTypeASCIICapable, NSInteger); //             // Displays a keyboard which can enter ASCII characters
+  JS_ASSIGN_ENUM(UIKeyboardTypeNumbersAndPunctuation, NSInteger); //    // Numbers and assorted punctuation.
+  JS_ASSIGN_ENUM(UIKeyboardTypeURL, NSInteger); //                      // A type optimized for URL entry (shows . / .com prominently).
+  JS_ASSIGN_ENUM(UIKeyboardTypeNumberPad, NSInteger); //                // A number pad with locale-appropriate digits (0-9, ۰-۹, ०-९, etc.). Suitable for PIN entry.
+  JS_ASSIGN_ENUM(UIKeyboardTypePhonePad, NSInteger); //                 // A phone pad (1-9, *, 0, #, with letters under the numbers).
+  JS_ASSIGN_ENUM(UIKeyboardTypeNamePhonePad, NSInteger); //             // A type optimized for entering a person's name or phone number.
+  JS_ASSIGN_ENUM(UIKeyboardTypeEmailAddress, NSInteger); //             // A type optimized for multiple email address entry (shows space @ . prominently).
+  JS_ASSIGN_ENUM(UIKeyboardTypeDecimalPad, NSInteger); //  NS_ENUM_AVAILABLE_IOS(4_1),   // A number pad with a decimal point.
+  JS_ASSIGN_ENUM(UIKeyboardTypeTwitter, NSInteger); //  NS_ENUM_AVAILABLE_IOS(5_0),      // A type optimized for twitter text entry (easy access to @ #)
+  JS_ASSIGN_ENUM(UIKeyboardTypeWebSearch, NSInteger); //  NS_ENUM_AVAILABLE_IOS(7_0),    // A default keyboard type with URL-oriented addition (shows space . prominently).
+  JS_ASSIGN_ENUM(UIKeyboardTypeASCIICapableNumberPad, NSInteger); //  NS_ENUM_AVAILABLE_IOS(10_0), // A number pad (0-9) that will always be ASCII digits.
+
+  JS_ASSIGN_ENUM(UIKeyboardTypeAlphabet, NSInteger); //  = UIKeyboardTypeASCIICapable, // Deprecated
+
+//};
+
+//
+// UIKeyboardAppearance
+//
+// Requests a keyboard appearance be used when a text widget
+// becomes first responder.. 
+// Note: Some keyboard/input methods types may not support every variant. 
+// In such cases, the input method will make a best effort to find a close 
+// match to the requested type.
+//
+
+//typedef NS_ENUM(NSInteger, UIKeyboardAppearance) {
+  JS_ASSIGN_ENUM(UIKeyboardAppearanceDefault, NSInteger); //            // Default apperance for the current input method.
+  JS_ASSIGN_ENUM(UIKeyboardAppearanceDark, NSInteger); //  NS_ENUM_AVAILABLE_IOS(7_0),
+  JS_ASSIGN_ENUM(UIKeyboardAppearanceLight, NSInteger); //  NS_ENUM_AVAILABLE_IOS(7_0),
+  JS_ASSIGN_ENUM(UIKeyboardAppearanceAlert, NSInteger); //  = UIKeyboardAppearanceDark,  // Deprecated
+//};
+
+//
+// UIReturnKeyType
+//
+// Controls the display of the return key. 
+//
+// Note: This enum is under discussion and may be replaced with a 
+// different implementation.
+//
+
+//typedef NS_ENUM(NSInteger, UIReturnKeyType) {
+  JS_ASSIGN_ENUM(UIReturnKeyDefault, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyGo, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyGoogle, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyJoin, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyNext, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyRoute, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeySearch, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeySend, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyYahoo, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyDone, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyEmergencyCall, NSInteger); //  
+  JS_ASSIGN_ENUM(UIReturnKeyContinue, NSInteger); //  NS_ENUM_AVAILABLE_IOS(9_0),
+//};
+
+  JS_ASSIGN_ENUM(UITextContentTypeName, UITextContentType); //                       NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeNamePrefix, UITextContentType); //                 NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeGivenName, UITextContentType); //                  NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeMiddleName, UITextContentType); //                 NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeFamilyName, UITextContentType); //                 NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeNameSuffix, UITextContentType); //                 NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeNickname, UITextContentType); //                   NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeJobTitle, UITextContentType); //                   NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeOrganizationName, UITextContentType); //           NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeLocation, UITextContentType); //                   NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeFullStreetAddress, UITextContentType); //          NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeStreetAddressLine1, UITextContentType); //         NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeStreetAddressLine2, UITextContentType); //         NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeAddressCity, UITextContentType); //                NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeAddressState, UITextContentType); //               NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeAddressCityAndState, UITextContentType); //        NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeSublocality, UITextContentType); //                NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeCountryName, UITextContentType); //                NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypePostalCode, UITextContentType); //                 NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeTelephoneNumber, UITextContentType); //            NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeEmailAddress, UITextContentType); //               NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeURL, UITextContentType); //                        NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeCreditCardNumber, UITextContentType); //           NS_AVAILABLE_IOS(10_0);
+  JS_ASSIGN_ENUM(UITextContentTypeUsername, UITextContentType); //                   NS_AVAILABLE_IOS(11_0);
+  JS_ASSIGN_ENUM(UITextContentTypePassword, UITextContentType); //                   NS_AVAILABLE_IOS(11_0);
+  JS_ASSIGN_ENUM(UITextContentTypeNewPassword, UITextContentType); //                NS_AVAILABLE_IOS(12_0);
+  JS_ASSIGN_ENUM(UITextContentTypeOneTimeCode, UITextContentType); //                NS_AVAILABLE_IOS(12_0);
+
 JS_INIT_CLASS_END(UITextField, UIControl);
 
 NAN_METHOD(NUITextField::New) {
@@ -131,22 +322,6 @@ NAN_SETTER(NUITextField::callbackSetter) {
   declare_autoreleasepool {
     declare_setter();
     declare_persistent_function(callback, @"sweetiekit.UITextField.initWithFrameCallback");
-  }
-}
-
-NAN_GETTER(NUITextField::autocorrectionTypeGetter) {
-  JS_UNWRAP(UITextField, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSInteger([self autocorrectionType]));
-  }
-}
-
-NAN_SETTER(NUITextField::autocorrectionTypeSetter) {
-  JS_UNWRAP(UITextField, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_value(NSInteger, input);
-    [self setAutocorrectionType:(UITextAutocorrectionType)input];
   }
 }
 
@@ -643,6 +818,219 @@ NAN_SETTER(NUITextField::clearsOnInsertionSetter) {
     declare_setter();
     declare_value(BOOL, input);
     [self setClearsOnInsertion: input];
+  }
+}
+
+// --------- UITextField ----------------
+
+NAN_GETTER(NUITextField::autocapitalizationTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextAutocapitalizationType([self autocapitalizationType]));
+  }
+}
+
+NAN_SETTER(NUITextField::autocapitalizationTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextAutocapitalizationType, input);
+    [self setAutocapitalizationType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::autocorrectionTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextAutocorrectionType([self autocorrectionType]));
+  }
+}
+
+NAN_SETTER(NUITextField::autocorrectionTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextAutocorrectionType, input);
+    [self setAutocorrectionType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::spellCheckingTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextSpellCheckingType([self spellCheckingType]));
+  }
+}
+
+NAN_SETTER(NUITextField::spellCheckingTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextSpellCheckingType, input);
+    [self setSpellCheckingType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::smartQuotesTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextSmartQuotesType([self smartQuotesType]));
+  }
+}
+
+NAN_SETTER(NUITextField::smartQuotesTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextSmartQuotesType, input);
+    [self setSmartQuotesType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::smartDashesTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextSmartDashesType([self smartDashesType]));
+  }
+}
+
+
+NAN_SETTER(NUITextField::smartDashesTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextSmartDashesType, input);
+    [self setSmartDashesType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::smartInsertDeleteTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextSmartInsertDeleteType([self smartInsertDeleteType]));
+  }
+}
+
+NAN_SETTER(NUITextField::smartInsertDeleteTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextSmartInsertDeleteType, input);
+    [self setSmartInsertDeleteType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::keyboardTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIKeyboardType([self keyboardType]));
+  }
+}
+
+NAN_SETTER(NUITextField::keyboardTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIKeyboardType, input);
+    [self setKeyboardType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::keyboardAppearanceGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIKeyboardAppearance([self keyboardAppearance]));
+  }
+}
+
+NAN_SETTER(NUITextField::keyboardAppearanceSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIKeyboardAppearance, input);
+    [self setKeyboardAppearance: input];
+  }
+}
+
+NAN_GETTER(NUITextField::returnKeyTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIReturnKeyType([self returnKeyType]));
+  }
+}
+
+NAN_SETTER(NUITextField::returnKeyTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIReturnKeyType, input);
+    [self setReturnKeyType: input];
+  }
+}
+
+NAN_GETTER(NUITextField::enablesReturnKeyAutomaticallyGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self enablesReturnKeyAutomatically]));
+  }
+}
+
+NAN_SETTER(NUITextField::enablesReturnKeyAutomaticallySetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setEnablesReturnKeyAutomatically: input];
+  }
+}
+
+NAN_GETTER(NUITextField::isSecureTextEntryGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isSecureTextEntry]));
+  }
+}
+
+NAN_SETTER(NUITextField::isSecureTextEntrySetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setSecureTextEntry: input];
+  }
+}
+
+NAN_GETTER(NUITextField::textContentTypeGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextContentType([self textContentType]));
+  }
+}
+
+NAN_SETTER(NUITextField::textContentTypeSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITextContentType, input);
+    [self setTextContentType: input];
+  }
+}
+
+#include "NUITextInputPasswordRules.h"
+
+NAN_GETTER(NUITextField::passwordRulesGetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITextInputPasswordRules([self passwordRules]));
+  }
+}
+
+NAN_SETTER(NUITextField::passwordRulesSetter) {
+  JS_UNWRAP(UITextField, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UITextInputPasswordRules, input);
+    [self setPasswordRules: input];
   }
 }
 

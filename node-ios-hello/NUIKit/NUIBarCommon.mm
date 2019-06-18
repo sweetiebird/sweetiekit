@@ -58,7 +58,7 @@ NAN_METHOD(NUIBarCommon::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIBarCommon *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIBarCommon alloc]; // TODO: init causes layout issues
+      self = [[UIBarCommon alloc] init];
     }
     if (self) {
       NUIBarCommon *wrapper = new NUIBarCommon();

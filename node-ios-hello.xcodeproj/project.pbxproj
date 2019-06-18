@@ -121,6 +121,7 @@
 		A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EA522B81650006CC5F2 /* NNSDateComponents.mm */; };
 		A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */; };
 		A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */; };
+		A1574EB722B88759006CC5F2 /* NUITextInputPasswordRules.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -575,6 +576,8 @@
 		A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStepper.mm; sourceTree = "<group>"; };
 		A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISegmentedControl.mm; sourceTree = "<group>"; };
 		A1574EAE22B82030006CC5F2 /* NUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISegmentedControl.h; sourceTree = "<group>"; };
+		A1574EB522B88758006CC5F2 /* NUITextInputPasswordRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInputPasswordRules.h; sourceTree = "<group>"; };
+		A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputPasswordRules.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1872,6 +1875,15 @@
 				A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */,
 			);
 			path = NUISegmentedControl;
+			sourceTree = "<group>";
+		};
+		A1574EB422B88758006CC5F2 /* NUITextInputPasswordRules */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EB522B88758006CC5F2 /* NUITextInputPasswordRules.h */,
+				A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */,
+			);
+			path = NUITextInputPasswordRules;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3201,6 +3213,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EB422B88758006CC5F2 /* NUITextInputPasswordRules */,
 				A1574EAC22B82030006CC5F2 /* NUISegmentedControl */,
 				A1574EA822B81CA9006CC5F2 /* NUIStepper */,
 				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
@@ -3919,6 +3932,7 @@
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A174A48A22B1945300415AD8 /* NUISearchController.mm in Sources */,
 				A19F39F522AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm in Sources */,
+				A1574EB722B88759006CC5F2 /* NUITextInputPasswordRules.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,

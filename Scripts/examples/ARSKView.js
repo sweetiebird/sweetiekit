@@ -9,8 +9,6 @@ const {
   NSKernAttributeName,
   NSStrokeColorAttributeName,
   NSStrokeWidthAttributeName,
-  UITextAutocorrectionType,
-  UITextSpellCheckingType,
   UIImageOrientation,
 } = require('./enums');
 
@@ -104,8 +102,8 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     length: placeholderText.length,
   });
   field.attributedPlaceholder = attrPlaceholder;
-  field.autocorrectionType = UITextAutocorrectionType.none;
-  field.spellCheckingType = UITextSpellCheckingType.none;
+  field.autocorrectionType = UITextAutocorrectionTypeNone;
+  field.spellCheckingType = UITextSpellCheckingTypeNone;
   return field;
 }
 

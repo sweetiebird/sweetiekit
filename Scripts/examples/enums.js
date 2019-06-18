@@ -62,19 +62,6 @@ const UITableViewCellStyle = {
   subtitle: 3,
 };
 
-const UIModalPresentationStyle = {
-  none: -1,
-  fullScreen: 0,
-  pageSheet: 1,
-  formSheet: 2,
-  currentContext: 3,
-  custom: 4,
-  overFullScreen: 5,
-  overCurrentContext: 6,
-  blurOverFullScreen: 7,
-  popover: 8,
-};
-
 module.exports.ARHitTestResultType = {
   /** Result type from intersecting the nearest feature point. */
   featurePoint                                        : (1 << 0),
@@ -93,18 +80,6 @@ module.exports.ARHitTestResultType = {
 
   /** Result type from intersecting with an existing plane anchor, taking into account the plane’s geometry. */
   existingPlaneUsingGeometry                          : (1 << 5),
-};
-
-const UITextAutocorrectionType = {
-  default: 0,
-  none: 1,
-  yes: 2,
-};
-
-const UITextSpellCheckingType = {
-  default: 0,
-  none: 1,
-  yes: 2,
 };
 
 module.exports.MDLMaterialSemantic = {
@@ -153,7 +128,4 @@ module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;
 module.exports.UIStackViewDistribution = UIStackViewDistribution;
 module.exports.UIStackViewAlignment = UIStackViewAlignment;
 module.exports.UITableViewCellStyle = UITableViewCellStyle;
-module.exports.UIModalPresentationStyle = UIModalPresentationStyle;
-module.exports.UITextAutocorrectionType = UITextAutocorrectionType;
-module.exports.UITextSpellCheckingType = UITextSpellCheckingType;
 module.exports.UIImageOrientation = UIKit.UIImageOrientation;
