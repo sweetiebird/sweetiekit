@@ -133,6 +133,8 @@
 		A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ED722B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm */; };
 		A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ED922B8D96B006CC5F2 /* NUICollectionViewUpdateItem.mm */; };
 		A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */; };
+		A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE322B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.mm */; };
+		A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -610,6 +612,10 @@
 		A1574EDA22B8D96B006CC5F2 /* NUICollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewUpdateItem.h; sourceTree = "<group>"; };
 		A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewLayoutAttributes.mm; sourceTree = "<group>"; };
 		A1574EDD22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
+		A1574EE322B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewFlowLayout.mm; sourceTree = "<group>"; };
+		A1574EE422B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewFlowLayoutInvalidationContext.mm; sourceTree = "<group>"; };
+		A1574EE722B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -2008,6 +2014,24 @@
 			path = NUICollectionViewLayoutAttributes;
 			sourceTree = "<group>";
 		};
+		A1574EE222B8DF5F006CC5F2 /* NUICollectionViewFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EE422B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.h */,
+				A1574EE322B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.mm */,
+			);
+			path = NUICollectionViewFlowLayout;
+			sourceTree = "<group>";
+		};
+		A1574EE522B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EE722B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.h */,
+				A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */,
+			);
+			path = NUICollectionViewFlowLayoutInvalidationContext;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3335,6 +3359,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EE222B8DF5F006CC5F2 /* NUICollectionViewFlowLayout */,
+				A1574EE522B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext */,
 				A1574ED222B8D96A006CC5F2 /* NUICollectionViewLayout */,
 				A1574EDB22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes */,
 				A1574ED522B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext */,
@@ -4268,6 +4294,7 @@
 				A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
@@ -4309,6 +4336,7 @@
 				A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */,
 				A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */,
 				A19F39ED22AF651E00606332 /* NMDLMaterialProperty.mm in Sources */,
+				A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,

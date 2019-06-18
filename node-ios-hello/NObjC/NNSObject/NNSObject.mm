@@ -722,6 +722,8 @@ NAN_METHOD(NClass::New) {
 #include "NUICollectionViewLayoutAttributes.h"
 #include "NUICollectionViewLayoutInvalidationContext.h"
 #include "NUICollectionViewUpdateItem.h"
+#include "NUICollectionViewFlowLayout.h"
+#include "NUICollectionViewFlowLayoutInvalidationContext.h"
 #include "NUITableViewDataSource.h"
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
@@ -1002,6 +1004,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UICollectionViewLayoutAttributes);
     JS_EXPORT_TYPE(UICollectionViewLayoutInvalidationContext);
     JS_EXPORT_TYPE(UICollectionViewUpdateItem);
+    JS_EXPORT_TYPE(UICollectionViewFlowLayout);
+    JS_EXPORT_TYPE(UICollectionViewFlowLayoutInvalidationContext);
     JS_EXPORT_TYPE(UINib);
     JS_EXPORT_TYPE(UITouch);
     JS_EXPORT_TYPE(UIPageControl);
@@ -1400,6 +1404,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UINavigationBar);
       JS_RETURN_TYPE(UIPageControl);
       JS_RETURN_TYPE(UISlider);
+      JS_RETURN_TYPE(UICollectionViewFlowLayoutInvalidationContext);
+      JS_RETURN_TYPE(UICollectionViewFlowLayout);
       JS_RETURN_TYPE(UICollectionViewUpdateItem);
       JS_RETURN_TYPE(UICollectionViewLayoutInvalidationContext);
       JS_RETURN_TYPE(UICollectionViewLayoutAttributes);
