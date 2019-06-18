@@ -1210,7 +1210,6 @@ https.get(options, function(res) {
 //process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
 const sweetiekit = require('std:sweetiekit.node');
-const UIControlEvents = require('./enums').UIControlEvents;
 const {
   NSObject,
   NSUserDefaults,
@@ -1299,7 +1298,7 @@ console.log(sb, vc, view, subview);
 //    //firstVC.view.addSubview(subview);
 //
 //    console.log(`Added a new UIView at ${x},${y}`);
-//  }, UIControlEvents.touchUpInside);
+//  }, UIControlEventTouchUpInside);
 //  button.backgroundColor = ({red: 0.0, green: 1.0, blue: 0.0});
 //  console.log('post-button', button, button.frame);
 //  firstVC.view.addSubview(button);
@@ -1508,7 +1507,7 @@ function iosApp() {
     vc.present(imgVC, true, () => {});
   }
 
-  btnLogin.addTargetActionForControlEvents(handleButtonPress, UIControlEventsTouchUpInside);
+  btnLogin.addTargetActionForControlEvents(handleButtonPress, UIControlEventTouchUpInside);
 }
 
 setTimeout(async () => {

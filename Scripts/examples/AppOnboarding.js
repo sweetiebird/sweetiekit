@@ -2,10 +2,8 @@ const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
 const {
   NSParagraphStyleAttributeName,
-  UIControlState,
   UIViewContentMode,
   UIBarStyle,
-  UIControlEvents,
   UIProgressViewStyle,
   UIBarMetrics,
 }= require('./enums');
@@ -87,14 +85,14 @@ function setupQuizButton() {
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
   nextBtn.backgroundColor = colors.fitbodPink;
-  nextBtn.setTitleForState('GET STARTED', UIControlState.normal);
-  nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
+  nextBtn.setTitleForState('GET STARTED', UIControlStateNormal);
+  nextBtn.setTitleColorForState(colors.black, UIControlStateNormal);
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
   nextBtn.addTargetActionForControlEvents(() => {
 
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   quizVC.view.addSubview(nextBtn);
 }
@@ -193,7 +191,7 @@ function setupQuizView() {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     quizScroll.setContentOffset({ x: offsetX, y: 0 }, true);
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   makeQuizDelegate(pageControl);
 
@@ -350,7 +348,7 @@ function setupWelcomeView() {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   makeDelegate(pageControl);
 
@@ -366,12 +364,12 @@ function setupStartButton() {
   nextBtn.layer.shadowRadius = 8;
   nextBtn.layer.maskToBounds = false;
   nextBtn.backgroundColor = colors.fitbodPink;
-  nextBtn.setTitleForState('GET STARTED', UIControlState.normal);
-  nextBtn.setTitleColorForState(colors.black, UIControlState.normal);
+  nextBtn.setTitleForState('GET STARTED', UIControlStateNormal);
+  nextBtn.setTitleColorForState(colors.black, UIControlStateNormal);
   nextBtn.titleLabel.font = buttonFont;
   nextBtn.showsTouchWhenHighlighted = true;
 
-  nextBtn.addTargetActionForControlEvents(startQuiz, UIControlEvents.touchUpInside);
+  nextBtn.addTargetActionForControlEvents(startQuiz, UIControlEventTouchUpInside);
 
   demoVC.view.addSubview(nextBtn);
 }

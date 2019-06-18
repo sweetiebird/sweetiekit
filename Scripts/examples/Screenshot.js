@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const { UIControlEvents } = require('./enums');
-
 const {
   UIView,
   UIButton,
@@ -73,7 +71,7 @@ async function make(nav, demoVC) {
   button.layer.shadowColor = RGB(87, 174, 176);
   button.layer.shadowOffset = { width: 0, height: 12 };
   button.layer.shadowOpacity = 1;
-  button.addTargetActionForControlEvents(takeSS, UIControlEvents.touchUpInside);
+  button.addTargetActionForControlEvents(takeSS, UIControlEventTouchUpInside);
   button.showsTouchWhenHighlighted = true;
 
   view.addSubview(button);

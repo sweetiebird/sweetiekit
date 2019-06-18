@@ -4,8 +4,6 @@ THREE = require('../vendor/three/three');
 
 const colors = require('./colors');
 const {
-  UIControlState,
-  UIControlEvents,
   NSFontAttributeName,
   NSForegroundColorAttributeName,
   NSKernAttributeName,
@@ -74,7 +72,7 @@ function makeCamBtn(demoVC, btnSize) {
   camBtn.layer.shadowColor = colors.fitbodDarkGrey;
   camBtn.layer.shadowRadius = 6;
   camBtn.showsTouchWhenHighlighted = true;
-  camBtn.setBackgroundImageForState(UIImage('camera_btn_thin'), UIControlState.normal);
+  camBtn.setBackgroundImageForState(UIImage('camera_btn_thin'), UIControlStateNormal);
   return camBtn;
 }
 
@@ -116,7 +114,7 @@ function makeParticleButton(demoVC) {
   const size = 40;
   const btn = UIButton(CGRectMake(demoVC.view.frame.width - size, 0, size, size));
   btn.backgroundColor = colors.clear;
-  btn.setBackgroundImageForState(UIImage('fire'), UIControlState.normal);
+  btn.setBackgroundImageForState(UIImage('fire'), UIControlStateNormal);
   btn.showsTouchWhenHighlighted = true;
   btn.contentMode = UIViewContentMode.scaleAspectFit;
   btn.alpha = 0.3;
@@ -456,13 +454,13 @@ async function make(nav, demoVC) {
   //   // takeScreenshot(demoVC.view);
   //   const imgView = getCapturedImage(arView);
   //   if (imgView) demoVC.view.addSubview(imgView);
-  // }, UIControlEvents.touchUpInside);
+  // }, UIControlEventTouchUpInside);
 
   const fireBtn = makeParticleButton(demoVC);
   fireBtn.addTargetActionForControlEvents(() => {
     isEffectMode = !isEffectMode;
     fireBtn.alpha = isEffectMode ? 1 : 0.3;
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   const fieldHeight = 50;
   const horOffset = 24;
@@ -491,7 +489,7 @@ async function make(nav, demoVC) {
       delete active.node;
       _update();
     }
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   const distSlider = new UISlider({
     x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
@@ -500,7 +498,7 @@ async function make(nav, demoVC) {
   distSlider.setThumbImage(UIImage.transparent);
   distSlider.addTargetActionForControlEvents(() => {
     console.log('distance slider changed', distSlider.value);
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   const rotSlider = new UISlider({
     x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
@@ -509,7 +507,7 @@ async function make(nav, demoVC) {
   rotSlider.setThumbImage(UIImage.transparent);
   rotSlider.addTargetActionForControlEvents(() => {
     console.log('rotation slider changed', rotSlider.value);
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   const subviews = [topView, scaleSlider/*, distSlider, rotSlider, camBtn */];
   subviews.forEach((s) => {

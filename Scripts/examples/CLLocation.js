@@ -2,7 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 THREE = require('../vendor/three/three');
 
 const colors = require('./colors');
-const { UIControlState, UIControlEvents } = require('./enums');
 const math = require('./helpers/math');
 
 const {
@@ -166,10 +165,10 @@ async function make(nav, demoVC) {
         }
       });
     }
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
-  btn.setTitleForState('Geocode Address', UIControlState.normal);
-  btn.setTitleColorForState(colors.black, UIControlState.normal);
+  btn.setTitleForState('Geocode Address', UIControlStateNormal);
+  btn.setTitleColorForState(colors.black, UIControlStateNormal);
   btn.backgroundColor = colors.fitbodPink;
 
   distLabel = UILabel({

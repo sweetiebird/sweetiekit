@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const UIControlEvents = require('./enums').UIControlEvents;
-
 const {
   UIImagePickerController,
   UIImagePickerControllerDelegate,
@@ -38,7 +36,7 @@ async function make(nav, demoVC) {
       imgCtrl.delegate = imgDel;
       demoVC.present(imgCtrl, true, () => {});
     }
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   btn.backgroundColor = RGB(87, 174, 176);
   btn.layer.cornerRadius = 4;

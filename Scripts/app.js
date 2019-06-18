@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const UIControlEvents = require('./enums').UIControlEvents;
-
 // const axios = require('axios');
 const https = require('https');
 
@@ -212,7 +210,7 @@ function createTable() {
      } else {
        demo();
      }
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
   console.log('userPhoto3');
 
    nextBtn.backgroundColor = UIColor.white;
@@ -260,7 +258,7 @@ async function setupApp() {
     console.log('UIButton', username);
     if (username) { userPhoto(); }
     console.log('UIButton', username);
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
   console.log('setupApp7');
 
   nextBtn.backgroundColor = UIColor.white;

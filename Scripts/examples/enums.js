@@ -18,32 +18,6 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
-const UIControlState = {
-  normal: 0,
-  highlighted: 1 << 0,
-  disabled: 1 << 1,
-  selected: 1 << 2,
-  focused: 1 << 3,
-};
-
-const UIControlEvents = {
-  touchDown: 1 << 0,
-  touchDownRepeat: 1 << 1,
-  touchDragInside: 1 << 2,
-  touchDragOutside: 1 << 3,
-  touchDragEnter: 1 << 4,
-  touchDragExit: 1 << 5,
-  touchUpInside: 1 << 6,
-  touchUpOutside: 1 << 7,
-  touchCancel: 1 << 8,
-  valueChanged: 1 << 12,
-  primaryActionTriggered: 1 << 13,
-  editingDidBegin: 1 << 16,
-  editingChanged: 1 << 17,
-  editingDidEnd: 1 << 18,
-  editingDidEndOnExit: 1 << 19,
-};
-
 const UIProgressViewStyle = {
   default: 0,
   bar: 1,
@@ -230,10 +204,8 @@ module.exports.NSFontAttributeName = 'NSFont';
 module.exports.NSKernAttributeName = 'NSKern';
 module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
-module.exports.UIControlState = UIControlState;
 module.exports.UIViewContentMode = UIViewContentMode;
 module.exports.UIBarStyle = UIBarStyle;
-module.exports.UIControlEvents = UIControlEvents;
 module.exports.UIProgressViewStyle = UIProgressViewStyle;
 module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;

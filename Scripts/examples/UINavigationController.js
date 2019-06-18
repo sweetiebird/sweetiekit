@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const UIControlEvents = require('./enums').UIControlEvents;
-
 const {
   UIViewController,
   UIButton,
@@ -15,7 +13,7 @@ async function make(nav, demoVC) {
     const lastVC = UIViewController();
     lastVC.view.backgroundColor = RGB(205, 37, 83);
     nav.pushViewController(lastVC);
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
   btn.backgroundColor = RGB(87, 174, 176);
   btn.layer.cornerRadius = 4;
   demoVC.view.addSubview(btn);

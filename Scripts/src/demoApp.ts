@@ -254,7 +254,7 @@ async function userPhoto() {
     } else {
       demo();
     }
-  }, UIControlEventsTouchUpInside);
+  }, UIControlEventTouchUpInside);
 
   nextBtn.backgroundColor = UIColor.white;
 
@@ -285,7 +285,7 @@ async function setupApp() {
   nextBtn.addTargetActionForControlEvents(() => {
     username = nameField.text;
     if (username) userPhoto();
-  }, UIControlEventsTouchUpInside);
+  }, UIControlEventTouchUpInside);
   nextBtn.setTitleForState('👍 Next', UIControlStateNormal);
 
   nextBtn.backgroundColor = UIColor.white;

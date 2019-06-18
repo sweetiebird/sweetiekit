@@ -4,9 +4,7 @@ const colors = require('./colors');
 
 const {
   NSParagraphStyleAttributeName,
-  UIControlState,
   UIViewContentMode,
-  UIControlEvents,
   UIBarMetrics,
   UITableViewSelectionStyle,
   UITableViewCellSeparatorStyle,
@@ -128,8 +126,8 @@ function makeAppButton(title) {
 
   btn.backgroundColor = colors.fitbodPink;
 
-  btn.setTitleColorForState(colors.black, UIControlState.normal);
-  btn.setTitleForState(title, UIControlState.normal);
+  btn.setTitleColorForState(colors.black, UIControlStateNormal);
+  btn.setTitleForState(title, UIControlStateNormal);
   btn.titleLabel.font = buttonFont;
 
   return btn;
@@ -289,12 +287,12 @@ function setSizes(vc) {
 
 function makeTopToolbarTitle(title) {
   const button = UIButton();
-  button.setTitleForState(title, UIControlState.normal);
+  button.setTitleForState(title, UIControlStateNormal);
   button.sizeToFit();
   button.setTitleColorForState({
     ...colors.white,
     alpha: 0.8,
-  }, UIControlState.normal);
+  }, UIControlStateNormal);
   button.titleLabel.font = barTitleFont;
   button.translatesAutoresizingMaskIntoConstraints = false;
   button.showsTouchWhenHighlighted = true;
@@ -382,7 +380,7 @@ function makeInnerAppControllers(nav) {
       item: `${adj[0].toUpperCase()}${adj.substring(1).toLowerCase()} ${noun[0].toUpperCase()}${noun.substring(1).toLowerCase()}`,
     });
     partyTable.reloadData();
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   makePartyTable();
   partyTable.separatorStyle = UITableViewCellSeparatorStyle.none;
@@ -407,7 +405,7 @@ function makeInnerAppControllers(nav) {
 
   wagonTitle.addTargetActionForControlEvents(() => {
     console.log('editor view controller');
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   nav.setViewControllers([tabVC], true);
 
@@ -520,7 +518,7 @@ function startQuiz(nav) {
     if (i !== quizStep) {
       quizStep = i;
     }
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
 
   const progressView = makeProgressView();
   clippingView.addSubview(progressView);
@@ -545,12 +543,12 @@ function startQuiz(nav) {
         quizStep = numQuestions - 1;
       }
       if (quizStep >= numQuestions - 1) {
-        nextButton.setTitleForState('DONE', UIControlState.normal);
+        nextButton.setTitleForState('DONE', UIControlStateNormal);
       } else {
-        nextButton.setTitleForState('NEXT', UIControlState.normal);
+        nextButton.setTitleForState('NEXT', UIControlStateNormal);
       }
     }
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
 
   const del = new UIScrollViewDelegate();
 
@@ -565,9 +563,9 @@ function startQuiz(nav) {
       progressView.setProgress((quizStep + 1) / 3, true);
     }
     if (page >= numQuestions - 1) {
-      nextButton.setTitleForState('DONE', UIControlState.normal);
+      nextButton.setTitleForState('DONE', UIControlStateNormal);
     } else {
-      nextButton.setTitleForState('NEXT', UIControlState.normal);
+      nextButton.setTitleForState('NEXT', UIControlStateNormal);
     }
   };
 
@@ -582,9 +580,9 @@ function startQuiz(nav) {
       progressView.setProgress((quizStep + 1) / 3, true);
     }
     if (page >= numQuestions - 1) {
-      nextButton.setTitleForState('DONE', UIControlState.normal);
+      nextButton.setTitleForState('DONE', UIControlStateNormal);
     } else {
-      nextButton.setTitleForState('NEXT', UIControlState.normal);
+      nextButton.setTitleForState('NEXT', UIControlStateNormal);
     }
   };
 
@@ -623,13 +621,13 @@ async function make(nav, demoVC) {
     const i = pageControl.currentPage;
     const offsetX = w * i;
     scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
-  }, UIControlEvents.valueChanged);
+  }, UIControlEventValueChanged);
   demoVC.view.addSubview(pageControl);
 
   const startButton = makeAppButton('GET STARTED');
   startButton.addTargetActionForControlEvents(() => {
     startQuiz(nav);
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
   demoVC.view.addSubview(startButton);
 
   nav.pushViewController(demoVC);
