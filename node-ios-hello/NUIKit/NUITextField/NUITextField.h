@@ -14,9 +14,6 @@
 #define to_value_UITextField(x) to_value_wrapper(x, UITextField)
 #define is_value_UITextField(x) is_value_wrapper(x, UITextField)
 
-#define js_value_NSTextAlignment(x) JS_ENUM(NSTextAlignment, NSInteger, x)
-#define to_value_NSTextAlignment(x) TO_ENUM(NSTextAlignment, NSInteger, x)
-#define is_value_NSTextAlignment(x) IS_ENUM(NSTextAlignment, NSInteger, x)
 
 #define js_value_UITextBorderStyle(x) JS_ENUM(UITextBorderStyle, NSInteger, x)
 #define to_value_UITextBorderStyle(x) TO_ENUM(UITextBorderStyle, NSInteger, x)

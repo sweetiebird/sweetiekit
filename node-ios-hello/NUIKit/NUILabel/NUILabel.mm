@@ -21,6 +21,37 @@ JS_INIT_CLASS(UILabel, UIView);
   JS_ASSIGN_PROP(proto, attributedText);
   // static members (ctor)
   JS_INIT_CTOR(UILabel, UIView);
+  // constants (exports)
+  
+/* Values for NSTextAlignment */
+//typedef NS_ENUM(NSInteger, NSTextAlignment) {
+    JS_ASSIGN_ENUM(NSTextAlignmentLeft, NSInteger); //       = 0,    // Visually left aligned
+#if TARGET_OS_IPHONE && !0
+    JS_ASSIGN_ENUM(NSTextAlignmentCenter, NSInteger); //     = 1,    // Visually centered
+    JS_ASSIGN_ENUM(NSTextAlignmentRight, NSInteger); //      = 2,    // Visually right aligned
+#else /* !TARGET_OS_IPHONE */
+    JS_ASSIGN_ENUM(NSTextAlignmentRight, NSInteger); //      = 1,    // Visually right aligned
+    JS_ASSIGN_ENUM(NSTextAlignmentCenter, NSInteger); //     = 2,    // Visually centered
+#endif
+    JS_ASSIGN_ENUM(NSTextAlignmentJustified, NSInteger); //  = 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
+    JS_ASSIGN_ENUM(NSTextAlignmentNatural, NSInteger); //    = 4,    // Indicates the default alignment for script
+//} NS_ENUM_AVAILABLE_IOS(6_0);
+
+#if TODO
+#if __has_include(<CoreText/CTParagraphStyle.h>)
+UIKIT_SWIFT_FORWARD_DECLARE(typedef CF_ENUM(uint8_t, CTTextAlignment))
+UIKIT_EXTERN CTTextAlignment NSTextAlignmentToCTTextAlignment(NSTextAlignment nsTextAlignment) NS_AVAILABLE_IOS(6_0);
+UIKIT_EXTERN NSTextAlignment NSTextAlignmentFromCTTextAlignment(CTTextAlignment ctTextAlignment) NS_AVAILABLE_IOS(6_0);
+#endif
+#endif
+
+/* Values for NSWritingDirection */
+//typedef NS_ENUM(NSInteger, NSWritingDirection) {
+    JS_ASSIGN_ENUM(NSWritingDirectionNatural, NSInteger); //        = -1,    // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
+    JS_ASSIGN_ENUM(NSWritingDirectionLeftToRight, NSInteger); //    =  0,    // Left to right writing direction
+    JS_ASSIGN_ENUM(NSWritingDirectionRightToLeft, NSInteger); //    =  1     // Right to left writing direction
+//} NS_ENUM_AVAILABLE_IOS(6_0);
+
 JS_INIT_CLASS_END(UILabel, UIView);
 
 NAN_METHOD(NUILabel::New) {

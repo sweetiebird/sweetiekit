@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const NSTextAlignment = require('./enums').NSTextAlignment;
-
 const {
   UIPickerView,
   UIPickerViewManager,
@@ -58,7 +56,7 @@ async function make(nav, demoVC) {
     width: demoVC.view.frame.width - 24,
     height: 20,
   });
-  label.textAlignment = NSTextAlignment.center;
+  label.textAlignment = NSTextAlignmentCenter;
 
   demoVC.view.addSubview(label);
 

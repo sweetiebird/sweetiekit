@@ -3,7 +3,6 @@ const faker = require('Faker');
 const colors = require('./colors');
 
 const {
-  NSTextAlignment,
   NSParagraphStyleAttributeName,
   UIControlState,
   UIViewContentMode,
@@ -183,11 +182,11 @@ function makeSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
-    label.textAlignment = NSTextAlignment.center;
+    label.textAlignment = NSTextAlignmentCenter;
 
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
-    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textAlignment = NSTextAlignmentLeft;
     contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
@@ -432,7 +431,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     label.text = titles[i];
     label.textColor = colors.white;
     label.font = titleFont;
-    label.textAlignment = NSTextAlignment.left;
+    label.textAlignment = NSTextAlignmentLeft;
     label.numberOfLines = 0;
     label.sizeToFit();
 
@@ -444,7 +443,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
       const cell = new UITableViewCell();
       const text = items[indexPath.row];
       cell.textLabel.numberOfLines = 0;
-      cell.textLabel.textAlignment = NSTextAlignment.left;
+      cell.textLabel.textAlignment = NSTextAlignmentLeft;
       cell.textLabel.font = contentFont;
 
       if (indexPath.row === responseSelections[i]) {

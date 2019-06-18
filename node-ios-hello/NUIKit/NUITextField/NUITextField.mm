@@ -297,6 +297,8 @@ NAN_SETTER(NUITextField::fontSetter) {
   }
 }
 
+#include "NUILabel.h"
+
 NAN_GETTER(NUITextField::textAlignmentGetter) {
   JS_UNWRAP(UITextField, self);
   declare_autoreleasepool {

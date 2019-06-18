@@ -1,7 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
 const {
-  NSTextAlignment,
   NSParagraphStyleAttributeName,
   UIControlState,
   UIViewContentMode,
@@ -159,10 +158,10 @@ function setupQuizView() {
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
-    label.textAlignment = NSTextAlignment.center;
+    label.textAlignment = NSTextAlignmentCenter;
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
-    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textAlignment = NSTextAlignmentLeft;
     contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };
@@ -316,10 +315,10 @@ function setupWelcomeView() {
     label.text = titles[i];
     label.textColor = colors.fitbodPink;
     label.font = titleFont;
-    label.textAlignment = NSTextAlignment.center;
+    label.textAlignment = NSTextAlignmentCenter;
     const contentLabel = UILabel();
     contentLabel.numberOfLines = 0;
-    contentLabel.textAlignment = NSTextAlignment.left;
+    contentLabel.textAlignment = NSTextAlignmentLeft;
     contentLabel.textColor = RGB(255, 255, 255, 0.9);
     contentLabel.font = contentFont;
     contentLabel.frame = { x: 20, y: contentY, width: w - 40, height: 120 };

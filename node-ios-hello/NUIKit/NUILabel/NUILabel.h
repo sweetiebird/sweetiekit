@@ -14,6 +14,14 @@
 #define to_value_UILabel(x) to_value_wrapper(x, UILabel)
 #define is_value_UILabel(x) is_value_wrapper(x, UILabel)
 
+#define js_value_NSTextAlignment(x) JS_ENUM(NSTextAlignment, NSInteger, x)
+#define to_value_NSTextAlignment(x) TO_ENUM(NSTextAlignment, NSInteger, x)
+#define is_value_NSTextAlignment(x) IS_ENUM(NSTextAlignment, NSInteger, x)
+
+#define js_value_NSWritingDirection(x) JS_ENUM(NSWritingDirection, NSInteger, x)
+#define to_value_NSWritingDirection(x) TO_ENUM(NSWritingDirection, NSInteger, x)
+#define is_value_NSWritingDirection(x) IS_ENUM(NSWritingDirection, NSInteger, x)
+
 JS_WRAP_CLASS(UILabel, UIView);
   JS_METHOD(Alloc);
   JS_PROP(Text);

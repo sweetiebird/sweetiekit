@@ -18,14 +18,6 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
-const NSTextAlignment = {
-  left: 0,
-  right: 2,
-  center: 1,
-  justified: 3,
-  natural: 4,
-};
-
 const UIControlState = {
   normal: 0,
   highlighted: 1 << 0,
@@ -232,7 +224,6 @@ module.exports.MDLMaterialSemantic = {
 
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;
-module.exports.NSTextAlignment = NSTextAlignment;
 module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
 module.exports.NSForegroundColorAttributeName = 'NSColor';
 module.exports.NSFontAttributeName = 'NSFont';
