@@ -30,7 +30,7 @@ JS_WRAP_CLASS(SKPhysicsBody, NSObject);
   // JS_PROP(categoryBitMask);
   // JS_PROP(contactTestBitMask);
   // JS_PROP(collisionBitMask);
-  JS_PROP(dynamic);
+  JS_PROP(isDynamic);
   JS_PROP(usesPreciseCollisionDetection);
   JS_PROP(allowsRotation);
   JS_PROP(pinned);

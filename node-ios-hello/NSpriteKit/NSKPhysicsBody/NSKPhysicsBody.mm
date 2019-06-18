@@ -17,7 +17,7 @@ JS_INIT_CLASS(SKPhysicsBody, NSObject);
   JS_ASSIGN_METHOD(proto, applyForce);
   JS_ASSIGN_METHOD(proto, applyForceAtPoint);
   JS_ASSIGN_METHOD(proto, applyTorque);
-  JS_ASSIGN_PROP(proto, dynamic);
+  JS_ASSIGN_PROP(proto, isDynamic);
   JS_ASSIGN_PROP(proto, usesPreciseCollisionDetection);
   JS_ASSIGN_PROP(proto, allowsRotation);
   JS_ASSIGN_PROP(proto, pinned);
@@ -230,20 +230,19 @@ NAN_METHOD(NSKPhysicsBody::applyTorque) {
   }
 }
 
-NAN_GETTER(NSKPhysicsBody::dynamicGetter) {
+NAN_GETTER(NSKPhysicsBody::isDynamicGetter) {
   JS_UNWRAP(SKPhysicsBody, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isDynamic]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isDynamic]));
   }
 }
 
-NAN_SETTER(NSKPhysicsBody::dynamicSetter) {
+NAN_SETTER(NSKPhysicsBody::isDynamicSetter) {
   JS_UNWRAP(SKPhysicsBody, self);
-  @autoreleasepool
-  {
-    [self setDynamic: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setDynamic: input];
   }
 }
 
