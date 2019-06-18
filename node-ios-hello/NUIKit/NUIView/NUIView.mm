@@ -362,6 +362,17 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_CONSTANT("UIFontSmallSystemFontSize", CGFloat, [UIFont smallSystemFontSize]); //__TVOS_PROHIBITED;
   JS_ASSIGN_CONSTANT("UIFontSystemFontSize", CGFloat, [UIFont systemFontSize]); //__TVOS_PROHIBITED;
 
+  // UIGeometry.h constants
+  
+  //typedef NS_OPTIONS(NSUInteger, UIRectEdge) {
+    JS_ASSIGN_ENUM(UIRectEdgeNone, NSUInteger); //    = 0,
+    JS_ASSIGN_ENUM(UIRectEdgeTop, NSUInteger); //     = 1 << 0,
+    JS_ASSIGN_ENUM(UIRectEdgeLeft, NSUInteger); //    = 1 << 1,
+    JS_ASSIGN_ENUM(UIRectEdgeBottom, NSUInteger); //  = 1 << 2,
+    JS_ASSIGN_ENUM(UIRectEdgeRight, NSUInteger); //   = 1 << 3,
+    JS_ASSIGN_ENUM(UIRectEdgeAll, NSUInteger); //     = UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight
+  //} NS_ENUM_AVAILABLE_IOS(7_0);
+
 JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {

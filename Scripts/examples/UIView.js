@@ -43,21 +43,25 @@ async function make(nav, demoVC) {
   fgView.layer.shadowRadius = 8;
   fgView.layer.shadowOpacity = 0.4;
 
-  const tap = UITapGestureRecognizer();
-  tap.addTarget(() => {
-    console.log('tap!!');
+  const fgTap = UITapGestureRecognizer();
+  fgTap.addTarget(() => {
+    console.log('tap!', fgTap.locationOfTouchInView(0, fgView));
   });
-  const tap2 = UITapGestureRecognizer();
-  const pan = UIPanGestureRecognizer();
-  tap2.addTarget(() => {
-    console.log('tap22222!!');
+  fgView.addGestureRecognizer(fgTap);
+
+  const bgTap = UITapGestureRecognizer();
+  bgTap.addTarget(() => {
+    console.log('bgTap!', bgTap.locationOfTouchInView(0, bgView));
   });
-  pan.addTarget(() => {
-    console.log('pannnnn!!');
+  bgView.addGestureRecognizer(bgTap);
+
+  const bgPan = UIPanGestureRecognizer();
+  bgPan.addTarget(() => {
+    console.log('pan!');
+    console.log(bgPan.translationInView(bgView));
+    console.log(bgPan.velocityInView(bgView));
   });
-  fgView.addGestureRecognizer(tap);
-  bgView.addGestureRecognizer(tap2);
-  bgView.addGestureRecognizer(pan);
+  bgView.addGestureRecognizer(bgPan);
 
   return bgView;
 }

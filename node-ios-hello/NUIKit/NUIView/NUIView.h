@@ -82,6 +82,12 @@
 #define to_value_UIDisplayGamut(x) TO_ENUM(UIDisplayGamut, NSInteger, x)
 #define is_value_UIDisplayGamut(x) IS_ENUM(UIDisplayGamut, NSInteger, x)
 
+// UIGeometry.h constants
+
+#define js_value_UIRectEdge(x) JS_ENUM(UIRectEdge, NSUInteger, x)
+#define to_value_UIRectEdge(x) TO_ENUM(UIRectEdge, NSUInteger, x)
+#define is_value_UIRectEdge(x) IS_ENUM(UIRectEdge, NSUInteger, x)
+
 JS_WRAP_CLASS(UIView, UIResponder);
   JS_STATIC_METHOD(layerClass);
   JS_STATIC_METHOD(userInterfaceLayoutDirectionForSemanticContentAttribute);
