@@ -430,6 +430,7 @@ async function make(nav, demoVC) {
   }, 1000/60);*/
 
   demoVC.view.addSubview(arView);
+  arView.pinToSuperview();
   nav.pushViewController(demoVC);
 
   arView.presentScene(scene);
@@ -459,8 +460,26 @@ async function make(nav, demoVC) {
   });
 
   const topView = makeTopView(demoVC, fieldHeight);
+  demoVC.view.addSubview(topView);
+  /*
+  topView.pinToSuperviewWithInsetsEdges(
+    UIEdgeInsetsMake(0, 0, 0, 0),
+    UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeRight);
+    */
+
   topView.addSubview(field);
+  /*
+  field.pinToSuperviewWithInsetsEdges(
+    UIEdgeInsetsMake(0, 0, 0, fireBtn.width),
+    UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight);
+    */
+
   topView.addSubview(fireBtn);
+  /*
+  fireBtn.pinToSuperviewWithInsetsEdges(
+    UIEdgeInsetsMake(0, field.width, 0, 0),
+    UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight);
+    */
 
   const viewW = view.frame.width;
   const scaleSliderY = fieldHeight + 20;
@@ -469,7 +488,13 @@ async function make(nav, demoVC) {
   const scaleSlider = new UISlider({
       x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
   });
-  scaleSlider.value = 0.5;
+  demoVC.view.addSubview(scaleSlider);
+  /*
+  scaleSlider.pinToSuperviewWithInsetsEdges(
+    UIEdgeInsetsMake(scaleSliderY, 0, 0, 0),
+    UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeRight);
+    */
+  scaleSlider.value = 0.25;
   scaleSlider.setThumbImage(UIImage.transparent);
   scaleSlider.addTargetActionForControlEvents(() => {
     console.log('scale slider changed', scaleSlider.value);
@@ -500,13 +525,24 @@ async function make(nav, demoVC) {
 
   const subviews = [topView, scaleSlider/*, distSlider, rotSlider, camBtn */];
   subviews.forEach((s) => {
-    demoVC.view.addSubview(s);
+    //demoVC.view.addSubview(s);
     demoVC.view.bringSubviewToFront(s);
   });
 
   arView.viewWillAppear = () => {
     arView.session.run(config);
   }
+
+  arView.configure = () => {
+    if (arView.size.width !== arView.scene.size.width ||
+      arView.size.height !== arView.scene.size.height) {
+      console.log('arView.configure');
+      arView.scene.size = arView.size;
+    }
+  };
+  arView.configureInterval = setInterval(() => {
+    arView.configure();
+  }, 1000);
 }
 
 module.exports = make;
