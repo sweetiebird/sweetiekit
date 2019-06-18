@@ -23,6 +23,40 @@
 #define to_value_NSAttributedStringKey(x) to_enum_string_wrapper(x, NSAttributedStringKey)
 #define is_value_NSAttributedStringKey(x) is_enum_string_wrapper(x, NSAttributedStringKey)
 
+// NSAttributedString constants
+
+#define js_value_NSUnderlineStyle(x) JS_OPTS(NSUnderlineStyle, NSInteger, x)
+#define to_value_NSUnderlineStyle(x) TO_OPTS(NSUnderlineStyle, NSInteger, x)
+#define is_value_NSUnderlineStyle(x) IS_OPTS(NSUnderlineStyle, NSInteger, x)
+
+#define js_value_NSWritingDirectionFormatType(x) JS_ENUM(NSWritingDirectionFormatType, NSInteger, x)
+#define to_value_NSWritingDirectionFormatType(x) TO_ENUM(NSWritingDirectionFormatType, NSInteger, x)
+#define is_value_NSWritingDirectionFormatType(x) IS_ENUM(NSWritingDirectionFormatType, NSInteger, x)
+
+#define js_value_NSTextEffectStyle(x) JS_ENUM(NSTextEffectStyle, NSString, x)
+#define to_value_NSTextEffectStyle(x) TO_ENUM(NSTextEffectStyle, NSString, x)
+#define is_value_NSTextEffectStyle(x) IS_ENUM(NSTextEffectStyle, NSString, x)
+
+#define js_value_NSAttributedStringDocumentType(x) JS_ENUM(NSAttributedStringDocumentType, NSString, x)
+#define to_value_NSAttributedStringDocumentType(x) TO_ENUM(NSAttributedStringDocumentType, NSString, x)
+#define is_value_NSAttributedStringDocumentType(x) IS_ENUM(NSAttributedStringDocumentType, NSString, x)
+
+#define js_value_NSTextLayoutSectionKey(x) JS_ENUM(NSTextLayoutSectionKey, NSString, x)
+#define to_value_NSTextLayoutSectionKey(x) TO_ENUM(NSTextLayoutSectionKey, NSString, x)
+#define is_value_NSTextLayoutSectionKey(x) IS_ENUM(NSTextLayoutSectionKey, NSString, x)
+
+#define js_value_NSAttributedStringDocumentAttributeKey(x) JS_ENUM(NSAttributedStringDocumentAttributeKey, NSString, x)
+#define to_value_NSAttributedStringDocumentAttributeKey(x) TO_ENUM(NSAttributedStringDocumentAttributeKey, NSString, x)
+#define is_value_NSAttributedStringDocumentAttributeKey(x) IS_ENUM(NSAttributedStringDocumentAttributeKey, NSString, x)
+
+#define js_value_NSAttributedStringDocumentReadingOptionKey(x) JS_ENUM(NSAttributedStringDocumentReadingOptionKey, NSString, x)
+#define to_value_NSAttributedStringDocumentReadingOptionKey(x) TO_ENUM(NSAttributedStringDocumentReadingOptionKey, NSString, x)
+#define is_value_NSAttributedStringDocumentReadingOptionKey(x) IS_ENUM(NSAttributedStringDocumentReadingOptionKey, NSString, x)
+
+#define js_value_NSTextWritingDirection(x) JS_ENUM(NSTextWritingDirection, NSInteger, x)
+#define to_value_NSTextWritingDirection(x) TO_ENUM(NSTextWritingDirection, NSInteger, x)
+#define is_value_NSTextWritingDirection(x) IS_ENUM(NSTextWritingDirection, NSInteger, x)
+
 JS_WRAP_CLASS(NSAttributedString, NSObject);
   JS_METHOD(attributesAtIndexEffectiveRange);
   JS_METHOD(attributeAtIndexEffectiveRange);

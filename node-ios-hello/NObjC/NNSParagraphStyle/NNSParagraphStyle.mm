@@ -16,6 +16,9 @@ JS_INIT_CLASS(NSParagraphStyle, NSObject);
   JS_INIT_CTOR(NSParagraphStyle, NSObject);
   // constants (exports)
 
+  //typedef NSString * NSTextTabOptionKey NS_TYPED_ENUM;
+  JS_ASSIGN_ENUM(NSTabColumnTerminatorsAttributeName, NSTextTabOptionKey); //  NS_AVAILABLE(10_0, 7_0); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
+
 //typedef NS_ENUM(NSInteger, NSLineBreakMode) {
   JS_ASSIGN_ENUM(NSLineBreakByWordWrapping, NSInteger); // Wrap at word boundaries, default
   JS_ASSIGN_ENUM(NSLineBreakByCharWrapping, NSInteger); // Wrap at character boundaries

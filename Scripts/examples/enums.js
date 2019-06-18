@@ -78,10 +78,4 @@ module.exports.MDLMaterialSemantic = {
 
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;
-module.exports.NSParagraphStyleAttributeName = 'NSParagraphStyle';
-module.exports.NSForegroundColorAttributeName = 'NSColor';
-module.exports.NSFontAttributeName = 'NSFont';
-module.exports.NSKernAttributeName = 'NSKern';
-module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
-module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
 module.exports.ARWorldAlignment = ARWorldAlignment;

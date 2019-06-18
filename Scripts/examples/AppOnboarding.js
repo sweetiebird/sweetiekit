@@ -1,8 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
-const {
-  NSParagraphStyleAttributeName,
-}= require('./enums');
 
 const {
   UIProgressView,

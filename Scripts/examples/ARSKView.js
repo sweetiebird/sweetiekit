@@ -3,13 +3,6 @@ const SweetieKit = require('std:sweetiekit.node');
 THREE = require('../vendor/three/three');
 
 const colors = require('./colors');
-const {
-  NSFontAttributeName,
-  NSForegroundColorAttributeName,
-  NSKernAttributeName,
-  NSStrokeColorAttributeName,
-  NSStrokeWidthAttributeName,
-} = require('./enums');
 
 const {
   ARSKView,

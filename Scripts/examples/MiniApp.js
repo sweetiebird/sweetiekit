@@ -3,10 +3,6 @@ const faker = require('Faker');
 const colors = require('./colors');
 
 const {
-  NSParagraphStyleAttributeName,
-}= require('./enums');
-
-const {
   UIProgressView,
   UIScrollView,
   UIView,
