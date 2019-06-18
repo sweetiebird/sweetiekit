@@ -126,6 +126,9 @@
 		A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */; };
 		A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */; };
 		A1574EC522B8B3B3006CC5F2 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC422B8B3B3006CC5F2 /* UIView+Constraints.swift */; };
+		A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC822B8BC4D006CC5F2 /* NUIStoryboardSegue.mm */; };
+		A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ECB22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.mm */; };
+		A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ECF22B8BE2A006CC5F2 /* NUIKeyCommand.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -589,6 +592,12 @@
 		A1574EBF22B8A3AB006CC5F2 /* NUIVisualEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIVisualEffect.h; sourceTree = "<group>"; };
 		A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIVisualEffect.mm; sourceTree = "<group>"; };
 		A1574EC422B8B3B3006CC5F2 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		A1574EC722B8BC4D006CC5F2 /* NUIStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIStoryboardSegue.h; sourceTree = "<group>"; };
+		A1574EC822B8BC4D006CC5F2 /* NUIStoryboardSegue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStoryboardSegue.mm; sourceTree = "<group>"; };
+		A1574ECA22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIStoryboardUnwindSegueSource.h; sourceTree = "<group>"; };
+		A1574ECB22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStoryboardUnwindSegueSource.mm; sourceTree = "<group>"; };
+		A1574ECF22B8BE2A006CC5F2 /* NUIKeyCommand.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIKeyCommand.mm; sourceTree = "<group>"; };
+		A1574ED022B8BE2A006CC5F2 /* NUIKeyCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIKeyCommand.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1924,6 +1933,33 @@
 			path = NUIVisualEffect;
 			sourceTree = "<group>";
 		};
+		A1574EC622B8BC4D006CC5F2 /* NUIStoryboardSegue */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EC722B8BC4D006CC5F2 /* NUIStoryboardSegue.h */,
+				A1574EC822B8BC4D006CC5F2 /* NUIStoryboardSegue.mm */,
+			);
+			path = NUIStoryboardSegue;
+			sourceTree = "<group>";
+		};
+		A1574EC922B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource */ = {
+			isa = PBXGroup;
+			children = (
+				A1574ECA22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.h */,
+				A1574ECB22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.mm */,
+			);
+			path = NUIStoryboardUnwindSegueSource;
+			sourceTree = "<group>";
+		};
+		A1574ECE22B8BE29006CC5F2 /* NUIKeyCommand */ = {
+			isa = PBXGroup;
+			children = (
+				A1574ED022B8BE2A006CC5F2 /* NUIKeyCommand.h */,
+				A1574ECF22B8BE2A006CC5F2 /* NUIKeyCommand.mm */,
+			);
+			path = NUIKeyCommand;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3251,6 +3287,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574ECE22B8BE29006CC5F2 /* NUIKeyCommand */,
+				A1574EC622B8BC4D006CC5F2 /* NUIStoryboardSegue */,
+				A1574EC922B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource */,
 				A1574EBB22B8A3AA006CC5F2 /* NUIBlurEffect */,
 				A1574EBE22B8A3AB006CC5F2 /* NUIVisualEffect */,
 				A1574EB822B8A3AA006CC5F2 /* NUIVisualEffectView */,
@@ -3952,6 +3991,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,
 				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
@@ -4019,6 +4059,7 @@
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
+				A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
@@ -4231,6 +4272,7 @@
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
+				A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */,
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
 				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,

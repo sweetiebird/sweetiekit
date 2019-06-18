@@ -36,6 +36,20 @@ JS_INIT_CLASS(UINavigationController, UIViewController);
 
   // static members (ctor)
   JS_INIT_CTOR(UINavigationController, UIViewController);
+  
+  // UIViewController (UINavigationControllerItem)
+  {
+    JS_WITH_TYPE(UIViewController);
+    JS_ASSIGN_PROTO_METHOD_AS(NUIViewController_UINavigationControllerItem::setToolbarItemsAnimated, "setToolbarItemsAnimated");
+  }
+  // UIViewController (UINavigationControllerContextualToolbarItems)
+  {
+    JS_WITH_TYPE(UIViewController);
+    JS_ASSIGN_PROTO_PROP_READONLY_AS(NUIViewController_UINavigationControllerContextualToolbarItems::navigationItem, "navigationItem");
+    JS_ASSIGN_PROTO_PROP_AS(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushed, "hidesBottomBarWhenPushed");
+    JS_ASSIGN_PROTO_PROP_READONLY_AS(NUIViewController_UINavigationControllerContextualToolbarItems::navigationController, "navigationController");
+    JS_ASSIGN_PROTO_PROP_AS(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItems, "toolbarItems");
+  }
 JS_INIT_CLASS_END(UINavigationController, UIViewController);
 
 NAN_METHOD(NUINavigationController::New) {
@@ -428,3 +442,61 @@ NAN_SETTER(NUIViewController::toolbarItemsSetter) {
   }
 }
 */
+
+NAN_METHOD(NUIViewController_UINavigationControllerItem::setToolbarItemsAnimated) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSArray<UIBarButtonItem*>, toolbarItems);
+    declare_value(BOOL, animated);
+    [self setToolbarItems: toolbarItems animated: animated];
+  }
+}
+
+#include "NUINavigationItem.h"
+
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationItemGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UINavigationItem([self navigationItem]));
+  }
+}
+
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hidesBottomBarWhenPushed]));
+  }
+}
+
+NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedSetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidesBottomBarWhenPushed: input];
+  }
+}
+
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationControllerGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UINavigationController([self navigationController]));
+  }
+}
+
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self toolbarItems]));
+  }
+}
+
+NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsSetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<UIBarButtonItem*>, input);
+    [self setToolbarItems: input];
+  }
+}

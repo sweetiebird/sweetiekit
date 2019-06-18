@@ -11,11 +11,11 @@ async function make(nav, demoVC) {
     'And an informative message',
   );
   const action = new UIAlertAction('Okay', () => {
-    alert.dismiss(true, () => {});
+    alert.dismissViewControllerAnimatedCompletion(true, () => {});
   });
   alert.addAction(action);
   nav.pushViewController(demoVC);
-  demoVC.present(alert, true, () => {});
+  demoVC.presentViewControllerAnimatedCompletion(alert, true, () => {});
 }
 
 module.exports = make;

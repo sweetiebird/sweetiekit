@@ -15,6 +15,13 @@ JS_INIT_CLASS(UITabBarController, UIViewController);
   JS_ASSIGN_PROP_READONLY(proto, tabBar);
   // static members (ctor)
   JS_INIT_CTOR(UITabBarController, UIViewController);
+  
+  // UIViewController (UITabBarControllerItem)
+  {
+    JS_WITH_TYPE(UIViewController);
+    JS_ASSIGN_PROTO_PROP_AS(NUIViewController_UITabBarControllerItem::tabBarItem, "tabBarItem");
+    JS_ASSIGN_PROTO_PROP_READONLY_AS(NUIViewController_UITabBarControllerItem::tabBarController, "tabBarController");
+  }
 JS_INIT_CLASS_END(UITabBarController, UIViewController);
 
 NAN_METHOD(NUITabBarController::New) {
@@ -68,3 +75,29 @@ NAN_GETTER(NUITabBarController::tabBarGetter) {
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui tabBar], NUITabBar::type)));
 }
+
+#include "NUITabBarItem.h"
+
+NAN_GETTER(NUIViewController_UITabBarControllerItem::tabBarItemGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITabBarItem([self tabBarItem]));
+  }
+}
+
+NAN_SETTER(NUIViewController_UITabBarControllerItem::tabBarItemSetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UITabBarItem, input);
+    [self setTabBarItem: input];
+  }
+}
+
+NAN_GETTER(NUIViewController_UITabBarControllerItem::tabBarControllerGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITabBarController([self tabBarController]));
+  }
+}
+

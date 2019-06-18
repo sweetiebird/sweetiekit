@@ -101,6 +101,12 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
         xxx_swizzle(class_,
           @selector(viewDidDisappear:),
           @selector(xxx_viewDidDisappear:));
+        xxx_swizzle(class_,
+          @selector(viewWillLayoutSubviews:),
+          @selector(xxx_viewWillLayoutSubviews:));
+        xxx_swizzle(class_,
+          @selector(viewDidLayoutSubviews:),
+          @selector(xxx_viewDidLayoutSubviews:));
     });
 }
 
@@ -182,6 +188,43 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
     });
 }
 
+- (void)xxx_viewWillLayoutSubviews:(BOOL)animated {
+    [self xxx_viewWillLayoutSubviews:animated];
+    //NSLog(@"viewWillLayoutSubviews: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewWillLayoutSubviews"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewWillLayoutSubviews", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewWillLayoutSubviews"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewWillLayoutSubviews", JS_BOOL(animated));
+      }
+    });
+}
+
+- (void)xxx_viewDidLayoutSubviews:(BOOL)animated {
+    [self xxx_viewDidLayoutSubviews:animated];
+    //NSLog(@"viewDidLayoutSubviews: %@", self);
+    id fn = [self associatedValueForKey:@"sweetiekit_viewDidLayoutSubviews"];
+    if (fn != nullptr) {
+      Nan::HandleScope scope;
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      [func jsFunction]->Call("UIViewController::viewDidLayoutSubviews", JS_BOOL(animated));
+    }
+    sweetiekit::forEachView([self view], ^(UIView *view) {
+      id fn = [view associatedValueForKey:@"sweetiekit_viewDidLayoutSubviews"];
+      if (fn != nullptr) {
+        Nan::HandleScope scope;
+        SweetJSFunction* func = (SweetJSFunction*)fn;
+        [func jsFunction]->Call("UIView::viewDidLayoutSubviews", JS_BOOL(animated));
+      }
+    });
+}
 @end
 
 IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {

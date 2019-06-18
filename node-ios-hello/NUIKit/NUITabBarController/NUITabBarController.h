@@ -19,4 +19,11 @@ JS_WRAP_CLASS(UITabBarController, UIViewController);
   JS_PROP(tabBar);
 JS_WRAP_CLASS_END(UITabBarController);
 
+
+// UIViewController (UITabBarControllerItem)
+JS_EXTEND_CLASS(UIViewController, UITabBarControllerItem);
+  JS_PROP(tabBarItem);
+  JS_PROP(tabBarController);
+JS_EXTEND_CLASS_END(UIViewController, UITabBarControllerItem);
+
 #endif /* NUITabBarController_h */

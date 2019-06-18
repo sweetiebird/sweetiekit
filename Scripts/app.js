@@ -206,7 +206,7 @@ function createTable() {
 
        imgDel.onCancel = (picker) => {};
        imgCtrl.delegate = imgDel;
-       photoVC.present(imgCtrl, true, () => {});
+       photoVC.presentViewControllerAnimatedCompletion(imgCtrl, true, () => {});
      } else {
        demo();
      }
@@ -313,7 +313,7 @@ async function setupApp() {
   nameVC.modalPresentationStyle = 'custom';
 
   setTimeout(() => {
-    nameVC.present(showVC, true, () => {});
+    nameVC.presentViewControllerAnimatedCompletion(showVC, true, () => {});
   }, 3000);
   console.log('setupAppDone');
 }

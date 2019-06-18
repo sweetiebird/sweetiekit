@@ -12,11 +12,6 @@
 NUISplitViewController::NUISplitViewController() {}
 NUISplitViewController::~NUISplitViewController() {}
 
-#define JS_WITH_TYPE(kind) \
-  if (N##kind::type.IsEmpty()) { N##kind::type.Reset(Nan::New<FunctionTemplate>()); } \
-  Local<Function> ctor(JS_TYPE(N##kind)); \
-  Local<Object> proto(JS_OBJ(ctor->Get(JS_CONTEXT(), JS_STR("prototype")).ToLocalChecked()))
-
 #include "NUIViewController.h"
 
 Nan::Persistent<FunctionTemplate> NUISplitViewControllerDelegate::type;
@@ -31,26 +26,26 @@ JS_INIT_CLASS(UISplitViewController, UIViewController);
 // UISplitViewControllerDelegate
   {
     JS_WITH_TYPE(UISplitViewControllerDelegate);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerWillChangeToDisplayMode);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::targetDisplayModeForActionInSplitViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerShowViewControllerSender);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerShowDetailViewControllerSender);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::primaryViewControllerForCollapsingSplitViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::primaryViewControllerForExpandingSplitViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerCollapseSecondaryViewControllerOntoPrimaryViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerSeparateSecondaryViewControllerFromPrimaryViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerSupportedInterfaceOrientations);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerPreferredInterfaceOrientationForPresentation);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerWillHideViewControllerWithBarButtonItemForPopoverController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerWillShowViewControllerInvalidatingBarButtonItem);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerPopoverControllerWillPresentViewController);
-    JS_ASSIGN_PROTO_METHOD(NUISplitViewControllerDelegate::splitViewControllerShouldHideViewControllerInOrientation);
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerWillChangeToDisplayMode, "splitViewControllerWillChangeToDisplayMode");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::targetDisplayModeForActionInSplitViewController, "targetDisplayModeForActionInSplitViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerShowViewControllerSender, "splitViewControllerShowViewControllerSender");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerShowDetailViewControllerSender, "splitViewControllerShowDetailViewControllerSender");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::primaryViewControllerForCollapsingSplitViewController, "primaryViewControllerForCollapsingSplitViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::primaryViewControllerForExpandingSplitViewController, "primaryViewControllerForExpandingSplitViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerCollapseSecondaryViewControllerOntoPrimaryViewController, "splitViewControllerCollapseSecondaryViewControllerOntoPrimaryViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerSeparateSecondaryViewControllerFromPrimaryViewController, "splitViewControllerSeparateSecondaryViewControllerFromPrimaryViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerSupportedInterfaceOrientations, "splitViewControllerSupportedInterfaceOrientations");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerPreferredInterfaceOrientationForPresentation, "splitViewControllerPreferredInterfaceOrientationForPresentation");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerWillHideViewControllerWithBarButtonItemForPopoverController, "splitViewControllerWillHideViewControllerWithBarButtonItemForPopoverController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerWillShowViewControllerInvalidatingBarButtonItem, "splitViewControllerWillShowViewControllerInvalidatingBarButtonItem");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerPopoverControllerWillPresentViewController, "splitViewControllerPopoverControllerWillPresentViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUISplitViewControllerDelegate::splitViewControllerShouldHideViewControllerInOrientation, "splitViewControllerShouldHideViewControllerInOrientation");
   }
 // UIViewController
   {
     JS_WITH_TYPE(UIViewController);
-    JS_ASSIGN_PROTO_METHOD(NUIViewController_UISplitViewController::collapseSecondaryViewControllerForSplitViewController);
-    JS_ASSIGN_PROTO_METHOD(NUIViewController_UISplitViewController::separateSecondaryViewControllerForSplitViewController);
+    JS_ASSIGN_PROTO_METHOD_AS(NUIViewController_UISplitViewController::collapseSecondaryViewControllerForSplitViewController, "collapseSecondaryViewControllerForSplitViewController");
+    JS_ASSIGN_PROTO_METHOD_AS(NUIViewController_UISplitViewController::separateSecondaryViewControllerForSplitViewController, "separateSecondaryViewControllerForSplitViewController");
   }
 // UISplitViewController
   JS_ASSIGN_PROTO_PROP(viewControllers);
@@ -68,7 +63,7 @@ JS_INIT_CLASS(UISplitViewController, UIViewController);
 // UIViewController
   {
     JS_WITH_TYPE(UIViewController);
-    JS_ASSIGN_PROTO_PROP_READONLY(NUIViewController_UISplitViewController::splitViewController);
+    JS_ASSIGN_PROTO_PROP_READONLY_AS(NUIViewController_UISplitViewController::splitViewController, "splitViewController");
   }
 
   // static members (ctor)

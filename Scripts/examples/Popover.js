@@ -36,7 +36,7 @@ function make(nav, demoVC) {
       ppc.sourceView = view;
       ppc.sourceRect = CGRectMake(xPosition, yPosition, 0, 0);
     }
-    demoVC.present(vc, true, () => {});
+    demoVC.presentViewControllerAnimatedCompletion(vc, true, () => {});
   }, UIControlEventTouchUpInside);
   button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 4;

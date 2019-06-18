@@ -174,7 +174,7 @@ function toggleRecordScreen(demoVC, recorder) {
   const del = new RPPreviewViewControllerDelegate();
   del.previewControllerDidFinish = (previewController) => {
     console.log('preview controller did finish - uidemos.js toggleRecordScreen()');
-    previewController.dismiss(true, () => {
+    previewController.dismissViewControllerAnimatedCompletion(true, () => {
       console.log('preview controller did finish 2 - uidemos.js toggleRecordScreen()');
     });
   };
@@ -184,7 +184,7 @@ function toggleRecordScreen(demoVC, recorder) {
     recorder.stopRecordingWithHandler((previewController) => {
       console.log('stop recording 2 - uidemos.js toggleRecordScreen()');
       previewController.delegate = del;
-      demoVC.present(previewController, true, () => {
+      demoVC.presentViewControllerAnimatedCompletion(previewController, true, () => {
         console.log('stop recording 3 - uidemos.js toggleRecordScreen()');
       });
     });

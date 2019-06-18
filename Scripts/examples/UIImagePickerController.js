@@ -34,7 +34,7 @@ async function make(nav, demoVC) {
 
       imgDel.onCancel = (picker) => {};
       imgCtrl.delegate = imgDel;
-      demoVC.present(imgCtrl, true, () => {});
+      demoVC.presentViewControllerAnimatedCompletion(imgCtrl, true, () => {});
     }
   }, UIControlEventTouchUpInside);
 

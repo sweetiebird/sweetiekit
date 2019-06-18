@@ -1366,7 +1366,7 @@ console.log(sb, vc, view, subview);
 //    console.log(del, del.onInfo);
 //    const imgVC = new UIImagePickerController();
 //    imgVC.delegate = del;
-//    vc.present(imgVC, true, () => {});
+//    vc.presentViewControllerAnimatedCompletion(imgVC, true, () => {});
 //  }
 //  return vc;
 //}
@@ -1416,11 +1416,11 @@ console.log(sb, vc, view, subview);
 //    kv.setValueForKey(userField.text, "me");
 //    //await buildMainUI();
 //    const vc2 = sb.instantiateViewControllerWithIdentifier('loginVC');
-//    vc.present(vc2, true, (success) => {
+//    vc.presentViewControllerAnimatedCompletion(vc2, true, (success) => {
 //      console.log("Finsihed!", success)
 //      const btnLogin = vc2.view.viewWithStringTag("btnLogin");
 //      btnLogin.callback = async () => {
-//        vc2.dismiss();
+//        vc2.dismissViewControllerAnimatedCompletion(true);
 //      }
 //    })
 //  }
@@ -1504,7 +1504,7 @@ function iosApp() {
     del.onCancel = (picker) => {};
 
     imgVC.delegate = del;
-    vc.present(imgVC, true, () => {});
+    vc.presentViewControllerAnimatedCompletion(imgVC, true, () => {});
   }
 
   btnLogin.addTargetActionForControlEvents(handleButtonPress, UIControlEventTouchUpInside);

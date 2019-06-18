@@ -42,12 +42,6 @@ JS_WRAP_CLASS(UISplitViewController, UIViewController);
   JS_PROP(primaryEdge);
 JS_WRAP_CLASS_END(UISplitViewController);
 
-#define JS_EXTEND_CLASS(name, category) \
-  JS_WRAP_CLASS(name##_##category, NSObject)
-
-#define JS_EXTEND_CLASS_END(name, category) \
-  JS_WRAP_CLASS_END(name##_##category)
-
 // UIViewController
 JS_EXTEND_CLASS(UIViewController, UISplitViewController);
   JS_PROP_READONLY(splitViewController);

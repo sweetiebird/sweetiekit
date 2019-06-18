@@ -687,6 +687,9 @@ NAN_METHOD(NClass::New) {
 #include "NUIVisualEffectView.h"
 #include "NUITextInputPasswordRules.h"
 #include "NUITextField.h"
+#include "NUIKeyCommand.h"
+#include "NUIStoryboardSegue.h"
+#include "NUIStoryboardUnwindSegueSource.h"
 #include "NUITextInputMode.h"
 #include "NUIStoryboard.h"
 #include "NUISearchController.h"
@@ -962,6 +965,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UISwitch);
     JS_EXPORT_TYPE(UIStoryboard);
     JS_EXPORT_TYPE(UIButton);
+    JS_EXPORT_TYPE(UIKeyCommand);
+    JS_EXPORT_TYPE(UIStoryboardSegue);
+    JS_EXPORT_TYPE(UIStoryboardUnwindSegueSource);
     JS_EXPORT_TYPE(UITextInputMode);
     JS_EXPORT_TYPE(UITextInputPasswordRules);
     JS_EXPORT_TYPE(UITextField);
@@ -1413,6 +1419,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UITextInputPasswordRules);
       JS_RETURN_TYPE(UITextField);
       JS_RETURN_TYPE(UITextInputMode);
+      JS_RETURN_TYPE(UIStoryboardUnwindSegueSource);
+      JS_RETURN_TYPE(UIStoryboardSegue);
+      JS_RETURN_TYPE(UIKeyCommand);
       JS_RETURN_TYPE(UISwitch);
       JS_RETURN_TYPE(UIRefreshControl);
       JS_RETURN_TYPE(UIControl);

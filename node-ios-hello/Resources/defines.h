@@ -221,11 +221,17 @@ using namespace node;
 #define JS_ASSIGN_PROTO_PROP(jsName)           JS_ASSIGN_PROP(proto, jsName)
 #define JS_ASSIGN_PROTO_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(proto, jsName)
 #define JS_ASSIGN_PROTO_METHOD(jsName)         JS_ASSIGN_METHOD(proto, jsName)
-#define JS_ASSIGN_PROTO_METHOD_AS(cppName, jsName) JS_SET_METHOD(proto, jsName, cppName)
+
+#define JS_ASSIGN_PROTO_PROP_AS(cppName, jsName)           JS_SET_PROP(proto, jsName, cppName)
+#define JS_ASSIGN_PROTO_PROP_READONLY_AS(cppName, jsName)  JS_SET_PROP_READONLY(proto, jsName, cppName)
+#define JS_ASSIGN_PROTO_METHOD_AS(cppName, jsName)         JS_SET_METHOD(proto, jsName, cppName)
 
 #define JS_ASSIGN_STATIC_PROP(jsName)           JS_ASSIGN_PROP(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
+
+#define JS_ASSIGN_STATIC_PROP_AS(cppName, jsName)           JS_SET_PROP(ctor, jsName, cppName)
+#define JS_ASSIGN_STATIC_PROP_READONLY_AS(cppName, jsName)  JS_SET_PROP_READONLY(ctor, jsName, cppName)
 #define JS_ASSIGN_STATIC_METHOD_AS(cppName, jsName) JS_SET_METHOD(ctor, jsName, cppName)
 
 #define JS_ASSIGN_CONSTANT(name, type, value) \
@@ -270,6 +276,17 @@ public: \
   
 #define JS_WRAP_CLASS_END(name) \
 };
+
+#define JS_EXTEND_CLASS(name, category) \
+  JS_WRAP_CLASS(name##_##category, NSObject)
+
+#define JS_EXTEND_CLASS_END(name, category) \
+  JS_WRAP_CLASS_END(name##_##category)
+
+#define JS_WITH_TYPE(kind) \
+  if (N##kind::type.IsEmpty()) { N##kind::type.Reset(Nan::New<FunctionTemplate>()); } \
+  Local<Function> ctor(JS_TYPE(N##kind)); \
+  Local<Object> proto(JS_OBJ(ctor->Get(JS_CONTEXT(), JS_STR("prototype")).ToLocalChecked()))
 
 #define JS_ATTACH_FUNCTION(jsValue, objcValue, keyName) \
   { \

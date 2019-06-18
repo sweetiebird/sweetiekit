@@ -114,41 +114,6 @@ NAN_GETTER(NUIResponder::undoManagerGetter) {
   }
 }
 
-//NAN_GETTER(NUIKeyCommand::inputGetter) {
-//  JS_UNWRAP(UIKeyCommand, self);
-//  @autoreleasepool
-//  {
-//    JS_SET_RETURN(js_value_NSString([self input]));
-//    return;
-//  }
-//}
-
-//NAN_GETTER(NUIKeyCommand::modifierFlagsGetter) {
-//  JS_UNWRAP(UIKeyCommand, self);
-//  @autoreleasepool
-//  {
-//    JS_SET_RETURN(js_value_UIKeyModifierFlags([self modifierFlags]));
-//    return;
-//  }
-//}
-
-//NAN_GETTER(NUIKeyCommand::discoverabilityTitleGetter) {
-//  JS_UNWRAP(UIKeyCommand, self);
-//  @autoreleasepool
-//  {
-//    JS_SET_RETURN(js_value_NSString([self discoverabilityTitle]));
-//    return;
-//  }
-//}
-
-//NAN_SETTER(NUIKeyCommand::discoverabilityTitleSetter) {
-//  JS_UNWRAP(UIKeyCommand, self);
-//  @autoreleasepool
-//  {
-//    [self setDiscoverabilityTitle: to_value_NSString(value)];
-//  }
-//}
-
 NAN_GETTER(NUIResponder::keyCommandsGetter) {
   JS_UNWRAP(UIResponder, self);
   @autoreleasepool

@@ -39,4 +39,17 @@ JS_WRAP_CLASS(UINavigationController, UIViewController);
 
 JS_WRAP_CLASS_END(UINavigationController);
 
+// UIViewController (UINavigationControllerItem)
+JS_EXTEND_CLASS(UIViewController, UINavigationControllerItem);
+  JS_METHOD(setToolbarItemsAnimated);
+JS_EXTEND_CLASS_END(UIViewController, UINavigationControllerItem);
+
+// UIViewController (UINavigationControllerContextualToolbarItems)
+JS_EXTEND_CLASS(UIViewController, UINavigationControllerContextualToolbarItems);
+  JS_PROP_READONLY(navigationItem);
+  JS_PROP(hidesBottomBarWhenPushed);
+  JS_PROP_READONLY(navigationController);
+  JS_PROP(toolbarItems);
+JS_EXTEND_CLASS_END(UIViewController, UINavigationControllerContextualToolbarItems);
+
 #endif /* NUINavigationController_h */

@@ -19,10 +19,10 @@ async function make(nav, demoVC) {
       'Hello',
     );
     const action = new UIAlertAction('Okay', () => {
-      alert.dismiss(true, () => {});
+      alert.dismissViewControllerAnimatedCompletion(true, () => {});
     });
     alert.addAction(action);
-    demoVC.present(alert, true, () => {});
+    demoVC.presentViewControllerAnimatedCompletion(alert, true, () => {});
   }, UIControlEventTouchUpInside);
   button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 4;

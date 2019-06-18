@@ -250,7 +250,7 @@ async function userPhoto() {
 
       imgDel.onCancel = () => {};
       imgCtrl.delegate = imgDel;
-      photoVC.present(imgCtrl, true, () => {});
+      photoVC.presentViewControllerAnimatedCompletion(imgCtrl, true, () => {});
     } else {
       demo();
     }
