@@ -53,10 +53,6 @@ const {
   UICollectionViewController,
 } = UIKit;
 
-const CLLocationAccuracy = {
-  BestForNavigation: 'kCLLocationAccuracyBestForNavigation',
-};
-
 const UITableViewScrollPosition = {
   Top: 'Top',
   Bottom: 'Bottom',
@@ -380,7 +376,7 @@ class ARApp {
     });
     this.locMgr = new CLLocationManager();
     this.locMgr.delegate = this.locDel;
-    this.locMgr.desiredAccuracy = CLLocationAccuracy.BestForNavigation;
+    this.locMgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     this.locMgr.distanceFilter = 1;
     console.log(this.locMgr, this.locDel);
     this.locMgr.requestAlwaysAuthorization();

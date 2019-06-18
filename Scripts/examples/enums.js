@@ -2,10 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const { UIKit } = SweetieKit;
 
-const CLLocationAccuracy = {
-  BestForNavigation: 'kCLLocationAccuracyBestForNavigation',
-};
-
 const UITableViewScrollPosition = {
   Top: 'Top',
   Bottom: 'Bottom',
@@ -251,7 +247,6 @@ module.exports.MDLMaterialSemantic = {
   userDefined: 0x8001
 };
 
-module.exports.CLLocationAccuracy = CLLocationAccuracy;
 module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;

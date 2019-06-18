@@ -22,7 +22,52 @@ JS_INIT_CLASS(CLLocation, NSObject);
   JS_SET_PROP_READONLY(proto, "course", Course);
   // static members (ctor)
   JS_INIT_CTOR(CLLocation, NSObject);
+  // constants (exports)
+  
+/*
+ *  kCLDistanceFilterNone
+ *  
+ *  Discussion:
+ *    Use as the distanceFilter property for CLLocationManager. This indicates 
+ *    to the location service that no minimum movement filter is desired - ie, client will be informed
+ *    of any movement.
+ */
+  JS_ASSIGN_ENUM(kCLDistanceFilterNone, CLLocationDistance);
+
+/*
+ *  kCLLocationAccuracy<x>
+ *  
+ *  Discussion:
+ *    Used to specify the accuracy level desired. The location service will try its best to achieve
+ *    your desired accuracy. However, it is not guaranteed. To optimize
+ *    power performance, be sure to specify an appropriate accuracy for your usage scenario (eg,
+ *    use a large accuracy value when only a coarse location is needed).
+ */
+  JS_ASSIGN_ENUM(kCLLocationAccuracyBestForNavigation, CLLocationAccuracy);
+  JS_ASSIGN_ENUM(kCLLocationAccuracyBest, CLLocationAccuracy);
+  JS_ASSIGN_ENUM(kCLLocationAccuracyNearestTenMeters, CLLocationAccuracy);
+  JS_ASSIGN_ENUM(kCLLocationAccuracyHundredMeters, CLLocationAccuracy);
+  JS_ASSIGN_ENUM(kCLLocationAccuracyKilometer, CLLocationAccuracy);
+  JS_ASSIGN_ENUM(kCLLocationAccuracyThreeKilometers, CLLocationAccuracy);
+
+/*
+ *  CLLocationDistanceMax
+ *
+ *  Discussion:
+ *    Used to specify the maximum CLLocationDistance
+ */
+  JS_ASSIGN_ENUM(CLLocationDistanceMax, CLLocationDistance);
+
+/*
+ *  CLTimeIntervalMax
+ *
+ *  Discussion:
+ *    Used to specify the maximum NSTimeInterval
+ */
+  JS_ASSIGN_ENUM(CLTimeIntervalMax, NSTimeInterval);
+
 JS_INIT_CLASS_END(CLLocation, NSObject);
+
 
 NAN_METHOD(NCLLocation::New) {
   JS_RECONSTRUCT(CLLocation);
