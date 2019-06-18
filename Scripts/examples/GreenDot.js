@@ -1,7 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
 const math = require('./helpers/math');
 const SCNLightType = require('./enums').SCNLightType;
-const ARWorldAlignment = require('./enums').ARWorldAlignment;
 THREE = require('../vendor/three/three');
 
 const {
@@ -54,7 +53,7 @@ async function make(nav, demoVC) {
   const view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   const config = new ARWorldTrackingConfiguration();
-  config.worldAlignment = ARWorldAlignment.gravityAndHeading;
+  config.worldAlignment = ARWorldAlignmentGravityAndHeading;
 
   const viewDel = new ARSCNViewDelegate(() => {
     const parentNode = new SCNNode();

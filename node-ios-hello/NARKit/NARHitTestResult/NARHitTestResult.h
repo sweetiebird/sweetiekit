@@ -16,9 +16,9 @@
 
 // ARKit enums
 
-#define js_value_ARHitTestResultType(x) JS_ENUM(ARHitTestResultType, NSUInteger, x)
-#define to_value_ARHitTestResultType(x) TO_ENUM(ARHitTestResultType, NSUInteger, x)
-#define is_value_ARHitTestResultType(x) IS_ENUM(ARHitTestResultType, NSUInteger, x)
+#define js_value_ARHitTestResultType(x) JS_OPTS(ARHitTestResultType, NSUInteger, x)
+#define to_value_ARHitTestResultType(x) TO_OPTS(ARHitTestResultType, NSUInteger, x)
+#define is_value_ARHitTestResultType(x) IS_OPTS(ARHitTestResultType, NSUInteger, x)
 
 JS_WRAP_CLASS(ARHitTestResult, NSObject);
   JS_PROP_READONLY(type);

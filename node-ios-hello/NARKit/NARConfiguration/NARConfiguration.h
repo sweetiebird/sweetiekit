@@ -14,6 +14,18 @@
 #define to_value_ARConfiguration(x) to_value_wrapper(x, ARConfiguration)
 #define is_value_ARConfiguration(x) is_value_wrapper(x, ARConfiguration)
 
+#define js_value_ARWorldAlignment(x) JS_ENUM(ARWorldAlignment, NSInteger, x)
+#define to_value_ARWorldAlignment(x) TO_ENUM(ARWorldAlignment, NSInteger, x)
+#define is_value_ARWorldAlignment(x) IS_ENUM(ARWorldAlignment, NSInteger, x)
+
+#define js_value_AREnvironmentTexturing(x) JS_ENUM(AREnvironmentTexturing, NSInteger, x)
+#define to_value_AREnvironmentTexturing(x) TO_ENUM(AREnvironmentTexturing, NSInteger, x)
+#define is_value_AREnvironmentTexturing(x) IS_ENUM(AREnvironmentTexturing, NSInteger, x)
+
+#define js_value_ARPlaneDetection(x) JS_OPTS(ARPlaneDetection, NSUnteger, x)
+#define to_value_ARPlaneDetection(x) TO_OPTS(ARPlaneDetection, NSUnteger, x)
+#define is_value_ARPlaneDetection(x) IS_OPTS(ARPlaneDetection, NSUnteger, x)
+
 JS_WRAP_CLASS(ARConfiguration, NSObject);
   JS_PROP(isLightEstimationEnabled);
   JS_PROP(worldAlignment);
