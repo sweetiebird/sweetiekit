@@ -136,6 +136,15 @@
 		A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE322B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.mm */; };
 		A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */; };
 		A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */; };
+		A1574F0022B93071006CC5F2 /* NCAPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EF022B9306F006CC5F2 /* NCAPropertyAnimation.mm */; };
+		A1574F0122B93071006CC5F2 /* NCATransition.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EF222B9306F006CC5F2 /* NCATransition.mm */; };
+		A1574F0222B93071006CC5F2 /* NCAAnimationGroup.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EF522B93070006CC5F2 /* NCAAnimationGroup.mm */; };
+		A1574F0322B93071006CC5F2 /* NCAAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EF822B93070006CC5F2 /* NCAAnimation.mm */; };
+		A1574F0422B93071006CC5F2 /* NCAKeyframeAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EFC22B93070006CC5F2 /* NCAKeyframeAnimation.mm */; };
+		A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EFF22B93071006CC5F2 /* NCASpringAnimation.mm */; };
+		A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574F0822B93293006CC5F2 /* NCAValueFunction.mm */; };
+		A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574F0B22B93B96006CC5F2 /* NCAMediaTimingFunction.mm */; };
+		A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574F0F22B948D8006CC5F2 /* NCATransaction.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -619,6 +628,24 @@
 		A1574EE722B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		A1574EEB22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewTransitionLayout.h; sourceTree = "<group>"; };
 		A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewTransitionLayout.mm; sourceTree = "<group>"; };
+		A1574EEF22B9306F006CC5F2 /* NCAPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAPropertyAnimation.h; sourceTree = "<group>"; };
+		A1574EF022B9306F006CC5F2 /* NCAPropertyAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAPropertyAnimation.mm; sourceTree = "<group>"; };
+		A1574EF222B9306F006CC5F2 /* NCATransition.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCATransition.mm; sourceTree = "<group>"; };
+		A1574EF322B9306F006CC5F2 /* NCATransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCATransition.h; sourceTree = "<group>"; };
+		A1574EF522B93070006CC5F2 /* NCAAnimationGroup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAAnimationGroup.mm; sourceTree = "<group>"; };
+		A1574EF622B93070006CC5F2 /* NCAAnimationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAAnimationGroup.h; sourceTree = "<group>"; };
+		A1574EF822B93070006CC5F2 /* NCAAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAAnimation.mm; sourceTree = "<group>"; };
+		A1574EF922B93070006CC5F2 /* NCAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAAnimation.h; sourceTree = "<group>"; };
+		A1574EFB22B93070006CC5F2 /* NCAKeyframeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAKeyframeAnimation.h; sourceTree = "<group>"; };
+		A1574EFC22B93070006CC5F2 /* NCAKeyframeAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAKeyframeAnimation.mm; sourceTree = "<group>"; };
+		A1574EFE22B93071006CC5F2 /* NCASpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCASpringAnimation.h; sourceTree = "<group>"; };
+		A1574EFF22B93071006CC5F2 /* NCASpringAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCASpringAnimation.mm; sourceTree = "<group>"; };
+		A1574F0722B93293006CC5F2 /* NCAValueFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAValueFunction.h; sourceTree = "<group>"; };
+		A1574F0822B93293006CC5F2 /* NCAValueFunction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAValueFunction.mm; sourceTree = "<group>"; };
+		A1574F0B22B93B96006CC5F2 /* NCAMediaTimingFunction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAMediaTimingFunction.mm; sourceTree = "<group>"; };
+		A1574F0C22B93B96006CC5F2 /* NCAMediaTimingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAMediaTimingFunction.h; sourceTree = "<group>"; };
+		A1574F0F22B948D8006CC5F2 /* NCATransaction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCATransaction.mm; sourceTree = "<group>"; };
+		A1574F1022B948D8006CC5F2 /* NCATransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCATransaction.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1114,6 +1141,15 @@
 		216392A2226BD43600051DE0 /* NCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				A1574F0E22B948D8006CC5F2 /* NCATransaction */,
+				A1574F0A22B93B96006CC5F2 /* NCAMediaTimingFunction */,
+				A1574F0622B93293006CC5F2 /* NCAValueFunction */,
+				A1574EF722B93070006CC5F2 /* NCAAnimation */,
+				A1574EF422B93070006CC5F2 /* NCAAnimationGroup */,
+				A1574EFA22B93070006CC5F2 /* NCAKeyframeAnimation */,
+				A1574EEE22B9306F006CC5F2 /* NCAPropertyAnimation */,
+				A1574EFD22B93071006CC5F2 /* NCASpringAnimation */,
+				A1574EF122B9306F006CC5F2 /* NCATransition */,
 				A174A48022B14A2000415AD8 /* NCAGradientLayer */,
 				A1B5ABCE227D1114004B3CB2 /* NCABasicAnimation */,
 				A1646B7C2291E6E90078CF4B /* NCAEmitterCell */,
@@ -2042,6 +2078,87 @@
 				A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */,
 			);
 			path = NUICollectionViewTransitionLayout;
+			sourceTree = "<group>";
+		};
+		A1574EEE22B9306F006CC5F2 /* NCAPropertyAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EEF22B9306F006CC5F2 /* NCAPropertyAnimation.h */,
+				A1574EF022B9306F006CC5F2 /* NCAPropertyAnimation.mm */,
+			);
+			path = NCAPropertyAnimation;
+			sourceTree = "<group>";
+		};
+		A1574EF122B9306F006CC5F2 /* NCATransition */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EF322B9306F006CC5F2 /* NCATransition.h */,
+				A1574EF222B9306F006CC5F2 /* NCATransition.mm */,
+			);
+			path = NCATransition;
+			sourceTree = "<group>";
+		};
+		A1574EF422B93070006CC5F2 /* NCAAnimationGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EF622B93070006CC5F2 /* NCAAnimationGroup.h */,
+				A1574EF522B93070006CC5F2 /* NCAAnimationGroup.mm */,
+			);
+			path = NCAAnimationGroup;
+			sourceTree = "<group>";
+		};
+		A1574EF722B93070006CC5F2 /* NCAAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EF922B93070006CC5F2 /* NCAAnimation.h */,
+				A1574EF822B93070006CC5F2 /* NCAAnimation.mm */,
+			);
+			path = NCAAnimation;
+			sourceTree = "<group>";
+		};
+		A1574EFA22B93070006CC5F2 /* NCAKeyframeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EFB22B93070006CC5F2 /* NCAKeyframeAnimation.h */,
+				A1574EFC22B93070006CC5F2 /* NCAKeyframeAnimation.mm */,
+			);
+			path = NCAKeyframeAnimation;
+			sourceTree = "<group>";
+		};
+		A1574EFD22B93071006CC5F2 /* NCASpringAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EFE22B93071006CC5F2 /* NCASpringAnimation.h */,
+				A1574EFF22B93071006CC5F2 /* NCASpringAnimation.mm */,
+			);
+			path = NCASpringAnimation;
+			sourceTree = "<group>";
+		};
+		A1574F0622B93293006CC5F2 /* NCAValueFunction */ = {
+			isa = PBXGroup;
+			children = (
+				A1574F0722B93293006CC5F2 /* NCAValueFunction.h */,
+				A1574F0822B93293006CC5F2 /* NCAValueFunction.mm */,
+			);
+			path = NCAValueFunction;
+			sourceTree = "<group>";
+		};
+		A1574F0A22B93B96006CC5F2 /* NCAMediaTimingFunction */ = {
+			isa = PBXGroup;
+			children = (
+				A1574F0C22B93B96006CC5F2 /* NCAMediaTimingFunction.h */,
+				A1574F0B22B93B96006CC5F2 /* NCAMediaTimingFunction.mm */,
+			);
+			path = NCAMediaTimingFunction;
+			sourceTree = "<group>";
+		};
+		A1574F0E22B948D8006CC5F2 /* NCATransaction */ = {
+			isa = PBXGroup;
+			children = (
+				A1574F1022B948D8006CC5F2 /* NCATransaction.h */,
+				A1574F0F22B948D8006CC5F2 /* NCATransaction.mm */,
+			);
+			path = NCATransaction;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -4100,6 +4217,7 @@
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
+				A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
@@ -4108,6 +4226,7 @@
 				A19F39F522AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm in Sources */,
 				A1574EB722B88759006CC5F2 /* NUITextInputPasswordRules.mm in Sources */,
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
+				A1574F0022B93071006CC5F2 /* NCAPropertyAnimation.mm in Sources */,
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
@@ -4140,6 +4259,7 @@
 				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
+				A1574F0122B93071006CC5F2 /* NCATransition.mm in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
 				A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */,
@@ -4205,6 +4325,7 @@
 				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
 				A133701922AACEC800FA3768 /* NNSURL.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
+				A1574F0422B93071006CC5F2 /* NCAKeyframeAnimation.mm in Sources */,
 				A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
@@ -4225,6 +4346,7 @@
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
+				A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
@@ -4280,6 +4402,7 @@
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
+				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */,
@@ -4353,6 +4476,7 @@
 				A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
+				A1574F0222B93071006CC5F2 /* NCAAnimationGroup.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
 				A19F39C922AF2AA800606332 /* NAUParameterNode.mm in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
@@ -4380,6 +4504,7 @@
 				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
+				A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
 				A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */,
@@ -4389,6 +4514,7 @@
 				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
 				A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */,
+				A1574F0322B93071006CC5F2 /* NCAAnimation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

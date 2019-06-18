@@ -729,11 +729,20 @@ NAN_METHOD(NClass::New) {
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NUIDatePicker.h"
+#include "NCATransaction.h"
 #include "NCALayer.h"
 #include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
-#include "NCABasicAnimation.h"
+#include "NCAMediaTimingFunction.h" // : NSObject
+#include "NCAValueFunction.h" // : NSObject
+#include "NCAAnimation.h" // : NSObject
+#include "NCAAnimationGroup.h" // : CAAnimation
+#include "NCATransition.h" // : CAAnimation
+#include "NCAPropertyAnimation.h" // : CAAnimation
+#include "NCAKeyframeAnimation.h" // : CAPropertyAnimation
+#include "NCABasicAnimation.h" // : CAPropertyAnimation
+#include "NCASpringAnimation.h" // : CABasicAnimation
 #include "NCAShapeLayer.h"
 #include "NUIPresentationController.h"
 #include "NUIAlertController.h"
@@ -1094,10 +1103,21 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(GifView);
 
     // CoreAnimation
+    JS_EXPORT_TYPE(CATransaction);
+    JS_EXPORT_TYPE(CAMediaTimingFunction);
+    JS_EXPORT_TYPE(CAValueFunction);
+    JS_EXPORT_TYPE(CAAnimation);
+    JS_EXPORT_TYPE(CAAnimationGroup);
+    JS_EXPORT_TYPE(CATransition);
+    JS_EXPORT_TYPE(CAPropertyAnimation);
+    JS_EXPORT_TYPE(CAKeyframeAnimation);
+    JS_EXPORT_TYPE(CABasicAnimation);
+    JS_EXPORT_TYPE(CASpringAnimation);
+
     JS_EXPORT_TYPE(CALayer);
     JS_EXPORT_TYPE(CAGradientLayer);
     JS_EXPORT_TYPE(CAShapeLayer);
-    JS_EXPORT_TYPE(CABasicAnimation);
+
     JS_EXPORT_TYPE(CAEmitterCell);
     JS_EXPORT_TYPE(CAEmitterLayer);
     
@@ -1218,10 +1238,21 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
       JS_RETURN_TYPE(CAEmitterLayer);
+
       JS_RETURN_TYPE(CAShapeLayer);
       JS_RETURN_TYPE(CAGradientLayer);
       JS_RETURN_TYPE(CALayer);
+
+      JS_RETURN_TYPE(CASpringAnimation);
       JS_RETURN_TYPE(CABasicAnimation);
+      JS_RETURN_TYPE(CAKeyframeAnimation);
+      JS_RETURN_TYPE(CAPropertyAnimation);
+      JS_RETURN_TYPE(CATransition);
+      JS_RETURN_TYPE(CAAnimationGroup);
+      JS_RETURN_TYPE(CAAnimation);
+      JS_RETURN_TYPE(CAValueFunction);
+      JS_RETURN_TYPE(CAMediaTimingFunction);
+      JS_RETURN_TYPE(CATransaction);
       
       // Core Image
       JS_RETURN_TYPE(CIImage);

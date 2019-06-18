@@ -9,35 +9,16 @@
 NCABasicAnimation::NCABasicAnimation () {}
 NCABasicAnimation::~NCABasicAnimation () {}
 
-JS_INIT_CLASS(CABasicAnimation, NSObject);
+JS_INIT_CLASS(CABasicAnimation, CAPropertyAnimation);
+  JS_ASSIGN_PROTO_PROP(fromValue);
+  JS_ASSIGN_PROTO_PROP(toValue);
+  JS_ASSIGN_PROTO_PROP(byValue);
+
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, fromValue);
-  JS_ASSIGN_PROP(proto, toValue);
-  JS_ASSIGN_PROP(proto, duration);
   // static members (ctor)
-  JS_INIT_CTOR(CABasicAnimation, NSObject);
+  JS_INIT_CTOR(CABasicAnimation, CAPropertyAnimation);
   // constants (exports)
-
-  JS_ASSIGN_ENUM(kCAAnimationLinear, CAAnimationCalculationMode);
-  JS_ASSIGN_ENUM(kCAAnimationDiscrete, CAAnimationCalculationMode);
-  JS_ASSIGN_ENUM(kCAAnimationPaced, CAAnimationCalculationMode);
-  JS_ASSIGN_ENUM(kCAAnimationCubic, CAAnimationCalculationMode);
-  JS_ASSIGN_ENUM(kCAAnimationCubicPaced, CAAnimationCalculationMode);
-
-  JS_ASSIGN_ENUM(kCAAnimationRotateAuto, CAAnimationRotationMode);
-  JS_ASSIGN_ENUM(kCAAnimationRotateAutoReverse, CAAnimationRotationMode);
-
-  JS_ASSIGN_ENUM(kCATransitionFade, CATransitionType);
-  JS_ASSIGN_ENUM(kCATransitionMoveIn, CATransitionType);
-  JS_ASSIGN_ENUM(kCATransitionPush, CATransitionType);
-  JS_ASSIGN_ENUM(kCATransitionReveal, CATransitionType);
-
-  JS_ASSIGN_ENUM(kCATransitionFromRight, CATransitionSubtype);
-  JS_ASSIGN_ENUM(kCATransitionFromLeft, CATransitionSubtype);
-  JS_ASSIGN_ENUM(kCATransitionFromTop, CATransitionSubtype);
-  JS_ASSIGN_ENUM(kCATransitionFromBottom, CATransitionSubtype);
-
-JS_INIT_CLASS_END(CABasicAnimation, NSObject);
+JS_INIT_CLASS_END(CABasicAnimation, CAPropertyAnimation);
 
 NAN_METHOD(NCABasicAnimation::New) {
   JS_RECONSTRUCT(CABasicAnimation);
@@ -69,88 +50,49 @@ NAN_METHOD(NCABasicAnimation::New) {
 }
 
 NAN_GETTER(NCABasicAnimation::fromValueGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  __block id _Nullable from;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      from = [anim fromValue];
-    });
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self fromValue]));
   }
-  
-//  JS_SET_RETURN(JS_FLOAT(from));
 }
 
 NAN_SETTER(NCABasicAnimation::fromValueSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-      double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-      CGPoint pt = CGPointMake(x, y);
-      NSValue *val = [NSValue valueWithCGPoint:pt];
-      [anim setFromValue:val];
-    });
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id, input);
+    [self setFromValue: input];
   }
 }
 
 NAN_GETTER(NCABasicAnimation::toValueGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  __block id _Nullable to;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      to = [anim toValue];
-    });
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self toValue]));
   }
-  
-//  JS_SET_RETURN(JS_FLOAT(to));
 }
 
 NAN_SETTER(NCABasicAnimation::toValueSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      double x = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("x")));
-      double y = TO_DOUBLE(JS_OBJ(value)->Get(JS_STR("y")));
-      CGPoint pt = CGPointMake(x, y);
-      NSValue *val = [NSValue valueWithCGPoint:pt];
-      [anim setToValue:val];
-    });
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id, input);
+    [self setToValue: input];
   }
 }
 
-NAN_GETTER(NCABasicAnimation::durationGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  __block CGFloat duration;
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      duration = [anim duration];
-    });
+NAN_GETTER(NCABasicAnimation::byValueGetter) {
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self byValue]));
   }
-  
-  JS_SET_RETURN(JS_FLOAT(duration));
 }
 
-NAN_SETTER(NCABasicAnimation::durationSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(CABasicAnimation, anim);
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      double x = TO_DOUBLE(value);
-      [anim setDuration:x];
-    });
+NAN_SETTER(NCABasicAnimation::byValueSetter) {
+  JS_UNWRAP(CABasicAnimation, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id, input);
+    [self setByValue: input];
   }
 }

@@ -521,10 +521,6 @@ NAN_METHOD(NCALayer::actionForKey) {
   }
 }
 
-#define js_value_CAAnimation(x) js_value_wrapper_unknown(x, CAAnimation)
-#define to_value_CAAnimation(x) to_value_wrapper_unknown(x, CAAnimation)
-#define is_value_CAAnimation(x) is_value_wrapper_unknown(x, CAAnimation)
-
 NAN_METHOD(NCALayer::addAnimationForKey) {
   JS_UNWRAP(CALayer, self);
   declare_autoreleasepool {
