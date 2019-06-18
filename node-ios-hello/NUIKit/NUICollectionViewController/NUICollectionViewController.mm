@@ -6,10 +6,22 @@
 //
 #include "NUICollectionViewController.h"
 
+#define instancetype UICollectionViewController
+#define js_value_instancetype js_value_UICollectionViewController
+
 NUICollectionViewController::NUICollectionViewController() {}
 NUICollectionViewController::~NUICollectionViewController() {}
 
 JS_INIT_CLASS(UICollectionViewController, UIViewController);
+  JS_ASSIGN_STATIC_METHOD(initWithCollectionViewLayout);
+  JS_ASSIGN_STATIC_METHOD(initWithNibNameBundle);
+  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_PROP(collectionView);
+  JS_ASSIGN_PROTO_PROP(clearsSelectionOnViewWillAppear);
+  JS_ASSIGN_PROTO_PROP(useLayoutToLayoutNavigationTransitions);
+  JS_ASSIGN_PROTO_PROP_READONLY(collectionViewLayout);
+  JS_ASSIGN_PROTO_PROP(installsStandardGestureForInteractiveMovement);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UICollectionViewController, UIViewController);
@@ -35,3 +47,108 @@ NAN_METHOD(NUICollectionViewController::New) {
 
   info.GetReturnValue().Set(ctrlObj);
 }
+
+#include "NUICollectionViewLayout.h"
+
+NAN_METHOD(NUICollectionViewController::initWithCollectionViewLayout) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UICollectionViewLayout, layout);
+    JS_SET_RETURN(js_value_instancetype([[UICollectionViewController alloc] initWithCollectionViewLayout: layout]));
+  }
+}
+
+#include "NNSBundle.h"
+
+NAN_METHOD(NUICollectionViewController::initWithNibNameBundle) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSString, nibNameOrNil);
+    declare_nullable_pointer(NSBundle, nibBundleOrNil);
+    JS_SET_RETURN(js_value_instancetype([[UICollectionViewController alloc] initWithNibName: nibNameOrNil bundle: nibBundleOrNil]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NUICollectionViewController::initWithCoder) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([[UICollectionViewController alloc] initWithCoder: aDecoder]));
+  }
+}
+
+#include "NUICollectionView.h"
+
+NAN_GETTER(NUICollectionViewController::collectionViewGetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UICollectionView([self collectionView]));
+  }
+}
+
+NAN_SETTER(NUICollectionViewController::collectionViewSetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UICollectionView, input);
+    [self setCollectionView: input];
+  }
+}
+
+NAN_GETTER(NUICollectionViewController::clearsSelectionOnViewWillAppearGetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self clearsSelectionOnViewWillAppear]));
+  }
+}
+
+NAN_SETTER(NUICollectionViewController::clearsSelectionOnViewWillAppearSetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setClearsSelectionOnViewWillAppear: input];
+  }
+}
+
+NAN_GETTER(NUICollectionViewController::useLayoutToLayoutNavigationTransitionsGetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self useLayoutToLayoutNavigationTransitions]));
+  }
+}
+
+NAN_SETTER(NUICollectionViewController::useLayoutToLayoutNavigationTransitionsSetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setUseLayoutToLayoutNavigationTransitions: input];
+  }
+}
+
+NAN_GETTER(NUICollectionViewController::collectionViewLayoutGetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UICollectionViewLayout([self collectionViewLayout]));
+  }
+}
+
+NAN_GETTER(NUICollectionViewController::installsStandardGestureForInteractiveMovementGetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self installsStandardGestureForInteractiveMovement]));
+  }
+}
+
+NAN_SETTER(NUICollectionViewController::installsStandardGestureForInteractiveMovementSetter) {
+  JS_UNWRAP(UICollectionViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setInstallsStandardGestureForInteractiveMovement: input];
+  }
+}
+

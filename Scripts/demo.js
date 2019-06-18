@@ -158,13 +158,19 @@ global.CGPointMake = (x, y) => {
   return {x, y};
 };
 
+global.CGPointZero = CGPointMake(0, 0);
+
 global.CGSizeMake = (width, height) => {
   return {width, height};
 };
 
+global.CGSizeZero = CGSizeMake(0, 0);
+
 global.UIEdgeInsetsMake = (top, left, bottom, right) => {
   return {top, left, bottom, right};
 };
+
+global.UIEdgeInsetsZero = UIEdgeInsetsMake(0, 0, 0, 0);
 
 global.IsUIColor = (x) => {
   return (typeof x === 'object' &&

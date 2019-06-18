@@ -371,6 +371,9 @@ namespace sweetiekit
         result = Local<Value>::Cast(inst.ToLocalChecked());
       } else {
         iOSLog0("GetWrapperFor failed to get instance");
+#if 1
+        return scope.Escape(result);
+#else
         MaybeLocal<Object> inst(JS_FUNC(defaultType.Get(isolate))->NewInstance(context, sizeof(argv)/sizeof(argv[0]), argv));
         if (!inst.IsEmpty()) {
           result = Local<Value>::Cast(inst.ToLocalChecked());
@@ -378,6 +381,7 @@ namespace sweetiekit
           iOSLog0("GetWrapperFor failed to get default instance");
           return scope.Escape(result);
         }
+#endif
       }
       if (wrappers) {
         NJSValue* wrapper = [[NJSValue alloc] initWithValue:result];

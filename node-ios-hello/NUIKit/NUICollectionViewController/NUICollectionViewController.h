@@ -15,6 +15,14 @@
 #define is_value_UICollectionViewController(x) is_value_wrapper(x, UICollectionViewController)
 
 JS_WRAP_CLASS(UICollectionViewController, UIViewController);
+  JS_STATIC_METHOD(initWithCollectionViewLayout);
+  JS_STATIC_METHOD(initWithNibNameBundle);
+  JS_STATIC_METHOD(initWithCoder);
+  JS_PROP(collectionView);
+  JS_PROP(clearsSelectionOnViewWillAppear);
+  JS_PROP(useLayoutToLayoutNavigationTransitions);
+  JS_PROP_READONLY(collectionViewLayout);
+  JS_PROP(installsStandardGestureForInteractiveMovement);
 JS_WRAP_CLASS_END(UICollectionViewController);
 
 #endif /* NUICollectionViewController_h */

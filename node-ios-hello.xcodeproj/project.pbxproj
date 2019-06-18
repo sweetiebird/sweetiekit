@@ -135,6 +135,7 @@
 		A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */; };
 		A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE322B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.mm */; };
 		A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */; };
+		A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -616,6 +617,8 @@
 		A1574EE422B8DF5F006CC5F2 /* NUICollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		A1574EE622B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewFlowLayoutInvalidationContext.mm; sourceTree = "<group>"; };
 		A1574EE722B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		A1574EEB22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewTransitionLayout.h; sourceTree = "<group>"; };
+		A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewTransitionLayout.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -2032,6 +2035,15 @@
 			path = NUICollectionViewFlowLayoutInvalidationContext;
 			sourceTree = "<group>";
 		};
+		A1574EEA22B8E851006CC5F2 /* NUICollectionViewTransitionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EEB22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.h */,
+				A1574EEC22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm */,
+			);
+			path = NUICollectionViewTransitionLayout;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3359,6 +3371,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EEA22B8E851006CC5F2 /* NUICollectionViewTransitionLayout */,
 				A1574EE222B8DF5F006CC5F2 /* NUICollectionViewFlowLayout */,
 				A1574EE522B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext */,
 				A1574ED222B8D96A006CC5F2 /* NUICollectionViewLayout */,
@@ -4277,6 +4290,7 @@
 				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
+				A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */,
 				A174A48E22B1A5F000415AD8 /* NUITextInputMode.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,

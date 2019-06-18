@@ -15,10 +15,18 @@
 #define is_value_UICollectionViewManager(x) is_value_wrapper(x, UICollectionViewManager)
 
 JS_WRAP_CLASS(UICollectionViewManager, NSObject);
-  JS_PROP(DidSelectItemAt);
+  JS_PROP(didSelectItemAt);
+  JS_PROP(didDeselectItemAt);
+  JS_PROP(shouldSelectItemAt);
+  JS_PROP(shouldDeselectItemAt);
+  
+  JS_PROP(didHighlightItemAt);
+  JS_PROP(didUnhighlightItemAt);
+  JS_PROP(shouldHighlightItemAt);
+  JS_PROP(shouldUnhighlightItemAt);
+  
   sweetiekit::JSFunction _numberItemsInSection;
   sweetiekit::JSFunction _cellForItemAt;
-  sweetiekit::JSFunction _didSelectItemAt;
 JS_WRAP_CLASS_END(UICollectionViewManager);
 
 #endif /* NUICollectionViewManager_h */

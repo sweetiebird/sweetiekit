@@ -190,7 +190,8 @@ using namespace node;
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
   auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
-  S##type* name = n##name->As<S##type>(); name = name;
+  S##type* name##_ = n##name->As<S##type>(); \
+  __weak S##type* name = name##_; name = name;
   
 #define JS_UNWRAPPED_(info, type, name) \
   N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \

@@ -5,15 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUIViewController.h"
-#if OLD
-#include "NUINavigationController.h"
-#include "NUIViewControllerTransitioningDelegate.h"
-#include "NUIView.h"
-#include "NUIBarButtonItem.h"
-#include "NUITabBarItem.h"
-#include "NUINavigationItem.h"
-#include "NUIPopoverPresentationController.h"
-#endif
 
 #define instancetype UIViewController
 #define js_value_instancetype js_value_UIViewController
@@ -23,23 +14,6 @@ NUIViewController::~NUIViewController() {}
 
 JS_INIT_CLASS(UIViewController, UIResponder);
   // instance members (proto)
-#if OLD
-  JS_SET_PROP_READONLY(proto, "view", View);
-  JS_SET_METHOD(proto, "present", PresentViewController);
-  JS_SET_METHOD(proto, "dismiss", DismissViewController);
-  JS_SET_PROP(proto, "transitioningDelegate", TransitioningDelegate);
-  JS_SET_PROP(proto, "toolbarItems", ToolbarItems);
-  JS_SET_PROP(proto, "tabBarItem", TabBarItem);
-  JS_ASSIGN_PROP(proto, modalPresentationStyle);
-  JS_ASSIGN_PROP(proto, viewDidAppear);
-  JS_ASSIGN_PROP(proto, viewWillAppear);
-  JS_ASSIGN_PROP(proto, viewDidDisappear);
-  JS_ASSIGN_PROP(proto, viewWillDisappear);
-  JS_ASSIGN_PROP(proto, preferredContentSize);
-  JS_ASSIGN_PROP_READONLY(proto, navigationController);
-  JS_ASSIGN_PROP_READONLY(proto, navigationItem);
-  JS_ASSIGN_PROP_READONLY(proto, popoverPresentationController);
-#endif
   JS_ASSIGN_PROTO_PROP(viewDidAppear);
   JS_ASSIGN_PROTO_PROP(viewWillAppear);
   JS_ASSIGN_PROTO_PROP(viewDidDisappear);
@@ -289,152 +263,6 @@ NAN_METHOD(NUIViewController::New) {
     }
   }
 }
-
-#if OLD
-NAN_GETTER(NUIViewController::ViewGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_UIView([self view]));
-    return;
-  }
-}
-
-NAN_METHOD(NUIViewController::PresentViewController)
-{
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    sweetiekit::JSFunction cb(info[2]);
-    [self presentViewController:to_value_UIViewController(info[0])
-     animated:(info[1]->IsBoolean() ? TO_BOOL(info[1]) : true)
-     completion:^{
-        dispatch_main(^{
-          cb("NUIViewController::PresentViewController");
-        });
-     }];
-  }
-}
-
-NAN_METHOD(NUIViewController::DismissViewController)
-{
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    sweetiekit::JSFunction cb(info[2]);
-    [self
-     dismissViewControllerAnimated:(info[0]->IsBoolean() ? TO_BOOL(info[0]) : true)
-     completion:^{
-        dispatch_main(^{
-          cb("NUIViewController::DismissViewController");
-        });
-     }];
-  }
-}
-
-NAN_SETTER(NUIViewController::TransitioningDelegateSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIViewController, ctrl);
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      Local<Object> obj = JS_OBJ(value);
-      NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(obj);
-      [ctrl setTransitioningDelegate:del->As<SUIViewControllerTransitioningDelegate>()];
-    });
-  }
-}
-
-NAN_GETTER(NUIViewController::TransitioningDelegateGetter) {
-  Nan::HandleScope scope;
-  
-//  NUIViewControllerTransitioningDelegate *del = ObjectWrap::Unwrap<NUIViewControllerTransitioningDelegate>(info.This());
-//
-//  info.GetReturnValue().Set(del->_presentationControllerFor.GetValue());
-}
-
-NAN_SETTER(NUIViewController::ToolbarItemsSetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    [self setToolbarItems:to_value_NSArray<UIBarButtonItem*>(value)
-          animated:YES];
-  }
-}
-
-NAN_GETTER(NUIViewController::ToolbarItemsGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self toolbarItems]));
-  }
-}
-
-NAN_SETTER(NUIViewController::TabBarItemSetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    [self setTabBarItem:to_value_UITabBarItem(value)];
-  }
-}
-
-NAN_GETTER(NUIViewController::TabBarItemGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_UITabBarItem([self tabBarItem]));
-  }
-}
-
-NAN_GETTER(NUIViewController::navigationControllerGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationController([self navigationController]));
-  }
-}
-
-NAN_GETTER(NUIViewController::navigationItemGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationItem([self navigationItem]));
-  }
-}
-
-NAN_GETTER(NUIViewController::modalPresentationStyleGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIViewController, ui);
-  
-  JS_SET_RETURN(js_value_UIModalPresentationStyle([ui modalPresentationStyle]));
-}
-
-NAN_SETTER(NUIViewController::modalPresentationStyleSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UIViewController, ui);
-  
-  @autoreleasepool {
-    UIModalPresentationStyle result = (value->IsInt32() ? to_value_UIModalPresentationStyle(value) : UIModalPresentationPopover);
-    [ui setModalPresentationStyle:result];
-  }
-}
-
-NAN_GETTER(NUIViewController::popoverPresentationControllerGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_UIPopoverPresentationController([self popoverPresentationController]));
-  }
-}
-
-NAN_GETTER(NUIViewController::preferredContentSizeGetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_CGSize([self preferredContentSize]));
-  }
-}
-
-NAN_SETTER(NUIViewController::preferredContentSizeSetter) {
-  JS_UNWRAP(UIViewController, self);
-  @autoreleasepool {
-    [self setPreferredContentSize:to_value_CGSize(value)];
-  }
-}
-#endif
 
 NAN_GETTER(NUIViewController::viewDidAppearGetter) {
   Nan::EscapableHandleScope scope;

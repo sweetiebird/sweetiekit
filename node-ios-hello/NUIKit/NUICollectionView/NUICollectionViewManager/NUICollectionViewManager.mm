@@ -10,8 +10,17 @@ NUICollectionViewManager::NUICollectionViewManager() {}
 NUICollectionViewManager::~NUICollectionViewManager() {}
 
 JS_INIT_CLASS(UICollectionViewManager, NSObject);
+  JS_ASSIGN_PROTO_PROP(didSelectItemAt);
+  JS_ASSIGN_PROTO_PROP(didDeselectItemAt);
+  JS_ASSIGN_PROTO_PROP(shouldSelectItemAt);
+  JS_ASSIGN_PROTO_PROP(shouldDeselectItemAt);
+  
+  JS_ASSIGN_PROTO_PROP(didHighlightItemAt);
+  JS_ASSIGN_PROTO_PROP(didUnhighlightItemAt);
+  JS_ASSIGN_PROTO_PROP(shouldHighlightItemAt);
+  JS_ASSIGN_PROTO_PROP(shouldUnhighlightItemAt);
+  
   // instance members (proto)
-  JS_SET_PROP(proto, "didSelectItemAt", DidSelectItemAt);
   // static members (ctor)
   JS_INIT_CTOR(UICollectionViewManager, NSObject);
 JS_INIT_CLASS_END(UICollectionViewManager, NSObject);
@@ -67,31 +76,241 @@ NAN_METHOD(NUICollectionViewManager::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NUICollectionViewManager::DidSelectItemAtGetter) {
-  Nan::HandleScope scope;
-
-  NUICollectionViewManager *mgr = ObjectWrap::Unwrap<NUICollectionViewManager>(info.This());
-  SUICollectionViewManager* sMgr = mgr->As<SUICollectionViewManager>();
-
-  Nan::ThrowError("TODO SUICollectionViewManager::DidSelectItemAtGetter");
+NAN_GETTER(NUICollectionViewManager::didSelectItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::DidSelectItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
 }
 
-NAN_SETTER(NUICollectionViewManager::DidSelectItemAtSetter) {
-  Nan::HandleScope scope;
+NAN_SETTER(NUICollectionViewManager::didSelectItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::DidSelectItemAtSetter");
+    [self setDidSelectItemAtCallback: ^ (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::DidSelectItemAtSetter");
+        if (callback) {
+          [callback jsFunction]->Call("NUICollectionViewManager::DidSelectItemAtSetter",
+            js_value_UICollectionView(collectionView),
+            js_value_NSIndexPath(indexPath));
+        }
+      });
+    }];
+  }
+}
 
-  NUICollectionViewManager *mgr = ObjectWrap::Unwrap<NUICollectionViewManager>(info.This());
-  SUICollectionViewManager* sMgr = mgr->As<SUICollectionViewManager>();
+NAN_GETTER(NUICollectionViewManager::didDeselectItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::DidDeselectItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
 
-  mgr->_didSelectItemAt.Reset(Local<Function>::Cast(value));
+NAN_SETTER(NUICollectionViewManager::didDeselectItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::DidDeselectItemAtSetter");
+    [self setDidDeselectItemAtCallback: ^ (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::DidDeselectItemAtSetter");
+        if (callback) {
+          [callback jsFunction]->Call("NUICollectionViewManager::DidDeselectItemAtSetter",
+            js_value_UICollectionView(collectionView),
+            js_value_NSIndexPath(indexPath));
+        }
+      });
+    }];
+  }
+}
 
-  [sMgr setDidSelectItemAtCallback: ^ (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
-    Nan::HandleScope scope;
-//    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-//    uint32_t section = [indexPath section];
-//    uint32_t row = [indexPath row];
-//    Local<Object> indexPathObj = Nan::New<Object>();
-//    Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
-//    Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
-//    mgr->_didSelectRowAt("NUITableViewManager::New", tableViewObj, indexPathObj);
-  }];
+NAN_GETTER(NUICollectionViewManager::shouldSelectItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldSelectItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::shouldSelectItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::ShouldSelectItemAtSetter");
+    [self setShouldSelectItemAtCallback: ^ BOOL(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      __block BOOL result = YES;
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldSelectItemAtSetter");
+        if (callback) {
+          result = to_value_BOOL(
+            [callback jsFunction]->Call("NUICollectionViewManager::ShouldSelectItemAtSetter",
+              js_value_UICollectionView(collectionView),
+              js_value_NSIndexPath(indexPath)));
+        }
+      });
+      return result;
+    }];
+  }
+}
+
+NAN_GETTER(NUICollectionViewManager::shouldDeselectItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldDeselectItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::shouldDeselectItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::ShouldDeselectItemAtSetter");
+    [self setShouldDeselectItemAtCallback: ^ BOOL(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      __block BOOL result = YES;
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldDeselectItemAtSetter");
+        if (callback) {
+          result = to_value_BOOL(
+            [callback jsFunction]->Call("NUICollectionViewManager::ShouldDeselectItemAtSetter",
+              js_value_UICollectionView(collectionView),
+              js_value_NSIndexPath(indexPath)));
+        }
+      });
+      return result;
+    }];
+  }
+}
+
+
+
+
+NAN_GETTER(NUICollectionViewManager::didHighlightItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::DidHighlightItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::didHighlightItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::DidHighlightItemAtSetter");
+    [self setDidHighlightItemAtCallback: ^ (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::DidHighlightItemAtSetter");
+        if (callback) {
+          [callback jsFunction]->Call("NUICollectionViewManager::DidHighlightItemAtSetter",
+            js_value_UICollectionView(collectionView),
+            js_value_NSIndexPath(indexPath));
+        }
+      });
+    }];
+  }
+}
+
+NAN_GETTER(NUICollectionViewManager::didUnhighlightItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::DidUnhighlightItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::didUnhighlightItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::DidUnhighlightItemAtSetter");
+    [self setDidUnhighlightItemAtCallback: ^ (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::DidUnhighlightItemAtSetter");
+        if (callback) {
+          [callback jsFunction]->Call("NUICollectionViewManager::DidUnhighlightItemAtSetter",
+            js_value_UICollectionView(collectionView),
+            js_value_NSIndexPath(indexPath));
+        }
+      });
+    }];
+  }
+}
+
+NAN_GETTER(NUICollectionViewManager::shouldHighlightItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldHighlightItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::shouldHighlightItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::ShouldHighlightItemAtSetter");
+    [self setShouldHighlightItemAtCallback: ^ BOOL(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      __block BOOL result = YES;
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldHighlightItemAtSetter");
+        if (callback) {
+          result = to_value_BOOL(
+            [callback jsFunction]->Call("NUICollectionViewManager::ShouldHighlightItemAtSetter",
+              js_value_UICollectionView(collectionView),
+              js_value_NSIndexPath(indexPath)));
+        }
+      });
+      return result;
+    }];
+  }
+}
+
+NAN_GETTER(NUICollectionViewManager::shouldUnhighlightItemAtGetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldUnhighlightItemAtSetter");
+    if (callback) {
+      JS_SET_RETURN([callback jsFunction]->Get());
+    }
+  }
+}
+
+NAN_SETTER(NUICollectionViewManager::shouldUnhighlightItemAtSetter) {
+  JS_UNWRAP_SWIFT(UICollectionViewManager, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_persistent_function(callback, @"NUICollectionViewManager::ShouldUnhighlightItemAtSetter");
+    [self setShouldUnhighlightItemAtCallback: ^ BOOL(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
+      __block BOOL result = YES;
+      dispatch_main(^{
+        get_persistent_function(self, callback, @"NUICollectionViewManager::ShouldUnhighlightItemAtSetter");
+        if (callback) {
+          result = to_value_BOOL(
+            [callback jsFunction]->Call("NUICollectionViewManager::ShouldUnhighlightItemAtSetter",
+              js_value_UICollectionView(collectionView),
+              js_value_NSIndexPath(indexPath)));
+        }
+      });
+      return result;
+    }];
+  }
 }
