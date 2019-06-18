@@ -24,25 +24,6 @@ const ARWorldAlignment = {
   gravityAndHeading: 2,
 };
 
-const UIStackViewDistribution = {
-  fill: 0,
-  fillEqually: 1,
-  fillProportionally: 2,
-  equalSpacing: 3,
-  equalCentering: 4,
-};
-
-const UIStackViewAlignment = {
-  fill: 0,
-  leading: 1,
-  top: 2,
-  firstBaseline: 3,
-  center: 4,
-  trailing: 5,
-  bottom: 6,
-  lastBaseline: 7,
-};
-
 module.exports.ARHitTestResultType = {
   /** Result type from intersecting the nearest feature point. */
   featurePoint                                        : (1 << 0),
@@ -104,5 +85,3 @@ module.exports.NSKernAttributeName = 'NSKern';
 module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
 module.exports.ARWorldAlignment = ARWorldAlignment;
-module.exports.UIStackViewDistribution = UIStackViewDistribution;
-module.exports.UIStackViewAlignment = UIStackViewAlignment;

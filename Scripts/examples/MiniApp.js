@@ -25,7 +25,6 @@ const {
   UITableViewManager,
   UITabBarController,
   UITabBarItem,
-  UIStackView,
   UIAlertController,
   UIAlertAction,
 } = SweetieKit;
