@@ -682,6 +682,9 @@ NAN_METHOD(NClass::New) {
 #include "NUIToolbar.h"
 #include "NUIImage.h"
 #include "NUIImageView.h"
+#include "NUIVisualEffect.h"
+#include "NUIBlurEffect.h"
+#include "NUIVisualEffectView.h"
 #include "NUITextInputPasswordRules.h"
 #include "NUITextField.h"
 #include "NUITextInputMode.h"
@@ -973,6 +976,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     JS_EXPORT_TYPE(UIImage);
     JS_EXPORT_TYPE(UIImageView);
+    JS_EXPORT_TYPE(UIVisualEffect);
+    JS_EXPORT_TYPE(UIBlurEffect);
+    JS_EXPORT_TYPE(UIVisualEffectView);
     JS_EXPORT_TYPE(UIFont);
     JS_EXPORT_TYPE(UILabel);
     JS_EXPORT_TYPE(UITableViewCell);
@@ -1398,8 +1404,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIGraphicsImageRendererFormat);
       JS_RETURN_TYPE(UIGraphicsRendererFormat);
       
-      JS_RETURN_TYPE(UIImage);
       JS_RETURN_TYPE(UIImageView);
+      JS_RETURN_TYPE(UIImage);
+      JS_RETURN_TYPE(UIVisualEffectView);
+      JS_RETURN_TYPE(UIBlurEffect);
+      JS_RETURN_TYPE(UIVisualEffect);
       JS_RETURN_TYPE(UIStoryboard);
       JS_RETURN_TYPE(UITextInputPasswordRules);
       JS_RETURN_TYPE(UITextField);

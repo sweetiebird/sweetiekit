@@ -122,6 +122,9 @@
 		A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAA22B81CA9006CC5F2 /* NUIStepper.mm */; };
 		A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EAD22B82030006CC5F2 /* NUISegmentedControl.mm */; };
 		A1574EB722B88759006CC5F2 /* NUITextInputPasswordRules.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */; };
+		A1574EC122B8A3AB006CC5F2 /* NUIVisualEffectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EB922B8A3AA006CC5F2 /* NUIVisualEffectView.mm */; };
+		A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */; };
+		A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -578,6 +581,12 @@
 		A1574EAE22B82030006CC5F2 /* NUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISegmentedControl.h; sourceTree = "<group>"; };
 		A1574EB522B88758006CC5F2 /* NUITextInputPasswordRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInputPasswordRules.h; sourceTree = "<group>"; };
 		A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputPasswordRules.mm; sourceTree = "<group>"; };
+		A1574EB922B8A3AA006CC5F2 /* NUIVisualEffectView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIVisualEffectView.mm; sourceTree = "<group>"; };
+		A1574EBA22B8A3AA006CC5F2 /* NUIVisualEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIVisualEffectView.h; sourceTree = "<group>"; };
+		A1574EBC22B8A3AA006CC5F2 /* NUIBlurEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBlurEffect.h; sourceTree = "<group>"; };
+		A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBlurEffect.mm; sourceTree = "<group>"; };
+		A1574EBF22B8A3AB006CC5F2 /* NUIVisualEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIVisualEffect.h; sourceTree = "<group>"; };
+		A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIVisualEffect.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1884,6 +1893,33 @@
 				A1574EB622B88758006CC5F2 /* NUITextInputPasswordRules.mm */,
 			);
 			path = NUITextInputPasswordRules;
+			sourceTree = "<group>";
+		};
+		A1574EB822B8A3AA006CC5F2 /* NUIVisualEffectView */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EBA22B8A3AA006CC5F2 /* NUIVisualEffectView.h */,
+				A1574EB922B8A3AA006CC5F2 /* NUIVisualEffectView.mm */,
+			);
+			path = NUIVisualEffectView;
+			sourceTree = "<group>";
+		};
+		A1574EBB22B8A3AA006CC5F2 /* NUIBlurEffect */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EBC22B8A3AA006CC5F2 /* NUIBlurEffect.h */,
+				A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */,
+			);
+			path = NUIBlurEffect;
+			sourceTree = "<group>";
+		};
+		A1574EBE22B8A3AB006CC5F2 /* NUIVisualEffect */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EBF22B8A3AB006CC5F2 /* NUIVisualEffect.h */,
+				A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */,
+			);
+			path = NUIVisualEffect;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -3213,6 +3249,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574EBB22B8A3AA006CC5F2 /* NUIBlurEffect */,
+				A1574EBE22B8A3AB006CC5F2 /* NUIVisualEffect */,
+				A1574EB822B8A3AA006CC5F2 /* NUIVisualEffectView */,
 				A1574EB422B88758006CC5F2 /* NUITextInputPasswordRules */,
 				A1574EAC22B82030006CC5F2 /* NUISegmentedControl */,
 				A1574EA822B81CA9006CC5F2 /* NUIStepper */,
@@ -4077,6 +4116,7 @@
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
 				A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */,
 				A13370AD22AEE79F00FA3768 /* NAVAudioSession.mm in Sources */,
+				A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */,
 				A133702222AAE76E00FA3768 /* NNSURLRequest.mm in Sources */,
 				A133701522AAAF9600FA3768 /* NNSCoder.mm in Sources */,
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
@@ -4144,6 +4184,7 @@
 				A13370D822AEFC6A00FA3768 /* NAVAudioCompressedBuffer.mm in Sources */,
 				A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */,
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
+				A1574EC122B8A3AB006CC5F2 /* NUIVisualEffectView.mm in Sources */,
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */,
@@ -4189,6 +4230,7 @@
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
 				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
+				A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */,
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A133702622AAEF2400FA3768 /* NNSMutableURLRequest.mm in Sources */,
 				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
