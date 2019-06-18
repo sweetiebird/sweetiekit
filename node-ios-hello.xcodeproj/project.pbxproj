@@ -129,6 +129,10 @@
 		A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC822B8BC4D006CC5F2 /* NUIStoryboardSegue.mm */; };
 		A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ECB22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.mm */; };
 		A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ECF22B8BE2A006CC5F2 /* NUIKeyCommand.mm */; };
+		A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ED422B8D96A006CC5F2 /* NUICollectionViewLayout.mm */; };
+		A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ED722B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm */; };
+		A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574ED922B8D96B006CC5F2 /* NUICollectionViewUpdateItem.mm */; };
+		A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -598,6 +602,14 @@
 		A1574ECB22B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIStoryboardUnwindSegueSource.mm; sourceTree = "<group>"; };
 		A1574ECF22B8BE2A006CC5F2 /* NUIKeyCommand.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIKeyCommand.mm; sourceTree = "<group>"; };
 		A1574ED022B8BE2A006CC5F2 /* NUIKeyCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIKeyCommand.h; sourceTree = "<group>"; };
+		A1574ED322B8D96A006CC5F2 /* NUICollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewLayout.h; sourceTree = "<group>"; };
+		A1574ED422B8D96A006CC5F2 /* NUICollectionViewLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewLayout.mm; sourceTree = "<group>"; };
+		A1574ED622B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		A1574ED722B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewLayoutInvalidationContext.mm; sourceTree = "<group>"; };
+		A1574ED922B8D96B006CC5F2 /* NUICollectionViewUpdateItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewUpdateItem.mm; sourceTree = "<group>"; };
+		A1574EDA22B8D96B006CC5F2 /* NUICollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewUpdateItem.h; sourceTree = "<group>"; };
+		A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICollectionViewLayoutAttributes.mm; sourceTree = "<group>"; };
+		A1574EDD22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1960,6 +1972,42 @@
 			path = NUIKeyCommand;
 			sourceTree = "<group>";
 		};
+		A1574ED222B8D96A006CC5F2 /* NUICollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A1574ED322B8D96A006CC5F2 /* NUICollectionViewLayout.h */,
+				A1574ED422B8D96A006CC5F2 /* NUICollectionViewLayout.mm */,
+			);
+			path = NUICollectionViewLayout;
+			sourceTree = "<group>";
+		};
+		A1574ED522B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext */ = {
+			isa = PBXGroup;
+			children = (
+				A1574ED622B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.h */,
+				A1574ED722B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm */,
+			);
+			path = NUICollectionViewLayoutInvalidationContext;
+			sourceTree = "<group>";
+		};
+		A1574ED822B8D96B006CC5F2 /* NUICollectionViewUpdateItem */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EDA22B8D96B006CC5F2 /* NUICollectionViewUpdateItem.h */,
+				A1574ED922B8D96B006CC5F2 /* NUICollectionViewUpdateItem.mm */,
+			);
+			path = NUICollectionViewUpdateItem;
+			sourceTree = "<group>";
+		};
+		A1574EDB22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				A1574EDD22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.h */,
+				A1574EDC22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes.mm */,
+			);
+			path = NUICollectionViewLayoutAttributes;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3287,6 +3335,10 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1574ED222B8D96A006CC5F2 /* NUICollectionViewLayout */,
+				A1574EDB22B8D96B006CC5F2 /* NUICollectionViewLayoutAttributes */,
+				A1574ED522B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext */,
+				A1574ED822B8D96B006CC5F2 /* NUICollectionViewUpdateItem */,
 				A1574ECE22B8BE29006CC5F2 /* NUIKeyCommand */,
 				A1574EC622B8BC4D006CC5F2 /* NUIStoryboardSegue */,
 				A1574EC922B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource */,
@@ -3995,6 +4047,7 @@
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,
 				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
+				A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A19F39CE22AF2B3D00606332 /* NAUAudioUnitPreset.mm in Sources */,
@@ -4059,6 +4112,7 @@
 				A1CE2B78228EB96000D9B3B8 /* NNSMutableParagraphStyle.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
+				A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */,
 				A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
@@ -4122,6 +4176,7 @@
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
+				A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */,
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
 				A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */,
@@ -4181,6 +4236,7 @@
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
 				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
+				A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
