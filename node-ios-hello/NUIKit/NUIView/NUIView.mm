@@ -79,6 +79,8 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROTO_PROP(viewWillAppear);
   JS_ASSIGN_PROTO_PROP(viewDidDisappear);
   JS_ASSIGN_PROTO_PROP(viewWillDisappear);
+  JS_ASSIGN_PROTO_PROP(viewWillLayoutSubviews);
+  JS_ASSIGN_PROTO_PROP(viewDidLayoutSubviews);
 //  JS_ASSIGN_PROTO_PROP(didAddSubview);
 //  JS_ASSIGN_PROTO_PROP(willRemoveSubview);
 //  JS_ASSIGN_PROTO_PROP(willMoveToSuperview);
@@ -1541,6 +1543,60 @@ NAN_SETTER(NUIView::viewWillDisappearSetter) {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
     [ui associateValue:func withKey:@"sweetiekit_viewWillDisappear"];
+  }
+}
+
+NAN_GETTER(NUIView::viewDidLayoutSubviewsGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidLayoutSubviews"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewDidLayoutSubviewsSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewDidLayoutSubviews"];
+  }
+}
+
+NAN_GETTER(NUIView::viewWillLayoutSubviewsGetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  
+  @autoreleasepool {
+    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillLayoutSubviews"];
+    if (fn != nullptr) {
+      SweetJSFunction* func = (SweetJSFunction*)fn;
+      sweetiekit::JSFunction& f = *[func jsFunction];
+      Local<Function> handle = Nan::New(*f.cb);
+      JS_SET_RETURN(scope.Escape(handle));
+    }
+  }
+}
+
+NAN_SETTER(NUIView::viewWillLayoutSubviewsSetter) {
+  Nan::EscapableHandleScope scope;
+
+  JS_UNWRAP(UIView, ui);
+  @autoreleasepool {
+    SweetJSFunction* func = [[SweetJSFunction alloc] init];
+    [func jsFunction]->Reset(scope.Escape(value));
+    [ui associateValue:func withKey:@"sweetiekit_viewWillLayoutSubviews"];
   }
 }
 

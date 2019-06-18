@@ -7,11 +7,13 @@ const {
 } = SweetieKit;
 
 async function make(nav, demoVC) {
-  const view = demoVC.view;
-  const layer = new CAEmitterLayer();
-  layer.emitterPosition = { x: view.frame.width / 2, y: view.frame.height / 2 };
-  const cell = new CAEmitterCell();
-  cell.birthrate = 100;
+  view = demoVC.view;
+  layer = new CAEmitterLayer();
+  layer.emitterPosition = view.center;
+  layer.renderMode = kCAEmitterLayerOldestFirst;
+  cell = new CAEmitterCell();
+  cell.alphaSpeed = -0.4;
+  cell.birthRate = 100;
   cell.lifetime = 10;
   cell.velocity = 100;
   cell.scale = 0.1;

@@ -187,6 +187,8 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP(viewWillAppear);
   JS_PROP(viewDidDisappear);
   JS_PROP(viewWillDisappear);
+  JS_PROP(viewWillLayoutSubviews);
+  JS_PROP(viewDidLayoutSubviews);
 //  JS_PROP(didAddSubview);
 //  JS_PROP(willRemoveSubview);
 //  JS_PROP(willMoveToSuperview);
