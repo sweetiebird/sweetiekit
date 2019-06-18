@@ -15,9 +15,9 @@
 #define is_value_UIGestureRecognizer(x) is_value_wrapper(x, UIGestureRecognizer)
 
 // UIKit constants
-#define js_value_UIGestureRecognizerState(x) js_enum_wrapper(x, UIGestureRecognizerState)
-#define to_value_UIGestureRecognizerState(x) to_enum_wrapper(x, UIGestureRecognizerState)
-#define is_value_UIGestureRecognizerState(x) is_enum_wrapper(x, UIGestureRecognizerState)
+#define js_value_UIGestureRecognizerState(x) JS_ENUM(UIGestureRecognizerState, NSInteger, x)
+#define to_value_UIGestureRecognizerState(x) TO_ENUM(UIGestureRecognizerState, NSInteger, x)
+#define is_value_UIGestureRecognizerState(x) IS_ENUM(UIGestureRecognizerState, NSInteger, x)
 
 JS_WRAP_CLASS(UIGestureRecognizer, NSObject);
   JS_METHOD(addTarget);

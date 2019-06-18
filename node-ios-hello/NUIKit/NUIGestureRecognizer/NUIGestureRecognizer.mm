@@ -40,6 +40,22 @@ JS_INIT_CLASS(UIGestureRecognizer, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(UIGestureRecognizer, NSObject);
   JS_ASSIGN_METHOD(ctor, initWithTargetAction);
+  // constants (exports)
+
+  //typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
+    JS_ASSIGN_ENUM(UIGestureRecognizerStatePossible, NSInteger); // ,   
+    
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateBegan, NSInteger); // ,      
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateChanged, NSInteger); // ,    
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateEnded, NSInteger); // ,      
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateCancelled, NSInteger); // ,  
+    
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateFailed, NSInteger); // ,     
+    
+    
+    JS_ASSIGN_ENUM(UIGestureRecognizerStateRecognized, NSInteger); //  = UIGestureRecognizerStateEnded 
+  //};
+
 JS_INIT_CLASS_END(UIGestureRecognizer, NSObject);
 
 NAN_METHOD(NUIGestureRecognizer::New) {
