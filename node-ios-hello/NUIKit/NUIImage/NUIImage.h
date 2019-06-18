@@ -14,17 +14,17 @@
 #define to_value_UIImage(x) to_value_wrapper(x, UIImage)
 #define is_value_UIImage(x) is_value_wrapper(x, UIImage)
 
-#define js_value_UIImageRenderingMode(x) js_enum_wrapper(x, UIImageRenderingMode)
-#define to_value_UIImageRenderingMode(x) to_enum_wrapper(x, UIImageRenderingMode)
-#define is_value_UIImageRenderingMode(x) is_enum_wrapper(x, UIImageRenderingMode)
+#define js_value_UIImageOrientation(x) JS_ENUM(UIImageOrientation, NSInteger, x)
+#define to_value_UIImageOrientation(x) TO_ENUM(UIImageOrientation, NSInteger, x)
+#define is_value_UIImageOrientation(x) IS_ENUM(UIImageOrientation, NSInteger, x)
 
-#define js_value_UIImageResizingMode(x) js_enum_wrapper(x, UIImageResizingMode)
-#define to_value_UIImageResizingMode(x) to_enum_wrapper(x, UIImageResizingMode)
-#define is_value_UIImageResizingMode(x) is_enum_wrapper(x, UIImageResizingMode)
+#define js_value_UIImageResizingMode(x) JS_ENUM(UIImageResizingMode, NSInteger, x)
+#define to_value_UIImageResizingMode(x) TO_ENUM(UIImageResizingMode, NSInteger, x)
+#define is_value_UIImageResizingMode(x) IS_ENUM(UIImageResizingMode, NSInteger, x)
 
-#define js_value_UIImageOrientation(x) js_enum_wrapper(x, UIImageOrientation)
-#define to_value_UIImageOrientation(x) to_enum_wrapper(x, UIImageOrientation)
-#define is_value_UIImageOrientation(x) is_enum_wrapper(x, UIImageOrientation)
+#define js_value_UIImageRenderingMode(x) JS_ENUM(UIImageRenderingMode, NSInteger, x)
+#define to_value_UIImageRenderingMode(x) TO_ENUM(UIImageRenderingMode, NSInteger, x)
+#define is_value_UIImageRenderingMode(x) IS_ENUM(UIImageRenderingMode, NSInteger, x)
 
 JS_WRAP_CLASS(UIImage, NSObject);
   JS_STATIC_METHOD(toArrayBuffer);

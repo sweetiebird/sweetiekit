@@ -9,7 +9,6 @@ const {
   NSKernAttributeName,
   NSStrokeColorAttributeName,
   NSStrokeWidthAttributeName,
-  UIImageOrientation,
 } = require('./enums');
 
 const {

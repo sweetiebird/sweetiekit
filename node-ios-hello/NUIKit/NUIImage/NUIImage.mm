@@ -65,6 +65,39 @@ JS_INIT_CLASS(UIImage, NSObject);
   JS_ASSIGN_METHOD(ctor, initWithCIImage);
   JS_ASSIGN_METHOD(ctor, initWithCIImageScaleOrientation);
 
+  // constants (exports)
+
+//typedef NS_ENUM(NSInteger, UIImageOrientation) {
+  JS_ASSIGN_ENUM(UIImageOrientationUp, NSInteger); //              // default orientation
+  JS_ASSIGN_ENUM(UIImageOrientationDown, NSInteger); //            // 180 deg rotation
+  JS_ASSIGN_ENUM(UIImageOrientationLeft, NSInteger); //            // 90 deg CCW
+  JS_ASSIGN_ENUM(UIImageOrientationRight, NSInteger); //           // 90 deg CW
+  JS_ASSIGN_ENUM(UIImageOrientationUpMirrored, NSInteger); //      // as above but image mirrored along other axis. horizontal flip
+  JS_ASSIGN_ENUM(UIImageOrientationDownMirrored, NSInteger); //    // horizontal flip
+  JS_ASSIGN_ENUM(UIImageOrientationLeftMirrored, NSInteger); //    // vertical flip
+  JS_ASSIGN_ENUM(UIImageOrientationRightMirrored, NSInteger); //   // vertical flip
+//};
+
+/* UIImage will implement the resizing mode the fastest way possible while
+retaining the desired visual appearance.
+Note that if an image's resizable area is one point then UIImageResizingModeTile
+is visually indistinguishable from UIImageResizingModeStretch.
+*/
+//typedef NS_ENUM(NSInteger, UIImageResizingMode) {
+  JS_ASSIGN_ENUM(UIImageResizingModeTile, NSInteger); //  
+  JS_ASSIGN_ENUM(UIImageResizingModeStretch, NSInteger); //  
+//};
+
+/* Images are created with UIImageRenderingModeAutomatic by default. An image with this mode is interpreted as a template image or an original image based on the context in which it is rendered. For example, navigation bars, tab bars, toolbars, and segmented controls automatically treat their foreground images as templates, while image views and web views treat their images as originals. You can use UIImageRenderingModeAlwaysTemplate to force your image to always be rendered as a template or UIImageRenderingModeAlwaysOriginal to force your image to always be rendered as an original.
+*/
+//typedef NS_ENUM(NSInteger, UIImageRenderingMode) {
+  JS_ASSIGN_ENUM(UIImageRenderingModeAutomatic, NSInteger); //            // Use the default rendering mode for the context where the image is used
+  
+  JS_ASSIGN_ENUM(UIImageRenderingModeAlwaysOriginal, NSInteger); //       // Always draw the original image, without treating it as a template
+  JS_ASSIGN_ENUM(UIImageRenderingModeAlwaysTemplate, NSInteger); //       // Always draw the image as a template image, ignoring its color information
+//} NS_ENUM_AVAILABLE_IOS(7_0);
+
+
 JS_INIT_CLASS_END(UIImage, NSObject);
 
 NAN_METHOD(NUIImage::New) {

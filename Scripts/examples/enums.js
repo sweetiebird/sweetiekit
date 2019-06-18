@@ -128,4 +128,3 @@ module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;
 module.exports.UIStackViewDistribution = UIStackViewDistribution;
 module.exports.UIStackViewAlignment = UIStackViewAlignment;
 module.exports.UITableViewCellStyle = UITableViewCellStyle;
-module.exports.UIImageOrientation = UIKit.UIImageOrientation;
