@@ -1,7 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 
-const UIControlEvents = require('./enums').UIControlEvents;
-
 const {
   UIButton,
 } = SweetieKit;
@@ -20,12 +18,12 @@ async function make(nav, demoVC) {
     });
     alert.addAction(action);
     demoVC.present(alert, true, () => {});
-  }, UIControlEvents.touchUpInside);
+  }, UIControlEventTouchUpInside);
   button.backgroundColor = RGB(87, 174, 176);
   button.layer.cornerRadius = 4;
   button.layer.shadowRadius = 12;
   button.layer.shadowColor = RGB(87, 174, 176);
-  button.layer.shadowOffset = { width: 0, height: 12 };
+  button.layer.shadowOffset = CGSizeMake(0, 12);
   return button;
 }
 

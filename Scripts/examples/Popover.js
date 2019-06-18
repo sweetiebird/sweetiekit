@@ -4,51 +4,47 @@ const colors = require('./colors');
 
 const {
   UIViewController,
-  UIView,
   UIPopoverPresentationControllerDelegate,
 } = SweetieKit;
 
-// func launchMaptrackTablePopover(withTracks: [Track]) {
-//   /*
-//    thanks to Stefan for his popover view controller creation code
-//    https://github.com/FitnessEffect/WorkoutTracker/blob/master/WorkoutTracker/InputExerciseViewController.swift
-//    */
-//   let xPosition = view.frame.width / 2
-//   let yPosition = view.frame.height / 2
-//   let popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "maptrackTableVC") as! MaptrackTableViewController
-//   popover.delegate = self
-//   popover.modalPresentationStyle = UIModalPresentationStyle.popover
-//   popover.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-//   popover.popoverPresentationController?.delegate = self
-//   popover.popoverPresentationController?.sourceView = view
-//   popover.preferredContentSize = CGSize(width: 260, height: 240)
-//   popover.popoverPresentationController?.sourceRect = CGRect(x: xPosition, y: yPosition, width: 0, height: 0)
-//   popover.tracks = withTracks
-//   present(popover, animated: true, completion: nil)
-// }
-//
-// func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-//   return .none
-// }
-
-
 function make(nav, demoVC) {
+
   nav.pushViewController(demoVC);
-  const del = new UIPopoverPresentationControllerDelegate();
-  const vc = UIViewController();
-  vc.view.backgroundColor = colors.fitbodPink;
-  vc.modalPresentationStyle = UIModalPresentationStyle.popover;
-  vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection.up;
-  vc.popoverPresentationController.delegate = del;
-  vc.popoverPresentationController.sourceView = demoVC.view;
-  vc.preferredContentSize = { width: 100, height: 100 };
-  vc.popoverPresentationController.sourceRect = {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  };
-  demoVC.present(vc, true, () => {});
+
+  const view = demoVC.view;
+
+  const button = UIButton(CGRectMake(12, 80, view.frame.width - 24, 50));
+  view.addSubview(button);
+
+  //const xPosition = view.frame.width / 2;
+  //const yPosition = view.frame.height / 2;
+  const xPosition = button.frame.x + button.frame.width / 2;
+  const yPosition = button.frame.y + button.frame.height;
+
+  button.setTitleForState('👋 Hello Button', UIControlStateNormal);
+  button.addTargetActionForControlEvents(() => {
+    const vc = UIViewController();
+    vc.view.backgroundColor = colors.fitbodPink;
+    vc.modalPresentationStyle = UIModalPresentationPopover;
+    vc.preferredContentSize = CGSizeMake(260, 240);
+    const ppc = vc.popoverPresentationController;
+    if (ppc) {
+      ppc.permittedArrowDirections = UIPopoverArrowDirectionUp;
+      const del = new UIPopoverPresentationControllerDelegate();
+      ppc.delegate = del;
+
+      ppc.sourceView = view;
+      ppc.sourceRect = CGRectMake(xPosition, yPosition, 0, 0);
+
+      ppc.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    }
+    demoVC.present(vc, true, () => {});
+  }, UIControlEventTouchUpInside);
+  button.backgroundColor = RGB(87, 174, 176);
+  button.layer.cornerRadius = 4;
+  button.layer.shadowRadius = 12;
+  button.layer.shadowColor = RGB(87, 174, 176);
+  button.layer.shadowOffset = CGSizeMake(0, 12);
 }
 
 module.exports = make;

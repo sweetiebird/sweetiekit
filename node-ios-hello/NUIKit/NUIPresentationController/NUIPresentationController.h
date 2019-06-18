@@ -15,18 +15,39 @@
 #define is_value_UIPresentationController(x) is_value_wrapper(x, UIPresentationController)
 
 JS_WRAP_CLASS(UIPresentationController, NSObject);
-  JS_PROP(FrameOfPresentedViewInContainerView);
-  JS_PROP(PresentationTransitionWillBegin);
-  JS_PROP(DismissalTransitionWillBegin);
-  JS_PROP(ContainerWillLayoutSubviews);
-  JS_PROP(SizeForChildContentContainer);
-  JS_PROP(ContainerView);
-  JS_PROP(PresentedView);
-  sweetiekit::JSFunction _frameOfPresentedView;
-  sweetiekit::JSFunction _presentationTransitionWillBegin;
-  sweetiekit::JSFunction _dismissalTransitionWillBegin;
-  sweetiekit::JSFunction _containerWillLayoutSubviews;
-  sweetiekit::JSFunction _sizeForChildContentContainer;
+#if TODO
+// UIAdaptivePresentationControllerDelegate
+  JS_METHOD(adaptivePresentationStyleForPresentationController);
+  JS_METHOD(adaptivePresentationStyleForPresentationControllerTraitCollection);
+  JS_METHOD(presentationControllerViewControllerForAdaptivePresentationStyle);
+  JS_METHOD(presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator);
+#endif
+// UIPresentationController
+  JS_STATIC_METHOD(initWithPresentedViewControllerPresentingViewController);
+  JS_METHOD(adaptivePresentationStyle);
+  JS_METHOD(adaptivePresentationStyleForTraitCollection);
+  JS_METHOD(containerViewWillLayoutSubviews);
+  JS_METHOD(containerViewDidLayoutSubviews);
+  JS_METHOD(presentedView);
+  JS_METHOD(frameOfPresentedViewInContainerView);
+  JS_METHOD(shouldPresentInFullscreen);
+  JS_METHOD(shouldRemovePresentersView);
+  JS_METHOD(presentationTransitionWillBegin);
+  JS_METHOD(presentationTransitionDidEnd);
+  JS_METHOD(dismissalTransitionWillBegin);
+  JS_METHOD(dismissalTransitionDidEnd);
+  JS_PROP_READONLY(presentingViewController);
+  JS_PROP_READONLY(presentedViewController);
+  JS_PROP_READONLY(presentationStyle);
+  JS_PROP_READONLY(containerView);
+  JS_PROP(delegate);
+  JS_PROP_READONLY(adaptivePresentationStyle);
+  JS_PROP_READONLY(presentedView);
+  JS_PROP_READONLY(frameOfPresentedViewInContainerView);
+  JS_PROP_READONLY(shouldPresentInFullscreen);
+  JS_PROP_READONLY(shouldRemovePresentersView);
+  JS_PROP(overrideTraitCollection);
+
 JS_WRAP_CLASS_END(UIPresentationController);
 
 #endif /* NUIPresentationController_h */

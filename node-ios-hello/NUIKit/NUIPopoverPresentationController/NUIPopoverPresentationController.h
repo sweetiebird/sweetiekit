@@ -14,10 +14,31 @@
 #define to_value_UIPopoverPresentationController(x) to_value_wrapper(x, UIPopoverPresentationController)
 #define is_value_UIPopoverPresentationController(x) is_value_wrapper(x, UIPopoverPresentationController)
 
+#define js_value_UIPopoverArrowDirection(x) JS_OPTS(UIPopoverArrowDirection, NSUInteger, x)
+#define to_value_UIPopoverArrowDirection(x) TO_OPTS(UIPopoverArrowDirection, NSUInteger, x)
+#define is_value_UIPopoverArrowDirection(x) IS_OPTS(UIPopoverArrowDirection, NSUInteger, x)
+
 JS_WRAP_CLASS(UIPopoverPresentationController, UIPresentationController);
+#if TODO
+// UIPopoverPresentationControllerDelegate
+  JS_METHOD(prepareForPopoverPresentation);
+  JS_METHOD(popoverPresentationControllerShouldDismissPopover);
+  JS_METHOD(popoverPresentationControllerDidDismissPopover);
+  JS_METHOD(popoverPresentationControllerWillRepositionPopoverToRectInView);
+#endif
+// UIPopoverPresentationController
+  JS_PROP(delegate);
   JS_PROP(permittedArrowDirections);
   JS_PROP(sourceView);
   JS_PROP(sourceRect);
+  JS_PROP(canOverlapSourceViewRect);
+  JS_PROP(barButtonItem);
+  JS_PROP_READONLY(arrowDirection);
+  JS_PROP(passthroughViews);
+  JS_PROP(backgroundColor);
+  JS_PROP(popoverLayoutMargins);
+  JS_PROP(popoverBackgroundViewClass);
+
 JS_WRAP_CLASS_END(UIPopoverPresentationController);
 
 #endif /* NUIPopoverPresentationController_h */

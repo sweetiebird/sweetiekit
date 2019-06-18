@@ -14,6 +14,22 @@
 #define to_value_UITouch(x) to_value_wrapper(x, UITouch)
 #define is_value_UITouch(x) is_value_wrapper(x, UITouch)
 
+#define js_value_UITouchPhase(x) JS_ENUM(UITouchPhase, NSInteger, x)
+#define to_value_UITouchPhase(x) TO_ENUM(UITouchPhase, NSInteger, x)
+#define is_value_UITouchPhase(x) IS_ENUM(UITouchPhase, NSInteger, x)
+
+#define js_value_UIForceTouchCapability(x) JS_ENUM(UIForceTouchCapability, NSInteger, x)
+#define to_value_UIForceTouchCapability(x) TO_ENUM(UIForceTouchCapability, NSInteger, x)
+#define is_value_UIForceTouchCapability(x) IS_ENUM(UIForceTouchCapability, NSInteger, x)
+
+#define js_value_UITouchType(x) JS_ENUM(UITouchType, NSInteger, x)
+#define to_value_UITouchType(x) TO_ENUM(UITouchType, NSInteger, x)
+#define is_value_UITouchType(x) IS_ENUM(UITouchType, NSInteger, x)
+
+#define js_value_UITouchProperties(x) JS_OPTS(UITouchProperties, NSInteger, x)
+#define to_value_UITouchProperties(x) TO_OPTS(UITouchProperties, NSInteger, x)
+#define is_value_UITouchProperties(x) IS_OPTS(UITouchProperties, NSInteger, x)
+
 JS_WRAP_CLASS(UITouch, NSObject);
   
   //@property(nonatomic,readonly) NSTimeInterval      timestamp;

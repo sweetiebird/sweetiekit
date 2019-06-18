@@ -82,6 +82,36 @@ JS_INIT_CLASS(UITouch, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(UITouch, NSObject);
 
+  // constants (exports)
+
+//typedef NS_ENUM(NSInteger, UITouchPhase) {
+  JS_ASSIGN_ENUM(UITouchPhaseBegan, NSInteger);             // whenever a finger touches the surface.
+  JS_ASSIGN_ENUM(UITouchPhaseMoved, NSInteger);             // whenever a finger moves on the surface.
+  JS_ASSIGN_ENUM(UITouchPhaseStationary, NSInteger);        // whenever a finger is touching the surface but hasn't moved since the previous event.
+  JS_ASSIGN_ENUM(UITouchPhaseEnded, NSInteger);             // whenever a finger leaves the surface.
+  JS_ASSIGN_ENUM(UITouchPhaseCancelled, NSInteger);         // whenever a touch doesn't end but we need to stop tracking (e.g. putting device to face)
+//};
+
+//typedef NS_ENUM(NSInteger, UIForceTouchCapability) {
+  JS_ASSIGN_ENUM(UIForceTouchCapabilityUnknown, NSInteger);
+  JS_ASSIGN_ENUM(UIForceTouchCapabilityUnavailable, NSInteger);
+  JS_ASSIGN_ENUM(UIForceTouchCapabilityAvailable, NSInteger);
+//};
+
+//typedef NS_ENUM(NSInteger, UITouchType) {
+  JS_ASSIGN_ENUM(UITouchTypeDirect, NSInteger); //                        // A direct touch from a finger (on a screen)
+  JS_ASSIGN_ENUM(UITouchTypeIndirect, NSInteger); //                      // An indirect touch (not a screen)
+  JS_ASSIGN_ENUM(UITouchTypePencil, NSInteger); // NS_AVAILABLE_IOS(9_1), // Add pencil name variant
+  JS_ASSIGN_ENUM(UITouchTypeStylus, NSInteger); // NS_AVAILABLE_IOS(9_1) = UITouchTypePencil, // A touch from a stylus (deprecated name, use pencil)
+//} NS_ENUM_AVAILABLE_IOS(9_0);
+
+//typedef NS_OPTIONS(NSInteger, UITouchProperties) {
+  JS_ASSIGN_ENUM(UITouchPropertyForce, NSInteger); // = (1UL << 0),
+  JS_ASSIGN_ENUM(UITouchPropertyAzimuth, NSInteger); // = (1UL << 1),
+  JS_ASSIGN_ENUM(UITouchPropertyAltitude, NSInteger); // = (1UL << 2),
+  JS_ASSIGN_ENUM(UITouchPropertyLocation, NSInteger); // = (1UL << 3), // For predicted Touches
+//} NS_AVAILABLE_IOS(9_1);
+  
 JS_INIT_CLASS_END(UITouch, NSObject);
 
 NAN_METHOD(NUITouch::New) {

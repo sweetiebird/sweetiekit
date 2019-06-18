@@ -35,6 +35,30 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROP_READONLY(proto, popoverPresentationController);
   // static members (ctor)
   JS_INIT_CTOR(UIViewController, UIResponder);
+  // constants (exports)
+  
+//typedef NS_ENUM(NSInteger, UIModalTransitionStyle) {
+  JS_ASSIGN_ENUM(UIModalTransitionStyleCoverVertical, NSInteger); // = 0,
+  JS_ASSIGN_ENUM(UIModalTransitionStyleFlipHorizontal, NSInteger); // __TVOS_PROHIBITED,
+  JS_ASSIGN_ENUM(UIModalTransitionStyleCrossDissolve, NSInteger); //,
+  JS_ASSIGN_ENUM(UIModalTransitionStylePartialCurl, NSInteger); // NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,
+//};
+
+//typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {
+  JS_ASSIGN_ENUM(UIModalPresentationFullScreen, NSInteger); // = 0,
+  JS_ASSIGN_ENUM(UIModalPresentationPageSheet, NSInteger); // NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,
+  JS_ASSIGN_ENUM(UIModalPresentationFormSheet, NSInteger); // NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,
+  JS_ASSIGN_ENUM(UIModalPresentationCurrentContext, NSInteger); // NS_ENUM_AVAILABLE_IOS(3_2),
+  JS_ASSIGN_ENUM(UIModalPresentationCustom, NSInteger); // NS_ENUM_AVAILABLE_IOS(7_0),
+  JS_ASSIGN_ENUM(UIModalPresentationOverFullScreen, NSInteger); // NS_ENUM_AVAILABLE_IOS(8_0),
+  JS_ASSIGN_ENUM(UIModalPresentationOverCurrentContext, NSInteger); // NS_ENUM_AVAILABLE_IOS(8_0),
+  JS_ASSIGN_ENUM(UIModalPresentationPopover, NSInteger); // NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED,
+#ifdef __TVOS__
+  JS_ASSIGN_ENUM(UIModalPresentationBlurOverFullScreen, NSInteger); // __TVOS_AVAILABLE(11_0) __IOS_PROHIBITED __WATCHOS_PROHIBITED,
+#endif
+  JS_ASSIGN_ENUM(UIModalPresentationNone, NSInteger); // NS_ENUM_AVAILABLE_IOS(7_0) = -1,
+//};
+
 JS_INIT_CLASS_END(UIViewController, UIResponder);
 
 NAN_METHOD(NUIViewController::New) {

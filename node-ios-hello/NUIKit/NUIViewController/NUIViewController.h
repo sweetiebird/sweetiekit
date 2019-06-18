@@ -15,6 +15,10 @@
 #define is_value_UIViewController(x) is_value_wrapper(x, UIViewController)
 
 // UIKit enums
+#define js_value_UIModalTransitionStyle(x) JS_ENUM(UIModalTransitionStyle, NSInteger, x)
+#define to_value_UIModalTransitionStyle(x) TO_ENUM(UIModalTransitionStyle, NSInteger, x)
+#define is_value_UIModalTransitionStyle(x) IS_ENUM(UIModalTransitionStyle, NSInteger, x)
+
 #define js_value_UIModalPresentationStyle(x) JS_ENUM(UIModalPresentationStyle, NSInteger, x)
 #define to_value_UIModalPresentationStyle(x) TO_ENUM(UIModalPresentationStyle, NSInteger, x)
 #define is_value_UIModalPresentationStyle(x) IS_ENUM(UIModalPresentationStyle, NSInteger, x)
