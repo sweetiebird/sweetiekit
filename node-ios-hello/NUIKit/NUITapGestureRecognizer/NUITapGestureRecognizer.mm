@@ -48,7 +48,7 @@ NAN_METHOD(NUIPinchGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIPinchGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIPinchGestureRecognizer alloc];
+      self = [[UIPinchGestureRecognizer alloc] init];
     }
     if (self) {
       NUIPinchGestureRecognizer *wrapper = new NUIPinchGestureRecognizer();
@@ -74,7 +74,7 @@ NAN_METHOD(NUIRotationGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIRotationGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIRotationGestureRecognizer alloc];
+      self = [[UIRotationGestureRecognizer alloc] init];
     }
     if (self) {
       NUIRotationGestureRecognizer *wrapper = new NUIRotationGestureRecognizer();
@@ -100,7 +100,7 @@ NAN_METHOD(NUISwipeGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UISwipeGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UISwipeGestureRecognizer alloc];
+      self = [[UISwipeGestureRecognizer alloc] init];
     }
     if (self) {
       NUISwipeGestureRecognizer *wrapper = new NUISwipeGestureRecognizer();
@@ -126,7 +126,7 @@ NAN_METHOD(NUIPanGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIPanGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIPanGestureRecognizer alloc];
+      self = [[UIPanGestureRecognizer alloc] init];
     }
     if (self) {
       NUIPanGestureRecognizer *wrapper = new NUIPanGestureRecognizer();
@@ -152,7 +152,7 @@ NAN_METHOD(NUIScreenEdgePanGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UIScreenEdgePanGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UIScreenEdgePanGestureRecognizer alloc];
+      self = [[UIScreenEdgePanGestureRecognizer alloc] init];
     }
     if (self) {
       NUIScreenEdgePanGestureRecognizer *wrapper = new NUIScreenEdgePanGestureRecognizer();
@@ -178,7 +178,7 @@ NAN_METHOD(NUILongPressGestureRecognizer::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UILongPressGestureRecognizer *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UILongPressGestureRecognizer alloc];
+      self = [[UILongPressGestureRecognizer alloc] init];
     }
     if (self) {
       NUILongPressGestureRecognizer *wrapper = new NUILongPressGestureRecognizer();

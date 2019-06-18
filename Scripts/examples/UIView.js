@@ -5,6 +5,7 @@ const {
   UIBezierPath,
   UIView,
   UITapGestureRecognizer,
+  UIPanGestureRecognizer,
 } = SweetieKit;
 
 async function make(nav, demoVC) {
@@ -47,11 +48,16 @@ async function make(nav, demoVC) {
     console.log('tap!!');
   });
   const tap2 = UITapGestureRecognizer();
+  const pan = UIPanGestureRecognizer();
   tap2.addTarget(() => {
     console.log('tap22222!!');
   });
+  pan.addTarget(() => {
+    console.log('pannnnn!!');
+  });
   fgView.addGestureRecognizer(tap);
   bgView.addGestureRecognizer(tap2);
+  bgView.addGestureRecognizer(pan);
 
   return bgView;
 }
