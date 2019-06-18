@@ -190,6 +190,14 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), areAnimationsEnabled);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), inheritedAnimationDuration);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), requiresConstraintBasedLayout);
+  
+  // constants (exports)
+  
+//typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
+    JS_ASSIGN_ENUM(UILayoutConstraintAxisHorizontal, NSInteger); //  = 0,
+    JS_ASSIGN_ENUM(UILayoutConstraintAxisVertical, NSInteger); //  = 1
+//};
+
 JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {

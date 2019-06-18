@@ -70,11 +70,6 @@ const UITableViewCellSeparatorStyle = {
   singleLine: 1,
 };
 
-const UILayoutConstraintAxis = {
-  horizontal: 0,
-  vertical: 1,
-};
-
 const UIStackViewDistribution = {
   fill: 0,
   fillEqually: 1,
@@ -193,7 +188,6 @@ module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
 module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;
 module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;
-module.exports.UILayoutConstraintAxis = UILayoutConstraintAxis;
 module.exports.UIStackViewDistribution = UIStackViewDistribution;
 module.exports.UIStackViewAlignment = UIStackViewAlignment;
 module.exports.UITableViewCellStyle = UITableViewCellStyle;

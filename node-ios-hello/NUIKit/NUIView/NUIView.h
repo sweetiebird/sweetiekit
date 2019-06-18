@@ -52,9 +52,9 @@
 #define to_value_UISemanticContentAttribute(x) to_enum_wrapper(x, UISemanticContentAttribute)
 #define is_value_UISemanticContentAttribute(x) is_enum_wrapper(x, UISemanticContentAttribute)
 
-#define js_value_UILayoutConstraintAxis(x) js_enum_wrapper(x, UILayoutConstraintAxis)
-#define to_value_UILayoutConstraintAxis(x) to_enum_wrapper(x, UILayoutConstraintAxis)
-#define is_value_UILayoutConstraintAxis(x) is_enum_wrapper(x, UILayoutConstraintAxis)
+#define js_value_UILayoutConstraintAxis(x) JS_ENUM(UILayoutConstraintAxis, NSInteger, x)
+#define to_value_UILayoutConstraintAxis(x) TO_ENUM(UILayoutConstraintAxis, NSInteger, x)
+#define is_value_UILayoutConstraintAxis(x) IS_ENUM(UILayoutConstraintAxis, NSInteger, x)
 
 // UIInterface.h constants
 
