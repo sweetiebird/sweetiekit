@@ -2,13 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const { UIKit } = SweetieKit;
 
-const UITableViewScrollPosition = {
-  Top: 'Top',
-  Bottom: 'Bottom',
-  Middle: 'Middle',
-  None: 'None',
-};
-
 const UICollectionViewScrollPosition = {
   Top: 'Top',
   Bottom: 'Bottom',
@@ -247,7 +240,6 @@ module.exports.MDLMaterialSemantic = {
   userDefined: 0x8001
 };
 
-module.exports.UITableViewScrollPosition = UITableViewScrollPosition;
 module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;

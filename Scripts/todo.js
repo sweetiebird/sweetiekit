@@ -53,13 +53,6 @@ const {
   UICollectionViewController,
 } = UIKit;
 
-const UITableViewScrollPosition = {
-  Top: 'Top',
-  Bottom: 'Bottom',
-  Middle: 'Middle',
-  None: 'None',
-};
-
 const UICollectionViewScrollPosition = {
   Top: 'Top',
   Bottom: 'Bottom',
@@ -461,7 +454,7 @@ class MyApp {
 
     this.todoTable.scrollToRowAt(
       { section: 0, row: this.todos.length - 1 },
-      UITableViewScrollPosition.Top,
+      UITableViewScrollPositionTop,
       true,
     );
 

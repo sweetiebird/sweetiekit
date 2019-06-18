@@ -984,6 +984,10 @@ Local<Value> js_value_NSRange(const NSRange& pt);
 NSRange to_value_NSRange(const Local<Value>& value);
 bool is_value_NSRange(const Local<Value>& value);
 
+Local<Value> js_value_NSIndexPath(const NSIndexPath* _Nullable value);
+NSIndexPath* _Nullable to_value_NSIndexPath(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_NSIndexPath(const Local<Value>& value);
+
 Local<Value> js_value_NSData(NSData* _Nullable value);
 NSData* _Nullable to_value_NSData(const Local<Value>& value, bool* _Nullable failed = nullptr);
 bool is_value_NSData(const Local<Value>& value);

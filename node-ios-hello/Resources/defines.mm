@@ -2227,6 +2227,52 @@ bool is_value_NSRange(const Local<Value>& value)
   return true;
 }
 
+Local<Value> js_value_NSIndexPath(const NSIndexPath* value)
+{
+  Nan::EscapableHandleScope handleScope;
+
+  Local<Object> result = Object::New(Isolate::GetCurrent());
+  result->Set(JS_STR("section"), js_value_NSInteger([value section]));
+  result->Set(JS_STR("row"), js_value_NSInteger([value row]));
+
+  return handleScope.Escape(result);
+}
+
+NSIndexPath* to_value_NSIndexPath(const Local<Value>& value, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+
+  if (!is_value_NSIndexPath(value)) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected NSIndexPath");
+    }
+    return nil;
+  }
+
+  NSInteger section = to_value_NSInteger(JS_OBJ(value)->Get(JS_STR("section")));
+  NSInteger row = to_value_NSInteger(JS_OBJ(value)->Get(JS_STR("row")));
+  return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
+bool is_value_NSIndexPath(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!is_value_NSInteger(obj->Get(JS_STR("section")))) {
+    return false;
+  }
+  if (!is_value_NSInteger(obj->Get(JS_STR("row")))) {
+    return false;
+  }
+  return true;
+}
+
 Local<Value> js_value_NSData(NSData* _Nullable data)
 {
   if (!data) {

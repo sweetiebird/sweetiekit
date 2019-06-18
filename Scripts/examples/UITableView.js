@@ -2,8 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const enums = require('./enums');
 
-const { UITableViewScrollPosition } = enums;
-
 const {
   UITableViewCell,
   UITableView,
@@ -71,7 +69,7 @@ function addNewTodo() {
 
   table.scrollToRowAt(
     { section: 0, row: todos.length - 1 },
-    UITableViewScrollPosition.Top,
+    UITableViewScrollPositionTop,
     true,
   );
 

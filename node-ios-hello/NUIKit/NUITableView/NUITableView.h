@@ -14,6 +14,18 @@
 #define to_value_UITableView(x) to_value_wrapper(x, UITableView)
 #define is_value_UITableView(x) is_value_wrapper(x, UITableView)
 
+#define js_value_UITableViewStyle(x) JS_ENUM(UITableViewStyle, NSInteger, x)
+#define to_value_UITableViewStyle(x) TO_ENUM(UITableViewStyle, NSInteger, x)
+#define is_value_UITableViewStyle(x) IS_ENUM(UITableViewStyle, NSInteger, x)
+
+#define js_value_UITableViewScrollPosition(x) JS_ENUM(UITableViewScrollPosition, NSInteger, x)
+#define to_value_UITableViewScrollPosition(x) TO_ENUM(UITableViewScrollPosition, NSInteger, x)
+#define is_value_UITableViewScrollPosition(x) IS_ENUM(UITableViewScrollPosition, NSInteger, x)
+
+#define js_value_UITableViewRowAnimation(x) JS_ENUM(UITableViewRowAnimation, NSInteger, x)
+#define to_value_UITableViewRowAnimation(x) TO_ENUM(UITableViewRowAnimation, NSInteger, x)
+#define is_value_UITableViewRowAnimation(x) IS_ENUM(UITableViewRowAnimation, NSInteger, x)
+
 JS_WRAP_CLASS(UITableView, UIScrollView);
   JS_METHOD(DequeueReusableCell);
   JS_METHOD(DequeueReusableCellWithIdentifierForIndexPath);

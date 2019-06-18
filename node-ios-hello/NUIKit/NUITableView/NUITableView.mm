@@ -21,6 +21,41 @@ JS_INIT_CLASS(UITableView, UIScrollView);
   JS_SET_METHOD(proto, "scrollToRowAt", ScrollToRowAt);
   // static members (ctor)
   JS_INIT_CTOR(UITableView, UIScrollView);
+  // constants (exports)
+  
+//typedef NS_ENUM(NSInteger, UITableViewStyle) {
+  JS_ASSIGN_ENUM(UITableViewStylePlain, NSInteger);          // regular table view
+  JS_ASSIGN_ENUM(UITableViewStyleGrouped, NSInteger);        // preferences style table view
+//};
+
+//typedef NS_ENUM(NSInteger, UITableViewScrollPosition) {
+  JS_ASSIGN_ENUM(UITableViewScrollPositionNone, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewScrollPositionTop, NSInteger);    
+  JS_ASSIGN_ENUM(UITableViewScrollPositionMiddle, NSInteger);   
+  JS_ASSIGN_ENUM(UITableViewScrollPositionBottom, NSInteger);
+//};                // scroll so row of interest is completely visible at top/center/bottom of view
+
+//typedef NS_ENUM(NSInteger, UITableViewRowAnimation) {
+  JS_ASSIGN_ENUM(UITableViewRowAnimationFade, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewRowAnimationRight, NSInteger);           // slide in from right (or out to right)
+  JS_ASSIGN_ENUM(UITableViewRowAnimationLeft, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewRowAnimationTop, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewRowAnimationBottom, NSInteger);
+  JS_ASSIGN_ENUM(UITableViewRowAnimationNone, NSInteger);            // available in iOS 3.0
+  JS_ASSIGN_ENUM(UITableViewRowAnimationMiddle, NSInteger);          // available in iOS 3.2.  attempts to keep cell centered in the space it will/did occupy
+  JS_ASSIGN_ENUM(UITableViewRowAnimationAutomatic, NSInteger); // = 100  // available in iOS 5.0.  chooses an appropriate animation style for you
+//};
+
+// Including this constant string in the array of strings returned by sectionIndexTitlesForTableView: will cause a magnifying glass icon to be displayed at that location in the index.
+// This should generally only be used as the first title in the index.
+//UIKIT_EXTERN NSString *const UITableViewIndexSearch NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UITableViewIndexSearch, NSString);
+
+// Returning this value from tableView:heightForHeaderInSection: or tableView:heightForFooterInSection: results in a height that fits the value returned from
+// tableView:titleForHeaderInSection: or tableView:titleForFooterInSection: if the title is not nil.
+//UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension NS_AVAILABLE_IOS(5_0);
+  JS_ASSIGN_ENUM(UITableViewAutomaticDimension, CGFloat);
+
 JS_INIT_CLASS_END(UITableView, UIScrollView);
 
 NAN_METHOD(NUITableView::New) {
@@ -263,39 +298,15 @@ NAN_METHOD(NUITableView::CellForRowAt) {
 }
 
 NAN_METHOD(NUITableView::ScrollToRowAt) {
-  JS_UNWRAP(UITableView, tv);
-  
-  int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
-  int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
-
-  std::string position;
-  if (info[1]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
-    position = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
-  }
-  
-  NSString *str = [NSString stringWithUTF8String:position.c_str()];
-  UITableViewScrollPosition pos = UITableViewScrollPositionTop;
-
-  if ([str isEqualToString:@"Bottom"]) {
-    pos = UITableViewScrollPositionBottom;
-  } else if ([str isEqualToString:@"Middle"]) {
-    pos = UITableViewScrollPositionMiddle;
-  } else if ([str isEqualToString:@"None"]) {
-    pos = UITableViewScrollPositionNone;
+  JS_UNWRAP(UITableView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSIndexPath, indexPath);
+    declare_value(UITableViewScrollPosition, scrollPosition);
+    declare_value(BOOL, animated);
+    [self scrollToRowAtIndexPath: indexPath atScrollPosition: scrollPosition animated: animated];
   }
 
-  bool animated = TO_BOOL(info[2]);
-
-  @autoreleasepool {
-    NSUInteger indexes[2];
-    indexes[0] = section;
-    indexes[1] = row;
-    NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
-    [tv scrollToRowAtIndexPath:path atScrollPosition:pos animated:animated];
-  }
 }
 
 NAN_GETTER(NUITableView::separatorStyleGetter) {
