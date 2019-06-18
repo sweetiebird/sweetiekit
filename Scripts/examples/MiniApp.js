@@ -4,7 +4,6 @@ const colors = require('./colors');
 
 const {
   NSParagraphStyleAttributeName,
-  UIBarMetrics,
   UITableViewSelectionStyle,
   UITableViewCellSeparatorStyle,
   UITableViewCellStyle,
@@ -103,7 +102,7 @@ const randomExpLevel = () => {
 
 function setNavStyles(nav) {
   nav.navigationBar.opaque = false;
-  nav.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
+  nav.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetricsDefault);
   nav.navigationBar.shadowImage = UIImage();
   nav.navigationBar.tintColor = colors.fitbodPink;
   nav.navigationBar.backgroundColor = UIColor.clear;

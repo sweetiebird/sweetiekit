@@ -305,6 +305,63 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_ENUM(UILayoutConstraintAxisVertical, NSInteger); //  = 1
 //};
 
+  // UIInterface.h constants
+  
+//typedef NS_ENUM(NSInteger, UIBarStyle) {
+  JS_ASSIGN_ENUM(UIBarStyleDefault, NSInteger); //           = 0,
+  JS_ASSIGN_ENUM(UIBarStyleBlack, NSInteger); //             = 1,
+  
+  JS_ASSIGN_ENUM(UIBarStyleBlackOpaque, NSInteger); //       = 1, // Deprecated. Use UIBarStyleBlack
+  JS_ASSIGN_ENUM(UIBarStyleBlackTranslucent, NSInteger); //  = 2, // Deprecated. Use UIBarStyleBlack and set the translucent property to YES
+//} __TVOS_PROHIBITED;
+
+//typedef NS_ENUM(NSInteger, UIUserInterfaceSizeClass) {
+  JS_ASSIGN_ENUM(UIUserInterfaceSizeClassUnspecified, NSInteger); //  = 0,
+  JS_ASSIGN_ENUM(UIUserInterfaceSizeClassCompact, NSInteger); //      = 1,
+  JS_ASSIGN_ENUM(UIUserInterfaceSizeClassRegular, NSInteger); //      = 2,
+//} NS_ENUM_AVAILABLE_IOS(8_0);
+
+// On iOS, these values are only available on trait environments with UIUserInterfaceIdiomCarPlay. 
+
+//typedef NS_ENUM(NSInteger, UIUserInterfaceStyle) {
+  JS_ASSIGN_ENUM(UIUserInterfaceStyleUnspecified, NSInteger); // ,
+  JS_ASSIGN_ENUM(UIUserInterfaceStyleLight, NSInteger); // ,
+  JS_ASSIGN_ENUM(UIUserInterfaceStyleDark, NSInteger); // ,
+//} __TVOS_AVAILABLE(10_0) __IOS_AVAILABLE(12_0) __WATCHOS_PROHIBITED;
+
+//typedef NS_ENUM(NSInteger, UIUserInterfaceLayoutDirection) {
+  JS_ASSIGN_ENUM(UIUserInterfaceLayoutDirectionLeftToRight, NSInteger); // ,
+  JS_ASSIGN_ENUM(UIUserInterfaceLayoutDirectionRightToLeft, NSInteger); // ,
+//} NS_ENUM_AVAILABLE_IOS(5_0);
+
+// These values are only used for the layout direction trait, which informs but does not completely dictate the layout direction of views. To determine the effective layout direction of a view, consult the UIView.effectiveUserInterfaceLayoutDirection property, whose values are members of the UIUserInterfaceLayoutDirection enum.
+
+//typedef NS_ENUM(NSInteger, UITraitEnvironmentLayoutDirection) {
+  JS_ASSIGN_ENUM(UITraitEnvironmentLayoutDirectionUnspecified, NSInteger); //  = -1,
+  JS_ASSIGN_ENUM(UITraitEnvironmentLayoutDirectionLeftToRight, NSInteger); //  = UIUserInterfaceLayoutDirectionLeftToRight,
+  JS_ASSIGN_ENUM(UITraitEnvironmentLayoutDirectionRightToLeft, NSInteger); //  = UIUserInterfaceLayoutDirectionRightToLeft,
+//} NS_ENUM_AVAILABLE_IOS(10_0);
+
+//typedef NS_ENUM(NSInteger, UIDisplayGamut) {
+  JS_ASSIGN_ENUM(UIDisplayGamutUnspecified, NSInteger); //  = -1, // UIKit will not set this anymore, instead a sensible default is chosen based on the device capabilities and settings always
+  JS_ASSIGN_ENUM(UIDisplayGamutSRGB, NSInteger); // ,
+  JS_ASSIGN_ENUM(UIDisplayGamutP3, NSInteger); // 
+//} NS_ENUM_AVAILABLE_IOS(10_0);
+
+  JS_ASSIGN_CONSTANT("UIColorLightTextColor", UIColor, [UIColor lightTextColor]); // __TVOS_PROHIBITED;                // for a dark background
+  JS_ASSIGN_CONSTANT("UIColorDarkTextColor", UIColor, [UIColor lightTextColor]); // __TVOS_PROHIBITED;                 // for a light background
+
+  JS_ASSIGN_CONSTANT("UIColorGroupTableViewBackgroundColor", UIColor, [UIColor lightTextColor]); // __TVOS_PROHIBITED;
+
+  JS_ASSIGN_CONSTANT("UIColorViewFlipsideBackgroundColor", UIColor, [UIColor lightTextColor]); // NS_DEPRECATED_IOS(2_0, 7_0) __TVOS_PROHIBITED;
+  JS_ASSIGN_CONSTANT("UIColorScrollViewTexturedBackgroundColor", UIColor, [UIColor lightTextColor]); // NS_DEPRECATED_IOS(3_2, 7_0) __TVOS_PROHIBITED;
+  JS_ASSIGN_CONSTANT("UIColorUnderPageBackgroundColor", UIColor, [UIColor lightTextColor]); // NS_DEPRECATED_IOS(5_0, 7_0) __TVOS_PROHIBITED;
+
+  JS_ASSIGN_CONSTANT("UIFontLabelFontSize", CGFloat, [UIFont labelFontSize]); //__TVOS_PROHIBITED;
+  JS_ASSIGN_CONSTANT("UIFontButtonFontSize", CGFloat, [UIFont buttonFontSize]); //__TVOS_PROHIBITED;
+  JS_ASSIGN_CONSTANT("UIFontSmallSystemFontSize", CGFloat, [UIFont smallSystemFontSize]); //__TVOS_PROHIBITED;
+  JS_ASSIGN_CONSTANT("UIFontSystemFontSize", CGFloat, [UIFont systemFontSize]); //__TVOS_PROHIBITED;
+
 JS_INIT_CLASS_END(UIView, UIResponder);
 
 NAN_METHOD(NUIView::New) {

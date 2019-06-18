@@ -18,19 +18,6 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
-const UIBarStyle = {
-  default: 0,
-  black: 1,
-  blackTranslucent: 2,
-};
-
-const UIBarMetrics = {
-  default: 0,
-  compact: 1,
-  defaultPrompt: 2,
-  compactPrompt: 3,
-};
-
 const ARWorldAlignment = {
   camera: 0,
   gravity: 1,
@@ -160,8 +147,6 @@ module.exports.NSFontAttributeName = 'NSFont';
 module.exports.NSKernAttributeName = 'NSKern';
 module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
-module.exports.UIBarStyle = UIBarStyle;
-module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
 module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;
 module.exports.UITableViewCellSeparatorStyle = UITableViewCellSeparatorStyle;

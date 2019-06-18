@@ -58,29 +58,29 @@
 
 // UIInterface.h constants
 
-#define js_value_UIBarStyle(x) js_enum_wrapper(x, UIBarStyle)
-#define to_value_UIBarStyle(x) to_enum_wrapper(x, UIBarStyle)
-#define is_value_UIBarStyle(x) is_enum_wrapper(x, UIBarStyle)
+#define js_value_UIBarStyle(x) JS_ENUM(UIBarStyle, NSInteger, x)
+#define to_value_UIBarStyle(x) TO_ENUM(UIBarStyle, NSInteger, x)
+#define is_value_UIBarStyle(x) IS_ENUM(UIBarStyle, NSInteger, x)
 
-#define js_value_UIUserInterfaceSizeClass(x) js_enum_wrapper(x, UIUserInterfaceSizeClass)
-#define to_value_UIUserInterfaceSizeClass(x) to_enum_wrapper(x, UIUserInterfaceSizeClass)
-#define is_value_UIUserInterfaceSizeClass(x) is_enum_wrapper(x, UIUserInterfaceSizeClass)
+#define js_value_UIUserInterfaceSizeClass(x) JS_ENUM(UIUserInterfaceSizeClass, NSInteger, x)
+#define to_value_UIUserInterfaceSizeClass(x) TO_ENUM(UIUserInterfaceSizeClass, NSInteger, x)
+#define is_value_UIUserInterfaceSizeClass(x) IS_ENUM(UIUserInterfaceSizeClass, NSInteger, x)
 
-#define js_value_UIUserInterfaceStyle(x) js_enum_wrapper(x, UIUserInterfaceStyle)
-#define to_value_UIUserInterfaceStyle(x) to_enum_wrapper(x, UIUserInterfaceStyle)
-#define is_value_UIUserInterfaceStyle(x) is_enum_wrapper(x, UIUserInterfaceStyle)
+#define js_value_UIUserInterfaceStyle(x) JS_ENUM(UIUserInterfaceStyle, NSInteger, x)
+#define to_value_UIUserInterfaceStyle(x) TO_ENUM(UIUserInterfaceStyle, NSInteger, x)
+#define is_value_UIUserInterfaceStyle(x) IS_ENUM(UIUserInterfaceStyle, NSInteger, x)
 
-#define js_value_UIUserInterfaceLayoutDirection(x) js_enum_wrapper(x, UIUserInterfaceLayoutDirection)
-#define to_value_UIUserInterfaceLayoutDirection(x) to_enum_wrapper(x, UIUserInterfaceLayoutDirection)
-#define is_value_UIUserInterfaceLayoutDirection(x) is_enum_wrapper(x, UIUserInterfaceLayoutDirection)
+#define js_value_UIUserInterfaceLayoutDirection(x) JS_ENUM(UIUserInterfaceLayoutDirection, NSInteger, x)
+#define to_value_UIUserInterfaceLayoutDirection(x) TO_ENUM(UIUserInterfaceLayoutDirection, NSInteger, x)
+#define is_value_UIUserInterfaceLayoutDirection(x) IS_ENUM(UIUserInterfaceLayoutDirection, NSInteger, x)
 
-#define js_value_UITraitEnvironmentLayoutDirection(x) js_enum_wrapper(x, UITraitEnvironmentLayoutDirection)
-#define to_value_UITraitEnvironmentLayoutDirection(x) to_enum_wrapper(x, UITraitEnvironmentLayoutDirection)
-#define is_value_UITraitEnvironmentLayoutDirection(x) is_enum_wrapper(x, UITraitEnvironmentLayoutDirection)
+#define js_value_UITraitEnvironmentLayoutDirection(x) JS_ENUM(UITraitEnvironmentLayoutDirection, NSInteger, x)
+#define to_value_UITraitEnvironmentLayoutDirection(x) TO_ENUM(UITraitEnvironmentLayoutDirection, NSInteger, x)
+#define is_value_UITraitEnvironmentLayoutDirection(x) IS_ENUM(UITraitEnvironmentLayoutDirection, NSInteger, x)
 
-#define js_value_UIDisplayGamut(x) js_enum_wrapper(x, UIDisplayGamut)
-#define to_value_UIDisplayGamut(x) to_enum_wrapper(x, UIDisplayGamut)
-#define is_value_UIDisplayGamut(x) is_enum_wrapper(x, UIDisplayGamut)
+#define js_value_UIDisplayGamut(x) JS_ENUM(UIDisplayGamut, NSInteger, x)
+#define to_value_UIDisplayGamut(x) TO_ENUM(UIDisplayGamut, NSInteger, x)
+#define is_value_UIDisplayGamut(x) IS_ENUM(UIDisplayGamut, NSInteger, x)
 
 JS_WRAP_CLASS(UIView, UIResponder);
   JS_STATIC_METHOD(layerClass);

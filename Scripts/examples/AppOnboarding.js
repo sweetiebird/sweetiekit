@@ -2,8 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 const colors = require('./colors');
 const {
   NSParagraphStyleAttributeName,
-  UIBarStyle,
-  UIBarMetrics,
 }= require('./enums');
 
 const {
@@ -374,7 +372,7 @@ function setupStartButton() {
 
 function setupNavStyle(n) {
   n.navigationBar.setTranslucent(true);
-  n.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetrics.default);
+  n.navigationBar.setBackgroundImageForBarMetrics(UIImage(), UIBarMetricsDefault);
   n.navigationBar.shadowImage = UIImage();
   n.navigationBar.tintColor = colors.fitbodPink;
   n.navigationBar.backgroundColor = UIColor.clear;

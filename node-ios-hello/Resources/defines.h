@@ -228,8 +228,11 @@ using namespace node;
 #define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
 #define JS_ASSIGN_STATIC_METHOD_AS(cppName, jsName) JS_SET_METHOD(ctor, jsName, cppName)
 
+#define JS_ASSIGN_CONSTANT(name, type, value) \
+  exports->Set(JS_STR(name), js_value_##type(value))
+
 #define JS_ASSIGN_ENUM(name, type) \
-  exports->Set(JS_STR(#name), js_value_##type(name))
+  JS_ASSIGN_CONSTANT(#name, type, name)
 
 #define JS_ASSIGN_VALUE(name) \
   JS_ASSIGN_ENUM(name, id)
