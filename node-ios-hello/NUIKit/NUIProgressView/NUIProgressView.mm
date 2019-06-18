@@ -17,6 +17,15 @@ JS_INIT_CLASS(UIProgressView, UIView);
   JS_ASSIGN_PROP(proto, trackTintColor);
   // static members (ctor)
   JS_INIT_CTOR(UIProgressView, UIView);
+  // constants (exports)
+  
+//typedef NS_ENUM(NSInteger, UIProgressViewStyle) {
+  JS_ASSIGN_ENUM(UIProgressViewStyleDefault, NSInteger);
+#ifndef __TVOS__
+  JS_ASSIGN_ENUM(UIProgressViewStyleBar, NSInteger); //  __TVOS_PROHIBITED,     
+#endif
+//};
+
 JS_INIT_CLASS_END(UIProgressView, UIView);
 
 NAN_METHOD(NUIProgressView::New) {

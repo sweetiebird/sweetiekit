@@ -18,11 +18,6 @@ const SKSceneScaleMode = {
   resizeFill: 'resizeFill',
 };
 
-const UIProgressViewStyle = {
-  default: 0,
-  bar: 1,
-};
-
 const UIViewContentMode = {
   scaleToFill: 0,
   scaleAspectFit: 1,
@@ -183,7 +178,6 @@ module.exports.NSStrokeColorAttributeName = 'NSStrokeColor';
 module.exports.NSStrokeWidthAttributeName = 'NSStrokeWidth';
 module.exports.UIViewContentMode = UIViewContentMode;
 module.exports.UIBarStyle = UIBarStyle;
-module.exports.UIProgressViewStyle = UIProgressViewStyle;
 module.exports.UIBarMetrics = UIBarMetrics;
 module.exports.ARWorldAlignment = ARWorldAlignment;
 module.exports.UITableViewSelectionStyle = UITableViewSelectionStyle;

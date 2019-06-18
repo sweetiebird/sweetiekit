@@ -14,6 +14,10 @@
 #define to_value_UIProgressView(x) to_value_wrapper(x, UIProgressView)
 #define is_value_UIProgressView(x) is_value_wrapper(x, UIProgressView)
 
+#define js_value_UIProgressViewStyle(x) JS_ENUM(UIProgressViewStyle, NSInteger, x)
+#define to_value_UIProgressViewStyle(x) TO_ENUM(UIProgressViewStyle, NSInteger, x)
+#define is_value_UIProgressViewStyle(x) IS_ENUM(UIProgressViewStyle, NSInteger, x)
+
 JS_WRAP_CLASS(UIProgressView, UIView);
   JS_METHOD(setProgress);
   JS_PROP(progress);

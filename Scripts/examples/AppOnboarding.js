@@ -4,7 +4,6 @@ const {
   NSParagraphStyleAttributeName,
   UIViewContentMode,
   UIBarStyle,
-  UIProgressViewStyle,
   UIBarMetrics,
 }= require('./enums');
 
