@@ -162,6 +162,10 @@ global.CGSizeMake = (width, height) => {
   return {width, height};
 };
 
+global.UIEdgeInsetsMake = (top, left, bottom, right) => {
+  return {top, left, bottom, right};
+};
+
 global.IsUIColor = (x) => {
   return (typeof x === 'object' &&
     typeof x.red === 'number' &&

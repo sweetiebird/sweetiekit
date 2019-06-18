@@ -266,6 +266,11 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_PROP_READONLY(inheritedAnimationDuration);
   JS_PROP_READONLY(requiresConstraintBasedLayout);
   
+  JS_METHOD(pinToSuperview);
+  JS_METHOD(pinToSuperviewWithEdges);
+  JS_METHOD(pinToSuperviewWithInsets);
+  JS_METHOD(pinToSuperviewWithInsetsEdges);
+  
 JS_WRAP_CLASS_END(UIView);
 
 #endif /* NUIView_h */

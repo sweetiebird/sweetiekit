@@ -152,6 +152,12 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROP_READONLY(proto, hasAmbiguousLayout);
   JS_ASSIGN_PROP(proto, restorationIdentifier);
   
+  // UIView+Constants.swift
+  JS_ASSIGN_PROTO_METHOD(pinToSuperview);
+  JS_ASSIGN_PROTO_METHOD(pinToSuperviewWithInsets);
+  JS_ASSIGN_PROTO_METHOD(pinToSuperviewWithEdges);
+  JS_ASSIGN_PROTO_METHOD(pinToSuperviewWithInsetsEdges);
+  
   // static members (ctor)
   JS_INIT_CTOR(UIView, UIResponder);
   JS_ASSIGN_STATIC_METHOD(layerClass);
@@ -2376,5 +2382,45 @@ NAN_GETTER(NUIView::requiresConstraintBasedLayoutGetter) {
   @autoreleasepool
   {
     JS_SET_RETURN(js_value_BOOL([UIView requiresConstraintBasedLayout]));
+  }
+}
+
+NAN_METHOD(NUIView::pinToSuperview) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    [self pinToSuperviewWith:UIEdgeInsetsZero edges:UIRectEdgeAll];
+  }
+}
+
+NAN_METHOD(NUIView::pinToSuperviewWithInsets) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UIEdgeInsets, insets);
+    [self pinToSuperviewWith:insets edges:UIRectEdgeAll];
+  }
+}
+
+NAN_METHOD(NUIView::pinToSuperviewWithEdges) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UIRectEdge, edges);
+    [self pinToSuperviewWith:UIEdgeInsetsZero edges:edges];
+  }
+}
+
+NAN_METHOD(NUIView::pinToSuperviewWithInsetsEdges) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(UIEdgeInsets, insets);
+    declare_value(UIRectEdge, edges);
+    [self pinToSuperviewWith:insets edges:edges];
   }
 }

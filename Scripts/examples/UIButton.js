@@ -5,8 +5,13 @@ const {
 } = SweetieKit;
 
 async function make(nav, demoVC) {
-  const w = demoVC.view.frame.width;
-  const button = UIButton(CGRectMake(12, 80, w - 24, 50));
+  const view = demoVC.view;
+  const w = view.frame.width;
+  const button = UIButton();
+  view.addSubview(button);
+  button.pinToSuperviewWithInsetsEdges(UIEdgeInsetsMake(30, 0, 0, 0), UIRectEdgeTop);
+  button.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).isActive = true;
+  button.widthAnchor.constraintGreaterThanOrEqualToAnchorConstant(view.widthAnchor, -24).isActive = true;
   button.setTitleForState('👋 Hello Button', UIControlStateNormal);
   button.addTargetActionForControlEvents(() => {
     const alert = new UIAlertController(
@@ -24,7 +29,6 @@ async function make(nav, demoVC) {
   button.layer.shadowRadius = 12;
   button.layer.shadowColor = RGB(87, 174, 176);
   button.layer.shadowOffset = CGSizeMake(0, 12);
-  return button;
 }
 
 module.exports = make;

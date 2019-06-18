@@ -125,6 +125,7 @@
 		A1574EC122B8A3AB006CC5F2 /* NUIVisualEffectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EB922B8A3AA006CC5F2 /* NUIVisualEffectView.mm */; };
 		A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */; };
 		A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */; };
+		A1574EC522B8B3B3006CC5F2 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1574EC422B8B3B3006CC5F2 /* UIView+Constraints.swift */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -587,6 +588,7 @@
 		A1574EBD22B8A3AA006CC5F2 /* NUIBlurEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBlurEffect.mm; sourceTree = "<group>"; };
 		A1574EBF22B8A3AB006CC5F2 /* NUIVisualEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIVisualEffect.h; sourceTree = "<group>"; };
 		A1574EC022B8A3AB006CC5F2 /* NUIVisualEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIVisualEffect.mm; sourceTree = "<group>"; };
+		A1574EC422B8B3B3006CC5F2 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3351,6 +3353,7 @@
 				A1D6729622695CB800562A42 /* NUIView.h */,
 				A1D6729722695D0200562A42 /* NUIView.mm */,
 				21C872D0226A989400B5192B /* UIView+stringTag.swift */,
+				A1574EC422B8B3B3006CC5F2 /* UIView+Constraints.swift */,
 			);
 			path = NUIView;
 			sourceTree = "<group>";
@@ -4123,6 +4126,7 @@
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
 				A19F3A0122AF68B400606332 /* NMDLTexture.mm in Sources */,
 				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,
+				A1574EC522B8B3B3006CC5F2 /* UIView+Constraints.swift in Sources */,
 				A1EE7D7A229D8EEF002B53FF /* NSCNBox.mm in Sources */,
 				A13370FF22AF1C9100FA3768 /* NCoreAudioTypes.mm in Sources */,
 				A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */,
