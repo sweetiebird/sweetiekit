@@ -16,6 +16,27 @@ JS_INIT_CLASS(CABasicAnimation, NSObject);
   JS_ASSIGN_PROP(proto, duration);
   // static members (ctor)
   JS_INIT_CTOR(CABasicAnimation, NSObject);
+  // constants (exports)
+
+  JS_ASSIGN_ENUM(kCAAnimationLinear, CAAnimationCalculationMode);
+  JS_ASSIGN_ENUM(kCAAnimationDiscrete, CAAnimationCalculationMode);
+  JS_ASSIGN_ENUM(kCAAnimationPaced, CAAnimationCalculationMode);
+  JS_ASSIGN_ENUM(kCAAnimationCubic, CAAnimationCalculationMode);
+  JS_ASSIGN_ENUM(kCAAnimationCubicPaced, CAAnimationCalculationMode);
+
+  JS_ASSIGN_ENUM(kCAAnimationRotateAuto, CAAnimationRotationMode);
+  JS_ASSIGN_ENUM(kCAAnimationRotateAutoReverse, CAAnimationRotationMode);
+
+  JS_ASSIGN_ENUM(kCATransitionFade, CATransitionType);
+  JS_ASSIGN_ENUM(kCATransitionMoveIn, CATransitionType);
+  JS_ASSIGN_ENUM(kCATransitionPush, CATransitionType);
+  JS_ASSIGN_ENUM(kCATransitionReveal, CATransitionType);
+
+  JS_ASSIGN_ENUM(kCATransitionFromRight, CATransitionSubtype);
+  JS_ASSIGN_ENUM(kCATransitionFromLeft, CATransitionSubtype);
+  JS_ASSIGN_ENUM(kCATransitionFromTop, CATransitionSubtype);
+  JS_ASSIGN_ENUM(kCATransitionFromBottom, CATransitionSubtype);
+
 JS_INIT_CLASS_END(CABasicAnimation, NSObject);
 
 NAN_METHOD(NCABasicAnimation::New) {
