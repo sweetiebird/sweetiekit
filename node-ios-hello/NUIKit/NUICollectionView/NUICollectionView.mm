@@ -22,6 +22,29 @@ JS_INIT_CLASS(UICollectionView, UIScrollView);
   JS_SET_METHOD(proto, "reloadData", ReloadData);
   // static members (ctor)
   JS_INIT_CTOR(UICollectionView, UIScrollView);
+  // constants (exports)
+
+//typedef NS_OPTIONS(NSUInteger, UICollectionViewScrollPosition) {
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionNone, NSUInteger); //                  = 0,
+  
+  // The vertical positions are mutually exclusive to each other, but are bitwise or-able with the horizontal scroll positions.
+  // Combining positions from the same grouping (horizontal or vertical) will result in an NSInvalidArgumentException.
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionTop, NSUInteger); //                   = 1 << 0,
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionCenteredVertically, NSUInteger); //    = 1 << 1,
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionBottom, NSUInteger); //                = 1 << 2,
+  
+  // Likewise, the horizontal positions are mutually exclusive to each other.
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionLeft, NSUInteger); //                  = 1 << 3,
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionCenteredHorizontally, NSUInteger); //  = 1 << 4,
+  JS_ASSIGN_ENUM(UICollectionViewScrollPositionRight, NSUInteger); //                 = 1 << 5
+//};
+
+//typedef NS_ENUM(NSInteger, UICollectionViewReorderingCadence) {
+  JS_ASSIGN_ENUM(UICollectionViewReorderingCadenceImmediate, NSInteger);
+  JS_ASSIGN_ENUM(UICollectionViewReorderingCadenceFast, NSInteger);
+  JS_ASSIGN_ENUM(UICollectionViewReorderingCadenceSlow, NSInteger);
+//} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
 JS_INIT_CLASS_END(UICollectionView, UIScrollView);
 
 NAN_METHOD(NUICollectionView::New) {
@@ -75,6 +98,7 @@ NAN_METHOD(NUICollectionView::RegisterNibForCellWithReuseIdentifier) {
     identifier = *utf8Value;
   } else {
     Nan::ThrowError("invalid argument");
+    return;
   }
 
   @autoreleasepool {
@@ -94,6 +118,7 @@ NAN_METHOD(NUICollectionView::DequeueReusableCellWithReuseIdentifier) {
     identifier = *utf8Value;
   } else {
     Nan::ThrowError("invalid argument");
+    return;
   }
 
   int section = TO_UINT32(JS_OBJ(info[1])->Get(JS_STR("section")));
@@ -121,46 +146,13 @@ NAN_METHOD(NUICollectionView::DequeueReusableCellWithReuseIdentifier) {
 
 
 NAN_METHOD(NUICollectionView::ScrollToItemAtIndexPath) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UICollectionView, ui);
-
-  int section = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("section")));
-  int row = TO_UINT32(JS_OBJ(info[0])->Get(JS_STR("row")));
-
-  std::string position;
-  if (info[1]->IsString()) {
-    Nan::Utf8String utf8Value(Local<String>::Cast(info[1]));
-    position = *utf8Value;
-  } else {
-    Nan::ThrowError("invalid argument");
-  }
-  
-  NSString *str = [NSString stringWithUTF8String:position.c_str()];
-  UICollectionViewScrollPosition pos = UICollectionViewScrollPositionCenteredVertically;
-
-  if ([str isEqualToString:@"CenteredHorizontally"]) {
-    pos = UICollectionViewScrollPositionCenteredHorizontally;
-  } else if ([str isEqualToString:@"Top"]) {
-    pos = UICollectionViewScrollPositionTop;
-  } else if ([str isEqualToString:@"Bottom"]) {
-    pos = UICollectionViewScrollPositionBottom;
-  } else if ([str isEqualToString:@"Left"]) {
-    pos = UICollectionViewScrollPositionLeft;
-  } else if ([str isEqualToString:@"Right"]) {
-    pos = UICollectionViewScrollPositionRight;
-  } else if ([str isEqualToString:@"None"]) {
-    pos = UICollectionViewScrollPositionNone;
-  }
-
-  bool animated = TO_BOOL(info[2]);
-
-  @autoreleasepool {
-    NSUInteger indexes[2];
-    indexes[0] = section;
-    indexes[1] = row;
-    NSIndexPath* path = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
-    [ui scrollToItemAtIndexPath:path atScrollPosition:pos animated:animated];
+  JS_UNWRAP(UICollectionView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSIndexPath, indexPath);
+    declare_value(UICollectionViewScrollPosition, scrollPosition);
+    declare_value(BOOL, animated);
+    [self scrollToItemAtIndexPath: indexPath atScrollPosition: scrollPosition animated: animated];
   }
 }
 

@@ -2,16 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const { UIKit } = SweetieKit;
 
-const UICollectionViewScrollPosition = {
-  Top: 'Top',
-  Bottom: 'Bottom',
-  Left: 'Left',
-  Right: 'Right',
-  None: 'None',
-  CenteredHorizontally: 'CenteredHorizontally',
-  CenteredVertically: 'CenteredVertically',
-};
-
 const SCNLightType = {
   IES: 'IES',
   ambient: 'ambient',
@@ -240,7 +230,6 @@ module.exports.MDLMaterialSemantic = {
   userDefined: 0x8001
 };
 
-module.exports.UICollectionViewScrollPosition = UICollectionViewScrollPosition;
 module.exports.SCNLightType = SCNLightType;
 module.exports.SKSceneScaleMode = SKSceneScaleMode;
 module.exports.NSTextAlignment = NSTextAlignment;

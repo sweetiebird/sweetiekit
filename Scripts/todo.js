@@ -53,16 +53,6 @@ const {
   UICollectionViewController,
 } = UIKit;
 
-const UICollectionViewScrollPosition = {
-  Top: 'Top',
-  Bottom: 'Bottom',
-  Left: 'Left',
-  Right: 'Right',
-  None: 'None',
-  CenteredHorizontally: 'CenteredHorizontally',
-  CenteredVertically: 'CenteredVertically',
-};
-
 // shared application
 // let app;
 // // storyboard
