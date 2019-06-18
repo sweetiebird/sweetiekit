@@ -4,6 +4,7 @@ const {
   CAGradientLayer,
   UIBezierPath,
   UIView,
+  UITapGestureRecognizer,
 } = SweetieKit;
 
 async function make(nav, demoVC) {
@@ -40,6 +41,17 @@ async function make(nav, demoVC) {
   fgView.layer.shadowPath = UIBezierPath.bezierPathWithOvalInRect(contactRect);
   fgView.layer.shadowRadius = 8;
   fgView.layer.shadowOpacity = 0.4;
+
+  const tap = UITapGestureRecognizer();
+  tap.addTarget(() => {
+    console.log('tap!!');
+  });
+  const tap2 = UITapGestureRecognizer();
+  tap2.addTarget(() => {
+    console.log('tap22222!!');
+  });
+  fgView.addGestureRecognizer(tap);
+  bgView.addGestureRecognizer(tap2);
 
   return bgView;
 }

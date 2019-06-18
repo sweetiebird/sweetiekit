@@ -35,7 +35,7 @@ NAN_METHOD(NUITapGestureRecognizer::New) {
 
   JS_SET_RETURN(obj);
 }
-  
+
 JS_INIT_DEFAULT(UIPinchGestureRecognizer);
 JS_INIT_CLASS(UIPinchGestureRecognizer, UIGestureRecognizer);
   JS_INIT_CTOR(UIPinchGestureRecognizer, UIGestureRecognizer);
