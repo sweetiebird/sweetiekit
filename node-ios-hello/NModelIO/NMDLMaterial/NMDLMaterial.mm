@@ -61,6 +61,59 @@ JS_INIT_CLASS(MDLMaterial, NSObject);
   JS_ASSIGN_STATIC_METHOD(initWithNameScatteringFunction);
   
   JS_ASSIGN_STATIC_METHOD(materialWithSCNMaterial);
+  
+  // constants (exports)
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialSemantic) {
+    JS_ASSIGN_ENUM(MDLMaterialSemanticBaseColor, NSUInteger); //  = 0,
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSubsurface, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticMetallic, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSpecular, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSpecularExponent, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSpecularTint, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticRoughness, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticAnisotropic, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticAnisotropicRotation, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSheen, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticSheenTint, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticClearcoat, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticClearcoatGloss, NSUInteger);
+
+    JS_ASSIGN_ENUM(MDLMaterialSemanticEmission, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticBump, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticOpacity, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticInterfaceIndexOfRefraction, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticMaterialIndexOfRefraction, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticObjectSpaceNormal, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticTangentSpaceNormal, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticDisplacement, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticDisplacementScale, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticAmbientOcclusion, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialSemanticAmbientOcclusionScale, NSUInteger);
+    
+    JS_ASSIGN_ENUM(MDLMaterialSemanticNone, NSUInteger); //  = 0x8000,
+    JS_ASSIGN_ENUM(MDLMaterialSemanticUserDefined, NSUInteger); //  = 0x8001
+  //};
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialPropertyType) {
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeNone, NSUInteger); //  = 0, // default resulting from [MDLMaterialProperty init]
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeString, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeURL, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeTexture, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeColor, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeFloat, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeFloat2, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeFloat3, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeFloat4, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialPropertyTypeMatrix44, NSUInteger);
+  //};
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialFace) {
+    JS_ASSIGN_ENUM(MDLMaterialFaceFront, NSUInteger); //  = 0,
+    JS_ASSIGN_ENUM(MDLMaterialFaceBack, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialFaceDoubleSided, NSUInteger);
+  //};
+
 JS_INIT_CLASS_END(MDLMaterial, NSObject);
 
 NAN_METHOD(NMDLMaterial::New) {

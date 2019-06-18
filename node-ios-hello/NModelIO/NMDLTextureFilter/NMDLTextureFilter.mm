@@ -19,6 +19,24 @@ JS_INIT_CLASS(MDLTextureFilter, NSObject);
   JS_ASSIGN_PROTO_PROP(mipFilter);
   // static members (ctor)
   JS_INIT_CTOR(MDLTextureFilter, NSObject);
+  // constants (exports)
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialTextureWrapMode) {
+    JS_ASSIGN_ENUM(MDLMaterialTextureWrapModeClamp, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialTextureWrapModeRepeat, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialTextureWrapModeMirror, NSUInteger);
+  //};
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialTextureFilterMode) {
+    JS_ASSIGN_ENUM(MDLMaterialTextureFilterModeNearest, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialTextureFilterModeLinear, NSUInteger);
+  //};
+
+  //typedef NS_ENUM(NSUInteger, MDLMaterialMipMapFilterMode) {
+    JS_ASSIGN_ENUM(MDLMaterialMipMapFilterModeNearest, NSUInteger);
+    JS_ASSIGN_ENUM(MDLMaterialMipMapFilterModeLinear, NSUInteger);
+  //};
+
 JS_INIT_CLASS_END(MDLTextureFilter, NSObject);
 
 NAN_METHOD(NMDLTextureFilter::New) {

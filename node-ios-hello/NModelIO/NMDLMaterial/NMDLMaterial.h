@@ -15,13 +15,14 @@
 #define is_value_MDLMaterial(x) is_value_wrapper(x, MDLMaterial)
 
 // ModelIO constants
-#define js_value_MDLMaterialSemantic(x) JS_ENUM(MDLMaterialSemantic, NSInteger, x)
-#define to_value_MDLMaterialSemantic(x) TO_ENUM(MDLMaterialSemantic, NSInteger, x)
-#define is_value_MDLMaterialSemantic(x) IS_ENUM(MDLMaterialSemantic, NSInteger, x)
 
-#define js_value_MDLMaterialPropertyType(x) JS_ENUM(MDLMaterialPropertyType, NSInteger, x)
-#define to_value_MDLMaterialPropertyType(x) TO_ENUM(MDLMaterialPropertyType, NSInteger, x)
-#define is_value_MDLMaterialPropertyType(x) IS_ENUM(MDLMaterialPropertyType, NSInteger, x)
+#define js_value_MDLMaterialSemantic(x) JS_ENUM(MDLMaterialSemantic, NSUInteger, x)
+#define to_value_MDLMaterialSemantic(x) TO_ENUM(MDLMaterialSemantic, NSUInteger, x)
+#define is_value_MDLMaterialSemantic(x) IS_ENUM(MDLMaterialSemantic, NSUInteger, x)
+
+#define js_value_MDLMaterialPropertyType(x) JS_ENUM(MDLMaterialPropertyType, NSUInteger, x)
+#define to_value_MDLMaterialPropertyType(x) TO_ENUM(MDLMaterialPropertyType, NSUInteger, x)
+#define is_value_MDLMaterialPropertyType(x) IS_ENUM(MDLMaterialPropertyType, NSUInteger, x)
 
 #define js_value_MDLMaterialFace(x) JS_ENUM(MDLMaterialFace, NSUInteger, x)
 #define to_value_MDLMaterialFace(x) TO_ENUM(MDLMaterialFace, NSUInteger, x)

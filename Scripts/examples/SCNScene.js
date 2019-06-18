@@ -16,10 +16,6 @@ const {
   SCNPhysicsBody,
 } = SweetieKit;
 
-const {
-  MDLMaterialSemantic,
-} = require('./enums.js');
-
 function UIColorRandom() {
   return {red: Math.random(), green: Math.random(), blue: Math.random()};
 }
@@ -157,9 +153,9 @@ async function make(nav, demoVC) {
     if (typeof fighterMaterial === 'undefined') {
       fighterScatteringFunction = MDLScatteringFunction();
       fighterMaterial = MDLMaterial.initWithNameScatteringFunction('fighterMaterial', fighterScatteringFunction);
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Diffuse_25.jpg', MDLMaterialSemantic.baseColor, NSURL(Path.join(MediaPath, 'Fighter_Diffuse_25.jpg'))));
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Specular_25.jpg', MDLMaterialSemantic.metallic, NSURL(Path.join(MediaPath, 'Fighter_Specular_25.jpg'))));
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Illumination_25.jpg', MDLMaterialSemantic.emission, NSURL(Path.join(MediaPath, 'Fighter_Illumination_25.jpg'))));
+      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Diffuse_25.jpg', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'Fighter_Diffuse_25.jpg'))));
+      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Specular_25.jpg', MDLMaterialSemanticMetallic, NSURL(Path.join(MediaPath, 'Fighter_Specular_25.jpg'))));
+      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Illumination_25.jpg', MDLMaterialSemanticEmission, NSURL(Path.join(MediaPath, 'Fighter_Illumination_25.jpg'))));
     }
     if (typeof fighterGeometry === 'undefined') {
       fighterAsset = MDLAsset.initWithURL(NSURL(Path.join(MediaPath, 'Fighter.obj')));

@@ -15,17 +15,18 @@
 #define is_value_MDLTextureFilter(x) is_value_wrapper(x, MDLTextureFilter)
 
 // ModelIO constants
-#define js_value_MDLMaterialTextureWrapMode(x) JS_ENUM(MDLMaterialTextureWrapMode, NSInteger, x)
-#define to_value_MDLMaterialTextureWrapMode(x) TO_ENUM(MDLMaterialTextureWrapMode, NSInteger, x)
-#define is_value_MDLMaterialTextureWrapMode(x) IS_ENUM(MDLMaterialTextureWrapMode, NSInteger, x)
 
-#define js_value_MDLMaterialTextureFilterMode(x) JS_ENUM(MDLMaterialTextureFilterMode, NSInteger, x)
-#define to_value_MDLMaterialTextureFilterMode(x) TO_ENUM(MDLMaterialTextureFilterMode, NSInteger, x)
-#define is_value_MDLMaterialTextureFilterMode(x) IS_ENUM(MDLMaterialTextureFilterMode, NSInteger, x)
+#define js_value_MDLMaterialTextureWrapMode(x) JS_ENUM(MDLMaterialTextureWrapMode, NSUInteger, x)
+#define to_value_MDLMaterialTextureWrapMode(x) TO_ENUM(MDLMaterialTextureWrapMode, NSUInteger, x)
+#define is_value_MDLMaterialTextureWrapMode(x) IS_ENUM(MDLMaterialTextureWrapMode, NSUInteger, x)
 
-#define js_value_MDLMaterialMipMapFilterMode(x) JS_ENUM(MDLMaterialMipMapFilterMode, NSInteger, x)
-#define to_value_MDLMaterialMipMapFilterMode(x) TO_ENUM(MDLMaterialMipMapFilterMode, NSInteger, x)
-#define is_value_MDLMaterialMipMapFilterMode(x) IS_ENUM(MDLMaterialMipMapFilterMode, NSInteger, x)
+#define js_value_MDLMaterialTextureFilterMode(x) JS_ENUM(MDLMaterialTextureFilterMode, NSUInteger, x)
+#define to_value_MDLMaterialTextureFilterMode(x) TO_ENUM(MDLMaterialTextureFilterMode, NSUInteger, x)
+#define is_value_MDLMaterialTextureFilterMode(x) IS_ENUM(MDLMaterialTextureFilterMode, NSUInteger, x)
+
+#define js_value_MDLMaterialMipMapFilterMode(x) JS_ENUM(MDLMaterialMipMapFilterMode, NSUInteger, x)
+#define to_value_MDLMaterialMipMapFilterMode(x) TO_ENUM(MDLMaterialMipMapFilterMode, NSUInteger, x)
+#define is_value_MDLMaterialMipMapFilterMode(x) IS_ENUM(MDLMaterialMipMapFilterMode, NSUInteger, x)
 
 JS_WRAP_CLASS(MDLTextureFilter, NSObject);
   JS_PROP(sWrapMode);
