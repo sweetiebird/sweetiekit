@@ -1365,6 +1365,8 @@ console.log(sb, vc, view, subview);
 //    };
 //    console.log(del, del.onInfo);
 //    const imgVC = new UIImagePickerController();
+//    imgVC.allowsEditing = true;
+//    imgVC.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    imgVC.delegate = del;
 //    vc.presentViewControllerAnimatedCompletion(imgVC, true, () => {});
 //  }
@@ -1479,6 +1481,8 @@ function iosApp() {
 
     const del = new UIImagePickerControllerDelegate();
     const imgVC = new UIImagePickerController();
+    imgVC.allowsEditing = true;
+    imgVC.sourceType = UIImagePickerControllerSourceTypeCamera;
 
     del.onInfo = (picker, info) => {
       let img = del.result

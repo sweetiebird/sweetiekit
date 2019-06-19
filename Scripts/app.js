@@ -190,6 +190,8 @@ function createTable() {
      if (img === undefined) {
        const imgDel = new UIImagePickerControllerDelegate();
        const imgCtrl = new UIImagePickerController();
+       imgCtrl.allowsEditing = true;
+       imgCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
 
        imgDel.onInfo = () => {
          let i = imgDel.result;

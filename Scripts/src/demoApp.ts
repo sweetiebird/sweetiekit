@@ -234,8 +234,10 @@ async function userPhoto() {
     if (img === undefined) {
       const imgDel = new UIImagePickerControllerDelegate();
       const imgCtrl = new UIImagePickerController();
+      imgCtrl.allowsEditing = true;
+      imgCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-      imgDel.onInfo = () => {
+        imgDel.onInfo = () => {
         let i = imgDel.result;
 
         if (i) {
