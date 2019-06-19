@@ -3616,6 +3616,7 @@
 				A1D672BD2269A05700562A42 /* NUIImage */,
 				A133700922AAA8FF00FA3768 /* NUIImageAsset */,
 				A1E48226226AB0AE002AF96F /* NUIImagePickerController */,
+				A1E4822A226AB40E002AF96F /* NUIImagePickerControllerDelegate */,
 				211E76AC226A1BF100B838AF /* NUIImageView */,
 				A1574ECE22B8BE29006CC5F2 /* NUIKeyCommand */,
 				A1B20572229799A9006CA4C6 /* NUIKitGlobals */,
@@ -3836,7 +3837,6 @@
 		A1E48226226AB0AE002AF96F /* NUIImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
-				A1E4822A226AB40E002AF96F /* NUIImagePickerControllerDelegate */,
 				A1E48227226AB0C5002AF96F /* NUIImagePickerController.h */,
 				A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */,
 			);
