@@ -849,6 +849,7 @@ NAN_METHOD(NClass::New) {
 #include "NCLLocationManager.h"
 #include "NCLLocationManagerDelegate.h"
 #include "NCLLocation.h"
+#include "NCLFloor.h"
 #include "NCLGeocoder.h"
 #include "NCLPlacemark.h"
 #include "NCLHeading.h"
@@ -1086,6 +1087,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // Core Location
     JS_EXPORT_TYPE(CLHeading);
+    JS_EXPORT_TYPE(CLFloor);
     JS_EXPORT_TYPE(CLLocation);
     JS_EXPORT_TYPE(CLLocationManager);
     JS_EXPORT_TYPE(CLLocationManagerDelegate);
@@ -1359,6 +1361,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CLGeocoder);
       JS_RETURN_TYPE(CLPlacemark);
       JS_RETURN_TYPE(CLLocation);
+      JS_RETURN_TYPE(CLFloor);
       JS_RETURN_TYPE(CLHeading);
       JS_RETURN_TYPE(CLLocationManager);
       JS_RETURN_TYPE_FROM(CLLocationManagerDelegate, SCLLocationManagerDelegate);

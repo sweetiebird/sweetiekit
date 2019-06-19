@@ -58,6 +58,29 @@
 #define is_value_CLLocationDirection(x) is_value_double(x)
 
 /*
+ *  CLLocationCoordinate2D
+ *  
+ *  Discussion:
+ *    A structure that contains a geographical coordinate.
+ *
+ *  Fields:
+ *    latitude:
+ *      The latitude in degrees.
+ *    longitude:
+ *      The longitude in degrees.
+ *
+struct CLLocationCoordinate2D {
+  CLLocationDegrees latitude;
+  CLLocationDegrees longitude;
+};
+typedef struct CLLocationCoordinate2D CLLocationCoordinate2D;
+ */
+
+Local<Value> js_value_CLLocationCoordinate2D(const CLLocationCoordinate2D& value);
+CLLocationCoordinate2D to_value_CLLocationCoordinate2D(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_CLLocationCoordinate2D(const Local<Value>& value);
+
+/*
  *  CLLocationDistance
  *  
  *  Discussion:
@@ -67,17 +90,25 @@
 #define to_value_CLLocationDistance(x) to_value_double(x)
 #define is_value_CLLocationDistance(x) is_value_double(x)
 
-
 JS_WRAP_CLASS(CLLocation, NSObject);
-  JS_PROP(Coordinate);
-  JS_PROP(Altitude);
-  JS_PROP(Floor);
-  JS_PROP(HorizontalAccuracy);
-  JS_PROP(VerticalAccuracy);
-  JS_PROP(Timestamp);
-  JS_METHOD(Distance);
-  JS_PROP(Speed);
-  JS_PROP(Course);
+// global functions
+  JS_METHOD(CLLocationCoordinate2DIsValid);
+  JS_METHOD(CLLocationCoordinate2DMake);
+  
+// CLLocation
+  JS_STATIC_METHOD(initWithLatitudeLongitude);
+  JS_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
+  JS_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
+  JS_METHOD(getDistanceFrom);
+  JS_METHOD(distanceFromLocation);
+  JS_PROP_READONLY(coordinate);
+  JS_PROP_READONLY(altitude);
+  JS_PROP_READONLY(horizontalAccuracy);
+  JS_PROP_READONLY(verticalAccuracy);
+  JS_PROP_READONLY(course);
+  JS_PROP_READONLY(speed);
+  JS_PROP_READONLY(timestamp);
+  JS_PROP_READONLY(floor);
 JS_WRAP_CLASS_END(CLLocation);
 
 #endif /* NCLLocation_h */

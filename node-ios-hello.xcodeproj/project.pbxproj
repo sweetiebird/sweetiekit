@@ -307,6 +307,7 @@
 		A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B94228F03D100D9B3B8 /* NUIPickerView.mm */; };
 		A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B99228F050700D9B3B8 /* NUIPickerViewManager.mm */; };
 		A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B9B228F051200D9B3B8 /* SUIPickerViewManager.swift */; };
+		A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4981622B9B2A8009AC951 /* NCLFloor.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -924,6 +925,8 @@
 		A1CE2B98228F050700D9B3B8 /* NUIPickerViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPickerViewManager.h; sourceTree = "<group>"; };
 		A1CE2B99228F050700D9B3B8 /* NUIPickerViewManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPickerViewManager.mm; sourceTree = "<group>"; };
 		A1CE2B9B228F051200D9B3B8 /* SUIPickerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPickerViewManager.swift; sourceTree = "<group>"; };
+		A1D4981522B9B2A8009AC951 /* NCLFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFloor.h; sourceTree = "<group>"; };
+		A1D4981622B9B2A8009AC951 /* NCLFloor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLFloor.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -3133,6 +3136,7 @@
 		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4981422B9B2A8009AC951 /* NCLFloor */,
 				A1646B8D22920CFC0078CF4B /* NCLGeocoder */,
 				A13768EA2288394C00CDB13B /* NCLHeading */,
 				A1BD4BA02287DE04001D1F6E /* NCLLocation */,
@@ -3390,6 +3394,15 @@
 				A1CE2B9B228F051200D9B3B8 /* SUIPickerViewManager.swift */,
 			);
 			path = NUIPickerViewManager;
+			sourceTree = "<group>";
+		};
+		A1D4981422B9B2A8009AC951 /* NCLFloor */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4981522B9B2A8009AC951 /* NCLFloor.h */,
+				A1D4981622B9B2A8009AC951 /* NCLFloor.mm */,
+			);
+			path = NCLFloor;
 			sourceTree = "<group>";
 		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
@@ -4247,6 +4260,7 @@
 				A1D67293226953BB00562A42 /* NUIViewController.mm in Sources */,
 				A174A48622B1856700415AD8 /* NUIBarCommon.mm in Sources */,
 				A133701E22AAE65100FA3768 /* NWKWebView.mm in Sources */,
+				A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,

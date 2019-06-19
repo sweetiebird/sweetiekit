@@ -375,17 +375,17 @@
   (js-type-getter UIView NSString* UIImage name)
 ))))
 
-(define-macro js-value-CLLocationDistance (x) `(js-value-number ,x))
-(define-macro js-value-CLLocationAccuracy (x) `(js-value-number ,x))
-(define-macro js-value-CLLocationDirection (x) `(js-value-number ,x))
-(define-macro js-value-CLLocationSpeed (x) `(js-value-number ,x))
+;(define-macro js-value-CLLocationDistance (x) `(js-value-number ,x))
+;(define-macro js-value-CLLocationAccuracy (x) `(js-value-number ,x))
+;(define-macro js-value-CLLocationDirection (x) `(js-value-number ,x))
+;(define-macro js-value-CLLocationSpeed (x) `(js-value-number ,x))
 
-(define-macro js-value-CLLocationCoordinate2D (x)
-  `(let (coord ,x
-         obj (js-new-object))
-     (js-set-number obj "latitude" (coord .latitude))
-     (js-set-number obj "longitude" (coord .longitude))
-     (js-value obj)))
+;(define-macro js-value-CLLocationCoordinate2D (x)
+;  `(let (coord ,x
+;         obj (js-new-object))
+;     (js-set-number obj "latitude" (coord .latitude))
+;     (js-set-number obj "longitude" (coord .longitude))
+;     (js-value obj)))
 
 (define-macro property spec
   (let (name (drop spec)

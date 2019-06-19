@@ -6,20 +6,33 @@
 //
 #include "NCLLocation.h"
 
+#define instancetype CLLocation
+#define js_value_instancetype js_value_CLLocation
+
 NCLLocation::NCLLocation () {}
 NCLLocation::~NCLLocation () {}
 
 JS_INIT_CLASS(CLLocation, NSObject);
+  // global functions
+  JS_SET_METHOD(exports, "CLLocationCoordinate2DIsValid", CLLocationCoordinate2DIsValid);
+  JS_SET_METHOD(exports, "CLLocationCoordinate2DMake", CLLocationCoordinate2DMake);
+
+// CLLocation
+  JS_ASSIGN_STATIC_METHOD(initWithLatitudeLongitude);
+  JS_ASSIGN_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
+  JS_ASSIGN_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
+  JS_ASSIGN_PROTO_METHOD(getDistanceFrom);
+  JS_ASSIGN_PROTO_METHOD(distanceFromLocation);
+  JS_ASSIGN_PROTO_PROP_READONLY(coordinate);
+  JS_ASSIGN_PROTO_PROP_READONLY(altitude);
+  JS_ASSIGN_PROTO_PROP_READONLY(horizontalAccuracy);
+  JS_ASSIGN_PROTO_PROP_READONLY(verticalAccuracy);
+  JS_ASSIGN_PROTO_PROP_READONLY(course);
+  JS_ASSIGN_PROTO_PROP_READONLY(speed);
+  JS_ASSIGN_PROTO_PROP_READONLY(timestamp);
+  JS_ASSIGN_PROTO_PROP_READONLY(floor);
+
   // instance members (proto)
-  JS_SET_PROP_READONLY(proto, "coordinate", Coordinate);
-  JS_SET_PROP_READONLY(proto, "altitude", Altitude);
-  JS_SET_PROP_READONLY(proto, "floor", Floor);
-  JS_SET_PROP_READONLY(proto, "horizontalAccuracy", HorizontalAccuracy);
-  JS_SET_PROP_READONLY(proto, "verticalAccuracy", VerticalAccuracy);
-  JS_SET_PROP_READONLY(proto, "timestamp", Timestamp);
-  JS_SET_METHOD(proto, "distance", Distance);
-  JS_SET_PROP_READONLY(proto, "speed", Speed);
-  JS_SET_PROP_READONLY(proto, "course", Course);
   // static members (ctor)
   JS_INIT_CTOR(CLLocation, NSObject);
   // constants (exports)
@@ -65,9 +78,10 @@ JS_INIT_CLASS(CLLocation, NSObject);
  *    Used to specify the maximum NSTimeInterval
  */
   JS_ASSIGN_ENUM(CLTimeIntervalMax, NSTimeInterval);
+  
+  JS_ASSIGN_ENUM(kCLLocationCoordinate2DInvalid, CLLocationCoordinate2D);
 
 JS_INIT_CLASS_END(CLLocation, NSObject);
-
 
 NAN_METHOD(NCLLocation::New) {
   JS_RECONSTRUCT(CLLocation);
@@ -94,104 +108,177 @@ NAN_METHOD(NCLLocation::New) {
   info.GetReturnValue().Set(obj);
 }
 
-NAN_GETTER(NCLLocation::CoordinateGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
+Local<Value>
+js_value_CLLocationCoordinate2D(const CLLocationCoordinate2D& value)
+{
+  Nan::EscapableHandleScope handleScope;
   Local<Object> result = Object::New(Isolate::GetCurrent());
-  double lng = [loc coordinate].longitude;
-  double lat = [loc coordinate].latitude;
-  result->Set(JS_STR("latitude"), JS_NUM(lat));
-  result->Set(JS_STR("longitude"), JS_NUM(lng));
-
-  JS_SET_RETURN(result);
+  result->Set(JS_STR("latitude"), js_value_CLLocationDegrees(value.latitude));
+  result->Set(JS_STR("longitude"), js_value_CLLocationDegrees(value.longitude));
+  return handleScope.Escape(result);
 }
 
-NAN_GETTER(NCLLocation::FloorGetter) {
-  Nan::HandleScope scope;
+CLLocationCoordinate2D
+to_value_CLLocationCoordinate2D(const Local<Value>& value, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
 
-  JS_UNWRAP(CLLocation, loc);
-  
-  CLFloor* floor = [loc floor];
-  if (floor != nullptr) {
-    NSInteger level = [floor level];
+  if (!is_value_CLLocationCoordinate2D(value)) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected CLLocationCoordinate2D");
+    }
+    return kCLLocationCoordinate2DInvalid;
+  }
 
-    Local<Object> result = Object::New(Isolate::GetCurrent());
-    result->Set(JS_STR("floor"), JS_NUM(level));
+  CLLocationDegrees latitude = to_value_CLLocationDegrees(JS_OBJ(value)->Get(JS_STR("latitude")));
+  CLLocationDegrees longitude = to_value_CLLocationDegrees(JS_OBJ(value)->Get(JS_STR("longitude")));
+  return CLLocationCoordinate2DMake(latitude, longitude);
+}
 
-    JS_SET_RETURN(result);
+bool
+is_value_CLLocationCoordinate2D(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  auto obj(JS_OBJ(value));
+  if (!is_value_CLLocationDegrees(obj->Get(JS_STR("latitude")))) {
+    return false;
+  }
+  if (!is_value_CLLocationDegrees(obj->Get(JS_STR("longitude")))) {
+    return false;
+  }
+  return true;
+}
+
+NAN_METHOD(NCLLocation::CLLocationCoordinate2DIsValid) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CLLocationCoordinate2D, value);
+    JS_SET_RETURN(js_value_BOOL(::CLLocationCoordinate2DIsValid(value)));
   }
 }
 
-NAN_GETTER(NCLLocation::AltitudeGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
-  double alt = [loc altitude];
-
-  JS_SET_RETURN(JS_NUM(alt));
+NAN_METHOD(NCLLocation::CLLocationCoordinate2DMake) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CLLocationDegrees, latitude);
+    declare_value(CLLocationDegrees, longitude);
+    JS_SET_RETURN(js_value_CLLocationCoordinate2D(::CLLocationCoordinate2DMake(latitude, longitude)));
+  }
 }
 
-NAN_GETTER(NCLLocation::HorizontalAccuracyGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
-  double result = [loc horizontalAccuracy];
-
-  JS_SET_RETURN(JS_NUM(result));
+NAN_METHOD(NCLLocation::initWithLatitudeLongitude) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CLLocationDegrees, latitude);
+    declare_value(CLLocationDegrees, longitude);
+    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithLatitude: latitude longitude: longitude]));
+  }
 }
 
-NAN_GETTER(NCLLocation::VerticalAccuracyGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
-  double result = [loc verticalAccuracy];
-
-  JS_SET_RETURN(JS_NUM(result));
+NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CLLocationCoordinate2D, coordinate);
+    declare_value(CLLocationDistance, altitude);
+    declare_value(CLLocationAccuracy, hAccuracy);
+    declare_value(CLLocationAccuracy, vAccuracy);
+    declare_pointer(NSDate, timestamp);
+    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy timestamp: timestamp]));
+  }
 }
 
-NAN_GETTER(NCLLocation::TimestampGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
-  NSDate* result = [loc timestamp];
-  double milliseconds = 1000.0 * [result timeIntervalSince1970];
-
-  JS_SET_RETURN(Nan::New<Date>(milliseconds).ToLocalChecked());
+NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CLLocationCoordinate2D, coordinate);
+    declare_value(CLLocationDistance, altitude);
+    declare_value(CLLocationAccuracy, hAccuracy);
+    declare_value(CLLocationAccuracy, vAccuracy);
+    declare_value(CLLocationDirection, course);
+    declare_value(CLLocationSpeed, speed);
+    declare_pointer(NSDate, timestamp);
+    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy course: course speed: speed timestamp: timestamp]));
+  }
 }
 
-NAN_METHOD(NCLLocation::Distance) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc1);
-  
-  JS_UNWRAPPED(info[0], CLLocation, loc2);
-  double result = [loc1 distanceFromLocation:loc2];
-  
-  JS_SET_RETURN(JS_NUM(result));
+NAN_METHOD(NCLLocation::getDistanceFrom) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CLLocation, location);
+    JS_SET_RETURN(js_value_CLLocationDistance([self getDistanceFrom: location]));
+  }
 }
 
-NAN_GETTER(NCLLocation::SpeedGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(CLLocation, loc);
-
-  double result = [loc speed];
-
-  JS_SET_RETURN(JS_NUM(result));
+NAN_METHOD(NCLLocation::distanceFromLocation) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(CLLocation, location);
+    JS_SET_RETURN(js_value_CLLocationDistance([self distanceFromLocation: location]));
+  }
 }
 
-NAN_GETTER(NCLLocation::CourseGetter) {
-  Nan::HandleScope scope;
+NAN_GETTER(NCLLocation::coordinateGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationCoordinate2D([self coordinate]));
+  }
+}
 
-  JS_UNWRAP(CLLocation, loc);
+NAN_GETTER(NCLLocation::altitudeGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationDistance([self altitude]));
+  }
+}
 
-  double result = [loc course];
+NAN_GETTER(NCLLocation::horizontalAccuracyGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationAccuracy([self horizontalAccuracy]));
+  }
+}
 
-  JS_SET_RETURN(JS_NUM(result));
+NAN_GETTER(NCLLocation::verticalAccuracyGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationAccuracy([self verticalAccuracy]));
+  }
+}
+
+NAN_GETTER(NCLLocation::courseGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationDirection([self course]));
+  }
+}
+
+NAN_GETTER(NCLLocation::speedGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLLocationSpeed([self speed]));
+  }
+}
+
+NAN_GETTER(NCLLocation::timestampGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSDate([self timestamp]));
+  }
+}
+
+#include "NCLFloor.h"
+
+NAN_GETTER(NCLLocation::floorGetter) {
+  JS_UNWRAP(CLLocation, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CLFloor([self floor]));
+  }
 }
