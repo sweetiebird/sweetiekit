@@ -853,6 +853,12 @@ NAN_METHOD(NClass::New) {
 #include "NCLGeocoder.h"
 #include "NCLPlacemark.h"
 #include "NCLHeading.h"
+#include "NCLVisit.h"
+#include "NCLRegion.h"
+#include "NCLBeacon.h"
+#include "NCLBeaconRegion.h"
+#include "NCNPostalAddress.h"
+#include "NNSUUID.h"
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
 #include "NMKAnnotationView.h"
@@ -932,6 +938,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSTimeZone);
     JS_EXPORT_TYPE(NSDateComponents);
     JS_EXPORT_TYPE(NSCalendar);
+    JS_EXPORT_TYPE(NSUUID);
 
     // UIKit
     JS_EXPORT_TYPE(UIGestureRecognizer);
@@ -1093,6 +1100,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CLLocationManagerDelegate);
     JS_EXPORT_TYPE(CLGeocoder);
     JS_EXPORT_TYPE(CLPlacemark);
+    JS_EXPORT_TYPE(CLVisit);
+    JS_EXPORT_TYPE(CLRegion);
+    JS_EXPORT_TYPE(CLBeacon);
+    JS_EXPORT_TYPE(CLBeaconRegion);
+
+    // Contacts
+    JS_EXPORT_TYPE(CNPostalAddress);
     
     // ReplayKit
     JS_EXPORT_TYPE(RPScreenRecorder);
@@ -1358,13 +1372,17 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(GifView);
 
       // Core Location
+      JS_RETURN_TYPE(CLBeaconRegion);
+      JS_RETURN_TYPE(CLBeacon);
+      JS_RETURN_TYPE(CLRegion);
+      JS_RETURN_TYPE(CLVisit);
       JS_RETURN_TYPE(CLGeocoder);
       JS_RETURN_TYPE(CLPlacemark);
       JS_RETURN_TYPE(CLLocation);
       JS_RETURN_TYPE(CLFloor);
       JS_RETURN_TYPE(CLHeading);
       JS_RETURN_TYPE(CLLocationManager);
-      JS_RETURN_TYPE_FROM(CLLocationManagerDelegate, SCLLocationManagerDelegate);
+      JS_RETURN_TYPE(CLLocationManagerDelegate);
       
       // ReplayKit
       JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
@@ -1531,6 +1549,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // Objects
       
+      JS_RETURN_TYPE(NSUUID);
       JS_RETURN_TYPE(NSCalendar);
       JS_RETURN_TYPE(NSDateComponents);
       JS_RETURN_TYPE(NSTimeZone);

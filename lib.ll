@@ -500,7 +500,9 @@
                         " *" "* " 
                         " *" "* " 
                         " *" "* " 
-                        " *" "* ")
+                        " *" "* "
+                        "NS_NONATOMIC_IOSONLY" "nonatomic"
+                        )
     (with r (list)
       (let (lines (map (fn (line)
                         (when (search line " @")
@@ -582,6 +584,7 @@
        CI: "CoreImage"
        CL: "CoreLocation"
        CM: "CoreMotion"
+       CN: "Contacts"
        GK: "GameplayKit"
       MDL: "ModelIO"
        MK: "MapKit"

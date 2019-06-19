@@ -15,7 +15,16 @@
 #define is_value_CLGeocoder(x) is_value_wrapper(x, CLGeocoder)
 
 JS_WRAP_CLASS(CLGeocoder, NSObject);
-  JS_METHOD(geocodeAddressString);
+  JS_METHOD(reverseGeocodeLocationCompletionHandler);
+  JS_METHOD(reverseGeocodeLocationPreferredLocaleCompletionHandler);
+  JS_METHOD(geocodeAddressDictionaryCompletionHandler);
+  JS_METHOD(geocodeAddressStringCompletionHandler);
+  JS_METHOD(geocodeAddressStringInRegionCompletionHandler);
+  JS_METHOD(geocodeAddressStringInRegionPreferredLocaleCompletionHandler);
+  JS_METHOD(cancelGeocode);
+  JS_METHOD(geocodePostalAddressCompletionHandler);
+  JS_METHOD(geocodePostalAddressPreferredLocaleCompletionHandler);
+  JS_PROP_READONLY(isGeocoding);
 JS_WRAP_CLASS_END(CLGeocoder);
 
 #endif /* NCLGeocoder_h */

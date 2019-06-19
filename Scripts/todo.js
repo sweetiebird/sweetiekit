@@ -287,14 +287,16 @@ class ARApp {
   }
 
   setupLocationUpdates() {
-    this.locDel = new CLLocationManagerDelegate((mgr, status) => {
+    this.locDel = new CLLocationManagerDelegate();
+    this.locDel.locationManagerDidChangeAuthorizationStatus = (mgr, status) => {
       this.locMgr.startUpdatingLocation();
       if (CLLocationManager.headingAvailable()) {
         this.locMgr.headingFilter = 5
         this.locMgr.startUpdatingHeading()
       }
 
-    }, (mgr, locations) => {
+    };
+    this.locDel.locationManagerDidUpdateLocations = (mgr, locations) => {
       for (let i = 0, len = locations.length; i < len; i++) {
         const loc = locations[i];
         const { coordinate, floor, altitude,
@@ -337,7 +339,8 @@ class ARApp {
           }
         }
       }
-    }, (mgr, heading) => {
+    };
+    this.locDel.locationManagerDidDidUpdateHeading = (mgr, heading) => {
       const {
         magneticHeading,
         trueHeading,
@@ -356,7 +359,7 @@ class ARApp {
         y,
         z,
       });
-    });
+    };
     this.locMgr = new CLLocationManager();
     this.locMgr.delegate = this.locDel;
     this.locMgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;

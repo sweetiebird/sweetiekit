@@ -33,17 +33,20 @@ const address = '1538 n halsted st chicago il 60642';
 function setupLocation() {
   geocoder = new CLGeocoder();
   mgr = new CLLocationManager();
-  mgr.delegate = new CLLocationManagerDelegate(() => {
+  del = new CLLocationManagerDelegate();
+  del.locationManagerDidChangeAuthorizationStatus = () => {
     mgr.startUpdatingLocation();
-  }, (_, locations) => {
+  };
+  del.locationManagerDidUpdateLocations = (_, locations) => {
     const loc = locations[0];
     if (dest) {
       const d = loc.distance(dest);
       distNode.geometry.string = `${Math.round(d)} meters`;
     }
-  }, () => {});
+  };
+  mgr.delegate = del;
   mgr.requestAlwaysAuthorization();
-  geocoder.geocodeAddressString(address, (placemarks) => {
+  geocoder.geocodeAddressStringCompletionHandler(address, (placemarks) => {
     dest = placemarks[0].location;
   });
 }

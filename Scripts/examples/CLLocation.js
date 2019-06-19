@@ -156,7 +156,7 @@ async function make(nav, demoVC) {
 
   btn.addTargetActionForControlEvents(() => {
     if (text) {
-      geocoder.geocodeAddressString(text, (placemarks) => {
+      geocoder.geocodeAddressStringCompletionHandler(text, (placemarks) => {
         if (Array.isArray(placemarks)) {
           const p = placemarks[0];
           location2 = p.location;
@@ -183,11 +183,16 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(btn);
   demoVC.view.addSubview(distLabel);
 
-  const mgr = new CLLocationManager();
-  mgr.delegate = new CLLocationManagerDelegate(() => {
+  mgr = new CLLocationManager();
+  del = new CLLocationManagerDelegate();
+  del.locationManagerDidChangeAuthorizationStatus = (...args) => {
+    console.log('locationManagerDidChangeAuthorizationStatus', ...args);
     mgr.startUpdatingLocation();
     mgr.startUpdatingHeading();
-  }, (_, locations) => {
+  };
+  del.locationManagerDidUpdateLocations = (...args) => {
+    const [_, locations] = args;
+    console.log('locationManagerDidUpdateLocations', locations.map(x => x.toString()));
     if (Array.isArray(locations) && locations.length > 0 && !location) {
       location = locations[0];
       if (mapView) {
@@ -199,10 +204,14 @@ async function make(nav, demoVC) {
         mapView.setRegion(region, true);
       }
     }
-  }, (_, heading) => {
+  };
+  del.locationManagerDidDidUpdateHeading = (...args) => {
+    console.log('locationManagerDidUpdateHeading', ...args);
+    const [_, heading] = args;
     trueHeading = heading.trueHeading;
     console.log(trueHeading);
-  });
+  };
+  mgr.delegate = del;
   mgr.requestAlwaysAuthorization();
 
   return undefined;

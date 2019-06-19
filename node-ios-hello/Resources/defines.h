@@ -339,6 +339,42 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
 #define JS_GET_FUNCTION(varName, objc, keyName) \
   auto& varName = *[(SweetJSFunction*)[objc associatedValueForKey:keyName] jsFunction];
 
+
+
+#define DELEGATE_PROP(type, key) \
+NAN_GETTER(N##type::key##Getter) { \
+  JS_UNWRAP(type, self); \
+  declare_autoreleasepool { \
+    get_persistent_function(self, callback, @#key); \
+    if (callback) { \
+      JS_SET_RETURN([callback jsFunction]->Get()); \
+    } \
+  } \
+} \
+ \
+NAN_SETTER(N##type::key##Setter) { \
+  JS_UNWRAP(type, self); \
+  declare_autoreleasepool { \
+    declare_setter(); \
+    declare_persistent_function(callback, @#key); \
+  } \
+}
+
+#define call_persistent_function_noreturn(from, name, key, ...) \
+  Local<Value> JS_RESULT; \
+  get_persistent_function(from, name, @key); \
+  if (name) { \
+    JS_RESULT = [name jsFunction]->Call(key, __VA_ARGS__); \
+  }
+  
+#define call_delegate(after_callback, key, ...) \
+  dispatch_main(^{ \
+    call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
+    after_callback; \
+  });
+
+#define noop() {}
+
 #include <array>
 #include <deque>
 #include <mutex>

@@ -85,27 +85,24 @@ JS_INIT_CLASS_END(CLLocation, NSObject);
 
 NAN_METHOD(NCLLocation::New) {
   JS_RECONSTRUCT(CLLocation);
+  @autoreleasepool {
+    CLLocation* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NCLLocation *loc = new NCLLocation();
-
-  if (info[0]->IsExternal()) {
-    loc->SetNSObject((__bridge CLLocation *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      double lat = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("latitude")));
-      double lng = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("longitude")));
-      loc->SetNSObject([[CLLocation alloc] initWithLatitude:lat longitude:lng]);
+    if (info[0]->IsExternal()) {
+      self = (__bridge CLLocation *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[CLLocation alloc] init];
     }
-  } else {
-    @autoreleasepool {
-        loc->SetNSObject([[CLLocation alloc] init]);
+    if (self) {
+      NCLLocation *wrapper = new NCLLocation();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("CLLocation::New: invalid arguments");
     }
   }
-  loc->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
 }
 
 Local<Value>

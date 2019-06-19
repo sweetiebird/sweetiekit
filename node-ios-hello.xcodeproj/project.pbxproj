@@ -270,7 +270,6 @@
 		A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B932287D555001D1F6E /* NSKSpriteNode.mm */; };
 		A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B982287DA43001D1F6E /* NCLLocationManager.mm */; };
 		A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */; };
-		A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */; };
 		A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */; };
 		A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAA2287F678001D1F6E /* NSKTexture.mm */; };
 		A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4BAE228809AF001D1F6E /* NARFrame.mm */; };
@@ -308,6 +307,12 @@
 		A1CE2B9A228F050700D9B3B8 /* NUIPickerViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B99228F050700D9B3B8 /* NUIPickerViewManager.mm */; };
 		A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B9B228F051200D9B3B8 /* SUIPickerViewManager.swift */; };
 		A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4981622B9B2A8009AC951 /* NCLFloor.mm */; };
+		A1D4981B22B9BA6A009AC951 /* NCLRegion.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4981922B9BA6A009AC951 /* NCLRegion.mm */; };
+		A1D4982022B9BBD0009AC951 /* NCNPostalAddress.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4981F22B9BBD0009AC951 /* NCNPostalAddress.mm */; };
+		A1D4982422B9C608009AC951 /* NCLBeaconRegion.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982322B9C608009AC951 /* NCLBeaconRegion.mm */; };
+		A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982722B9C726009AC951 /* NNSUUID.mm */; };
+		A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982B22B9C968009AC951 /* NCLBeacon.mm */; };
+		A1D4983022B9D48D009AC951 /* NCLVisit.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982F22B9D48D009AC951 /* NCLVisit.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -864,7 +869,6 @@
 		A1BD4B982287DA43001D1F6E /* NCLLocationManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocationManager.mm; sourceTree = "<group>"; };
 		A1BD4B9B2287DC0B001D1F6E /* NCLLocationManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLLocationManagerDelegate.h; sourceTree = "<group>"; };
 		A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocationManagerDelegate.mm; sourceTree = "<group>"; };
-		A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLLocationManagerDelegate.swift; sourceTree = "<group>"; };
 		A1BD4BA12287DE15001D1F6E /* NCLLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLLocation.h; sourceTree = "<group>"; };
 		A1BD4BA22287DE1C001D1F6E /* NCLLocation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLLocation.mm; sourceTree = "<group>"; };
 		A1BD4BA92287F671001D1F6E /* NSKTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKTexture.h; sourceTree = "<group>"; };
@@ -927,6 +931,18 @@
 		A1CE2B9B228F051200D9B3B8 /* SUIPickerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPickerViewManager.swift; sourceTree = "<group>"; };
 		A1D4981522B9B2A8009AC951 /* NCLFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFloor.h; sourceTree = "<group>"; };
 		A1D4981622B9B2A8009AC951 /* NCLFloor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLFloor.mm; sourceTree = "<group>"; };
+		A1D4981922B9BA6A009AC951 /* NCLRegion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLRegion.mm; sourceTree = "<group>"; };
+		A1D4981A22B9BA6A009AC951 /* NCLRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRegion.h; sourceTree = "<group>"; };
+		A1D4981E22B9BBD0009AC951 /* NCNPostalAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCNPostalAddress.h; sourceTree = "<group>"; };
+		A1D4981F22B9BBD0009AC951 /* NCNPostalAddress.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCNPostalAddress.mm; sourceTree = "<group>"; };
+		A1D4982222B9C608009AC951 /* NCLBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLBeaconRegion.h; sourceTree = "<group>"; };
+		A1D4982322B9C608009AC951 /* NCLBeaconRegion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLBeaconRegion.mm; sourceTree = "<group>"; };
+		A1D4982622B9C726009AC951 /* NNSUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUUID.h; sourceTree = "<group>"; };
+		A1D4982722B9C726009AC951 /* NNSUUID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUUID.mm; sourceTree = "<group>"; };
+		A1D4982A22B9C968009AC951 /* NCLBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLBeacon.h; sourceTree = "<group>"; };
+		A1D4982B22B9C968009AC951 /* NCLBeacon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLBeacon.mm; sourceTree = "<group>"; };
+		A1D4982E22B9D48D009AC951 /* NCLVisit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLVisit.h; sourceTree = "<group>"; };
+		A1D4982F22B9D48D009AC951 /* NCLVisit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLVisit.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -3136,6 +3152,10 @@
 		A1BD4B952287DA14001D1F6E /* NCoreLocation */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4982D22B9D48D009AC951 /* NCLVisit */,
+				A1D4982922B9C968009AC951 /* NCLBeacon */,
+				A1D4982122B9C608009AC951 /* NCLBeaconRegion */,
+				A1D4981822B9BA6A009AC951 /* NCLRegion */,
 				A1D4981422B9B2A8009AC951 /* NCLFloor */,
 				A1646B8D22920CFC0078CF4B /* NCLGeocoder */,
 				A13768EA2288394C00CDB13B /* NCLHeading */,
@@ -3161,7 +3181,6 @@
 			children = (
 				A1BD4B9B2287DC0B001D1F6E /* NCLLocationManagerDelegate.h */,
 				A1BD4B9C2287DC11001D1F6E /* NCLLocationManagerDelegate.mm */,
-				A1BD4B9E2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift */,
 			);
 			path = NCLLocationManagerDelegate;
 			sourceTree = "<group>";
@@ -3403,6 +3422,68 @@
 				A1D4981622B9B2A8009AC951 /* NCLFloor.mm */,
 			);
 			path = NCLFloor;
+			sourceTree = "<group>";
+		};
+		A1D4981822B9BA6A009AC951 /* NCLRegion */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4981A22B9BA6A009AC951 /* NCLRegion.h */,
+				A1D4981922B9BA6A009AC951 /* NCLRegion.mm */,
+			);
+			path = NCLRegion;
+			sourceTree = "<group>";
+		};
+		A1D4981C22B9BBD0009AC951 /* NContacts */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4981D22B9BBD0009AC951 /* NCNPostalAddress */,
+			);
+			path = NContacts;
+			sourceTree = "<group>";
+		};
+		A1D4981D22B9BBD0009AC951 /* NCNPostalAddress */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4981E22B9BBD0009AC951 /* NCNPostalAddress.h */,
+				A1D4981F22B9BBD0009AC951 /* NCNPostalAddress.mm */,
+			);
+			path = NCNPostalAddress;
+			sourceTree = "<group>";
+		};
+		A1D4982122B9C608009AC951 /* NCLBeaconRegion */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4982222B9C608009AC951 /* NCLBeaconRegion.h */,
+				A1D4982322B9C608009AC951 /* NCLBeaconRegion.mm */,
+			);
+			path = NCLBeaconRegion;
+			sourceTree = "<group>";
+		};
+		A1D4982522B9C726009AC951 /* NNSUUID */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4982622B9C726009AC951 /* NNSUUID.h */,
+				A1D4982722B9C726009AC951 /* NNSUUID.mm */,
+			);
+			path = NNSUUID;
+			sourceTree = "<group>";
+		};
+		A1D4982922B9C968009AC951 /* NCLBeacon */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4982A22B9C968009AC951 /* NCLBeacon.h */,
+				A1D4982B22B9C968009AC951 /* NCLBeacon.mm */,
+			);
+			path = NCLBeacon;
+			sourceTree = "<group>";
+		};
+		A1D4982D22B9D48D009AC951 /* NCLVisit */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4982E22B9D48D009AC951 /* NCLVisit.h */,
+				A1D4982F22B9D48D009AC951 /* NCLVisit.mm */,
+			);
+			path = NCLVisit;
 			sourceTree = "<group>";
 		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
@@ -3717,6 +3798,7 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4982522B9C726009AC951 /* NNSUUID */,
 				A1574EA422B81650006CC5F2 /* NNSDateComponents */,
 				A1574EA022B812DB006CC5F2 /* NNSMutableCharacterSet */,
 				A1574E9C22B811E8006CC5F2 /* NNSCharacterSet */,
@@ -3983,6 +4065,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4981C22B9BBD0009AC951 /* NContacts */,
 				A19F39D522AF4AE100606332 /* NModelIO */,
 				A133708122AB382200FA3768 /* NMediaPlayer */,
 				A1482A93229D4DAC001502C0 /* GameFiles */,
@@ -4232,6 +4315,7 @@
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
 				A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
+				A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */,
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
@@ -4273,6 +4357,7 @@
 				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
+				A1D4983022B9D48D009AC951 /* NCLVisit.mm in Sources */,
 				A1574F0122B93071006CC5F2 /* NCATransition.mm in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
@@ -4297,10 +4382,10 @@
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
-				A1BD4B9F2287DC1B001D1F6E /* SCLLocationManagerDelegate.swift in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
+				A1D4981B22B9BA6A009AC951 /* NCLRegion.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
 				A133700522AAA5F200FA3768 /* NUITraitCollection.mm in Sources */,
@@ -4310,6 +4395,7 @@
 				A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */,
 				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
+				A1D4982422B9C608009AC951 /* NCLBeaconRegion.mm in Sources */,
 				A13370E822AF02F500FA3768 /* NAVAudioIONode.mm in Sources */,
 				A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */,
 				A133700122AA805100FA3768 /* NUIToolbar.mm in Sources */,
@@ -4360,6 +4446,7 @@
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
+				A1D4982022B9BBD0009AC951 /* NCNPostalAddress.mm in Sources */,
 				A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
@@ -4501,6 +4588,7 @@
 				A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A13370C522AEF87500FA3768 /* NAVAudioNode.mm in Sources */,
+				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
