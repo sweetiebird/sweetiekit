@@ -160,7 +160,8 @@
 (define-macro js-define-method (self-type self name args static: static? rest: body)
   `(nan-method (js-wrapper ,self-type ,(objc-method-name name args))
      (declare-type ,self-type %self)
-     ,(unless static? `(JS_UNWRAP ,self-type ,self))
+     ,(if (= static? 'init) `(JS_UNWRAP_OR_ALLOC ,self-type ,self)
+          (not static?) `(JS_UNWRAP ,self-type ,self))
      (with-autoreleasepool
        ;(NSLog @"%@\n" [[(%self-type) alloc] init])
        ,@body)))
@@ -354,7 +355,7 @@
 
 (define-macro js-type-method (self-type return-type name args static: static? rest: body)
   (let (return-type (expand return-type)
-        self (if (objc-init? name) `[(%instancetype) alloc] static? `(%instancetype) `self)
+        self (if (objc-init? name) `self static? `(%instancetype) `self)
         body (if (none? body) (js-gen-method-call self name args) body))
     `(js-define-method ,self-type self ,name ,args static: ,static?
        ,@(js-gen-method-args name args)
@@ -443,19 +444,19 @@
 
 (define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
   (when (objc-init? name)
-    (set static? true))
+    (set static? 'init))
   (let class (if (obj? class) (hd class) class)
     (case (getenv '%%flags 'stage)
       header
       (js-print-type class 
         (let name (objc-method-name name args static: static?)
-          `(%indent ,(if static?
+          `(%indent ,(if (and static? (not (= static? 'init)))
             `(JS_STATIC_METHOD ,name)
             `(JS_METHOD ,name)))))
       ctor
       (js-print-type class
         (let name (objc-method-name name args static: static?)
-          `(%indent ,(if static?
+          `(%indent ,(if (and static? (not (= static? 'init)))
               `(JS_ASSIGN_STATIC_METHOD ,name)
               `(JS_ASSIGN_PROTO_METHOD ,name)))))
       source
