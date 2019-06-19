@@ -76,7 +76,7 @@ JS_INIT_CLASS(UITextField, UIControl);
 
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
-  JS_ASSIGN_STATIC_METHOD(initWithFrameCallback);
+  JS_ASSIGN_PROTO_METHOD(initWithFrameCallback);
   
   // constants (exports)
 
@@ -280,10 +280,11 @@ NAN_METHOD(NUITextField::New) {
 }
 
 NAN_METHOD(NUITextField::initWithFrameCallback) {
+  JS_UNWRAP_OR_ALLOC(UITextField, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGRect, frame);
-    UITextField* self = [[UITextField alloc] initWithFrame:frame];
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame:frame]));
     declare_persistent_function(callback, @"sweetiekit.UITextField.initWithFrameCallback");
     [self setPlaceholder:@"Enter text here"];
     [self setFont:[UIFont systemFontOfSize:15]];
@@ -303,7 +304,6 @@ NAN_METHOD(NUITextField::initWithFrameCallback) {
       });
       return result;
     }];
-    JS_SET_RETURN(js_value_instancetype(self));
   }
 }
 
@@ -1035,3 +1035,4 @@ NAN_SETTER(NUITextField::passwordRulesSetter) {
 }
 
 // --------- end source ----------------
+

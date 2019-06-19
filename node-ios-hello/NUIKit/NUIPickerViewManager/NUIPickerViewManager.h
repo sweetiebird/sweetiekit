@@ -26,4 +26,8 @@ JS_WRAP_CLASS(UIPickerViewManager, NSObject);
   sweetiekit::JSFunction _didSelectRow;
 JS_WRAP_CLASS_END(UIPickerViewManager);
 
+#if __OBJC__
+typedef SUIPickerViewManager UIPickerViewManager;
+#endif
+
 #endif /* NUIPickerViewManager_h */

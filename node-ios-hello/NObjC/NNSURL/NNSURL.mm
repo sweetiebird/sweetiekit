@@ -42,11 +42,11 @@ JS_INIT_CLASS(NSURL, NSObject);
   JS_ASSIGN_PROTO_METHOD(checkPromisedItemIsReachableAndReturnError);
 #if 0
 // NSURLQueryItem
-  JS_ASSIGN_STATIC_METHOD(initWithNameValue);
+  JS_ASSIGN_PROTO_METHOD(initWithNameValue);
 // NSURLComponents
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithURLResolvingAgainstBaseURL);
-  JS_ASSIGN_STATIC_METHOD(initWithString);
+  JS_ASSIGN_PROTO_METHOD(initWithURLResolvingAgainstBaseURL);
+  JS_ASSIGN_PROTO_METHOD(initWithString);
   JS_ASSIGN_PROTO_METHOD(URLRelativeToURL);
 // NSString
   JS_ASSIGN_PROTO_METHOD(stringByAddingPercentEncodingWithAllowedCharacters);
@@ -59,7 +59,7 @@ JS_INIT_CLASS(NSURL, NSObject);
   JS_ASSIGN_PROTO_METHOD(URLByAppendingPathExtension);
 #if 0
 // NSFileSecurity
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
 // NSObject
   JS_ASSIGN_PROTO_METHOD(URLResourceDataDidBecomeAvailable);
   JS_ASSIGN_PROTO_METHOD(URLResourceDidFinishLoading);
@@ -134,15 +134,15 @@ JS_INIT_CLASS(NSURL, NSObject);
 // NSURL
   JS_ASSIGN_STATIC_METHOD(fileURLWithPathComponents);
 // NSURL:
-  JS_ASSIGN_STATIC_METHOD(initWithSchemeHostPath);
+  JS_ASSIGN_PROTO_METHOD(initWithSchemeHostPath);
   JS_ASSIGN_STATIC_METHOD(initFileURLWithPathIsDirectoryRelativeToURL);
   JS_ASSIGN_STATIC_METHOD(initFileURLWithPathRelativeToURL);
   JS_ASSIGN_STATIC_METHOD(initFileURLWithPathIsDirectory);
   JS_ASSIGN_STATIC_METHOD(initFileURLWithPath);
   JS_ASSIGN_STATIC_METHOD(initFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL);
-  JS_ASSIGN_STATIC_METHOD(initWithString);
-  JS_ASSIGN_STATIC_METHOD(initWithStringRelativeToURL);
-  JS_ASSIGN_STATIC_METHOD(initWithDataRepresentationRelativeToURL);
+  JS_ASSIGN_PROTO_METHOD(initWithString);
+  JS_ASSIGN_PROTO_METHOD(initWithStringRelativeToURL);
+  JS_ASSIGN_PROTO_METHOD(initWithDataRepresentationRelativeToURL);
   JS_ASSIGN_STATIC_METHOD(initAbsoluteURLWithDataRepresentationRelativeToURL);
   JS_ASSIGN_STATIC_METHOD(initByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError);
 // NSURL:
@@ -430,12 +430,13 @@ NAN_METHOD(NNSURL::fileURLWithPathComponents) {
 }
 
 NAN_METHOD(NNSURL::initWithSchemeHostPath) {
+  JS_UNWRAP_OR_ALLOC(NSURL, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, scheme);
     declare_nullable_pointer(NSString, host);
     declare_pointer(NSString, path);
-    JS_SET_RETURN(js_value_instancetype([[NSURL alloc] initWithScheme: scheme host: host path: path]));
+    JS_SET_RETURN(js_value_instancetype([self initWithScheme: scheme host: host path: path]));
   }
 }
 
@@ -486,28 +487,31 @@ NAN_METHOD(NNSURL::initFileURLWithFileSystemRepresentationIsDirectoryRelativeToU
 }
 
 NAN_METHOD(NNSURL::initWithString) {
+  JS_UNWRAP_OR_ALLOC(NSURL, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, URLString);
-    JS_SET_RETURN(js_value_instancetype([[NSURL alloc] initWithString: URLString]));
+    JS_SET_RETURN(js_value_instancetype([self initWithString: URLString]));
   }
 }
 
 NAN_METHOD(NNSURL::initWithStringRelativeToURL) {
+  JS_UNWRAP_OR_ALLOC(NSURL, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, URLString);
     declare_nullable_pointer(NSURL, baseURL);
-    JS_SET_RETURN(js_value_instancetype([[NSURL alloc] initWithString: URLString relativeToURL: baseURL]));
+    JS_SET_RETURN(js_value_instancetype([self initWithString: URLString relativeToURL: baseURL]));
   }
 }
 
 NAN_METHOD(NNSURL::initWithDataRepresentationRelativeToURL) {
+  JS_UNWRAP_OR_ALLOC(NSURL, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSData, data);
     declare_nullable_pointer(NSURL, baseURL);
-    JS_SET_RETURN(js_value_instancetype([[NSURL alloc] initWithDataRepresentation: data relativeToURL: baseURL]));
+    JS_SET_RETURN(js_value_instancetype([self initWithDataRepresentation: data relativeToURL: baseURL]));
   }
 }
 
@@ -711,11 +715,12 @@ NAN_METHOD(NNSURL::checkPromisedItemIsReachableAndReturnError) {
 
 #if TODO
 NAN_METHOD(NNSURLQueryItem::initWithNameValue) {
+  JS_UNWRAP_OR_ALLOC(NSURLQueryItem, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_nullable_pointer(NSString, value);
-    JS_SET_RETURN(js_value_instancetype([[NSURLQueryItem alloc] initWithName: name value: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name value: value]));
   }
 }
 
@@ -726,19 +731,21 @@ NAN_METHOD(NNSURLComponents::init) {
 }
 
 NAN_METHOD(NNSURLComponents::initWithURLResolvingAgainstBaseURL) {
+  JS_UNWRAP_OR_ALLOC(NSURLComponents, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, url);
     declare_value(BOOL, resolve);
-    JS_SET_RETURN(js_value_instancetype([[NSURLComponents alloc] initWithURL: url resolvingAgainstBaseURL: resolve]));
+    JS_SET_RETURN(js_value_instancetype([self initWithURL: url resolvingAgainstBaseURL: resolve]));
   }
 }
 
 NAN_METHOD(NNSURLComponents::initWithString) {
+  JS_UNWRAP_OR_ALLOC(NSURLComponents, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, URLString);
-    JS_SET_RETURN(js_value_instancetype([[NSURLComponents alloc] initWithString: URLString]));
+    JS_SET_RETURN(js_value_instancetype([self initWithString: URLString]));
   }
 }
 
@@ -809,10 +816,11 @@ NAN_METHOD(NNSURL::URLByAppendingPathExtension) {
 
 #if TODO
 NAN_METHOD(NNSFileSecurity::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(NSFileSecurity, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[NSFileSecurity alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 

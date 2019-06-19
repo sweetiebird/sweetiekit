@@ -38,7 +38,7 @@ JS_WRAP_CLASS(UITraitCollection, NSObject);
   JS_STATIC_METHOD(traitCollectionWithPreferredContentSizeCategory);
   JS_STATIC_METHOD(traitCollectionWithDisplayGamut);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_METHOD(containsTraitsInCollection);
   JS_PROP_READONLY(userInterfaceIdiom);
   JS_PROP_READONLY(userInterfaceStyle);

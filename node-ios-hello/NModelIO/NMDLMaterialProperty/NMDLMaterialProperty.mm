@@ -32,16 +32,16 @@ JS_INIT_CLASS(MDLMaterialProperty, NSObject);
   JS_ASSIGN_PROTO_PROP(luminance);
   // static members (ctor)
   JS_INIT_CTOR(MDLMaterialProperty, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemantic);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat2);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat3);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticFloat4);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticMatrix4x4);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticURL);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticString);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticTextureSampler);
-  JS_ASSIGN_STATIC_METHOD(initWithNameSemanticColor);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemantic);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticFloat);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticFloat2);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticFloat3);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticFloat4);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticMatrix4x4);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticURL);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticString);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticTextureSampler);
+  JS_ASSIGN_PROTO_METHOD(initWithNameSemanticColor);
 JS_INIT_CLASS_END(MDLMaterialProperty, NSObject);
 
 NAN_METHOD(NMDLMaterialProperty::New) {
@@ -69,105 +69,115 @@ NAN_METHOD(NMDLMaterialProperty::New) {
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemantic) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticFloat) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(float, value);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic float: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic float: value]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticFloat2) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(vector_float2, value);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic float2: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic float2: value]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticFloat3) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(vector_float3, value);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic float3: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic float3: value]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticFloat4) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(vector_float4, value);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic float4: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic float4: value]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticMatrix4x4) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(matrix_float4x4, value);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic matrix4x4: value]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic matrix4x4: value]));
   }
 }
 
 #include "NNSURL.h"
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticURL) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_nullable_pointer(NSURL, URL);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic URL: URL]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic URL: URL]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticString) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_nullable_pointer(NSString, string);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic string: string]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic string: string]));
   }
 }
 
 #include "NMDLTextureSampler.h"
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticTextureSampler) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_nullable_pointer(MDLTextureSampler, textureSampler);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic textureSampler: textureSampler]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic textureSampler: textureSampler]));
   }
 }
 
 NAN_METHOD(NMDLMaterialProperty::initWithNameSemanticColor) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialProperty, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLMaterialSemantic, semantic);
     declare_value(CGColorRef, color);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialProperty alloc] initWithName: name semantic: semantic color: color]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name semantic: semantic color: color]));
   }
 }
 

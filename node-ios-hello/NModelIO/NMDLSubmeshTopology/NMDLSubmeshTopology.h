@@ -20,7 +20,7 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(MDLSubmeshTopology, NSObject);
-  JS_STATIC_METHOD(initWithSubmesh);
+  JS_METHOD(initWithSubmesh);
   JS_PROP(faceTopology);
   JS_PROP(faceCount);
   JS_PROP(vertexCreaseIndices);

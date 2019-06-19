@@ -28,14 +28,14 @@ JS_INIT_CLASS(AVAudioFormat, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(formatDescription);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioFormat, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithStreamDescription);
-  JS_ASSIGN_STATIC_METHOD(initWithStreamDescriptionChannelLayout);
+  JS_ASSIGN_PROTO_METHOD(initWithStreamDescription);
+  JS_ASSIGN_PROTO_METHOD(initWithStreamDescriptionChannelLayout);
   JS_ASSIGN_STATIC_METHOD(initStandardFormatWithSampleRateChannels);
   JS_ASSIGN_STATIC_METHOD(initStandardFormatWithSampleRateChannelLayout);
-  JS_ASSIGN_STATIC_METHOD(initWithCommonFormatSampleRateChannelsInterleaved);
-  JS_ASSIGN_STATIC_METHOD(initWithCommonFormatSampleRateInterleavedChannelLayout);
-  JS_ASSIGN_STATIC_METHOD(initWithSettings);
-  JS_ASSIGN_STATIC_METHOD(initWithCMAudioFormatDescription);
+  JS_ASSIGN_PROTO_METHOD(initWithCommonFormatSampleRateChannelsInterleaved);
+  JS_ASSIGN_PROTO_METHOD(initWithCommonFormatSampleRateInterleavedChannelLayout);
+  JS_ASSIGN_PROTO_METHOD(initWithSettings);
+  JS_ASSIGN_PROTO_METHOD(initWithCMAudioFormatDescription);
 JS_INIT_CLASS_END(AVAudioFormat, NSObject);
 
 NAN_METHOD(NAVAudioFormat::New) {
@@ -65,21 +65,23 @@ NAN_METHOD(NAVAudioFormat::New) {
 }
 
 NAN_METHOD(NAVAudioFormat::initWithStreamDescription) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AudioStreamBasicDescription, asbd);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithStreamDescription: &asbd]));
+    JS_SET_RETURN(js_value_instancetype([self initWithStreamDescription: &asbd]));
   }
 }
 
 #include "NAVAudioChannelLayout.h"
 
 NAN_METHOD(NAVAudioFormat::initWithStreamDescriptionChannelLayout) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AudioStreamBasicDescription, asbd);
     declare_nullable_pointer(AVAudioChannelLayout, layout);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithStreamDescription: &asbd channelLayout: layout]));
+    JS_SET_RETURN(js_value_instancetype([self initWithStreamDescription: &asbd channelLayout: layout]));
   }
 }
 
@@ -104,42 +106,46 @@ NAN_METHOD(NAVAudioFormat::initStandardFormatWithSampleRateChannelLayout) {
 }
 
 NAN_METHOD(NAVAudioFormat::initWithCommonFormatSampleRateChannelsInterleaved) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AVAudioCommonFormat, format);
     declare_value(double, sampleRate);
     declare_value(AVAudioChannelCount, channels);
     declare_value(BOOL, interleaved);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCommonFormat: format sampleRate: sampleRate channels: channels interleaved: interleaved]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCommonFormat: format sampleRate: sampleRate channels: channels interleaved: interleaved]));
   }
 }
 
 NAN_METHOD(NAVAudioFormat::initWithCommonFormatSampleRateInterleavedChannelLayout) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AVAudioCommonFormat, format);
     declare_value(double, sampleRate);
     declare_value(BOOL, interleaved);
     declare_pointer(AVAudioChannelLayout, layout);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCommonFormat: format sampleRate: sampleRate interleaved: interleaved channelLayout: layout]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCommonFormat: format sampleRate: sampleRate interleaved: interleaved channelLayout: layout]));
   }
 }
 
 NAN_METHOD(NAVAudioFormat::initWithSettings) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSDictionary/* <NSString*, id>*/, settings);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithSettings: settings]));
+    JS_SET_RETURN(js_value_instancetype([self initWithSettings: settings]));
   }
 }
 
 NAN_METHOD(NAVAudioFormat::initWithCMAudioFormatDescription) {
+  JS_UNWRAP_OR_ALLOC(AVAudioFormat, self);
   declare_autoreleasepool {
     JS_TODO();
     #if TODO
     declare_args();
     declare_value(CMAudioFormatDescriptionRef, formatDescription);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioFormat alloc] initWithCMAudioFormatDescription: formatDescription]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCMAudioFormatDescription: formatDescription]));
     #endif
   }
 }
@@ -234,4 +240,3 @@ NAN_GETTER(NAVAudioFormat::formatDescriptionGetter) {
     #endif
   }
 }
-

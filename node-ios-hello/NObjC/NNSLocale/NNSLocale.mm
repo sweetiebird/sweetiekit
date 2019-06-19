@@ -25,8 +25,8 @@ JS_INIT_CLASS(NSLocale, NSObject);
   JS_ASSIGN_STATIC_METHOD(lineDirectionForLanguage);
   JS_ASSIGN_PROTO_METHOD(objectForKey);
   JS_ASSIGN_PROTO_METHOD(displayNameForKeyValue);
-  JS_ASSIGN_STATIC_METHOD(initWithLocaleIdentifier);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithLocaleIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(localizedStringForLocaleIdentifier);
   JS_ASSIGN_PROTO_METHOD(localizedStringForLanguageCode);
   JS_ASSIGN_PROTO_METHOD(localizedStringForCountryCode);
@@ -191,20 +191,22 @@ NAN_METHOD(NNSLocale::displayNameForKeyValue) {
 }
 
 NAN_METHOD(NNSLocale::initWithLocaleIdentifier) {
+  JS_UNWRAP_OR_ALLOC(NSLocale, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, string);
-    JS_SET_RETURN(js_value_instancetype([[NSLocale alloc] initWithLocaleIdentifier: string]));
+    JS_SET_RETURN(js_value_instancetype([self initWithLocaleIdentifier: string]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NNSLocale::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(NSLocale, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[NSLocale alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -470,4 +472,3 @@ NAN_GETTER(NNSLocale::preferredLanguagesGetter) {
     JS_SET_RETURN(js_value_NSArray<NSString*>([NSLocale preferredLanguages]));
   }
 }
-

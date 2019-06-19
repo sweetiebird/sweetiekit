@@ -19,13 +19,6 @@
 #define is_value_UIPopoverArrowDirection(x) IS_OPTS(UIPopoverArrowDirection, NSUInteger, x)
 
 JS_WRAP_CLASS(UIPopoverPresentationController, UIPresentationController);
-#if TODO
-// UIPopoverPresentationControllerDelegate
-  JS_METHOD(prepareForPopoverPresentation);
-  JS_METHOD(popoverPresentationControllerShouldDismissPopover);
-  JS_METHOD(popoverPresentationControllerDidDismissPopover);
-  JS_METHOD(popoverPresentationControllerWillRepositionPopoverToRectInView);
-#endif
 // UIPopoverPresentationController
   JS_PROP(delegate);
   JS_PROP(permittedArrowDirections);

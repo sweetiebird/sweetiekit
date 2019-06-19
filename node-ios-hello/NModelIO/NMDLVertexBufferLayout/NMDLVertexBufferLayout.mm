@@ -17,7 +17,7 @@ JS_INIT_CLASS(MDLVertexBufferLayout, NSObject);
   JS_ASSIGN_PROTO_PROP(stride);
   // static members (ctor)
   JS_INIT_CTOR(MDLVertexBufferLayout, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithStride);
+  JS_ASSIGN_PROTO_METHOD(initWithStride);
 JS_INIT_CLASS_END(MDLVertexBufferLayout, NSObject);
 
 NAN_METHOD(NMDLVertexBufferLayout::New) {
@@ -47,10 +47,11 @@ NAN_METHOD(NMDLVertexBufferLayout::New) {
 }
 
 NAN_METHOD(NMDLVertexBufferLayout::initWithStride) {
+  JS_UNWRAP_OR_ALLOC(MDLVertexBufferLayout, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(NSUInteger, stride);
-    JS_SET_RETURN(js_value_instancetype([[MDLVertexBufferLayout alloc] initWithStride: stride]));
+    JS_SET_RETURN(js_value_instancetype([self initWithStride: stride]));
   }
 }
 
@@ -69,4 +70,3 @@ NAN_SETTER(NMDLVertexBufferLayout::strideSetter) {
     [self setStride: input];
   }
 }
-

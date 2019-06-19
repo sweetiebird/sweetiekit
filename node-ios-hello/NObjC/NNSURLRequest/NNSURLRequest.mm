@@ -32,8 +32,8 @@ JS_INIT_CLASS(NSURLRequest, NSObject);
   JS_INIT_CTOR(NSURLRequest, NSObject);
   JS_ASSIGN_STATIC_METHOD(requestWithURL);
   JS_ASSIGN_STATIC_METHOD(requestWithURLCachePolicyTimeoutInterval);
-  JS_ASSIGN_STATIC_METHOD(initWithURL);
-  JS_ASSIGN_STATIC_METHOD(initWithURLCachePolicyTimeoutInterval);
+  JS_ASSIGN_PROTO_METHOD(initWithURL);
+  JS_ASSIGN_PROTO_METHOD(initWithURLCachePolicyTimeoutInterval);
   JS_ASSIGN_STATIC_PROP_READONLY(supportsSecureCoding);
 JS_INIT_CLASS_END(NSURLRequest, NSObject);
 
@@ -80,20 +80,22 @@ NAN_METHOD(NNSURLRequest::requestWithURLCachePolicyTimeoutInterval) {
 }
 
 NAN_METHOD(NNSURLRequest::initWithURL) {
+  JS_UNWRAP_OR_ALLOC(NSURLRequest, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, URL);
-    JS_SET_RETURN(js_value_instancetype([[NSURLRequest alloc] initWithURL: URL]));
+    JS_SET_RETURN(js_value_instancetype([self initWithURL: URL]));
   }
 }
 
 NAN_METHOD(NNSURLRequest::initWithURLCachePolicyTimeoutInterval) {
+  JS_UNWRAP_OR_ALLOC(NSURLRequest, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, URL);
     declare_value(NSURLRequestCachePolicy, cachePolicy);
     declare_value(NSTimeInterval, timeoutInterval);
-    JS_SET_RETURN(js_value_instancetype([[NSURLRequest alloc] initWithURL: URL cachePolicy: cachePolicy timeoutInterval: timeoutInterval]));
+    JS_SET_RETURN(js_value_instancetype([self initWithURL: URL cachePolicy: cachePolicy timeoutInterval: timeoutInterval]));
   }
 }
 

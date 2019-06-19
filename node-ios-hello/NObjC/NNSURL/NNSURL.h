@@ -62,15 +62,15 @@ JS_WRAP_CLASS(NSURL, NSObject);
 #endif
 // NSURL
   JS_STATIC_METHOD(fileURLWithPathComponents);
-  JS_STATIC_METHOD(initWithSchemeHostPath);
+  JS_METHOD(initWithSchemeHostPath);
   JS_STATIC_METHOD(initFileURLWithPathIsDirectoryRelativeToURL);
   JS_STATIC_METHOD(initFileURLWithPathRelativeToURL);
   JS_STATIC_METHOD(initFileURLWithPathIsDirectory);
   JS_STATIC_METHOD(initFileURLWithPath);
   JS_STATIC_METHOD(initFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL);
-  JS_STATIC_METHOD(initWithString);
-  JS_STATIC_METHOD(initWithStringRelativeToURL);
-  JS_STATIC_METHOD(initWithDataRepresentationRelativeToURL);
+  JS_METHOD(initWithString);
+  JS_METHOD(initWithStringRelativeToURL);
+  JS_METHOD(initWithDataRepresentationRelativeToURL);
   JS_STATIC_METHOD(initAbsoluteURLWithDataRepresentationRelativeToURL);
   JS_METHOD(getFileSystemRepresentationMaxLength);
   JS_METHOD(checkResourceIsReachableAndReturnError);
@@ -92,11 +92,11 @@ JS_WRAP_CLASS(NSURL, NSObject);
   JS_METHOD(checkPromisedItemIsReachableAndReturnError);
 #if 0
 // NSURLQueryItem
-  JS_STATIC_METHOD(initWithNameValue);
+  JS_METHOD(initWithNameValue);
 // NSURLComponents
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithURLResolvingAgainstBaseURL);
-  JS_STATIC_METHOD(initWithString);
+  JS_METHOD(initWithURLResolvingAgainstBaseURL);
+  JS_METHOD(initWithString);
   JS_METHOD(URLRelativeToURL);
 // NSString
   JS_METHOD(stringByAddingPercentEncodingWithAllowedCharacters);
@@ -109,7 +109,7 @@ JS_WRAP_CLASS(NSURL, NSObject);
   JS_METHOD(URLByAppendingPathExtension);
 #if 0
 // NSFileSecurity
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
 // NSObject
   JS_METHOD(URLResourceDataDidBecomeAvailable);
   JS_METHOD(URLResourceDidFinishLoading);

@@ -44,7 +44,7 @@ async function make(nav, demoVC) {
   bgView = global.bgView = UIView(bgFrame);
   fgView = global.fgView = UIView(fgFrame);
   blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleRegular);
-  ggView = global.ggView = UIVisualEffectView.initWithEffect(blurEffect);
+  ggView = global.ggView = UIVisualEffectView.alloc().initWithEffect(blurEffect);
   ggView.frame = ggFrame;
   ggView.width *= 1.2;
   ggView.height *= 1.2;

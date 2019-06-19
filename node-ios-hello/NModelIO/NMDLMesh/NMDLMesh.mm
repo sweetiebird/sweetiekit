@@ -48,7 +48,7 @@ JS_INIT_CLASS(MDLMesh, MDLObject);
 
   // static members (ctor)
   JS_INIT_CTOR(MDLMesh, MDLObject);
-  JS_ASSIGN_STATIC_METHOD(initWithBufferAllocator);
+  JS_ASSIGN_PROTO_METHOD(initWithBufferAllocator);
   JS_ASSIGN_STATIC_METHOD(newBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator);
   JS_ASSIGN_STATIC_METHOD(newEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator);
   JS_ASSIGN_STATIC_METHOD(newCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator);
@@ -58,9 +58,9 @@ JS_INIT_CLASS(MDLMesh, MDLObject);
   JS_ASSIGN_STATIC_METHOD(newIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator);
   JS_ASSIGN_STATIC_METHOD(newIcosahedronWithRadiusInwardNormalsAllocator);
   JS_ASSIGN_STATIC_METHOD(newSubdividedMeshSubmeshIndexSubdivisionLevels);
-  JS_ASSIGN_STATIC_METHOD(initWithBufferAllocator);
-  JS_ASSIGN_STATIC_METHOD(initWithVertexBufferVertexCountDescriptorSubmeshes);
-  JS_ASSIGN_STATIC_METHOD(initWithVertexBuffersVertexCountDescriptorSubmeshes);
+  JS_ASSIGN_PROTO_METHOD(initWithBufferAllocator);
+  JS_ASSIGN_PROTO_METHOD(initWithVertexBufferVertexCountDescriptorSubmeshes);
+  JS_ASSIGN_PROTO_METHOD(initWithVertexBuffersVertexCountDescriptorSubmeshes);
   JS_ASSIGN_STATIC_METHOD(initBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator);
   JS_ASSIGN_STATIC_METHOD(initSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator);
   JS_ASSIGN_STATIC_METHOD(initHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator);
@@ -213,10 +213,11 @@ NAN_METHOD(NMDLMesh::newSubdividedMeshSubmeshIndexSubdivisionLevels) {
 }
 
 NAN_METHOD(NMDLMesh::initWithBufferAllocator) {
+  JS_UNWRAP_OR_ALLOC(MDLMesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id/* <MDLMeshBufferAllocator>*/, bufferAllocator);
-    JS_SET_RETURN(js_value_instancetype([[MDLMesh alloc] initWithBufferAllocator: bufferAllocator]));
+    JS_SET_RETURN(js_value_instancetype([self initWithBufferAllocator: bufferAllocator]));
   }
 }
 
@@ -224,13 +225,14 @@ NAN_METHOD(NMDLMesh::initWithBufferAllocator) {
 #include "NMDLSubmesh.h"
 
 NAN_METHOD(NMDLMesh::initWithVertexBufferVertexCountDescriptorSubmeshes) {
+  JS_UNWRAP_OR_ALLOC(MDLMesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id/* <MDLMeshBuffer>*/, vertexBuffer);
     declare_value(NSUInteger, vertexCount);
     declare_pointer(MDLVertexDescriptor, descriptor);
     declare_pointer(NSArray<MDLSubmesh*>, submeshes);
-    JS_SET_RETURN(js_value_instancetype([[MDLMesh alloc] initWithVertexBuffer: vertexBuffer
+    JS_SET_RETURN(js_value_instancetype([self initWithVertexBuffer: vertexBuffer
                          vertexCount:vertexCount
                           descriptor:descriptor
                            submeshes:submeshes]));
@@ -238,13 +240,14 @@ NAN_METHOD(NMDLMesh::initWithVertexBufferVertexCountDescriptorSubmeshes) {
 }
 
 NAN_METHOD(NMDLMesh::initWithVertexBuffersVertexCountDescriptorSubmeshes) {
+  JS_UNWRAP_OR_ALLOC(MDLMesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSArray<id/* <MDLMeshBuffer>*/>, vertexBuffers);
     declare_value(NSUInteger, vertexCount);
     declare_pointer(MDLVertexDescriptor, descriptor);
     declare_pointer(NSArray<MDLSubmesh*>, submeshes);
-    JS_SET_RETURN(js_value_instancetype([[MDLMesh alloc] initWithVertexBuffers: vertexBuffers
+    JS_SET_RETURN(js_value_instancetype([self initWithVertexBuffers: vertexBuffers
                           vertexCount:(NSUInteger)vertexCount
                            descriptor:(MDLVertexDescriptor *)descriptor
                             submeshes:(NSArray<MDLSubmesh*> *)submeshes]));
@@ -735,3 +738,4 @@ NAN_METHOD(NMDLMesh::meshWithSCNGeometryBufferAllocator) {
     JS_SET_RETURN(js_value_instancetype([MDLMesh meshWithSCNGeometry: scnGeometry bufferAllocator: bufferAllocator]));
   }
 }
+

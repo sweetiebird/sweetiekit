@@ -20,7 +20,7 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(MDLVertexAttribute, NSObject);
-  JS_STATIC_METHOD(initWithNameFormatOffsetBufferIndex);
+  JS_METHOD(initWithNameFormatOffsetBufferIndex);
   JS_PROP(name);
   JS_PROP(format);
   JS_PROP(offset);

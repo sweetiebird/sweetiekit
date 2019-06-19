@@ -15,7 +15,7 @@ NNSCalendar::~NNSCalendar() {}
 JS_INIT_CLASS(NSCalendar, NSObject);
   // instance members (proto)
   JS_ASSIGN_STATIC_METHOD(calendarWithIdentifier);
-  JS_ASSIGN_STATIC_METHOD(initWithCalendarIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithCalendarIdentifier);
   JS_ASSIGN_PROTO_METHOD(minimumRangeOfUnit);
   JS_ASSIGN_PROTO_METHOD(maximumRangeOfUnit);
   JS_ASSIGN_PROTO_METHOD(rangeOfUnitInUnitForDate);
@@ -187,10 +187,11 @@ NAN_METHOD(NNSCalendar::calendarWithIdentifier) {
 }
 
 NAN_METHOD(NNSCalendar::initWithCalendarIdentifier) {
+  JS_UNWRAP_OR_ALLOC(NSCalendar, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(NSCalendarIdentifier, ident);
-    JS_SET_RETURN(js_value_id([[NSCalendar alloc] initWithCalendarIdentifier: ident]));
+    JS_SET_RETURN(js_value_id([self initWithCalendarIdentifier: ident]));
   }
 }
 
@@ -835,4 +836,3 @@ NAN_GETTER(NNSCalendar::PMSymbolGetter) {
     JS_SET_RETURN(js_value_NSString([self PMSymbol]));
   }
 }
-

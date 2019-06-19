@@ -16,7 +16,7 @@ JS_INIT_CLASS(UICollectionViewLayout, NSObject);
   JS_ASSIGN_STATIC_METHOD(layoutAttributesClass);
   JS_ASSIGN_STATIC_METHOD(invalidationContextClass);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(invalidateLayout);
   JS_ASSIGN_PROTO_METHOD(invalidateLayoutWithContext);
   JS_ASSIGN_PROTO_METHOD(registerClassForDecorationViewOfKind);
@@ -110,10 +110,11 @@ NAN_METHOD(NUICollectionViewLayout::init) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NUICollectionViewLayout::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UICollectionViewLayout, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionViewLayout alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 

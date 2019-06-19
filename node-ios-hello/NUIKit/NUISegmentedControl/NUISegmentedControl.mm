@@ -14,7 +14,7 @@ NUISegmentedControl::~NUISegmentedControl() {}
 
 JS_INIT_CLASS(UISegmentedControl, UIControl);
   // instance members (proto)
-  JS_ASSIGN_STATIC_METHOD(initWithItems);
+  JS_ASSIGN_PROTO_METHOD(initWithItems);
   JS_ASSIGN_PROTO_METHOD(insertSegmentWithTitleAtIndexAnimated);
   JS_ASSIGN_PROTO_METHOD(insertSegmentWithImageAtIndexAnimated);
   JS_ASSIGN_PROTO_METHOD(removeSegmentAtIndexAnimated);
@@ -75,6 +75,8 @@ NAN_METHOD(NUISegmentedControl::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge UISegmentedControl *)(info[0].As<External>()->Value());
+    } else if (info.Length() > 0 && is_value_CGRect(info[0])) {
+      self = [[UISegmentedControl alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[UISegmentedControl alloc] init];
     }
@@ -91,10 +93,11 @@ NAN_METHOD(NUISegmentedControl::New) {
 }
 
 NAN_METHOD(NUISegmentedControl::initWithItems) {
+  JS_UNWRAP_OR_ALLOC(UISegmentedControl, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_pointer(NSArray, items);
-    JS_SET_RETURN(js_value_instancetype([[UISegmentedControl alloc] initWithItems: items]));
+    JS_SET_RETURN(js_value_instancetype([self initWithItems: items]));
   }
 }
 
@@ -406,4 +409,3 @@ NAN_SETTER(NUISegmentedControl::tintColorSetter) {
     [self setTintColor: input];
   }
 }
-

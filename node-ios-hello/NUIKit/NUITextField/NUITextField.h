@@ -72,7 +72,7 @@
 
 
 JS_WRAP_CLASS(UITextField, UIControl);
-  JS_STATIC_METHOD(initWithFrameCallback);
+  JS_METHOD(initWithFrameCallback);
   JS_PROP(callback);
   
   JS_METHOD(borderRectForBounds);

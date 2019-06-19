@@ -15,8 +15,8 @@ NNSUUID::~NNSUUID() {}
 JS_INIT_CLASS(NSUUID, NSObject);
   JS_ASSIGN_STATIC_METHOD(UUID);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithUUIDString);
-  JS_ASSIGN_STATIC_METHOD(initWithUUIDBytes);
+  JS_ASSIGN_PROTO_METHOD(initWithUUIDString);
+  JS_ASSIGN_PROTO_METHOD(initWithUUIDBytes);
   JS_ASSIGN_PROTO_METHOD(getUUIDBytes);
   JS_ASSIGN_PROTO_PROP_READONLY(UUIDString);
 
@@ -61,14 +61,16 @@ NAN_METHOD(NNSUUID::init) {
 }
 
 NAN_METHOD(NNSUUID::initWithUUIDString) {
+  JS_UNWRAP_OR_ALLOC(NSUUID, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, string);
-    JS_SET_RETURN(js_value_instancetype([[NSUUID alloc] initWithUUIDString: string]));
+    JS_SET_RETURN(js_value_instancetype([self initWithUUIDString: string]));
   }
 }
 
 NAN_METHOD(NNSUUID::initWithUUIDBytes) {
+  JS_UNWRAP_OR_ALLOC(NSUUID, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSData, bytesData);
@@ -80,7 +82,7 @@ NAN_METHOD(NNSUUID::initWithUUIDBytes) {
     }
     uuid_t uuid;
     memcpy(uuid, bytes, sizeof(uuid_t));
-    JS_SET_RETURN(js_value_instancetype([[NSUUID alloc] initWithUUIDBytes: uuid]));
+    JS_SET_RETURN(js_value_instancetype([self initWithUUIDBytes: uuid]));
   }
 }
 

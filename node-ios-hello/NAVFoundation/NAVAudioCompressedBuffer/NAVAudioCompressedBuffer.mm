@@ -23,8 +23,8 @@ JS_INIT_CLASS(AVAudioCompressedBuffer, AVAudioBuffer);
   JS_ASSIGN_PROTO_PROP_READONLY(packetDescriptions);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioCompressedBuffer, AVAudioBuffer);
-  JS_ASSIGN_STATIC_METHOD(initWithFormatPacketCapacityMaximumPacketSize);
-  JS_ASSIGN_STATIC_METHOD(initWithFormatPacketCapacity);
+  JS_ASSIGN_PROTO_METHOD(initWithFormatPacketCapacityMaximumPacketSize);
+  JS_ASSIGN_PROTO_METHOD(initWithFormatPacketCapacity);
 JS_INIT_CLASS_END(AVAudioCompressedBuffer, AVAudioBuffer);
 
 NAN_METHOD(NAVAudioCompressedBuffer::New) {
@@ -57,21 +57,23 @@ NAN_METHOD(NAVAudioCompressedBuffer::New) {
 #include "NAVAudioNode.h"
 
 NAN_METHOD(NAVAudioCompressedBuffer::initWithFormatPacketCapacityMaximumPacketSize) {
+  JS_UNWRAP_OR_ALLOC(AVAudioCompressedBuffer, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AVAudioFormat, format);
     declare_value(AVAudioPacketCount, packetCapacity);
     declare_value(NSInteger, maximumPacketSize);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioCompressedBuffer alloc] initWithFormat: format packetCapacity: packetCapacity maximumPacketSize: maximumPacketSize]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFormat: format packetCapacity: packetCapacity maximumPacketSize: maximumPacketSize]));
   }
 }
 
 NAN_METHOD(NAVAudioCompressedBuffer::initWithFormatPacketCapacity) {
+  JS_UNWRAP_OR_ALLOC(AVAudioCompressedBuffer, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AVAudioFormat, format);
     declare_value(AVAudioPacketCount, packetCapacity);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioCompressedBuffer alloc] initWithFormat: format packetCapacity: packetCapacity]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFormat: format packetCapacity: packetCapacity]));
   }
 }
 
@@ -143,4 +145,5 @@ NAN_GETTER(NAVAudioCompressedBuffer::packetDescriptionsGetter) {
     JS_SET_RETURN(js_value_AudioStreamPacketDescription([self packetDescriptions]));
   }
 }
+
 

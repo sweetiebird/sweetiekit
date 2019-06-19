@@ -58,8 +58,8 @@ JS_INIT_CLASS(WKWebView, UIView);
   // static members (ctor)
   JS_INIT_CTOR(WKWebView, UIView);
   JS_ASSIGN_STATIC_METHOD(handlesURLScheme);
-  JS_ASSIGN_STATIC_METHOD(initWithFrameConfiguration);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithFrameConfiguration);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
 JS_INIT_CLASS_END(WKWebView, UIView);
 
 NAN_METHOD(NWKWebView::New) {
@@ -98,21 +98,23 @@ NAN_METHOD(NWKWebView::handlesURLScheme) {
 #define is_value_WKWebViewConfiguration(x) is_value_wrapper_unknown(x, WKWebViewConfiguration)
 
 NAN_METHOD(NWKWebView::initWithFrameConfiguration) {
+  JS_UNWRAP_OR_ALLOC(WKWebView, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGRect, frame);
     declare_pointer(WKWebViewConfiguration, configuration);
-    JS_SET_RETURN(js_value_instancetype([[WKWebView alloc] initWithFrame: frame configuration: configuration]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame: frame configuration: configuration]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NWKWebView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(WKWebView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, coder);
-    JS_SET_RETURN(js_value_instancetype([[WKWebView alloc] initWithCoder: coder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: coder]));
   }
 }
 

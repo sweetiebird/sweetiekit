@@ -293,6 +293,7 @@ NAN_METHOD(NUIImage::animatedImageWithImagesDuration) {
 #define js_value_instancetype js_value_UIImage
 
 NAN_METHOD(NUIImage::initWithContentsOfFile) {
+  [UIImage new];
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, path);

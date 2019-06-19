@@ -27,8 +27,8 @@ JS_INIT_CLASS(NSTimeZone, NSObject);
   JS_ASSIGN_PROTO_METHOD(nextDaylightSavingTimeTransitionAfterDate);
   JS_ASSIGN_PROTO_METHOD(isEqualToTimeZone);
   JS_ASSIGN_PROTO_METHOD(localizedNameLocale);
-  JS_ASSIGN_STATIC_METHOD(initWithName);
-  JS_ASSIGN_STATIC_METHOD(initWithNameData);
+  JS_ASSIGN_PROTO_METHOD(initWithName);
+  JS_ASSIGN_PROTO_METHOD(initWithNameData);
   JS_ASSIGN_PROTO_PROP_READONLY(name);
   JS_ASSIGN_PROTO_PROP_READONLY(data);
   JS_ASSIGN_STATIC_PROP_READONLY(systemTimeZone);
@@ -193,19 +193,21 @@ NAN_METHOD(NNSTimeZone::localizedNameLocale) {
 }
 
 NAN_METHOD(NNSTimeZone::initWithName) {
+  JS_UNWRAP_OR_ALLOC(NSTimeZone, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, tzName);
-    JS_SET_RETURN(js_value_instancetype([[NSTimeZone alloc] initWithName: tzName]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: tzName]));
   }
 }
 
 NAN_METHOD(NNSTimeZone::initWithNameData) {
+  JS_UNWRAP_OR_ALLOC(NSTimeZone, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, tzName);
     declare_nullable_pointer(NSData, aData);
-    JS_SET_RETURN(js_value_instancetype([[NSTimeZone alloc] initWithName: tzName data: aData]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: tzName data: aData]));
   }
 }
 
@@ -316,4 +318,3 @@ NAN_GETTER(NNSTimeZone::descriptionGetter) {
     JS_SET_RETURN(js_value_NSString([self description]));
   }
 }
-

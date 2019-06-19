@@ -22,7 +22,7 @@ JS_INIT_CLASS(MDLVertexAttribute, NSObject);
   JS_ASSIGN_PROTO_PROP(initializationValue);
   // static members (ctor)
   JS_INIT_CTOR(MDLVertexAttribute, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithNameFormatOffsetBufferIndex);
+  JS_ASSIGN_PROTO_METHOD(initWithNameFormatOffsetBufferIndex);
   // constants
   exports->Set(JS_STR("MDLVertexAttributeAnisotropy"), js_value_NSString(MDLVertexAttributeAnisotropy));
   exports->Set(JS_STR("MDLVertexAttributeBinormal"), js_value_NSString(MDLVertexAttributeBinormal));
@@ -70,13 +70,14 @@ NAN_METHOD(NMDLVertexAttribute::New) {
 #include "NMDLVertexDescriptor.h"
 
 NAN_METHOD(NMDLVertexAttribute::initWithNameFormatOffsetBufferIndex) {
+  JS_UNWRAP_OR_ALLOC(MDLVertexAttribute, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_value(MDLVertexFormat, format);
     declare_value(NSUInteger, offset);
     declare_value(NSUInteger, bufferIndex);
-    JS_SET_RETURN(js_value_instancetype([[MDLVertexAttribute alloc] initWithName: name format: format offset: offset bufferIndex: bufferIndex]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name format: format offset: offset bufferIndex: bufferIndex]));
   }
 }
 
@@ -175,4 +176,3 @@ NAN_SETTER(NMDLVertexAttribute::initializationValueSetter) {
     [self setInitializationValue: input];
   }
 }
-

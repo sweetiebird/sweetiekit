@@ -96,9 +96,9 @@ JS_WRAP_CLASS(CLLocation, NSObject);
   JS_METHOD(CLLocationCoordinate2DMake);
   
 // CLLocation
-  JS_STATIC_METHOD(initWithLatitudeLongitude);
-  JS_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
-  JS_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
+  JS_METHOD(initWithLatitudeLongitude);
+  JS_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
+  JS_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
   JS_METHOD(getDistanceFrom);
   JS_METHOD(distanceFromLocation);
   JS_PROP_READONLY(coordinate);

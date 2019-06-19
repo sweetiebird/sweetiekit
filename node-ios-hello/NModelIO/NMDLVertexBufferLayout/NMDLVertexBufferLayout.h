@@ -20,7 +20,7 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(MDLVertexBufferLayout, NSObject);
-  JS_STATIC_METHOD(initWithStride);
+  JS_METHOD(initWithStride);
   JS_PROP(stride);
 JS_WRAP_CLASS_END(MDLVertexBufferLayout);
 

@@ -65,8 +65,8 @@ JS_WRAP_CLASS(UIViewController, UIResponder);
   JS_METHOD(willTransitionToTraitCollectionWithTransitionCoordinator);
 #endif
 // UIViewController
-  JS_STATIC_METHOD(initWithNibNameBundle);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithNibNameBundle);
+  JS_METHOD(initWithCoder);
   JS_METHOD(loadView);
   JS_METHOD(loadViewIfNeeded);
   JS_METHOD(viewWillUnload);

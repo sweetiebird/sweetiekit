@@ -14,8 +14,8 @@ NUINavigationItem::~NUINavigationItem() {}
 
 JS_INIT_CLASS(UINavigationItem, NSObject);
   // instance members (proto)
-  JS_ASSIGN_STATIC_METHOD(initWithTitle);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithTitle);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(setHidesBackButtonAnimated);
   JS_ASSIGN_PROTO_METHOD(setLeftBarButtonItemsAnimated);
   JS_ASSIGN_PROTO_METHOD(setRightBarButtonItemsAnimated);
@@ -73,20 +73,22 @@ NAN_METHOD(NUINavigationItem::New) {
 }
 
 NAN_METHOD(NUINavigationItem::initWithTitle) {
+  JS_UNWRAP_OR_ALLOC(UINavigationItem, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, title);
-    JS_SET_RETURN(js_value_instancetype([[UINavigationItem alloc] initWithTitle: title]));
+    JS_SET_RETURN(js_value_instancetype([self initWithTitle: title]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUINavigationItem::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UINavigationItem, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, coder);
-    JS_SET_RETURN(js_value_instancetype([[UINavigationItem alloc] initWithCoder: coder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: coder]));
   }
 }
 
@@ -353,4 +355,3 @@ NAN_SETTER(NUINavigationItem::hidesSearchBarWhenScrollingSetter) {
     [self setHidesSearchBarWhenScrolling: input];
   }
 }
-

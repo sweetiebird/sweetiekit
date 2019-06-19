@@ -124,7 +124,7 @@ JS_INIT_CLASS(CALayer, NSObject);
   JS_ASSIGN_STATIC_METHOD(needsDisplayForKey);
   JS_ASSIGN_STATIC_METHOD(defaultActionForKey);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithLayer);
+  JS_ASSIGN_PROTO_METHOD(initWithLayer);
   
   // constants
 
@@ -232,10 +232,11 @@ NAN_METHOD(NCALayer::init) {
 }
 
 NAN_METHOD(NCALayer::initWithLayer) {
+  JS_UNWRAP_OR_ALLOC(CALayer, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id, layer);
-    JS_SET_RETURN(js_value_instancetype([[CALayer alloc] initWithLayer: layer]));
+    JS_SET_RETURN(js_value_instancetype([self initWithLayer: layer]));
   }
 }
 
@@ -1428,4 +1429,3 @@ NAN_SETTER(NCALayer::styleSetter) {
     [self setStyle: input];
   }
 }
-

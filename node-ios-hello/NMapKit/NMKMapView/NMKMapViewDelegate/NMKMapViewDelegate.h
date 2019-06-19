@@ -25,4 +25,8 @@ JS_WRAP_CLASS(MKMapViewDelegate, NSObject);
   sweetiekit::JSFunction _didSelectViewForAnnotation;
 JS_WRAP_CLASS_END(MKMapViewDelegate);
 
+#if __OBJC__
+typedef SMKMapViewDelegate MKMapViewDelegate;
+#endif
+
 #endif /* NMKMapViewDelegate_h */

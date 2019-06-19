@@ -25,4 +25,8 @@ JS_WRAP_CLASS(WKNavigationDelegate, NSObject);
   sweetiekit::JSFunction _didFinishNavigation;
 JS_WRAP_CLASS_END(WKNavigationDelegate);
 
+#if __OBJC__
+typedef SWKNavigationDelegate WKNavigationDelegate;
+#endif
+
 #endif /* NWKNavigationDelegate_h */

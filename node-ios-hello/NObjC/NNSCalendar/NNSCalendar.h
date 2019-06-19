@@ -33,7 +33,7 @@
 JS_WRAP_CLASS(NSCalendar, NSObject);
   JS_STATIC_METHOD(calendarWithIdentifier);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCalendarIdentifier);
+  JS_METHOD(initWithCalendarIdentifier);
   JS_METHOD(minimumRangeOfUnit);
   JS_METHOD(maximumRangeOfUnit);
   JS_METHOD(rangeOfUnitInUnitForDate);

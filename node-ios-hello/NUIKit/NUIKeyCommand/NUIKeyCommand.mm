@@ -16,7 +16,7 @@ JS_INIT_CLASS(UIKeyCommand, NSObject);
   JS_ASSIGN_STATIC_METHOD(keyCommandWithInputModifierFlagsAction);
   JS_ASSIGN_STATIC_METHOD(keyCommandWithInputModifierFlagsActionDiscoverabilityTitle);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_PROP_READONLY(input);
   JS_ASSIGN_PROTO_PROP_READONLY(modifierFlags);
   JS_ASSIGN_PROTO_PROP(discoverabilityTitle);
@@ -123,10 +123,11 @@ NAN_METHOD(NUIKeyCommand::init) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIKeyCommand::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIKeyCommand, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIKeyCommand alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 

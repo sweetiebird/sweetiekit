@@ -63,8 +63,8 @@ JS_WRAP_CLASS(UICollectionView, UIScrollView);
   JS_METHOD(collectionViewShouldSpringLoadItemAtIndexPathWithContext);
 #endif
 // UICollectionView
-  JS_STATIC_METHOD(initWithFrameCollectionViewLayout);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithFrameCollectionViewLayout);
+  JS_METHOD(initWithCoder);
   JS_METHOD(registerClassForCellWithReuseIdentifier);
   JS_METHOD(registerNibForCellWithReuseIdentifier);
   JS_METHOD(registerClassForSupplementaryViewOfKindWithReuseIdentifier);
@@ -124,14 +124,14 @@ JS_WRAP_CLASS(UICollectionView, UIScrollView);
   JS_METHOD(collectionViewDropSessionDidEnd);
   JS_METHOD(collectionViewDropPreviewParametersForItemAtIndexPath);
 // UICollectionViewDropProposal
-  JS_STATIC_METHOD(initWithDropOperationIntent);
+  JS_METHOD(initWithDropOperationIntent);
 // UICollectionViewDropCoordinator
   JS_METHOD(dropItemToPlaceholder);
   JS_METHOD(dropItemToItemAtIndexPath);
   JS_METHOD(dropItemIntoItemAtIndexPathRect);
   JS_METHOD(dropItemToTarget);
 // UICollectionViewPlaceholder
-  JS_STATIC_METHOD(initWithInsertionIndexPathReuseIdentifier);
+  JS_METHOD(initWithInsertionIndexPathReuseIdentifier);
   JS_STATIC_METHOD(init);
 // UICollectionViewDropPlaceholderContext
   JS_METHOD(commitInsertionWithDataSourceUpdates);

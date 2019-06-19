@@ -18,4 +18,8 @@ JS_WRAP_CLASS(UITarget, NSObject);
   sweetiekit::JSFunction _callback;
 JS_WRAP_CLASS_END(UITarget);
 
+#if __OBJC__
+typedef SUITarget UITarget;
+#endif
+
 #endif /* NUITarget_h */

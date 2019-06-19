@@ -15,8 +15,8 @@
 #define is_value_UIVisualEffectView(x) is_value_wrapper(x, UIVisualEffectView)
 
 JS_WRAP_CLASS(UIVisualEffectView, UIView);
-  JS_STATIC_METHOD(initWithEffect);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithEffect);
+  JS_METHOD(initWithCoder);
   JS_PROP_READONLY(contentView);
   JS_PROP(effect);
 JS_WRAP_CLASS_END(UIVisualEffectView);

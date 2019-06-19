@@ -23,9 +23,9 @@
 #define is_value_UIStackViewAlignment(x) IS_ENUM(UIStackViewAlignment, NSInteger, x)
 
 JS_WRAP_CLASS(UIStackView, UIView);
-  JS_STATIC_METHOD(initWithFrame);
-  JS_STATIC_METHOD(initWithCoder);
-  JS_STATIC_METHOD(initWithArrangedSubviews);
+  JS_METHOD(initWithFrame);
+  JS_METHOD(initWithCoder);
+  JS_METHOD(initWithArrangedSubviews);
   JS_METHOD(addArrangedSubview);
   JS_METHOD(removeArrangedSubview);
   JS_METHOD(insertArrangedSubviewAtIndex);

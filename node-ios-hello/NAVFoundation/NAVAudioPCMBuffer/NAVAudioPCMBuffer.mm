@@ -22,7 +22,7 @@ JS_INIT_CLASS(AVAudioPCMBuffer, AVAudioBuffer);
   JS_ASSIGN_PROTO_PROP_READONLY(int32ChannelData);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioPCMBuffer, AVAudioBuffer);
-  JS_ASSIGN_STATIC_METHOD(initWithPCMFormatFrameCapacity);
+  JS_ASSIGN_PROTO_METHOD(initWithPCMFormatFrameCapacity);
 JS_INIT_CLASS_END(AVAudioPCMBuffer, AVAudioBuffer);
 
 NAN_METHOD(NAVAudioPCMBuffer::New) {
@@ -55,11 +55,12 @@ NAN_METHOD(NAVAudioPCMBuffer::New) {
 #include "NAVAudioNode.h"
 
 NAN_METHOD(NAVAudioPCMBuffer::initWithPCMFormatFrameCapacity) {
+  JS_UNWRAP_OR_ALLOC(AVAudioPCMBuffer, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AVAudioFormat, format);
     declare_value(AVAudioFrameCount, frameCapacity);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioPCMBuffer alloc] initWithPCMFormat: format frameCapacity: frameCapacity]));
+    JS_SET_RETURN(js_value_instancetype([self initWithPCMFormat: format frameCapacity: frameCapacity]));
   }
 }
 

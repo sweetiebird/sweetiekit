@@ -118,8 +118,8 @@ JS_WRAP_CLASS(UIView, UIResponder);
   JS_STATIC_METHOD(performSystemAnimationOnViewsOptionsAnimationsCompletion);
   JS_STATIC_METHOD(animateKeyframesWithDurationDelayOptionsAnimationsCompletion);
   JS_STATIC_METHOD(addKeyframeWithRelativeStartTimeRelativeDurationAnimations);
-  JS_STATIC_METHOD(initWithFrame);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithFrame);
+  JS_METHOD(initWithCoder);
 
 
   JS_PROP(origin);

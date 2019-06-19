@@ -22,7 +22,7 @@ JS_WRAP_CLASS(UIKeyCommand, NSObject);
   JS_STATIC_METHOD(keyCommandWithInputModifierFlagsAction);
   JS_STATIC_METHOD(keyCommandWithInputModifierFlagsActionDiscoverabilityTitle);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_PROP_READONLY(input);
   JS_PROP_READONLY(modifierFlags);
   JS_PROP(discoverabilityTitle);

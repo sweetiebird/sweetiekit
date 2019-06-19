@@ -141,7 +141,7 @@ async function make(nav, demoVC) {
     rootNode.addChildNode(planeNode);
 
     if (typeof hornbugGeometry === 'undefined') {
-      hornbugAsset = MDLAsset.initWithURL(NSURL(Path.join(MediaPath, 'hornbug.obj')));
+      hornbugAsset = MDLAsset.alloc().initWithURL(NSURL(Path.join(MediaPath, 'hornbug.obj')));
       hornbugObject = hornbugAsset.objectAtIndex(0);
       hornbugGeometry = SCNGeometry.geometryWithMDLMesh(hornbugObject);
     }
@@ -152,13 +152,13 @@ async function make(nav, demoVC) {
 
     if (typeof fighterMaterial === 'undefined') {
       fighterScatteringFunction = MDLScatteringFunction();
-      fighterMaterial = MDLMaterial.initWithNameScatteringFunction('fighterMaterial', fighterScatteringFunction);
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Diffuse_25.jpg', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'Fighter_Diffuse_25.jpg'))));
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Specular_25.jpg', MDLMaterialSemanticMetallic, NSURL(Path.join(MediaPath, 'Fighter_Specular_25.jpg'))));
-      fighterMaterial.setProperty(MDLMaterialProperty.initWithNameSemanticURL('Fighter_Illumination_25.jpg', MDLMaterialSemanticEmission, NSURL(Path.join(MediaPath, 'Fighter_Illumination_25.jpg'))));
+      fighterMaterial = MDLMaterial.alloc().initWithNameScatteringFunction('fighterMaterial', fighterScatteringFunction);
+      fighterMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('Fighter_Diffuse_25.jpg', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'Fighter_Diffuse_25.jpg'))));
+      fighterMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('Fighter_Specular_25.jpg', MDLMaterialSemanticMetallic, NSURL(Path.join(MediaPath, 'Fighter_Specular_25.jpg'))));
+      fighterMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('Fighter_Illumination_25.jpg', MDLMaterialSemanticEmission, NSURL(Path.join(MediaPath, 'Fighter_Illumination_25.jpg'))));
     }
     if (typeof fighterGeometry === 'undefined') {
-      fighterAsset = MDLAsset.initWithURL(NSURL(Path.join(MediaPath, 'Fighter.obj')));
+      fighterAsset = MDLAsset.alloc().initWithURL(NSURL(Path.join(MediaPath, 'Fighter.obj')));
       fighterObject = fighterAsset.objectAtIndex(0);
       for (let submesh of fighterObject.submeshes) {
         submesh.material = fighterMaterial;

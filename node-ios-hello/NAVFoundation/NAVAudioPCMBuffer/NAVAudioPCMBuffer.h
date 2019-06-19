@@ -15,7 +15,7 @@
 #define is_value_AVAudioPCMBuffer(x) is_value_wrapper(x, AVAudioPCMBuffer)
 
 JS_WRAP_CLASS(AVAudioPCMBuffer, AVAudioBuffer);
-  JS_STATIC_METHOD(initWithPCMFormatFrameCapacity);
+  JS_METHOD(initWithPCMFormatFrameCapacity);
   JS_PROP_READONLY(frameCapacity);
   JS_PROP(frameLength);
   JS_PROP_READONLY(stride);

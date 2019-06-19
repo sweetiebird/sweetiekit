@@ -58,8 +58,8 @@
 JS_WRAP_CLASS(AUAudioUnit, NSObject);
 // AUAudioUnit
   JS_STATIC_METHOD(instantiateWithComponentDescriptionOptionsCompletionHandler);
-  JS_STATIC_METHOD(initWithComponentDescriptionOptionsError);
-  JS_STATIC_METHOD(initWithComponentDescriptionError);
+  JS_METHOD(initWithComponentDescriptionOptionsError);
+  JS_METHOD(initWithComponentDescriptionError);
   JS_METHOD(allocateRenderResourcesAndReturnError);
   JS_METHOD(deallocateRenderResources);
   JS_METHOD(reset);
@@ -75,8 +75,8 @@ JS_WRAP_CLASS(AUAudioUnit, NSObject);
 #if TODO
 // AUAudioUnitBusArray
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithAudioUnitBusTypeBusses);
-  JS_STATIC_METHOD(initWithAudioUnitBusType);
+  JS_METHOD(initWithAudioUnitBusTypeBusses);
+  JS_METHOD(initWithAudioUnitBusType);
   JS_METHOD(objectAtIndexedSubscript);
   JS_METHOD(setBusCountError);
   JS_METHOD(addObserverToAllBussesForKeyPathOptionsContext);

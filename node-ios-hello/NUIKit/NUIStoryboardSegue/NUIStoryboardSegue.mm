@@ -14,7 +14,7 @@ NUIStoryboardSegue::~NUIStoryboardSegue() {}
 
 JS_INIT_CLASS(UIStoryboardSegue, NSObject);
   JS_ASSIGN_STATIC_METHOD(segueWithIdentifierSourceDestinationPerformHandler);
-  JS_ASSIGN_STATIC_METHOD(initWithIdentifierSourceDestination);
+  JS_ASSIGN_PROTO_METHOD(initWithIdentifierSourceDestination);
   JS_ASSIGN_PROTO_METHOD(perform);
   JS_ASSIGN_PROTO_PROP_READONLY(identifier);
   JS_ASSIGN_PROTO_PROP_READONLY(sourceViewController);
@@ -67,12 +67,13 @@ NAN_METHOD(NUIStoryboardSegue::segueWithIdentifierSourceDestinationPerformHandle
 }
 
 NAN_METHOD(NUIStoryboardSegue::initWithIdentifierSourceDestination) {
+  JS_UNWRAP_OR_ALLOC(UIStoryboardSegue, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_pointer(NSString, identifier);
     declare_pointer(UIViewController, source);
     declare_pointer(UIViewController, destination);
-    JS_SET_RETURN(js_value_instancetype([[UIStoryboardSegue alloc] initWithIdentifier: identifier source: source destination: destination]));
+    JS_SET_RETURN(js_value_instancetype([self initWithIdentifier: identifier source: source destination: destination]));
   }
 }
 
@@ -103,3 +104,4 @@ NAN_GETTER(NUIStoryboardSegue::destinationViewControllerGetter) {
     JS_SET_RETURN(js_value_UIViewController([self destinationViewController]));
   }
 }
+

@@ -111,7 +111,7 @@ async function make(nav, demoVC) {
       const camXform = frame.camera.transform;
       const xform = new THREE.Matrix4().fromArray(camXform);
       xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-5));
-      const anchor = ARAnchor.initWithTransform(xform);
+      const anchor = ARAnchor.alloc().initWithTransform(xform);
       arView.session.add(anchor);
       navAnchor = anchor;
       setupLocation();

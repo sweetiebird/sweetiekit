@@ -53,8 +53,8 @@ JS_INIT_CLASS(UICollectionView, UIScrollView);
   JS_ASSIGN_PROTO_METHOD(collectionViewShouldSpringLoadItemAtIndexPathWithContext);
 #endif
 // UICollectionView
-  JS_ASSIGN_STATIC_METHOD(initWithFrameCollectionViewLayout);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithFrameCollectionViewLayout);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(registerClassForCellWithReuseIdentifier);
   JS_ASSIGN_PROTO_METHOD(registerNibForCellWithReuseIdentifier);
   JS_ASSIGN_PROTO_METHOD(registerClassForSupplementaryViewOfKindWithReuseIdentifier);
@@ -114,14 +114,14 @@ JS_INIT_CLASS(UICollectionView, UIScrollView);
   JS_ASSIGN_PROTO_METHOD(collectionViewDropSessionDidEnd);
   JS_ASSIGN_PROTO_METHOD(collectionViewDropPreviewParametersForItemAtIndexPath);
 // UICollectionViewDropProposal
-  JS_ASSIGN_STATIC_METHOD(initWithDropOperationIntent);
+  JS_ASSIGN_PROTO_METHOD(initWithDropOperationIntent);
 // UICollectionViewDropCoordinator
   JS_ASSIGN_PROTO_METHOD(dropItemToPlaceholder);
   JS_ASSIGN_PROTO_METHOD(dropItemToItemAtIndexPath);
   JS_ASSIGN_PROTO_METHOD(dropItemIntoItemAtIndexPathRect);
   JS_ASSIGN_PROTO_METHOD(dropItemToTarget);
 // UICollectionViewPlaceholder
-  JS_ASSIGN_STATIC_METHOD(initWithInsertionIndexPathReuseIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithInsertionIndexPathReuseIdentifier);
   JS_ASSIGN_STATIC_METHOD(init);
 // UICollectionViewDropPlaceholderContext
   JS_ASSIGN_PROTO_METHOD(commitInsertionWithDataSourceUpdates);
@@ -584,21 +584,23 @@ NAN_METHOD(NUICollectionViewDelegate::collectionViewShouldSpringLoadItemAtIndexP
 #include "NUICollectionViewLayout.h"
 
 NAN_METHOD(NUICollectionView::initWithFrameCollectionViewLayout) {
+  JS_UNWRAP_OR_ALLOC(UICollectionView, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGRect, frame);
     declare_pointer(UICollectionViewLayout, layout);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionView alloc] initWithFrame: frame collectionViewLayout: layout]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame: frame collectionViewLayout: layout]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUICollectionView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UICollectionView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionView alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -1168,11 +1170,12 @@ NAN_METHOD(NUICollectionViewDropDelegate::collectionViewDropPreviewParametersFor
 }
 
 NAN_METHOD(NUICollectionViewDropProposal::initWithDropOperationIntent) {
+  JS_UNWRAP_OR_ALLOC(UICollectionViewDropProposal, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(UIDropOperation, operation);
     declare_value(UICollectionViewDropIntent, intent);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionViewDropProposal alloc] initWithDropOperation: operation intent: intent]));
+    JS_SET_RETURN(js_value_instancetype([self initWithDropOperation: operation intent: intent]));
   }
 }
 
@@ -1218,11 +1221,12 @@ NAN_METHOD(NUICollectionViewDropCoordinator::dropItemToTarget) {
 }
 
 NAN_METHOD(NUICollectionViewPlaceholder::initWithInsertionIndexPathReuseIdentifier) {
+  JS_UNWRAP_OR_ALLOC(UICollectionViewPlaceholder, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSIndexPath, insertionIndexPath);
     declare_pointer(NSString, reuseIdentifier);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionViewPlaceholder alloc] initWithInsertionIndexPath: insertionIndexPath reuseIdentifier: reuseIdentifier]));
+    JS_SET_RETURN(js_value_instancetype([self initWithInsertionIndexPath: insertionIndexPath reuseIdentifier: reuseIdentifier]));
   }
 }
 
@@ -1625,4 +1629,3 @@ NAN_GETTER(NUICollectionViewDropPlaceholderContext::dragItemGetter) {
   }
 }
 #endif
-

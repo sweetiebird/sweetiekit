@@ -15,8 +15,8 @@
 #define is_value_UICollectionViewTransitionLayout(x) is_value_wrapper(x, UICollectionViewTransitionLayout)
 
 JS_WRAP_CLASS(UICollectionViewTransitionLayout, UICollectionViewLayout);
-  JS_STATIC_METHOD(initWithCurrentLayoutNextLayout);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCurrentLayoutNextLayout);
+  JS_METHOD(initWithCoder);
   JS_METHOD(updateValueForAnimatedKey);
   JS_METHOD(valueForAnimatedKey);
   JS_PROP(transitionProgress);

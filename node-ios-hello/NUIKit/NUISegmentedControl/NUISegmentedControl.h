@@ -23,7 +23,7 @@
 #define is_value_UISegmentedControlSegment(x) IS_ENUM(UISegmentedControlSegment, NSInteger, x)
 
 JS_WRAP_CLASS(UISegmentedControl, UIControl);
-  JS_STATIC_METHOD(initWithItems);
+  JS_METHOD(initWithItems);
   JS_METHOD(insertSegmentWithTitleAtIndexAnimated);
   JS_METHOD(insertSegmentWithImageAtIndexAnimated);
   JS_METHOD(removeSegmentAtIndexAnimated);

@@ -31,7 +31,7 @@
 Nid::Nid() : _self(nullptr) {}
 Nid::~Nid() {}
 
-JS_INIT_CLASS_BASE(id);
+JS_INIT_CLASS_BASE(id, nil);
   // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, self);
   JS_ASSIGN_PROP_READONLY(proto, selfPointer);
@@ -624,7 +624,7 @@ NAN_METHOD(NNSObject::New) {
 NClass::NClass() {}
 NClass::~NClass() {}
 
-JS_INIT_CLASS(Class, id);
+JS_INIT_CLASS_ALLOC(Class, id, nil);
   JS_INIT_CTOR(Class, id);
 JS_INIT_CLASS_END(Class, id);
 

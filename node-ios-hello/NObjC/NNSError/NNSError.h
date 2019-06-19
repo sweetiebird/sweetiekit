@@ -29,7 +29,7 @@ JS_WRAP_CLASS(NSError, NSObject);
   JS_STATIC_METHOD(errorWithDomainCodeUserInfo);
   JS_STATIC_METHOD(setUserInfoValueProviderForDomainProvider);
   JS_STATIC_METHOD(userInfoValueProviderForDomain);
-  JS_STATIC_METHOD(initWithDomainCodeUserInfo);
+  JS_METHOD(initWithDomainCodeUserInfo);
 #if TODO
 // NSObject
   JS_METHOD(attemptRecoveryFromErrorOptionIndexDelegateDidRecoverSelectorContextInfo);

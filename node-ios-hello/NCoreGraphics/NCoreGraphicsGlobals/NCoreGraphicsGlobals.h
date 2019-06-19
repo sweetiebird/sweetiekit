@@ -20,4 +20,8 @@ JS_WRAP_CLASS(CoreGraphicsGlobals, NSObject);
   JS_METHOD(UIGraphicsEndImageContext);
 JS_WRAP_CLASS_END(CoreGraphicsGlobals);
 
+#if __OBJC__
+typedef SCoreGraphicsGlobals CoreGraphicsGlobals;
+#endif
+
 #endif /* NCoreGraphicsGlobals_h */

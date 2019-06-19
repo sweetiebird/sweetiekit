@@ -17,13 +17,13 @@ JS_INIT_CLASS(MDLMaterial, NSObject);
 #if TODO
 // MDLMaterialPropertyConnection
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithOutput);
+  JS_ASSIGN_PROTO_METHOD(initWithOutput);
 // MDLMaterialPropertyNode
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithInputs);
+  JS_ASSIGN_PROTO_METHOD(initWithInputs);
 // MDLMaterialPropertyGraph
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithNodes);
+  JS_ASSIGN_PROTO_METHOD(initWithNodes);
   JS_ASSIGN_PROTO_METHOD(evaluate);
 #endif
 // MDLMaterial
@@ -58,7 +58,7 @@ JS_INIT_CLASS(MDLMaterial, NSObject);
 
   // static members (ctor)
   JS_INIT_CTOR(MDLMaterial, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithNameScatteringFunction);
+  JS_ASSIGN_PROTO_METHOD(initWithNameScatteringFunction);
   
   JS_ASSIGN_STATIC_METHOD(materialWithSCNMaterial);
   
@@ -150,10 +150,11 @@ NAN_METHOD(NMDLMaterialPropertyConnection::init) {
 }
 
 NAN_METHOD(NMDLMaterialPropertyConnection::initWithOutput) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialPropertyConnection, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(MDLMaterialProperty, output);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialPropertyConnection alloc] initWithOutput: output]));
+    JS_SET_RETURN(js_value_instancetype([self initWithOutput: output]));
   }
 }
 
@@ -164,10 +165,11 @@ NAN_METHOD(NMDLMaterialPropertyNode::init) {
 }
 
 NAN_METHOD(NMDLMaterialPropertyNode::initWithInputs) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialPropertyNode, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSArray<MDLMaterialProperty*>, inputs);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialPropertyNode alloc] initWithInputs: inputs]));
+    JS_SET_RETURN(js_value_instancetype([self initWithInputs: inputs]));
   }
 }
 
@@ -178,10 +180,11 @@ NAN_METHOD(NMDLMaterialPropertyGraph::init) {
 }
 
 NAN_METHOD(NMDLMaterialPropertyGraph::initWithNodes) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterialPropertyGraph, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSArray<MDLMaterialPropertyNode*>, nodes);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterialPropertyGraph alloc] initWithNodes: nodes]));
+    JS_SET_RETURN(js_value_instancetype([self initWithNodes: nodes]));
   }
 }
 
@@ -196,11 +199,12 @@ NAN_METHOD(NMDLMaterialPropertyGraph::evaluate) {
 #include "NMDLScatteringFunction.h"
 
 NAN_METHOD(NMDLMaterial::initWithNameScatteringFunction) {
+  JS_UNWRAP_OR_ALLOC(MDLMaterial, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
     declare_pointer(MDLScatteringFunction, scatteringFunction);
-    JS_SET_RETURN(js_value_instancetype([[MDLMaterial alloc] initWithName: name scatteringFunction: scatteringFunction]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name scatteringFunction: scatteringFunction]));
   }
 }
 

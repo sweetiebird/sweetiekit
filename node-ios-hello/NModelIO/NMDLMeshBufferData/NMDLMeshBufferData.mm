@@ -22,8 +22,8 @@ JS_INIT_CLASS(MDLMeshBufferData, NSObject);
   JS_ASSIGN_PROTO_METHOD(map);
   // static members (ctor)
   JS_INIT_CTOR(MDLMeshBufferData, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithTypeLength);
-  JS_ASSIGN_STATIC_METHOD(initWithTypeData);
+  JS_ASSIGN_PROTO_METHOD(initWithTypeLength);
+  JS_ASSIGN_PROTO_METHOD(initWithTypeData);
 JS_INIT_CLASS_END(MDLMeshBufferData, NSObject);
 
 NAN_METHOD(NMDLMeshBufferData::New) {
@@ -53,20 +53,22 @@ NAN_METHOD(NMDLMeshBufferData::New) {
 }
 
 NAN_METHOD(NMDLMeshBufferData::initWithTypeLength) {
+  JS_UNWRAP_OR_ALLOC(MDLMeshBufferData, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(MDLMeshBufferType, type);
     declare_value(NSUInteger, length);
-    JS_SET_RETURN(js_value_instancetype([[MDLMeshBufferData alloc] initWithType: type length: length]));
+    JS_SET_RETURN(js_value_instancetype([self initWithType: type length: length]));
   }
 }
 
 NAN_METHOD(NMDLMeshBufferData::initWithTypeData) {
+  JS_UNWRAP_OR_ALLOC(MDLMeshBufferData, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(MDLMeshBufferType, type);
     declare_nullable_pointer(NSData, data);
-    JS_SET_RETURN(js_value_instancetype([[MDLMeshBufferData alloc] initWithType: type data: data]));
+    JS_SET_RETURN(js_value_instancetype([self initWithType: type data: data]));
   }
 }
 

@@ -53,8 +53,8 @@ JS_INIT_CLASS(MDLAsset, NSObject);
   JS_ASSIGN_STATIC_METHOD(canImportFileExtension);
   JS_ASSIGN_STATIC_METHOD(canExportFileExtension);
   JS_ASSIGN_STATIC_METHOD(placeLightProbesWithDensityHeuristicUsingIrradianceDataSource);
-  JS_ASSIGN_STATIC_METHOD(initWithURL);
-  JS_ASSIGN_STATIC_METHOD(initWithBufferAllocator);
+  JS_ASSIGN_PROTO_METHOD(initWithURL);
+  JS_ASSIGN_PROTO_METHOD(initWithBufferAllocator);
   JS_ASSIGN_STATIC_METHOD(assetWithSCNScene);
   JS_ASSIGN_STATIC_METHOD(assetWithSCNSceneBufferAllocator);
 JS_INIT_CLASS_END(MDLAsset, NSObject);
@@ -114,18 +114,20 @@ NAN_METHOD(NMDLAsset::placeLightProbesWithDensityHeuristicUsingIrradianceDataSou
 #include "NNSURL.h"
 
 NAN_METHOD(NMDLAsset::initWithURL) {
+  JS_UNWRAP_OR_ALLOC(MDLAsset, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, URL);
-    JS_SET_RETURN(js_value_instancetype([[MDLAsset alloc] initWithURL: URL]));
+    JS_SET_RETURN(js_value_instancetype([self initWithURL: URL]));
   }
 }
 
 NAN_METHOD(NMDLAsset::initWithBufferAllocator) {
+  JS_UNWRAP_OR_ALLOC(MDLAsset, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id/* <MDLMeshBufferAllocator>*/, bufferAllocator);
-    JS_SET_RETURN(js_value_instancetype([[MDLAsset alloc] initWithBufferAllocator: bufferAllocator]));
+    JS_SET_RETURN(js_value_instancetype([self initWithBufferAllocator: bufferAllocator]));
   }
 }
 
@@ -436,3 +438,4 @@ NAN_METHOD(NMDLAsset::assetWithSCNSceneBufferAllocator) {
     JS_SET_RETURN(js_value_instancetype([MDLAsset assetWithSCNScene: scnScene bufferAllocator: bufferAllocator]));
   }
 }
+

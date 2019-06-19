@@ -18,7 +18,7 @@ JS_INIT_CLASS(MDLVertexDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(layouts);
   // static members (ctor)
   JS_INIT_CTOR(MDLVertexDescriptor, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithVertexDescriptor);
+  JS_ASSIGN_PROTO_METHOD(initWithVertexDescriptor);
   JS_ASSIGN_PROTO_METHOD(attributeNamed);
   JS_ASSIGN_PROTO_METHOD(addOrReplaceAttribute);
   JS_ASSIGN_PROTO_METHOD(removeAttributeNamed);
@@ -135,10 +135,11 @@ NAN_METHOD(NMDLVertexDescriptor::New) {
 }
 
 NAN_METHOD(NMDLVertexDescriptor::initWithVertexDescriptor) {
+  JS_UNWRAP_OR_ALLOC(MDLVertexDescriptor, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(MDLVertexDescriptor, vertexDescriptor);
-    JS_SET_RETURN(js_value_instancetype([[MDLVertexDescriptor alloc] initWithVertexDescriptor: vertexDescriptor]));
+    JS_SET_RETURN(js_value_instancetype([self initWithVertexDescriptor: vertexDescriptor]));
   }
 }
 
@@ -223,4 +224,5 @@ NAN_SETTER(NMDLVertexDescriptor::layoutsSetter) {
     [self setLayouts: input];
   }
 }
+
 

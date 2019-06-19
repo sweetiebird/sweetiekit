@@ -15,8 +15,8 @@
 #define is_value_MDLMeshBufferData(x) is_value_wrapper(x, MDLMeshBufferData)
 
 JS_WRAP_CLASS(MDLMeshBufferData, NSObject);
-  JS_STATIC_METHOD(initWithTypeLength);
-  JS_STATIC_METHOD(initWithTypeData);
+  JS_METHOD(initWithTypeLength);
+  JS_METHOD(initWithTypeData);
   JS_PROP_READONLY(data);
 // MDLMeshBuffer
   JS_METHOD(fillDataOffset);

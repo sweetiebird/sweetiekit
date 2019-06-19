@@ -332,7 +332,7 @@ class ARApp {
               const translation = new THREE.Matrix4().makeTranslation(0,0,-3);
               const view = new THREE.Matrix4().fromArray(camXform);
               view.multiply(translation);
-              const anchor = ARAnchor.initWithTransform(view);
+              const anchor = ARAnchor.alloc().initWithTransform(view);
               this.arView.session.add(anchor);
               break;
             }

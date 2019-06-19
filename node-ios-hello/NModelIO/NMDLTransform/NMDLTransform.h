@@ -29,10 +29,10 @@ JS_WRAP_CLASS(MDLTransform, NSObject);
 #endif
 // MDLTransform
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithIdentity);
-  JS_STATIC_METHOD(initWithTransformComponent);
-  JS_STATIC_METHOD(initWithMatrix);
-  JS_STATIC_METHOD(initWithMatrixResetsTransform);
+  JS_METHOD(initWithIdentity);
+  JS_METHOD(initWithTransformComponent);
+  JS_METHOD(initWithMatrix);
+  JS_METHOD(initWithMatrixResetsTransform);
   JS_METHOD(setIdentity);
   JS_METHOD(translationAtTime);
   JS_METHOD(rotationAtTime);

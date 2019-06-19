@@ -192,8 +192,8 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_STATIC_METHOD(performSystemAnimationOnViewsOptionsAnimationsCompletion);
   JS_ASSIGN_STATIC_METHOD(animateKeyframesWithDurationDelayOptionsAnimationsCompletion);
   JS_ASSIGN_STATIC_METHOD(addKeyframeWithRelativeStartTimeRelativeDurationAnimations);
-  JS_ASSIGN_STATIC_METHOD(initWithFrame);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithFrame);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
 
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), areAnimationsEnabled);
   JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), inheritedAnimationDuration);
@@ -793,20 +793,22 @@ NAN_METHOD(NUIView::addKeyframeWithRelativeStartTimeRelativeDurationAnimations) 
 }
 
 NAN_METHOD(NUIView::initWithFrame) {
+  JS_UNWRAP_OR_ALLOC(UIView, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGRect, frame);
-    JS_SET_RETURN(js_value_instancetype([[UIView alloc] initWithFrame: frame]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame: frame]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIView alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 

@@ -21,16 +21,16 @@
 
 JS_WRAP_CLASS(MDLMaterialProperty, NSObject);
 // MDLMaterialProperty
-  JS_STATIC_METHOD(initWithNameSemantic);
-  JS_STATIC_METHOD(initWithNameSemanticFloat);
-  JS_STATIC_METHOD(initWithNameSemanticFloat2);
-  JS_STATIC_METHOD(initWithNameSemanticFloat3);
-  JS_STATIC_METHOD(initWithNameSemanticFloat4);
-  JS_STATIC_METHOD(initWithNameSemanticMatrix4x4);
-  JS_STATIC_METHOD(initWithNameSemanticURL);
-  JS_STATIC_METHOD(initWithNameSemanticString);
-  JS_STATIC_METHOD(initWithNameSemanticTextureSampler);
-  JS_STATIC_METHOD(initWithNameSemanticColor);
+  JS_METHOD(initWithNameSemantic);
+  JS_METHOD(initWithNameSemanticFloat);
+  JS_METHOD(initWithNameSemanticFloat2);
+  JS_METHOD(initWithNameSemanticFloat3);
+  JS_METHOD(initWithNameSemanticFloat4);
+  JS_METHOD(initWithNameSemanticMatrix4x4);
+  JS_METHOD(initWithNameSemanticURL);
+  JS_METHOD(initWithNameSemanticString);
+  JS_METHOD(initWithNameSemanticTextureSampler);
+  JS_METHOD(initWithNameSemanticColor);
   JS_METHOD(setProperties);
   JS_PROP(semantic);
   JS_PROP(type);

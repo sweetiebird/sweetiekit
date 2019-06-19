@@ -15,8 +15,8 @@
 #define is_value_AVAudioCompressedBuffer(x) is_value_wrapper(x, AVAudioCompressedBuffer)
 
 JS_WRAP_CLASS(AVAudioCompressedBuffer, AVAudioBuffer);
-  JS_STATIC_METHOD(initWithFormatPacketCapacityMaximumPacketSize);
-  JS_STATIC_METHOD(initWithFormatPacketCapacity);
+  JS_METHOD(initWithFormatPacketCapacityMaximumPacketSize);
+  JS_METHOD(initWithFormatPacketCapacity);
   JS_PROP_READONLY(packetCapacity);
   JS_PROP(packetCount);
   JS_PROP_READONLY(maximumPacketSize);

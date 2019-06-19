@@ -13,9 +13,9 @@ NCLBeaconRegion::NCLBeaconRegion() {}
 NCLBeaconRegion::~NCLBeaconRegion() {}
 
 JS_INIT_CLASS(CLBeaconRegion, CLRegion);
-  JS_ASSIGN_STATIC_METHOD(initWithProximityUUIDIdentifier);
-  JS_ASSIGN_STATIC_METHOD(initWithProximityUUIDMajorIdentifier);
-  JS_ASSIGN_STATIC_METHOD(initWithProximityUUIDMajorMinorIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithProximityUUIDIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithProximityUUIDMajorIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithProximityUUIDMajorMinorIdentifier);
   JS_ASSIGN_PROTO_METHOD(peripheralDataWithMeasuredPower);
   JS_ASSIGN_PROTO_PROP_READONLY(proximityUUID);
   JS_ASSIGN_PROTO_PROP_READONLY(major);
@@ -53,32 +53,35 @@ NAN_METHOD(NCLBeaconRegion::New) {
 #include "NNSUUID.h"
 
 NAN_METHOD(NCLBeaconRegion::initWithProximityUUIDIdentifier) {
+  JS_UNWRAP_OR_ALLOC(CLBeaconRegion, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSUUID, proximityUUID);
     declare_pointer(NSString, identifier);
-    JS_SET_RETURN(js_value_instancetype([[CLBeaconRegion alloc] initWithProximityUUID: proximityUUID identifier: identifier]));
+    JS_SET_RETURN(js_value_instancetype([self initWithProximityUUID: proximityUUID identifier: identifier]));
   }
 }
 
 NAN_METHOD(NCLBeaconRegion::initWithProximityUUIDMajorIdentifier) {
+  JS_UNWRAP_OR_ALLOC(CLBeaconRegion, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSUUID, proximityUUID);
     declare_value(CLBeaconMajorValue, major);
     declare_pointer(NSString, identifier);
-    JS_SET_RETURN(js_value_instancetype([[CLBeaconRegion alloc] initWithProximityUUID: proximityUUID major: major identifier: identifier]));
+    JS_SET_RETURN(js_value_instancetype([self initWithProximityUUID: proximityUUID major: major identifier: identifier]));
   }
 }
 
 NAN_METHOD(NCLBeaconRegion::initWithProximityUUIDMajorMinorIdentifier) {
+  JS_UNWRAP_OR_ALLOC(CLBeaconRegion, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSUUID, proximityUUID);
     declare_value(CLBeaconMajorValue, major);
     declare_value(CLBeaconMinorValue, minor);
     declare_pointer(NSString, identifier);
-    JS_SET_RETURN(js_value_instancetype([[CLBeaconRegion alloc] initWithProximityUUID: proximityUUID major: major minor: minor identifier: identifier]));
+    JS_SET_RETURN(js_value_instancetype([self initWithProximityUUID: proximityUUID major: major minor: minor identifier: identifier]));
   }
 }
 

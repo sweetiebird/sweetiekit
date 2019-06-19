@@ -182,9 +182,16 @@ using namespace node;
 #define JS_UNWRAP(type, name) \
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
   auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
-  type* name##_ = n##name->As<type>(); \
-  __weak type* name = name##_; name = name;
+  N##type* n##name = info.This().IsEmpty() ? nullptr : ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  if (!n##name) { \
+    js_panic_noreturn("Expected `this` context to be an instance, but `this` was null"); \
+    return; \
+  } \
+  type* name##_ = n##name ? n##name->As<type>() : nil; \
+  __weak type* name = name##_; name = name
+
+#define JS_UNWRAP_OR_ALLOC(type, name) \
+  JS_UNWRAP(type, name)
 
 #define JS_UNWRAP_SWIFT(type, name) \
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
@@ -272,7 +279,8 @@ public: \
   static Nan::Persistent<FunctionTemplate> type; \
   virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; } \
   static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate, Local<Object> exports); \
-  static NAN_METHOD(New);
+  static NAN_METHOD(New); \
+  static NAN_METHOD(alloc);
   
   
 #define JS_WRAP_CLASS_END(name) \
@@ -297,11 +305,19 @@ public: \
   }
 
 #define JS_INIT_CLASS(name, base) \
-  JS_INIT_CLASS_BASE(name, ctorSpec->Inherit(Nan::New(N##base::type)))
+  JS_INIT_CLASS_BASE(name, [name alloc], ctorSpec->Inherit(Nan::New(N##base::type)))
 
-#define JS_INIT_CLASS_BASE(name, ...) \
+#define JS_INIT_CLASS_ALLOC(name, base, do_alloc) \
+  JS_INIT_CLASS_BASE(name, do_alloc, ctorSpec->Inherit(Nan::New(N##base::type)))
+
+#define JS_INIT_CLASS_BASE(name, do_alloc, ...) \
 \
 Nan::Persistent<FunctionTemplate> N##name::type; \
+\
+NAN_METHOD(N##name::alloc) \
+{ \
+  JS_SET_RETURN(js_value_##name(do_alloc)); \
+} \
 \
 std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate, Local<Object> exports) \
 { \
@@ -326,7 +342,8 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
     js_panic_noreturn("Constructor prototype isn't an object"); \
     return result; \
   } \
-  Local<Object> proto(JS_OBJ(proto_v))
+  Local<Object> proto(JS_OBJ(proto_v)); \
+  JS_ASSIGN_STATIC_METHOD(alloc)
 
 #define JS_INIT_CTOR(name, base) \
   { }; 
@@ -1408,7 +1425,7 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
 #endif
 
 #define declare_args() \
-  int JS_ARGC = 0
+  int JS_ARGC = 0; JS_ARGC = JS_ARGC
 
 #define declare_getter() \
   std::vector< Local<Value> > info; \

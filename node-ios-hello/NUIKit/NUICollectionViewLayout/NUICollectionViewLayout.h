@@ -18,7 +18,7 @@ JS_WRAP_CLASS(UICollectionViewLayout, NSObject);
   JS_STATIC_METHOD(layoutAttributesClass);
   JS_STATIC_METHOD(invalidationContextClass);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_METHOD(invalidateLayout);
   JS_METHOD(invalidateLayoutWithContext);
   JS_METHOD(registerClassForDecorationViewOfKind);

@@ -72,7 +72,7 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     demoVC.view.frame.width - (horOffset * 2),
     fieldHeight);
 
-  const field = UITextField.initWithFrameCallback(frame, callback);
+  const field = UITextField.alloc().initWithFrameCallback(frame, callback);
   field.textColor = {
     ...colors.white,
     alpha: 0.8,
@@ -159,7 +159,7 @@ function getCapturedImage(arView) {
     const ciImg = arView.session.currentFrame.capturedImage;
     const xformedImg = ciImg.imageByApplyingTransform(xFormMatrix);
     console.log(xformedImg);
-    const uiImg = UIImage.initWithCIImageScaleOrientation(xformedImg, 1, orientation);
+    const uiImg = UIImage.alloc().initWithCIImageScaleOrientation(xformedImg, 1, orientation);
     console.log(ciImg, xformedImg, uiImg);
     const ssView = UIImageView(uiImg);
     ssView.frame = { x: 0, y: 0, width: arView.frame.width, height: arView.frame.height };
@@ -364,7 +364,7 @@ async function make(nav, demoVC) {
       delete char.anchor;
     }
     xform = _xform(xform);
-    char.anchor = ARAnchor.initWithTransform(xform);
+    char.anchor = ARAnchor.alloc().initWithTransform(xform);
     arView.session.add(char.anchor);
     return char;
   };

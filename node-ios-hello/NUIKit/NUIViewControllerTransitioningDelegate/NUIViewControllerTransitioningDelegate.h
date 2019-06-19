@@ -19,4 +19,8 @@ JS_WRAP_CLASS(UIViewControllerTransitioningDelegate, NSObject);
   sweetiekit::JSFunction _presentationControllerFor;
 JS_WRAP_CLASS_END(UIViewControllerTransitioningDelegate);
 
+#if __OBJC__
+typedef SUIViewControllerTransitioningDelegate UIViewControllerTransitioningDelegate;
+#endif
+
 #endif /* NUIViewControllerTransitioningDelegate_h */

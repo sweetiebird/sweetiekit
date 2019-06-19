@@ -16,7 +16,7 @@
 
 JS_WRAP_CLASS(UIStoryboardSegue, NSObject);
   JS_STATIC_METHOD(segueWithIdentifierSourceDestinationPerformHandler);
-  JS_STATIC_METHOD(initWithIdentifierSourceDestination);
+  JS_METHOD(initWithIdentifierSourceDestination);
   JS_METHOD(perform);
   JS_PROP_READONLY(identifier);
   JS_PROP_READONLY(sourceViewController);

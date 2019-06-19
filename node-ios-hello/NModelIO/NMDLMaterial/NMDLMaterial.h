@@ -32,17 +32,17 @@ JS_WRAP_CLASS(MDLMaterial, NSObject);
 #if TODO
 // MDLMaterialPropertyConnection
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithOutput);
+  JS_METHOD(initWithOutput);
 // MDLMaterialPropertyNode
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithInputs);
+  JS_METHOD(initWithInputs);
 // MDLMaterialPropertyGraph
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithNodes);
+  JS_METHOD(initWithNodes);
   JS_METHOD(evaluate);
 #endif
 // MDLMaterial
-  JS_STATIC_METHOD(initWithNameScatteringFunction);
+  JS_METHOD(initWithNameScatteringFunction);
   JS_METHOD(setProperty);
   JS_METHOD(removeProperty);
   JS_METHOD(propertyNamed);

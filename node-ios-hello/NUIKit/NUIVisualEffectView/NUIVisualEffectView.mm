@@ -14,8 +14,8 @@ NUIVisualEffectView::~NUIVisualEffectView() {}
 
 JS_INIT_CLASS(UIVisualEffectView, UIView);
   // instance members (proto)
-  JS_ASSIGN_STATIC_METHOD(initWithEffect);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithEffect);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_PROP_READONLY(contentView);
   JS_ASSIGN_PROTO_PROP(effect);
   // static members (ctor)
@@ -48,20 +48,22 @@ NAN_METHOD(NUIVisualEffectView::New) {
 #include "NUIVisualEffect.h"
 
 NAN_METHOD(NUIVisualEffectView::initWithEffect) {
+  JS_UNWRAP_OR_ALLOC(UIVisualEffectView, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_pointer(UIVisualEffect, effect);
-    JS_SET_RETURN(js_value_instancetype([[UIVisualEffectView alloc] initWithEffect: effect]));
+    JS_SET_RETURN(js_value_instancetype([self initWithEffect: effect]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIVisualEffectView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIVisualEffectView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIVisualEffectView alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 

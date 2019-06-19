@@ -15,10 +15,8 @@ JS_INIT_CLASS(GifView, UIImageView);
   // instance members (proto)
   JS_ASSIGN_METHOD(proto, setGifImage);
   JS_ASSIGN_METHOD(proto, setGifFromUrl);
-
   // static members (ctor)
   JS_INIT_CTOR(GifView, UIImageView);
-  
 JS_INIT_CLASS_END(GifView, UIImageView);
 
 NAN_METHOD(NGifView::New) {

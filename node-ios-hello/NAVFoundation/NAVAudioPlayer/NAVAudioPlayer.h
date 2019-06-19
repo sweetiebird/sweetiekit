@@ -16,10 +16,10 @@
 
 JS_WRAP_CLASS(AVAudioPlayer, NSObject);
 // AVAudioPlayer
-  JS_STATIC_METHOD(initWithContentsOfURLError);
-  JS_STATIC_METHOD(initWithDataError);
-  JS_STATIC_METHOD(initWithContentsOfURLFileTypeHintError);
-  JS_STATIC_METHOD(initWithDataFileTypeHintError);
+  JS_METHOD(initWithContentsOfURLError);
+  JS_METHOD(initWithDataError);
+  JS_METHOD(initWithContentsOfURLFileTypeHintError);
+  JS_METHOD(initWithDataFileTypeHintError);
   JS_METHOD(prepareToPlay);
   JS_METHOD(play);
   JS_METHOD(playAtTime);

@@ -39,7 +39,7 @@ JS_WRAP_PROTOCOL_END(UISearchResultsUpdating, NSObject);
 
 // UISearchController
 JS_WRAP_CLASS(UISearchController, UIViewController);
-  JS_STATIC_METHOD(initWithSearchResultsController);
+  JS_METHOD(initWithSearchResultsController);
   JS_PROP(searchResultsUpdater);
   JS_PROP(isActive);
   JS_PROP(delegate);

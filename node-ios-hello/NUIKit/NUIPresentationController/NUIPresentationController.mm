@@ -22,7 +22,7 @@ JS_INIT_CLASS(UIPresentationController, NSObject);
   JS_ASSIGN_PROTO_METHOD(presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator);
 #endif
 // UIPresentationController
-  JS_ASSIGN_STATIC_METHOD(initWithPresentedViewControllerPresentingViewController);
+  JS_ASSIGN_PROTO_METHOD(initWithPresentedViewControllerPresentingViewController);
   JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyle);
   JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyleForTraitCollection);
   JS_ASSIGN_PROTO_METHOD(containerViewWillLayoutSubviews);
@@ -116,11 +116,12 @@ NAN_METHOD(NUIAdaptivePresentationControllerDelegate::presentationControllerWill
 #endif
 
 NAN_METHOD(NUIPresentationController::initWithPresentedViewControllerPresentingViewController) {
+  JS_UNWRAP_OR_ALLOC(UIPresentationController, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UIViewController, presentedViewController);
     declare_nullable_pointer(UIViewController, presentingViewController);
-    JS_SET_RETURN(js_value_instancetype([[UIPresentationController alloc] initWithPresentedViewController: presentedViewController presentingViewController: presentingViewController]));
+    JS_SET_RETURN(js_value_instancetype([self initWithPresentedViewController: presentedViewController presentingViewController: presentingViewController]));
   }
 }
 
@@ -312,4 +313,3 @@ NAN_SETTER(NUIPresentationController::overrideTraitCollectionSetter) {
     [self setOverrideTraitCollection: input];
   }
 }
-

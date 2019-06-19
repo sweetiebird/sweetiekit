@@ -15,7 +15,7 @@
 #define is_value_CLPlacemark(x) is_value_wrapper(x, CLPlacemark)
 
 JS_WRAP_CLASS(CLPlacemark, NSObject);
-  JS_STATIC_METHOD(initWithPlacemark);
+  JS_METHOD(initWithPlacemark);
   JS_PROP_READONLY(location);
   JS_PROP_READONLY(region);
   JS_PROP_READONLY(timeZone);

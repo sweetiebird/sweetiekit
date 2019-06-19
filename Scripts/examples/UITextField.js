@@ -6,7 +6,7 @@ const {
 
 async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
-  const field = UITextField.initWithFrameCallback(CGRectMake(12, 80, w - 24, 50), () => {
+  const field = UITextField.alloc().initWithFrameCallback(CGRectMake(12, 80, w - 24, 50), () => {
     console.log(field.text);
   });
   return field;

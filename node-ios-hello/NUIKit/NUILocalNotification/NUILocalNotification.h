@@ -16,7 +16,7 @@
 
 JS_WRAP_CLASS(UILocalNotification, NSObject);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_PROP(fireDate);
   JS_PROP(timeZone);
   JS_PROP(repeatInterval);

@@ -20,7 +20,7 @@
 #define is_value_MDLVertexFormat(x) IS_ENUM(MDLVertexFormat, NSUInteger, x)
 
 JS_WRAP_CLASS(MDLVertexDescriptor, NSObject);
-  JS_STATIC_METHOD(initWithVertexDescriptor);
+  JS_METHOD(initWithVertexDescriptor);
   JS_METHOD(attributeNamed);
   JS_METHOD(addOrReplaceAttribute);
   JS_METHOD(removeAttributeNamed);

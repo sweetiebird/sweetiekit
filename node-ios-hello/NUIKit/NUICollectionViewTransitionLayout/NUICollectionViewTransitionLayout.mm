@@ -13,8 +13,8 @@ NUICollectionViewTransitionLayout::NUICollectionViewTransitionLayout() {}
 NUICollectionViewTransitionLayout::~NUICollectionViewTransitionLayout() {}
 
 JS_INIT_CLASS(UICollectionViewTransitionLayout, UICollectionViewLayout);
-  JS_ASSIGN_STATIC_METHOD(initWithCurrentLayoutNextLayout);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCurrentLayoutNextLayout);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(updateValueForAnimatedKey);
   JS_ASSIGN_PROTO_METHOD(valueForAnimatedKey);
   JS_ASSIGN_PROTO_PROP(transitionProgress);
@@ -50,21 +50,23 @@ NAN_METHOD(NUICollectionViewTransitionLayout::New) {
 #include "NUICollectionViewLayout.h"
 
 NAN_METHOD(NUICollectionViewTransitionLayout::initWithCurrentLayoutNextLayout) {
+  JS_UNWRAP_OR_ALLOC(UICollectionViewTransitionLayout, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UICollectionViewLayout, currentLayout);
     declare_pointer(UICollectionViewLayout, newLayout);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionViewTransitionLayout alloc] initWithCurrentLayout: currentLayout nextLayout: newLayout]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCurrentLayout: currentLayout nextLayout: newLayout]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUICollectionViewTransitionLayout::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UICollectionViewTransitionLayout, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UICollectionViewTransitionLayout alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -116,4 +118,3 @@ NAN_GETTER(NUICollectionViewTransitionLayout::nextLayoutGetter) {
     JS_SET_RETURN(js_value_UICollectionViewLayout([self nextLayout]));
   }
 }
-

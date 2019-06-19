@@ -26,7 +26,7 @@ JS_INIT_CLASS(MDLSubmeshTopology, NSObject);
   JS_ASSIGN_PROTO_PROP(holeCount);
   // static members (ctor)
   JS_INIT_CTOR(MDLSubmeshTopology, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithSubmesh);
+  JS_ASSIGN_PROTO_METHOD(initWithSubmesh);
 JS_INIT_CLASS_END(MDLSubmeshTopology, NSObject);
 
 NAN_METHOD(NMDLSubmeshTopology::New) {
@@ -58,10 +58,11 @@ NAN_METHOD(NMDLSubmeshTopology::New) {
 #include "NMDLSubmesh.h"
 
 NAN_METHOD(NMDLSubmeshTopology::initWithSubmesh) {
+  JS_UNWRAP_OR_ALLOC(MDLSubmeshTopology, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(MDLSubmesh, submesh);
-    JS_SET_RETURN(js_value_instancetype([[MDLSubmeshTopology alloc] initWithSubmesh: submesh]));
+    JS_SET_RETURN(js_value_instancetype([self initWithSubmesh: submesh]));
   }
 }
 

@@ -26,7 +26,7 @@ JS_INIT_CLASS(UITraitCollection, NSObject);
   JS_ASSIGN_STATIC_METHOD(traitCollectionWithPreferredContentSizeCategory);
   JS_ASSIGN_STATIC_METHOD(traitCollectionWithDisplayGamut);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(containsTraitsInCollection);
   JS_ASSIGN_PROTO_PROP_READONLY(userInterfaceIdiom);
   JS_ASSIGN_PROTO_PROP_READONLY(userInterfaceStyle);
@@ -192,10 +192,11 @@ NAN_METHOD(NUITraitCollection::init) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NUITraitCollection::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UITraitCollection, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UITraitCollection alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -288,4 +289,3 @@ NAN_GETTER(NUITraitEnvironment::traitCollectionGetter) {
   }
 }
 #endif
-

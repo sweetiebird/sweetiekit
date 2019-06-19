@@ -39,8 +39,8 @@ JS_INIT_CLASS(NSBundle, NSObject);
   JS_ASSIGN_PROTO_METHOD(variantFittingPresentationWidth);
 // NSBundleResourceRequest
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithTags);
-  JS_ASSIGN_STATIC_METHOD(initWithTagsBundle);
+  JS_ASSIGN_PROTO_METHOD(initWithTags);
+  JS_ASSIGN_PROTO_METHOD(initWithTagsBundle);
   JS_ASSIGN_PROTO_METHOD(beginAccessingResourcesWithCompletionHandler);
   JS_ASSIGN_PROTO_METHOD(conditionallyBeginAccessingResourcesWithCompletionHandler);
   JS_ASSIGN_PROTO_METHOD(endAccessingResources);
@@ -103,8 +103,8 @@ JS_INIT_CLASS(NSBundle, NSObject);
   JS_ASSIGN_STATIC_METHOD_AS(pathsForResourcesOfTypeInDirectoryStatic, "pathsForResourceOfTypeInDirectory");
   JS_ASSIGN_STATIC_METHOD(preferredLocalizationsFromArray);
   JS_ASSIGN_STATIC_METHOD(preferredLocalizationsFromArrayForPreferences);
-  JS_ASSIGN_STATIC_METHOD(initWithPath);
-  JS_ASSIGN_STATIC_METHOD(initWithURL);
+  JS_ASSIGN_PROTO_METHOD(initWithPath);
+  JS_ASSIGN_PROTO_METHOD(initWithURL);
 JS_INIT_CLASS_END(NSBundle, NSObject);
 
 #include "NNSURL.h"
@@ -270,18 +270,20 @@ NAN_METHOD(NNSBundle::preferredLocalizationsFromArrayForPreferences) {
 }
 
 NAN_METHOD(NNSBundle::initWithPath) {
+  JS_UNWRAP_OR_ALLOC(NSBundle, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, path);
-    JS_SET_RETURN(js_value_instancetype([[NSBundle alloc] initWithPath: path]));
+    JS_SET_RETURN(js_value_instancetype([self initWithPath: path]));
   }
 }
 
 NAN_METHOD(NNSBundle::initWithURL) {
+  JS_UNWRAP_OR_ALLOC(NSBundle, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, url);
-    JS_SET_RETURN(js_value_instancetype([[NSBundle alloc] initWithURL: url]));
+    JS_SET_RETURN(js_value_instancetype([self initWithURL: url]));
   }
 }
 
@@ -491,19 +493,21 @@ NAN_METHOD(NNSBundleResourceRequest::init) {
 }
 
 NAN_METHOD(NNSBundleResourceRequest::initWithTags) {
+  JS_UNWRAP_OR_ALLOC(NSBundleResourceRequest, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSSet<NSString*>, tags);
-    JS_SET_RETURN(js_value_instancetype([[NSBundleResourceRequest alloc] initWithTags: tags]));
+    JS_SET_RETURN(js_value_instancetype([self initWithTags: tags]));
   }
 }
 
 NAN_METHOD(NNSBundleResourceRequest::initWithTagsBundle) {
+  JS_UNWRAP_OR_ALLOC(NSBundleResourceRequest, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSSet<NSString*>, tags);
     declare_pointer(NSBundle, bundle);
-    JS_SET_RETURN(js_value_instancetype([[NSBundleResourceRequest alloc] initWithTags: tags bundle: bundle]));
+    JS_SET_RETURN(js_value_instancetype([self initWithTags: tags bundle: bundle]));
   }
 }
 

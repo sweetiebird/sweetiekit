@@ -28,9 +28,9 @@ JS_INIT_CLASS(UIStackView, UIView);
   JS_ASSIGN_PROTO_PROP(isLayoutMarginsRelativeArrangement);
   // static members (ctor)
   JS_INIT_CTOR(UIStackView, UIView);
-  JS_ASSIGN_STATIC_METHOD(initWithFrame);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
-  JS_ASSIGN_STATIC_METHOD(initWithArrangedSubviews);
+  JS_ASSIGN_PROTO_METHOD(initWithFrame);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithArrangedSubviews);
   // constants (exports)
 
 /* Distribution—the layout along the stacking axis.
@@ -158,26 +158,29 @@ NAN_METHOD(NUIStackView::New) {
 }
 
 NAN_METHOD(NUIStackView::initWithFrame) {
+  JS_UNWRAP_OR_ALLOC(UIStackView, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGRect, frame);
-    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithFrame: frame]));
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame: frame]));
   }
 }
 
 NAN_METHOD(NUIStackView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIStackView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, coder);
-    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithCoder: coder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: coder]));
   }
 }
 
 NAN_METHOD(NUIStackView::initWithArrangedSubviews) {
+  JS_UNWRAP_OR_ALLOC(UIStackView, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSArray<UIView*>, views);
-    JS_SET_RETURN(js_value_instancetype([[UIStackView alloc] initWithArrangedSubviews: views]));
+    JS_SET_RETURN(js_value_instancetype([self initWithArrangedSubviews: views]));
   }
 }
 
@@ -330,4 +333,3 @@ NAN_SETTER(NUIStackView::isLayoutMarginsRelativeArrangementSetter) {
     [self setLayoutMarginsRelativeArrangement: input];
   }
 }
-

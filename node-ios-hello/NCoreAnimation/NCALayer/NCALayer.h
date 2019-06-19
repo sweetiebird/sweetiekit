@@ -44,7 +44,7 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_STATIC_METHOD(needsDisplayForKey);
   JS_STATIC_METHOD(defaultActionForKey);
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithLayer);
+  JS_METHOD(initWithLayer);
   JS_METHOD(presentationLayer);
   JS_METHOD(modelLayer);
   JS_METHOD(shouldArchiveValueForKey);

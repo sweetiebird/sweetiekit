@@ -19,13 +19,13 @@ JS_INIT_CLASS(UIUserNotificationSettings, NSObject);
 #if TODO
 // UIUserNotificationCategory
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(actionsForContext);
 // UIMutableUserNotificationCategory
   JS_ASSIGN_PROTO_METHOD(setActionsForContext);
 // UIUserNotificationAction
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
 #endif
 // UIUserNotificationSettings
   JS_ASSIGN_PROTO_PROP_READONLY(types);
@@ -108,10 +108,11 @@ NAN_METHOD(NUIUserNotificationCategory::init) {
 }
 
 NAN_METHOD(NUIUserNotificationCategory::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIUserNotificationCategory, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIUserNotificationCategory alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -141,10 +142,11 @@ NAN_METHOD(NUIUserNotificationAction::init) {
 }
 
 NAN_METHOD(NUIUserNotificationAction::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIUserNotificationAction, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIUserNotificationAction alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 #endif

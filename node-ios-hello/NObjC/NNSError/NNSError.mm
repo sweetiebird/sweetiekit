@@ -57,7 +57,7 @@ JS_INIT_CLASS(NSError, NSObject);
   JS_ASSIGN_STATIC_METHOD(errorWithDomainCodeUserInfo);
   JS_ASSIGN_STATIC_METHOD(setUserInfoValueProviderForDomainProvider);
   JS_ASSIGN_STATIC_METHOD(userInfoValueProviderForDomain);
-  JS_ASSIGN_STATIC_METHOD(initWithDomainCodeUserInfo);
+  JS_ASSIGN_PROTO_METHOD(initWithDomainCodeUserInfo);
 JS_INIT_CLASS_END(NSError, NSObject);
 
 NAN_METHOD(NNSError::New) {
@@ -121,12 +121,13 @@ NAN_METHOD(NNSError::userInfoValueProviderForDomain) {
 }
 
 NAN_METHOD(NNSError::initWithDomainCodeUserInfo) {
+  JS_UNWRAP_OR_ALLOC(NSError, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(NSErrorDomain, domain);
     declare_value(NSInteger, code);
     declare_nullable_pointer(NSDictionary/* <NSErrorUserInfoKey, id>*/, dict);
-    JS_SET_RETURN(js_value_instancetype([[NSError alloc] initWithDomain: domain code: code userInfo: dict]));
+    JS_SET_RETURN(js_value_instancetype([self initWithDomain: domain code: code userInfo: dict]));
   }
 }
 
@@ -217,4 +218,3 @@ NAN_GETTER(NNSError::helpAnchorGetter) {
     JS_SET_RETURN(js_value_NSString([self helpAnchor]));
   }
 }
-

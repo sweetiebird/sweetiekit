@@ -21,10 +21,10 @@
 
 JS_WRAP_CLASS(MDLSubmesh, NSObject);
 #if TODO
-  JS_STATIC_METHOD(initWithName);
-  JS_STATIC_METHOD(initWithIndexBuffer);
-  JS_STATIC_METHOD(initWithName);
-  JS_STATIC_METHOD(initWithMDLSubmesh);
+  JS_METHOD(initWithName);
+  JS_METHOD(initWithIndexBuffer);
+  JS_METHOD(initWithName);
+  JS_METHOD(initWithMDLSubmesh);
 #endif
   JS_METHOD(indexBufferAsIndexType);
   JS_PROP_READONLY(indexBuffer);

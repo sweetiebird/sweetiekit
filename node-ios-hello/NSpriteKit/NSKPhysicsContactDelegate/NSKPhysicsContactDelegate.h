@@ -22,4 +22,8 @@ JS_WRAP_CLASS(SKPhysicsContactDelegate, NSObject);
   sweetiekit::JSFunction _didEndContact;
 JS_WRAP_CLASS_END(SKPhysicsContactDelegate);
 
+#if __OBJC__
+typedef SSKPhysicsContactDelegate SKPhysicsContactDelegate;
+#endif
+
 #endif /* NSKPhysicsContactDelegate_h */

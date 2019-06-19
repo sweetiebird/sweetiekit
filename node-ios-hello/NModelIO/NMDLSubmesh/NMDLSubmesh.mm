@@ -28,10 +28,10 @@ JS_INIT_CLASS(MDLSubmesh, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(MDLSubmesh, NSObject);
 #if TODO
-  JS_ASSIGN_STATIC_METHOD(initWithName);
-  JS_ASSIGN_STATIC_METHOD(initWithIndexBuffer);
-  JS_ASSIGN_STATIC_METHOD(initWithName);
-  JS_ASSIGN_STATIC_METHOD(initWithMDLSubmesh);
+  JS_ASSIGN_PROTO_METHOD(initWithName);
+  JS_ASSIGN_PROTO_METHOD(initWithIndexBuffer);
+  JS_ASSIGN_PROTO_METHOD(initWithName);
+  JS_ASSIGN_PROTO_METHOD(initWithMDLSubmesh);
 #endif
   JS_ASSIGN_STATIC_METHOD(submeshWithSCNGeometryElement);
   JS_ASSIGN_STATIC_METHOD(submeshWithSCNGeometryElementBufferAllocator);
@@ -85,34 +85,38 @@ NAN_METHOD(NMDLSubmesh::submeshWithSCNGeometryElementBufferAllocator) {
 
 #if TODO
 NAN_METHOD(NMDLSubmesh::initWithName) {
+  JS_UNWRAP_OR_ALLOC(MDLSubmesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
-    JS_SET_RETURN(js_value_instancetype([[MDLSubmesh alloc] initWithName: name]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name]));
   }
 }
 
 NAN_METHOD(NMDLSubmesh::initWithIndexBuffer) {
+  JS_UNWRAP_OR_ALLOC(MDLSubmesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id<MDLMeshBuffer>, indexBuffer);
-    JS_SET_RETURN(js_value_instancetype([[MDLSubmesh alloc] initWithIndexBuffer: indexBuffer]));
+    JS_SET_RETURN(js_value_instancetype([self initWithIndexBuffer: indexBuffer]));
   }
 }
 
 NAN_METHOD(NMDLSubmesh::initWithName) {
+  JS_UNWRAP_OR_ALLOC(MDLSubmesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, name);
-    JS_SET_RETURN(js_value_instancetype([[MDLSubmesh alloc] initWithName: name]));
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name]));
   }
 }
 
 NAN_METHOD(NMDLSubmesh::initWithMDLSubmesh) {
+  JS_UNWRAP_OR_ALLOC(MDLSubmesh, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(nonnull-MDLSubmesh, submesh);
-    JS_SET_RETURN(js_value_instancetype([[MDLSubmesh alloc] initWithMDLSubmesh: submesh]));
+    JS_SET_RETURN(js_value_instancetype([self initWithMDLSubmesh: submesh]));
   }
 }
 #endif

@@ -24,13 +24,13 @@ JS_WRAP_CLASS(UIUserNotificationSettings, NSObject);
 #if TODO
 // UIUserNotificationCategory
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_METHOD(actionsForContext);
 // UIMutableUserNotificationCategory
   JS_METHOD(setActionsForContext);
 // UIUserNotificationAction
   JS_STATIC_METHOD(init);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
 #endif
 // UIUserNotificationSettings
   JS_PROP_READONLY(types);

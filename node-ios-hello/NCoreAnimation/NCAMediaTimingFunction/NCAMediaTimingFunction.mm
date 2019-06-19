@@ -15,7 +15,7 @@ NCAMediaTimingFunction::~NCAMediaTimingFunction() {}
 JS_INIT_CLASS(CAMediaTimingFunction, NSObject);
   JS_ASSIGN_STATIC_METHOD(functionWithName);
   JS_ASSIGN_STATIC_METHOD(functionWithControlPoints);
-  JS_ASSIGN_STATIC_METHOD(initWithControlPoints);
+  JS_ASSIGN_PROTO_METHOD(initWithControlPoints);
   JS_ASSIGN_PROTO_METHOD(getControlPointAtIndexValues);
 
   // instance members (proto)
@@ -73,13 +73,14 @@ NAN_METHOD(NCAMediaTimingFunction::functionWithControlPoints) {
 }
 
 NAN_METHOD(NCAMediaTimingFunction::initWithControlPoints) {
+  JS_UNWRAP_OR_ALLOC(CAMediaTimingFunction, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(float, c1x);
     declare_value(float, c1y);
     declare_value(float, c2x);
     declare_value(float, c2y);
-    JS_SET_RETURN(js_value_instancetype([[CAMediaTimingFunction alloc] initWithControlPoints: c1x : c1y : c2x : c2y]));
+    JS_SET_RETURN(js_value_instancetype([self initWithControlPoints: c1x : c1y : c2x : c2y]));
   }
 }
 
@@ -93,4 +94,3 @@ NAN_METHOD(NCAMediaTimingFunction::getControlPointAtIndexValues) {
     JS_SET_RETURN(js_value_CGPoint(CGPointMake(ptr[0], ptr[1])));
   }
 }
-

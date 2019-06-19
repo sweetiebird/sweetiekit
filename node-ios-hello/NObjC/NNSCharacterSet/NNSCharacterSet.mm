@@ -18,7 +18,7 @@ JS_INIT_CLASS(NSCharacterSet, NSObject);
   JS_ASSIGN_STATIC_METHOD(characterSetWithCharactersInString);
   JS_ASSIGN_STATIC_METHOD(characterSetWithBitmapRepresentation);
   JS_ASSIGN_STATIC_METHOD(characterSetWithContentsOfFile);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(characterIsMember);
   JS_ASSIGN_PROTO_METHOD(longCharacterIsMember);
   JS_ASSIGN_PROTO_METHOD(isSupersetOfSet);
@@ -103,10 +103,11 @@ NAN_METHOD(NNSCharacterSet::characterSetWithContentsOfFile) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NNSCharacterSet::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(NSCharacterSet, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[NSCharacterSet alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -249,4 +250,3 @@ NAN_GETTER(NNSCharacterSet::invertedSetGetter) {
     JS_SET_RETURN(js_value_NSCharacterSet([self invertedSet]));
   }
 }
-

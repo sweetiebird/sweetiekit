@@ -23,7 +23,7 @@ JS_WRAP_CLASS(UIPresentationController, NSObject);
   JS_METHOD(presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator);
 #endif
 // UIPresentationController
-  JS_STATIC_METHOD(initWithPresentedViewControllerPresentingViewController);
+  JS_METHOD(initWithPresentedViewControllerPresentingViewController);
   JS_METHOD(adaptivePresentationStyle);
   JS_METHOD(adaptivePresentationStyleForTraitCollection);
   JS_METHOD(containerViewWillLayoutSubviews);

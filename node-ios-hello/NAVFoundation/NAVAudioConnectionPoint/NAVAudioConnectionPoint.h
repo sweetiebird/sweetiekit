@@ -20,7 +20,7 @@
 //#define is_value_SCNMovabilityHint(x) IS_ENUM(SCNMovabilityHint, NSInteger, x)
 
 JS_WRAP_CLASS(AVAudioConnectionPoint, NSObject);
-  JS_STATIC_METHOD(initWithNodeBus);
+  JS_METHOD(initWithNodeBus);
   JS_PROP_READONLY(node);
   JS_PROP_READONLY(bus);
 JS_WRAP_CLASS_END(AVAudioConnectionPoint);

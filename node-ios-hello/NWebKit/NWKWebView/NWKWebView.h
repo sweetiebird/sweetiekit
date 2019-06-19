@@ -22,8 +22,8 @@
 
 JS_WRAP_CLASS(WKWebView, UIView);
   JS_STATIC_METHOD(handlesURLScheme);
-  JS_STATIC_METHOD(initWithFrameConfiguration);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithFrameConfiguration);
+  JS_METHOD(initWithCoder);
   JS_METHOD(loadRequest);
   JS_METHOD(loadFileURLAllowingReadAccessToURL);
   JS_METHOD(loadHTMLStringBaseURL);

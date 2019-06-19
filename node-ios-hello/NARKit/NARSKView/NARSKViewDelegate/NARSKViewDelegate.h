@@ -18,4 +18,8 @@ JS_WRAP_CLASS(ARSKViewDelegate, NSObject);
   sweetiekit::JSFunction _nodeForAnchor;
 JS_WRAP_CLASS_END(ARSKViewDelegate);
 
+#if __OBJC__
+typedef SARSKViewDelegate ARSKViewDelegate;
+#endif
+
 #endif /* NARSKViewDelegate_h */

@@ -27,7 +27,7 @@ JS_WRAP_CLASS(NSCharacterSet, NSObject);
   JS_STATIC_METHOD(characterSetWithCharactersInString);
   JS_STATIC_METHOD(characterSetWithBitmapRepresentation);
   JS_STATIC_METHOD(characterSetWithContentsOfFile);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithCoder);
   JS_METHOD(characterIsMember);
   JS_METHOD(longCharacterIsMember);
   JS_METHOD(isSupersetOfSet);

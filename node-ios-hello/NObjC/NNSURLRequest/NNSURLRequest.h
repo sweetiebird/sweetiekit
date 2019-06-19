@@ -26,8 +26,8 @@
 JS_WRAP_CLASS(NSURLRequest, NSObject);
   JS_STATIC_METHOD(requestWithURL);
   JS_STATIC_METHOD(requestWithURLCachePolicyTimeoutInterval);
-  JS_STATIC_METHOD(initWithURL);
-  JS_STATIC_METHOD(initWithURLCachePolicyTimeoutInterval);
+  JS_METHOD(initWithURL);
+  JS_METHOD(initWithURLCachePolicyTimeoutInterval);
   JS_METHOD(valueForHTTPHeaderField);
   JS_STATIC_PROP_READONLY(supportsSecureCoding);
   JS_PROP_READONLY(URL);

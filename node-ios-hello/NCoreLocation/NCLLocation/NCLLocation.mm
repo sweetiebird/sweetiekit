@@ -18,9 +18,9 @@ JS_INIT_CLASS(CLLocation, NSObject);
   JS_SET_METHOD(exports, "CLLocationCoordinate2DMake", CLLocationCoordinate2DMake);
 
 // CLLocation
-  JS_ASSIGN_STATIC_METHOD(initWithLatitudeLongitude);
-  JS_ASSIGN_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
-  JS_ASSIGN_STATIC_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
+  JS_ASSIGN_PROTO_METHOD(initWithLatitudeLongitude);
+  JS_ASSIGN_PROTO_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
+  JS_ASSIGN_PROTO_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
   JS_ASSIGN_PROTO_METHOD(getDistanceFrom);
   JS_ASSIGN_PROTO_METHOD(distanceFromLocation);
   JS_ASSIGN_PROTO_PROP_READONLY(coordinate);
@@ -170,15 +170,17 @@ NAN_METHOD(NCLLocation::CLLocationCoordinate2DMake) {
 }
 
 NAN_METHOD(NCLLocation::initWithLatitudeLongitude) {
+  JS_UNWRAP_OR_ALLOC(CLLocation, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CLLocationDegrees, latitude);
     declare_value(CLLocationDegrees, longitude);
-    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithLatitude: latitude longitude: longitude]));
+    JS_SET_RETURN(js_value_instancetype([self initWithLatitude: latitude longitude: longitude]));
   }
 }
 
 NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp) {
+  JS_UNWRAP_OR_ALLOC(CLLocation, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CLLocationCoordinate2D, coordinate);
@@ -186,11 +188,12 @@ NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccu
     declare_value(CLLocationAccuracy, hAccuracy);
     declare_value(CLLocationAccuracy, vAccuracy);
     declare_pointer(NSDate, timestamp);
-    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy timestamp: timestamp]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy timestamp: timestamp]));
   }
 }
 
 NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp) {
+  JS_UNWRAP_OR_ALLOC(CLLocation, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CLLocationCoordinate2D, coordinate);
@@ -200,7 +203,7 @@ NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccu
     declare_value(CLLocationDirection, course);
     declare_value(CLLocationSpeed, speed);
     declare_pointer(NSDate, timestamp);
-    JS_SET_RETURN(js_value_instancetype([[CLLocation alloc] initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy course: course speed: speed timestamp: timestamp]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoordinate: coordinate altitude: altitude horizontalAccuracy: hAccuracy verticalAccuracy: vAccuracy course: course speed: speed timestamp: timestamp]));
   }
 }
 

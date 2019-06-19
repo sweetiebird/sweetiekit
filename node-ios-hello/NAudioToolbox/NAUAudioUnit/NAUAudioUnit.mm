@@ -109,13 +109,13 @@ JS_INIT_CLASS(AUAudioUnit, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(AUAudioUnit, NSObject);
   JS_ASSIGN_STATIC_METHOD(instantiateWithComponentDescriptionOptionsCompletionHandler);
-  JS_ASSIGN_STATIC_METHOD(initWithComponentDescriptionOptionsError);
-  JS_ASSIGN_STATIC_METHOD(initWithComponentDescriptionError);
+  JS_ASSIGN_PROTO_METHOD(initWithComponentDescriptionOptionsError);
+  JS_ASSIGN_PROTO_METHOD(initWithComponentDescriptionError);
 #if TODO
 // AUAudioUnitBusArray
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithAudioUnitBusTypeBusses);
-  JS_ASSIGN_STATIC_METHOD(initWithAudioUnitBusType);
+  JS_ASSIGN_PROTO_METHOD(initWithAudioUnitBusTypeBusses);
+  JS_ASSIGN_PROTO_METHOD(initWithAudioUnitBusType);
 #endif
 JS_INIT_CLASS_END(AUAudioUnit, NSObject);
 
@@ -158,22 +158,24 @@ NAN_METHOD(NAUAudioUnit::instantiateWithComponentDescriptionOptionsCompletionHan
 }
 
 NAN_METHOD(NAUAudioUnit::initWithComponentDescriptionOptionsError) {
+  JS_UNWRAP_OR_ALLOC(AUAudioUnit, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AudioComponentDescription, componentDescription);
     declare_value(AudioComponentInstantiationOptions, options);
     declare_error();
-    JS_SET_RETURN(js_value_instancetype([[AUAudioUnit alloc] initWithComponentDescription: componentDescription options: options error: &error]));
+    JS_SET_RETURN(js_value_instancetype([self initWithComponentDescription: componentDescription options: options error: &error]));
     js_panic_NSError(error);
   }
 }
 
 NAN_METHOD(NAUAudioUnit::initWithComponentDescriptionError) {
+  JS_UNWRAP_OR_ALLOC(AUAudioUnit, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(AudioComponentDescription, componentDescription);
     declare_error();
-    JS_SET_RETURN(js_value_instancetype([[AUAudioUnit alloc] initWithComponentDescription: componentDescription error: &error]));
+    JS_SET_RETURN(js_value_instancetype([self initWithComponentDescription: componentDescription error: &error]));
     js_panic_NSError(error);
   }
 }
@@ -308,21 +310,23 @@ NAN_METHOD(NAUAudioUnitBusArray::init) {
 }
 
 NAN_METHOD(NAUAudioUnitBusArray::initWithAudioUnitBusTypeBusses) {
+  JS_UNWRAP_OR_ALLOC(AUAudioUnitBusArray, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AUAudioUnit, owner);
     declare_value(AUAudioUnitBusType, busType);
     declare_pointer(NSArray<AUAudioUnitBus*>, busArray);
-    JS_SET_RETURN(js_value_instancetype([[AUAudioUnitBusArray alloc] initWithAudioUnit: owner busType: busType busses: busArray]));
+    JS_SET_RETURN(js_value_instancetype([self initWithAudioUnit: owner busType: busType busses: busArray]));
   }
 }
 
 NAN_METHOD(NAUAudioUnitBusArray::initWithAudioUnitBusType) {
+  JS_UNWRAP_OR_ALLOC(AUAudioUnitBusArray, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AUAudioUnit, owner);
     declare_value(AUAudioUnitBusType, busType);
-    JS_SET_RETURN(js_value_instancetype([[AUAudioUnitBusArray alloc] initWithAudioUnit: owner busType: busType]));
+    JS_SET_RETURN(js_value_instancetype([self initWithAudioUnit: owner busType: busType]));
   }
 }
 
@@ -1099,4 +1103,3 @@ NAN_SETTER(NAUAudioUnitPreset::nameSetter) {
   }
 }
 #endif
-

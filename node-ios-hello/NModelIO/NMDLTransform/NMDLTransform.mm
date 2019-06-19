@@ -49,10 +49,10 @@ JS_INIT_CLASS(MDLTransform, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(MDLTransform, NSObject);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithIdentity);
-  JS_ASSIGN_STATIC_METHOD(initWithTransformComponent);
-  JS_ASSIGN_STATIC_METHOD(initWithMatrix);
-  JS_ASSIGN_STATIC_METHOD(initWithMatrixResetsTransform);
+  JS_ASSIGN_PROTO_METHOD(initWithIdentity);
+  JS_ASSIGN_PROTO_METHOD(initWithTransformComponent);
+  JS_ASSIGN_PROTO_METHOD(initWithMatrix);
+  JS_ASSIGN_PROTO_METHOD(initWithMatrixResetsTransform);
 JS_INIT_CLASS_END(MDLTransform, NSObject);
 
 NAN_METHOD(NMDLTransform::New) {
@@ -127,33 +127,37 @@ NAN_METHOD(NMDLTransform::init) {
 }
 
 NAN_METHOD(NMDLTransform::initWithIdentity) {
+  JS_UNWRAP_OR_ALLOC(MDLTransform, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_instancetype([[MDLTransform alloc] initWithIdentity]));
+    JS_SET_RETURN(js_value_instancetype([self initWithIdentity]));
   }
 }
 
 NAN_METHOD(NMDLTransform::initWithTransformComponent) {
+  JS_UNWRAP_OR_ALLOC(MDLTransform, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id/* <MDLTransformComponent>*/, component);
-    JS_SET_RETURN(js_value_instancetype([[MDLTransform alloc] initWithTransformComponent: component]));
+    JS_SET_RETURN(js_value_instancetype([self initWithTransformComponent: component]));
   }
 }
 
 NAN_METHOD(NMDLTransform::initWithMatrix) {
+  JS_UNWRAP_OR_ALLOC(MDLTransform, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(matrix_float4x4, matrix);
-    JS_SET_RETURN(js_value_instancetype([[MDLTransform alloc] initWithMatrix: matrix]));
+    JS_SET_RETURN(js_value_instancetype([self initWithMatrix: matrix]));
   }
 }
 
 NAN_METHOD(NMDLTransform::initWithMatrixResetsTransform) {
+  JS_UNWRAP_OR_ALLOC(MDLTransform, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(matrix_float4x4, matrix);
     declare_value(BOOL, resetsTransform);
-    JS_SET_RETURN(js_value_instancetype([[MDLTransform alloc] initWithMatrix: matrix resetsTransform: resetsTransform]));
+    JS_SET_RETURN(js_value_instancetype([self initWithMatrix: matrix resetsTransform: resetsTransform]));
   }
 }
 
@@ -377,4 +381,3 @@ NAN_SETTER(NMDLTransform::scaleSetter) {
     [self setScale: input];
   }
 }
-

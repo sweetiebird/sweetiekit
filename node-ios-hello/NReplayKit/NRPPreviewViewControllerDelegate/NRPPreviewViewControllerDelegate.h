@@ -19,4 +19,8 @@ JS_WRAP_CLASS(RPPreviewViewControllerDelegate, NSObject);
   sweetiekit::JSFunction _didFinish;
 JS_WRAP_CLASS_END(RPPreviewViewControllerDelegate);
 
+#if __OBJC__
+typedef SRPPreviewViewControllerDelegate RPPreviewViewControllerDelegate;
+#endif
+
 #endif /* NRPPreviewViewControllerDelegate_h */

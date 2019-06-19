@@ -11,13 +11,6 @@ NUIPopoverPresentationController::~NUIPopoverPresentationController() {}
 
 JS_INIT_CLASS(UIPopoverPresentationController, UIPresentationController);
   // instance members (proto)
-#if TODO
-// UIPopoverPresentationControllerDelegate
-  JS_ASSIGN_PROTO_METHOD(prepareForPopoverPresentation);
-  JS_ASSIGN_PROTO_METHOD(popoverPresentationControllerShouldDismissPopover);
-  JS_ASSIGN_PROTO_METHOD(popoverPresentationControllerDidDismissPopover);
-  JS_ASSIGN_PROTO_METHOD(popoverPresentationControllerWillRepositionPopoverToRectInView);
-#endif
 // UIPopoverPresentationController
   JS_ASSIGN_PROTO_PROP(delegate);
   JS_ASSIGN_PROTO_PROP(permittedArrowDirections);
@@ -51,71 +44,23 @@ JS_INIT_CLASS_END(UIPopoverPresentationController, UIPresentationController);
 
 NAN_METHOD(NUIPopoverPresentationController::New) {
   JS_RECONSTRUCT(UIPopoverPresentationController);
+  @autoreleasepool {
+    UIPopoverPresentationController* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NUIPopoverPresentationController *ui = new NUIPopoverPresentationController();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge UIPopoverPresentationController *)(info[0].As<External>()->Value()));
-  } else if (info.Length() == 2) {
-    @autoreleasepool {
-      UIViewController *presented = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]))->As<UIViewController>();
-      UIViewController *presenting = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[1]))->As<UIViewController>();
-
-      ui->SetNSObject([[UIPopoverPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting]);
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIPopoverPresentationController *)(info[0].As<External>()->Value());
     }
-  } else {
-    @autoreleasepool {
-      UIViewController *presented = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]))->As<UIViewController>();
-
-      ui->SetNSObject([[UIPopoverPresentationController alloc] initWithPresentedViewController:presented presentingViewController:nil]);
+    if (self) {
+      NUIPopoverPresentationController *wrapper = new NUIPopoverPresentationController();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIPopoverPresentationController::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
-
-#if TODO
-NAN_METHOD(NUIPopoverPresentationControllerDelegate::prepareForPopoverPresentation) {
-  JS_UNWRAP(UIPopoverPresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPopoverPresentationController, popoverPresentationController);
-    [self prepareForPopoverPresentation: popoverPresentationController];
-  }
-}
-
-NAN_METHOD(NUIPopoverPresentationControllerDelegate::popoverPresentationControllerShouldDismissPopover) {
-  JS_UNWRAP(UIPopoverPresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPopoverPresentationController, popoverPresentationController);
-    JS_SET_RETURN(js_value_BOOL([self popoverPresentationControllerShouldDismissPopover: popoverPresentationController]));
-  }
-}
-
-NAN_METHOD(NUIPopoverPresentationControllerDelegate::popoverPresentationControllerDidDismissPopover) {
-  JS_UNWRAP(UIPopoverPresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPopoverPresentationController, popoverPresentationController);
-    [self popoverPresentationControllerDidDismissPopover: popoverPresentationController];
-  }
-}
-
-NAN_METHOD(NUIPopoverPresentationControllerDelegate::popoverPresentationControllerWillRepositionPopoverToRectInView) {
-  JS_UNWRAP(UIPopoverPresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPopoverPresentationController, popoverPresentationController);
-    declare_pointer(inout-CGRect, rect);
-    declare_value(inout-UIView-pointer-__nonnull-pointer-__nonnull, view);
-    [self popoverPresentationController: popoverPresentationController willRepositionPopoverToRect: rect inView: view];
-  }
-}
-#endif
 
 NAN_GETTER(NUIPopoverPresentationController::delegateGetter) {
   JS_UNWRAP(UIPopoverPresentationController, self);
@@ -130,6 +75,7 @@ NAN_SETTER(NUIPopoverPresentationController::delegateSetter) {
     declare_setter();
     declare_value(id/* <UIPopoverPresentationControllerDelegate>*/, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"UIPopoverPresentationController::delegate"];
   }
 }
 

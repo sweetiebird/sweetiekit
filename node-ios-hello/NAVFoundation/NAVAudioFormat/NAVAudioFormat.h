@@ -19,14 +19,14 @@
 #define is_value_AVAudioCommonFormat(x) IS_ENUM(AVAudioCommonFormat, NSInteger, x)
 
 JS_WRAP_CLASS(AVAudioFormat, NSObject);
-  JS_STATIC_METHOD(initWithStreamDescription);
-  JS_STATIC_METHOD(initWithStreamDescriptionChannelLayout);
+  JS_METHOD(initWithStreamDescription);
+  JS_METHOD(initWithStreamDescriptionChannelLayout);
   JS_STATIC_METHOD(initStandardFormatWithSampleRateChannels);
   JS_STATIC_METHOD(initStandardFormatWithSampleRateChannelLayout);
-  JS_STATIC_METHOD(initWithCommonFormatSampleRateChannelsInterleaved);
-  JS_STATIC_METHOD(initWithCommonFormatSampleRateInterleavedChannelLayout);
-  JS_STATIC_METHOD(initWithSettings);
-  JS_STATIC_METHOD(initWithCMAudioFormatDescription);
+  JS_METHOD(initWithCommonFormatSampleRateChannelsInterleaved);
+  JS_METHOD(initWithCommonFormatSampleRateInterleavedChannelLayout);
+  JS_METHOD(initWithSettings);
+  JS_METHOD(initWithCMAudioFormatDescription);
   JS_METHOD(isEqual);
   JS_PROP_READONLY(isStandard);
   JS_PROP_READONLY(commonFormat);

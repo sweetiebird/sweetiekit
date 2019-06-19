@@ -21,7 +21,7 @@
 JS_WRAP_CLASS(CAMediaTimingFunction, NSObject);
   JS_STATIC_METHOD(functionWithName);
   JS_STATIC_METHOD(functionWithControlPoints);
-  JS_STATIC_METHOD(initWithControlPoints);
+  JS_METHOD(initWithControlPoints);
   JS_METHOD(getControlPointAtIndexValues);
 JS_WRAP_CLASS_END(CAMediaTimingFunction);
 

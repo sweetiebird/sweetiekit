@@ -21,8 +21,8 @@
 #define is_value_UINavigationItemLargeTitleDisplayMode(x) IS_ENUM(UINavigationItemLargeTitleDisplayMode, NSInteger, x)
 
 JS_WRAP_CLASS(UINavigationItem, NSObject);
-  JS_STATIC_METHOD(initWithTitle);
-  JS_STATIC_METHOD(initWithCoder);
+  JS_METHOD(initWithTitle);
+  JS_METHOD(initWithCoder);
   JS_METHOD(setHidesBackButtonAnimated);
   JS_METHOD(setLeftBarButtonItemsAnimated);
   JS_METHOD(setRightBarButtonItemsAnimated);

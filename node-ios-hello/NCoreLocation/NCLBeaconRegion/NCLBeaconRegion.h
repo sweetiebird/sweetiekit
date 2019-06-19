@@ -23,9 +23,9 @@
 #define is_value_CLBeaconMinorValue(x) is_value_uint16_t(x)
 
 JS_WRAP_CLASS(CLBeaconRegion, CLRegion);
-  JS_STATIC_METHOD(initWithProximityUUIDIdentifier);
-  JS_STATIC_METHOD(initWithProximityUUIDMajorIdentifier);
-  JS_STATIC_METHOD(initWithProximityUUIDMajorMinorIdentifier);
+  JS_METHOD(initWithProximityUUIDIdentifier);
+  JS_METHOD(initWithProximityUUIDMajorIdentifier);
+  JS_METHOD(initWithProximityUUIDMajorMinorIdentifier);
   JS_METHOD(peripheralDataWithMeasuredPower);
   JS_PROP_READONLY(proximityUUID);
   JS_PROP_READONLY(major);

@@ -29,4 +29,8 @@ JS_WRAP_CLASS(UICollectionViewManager, NSObject);
   sweetiekit::JSFunction _cellForItemAt;
 JS_WRAP_CLASS_END(UICollectionViewManager);
 
+#if __OBJC__
+typedef SUICollectionViewManager UICollectionViewManager;
+#endif
+
 #endif /* NUICollectionViewManager_h */

@@ -14,7 +14,7 @@ NCLPlacemark::NCLPlacemark () {}
 NCLPlacemark::~NCLPlacemark () {}
 
 JS_INIT_CLASS(CLPlacemark, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithPlacemark);
+  JS_ASSIGN_PROTO_METHOD(initWithPlacemark);
   JS_ASSIGN_PROTO_PROP_READONLY(location);
   JS_ASSIGN_PROTO_PROP_READONLY(region);
   JS_ASSIGN_PROTO_PROP_READONLY(timeZone);
@@ -61,10 +61,11 @@ NAN_METHOD(NCLPlacemark::New) {
 }
 
 NAN_METHOD(NCLPlacemark::initWithPlacemark) {
+  JS_UNWRAP_OR_ALLOC(CLPlacemark, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(CLPlacemark, placemark);
-    JS_SET_RETURN(js_value_instancetype([[CLPlacemark alloc] initWithPlacemark: placemark]));
+    JS_SET_RETURN(js_value_instancetype([self initWithPlacemark: placemark]));
   }
 }
 
@@ -192,4 +193,3 @@ NAN_GETTER(NCLPlacemark::postalAddressGetter) {
     JS_SET_RETURN(js_value_CNPostalAddress([self postalAddress]));
   }
 }
-

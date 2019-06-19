@@ -57,10 +57,10 @@ JS_INIT_CLASS(AVAudioPlayer, NSObject);
   
   // static members (ctor)
   JS_INIT_CTOR(AVAudioPlayer, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithContentsOfURLError);
-  JS_ASSIGN_STATIC_METHOD(initWithDataError);
-  JS_ASSIGN_STATIC_METHOD(initWithContentsOfURLFileTypeHintError);
-  JS_ASSIGN_STATIC_METHOD(initWithDataFileTypeHintError);
+  JS_ASSIGN_PROTO_METHOD(initWithContentsOfURLError);
+  JS_ASSIGN_PROTO_METHOD(initWithDataError);
+  JS_ASSIGN_PROTO_METHOD(initWithContentsOfURLFileTypeHintError);
+  JS_ASSIGN_PROTO_METHOD(initWithDataFileTypeHintError);
   
 JS_INIT_CLASS_END(AVAudioPlayer, NSObject);
 
@@ -95,26 +95,29 @@ NAN_METHOD(NAVAudioPlayer::New) {
 #include "NNSURL.h"
 
 NAN_METHOD(NAVAudioPlayer::initWithContentsOfURLError) {
+  JS_UNWRAP_OR_ALLOC(AVAudioPlayer, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSURL, url);
     declare_error();
-    JS_SET_RETURN(js_value_instancetype([[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error]));
+    JS_SET_RETURN(js_value_instancetype([self initWithContentsOfURL: url error: &error]));
     js_panic_NSError(error);
   }
 }
 
 NAN_METHOD(NAVAudioPlayer::initWithDataError) {
+  JS_UNWRAP_OR_ALLOC(AVAudioPlayer, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSData, data);
     declare_error();
-    JS_SET_RETURN(js_value_instancetype([[AVAudioPlayer alloc] initWithData: data error: &error]));
+    JS_SET_RETURN(js_value_instancetype([self initWithData: data error: &error]));
     js_panic_NSError(error);
   }
 }
 
 NAN_METHOD(NAVAudioPlayer::initWithContentsOfURLFileTypeHintError) {
+  JS_UNWRAP_OR_ALLOC(AVAudioPlayer, self);
   declare_autoreleasepool {
     JS_TODO();
     #if TODO
@@ -122,12 +125,13 @@ NAN_METHOD(NAVAudioPlayer::initWithContentsOfURLFileTypeHintError) {
     declare_pointer(NSURL, url);
     declare_value(NSString-pointer-__nullable, utiString);
     declare_pointer(NSError-pointer, outError);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioPlayer alloc] initWithContentsOfURL: url fileTypeHint: utiString error: outError]));
+    JS_SET_RETURN(js_value_instancetype([self initWithContentsOfURL: url fileTypeHint: utiString error: outError]));
     #endif
   }
 }
 
 NAN_METHOD(NAVAudioPlayer::initWithDataFileTypeHintError) {
+  JS_UNWRAP_OR_ALLOC(AVAudioPlayer, self);
   declare_autoreleasepool {
     JS_TODO();
     #if TODO
@@ -135,7 +139,7 @@ NAN_METHOD(NAVAudioPlayer::initWithDataFileTypeHintError) {
     declare_pointer(NSData, data);
     declare_value(NSString-pointer-__nullable, utiString);
     declare_pointer(NSError-pointer, outError);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioPlayer alloc] initWithData: data fileTypeHint: utiString error: outError]));
+    JS_SET_RETURN(js_value_instancetype([self initWithData: data fileTypeHint: utiString error: outError]));
     #endif
   }
 }
@@ -491,4 +495,3 @@ NAN_SETTER(NAVAudioPlayer::channelAssignmentsSetter) {
     [self setChannelAssignments: input];
   }
 }
-

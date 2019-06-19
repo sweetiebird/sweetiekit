@@ -30,4 +30,8 @@ JS_WRAP_CLASS(UIScrollViewDelegate, NSObject);
   sweetiekit::JSFunction _didEndDragging;
 JS_WRAP_CLASS_END(UIScrollViewDelegate);
 
+#if __OBJC__
+typedef SUIScrollViewDelegate UIScrollViewDelegate;
+#endif
+
 #endif /* NUIScrollViewDelegate_h */

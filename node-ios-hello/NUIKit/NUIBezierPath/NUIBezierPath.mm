@@ -52,7 +52,7 @@ JS_INIT_CLASS(UIBezierPath, NSObject);
   JS_ASSIGN_STATIC_METHOD(bezierPathWithArcCenterRadiusStartAngleEndAngleClockwise);
   JS_ASSIGN_STATIC_METHOD(bezierPathWithCGPath);
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   
   // constants
 
@@ -174,10 +174,11 @@ NAN_METHOD(NUIBezierPath::init) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIBezierPath::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIBezierPath, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIBezierPath alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -483,4 +484,3 @@ NAN_SETTER(NUIBezierPath::usesEvenOddFillRuleSetter) {
     [self setUsesEvenOddFillRule: input];
   }
 }
-

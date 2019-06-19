@@ -36,8 +36,8 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROTO_METHOD(willTransitionToTraitCollectionWithTransitionCoordinator);
 #endif
 // UIViewController
-  JS_ASSIGN_STATIC_METHOD(initWithNibNameBundle);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithNibNameBundle);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_METHOD(loadView);
   JS_ASSIGN_PROTO_METHOD(loadViewIfNeeded);
   JS_ASSIGN_PROTO_METHOD(viewWillUnload);
@@ -505,21 +505,23 @@ NAN_METHOD(NUIContentContainer::willTransitionToTraitCollectionWithTransitionCoo
 #include "NNSBundle.h"
 
 NAN_METHOD(NUIViewController::initWithNibNameBundle) {
+  JS_UNWRAP_OR_ALLOC(UIViewController, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_pointer(NSString, nibNameOrNil);
     declare_nullable_pointer(NSBundle, nibBundleOrNil);
-    JS_SET_RETURN(js_value_instancetype([[UIViewController alloc] initWithNibName: nibNameOrNil bundle: nibBundleOrNil]));
+    JS_SET_RETURN(js_value_instancetype([self initWithNibName: nibNameOrNil bundle: nibBundleOrNil]));
   }
 }
 
 #include "NNSCoder.h"
 
 NAN_METHOD(NUIViewController::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UIViewController, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UIViewController alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -1938,4 +1940,3 @@ NAN_GETTER(NUIPreviewAction::id<UIPreviewActionItem>(action, UIViewController, p
   }
 }
 #endif
-

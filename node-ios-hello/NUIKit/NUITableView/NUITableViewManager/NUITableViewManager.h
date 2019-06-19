@@ -27,4 +27,8 @@ JS_WRAP_CLASS(UITableViewManager, NSObject);
   sweetiekit::JSFunction _heightForRow;
 JS_WRAP_CLASS_END(UITableViewManager);
 
+#if __OBJC__
+typedef SUITableViewManager UITableViewManager;
+#endif
+
 #endif /* NUITableViewManager_h */

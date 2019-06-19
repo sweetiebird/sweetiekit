@@ -15,7 +15,7 @@ NUILocalNotification::~NUILocalNotification() {}
 JS_INIT_CLASS(UILocalNotification, NSObject);
   // instance members (proto)
   JS_ASSIGN_STATIC_METHOD(init);
-  JS_ASSIGN_STATIC_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
   JS_ASSIGN_PROTO_PROP(fireDate);
   JS_ASSIGN_PROTO_PROP(timeZone);
   JS_ASSIGN_PROTO_PROP(repeatInterval);
@@ -68,10 +68,11 @@ NAN_METHOD(NUILocalNotification::init) {
 #include "NNSCoder.h"
 
 NAN_METHOD(NUILocalNotification::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UILocalNotification, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSCoder, aDecoder);
-    JS_SET_RETURN(js_value_instancetype([[UILocalNotification alloc] initWithCoder: aDecoder]));
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
   }
 }
 
@@ -322,4 +323,3 @@ NAN_SETTER(NUILocalNotification::categorySetter) {
     [self setCategory: input];
   }
 }
-

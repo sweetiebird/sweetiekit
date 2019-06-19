@@ -18,7 +18,7 @@ JS_INIT_CLASS(AVAudioConnectionPoint, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(bus);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioConnectionPoint, NSObject);
-  JS_ASSIGN_STATIC_METHOD(initWithNodeBus);
+  JS_ASSIGN_PROTO_METHOD(initWithNodeBus);
 JS_INIT_CLASS_END(AVAudioConnectionPoint, NSObject);
 
 NAN_METHOD(NAVAudioConnectionPoint::New) {
@@ -48,11 +48,12 @@ NAN_METHOD(NAVAudioConnectionPoint::New) {
 #include "NAVAudioNode.h"
 
 NAN_METHOD(NAVAudioConnectionPoint::initWithNodeBus) {
+  JS_UNWRAP_OR_ALLOC(AVAudioConnectionPoint, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(AVAudioNode, node);
     declare_value(AVAudioNodeBus, bus);
-    JS_SET_RETURN(js_value_instancetype([[AVAudioConnectionPoint alloc] initWithNode: node bus: bus]));
+    JS_SET_RETURN(js_value_instancetype([self initWithNode: node bus: bus]));
   }
 }
 

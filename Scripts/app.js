@@ -154,8 +154,8 @@ function createTable() {
   //   const c = tblView.dequeueReusableCell("id");
   //   const data = myData[Object.keys(myData)[section]];
   //   const dino = data[row];
-  //   const cell = await UITableCell.initWithFrame(CGRect(0, 0, 100, 40));
-  //   const label = await UILabel.initWithFrame(CGRect(0, 0, 100, 40));
+  //   const cell = await UITableCell.alloc().initWithFrame(CGRect(0, 0, 100, 40));
+  //   const label = await UILabel.alloc().initWithFrame(CGRect(0, 0, 100, 40));
   //   label.text = dino.name;
   //   cell.addSubview(label);
   //   return cell;
@@ -242,7 +242,7 @@ async function setupApp() {
   console.log('setupApp5');
 
 
-  const nameField = UITextField.initWithFrameCallback(CGRectMake(12, fieldY, elemW, 50), () => {
+  const nameField = UITextField.alloc().initWithFrameCallback(CGRectMake(12, fieldY, elemW, 50), () => {
     console.log('nameField');
     username = nameField.text;
     console.log(username);

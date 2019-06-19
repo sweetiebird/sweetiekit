@@ -22,4 +22,8 @@ JS_WRAP_CLASS(UIKitGlobals, NSObject);
   JS_STATIC_PROP_READONLY(UIControlState);
 JS_WRAP_CLASS_END(UIKitGlobals);
 
+#if __OBJC__
+typedef SUIKitGlobals UIKitGlobals;
+#endif
+
 #endif /* NUIKitGlobals_h */
