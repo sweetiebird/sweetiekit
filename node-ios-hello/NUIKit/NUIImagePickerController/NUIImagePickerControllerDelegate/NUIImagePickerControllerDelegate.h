@@ -15,11 +15,17 @@
 #define is_value_UIImagePickerControllerDelegate(x) is_value_wrapper(x, UIImagePickerControllerDelegate)
 
 JS_WRAP_CLASS(UIImagePickerControllerDelegate, NSObject);
-  JS_PROP(Result);
-  JS_PROP(OnInfo);
-  JS_PROP(OnCancel);
-  Nan::Persistent<Function>* _onInfo;
-  Nan::Persistent<Function>* _onCancel;
+  JS_PROP(imagePickerControllerDidFinishPickingImageEditingInfo);
+  JS_PROP(imagePickerControllerDidFinishPickingMediaWithInfo);
+  JS_PROP(imagePickerControllerDidCancel);
 JS_WRAP_CLASS_END(UIImagePickerControllerDelegate);
+
+#ifdef __OBJC__
+@interface UIImagePickerControllerDelegate : NSObject<UIImagePickerControllerDelegate>
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey, id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0);
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info;
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+@end
+#endif
 
 #endif /* NUIImagePickerControllerDelegate_h */

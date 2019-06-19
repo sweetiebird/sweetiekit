@@ -193,20 +193,19 @@ function createTable() {
        imgCtrl.allowsEditing = true;
        imgCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-       imgDel.onInfo = () => {
-         let i = imgDel.result;
-
-         if (i) {
-           img = i;
+       imgDel.imagePickerControllerDidFinishPickingMediaWithInfo = (picker, info) => {
+         let img = info.get(UIImagePickerControllerOriginalImage);
+         if (img) {
            const imgView = UIImageView(img);
            imgView.frame = { x: imgX, y: imgY, width: 100, height: 100 };
            imgView.backgroundColor = UIColor.white;
            photoVC.view.addSubview(imgView);
            nextBtn.setTitleForState('✅ Lovely', UIControlStateNormal);
          }
+         picker.dismissViewControllerAnimatedCompletion(true, () => {});
        };
 
-       imgDel.onCancel = (picker) => {};
+       imgDel.imagePickerControllerDidCancel = (picker) => {};
        imgCtrl.delegate = imgDel;
        photoVC.presentViewControllerAnimatedCompletion(imgCtrl, true, () => {});
      } else {

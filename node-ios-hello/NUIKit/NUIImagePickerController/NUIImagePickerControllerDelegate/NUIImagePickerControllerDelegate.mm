@@ -6,104 +6,66 @@
 //
 #include "NUIImagePickerControllerDelegate.h"
 
-NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate()
-: _onInfo(new Nan::Persistent<Function>())
-, _onCancel(new Nan::Persistent<Function>())
-{
-}
-
-NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate()
-{
-  delete _onInfo;
-  delete _onCancel;
-}
+NUIImagePickerControllerDelegate::NUIImagePickerControllerDelegate() { }
+NUIImagePickerControllerDelegate::~NUIImagePickerControllerDelegate() { }
 
 JS_INIT_CLASS(UIImagePickerControllerDelegate, NSObject);
+  JS_ASSIGN_PROTO_PROP(imagePickerControllerDidFinishPickingImageEditingInfo);
+  JS_ASSIGN_PROTO_PROP(imagePickerControllerDidFinishPickingMediaWithInfo);
+  JS_ASSIGN_PROTO_PROP(imagePickerControllerDidCancel);
   // instance members (proto)
-  JS_SET_PROP_READONLY(proto, "result", Result);
-  JS_SET_PROP(proto, "onInfo", OnInfo);
-  JS_SET_PROP(proto, "onCancel", OnCancel);
   // static members (ctor)
   JS_INIT_CTOR(UIImagePickerControllerDelegate, NSObject);
 JS_INIT_CLASS_END(UIImagePickerControllerDelegate, NSObject);
 
 NAN_METHOD(NUIImagePickerControllerDelegate::New) {
   JS_RECONSTRUCT(UIImagePickerControllerDelegate);
-
-  Local<Object> ctrlObj = info.This();
-
-  NUIImagePickerControllerDelegate *ctrl = new NUIImagePickerControllerDelegate();
-
   @autoreleasepool {
-    ctrl->SetNSObject([[SUIImagePickerControllerDelegate alloc] init]);
-  }
-  ctrl->Wrap(ctrlObj);
+    UIImagePickerControllerDelegate* self = nullptr;
 
-  info.GetReturnValue().Set(ctrlObj);
-}
-
-NAN_SETTER(NUIImagePickerControllerDelegate::OnInfoSetter) {
-  Nan::HandleScope scope;
-
-  NUIImagePickerControllerDelegate *del = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
-  del->_onInfo->Reset(Local<Function>::Cast(value));
-
-  @autoreleasepool {
-    SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
-    [d setOnInfoClosureWithClosure:^(UIImagePickerController * _Nonnull, NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull) {
-      Nan::HandleScope scope;
-      sweetiekit::Resolve(del->_onInfo);
-      return true;
-    }];
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIImagePickerControllerDelegate *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UIImagePickerControllerDelegate alloc] init];
+    }
+    if (self) {
+      NUIImagePickerControllerDelegate *wrapper = new NUIImagePickerControllerDelegate();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIImagePickerControllerDelegate::New: invalid arguments");
+    }
   }
 }
 
+DELEGATE_PROP(UIImagePickerControllerDelegate, imagePickerControllerDidFinishPickingImageEditingInfo);
+DELEGATE_PROP(UIImagePickerControllerDelegate, imagePickerControllerDidFinishPickingMediaWithInfo);
+DELEGATE_PROP(UIImagePickerControllerDelegate, imagePickerControllerDidCancel);
 
-NAN_GETTER(NUIImagePickerControllerDelegate::ResultGetter) {
-  Nan::HandleScope scope;
+#include "NUIImagePickerController.h"
+#include "NUIImage.h"
 
-  NUIImagePickerControllerDelegate *view = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
-  auto obj = [view->As<SUIImagePickerControllerDelegate>() infoResult];
-  if (obj != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)obj)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NNSObject::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      info.GetReturnValue().Set(value);
-  }
-  
-
-  //info.GetReturnValue().Set(Nan::New(view->_onInfo));
+@implementation UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey, id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
+{
+  call_delegate(noop(), imagePickerControllerDidFinishPickingImageEditingInfo,
+    js_value_UIImagePickerController(picker),
+    js_value_UIImage(image),
+    js_value_NSDictionary(editingInfo));
 }
 
-NAN_GETTER(NUIImagePickerControllerDelegate::OnInfoGetter) {
-  Nan::HandleScope scope;
-
-  NUIImagePickerControllerDelegate *view = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_onInfo));
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info
+{
+  call_delegate(noop(), imagePickerControllerDidFinishPickingMediaWithInfo,
+    js_value_UIImagePickerController(picker),
+    js_value_NSDictionary(info));
 }
 
-NAN_SETTER(NUIImagePickerControllerDelegate::OnCancelSetter) {
-  Nan::HandleScope scope;
-
-  NUIImagePickerControllerDelegate *del = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
-  del->_onCancel->Reset(Local<Function>::Cast(value));
-
-  @autoreleasepool {
-    SUIImagePickerControllerDelegate* d = del->As<SUIImagePickerControllerDelegate>();
-    [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
-      Nan::HandleScope scope;
-      sweetiekit::Resolve(del->_onCancel);
-      return true;
-    }];
-  }
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  call_delegate(noop(), imagePickerControllerDidCancel,
+    js_value_UIImagePickerController(picker));
 }
-
-NAN_GETTER(NUIImagePickerControllerDelegate::OnCancelGetter) {
-  Nan::HandleScope scope;
-
-  NUIImagePickerControllerDelegate *view = ObjectWrap::Unwrap<NUIImagePickerControllerDelegate>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_onCancel));
-}
+@end

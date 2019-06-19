@@ -1479,14 +1479,13 @@ function iosApp() {
   async function handleButtonPress() {
     //btnLogin.callback = handleButtonPress;
 
-    const del = new UIImagePickerControllerDelegate();
+    const imgDel = new UIImagePickerControllerDelegate();
     const imgVC = new UIImagePickerController();
     imgVC.allowsEditing = true;
     imgVC.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-    del.onInfo = (picker, info) => {
-      let img = del.result
-
+    imgDel.imagePickerControllerDidFinishPickingMediaWithInfo = (picker, info) => {
+      let img = info.get(UIImagePickerControllerOriginalImage);
       if (img) {
         const vc2 = sb.instantiateViewControllerWithIdentifier('photoVC');
 
@@ -1503,11 +1502,12 @@ function iosApp() {
 
         nav.pushViewController(vc2);
       }
+      picker.dismissViewControllerAnimatedCompletion(true, () => {});
     };
 
-    del.onCancel = (picker) => {};
+    imgDel.imagePickerControllerDidCancel = (picker) => {};
 
-    imgVC.delegate = del;
+    imgVC.delegate = imgDel;
     vc.presentViewControllerAnimatedCompletion(imgVC, true, () => {});
   }
 

@@ -186,6 +186,7 @@ NAN_SETTER(NUIImagePickerController::delegateSetter) {
     declare_setter();
     declare_value(id/* <UINavigationControllerDelegate UIImagePickerControllerDelegate>*/, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NUIImagePickerController::delegate"];
   }
 }
 

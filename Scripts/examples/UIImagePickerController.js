@@ -21,20 +21,19 @@ async function make(nav, demoVC) {
       imgCtrl.allowsEditing = true;
       imgCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-      imgDel.onInfo = () => {
-        let i = imgDel.result;
-
-        if (i) {
-          img = i;
+      imgDel.imagePickerControllerDidFinishPickingMediaWithInfo = (picker, info) => {
+        let img = info.get(UIImagePickerControllerOriginalImage);
+        if (img) {
           const imgView = UIImageView(img);
           imgView.frame = { x: 12, y: 140, width: w - 24, height: w - 24 };
           imgView.backgroundColor = UIColor.white;
           demoVC.view.addSubview(imgView);
           btn.setTitleForState('✅', UIControlStateNormal);
         }
+        picker.dismissViewControllerAnimatedCompletion(true, () => {});
       };
 
-      imgDel.onCancel = (picker) => {};
+      imgDel.imagePickerControllerDidCancel = (picker) => {};
       imgCtrl.delegate = imgDel;
       demoVC.presentViewControllerAnimatedCompletion(imgCtrl, true, () => {});
     }

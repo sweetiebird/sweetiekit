@@ -335,7 +335,6 @@
 		A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48223226AA259002AF96F /* NUINavigationController.mm */; };
 		A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */; };
 		A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */; };
-		A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */; };
 		A1E5849622B1DD1000A967EF /* NUISplitViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E5849422B1DD1000A967EF /* NUISplitViewController.mm */; };
 		A1E5849A22B1DFFC00A967EF /* NUIPopoverController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1E5849922B1DFFC00A967EF /* NUIPopoverController.mm */; };
 		A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D52229D84F9002B53FF /* NSCNMaterial.mm */; };
@@ -983,7 +982,6 @@
 		A1E48228226AB0CF002AF96F /* NUIImagePickerController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerController.mm; sourceTree = "<group>"; };
 		A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIImagePickerControllerDelegate.h; sourceTree = "<group>"; };
 		A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIImagePickerControllerDelegate.mm; sourceTree = "<group>"; };
-		A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
 		A1E5849422B1DD1000A967EF /* NUISplitViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISplitViewController.mm; sourceTree = "<group>"; };
 		A1E5849522B1DD1000A967EF /* NUISplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISplitViewController.h; sourceTree = "<group>"; };
 		A1E5849822B1DFFC00A967EF /* NUIPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPopoverController.h; sourceTree = "<group>"; };
@@ -3850,7 +3848,6 @@
 			children = (
 				A1E4822B226AB425002AF96F /* NUIImagePickerControllerDelegate.h */,
 				A1E4822C226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm */,
-				A1E4822E226AB959002AF96F /* SUIImagePickerControllerDelegate.swift */,
 			);
 			path = NUIImagePickerControllerDelegate;
 			sourceTree = "<group>";
@@ -4505,7 +4502,6 @@
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
-				A1E4822F226AB959002AF96F /* SUIImagePickerControllerDelegate.swift in Sources */,
 				A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */,
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,

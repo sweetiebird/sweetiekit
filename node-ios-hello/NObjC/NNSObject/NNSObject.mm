@@ -1514,7 +1514,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(UIScrollViewDelegate, SUIScrollViewDelegate);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
       JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
-      JS_RETURN_TYPE_FROM(UIImagePickerControllerDelegate, SUIImagePickerControllerDelegate);
+      JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
       JS_RETURN_TYPE_FROM(UIViewControllerTransitioningDelegate, SUIViewControllerTransitioningDelegate);
       // ========= objects
