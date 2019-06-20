@@ -124,13 +124,26 @@ NAN_METHOD(NUIGestureRecognizer::addTargetAction) {
   @autoreleasepool
   {
     declare_args();
-    declare_pointer(NSObject, target);
-    declare_pointer(NSString, selectorName);
-    SEL action = NSSelectorFromString(selectorName);
-    if (!action) {
-      JS_PANIC("NSSelectorFromString returned nil for name %s", [selectorName UTF8String]);
-    }
-    JS_SET_RETURN(js_value_void([self addTarget: target action: action]));
+        __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[JS_ARGC++]);
+    SUITarget* target = [[SUITarget alloc] init];
+    [target setCallbackClosure:^(id _Nullable sender) {
+      dispatch_main(^{
+        if (fn) {
+          (*fn)("NUIGestureRecognizer::addTargetAction");
+        }
+      });
+    }];
+    [target setDeinitClosure:^() {
+      dispatch_main(^{
+        if (fn) {
+          delete fn; fn = nullptr;
+          iOSLog0("NUIGestureRecognizer::addTargetAction");
+        }
+      });
+    }];
+    SEL action([target callbackSelector]);
+    [self addTarget: target action: action];
+    JS_SET_RETURN(js_value_id(target));
   }
 }
 
@@ -139,13 +152,15 @@ NAN_METHOD(NUIGestureRecognizer::removeTargetAction) {
   @autoreleasepool
   {
     declare_args();
-    declare_pointer(NSObject, target);
-    declare_pointer(NSString, selectorName);
-    SEL action = NSSelectorFromString(selectorName);
-    if (!action) {
-      JS_PANIC("NSSelectorFromString returned nil for name %s", [selectorName UTF8String]);
+        declare_value(id, target_);
+    if (![target_ isKindOfClass:[SUITarget class]]) {
+      js_panic_noreturn("expected SUITarget");
+      return;
     }
-    JS_SET_RETURN(js_value_void([self removeTarget: target action: action]));
+    SUITarget* target = (SUITarget*)target_;
+    SEL action([target callbackSelector]);
+    [self removeTarget: target action: action];
+    [target deinitClosure]();
   }
 }
 
