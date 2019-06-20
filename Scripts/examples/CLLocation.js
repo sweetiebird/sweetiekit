@@ -14,14 +14,8 @@ const {
   MKMapViewDelegate,
 } = SweetieKit;
 
-let mapView;
-let distance;
-let location;
-let location2;
-let text;
-let distLabel;
-let trueHeading;
-let arView;
+location = null;
+trueHeading = 0;
 
 // const angleFromCoord = (lat1, long1, lat2, long2) => {
 //   const dLong = long2 - long1;
@@ -78,8 +72,6 @@ function makeMap(demoVC) {
   const h = demoVC.view.frame.height;
   const frame = { x: 0, y: 0, width: w, height: h };
   mapView = new MKMapView(frame);
-  const del = new MKMapViewDelegate();
-
   demoVC.view.addSubview(mapView);
 
   if (location) {
@@ -95,7 +87,7 @@ function makeMap(demoVC) {
 }
 
 function updateMap() {
-  const region = {
+  region = {
     coordinate: location.coordinate,
     latitudinalMeters: distance + 200,
     longitudinalMeters: distance + 200,
@@ -110,7 +102,7 @@ function updateMap() {
     title: 'YOU ARE HERE',
   });
   distLabel.text = `Distance: ${Math.round(distance)} meters`;
-  const dest = doMath(
+  dest = doMath(
     location.coordinate.latitude,
     location.coordinate.longitude,
     location2.coordinate.latitude,
@@ -148,51 +140,70 @@ async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
 
   const frame = {x: 12, y: 80, width: w - 24, height: 50};
-  const field = UITextField.alloc().initWithFrameCallback(frame, () => {
-    text = field.text;
-  });
+  textField = UITextField.alloc().initWithFrame(frame);
+  textField.placeholder = "Enter address here";
+  textField.font = UIFont.systemFontOfSize(15);
+  textField.borderStyle = UITextBorderStyleRoundedRect;
+  textField.returnKeyType = UIReturnKeyDone;
+  textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 
-  const btn = UIButton(CGRectMake(12, 150, w - 24, 40));
-
-  btn.addTargetActionForControlEvents(() => {
-    if (text) {
-      geocoder.geocodeAddressStringCompletionHandler(text, (placemarks) => {
+  _action = () => {
+    text = textField.text.trim();
+    if (text.length > 0) {
+      console.log('geocode', text);
+      geocoder.geocodeAddressStringCompletionHandler(text, (placemarks, error) => {
+        console.log('geocodeAddressStringCompletionHandler', placemarks, error);
         if (Array.isArray(placemarks)) {
+          textField.resignFirstResponder();
           const p = placemarks[0];
           location2 = p.location;
-          distance = location.distance(location2);
-          updateMap();
+          if (location) {
+            distance = location.distanceFromLocation(location2);
+            updateMap();
+          } else {
+            console.log('location is null');
+          }
         }
       });
     }
+  };
+
+  textField.delegate = UITextFieldDelegate({
+    textFieldShouldReturn(self) {
+      _action();
+      return true;
+    },
+  });
+
+  button = UIButton(CGRectMake(12, 150, w - 24, 40));
+  button.addTargetActionForControlEvents(() => {
+    _action();
   }, UIControlEventTouchUpInside);
 
-  btn.setTitleForState('Geocode Address', UIControlStateNormal);
-  btn.setTitleColorForState(colors.black, UIControlStateNormal);
-  btn.backgroundColor = colors.fitbodPink;
+  button.setTitleForState('Geocode Address', UIControlStateNormal);
+  button.setTitleColorForState(colors.black, UIControlStateNormal);
+  button.backgroundColor = colors.fitbodPink;
 
-  distLabel = UILabel({
-    x: 12,
-    y: 220,
-    width: w - 24,
-    height: 20,
-  });
+  distLabel = UILabel(CGRectMake(12, 220, w - 24, 20));
   distLabel.numberOfLines = 0;
 
-  demoVC.view.addSubview(field);
-  demoVC.view.addSubview(btn);
+  headingLabel = UILabel(CGRectMake(12, 270, w - 24, 20));
+  headingLabel.numberOfLines = 0;
+
+  demoVC.view.addSubview(textField);
+  demoVC.view.addSubview(button);
   demoVC.view.addSubview(distLabel);
+  demoVC.view.addSubview(headingLabel);
 
   mgr = new CLLocationManager();
   del = new CLLocationManagerDelegate();
-  del.locationManagerDidChangeAuthorizationStatus = (...args) => {
-    console.log('locationManagerDidChangeAuthorizationStatus', ...args);
+  del.locationManagerDidChangeAuthorizationStatus = (self, status) => {
+    console.log('locationManagerDidChangeAuthorizationStatus', self, status);
     mgr.startUpdatingLocation();
     mgr.startUpdatingHeading();
   };
-  del.locationManagerDidUpdateLocations = (...args) => {
-    const [_, locations] = args;
-    console.log('locationManagerDidUpdateLocations', locations.map(x => x.toString()));
+  del.locationManagerDidUpdateLocations = (self, locations) => {
+    console.log('locationManagerDidUpdateLocations', self, locations);
     if (Array.isArray(locations) && locations.length > 0 && !location) {
       location = locations[0];
       if (mapView) {
@@ -205,11 +216,10 @@ async function make(nav, demoVC) {
       }
     }
   };
-  del.locationManagerDidDidUpdateHeading = (...args) => {
-    console.log('locationManagerDidUpdateHeading', ...args);
-    const [_, heading] = args;
+  del.locationManagerDidDidUpdateHeading = (self, heading) => {
+    console.log('locationManagerDidUpdateHeading', self, heading.debugDescription);
     trueHeading = heading.trueHeading;
-    console.log(trueHeading);
+    headingLabel.text = heading.debugDescription;
   };
   mgr.delegate = del;
   mgr.requestAlwaysAuthorization();
