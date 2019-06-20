@@ -648,6 +648,7 @@ NAN_METHOD(NClass::New) {
   }
 }
 
+#include "NNSObjCRuntime.h"
 #include "NNSUserDefaults.h"
 #include "NNSMutableParagraphStyle.h"
 #include "NNSParagraphStyle.h"
@@ -658,6 +659,25 @@ NAN_METHOD(NClass::New) {
 #include "NNSTimeZone.h"
 #include "NNSDateComponents.h"
 #include "NNSCalendar.h"
+#include "NNSCoder.h"
+#include "NNSURL.h"
+#include "NNSURLRequest.h"
+#include "NNSMutableURLRequest.h"
+#include "NNSURLResponse.h"
+#include "NNSHTTPURLResponse.h" // : NSURLResponse
+#include "NNSURLProtectionSpace.h"
+#include "NNSURLCredential.h"
+#include "NNSURLAuthenticationChallenge.h"
+#include "NNSStream.h"
+#include "NNSInputStream.h"
+#include "NNSCache.h"
+#include "NNSBundle.h"
+#include "NNSNotification.h"
+#include "NNSNotificationCenter.h"
+#include "NNSOperation.h"
+#include "NNSOperationQueue.h"
+#include "NNSBlockOperation.h" // : NSOperation
+#include "NNSInvocationOperation.h" // : NSOperation
 
 #include "NUIBezierPath.h"
 #include "NUILabel.h"
@@ -760,7 +780,10 @@ NAN_METHOD(NClass::New) {
 #include "NUIMotionEffect.h"
 #include "NUILayoutGuide.h"
 #include "NUITableViewManager.h"
+#include "NUIEvent.h"
+#include "NUIPressesEvent.h"
 #include "NUITouch.h"
+#include "NUIPress.h"
 #include "NUIBarButtonItem.h"
 #include "NARSKView.h"
 #include "NARSession.h"
@@ -777,19 +800,6 @@ NAN_METHOD(NClass::New) {
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
 #include "NARSKViewDelegate.h"
-#include "NNSCoder.h"
-#include "NNSURL.h"
-#include "NNSURLRequest.h"
-#include "NNSMutableURLRequest.h"
-#include "NNSURLResponse.h"
-#include "NNSHTTPURLResponse.h" // : NSURLResponse
-#include "NNSURLProtectionSpace.h"
-#include "NNSURLCredential.h"
-#include "NNSURLAuthenticationChallenge.h"
-#include "NNSStream.h"
-#include "NNSInputStream.h"
-#include "NNSCache.h"
-#include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
 #include "NAVAudioSession.h"
@@ -928,6 +938,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
+    JS_EXPORT_TYPE(NSObjCRuntime);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
     JS_EXPORT_TYPE(NSURLRequest);
@@ -952,6 +963,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSDateComponents);
     JS_EXPORT_TYPE(NSCalendar);
     JS_EXPORT_TYPE(NSUUID);
+    JS_EXPORT_TYPE(NSNotification);
+    JS_EXPORT_TYPE(NSNotificationCenter);
+    JS_EXPORT_TYPE(NSOperation);
+    JS_EXPORT_TYPE(NSOperationQueue);
+    JS_EXPORT_TYPE(NSBlockOperation); // : NSOperation
+    JS_EXPORT_TYPE(NSInvocationOperation); // : NSOperation
 
     // UIKit
     JS_EXPORT_TYPE(UIGestureRecognizer);
@@ -1039,7 +1056,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UICollectionViewFlowLayoutInvalidationContext);
     JS_EXPORT_TYPE(UICollectionViewTransitionLayout);
     JS_EXPORT_TYPE(UINib);
+    JS_EXPORT_TYPE(UIEvent);
+    JS_EXPORT_TYPE(UIPressesEvent);
     JS_EXPORT_TYPE(UITouch);
+    JS_EXPORT_TYPE(UIPress);
     JS_EXPORT_TYPE(UIPageControl);
     JS_EXPORT_TYPE(UIPickerView);
     JS_EXPORT_TYPE(UIProgressView);
@@ -1552,7 +1572,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIMotionEffect);
       JS_RETURN_TYPE(UILayoutGuide);
       JS_RETURN_TYPE(UIApplication);
+      JS_RETURN_TYPE(UIPress);
       JS_RETURN_TYPE(UITouch);
+      JS_RETURN_TYPE(UIPressesEvent);
+      JS_RETURN_TYPE(UIEvent);
       JS_RETURN_TYPE(UIResponder);
       JS_RETURN_TYPE(UIAlertAction);
       JS_RETURN_TYPE(UINib);
@@ -1564,6 +1587,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // Objects
       
+      JS_RETURN_TYPE(NSInvocationOperation); // : NSOperation
+      JS_RETURN_TYPE(NSBlockOperation); // : NSOperation
+      JS_RETURN_TYPE(NSOperationQueue);
+      JS_RETURN_TYPE(NSOperation);
+      JS_RETURN_TYPE(NSNotificationCenter);
+      JS_RETURN_TYPE(NSNotification);
       JS_RETURN_TYPE(NSUUID);
       JS_RETURN_TYPE(NSCalendar);
       JS_RETURN_TYPE(NSDateComponents);
@@ -1588,7 +1617,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
+      JS_RETURN_TYPE(NSObjCRuntime);
       JS_RETURN_TYPE(NSObject);
+      if (object_isClass(obj)) {
+        return NClass::type;
+      }
       return Nid::type;
     }
   }

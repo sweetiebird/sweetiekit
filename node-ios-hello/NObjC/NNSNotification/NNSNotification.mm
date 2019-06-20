@@ -6,122 +6,115 @@
 //
 #include "NNSNotification.h"
 
+#define instancetype NSNotification
+#define js_value_instancetype js_value_NSNotification
+
 NNSNotification::NNSNotification () {}
 NNSNotification::~NNSNotification () {}
 
 JS_INIT_CLASS(NSNotification, NSObject);
+  JS_ASSIGN_STATIC_METHOD(notificationWithNameObject);
+  JS_ASSIGN_STATIC_METHOD(notificationWithNameObjectUserInfo);
+  JS_ASSIGN_PROTO_METHOD(initWithNameObjectUserInfo);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(init);
+  JS_ASSIGN_PROTO_PROP_READONLY(name);
+  JS_ASSIGN_PROTO_PROP_READONLY(object);
+  JS_ASSIGN_PROTO_PROP_READONLY(userInfo);
+
   // instance members (proto)
-  JS_ASSIGN_PROP_READONLY(proto, name);
-  JS_ASSIGN_PROP_READONLY(proto, object);
-  JS_ASSIGN_PROP_READONLY(proto, userInfo);
   // static members (ctor)
   JS_INIT_CTOR(NSNotification, NSObject);
-  JS_ASSIGN_METHOD(ctor, notificationWithName);
 JS_INIT_CLASS_END(NSNotification, NSObject);
 
 NAN_METHOD(NNSNotification::New) {
   JS_RECONSTRUCT(NSNotification);
-
-  Local<Object> obj = info.This();
-
-  NNSNotification *ns = new NNSNotification();
-
-  if (info[0]->IsExternal()) {
-    ns->SetNSObject((__bridge NSNotification *)(info[0].As<External>()->Value()));
-  } else if (info.Length() >= 2) {
-    @autoreleasepool {
-      NSString *name = NJSStringToNSString(info[0]);
-
-      id nsValue = sweetiekit::FromJS(info[1]);
-
-      Local<Object> infoObj = JS_OBJ(info[2]);
-      NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-      sweetiekit::forEachEntryInObject(infoObj, ^(Local<Value> key, Local<Value> value) {
-        Nan::HandleScope scope;
-        NSString* nsKey = NJSStringToNSString(key);
-        id nsValue = sweetiekit::FromJS(value);
-        dict[nsKey] = nsValue;
-      });
-      ns->SetNSObject([NSNotification notificationWithName:name object:nsValue userInfo:dict]);
-    }
-  } else {
-    @autoreleasepool {
-      ns->SetNSObject([[NSNotification alloc] init]);
-    }
-  }
-  ns->Wrap(obj);
-
-  JS_SET_RETURN(obj);
-}
-
-NAN_METHOD(NNSNotification::notificationWithName) {
   @autoreleasepool {
-    NSNotification* self = nil;
-    if (info.Length() == 2) {
-      NSString *name = to_value_NSString(info[0]);
-      id nsValue = to_value_id(info[1]);
-      self = [NSNotification notificationWithName:name object:nsValue];
-    } else if (info.Length() > 2) {
-      NSString *name = to_value_NSString(info[0]);
-      id nsValue = to_value_id(info[1]);
+    NSNotification* self = nullptr;
 
-      Local<Object> infoObj = JS_OBJ(info[2]);
-      NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-      sweetiekit::forEachEntryInObject(infoObj, ^(Local<Value> key, Local<Value> value) {
-        Nan::HandleScope scope;
-        NSString* nsKey = to_value_NSString(key);
-        id nsValue = to_value_id(value);
-        dict[nsKey] = nsValue;
-      });
-
-      self = [NSNotification notificationWithName:name object:nsValue userInfo:dict];
+    if (info[0]->IsExternal()) {
+      self = (__bridge NSNotification *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[NSNotification alloc] init];
     }
     if (self) {
-      JS_SET_RETURN_EXTERNAL(NSNotification, self);
+      NNSNotification *wrapper = new NNSNotification();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NSNotification::New: invalid arguments");
     }
+  }
+}
+
+NAN_METHOD(NNSNotification::notificationWithNameObject) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSNotificationName, aName);
+    declare_nullable_value(id, anObject);
+    JS_SET_RETURN(js_value_instancetype([NSNotification notificationWithName: aName object: anObject]));
+  }
+}
+
+NAN_METHOD(NNSNotification::notificationWithNameObjectUserInfo) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSNotificationName, aName);
+    declare_nullable_value(id, anObject);
+    declare_nullable_pointer(NSDictionary, aUserInfo);
+    JS_SET_RETURN(js_value_instancetype([NSNotification notificationWithName: aName object: anObject userInfo: aUserInfo]));
+  }
+}
+
+NAN_METHOD(NNSNotification::initWithNameObjectUserInfo) {
+  JS_UNWRAP_OR_ALLOC(NSNotification, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSNotificationName, name);
+    declare_nullable_value(id, object);
+    declare_nullable_pointer(NSDictionary, userInfo);
+    JS_SET_RETURN(js_value_instancetype([self initWithName: name object: object userInfo: userInfo]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NNSNotification::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(NSNotification, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
+  }
+}
+
+NAN_METHOD(NNSNotification::init) {
+  JS_UNWRAP_OR_ALLOC(NSNotification, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([self init]));
   }
 }
 
 NAN_GETTER(NNSNotification::nameGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSNotification, ns);
-  
-  JS_SET_RETURN(JS_STR([[ns name] UTF8String]));
+  JS_UNWRAP(NSNotification, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSNotificationName([self name]));
+  }
 }
 
 NAN_GETTER(NNSNotification::objectGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSNotification, ns);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ns object], NNSObject::type));
+  JS_UNWRAP(NSNotification, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self object]));
+  }
 }
 
 NAN_GETTER(NNSNotification::userInfoGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(NSNotification, ns);
-  
-  auto result = Nan::New<Array>();
-
-  @autoreleasepool {
-    NSDictionary *userInfo = [ns userInfo];
-    if (userInfo != nullptr) {
-      NSArray *keys = [userInfo allKeys];
-      for (NSUInteger i = 0, count = [keys count]; i < count; i++) {
-        NSString *k = [keys objectAtIndex:i];
-        id val = [userInfo valueForKey:k];
-        if ([val isKindOfClass:[NSString class]]) {
-          NSString *v = (NSString *)val;
-          Nan::Set(result, static_cast<uint32_t>(i), JS_STR([v UTF8String]));
-        } else if ([val isKindOfClass:[NSNumber class]]) {
-          NSNumber *v = (NSNumber *)val;
-          Nan::Set(result, static_cast<uint32_t>(i), JS_NUM([v doubleValue]));
-        } else {
-          Nan::Set(result, static_cast<uint32_t>(i), sweetiekit::GetWrapperFor(val, NNSObject::type));
-        }
-      }
-    }
+  JS_UNWRAP(NSNotification, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSDictionary([self userInfo]));
   }
 }
+

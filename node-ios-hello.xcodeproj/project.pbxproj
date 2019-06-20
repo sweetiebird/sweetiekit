@@ -317,6 +317,28 @@
 		A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4984522BAF404009AC951 /* NNSURLProtectionSpace.mm */; };
 		A1D4984C22BAF405009AC951 /* NNSURLCredential.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4984822BAF405009AC951 /* NNSURLCredential.mm */; };
 		A1D4985522BAFD40009AC951 /* NSecBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4985322BAFD40009AC951 /* NSecBase.mm */; };
+		A1D4986222BB29EB009AC951 /* NNSBlockOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4985722BB29EA009AC951 /* NNSBlockOperation.mm */; };
+		A1D4986322BB29EB009AC951 /* NNSOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4985B22BB29EA009AC951 /* NNSOperation.mm */; };
+		A1D4986422BB29EB009AC951 /* NNSOperationQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4985D22BB29EA009AC951 /* NNSOperationQueue.mm */; };
+		A1D4986522BB29EB009AC951 /* NNSInvocationOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4986022BB29EB009AC951 /* NNSInvocationOperation.mm */; };
+		A1D4986922BB2D6F009AC951 /* NNSObjCRuntime.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4986822BB2D6F009AC951 /* NNSObjCRuntime.mm */; };
+		A1D4987022BB3A62009AC951 /* NUIPressesEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4986C22BB3A61009AC951 /* NUIPressesEvent.mm */; };
+		A1D4987122BB3A62009AC951 /* NUIPress.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4986F22BB3A62009AC951 /* NUIPress.mm */; };
+		A1D4987522BB3D84009AC951 /* NNSUserActivity.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4987322BB3D84009AC951 /* NNSUserActivity.mm */; };
+		A1D4987922BB3DBC009AC951 /* NNSUserActivityDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4987822BB3DBB009AC951 /* NNSUserActivityDelegate.mm */; };
+		A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4987C22BB3EF0009AC951 /* NNSOutputStream.mm */; };
+		A1D4988122BB4112009AC951 /* NNSUndoManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4988022BB4112009AC951 /* NNSUndoManager.mm */; };
+		A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4988322BB4613009AC951 /* NUITextInputAssistantItem.mm */; };
+		A1D4988922BB4691009AC951 /* NUIInputViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4988822BB4691009AC951 /* NUIInputViewController.mm */; };
+		A1D4989022BB4731009AC951 /* NUILexiconEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4988C22BB4731009AC951 /* NUILexiconEntry.mm */; };
+		A1D4989122BB4731009AC951 /* NUILexicon.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4988E22BB4731009AC951 /* NUILexicon.mm */; };
+		A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4989422BB4790009AC951 /* NUIInputView.mm */; };
+		A1D4989922BB4933009AC951 /* NUITextInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4989822BB4932009AC951 /* NUITextInput.mm */; };
+		A1D4989D22BB49BD009AC951 /* NUIDictationPhrase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4989B22BB49BC009AC951 /* NUIDictationPhrase.mm */; };
+		A1D498AA22BB4A03009AC951 /* NUITextPosition.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A022BB4A02009AC951 /* NUITextPosition.mm */; };
+		A1D498AB22BB4A03009AC951 /* NUITextSelectionRect.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A322BB4A02009AC951 /* NUITextSelectionRect.mm */; };
+		A1D498AC22BB4A03009AC951 /* NUITextRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A622BB4A03009AC951 /* NUITextRange.mm */; };
+		A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A922BB4A03009AC951 /* NUITextInputStringTokenizer.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -957,6 +979,50 @@
 		A1D4984822BAF405009AC951 /* NNSURLCredential.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSURLCredential.mm; sourceTree = "<group>"; };
 		A1D4985322BAFD40009AC951 /* NSecBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSecBase.mm; sourceTree = "<group>"; };
 		A1D4985422BAFD40009AC951 /* NSecBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSecBase.h; sourceTree = "<group>"; };
+		A1D4985722BB29EA009AC951 /* NNSBlockOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSBlockOperation.mm; sourceTree = "<group>"; };
+		A1D4985822BB29EA009AC951 /* NNSBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSBlockOperation.h; sourceTree = "<group>"; };
+		A1D4985A22BB29EA009AC951 /* NNSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSOperation.h; sourceTree = "<group>"; };
+		A1D4985B22BB29EA009AC951 /* NNSOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSOperation.mm; sourceTree = "<group>"; };
+		A1D4985D22BB29EA009AC951 /* NNSOperationQueue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSOperationQueue.mm; sourceTree = "<group>"; };
+		A1D4985E22BB29EA009AC951 /* NNSOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSOperationQueue.h; sourceTree = "<group>"; };
+		A1D4986022BB29EB009AC951 /* NNSInvocationOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSInvocationOperation.mm; sourceTree = "<group>"; };
+		A1D4986122BB29EB009AC951 /* NNSInvocationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSInvocationOperation.h; sourceTree = "<group>"; };
+		A1D4986722BB2D6F009AC951 /* NNSObjCRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSObjCRuntime.h; sourceTree = "<group>"; };
+		A1D4986822BB2D6F009AC951 /* NNSObjCRuntime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSObjCRuntime.mm; sourceTree = "<group>"; };
+		A1D4986B22BB3A61009AC951 /* NUIPressesEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPressesEvent.h; sourceTree = "<group>"; };
+		A1D4986C22BB3A61009AC951 /* NUIPressesEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPressesEvent.mm; sourceTree = "<group>"; };
+		A1D4986E22BB3A62009AC951 /* NUIPress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPress.h; sourceTree = "<group>"; };
+		A1D4986F22BB3A62009AC951 /* NUIPress.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPress.mm; sourceTree = "<group>"; };
+		A1D4987322BB3D84009AC951 /* NNSUserActivity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserActivity.mm; sourceTree = "<group>"; };
+		A1D4987422BB3D84009AC951 /* NNSUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserActivity.h; sourceTree = "<group>"; };
+		A1D4987722BB3DBB009AC951 /* NNSUserActivityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserActivityDelegate.h; sourceTree = "<group>"; };
+		A1D4987822BB3DBB009AC951 /* NNSUserActivityDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserActivityDelegate.mm; sourceTree = "<group>"; };
+		A1D4987B22BB3EF0009AC951 /* NNSOutputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSOutputStream.h; sourceTree = "<group>"; };
+		A1D4987C22BB3EF0009AC951 /* NNSOutputStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSOutputStream.mm; sourceTree = "<group>"; };
+		A1D4987F22BB4112009AC951 /* NNSUndoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUndoManager.h; sourceTree = "<group>"; };
+		A1D4988022BB4112009AC951 /* NNSUndoManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUndoManager.mm; sourceTree = "<group>"; };
+		A1D4988322BB4613009AC951 /* NUITextInputAssistantItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputAssistantItem.mm; sourceTree = "<group>"; };
+		A1D4988422BB4613009AC951 /* NUITextInputAssistantItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInputAssistantItem.h; sourceTree = "<group>"; };
+		A1D4988722BB4691009AC951 /* NUIInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIInputViewController.h; sourceTree = "<group>"; };
+		A1D4988822BB4691009AC951 /* NUIInputViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIInputViewController.mm; sourceTree = "<group>"; };
+		A1D4988B22BB4731009AC951 /* NUILexiconEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILexiconEntry.h; sourceTree = "<group>"; };
+		A1D4988C22BB4731009AC951 /* NUILexiconEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILexiconEntry.mm; sourceTree = "<group>"; };
+		A1D4988E22BB4731009AC951 /* NUILexicon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUILexicon.mm; sourceTree = "<group>"; };
+		A1D4988F22BB4731009AC951 /* NUILexicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUILexicon.h; sourceTree = "<group>"; };
+		A1D4989322BB4790009AC951 /* NUIInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIInputView.h; sourceTree = "<group>"; };
+		A1D4989422BB4790009AC951 /* NUIInputView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIInputView.mm; sourceTree = "<group>"; };
+		A1D4989722BB4932009AC951 /* NUITextInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInput.h; sourceTree = "<group>"; };
+		A1D4989822BB4932009AC951 /* NUITextInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInput.mm; sourceTree = "<group>"; };
+		A1D4989B22BB49BC009AC951 /* NUIDictationPhrase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDictationPhrase.mm; sourceTree = "<group>"; };
+		A1D4989C22BB49BC009AC951 /* NUIDictationPhrase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDictationPhrase.h; sourceTree = "<group>"; };
+		A1D4989F22BB4A02009AC951 /* NUITextPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextPosition.h; sourceTree = "<group>"; };
+		A1D498A022BB4A02009AC951 /* NUITextPosition.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextPosition.mm; sourceTree = "<group>"; };
+		A1D498A222BB4A02009AC951 /* NUITextSelectionRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextSelectionRect.h; sourceTree = "<group>"; };
+		A1D498A322BB4A02009AC951 /* NUITextSelectionRect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextSelectionRect.mm; sourceTree = "<group>"; };
+		A1D498A522BB4A03009AC951 /* NUITextRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextRange.h; sourceTree = "<group>"; };
+		A1D498A622BB4A03009AC951 /* NUITextRange.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextRange.mm; sourceTree = "<group>"; };
+		A1D498A822BB4A03009AC951 /* NUITextInputStringTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInputStringTokenizer.h; sourceTree = "<group>"; };
+		A1D498A922BB4A03009AC951 /* NUITextInputStringTokenizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputStringTokenizer.mm; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -3568,6 +3634,204 @@
 			path = NSecBase;
 			sourceTree = "<group>";
 		};
+		A1D4985622BB29EA009AC951 /* NNSBlockOperation */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4985822BB29EA009AC951 /* NNSBlockOperation.h */,
+				A1D4985722BB29EA009AC951 /* NNSBlockOperation.mm */,
+			);
+			path = NNSBlockOperation;
+			sourceTree = "<group>";
+		};
+		A1D4985922BB29EA009AC951 /* NNSOperation */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4985A22BB29EA009AC951 /* NNSOperation.h */,
+				A1D4985B22BB29EA009AC951 /* NNSOperation.mm */,
+			);
+			path = NNSOperation;
+			sourceTree = "<group>";
+		};
+		A1D4985C22BB29EA009AC951 /* NNSOperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4985E22BB29EA009AC951 /* NNSOperationQueue.h */,
+				A1D4985D22BB29EA009AC951 /* NNSOperationQueue.mm */,
+			);
+			path = NNSOperationQueue;
+			sourceTree = "<group>";
+		};
+		A1D4985F22BB29EB009AC951 /* NNSInvocationOperation */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4986122BB29EB009AC951 /* NNSInvocationOperation.h */,
+				A1D4986022BB29EB009AC951 /* NNSInvocationOperation.mm */,
+			);
+			path = NNSInvocationOperation;
+			sourceTree = "<group>";
+		};
+		A1D4986622BB2D6F009AC951 /* NNSObjCRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4986722BB2D6F009AC951 /* NNSObjCRuntime.h */,
+				A1D4986822BB2D6F009AC951 /* NNSObjCRuntime.mm */,
+			);
+			path = NNSObjCRuntime;
+			sourceTree = "<group>";
+		};
+		A1D4986A22BB3A61009AC951 /* NUIPressesEvent */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4986B22BB3A61009AC951 /* NUIPressesEvent.h */,
+				A1D4986C22BB3A61009AC951 /* NUIPressesEvent.mm */,
+			);
+			path = NUIPressesEvent;
+			sourceTree = "<group>";
+		};
+		A1D4986D22BB3A62009AC951 /* NUIPress */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4986E22BB3A62009AC951 /* NUIPress.h */,
+				A1D4986F22BB3A62009AC951 /* NUIPress.mm */,
+			);
+			path = NUIPress;
+			sourceTree = "<group>";
+		};
+		A1D4987222BB3D84009AC951 /* NNSUserActivity */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4987422BB3D84009AC951 /* NNSUserActivity.h */,
+				A1D4987322BB3D84009AC951 /* NNSUserActivity.mm */,
+			);
+			path = NNSUserActivity;
+			sourceTree = "<group>";
+		};
+		A1D4987622BB3DBB009AC951 /* NNSUserActivityDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4987722BB3DBB009AC951 /* NNSUserActivityDelegate.h */,
+				A1D4987822BB3DBB009AC951 /* NNSUserActivityDelegate.mm */,
+			);
+			path = NNSUserActivityDelegate;
+			sourceTree = "<group>";
+		};
+		A1D4987A22BB3EF0009AC951 /* NNSOutputStream */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4987B22BB3EF0009AC951 /* NNSOutputStream.h */,
+				A1D4987C22BB3EF0009AC951 /* NNSOutputStream.mm */,
+			);
+			path = NNSOutputStream;
+			sourceTree = "<group>";
+		};
+		A1D4987E22BB4112009AC951 /* NNSUndoManager */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4987F22BB4112009AC951 /* NNSUndoManager.h */,
+				A1D4988022BB4112009AC951 /* NNSUndoManager.mm */,
+			);
+			path = NNSUndoManager;
+			sourceTree = "<group>";
+		};
+		A1D4988222BB4613009AC951 /* NUITextInputAssistantItem */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4988422BB4613009AC951 /* NUITextInputAssistantItem.h */,
+				A1D4988322BB4613009AC951 /* NUITextInputAssistantItem.mm */,
+			);
+			path = NUITextInputAssistantItem;
+			sourceTree = "<group>";
+		};
+		A1D4988622BB4691009AC951 /* NUIInputViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4988722BB4691009AC951 /* NUIInputViewController.h */,
+				A1D4988822BB4691009AC951 /* NUIInputViewController.mm */,
+			);
+			path = NUIInputViewController;
+			sourceTree = "<group>";
+		};
+		A1D4988A22BB4731009AC951 /* NUILexiconEntry */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4988B22BB4731009AC951 /* NUILexiconEntry.h */,
+				A1D4988C22BB4731009AC951 /* NUILexiconEntry.mm */,
+			);
+			path = NUILexiconEntry;
+			sourceTree = "<group>";
+		};
+		A1D4988D22BB4731009AC951 /* NUILexicon */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4988F22BB4731009AC951 /* NUILexicon.h */,
+				A1D4988E22BB4731009AC951 /* NUILexicon.mm */,
+			);
+			path = NUILexicon;
+			sourceTree = "<group>";
+		};
+		A1D4989222BB4790009AC951 /* NUIInputView */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4989322BB4790009AC951 /* NUIInputView.h */,
+				A1D4989422BB4790009AC951 /* NUIInputView.mm */,
+			);
+			path = NUIInputView;
+			sourceTree = "<group>";
+		};
+		A1D4989622BB4932009AC951 /* NUITextInput */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4989722BB4932009AC951 /* NUITextInput.h */,
+				A1D4989822BB4932009AC951 /* NUITextInput.mm */,
+			);
+			path = NUITextInput;
+			sourceTree = "<group>";
+		};
+		A1D4989A22BB49BC009AC951 /* NUIDictationPhrase */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4989C22BB49BC009AC951 /* NUIDictationPhrase.h */,
+				A1D4989B22BB49BC009AC951 /* NUIDictationPhrase.mm */,
+			);
+			path = NUIDictationPhrase;
+			sourceTree = "<group>";
+		};
+		A1D4989E22BB4A02009AC951 /* NUITextPosition */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4989F22BB4A02009AC951 /* NUITextPosition.h */,
+				A1D498A022BB4A02009AC951 /* NUITextPosition.mm */,
+			);
+			path = NUITextPosition;
+			sourceTree = "<group>";
+		};
+		A1D498A122BB4A02009AC951 /* NUITextSelectionRect */ = {
+			isa = PBXGroup;
+			children = (
+				A1D498A222BB4A02009AC951 /* NUITextSelectionRect.h */,
+				A1D498A322BB4A02009AC951 /* NUITextSelectionRect.mm */,
+			);
+			path = NUITextSelectionRect;
+			sourceTree = "<group>";
+		};
+		A1D498A422BB4A03009AC951 /* NUITextRange */ = {
+			isa = PBXGroup;
+			children = (
+				A1D498A522BB4A03009AC951 /* NUITextRange.h */,
+				A1D498A622BB4A03009AC951 /* NUITextRange.mm */,
+			);
+			path = NUITextRange;
+			sourceTree = "<group>";
+		};
+		A1D498A722BB4A03009AC951 /* NUITextInputStringTokenizer */ = {
+			isa = PBXGroup;
+			children = (
+				A1D498A822BB4A03009AC951 /* NUITextInputStringTokenizer.h */,
+				A1D498A922BB4A03009AC951 /* NUITextInputStringTokenizer.mm */,
+			);
+			path = NUITextInputStringTokenizer;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -3664,6 +3928,19 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1D498A722BB4A03009AC951 /* NUITextInputStringTokenizer */,
+				A1D4989E22BB4A02009AC951 /* NUITextPosition */,
+				A1D498A422BB4A03009AC951 /* NUITextRange */,
+				A1D498A122BB4A02009AC951 /* NUITextSelectionRect */,
+				A1D4989A22BB49BC009AC951 /* NUIDictationPhrase */,
+				A1D4989622BB4932009AC951 /* NUITextInput */,
+				A1D4989222BB4790009AC951 /* NUIInputView */,
+				A1D4988D22BB4731009AC951 /* NUILexicon */,
+				A1D4988A22BB4731009AC951 /* NUILexiconEntry */,
+				A1D4988622BB4691009AC951 /* NUIInputViewController */,
+				A1D4988222BB4613009AC951 /* NUITextInputAssistantItem */,
+				A1D4986D22BB3A62009AC951 /* NUIPress */,
+				A1D4986A22BB3A61009AC951 /* NUIPressesEvent */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
@@ -3881,6 +4158,15 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4987E22BB4112009AC951 /* NNSUndoManager */,
+				A1D4987A22BB3EF0009AC951 /* NNSOutputStream */,
+				A1D4987622BB3DBB009AC951 /* NNSUserActivityDelegate */,
+				A1D4987222BB3D84009AC951 /* NNSUserActivity */,
+				A1D4986622BB2D6F009AC951 /* NNSObjCRuntime */,
+				A1D4985622BB29EA009AC951 /* NNSBlockOperation */,
+				A1D4985F22BB29EB009AC951 /* NNSInvocationOperation */,
+				A1D4985922BB29EA009AC951 /* NNSOperation */,
+				A1D4985C22BB29EA009AC951 /* NNSOperationQueue */,
 				A1CE2B6A228EB20800D9B3B8 /* NNSAttributedString */,
 				A174A16C22822286002A8216 /* NNSBundle */,
 				A133707D22AB34E600FA3768 /* NNSCache */,
@@ -4389,10 +4675,13 @@
 				A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
+				A1D4986522BB29EB009AC951 /* NNSInvocationOperation.mm in Sources */,
 				A19F39CE22AF2B3D00606332 /* NAUAudioUnitPreset.mm in Sources */,
+				A1D4988122BB4112009AC951 /* NNSUndoManager.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
 				A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */,
+				A1D4989022BB4731009AC951 /* NUILexiconEntry.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
@@ -4401,6 +4690,7 @@
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
 				A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
+				A1D498AB22BB4A03009AC951 /* NUITextSelectionRect.mm in Sources */,
 				A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */,
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
@@ -4450,6 +4740,7 @@
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
 				A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */,
 				A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */,
+				A1D4989122BB4731009AC951 /* NUILexicon.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
 				A1574E9A22B8108F006CC5F2 /* NNSLocale.mm in Sources */,
@@ -4469,13 +4760,16 @@
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
+				A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
+				A1D4989922BB4933009AC951 /* NUITextInput.mm in Sources */,
 				A1D4981B22B9BA6A009AC951 /* NCLRegion.mm in Sources */,
 				A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */,
 				A1BD4BC72288284E001D1F6E /* NUICollectionViewCell.mm in Sources */,
 				A133700522AAA5F200FA3768 /* NUITraitCollection.mm in Sources */,
+				A1D4987022BB3A62009AC951 /* NUIPressesEvent.mm in Sources */,
 				A1EE7D9122A428D6002B53FF /* NSCNCameraController.mm in Sources */,
 				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A1CE2B57228E808200D9B3B8 /* UIImageView+NGif.swift in Sources */,
@@ -4504,9 +4798,11 @@
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
+				A1D4987122BB3A62009AC951 /* NUIPress.mm in Sources */,
 				A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
+				A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
 				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
@@ -4519,6 +4815,7 @@
 				A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */,
 				A19F39C822AF2AA800606332 /* NAUParameterGroup.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A1D4986322BB29EB009AC951 /* NNSOperation.mm in Sources */,
 				A13370BD22AEEE1800FA3768 /* NAVAudioSessionChannelDescription.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
@@ -4532,6 +4829,7 @@
 				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
+				A1D4987922BB3DBC009AC951 /* NNSUserActivityDelegate.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
 				A1D4982022B9BBD0009AC951 /* NCNPostalAddress.mm in Sources */,
@@ -4540,6 +4838,7 @@
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
+				A1D498AC22BB4A03009AC951 /* NUITextRange.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */,
 				A1E5849622B1DD1000A967EF /* NUISplitViewController.mm in Sources */,
@@ -4564,6 +4863,7 @@
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
 				A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */,
+				A1D4988922BB4691009AC951 /* NUIInputViewController.mm in Sources */,
 				A13370AD22AEE79F00FA3768 /* NAVAudioSession.mm in Sources */,
 				A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */,
 				A133702222AAE76E00FA3768 /* NNSURLRequest.mm in Sources */,
@@ -4594,6 +4894,7 @@
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
+				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
 				A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */,
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
@@ -4611,6 +4912,7 @@
 				A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
+				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
 				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
@@ -4653,8 +4955,11 @@
 				A13370CD22AEFB3B00FA3768 /* NAVAudioConnectionPoint.mm in Sources */,
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
 				A133709522AB418200FA3768 /* NNSError.mm in Sources */,
+				A1D4986222BB29EB009AC951 /* NNSBlockOperation.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
+				A1D4986922BB2D6F009AC951 /* NNSObjCRuntime.mm in Sources */,
+				A1D498AA22BB4A03009AC951 /* NUITextPosition.mm in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */,
 				A13370EE22AF031D00FA3768 /* NAVAudioMixerNode.mm in Sources */,
@@ -4663,12 +4968,15 @@
 				A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */,
 				A19F39ED22AF651E00606332 /* NMDLMaterialProperty.mm in Sources */,
 				A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */,
+				A1D4987522BB3D84009AC951 /* NNSUserActivity.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				A1574F0222B93071006CC5F2 /* NCAAnimationGroup.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
+				A1D4989D22BB49BD009AC951 /* NUIDictationPhrase.mm in Sources */,
 				A19F39C922AF2AA800606332 /* NAUParameterNode.mm in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
+				A1D4986422BB29EB009AC951 /* NNSOperationQueue.mm in Sources */,
 				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
 				A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */,
 				A1EE7D82229E77FE002B53FF /* Nobjc.cpp in Sources */,
