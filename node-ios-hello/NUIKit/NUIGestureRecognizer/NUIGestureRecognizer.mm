@@ -86,14 +86,20 @@ NAN_METHOD(NUIGestureRecognizer::addTarget) {
   SUITarget* target = [[SUITarget alloc] init];
   
   [target setCallbackClosure:^(id _Nullable sender) {
-    Nan::HandleScope scope;
-    (*fn)("NUIGestureRecognizer::addTarget", js_value_id(sender));
+    dispatch_main(^{
+      if (fn) {
+        (*fn)("NUIGestureRecognizer::addTarget", js_value_id(sender));
+      }
+    });
   }];
 
   [target setDeinitClosure:^() {
-    Nan::HandleScope scope;
-    delete fn; fn = nullptr;
-    iOSLog0("NUIGestureRecognizer fn deleted");
+    dispatch_main(^{
+      if (fn) {
+        delete fn; fn = nullptr;
+        iOSLog0("NUIGestureRecognizer::addTarget: fn deleted");
+      }
+    });
   }];
 
   UIGestureRecognizer *rec = ui->As<UIGestureRecognizer>();
@@ -137,7 +143,7 @@ NAN_METHOD(NUIGestureRecognizer::addTargetAction) {
       dispatch_main(^{
         if (fn) {
           delete fn; fn = nullptr;
-          iOSLog0("NUIGestureRecognizer::addTargetAction");
+          iOSLog0("NUIGestureRecognizer::addTargetAction: fn deleted");
         }
       });
     }];

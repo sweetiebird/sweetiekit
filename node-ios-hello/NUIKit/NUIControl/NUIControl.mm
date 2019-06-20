@@ -203,7 +203,7 @@ NAN_METHOD(NUIControl::addTargetActionForControlEvents) {
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NUIControl::addTarget", js_value_id(sender));
+          (*fn)("NUIControl::addTargetActionForControlEvents", js_value_id(sender));
         }
       });
     }];
@@ -212,7 +212,7 @@ NAN_METHOD(NUIControl::addTargetActionForControlEvents) {
       dispatch_main(^{
         if (fn) {
           delete fn; fn = nullptr;
-          iOSLog0("fn deleted");
+          iOSLog0("NUIControl::addTargetActionForControlEvents: fn deleted");
         }
       });
     }];

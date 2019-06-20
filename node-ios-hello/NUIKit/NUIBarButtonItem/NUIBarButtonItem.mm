@@ -40,13 +40,17 @@ NAN_METHOD(NUIBarButtonItem::New) {
       SUITarget* target = [[SUITarget alloc] init];
       
       [target setCallbackClosure:^(id _Nullable sender) {
-        Nan::HandleScope scope;
-        (*fn)("NUIBarButtonItem::New", js_value_id(sender));
+        dispatch_main(^{
+          if (fn) {
+            (*fn)("NUIBarButtonItem::New", js_value_id(sender));
+          }
+        });
       }];
       [target setDeinitClosure:^() {
-        Nan::HandleScope scope;
-        delete fn; fn = nullptr;
-        iOSLog0("fn deleted");
+        dispatch_main(^{
+          delete fn; fn = nullptr;
+          iOSLog0("NUIBarButtonItem::New: fn deleted");
+        });
       }];
 
       UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:target action:[target callbackSelector]];

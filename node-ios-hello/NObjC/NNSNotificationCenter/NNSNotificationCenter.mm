@@ -64,7 +64,7 @@ NAN_METHOD(NNSNotificationCenter::addObserverSelectorNameObject) {
       dispatch_main(^{
         if (fn) {
           delete fn; fn = nullptr;
-          iOSLog0("NNSNotificationCenter::addObserverSelectorNameObject");
+          iOSLog0("NNSNotificationCenter::addObserverSelectorNameObject: fn deleted");
         }
       });
     }];
