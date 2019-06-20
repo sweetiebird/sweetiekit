@@ -1,4 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
+const colors = require('./colors');
 
 const {
   UIScrollView,
@@ -29,6 +30,7 @@ async function make(nav, demoVC) {
   const label1 = UILabel();
   label1.numberOfLines = 0;
   label1.text = 'Lorem ipsum dolor amet aliqua sunt lumbersexual cardigan. Authentic live-edge chia everyday carry, selfies id est. Coloring book activated charcoal dreamcatcher flannel direct trade wayfarers put a bird on it retro locavore health goth seitan enamel pin esse. Excepteur non irony, kitsch nulla pok pok raw denim plaid. Messenger bag deep v ut, photo booth raclette crucifix XOXO glossier veniam ugh labore. Tumblr celiac irure labore, beard live-edge street art health goth non marfa gochujang poke la croix plaid. Duis roof party poutine, copper mug normcore pickled microdosing swag messenger bag. Meggings nulla man braid 8-bit distillery, authentic affogato poke poutine selvage proident actually ullamco sartorial blog. Tattooed letterpress street art four loko. Photo booth hexagon mlkshk, cupidatat officia pinterest distillery. Portland hashtag labore dolore deserunt gochujang, tacos taxidermy ut selfies.';
+  label1.textColor = colors.getTheme().textColor;
   label1.sizeToFit();
   label1.translatesAutoresizingMaskIntoConstraints = false;
 

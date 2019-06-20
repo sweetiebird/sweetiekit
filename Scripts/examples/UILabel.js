@@ -1,4 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
+const colors = require('./colors');
 
 const {
   UILabel,
@@ -15,6 +16,7 @@ async function make(nav, demoVC) {
   const label = UILabel({ x: 12, y: 80, width: w - 24, height: 100 });
   label.numberOfLines = 0;
   label.text = 'Lorem ipsum dolor amet cray cronut pok pok veniam kitsch literally. Occupy letterpress mixtape mollit nostrud.';
+  label.textColor = colors.getTheme().textColor;
   label.sizeToFit();
   const label2y = label.frame.y + label.frame.height + 12;
   const label2 = UILabel({ x: 12, y: label2y, width: w - 24, height: 100 });
@@ -22,6 +24,7 @@ async function make(nav, demoVC) {
   label2.text = 'Pariatur ethical ullamco blue bottle lo-fi. Voluptate health goth plaid, kinfolk mixtape crucifix vaporware kickstarter pop-up fixie chillwave lomo. Kickstarter mumblecore brunch tofu in pok pok.';
   label2.font = font;
   label2.sizeToFit();
+  label2.textColor = colors.getTheme().textColor;
   labelsView.addSubview(label);
   labelsView.addSubview(label2);
   return labelsView;

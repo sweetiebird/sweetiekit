@@ -19,7 +19,7 @@ async function make(nav, demoVC) {
 
 
   const w = demoVC.view.frame.width;
-  textField = UITextField.alloc().initWithFrame(CGRectMake(12, 80, w - 24, 50));
+  textField = UITextField.alloc().initWithFrame(CGRectMake(12, 10, w - 24, 50));
   textField.placeholder = "Enter text here";
   textField.font = UIFont.systemFontOfSize(15);
   textField.borderStyle = UITextBorderStyleRoundedRect;
@@ -28,7 +28,7 @@ async function make(nav, demoVC) {
   pane.addSubview(textField);
 
   label = UILabel();
-  const y = textField.frame.y + textField.bounds.height + 10;
+  const y = 80;
   label.frame = CGRectMake(12, y, w - 24, pane.bounds.height - y);
   label.textColor = colors.getTheme().textColor;
   label.font = titleFont;
@@ -39,6 +39,7 @@ async function make(nav, demoVC) {
   textField.addTargetActionForControlEvents((self) => {
     console.log('textField changed:', self, self.text);
     label.text = self.text;
+    label.frame = CGRectMake(12, y, demoVC.view.frame.width - 24, pane.bounds.height/2 - y);
   },UIControlEventAllEditingEvents);
 
   textField.delegate = UITextFieldDelegate({
