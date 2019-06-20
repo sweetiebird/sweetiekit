@@ -18,6 +18,9 @@ JS_WRAP_CLASS(UITextInputMode, NSObject);
   JS_PROP_READONLY(primaryLanguage);
   JS_STATIC_PROP_READONLY(currentInputMode);
   JS_STATIC_PROP_READONLY(activeInputModes);
+// UITextInputMode
+  JS_STATIC_METHOD(currentInputMode);
+  JS_STATIC_METHOD(activeInputModes);
 JS_WRAP_CLASS_END(UITextInputMode);
 
 #endif /* NUITextInputMode_h */

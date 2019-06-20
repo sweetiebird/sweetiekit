@@ -648,6 +648,7 @@ NAN_METHOD(NClass::New) {
   }
 }
 
+#include "NNSObjCRuntime.h"
 #include "NNSUserDefaults.h"
 #include "NNSMutableParagraphStyle.h"
 #include "NNSParagraphStyle.h"
@@ -658,6 +659,29 @@ NAN_METHOD(NClass::New) {
 #include "NNSTimeZone.h"
 #include "NNSDateComponents.h"
 #include "NNSCalendar.h"
+#include "NNSCoder.h"
+#include "NNSURL.h"
+#include "NNSURLRequest.h"
+#include "NNSMutableURLRequest.h"
+#include "NNSURLResponse.h"
+#include "NNSHTTPURLResponse.h" // : NSURLResponse
+#include "NNSURLProtectionSpace.h"
+#include "NNSURLCredential.h"
+#include "NNSURLAuthenticationChallenge.h"
+#include "NNSStream.h"
+#include "NNSInputStream.h"
+#include "NNSOutputStream.h"
+#include "NNSCache.h"
+#include "NNSBundle.h"
+#include "NNSNotification.h"
+#include "NNSNotificationCenter.h"
+#include "NNSOperation.h"
+#include "NNSOperationQueue.h"
+#include "NNSBlockOperation.h" // : NSOperation
+#include "NNSInvocationOperation.h" // : NSOperation
+#include "NNSUndoManager.h"
+#include "NNSUserActivity.h"
+#include "NNSUserActivityDelegate.h"
 
 #include "NUIBezierPath.h"
 #include "NUILabel.h"
@@ -685,12 +709,19 @@ NAN_METHOD(NClass::New) {
 #include "NUIVisualEffect.h"
 #include "NUIBlurEffect.h"
 #include "NUIVisualEffectView.h"
+#include "NUITextInput.h"
+#include "NUITextInputStringTokenizer.h"
+#include "NUITextInputAssistantItem.h"
 #include "NUITextInputPasswordRules.h"
+#include "NUITextInputMode.h"
+#include "NUITextSelectionRect.h"
+#include "NUITextRange.h"
+#include "NUITextPosition.h"
 #include "NUITextField.h"
+#include "NUITextFieldDelegate.h"
 #include "NUIKeyCommand.h"
 #include "NUIStoryboardSegue.h"
 #include "NUIStoryboardUnwindSegueSource.h"
-#include "NUITextInputMode.h"
 #include "NUIStoryboard.h"
 #include "NUISearchController.h"
 #include "NUITabBarController.h"
@@ -745,11 +776,13 @@ NAN_METHOD(NClass::New) {
 #include "NCASpringAnimation.h" // : CABasicAnimation
 #include "NCAShapeLayer.h"
 #include "NUIPresentationController.h"
+#include "NUIInputViewController.h"
 #include "NUIAlertController.h"
 #include "NUIAlertAction.h"
 #include "NUIScrollView.h"
 #include "NUIScrollViewDelegate.h"
 #include "NUIStackView.h"
+#include "NUIInputView.h"
 #include "NUIGestureRecognizer.h"
 #include "NUITapGestureRecognizer.h"
 #include "NNSLayoutAnchor.h"
@@ -760,8 +793,20 @@ NAN_METHOD(NClass::New) {
 #include "NUIMotionEffect.h"
 #include "NUILayoutGuide.h"
 #include "NUITableViewManager.h"
+#include "NUIEvent.h"
+#include "NUIPressesEvent.h"
 #include "NUITouch.h"
+#include "NUIPress.h"
 #include "NUIBarButtonItem.h"
+#include "NGif.h"
+#include "NGifView.h"
+#include "NGifManager.h"
+#include "NUINib.h"
+#include "NUILexicon.h"
+#include "NUILexiconEntry.h"
+#include "NUIKitGlobals.h"
+#include "NUIDictationPhrase.h"
+
 #include "NARSKView.h"
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -777,19 +822,6 @@ NAN_METHOD(NClass::New) {
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
 #include "NARSKViewDelegate.h"
-#include "NNSCoder.h"
-#include "NNSURL.h"
-#include "NNSURLRequest.h"
-#include "NNSMutableURLRequest.h"
-#include "NNSURLResponse.h"
-#include "NNSHTTPURLResponse.h" // : NSURLResponse
-#include "NNSURLProtectionSpace.h"
-#include "NNSURLCredential.h"
-#include "NNSURLAuthenticationChallenge.h"
-#include "NNSStream.h"
-#include "NNSInputStream.h"
-#include "NNSCache.h"
-#include "NNSBundle.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
 #include "NAVAudioSession.h"
@@ -867,11 +899,6 @@ NAN_METHOD(NClass::New) {
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
 #include "NMKAnnotationView.h"
-#include "NUINib.h"
-#include "NGif.h"
-#include "NGifView.h"
-#include "NGifManager.h"
-#include "NUIKitGlobals.h"
 #include "NCoreGraphicsGlobals.h"
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
@@ -928,6 +955,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(id);
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
+    JS_EXPORT_TYPE(NSObjCRuntime);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
     JS_EXPORT_TYPE(NSURLRequest);
@@ -939,6 +967,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSURLAuthenticationChallenge);
     JS_EXPORT_TYPE(NSStream);
     JS_EXPORT_TYPE(NSInputStream);
+    JS_EXPORT_TYPE(NSOutputStream);
     JS_EXPORT_TYPE(NSCache);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
@@ -952,6 +981,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSDateComponents);
     JS_EXPORT_TYPE(NSCalendar);
     JS_EXPORT_TYPE(NSUUID);
+    JS_EXPORT_TYPE(NSNotification);
+    JS_EXPORT_TYPE(NSNotificationCenter);
+    JS_EXPORT_TYPE(NSOperation);
+    JS_EXPORT_TYPE(NSOperationQueue);
+    JS_EXPORT_TYPE(NSBlockOperation); // : NSOperation
+    JS_EXPORT_TYPE(NSInvocationOperation); // : NSOperation
+    JS_EXPORT_TYPE(NSUndoManager);
+    JS_EXPORT_TYPE(NSUserActivity);
+    JS_EXPORT_TYPE(NSUserActivityDelegate);
 
     // UIKit
     JS_EXPORT_TYPE(UIGestureRecognizer);
@@ -985,6 +1023,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UICollectionViewController);
     JS_EXPORT_TYPE(UINavigationController);
     JS_EXPORT_TYPE(UIImagePickerController);
+    JS_EXPORT_TYPE(UIInputViewController);
     JS_EXPORT_TYPE(UIPresentationController);
     JS_EXPORT_TYPE(UIPopoverPresentationController);
     JS_EXPORT_TYPE(UIAlertController);
@@ -1005,9 +1044,16 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIKeyCommand);
     JS_EXPORT_TYPE(UIStoryboardSegue);
     JS_EXPORT_TYPE(UIStoryboardUnwindSegueSource);
+    JS_EXPORT_TYPE(UITextInput);
+    JS_EXPORT_TYPE(UITextInputStringTokenizer);
+    JS_EXPORT_TYPE(UITextInputAssistantItem);
     JS_EXPORT_TYPE(UITextInputMode);
     JS_EXPORT_TYPE(UITextInputPasswordRules);
+    JS_EXPORT_TYPE(UITextSelectionRect);
+    JS_EXPORT_TYPE(UITextRange);
+    JS_EXPORT_TYPE(UITextPosition);
     JS_EXPORT_TYPE(UITextField);
+    JS_EXPORT_TYPE(UITextFieldDelegate);
     JS_EXPORT_TYPE(UIStepper);
     JS_EXPORT_TYPE(UISegmentedControl);
     
@@ -1038,14 +1084,21 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UICollectionViewFlowLayout);
     JS_EXPORT_TYPE(UICollectionViewFlowLayoutInvalidationContext);
     JS_EXPORT_TYPE(UICollectionViewTransitionLayout);
+    JS_EXPORT_TYPE(UIDictationPhrase);
     JS_EXPORT_TYPE(UINib);
+    JS_EXPORT_TYPE(UILexicon);
+    JS_EXPORT_TYPE(UILexiconEntry);
+    JS_EXPORT_TYPE(UIEvent);
+    JS_EXPORT_TYPE(UIPressesEvent);
     JS_EXPORT_TYPE(UITouch);
+    JS_EXPORT_TYPE(UIPress);
     JS_EXPORT_TYPE(UIPageControl);
     JS_EXPORT_TYPE(UIPickerView);
     JS_EXPORT_TYPE(UIProgressView);
     JS_EXPORT_TYPE(UIDatePicker);
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
+    JS_EXPORT_TYPE(UIInputView);
     JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
 
     // UIKit delegates
@@ -1460,10 +1513,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UISearchController);
       JS_RETURN_TYPE(UISplitViewController);
       JS_RETURN_TYPE(UITabBarController);
-      JS_RETURN_TYPE(UIViewController);
       JS_RETURN_TYPE(UIPopoverPresentationController);
       JS_RETURN_TYPE(UIPresentationController);
+      JS_RETURN_TYPE(UIInputViewController);
+      JS_RETURN_TYPE(UIViewController);
       // ========= views
+      JS_RETURN_TYPE(UIInputView);
       JS_RETURN_TYPE(UIStackView);
       JS_RETURN_TYPE(UITabBar);
       JS_RETURN_TYPE(UIDatePicker);
@@ -1504,9 +1559,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBlurEffect);
       JS_RETURN_TYPE(UIVisualEffect);
       JS_RETURN_TYPE(UIStoryboard);
-      JS_RETURN_TYPE(UITextInputPasswordRules);
+      JS_RETURN_TYPE(UITextFieldDelegate);
       JS_RETURN_TYPE(UITextField);
+      JS_RETURN_TYPE(UITextSelectionRect);
+      JS_RETURN_TYPE(UITextRange);
+      JS_RETURN_TYPE(UITextPosition);
+      JS_RETURN_TYPE(UITextInputPasswordRules);
       JS_RETURN_TYPE(UITextInputMode);
+      JS_RETURN_TYPE(UITextInputStringTokenizer);
+      JS_RETURN_TYPE(UITextInputAssistantItem);
+      JS_RETURN_TYPE(UITextInput);
       JS_RETURN_TYPE(UIStoryboardUnwindSegueSource);
       JS_RETURN_TYPE(UIStoryboardSegue);
       JS_RETURN_TYPE(UIKeyCommand);
@@ -1552,10 +1614,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIMotionEffect);
       JS_RETURN_TYPE(UILayoutGuide);
       JS_RETURN_TYPE(UIApplication);
+      JS_RETURN_TYPE(UIPress);
       JS_RETURN_TYPE(UITouch);
+      JS_RETURN_TYPE(UIPressesEvent);
+      JS_RETURN_TYPE(UIEvent);
       JS_RETURN_TYPE(UIResponder);
       JS_RETURN_TYPE(UIAlertAction);
+      JS_RETURN_TYPE(UILexiconEntry);
+      JS_RETURN_TYPE(UILexicon);
       JS_RETURN_TYPE(UINib);
+      JS_RETURN_TYPE(UIDictationPhrase);
       
       // Globals
       
@@ -1564,6 +1632,15 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // Objects
       
+      JS_RETURN_TYPE(NSUserActivityDelegate);
+      JS_RETURN_TYPE(NSUserActivity);
+      JS_RETURN_TYPE(NSUndoManager);
+      JS_RETURN_TYPE(NSInvocationOperation); // : NSOperation
+      JS_RETURN_TYPE(NSBlockOperation); // : NSOperation
+      JS_RETURN_TYPE(NSOperationQueue);
+      JS_RETURN_TYPE(NSOperation);
+      JS_RETURN_TYPE(NSNotificationCenter);
+      JS_RETURN_TYPE(NSNotification);
       JS_RETURN_TYPE(NSUUID);
       JS_RETURN_TYPE(NSCalendar);
       JS_RETURN_TYPE(NSDateComponents);
@@ -1576,6 +1653,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSParagraphStyle);
       JS_RETURN_TYPE(NSCache);
       JS_RETURN_TYPE(NSBundle);
+      JS_RETURN_TYPE(NSOutputStream);
       JS_RETURN_TYPE(NSInputStream);
       JS_RETURN_TYPE(NSStream);
       JS_RETURN_TYPE(NSURLAuthenticationChallenge);
@@ -1588,7 +1666,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
+      JS_RETURN_TYPE(NSObjCRuntime);
       JS_RETURN_TYPE(NSObject);
+      if (object_isClass(obj)) {
+        return NClass::type;
+      }
       return Nid::type;
     }
   }

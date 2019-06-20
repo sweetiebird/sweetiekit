@@ -24,10 +24,19 @@
 #define is_value_UIEventSubtype(x) IS_ENUM(UIEventSubtype, NSInteger, x)
 
 JS_WRAP_CLASS(UIEvent, NSObject);
-  JS_PROP(type);
-  JS_PROP(subtype);
-  JS_PROP(timestamp);
-  JS_PROP(allTouches);
+#if UIKIT_DEFINE_AS_PROPERTIES
+  JS_PROP_READONLY(allTouches);
+#else
+  JS_METHOD(allTouches);
+#endif
+  JS_METHOD(touchesForWindow);
+  JS_METHOD(touchesForView);
+  JS_METHOD(touchesForGestureRecognizer);
+  JS_METHOD(coalescedTouchesForTouch);
+  JS_METHOD(predictedTouchesForTouch);
+  JS_PROP_READONLY(type);
+  JS_PROP_READONLY(subtype);
+  JS_PROP_READONLY(timestamp);
 JS_WRAP_CLASS_END(UIEvent);
 
 #endif /* NUIEvent_h */

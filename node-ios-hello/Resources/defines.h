@@ -387,8 +387,10 @@ NAN_SETTER(N##type::key##Setter) { \
 #define call_delegate(after_callback, key, ...) \
   dispatch_main(^{ \
     call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
-    after_callback; \
-  });
+    if (callback) { \
+      after_callback; \
+    } \
+  })
 
 #define noop() {}
 
@@ -1218,6 +1220,10 @@ bool is_value_NSDictionary(Local<Value> value) {
   return true;
 }
 
+Local<Value> js_value_SEL(id _Nullable value);
+SEL _Nullable to_value_SEL(Local<Value> value, bool* _Nullable failed = nullptr);
+bool is_value_SEL(Local<Value> value);
+
 Local<Value> js_value_id(id _Nullable value);
 id _Nullable to_value_id(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_id(Local<Value> value);
@@ -1390,6 +1396,10 @@ bool is_value_boxed(Local<Value> value);
 #define js_value_wrapper_unknown(x, t) sweetiekit::GetWrapperFor(x)
 #define to_value_wrapper_unknown(x, t) to_value_wrapper(x, t)
 #define is_value_wrapper_unknown(x, t) is_value_wrapper(x, NSObject)
+
+#define js_value_bridged(x, t) sweetiekit::GetWrapperFor((__bridge id)x, Nid::type)
+#define to_value_bridged(x, t) (__bridge t)sweetiekit::GetValueFor(x)
+#define is_value_bridged(x, t) JS_INSTANCEOF(x, Nid)
   
 #define declare_value_(index, type, name) \
   auto name##_argument_index(index); \

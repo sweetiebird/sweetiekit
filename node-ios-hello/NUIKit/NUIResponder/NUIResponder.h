@@ -15,31 +15,60 @@
 #define is_value_UIResponder(x) is_value_wrapper(x, UIResponder)
 
 JS_WRAP_CLASS(UIResponder, NSObject);
+  JS_STATIC_METHOD(clearTextInputContextIdentifier);
+// UIResponderStandardEditActions
+  JS_METHOD(cut);
+  JS_METHOD(copy);
+  JS_METHOD(paste);
+  JS_METHOD(select);
+  JS_METHOD(selectAll);
+  JS_METHOD(delete_);
+  JS_METHOD(makeTextWritingDirectionLeftToRight);
+  JS_METHOD(makeTextWritingDirectionRightToLeft);
+  JS_METHOD(toggleBoldface);
+  JS_METHOD(toggleItalics);
+  JS_METHOD(toggleUnderline);
+  JS_METHOD(increaseSize);
+  JS_METHOD(decreaseSize);
+// UIResponder
+  JS_METHOD(nextResponder);
+  JS_METHOD(canBecomeFirstResponder);
+  JS_METHOD(becomeFirstResponder);
+  JS_METHOD(canResignFirstResponder);
+  JS_METHOD(resignFirstResponder);
+  JS_METHOD(isFirstResponder);
   JS_METHOD(touchesBeganWithEvent);
   JS_METHOD(touchesMovedWithEvent);
   JS_METHOD(touchesEndedWithEvent);
-  JS_PROP(nextResponder);
-  JS_PROP(canBecomeFirstResponder);
-  JS_PROP(canResignFirstResponder);
-  JS_PROP(isFirstResponder);
-  JS_PROP(undoManager);
-  // UIKeyCommand
-//  JS_PROP(input);
-//  JS_PROP(modifierFlags);
-//  JS_PROP(discoverabilityTitle);
-  // UIResponder
-  JS_PROP(keyCommands);
-  JS_PROP(inputView);
-  JS_PROP(inputAccessoryView);
-  JS_PROP(inputAssistantItem);
-  JS_PROP(inputViewController);
-  JS_PROP(inputAccessoryViewController);
-  JS_PROP(textInputMode);
-  JS_PROP(textInputContextIdentifier);
+  JS_METHOD(touchesCancelledWithEvent);
+  JS_METHOD(touchesEstimatedPropertiesUpdated);
+  JS_METHOD(pressesBeganWithEvent);
+  JS_METHOD(pressesChangedWithEvent);
+  JS_METHOD(pressesEndedWithEvent);
+  JS_METHOD(pressesCancelledWithEvent);
+  JS_METHOD(motionBeganWithEvent);
+  JS_METHOD(motionEndedWithEvent);
+  JS_METHOD(motionCancelledWithEvent);
+  JS_METHOD(remoteControlReceivedWithEvent);
+  JS_METHOD(canPerformActionWithSender);
+  JS_METHOD(targetForActionWithSender);
+  JS_METHOD(reloadInputViews);
+  JS_METHOD(updateUserActivityState);
+  JS_METHOD(restoreUserActivityState);
+  JS_PROP_READONLY(nextResponder);
+  JS_PROP_READONLY(canBecomeFirstResponder);
+  JS_PROP_READONLY(canResignFirstResponder);
+  JS_PROP_READONLY(isFirstResponder);
+  JS_PROP_READONLY(undoManager);
+  JS_PROP_READONLY(keyCommands);
+  JS_PROP_READONLY(inputView);
+  JS_PROP_READONLY(inputAccessoryView);
+  JS_PROP_READONLY(inputAssistantItem);
+  JS_PROP_READONLY(inputViewController);
+  JS_PROP_READONLY(inputAccessoryViewController);
+  JS_PROP_READONLY(textInputMode);
+  JS_PROP_READONLY(textInputContextIdentifier);
   JS_PROP(userActivity);
-  JS_PROP(touchesBegan);
-  JS_PROP(touchesMoved);
-  JS_PROP(touchesEnded);
 JS_WRAP_CLASS_END(UIResponder);
 
 #endif /* NUIResponder_h */

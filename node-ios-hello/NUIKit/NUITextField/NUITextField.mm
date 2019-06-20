@@ -17,6 +17,8 @@ NUITextField::~NUITextField()
 {
 }
 
+#include "NNSNotification.h"
+
 JS_INIT_CLASS(UITextField, UIControl);
   // instance members (proto)
   JS_ASSIGN_PROTO_PROP(callback);
@@ -77,8 +79,36 @@ JS_INIT_CLASS(UITextField, UIControl);
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
   JS_ASSIGN_PROTO_METHOD(initWithFrameCallback);
-  
   // constants (exports)
+  
+  //typedef NS_ENUM(NSInteger, UITextBorderStyle) {
+    JS_ASSIGN_ENUM(UITextBorderStyleNone, NSInteger);
+    JS_ASSIGN_ENUM(UITextBorderStyleLine, NSInteger);
+    JS_ASSIGN_ENUM(UITextBorderStyleBezel, NSInteger);
+    JS_ASSIGN_ENUM(UITextBorderStyleRoundedRect, NSInteger);
+  //};
+
+  //typedef NS_ENUM(NSInteger, UITextFieldViewMode) {
+    JS_ASSIGN_ENUM(UITextFieldViewModeNever, NSInteger);
+    JS_ASSIGN_ENUM(UITextFieldViewModeWhileEditing, NSInteger);
+    JS_ASSIGN_ENUM(UITextFieldViewModeUnlessEditing, NSInteger);
+    JS_ASSIGN_ENUM(UITextFieldViewModeAlways, NSInteger);
+  //};
+
+  //typedef NS_ENUM(NSInteger, UITextFieldDidEndEditingReason) {
+    JS_ASSIGN_ENUM(UITextFieldDidEndEditingReasonCommitted, NSInteger);
+#ifdef __TVOS__
+    JS_ASSIGN_ENUM(UITextFieldDidEndEditingReasonCancelled, NSInteger); // UIKIT_AVAILABLE_TVOS_ONLY(10_0)
+#endif
+  //} NS_ENUM_AVAILABLE_IOS(10_0);
+
+  JS_ASSIGN_ENUM(UITextFieldTextDidBeginEditingNotification, NSNotificationName);
+  JS_ASSIGN_ENUM(UITextFieldTextDidEndEditingNotification, NSNotificationName);
+  JS_ASSIGN_ENUM(UITextFieldTextDidChangeNotification, NSNotificationName);
+
+  JS_ASSIGN_ENUM(UITextFieldDidEndEditingReasonKey, NSString); // NS_AVAILABLE_IOS(10_0);
+
+  // constants (exports) from UITextInputTraits.h
 
 //
 // UITextAutocapitalizationType
@@ -617,6 +647,7 @@ NAN_SETTER(NUITextField::delegateSetter) {
     declare_setter();
     declare_value(id/* <UITextFieldDelegate>*/, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NUITextField::delegate"];
   }
 }
 

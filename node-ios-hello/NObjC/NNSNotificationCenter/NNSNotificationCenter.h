@@ -15,8 +15,14 @@
 #define is_value_NSNotificationCenter(x) is_value_wrapper(x, NSNotificationCenter)
 
 JS_WRAP_CLASS(NSNotificationCenter, NSObject);
+  JS_METHOD(addObserverSelectorNameObject);
   JS_METHOD(postNotification);
-  JS_METHOD(addObserverForName);
+  JS_METHOD(postNotificationNameObject);
+  JS_METHOD(postNotificationNameObjectUserInfo);
+  JS_METHOD(removeObserver);
+  JS_METHOD(removeObserverNameObject);
+  JS_METHOD(addObserverForNameObjectQueueUsingBlock);
+  JS_STATIC_PROP_READONLY(defaultCenter);
 JS_WRAP_CLASS_END(NSNotificationCenter);
 
 #endif /* NNSNotificationCenter_h */

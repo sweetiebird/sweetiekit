@@ -2475,6 +2475,47 @@ bool is_value_UIOffset(const Local<Value>& value)
   return true;
 }
 
+Local<Value> js_value_SEL(id _Nullable value) {
+  return sweetiekit::GetWrapperFor(value);
+}
+
+SEL _Nullable to_value_SEL(Local<Value> value, bool* _Nullable failed) {
+  @autoreleasepool {
+    if (!is_value_SEL(value)) {
+      if (failed) {
+        *failed = true;
+      } else {
+        Nan::ThrowError("to_value_SEL failed");
+        return nil;
+      }
+    }
+    
+    NSString* selectorName = to_value_NSString(value);
+    if (selectorName) {
+      SEL action = NSSelectorFromString(selectorName);
+      if (!action) {
+        if (failed) {
+          *failed = true;
+        } else {
+          Nan::ThrowError("to_value_SEL: NSSelectorFromString returned nil");
+        }
+        return nil;
+      }
+      return action;
+    }
+  }
+  if (failed) {
+    *failed = true;
+  } else {
+    Nan::ThrowError("to_value_SEL: nil result");
+  }
+  return nil;
+}
+
+bool is_value_SEL(Local<Value> value) {
+  return is_value_NSString(value);
+}
+
 Local<Value> js_value_id(id _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }

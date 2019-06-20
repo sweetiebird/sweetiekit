@@ -14,10 +14,6 @@
 #define to_value_SecBase(x) to_value_wrapper(x, SecBase)
 #define is_value_SecBase(x) is_value_wrapper(x, SecBase)
 
-#define js_value_bridged(x, t) sweetiekit::GetWrapperFor((__bridge id)x, Nid::type)
-#define to_value_bridged(x, t) (__bridge t)sweetiekit::GetValueFor(x)
-#define is_value_bridged(x, t) JS_INSTANCEOF(x, Nid)
-
 //typedef struct CF_BRIDGED_TYPE(id) SECTYPE(SecCertificate) *SecCertificateRef;
 #define js_value_SecCertificateRef(x) js_value_bridged(x, SecCertificateRef)
 #define to_value_SecCertificateRef(x) to_value_bridged(x, SecCertificateRef)

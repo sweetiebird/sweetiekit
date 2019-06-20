@@ -30,6 +30,23 @@ JS_INIT_CLASS(NSURLProtectionSpace, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(NSURLProtectionSpace, NSObject);
   // constant values (exports)
+
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceHTTP, NSString); // API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceHTTPS, NSString); // API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceFTP, NSString); // API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceHTTPProxy, NSString);
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceHTTPSProxy, NSString);
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceFTPProxy, NSString);
+  JS_ASSIGN_ENUM(NSURLProtectionSpaceSOCKSProxy, NSString);
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodDefault, NSString);
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodHTTPBasic, NSString);
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodHTTPDigest, NSString);
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodHTMLForm, NSString);
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodNTLM, NSString); // API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodNegotiate, NSString); // API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodClientCertificate, NSString); // API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+  JS_ASSIGN_ENUM(NSURLAuthenticationMethodServerTrust, NSString); // API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+
 JS_INIT_CLASS_END(NSURLProtectionSpace, NSObject);
 
 NAN_METHOD(NNSURLProtectionSpace::New) {
