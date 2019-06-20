@@ -18,6 +18,7 @@ NUITextField::~NUITextField()
 }
 
 #include "NNSNotification.h"
+#include "NUITextInput.h"
 
 JS_INIT_CLASS(UITextField, UIControl);
   // instance members (proto)
@@ -75,6 +76,70 @@ JS_INIT_CLASS(UITextField, UIControl);
   JS_ASSIGN_PROTO_PROP(isSecureTextEntry);
   JS_ASSIGN_PROTO_PROP(textContentType);
   JS_ASSIGN_PROTO_PROP(passwordRules);
+  
+  
+  {
+      #if TODO
+      // UIKeyInput
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::hasText, "hasText");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::insertText, "insertText");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::deleteBackward, "deleteBackward");
+      #endif
+      // UITextInput
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::textInRange, "textInRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::replaceRangeWithText, "replaceRangeWithText");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::setMarkedTextSelectedRange, "setMarkedTextSelectedRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::unmarkText, "unmarkText");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::textRangeFromPositionToPosition, "textRangeFromPositionToPosition");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::positionFromPositionOffset, "positionFromPositionOffset");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::positionFromPositionInDirectionOffset, "positionFromPositionInDirectionOffset");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::comparePositionToPosition, "comparePositionToPosition");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::offsetFromPositionToPosition, "offsetFromPositionToPosition");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::positionWithinRangeFarthestInDirection, "positionWithinRangeFarthestInDirection");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::characterRangeByExtendingPositionInDirection, "characterRangeByExtendingPositionInDirection");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::baseWritingDirectionForPositionInDirection, "baseWritingDirectionForPositionInDirection");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::setBaseWritingDirectionForRange, "setBaseWritingDirectionForRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::firstRectForRange, "firstRectForRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::caretRectForPosition, "caretRectForPosition");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::selectionRectsForRange, "selectionRectsForRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::closestPositionToPoint, "closestPositionToPoint");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::closestPositionToPointWithinRange, "closestPositionToPointWithinRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::characterRangeAtPoint, "characterRangeAtPoint");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::shouldChangeTextInRangeReplacementText, "shouldChangeTextInRangeReplacementText");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::textStylingAtPositionInDirection, "textStylingAtPositionInDirection");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::positionWithinRangeAtCharacterOffset, "positionWithinRangeAtCharacterOffset");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::characterOffsetOfPositionWithinRange, "characterOffsetOfPositionWithinRange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::insertDictationResult, "insertDictationResult");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::dictationRecordingDidEnd, "dictationRecordingDidEnd");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::dictationRecognitionFailed, "dictationRecognitionFailed");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::insertDictationResultPlaceholder, "insertDictationResultPlaceholder");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::frameForDictationResultPlaceholder, "frameForDictationResultPlaceholder");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::removeDictationResultPlaceholderWillInsertResult, "removeDictationResultPlaceholderWillInsertResult");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::beginFloatingCursorAtPoint, "beginFloatingCursorAtPoint");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::updateFloatingCursorAtPoint, "updateFloatingCursorAtPoint");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::endFloatingCursor, "endFloatingCursor");
+      #if TODO
+      // UITextInputDelegate
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::selectionWillChange, "selectionWillChange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::selectionDidChange, "selectionDidChange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::textWillChange, "textWillChange");
+        JS_ASSIGN_PROTO_METHOD_AS(NUITextInput::textDidChange, "textDidChange");
+      // UIKeyInput
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::hasText, "hasText");
+      #endif
+      // UITextInput
+        JS_ASSIGN_PROTO_PROP_AS(NUITextInput::selectedTextRange, "selectedTextRange");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::markedTextRange, "markedTextRange");
+        JS_ASSIGN_PROTO_PROP_AS(NUITextInput::markedTextStyle, "markedTextStyle");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::beginningOfDocument, "beginningOfDocument");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::endOfDocument, "endOfDocument");
+        JS_ASSIGN_PROTO_PROP_AS(NUITextInput::inputDelegate, "inputDelegate");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::tokenizer, "tokenizer");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::textInputView, "textInputView");
+        JS_ASSIGN_PROTO_PROP_AS(NUITextInput::selectionAffinity, "selectionAffinity");
+        JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::insertDictationResultPlaceholder, "insertDictationResultPlaceholder");
+
+  }
 
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);

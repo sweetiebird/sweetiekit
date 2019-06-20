@@ -14,15 +14,15 @@ NUITextInput::~NUITextInput() {}
 
 #include "NNSNotification.h"
 
-JS_INIT_CLASS(UITextInput, NSObject);
+JS_INIT_CLASS_ALLOC(UITextInput, NSObject, noop());
+  UITextInputProtocol = NSProtocolFromString(@"UITextInput");
 #if TODO
 // UIKeyInput
   JS_ASSIGN_PROTO_METHOD(hasText);
   JS_ASSIGN_PROTO_METHOD(insertText);
   JS_ASSIGN_PROTO_METHOD(deleteBackward);
+#endif
 // UITextInput
-  JS_ASSIGN_STATIC_METHOD(currentInputMode);
-  JS_ASSIGN_STATIC_METHOD(activeInputModes);
   JS_ASSIGN_PROTO_METHOD(textInRange);
   JS_ASSIGN_PROTO_METHOD(replaceRangeWithText);
   JS_ASSIGN_PROTO_METHOD(setMarkedTextSelectedRange);
@@ -55,6 +55,7 @@ JS_INIT_CLASS(UITextInput, NSObject);
   JS_ASSIGN_PROTO_METHOD(beginFloatingCursorAtPoint);
   JS_ASSIGN_PROTO_METHOD(updateFloatingCursorAtPoint);
   JS_ASSIGN_PROTO_METHOD(endFloatingCursor);
+#if TODO
 // UITextInputDelegate
   JS_ASSIGN_PROTO_METHOD(selectionWillChange);
   JS_ASSIGN_PROTO_METHOD(selectionDidChange);
@@ -62,6 +63,7 @@ JS_INIT_CLASS(UITextInput, NSObject);
   JS_ASSIGN_PROTO_METHOD(textDidChange);
 // UIKeyInput
   JS_ASSIGN_PROTO_PROP_READONLY(hasText);
+#endif
 // UITextInput
   JS_ASSIGN_PROTO_PROP(selectedTextRange);
   JS_ASSIGN_PROTO_PROP_READONLY(markedTextRange);
@@ -73,7 +75,6 @@ JS_INIT_CLASS(UITextInput, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(textInputView);
   JS_ASSIGN_PROTO_PROP(selectionAffinity);
   JS_ASSIGN_PROTO_PROP_READONLY(insertDictationResultPlaceholder);
-#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -115,17 +116,17 @@ JS_INIT_CLASS(UITextInput, NSObject);
 
   JS_ASSIGN_ENUM(UITextInputCurrentInputModeDidChangeNotification, NSNotificationName); // NS_AVAILABLE_IOS(4_2);
 
-JS_INIT_CLASS_END(UITextInput, NSObject);
+JS_INIT_PROTOCOL_END(UITextInput, NSObject);
 
 NAN_METHOD(NUITextInput::New) {
   JS_RECONSTRUCT(UITextInput);
   @autoreleasepool {
-    UITextInput* self = nullptr;
+    id<UITextInput> self = nullptr;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge UITextInput *)(info[0].As<External>()->Value());
-    } else if (info.Length() <= 0) {
-      self = [[UITextInput alloc] init];
+      self = (__bridge id<UITextInput>)(info[0].As<External>()->Value());
+    } else if (is_value_UITextInput(info[0])) {
+      self = to_value_UITextInput(info[0]);
     }
     if (self) {
       NUITextInput *wrapper = new NUITextInput();
@@ -142,14 +143,14 @@ NAN_METHOD(NUITextInput::New) {
 #if TODO
 
 NAN_METHOD(NUIKeyInput::hasText) {
-  JS_UNWRAP(UIKeyInput, self);
+  JS_UNWRAP_PROTOCOL(UIKeyInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self hasText]));
   }
 }
 
 NAN_METHOD(NUIKeyInput::insertText) {
-  JS_UNWRAP(UIKeyInput, self);
+  JS_UNWRAP_PROTOCOL(UIKeyInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, text);
@@ -158,14 +159,17 @@ NAN_METHOD(NUIKeyInput::insertText) {
 }
 
 NAN_METHOD(NUIKeyInput::deleteBackward) {
-  JS_UNWRAP(UIKeyInput, self);
+  JS_UNWRAP_PROTOCOL(UIKeyInput, self);
   declare_autoreleasepool {
     [self deleteBackward];
   }
 }
+#endif
+
+#include "NUITextRange.h"
 
 NAN_METHOD(NUITextInput::textInRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -174,7 +178,7 @@ NAN_METHOD(NUITextInput::textInRange) {
 }
 
 NAN_METHOD(NUITextInput::replaceRangeWithText) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -184,7 +188,7 @@ NAN_METHOD(NUITextInput::replaceRangeWithText) {
 }
 
 NAN_METHOD(NUITextInput::setMarkedTextSelectedRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_pointer(NSString, markedText);
@@ -194,14 +198,16 @@ NAN_METHOD(NUITextInput::setMarkedTextSelectedRange) {
 }
 
 NAN_METHOD(NUITextInput::unmarkText) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     [self unmarkText];
   }
 }
 
+#include "NUITextPosition.h"
+
 NAN_METHOD(NUITextInput::textRangeFromPositionToPosition) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, fromPosition);
@@ -211,7 +217,7 @@ NAN_METHOD(NUITextInput::textRangeFromPositionToPosition) {
 }
 
 NAN_METHOD(NUITextInput::positionFromPositionOffset) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -221,7 +227,7 @@ NAN_METHOD(NUITextInput::positionFromPositionOffset) {
 }
 
 NAN_METHOD(NUITextInput::positionFromPositionInDirectionOffset) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -231,8 +237,10 @@ NAN_METHOD(NUITextInput::positionFromPositionInDirectionOffset) {
   }
 }
 
+#include "NNSObjCRuntime.h"
+
 NAN_METHOD(NUITextInput::comparePositionToPosition) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -242,7 +250,7 @@ NAN_METHOD(NUITextInput::comparePositionToPosition) {
 }
 
 NAN_METHOD(NUITextInput::offsetFromPositionToPosition) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, from);
@@ -252,7 +260,7 @@ NAN_METHOD(NUITextInput::offsetFromPositionToPosition) {
 }
 
 NAN_METHOD(NUITextInput::positionWithinRangeFarthestInDirection) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -262,7 +270,7 @@ NAN_METHOD(NUITextInput::positionWithinRangeFarthestInDirection) {
 }
 
 NAN_METHOD(NUITextInput::characterRangeByExtendingPositionInDirection) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -272,7 +280,7 @@ NAN_METHOD(NUITextInput::characterRangeByExtendingPositionInDirection) {
 }
 
 NAN_METHOD(NUITextInput::baseWritingDirectionForPositionInDirection) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -282,7 +290,7 @@ NAN_METHOD(NUITextInput::baseWritingDirectionForPositionInDirection) {
 }
 
 NAN_METHOD(NUITextInput::setBaseWritingDirectionForRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(UITextWritingDirection, writingDirection);
@@ -292,7 +300,7 @@ NAN_METHOD(NUITextInput::setBaseWritingDirectionForRange) {
 }
 
 NAN_METHOD(NUITextInput::firstRectForRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -301,7 +309,7 @@ NAN_METHOD(NUITextInput::firstRectForRange) {
 }
 
 NAN_METHOD(NUITextInput::caretRectForPosition) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -310,7 +318,7 @@ NAN_METHOD(NUITextInput::caretRectForPosition) {
 }
 
 NAN_METHOD(NUITextInput::selectionRectsForRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -319,7 +327,7 @@ NAN_METHOD(NUITextInput::selectionRectsForRange) {
 }
 
 NAN_METHOD(NUITextInput::closestPositionToPoint) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGPoint, point);
@@ -328,7 +336,7 @@ NAN_METHOD(NUITextInput::closestPositionToPoint) {
 }
 
 NAN_METHOD(NUITextInput::closestPositionToPointWithinRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGPoint, point);
@@ -338,7 +346,7 @@ NAN_METHOD(NUITextInput::closestPositionToPointWithinRange) {
 }
 
 NAN_METHOD(NUITextInput::characterRangeAtPoint) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGPoint, point);
@@ -347,7 +355,7 @@ NAN_METHOD(NUITextInput::characterRangeAtPoint) {
 }
 
 NAN_METHOD(NUITextInput::shouldChangeTextInRangeReplacementText) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -357,17 +365,17 @@ NAN_METHOD(NUITextInput::shouldChangeTextInRangeReplacementText) {
 }
 
 NAN_METHOD(NUITextInput::textStylingAtPositionInDirection) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
     declare_value(UITextStorageDirection, direction);
-    JS_SET_RETURN(js_value_NSDictionary<NSAttributedStringKey_id>([self textStylingAtPosition: position inDirection: direction]));
+    JS_SET_RETURN(js_value_NSDictionary/* <NSAttributedStringKey, id>*/([self textStylingAtPosition: position inDirection: direction]));
   }
 }
 
 NAN_METHOD(NUITextInput::positionWithinRangeAtCharacterOffset) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextRange, range);
@@ -377,7 +385,7 @@ NAN_METHOD(NUITextInput::positionWithinRangeAtCharacterOffset) {
 }
 
 NAN_METHOD(NUITextInput::characterOffsetOfPositionWithinRange) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(UITextPosition, position);
@@ -387,7 +395,7 @@ NAN_METHOD(NUITextInput::characterOffsetOfPositionWithinRange) {
 }
 
 NAN_METHOD(NUITextInput::insertDictationResult) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSArray<UIDictationPhrase*>, dictationResult);
@@ -396,28 +404,28 @@ NAN_METHOD(NUITextInput::insertDictationResult) {
 }
 
 NAN_METHOD(NUITextInput::dictationRecordingDidEnd) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     [self dictationRecordingDidEnd];
   }
 }
 
 NAN_METHOD(NUITextInput::dictationRecognitionFailed) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     [self dictationRecognitionFailed];
   }
 }
 
 NAN_METHOD(NUITextInput::insertDictationResultPlaceholder) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_id([self insertDictationResultPlaceholder]));
   }
 }
 
 NAN_METHOD(NUITextInput::frameForDictationResultPlaceholder) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id, placeholder);
@@ -426,7 +434,7 @@ NAN_METHOD(NUITextInput::frameForDictationResultPlaceholder) {
 }
 
 NAN_METHOD(NUITextInput::removeDictationResultPlaceholderWillInsertResult) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(id, placeholder);
@@ -436,7 +444,7 @@ NAN_METHOD(NUITextInput::removeDictationResultPlaceholderWillInsertResult) {
 }
 
 NAN_METHOD(NUITextInput::beginFloatingCursorAtPoint) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGPoint, point);
@@ -445,7 +453,7 @@ NAN_METHOD(NUITextInput::beginFloatingCursorAtPoint) {
 }
 
 NAN_METHOD(NUITextInput::updateFloatingCursorAtPoint) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_args();
     declare_value(CGPoint, point);
@@ -454,14 +462,15 @@ NAN_METHOD(NUITextInput::updateFloatingCursorAtPoint) {
 }
 
 NAN_METHOD(NUITextInput::endFloatingCursor) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     [self endFloatingCursor];
   }
 }
 
+#if TODO
 NAN_METHOD(NUITextInputDelegate::selectionWillChange) {
-  JS_UNWRAP(UITextInputDelegate, self);
+  JS_UNWRAP_PROTOCOL(UITextInputDelegate, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id<UITextInput>, textInput);
@@ -470,7 +479,7 @@ NAN_METHOD(NUITextInputDelegate::selectionWillChange) {
 }
 
 NAN_METHOD(NUITextInputDelegate::selectionDidChange) {
-  JS_UNWRAP(UITextInputDelegate, self);
+  JS_UNWRAP_PROTOCOL(UITextInputDelegate, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id<UITextInput>, textInput);
@@ -479,7 +488,7 @@ NAN_METHOD(NUITextInputDelegate::selectionDidChange) {
 }
 
 NAN_METHOD(NUITextInputDelegate::textWillChange) {
-  JS_UNWRAP(UITextInputDelegate, self);
+  JS_UNWRAP_PROTOCOL(UITextInputDelegate, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id<UITextInput>, textInput);
@@ -488,7 +497,7 @@ NAN_METHOD(NUITextInputDelegate::textWillChange) {
 }
 
 NAN_METHOD(NUITextInputDelegate::textDidChange) {
-  JS_UNWRAP(UITextInputDelegate, self);
+  JS_UNWRAP_PROTOCOL(UITextInputDelegate, self);
   declare_autoreleasepool {
     declare_args();
     declare_nullable_value(id<UITextInput>, textInput);
@@ -497,22 +506,23 @@ NAN_METHOD(NUITextInputDelegate::textDidChange) {
 }
 
 NAN_GETTER(NUIKeyInput::hasTextGetter) {
-  JS_UNWRAP(UIKeyInput, self);
+  JS_UNWRAP_PROTOCOL(UIKeyInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self hasText]));
   }
 }
+#endif
 
 
 NAN_GETTER(NUITextInput::selectedTextRangeGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITextRange([self selectedTextRange]));
   }
 }
 
 NAN_SETTER(NUITextInput::selectedTextRangeSetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_setter();
     declare_pointer(UITextRange, input);
@@ -521,81 +531,87 @@ NAN_SETTER(NUITextInput::selectedTextRangeSetter) {
 }
 
 NAN_GETTER(NUITextInput::markedTextRangeGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITextRange([self markedTextRange]));
   }
 }
 
 NAN_GETTER(NUITextInput::markedTextStyleGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSDictionary<NSAttributedStringKey id>([self markedTextStyle]));
+    JS_SET_RETURN(js_value_NSDictionary/* <NSAttributedStringKey, id>*/([self markedTextStyle]));
   }
 }
 
 NAN_SETTER(NUITextInput::markedTextStyleSetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_pointer(NSDictionary<NSAttributedStringKey id>, input);
+    declare_pointer(NSDictionary/* <NSAttributedStringKey, id>*/, input);
     [self setMarkedTextStyle: input];
   }
 }
 
 NAN_GETTER(NUITextInput::beginningOfDocumentGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITextPosition([self beginningOfDocument]));
   }
 }
 
 NAN_GETTER(NUITextInput::endOfDocumentGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITextPosition([self endOfDocument]));
   }
 }
 
 NAN_GETTER(NUITextInput::inputDelegateGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id<UITextInputDelegate>([self inputDelegate]));
+    JS_SET_RETURN(js_value_id/* <UITextInputDelegate>*/([self inputDelegate]));
   }
 }
 
 NAN_SETTER(NUITextInput::inputDelegateSetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id<UITextInputDelegate>, input);
+    declare_value(id/* <UITextInputDelegate>*/, input);
     [self setInputDelegate: input];
+    {
+      NSObject* self = self_;
+      [self associateValue:input withKey:@"NUITextInput::inputDelegate"];
+    }
   }
 }
 
 NAN_GETTER(NUITextInput::tokenizerGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id<UITextInputTokenizer>([self tokenizer]));
+    JS_SET_RETURN(js_value_id/* <UITextInputTokenizer>*/([self tokenizer]));
   }
 }
 
+#include "NUIView.h"
+
 NAN_GETTER(NUITextInput::textInputViewGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UIView([self textInputView]));
   }
 }
 
 NAN_GETTER(NUITextInput::selectionAffinityGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITextStorageDirection([self selectionAffinity]));
   }
 }
 
 NAN_SETTER(NUITextInput::selectionAffinitySetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     declare_setter();
     declare_value(UITextStorageDirection, input);
@@ -604,12 +620,9 @@ NAN_SETTER(NUITextInput::selectionAffinitySetter) {
 }
 
 NAN_GETTER(NUITextInput::insertDictationResultPlaceholderGetter) {
-  JS_UNWRAP(UITextInput, self);
+  JS_UNWRAP_PROTOCOL(UITextInput, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_id([self insertDictationResultPlaceholder]));
   }
 }
-#endif
 
-@implementation UITextInput
-@end

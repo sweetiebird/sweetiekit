@@ -144,7 +144,6 @@ NAN_METHOD(NUISplitViewController::showDetailViewControllerSender) {
 #define JS_UNWRAP_PROTOCOL(type, name) \
   JS_UNWRAP_(id, name##_); \
   id<type> name(name##_);
-  
 
 NAN_METHOD(NUISplitViewControllerDelegate::splitViewControllerWillChangeToDisplayMode) {
   JS_UNWRAP_PROTOCOL(UISplitViewControllerDelegate, self);

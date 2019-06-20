@@ -624,7 +624,7 @@ NAN_METHOD(NNSObject::New) {
 NClass::NClass() {}
 NClass::~NClass() {}
 
-JS_INIT_CLASS_ALLOC(Class, id, nil);
+JS_INIT_CLASS_ALLOC(Class, id, noop());
   JS_INIT_CTOR(Class, id);
 JS_INIT_CLASS_END(Class, id);
 
@@ -1568,7 +1568,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UITextInputMode);
       JS_RETURN_TYPE(UITextInputStringTokenizer);
       JS_RETURN_TYPE(UITextInputAssistantItem);
-      JS_RETURN_TYPE(UITextInput);
+//      JS_RETURN_TYPE(UITextInput);
       JS_RETURN_TYPE(UIStoryboardUnwindSegueSource);
       JS_RETURN_TYPE(UIStoryboardSegue);
       JS_RETURN_TYPE(UIKeyCommand);

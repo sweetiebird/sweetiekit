@@ -10,9 +10,9 @@
 
 #include "NNSObject.h"
 
-#define js_value_UITextInput(x) js_value_wrapper(x, UITextInput)
-#define to_value_UITextInput(x) to_value_wrapper(x, UITextInput)
-#define is_value_UITextInput(x) is_value_wrapper(x, UITextInput)
+#define js_value_UITextInput(x) js_protocol_wrapper(x, UITextInput, NSObject)
+#define to_value_UITextInput(x) to_protocol_wrapper(x, UITextInput, NSObject)
+#define is_value_UITextInput(x) is_protocol_wrapper(x, UITextInput, NSObject)
 
 #define js_value_UITextStorageDirection(x) JS_ENUM(UITextStorageDirection, NSInteger, x)
 #define to_value_UITextStorageDirection(x) TO_ENUM(UITextStorageDirection, NSInteger, x)
@@ -34,12 +34,13 @@
 #define to_value_UITextGranularity(x) TO_ENUM(UITextGranularity, NSInteger, x)
 #define is_value_UITextGranularity(x) IS_ENUM(UITextGranularity, NSInteger, x)
 
-JS_WRAP_CLASS(UITextInput, NSObject);
+JS_WRAP_PROTOCOL(UITextInput, NSObject);
 #if TODO
 // UIKeyInput
   JS_METHOD(hasText);
   JS_METHOD(insertText);
   JS_METHOD(deleteBackward);
+#endif
 // UITextInput
   JS_METHOD(textInRange);
   JS_METHOD(replaceRangeWithText);
@@ -73,6 +74,7 @@ JS_WRAP_CLASS(UITextInput, NSObject);
   JS_METHOD(beginFloatingCursorAtPoint);
   JS_METHOD(updateFloatingCursorAtPoint);
   JS_METHOD(endFloatingCursor);
+#if TODO
 // UITextInputDelegate
   JS_METHOD(selectionWillChange);
   JS_METHOD(selectionDidChange);
@@ -80,6 +82,7 @@ JS_WRAP_CLASS(UITextInput, NSObject);
   JS_METHOD(textDidChange);
 // UIKeyInput
   JS_PROP_READONLY(hasText);
+#endif
 // UITextInput
   JS_PROP(selectedTextRange);
   JS_PROP_READONLY(markedTextRange);
@@ -91,13 +94,7 @@ JS_WRAP_CLASS(UITextInput, NSObject);
   JS_PROP_READONLY(textInputView);
   JS_PROP(selectionAffinity);
   JS_PROP_READONLY(insertDictationResultPlaceholder);
-#endif
 
-JS_WRAP_CLASS_END(UITextInput);
-
-#if __OBJC__
-@interface UITextInput : NSObject/* <UITextInput>*/
-@end
-#endif
+JS_WRAP_PROTOCOL_END(UITextInput, NSObject);
 
 #endif /* NUITextInput_h */

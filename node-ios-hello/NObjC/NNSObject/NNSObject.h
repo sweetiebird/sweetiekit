@@ -131,6 +131,14 @@ template<> struct ObjCProtocolTraits< id<name> > { static Protocol* protocol() {
 Protocol* name##Protocol;
 
 
+#define JS_UNWRAP_PROTOCOL(type, name) \
+  JS_UNWRAP_(id, name##_); \
+  id<type> name(name##_);
+
+#define JS_UNWRAPPED_PROTOCOL(type, name) \
+  JS_UNWRAPPED_(id, name##_); \
+  id<type> name(name##_);
+
 template<typename T>
 Local<Value>
 js_value_protocol(T x, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
@@ -143,14 +151,17 @@ js_value_protocol(T x, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
 
 template<typename T, typename K>
 T
-to_value_protocol(K self, bool* failed = nullptr, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
+to_value_protocol(K value, bool* failed = nullptr, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
 {
   if (failed) {
     *failed = false;
   }
-  if (!protocol || [self conformsToProtocol: protocol]) {
-    T result(static_cast< T >(self));
-    return result;
+  if (protocol) {
+    JS_UNWRAPPED(value, NSObject, self);
+    if ([self conformsToProtocol: protocol]) {
+      T result(static_cast< T >(self));
+      return result;
+    }
   }
   if (failed) {
     *failed = true;
@@ -173,10 +184,9 @@ is_value_protocol(Local<Value> x, Protocol* protocol = ObjCProtocolTraits<T>::pr
   return true;
 }
 
-#define js_protocol_wrapper(x, type, base) js_value_protocol<type>(x)
-#define to_protocol_wrapper(x, type, base) to_value_protocol<type>(x)
-#define is_protocol_wrapper(x, type, base) is_value_protocol<type>(x)
-
+#define js_protocol_wrapper(x, type, base) js_value_protocol< id<type> >(x)
+#define to_protocol_wrapper(x, type, base) to_value_protocol< id<type> >(x)
+#define is_protocol_wrapper(x, type, base) is_value_protocol< id<type> >(x)
 
 
 #endif /* NNSObject_h */

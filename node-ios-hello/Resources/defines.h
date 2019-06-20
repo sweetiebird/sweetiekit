@@ -305,7 +305,7 @@ public: \
   }
 
 #define JS_INIT_CLASS(name, base) \
-  JS_INIT_CLASS_BASE(name, [name alloc], ctorSpec->Inherit(Nan::New(N##base::type)))
+  JS_INIT_CLASS_BASE(name, JS_SET_RETURN(js_value_##name([name alloc])), ctorSpec->Inherit(Nan::New(N##base::type)))
 
 #define JS_INIT_CLASS_ALLOC(name, base, do_alloc) \
   JS_INIT_CLASS_BASE(name, do_alloc, ctorSpec->Inherit(Nan::New(N##base::type)))
@@ -316,7 +316,7 @@ Nan::Persistent<FunctionTemplate> N##name::type; \
 \
 NAN_METHOD(N##name::alloc) \
 { \
-  JS_SET_RETURN(js_value_##name(do_alloc)); \
+  do_alloc; \
 } \
 \
 std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *isolate, Local<Object> exports) \
