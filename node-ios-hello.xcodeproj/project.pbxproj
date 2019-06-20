@@ -40,7 +40,6 @@
 		A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */; };
 		A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */; };
 		A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */; };
-		A124EFE622AF383800F29727 /* SWKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
 		A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655EC22719CE300D3DF47 /* tsconfig.json */; };
@@ -313,6 +312,13 @@
 		A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982722B9C726009AC951 /* NNSUUID.mm */; };
 		A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982B22B9C968009AC951 /* NCLBeacon.mm */; };
 		A1D4983022B9D48D009AC951 /* NCLVisit.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4982F22B9D48D009AC951 /* NCLVisit.mm */; };
+		A1D4983422BAED95009AC951 /* NWKNavigation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4983322BAED95009AC951 /* NWKNavigation.mm */; };
+		A1D4983822BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4983622BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm */; };
+		A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4983F22BAF404009AC951 /* NNSHTTPURLResponse.mm */; };
+		A1D4984A22BAF405009AC951 /* NNSURLResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4984222BAF404009AC951 /* NNSURLResponse.mm */; };
+		A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4984522BAF404009AC951 /* NNSURLProtectionSpace.mm */; };
+		A1D4984C22BAF405009AC951 /* NNSURLCredential.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4984822BAF405009AC951 /* NNSURLCredential.mm */; };
+		A1D4985522BAFD40009AC951 /* NSecBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D4985322BAFD40009AC951 /* NSecBase.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -459,7 +465,6 @@
 		A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewManager.swift; sourceTree = "<group>"; };
 		A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWKNavigationDelegate.mm; sourceTree = "<group>"; };
 		A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWKNavigationDelegate.h; sourceTree = "<group>"; };
-		A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWKNavigationDelegate.swift; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
 		A12655EB22719CE300D3DF47 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		A12655EC22719CE300D3DF47 /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
@@ -942,6 +947,20 @@
 		A1D4982B22B9C968009AC951 /* NCLBeacon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLBeacon.mm; sourceTree = "<group>"; };
 		A1D4982E22B9D48D009AC951 /* NCLVisit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLVisit.h; sourceTree = "<group>"; };
 		A1D4982F22B9D48D009AC951 /* NCLVisit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLVisit.mm; sourceTree = "<group>"; };
+		A1D4983222BAED95009AC951 /* NWKNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWKNavigation.h; sourceTree = "<group>"; };
+		A1D4983322BAED95009AC951 /* NWKNavigation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWKNavigation.mm; sourceTree = "<group>"; };
+		A1D4983622BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSURLAuthenticationChallenge.mm; sourceTree = "<group>"; };
+		A1D4983722BAEEBC009AC951 /* NNSURLAuthenticationChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSURLAuthenticationChallenge.h; sourceTree = "<group>"; };
+		A1D4983E22BAF404009AC951 /* NNSHTTPURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSHTTPURLResponse.h; sourceTree = "<group>"; };
+		A1D4983F22BAF404009AC951 /* NNSHTTPURLResponse.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSHTTPURLResponse.mm; sourceTree = "<group>"; };
+		A1D4984122BAF404009AC951 /* NNSURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSURLResponse.h; sourceTree = "<group>"; };
+		A1D4984222BAF404009AC951 /* NNSURLResponse.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSURLResponse.mm; sourceTree = "<group>"; };
+		A1D4984422BAF404009AC951 /* NNSURLProtectionSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSURLProtectionSpace.h; sourceTree = "<group>"; };
+		A1D4984522BAF404009AC951 /* NNSURLProtectionSpace.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSURLProtectionSpace.mm; sourceTree = "<group>"; };
+		A1D4984722BAF405009AC951 /* NNSURLCredential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSURLCredential.h; sourceTree = "<group>"; };
+		A1D4984822BAF405009AC951 /* NNSURLCredential.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSURLCredential.mm; sourceTree = "<group>"; };
+		A1D4985322BAFD40009AC951 /* NSecBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSecBase.mm; sourceTree = "<group>"; };
+		A1D4985422BAFD40009AC951 /* NSecBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSecBase.h; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -1329,7 +1348,6 @@
 			children = (
 				A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */,
 				A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */,
-				A124EFE422AF383800F29727 /* SWKNavigationDelegate.swift */,
 			);
 			path = NWKNavigationDelegate;
 			sourceTree = "<group>";
@@ -1454,6 +1472,7 @@
 		A133701A22AAE65000FA3768 /* NWebKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4983122BAED94009AC951 /* NWKNavigation */,
 				A124EFE122AF383800F29727 /* NWKNavigationDelegate */,
 				A133701B22AAE65100FA3768 /* NWKWebView */,
 			);
@@ -3484,6 +3503,77 @@
 			path = NCLVisit;
 			sourceTree = "<group>";
 		};
+		A1D4983122BAED94009AC951 /* NWKNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4983222BAED95009AC951 /* NWKNavigation.h */,
+				A1D4983322BAED95009AC951 /* NWKNavigation.mm */,
+			);
+			path = NWKNavigation;
+			sourceTree = "<group>";
+		};
+		A1D4983522BAEEBC009AC951 /* NNSURLAuthenticationChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4983722BAEEBC009AC951 /* NNSURLAuthenticationChallenge.h */,
+				A1D4983622BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm */,
+			);
+			path = NNSURLAuthenticationChallenge;
+			sourceTree = "<group>";
+		};
+		A1D4983D22BAF404009AC951 /* NNSHTTPURLResponse */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4983E22BAF404009AC951 /* NNSHTTPURLResponse.h */,
+				A1D4983F22BAF404009AC951 /* NNSHTTPURLResponse.mm */,
+			);
+			path = NNSHTTPURLResponse;
+			sourceTree = "<group>";
+		};
+		A1D4984022BAF404009AC951 /* NNSURLResponse */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4984122BAF404009AC951 /* NNSURLResponse.h */,
+				A1D4984222BAF404009AC951 /* NNSURLResponse.mm */,
+			);
+			path = NNSURLResponse;
+			sourceTree = "<group>";
+		};
+		A1D4984322BAF404009AC951 /* NNSURLProtectionSpace */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4984422BAF404009AC951 /* NNSURLProtectionSpace.h */,
+				A1D4984522BAF404009AC951 /* NNSURLProtectionSpace.mm */,
+			);
+			path = NNSURLProtectionSpace;
+			sourceTree = "<group>";
+		};
+		A1D4984622BAF405009AC951 /* NNSURLCredential */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4984722BAF405009AC951 /* NNSURLCredential.h */,
+				A1D4984822BAF405009AC951 /* NNSURLCredential.mm */,
+			);
+			path = NNSURLCredential;
+			sourceTree = "<group>";
+		};
+		A1D4985122BAFD40009AC951 /* NSecurity */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4985222BAFD40009AC951 /* NSecBase */,
+			);
+			path = NSecurity;
+			sourceTree = "<group>";
+		};
+		A1D4985222BAFD40009AC951 /* NSecBase */ = {
+			isa = PBXGroup;
+			children = (
+				A1D4985422BAFD40009AC951 /* NSecBase.h */,
+				A1D4985322BAFD40009AC951 /* NSecBase.mm */,
+			);
+			path = NSecBase;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -3805,6 +3895,7 @@
 				A133701222AAAF9500FA3768 /* NNSCoder */,
 				A1574EA422B81650006CC5F2 /* NNSDateComponents */,
 				A133709222AB418200FA3768 /* NNSError */,
+				A1D4983D22BAF404009AC951 /* NNSHTTPURLResponse */,
 				A133702A22AAF29C00FA3768 /* NNSInputStream */,
 				A1574E9322B8108E006CC5F2 /* NNSLocale */,
 				A1CE2B7A228EC15800D9B3B8 /* NNSMutableAttributedString */,
@@ -3818,7 +3909,11 @@
 				A133702722AAF29C00FA3768 /* NNSStream */,
 				A1574E9622B8108F006CC5F2 /* NNSTimeZone */,
 				A133701622AACEC700FA3768 /* NNSURL */,
+				A1D4983522BAEEBC009AC951 /* NNSURLAuthenticationChallenge */,
+				A1D4984622BAF405009AC951 /* NNSURLCredential */,
+				A1D4984322BAF404009AC951 /* NNSURLProtectionSpace */,
 				A133701F22AAE76E00FA3768 /* NNSURLRequest */,
+				A1D4984022BAF404009AC951 /* NNSURLResponse */,
 				21C872CC226A87C500B5192B /* NNSUserDefaults */,
 				A1D4982522B9C726009AC951 /* NNSUUID */,
 			);
@@ -4062,6 +4157,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1D4985122BAFD40009AC951 /* NSecurity */,
 				A1D4981C22B9BBD0009AC951 /* NContacts */,
 				A19F39D522AF4AE100606332 /* NModelIO */,
 				A133708122AB382200FA3768 /* NMediaPlayer */,
@@ -4303,7 +4399,6 @@
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
 				A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */,
-				A124EFE622AF383800F29727 /* SWKNavigationDelegate.swift in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
 				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
@@ -4346,6 +4441,7 @@
 				A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */,
+				A1D4984A22BAF405009AC951 /* NNSURLResponse.mm in Sources */,
 				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
 				A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */,
@@ -4434,6 +4530,7 @@
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
 				A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */,
+				A1D4984C22BAF405009AC951 /* NNSURLCredential.mm in Sources */,
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
 				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
 				A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */,
@@ -4492,6 +4589,7 @@
 				A1574E9F22B811E9006CC5F2 /* NNSCharacterSet.mm in Sources */,
 				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
+				A1D4983422BAED95009AC951 /* NWKNavigation.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
 				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
@@ -4512,6 +4610,7 @@
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */,
 				A174A48E22B1A5F000415AD8 /* NUITextInputMode.mm in Sources */,
+				A1D4985522BAFD40009AC951 /* NSecBase.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
@@ -4529,6 +4628,7 @@
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
+				A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1BD4BAF228809AF001D1F6E /* NARFrame.mm in Sources */,
@@ -4600,10 +4700,12 @@
 				A1BD4BC322882469001D1F6E /* SUICollectionViewManager.swift in Sources */,
 				A133702622AAEF2400FA3768 /* NNSMutableURLRequest.mm in Sources */,
 				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
+				A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
+				A1D4983822BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
 				A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */,
 				A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */,

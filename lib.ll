@@ -595,6 +595,7 @@
        NS: "Foundation"
        RP: "ReplayKit"
       SCN: "SceneKit"
+      Sec: "Security"
        SK: "SpriteKit"
        UI: "UIKit"
        WK: "WebKit"))

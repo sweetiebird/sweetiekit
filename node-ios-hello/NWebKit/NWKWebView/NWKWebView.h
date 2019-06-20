@@ -8,7 +8,6 @@
 #ifndef NWKWebView_h
 #define NWKWebView_h    
 
-#import <WebKit/WebKit.h>
 #include "NUIView.h"
 
 #define js_value_WKWebView(x) js_value_wrapper(x, WKWebView)

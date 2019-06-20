@@ -83,6 +83,7 @@ NAN_METHOD(N${name}::New) {
 #define is_value_${name}(x) is_value_wrapper(x, ${name})
 
 JS_WRAP_CLASS(${name}, ${superClass});
+  // TODO: declare ${name} methods and properties
 JS_WRAP_CLASS_END(${name});
 
 #endif /* N${name}_h */`;

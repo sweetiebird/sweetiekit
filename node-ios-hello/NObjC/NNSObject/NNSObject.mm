@@ -781,6 +781,11 @@ NAN_METHOD(NClass::New) {
 #include "NNSURL.h"
 #include "NNSURLRequest.h"
 #include "NNSMutableURLRequest.h"
+#include "NNSURLResponse.h"
+#include "NNSHTTPURLResponse.h" // : NSURLResponse
+#include "NNSURLProtectionSpace.h"
+#include "NNSURLCredential.h"
+#include "NNSURLAuthenticationChallenge.h"
 #include "NNSStream.h"
 #include "NNSInputStream.h"
 #include "NNSCache.h"
@@ -872,6 +877,9 @@ NAN_METHOD(NClass::New) {
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIImage.h"
+
+#import <WebKit/WebKit.h>
+#include "NWKNavigation.h"
 #include "NWKNavigationDelegate.h"
 #include "NWKWebView.h"
 
@@ -924,6 +932,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSURL);
     JS_EXPORT_TYPE(NSURLRequest);
     JS_EXPORT_TYPE(NSMutableURLRequest);
+    JS_EXPORT_TYPE(NSURLResponse);
+    JS_EXPORT_TYPE(NSHTTPURLResponse);
+    JS_EXPORT_TYPE(NSURLProtectionSpace);
+    JS_EXPORT_TYPE(NSURLCredential);
+    JS_EXPORT_TYPE(NSURLAuthenticationChallenge);
     JS_EXPORT_TYPE(NSStream);
     JS_EXPORT_TYPE(NSInputStream);
     JS_EXPORT_TYPE(NSCache);
@@ -1047,6 +1060,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // WebKit
     JS_EXPORT_TYPE(WKWebView);
+    JS_EXPORT_TYPE(WKNavigation);
     JS_EXPORT_TYPE(WKNavigationDelegate);
     
     // Core Graphics
@@ -1431,8 +1445,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AVAudioEngine);
 
       // WebKit
+      JS_RETURN_TYPE(WKNavigationDelegate);
+      JS_RETURN_TYPE(WKNavigation);
       JS_RETURN_TYPE(WKWebView);
-      JS_RETURN_TYPE_FROM(WKNavigationDelegate, SWKNavigationDelegate);
 
       // UIKit
       
@@ -1563,6 +1578,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSBundle);
       JS_RETURN_TYPE(NSInputStream);
       JS_RETURN_TYPE(NSStream);
+      JS_RETURN_TYPE(NSURLAuthenticationChallenge);
+      JS_RETURN_TYPE(NSURLCredential);
+      JS_RETURN_TYPE(NSURLProtectionSpace);
+      JS_RETURN_TYPE(NSHTTPURLResponse);
+      JS_RETURN_TYPE(NSURLResponse);
       JS_RETURN_TYPE(NSMutableURLRequest);
       JS_RETURN_TYPE(NSURLRequest);
       JS_RETURN_TYPE(NSURL);

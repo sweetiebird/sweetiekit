@@ -165,10 +165,7 @@ NAN_GETTER(NAVAudioNode::lastRenderTimeGetter) {
   }
 }
 
-// TODO
-#define js_value_AUAudioUnit(x) js_value_wrapper_unknown(x, AUAudioUnit)
-#define to_value_AUAudioUnit(x) to_value_wrapper_unknown(x, AUAudioUnit)
-#define is_value_AUAudioUnit(x) is_value_wrapper_unknown(x, AUAudioUnit)
+#include "NAUAudioUnit.h"
 
 NAN_GETTER(NAVAudioNode::AUAudioUnitGetter) {
   JS_UNWRAP(AVAudioNode, self);
