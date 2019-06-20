@@ -10,162 +10,173 @@ NUIScrollViewDelegate::NUIScrollViewDelegate() {}
 NUIScrollViewDelegate::~NUIScrollViewDelegate() {}
 
 JS_INIT_CLASS(UIScrollViewDelegate, NSObject);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidScroll);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidZoom);
+  JS_ASSIGN_PROTO_PROP(scrollViewWillBeginDragging);
+  JS_ASSIGN_PROTO_PROP(scrollViewWillEndDraggingWithVelocityTargetContentOffset);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidEndDraggingWillDecelerate);
+  JS_ASSIGN_PROTO_PROP(scrollViewWillBeginDecelerating);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidEndDecelerating);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidEndScrollingAnimation);
+  JS_ASSIGN_PROTO_PROP(viewForZoomingInScrollView);
+  JS_ASSIGN_PROTO_PROP(scrollViewWillBeginZoomingWithView);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidEndZoomingWithViewAtScale);
+  JS_ASSIGN_PROTO_PROP(scrollViewShouldScrollToTop);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidScrollToTop);
+  JS_ASSIGN_PROTO_PROP(scrollViewDidChangeAdjustedContentInset);
+
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, didScroll);
-  JS_ASSIGN_PROP(proto, willBeginDecelerating);
-  JS_ASSIGN_PROP(proto, didEndDecelerating);
-  JS_ASSIGN_PROP(proto, didScrollToTop);
-  JS_ASSIGN_PROP(proto, shouldScrollToTop);
-  JS_ASSIGN_PROP(proto, didEndDragging);
   // static members (ctor)
   JS_INIT_CTOR(UIScrollViewDelegate, NSObject);
 JS_INIT_CLASS_END(UIScrollViewDelegate, NSObject);
 
 NAN_METHOD(NUIScrollViewDelegate::New) {
   JS_RECONSTRUCT(UIScrollViewDelegate);
-
-  Local<Object> obj = info.This();
-
-  NUIScrollViewDelegate *ui = new NUIScrollViewDelegate();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge SUIScrollViewDelegate *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[SUIScrollViewDelegate alloc] init]);
+  @autoreleasepool {
+    UIScrollViewDelegate* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIScrollViewDelegate *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UIScrollViewDelegate alloc] init];
+    }
+    if (self) {
+      NUIScrollViewDelegate *wrapper = new NUIScrollViewDelegate();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIScrollViewDelegate::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
+
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidScroll);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidZoom);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginDragging);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillEndDraggingWithVelocityTargetContentOffset);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndDraggingWillDecelerate);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginDecelerating);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndDecelerating);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndScrollingAnimation);
+DELEGATE_PROP(UIScrollViewDelegate, viewForZoomingInScrollView);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginZoomingWithView);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndZoomingWithViewAtScale);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewShouldScrollToTop);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidScrollToTop);
+DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentInset);
 
 #include "NUIScrollView.h"
 
-NAN_GETTER(NUIScrollViewDelegate::didScrollGetter) {
-  Nan::HandleScope scope;
+@implementation UIScrollViewDelegate
 
-  Nan::ThrowError("NUIScrollViewDelegate::didScrollGetter not yet implemented");
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView // any offset changes
+{
+  call_delegate(noop(), scrollViewDidScroll,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_SETTER(NUIScrollViewDelegate::didScrollSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_didScroll.Reset(Local<Function>::Cast(value));
-  
-  [sDel setDidScroll: ^ (UIScrollView * _Nonnull scrollView) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    del->_didScroll("NUIScrollViewDelegate::didScrollSetter", scrollViewObj);
-  }];
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView NS_AVAILABLE_IOS(3_2) // any zoom scale changes
+{
+  call_delegate(noop(), scrollViewDidZoom,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_GETTER(NUIScrollViewDelegate::didEndDeceleratingGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NUIScrollViewDelegate::didScrollGetter not yet implemented");
+// called on start of dragging (may require some time and or distance to move)
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
+{
+  call_delegate(noop(), scrollViewWillBeginDragging,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_SETTER(NUIScrollViewDelegate::didEndDeceleratingSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_didEndDecelerating.Reset(Local<Function>::Cast(value));
-  
-  [sDel setDidEndDecelerating: ^ (UIScrollView * _Nonnull scrollView) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    del->_didEndDecelerating("NUIScrollViewDelegate::didEndDeceleratingSetter", scrollViewObj);
-  }];
+// called on finger up if the user dragged. velocity is in points/millisecond. targetContentOffset may be changed to adjust where the scroll view comes to rest
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset NS_AVAILABLE_IOS(5_0) 
+{
+  dispatch_main(^{
+    auto jsPoint(js_value_boxed(targetContentOffset ? js_value_CGPoint(*targetContentOffset) : js_value_id(nil)));
+    call_delegate(noop(), scrollViewWillEndDraggingWithVelocityTargetContentOffset,
+      js_value_UIScrollView(scrollView),
+      js_value_CGPoint(velocity),
+      jsPoint);
+    auto jsOutPoint(to_value_boxed_value(jsPoint));
+    if (is_value_CGPoint(jsOutPoint)) {
+      if (targetContentOffset) {
+        *targetContentOffset = to_value_CGPoint(jsOutPoint);
+      }
+    }
+  });
 }
 
-NAN_GETTER(NUIScrollViewDelegate::didScrollToTopGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NUIScrollViewDelegate::didScrollToTopGetter not yet implemented");
+// called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate 
+{
+  call_delegate(noop(), scrollViewDidEndDraggingWillDecelerate,
+    js_value_UIScrollView(scrollView),
+    js_value_BOOL(decelerate));
 }
 
-NAN_SETTER(NUIScrollViewDelegate::didScrollToTopSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_didScrollToTop.Reset(Local<Function>::Cast(value));
-  
-  [sDel setDidScrollToTop: ^ (UIScrollView * _Nonnull scrollView) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    del->_didScrollToTop("NUIScrollViewDelegate::didScrollToTopSetter", scrollViewObj);
-  }];
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView    // called on finger up as we are moving
+{
+  call_delegate(noop(), scrollViewWillBeginDecelerating,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_GETTER(NUIScrollViewDelegate::shouldScrollToTopGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NUIScrollViewDelegate::shouldScrollToTopGetter not yet implemented");
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView       // called when scroll view grinds to a halt
+{
+  call_delegate(noop(), scrollViewDidEndDecelerating,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_SETTER(NUIScrollViewDelegate::shouldScrollToTopSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_didScrollToTop.Reset(Local<Function>::Cast(value));
-  
-  [sDel setShouldScrollToTop: ^ BOOL (UIScrollView * _Nonnull scrollView) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    Local<Value> resultVal = del->_didScrollToTop("NUIScrollViewDelegate::shouldScrollToTopSetter", scrollViewObj);
-    int result = resultVal->IsBoolean() ? TO_BOOL(resultVal) : true;
-    return result;
-  }];
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView  // called when setContentOffset/scrollRectVisible:animated: finishes. not called if not animating
+{
+  call_delegate(noop(), scrollViewDidEndScrollingAnimation,
+    js_value_UIScrollView(scrollView));
 }
 
-NAN_GETTER(NUIScrollViewDelegate::willBeginDeceleratingGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NUIScrollViewDelegate::willBeginDeceleratingGetter not yet implemented");
+- (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView      // return a view that will be scaled. if delegate returns nil, nothing happens
+{
+  __block UIView* result = nil;
+  call_delegate(result = to_value_UIView(JS_RESULT), viewForZoomingInScrollView,
+    js_value_UIScrollView(scrollView));
+  return result;
 }
 
-NAN_SETTER(NUIScrollViewDelegate::willBeginDeceleratingSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_willBeginDecelerating.Reset(Local<Function>::Cast(value));
-
-  [sDel setWillBeginDecelerating: ^ (UIScrollView * _Nonnull scrollView) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    del->_willBeginDecelerating("NUIScrollViewDelegate::willBeginDeceleratingSetter", scrollViewObj);
-  }];
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view NS_AVAILABLE_IOS(3_2)  // called before the scroll view begins zooming its content
+{
+  call_delegate(noop(), scrollViewWillBeginZoomingWithView,
+    js_value_UIScrollView(scrollView),
+    js_value_UIView(view));
 }
 
-NAN_GETTER(NUIScrollViewDelegate::didEndDraggingGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NUIScrollViewDelegate::didEndDraggingGetter not yet implemented");
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale  // scale between minimum and maximum. called after any 'bounce' animations
+{
+  call_delegate(noop(), scrollViewDidEndZoomingWithViewAtScale,
+    js_value_UIScrollView(scrollView),
+    js_value_UIView(view),
+    js_value_CGFloat(scale));
 }
 
-NAN_SETTER(NUIScrollViewDelegate::didEndDraggingSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NUIScrollViewDelegate *del = ObjectWrap::Unwrap<NUIScrollViewDelegate>(info.This());
-  SUIScrollViewDelegate* sDel = del->As<SUIScrollViewDelegate>();
-
-  del->_didEndDragging.Reset(Local<Function>::Cast(value));
-
-  [sDel setDidEndDragging: ^ (UIScrollView * _Nonnull scrollView, BOOL decelerate) {
-    Nan::HandleScope scope;
-    Local<Value> scrollViewObj = sweetiekit::GetWrapperFor(scrollView, NUIScrollView::type);
-    del->_didEndDragging("NUIScrollViewDelegate::didEndDraggingSetter", scrollViewObj);
-  }];
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView    // return a yes if you want to scroll to the top. if not defined, assumes YES
+{
+  __block BOOL result = YES;
+  call_delegate(result = to_value_BOOL(JS_RESULT), scrollViewShouldScrollToTop,
+    js_value_UIScrollView(scrollView));
+  return result;
 }
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView       // called when scrolling animation finished. may be called immediately if already at top
+{
+  call_delegate(noop(), scrollViewDidScrollToTop,
+    js_value_UIScrollView(scrollView));
+}
+
+/* Also see -[UIScrollView adjustedContentInsetDidChange]
+ */
+- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0)) 
+{
+  call_delegate(noop(), scrollViewDidChangeAdjustedContentInset,
+    js_value_UIScrollView(scrollView));
+}
+
+@end

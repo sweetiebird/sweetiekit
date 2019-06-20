@@ -136,9 +136,9 @@ function makeProgressView() {
 }
 
 function makeScrollDelegate(pageControl) {
-  const del = new UIScrollViewDelegate();
+  const del = UIScrollViewDelegate();
 
-  del.didScroll = (sv) => {
+  del.scrollViewDidScroll = (sv) => {
     const { x } = sv.contentOffset;
     const page = Math.round(x / w);
     if (page !== pageControl.currentPage) {
@@ -146,7 +146,7 @@ function makeScrollDelegate(pageControl) {
     }
   };
 
-  del.didEndDecelerating = (sv) => {
+  del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
       sv.setContentOffset({ x, y: 0 }, false);
@@ -540,9 +540,9 @@ function startQuiz(nav) {
     }
   }, UIControlEventTouchUpInside);
 
-  const del = new UIScrollViewDelegate();
+  const del = UIScrollViewDelegate();
 
-  del.didScroll = (sv) => {
+  del.scrollViewDidScroll = (sv) => {
     const { x } = sv.contentOffset;
     const page = Math.round(x / w);
     if (page !== pageControl.currentPage) {
@@ -559,7 +559,7 @@ function startQuiz(nav) {
     }
   };
 
-  del.didEndDecelerating = (sv) => {
+  del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
       sv.setContentOffset({ x, y: 0 }, false);

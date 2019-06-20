@@ -197,7 +197,6 @@
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
 		A19476BD226E9469003BB393 /* NUITableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476BC226E9469003BB393 /* NUITableView.mm */; };
 		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
-		A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */; };
 		A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476C6226F7410003BB393 /* DashboardViewController.swift */; };
 		A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948932228A5D46007BF787 /* NSCNLight.mm */; };
 		A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948936228A68BA007BF787 /* NARConfiguration.mm */; };
@@ -282,7 +281,6 @@
 		A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CC12CF228E5935008C10A0 /* NUICollectionReusableView.mm */; };
 		A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B43228E605100D9B3B8 /* NUIPageControl.mm */; };
 		A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B48228E694B00D9B3B8 /* NUIScrollViewDelegate.mm */; };
-		A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B4A228E696800D9B3B8 /* SUIScrollViewDelegate.swift */; };
 		A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B4D228E7B4B00D9B3B8 /* NUIBezierPath.mm */; };
 		A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B52228E7FFD00D9B3B8 /* NGifManager.swift */; };
 		A1CE2B55228E804F00D9B3B8 /* UIImage+NGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2B54228E804F00D9B3B8 /* UIImage+NGif.swift */; };
@@ -746,7 +744,6 @@
 		A19476BC226E9469003BB393 /* NUITableView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableView.mm; sourceTree = "<group>"; };
 		A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIRefreshControl.mm; sourceTree = "<group>"; };
 		A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIRefreshControl.h; sourceTree = "<group>"; };
-		A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIRefreshControl.swift; sourceTree = "<group>"; };
 		A19476C6226F7410003BB393 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A1948931228A5D40007BF787 /* NSCNLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNLight.h; sourceTree = "<group>"; };
 		A1948932228A5D46007BF787 /* NSCNLight.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNLight.mm; sourceTree = "<group>"; };
@@ -898,7 +895,6 @@
 		A1CE2B44228E605100D9B3B8 /* NUIPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPageControl.h; sourceTree = "<group>"; };
 		A1CE2B47228E694B00D9B3B8 /* NUIScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScrollViewDelegate.h; sourceTree = "<group>"; };
 		A1CE2B48228E694B00D9B3B8 /* NUIScrollViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScrollViewDelegate.mm; sourceTree = "<group>"; };
-		A1CE2B4A228E696800D9B3B8 /* SUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		A1CE2B4D228E7B4B00D9B3B8 /* NUIBezierPath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBezierPath.mm; sourceTree = "<group>"; };
 		A1CE2B4E228E7B4B00D9B3B8 /* NUIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBezierPath.h; sourceTree = "<group>"; };
 		A1CE2B52228E7FFD00D9B3B8 /* NGifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NGifManager.swift; sourceTree = "<group>"; };
@@ -2585,7 +2581,6 @@
 			children = (
 				A19476C3226F5BEF003BB393 /* NUIRefreshControl.h */,
 				A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */,
-				A19476C4226F5CBF003BB393 /* SUIRefreshControl.swift */,
 			);
 			path = NUIRefreshControl;
 			sourceTree = "<group>";
@@ -3308,7 +3303,6 @@
 			children = (
 				A1CE2B47228E694B00D9B3B8 /* NUIScrollViewDelegate.h */,
 				A1CE2B48228E694B00D9B3B8 /* NUIScrollViewDelegate.mm */,
-				A1CE2B4A228E696800D9B3B8 /* SUIScrollViewDelegate.swift */,
 			);
 			path = NUIScrollViewDelegate;
 			sourceTree = "<group>";
@@ -4605,7 +4599,6 @@
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
-				A1CE2B4B228E696800D9B3B8 /* SUIScrollViewDelegate.swift in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */,
@@ -4637,7 +4630,6 @@
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
 				A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */,
-				A19476C5226F5CBF003BB393 /* SUIRefreshControl.swift in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,

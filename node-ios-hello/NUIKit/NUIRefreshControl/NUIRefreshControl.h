@@ -15,7 +15,7 @@
 #define is_value_UIRefreshControl(x) is_value_wrapper(x, UIRefreshControl)
 
 JS_WRAP_CLASS(UIRefreshControl, UIControl);
-  JS_STATIC_METHOD(init);
+  JS_METHOD(init);
   JS_METHOD(beginRefreshing);
   JS_METHOD(endRefreshing);
   JS_PROP_READONLY(isRefreshing);

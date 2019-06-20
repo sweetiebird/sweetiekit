@@ -50,14 +50,6 @@ DELEGATE_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationContro
 #include "NUIPopoverPresentationController.h"
 #include "NUIView.h"
 
-Local<Object>
-js_box(const Local<Value>& value)
-{
-  Local<Object> result(Object::New(JS_ISOLATE()));
-  result->Set(JS_STR("value"), value);
-  return result;
-}
-
 @implementation UIPopoverPresentationControllerDelegate
 
 - (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
@@ -92,14 +84,14 @@ js_box(const Local<Value>& value)
   UIView* inView(view ? *view : nil);
   UIView* __strong * inoutView(&inView);
   dispatch_main(^{
-    auto jsRect(js_box(rect ? js_value_CGRect(*inoutRect) : js_value_id(nil)));
-    auto jsView(js_box(inoutView ? js_value_UIView(*inoutView) : js_value_id(nil)));
+    auto jsRect(js_value_boxed(rect ? js_value_CGRect(*inoutRect) : js_value_id(nil)));
+    auto jsView(js_value_boxed(inoutView ? js_value_UIView(*inoutView) : js_value_id(nil)));
     call_delegate(noop(), popoverPresentationControllerWillRepositionPopoverToRectInView,
       js_value_UIPopoverPresentationController(popoverPresentationController),
       jsRect,
       jsView);
-    auto jsOutRect(jsRect->Get(JS_STR("value")));
-    auto jsOutView(jsView->Get(JS_STR("value")));
+    auto jsOutRect(to_value_boxed_value(jsRect));
+    auto jsOutView(to_value_boxed_value(jsView));
     if (is_value_CGRect(jsOutRect)) {
       if (inoutRect) {
         *inoutRect = to_value_CGRect(jsOutRect);

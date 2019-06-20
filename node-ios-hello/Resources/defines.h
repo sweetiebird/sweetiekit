@@ -1274,6 +1274,12 @@ T _Nullable to_value_id_(Local<Value> value, bool* _Nullable failed = nullptr) {
   return (T)sweetiekit::GetValueFor(value, failed);
 }
 
+Local<Value> js_value_boxed(id _Nullable value = nil);
+Local<Value> js_value_boxed(Local<Value> value);
+Local<Value> to_value_boxed_value(Local<Value> box, bool* _Nullable failed = nullptr);
+id _Nullable to_value_boxed(Local<Value> box, bool* _Nullable failed = nullptr);
+bool is_value_boxed(Local<Value> value);
+
 #define js_value_void_pointer(x) Nan::New<External>(x)
 #define to_value_void_pointer(x) (x).As<External>()->Value()
 #define is_value_void_pointer(x) (x)->IsExternal()

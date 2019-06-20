@@ -1526,7 +1526,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // ========= delegates
       JS_RETURN_TYPE_FROM(UIPopoverPresentationControllerDelegate, SUIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
-      JS_RETURN_TYPE_FROM(UIScrollViewDelegate, SUIScrollViewDelegate);
+      JS_RETURN_TYPE(UIScrollViewDelegate);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
       JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);

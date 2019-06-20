@@ -124,7 +124,7 @@ NAN_METHOD(NUIGestureRecognizer::addTargetAction) {
   @autoreleasepool
   {
     declare_args();
-        __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[JS_ARGC++]);
+    __block sweetiekit::JSFunction* fn = new sweetiekit::JSFunction(info[JS_ARGC++]);
     SUITarget* target = [[SUITarget alloc] init];
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
@@ -152,7 +152,7 @@ NAN_METHOD(NUIGestureRecognizer::removeTargetAction) {
   @autoreleasepool
   {
     declare_args();
-        declare_value(id, target_);
+    declare_value(id, target_);
     if (![target_ isKindOfClass:[SUITarget class]]) {
       js_panic_noreturn("expected SUITarget");
       return;

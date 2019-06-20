@@ -2891,3 +2891,64 @@ bool is_value_NSArrayOfCGColors(Local<Value> value) {
   // TODO: check each item in the array.
   return true;
 }
+
+Local<Value> js_value_boxed(id _Nullable value)
+{
+  return js_value_boxed(js_value_id(value));
+}
+
+Local<Value> js_value_boxed(Local<Value> value)
+{
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  result->Set(JS_STR("value"), value);
+  return result;
+}
+
+Local<Value> to_value_boxed_value(Local<Value> box, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  if (is_value_boxed(box)) {
+    Nan::EscapableHandleScope scope;
+    Local<Object> jsBox(JS_OBJ(box));
+    return scope.Escape(jsBox->Get(JS_STR("value")));
+  }
+  if (failed) {
+    *failed = true;
+  } else {
+    Nan::ThrowError("to_value_boxed_value failed");
+  }
+  return Nan::Undefined();
+}
+
+id _Nullable to_value_boxed(Local<Object> box, bool* _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  if (is_value_boxed(box)) {
+    Local<Object> jsBox(JS_OBJ(box));
+    return to_value_id(jsBox->Get(JS_STR("value")));
+  }
+  if (failed) {
+    *failed = true;
+  } else {
+    Nan::ThrowError("to_value_boxed_value failed");
+  }
+  return nil;
+}
+
+bool is_value_boxed(Local<Value> value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  if (!JS_HAS(JS_OBJ(value), JS_STR("value"))) {
+    if (JS_OBJ(value)->Get(JS_STR("value"))->IsNullOrUndefined()) {
+      return false;
+    }
+  }
+  return true;
+}
+

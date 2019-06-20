@@ -18,8 +18,8 @@ const colors = [
 ];
 
 function makeDelegate(demoVC, pageControl) {
-  const del = new UIScrollViewDelegate();
-  del.didScroll = (sv) => {
+  const del = UIScrollViewDelegate();
+  del.scrollViewDidScroll = (sv) => {
     const { x } = sv.contentOffset;
     pageControl.currentPage = Math.round(x / demoVC.view.frame.width);
   };

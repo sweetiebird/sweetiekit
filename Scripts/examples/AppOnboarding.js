@@ -102,15 +102,15 @@ function setupProgressView() {
 }
 
 function makeQuizDelegate(pageControl) {
-  const del = new UIScrollViewDelegate();
-  del.didScroll = (sv) => {
+  const del = UIScrollViewDelegate();
+  del.scrollViewDidScroll = (sv) => {
     const { x, y } = sv.contentOffset;
     const page = Math.round(x / w);
     if (page !== pageControl.currentPage) {
       pageControl.currentPage = page;
     }
   };
-  del.didEndDecelerating = (sv) => {
+  del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
       sv.setContentOffset({ x, y: 0 }, false);
@@ -232,15 +232,15 @@ function makeBgView() {
 }
 
 function makeDelegate(pageControl) {
-  const del = new UIScrollViewDelegate();
-  del.didScroll = (sv) => {
+  const del = UIScrollViewDelegate();
+  del.scrollViewDidScroll = (sv) => {
     const { x, y } = sv.contentOffset;
     const page = Math.round(x / w);
     if (page !== pageControl.currentPage) {
       pageControl.currentPage = page;
     }
   };
-  del.didEndDecelerating = (sv) => {
+  del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
       sv.setContentOffset({ x, y: 0 }, false);
