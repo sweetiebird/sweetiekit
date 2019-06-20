@@ -719,6 +719,7 @@ NAN_METHOD(NClass::New) {
 #include "NUITextPosition.h"
 #include "NUITextField.h"
 #include "NUITextFieldDelegate.h"
+#include "NUITextInputDelegate.h"
 #include "NUIKeyCommand.h"
 #include "NUIStoryboardSegue.h"
 #include "NUIStoryboardUnwindSegueSource.h"
@@ -1054,6 +1055,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITextPosition);
     JS_EXPORT_TYPE(UITextField);
     JS_EXPORT_TYPE(UITextFieldDelegate);
+    JS_EXPORT_TYPE(UITextInputDelegate);
     JS_EXPORT_TYPE(UIStepper);
     JS_EXPORT_TYPE(UISegmentedControl);
     
@@ -1559,6 +1561,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBlurEffect);
       JS_RETURN_TYPE(UIVisualEffect);
       JS_RETURN_TYPE(UIStoryboard);
+      JS_RETURN_TYPE(UITextInputDelegate);
       JS_RETURN_TYPE(UITextFieldDelegate);
       JS_RETURN_TYPE(UITextField);
       JS_RETURN_TYPE(UITextSelectionRect);

@@ -580,10 +580,7 @@ NAN_SETTER(NUITextInput::inputDelegateSetter) {
     declare_setter();
     declare_value(id/* <UITextInputDelegate>*/, input);
     [self setInputDelegate: input];
-    {
-      NSObject* self = self_;
-      [self associateValue:input withKey:@"NUITextInput::inputDelegate"];
-    }
+    [(NSObject*)self associateValue:input withKey:@"NUITextInput::inputDelegate"];
   }
 }
 

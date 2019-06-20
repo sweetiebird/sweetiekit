@@ -69,7 +69,7 @@ NAN_METHOD(NUIKeyCommand::keyCommandWithInputModifierFlagsAction) {
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NUIKeyCommand::keyCommandWithInputModifierFlagsAction");
+          (*fn)("NUIKeyCommand::keyCommandWithInputModifierFlagsAction", js_value_id(sender));
         }
       });
     }];
@@ -96,7 +96,7 @@ NAN_METHOD(NUIKeyCommand::keyCommandWithInputModifierFlagsActionDiscoverabilityT
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NUIKeyCommand::keyCommandWithInputModifierFlagsActionDiscoverabilityTitle");
+          (*fn)("NUIKeyCommand::keyCommandWithInputModifierFlagsActionDiscoverabilityTitle", js_value_id(sender));
         }
       });
     }];

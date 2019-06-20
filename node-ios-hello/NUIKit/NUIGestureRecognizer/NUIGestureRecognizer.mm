@@ -85,9 +85,9 @@ NAN_METHOD(NUIGestureRecognizer::addTarget) {
 
   SUITarget* target = [[SUITarget alloc] init];
   
-  [target setCallbackClosure:^(id _Nullable) {
+  [target setCallbackClosure:^(id _Nullable sender) {
     Nan::HandleScope scope;
-    (*fn)("NUIGestureRecognizer::addTarget");
+    (*fn)("NUIGestureRecognizer::addTarget", js_value_id(sender));
   }];
 
   [target setDeinitClosure:^() {
@@ -129,7 +129,7 @@ NAN_METHOD(NUIGestureRecognizer::addTargetAction) {
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NUIGestureRecognizer::addTargetAction");
+          (*fn)("NUIGestureRecognizer::addTargetAction", js_value_id(sender));
         }
       });
     }];

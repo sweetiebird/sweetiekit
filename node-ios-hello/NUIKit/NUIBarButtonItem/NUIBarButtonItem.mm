@@ -39,9 +39,9 @@ NAN_METHOD(NUIBarButtonItem::New) {
 
       SUITarget* target = [[SUITarget alloc] init];
       
-      [target setCallbackClosure:^(id _Nullable) {
+      [target setCallbackClosure:^(id _Nullable sender) {
         Nan::HandleScope scope;
-        (*fn)("NUIBarButtonItem::New");
+        (*fn)("NUIBarButtonItem::New", js_value_id(sender));
       }];
       [target setDeinitClosure:^() {
         Nan::HandleScope scope;

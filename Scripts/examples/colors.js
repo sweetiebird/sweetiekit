@@ -30,9 +30,9 @@ module.exports.theme = {
 
     backgroundColor: RGB(245, 247, 252),
     backgroundDarkColor: RGB(233, 237, 244),
-    textColorColor: RGB(20, 24, 42),
-    tintColorColor: RGB(20, 24, 42),
-    trimColorColor: RGB(20, 24, 42),
+    textColor: RGB(20, 24, 42),
+    tintColor: RGB(20, 24, 42),
+    trimColor: RGB(20, 24, 42),
     foregroundColor: RGB(26, 31, 53),
     foregroundDarkColor: RGB(20, 24, 42),
 

@@ -340,6 +340,7 @@
 		A1D498AC22BB4A03009AC951 /* NUITextRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A622BB4A03009AC951 /* NUITextRange.mm */; };
 		A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498A922BB4A03009AC951 /* NUITextInputStringTokenizer.mm */; };
 		A1D498B122BB62A5009AC951 /* NUITextFieldDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498AF22BB62A5009AC951 /* NUITextFieldDelegate.mm */; };
+		A1D498B522BB798D009AC951 /* NUITextInputDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D498B322BB798D009AC951 /* NUITextInputDelegate.mm */; };
 		A1D65DCE22815D5600AC0BD9 /* NUIBarButtonItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */; };
 		A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD122816F0100AC0BD9 /* SUITarget.swift */; };
 		A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1D65DD42281745500AC0BD9 /* NUITarget.mm */; };
@@ -1026,6 +1027,8 @@
 		A1D498A922BB4A03009AC951 /* NUITextInputStringTokenizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputStringTokenizer.mm; sourceTree = "<group>"; };
 		A1D498AF22BB62A5009AC951 /* NUITextFieldDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextFieldDelegate.mm; sourceTree = "<group>"; };
 		A1D498B022BB62A5009AC951 /* NUITextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextFieldDelegate.h; sourceTree = "<group>"; };
+		A1D498B322BB798D009AC951 /* NUITextInputDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITextInputDelegate.mm; sourceTree = "<group>"; };
+		A1D498B422BB798D009AC951 /* NUITextInputDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITextInputDelegate.h; sourceTree = "<group>"; };
 		A1D65DCC22815D4D00AC0BD9 /* NUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIBarButtonItem.h; sourceTree = "<group>"; };
 		A1D65DCD22815D5600AC0BD9 /* NUIBarButtonItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarButtonItem.mm; sourceTree = "<group>"; };
 		A1D65DD122816F0100AC0BD9 /* SUITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITarget.swift; sourceTree = "<group>"; };
@@ -3844,6 +3847,15 @@
 			path = NUITextFieldDelegate;
 			sourceTree = "<group>";
 		};
+		A1D498B222BB798D009AC951 /* NUITextInputDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1D498B422BB798D009AC951 /* NUITextInputDelegate.h */,
+				A1D498B322BB798D009AC951 /* NUITextInputDelegate.mm */,
+			);
+			path = NUITextInputDelegate;
+			sourceTree = "<group>";
+		};
 		A1D65DCB22815D3F00AC0BD9 /* NUIBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -3940,6 +3952,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1D498B222BB798D009AC951 /* NUITextInputDelegate */,
 				A1D498AE22BB62A5009AC951 /* NUITextFieldDelegate */,
 				A1D498A722BB4A03009AC951 /* NUITextInputStringTokenizer */,
 				A1D4989E22BB4A02009AC951 /* NUITextPosition */,
@@ -4775,6 +4788,7 @@
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
 				A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */,
+				A1D498B522BB798D009AC951 /* NUITextInputDelegate.mm in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,

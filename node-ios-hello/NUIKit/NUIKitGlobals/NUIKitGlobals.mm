@@ -40,6 +40,7 @@ NAN_METHOD(NUIKitGlobals::New) {
 }
 
 #include "NUIImage.h"
+#include "NNSError.h"
 
 NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   Nan::HandleScope scope;
@@ -52,8 +53,8 @@ NAN_METHOD(NUIKitGlobals::UIImageWriteToSavedPhotosAlbum) {
   [target setCallbackClosure:^(UIImage * _Nonnull image, NSError * _Nullable error, void * _Nullable context) {
     Nan::HandleScope scope;
     (*fn)("NUIKitGlobals::UIImageWriteToSavedPhotosAlbum",
-            sweetiekit::GetWrapperFor(image, NUIImage::type),
-            sweetiekit::GetWrapperFor(error));
+      js_value_UIImage(image),
+      js_value_NSError(error));
     [[SUIKitGlobals shared] dissociateValueForKey:@"sweetiekit.uikitglobals.uiimagewritetosavedphotosalbum"];
     target = nullptr;
   }];

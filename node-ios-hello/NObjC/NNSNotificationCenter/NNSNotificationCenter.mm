@@ -56,7 +56,7 @@ NAN_METHOD(NNSNotificationCenter::addObserverSelectorNameObject) {
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NNSNotificationCenter::addObserverSelectorNameObject");
+          (*fn)("NNSNotificationCenter::addObserverSelectorNameObject", js_value_id(sender));
         }
       });
     }];

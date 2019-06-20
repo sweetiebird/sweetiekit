@@ -203,7 +203,7 @@ NAN_METHOD(NUIControl::addTargetActionForControlEvents) {
     [target setCallbackClosure:^(id _Nullable sender) {
       dispatch_main(^{
         if (fn) {
-          (*fn)("NUIControl::addTarget");
+          (*fn)("NUIControl::addTarget", js_value_id(sender));
         }
       });
     }];
