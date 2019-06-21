@@ -9,6 +9,7 @@ const makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
 const makeFullReact = require('./examples/fullReact');
 const makePlatformer = require('./examples/Beez');
+const makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
 const makeARSCNView = require('./examples/ARSCNView');
@@ -101,6 +102,7 @@ const appDemos = {
   MiniAppReact: makeMiniAppReact,
   FullReact: makeFullReact,
   Platformer: makePlatformer,
+  EmojiCam: makeEmojiCam,
 };
 
 const demoTypeNames = Object.keys(demoTypes).sort();

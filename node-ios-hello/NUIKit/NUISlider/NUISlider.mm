@@ -16,6 +16,7 @@ JS_INIT_CLASS(UISlider, UIControl);
   JS_ASSIGN_METHOD(proto, setThumbImage);
   JS_ASSIGN_PROP_READONLY(proto, currentThumbImage);
   JS_ASSIGN_PROP(proto, thumbTintColor);
+  JS_ASSIGN_PROP(proto, continuous);
   // static members (ctor)
   JS_INIT_CTOR(UISlider, UIControl);
 JS_INIT_CLASS_END(UISlider, UIControl);
@@ -115,3 +116,19 @@ JS_SETTER(UISlider, ui, thumbTintColor, {
   }
   [ui setThumbTintColor:color];
 });
+
+NAN_GETTER(NUISlider::continuousGetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UISlider, ui);
+  
+  JS_SET_RETURN(JS_BOOL([ui isContinuous]));
+}
+
+NAN_SETTER(NUISlider::continuousSetter) {
+  Nan::HandleScope scope;
+  
+  JS_UNWRAP(UISlider, ui);
+
+  [ui setContinuous:TO_BOOL(value)];
+}

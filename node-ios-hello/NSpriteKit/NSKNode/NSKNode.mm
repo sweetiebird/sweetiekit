@@ -61,9 +61,7 @@ NAN_METHOD(NSKNode::New) {
     node->SetNSObject((__bridge SKNode *)(info[0].As<External>()->Value()));
   } else {
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        node->SetNSObject([SKNode node]);
-      });
+      node->SetNSObject([SKNode node]);
     }
   }
   node->Wrap(obj);

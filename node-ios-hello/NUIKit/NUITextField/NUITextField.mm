@@ -140,10 +140,12 @@ JS_INIT_CLASS(UITextField, UIControl);
         JS_ASSIGN_PROTO_PROP_READONLY_AS(NUITextInput::insertDictationResultPlaceholder, "insertDictationResultPlaceholder");
 
   }
+  JS_ASSIGN_PROTO_METHOD(initWithFrameCallback);
 
   // static members (ctor)
   JS_INIT_CTOR(UITextField, UIControl);
-  JS_ASSIGN_PROTO_METHOD(initWithFrameCallback);
+  JS_ASSIGN_STATIC_METHOD(initNewWithFrameCallback);
+
   // constants (exports)
   
   //typedef NS_ENUM(NSInteger, UITextBorderStyle) {
@@ -371,6 +373,34 @@ NAN_METHOD(NUITextField::New) {
     } else {
       Nan::ThrowError("NUITextField::New: invalid arguments");
     }
+  }
+}
+
+NAN_METHOD(NUITextField::initNewWithFrameCallback) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    id self = [[UITextField alloc] initWithFrame:frame];
+    JS_SET_RETURN(js_value_instancetype(self));
+    declare_persistent_function(callback, @"sweetiekit.UITextField.initWithFrameCallback");
+    [self setPlaceholder:@"Enter text here"];
+    [self setFont:[UIFont systemFontOfSize:15]];
+    [self setBorderStyle:UITextBorderStyleRoundedRect];
+    [self setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [self setKeyboardType:UIKeyboardTypeDefault];
+    [self setReturnKeyType:UIReturnKeyDone];
+    [self setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [self setTargetClosureWithClosure:^(UITextField* sender){
+      __block bool result = true;
+      dispatch_main(^{
+        get_persistent_function(sender, callback, @"sweetiekit.UITextField.initWithFrameCallback");
+        if (callback) {
+          result = to_value_BOOL([callback jsFunction]->Call("NUITextField::initWithFrameCallback"));
+        }
+      });
+      return result;
+    }];
   }
 }
 

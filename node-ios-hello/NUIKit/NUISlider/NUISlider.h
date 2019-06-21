@@ -20,6 +20,7 @@ JS_WRAP_CLASS(UISlider, UIControl);
   JS_METHOD(setThumbImage);
   JS_PROP(currentThumbImage);
   JS_PROP(thumbTintColor);
+  JS_PROP(continuous);
 JS_WRAP_CLASS_END(UISlider);
 
 #endif /* NUISlider_h */
