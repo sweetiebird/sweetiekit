@@ -12,6 +12,7 @@ const {
   SKScene,
   ARAnchor,
   UITextField,
+  UIApplication,
   UIButton,
   UIImage,
   NSMutableAttributedString,
@@ -206,7 +207,7 @@ function emojiCam(nav, demoVC) {
       alpha: 0.3,
     };
 
-    const topView = UIView({ x: 0, y: 0, width: demoVC.view.frame.width, height: fieldHeight + 1 });
+    const topView = UIView({ x: 0, y: (fieldHeight * 1.5), width: demoVC.view.frame.width, height: fieldHeight + 1 });
     topView.backgroundColor = {
       ...colors.white,
       alpha: 0.1,
@@ -448,7 +449,12 @@ function emojiCam(nav, demoVC) {
 
     demoVC.view.addSubview(arView);
     arView.pinToSuperview();
-    nav.pushViewController(demoVC);
+    // nav.pushViewController(demoVC);
+    new UIApplication()
+      .keyWindow
+      .rootViewController
+      .viewControllers[0]
+      .presentViewControllerAnimatedCompletion(demoVC, true, () => {});
 
     arView.presentScene(scene);
 
@@ -498,8 +504,19 @@ function emojiCam(nav, demoVC) {
       UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight);
       */
 
+    // noinspection JSSuspiciousNameCombination
+    const closeBtn = UIButton({ x: 0, y: fieldHeight * 0.5, width: fieldHeight, height: fieldHeight });
+    closeBtn.setTitleForState('x', UIControlStateNormal);
+    closeBtn.setTitleColorForState(colors.white, UIControlStateNormal);
+    closeBtn.backgroundColor = colors.clear;
+    closeBtn.addTargetActionForControlEvents(() => {
+      demoVC.dismissViewControllerAnimatedCompletion(true, () => {});
+    }, UIControlEventTouchUpInside);
+    closeBtn.alpha = 0.6;
+    demoVC.view.addSubview(closeBtn);
+
     const viewW = view.frame.width;
-    const scaleSliderY = fieldHeight + 20;
+    const scaleSliderY = (fieldHeight * 2) + 40;
     const sliderHeight = 20;
 
     const scaleSlider = UISlider({
