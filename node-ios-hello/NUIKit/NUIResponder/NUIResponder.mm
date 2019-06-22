@@ -13,8 +13,11 @@ NUIResponder::NUIResponder() {}
 NUIResponder::~NUIResponder() {}
 
 JS_INIT_CLASS(UIResponder, NSObject);
+  #pragma mark - Static methods
   JS_ASSIGN_STATIC_METHOD(clearTextInputContextIdentifier);
-// UIResponderStandardEditActions
+  #pragma mark - Proto methods
+  // instance members (proto)
+  // UIResponderStandardEditActions
   JS_ASSIGN_PROTO_METHOD(cut);
   JS_ASSIGN_PROTO_METHOD(copy);
   JS_ASSIGN_PROTO_METHOD(paste);
@@ -28,16 +31,13 @@ JS_INIT_CLASS(UIResponder, NSObject);
   JS_ASSIGN_PROTO_METHOD(toggleUnderline);
   JS_ASSIGN_PROTO_METHOD(increaseSize);
   JS_ASSIGN_PROTO_METHOD(decreaseSize);
-// UIResponder
+  // UIResponder
   JS_ASSIGN_PROTO_METHOD(nextResponder);
   JS_ASSIGN_PROTO_METHOD(canBecomeFirstResponder);
   JS_ASSIGN_PROTO_METHOD(becomeFirstResponder);
   JS_ASSIGN_PROTO_METHOD(canResignFirstResponder);
   JS_ASSIGN_PROTO_METHOD(resignFirstResponder);
   JS_ASSIGN_PROTO_METHOD(isFirstResponder);
-  JS_ASSIGN_PROTO_METHOD(touchesBeganWithEvent);
-  JS_ASSIGN_PROTO_METHOD(touchesMovedWithEvent);
-  JS_ASSIGN_PROTO_METHOD(touchesEndedWithEvent);
   JS_ASSIGN_PROTO_METHOD(touchesCancelledWithEvent);
   JS_ASSIGN_PROTO_METHOD(touchesEstimatedPropertiesUpdated);
   JS_ASSIGN_PROTO_METHOD(pressesBeganWithEvent);
@@ -53,6 +53,8 @@ JS_INIT_CLASS(UIResponder, NSObject);
   JS_ASSIGN_PROTO_METHOD(reloadInputViews);
   JS_ASSIGN_PROTO_METHOD(updateUserActivityState);
   JS_ASSIGN_PROTO_METHOD(restoreUserActivityState);
+
+  #pragma mark - Proto properties
   JS_ASSIGN_PROTO_PROP_READONLY(nextResponder);
   JS_ASSIGN_PROTO_PROP_READONLY(canBecomeFirstResponder);
   JS_ASSIGN_PROTO_PROP_READONLY(canResignFirstResponder);
@@ -67,15 +69,20 @@ JS_INIT_CLASS(UIResponder, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(textInputMode);
   JS_ASSIGN_PROTO_PROP_READONLY(textInputContextIdentifier);
   JS_ASSIGN_PROTO_PROP(userActivity);
-  // swizzled method properties
-  JS_ASSIGN_PROTO_PROP(touchesBegan);
-  JS_ASSIGN_PROTO_PROP(touchesMoved);
-  JS_ASSIGN_PROTO_PROP(touchesEnded);
 
-  // instance members (proto)
+  #pragma mark - Swizzled method properties
+  // used to get/set callbacks for swizzled methods
+  // DO NOT OVERWRITE THESE :)
+  JS_ASSIGN_PROTO_PROP(touchesBeganWithEvent);
+  JS_ASSIGN_PROTO_PROP(touchesMovedWithEvent);
+  JS_ASSIGN_PROTO_PROP(touchesEndedWithEvent);
+
   // static members (ctor)
+  #pragma mark - Static
   JS_INIT_CTOR(UIResponder, NSObject);
 JS_INIT_CLASS_END(UIResponder, NSObject);
+
+#pragma mark - Nan Handlers
 
 NAN_METHOD(NUIResponder::New) {
   JS_RECONSTRUCT(UIResponder);
@@ -268,36 +275,6 @@ NAN_METHOD(NUIResponder::isFirstResponder) {
 
 #include "NUITouch.h"
 #include "NUIEvent.h"
-
-NAN_METHOD(NUIResponder::touchesBeganWithEvent) {
-  JS_UNWRAP(UIResponder, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(NSSet/* <UITouch*>*/, touches);
-    declare_nullable_pointer(UIEvent, event);
-    [self touchesBegan: touches withEvent: event];
-  }
-}
-
-NAN_METHOD(NUIResponder::touchesMovedWithEvent) {
-  JS_UNWRAP(UIResponder, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(NSSet/* <UITouch*>*/, touches);
-    declare_nullable_pointer(UIEvent, event);
-    [self touchesMoved: touches withEvent: event];
-  }
-}
-
-NAN_METHOD(NUIResponder::touchesEndedWithEvent) {
-  JS_UNWRAP(UIResponder, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(NSSet/* <UITouch*>*/, touches);
-    declare_nullable_pointer(UIEvent, event);
-    [self touchesEnded: touches withEvent: event];
-  }
-}
 
 NAN_METHOD(NUIResponder::touchesCancelledWithEvent) {
   JS_UNWRAP(UIResponder, self);
@@ -564,11 +541,11 @@ NAN_SETTER(NUIResponder::userActivitySetter) {
   }
 }
 
-NAN_GETTER(NUIResponder::touchesBeganGetter) {
+NAN_GETTER(NUIResponder::touchesBeganWithEventGetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
-    id fn = [self associatedValueForKey:@"sweetiekit_touchesBegan"];
+    id fn = [self associatedValueForKey:@"sweetiekit_touchesBeganWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -578,21 +555,21 @@ NAN_GETTER(NUIResponder::touchesBeganGetter) {
   }
 }
 
-NAN_SETTER(NUIResponder::touchesBeganSetter) {
+NAN_SETTER(NUIResponder::touchesBeganWithEventSetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [self associateValue:func withKey:@"sweetiekit_touchesBegan"];
+    [self associateValue:func withKey:@"sweetiekit_touchesBeganWithEvent"];
   }
 }
 
-NAN_GETTER(NUIResponder::touchesMovedGetter) {
+NAN_GETTER(NUIResponder::touchesMovedWithEventGetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
-    id fn = [self associatedValueForKey:@"sweetiekit_touchesMoved"];
+    id fn = [self associatedValueForKey:@"sweetiekit_touchesMovedWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -602,21 +579,21 @@ NAN_GETTER(NUIResponder::touchesMovedGetter) {
   }
 }
 
-NAN_SETTER(NUIResponder::touchesMovedSetter) {
+NAN_SETTER(NUIResponder::touchesMovedWithEventSetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [self associateValue:func withKey:@"sweetiekit_touchesMoved"];
+    [self associateValue:func withKey:@"sweetiekit_touchesMovedWithEvent"];
   }
 }
 
-NAN_GETTER(NUIResponder::touchesEndedGetter) {
+NAN_GETTER(NUIResponder::touchesEndedWithEventGetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
-    id fn = [self associatedValueForKey:@"sweetiekit_touchesEnded"];
+    id fn = [self associatedValueForKey:@"sweetiekit_touchesEndedWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -626,12 +603,12 @@ NAN_GETTER(NUIResponder::touchesEndedGetter) {
   }
 }
 
-NAN_SETTER(NUIResponder::touchesEndedSetter) {
+NAN_SETTER(NUIResponder::touchesEndedWithEventSetter) {
   Nan::EscapableHandleScope scope;
   JS_UNWRAP(UIResponder, self);
   declare_autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [self associateValue:func withKey:@"sweetiekit_touchesEnded"];
+    [self associateValue:func withKey:@"sweetiekit_touchesEndedWithEvent"];
   }
 }

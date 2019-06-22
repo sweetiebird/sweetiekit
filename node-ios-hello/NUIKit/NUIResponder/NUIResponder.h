@@ -37,9 +37,9 @@ JS_WRAP_CLASS(UIResponder, NSObject);
   JS_METHOD(canResignFirstResponder);
   JS_METHOD(resignFirstResponder);
   JS_METHOD(isFirstResponder);
-  JS_METHOD(touchesBeganWithEvent);
-  JS_METHOD(touchesMovedWithEvent);
-  JS_METHOD(touchesEndedWithEvent);
+//  JS_METHOD(touchesBeganWithEvent);
+//  JS_METHOD(touchesMovedWithEvent);
+//  JS_METHOD(touchesEndedWithEvent);
   JS_METHOD(touchesCancelledWithEvent);
   JS_METHOD(touchesEstimatedPropertiesUpdated);
   JS_METHOD(pressesBeganWithEvent);
@@ -69,9 +69,9 @@ JS_WRAP_CLASS(UIResponder, NSObject);
   JS_PROP_READONLY(textInputMode);
   JS_PROP_READONLY(textInputContextIdentifier);
   JS_PROP(userActivity);
-  JS_PROP(touchesBegan);
-  JS_PROP(touchesMoved);
-  JS_PROP(touchesEnded);
+  JS_PROP(touchesBeganWithEvent);
+  JS_PROP(touchesMovedWithEvent);
+  JS_PROP(touchesEndedWithEvent);
 JS_WRAP_CLASS_END(UIResponder);
 
 #endif /* NUIResponder_h */

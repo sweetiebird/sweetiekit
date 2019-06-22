@@ -55,7 +55,6 @@ class Player {
   jump(force) {
     if (this.jumps > 0) {
       --this.jumps;
-      this.configure();
       this.node.physicsBody.velocity = { dx: 0, dy: 0 };
       this.node.physicsBody.applyImpulse({ dx: force.x, dy: force.y });
     }
@@ -81,7 +80,7 @@ function makeDemo(navigation, dvc) {
   //let contactDel;
   //let joystick;
   //let joystickArrows;
-  //let joystickKnob;
+  // let joystickKnob;
 
   const PhysicsCategory = {
     none: 0,
@@ -111,11 +110,22 @@ function makeDemo(navigation, dvc) {
   }
 
   function touchesEnded() {
-    player.jump(joystickKnob.position);
+    // player.jump(joystickKnob.position);
     const action = SKAction.moveTo(v2(0, 0), 0.2);
     joystickKnob.runAction(action, () => {
       joystickKnob.position = v2(0, 0);
     });
+  }
+
+  function sceneTouchesBegan(touches = []) {
+    if (touches.length) {
+      const last = touches[touches.length - 1];
+      const viewLoc = last.locationInView(skView);
+      console.log(skView.frame.width, joystickKnob.position);
+      if (viewLoc.x < skView.frame.width / 2) {
+        player.jump(joystickKnob.position);
+      }
+    }
   }
 
   function addPlatforms() {
@@ -171,7 +181,7 @@ function makeDemo(navigation, dvc) {
     const groundH = Math.round(demoVC.view.bounds.height * 0.08);
     const groundW = demoVC.view.bounds.width * 1000;
     ground.size = { width: 2*groundW, height: groundH };
-    ground.position = { x: -groundW, y: (demoVC.view.bounds.height / -2) + groundH };
+    ground.position = { x: -(groundW * 0.5), y: (demoVC.view.bounds.height / -2) + groundH };
     ground.name = 'ground';
 
     ground.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(ground.size);
@@ -311,7 +321,7 @@ function makeDemo(navigation, dvc) {
 
     makeJoystick();
 
-    // scene.touchesBegan = touchesMoved;
+    scene.touchesBegan = sceneTouchesBegan;
     // scene.touchesMoved = touchesMoved;
     // scene.touchesEnded = touchesEnded;
 

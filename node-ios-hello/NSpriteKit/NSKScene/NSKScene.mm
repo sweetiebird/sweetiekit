@@ -13,9 +13,9 @@ JS_INIT_CLASS(SKScene, SKNode);
   // instance members (proto)
   JS_ASSIGN_PROTO_METHOD(convertPointFromView);
   JS_ASSIGN_PROTO_METHOD(convertPointToView);
-  JS_ASSIGN_PROP(proto, touchesBegan);
-  JS_ASSIGN_PROP(proto, touchesMoved);
-  JS_ASSIGN_PROP(proto, touchesEnded);
+  JS_ASSIGN_PROP(proto, touchesBeganWithEvent);
+  JS_ASSIGN_PROP(proto, touchesMovedWithEvent);
+  JS_ASSIGN_PROP(proto, touchesEndedWithEvent);
   JS_ASSIGN_PROP(proto, update);
   JS_ASSIGN_PROP(proto, size);
   JS_ASSIGN_PROP(proto, scaleMode);
@@ -113,13 +113,13 @@ NAN_SETTER(NSKScene::scaleModeSetter) {
   }
 }
 
-NAN_GETTER(NSKScene::touchesBeganGetter) {
+NAN_GETTER(NSKScene::touchesBeganWithEventGetter) {
   Nan::EscapableHandleScope scope;
   
   JS_UNWRAP(SKScene, sk);
 
   @autoreleasepool {
-    id fn = [sk associatedValueForKey:@"sweetiekit_touchesBegan"];
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesBeganWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -129,7 +129,7 @@ NAN_GETTER(NSKScene::touchesBeganGetter) {
   }
 }
 
-NAN_SETTER(NSKScene::touchesBeganSetter) {
+NAN_SETTER(NSKScene::touchesBeganWithEventSetter) {
   Nan::EscapableHandleScope scope;
 
   JS_UNWRAP(SKScene, sk);
@@ -137,17 +137,17 @@ NAN_SETTER(NSKScene::touchesBeganSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [sk associateValue:func withKey:@"sweetiekit_touchesBegan"];
+    [sk associateValue:func withKey:@"sweetiekit_touchesBeganWithEvent"];
   }
 }
 
-NAN_GETTER(NSKScene::touchesMovedGetter) {
+NAN_GETTER(NSKScene::touchesMovedWithEventGetter) {
   Nan::EscapableHandleScope scope;
   
   JS_UNWRAP(SKScene, sk);
 
   @autoreleasepool {
-    id fn = [sk associatedValueForKey:@"sweetiekit_touchesMoved"];
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesMovedWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -157,7 +157,7 @@ NAN_GETTER(NSKScene::touchesMovedGetter) {
   }
 }
 
-NAN_SETTER(NSKScene::touchesMovedSetter) {
+NAN_SETTER(NSKScene::touchesMovedWithEventSetter) {
   Nan::EscapableHandleScope scope;
 
   JS_UNWRAP(SKScene, sk);
@@ -165,17 +165,17 @@ NAN_SETTER(NSKScene::touchesMovedSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [sk associateValue:func withKey:@"sweetiekit_touchesMoved"];
+    [sk associateValue:func withKey:@"sweetiekit_touchesMovedWithEvent"];
   }
 }
 
-NAN_GETTER(NSKScene::touchesEndedGetter) {
+NAN_GETTER(NSKScene::touchesEndedWithEventGetter) {
   Nan::EscapableHandleScope scope;
   
   JS_UNWRAP(SKScene, sk);
 
   @autoreleasepool {
-    id fn = [sk associatedValueForKey:@"sweetiekit_touchesEnded"];
+    id fn = [sk associatedValueForKey:@"sweetiekit_touchesEndedWithEvent"];
     if (fn != nullptr) {
       SweetJSFunction* func = (SweetJSFunction*)fn;
       sweetiekit::JSFunction& f = *[func jsFunction];
@@ -185,7 +185,7 @@ NAN_GETTER(NSKScene::touchesEndedGetter) {
   }
 }
 
-NAN_SETTER(NSKScene::touchesEndedSetter) {
+NAN_SETTER(NSKScene::touchesEndedWithEventSetter) {
   Nan::EscapableHandleScope scope;
 
   JS_UNWRAP(SKScene, sk);
@@ -193,7 +193,7 @@ NAN_SETTER(NSKScene::touchesEndedSetter) {
   @autoreleasepool {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
-    [sk associateValue:func withKey:@"sweetiekit_touchesEnded"];
+    [sk associateValue:func withKey:@"sweetiekit_touchesEndedWithEvent"];
   }
 }
 
