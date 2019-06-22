@@ -91,6 +91,7 @@ function makeDemo(navigation, dvc) {
 
   function touchesMoved(touches = []) {
     touches.forEach((t, idx) => {
+      console.log(t);
       const viewLoc = t.locationInView(skView);
       const scnLoc = scene.convertPointFromView(viewLoc);
       const jPos = joystick.convertPointFromNode(scnLoc, scene);
@@ -118,7 +119,7 @@ function makeDemo(navigation, dvc) {
   }
 
   function addPlatforms() {
-    const groundH = Math.round(scene.size.height * 0.05);
+    const groundH = 18;
     const groundW = scene.size.width * 0.3;
     const groundOffset = scene.size.width * 0.08;
     const groundSize = { width: groundW, height: groundH };
@@ -133,7 +134,7 @@ function makeDemo(navigation, dvc) {
     ];
 
     for (let i = 0, l = grounds.length; i < l; i++) {
-      const ground = new SKSpriteNode('game_ground');
+      const ground = SKSpriteNode('game_ground');
       ground.size = grounds[i].size;
       ground.position = { x: grounds[i].x, y: grounds[i].y };
 
@@ -152,21 +153,21 @@ function makeDemo(navigation, dvc) {
   }
 
   function makeScene(demoVC) {
-    const scn = new SKScene();
+    const scn = SKScene();
     scn.anchorPoint = { x: 0.5, y: 0.5 };
     scn.scaleMode = SKSceneScaleModeAspectFill;
     scn.size = { width: demoVC.view.bounds.width, height: demoVC.view.bounds.height };
-    const bg = new SKSpriteNode('game_bg');
+    const bg = SKSpriteNode('game_bg');
     bg.size = { width: demoVC.view.bounds.width, height: demoVC.view.bounds.height };
     bg.position = { x: 0, y: 0 };
     scn.addChild(bg);
-    const stars = new SKSpriteNode('game_stars');
+    const stars = SKSpriteNode('game_stars');
     const starsH = Math.round(demoVC.view.bounds.height * 0.26);
     const starsSize = { width: scn.size.width, height: starsH };
     stars.position = { x: 0, y: distToTopY(scn.size, starsSize) };
     stars.size = starsSize;
     scn.addChild(stars);
-    const ground = new SKSpriteNode('game_ground');
+    const ground = SKSpriteNode('game_ground');
     const groundH = Math.round(demoVC.view.bounds.height * 0.08);
     const groundW = demoVC.view.bounds.width * 1000;
     ground.size = { width: 2*groundW, height: groundH };
@@ -186,9 +187,9 @@ function makeDemo(navigation, dvc) {
   }
 
   function makeJoystick() {
-    joystick = new SKNode();
-    joystickKnob = new SKSpriteNode('game_knob');
-    joystickArrows = new SKSpriteNode('game_arrows');
+    joystick = SKNode();
+    joystickKnob = SKSpriteNode('game_knob');
+    joystickArrows = SKSpriteNode('game_arrows');
     const joystickSize = { width: 100, height: 100 };
 
     joystickKnob.size = joystickSize;
@@ -219,7 +220,7 @@ function makeDemo(navigation, dvc) {
   }
 
   function makePlayer(demoVC) {
-    const node = new SKSpriteNode('game_player');
+    const node = SKSpriteNode('game_player');
     node.size = { width: 36, height: 49 };
     node.position = v2(0, 0);
     // node.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(node.size);
@@ -227,7 +228,7 @@ function makeDemo(navigation, dvc) {
   }
 
   function makeDelegate() {
-    const del = new SKPhysicsContactDelegate();
+    const del = SKPhysicsContactDelegate();
     del.didBeginContact = (contact) => {
       let bodyA = contact.bodyA;
       let bodyB = contact.bodyB;

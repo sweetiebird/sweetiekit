@@ -69,6 +69,9 @@ JS_WRAP_CLASS(UIResponder, NSObject);
   JS_PROP_READONLY(textInputMode);
   JS_PROP_READONLY(textInputContextIdentifier);
   JS_PROP(userActivity);
+  JS_PROP(touchesBegan);
+  JS_PROP(touchesMoved);
+  JS_PROP(touchesEnded);
 JS_WRAP_CLASS_END(UIResponder);
 
 #endif /* NUIResponder_h */
