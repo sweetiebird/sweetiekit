@@ -10,24 +10,30 @@ NSKView::NSKView() {}
 NSKView::~NSKView() {}
 
 JS_INIT_CLASS(SKView, UIView);
+  JS_ASSIGN_PROTO_METHOD(presentScene);
+  JS_ASSIGN_PROTO_METHOD(presentSceneTransition);
+  JS_ASSIGN_PROTO_METHOD(textureFromNode);
+  JS_ASSIGN_PROTO_METHOD(textureFromNodeCrop);
+  JS_ASSIGN_PROTO_METHOD(convertPointToScene);
+  JS_ASSIGN_PROTO_METHOD(convertPointFromScene);
+  JS_ASSIGN_PROTO_PROP(isPaused);
+  JS_ASSIGN_PROTO_PROP(showsFPS);
+  JS_ASSIGN_PROTO_PROP(showsDrawCount);
+  JS_ASSIGN_PROTO_PROP(showsNodeCount);
+  JS_ASSIGN_PROTO_PROP(showsQuadCount);
+  JS_ASSIGN_PROTO_PROP(showsPhysics);
+  JS_ASSIGN_PROTO_PROP(showsFields);
+  JS_ASSIGN_PROTO_PROP(isAsynchronous);
+  JS_ASSIGN_PROTO_PROP(allowsTransparency);
+  JS_ASSIGN_PROTO_PROP(ignoresSiblingOrder);
+  JS_ASSIGN_PROTO_PROP(shouldCullNonVisibleNodes);
+  JS_ASSIGN_PROTO_PROP(preferredFramesPerSecond);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP(frameInterval);
+  JS_ASSIGN_PROTO_PROP(preferredFrameRate);
+  JS_ASSIGN_PROTO_PROP_READONLY(scene);
+
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, presentScene);
-  JS_ASSIGN_PROP(proto, paused);
-  JS_ASSIGN_PROP(proto, showsFPS);
-  JS_ASSIGN_PROP(proto, showsDrawCount);
-  JS_ASSIGN_PROP(proto, showsNodeCount);
-  JS_ASSIGN_PROP(proto, showsQuadCount);
-  JS_ASSIGN_PROP(proto, showsPhysics);
-  JS_ASSIGN_PROP(proto, showsFields);
-  JS_ASSIGN_PROP(proto, asynchronous);
-  JS_ASSIGN_PROP(proto, allowsTransparency);
-  JS_ASSIGN_PROP(proto, ignoresSiblingOrder);
-  JS_ASSIGN_PROP(proto, shouldCullNonVisibleNodes);
-  JS_ASSIGN_PROP(proto, preferredFramesPerSecond);
-  JS_ASSIGN_PROP(proto, delegate);
-  JS_ASSIGN_PROP(proto, frameInterval);
-  JS_ASSIGN_PROP(proto, preferredFrameRate);
-  JS_ASSIGN_PROP_READONLY(proto, scene);
   // static members (ctor)
   JS_INIT_CTOR(SKView, UIView);
 JS_INIT_CLASS_END(SKView, UIView);
@@ -64,280 +70,311 @@ NAN_METHOD(NSKView::New) {
 #include "NSKScene.h"
 
 NAN_METHOD(NSKView::presentScene) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(SKView, ui);
-  
-  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(Local<Object>::Cast(info[0]));
-  
-  [ui presentScene:scene->As<SKScene>()];
-}
-
-NAN_GETTER(NSKView::pausedGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isPaused]));
-    return;
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(SKScene, scene);
+    [self presentScene: scene];
   }
 }
 
-NAN_SETTER(NSKView::pausedSetter) {
+#include "NSKTransition.h"
+
+NAN_METHOD(NSKView::presentSceneTransition) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setPaused: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKScene, scene);
+    declare_pointer(SKTransition, transition);
+    [self presentScene: scene transition: transition];
+  }
+}
+
+#include "NSKTexture.h"
+
+NAN_METHOD(NSKView::textureFromNode) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_SKTexture([self textureFromNode: node]));
+  }
+}
+
+NAN_METHOD(NSKView::textureFromNodeCrop) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    declare_value(CGRect, crop);
+    JS_SET_RETURN(js_value_SKTexture([self textureFromNode: node crop: crop]));
+  }
+}
+
+NAN_METHOD(NSKView::convertPointToScene) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(SKScene, scene);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point toScene: scene]));
+  }
+}
+
+NAN_METHOD(NSKView::convertPointFromScene) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(SKScene, scene);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point fromScene: scene]));
+  }
+}
+
+NAN_GETTER(NSKView::isPausedGetter) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isPaused]));
+  }
+}
+
+NAN_SETTER(NSKView::isPausedSetter) {
+  JS_UNWRAP(SKView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setPaused: input];
   }
 }
 
 NAN_GETTER(NSKView::showsFPSGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsFPS]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsFPS]));
   }
 }
 
 NAN_SETTER(NSKView::showsFPSSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsFPS: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsFPS: input];
   }
 }
 
 NAN_GETTER(NSKView::showsDrawCountGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsDrawCount]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsDrawCount]));
   }
 }
 
 NAN_SETTER(NSKView::showsDrawCountSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsDrawCount: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsDrawCount: input];
   }
 }
 
 NAN_GETTER(NSKView::showsNodeCountGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsNodeCount]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsNodeCount]));
   }
 }
 
 NAN_SETTER(NSKView::showsNodeCountSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsNodeCount: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsNodeCount: input];
   }
 }
 
 NAN_GETTER(NSKView::showsQuadCountGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsQuadCount]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsQuadCount]));
   }
 }
 
 NAN_SETTER(NSKView::showsQuadCountSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsQuadCount: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsQuadCount: input];
   }
 }
 
 NAN_GETTER(NSKView::showsPhysicsGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsPhysics]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsPhysics]));
   }
 }
 
 NAN_SETTER(NSKView::showsPhysicsSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsPhysics: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsPhysics: input];
   }
 }
 
 NAN_GETTER(NSKView::showsFieldsGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self showsFields]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsFields]));
   }
 }
 
 NAN_SETTER(NSKView::showsFieldsSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShowsFields: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsFields: input];
   }
 }
 
-NAN_GETTER(NSKView::asynchronousGetter) {
+NAN_GETTER(NSKView::isAsynchronousGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isAsynchronous]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isAsynchronous]));
   }
 }
 
-NAN_SETTER(NSKView::asynchronousSetter) {
+NAN_SETTER(NSKView::isAsynchronousSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setAsynchronous: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setAsynchronous: input];
   }
 }
 
 NAN_GETTER(NSKView::allowsTransparencyGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self allowsTransparency]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self allowsTransparency]));
   }
 }
 
 NAN_SETTER(NSKView::allowsTransparencySetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setAllowsTransparency: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setAllowsTransparency: input];
   }
 }
 
 NAN_GETTER(NSKView::ignoresSiblingOrderGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self ignoresSiblingOrder]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self ignoresSiblingOrder]));
   }
 }
 
 NAN_SETTER(NSKView::ignoresSiblingOrderSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setIgnoresSiblingOrder: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setIgnoresSiblingOrder: input];
   }
 }
 
 NAN_GETTER(NSKView::shouldCullNonVisibleNodesGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self shouldCullNonVisibleNodes]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self shouldCullNonVisibleNodes]));
   }
 }
 
 NAN_SETTER(NSKView::shouldCullNonVisibleNodesSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setShouldCullNonVisibleNodes: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShouldCullNonVisibleNodes: input];
   }
 }
 
 NAN_GETTER(NSKView::preferredFramesPerSecondGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSInteger([self preferredFramesPerSecond]));
-    return;
   }
 }
 
 NAN_SETTER(NSKView::preferredFramesPerSecondSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setPreferredFramesPerSecond: to_value_NSInteger(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSInteger, input);
+    [self setPreferredFramesPerSecond: input];
   }
 }
 
-typedef NSObject SKViewDelegate;
-
 NAN_GETTER(NSKView::delegateGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(js_value_id<SKViewDelegate>([self delegate]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSObject/* <SKViewDelegate>*/([self delegate]));
   }
 }
 
 NAN_SETTER(NSKView::delegateSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setDelegate: to_value_id<SKViewDelegate>(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSObject/* <SKViewDelegate>*/, input);
+    [self setDelegate: input];
+    [self associateValue:input withKey:@"NSKView::delegate"];
   }
 }
 
 NAN_GETTER(NSKView::frameIntervalGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSInteger([self frameInterval]));
-    return;
   }
 }
 
 NAN_SETTER(NSKView::frameIntervalSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setFrameInterval: to_value_NSInteger(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSInteger, input);
+    [self setFrameInterval: input];
   }
 }
 
 NAN_GETTER(NSKView::preferredFrameRateGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_float([self preferredFrameRate]));
-    return;
   }
 }
 
 NAN_SETTER(NSKView::preferredFrameRateSetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
-    [self setPreferredFrameRate: to_value_float(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setPreferredFrameRate: input];
   }
 }
-
-#include "NSKScene.h"
 
 NAN_GETTER(NSKView::sceneGetter) {
   JS_UNWRAP(SKView, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKScene([self scene]));
-    return;
   }
 }
-

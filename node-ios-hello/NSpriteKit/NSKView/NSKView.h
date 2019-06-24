@@ -16,14 +16,19 @@
 
 JS_WRAP_CLASS(SKView, UIView);
   JS_METHOD(presentScene);
-  JS_PROP(paused);
+  JS_METHOD(presentSceneTransition);
+  JS_METHOD(textureFromNode);
+  JS_METHOD(textureFromNodeCrop);
+  JS_METHOD(convertPointToScene);
+  JS_METHOD(convertPointFromScene);
+  JS_PROP(isPaused);
   JS_PROP(showsFPS);
   JS_PROP(showsDrawCount);
   JS_PROP(showsNodeCount);
   JS_PROP(showsQuadCount);
   JS_PROP(showsPhysics);
   JS_PROP(showsFields);
-  JS_PROP(asynchronous);
+  JS_PROP(isAsynchronous);
   JS_PROP(allowsTransparency);
   JS_PROP(ignoresSiblingOrder);
   JS_PROP(shouldCullNonVisibleNodes);
