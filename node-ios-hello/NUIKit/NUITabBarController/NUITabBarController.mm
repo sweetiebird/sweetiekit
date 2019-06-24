@@ -14,6 +14,7 @@ JS_INIT_CLASS(UITabBarController, UIViewController);
   JS_ASSIGN_METHOD(proto, setViewControllers);
   JS_ASSIGN_PROTO_PROP(viewControllers);
   JS_ASSIGN_PROTO_PROP(selectedIndex);
+  JS_ASSIGN_PROTO_PROP(selectedViewController);
   JS_ASSIGN_PROP_READONLY(proto, tabBar);
   // static members (ctor)
   JS_INIT_CTOR(UITabBarController, UIViewController);
@@ -97,6 +98,22 @@ NAN_SETTER(NUITabBarController::selectedIndexSetter) {
     declare_setter();
     declare_value(NSInteger, input);
     [self setSelectedIndex: input];
+  }
+}
+
+NAN_GETTER(NUITabBarController::selectedViewControllerGetter) {
+  JS_UNWRAP(UITabBarController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIViewController([self selectedViewController]));
+  }
+}
+
+NAN_SETTER(NUITabBarController::selectedViewControllerSetter) {
+  JS_UNWRAP(UITabBarController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIViewController, input);
+    [self setSelectedViewController: input];
   }
 }
 

@@ -2,7 +2,7 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const colors = require('./examples/colors');
 
-__DEV__ = true;
+__DEV__ = false;
 
 // apps
 const makeMiniApp = () => require('./examples/MiniApp');

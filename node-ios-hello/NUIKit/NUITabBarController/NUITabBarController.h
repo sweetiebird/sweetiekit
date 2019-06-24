@@ -19,6 +19,7 @@ JS_WRAP_CLASS(UITabBarController, UIViewController);
   JS_PROP(tabBar);
   JS_PROP(viewControllers);
   JS_PROP(selectedIndex);
+  JS_PROP(selectedViewController);
 JS_WRAP_CLASS_END(UITabBarController);
 
 
