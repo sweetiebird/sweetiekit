@@ -849,6 +849,11 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioPlayerNode.h"
 #include "NAVAudioFile.h"
 #include "NAVAudioChannelLayout.h"
+
+#include "NAVDepthData.h"
+#include "NAVPortraitEffectsMatte.h"
+#include "NAVCameraCalibrationData.h"
+
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
@@ -911,6 +916,7 @@ NAN_METHOD(NClass::New) {
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
+#include "NCIColor.h"
 #include "NCIImage.h"
 
 #import <WebKit/WebKit.h>
@@ -1157,6 +1163,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVAudioPlayerNode);
     JS_EXPORT_TYPE(AVAudioFile);
     JS_EXPORT_TYPE(AVAudioChannelLayout);
+
+    JS_EXPORT_TYPE(AVDepthData);
+    JS_EXPORT_TYPE(AVPortraitEffectsMatte);
+    JS_EXPORT_TYPE(AVCameraCalibrationData);
     
     // MediaPlayer
     JS_EXPORT_TYPE(MPMediaEntity);
@@ -1309,6 +1319,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MKUserLocation);
 
     // core image
+    JS_EXPORT_TYPE(CIColor);
     JS_EXPORT_TYPE(CIImage);
 }
 
@@ -1354,6 +1365,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // Core Image
       JS_RETURN_TYPE(CIImage);
+      JS_RETURN_TYPE(CIColor);
 
       // MapKit
       JS_RETURN_TYPE(MKUserLocation);
@@ -1495,6 +1507,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AUParameterNode);
       
       // AVFoundation
+
+      JS_RETURN_TYPE(AVCameraCalibrationData);
+      JS_RETURN_TYPE(AVPortraitEffectsMatte);
+      JS_RETURN_TYPE(AVDepthData);
+
       JS_RETURN_TYPE(AVAudioPlayer);
       JS_RETURN_TYPE(AVAudioFormat);
       JS_RETURN_TYPE(AVAudioSession);

@@ -666,6 +666,7 @@ namespace sweetiekit {
   CGAffineTransform CGAffineXFormFromJSArray(Local<Value> jsThing);
   bool IsJSFrame(Local<Value> jsThing);
   bool SetTransform3(simd_float3x3& transform, Local<Value> value);
+  bool SetTransform4x3(simd_float4x3& transform, Local<Value> value);
   bool SetTransform(simd_float4x4& transform, Local<Value> value);
   bool SetQuaternion(simd_quatf& quat, Local<Value> value);
   bool SetVector1(simd_float1& xyz, Local<Value> value);
@@ -673,6 +674,7 @@ namespace sweetiekit {
   bool SetVector3(simd_float3& xyz, Local<Value> value);
   bool SetVector4(simd_float4& xyz, Local<Value> value);
   bool SetTransform3(float* _Nonnull transform, Local<Value> value);
+  bool SetTransform4x3(float* _Nonnull transform, Local<Value> value);
   bool SetTransform(float* _Nonnull transform, Local<Value> value);
   bool SetQuaternion(float* _Nonnull quat, Local<Value> value);
   bool SetVector1(float* _Nonnull x, Local<Value> value);
@@ -680,6 +682,7 @@ namespace sweetiekit {
   bool SetVector3(float* _Nonnull xyz, Local<Value> value);
   bool SetVector4(float* _Nonnull xyzw, Local<Value> value);
   bool IsTransform3(Local<Value> value);
+  bool IsTransform4x3(Local<Value> value);
   bool IsTransform(Local<Value> value);
   bool IsQuaternion(Local<Value> value);
   bool IsVector1(Local<Value> value);
@@ -924,6 +927,7 @@ Local<Value> js_value_simd_float2(const simd_float2& value);
 Local<Value> js_value_simd_float3(const simd_float3& value);
 Local<Value> js_value_simd_float4(const simd_float4& value);
 Local<Value> js_value_simd_float3x3(const simd_float3x3& value);
+Local<Value> js_value_simd_float4x3(const simd_float4x3& value);
 Local<Value> js_value_simd_float4x4(const simd_float4x4& value);
 simd_quatf    to_value_simd_quatf(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float1   to_value_simd_float1(const Local<Value>& value, bool * _Nullable failed = nullptr);
@@ -931,6 +935,7 @@ simd_float2   to_value_simd_float2(const Local<Value>& value, bool * _Nullable f
 simd_float3   to_value_simd_float3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float4   to_value_simd_float4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable failed = nullptr);
+simd_float4x3 to_value_simd_float4x3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 bool is_value_simd_quatf(const Local<Value>& value);
 bool is_value_simd_float1(const Local<Value>& value);
@@ -938,6 +943,7 @@ bool is_value_simd_float2(const Local<Value>& value);
 bool is_value_simd_float3(const Local<Value>& value);
 bool is_value_simd_float4(const Local<Value>& value);
 bool is_value_simd_float3x3(const Local<Value>& value);
+bool is_value_simd_float4x3(const Local<Value>& value);
 bool is_value_simd_float4x4(const Local<Value>& value);
 
 #define js_value_vector_float1   js_value_simd_float1
@@ -945,6 +951,7 @@ bool is_value_simd_float4x4(const Local<Value>& value);
 #define js_value_vector_float3   js_value_simd_float3
 #define js_value_vector_float4   js_value_simd_float4
 #define js_value_matrix_float3x3 js_value_simd_float3x3
+#define js_value_matrix_float4x3 js_value_simd_float4x3
 #define js_value_matrix_float4x4 js_value_simd_float4x4
 #define to_value_vector_float1   to_value_simd_float1
 #define to_value_vector_float2   to_value_simd_float2
@@ -1041,18 +1048,30 @@ Local<Value> js_value_CGColorRef(CGColorRef _Nullable value);
 Local<Value> js_value_CGPathRef(CGPathRef _Nullable value);
 Local<Value> js_value_CGContextRef(CGContextRef _Nullable value);
 Local<Value> js_value_CGImageRef(CGImageRef _Nullable value);
+Local<Value> js_value_CGLayerRef(CGLayerRef _Nullable value);
+Local<Value> js_value_CGColorSpaceRef(CGColorSpaceRef _Nullable value);
+Local<Value> js_value_CVImageBufferRef(CVImageBufferRef _Nullable value);
+Local<Value> js_value_CVPixelBufferRef(CVPixelBufferRef _Nullable value);
 Local<Value> js_value_UIColor(UIColor* _Nullable value);
 
 CGColorRef _Nullable to_value_CGColorRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 CGPathRef _Nullable to_value_CGPathRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 CGImageRef _Nullable to_value_CGImageRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGLayerRef _Nullable to_value_CGLayerRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CGColorSpaceRef _Nullable to_value_CGColorSpaceRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CVImageBufferRef _Nullable to_value_CVImageBufferRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
+CVPixelBufferRef _Nullable to_value_CVPixelBufferRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
 
 #define is_value_CGColorRef is_value_UIColor
 bool is_value_CGPathRef(const Local<Value>& value);
 bool is_value_CGContextRef(const Local<Value>& value);
 bool is_value_CGImageRef(const Local<Value>& value);
+bool is_value_CGLayerRef(const Local<Value>& value);
+bool is_value_CGColorSpaceRef(const Local<Value>& value);
+bool is_value_CVImageBufferRef(const Local<Value>& value);
+bool is_value_CVPixelBufferRef(const Local<Value>& value);
 bool is_value_UIColor(const Local<Value>& value);
 
 #define js_value_SKColor js_value_UIColor
@@ -1344,6 +1363,10 @@ bool is_value_boxed(Local<Value> value);
 #define js_value_uint64_t(x) JS_UINT64(x)
 #define to_value_uint64_t(x) TO_UINT64(x)
 #define is_value_uint64_t(x) IS_UINT64(x)
+
+#define js_value_size_t(x) JS_UINT64(x)
+#define to_value_size_t(x) TO_UINT64(x)
+#define is_value_size_t(x) IS_UINT64(x)
 
 #define js_value_double(x) JS_NUM(x)
 #define to_value_double(x) TO_DOUBLE(x)

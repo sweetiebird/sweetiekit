@@ -695,7 +695,7 @@ namespace sweetiekit
   bool IsTransform3(Local<Value> value) {
     Nan::HandleScope scope;
     if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
-      return IsTransform3(JS_OBJ(value)->Get(JS_STR("elements")));
+      value = JS_OBJ(value)->Get(JS_STR("elements"));
     }
     if (value->IsFloat32Array()) {
       Local<Float32Array> xform = Local<Float32Array>::Cast(value);
@@ -746,6 +746,65 @@ namespace sweetiekit
     }
     return true;
   }
+
+  bool SetTransform4x3(simd_float4x3& transform, Local<Value> value) {
+    return SetTransform4x3((float*)&transform, value);
+  }
+  bool IsTransform4x3(Local<Value> value) {
+    Nan::HandleScope scope;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      value = JS_OBJ(value)->Get(JS_STR("elements"));
+    }
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      if (xform->Length() >= 4*3) {
+        return true;
+      }
+      return true;
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 4*3; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      if (xform->Length() >= 4*3) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
+  bool SetTransform4x3(float* matrix, Local<Value> value) {
+    Nan::HandleScope scope;
+    if (value->IsObject() && JS_HAS(JS_OBJ(value), JS_STR("elements"))) {
+      value = JS_OBJ(value)->Get(JS_STR("elements"));
+    }
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform = Local<Float32Array>::Cast(value);
+      for (uint32_t i = 0; i < 4*3; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform = Local<Array>::Cast(value);
+      for (uint32_t i = 0; i < 4*3; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform = Local<Float64Array>::Cast(value);
+      for (uint32_t i = 0; i < 4*3; i++) {
+        matrix[i] = TO_FLOAT(xform->Get(i));
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
   
   bool SetQuaternion(simd_quatf& quat, Local<Value> value) {
     return SetQuaternion((float*)&quat, value);
@@ -1573,6 +1632,10 @@ Local<Value> js_value_simd_float3x3(const simd_float3x3& value) {
   return createTypedArray<Float32Array>(9, (const float*)&value);
 }
 
+Local<Value> js_value_simd_float4x3(const simd_float4x3& value) {
+  return createTypedArray<Float32Array>(4*3, (const float*)&value);
+}
+
 Local<Value> js_value_simd_float4x4(const simd_float4x4& value) {
   return createTypedArray<Float32Array>(16, (const float*)&value);
 }
@@ -1653,6 +1716,23 @@ simd_float3x3 to_value_simd_float3x3(const Local<Value>& value, bool * _Nullable
   return result;
 }
 
+simd_float4x3 to_value_simd_float4x3(const Local<Value>& value, bool * _Nullable failed) {
+  simd_float4x3 result = { {
+    { 1, 0, 0 },
+    { 0, 1, 0 },
+    { 0, 0, 1 },
+    { 0, 0, 0 },
+  } };
+  bool ok = sweetiekit::SetTransform4x3(result, value);
+  if (failed) {
+    *failed = ok;
+  }
+  else if (!ok) {
+    Nan::ThrowError("Expected simd_float4x4");
+  }
+  return result;
+}
+
 simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable failed) {
   simd_float4x4 result = { {
     { 1, 0, 0, 0 },
@@ -1688,6 +1768,10 @@ bool  is_value_simd_float4(const Local<Value>& value) {
 
 bool  is_value_simd_float3x3(const Local<Value>& value) {
   return sweetiekit::IsTransform3(value);
+}
+
+bool  is_value_simd_float4x3(const Local<Value>& value) {
+  return sweetiekit::IsTransform4x3(value);
 }
 
 bool  is_value_simd_float4x4(const Local<Value>& value) {
@@ -2112,6 +2196,22 @@ Local<Value> js_value_CGImageRef(CGImageRef _Nullable value) {
   return sweetiekit::GetWrapperFor((__bridge id)value);
 }
 
+Local<Value> js_value_CGLayerRef(CGLayerRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+Local<Value> js_value_CGColorSpaceRef(CGColorSpaceRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+Local<Value> js_value_CVImageBufferRef(CVImageBufferRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+Local<Value> js_value_CVPixelBufferRef(CVPixelBufferRef _Nullable value) {
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
 Local<Value> js_value_UIColor(UIColor* _Nullable color) {
   return sweetiekit::JSObjFromUIColor(color);
 }
@@ -2145,6 +2245,22 @@ CGContextRef _Nullable to_value_CGContextRef(const Local<Value>& value, bool * _
 
 CGImageRef _Nullable to_value_CGImageRef(const Local<Value>& value, bool * _Nullable failed) {
   return (__bridge CGImageRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CGLayerRef _Nullable to_value_CGLayerRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CGLayerRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CGColorSpaceRef _Nullable to_value_CGColorSpaceRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CGColorSpaceRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CVImageBufferRef _Nullable to_value_CVImageBufferRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CVImageBufferRef)sweetiekit::GetValueFor(value, failed);
+}
+
+CVPixelBufferRef _Nullable to_value_CVPixelBufferRef(const Local<Value>& value, bool * _Nullable failed) {
+  return (__bridge CVPixelBufferRef)sweetiekit::GetValueFor(value, failed);
 }
 
 UIColor* _Nullable to_value_UIColor(const Local<Value>& value, bool * _Nullable failed) {
@@ -2193,6 +2309,30 @@ bool is_value_CGContextRef(const Local<Value>& value)
 }
 
 bool is_value_CGImageRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
+bool is_value_CGLayerRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
+bool is_value_CGColorSpaceRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
+bool is_value_CVImageBufferRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
+bool is_value_CVPixelBufferRef(const Local<Value>& value)
 {
   // TODO: test type.
   return is_value_id(value);
