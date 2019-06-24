@@ -926,6 +926,7 @@ NAN_METHOD(NClass::New) {
 #include "NCIColor.h"
 #include "NCIImage.h"
 #include "NCIFilter.h"
+#include "NCIKernel.h"
 
 #import <WebKit/WebKit.h>
 #include "NWKNavigation.h"
@@ -1338,6 +1339,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CIColor);
     JS_EXPORT_TYPE(CIImage);
     JS_EXPORT_TYPE(CIFilter);
+    JS_EXPORT_TYPE(CIKernel);
 }
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -1381,6 +1383,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CATransaction);
       
       // Core Image
+      JS_RETURN_TYPE(CIKernel);
       JS_RETURN_TYPE(CIFilter);
       JS_RETURN_TYPE(CIImage);
       JS_RETURN_TYPE(CIColor);

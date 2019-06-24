@@ -211,6 +211,7 @@
 		A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0122C0BA34008F16AE /* NSKPhysicsJointFixed.mm */; };
 		A1926F0C22C0BFBB008F16AE /* NSKTransition.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0B22C0BFBB008F16AE /* NSKTransition.mm */; };
 		A1926F1022C0C09F008F16AE /* NCIFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0F22C0C09F008F16AE /* NCIFilter.mm */; };
+		A1926F1422C0C172008F16AE /* NCIKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1322C0C172008F16AE /* NCIKernel.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -813,6 +814,8 @@
 		A1926F0B22C0BFBB008F16AE /* NSKTransition.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTransition.mm; sourceTree = "<group>"; };
 		A1926F0E22C0C09F008F16AE /* NCIFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIFilter.h; sourceTree = "<group>"; };
 		A1926F0F22C0C09F008F16AE /* NCIFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIFilter.mm; sourceTree = "<group>"; };
+		A1926F1222C0C172008F16AE /* NCIKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIKernel.h; sourceTree = "<group>"; };
+		A1926F1322C0C172008F16AE /* NCIKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIKernel.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2490,9 +2493,10 @@
 		A1710EB8229A92BF00EC7C86 /* NCoreImage */ = {
 			isa = PBXGroup;
 			children = (
-				A1926F0D22C0C09F008F16AE /* NCIFilter */,
 				A1926EDD22C0A6B9008F16AE /* NCIColor */,
+				A1926F0D22C0C09F008F16AE /* NCIFilter */,
 				A1710EB9229A92BF00EC7C86 /* NCIImage */,
+				A1926F1122C0C171008F16AE /* NCIKernel */,
 			);
 			path = NCoreImage;
 			sourceTree = "<group>";
@@ -2844,6 +2848,15 @@
 				A1926F0F22C0C09F008F16AE /* NCIFilter.mm */,
 			);
 			path = NCIFilter;
+			sourceTree = "<group>";
+		};
+		A1926F1122C0C171008F16AE /* NCIKernel */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F1222C0C172008F16AE /* NCIKernel.h */,
+				A1926F1322C0C172008F16AE /* NCIKernel.mm */,
+			);
+			path = NCIKernel;
 			sourceTree = "<group>";
 		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
@@ -5111,6 +5124,7 @@
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D498AC22BB4A03009AC951 /* NUITextRange.mm in Sources */,
+				A1926F1422C0C172008F16AE /* NCIKernel.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */,
 				A1E5849622B1DD1000A967EF /* NUISplitViewController.mm in Sources */,
