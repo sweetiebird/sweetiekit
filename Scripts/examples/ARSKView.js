@@ -540,8 +540,14 @@ async function make(nav, demoVC) {
       arView.scene.size = arView.size;
     }
   };
+  if (arView.configureInterval) {
+    clearInterval(arView.configureInterval);
+    delete arView.configureInterval;
+  }
   arView.configureInterval = setInterval(() => {
-    arView.configure();
+    if (arView.configure) {
+      arView.configure();
+    }
   }, 1000);
 }
 

@@ -39,6 +39,25 @@ async function make(nav, demoVC) {
   scene.rootNode.position = { x: 1, y: 1, z: 0 };
   scene.rootNode.eulerAngles = { x: Math.PI / 2, y: 0, z: 0 };
 
+  arView.configure = () => {
+    /*
+    if (arView.size.width !== arView.scene.size.width ||
+      arView.size.height !== arView.scene.size.height) {
+      console.log('arView.configure');
+      arView.scene.size = arView.size;
+    }
+    */
+  };
+  if (arView.configureInterval) {
+    clearInterval(arView.configureInterval);
+    delete arView.configureInterval;
+}
+  arView.configureInterval = setInterval(() => {
+    if (arView.configure) {
+      arView.configure();
+    }
+  }, 1000);
+
   demoVC.view.addSubview(arView);
   nav.pushViewController(demoVC);
 
