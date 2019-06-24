@@ -15,7 +15,13 @@
 #define is_value_CIKernel(x) is_value_wrapper(x, CIKernel)
 
 JS_WRAP_CLASS(CIKernel, NSObject);
-  // TODO: declare CIKernel methods and properties
+  JS_STATIC_METHOD(kernelsWithString);
+  JS_STATIC_METHOD(kernelWithString);
+  JS_STATIC_METHOD(kernelWithFunctionNameFromMetalLibraryDataError);
+  JS_STATIC_METHOD(kernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError);
+  JS_METHOD(setROISelector);
+  JS_METHOD(applyWithExtentRoiCallbackArguments);
+  JS_PROP_READONLY(name);
 JS_WRAP_CLASS_END(CIKernel);
 
 #endif /* NCIKernel_h */
