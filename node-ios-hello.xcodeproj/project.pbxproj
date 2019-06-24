@@ -279,7 +279,6 @@
 		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
 		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
 		A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */; };
-		A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */; };
 		A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */; };
 		A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B832287C369001D1F6E /* NSKNode.mm */; };
 		A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B872287C564001D1F6E /* NSKLabelNode.mm */; };
@@ -943,7 +942,6 @@
 		A1BD4B422287BCBC001D1F6E /* NSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNView.mm; sourceTree = "<group>"; };
 		A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSKViewDelegate.h; sourceTree = "<group>"; };
 		A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSKViewDelegate.mm; sourceTree = "<group>"; };
-		A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSKViewDelegate.swift; sourceTree = "<group>"; };
 		A1BD4B7D2287C21A001D1F6E /* NARAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARAnchor.h; sourceTree = "<group>"; };
 		A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARAnchor.mm; sourceTree = "<group>"; };
 		A1BD4B822287C361001D1F6E /* NSKNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKNode.h; sourceTree = "<group>"; };
@@ -3467,7 +3465,6 @@
 			children = (
 				A1BD4B772287BF1F001D1F6E /* NARSKViewDelegate.h */,
 				A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */,
-				A1BD4B7A2287BF37001D1F6E /* SARSKViewDelegate.swift */,
 			);
 			path = NARSKViewDelegate;
 			sourceTree = "<group>";
@@ -4189,6 +4186,7 @@
 				A18F1E62228A418300A42754 /* NARSCNView */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
+				A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */,
 				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
 			);
 			path = NARKit;
@@ -4225,7 +4223,6 @@
 		A1D65E1022819D7C00AC0BD9 /* NARSKView */ = {
 			isa = PBXGroup;
 			children = (
-				A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */,
 				A1D65E1122819D8E00AC0BD9 /* NARSKView.h */,
 				A1D65E1222819D9500AC0BD9 /* NARSKView.mm */,
 			);
@@ -5341,7 +5338,6 @@
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
-				A1BD4B7B2287BF37001D1F6E /* SARSKViewDelegate.swift in Sources */,
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
 				A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */,
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
