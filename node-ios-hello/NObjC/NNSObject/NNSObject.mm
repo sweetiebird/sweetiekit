@@ -871,6 +871,9 @@ NAN_METHOD(NClass::New) {
 #include "NARSCNViewDelegate.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
+#include "NSCNPhysicsBehavior.h"
+#include "NSCNPhysicsShape.h"
+#include "NSCNPhysicsWorld.h"
 #include "NSCNNode.h"
 #include "NSCNLight.h"
 #include "NSCNMaterial.h"
@@ -1312,6 +1315,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
     JS_EXPORT_TYPE(SCNScene);
+    JS_EXPORT_TYPE(SCNPhysicsBehavior);
+    JS_EXPORT_TYPE(SCNPhysicsShape);
+    JS_EXPORT_TYPE(SCNPhysicsWorld);
     JS_EXPORT_TYPE(SCNView);
     JS_EXPORT_TYPE(SCNLight);
 
@@ -1450,6 +1456,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNGeometrySource);
       JS_RETURN_TYPE(SCNGeometry);
       JS_RETURN_TYPE(SCNLight);
+      JS_RETURN_TYPE(SCNPhysicsWorld);
+      JS_RETURN_TYPE(SCNPhysicsShape);
+      JS_RETURN_TYPE(SCNPhysicsBehavior);
       JS_RETURN_TYPE(SCNScene);
       JS_RETURN_TYPE(SCNNode);
       JS_RETURN_TYPE(SCNView);

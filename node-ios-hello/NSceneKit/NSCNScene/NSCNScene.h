@@ -16,7 +16,22 @@
 
 JS_WRAP_CLASS(SCNScene, NSObject);
   JS_STATIC_METHOD(sceneWithMDLAsset);
-  JS_PROP(rootNode);
+  JS_STATIC_METHOD(scene);
+  JS_STATIC_METHOD(sceneNamed);
+  JS_STATIC_METHOD(sceneNamedInDirectoryOptions);
+  JS_STATIC_METHOD(sceneWithURLOptionsError);
+  JS_METHOD(attributeForKey);
+  JS_METHOD(setAttributeForKey);
+  JS_METHOD(writeToURLOptionsDelegateProgressHandler);
+  JS_PROP_READONLY(rootNode);
+  JS_PROP_READONLY(physicsWorld);
+  JS_PROP_READONLY(background);
+  JS_PROP_READONLY(lightingEnvironment);
+  JS_PROP(fogStartDistance);
+  JS_PROP(fogEndDistance);
+  JS_PROP(fogDensityExponent);
+  JS_PROP(fogColor);
+  JS_PROP(isPaused);
 JS_WRAP_CLASS_END(SCNScene);
 
 #endif /* NSCNScene_h */

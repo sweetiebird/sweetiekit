@@ -2033,6 +2033,22 @@ SCNMatrix4 to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable faile
   return result;
 }
 
+bool is_value_SCNQuaternion(const Local<Value>& value) {
+  return sweetiekit::IsVector4(value);
+}
+
+bool is_value_SCNVector3(const Local<Value>& value) {
+  return sweetiekit::IsVector3(value);
+}
+
+bool is_value_SCNVector4(const Local<Value>& value) {
+  return sweetiekit::IsVector4(value);
+}
+
+bool is_value_SCNMatrix4(const Local<Value>& value) {
+  return sweetiekit::IsTransform(value);
+}
+
 Local<Value> js_value_CATransform3D(const CATransform3D& value) {
   return createTypedArray<Float32Array>(16, (const float*)&value);
 }

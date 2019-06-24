@@ -216,6 +216,9 @@
 		A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */; };
 		A1926F2822C0C453008F16AE /* NCIWarpKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */; };
 		A1926F2C22C0CBE9008F16AE /* NUITabBarControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2B22C0CBE8008F16AE /* NUITabBarControllerDelegate.mm */; };
+		A1926F3022C0DD7D008F16AE /* NSCNPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2E22C0DD7D008F16AE /* NSCNPhysicsWorld.mm */; };
+		A1926F3422C0DDFB008F16AE /* NSCNPhysicsBehavior.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3222C0DDFB008F16AE /* NSCNPhysicsBehavior.mm */; };
+		A1926F3822C0DEA6008F16AE /* NSCNPhysicsShape.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3722C0DEA6008F16AE /* NSCNPhysicsShape.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -827,6 +830,12 @@
 		A1926F2722C0C453008F16AE /* NCIWarpKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIWarpKernel.h; sourceTree = "<group>"; };
 		A1926F2A22C0CBE8008F16AE /* NUITabBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarControllerDelegate.h; sourceTree = "<group>"; };
 		A1926F2B22C0CBE8008F16AE /* NUITabBarControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarControllerDelegate.mm; sourceTree = "<group>"; };
+		A1926F2E22C0DD7D008F16AE /* NSCNPhysicsWorld.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsWorld.mm; sourceTree = "<group>"; };
+		A1926F2F22C0DD7D008F16AE /* NSCNPhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsWorld.h; sourceTree = "<group>"; };
+		A1926F3222C0DDFB008F16AE /* NSCNPhysicsBehavior.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsBehavior.mm; sourceTree = "<group>"; };
+		A1926F3322C0DDFB008F16AE /* NSCNPhysicsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsBehavior.h; sourceTree = "<group>"; };
+		A1926F3622C0DEA6008F16AE /* NSCNPhysicsShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsShape.h; sourceTree = "<group>"; };
+		A1926F3722C0DEA6008F16AE /* NSCNPhysicsShape.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsShape.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2908,6 +2917,33 @@
 			path = NUITabBarControllerDelegate;
 			sourceTree = "<group>";
 		};
+		A1926F2D22C0DD7D008F16AE /* NSCNPhysicsWorld */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F2F22C0DD7D008F16AE /* NSCNPhysicsWorld.h */,
+				A1926F2E22C0DD7D008F16AE /* NSCNPhysicsWorld.mm */,
+			);
+			path = NSCNPhysicsWorld;
+			sourceTree = "<group>";
+		};
+		A1926F3122C0DDFB008F16AE /* NSCNPhysicsBehavior */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F3322C0DDFB008F16AE /* NSCNPhysicsBehavior.h */,
+				A1926F3222C0DDFB008F16AE /* NSCNPhysicsBehavior.mm */,
+			);
+			path = NSCNPhysicsBehavior;
+			sourceTree = "<group>";
+		};
+		A1926F3522C0DEA6008F16AE /* NSCNPhysicsShape */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F3622C0DEA6008F16AE /* NSCNPhysicsShape.h */,
+				A1926F3722C0DEA6008F16AE /* NSCNPhysicsShape.mm */,
+			);
+			path = NSCNPhysicsShape;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3437,7 +3473,10 @@
 				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A1EE7D8622A41637002B53FF /* NSCNMaterialProperty */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
+				A1926F3122C0DDFB008F16AE /* NSCNPhysicsBehavior */,
 				A1EE7D9222A435FD002B53FF /* NSCNPhysicsBody */,
+				A1926F3522C0DEA6008F16AE /* NSCNPhysicsShape */,
+				A1926F2D22C0DD7D008F16AE /* NSCNPhysicsWorld */,
 				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
 				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
 				A12C1501228A3700005BDD9D /* NSCNScene */,
@@ -5084,6 +5123,8 @@
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
 				A1926F0722C0BA34008F16AE /* NSKPhysicsJointSpring.mm in Sources */,
+				A1926F3022C0DD7D008F16AE /* NSCNPhysicsWorld.mm in Sources */,
+				A1926F3422C0DDFB008F16AE /* NSCNPhysicsBehavior.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
@@ -5201,6 +5242,7 @@
 				A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */,
 				A1D4988922BB4691009AC951 /* NUIInputViewController.mm in Sources */,
 				A13370AD22AEE79F00FA3768 /* NAVAudioSession.mm in Sources */,
+				A1926F3822C0DEA6008F16AE /* NSCNPhysicsShape.mm in Sources */,
 				A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */,
 				A1926EE022C0A6B9008F16AE /* NCIColor.mm in Sources */,
 				A133702222AAE76E00FA3768 /* NNSURLRequest.mm in Sources */,

@@ -1031,6 +1031,10 @@ SCNQuaternion  to_value_SCNQuaternion(const Local<Value>& value, bool * _Nullabl
 SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_SCNQuaternion(const Local<Value>& value);
+bool is_value_SCNVector3(const Local<Value>& value);
+bool is_value_SCNVector4(const Local<Value>& value);
+bool is_value_SCNMatrix4(const Local<Value>& value);
 
 Local<Value> js_value_CATransform3D(const CATransform3D& value);
 CATransform3D to_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
