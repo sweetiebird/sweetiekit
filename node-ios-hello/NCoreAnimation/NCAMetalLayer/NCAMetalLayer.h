@@ -6,7 +6,9 @@
 //
 
 #ifndef NCAMetalLayer_h
-#define NCAMetalLayer_h    
+#define NCAMetalLayer_h   
+
+#if !TARGET_OS_SIMULATOR 
 
 #include "NCALayer.h"
 
@@ -33,5 +35,7 @@ JS_WRAP_PROTOCOL(CAMetalDrawable, NSObject);
   JS_PROP_READONLY(texture);
   JS_PROP_READONLY(layer);
 JS_WRAP_PROTOCOL_END(CAMetalDrawable, NSObject);
+
+#endif // !TARGET_OS_SIMULATOR
 
 #endif /* NCAMetalLayer_h */

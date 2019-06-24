@@ -6,6 +6,9 @@
 //
 #include "NSKRenderer.h"
 
+/* SKRenderer is not available for WatchKit apps and the iOS simulator */
+#if SKVIEW_AVAILABLE && !TARGET_OS_SIMULATOR
+
 #import <SpriteKit/SKRenderer.h>
 
 #define instancetype SKRenderer
@@ -231,3 +234,4 @@ NAN_SETTER(NSKRenderer::showsFieldsSetter) {
   }
 }
 
+#endif

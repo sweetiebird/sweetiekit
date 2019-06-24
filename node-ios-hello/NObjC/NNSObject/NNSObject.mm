@@ -1266,8 +1266,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CASpringAnimation);
 
     JS_EXPORT_TYPE(CALayer);
+#if !TARGET_OS_SIMULATOR
     JS_EXPORT_PROTOCOL(CAMetalDrawable);
     JS_EXPORT_TYPE(CAMetalLayer);
+#endif
     JS_EXPORT_TYPE(CAGradientLayer);
     JS_EXPORT_TYPE(CAShapeLayer);
 
@@ -1299,7 +1301,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLMaterial);
 
     // SpriteKit
+#if !TARGET_OS_SIMULATOR
     JS_EXPORT_TYPE(SKRenderer);
+#endif
     JS_EXPORT_TYPE(SKPhysicsContact);
     JS_EXPORT_TYPE(SKView);
     JS_EXPORT_TYPE(SKPhysicsBody);
@@ -1433,6 +1437,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
 #define JS_RETURN_TYPE(Type) \
       JS_RETURN_TYPE_FROM(Type, Type)
+    
+#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType) \
+      if ([obj conformsToProtocol:ObjcType##Protocol]) { \
+        return N##Type::type; \
+      }
+
+#define JS_RETURN_PROTOCOL(Type) \
+      JS_RETURN_PROTOCOL_FROM(Type, Type)
 
       // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
@@ -1440,6 +1452,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       JS_RETURN_TYPE(CAShapeLayer);
       JS_RETURN_TYPE(CAGradientLayer);
+#if !TARGET_OS_SIMULATOR
+      JS_RETURN_TYPE(CAMetalLayer);
+#endif
       JS_RETURN_TYPE(CALayer);
 
       JS_RETURN_TYPE(CASpringAnimation);
@@ -1568,7 +1583,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKNode);
       JS_RETURN_TYPE(SKView);
       JS_RETURN_TYPE(SKAction);
+#if !TARGET_OS_SIMULATOR
       JS_RETURN_TYPE(SKRenderer);
+#endif
 
       // ModelIO
       JS_RETURN_TYPE(MDLMaterial);
@@ -1836,10 +1853,19 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
       JS_RETURN_TYPE(NSObjCRuntime);
-      JS_RETURN_TYPE(NSObject);
       if (object_isClass(obj)) {
         return NClass::type;
       }
+
+      // Protocols
+
+#if !TARGET_OS_SIMULATOR
+      JS_RETURN_PROTOCOL(CAMetalDrawable);
+#endif
+
+      // Default types
+
+      JS_RETURN_TYPE(NSObject);
       return Nid::type;
     }
   }

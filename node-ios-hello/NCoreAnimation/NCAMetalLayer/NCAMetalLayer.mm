@@ -6,6 +6,8 @@
 //
 #include "NCAMetalLayer.h"
 
+#if !TARGET_OS_SIMULATOR
+
 #define instancetype CAMetalLayer
 #define js_value_instancetype js_value_CAMetalLayer
 
@@ -220,3 +222,5 @@ NAN_GETTER(NCAMetalDrawable::layerGetter) {
     JS_SET_RETURN(js_value_CAMetalLayer([self layer]));
   }
 }
+
+#endif // !TARGET_OS_SIMULATOR
