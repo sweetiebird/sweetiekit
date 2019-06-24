@@ -212,6 +212,9 @@
 		A1926F0C22C0BFBB008F16AE /* NSKTransition.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0B22C0BFBB008F16AE /* NSKTransition.mm */; };
 		A1926F1022C0C09F008F16AE /* NCIFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0F22C0C09F008F16AE /* NCIFilter.mm */; };
 		A1926F1422C0C172008F16AE /* NCIKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1322C0C172008F16AE /* NCIKernel.mm */; };
+		A1926F1E22C0C38E008F16AE /* NCIColorKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1622C0C38D008F16AE /* NCIColorKernel.mm */; };
+		A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */; };
+		A1926F2822C0C453008F16AE /* NCIWarpKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -816,6 +819,12 @@
 		A1926F0F22C0C09F008F16AE /* NCIFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIFilter.mm; sourceTree = "<group>"; };
 		A1926F1222C0C172008F16AE /* NCIKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIKernel.h; sourceTree = "<group>"; };
 		A1926F1322C0C172008F16AE /* NCIKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIKernel.mm; sourceTree = "<group>"; };
+		A1926F1622C0C38D008F16AE /* NCIColorKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIColorKernel.mm; sourceTree = "<group>"; };
+		A1926F1722C0C38D008F16AE /* NCIColorKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIColorKernel.h; sourceTree = "<group>"; };
+		A1926F1C22C0C38E008F16AE /* NCIBlendKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIBlendKernel.h; sourceTree = "<group>"; };
+		A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIBlendKernel.mm; sourceTree = "<group>"; };
+		A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIWarpKernel.mm; sourceTree = "<group>"; };
+		A1926F2722C0C453008F16AE /* NCIWarpKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIWarpKernel.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2493,10 +2502,13 @@
 		A1710EB8229A92BF00EC7C86 /* NCoreImage */ = {
 			isa = PBXGroup;
 			children = (
+				A1926F1B22C0C38E008F16AE /* NCIBlendKernel */,
 				A1926EDD22C0A6B9008F16AE /* NCIColor */,
+				A1926F1522C0C38D008F16AE /* NCIColorKernel */,
 				A1926F0D22C0C09F008F16AE /* NCIFilter */,
 				A1710EB9229A92BF00EC7C86 /* NCIImage */,
 				A1926F1122C0C171008F16AE /* NCIKernel */,
+				A1926F2522C0C453008F16AE /* NCIWarpKernel */,
 			);
 			path = NCoreImage;
 			sourceTree = "<group>";
@@ -2857,6 +2869,33 @@
 				A1926F1322C0C172008F16AE /* NCIKernel.mm */,
 			);
 			path = NCIKernel;
+			sourceTree = "<group>";
+		};
+		A1926F1522C0C38D008F16AE /* NCIColorKernel */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F1722C0C38D008F16AE /* NCIColorKernel.h */,
+				A1926F1622C0C38D008F16AE /* NCIColorKernel.mm */,
+			);
+			path = NCIColorKernel;
+			sourceTree = "<group>";
+		};
+		A1926F1B22C0C38E008F16AE /* NCIBlendKernel */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F1C22C0C38E008F16AE /* NCIBlendKernel.h */,
+				A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */,
+			);
+			path = NCIBlendKernel;
+			sourceTree = "<group>";
+		};
+		A1926F2522C0C453008F16AE /* NCIWarpKernel */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F2722C0C453008F16AE /* NCIWarpKernel.h */,
+				A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */,
+			);
+			path = NCIWarpKernel;
 			sourceTree = "<group>";
 		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
@@ -5137,6 +5176,7 @@
 				A19F39F122AF65F400606332 /* NMDLScatteringFunction.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
+				A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */,
 				A1EE7D78229D8EEF002B53FF /* NSCNSphere.mm in Sources */,
 				A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
@@ -5192,6 +5232,7 @@
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				A1574EED22B8E851006CC5F2 /* NUICollectionViewTransitionLayout.mm in Sources */,
 				A174A48E22B1A5F000415AD8 /* NUITextInputMode.mm in Sources */,
+				A1926F2822C0C453008F16AE /* NCIWarpKernel.mm in Sources */,
 				A1D4985522BAFD40009AC951 /* NSecBase.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
@@ -5254,6 +5295,7 @@
 				A1D498AA22BB4A03009AC951 /* NUITextPosition.mm in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */,
+				A1926F1E22C0C38E008F16AE /* NCIColorKernel.mm in Sources */,
 				A13370EE22AF031D00FA3768 /* NAVAudioMixerNode.mm in Sources */,
 				A1B6548A228CD87600976024 /* NSKAction.mm in Sources */,
 				A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */,
