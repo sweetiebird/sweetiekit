@@ -871,8 +871,6 @@ NAN_METHOD(NClass::New) {
 #include "NARSCNViewDelegate.h"
 #include "NSceneKitTypes.h"
 #include "NSCNAction.h"
-#include "NSCNAudioPlayer.h"
-#include "NSCNAudioSource.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
 #include "NSCNPhysicsBehavior.h"
@@ -885,6 +883,8 @@ NAN_METHOD(NClass::New) {
 #include "NSCNPhysicsShape.h"
 #include "NSCNPhysicsWorld.h"
 #include "NSCNNode.h"
+#include "NSCNAudioPlayer.h"
+#include "NSCNAudioSource.h"
 #include "NSCNLight.h"
 #include "NSCNMaterial.h"
 #include "NSCNMaterialProperty.h"
@@ -1301,8 +1301,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // SceneKit
     JS_EXPORT_TYPE(SceneKitTypes);
     JS_EXPORT_TYPE(SCNAction);
-    JS_EXPORT_TYPE(SCNAudioPlayer);
-    JS_EXPORT_TYPE(SCNAudioSource);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
     JS_EXPORT_TYPE(SCNMaterialProperty);
@@ -1328,6 +1326,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNText);
     JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
+    JS_EXPORT_TYPE(SCNAudioPlayer);
+    JS_EXPORT_TYPE(SCNAudioSource);
     JS_EXPORT_TYPE(SCNScene);
     JS_EXPORT_TYPE(SCNPhysicsBehavior);
     JS_EXPORT_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior

@@ -15,7 +15,24 @@
 #define is_value_SCNAudioSource(x) is_value_wrapper(x, SCNAudioSource)
 
 JS_WRAP_CLASS(SCNAudioSource, NSObject);
-  // TODO: declare SCNAudioSource methods and properties
+  JS_STATIC_METHOD(audioSourceNamed);
+  JS_METHOD(initWithFileNamed);
+  JS_METHOD(initWithURL);
+  JS_METHOD(load);
+  JS_PROP(isPositional);
+  JS_PROP(volume);
+  JS_PROP(rate);
+  JS_PROP(reverbBlend);
+  JS_PROP(loops);
+  JS_PROP(shouldStream);
 JS_WRAP_CLASS_END(SCNAudioSource);
+
+// SCNNode (SCNAudioSupport)
+JS_EXTEND_CLASS(SCNNode, SCNAudioSupport);
+  JS_METHOD(addAudioPlayer);
+  JS_METHOD(removeAllAudioPlayers);
+  JS_METHOD(removeAudioPlayer);
+  JS_PROP_READONLY(audioPlayers);
+JS_EXTEND_CLASS_END(SCNNode, SCNAudioSupport);
 
 #endif /* NSCNAudioSource_h */
