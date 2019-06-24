@@ -764,6 +764,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIDatePicker.h"
 #include "NCATransaction.h"
 #include "NCALayer.h"
+#include "NCAMetalLayer.h"
 #include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
@@ -810,6 +811,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIKitGlobals.h"
 #include "NUIDictationPhrase.h"
 
+#include "NMTLPixelFormat.h"
 #include "NMTLRenderPassAttachmentDescriptor.h" // : NSObject <NSCopying>
 #include "NMTLRenderPassColorAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
 #include "NMTLRenderPassDepthAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
@@ -1001,6 +1003,12 @@ NAN_METHOD(NClass::New) {
 
 #define JS_EXPORT_TYPE(type) \
         JS_EXPORT_TYPE_AS(type, #type)
+
+#define JS_EXPORT_PROTOCOL(type) \
+        JS_EXPORT_TYPE_AS(type, #type)
+
+#define JS_EXPORT_GLOBALS(name) \
+        N##name::Initialize(isolate, exports)
 
 void NNSObject::RegisterTypes(Local<Object> exports) {
     Isolate* isolate = Isolate::GetCurrent();
@@ -1258,6 +1266,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CASpringAnimation);
 
     JS_EXPORT_TYPE(CALayer);
+    JS_EXPORT_PROTOCOL(CAMetalDrawable);
+    JS_EXPORT_TYPE(CAMetalLayer);
     JS_EXPORT_TYPE(CAGradientLayer);
     JS_EXPORT_TYPE(CAShapeLayer);
 
@@ -1360,6 +1370,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNParticlePropertyController);
 
     // Metal
+    JS_EXPORT_GLOBALS(MTLPixelFormat);
     JS_EXPORT_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
     JS_EXPORT_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor

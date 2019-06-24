@@ -290,7 +290,6 @@ public: \
   
 #define JS_WRAP_CLASS_END(name) \
 };
-
 #define JS_EXTEND_CLASS(name, category) \
   JS_WRAP_CLASS(name##_##category, NSObject)
 
@@ -360,10 +359,29 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
   type.Reset(ctorSpec); \
   return result; \
 }
+
+
+#define JS_WRAP_GLOBALS(name) \
+\
+class N##name { \
+public: \
+  static void Initialize(Isolate * _Nonnull isolate, Local<Object> exports)
   
+#define JS_WRAP_GLOBALS_END(name) \
+};
+
+#define JS_INIT_GLOBALS(name) \
+\
+void N##name::Initialize(Isolate *isolate, Local<Object> exports) \
+{ \
+  Nan::HandleScope scope
+  
+#define JS_INIT_GLOBALS_END(name) \
+}
+
+
 #define JS_GET_FUNCTION(varName, objc, keyName) \
   auto& varName = *[(SweetJSFunction*)[objc associatedValueForKey:keyName] jsFunction];
-
 
 
 #define DELEGATE_PROP(type, key) \

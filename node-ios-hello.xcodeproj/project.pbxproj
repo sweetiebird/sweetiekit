@@ -242,6 +242,8 @@
 		A1926F8F22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F8422C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptor.mm */; };
 		A1926F9022C10729008F16AE /* NMTLRenderPassDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F8722C10729008F16AE /* NMTLRenderPassDescriptor.mm */; };
 		A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F8B22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm */; };
+		A1926F9522C112BA008F16AE /* NCAMetalLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F9422C112BA008F16AE /* NCAMetalLayer.mm */; };
+		A1926F9D22C1144C008F16AE /* NMTLPixelFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F9C22C1144C008F16AE /* NMTLPixelFormat.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -903,6 +905,10 @@
 		A1926F8822C10729008F16AE /* NMTLRenderPassDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLRenderPassDescriptor.h; sourceTree = "<group>"; };
 		A1926F8A22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLRenderPassColorAttachmentDescriptorArray.h; sourceTree = "<group>"; };
 		A1926F8B22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLRenderPassColorAttachmentDescriptorArray.mm; sourceTree = "<group>"; };
+		A1926F9322C112BA008F16AE /* NCAMetalLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAMetalLayer.h; sourceTree = "<group>"; };
+		A1926F9422C112BA008F16AE /* NCAMetalLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAMetalLayer.mm; sourceTree = "<group>"; };
+		A1926F9B22C1144C008F16AE /* NMTLPixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLPixelFormat.h; sourceTree = "<group>"; };
+		A1926F9C22C1144C008F16AE /* NMTLPixelFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLPixelFormat.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -1394,6 +1400,7 @@
 				A1574EFA22B93070006CC5F2 /* NCAKeyframeAnimation */,
 				216392A3226BD48A00051DE0 /* NCALayer */,
 				A1574F0A22B93B96006CC5F2 /* NCAMediaTimingFunction */,
+				A1926F9222C112BA008F16AE /* NCAMetalLayer */,
 				A1574EEE22B9306F006CC5F2 /* NCAPropertyAnimation */,
 				A158FD86229A292F000F7ABA /* NCAShapeLayer */,
 				A1574EFD22B93071006CC5F2 /* NCASpringAnimation */,
@@ -3151,6 +3158,7 @@
 		A1926F7922C10729008F16AE /* NMetal */ = {
 			isa = PBXGroup;
 			children = (
+				A1926F9A22C1144C008F16AE /* NMTLPixelFormat */,
 				A1926F7A22C10729008F16AE /* NMTLRenderPassAttachmentDescriptor */,
 				A1926F8322C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptor */,
 				A1926F8922C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray */,
@@ -3213,6 +3221,24 @@
 				A1926F8B22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm */,
 			);
 			path = NMTLRenderPassColorAttachmentDescriptorArray;
+			sourceTree = "<group>";
+		};
+		A1926F9222C112BA008F16AE /* NCAMetalLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F9322C112BA008F16AE /* NCAMetalLayer.h */,
+				A1926F9422C112BA008F16AE /* NCAMetalLayer.mm */,
+			);
+			path = NCAMetalLayer;
+			sourceTree = "<group>";
+		};
+		A1926F9A22C1144C008F16AE /* NMTLPixelFormat */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F9B22C1144C008F16AE /* NMTLPixelFormat.h */,
+				A1926F9C22C1144C008F16AE /* NMTLPixelFormat.mm */,
+			);
+			path = NMTLPixelFormat;
 			sourceTree = "<group>";
 		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
@@ -5522,6 +5548,7 @@
 				A13370D722AEFC6A00FA3768 /* NAVAudioPCMBuffer.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
+				A1926F9D22C1144C008F16AE /* NMTLPixelFormat.mm in Sources */,
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */,
@@ -5700,6 +5727,7 @@
 				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
 				A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
+				A1926F9522C112BA008F16AE /* NCAMetalLayer.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A1926F7422C0FD1D008F16AE /* NSCNSceneRendererDelegate.mm in Sources */,
 				A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */,
