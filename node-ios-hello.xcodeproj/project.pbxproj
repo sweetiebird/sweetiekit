@@ -219,6 +219,12 @@
 		A1926F3022C0DD7D008F16AE /* NSCNPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2E22C0DD7D008F16AE /* NSCNPhysicsWorld.mm */; };
 		A1926F3422C0DDFB008F16AE /* NSCNPhysicsBehavior.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3222C0DDFB008F16AE /* NSCNPhysicsBehavior.mm */; };
 		A1926F3822C0DEA6008F16AE /* NSCNPhysicsShape.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3722C0DEA6008F16AE /* NSCNPhysicsShape.mm */; };
+		A1926F4B22C0E286008F16AE /* NSCNPhysicsConeTwistJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3A22C0E284008F16AE /* NSCNPhysicsConeTwistJoint.mm */; };
+		A1926F4C22C0E286008F16AE /* NSCNPhysicsBallSocketJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F3D22C0E285008F16AE /* NSCNPhysicsBallSocketJoint.mm */; };
+		A1926F4D22C0E286008F16AE /* NSCNPhysicsVehicleWheel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4122C0E285008F16AE /* NSCNPhysicsVehicleWheel.mm */; };
+		A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4322C0E285008F16AE /* NSCNPhysicsSliderJoint.mm */; };
+		A1926F4F22C0E286008F16AE /* NSCNPhysicsHingeJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4622C0E285008F16AE /* NSCNPhysicsHingeJoint.mm */; };
+		A1926F5022C0E286008F16AE /* NSCNPhysicsVehicle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4922C0E285008F16AE /* NSCNPhysicsVehicle.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -836,6 +842,18 @@
 		A1926F3322C0DDFB008F16AE /* NSCNPhysicsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsBehavior.h; sourceTree = "<group>"; };
 		A1926F3622C0DEA6008F16AE /* NSCNPhysicsShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsShape.h; sourceTree = "<group>"; };
 		A1926F3722C0DEA6008F16AE /* NSCNPhysicsShape.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsShape.mm; sourceTree = "<group>"; };
+		A1926F3A22C0E284008F16AE /* NSCNPhysicsConeTwistJoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsConeTwistJoint.mm; sourceTree = "<group>"; };
+		A1926F3B22C0E284008F16AE /* NSCNPhysicsConeTwistJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsConeTwistJoint.h; sourceTree = "<group>"; };
+		A1926F3D22C0E285008F16AE /* NSCNPhysicsBallSocketJoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsBallSocketJoint.mm; sourceTree = "<group>"; };
+		A1926F3E22C0E285008F16AE /* NSCNPhysicsBallSocketJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsBallSocketJoint.h; sourceTree = "<group>"; };
+		A1926F4022C0E285008F16AE /* NSCNPhysicsVehicleWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsVehicleWheel.h; sourceTree = "<group>"; };
+		A1926F4122C0E285008F16AE /* NSCNPhysicsVehicleWheel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsVehicleWheel.mm; sourceTree = "<group>"; };
+		A1926F4322C0E285008F16AE /* NSCNPhysicsSliderJoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsSliderJoint.mm; sourceTree = "<group>"; };
+		A1926F4422C0E285008F16AE /* NSCNPhysicsSliderJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsSliderJoint.h; sourceTree = "<group>"; };
+		A1926F4622C0E285008F16AE /* NSCNPhysicsHingeJoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsHingeJoint.mm; sourceTree = "<group>"; };
+		A1926F4722C0E285008F16AE /* NSCNPhysicsHingeJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsHingeJoint.h; sourceTree = "<group>"; };
+		A1926F4922C0E285008F16AE /* NSCNPhysicsVehicle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsVehicle.mm; sourceTree = "<group>"; };
+		A1926F4A22C0E285008F16AE /* NSCNPhysicsVehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsVehicle.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2944,6 +2962,60 @@
 			path = NSCNPhysicsShape;
 			sourceTree = "<group>";
 		};
+		A1926F3922C0E284008F16AE /* NSCNPhysicsConeTwistJoint */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F3B22C0E284008F16AE /* NSCNPhysicsConeTwistJoint.h */,
+				A1926F3A22C0E284008F16AE /* NSCNPhysicsConeTwistJoint.mm */,
+			);
+			path = NSCNPhysicsConeTwistJoint;
+			sourceTree = "<group>";
+		};
+		A1926F3C22C0E285008F16AE /* NSCNPhysicsBallSocketJoint */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F3E22C0E285008F16AE /* NSCNPhysicsBallSocketJoint.h */,
+				A1926F3D22C0E285008F16AE /* NSCNPhysicsBallSocketJoint.mm */,
+			);
+			path = NSCNPhysicsBallSocketJoint;
+			sourceTree = "<group>";
+		};
+		A1926F3F22C0E285008F16AE /* NSCNPhysicsVehicleWheel */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F4022C0E285008F16AE /* NSCNPhysicsVehicleWheel.h */,
+				A1926F4122C0E285008F16AE /* NSCNPhysicsVehicleWheel.mm */,
+			);
+			path = NSCNPhysicsVehicleWheel;
+			sourceTree = "<group>";
+		};
+		A1926F4222C0E285008F16AE /* NSCNPhysicsSliderJoint */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F4422C0E285008F16AE /* NSCNPhysicsSliderJoint.h */,
+				A1926F4322C0E285008F16AE /* NSCNPhysicsSliderJoint.mm */,
+			);
+			path = NSCNPhysicsSliderJoint;
+			sourceTree = "<group>";
+		};
+		A1926F4522C0E285008F16AE /* NSCNPhysicsHingeJoint */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F4722C0E285008F16AE /* NSCNPhysicsHingeJoint.h */,
+				A1926F4622C0E285008F16AE /* NSCNPhysicsHingeJoint.mm */,
+			);
+			path = NSCNPhysicsHingeJoint;
+			sourceTree = "<group>";
+		};
+		A1926F4822C0E285008F16AE /* NSCNPhysicsVehicle */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F4A22C0E285008F16AE /* NSCNPhysicsVehicle.h */,
+				A1926F4922C0E285008F16AE /* NSCNPhysicsVehicle.mm */,
+			);
+			path = NSCNPhysicsVehicle;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3473,9 +3545,15 @@
 				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A1EE7D8622A41637002B53FF /* NSCNMaterialProperty */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
+				A1926F3C22C0E285008F16AE /* NSCNPhysicsBallSocketJoint */,
 				A1926F3122C0DDFB008F16AE /* NSCNPhysicsBehavior */,
 				A1EE7D9222A435FD002B53FF /* NSCNPhysicsBody */,
+				A1926F3922C0E284008F16AE /* NSCNPhysicsConeTwistJoint */,
+				A1926F4522C0E285008F16AE /* NSCNPhysicsHingeJoint */,
 				A1926F3522C0DEA6008F16AE /* NSCNPhysicsShape */,
+				A1926F4222C0E285008F16AE /* NSCNPhysicsSliderJoint */,
+				A1926F4822C0E285008F16AE /* NSCNPhysicsVehicle */,
+				A1926F3F22C0E285008F16AE /* NSCNPhysicsVehicleWheel */,
 				A1926F2D22C0DD7D008F16AE /* NSCNPhysicsWorld */,
 				A1EE7D6D229D8EEE002B53FF /* NSCNPlane */,
 				A1EE7D55229D8EEE002B53FF /* NSCNPyramid */,
@@ -5033,6 +5111,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1926F4D22C0E286008F16AE /* NSCNPhysicsVehicleWheel.mm in Sources */,
 				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,
@@ -5175,6 +5254,7 @@
 				A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
 				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
+				A1926F4C22C0E286008F16AE /* NSCNPhysicsBallSocketJoint.mm in Sources */,
 				A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */,
 				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
@@ -5201,6 +5281,7 @@
 				A133708D22AB39DF00FA3768 /* NMPMusicPlayerQueueDescriptor.mm in Sources */,
 				A1574EA722B81650006CC5F2 /* NNSDateComponents.mm in Sources */,
 				A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */,
+				A1926F5022C0E286008F16AE /* NSCNPhysicsVehicle.mm in Sources */,
 				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
@@ -5232,6 +5313,7 @@
 				A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
+				A1926F4F22C0E286008F16AE /* NSCNPhysicsHingeJoint.mm in Sources */,
 				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
 				A1926EEC22C0ADAD008F16AE /* NAVCameraCalibrationData.mm in Sources */,
 				A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */,
@@ -5300,6 +5382,7 @@
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
+				A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
@@ -5347,6 +5430,7 @@
 				A1D4986922BB2D6F009AC951 /* NNSObjCRuntime.mm in Sources */,
 				A1D498AA22BB4A03009AC951 /* NUITextPosition.mm in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
+				A1926F4B22C0E286008F16AE /* NSCNPhysicsConeTwistJoint.mm in Sources */,
 				A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */,
 				A1926F1E22C0C38E008F16AE /* NCIColorKernel.mm in Sources */,
 				A13370EE22AF031D00FA3768 /* NAVAudioMixerNode.mm in Sources */,

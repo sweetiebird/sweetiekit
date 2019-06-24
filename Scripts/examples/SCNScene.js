@@ -64,7 +64,7 @@ async function make(nav, demoVC) {
     node.physicsBody.applyForce(dir, isImpulse);
   };
 
-  scnView.touchesBegan = (touches, evt) => {
+  scnView.touchesBeganWithEvent = (touches, evt) => {
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
     pt.y -= Math.trunc(0.1*touch.view.height);
@@ -76,7 +76,7 @@ async function make(nav, demoVC) {
     }
   };
 
-  scnView.touchesMoved = (touches, evt) => {
+  scnView.touchesMovedWithEvent = (touches, evt) => {
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
     pt.y -= Math.trunc(0.1*touch.view.height);

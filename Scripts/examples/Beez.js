@@ -347,7 +347,7 @@ function makeDemo(navigation, dvc) {
     makeJoystick();
 
     scene.touchesBeganWithEvent = sceneTouchesBegan;
-    // scene.touchesMoved = touchesMoved;
+    // scene.touchesMovedWithEvent = touchesMoved;
     // scene.touchesEndedWithEvent = touchesEnded;
 
     scene.update = () => {

@@ -872,6 +872,12 @@ NAN_METHOD(NClass::New) {
 #include "NSCNView.h"
 #include "NSCNScene.h"
 #include "NSCNPhysicsBehavior.h"
+#include "NSCNPhysicsHingeJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsBallSocketJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsSliderJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsConeTwistJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsVehicleWheel.h"
+#include "NSCNPhysicsVehicle.h" // : SCNPhysicsBehavior
 #include "NSCNPhysicsShape.h"
 #include "NSCNPhysicsWorld.h"
 #include "NSCNNode.h"
@@ -1316,6 +1322,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNNode);
     JS_EXPORT_TYPE(SCNScene);
     JS_EXPORT_TYPE(SCNPhysicsBehavior);
+    JS_EXPORT_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsSliderJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsConeTwistJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsVehicleWheel);
+    JS_EXPORT_TYPE(SCNPhysicsVehicle); // : SCNPhysicsBehavior
     JS_EXPORT_TYPE(SCNPhysicsShape);
     JS_EXPORT_TYPE(SCNPhysicsWorld);
     JS_EXPORT_TYPE(SCNView);
@@ -1458,6 +1470,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNLight);
       JS_RETURN_TYPE(SCNPhysicsWorld);
       JS_RETURN_TYPE(SCNPhysicsShape);
+      JS_RETURN_TYPE(SCNPhysicsVehicle); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsVehicleWheel);
+      JS_RETURN_TYPE(SCNPhysicsConeTwistJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsSliderJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
       JS_RETURN_TYPE(SCNPhysicsBehavior);
       JS_RETURN_TYPE(SCNScene);
       JS_RETURN_TYPE(SCNNode);
