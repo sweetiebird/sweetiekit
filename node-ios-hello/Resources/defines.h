@@ -1423,6 +1423,11 @@ bool is_value_boxed(Local<Value> value);
 #define to_value_NSString(x) NJSStringToNSString(x)
 #define is_value_NSString(x) (x)->IsString()
 
+#define JS_DECLARE_STRUCT(type) \
+Local<Value> js_value_##type(const type& value); \
+type to_value_##type(const Local<Value>& value, bool * _Nullable failed = nullptr); \
+bool is_value_##type(const Local<Value>& value)
+
 #define JS_ENUM(type, c, x) js_value_##c(x)
 #define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
 #define IS_ENUM(type, c, x) is_value_##c(x)
@@ -1466,6 +1471,12 @@ bool is_value_boxed(Local<Value> value);
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(to_value_##type(info[name##_argument_index]));
   
+#define declare_protocol_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (info[name##_argument_index]->IsNullOrUndefined() || !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  id<type> name(to_value_##type(info[name##_argument_index]));
+  
 #define declare_nullable_value_(index, type, name) \
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
@@ -1477,6 +1488,12 @@ bool is_value_boxed(Local<Value> value);
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
+
+#define declare_nullable_protocol_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  id<type> name(info[name##_argument_index]->IsNullOrUndefined() ? nil : to_value_##type(info[name##_argument_index]));
 
 #define declare_value_pointer_(index, type, name) \
   auto name##_argument_index(index); \
@@ -1511,11 +1528,17 @@ bool is_value_boxed(Local<Value> value);
 #define declare_pointer(...) \
   declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
 
+#define declare_protocol(...) \
+  declare_protocol_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+
 #define declare_nullable_pointer(...) \
   declare_nullable_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_nullable_value(...) \
   declare_nullable_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define declare_nullable_protocol(...) \
+  declare_nullable_protocol_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;

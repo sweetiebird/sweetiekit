@@ -34,7 +34,7 @@
 #define to_value_MTLMultisampleStencilResolveFilter(x) TO_ENUM(MTLMultisampleStencilResolveFilter, NSUInteger, x)
 #define is_value_MTLMultisampleStencilResolveFilter(x) IS_ENUM(MTLMultisampleStencilResolveFilter, NSUInteger, x)
 
-Local<Value> js_value_MTLClearColor(const MTLClearColor& color);
+Local<Value> js_value_MTLClearColor(const MTLClearColor& value);
 MTLClearColor to_value_MTLClearColor(const Local<Value>& value, bool * _Nullable failed = nullptr);
 bool is_value_MTLClearColor(const Local<Value>& value);
 

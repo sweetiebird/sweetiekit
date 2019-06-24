@@ -11,14 +11,13 @@
 
 #import <Metal/MTLRenderPass.h>
 
-
-Local<Value> js_value_MTLClearColor(const MTLClearColor& color) {
+Local<Value> js_value_MTLClearColor(const MTLClearColor& value) {
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));
-  result->Set(JS_STR("red"), js_value_double(color.red));
-  result->Set(JS_STR("green"), js_value_double(color.green));
-  result->Set(JS_STR("blue"), js_value_double(color.blue));
-  result->Set(JS_STR("alpha"), js_value_double(color.alpha));
+  result->Set(JS_STR("red"), js_value_double(value.red));
+  result->Set(JS_STR("green"), js_value_double(value.green));
+  result->Set(JS_STR("blue"), js_value_double(value.blue));
+  result->Set(JS_STR("alpha"), js_value_double(value.alpha));
   return scope.Escape(result);
 }
 

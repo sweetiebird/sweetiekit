@@ -10,9 +10,9 @@
 
 #include "NNSObject.h"
 
-#define js_value_UITextInput(x) js_protocol_wrapper(x, UITextInput, NSObject)
-#define to_value_UITextInput(x) to_protocol_wrapper(x, UITextInput, NSObject)
-#define is_value_UITextInput(x) is_protocol_wrapper(x, UITextInput, NSObject)
+#define js_value_UITextInput(x) js_protocol_wrapper(x, UITextInput)
+#define to_value_UITextInput(x) to_protocol_wrapper(x, UITextInput)
+#define is_value_UITextInput(x) is_protocol_wrapper(x, UITextInput)
 
 #define js_value_UITextStorageDirection(x) JS_ENUM(UITextStorageDirection, NSInteger, x)
 #define to_value_UITextStorageDirection(x) TO_ENUM(UITextStorageDirection, NSInteger, x)

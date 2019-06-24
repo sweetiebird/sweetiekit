@@ -184,9 +184,9 @@ is_value_protocol(Local<Value> x, Protocol* _Nullable protocol = ObjCProtocolTra
   return true;
 }
 
-#define js_protocol_wrapper(x, type, base) js_value_protocol< id<type> >(x)
-#define to_protocol_wrapper(x, type, base) to_value_protocol< id<type> >(x)
-#define is_protocol_wrapper(x, type, base) is_value_protocol< id<type> >(x)
+#define js_protocol_wrapper(x, type) js_value_protocol< id<type> >(x)
+#define to_protocol_wrapper(x, type) to_value_protocol< id<type> >(x)
+#define is_protocol_wrapper(x, type) is_value_protocol< id<type> >(x)
 
 
 #endif /* NNSObject_h */

@@ -812,6 +812,22 @@ NAN_METHOD(NClass::New) {
 #include "NUIDictationPhrase.h"
 
 #include "NMTLPixelFormat.h"
+
+#include "NMTLType.h" // : NSObject
+#include "NMTLStructMember.h" // : NSObject
+#include "NMTLStructType.h" // : MTLType
+#include "NMTLArrayType.h" // : MTLType
+#include "NMTLPointerType.h" // : MTLType
+#include "NMTLTextureReferenceType.h" // : MTLType
+#include "NMTLArgument.h" // : NSObject
+
+#include "NMTLArgumentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDevice.h" // <NSObject>
+
+#include "NMTLResource.h" // <NSObject>
+#include "NMTLTextureDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLTexture.h" // <MTLResource>
+
 #include "NMTLRenderPassAttachmentDescriptor.h" // : NSObject <NSCopying>
 #include "NMTLRenderPassColorAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
 #include "NMTLRenderPassDepthAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
@@ -1375,6 +1391,23 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // Metal
     JS_EXPORT_GLOBALS(MTLPixelFormat);
+
+    JS_EXPORT_PROTOCOL(MTLResource); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLTexture); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLDevice); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLType); // : NSObject
+    JS_EXPORT_TYPE(MTLStructMember); // : NSObject
+    JS_EXPORT_TYPE(MTLStructType); // : MTLType
+    JS_EXPORT_TYPE(MTLArrayType); // : MTLType
+    JS_EXPORT_TYPE(MTLPointerType); // : MTLType
+    JS_EXPORT_TYPE(MTLTextureReferenceType); // : MTLType
+    JS_EXPORT_TYPE(MTLArgument); // : NSObject
+
+    JS_EXPORT_TYPE(MTLArgumentDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_TYPE(MTLTextureDescriptor); // : NSObject <NSCopying>
+
     JS_EXPORT_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
     JS_EXPORT_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
@@ -1489,12 +1522,25 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKMapViewDelegate);
 
       // Metal
+
       JS_RETURN_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
       JS_RETURN_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
       JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
       JS_RETURN_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLTextureDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLArgumentDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLArgument); // : NSObject
+      JS_RETURN_TYPE(MTLTextureReferenceType); // : MTLType
+      JS_RETURN_TYPE(MTLPointerType); // : MTLType
+      JS_RETURN_TYPE(MTLArrayType); // : MTLType
+      JS_RETURN_TYPE(MTLStructType); // : MTLType
+      JS_RETURN_TYPE(MTLStructMember); // : NSObject
+      JS_RETURN_TYPE(MTLType); // : NSObject
 
       // ARKit
       JS_RETURN_TYPE(ARLightEstimate);
@@ -1857,11 +1903,17 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
         return NClass::type;
       }
 
-      // Protocols
+      // Core Animation Protocols
 
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
+
+      // Metal Protocols
+
+      JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
+      JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
 
       // Default types
 
