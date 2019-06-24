@@ -15,7 +15,16 @@
 #define is_value_MKOverlayView(x) is_value_wrapper(x, MKOverlayView)
 
 JS_WRAP_CLASS(MKOverlayView, UIView);
-  // TODO: declare MKOverlayView methods and properties
+  JS_METHOD(initWithOverlay);
+  JS_METHOD(pointForMapPoint);
+  JS_METHOD(mapPointForPoint);
+  JS_METHOD(rectForMapRect);
+  JS_METHOD(mapRectForRect);
+  JS_METHOD(canDrawMapRectZoomScale);
+  JS_METHOD(drawMapRectZoomScaleInContext);
+  JS_METHOD(setNeedsDisplayInMapRect);
+  JS_METHOD(setNeedsDisplayInMapRectZoomScale);
+  JS_PROP_READONLY(overlay);
 JS_WRAP_CLASS_END(MKOverlayView);
 
 #endif /* NMKOverlayView_h */
