@@ -7,14 +7,14 @@ const {
 } = SweetieKit;
 
 async function make(nav, demoVC) {
-  const tabCtrl = new UITabBarController();
-  const otherVC = UIViewController();
+  tabCtrl = new UITabBarController();
+  otherVC = UIViewController();
   otherVC.view.backgroundColor = RGB(205, 37, 83);
-  const otherItem = new UITabBarItem('Other Tab');
-  const demoItem = new UITabBarItem('Tab A');
+  otherItem = new UITabBarItem('Other Tab');
+  demoItem = new UITabBarItem('Tab A');
   demoVC.tabBarItem = demoItem;
   otherVC.tabBarItem = otherItem;
-  tabCtrl.setViewControllers([demoVC, otherVC]);
+  tabCtrl.setViewControllersAnimated([demoVC, otherVC], true);
   nav.pushViewController(tabCtrl);
 }
 

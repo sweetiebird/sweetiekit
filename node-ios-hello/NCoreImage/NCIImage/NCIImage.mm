@@ -10,6 +10,33 @@
 #define instancetype CIImage
 #define js_value_instancetype js_value_CIImage
 
+Local<Value> js_value_IOSurfaceRef(IOSurfaceRef _Nullable value)
+{
+  return sweetiekit::GetWrapperFor((__bridge id)value);
+}
+
+IOSurfaceRef _Nullable to_value_IOSurfaceRef(const Local<Value>& value, bool * _Nullable failed)
+{
+  if (failed) {
+    *failed = false;
+  }
+  if (!is_value_IOSurfaceRef(value)) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("to_value_IOSurfaceRef: expected an IOSurfaceRef");
+    }
+    return nil;
+  }
+  return (__bridge IOSurfaceRef)sweetiekit::GetValueFor(value, failed);
+}
+
+bool is_value_IOSurfaceRef(const Local<Value>& value)
+{
+  // TODO: test type.
+  return is_value_id(value);
+}
+
 NCIImage::NCIImage() {}
 NCIImage::~NCIImage() {}
 

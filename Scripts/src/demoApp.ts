@@ -216,7 +216,7 @@ async function demo() {
   dashboardVC.view.backgroundColor = RGB(111, 174, 175);
   const table = createTable();
   dashboardVC.view.addSubview(table);
-  nav.setViewControllers([dashboardVC], false);
+  nav.setViewControllersAnimated([dashboardVC], false);
 }
 
 async function userPhoto() {

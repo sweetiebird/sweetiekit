@@ -15,11 +15,12 @@
 #define is_value_ARAnchor(x) is_value_wrapper(x, ARAnchor)
 
 JS_WRAP_CLASS(ARAnchor, NSObject);
+  JS_METHOD(initWithAnchor);
   JS_METHOD(initWithTransform);
-  
-  JS_PROP(name);
-  JS_PROP(identifier);
-  JS_PROP(transform);
+  JS_METHOD(initWithNameTransform);
+  JS_PROP_READONLY(identifier);
+  JS_PROP_READONLY(name);
+  JS_PROP_READONLY(transform);
 JS_WRAP_CLASS_END(ARAnchor);
 
 
