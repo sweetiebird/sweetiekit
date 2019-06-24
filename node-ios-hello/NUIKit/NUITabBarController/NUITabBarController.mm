@@ -12,6 +12,7 @@ NUITabBarController::~NUITabBarController() {}
 JS_INIT_CLASS(UITabBarController, UIViewController);
   // instance members (proto)
   JS_ASSIGN_METHOD(proto, setViewControllers);
+  JS_ASSIGN_PROTO_PROP(viewControllers);
   JS_ASSIGN_PROP_READONLY(proto, tabBar);
   // static members (ctor)
   JS_INIT_CTOR(UITabBarController, UIViewController);
@@ -66,6 +67,22 @@ NAN_METHOD(NUITabBarController::setViewControllers) {
   }
 }
 
+NAN_GETTER(NUITabBarController::viewControllersGetter) {
+  JS_UNWRAP(UITabBarController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIViewController*>([self viewControllers]));
+  }
+}
+
+NAN_SETTER(NUITabBarController::viewControllersSetter) {
+  JS_UNWRAP(UITabBarController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<UIViewController*>, input);
+    [self setViewControllers: input];
+  }
+}
+
 #include "NUITabBar.h"
 
 NAN_GETTER(NUITabBarController::tabBarGetter) {
@@ -75,6 +92,7 @@ NAN_GETTER(NUITabBarController::tabBarGetter) {
   
   JS_SET_RETURN(JS_OBJ(sweetiekit::GetWrapperFor([ui tabBar], NUITabBar::type)));
 }
+
 
 #include "NUITabBarItem.h"
 
