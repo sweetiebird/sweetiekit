@@ -2,6 +2,8 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const colors = require('./examples/colors');
 
+__DEV__ = true;
+
 // apps
 const makeMiniApp = () => require('./examples/MiniApp');
 makeMiniApp.lazy = true;

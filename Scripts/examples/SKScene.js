@@ -78,7 +78,7 @@ function makeScene(demoVC) {
   scene = SKScene.sceneWithSize(size);
   scene.backgroundColor = RGB( 135, 206, 250 );
   scene.scaleMode = SKSceneScaleModeResizeFill;
-  scene.touchesEnded = touchesEnded;
+  scene.touchesEndedWithEvent = touchesEnded;
   scene.physicsWorld.gravity = { dx: 0, dy: 0 };
 }
 
