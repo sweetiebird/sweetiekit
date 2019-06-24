@@ -892,6 +892,7 @@ NAN_METHOD(NClass::New) {
 #include "NSCNText.h"
 #include "NSCNShape.h"
 #include "NSKScene.h"
+#include "NSKTransition.h"
 #include "NSKSpriteNode.h"
 #include "NSKCameraNode.h"
 #include "NSKEmitterNode.h"
@@ -924,6 +925,7 @@ NAN_METHOD(NClass::New) {
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIColor.h"
 #include "NCIImage.h"
+#include "NCIFilter.h"
 
 #import <WebKit/WebKit.h>
 #include "NWKNavigation.h"
@@ -1271,6 +1273,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKLabelNode);
     JS_EXPORT_TYPE(SKCameraNode);
     JS_EXPORT_TYPE(SKScene);
+    JS_EXPORT_TYPE(SKTransition);
     JS_EXPORT_TYPE(SKAction);
     JS_EXPORT_TYPE(SKTexture);
     JS_EXPORT_TYPE(SKPhysicsWorld);
@@ -1334,6 +1337,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // core image
     JS_EXPORT_TYPE(CIColor);
     JS_EXPORT_TYPE(CIImage);
+    JS_EXPORT_TYPE(CIFilter);
 }
 
 Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset) {
@@ -1377,6 +1381,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CATransaction);
       
       // Core Image
+      JS_RETURN_TYPE(CIFilter);
       JS_RETURN_TYPE(CIImage);
       JS_RETURN_TYPE(CIColor);
 
@@ -1454,6 +1459,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKPhysicsJoint);
       JS_RETURN_TYPE(SKPhysicsBody);
       JS_RETURN_TYPE(SKSpriteNode);
+      JS_RETURN_TYPE(SKTransition);
       JS_RETURN_TYPE(SKScene);
       JS_RETURN_TYPE(SKLabelNode);
       JS_RETURN_TYPE(SKTransformNode);
