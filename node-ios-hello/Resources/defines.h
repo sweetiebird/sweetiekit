@@ -172,6 +172,9 @@ using namespace node;
 
 #define JS_STATIC_METHOD(name) \
   static NAN_METHOD(name)
+
+#define JS_GLOBAL_METHOD(name) \
+  static NAN_METHOD(name)
   
 #define JS_UNWRAP_(type, name) \
   auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
@@ -237,10 +240,12 @@ using namespace node;
 #define JS_ASSIGN_STATIC_PROP(jsName)           JS_ASSIGN_PROP(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_PROP_READONLY(jsName)  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), jsName)
 #define JS_ASSIGN_STATIC_METHOD(jsName)         JS_ASSIGN_METHOD(ctor, jsName)
+#define JS_ASSIGN_GLOBAL_METHOD(jsName)         JS_SET_METHOD(exports, #jsName, jsName)
 
 #define JS_ASSIGN_STATIC_PROP_AS(cppName, jsName)           JS_SET_PROP(ctor, jsName, cppName)
 #define JS_ASSIGN_STATIC_PROP_READONLY_AS(cppName, jsName)  JS_SET_PROP_READONLY(ctor, jsName, cppName)
 #define JS_ASSIGN_STATIC_METHOD_AS(cppName, jsName) JS_SET_METHOD(ctor, jsName, cppName)
+#define JS_ASSIGN_GLOBAL_METHOD_AS(cppName, jsName) JS_SET_METHOD(exports, jsName, cppName)
 
 #define JS_ASSIGN_CONSTANT(name, type, value) \
   exports->Set(JS_STR(name), js_value_##type(value))

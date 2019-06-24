@@ -14,50 +14,51 @@ NNSUserDefaults::~NNSUserDefaults () {}
 
 JS_INIT_CLASS(NSUserDefaults, NSObject);
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, objectForKey);
-  JS_SET_METHOD(proto, "valueForKey", objectForKey);
-  JS_ASSIGN_METHOD(proto, setObjectForKey);
-  JS_SET_METHOD(proto, "setValueForKey", setObjectForKey);
-  JS_ASSIGN_METHOD(proto, removeObjectForKey);
-  JS_SET_METHOD(proto, "removeValueForKey", removeObjectForKey);
-  JS_ASSIGN_METHOD(proto, stringForKey);
-  JS_ASSIGN_METHOD(proto, arrayForKey);
-  JS_ASSIGN_METHOD(proto, dictionaryForKey);
-  JS_ASSIGN_METHOD(proto, dataForKey);
-  JS_ASSIGN_METHOD(proto, stringArrayForKey);
-  JS_ASSIGN_METHOD(proto, integerForKey);
-  JS_ASSIGN_METHOD(proto, floatForKey);
-  JS_ASSIGN_METHOD(proto, doubleForKey);
-  JS_ASSIGN_METHOD(proto, boolForKey);
-  JS_ASSIGN_METHOD(proto, URLForKey);
-  JS_ASSIGN_METHOD(proto, setIntegerForKey);
-  JS_ASSIGN_METHOD(proto, setFloatForKey);
-  JS_ASSIGN_METHOD(proto, setDoubleForKey);
-  JS_ASSIGN_METHOD(proto, setBoolForKey);
-  JS_ASSIGN_METHOD(proto, setURLForKey);
-  JS_ASSIGN_METHOD(proto, registerDefaults);
-  JS_ASSIGN_METHOD(proto, addSuiteNamed);
-  JS_ASSIGN_METHOD(proto, removeSuiteNamed);
-  JS_ASSIGN_METHOD(proto, dictionaryRepresentation);
-  JS_ASSIGN_METHOD(proto, volatileDomainForName);
-  JS_ASSIGN_METHOD(proto, setVolatileDomainForName);
-  JS_ASSIGN_METHOD(proto, removeVolatileDomainForName);
-  JS_ASSIGN_METHOD(proto, persistentDomainNames);
-  JS_ASSIGN_METHOD(proto, persistentDomainForName);
-  JS_ASSIGN_METHOD(proto, setPersistentDomainForName);
-  JS_ASSIGN_METHOD(proto, removePersistentDomainForName);
-  JS_ASSIGN_METHOD(proto, synchronize);
-  JS_ASSIGN_METHOD(proto, objectIsForcedForKey);
-  JS_ASSIGN_METHOD(proto, objectIsForcedForKeyInDomain);
-  JS_ASSIGN_PROP_READONLY(proto, volatileDomainNames);
+  JS_ASSIGN_PROTO_METHOD(objectForKey);
+  JS_ASSIGN_PROTO_METHOD(setObjectForKey);
+  JS_ASSIGN_PROTO_METHOD(removeObjectForKey);
+  JS_ASSIGN_PROTO_METHOD_AS(objectForKey, "valueForKey");
+  JS_ASSIGN_PROTO_METHOD_AS(setObjectForKey, "setValueForKey");
+  JS_ASSIGN_PROTO_METHOD_AS(removeObjectForKey, "removeObjectForKey");
+  JS_ASSIGN_PROTO_METHOD(stringForKey);
+  JS_ASSIGN_PROTO_METHOD(arrayForKey);
+  JS_ASSIGN_PROTO_METHOD(dictionaryForKey);
+  JS_ASSIGN_PROTO_METHOD(dataForKey);
+  JS_ASSIGN_PROTO_METHOD(stringArrayForKey);
+  JS_ASSIGN_PROTO_METHOD(integerForKey);
+  JS_ASSIGN_PROTO_METHOD(floatForKey);
+  JS_ASSIGN_PROTO_METHOD(doubleForKey);
+  JS_ASSIGN_PROTO_METHOD(boolForKey);
+  JS_ASSIGN_PROTO_METHOD(URLForKey);
+  JS_ASSIGN_PROTO_METHOD(setIntegerForKey);
+  JS_ASSIGN_PROTO_METHOD(setFloatForKey);
+  JS_ASSIGN_PROTO_METHOD(setDoubleForKey);
+  JS_ASSIGN_PROTO_METHOD(setBoolForKey);
+  JS_ASSIGN_PROTO_METHOD(setURLForKey);
+  JS_ASSIGN_PROTO_METHOD(registerDefaults);
+  JS_ASSIGN_PROTO_METHOD(addSuiteNamed);
+  JS_ASSIGN_PROTO_METHOD(removeSuiteNamed);
+  JS_ASSIGN_PROTO_METHOD(dictionaryRepresentation);
+  JS_ASSIGN_PROTO_METHOD(volatileDomainForName);
+  JS_ASSIGN_PROTO_METHOD(setVolatileDomainForName);
+  JS_ASSIGN_PROTO_METHOD(removeVolatileDomainForName);
+  JS_ASSIGN_PROTO_METHOD(persistentDomainNames);
+  JS_ASSIGN_PROTO_METHOD(persistentDomainForName);
+  JS_ASSIGN_PROTO_METHOD(setPersistentDomainForName);
+  JS_ASSIGN_PROTO_METHOD(removePersistentDomainForName);
+  JS_ASSIGN_PROTO_METHOD(synchronize);
+  JS_ASSIGN_PROTO_METHOD(objectIsForcedForKey);
+  JS_ASSIGN_PROTO_METHOD(objectIsForcedForKeyInDomain);
+  JS_ASSIGN_PROTO_PROP_READONLY(volatileDomainNames);
 
   // static members (ctor)
   JS_INIT_CTOR(NSUserDefaults, NSObject);
-  JS_ASSIGN_METHOD(ctor, resetStandardUserDefaults);
-  JS_ASSIGN_METHOD(ctor, init);
-  JS_ASSIGN_METHOD(ctor, initWithSuiteName);
-  JS_ASSIGN_METHOD(ctor, initWithUser);
-  JS_ASSIGN_PROP_READONLY(JS_OBJ(ctor), standardUserDefaults);
+  JS_ASSIGN_STATIC_METHOD(resetStandardUserDefaults);
+  JS_ASSIGN_STATIC_METHOD(init);
+  JS_ASSIGN_STATIC_METHOD(initWithSuiteName);
+  JS_ASSIGN_STATIC_METHOD(initWithUser);
+  JS_ASSIGN_STATIC_PROP_READONLY(standardUserDefaults);
+
 JS_INIT_CLASS_END(NSUserDefaults, NSObject);
 
 NAN_METHOD(NNSUserDefaults::New) {
@@ -414,5 +415,3 @@ NAN_GETTER(NNSUserDefaults::volatileDomainNamesGetter) {
     JS_SET_RETURN(js_value_NSArray<NSString*>([self volatileDomainNames]));
   }
 }
-
-

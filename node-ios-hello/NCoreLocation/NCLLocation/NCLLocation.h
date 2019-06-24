@@ -95,8 +95,8 @@ bool is_value_CLLocationCoordinate2D(const Local<Value>& value);
 
 JS_WRAP_CLASS(CLLocation, NSObject);
 // global functions
-  JS_METHOD(CLLocationCoordinate2DIsValid);
-  JS_METHOD(CLLocationCoordinate2DMake);
+  JS_GLOBAL_METHOD(CLLocationCoordinate2DIsValid);
+  JS_GLOBAL_METHOD(CLLocationCoordinate2DMake);
   
 // CLLocation
   JS_METHOD(initWithLatitudeLongitude);

@@ -31,6 +31,10 @@
 #define is_value_CATransitionSubtype(x) IS_ENUM(CATransitionSubtype, NSString, x)
 
 JS_WRAP_CLASS(CAAnimation, NSObject);
+// global functions
+  JS_GLOBAL_METHOD(CACurrentMediaTime);
+
+// CAAnimation
   JS_STATIC_METHOD(animation);
   JS_STATIC_METHOD(defaultValueForKey);
   JS_METHOD(shouldArchiveValueForKey);
@@ -43,9 +47,6 @@ JS_WRAP_CLASS(CAAnimation, NSObject);
   JS_PROP(timingFunction);
   JS_PROP(delegate);
   JS_PROP(isRemovedOnCompletion);
-  
-// global functions
-  JS_METHOD(CACurrentMediaTime);
 JS_WRAP_CLASS_END(CAAnimation);
 
 #endif /* NCAAnimation_h */

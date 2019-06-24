@@ -244,9 +244,9 @@ NMKMapView::~NMKMapView() {}
 
 JS_INIT_CLASS(MKMapView, UIView);
   // global functions
-  JS_SET_METHOD(exports, "MKCoordinateSpanMake", MKCoordinateSpanMake);
-  JS_SET_METHOD(exports, "MKCoordinateRegionMake", MKCoordinateRegionMake);
-  JS_SET_METHOD(exports, "MKCoordinateRegionMakeWithDistance", MKCoordinateRegionMakeWithDistance);
+  JS_ASSIGN_GLOBAL_METHOD(MKCoordinateSpanMake);
+  JS_ASSIGN_GLOBAL_METHOD(MKCoordinateRegionMake);
+  JS_ASSIGN_GLOBAL_METHOD(MKCoordinateRegionMakeWithDistance);
   
 // MKMapView
   JS_ASSIGN_PROTO_METHOD(setRegionAnimated);

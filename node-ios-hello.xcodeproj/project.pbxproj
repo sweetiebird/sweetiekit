@@ -202,6 +202,7 @@
 		A1926EE422C0A739008F16AE /* NAVDepthData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EE222C0A739008F16AE /* NAVDepthData.mm */; };
 		A1926EE822C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EE622C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm */; };
 		A1926EEC22C0ADAD008F16AE /* NAVCameraCalibrationData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EEA22C0ADAD008F16AE /* NAVCameraCalibrationData.mm */; };
+		A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EEF22C0B2C2008F16AE /* NUIDevice.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -787,6 +788,8 @@
 		A1926EE722C0A7E5008F16AE /* NAVPortraitEffectsMatte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVPortraitEffectsMatte.h; sourceTree = "<group>"; };
 		A1926EEA22C0ADAD008F16AE /* NAVCameraCalibrationData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVCameraCalibrationData.mm; sourceTree = "<group>"; };
 		A1926EEB22C0ADAD008F16AE /* NAVCameraCalibrationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVCameraCalibrationData.h; sourceTree = "<group>"; };
+		A1926EEE22C0B2C2008F16AE /* NUIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDevice.h; sourceTree = "<group>"; };
+		A1926EEF22C0B2C2008F16AE /* NUIDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDevice.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2739,6 +2742,15 @@
 			path = NAVCameraCalibrationData;
 			sourceTree = "<group>";
 		};
+		A1926EED22C0B2C2008F16AE /* NUIDevice */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EEE22C0B2C2008F16AE /* NUIDevice.h */,
+				A1926EEF22C0B2C2008F16AE /* NUIDevice.mm */,
+			);
+			path = NUIDevice;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4103,6 +4115,7 @@
 				A1574ED822B8D96B006CC5F2 /* NUICollectionViewUpdateItem */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
 				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
+				A1926EED22C0B2C2008F16AE /* NUIDevice */,
 				A1D4989A22BB49BC009AC951 /* NUIDictationPhrase */,
 				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
 				A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */,
@@ -5146,6 +5159,7 @@
 				A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */,
 				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
+				A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */,
 				A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */,
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,

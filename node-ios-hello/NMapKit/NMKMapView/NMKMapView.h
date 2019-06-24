@@ -61,9 +61,10 @@ bool is_value_MKCoordinateRegion(const Local<Value>& value);
 
 JS_WRAP_CLASS(MKMapView, UIView);
 // global functions
-  JS_METHOD(MKCoordinateSpanMake);
-  JS_METHOD(MKCoordinateRegionMake);
-  JS_METHOD(MKCoordinateRegionMakeWithDistance);
+  JS_GLOBAL_METHOD(MKCoordinateSpanMake);
+  JS_GLOBAL_METHOD(MKCoordinateRegionMake);
+  JS_GLOBAL_METHOD(MKCoordinateRegionMakeWithDistance);
+
 // MKMapView
   JS_METHOD(setRegionAnimated);
   JS_METHOD(setCenterCoordinateAnimated);

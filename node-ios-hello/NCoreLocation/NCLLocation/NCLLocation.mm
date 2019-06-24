@@ -14,8 +14,8 @@ NCLLocation::~NCLLocation () {}
 
 JS_INIT_CLASS(CLLocation, NSObject);
   // global functions
-  JS_SET_METHOD(exports, "CLLocationCoordinate2DIsValid", CLLocationCoordinate2DIsValid);
-  JS_SET_METHOD(exports, "CLLocationCoordinate2DMake", CLLocationCoordinate2DMake);
+  JS_ASSIGN_GLOBAL_METHOD(CLLocationCoordinate2DIsValid);
+  JS_ASSIGN_GLOBAL_METHOD(CLLocationCoordinate2DMake);
 
 // CLLocation
   JS_ASSIGN_PROTO_METHOD(initWithLatitudeLongitude);

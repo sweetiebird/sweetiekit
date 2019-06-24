@@ -20,7 +20,7 @@ NAN_METHOD(NCAAnimation::CACurrentMediaTime) {
 
 JS_INIT_CLASS(CAAnimation, NSObject);
   // global functions
-  JS_SET_METHOD(exports, "CACurrentMediaTime", CACurrentMediaTime);
+  JS_ASSIGN_GLOBAL_METHOD(CACurrentMediaTime);
 
 // CAAnimation
   JS_ASSIGN_STATIC_METHOD(animation);

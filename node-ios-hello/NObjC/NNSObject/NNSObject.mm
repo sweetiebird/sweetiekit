@@ -802,6 +802,7 @@ NAN_METHOD(NClass::New) {
 #include "NGif.h"
 #include "NGifView.h"
 #include "NGifManager.h"
+#include "NUIDevice.h"
 #include "NUINib.h"
 #include "NUILexicon.h"
 #include "NUILexiconEntry.h"
@@ -1100,6 +1101,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UICollectionViewFlowLayoutInvalidationContext);
     JS_EXPORT_TYPE(UICollectionViewTransitionLayout);
     JS_EXPORT_TYPE(UIDictationPhrase);
+    JS_EXPORT_TYPE(UIDevice);
     JS_EXPORT_TYPE(UINib);
     JS_EXPORT_TYPE(UILexicon);
     JS_EXPORT_TYPE(UILexiconEntry);
@@ -1662,6 +1664,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UILexiconEntry);
       JS_RETURN_TYPE(UILexicon);
       JS_RETURN_TYPE(UINib);
+      JS_RETURN_TYPE(UIDevice);
       JS_RETURN_TYPE(UIDictationPhrase);
       
       // Globals
