@@ -397,9 +397,9 @@ function makeInnerAppControllers(nav) {
     console.log('editor view controller');
   }, UIControlEventTouchUpInside);
 
-  nav.setViewControllers([tabVC], true);
+  nav.setViewControllersAnimated([tabVC], true);
 
-  tabVC.setViewControllers([partyVC, wagonVC], false);
+  tabVC.setViewControllersAnimated([partyVC, wagonVC], false);
 }
 
 function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {

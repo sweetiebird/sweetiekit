@@ -15,10 +15,14 @@
 #define is_value_UITabBarController(x) is_value_wrapper(x, UITabBarController)
 
 JS_WRAP_CLASS(UITabBarController, UIViewController);
-  JS_METHOD(setViewControllers);
-  JS_PROP(tabBar);
+  JS_METHOD(setViewControllersAnimated);
   JS_PROP(viewControllers);
+  JS_PROP(selectedViewController);
   JS_PROP(selectedIndex);
+  JS_PROP_READONLY(moreNavigationController);
+  JS_PROP(customizableViewControllers);
+  JS_PROP_READONLY(tabBar);
+  JS_PROP(delegate);
 JS_WRAP_CLASS_END(UITabBarController);
 
 
