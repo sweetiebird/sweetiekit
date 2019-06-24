@@ -1252,7 +1252,7 @@ console.log(sb, vc, view, subview);
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "tabVC") as! UITabBarController
         let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "firstVC") as! FirstViewController
         let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(withIdentifier: "secondVC") as! SecondViewController
-        vc.setViewControllers([firstVC, secondVC], animated: false)
+        vc.setViewControllersAnimated([firstVC, secondVC], animated: false)
         window?.rootViewController = vc;
 */
 
@@ -1272,7 +1272,7 @@ console.log(sb, vc, view, subview);
 //  //firstVC.view.addSubview(UIView(0, 400, 200, 200));
 //
 //  const secondVC = sb.instantiateViewControllerWithIdentifier('secondVC');
-//  vc.setViewControllers([firstVC, secondVC], false);
+//  vc.setViewControllersAnimated([firstVC, secondVC], false);
 //
 //  app.keyWindow.rootViewController = vc; // update to { get, set }
 //
