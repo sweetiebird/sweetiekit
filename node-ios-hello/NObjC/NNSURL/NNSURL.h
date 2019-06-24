@@ -14,10 +14,10 @@
 #define to_value_NSURL(x) to_value_wrapper(x, NSURL)
 #define is_value_NSURL(x) is_value_wrapper(x, NSURL)
 
-NSString* to_value_URLString(Local<Value> value, bool* _Nullable failed = nullptr);
+NSString* _Nullable to_value_URLString(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_URLString(Local<Value> value);
 
-NSURL* to_value_URL(Local<Value> value, bool* _Nullable failed = nullptr);
+NSURL* _Nullable to_value_URL(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_URL(Local<Value> value);
 
 // Foundation enums

@@ -13,13 +13,13 @@
 #ifdef __OBJC__
 @interface NSObject (CategoryNSObject)
 
-- (void) associateValue:(id)value withKey:(NSString *)aKey;
-- (id) associatedValueForKey:(NSString *)aKey;
-- (void) dissociateValueForKey:(NSString *)aKey;
+- (void) associateValue:(id _Nullable )value withKey:(NSString * _Nonnull)aKey;
+- (id _Nullable ) associatedValueForKey:(NSString * _Nonnull)aKey;
+- (void) dissociateValueForKey:(NSString * _Nonnull)aKey;
 
 @end
 
-extern "C" void objc_callCallback(NSObject* obj);
+extern "C" void objc_callCallback(NSObject* _Nonnull obj);
 #endif
 
 class NObjectWrap : public ObjectWrap
@@ -54,8 +54,8 @@ JS_WRAP_CLASS(id, ObjectWrap);
   JS_METHOD(invokeBooleanSetter);
   JS_METHOD(invoke);
 
-  id _self;
-  id set_self(__weak id self);
+  id _Nullable _self;
+  id _Nullable set_self(__weak id _Nullable self);
   
   inline void wrap(v8::Local<v8::Object> handle) {
     Wrap(handle);
@@ -66,20 +66,20 @@ JS_WRAP_CLASS(id, ObjectWrap);
     return (T)_self;
   }
   
-  id self() {
+  id _Nullable self() {
     return _self;
   }
   
   template<typename T>
-  T* As() {
-    return self<T*>();
+  T* _Nullable As() {
+    return self<T*>();  
   }
   
   bool IsClass() {
     return object_isClass(self());
   }
   
-  Class AsClass() {
+  Class _Nullable AsClass() {
     if (IsClass()) {
       return self<Class>();
     } else {
@@ -101,13 +101,13 @@ JS_WRAP_CLASS_END(Class);
 
 JS_WRAP_CLASS(NSObject, id);
 
-  NSObject* SetNSObject(__weak NSObject* obj) {
+  NSObject* _Nullable SetNSObject(__weak NSObject* _Nullable obj) {
     set_self(obj);
     return self<NSObject*>();
   }
   
   static void RegisterTypes(Local<Object> exports);
-  static Nan::Persistent<FunctionTemplate>& GetNSObjectType(NSObject* obj, Nan::Persistent<FunctionTemplate>& unset);
+  static Nan::Persistent<FunctionTemplate>& GetNSObjectType(NSObject* _Nullable obj, Nan::Persistent<FunctionTemplate>& unset);
 JS_WRAP_CLASS_END(NSObject);
 
 
@@ -141,7 +141,7 @@ Protocol* name##Protocol;
 
 template<typename T>
 Local<Value>
-js_value_protocol(T x, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
+js_value_protocol(T x, Protocol* _Nullable protocol = ObjCProtocolTraits<T>::protocol())
 {
   if (protocol && x && ![x conformsToProtocol: protocol]) {
     return Nan::Undefined();
@@ -151,7 +151,7 @@ js_value_protocol(T x, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
 
 template<typename T, typename K>
 T
-to_value_protocol(K value, bool* failed = nullptr, Protocol* protocol = ObjCProtocolTraits<T>::protocol())
+to_value_protocol(K value, bool* _Nullable failed = nullptr, Protocol* _Nullable protocol = ObjCProtocolTraits<T>::protocol())
 {
   if (failed) {
     *failed = false;
@@ -173,7 +173,7 @@ to_value_protocol(K value, bool* failed = nullptr, Protocol* protocol = ObjCProt
 
 template<typename T>
 bool
-is_value_protocol(Local<Value> x, Protocol* protocol = ObjCProtocolTraits<T>::protocol()) {
+is_value_protocol(Local<Value> x, Protocol* _Nullable protocol = ObjCProtocolTraits<T>::protocol()) {
   if (!is_value_id(x)) {
     return false;
   }

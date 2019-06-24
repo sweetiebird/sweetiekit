@@ -46,8 +46,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *
  *    locations is an array of CLLocation objects in chronological order.
  */
-- (void)locationManager:(CLLocationManager *)manager
-   didUpdateLocations:(NSArray<CLLocation *> *)locations API_AVAILABLE(ios(6.0), macos(10.9));
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+     didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations API_AVAILABLE(ios(6.0), macos(10.9));
 
 /*
  *  locationManager:didUpdateHeading:
@@ -55,8 +55,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when a new heading is available.
  */
-- (void)locationManager:(CLLocationManager *)manager
-       didUpdateHeading:(CLHeading *)newHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+       didUpdateHeading:(CLHeading * _Nonnull)newHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManagerShouldDisplayHeadingCalibration:
@@ -65,7 +65,7 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    Invoked when a new heading is available. Return YES to display heading calibration info. The display 
  *    will remain until heading is calibrated, unless dismissed early via dismissHeadingCalibrationDisplay.
  */
-- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager  API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager * _Nonnull)manager  API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didDetermineState:forRegion:
@@ -74,8 +74,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    Invoked when there's a state transition for a monitored region or in response to a request for state via a
  *    a call to requestStateForRegion:.
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region API_AVAILABLE(ios(7.0), macos(10.10)) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didDetermineState:(CLRegionState)state forRegion:(CLRegion * _Nonnull)region API_AVAILABLE(ios(7.0), macos(10.10)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didRangeBeacons:inRegion:
@@ -87,8 +87,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    Similarly if a specific beacon no longer appears in beacons, it may be assumed the beacon is no longer received
  *    by the device.
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons inRegion:(CLBeaconRegion * _Nonnull)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:rangingBeaconsDidFailForRegion:withError:
@@ -96,9 +96,9 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when an error has occurred ranging beacons in a region. Error types are defined in "CLError.h".
  */
-- (void)locationManager:(CLLocationManager *)manager
-  rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
-  withError:(NSError *)error API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  rangingBeaconsDidFailForRegion:(CLBeaconRegion * _Nonnull)region
+  withError:(NSError * _Nonnull)error API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didEnterRegion:
@@ -107,8 +107,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    Invoked when the user enters a monitored region.  This callback will be invoked for every allocated
  *    CLLocationManager instance with a non-nil delegate that implements this method.
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didEnterRegion:(CLRegion *)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didEnterRegion:(CLRegion * _Nonnull)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didExitRegion:
@@ -117,8 +117,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    Invoked when the user exits a monitored region.  This callback will be invoked for every allocated
  *    CLLocationManager instance with a non-nil delegate that implements this method.
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didExitRegion:(CLRegion *)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didExitRegion:(CLRegion * _Nonnull)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didFailWithError:
@@ -126,8 +126,8 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when an error has occurred. Error types are defined in "CLError.h".
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didFailWithError:(NSError *)error;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didFailWithError:(NSError * _Nonnull)error;
 
 /*
  *  locationManager:monitoringDidFailForRegion:withError:
@@ -135,9 +135,9 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when a region monitoring error has occurred. Error types are defined in "CLError.h".
  */
-- (void)locationManager:(CLLocationManager *)manager
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
   monitoringDidFailForRegion:(nullable CLRegion *)region
-  withError:(NSError *)error API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
+  withError:(NSError * _Nonnull)error API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didChangeAuthorizationStatus:
@@ -145,7 +145,7 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when the authorization status changes for this application.
  */
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_AVAILABLE(ios(4.2), macos(10.7));
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_AVAILABLE(ios(4.2), macos(10.7));
 
 /*
  *  locationManager:didStartMonitoringForRegion:
@@ -153,14 +153,14 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *  Discussion:
  *    Invoked when a monitoring for a region started successfully.
  */
-- (void)locationManager:(CLLocationManager *)manager
-  didStartMonitoringForRegion:(CLRegion *)region API_AVAILABLE(ios(5.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
+  didStartMonitoringForRegion:(CLRegion * _Nonnull)region API_AVAILABLE(ios(5.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  Discussion:
  *    Invoked when location updates are automatically paused.
  */
-- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager * _Nonnull)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  Discussion:
@@ -169,7 +169,7 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    In the event that your application is terminated while suspended, you will
  *    not receive this notification.
  */
-- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager * _Nonnull)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didFinishDeferredUpdatesWithError:
@@ -182,7 +182,7 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    An error will be returned if deferred updates end before the specified
  *    criteria are met (see CLError), otherwise error will be nil.
  */
-- (void)locationManager:(CLLocationManager *)manager
+- (void)locationManager:(CLLocationManager * _Nonnull)manager
   didFinishDeferredUpdatesWithError:(nullable NSError *)error API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos);
 
 /*
@@ -193,7 +193,7 @@ JS_WRAP_CLASS_END(CLLocationManagerDelegate);
  *    a location, if visit monitoring is currently started (possibly from a
  *    prior launch).
  */
-- (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didVisit:(CLVisit * _Nonnull)visit API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 @end
 #endif

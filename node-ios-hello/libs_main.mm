@@ -80,7 +80,7 @@ namespace sweetiekit {
           Local<Promise> promise = result.As<Promise>();
 #if 1
           if (!promise->HasHandler()) {
-            promise->Then(JS_CONTEXT(),
+            (void)promise->Then(JS_CONTEXT(),
             (v8::Function::New(JS_CONTEXT(), [](const FunctionCallbackInfo<Value>& info) -> void {
               int argc = info.Length();
               argc = argc;
@@ -176,7 +176,10 @@ namespace sweetiekit {
   Nan::Callback tickKicker;
   
   void Kick() {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
     tickKicker();
+#pragma clang diagnostic pop
   }
 };
 
@@ -370,12 +373,11 @@ static void embed_thread_runner(void* arg) {
   }
 }
 
-
-inline static void embed_cb(uv_async_t* async) {
-  uv_run(uv_default_loop(), UV_RUN_ONCE);
-
-  uv_sem_post(&embed_sem);
-}
+//inline static void embed_cb(uv_async_t* async) {
+//  uv_run(uv_default_loop(), UV_RUN_ONCE);
+//
+//  uv_sem_post(&embed_sem);
+//}
 
 extern "C" void embed_start() {
   //uv_loop_t external;
