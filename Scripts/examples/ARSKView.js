@@ -394,7 +394,7 @@ async function make(nav, demoVC) {
     }
   };
 
-  scene.touchesEnded = (touches, evt) => {
+  scene.touchesEndedWithEvent = (touches, evt) => {
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
     pt.y -= Math.trunc(0.1*touch.view.height);

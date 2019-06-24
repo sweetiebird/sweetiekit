@@ -348,7 +348,7 @@ function makeDemo(navigation, dvc) {
 
     scene.touchesBeganWithEvent = sceneTouchesBegan;
     // scene.touchesMoved = touchesMoved;
-    // scene.touchesEnded = touchesEnded;
+    // scene.touchesEndedWithEvent = touchesEnded;
 
     scene.update = () => {
       if (isMoving) {
