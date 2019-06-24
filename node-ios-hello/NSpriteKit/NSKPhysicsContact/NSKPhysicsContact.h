@@ -15,8 +15,11 @@
 #define is_value_SKPhysicsContact(x) is_value_wrapper(x, SKPhysicsContact)
 
 JS_WRAP_CLASS(SKPhysicsContact, NSObject);
-  JS_PROP(bodyA);
-  JS_PROP(bodyB);
+  JS_PROP_READONLY(bodyA);
+  JS_PROP_READONLY(bodyB);
+  JS_PROP_READONLY(contactPoint);
+  JS_PROP_READONLY(contactNormal);
+  JS_PROP_READONLY(collisionImpulse);
 JS_WRAP_CLASS_END(SKPhysicsContact);
 
 #endif /* NSKPhysicsContact_h */
