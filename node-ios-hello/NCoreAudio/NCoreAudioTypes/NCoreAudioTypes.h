@@ -14,11 +14,11 @@
 #define to_value_CoreAudioTypes(x) to_value_wrapper(x, CoreAudioTypes)
 #define is_value_CoreAudioTypes(x) is_value_wrapper(x, CoreAudioTypes)
 
-Local<Value> js_value_AudioStreamPacketDescription(const AudioStreamPacketDescription* value);
+Local<Value> js_value_AudioStreamPacketDescription(const AudioStreamPacketDescription* _Nullable value);
 AudioStreamPacketDescription to_value_AudioStreamPacketDescription(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_AudioStreamPacketDescription(Local<Value> value);
 
-Local<Value> js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* value);
+Local<Value> js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* _Nullable value);
 AudioStreamBasicDescription to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_AudioStreamBasicDescription(Local<Value> value);
 

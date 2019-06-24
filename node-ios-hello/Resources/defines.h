@@ -278,7 +278,7 @@ public: \
  \
   static Nan::Persistent<FunctionTemplate> type; \
   virtual Nan::Persistent<FunctionTemplate>& GetDerivedType() { return type; } \
-  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate *isolate, Local<Object> exports); \
+  static std::pair<Local<Object>, Local<FunctionTemplate>> Initialize(Isolate * _Nonnull isolate, Local<Object> exports); \
   static NAN_METHOD(New); \
   static NAN_METHOD(alloc);
   
@@ -309,6 +309,8 @@ public: \
 
 #define JS_INIT_CLASS_ALLOC(name, base, do_alloc) \
   JS_INIT_CLASS_BASE(name, do_alloc, ctorSpec->Inherit(Nan::New(N##base::type)))
+  
+#define JS_SUPPRESS_UNUSED_VARIABLE_WARNING(x) (void)(x)
 
 #define JS_INIT_CLASS_BASE(name, do_alloc, ...) \
 \
@@ -343,6 +345,7 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
     return result; \
   } \
   Local<Object> proto(JS_OBJ(proto_v)); \
+  JS_SUPPRESS_UNUSED_VARIABLE_WARNING(proto); \
   JS_ASSIGN_STATIC_METHOD(alloc)
 
 #define JS_INIT_CTOR(name, base) \
