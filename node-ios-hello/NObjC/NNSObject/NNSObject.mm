@@ -869,6 +869,10 @@ NAN_METHOD(NClass::New) {
 #include "NARLightEstimate.h"
 #include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
+#include "NSceneKitTypes.h"
+#include "NSCNAction.h"
+#include "NSCNAudioPlayer.h"
+#include "NSCNAudioSource.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
 #include "NSCNPhysicsBehavior.h"
@@ -1295,6 +1299,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsContactDelegate);
 
     // SceneKit
+    JS_EXPORT_TYPE(SceneKitTypes);
+    JS_EXPORT_TYPE(SCNAction);
+    JS_EXPORT_TYPE(SCNAudioPlayer);
+    JS_EXPORT_TYPE(SCNAudioSource);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
     JS_EXPORT_TYPE(SCNMaterialProperty);
@@ -1442,6 +1450,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
+      JS_RETURN_TYPE(SceneKitTypes);
+      JS_RETURN_TYPE(SCNAction);
+      JS_RETURN_TYPE(SCNAudioPlayer);
+      JS_RETURN_TYPE(SCNAudioSource);
       JS_RETURN_TYPE(SCNMaterial);
       JS_RETURN_TYPE(SCNMaterialProperty);
       JS_RETURN_TYPE(SCNCamera);

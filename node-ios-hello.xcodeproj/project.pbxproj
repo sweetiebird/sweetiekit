@@ -225,6 +225,10 @@
 		A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4322C0E285008F16AE /* NSCNPhysicsSliderJoint.mm */; };
 		A1926F4F22C0E286008F16AE /* NSCNPhysicsHingeJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4622C0E285008F16AE /* NSCNPhysicsHingeJoint.mm */; };
 		A1926F5022C0E286008F16AE /* NSCNPhysicsVehicle.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F4922C0E285008F16AE /* NSCNPhysicsVehicle.mm */; };
+		A1926F5422C0E720008F16AE /* NSCNAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5222C0E720008F16AE /* NSCNAction.mm */; };
+		A1926F5B22C0E836008F16AE /* NSCNAudioSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5722C0E836008F16AE /* NSCNAudioSource.mm */; };
+		A1926F5C22C0E836008F16AE /* NSCNAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5A22C0E836008F16AE /* NSCNAudioPlayer.mm */; };
+		A1926F6022C0E8C1008F16AE /* NSceneKitTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -854,6 +858,14 @@
 		A1926F4722C0E285008F16AE /* NSCNPhysicsHingeJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsHingeJoint.h; sourceTree = "<group>"; };
 		A1926F4922C0E285008F16AE /* NSCNPhysicsVehicle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsVehicle.mm; sourceTree = "<group>"; };
 		A1926F4A22C0E285008F16AE /* NSCNPhysicsVehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsVehicle.h; sourceTree = "<group>"; };
+		A1926F5222C0E720008F16AE /* NSCNAction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNAction.mm; sourceTree = "<group>"; };
+		A1926F5322C0E720008F16AE /* NSCNAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNAction.h; sourceTree = "<group>"; };
+		A1926F5622C0E836008F16AE /* NSCNAudioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNAudioSource.h; sourceTree = "<group>"; };
+		A1926F5722C0E836008F16AE /* NSCNAudioSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNAudioSource.mm; sourceTree = "<group>"; };
+		A1926F5922C0E836008F16AE /* NSCNAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNAudioPlayer.h; sourceTree = "<group>"; };
+		A1926F5A22C0E836008F16AE /* NSCNAudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNAudioPlayer.mm; sourceTree = "<group>"; };
+		A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSceneKitTypes.mm; sourceTree = "<group>"; };
+		A1926F5F22C0E8C1008F16AE /* NSceneKitTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSceneKitTypes.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -3016,6 +3028,42 @@
 			path = NSCNPhysicsVehicle;
 			sourceTree = "<group>";
 		};
+		A1926F5122C0E720008F16AE /* NSCNAction */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F5322C0E720008F16AE /* NSCNAction.h */,
+				A1926F5222C0E720008F16AE /* NSCNAction.mm */,
+			);
+			path = NSCNAction;
+			sourceTree = "<group>";
+		};
+		A1926F5522C0E836008F16AE /* NSCNAudioSource */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F5622C0E836008F16AE /* NSCNAudioSource.h */,
+				A1926F5722C0E836008F16AE /* NSCNAudioSource.mm */,
+			);
+			path = NSCNAudioSource;
+			sourceTree = "<group>";
+		};
+		A1926F5822C0E836008F16AE /* NSCNAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F5922C0E836008F16AE /* NSCNAudioPlayer.h */,
+				A1926F5A22C0E836008F16AE /* NSCNAudioPlayer.mm */,
+			);
+			path = NSCNAudioPlayer;
+			sourceTree = "<group>";
+		};
+		A1926F5D22C0E8C1008F16AE /* NSceneKitTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F5F22C0E8C1008F16AE /* NSceneKitTypes.h */,
+				A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */,
+			);
+			path = NSceneKitTypes;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3532,6 +3580,10 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1926F5D22C0E8C1008F16AE /* NSceneKitTypes */,
+				A1926F5822C0E836008F16AE /* NSCNAudioPlayer */,
+				A1926F5522C0E836008F16AE /* NSCNAudioSource */,
+				A1926F5122C0E720008F16AE /* NSCNAction */,
 				A1EE7D6A229D8EEE002B53FF /* NSCNBox */,
 				A1EE7D8A22A41FEC002B53FF /* NSCNCamera */,
 				A1EE7D8E22A428D5002B53FF /* NSCNCameraController */,
@@ -5115,6 +5167,7 @@
 				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,
+				A1926F6022C0E8C1008F16AE /* NSceneKitTypes.mm in Sources */,
 				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
 				A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
@@ -5180,6 +5233,7 @@
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
 				A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */,
 				A1D4983022B9D48D009AC951 /* NCLVisit.mm in Sources */,
+				A1926F5422C0E720008F16AE /* NSCNAction.mm in Sources */,
 				A1574F0122B93071006CC5F2 /* NCATransition.mm in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
@@ -5353,6 +5407,7 @@
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
 				A1D65E1722819F8E00AC0BD9 /* NARSession.mm in Sources */,
+				A1926F5B22C0E836008F16AE /* NSCNAudioSource.mm in Sources */,
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
@@ -5399,6 +5454,7 @@
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
 				A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */,
+				A1926F5C22C0E836008F16AE /* NSCNAudioPlayer.mm in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,

@@ -15,7 +15,6 @@
 #define is_value_SCNPhysicsBehavior(x) is_value_wrapper(x, SCNPhysicsBehavior)
 
 JS_WRAP_CLASS(SCNPhysicsBehavior, NSObject);
-  // TODO: declare SCNPhysicsBehavior methods and properties
 JS_WRAP_CLASS_END(SCNPhysicsBehavior);
 
 #endif /* NSCNPhysicsBehavior_h */
