@@ -53,6 +53,10 @@ NAN_METHOD(NMTLRenderPassColorAttachmentDescriptorArray::objectAtIndexedSubscrip
   declare_autoreleasepool {
     declare_args();
     declare_value(NSUInteger, attachmentIndex);
+    if (attachmentIndex >= 8) {
+      js_panic_noreturn("attachmentIndex must be < 8");
+      return;
+    }
     JS_SET_RETURN(js_value_MTLRenderPassColorAttachmentDescriptor([self objectAtIndexedSubscript: attachmentIndex]));
   }
 }
@@ -63,6 +67,10 @@ NAN_METHOD(NMTLRenderPassColorAttachmentDescriptorArray::setObjectAtIndexedSubsc
     declare_args();
     declare_nullable_pointer(MTLRenderPassColorAttachmentDescriptor, attachment);
     declare_value(NSUInteger, attachmentIndex);
+    if (attachmentIndex >= 8) {
+      js_panic_noreturn("attachmentIndex must be < 8");
+      return;
+    }
     [self setObject: attachment atIndexedSubscript: attachmentIndex];
   }
 }

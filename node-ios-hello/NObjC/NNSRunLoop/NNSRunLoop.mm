@@ -12,6 +12,8 @@
 NNSRunLoop::NNSRunLoop() {}
 NNSRunLoop::~NNSRunLoop() {}
 
+#include "NNSObjCRuntime.h"
+
 JS_INIT_CLASS(NSRunLoop, NSObject);
   JS_ASSIGN_PROTO_METHOD(getCFRunLoop);
   JS_ASSIGN_PROTO_METHOD(addTimerForMode);
@@ -45,6 +47,9 @@ JS_INIT_CLASS(NSRunLoop, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(NSRunLoop, NSObject);
   // constant values (exports)
+  
+  JS_ASSIGN_ENUM(NSDefaultRunLoopMode, NSRunLoopMode);
+  JS_ASSIGN_ENUM(NSRunLoopCommonModes, NSRunLoopMode);
 JS_INIT_CLASS_END(NSRunLoop, NSObject);
 
 NAN_METHOD(NNSRunLoop::New) {
@@ -68,8 +73,6 @@ NAN_METHOD(NNSRunLoop::New) {
     }
   }
 }
-
-#include "NNSObjCRuntime.h"
 
 NAN_METHOD(NNSRunLoop::getCFRunLoop) {
   JS_UNWRAP(NSRunLoop, self);

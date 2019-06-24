@@ -649,6 +649,7 @@ NAN_METHOD(NClass::New) {
 }
 
 #include "NNSObjCRuntime.h"
+#include "NNSTarget.h"
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
 #include "NNSPort.h"
@@ -1099,6 +1100,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSObjCRuntime);
+    JS_EXPORT_TYPE(NSTarget);
     JS_EXPORT_TYPE(NSRunLoop);
     JS_EXPORT_TYPE(NSTimer);
     JS_EXPORT_TYPE(NSPort);
@@ -1631,6 +1633,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CAValueFunction);
       JS_RETURN_TYPE(CAMediaTimingFunction);
       JS_RETURN_TYPE(CATransaction);
+      JS_RETURN_TYPE(CADisplayLink);
       
       // Core Image
       JS_RETURN_TYPE(CIBlendKernel); // : CIColorKernel
@@ -2073,6 +2076,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSPort);
       JS_RETURN_TYPE(NSTimer);
       JS_RETURN_TYPE(NSRunLoop);
+      JS_RETURN_TYPE(NSTarget);
       JS_RETURN_TYPE(NSObjCRuntime);
       if (object_isClass(obj)) {
         return NClass::type;

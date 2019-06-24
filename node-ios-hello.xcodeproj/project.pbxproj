@@ -312,6 +312,7 @@
 		A19270A622C16422008F16AE /* NNSInvocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270A522C16422008F16AE /* NNSInvocation.mm */; };
 		A19270AA22C164AD008F16AE /* NNSPort.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270A822C164AC008F16AE /* NNSPort.mm */; };
 		A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270AD22C16896008F16AE /* NCADisplayLink.mm */; };
+		A19270B222C174C8008F16AE /* NNSTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270B022C174C7008F16AE /* NNSTarget.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -1113,6 +1114,8 @@
 		A19270A922C164AC008F16AE /* NNSPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSPort.h; sourceTree = "<group>"; };
 		A19270AC22C16896008F16AE /* NCADisplayLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCADisplayLink.h; sourceTree = "<group>"; };
 		A19270AD22C16896008F16AE /* NCADisplayLink.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCADisplayLink.mm; sourceTree = "<group>"; };
+		A19270B022C174C7008F16AE /* NNSTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSTarget.mm; sourceTree = "<group>"; };
+		A19270B122C174C7008F16AE /* NNSTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSTarget.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -4128,6 +4131,15 @@
 			path = NCADisplayLink;
 			sourceTree = "<group>";
 		};
+		A19270AF22C174C7008F16AE /* NNSTarget */ = {
+			isa = PBXGroup;
+			children = (
+				A19270B122C174C7008F16AE /* NNSTarget.h */,
+				A19270B022C174C7008F16AE /* NNSTarget.mm */,
+			);
+			path = NNSTarget;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -5722,6 +5734,7 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A19270AF22C174C7008F16AE /* NNSTarget */,
 				A19270A722C164AC008F16AE /* NNSPort */,
 				A19270A322C16422008F16AE /* NNSInvocation */,
 				A192709F22C16332008F16AE /* NNSTimer */,
@@ -6346,6 +6359,7 @@
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
 				A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */,
 				A1926FDD22C12999008F16AE /* NMTLBuffer.mm in Sources */,
+				A19270B222C174C8008F16AE /* NNSTarget.mm in Sources */,
 				A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
