@@ -231,6 +231,8 @@
 		A1926F6022C0E8C1008F16AE /* NSceneKitTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */; };
 		A1926F6722C0F4F4008F16AE /* NSCNParticlePropertyController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F6322C0F4F3008F16AE /* NSCNParticlePropertyController.mm */; };
 		A1926F6822C0F4F4008F16AE /* NSCNParticleSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F6522C0F4F4008F16AE /* NSCNParticleSystem.mm */; };
+		A1926F6B22C0FAFD008F16AE /* Reactor.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A1926F6922C0FAFD008F16AE /* Reactor.scnp */; };
+		A1926F6C22C0FAFD008F16AE /* Spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A1926F6A22C0FAFD008F16AE /* Spark.png */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -872,6 +874,8 @@
 		A1926F6322C0F4F3008F16AE /* NSCNParticlePropertyController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNParticlePropertyController.mm; sourceTree = "<group>"; };
 		A1926F6522C0F4F4008F16AE /* NSCNParticleSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNParticleSystem.mm; sourceTree = "<group>"; };
 		A1926F6622C0F4F4008F16AE /* NSCNParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNParticleSystem.h; sourceTree = "<group>"; };
+		A1926F6922C0FAFD008F16AE /* Reactor.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Reactor.scnp; sourceTree = "<group>"; };
+		A1926F6A22C0FAFD008F16AE /* Spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spark.png; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2498,6 +2502,8 @@
 		A16EF58D229D07B8007BCB49 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A1926F6922C0FAFD008F16AE /* Reactor.scnp */,
+				A1926F6A22C0FAFD008F16AE /* Spark.png */,
 				A16EF596229D0C5F007BCB49 /* Spark2.sks */,
 				A16EF58E229D07D4007BCB49 /* Fire.sks */,
 				A16EF594229D0BD6007BCB49 /* Spark.sks */,
@@ -5143,6 +5149,7 @@
 				A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */,
 				A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */,
 				A19E90FF225D7EEA004FC391 /* Scripts.bundle in Resources */,
+				A1926F6B22C0FAFD008F16AE /* Reactor.scnp in Resources */,
 				A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */,
 				A16EF593229D0917007BCB49 /* Magic.sks in Resources */,
 				A16EF597229D0C5F007BCB49 /* Spark2.sks in Resources */,
@@ -5157,6 +5164,7 @@
 				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
 				A16EF590229D07D4007BCB49 /* Fire.sks in Resources */,
 				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
+				A1926F6C22C0FAFD008F16AE /* Spark.png in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
