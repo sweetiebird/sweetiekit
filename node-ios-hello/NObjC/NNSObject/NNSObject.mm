@@ -835,6 +835,67 @@ NAN_METHOD(NClass::New) {
 #include "NMTLRenderPassColorAttachmentDescriptorArray.h" // : NSObject
 #include "NMTLRenderPassDescriptor.h" // : NSObject <NSCopying>
 
+#include "NMTLCommandQueue.h"
+#include "NMTLHeapDescriptor.h"
+#include "NMTLHeap.h"
+#include "NMTLBuffer.h" // <MTLResource>
+
+#include "NMTLSamplerDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLSamplerState.h" // <NSObject>
+
+#include "NMTLDepthStencil.h"
+#include "NMTLStencilDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDepthStencilDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDepthStencilState.h" // <NSObject>
+
+#include "NMTLTypes.h"
+
+#include "NMTLVertexAttribute.h" // : NSObject
+#include "NMTLAttribute.h" // : NSObject
+#include "NMTLFunctionConstant.h" // : NSObject
+#include "NMTLCompileOptions.h" // : NSObject <NSCopying>
+#include "NMTLFunction.h" // <NSObject>
+#include "NMTLLibrary.h" // <NSObject>
+
+#include "NMTLRenderPipelineColorAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineReflection.h" // : NSObject
+#include "NMTLRenderPipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLTileRenderPipelineColorAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLTileRenderPipelineColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLTileRenderPipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineState.h" // <NSObject>
+
+#include "NMTLVertexBufferLayoutDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLVertexBufferLayoutDescriptorArray.h" // : NSObject
+#include "NMTLVertexAttributeDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLVertexAttributeDescriptorArray.h" // : NSObject
+#include "NMTLVertexDescriptor.h" // : NSObject <NSCopying>
+
+#include "NMTLComputePipelineReflection.h" // : NSObject
+#include "NMTLComputePipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLComputePipelineState.h" // <NSObject>
+
+#include "NMTLFence.h" // <NSObject>
+#include "NMTLArgumentEncoder.h" // <NSObject>
+
+#include "NMTLIndirectCommandBufferDescriptor.h" // : NSObject
+#include "NMTLIndirectCommandBuffer.h" // <MTLResource>
+#include "NMTLIndirectRenderCommand.h" // <NSObject>
+#include "NMTLCommandEncoder.h" // <NSObject>
+#include "NMTLRenderCommandEncoder.h" // <MTLCommandEncoder>
+
+#include "NMTLBufferLayoutDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLBufferLayoutDescriptorArray.h" // : NSObject
+#include "NMTLAttributeDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLAttributeDescriptorArray.h" // : NSObject
+#include "NMTLStageInputOutputDescriptor.h" // : NSObject <NSCopying>
+
+#include "NMTLEvent.h" // <NSObject>
+#include "NMTLSharedEvent.h" // <MTLEvent>
+#include "NMTLSharedEventListener.h" // : NSObject
+#include "NMTLSharedEventHandle.h" // : NSObject <NSSecureCoding>
+
 #include "NARSKView.h"
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1391,6 +1452,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // Metal
     JS_EXPORT_GLOBALS(MTLPixelFormat);
+    JS_EXPORT_GLOBALS(MTLDepthStencil);
+    JS_EXPORT_GLOBALS(MTLTypes);
 
     JS_EXPORT_PROTOCOL(MTLResource); // <MTLResource>
     JS_EXPORT_PROTOCOL(MTLTexture); // <MTLResource>
@@ -1414,6 +1477,64 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
     JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
     JS_EXPORT_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLCommandQueue); // <NSObject>
+    JS_EXPORT_TYPE(MTLHeapDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLHeap); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLBuffer); // <MTLResource>
+
+    JS_EXPORT_TYPE(MTLSamplerDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLSamplerState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLStencilDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLDepthStencilDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLDepthStencilState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLVertexAttribute); // : NSObject
+    JS_EXPORT_TYPE(MTLAttribute); // : NSObject
+    JS_EXPORT_TYPE(MTLFunctionConstant); // : NSObject
+    JS_EXPORT_TYPE(MTLCompileOptions); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLFunction); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLLibrary); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
+    JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLRenderPipelineState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLVertexAttributeDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLVertexAttributeDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLVertexDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_TYPE(MTLComputePipelineReflection); // : NSObject
+    JS_EXPORT_TYPE(MTLComputePipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLComputePipelineState); // <NSObject>
+
+    JS_EXPORT_PROTOCOL(MTLFence); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLArgumentEncoder); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLIndirectCommandBufferDescriptor); // : NSObject
+    JS_EXPORT_PROTOCOL(MTLIndirectCommandBuffer); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLIndirectRenderCommand); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLCommandEncoder); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLRenderCommandEncoder); // <MTLCommandEncoder>
+
+    JS_EXPORT_TYPE(MTLBufferLayoutDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLBufferLayoutDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLAttributeDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLAttributeDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLStageInputOutputDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLEvent); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLSharedEvent); // <MTLEvent>
+    JS_EXPORT_TYPE(MTLSharedEventListener); // : NSObject
+    JS_EXPORT_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
 
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -1522,6 +1643,46 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKMapViewDelegate);
 
       // Metal
+
+      JS_RETURN_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
+      JS_RETURN_TYPE(MTLSharedEventListener); // : NSObject
+
+      JS_RETURN_TYPE(MTLStageInputOutputDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLAttributeDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLAttributeDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLBufferLayoutDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLBufferLayoutDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLIndirectCommandBufferDescriptor); // : NSObject
+
+      JS_RETURN_TYPE(MTLComputePipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLComputePipelineReflection); // : NSObject
+
+      JS_RETURN_TYPE(MTLVertexDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLVertexAttributeDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLVertexAttributeDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPipelineReflection); // : NSObject
+
+      JS_RETURN_TYPE(MTLCompileOptions); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLFunctionConstant); // : NSObject
+      JS_RETURN_TYPE(MTLAttribute); // : NSObject
+      JS_RETURN_TYPE(MTLVertexAttribute); // : NSObject
+
+      JS_RETURN_TYPE(MTLDepthStencilDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLStencilDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLSamplerDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLHeapDescriptor); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
@@ -1910,6 +2071,36 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #endif
 
       // Metal Protocols
+
+      JS_RETURN_PROTOCOL(MTLSharedEvent); // <MTLEvent>
+      JS_RETURN_PROTOCOL(MTLEvent); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLRenderCommandEncoder); // <MTLCommandEncoder>
+
+      JS_RETURN_PROTOCOL(MTLCommandEncoder); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLIndirectRenderCommand); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLIndirectCommandBuffer); // <MTLResource>
+
+      JS_RETURN_PROTOCOL(MTLArgumentEncoder); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLFence); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLComputePipelineState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLRenderPipelineState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLLibrary); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLFunction); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLDepthStencilState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLSamplerState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLBuffer); // <MTLResource>
+      JS_RETURN_PROTOCOL(MTLHeap); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLCommandQueue); // <NSObject>
 
       JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
       JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>

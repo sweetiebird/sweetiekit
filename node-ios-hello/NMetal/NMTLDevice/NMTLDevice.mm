@@ -57,7 +57,28 @@ bool is_value_MTLSizeAndAlign(const Local<Value>& value)
 NMTLDevice::NMTLDevice() {}
 NMTLDevice::~NMTLDevice() {}
 
+NAN_METHOD(NMTLDevice::MTLCreateSystemDefaultDevice) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLDevice(::MTLCreateSystemDefaultDevice()));
+  }
+}
+
+#if !TARGET_OS_IPHONE
+NAN_METHOD(NMTLDevice::MTLCopyAllDevices) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray< id<MTLDevice> >(::MTLCopyAllDevices())));
+  }
+}
+#endif
+
 JS_INIT_PROTOCOL(MTLDevice, NSObject);
+  // global functions
+  JS_ASSIGN_GLOBAL_METHOD(MTLCreateSystemDefaultDevice);
+#if !TARGET_OS_IPHONE
+  JS_ASSIGN_GLOBAL_METHOD(MTLCopyAllDevices);
+#endif
+
+// MTLDevice
   JS_ASSIGN_PROTO_METHOD(newCommandQueue);
   JS_ASSIGN_PROTO_METHOD(newCommandQueueWithMaxCommandBufferCount);
   JS_ASSIGN_PROTO_METHOD(heapTextureSizeAndAlignWithDescriptor);

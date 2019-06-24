@@ -35,6 +35,11 @@ MTLSizeAndAlign to_value_MTLSizeAndAlign(const Local<Value>& value, bool * _Null
 bool is_value_MTLSizeAndAlign(const Local<Value>& value);
 
 JS_WRAP_PROTOCOL(MTLDevice, NSObject);
+  // global functions
+  JS_GLOBAL_METHOD(MTLCreateSystemDefaultDevice);
+  JS_GLOBAL_METHOD(MTLCopyAllDevices);
+
+// MTLDevice
   JS_METHOD(newCommandQueue);
   JS_METHOD(newCommandQueueWithMaxCommandBufferCount);
   JS_METHOD(heapTextureSizeAndAlignWithDescriptor);
