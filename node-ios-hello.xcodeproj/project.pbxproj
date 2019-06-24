@@ -266,7 +266,6 @@
 		A1B6548A228CD87600976024 /* NSKAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65489228CD87500976024 /* NSKAction.mm */; };
 		A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */; };
 		A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */; };
-		A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */; };
 		A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */; };
 		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
 		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
@@ -910,7 +909,6 @@
 		A1B6548E228CE34D00976024 /* NSKPhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsWorld.h; sourceTree = "<group>"; };
 		A1B65491228CE4AF00976024 /* NSKPhysicsContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsContactDelegate.h; sourceTree = "<group>"; };
 		A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsContactDelegate.mm; sourceTree = "<group>"; };
-		A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKPhysicsContactDelegate.swift; sourceTree = "<group>"; };
 		A1B65497228CE80D00976024 /* NSKPhysicsContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsContact.h; sourceTree = "<group>"; };
 		A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsContact.mm; sourceTree = "<group>"; };
 		A1BD4B002287B6DC001D1F6E /* libicuucx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuucx.a; path = "../node-ios-release/out/Release/libicuucx.a"; sourceTree = "<group>"; };
@@ -3305,7 +3303,6 @@
 			children = (
 				A1B65491228CE4AF00976024 /* NSKPhysicsContactDelegate.h */,
 				A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */,
-				A1B65494228CE4BB00976024 /* SSKPhysicsContactDelegate.swift */,
 			);
 			path = NSKPhysicsContactDelegate;
 			sourceTree = "<group>";
@@ -5092,7 +5089,6 @@
 				A13370D722AEFC6A00FA3768 /* NAVAudioPCMBuffer.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
-				A1B65495228CE4BB00976024 /* SSKPhysicsContactDelegate.swift in Sources */,
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */,
