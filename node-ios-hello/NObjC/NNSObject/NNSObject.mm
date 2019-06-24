@@ -810,9 +810,17 @@ NAN_METHOD(NClass::New) {
 #include "NUIKitGlobals.h"
 #include "NUIDictationPhrase.h"
 
+#include "NMTLRenderPassAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPassColorAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassDepthAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassStencilAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLRenderPassDescriptor.h" // : NSObject <NSCopying>
+
 #include "NARSKView.h"
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
+#include "NSKRenderer.h"
 #include "NSKView.h"
 #include "NSKNode.h"
 #include "NSKTexture.h"
@@ -869,6 +877,7 @@ NAN_METHOD(NClass::New) {
 #include "NARLightEstimate.h"
 #include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
+
 #include "NSceneKitTypes.h"
 #include "NSCNSceneRenderer.h"
 #include "NSCNSceneRendererDelegate.h"
@@ -1280,6 +1289,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLMaterial);
 
     // SpriteKit
+    JS_EXPORT_TYPE(SKRenderer);
     JS_EXPORT_TYPE(SKPhysicsContact);
     JS_EXPORT_TYPE(SKView);
     JS_EXPORT_TYPE(SKPhysicsBody);
@@ -1348,6 +1358,14 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNLight);
     JS_EXPORT_TYPE(SCNParticleSystem);
     JS_EXPORT_TYPE(SCNParticlePropertyController);
+
+    // Metal
+    JS_EXPORT_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
 
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -1444,6 +1462,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKAnnotation);
       JS_RETURN_TYPE(MKMapViewDelegate);
 
+      // Metal
+      JS_RETURN_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
+
       // ARKit
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
@@ -1531,6 +1557,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKNode);
       JS_RETURN_TYPE(SKView);
       JS_RETURN_TYPE(SKAction);
+      JS_RETURN_TYPE(SKRenderer);
 
       // ModelIO
       JS_RETURN_TYPE(MDLMaterial);

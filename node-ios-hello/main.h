@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <ARKit/ARKit.h>
 #import <MetalKit/MetalKit.h>
+#import <Metal/Metal.h>
 
 
 #ifdef __cplusplus
