@@ -47,12 +47,15 @@ JS_INIT_CLASS(UISegmentedControl, UIControl);
   JS_INIT_CTOR(UISegmentedControl, UIControl);
   // constant values (exports)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
 //typedef NS_ENUM(NSInteger, UISegmentedControlStyle) {
   JS_ASSIGN_ENUM(UISegmentedControlStylePlain, NSInteger);     
   JS_ASSIGN_ENUM(UISegmentedControlStyleBordered, NSInteger);  
   JS_ASSIGN_ENUM(UISegmentedControlStyleBar, NSInteger);       
   JS_ASSIGN_ENUM(UISegmentedControlStyleBezeled, NSInteger);   
 //} NS_DEPRECATED_IOS(2_0, 7_0, "The segmentedControlStyle property no longer has any effect") __TVOS_PROHIBITED;
+#pragma clang diagnostic pop
 
 //enum {
   JS_ASSIGN_ENUM(UISegmentedControlNoSegment, NSInteger); // = -1   

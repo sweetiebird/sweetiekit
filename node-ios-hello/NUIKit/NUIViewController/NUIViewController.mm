@@ -18,8 +18,6 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROTO_PROP(viewWillAppear);
   JS_ASSIGN_PROTO_PROP(viewDidDisappear);
   JS_ASSIGN_PROTO_PROP(viewWillDisappear);
-  JS_ASSIGN_PROTO_PROP(viewWillLayoutSubviews);
-  JS_ASSIGN_PROTO_PROP(viewDidLayoutSubviews);
 
 // UIViewController
   JS_ASSIGN_STATIC_METHOD(attemptRotationToDeviceOrientation);
@@ -369,60 +367,6 @@ NAN_SETTER(NUIViewController::viewWillDisappearSetter) {
     SweetJSFunction* func = [[SweetJSFunction alloc] init];
     [func jsFunction]->Reset(scope.Escape(value));
     [ui associateValue:func withKey:@"sweetiekit_viewWillDisappear"];
-  }
-}
-
-NAN_GETTER(NUIViewController::viewWillLayoutSubviewsGetter) {
-  Nan::EscapableHandleScope scope;
-
-  JS_UNWRAP(UIViewController, ui);
-  
-  @autoreleasepool {
-    id fn = [ui associatedValueForKey:@"sweetiekit_viewWillLayoutSubviews"];
-    if (fn != nullptr) {
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      sweetiekit::JSFunction& f = *[func jsFunction];
-      Local<Function> handle = Nan::New(*f.cb);
-      JS_SET_RETURN(scope.Escape(handle));
-    }
-  }
-}
-
-NAN_SETTER(NUIViewController::viewWillLayoutSubviewsSetter) {
-  Nan::EscapableHandleScope scope;
-
-  JS_UNWRAP(UIViewController, ui);
-  @autoreleasepool {
-    SweetJSFunction* func = [[SweetJSFunction alloc] init];
-    [func jsFunction]->Reset(scope.Escape(value));
-    [ui associateValue:func withKey:@"sweetiekit_viewWillLayoutSubviews"];
-  }
-}
-
-NAN_GETTER(NUIViewController::viewDidLayoutSubviewsGetter) {
-  Nan::EscapableHandleScope scope;
-
-  JS_UNWRAP(UIViewController, ui);
-  
-  @autoreleasepool {
-    id fn = [ui associatedValueForKey:@"sweetiekit_viewDidLayoutSubviews"];
-    if (fn != nullptr) {
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      sweetiekit::JSFunction& f = *[func jsFunction];
-      Local<Function> handle = Nan::New(*f.cb);
-      JS_SET_RETURN(scope.Escape(handle));
-    }
-  }
-}
-
-NAN_SETTER(NUIViewController::viewDidLayoutSubviewsSetter) {
-  Nan::EscapableHandleScope scope;
-
-  JS_UNWRAP(UIViewController, ui);
-  @autoreleasepool {
-    SweetJSFunction* func = [[SweetJSFunction alloc] init];
-    [func jsFunction]->Reset(scope.Escape(value));
-    [ui associateValue:func withKey:@"sweetiekit_viewDidLayoutSubviews"];
   }
 }
 

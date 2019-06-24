@@ -610,7 +610,7 @@ namespace sweetiekit {
 namespace sweetiekit {
   struct JSEnumerateShouldStop
   {
-    JSEnumerateShouldStop(const char* methodName)
+    JSEnumerateShouldStop(const char* _Nonnull methodName)
     {
       m_onStop.Reset(sweetiekit::FromBlock(methodName, ^(JSInfo info) {
         m_onStopCalled = true;
@@ -863,7 +863,7 @@ namespace sweetiekit {
 
 extern "C" {
     // Forward declare some Objective-C runtime internal methods that are not API.
-    const char * _Nullable _protocol_getMethodTypeEncoding(Protocol * _Nonnull, SEL, BOOL isRequiredMethod, BOOL isInstanceMethod);
+  const char * _Nullable _protocol_getMethodTypeEncoding(Protocol * _Nonnull, SEL _Nonnull , BOOL isRequiredMethod, BOOL isInstanceMethod);
     id _Nullable objc_initWeak(id _Nullable * _Nonnull, id _Nonnull);
     void objc_destroyWeak(id _Nullable * _Nonnull);
     bool _Block_has_signature(void * _Nonnull);
@@ -1189,7 +1189,7 @@ Local<Value> js_value_NSDictionary(NSDictionary<K, T>* _Nullable value) {
     [value enumerateKeysAndObjectsUsingBlock:^(K key, T obj, BOOL * _Nonnull stop) {
       Local<Value> k = js_value_id(key);
       Local<Value> v = js_value_id(obj);
-      result->Set(JS_CONTEXT(), k, v);
+      (void)result->Set(JS_CONTEXT(), k, v);
     }];
     return result;
   }

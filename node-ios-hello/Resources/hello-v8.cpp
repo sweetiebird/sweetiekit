@@ -189,7 +189,7 @@ extern "C" void hellov8(const char* program_name)
             iOSLog0(*utf8);
         }
         
-        if (0)
+        if (/* DISABLES CODE */ (0))
         {
             // Use the JavaScript API to generate a WebAssembly module.
             //

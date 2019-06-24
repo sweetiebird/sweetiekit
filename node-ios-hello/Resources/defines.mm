@@ -2663,7 +2663,7 @@ Local<Value> js_value_NSMutableDictionary(NSMutableDictionary* _Nullable value) 
     [value enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * _Nonnull stop) {
       Local<Value> k = js_value_id(key);
       Local<Value> v = js_value_id(obj);
-      result->Set(JS_CONTEXT(), k, v);
+      (void)result->Set(JS_CONTEXT(), k, v);
     }];
     return scope.Escape(result);
   }
@@ -2708,7 +2708,7 @@ Local<Value> js_value_NSDictionary(NSDictionary* _Nullable value) {
     [value enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * _Nonnull stop) {
       Local<Value> k = js_value_id(key);
       Local<Value> v = js_value_id(obj);
-      result->Set(JS_CONTEXT(), k, v);
+      (void)result->Set(JS_CONTEXT(), k, v);
     }];
     return scope.Escape(result);
   }
@@ -2752,7 +2752,7 @@ Local<Value> js_value_NSSet(NSSet* _Nullable value) {
     Local<Set> result(Set::New(JS_ISOLATE()));
     [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
       Local<Value> v = js_value_id(obj);
-      result->Add(JS_CONTEXT(), v);
+      (void)result->Add(JS_CONTEXT(), v);
     }];
     return scope.Escape(result);
   }

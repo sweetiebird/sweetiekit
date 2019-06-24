@@ -47,8 +47,6 @@ JS_WRAP_CLASS(UIViewController, UIResponder);
   JS_PROP(viewWillAppear);
   JS_PROP(viewDidDisappear);
   JS_PROP(viewWillDisappear);
-  JS_PROP(viewWillLayoutSubviews);
-  JS_PROP(viewDidLayoutSubviews);
   
 // UIViewController
   JS_STATIC_METHOD(attemptRotationToDeviceOrientation);
