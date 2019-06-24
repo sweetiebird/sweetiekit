@@ -26,7 +26,6 @@
 #define to_value_UIUserInterfaceIdiom(x) TO_ENUM(UIUserInterfaceIdiom, NSInteger, x)
 #define is_value_UIUserInterfaceIdiom(x) IS_ENUM(UIUserInterfaceIdiom, NSInteger, x)
 
-
 JS_WRAP_CLASS(UIDevice, NSObject);
   // global functions
   JS_METHOD(UIDeviceOrientationIsPortrait);

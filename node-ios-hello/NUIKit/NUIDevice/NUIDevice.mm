@@ -52,20 +52,20 @@ JS_INIT_CLASS(UIDevice, NSObject);
   // constant values (exports)
 
   //typedef NS_ENUM(NSInteger, UIDeviceOrientation) {
-    JS_ASSIGN_ENUM(UIDeviceOrientationUnknown, NSInteger); //,
-    JS_ASSIGN_ENUM(UIDeviceOrientationPortrait, NSInteger); //,            
-    JS_ASSIGN_ENUM(UIDeviceOrientationPortraitUpsideDown, NSInteger); //,  
-    JS_ASSIGN_ENUM(UIDeviceOrientationLandscapeLeft, NSInteger); //,       
-    JS_ASSIGN_ENUM(UIDeviceOrientationLandscapeRight, NSInteger); //,      
-    JS_ASSIGN_ENUM(UIDeviceOrientationFaceUp, NSInteger); //,              
+    JS_ASSIGN_ENUM(UIDeviceOrientationUnknown, NSInteger);
+    JS_ASSIGN_ENUM(UIDeviceOrientationPortrait, NSInteger);            
+    JS_ASSIGN_ENUM(UIDeviceOrientationPortraitUpsideDown, NSInteger);  
+    JS_ASSIGN_ENUM(UIDeviceOrientationLandscapeLeft, NSInteger);       
+    JS_ASSIGN_ENUM(UIDeviceOrientationLandscapeRight, NSInteger);      
+    JS_ASSIGN_ENUM(UIDeviceOrientationFaceUp, NSInteger);              
     JS_ASSIGN_ENUM(UIDeviceOrientationFaceDown, NSInteger); //             
   //} __TVOS_PROHIBITED;
 
   //typedef NS_ENUM(NSInteger, UIDeviceBatteryState) {
-    JS_ASSIGN_ENUM(UIDeviceBatteryStateUnknown, NSInteger); //,
-    JS_ASSIGN_ENUM(UIDeviceBatteryStateUnplugged, NSInteger); //,   
-    JS_ASSIGN_ENUM(UIDeviceBatteryStateCharging, NSInteger); //,    
-    JS_ASSIGN_ENUM(UIDeviceBatteryStateFull, NSInteger); //,        
+    JS_ASSIGN_ENUM(UIDeviceBatteryStateUnknown, NSInteger);
+    JS_ASSIGN_ENUM(UIDeviceBatteryStateUnplugged, NSInteger);   
+    JS_ASSIGN_ENUM(UIDeviceBatteryStateCharging, NSInteger);    
+    JS_ASSIGN_ENUM(UIDeviceBatteryStateFull, NSInteger);        
   //} __TVOS_PROHIBITED;              
 
   //typedef NS_ENUM(NSInteger, UIUserInterfaceIdiom) {
