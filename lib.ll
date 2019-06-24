@@ -503,12 +503,13 @@
                         " *" "* " 
                         " *" "* "
                         "NS_NONATOMIC_IOSONLY" "nonatomic"
+                        "CF_RETURNS_NOT_RETAINED" ""
                         )
     (with r (list)
       (let (lines (map (fn (line)
                         (when (search line " @")
                           (set line (cat "@" (apply concat " @" (tl (split line " @"))))))
-                        (step pre (list " NS_" " UI_" " MP_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
+                        (step pre (list " NS_" " UI_" " CI_" " MP_" " API_" " __TVOS" " __OSX_AVAILABLE_STARTING")
                           (when (search line pre)
                             (set line (cat (hd (split line pre)) ";"))))
                         (set line (rtrim line (fn (c) (or (whitec c) (= c "{"))))))
