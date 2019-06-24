@@ -13,11 +13,25 @@
 NARSCNViewDelegate::NARSCNViewDelegate () {}
 NARSCNViewDelegate::~NARSCNViewDelegate () {}
 
+#include "NSCNSceneRenderer.h"
+
 JS_INIT_CLASS(ARSCNViewDelegate, NSObject);
   // instance members (proto)
   
   // static members (ctor)
   JS_INIT_CTOR(ARSCNViewDelegate, NSObject);
+  
+  // constants (exports)
+
+  //typedef SCNDebugOptions ARSCNDebugOptions API_AVAILABLE(ios(11.0));
+
+  /** Show the world origin in the scene. */
+  // API_AVAILABLE(ios(11.0))
+  JS_ASSIGN_ENUM(ARSCNDebugOptionShowWorldOrigin, SCNDebugOptions); // NS_SWIFT_NAME(ARSCNDebugOptions.showWorldOrigin);
+
+  /** Show detected 3D feature points in the world. */
+  // API_AVAILABLE(ios(11.0))
+  JS_ASSIGN_ENUM(ARSCNDebugOptionShowFeaturePoints, SCNDebugOptions); // NS_SWIFT_NAME(ARSCNDebugOptions.showFeaturePoints);
   
 JS_INIT_CLASS_END(ARSCNViewDelegate, NSObject);
 

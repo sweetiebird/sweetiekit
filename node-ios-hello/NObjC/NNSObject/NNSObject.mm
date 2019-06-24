@@ -870,6 +870,8 @@ NAN_METHOD(NClass::New) {
 #include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
 #include "NSceneKitTypes.h"
+#include "NSCNSceneRenderer.h"
+#include "NSCNSceneRendererDelegate.h"
 #include "NSCNAction.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
@@ -1302,6 +1304,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // SceneKit
     JS_EXPORT_TYPE(SceneKitTypes);
+    JS_EXPORT_TYPE(SCNSceneRenderer);
+    JS_EXPORT_TYPE(SCNSceneRendererDelegate);
     JS_EXPORT_TYPE(SCNAction);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
@@ -1455,6 +1459,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       JS_RETURN_TYPE(SceneKitTypes);
+      // JS_RETURN_TYPE(SCNSceneRenderer);
+      JS_RETURN_TYPE(SCNSceneRendererDelegate);
       JS_RETURN_TYPE(SCNParticleSystem);
       JS_RETURN_TYPE(SCNParticlePropertyController);
       JS_RETURN_TYPE(SCNAction);

@@ -124,19 +124,19 @@ extern Protocol* name##Protocol; \
 template<> struct ObjCProtocolTraits< id<name> > { static Protocol* protocol() { return name##Protocol; } };
 
 
-#define JS_INIT_PROTOCOL(name, base)     JS_INIT_CLASS(name, base) \
-  name##Protocol = NSProtocolFromString(@#name);
+#define JS_INIT_PROTOCOL(name, base)     JS_INIT_CLASS_ALLOC(name, base, noop()); \
+  name##Protocol = NSProtocolFromString(@#name)
 
-#define JS_INIT_PROTOCOL_END(name, base) JS_INIT_CLASS_END(name, base) \
-Protocol* name##Protocol;
+#define JS_INIT_PROTOCOL_END(name, base) JS_INIT_CLASS_END(name, base); \
+Protocol* name##Protocol
 
 
 #define JS_UNWRAP_PROTOCOL(type, name) \
   JS_UNWRAP_(id, name##_); \
   id<type> name(name##_);
 
-#define JS_UNWRAPPED_PROTOCOL(type, name) \
-  JS_UNWRAPPED_(id, name##_); \
+#define JS_UNWRAPPED_PROTOCOL(info, type, name) \
+  JS_UNWRAPPED_(info, id, name##_); \
   id<type> name(name##_);
 
 template<typename T>

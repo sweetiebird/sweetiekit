@@ -14,8 +14,7 @@ NUITextInput::~NUITextInput() {}
 
 #include "NNSNotification.h"
 
-JS_INIT_CLASS_ALLOC(UITextInput, NSObject, noop());
-  UITextInputProtocol = NSProtocolFromString(@"UITextInput");
+JS_INIT_PROTOCOL(UITextInput, NSObject);
 #if TODO
 // UIKeyInput
   JS_ASSIGN_PROTO_METHOD(hasText);
