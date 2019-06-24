@@ -267,26 +267,23 @@ function emojiCam(nav, demoVC) {
       }
     };
 
-    viewDel = ARSKViewDelegate((view, anchor) => {
-      const { identifier } = anchor;
-
-      if (active && active.anchor && active.anchor.identifier === anchor.identifier) {
+    viewDel = new ARSKViewDelegate((view, anchor) => {
+      if (active && active.anchor && active.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
         if (!active.node) {
-          throw new Error('expected node');
+          throw new Error("expected node");
         }
         return active.node;
       }
-
       for (let i = chars.length - 1; i >= 0; i--) {
         let char = chars[i];
-        if (char.anchor.identifier === identifier) {
+        if (char.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
           if (!char.node) {
-            throw new Error('expected node');
+            throw new Error("expected node");
           }
           return char.node;
         }
       }
-      //throw new Error('couldn't find node for anchor ' + anchor.identifier);
+      //throw new Error("couldn't find node for anchor " + anchor.identifier.UUIDString);
     });
 
     arView.delegate = viewDel;
@@ -387,23 +384,23 @@ function emojiCam(nav, demoVC) {
       return char;
     };
 
-    scene.touchesBegan = (touches, evt) => {
+    scene.touchesBeganWithEvent = (touches, evt) => {
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
       let hits = arView.hitTest(pt, 1);
-      console.log('touchesBegan', touches.length, pt);
+      console.log('touchesBeganWithEvent', touches.length, pt);
       if (hits && hits.length > 0) {
         active = _update(hits ? hits[0] : null);
       }
     };
 
-    scene.touchesMoved = (touches, evt) => {
+    scene.touchesMovedWithEvent = (touches, evt) => {
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
       let hits = arView.hitTest(pt, 1);
-      //console.log('touchesMoved', touches.length, pt);
+      //console.log('touchesMovedWithEvent', touches.length, pt);
       if (hits && hits.length > 0) {
         active = _update(hits ? hits[0] : null);
         console.log(active.node.xScale, active.node.yScale,
