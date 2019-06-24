@@ -15,7 +15,15 @@
 #define is_value_MTLRenderPipelineColorAttachmentDescriptor(x) is_value_wrapper(x, MTLRenderPipelineColorAttachmentDescriptor)
 
 JS_WRAP_CLASS(MTLRenderPipelineColorAttachmentDescriptor, NSObject);
-  // TODO: declare MTLRenderPipelineColorAttachmentDescriptor methods and properties
+  JS_PROP(pixelFormat);
+  JS_PROP(isBlendingEnabled);
+  JS_PROP(sourceRGBBlendFactor);
+  JS_PROP(destinationRGBBlendFactor);
+  JS_PROP(rgbBlendOperation);
+  JS_PROP(sourceAlphaBlendFactor);
+  JS_PROP(destinationAlphaBlendFactor);
+  JS_PROP(alphaBlendOperation);
+  JS_PROP(writeMask);
 JS_WRAP_CLASS_END(MTLRenderPipelineColorAttachmentDescriptor);
 
 #endif /* NMTLRenderPipelineColorAttachmentDescriptor_h */

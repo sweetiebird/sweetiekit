@@ -13,6 +13,14 @@ NMTLRenderPipelineState::NMTLRenderPipelineState() {}
 NMTLRenderPipelineState::~NMTLRenderPipelineState() {}
 
 JS_INIT_PROTOCOL(MTLRenderPipelineState, NSObject);
+  JS_ASSIGN_PROTO_METHOD(imageblockMemoryLengthForDimensions);
+  JS_ASSIGN_PROTO_PROP_READONLY(label);
+  JS_ASSIGN_PROTO_PROP_READONLY(device);
+  JS_ASSIGN_PROTO_PROP_READONLY(maxTotalThreadsPerThreadgroup);
+  JS_ASSIGN_PROTO_PROP_READONLY(threadgroupSizeMatchesTileSize);
+  JS_ASSIGN_PROTO_PROP_READONLY(imageblockSampleLength);
+  JS_ASSIGN_PROTO_PROP_READONLY(supportIndirectCommandBuffers);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLRenderPipelineState, NSObject);
@@ -39,5 +47,60 @@ NAN_METHOD(NMTLRenderPipelineState::New) {
     } else {
       Nan::ThrowError("MTLRenderPipelineState::New: invalid arguments");
     }
+  }
+}
+
+#include "NMTLTypes.h"
+
+NAN_METHOD(NMTLRenderPipelineState::imageblockMemoryLengthForDimensions) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(MTLSize, imageblockDimensions);
+    JS_SET_RETURN(js_value_NSUInteger([self imageblockMemoryLengthForDimensions: imageblockDimensions]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineState::labelGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self label]));
+  }
+}
+
+#include "NMTLDevice.h"
+
+NAN_GETTER(NMTLRenderPipelineState::deviceGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLDevice([self device]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineState::maxTotalThreadsPerThreadgroupGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSUInteger([self maxTotalThreadsPerThreadgroup]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineState::threadgroupSizeMatchesTileSizeGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self threadgroupSizeMatchesTileSize]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineState::imageblockSampleLengthGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSUInteger([self imageblockSampleLength]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineState::supportIndirectCommandBuffersGetter) {
+  JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self supportIndirectCommandBuffers]));
   }
 }

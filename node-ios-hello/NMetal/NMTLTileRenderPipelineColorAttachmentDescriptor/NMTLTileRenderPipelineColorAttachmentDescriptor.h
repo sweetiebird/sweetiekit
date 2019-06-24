@@ -15,7 +15,7 @@
 #define is_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) is_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)
 
 JS_WRAP_CLASS(MTLTileRenderPipelineColorAttachmentDescriptor, NSObject);
-  // TODO: declare MTLTileRenderPipelineColorAttachmentDescriptor methods and properties
+  JS_PROP(pixelFormat);
 JS_WRAP_CLASS_END(MTLTileRenderPipelineColorAttachmentDescriptor);
 
 #endif /* NMTLTileRenderPipelineColorAttachmentDescriptor_h */

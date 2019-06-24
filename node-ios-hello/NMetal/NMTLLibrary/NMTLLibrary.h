@@ -31,7 +31,12 @@
 #define is_value_MTLLibraryError(x) IS_ENUM(MTLLibraryError, NSUInteger, x)
 
 JS_WRAP_PROTOCOL(MTLLibrary, NSObject);
-  // TODO: declare MTLLibrary methods and properties
+  JS_METHOD(newFunctionWithName);
+  JS_METHOD(newFunctionWithNameConstantValuesError);
+  JS_METHOD(newFunctionWithNameConstantValuesCompletionHandler);
+  JS_PROP(label);
+  JS_PROP_READONLY(device);
+  JS_PROP_READONLY(functionNames);
 JS_WRAP_PROTOCOL_END(MTLLibrary, NSObject);
 
 #endif /* NMTLLibrary_h */

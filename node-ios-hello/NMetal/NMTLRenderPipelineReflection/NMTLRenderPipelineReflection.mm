@@ -13,6 +13,10 @@ NMTLRenderPipelineReflection::NMTLRenderPipelineReflection() {}
 NMTLRenderPipelineReflection::~NMTLRenderPipelineReflection() {}
 
 JS_INIT_CLASS(MTLRenderPipelineReflection, NSObject);
+  JS_ASSIGN_PROTO_PROP_READONLY(vertexArguments);
+  JS_ASSIGN_PROTO_PROP_READONLY(fragmentArguments);
+  JS_ASSIGN_PROTO_PROP_READONLY(tileArguments);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLRenderPipelineReflection, NSObject);
@@ -38,5 +42,28 @@ NAN_METHOD(NMTLRenderPipelineReflection::New) {
     } else {
       Nan::ThrowError("MTLRenderPipelineReflection::New: invalid arguments");
     }
+  }
+}
+
+#include "NMTLArgument.h"
+
+NAN_GETTER(NMTLRenderPipelineReflection::vertexArgumentsGetter) {
+  JS_UNWRAP(MTLRenderPipelineReflection, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<MTLArgument*>([self vertexArguments]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineReflection::fragmentArgumentsGetter) {
+  JS_UNWRAP(MTLRenderPipelineReflection, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<MTLArgument*>([self fragmentArguments]));
+  }
+}
+
+NAN_GETTER(NMTLRenderPipelineReflection::tileArgumentsGetter) {
+  JS_UNWRAP(MTLRenderPipelineReflection, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<MTLArgument*>([self tileArguments]));
   }
 }

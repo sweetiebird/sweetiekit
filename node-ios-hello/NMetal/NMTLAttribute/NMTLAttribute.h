@@ -15,7 +15,12 @@
 #define is_value_MTLAttribute(x) is_value_wrapper(x, MTLAttribute)
 
 JS_WRAP_CLASS(MTLAttribute, NSObject);
-  // TODO: declare MTLAttribute methods and properties
+  JS_PROP_READONLY(name);
+  JS_PROP_READONLY(attributeIndex);
+  JS_PROP_READONLY(attributeType);
+  JS_PROP_READONLY(isActive);
+  JS_PROP_READONLY(isPatchData);
+  JS_PROP_READONLY(isPatchControlPointData);
 JS_WRAP_CLASS_END(MTLAttribute);
 
 #endif /* NMTLAttribute_h */

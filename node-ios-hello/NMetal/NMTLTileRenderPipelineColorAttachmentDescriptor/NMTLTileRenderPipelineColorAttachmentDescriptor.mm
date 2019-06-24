@@ -13,6 +13,8 @@ NMTLTileRenderPipelineColorAttachmentDescriptor::NMTLTileRenderPipelineColorAtta
 NMTLTileRenderPipelineColorAttachmentDescriptor::~NMTLTileRenderPipelineColorAttachmentDescriptor() {}
 
 JS_INIT_CLASS(MTLTileRenderPipelineColorAttachmentDescriptor, NSObject);
+  JS_ASSIGN_PROTO_PROP(pixelFormat);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLTileRenderPipelineColorAttachmentDescriptor, NSObject);
@@ -38,5 +40,23 @@ NAN_METHOD(NMTLTileRenderPipelineColorAttachmentDescriptor::New) {
     } else {
       Nan::ThrowError("MTLTileRenderPipelineColorAttachmentDescriptor::New: invalid arguments");
     }
+  }
+}
+
+#include "NMTLPixelFormat.h"
+
+NAN_GETTER(NMTLTileRenderPipelineColorAttachmentDescriptor::pixelFormatGetter) {
+  JS_UNWRAP(MTLTileRenderPipelineColorAttachmentDescriptor, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self pixelFormat]));
+  }
+}
+
+NAN_SETTER(NMTLTileRenderPipelineColorAttachmentDescriptor::pixelFormatSetter) {
+  JS_UNWRAP(MTLTileRenderPipelineColorAttachmentDescriptor, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(MTLPixelFormat, input);
+    [self setPixelFormat: input];
   }
 }

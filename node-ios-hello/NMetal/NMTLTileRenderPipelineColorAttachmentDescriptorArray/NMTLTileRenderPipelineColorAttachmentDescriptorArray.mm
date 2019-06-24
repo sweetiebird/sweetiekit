@@ -13,6 +13,9 @@ NMTLTileRenderPipelineColorAttachmentDescriptorArray::NMTLTileRenderPipelineColo
 NMTLTileRenderPipelineColorAttachmentDescriptorArray::~NMTLTileRenderPipelineColorAttachmentDescriptorArray() {}
 
 JS_INIT_CLASS(MTLTileRenderPipelineColorAttachmentDescriptorArray, NSObject);
+  JS_ASSIGN_PROTO_METHOD(objectAtIndexedSubscript);
+  JS_ASSIGN_PROTO_METHOD(setObjectAtIndexedSubscript);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLTileRenderPipelineColorAttachmentDescriptorArray, NSObject);
@@ -38,5 +41,26 @@ NAN_METHOD(NMTLTileRenderPipelineColorAttachmentDescriptorArray::New) {
     } else {
       Nan::ThrowError("MTLTileRenderPipelineColorAttachmentDescriptorArray::New: invalid arguments");
     }
+  }
+}
+
+#include "NMTLTileRenderPipelineColorAttachmentDescriptor.h"
+
+NAN_METHOD(NMTLTileRenderPipelineColorAttachmentDescriptorArray::objectAtIndexedSubscript) {
+  JS_UNWRAP(MTLTileRenderPipelineColorAttachmentDescriptorArray, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSUInteger, attachmentIndex);
+    JS_SET_RETURN(js_value_MTLTileRenderPipelineColorAttachmentDescriptor([self objectAtIndexedSubscript: attachmentIndex]));
+  }
+}
+
+NAN_METHOD(NMTLTileRenderPipelineColorAttachmentDescriptorArray::setObjectAtIndexedSubscript) {
+  JS_UNWRAP(MTLTileRenderPipelineColorAttachmentDescriptorArray, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(MTLTileRenderPipelineColorAttachmentDescriptor, attachment);
+    declare_value(NSUInteger, attachmentIndex);
+    [self setObject: attachment atIndexedSubscript: attachmentIndex];
   }
 }

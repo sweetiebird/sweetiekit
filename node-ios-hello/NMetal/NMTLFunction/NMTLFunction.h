@@ -15,7 +15,17 @@
 #define is_value_MTLFunction(x) is_protocol_wrapper(x, MTLFunction)
 
 JS_WRAP_PROTOCOL(MTLFunction, NSObject);
-  // TODO: declare MTLFunction methods and properties
+  JS_METHOD(newArgumentEncoderWithBufferIndex);
+  JS_METHOD(newArgumentEncoderWithBufferIndexReflection);
+  JS_PROP(label);
+  JS_PROP_READONLY(device);
+  JS_PROP_READONLY(functionType);
+  JS_PROP_READONLY(patchType);
+  JS_PROP_READONLY(patchControlPointCount);
+  JS_PROP_READONLY(vertexAttributes);
+  JS_PROP_READONLY(stageInputAttributes);
+  JS_PROP_READONLY(name);
+  JS_PROP_READONLY(functionConstantsDictionary);
 JS_WRAP_PROTOCOL_END(MTLFunction, NSObject);
 
 #endif /* NMTLFunction_h */

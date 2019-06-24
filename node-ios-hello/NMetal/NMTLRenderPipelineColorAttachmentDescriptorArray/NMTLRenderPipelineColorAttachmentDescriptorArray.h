@@ -15,7 +15,8 @@
 #define is_value_MTLRenderPipelineColorAttachmentDescriptorArray(x) is_value_wrapper(x, MTLRenderPipelineColorAttachmentDescriptorArray)
 
 JS_WRAP_CLASS(MTLRenderPipelineColorAttachmentDescriptorArray, NSObject);
-  // TODO: declare MTLRenderPipelineColorAttachmentDescriptorArray methods and properties
+  JS_METHOD(objectAtIndexedSubscript);
+  JS_METHOD(setObjectAtIndexedSubscript);
 JS_WRAP_CLASS_END(MTLRenderPipelineColorAttachmentDescriptorArray);
 
 #endif /* NMTLRenderPipelineColorAttachmentDescriptorArray_h */

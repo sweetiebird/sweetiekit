@@ -313,6 +313,15 @@
 		A19270AA22C164AD008F16AE /* NNSPort.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270A822C164AC008F16AE /* NNSPort.mm */; };
 		A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270AD22C16896008F16AE /* NCADisplayLink.mm */; };
 		A19270B222C174C8008F16AE /* NNSTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270B022C174C7008F16AE /* NNSTarget.mm */; };
+		A19270B622C17FA3008F16AE /* NMTLFunctionConstantValues.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270B422C17FA3008F16AE /* NMTLFunctionConstantValues.mm */; };
+		A19270BA22C181AA008F16AE /* NMTLCommandBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270B822C181AA008F16AE /* NMTLCommandBuffer.mm */; };
+		A19270BE22C18220008F16AE /* NMTLDrawable.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270BD22C18220008F16AE /* NMTLDrawable.mm */; };
+		A19270C222C18302008F16AE /* NMTLBlitCommandEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270C122C18301008F16AE /* NMTLBlitCommandEncoder.mm */; };
+		A19270C622C18367008F16AE /* NMTLParallelRenderCommandEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270C422C18366008F16AE /* NMTLParallelRenderCommandEncoder.mm */; };
+		A19270CA22C184CB008F16AE /* NMTLComputeCommandEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270C822C184CB008F16AE /* NMTLComputeCommandEncoder.mm */; };
+		A19270D422C18EFF008F16AE /* NMTLPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270CC22C18EFE008F16AE /* NMTLPipeline.mm */; };
+		A19270D522C18EFF008F16AE /* NMTLPipelineBufferDescriptorArray.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270D022C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray.mm */; };
+		A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270D222C18EFE008F16AE /* NMTLPipelineBufferDescriptor.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -1116,6 +1125,24 @@
 		A19270AD22C16896008F16AE /* NCADisplayLink.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCADisplayLink.mm; sourceTree = "<group>"; };
 		A19270B022C174C7008F16AE /* NNSTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSTarget.mm; sourceTree = "<group>"; };
 		A19270B122C174C7008F16AE /* NNSTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSTarget.h; sourceTree = "<group>"; };
+		A19270B422C17FA3008F16AE /* NMTLFunctionConstantValues.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLFunctionConstantValues.mm; sourceTree = "<group>"; };
+		A19270B522C17FA3008F16AE /* NMTLFunctionConstantValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLFunctionConstantValues.h; sourceTree = "<group>"; };
+		A19270B822C181AA008F16AE /* NMTLCommandBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLCommandBuffer.mm; sourceTree = "<group>"; };
+		A19270B922C181AA008F16AE /* NMTLCommandBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLCommandBuffer.h; sourceTree = "<group>"; };
+		A19270BC22C18220008F16AE /* NMTLDrawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLDrawable.h; sourceTree = "<group>"; };
+		A19270BD22C18220008F16AE /* NMTLDrawable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLDrawable.mm; sourceTree = "<group>"; };
+		A19270C022C18301008F16AE /* NMTLBlitCommandEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLBlitCommandEncoder.h; sourceTree = "<group>"; };
+		A19270C122C18301008F16AE /* NMTLBlitCommandEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLBlitCommandEncoder.mm; sourceTree = "<group>"; };
+		A19270C422C18366008F16AE /* NMTLParallelRenderCommandEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLParallelRenderCommandEncoder.mm; sourceTree = "<group>"; };
+		A19270C522C18366008F16AE /* NMTLParallelRenderCommandEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLParallelRenderCommandEncoder.h; sourceTree = "<group>"; };
+		A19270C822C184CB008F16AE /* NMTLComputeCommandEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLComputeCommandEncoder.mm; sourceTree = "<group>"; };
+		A19270C922C184CB008F16AE /* NMTLComputeCommandEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLComputeCommandEncoder.h; sourceTree = "<group>"; };
+		A19270CC22C18EFE008F16AE /* NMTLPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLPipeline.mm; sourceTree = "<group>"; };
+		A19270CD22C18EFE008F16AE /* NMTLPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLPipeline.h; sourceTree = "<group>"; };
+		A19270CF22C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLPipelineBufferDescriptorArray.h; sourceTree = "<group>"; };
+		A19270D022C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLPipelineBufferDescriptorArray.mm; sourceTree = "<group>"; };
+		A19270D222C18EFE008F16AE /* NMTLPipelineBufferDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMTLPipelineBufferDescriptor.mm; sourceTree = "<group>"; };
+		A19270D322C18EFE008F16AE /* NMTLPipelineBufferDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTLPipelineBufferDescriptor.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -3366,6 +3393,15 @@
 		A1926F7922C10729008F16AE /* NMetal */ = {
 			isa = PBXGroup;
 			children = (
+				A19270CB22C18EFE008F16AE /* NMTLPipeline */,
+				A19270D122C18EFE008F16AE /* NMTLPipelineBufferDescriptor */,
+				A19270CE22C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray */,
+				A19270C722C184CB008F16AE /* NMTLComputeCommandEncoder */,
+				A19270C322C18366008F16AE /* NMTLParallelRenderCommandEncoder */,
+				A19270BF22C18301008F16AE /* NMTLBlitCommandEncoder */,
+				A19270BB22C18220008F16AE /* NMTLDrawable */,
+				A19270B722C181AA008F16AE /* NMTLCommandBuffer */,
+				A19270B322C17FA3008F16AE /* NMTLFunctionConstantValues */,
 				A192708A22C15B4A008F16AE /* NMTLVertexAttributeDescriptor */,
 				A192708722C15B4A008F16AE /* NMTLVertexAttributeDescriptorArray */,
 				A192709322C15B4B008F16AE /* NMTLVertexBufferLayoutDescriptor */,
@@ -3784,8 +3820,8 @@
 		A192701622C1344D008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptor */ = {
 			isa = PBXGroup;
 			children = (
-				A192701722C1344D008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptor.mm */,
 				A192701822C1344D008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptor.h */,
+				A192701722C1344D008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptor.mm */,
 			);
 			path = NMTLTileRenderPipelineColorAttachmentDescriptor;
 			sourceTree = "<group>";
@@ -3820,8 +3856,8 @@
 		A192702222C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray */ = {
 			isa = PBXGroup;
 			children = (
-				A192702322C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm */,
 				A192702422C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.h */,
+				A192702322C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm */,
 			);
 			path = NMTLRenderPipelineColorAttachmentDescriptorArray;
 			sourceTree = "<group>";
@@ -3838,8 +3874,8 @@
 		A192702822C1344E008F16AE /* NMTLTileRenderPipelineDescriptor */ = {
 			isa = PBXGroup;
 			children = (
-				A192702922C1344E008F16AE /* NMTLTileRenderPipelineDescriptor.mm */,
 				A192702A22C1344E008F16AE /* NMTLTileRenderPipelineDescriptor.h */,
+				A192702922C1344E008F16AE /* NMTLTileRenderPipelineDescriptor.mm */,
 			);
 			path = NMTLTileRenderPipelineDescriptor;
 			sourceTree = "<group>";
@@ -4138,6 +4174,87 @@
 				A19270B022C174C7008F16AE /* NNSTarget.mm */,
 			);
 			path = NNSTarget;
+			sourceTree = "<group>";
+		};
+		A19270B322C17FA3008F16AE /* NMTLFunctionConstantValues */ = {
+			isa = PBXGroup;
+			children = (
+				A19270B522C17FA3008F16AE /* NMTLFunctionConstantValues.h */,
+				A19270B422C17FA3008F16AE /* NMTLFunctionConstantValues.mm */,
+			);
+			path = NMTLFunctionConstantValues;
+			sourceTree = "<group>";
+		};
+		A19270B722C181AA008F16AE /* NMTLCommandBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				A19270B922C181AA008F16AE /* NMTLCommandBuffer.h */,
+				A19270B822C181AA008F16AE /* NMTLCommandBuffer.mm */,
+			);
+			path = NMTLCommandBuffer;
+			sourceTree = "<group>";
+		};
+		A19270BB22C18220008F16AE /* NMTLDrawable */ = {
+			isa = PBXGroup;
+			children = (
+				A19270BC22C18220008F16AE /* NMTLDrawable.h */,
+				A19270BD22C18220008F16AE /* NMTLDrawable.mm */,
+			);
+			path = NMTLDrawable;
+			sourceTree = "<group>";
+		};
+		A19270BF22C18301008F16AE /* NMTLBlitCommandEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				A19270C022C18301008F16AE /* NMTLBlitCommandEncoder.h */,
+				A19270C122C18301008F16AE /* NMTLBlitCommandEncoder.mm */,
+			);
+			path = NMTLBlitCommandEncoder;
+			sourceTree = "<group>";
+		};
+		A19270C322C18366008F16AE /* NMTLParallelRenderCommandEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				A19270C522C18366008F16AE /* NMTLParallelRenderCommandEncoder.h */,
+				A19270C422C18366008F16AE /* NMTLParallelRenderCommandEncoder.mm */,
+			);
+			path = NMTLParallelRenderCommandEncoder;
+			sourceTree = "<group>";
+		};
+		A19270C722C184CB008F16AE /* NMTLComputeCommandEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				A19270C922C184CB008F16AE /* NMTLComputeCommandEncoder.h */,
+				A19270C822C184CB008F16AE /* NMTLComputeCommandEncoder.mm */,
+			);
+			path = NMTLComputeCommandEncoder;
+			sourceTree = "<group>";
+		};
+		A19270CB22C18EFE008F16AE /* NMTLPipeline */ = {
+			isa = PBXGroup;
+			children = (
+				A19270CD22C18EFE008F16AE /* NMTLPipeline.h */,
+				A19270CC22C18EFE008F16AE /* NMTLPipeline.mm */,
+			);
+			path = NMTLPipeline;
+			sourceTree = "<group>";
+		};
+		A19270CE22C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray */ = {
+			isa = PBXGroup;
+			children = (
+				A19270CF22C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray.h */,
+				A19270D022C18EFE008F16AE /* NMTLPipelineBufferDescriptorArray.mm */,
+			);
+			path = NMTLPipelineBufferDescriptorArray;
+			sourceTree = "<group>";
+		};
+		A19270D122C18EFE008F16AE /* NMTLPipelineBufferDescriptor */ = {
+			isa = PBXGroup;
+			children = (
+				A19270D322C18EFE008F16AE /* NMTLPipelineBufferDescriptor.h */,
+				A19270D222C18EFE008F16AE /* NMTLPipelineBufferDescriptor.mm */,
+			);
+			path = NMTLPipelineBufferDescriptor;
 			sourceTree = "<group>";
 		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
@@ -6316,6 +6433,7 @@
 				A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,
+				A19270CA22C184CB008F16AE /* NMTLComputeCommandEncoder.mm in Sources */,
 				A192708022C14B8A008F16AE /* NMTLEvent.mm in Sources */,
 				A10D697F2293B058008D0ABC /* NUITabBar.mm in Sources */,
 				A192705022C13C82008F16AE /* NMTLIndirectCommandBufferDescriptor.mm in Sources */,
@@ -6364,6 +6482,7 @@
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
+				A19270B622C17FA3008F16AE /* NMTLFunctionConstantValues.mm in Sources */,
 				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
@@ -6502,6 +6621,7 @@
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
 				A1926F4F22C0E286008F16AE /* NSCNPhysicsHingeJoint.mm in Sources */,
+				A19270BA22C181AA008F16AE /* NMTLCommandBuffer.mm in Sources */,
 				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
 				A1926EEC22C0ADAD008F16AE /* NAVCameraCalibrationData.mm in Sources */,
 				A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */,
@@ -6546,6 +6666,7 @@
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
 				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
 				A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */,
+				A19270D422C18EFF008F16AE /* NMTLPipeline.mm in Sources */,
 				A1CE2B96228F03D100D9B3B8 /* NUIPickerView.mm in Sources */,
 				A1E48229226AB0CF002AF96F /* NUIImagePickerController.mm in Sources */,
 				A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */,
@@ -6553,6 +6674,7 @@
 				A1926F5B22C0E836008F16AE /* NSCNAudioSource.mm in Sources */,
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1926FF022C12D7E008F16AE /* NMTLDepthStencilDescriptor.mm in Sources */,
+				A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
 				A192700922C12F5F008F16AE /* NMTLVertexAttribute.mm in Sources */,
@@ -6596,6 +6718,7 @@
 				A1926EE822C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1926F2C22C0CBE9008F16AE /* NUITabBarControllerDelegate.mm in Sources */,
+				A19270BE22C18220008F16AE /* NMTLDrawable.mm in Sources */,
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
 				A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
@@ -6608,6 +6731,7 @@
 				A192709722C15B4C008F16AE /* NMTLVertexAttributeDescriptor.mm in Sources */,
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
+				A19270C222C18302008F16AE /* NMTLBlitCommandEncoder.mm in Sources */,
 				A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */,
 				A1926F5C22C0E836008F16AE /* NSCNAudioPlayer.mm in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
@@ -6675,6 +6799,7 @@
 				A1926F0422C0BA34008F16AE /* NSKPhysicsJointPin.mm in Sources */,
 				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
 				A19270A622C16422008F16AE /* NNSInvocation.mm in Sources */,
+				A19270C622C18367008F16AE /* NMTLParallelRenderCommandEncoder.mm in Sources */,
 				A192709922C15B4C008F16AE /* NMTLVertexBufferLayoutDescriptorArray.mm in Sources */,
 				A192709E22C161F6008F16AE /* NNSRunLoop.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
@@ -6683,6 +6808,7 @@
 				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */,
+				A19270D522C18EFF008F16AE /* NMTLPipelineBufferDescriptorArray.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A19270A222C16332008F16AE /* NNSTimer.mm in Sources */,
 				A192703C22C1375D008F16AE /* NMTLComputePipelineDescriptor.mm in Sources */,

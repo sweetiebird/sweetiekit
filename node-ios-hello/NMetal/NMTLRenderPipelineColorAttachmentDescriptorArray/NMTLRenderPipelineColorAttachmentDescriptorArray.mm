@@ -13,6 +13,9 @@ NMTLRenderPipelineColorAttachmentDescriptorArray::NMTLRenderPipelineColorAttachm
 NMTLRenderPipelineColorAttachmentDescriptorArray::~NMTLRenderPipelineColorAttachmentDescriptorArray() {}
 
 JS_INIT_CLASS(MTLRenderPipelineColorAttachmentDescriptorArray, NSObject);
+  JS_ASSIGN_PROTO_METHOD(objectAtIndexedSubscript);
+  JS_ASSIGN_PROTO_METHOD(setObjectAtIndexedSubscript);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLRenderPipelineColorAttachmentDescriptorArray, NSObject);
@@ -40,3 +43,25 @@ NAN_METHOD(NMTLRenderPipelineColorAttachmentDescriptorArray::New) {
     }
   }
 }
+
+#include "NMTLRenderPipelineColorAttachmentDescriptor.h"
+
+NAN_METHOD(NMTLRenderPipelineColorAttachmentDescriptorArray::objectAtIndexedSubscript) {
+  JS_UNWRAP(MTLRenderPipelineColorAttachmentDescriptorArray, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(NSUInteger, attachmentIndex);
+    JS_SET_RETURN(js_value_MTLRenderPipelineColorAttachmentDescriptor([self objectAtIndexedSubscript: attachmentIndex]));
+  }
+}
+
+NAN_METHOD(NMTLRenderPipelineColorAttachmentDescriptorArray::setObjectAtIndexedSubscript) {
+  JS_UNWRAP(MTLRenderPipelineColorAttachmentDescriptorArray, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(MTLRenderPipelineColorAttachmentDescriptor, attachment);
+    declare_value(NSUInteger, attachmentIndex);
+    [self setObject: attachment atIndexedSubscript: attachmentIndex];
+  }
+}
+

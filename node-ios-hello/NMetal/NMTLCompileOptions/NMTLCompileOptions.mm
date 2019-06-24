@@ -13,6 +13,10 @@ NMTLCompileOptions::NMTLCompileOptions() {}
 NMTLCompileOptions::~NMTLCompileOptions() {}
 
 JS_INIT_CLASS(MTLCompileOptions, NSObject);
+  JS_ASSIGN_PROTO_PROP(preprocessorMacros);
+  JS_ASSIGN_PROTO_PROP(fastMathEnabled);
+  JS_ASSIGN_PROTO_PROP(languageVersion);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLCompileOptions, NSObject);
@@ -38,5 +42,55 @@ NAN_METHOD(NMTLCompileOptions::New) {
     } else {
       Nan::ThrowError("MTLCompileOptions::New: invalid arguments");
     }
+  }
+}
+
+NAN_GETTER(NMTLCompileOptions::preprocessorMacrosGetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSDictionary/* <NSString*, NSObject*>*/([self preprocessorMacros]));
+  }
+}
+
+NAN_SETTER(NMTLCompileOptions::preprocessorMacrosSetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSDictionary/* <NSString*, NSObject*>*/, input);
+    [self setPreprocessorMacros: input];
+  }
+}
+
+NAN_GETTER(NMTLCompileOptions::fastMathEnabledGetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self fastMathEnabled]));
+  }
+}
+
+NAN_SETTER(NMTLCompileOptions::fastMathEnabledSetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setFastMathEnabled: input];
+  }
+}
+
+#include "NMTLLibrary.h"
+
+NAN_GETTER(NMTLCompileOptions::languageVersionGetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLLanguageVersion([self languageVersion]));
+  }
+}
+
+NAN_SETTER(NMTLCompileOptions::languageVersionSetter) {
+  JS_UNWRAP(MTLCompileOptions, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(MTLLanguageVersion, input);
+    [self setLanguageVersion: input];
   }
 }

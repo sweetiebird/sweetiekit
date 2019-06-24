@@ -15,7 +15,10 @@
 #define is_value_MTLFunctionConstant(x) is_value_wrapper(x, MTLFunctionConstant)
 
 JS_WRAP_CLASS(MTLFunctionConstant, NSObject);
-  // TODO: declare MTLFunctionConstant methods and properties
+  JS_PROP_READONLY(name);
+  JS_PROP_READONLY(type);
+  JS_PROP_READONLY(index);
+  JS_PROP_READONLY(required);
 JS_WRAP_CLASS_END(MTLFunctionConstant);
 
 #endif /* NMTLFunctionConstant_h */

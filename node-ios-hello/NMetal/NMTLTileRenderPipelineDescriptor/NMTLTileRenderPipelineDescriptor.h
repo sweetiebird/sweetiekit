@@ -15,7 +15,14 @@
 #define is_value_MTLTileRenderPipelineDescriptor(x) is_value_wrapper(x, MTLTileRenderPipelineDescriptor)
 
 JS_WRAP_CLASS(MTLTileRenderPipelineDescriptor, NSObject);
-  // TODO: declare MTLTileRenderPipelineDescriptor methods and properties
+  JS_METHOD(reset);
+  JS_PROP(label);
+  JS_PROP(tileFunction);
+  JS_PROP(rasterSampleCount);
+  JS_PROP_READONLY(colorAttachments);
+  JS_PROP(threadgroupSizeMatchesTileSize);
+  JS_PROP_READONLY(tileBuffers);
+  JS_PROP(maxTotalThreadsPerThreadgroup);
 JS_WRAP_CLASS_END(MTLTileRenderPipelineDescriptor);
 
 #endif /* NMTLTileRenderPipelineDescriptor_h */

@@ -13,6 +13,13 @@ NMTLLibrary::NMTLLibrary() {}
 NMTLLibrary::~NMTLLibrary() {}
 
 JS_INIT_PROTOCOL(MTLLibrary, NSObject);
+  JS_ASSIGN_PROTO_METHOD(newFunctionWithName);
+  JS_ASSIGN_PROTO_METHOD(newFunctionWithNameConstantValuesError);
+  JS_ASSIGN_PROTO_METHOD(newFunctionWithNameConstantValuesCompletionHandler);
+  JS_ASSIGN_PROTO_PROP(label);
+  JS_ASSIGN_PROTO_PROP_READONLY(device);
+  JS_ASSIGN_PROTO_PROP_READONLY(functionNames);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLLibrary, NSObject);
@@ -96,5 +103,84 @@ NAN_METHOD(NMTLLibrary::New) {
     } else {
       Nan::ThrowError("MTLLibrary::New: invalid arguments");
     }
+  }
+}
+
+#include "NMTLFunction.h"
+
+NAN_METHOD(NMTLLibrary::newFunctionWithName) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, functionName);
+    JS_SET_RETURN(js_value_MTLFunction([self newFunctionWithName: functionName]));
+  }
+}
+
+#include "NMTLFunctionConstantValues.h"
+
+NAN_METHOD(NMTLLibrary::newFunctionWithNameConstantValuesError) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    declare_pointer(MTLFunctionConstantValues, constantValues);
+    declare_error();
+    JS_SET_RETURN(js_value_MTLFunction([self newFunctionWithName: name constantValues: constantValues error: &error]));
+    js_panic_NSError(error);
+  }
+}
+
+#include "NNSError.h"
+
+NAN_METHOD(NMTLLibrary::newFunctionWithNameConstantValuesCompletionHandler) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    declare_pointer(MTLFunctionConstantValues, constantValues);
+    declare_callback(completionHandler);
+    [self newFunctionWithName: name constantValues: constantValues completionHandler:^(id<MTLFunction>  _Nullable function, NSError * _Nonnull error) {
+      dispatch_main(^{
+        if (completionHandler) {
+          [completionHandler jsFunction]->Call("NMTLLibrary::newFunctionWithNameConstantValuesCompletionHandler",
+            js_value_MTLFunction(function),
+            js_value_NSError(error));
+          clear_callback(completionHandler);
+        }
+      });
+    }];
+  }
+}
+
+NAN_GETTER(NMTLLibrary::labelGetter) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self label]));
+  }
+}
+
+NAN_SETTER(NMTLLibrary::labelSetter) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setLabel: input];
+  }
+}
+
+#include "NMTLDevice.h"
+
+NAN_GETTER(NMTLLibrary::deviceGetter) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLDevice([self device]));
+  }
+}
+
+NAN_GETTER(NMTLLibrary::functionNamesGetter) {
+  JS_UNWRAP_PROTOCOL(MTLLibrary, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<NSString*>([self functionNames]));
   }
 }

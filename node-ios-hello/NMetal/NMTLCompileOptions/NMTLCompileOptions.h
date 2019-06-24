@@ -15,7 +15,9 @@
 #define is_value_MTLCompileOptions(x) is_value_wrapper(x, MTLCompileOptions)
 
 JS_WRAP_CLASS(MTLCompileOptions, NSObject);
-  // TODO: declare MTLCompileOptions methods and properties
+  JS_PROP(preprocessorMacros);
+  JS_PROP(fastMathEnabled);
+  JS_PROP(languageVersion);
 JS_WRAP_CLASS_END(MTLCompileOptions);
 
 #endif /* NMTLCompileOptions_h */

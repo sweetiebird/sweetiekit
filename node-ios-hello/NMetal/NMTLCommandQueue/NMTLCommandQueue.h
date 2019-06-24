@@ -15,7 +15,11 @@
 #define is_value_MTLCommandQueue(x) is_protocol_wrapper(x, MTLCommandQueue)
 
 JS_WRAP_PROTOCOL(MTLCommandQueue, NSObject);
-  // TODO: declare MTLCommandQueue methods and properties
+  JS_METHOD(commandBuffer);
+  JS_METHOD(commandBufferWithUnretainedReferences);
+  JS_METHOD(insertDebugCaptureBoundary);
+  JS_PROP(label);
+  JS_PROP_READONLY(device);
 JS_WRAP_PROTOCOL_END(MTLCommandQueue, NSObject);
 
 #endif /* NMTLCommandQueue_h */

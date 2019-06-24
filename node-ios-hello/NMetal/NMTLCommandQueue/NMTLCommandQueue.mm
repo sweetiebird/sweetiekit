@@ -13,6 +13,12 @@ NMTLCommandQueue::NMTLCommandQueue() {}
 NMTLCommandQueue::~NMTLCommandQueue() {}
 
 JS_INIT_PROTOCOL(MTLCommandQueue, NSObject);
+  JS_ASSIGN_PROTO_METHOD(commandBuffer);
+  JS_ASSIGN_PROTO_METHOD(commandBufferWithUnretainedReferences);
+  JS_ASSIGN_PROTO_METHOD(insertDebugCaptureBoundary);
+  JS_ASSIGN_PROTO_PROP(label);
+  JS_ASSIGN_PROTO_PROP_READONLY(device);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MTLCommandQueue, NSObject);
@@ -41,3 +47,52 @@ NAN_METHOD(NMTLCommandQueue::New) {
     }
   }
 }
+
+#include "NMTLCommandBuffer.h"
+
+NAN_METHOD(NMTLCommandQueue::commandBuffer) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLCommandBuffer([self commandBuffer]));
+  }
+}
+
+NAN_METHOD(NMTLCommandQueue::commandBufferWithUnretainedReferences) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLCommandBuffer([self commandBufferWithUnretainedReferences]));
+  }
+}
+
+NAN_METHOD(NMTLCommandQueue::insertDebugCaptureBoundary) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    [self insertDebugCaptureBoundary];
+  }
+}
+
+NAN_GETTER(NMTLCommandQueue::labelGetter) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self label]));
+  }
+}
+
+NAN_SETTER(NMTLCommandQueue::labelSetter) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setLabel: input];
+  }
+}
+
+#include "NMTLDevice.h"
+
+NAN_GETTER(NMTLCommandQueue::deviceGetter) {
+  JS_UNWRAP_PROTOCOL(MTLCommandQueue, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLDevice([self device]));
+  }
+}
+

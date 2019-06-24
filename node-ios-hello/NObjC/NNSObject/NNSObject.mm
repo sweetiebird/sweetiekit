@@ -902,6 +902,19 @@ NAN_METHOD(NClass::New) {
 #include "NMTLSharedEventListener.h" // : NSObject
 #include "NMTLSharedEventHandle.h" // : NSObject <NSSecureCoding>
 
+#include "NMTLFunctionConstantValues.h" // : NSObject <NSCopying>
+
+#include "NMTLCommandBuffer.h" // <NSObject>
+#include "NMTLDrawable.h" // <NSObject>
+
+#include "NMTLBlitCommandEncoder.h" // <MTLCommandEncoder>
+#include "NMTLParallelRenderCommandEncoder.h" // <MTLCommandEncoder>
+#include "NMTLComputeCommandEncoder.h" // <MTLCommandEncoder>
+
+#include "NMTLPipeline.h"
+#include "NMTLPipelineBufferDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLPipelineBufferDescriptorArray.h" // : NSObject
+
 #include "NARSKView.h"
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1548,6 +1561,19 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLSharedEventListener); // : NSObject
     JS_EXPORT_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
 
+    JS_EXPORT_TYPE(MTLFunctionConstantValues); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLCommandBuffer); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLDrawable); // <NSObject>
+
+    JS_EXPORT_PROTOCOL(MTLBlitCommandEncoder); // <MTLCommandEncoder>
+    JS_EXPORT_PROTOCOL(MTLParallelRenderCommandEncoder); // <MTLCommandEncoder>
+    JS_EXPORT_PROTOCOL(MTLComputeCommandEncoder); // <MTLCommandEncoder>
+
+    JS_EXPORT_GLOBALS(MTLPipeline);
+    JS_EXPORT_TYPE(MTLPipelineBufferDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLPipelineBufferDescriptorArray); // : NSObject
+
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
     JS_EXPORT_TYPE(ARSKView);
@@ -1656,6 +1682,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKMapViewDelegate);
 
       // Metal
+
+      JS_RETURN_TYPE(MTLPipelineBufferDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLPipelineBufferDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLFunctionConstantValues); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
       JS_RETURN_TYPE(MTLSharedEventListener); // : NSObject
@@ -2089,6 +2120,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #endif
 
       // Metal Protocols
+
+      JS_RETURN_PROTOCOL(MTLComputeCommandEncoder); // <MTLCommandEncoder>
+      JS_RETURN_PROTOCOL(MTLParallelRenderCommandEncoder); // <MTLCommandEncoder>
+      JS_RETURN_PROTOCOL(MTLBlitCommandEncoder); // <MTLCommandEncoder>
+
+      JS_RETURN_PROTOCOL(MTLDrawable); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLCommandBuffer); // <NSObject>
 
       JS_RETURN_PROTOCOL(MTLSharedEvent); // <MTLEvent>
       JS_RETURN_PROTOCOL(MTLEvent); // <NSObject>

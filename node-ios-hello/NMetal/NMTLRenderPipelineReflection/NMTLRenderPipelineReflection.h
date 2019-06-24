@@ -15,7 +15,9 @@
 #define is_value_MTLRenderPipelineReflection(x) is_value_wrapper(x, MTLRenderPipelineReflection)
 
 JS_WRAP_CLASS(MTLRenderPipelineReflection, NSObject);
-  // TODO: declare MTLRenderPipelineReflection methods and properties
+  JS_PROP_READONLY(vertexArguments);
+  JS_PROP_READONLY(fragmentArguments);
+  JS_PROP_READONLY(tileArguments);
 JS_WRAP_CLASS_END(MTLRenderPipelineReflection);
 
 #endif /* NMTLRenderPipelineReflection_h */
