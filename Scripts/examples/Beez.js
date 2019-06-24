@@ -61,6 +61,7 @@ class Player {
   }
 
   move(force) {
+    this.node.physicsBody.applyForce({ dx: force.x, dy: force.y });
   }
 
   touchedGround() {
@@ -70,6 +71,10 @@ class Player {
   kill() {
     this.refillJumps();
     this.node.position = v2(0, 0);
+  }
+
+  get position() {
+    return this.node.position;
   }
 }
 
@@ -81,6 +86,7 @@ function makeDemo(navigation, dvc) {
   //let joystick;
   //let joystickArrows;
   // let joystickKnob;
+  var isMoving = false;
 
   const PhysicsCategory = {
     none: 0,
@@ -89,8 +95,8 @@ function makeDemo(navigation, dvc) {
   };
 
   function touchesMoved(touches = []) {
-    touches.forEach((t, idx) => {
-      console.log(t);
+    const copy = Array.from(touches);
+    copy.forEach((t, idx) => {
       const viewLoc = t.locationInView(skView);
       const scnLoc = scene.convertPointFromView(viewLoc);
       const jPos = joystick.convertPointFromNode(scnLoc, scene);
@@ -110,20 +116,30 @@ function makeDemo(navigation, dvc) {
   }
 
   function touchesEnded() {
+    isMoving = false;
     // player.jump(joystickKnob.position);
-    const action = SKAction.moveTo(v2(0, 0), 0.2);
+    const action = SKAction.moveTo(v2(0, 0), 0.1);
     joystickKnob.runAction(action, () => {
       joystickKnob.position = v2(0, 0);
     });
   }
 
+  function touchesBegan() {
+    isMoving = true;
+  }
+
   function sceneTouchesBegan(touches = []) {
-    if (touches.length) {
-      const last = touches[touches.length - 1];
+    const copy = Array.from(touches);
+    if (copy.length) {
+      const last = copy[copy.length - 1];
       const viewLoc = last.locationInView(skView);
-      console.log(skView.frame.width, joystickKnob.position);
-      if (viewLoc.x < skView.frame.width / 2) {
-        player.jump(joystickKnob.position);
+      if (viewLoc.x < skView.frame.width / 1/5) {
+        const bothZero = joystickKnob.position.x === 0 && joystickKnob.position.y === 0;
+        const jumpPos = {
+          x: bothZero ? joystickKnob.position.x : player.node.position.x,
+          y: bothZero ? joystickKnob.position.y : player.node.position.y + player.node.size.height,
+        };
+        player.jump(jumpPos);
       }
     }
   }
@@ -223,8 +239,9 @@ function makeDemo(navigation, dvc) {
     joystick.userInteractionEnabled = true;
     joystickArrows.userInteractionEnabled = true;
 
-    joystickArrows.touchesMoved = touchesMoved;
-    joystickArrows.touchesEnded = touchesEnded;
+    joystickArrows.touchesMovedWithEvent = touchesMoved;
+    joystickArrows.touchesEndedWithEvent = touchesEnded;
+    joystickArrows.touchesBeganWithEvent = touchesBegan;
 
     scene.addChild(joystick);
   }
@@ -242,12 +259,13 @@ function makeDemo(navigation, dvc) {
     del.didBeginContact = (contact) => {
       let bodyA = contact.bodyA;
       let bodyB = contact.bodyB;
-      console.log(contact.bodyA.node.name, contact.bodyB.node.name);
-      if (bodyA && bodyA.node) {
-        if (bodyB && bodyB.node) {
+      if (bodyA && bodyA.node && bodyA.node.name) {
+        if (bodyB && bodyB.node && bodyB.node.name) {
+          const nameA = String(bodyA.node.name);
+          const nameB = String(bodyB.node.name);
           if (
-            (bodyA.node.name.includes('ground') && bodyB.node.name === 'player') ||
-            (bodyA.node.name === 'player' && bodyB.node.name.includes('ground'))
+            (nameA.includes('ground') && nameB === 'player') ||
+            (nameA === 'player' && nameB.includes('ground'))
           ) {
             player.touchedGround();
           }
@@ -297,6 +315,13 @@ function makeDemo(navigation, dvc) {
     player.node.physicsBody.contactTestBitMask = PhysicsCategory.ground;
     player.node.physicsBody.collisionBitMask = PhysicsCategory.ground;
     player.node.physicsBody.allowsRotation = false;
+    scene.physicsBody = SKPhysicsBody.bodyWithEdgeLoopFromRect(scene.frame);
+    scene.physicsBody.isDynamic = false;
+    scene.physicsBody.categoryBitMask = PhysicsCategory.ground;
+    scene.physicsBody.contactTestBitMask = PhysicsCategory.player;
+    scene.physicsBody.collisionBitMask = PhysicsCategory.player;
+    scene.physicsBody.allowsRotation = false;
+    scene.physicsBody.affectedByGravity = false;
   }
 
   function start() {
@@ -321,9 +346,15 @@ function makeDemo(navigation, dvc) {
 
     makeJoystick();
 
-    scene.touchesBegan = sceneTouchesBegan;
+    scene.touchesBeganWithEvent = sceneTouchesBegan;
     // scene.touchesMoved = touchesMoved;
     // scene.touchesEnded = touchesEnded;
+
+    scene.update = () => {
+      if (isMoving) {
+        player.move(joystickKnob.position);
+      }
+    };
 
     nav.pushViewController(demoVC);
 

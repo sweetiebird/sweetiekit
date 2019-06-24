@@ -252,15 +252,28 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
     dispatch_once(&onceToken, ^{
       __block IMP originalEndedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesEnded:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesEndedWithEvent"];
+
           if (fn != nullptr) {
             Nan::HandleScope scope;
-            SweetJSFunction* func = (SweetJSFunction*)fn;
-            __block uint32_t count = 0;
-            auto value = Nan::New<Array>();
-            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-            }];
-            [func jsFunction]->Call("UIResponder::touchesEndedWithEvent", value, sweetiekit::GetWrapperFor(event));
+
+            @try {
+              SweetJSFunction* func = (SweetJSFunction*)fn;
+              __block uint32_t count = 0;
+              auto value = Nan::New<Array>();
+              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+              }];
+              [func jsFunction]->Call("UIResponder::touchesEndedWithEvent", value, sweetiekit::GetWrapperFor(event));
+            } @catch (NSException *exception) {
+              NSLog(@"%@", [exception debugDescription]);
+            }
+//            SweetJSFunction* func = (SweetJSFunction*)fn;
+//            __block uint32_t count = 0;
+//            auto value = Nan::New<Array>();
+//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+//            }];
+//            [func jsFunction]->Call("UIResponder::touchesEndedWithEvent", value, sweetiekit::GetWrapperFor(event));
            }
 
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalEndedIMP)(_self, @selector(touchesEnded:withEvent:), touches, event);
@@ -268,31 +281,55 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
 
       __block IMP originalMovedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesMoved:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesMovedWithEvent"];
+
           if (fn != nullptr) {
             Nan::HandleScope scope;
-            SweetJSFunction* func = (SweetJSFunction*)fn;
-            __block uint32_t count = 0;
-            auto value = Nan::New<Array>();
-            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-            }];
-            [func jsFunction]->Call("UIResponder::touchesMovedWithEvent", value, sweetiekit::GetWrapperFor(event));
-           }
 
+            @try {
+              SweetJSFunction* func = (SweetJSFunction*)fn;
+              __block uint32_t count = 0;
+              auto value = Nan::New<Array>();
+              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+              }];
+              [func jsFunction]->Call("UIResponder::touchesMovedWithEvent", value, sweetiekit::GetWrapperFor(event));
+            } @catch (NSException *exception) {
+              NSLog(@"%@", [exception debugDescription]);
+            }
+          }
+//          SweetJSFunction* func = (SweetJSFunction*)fn;
+//          __block uint32_t count = 0;
+//          auto value = Nan::New<Array>();
+//          [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+//            Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+//          }];
+//          [func jsFunction]->Call("UIResponder::touchesMovedWithEvent", value, sweetiekit::GetWrapperFor(event));
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalMovedIMP)(_self, @selector(touchesMoved:withEvent:), touches, event);
         });
 
       __block IMP originalBeganIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesBegan:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesBeganWithEvent"];
+
           if (fn != nullptr) {
             Nan::HandleScope scope;
-            SweetJSFunction* func = (SweetJSFunction*)fn;
-            __block uint32_t count = 0;
-            auto value = Nan::New<Array>();
-            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-            }];
-            [func jsFunction]->Call("UIResponder::touchesBeganWithEvent", value, sweetiekit::GetWrapperFor(event));
+            @try {
+              SweetJSFunction* func = (SweetJSFunction*)fn;
+              __block uint32_t count = 0;
+              auto value = Nan::New<Array>();
+              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+              }];
+              [func jsFunction]->Call("UIResponder::touchesBeganWithEvent", value, sweetiekit::GetWrapperFor(event));
+            } @catch (NSException *exception) {
+              NSLog(@"%@", [exception debugDescription]);
+            }
+//            SweetJSFunction* func = (SweetJSFunction*)fn;
+//            __block uint32_t count = 0;
+//            auto value = Nan::New<Array>();
+//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+//            }];
+//            [func jsFunction]->Call("UIResponder::touchesBeganWithEvent", value, sweetiekit::GetWrapperFor(event));
            }
 
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalBeganIMP)(_self, @selector(touchesBegan:withEvent:), touches, event);
@@ -300,15 +337,28 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
 
     __block IMP touchesCancelledIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesCancelled:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
           id fn = [_self associatedValueForKey:@"sweetiekit_touchesCancelledWithEvent"];
+
           if (fn != nullptr) {
             Nan::HandleScope scope;
-            SweetJSFunction* func = (SweetJSFunction*)fn;
-            __block uint32_t count = 0;
-            auto value = Nan::New<Array>();
-            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-            }];
-            [func jsFunction]->Call("UIResponder::touchesCancelledWithEvent", value, sweetiekit::GetWrapperFor(event));
+
+            @try {
+              SweetJSFunction* func = (SweetJSFunction*)fn;
+              __block uint32_t count = 0;
+              auto value = Nan::New<Array>();
+              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+              }];
+              [func jsFunction]->Call("UIResponder::touchesCancelledWithEvent", value, sweetiekit::GetWrapperFor(event));
+            } @catch (NSException *exception) {
+              NSLog(@"%@", [exception debugDescription]);
+            }
+//            SweetJSFunction* func = (SweetJSFunction*)fn;
+//            __block uint32_t count = 0;
+//            auto value = Nan::New<Array>();
+//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
+//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
+//            }];
+//            [func jsFunction]->Call("UIResponder::touchesCancelledWithEvent", value, sweetiekit::GetWrapperFor(event));
            }
 
           ((void ( *)(id, SEL, NSSet *, UIEvent *))touchesCancelledIMP)(_self, @selector(touchesCancelled:withEvent:), touches, event);
