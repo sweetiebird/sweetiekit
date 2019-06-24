@@ -59,7 +59,10 @@ NAN_METHOD(NSKRenderer::New) {
 NAN_METHOD(NSKRenderer::rendererWithDevice) {
   declare_autoreleasepool {
     declare_args();
-    declare_value(id/* <MTLDevice>*/, device);
+    declare_nullable_value(id/* <MTLDevice>*/, device);
+    if (!device) {
+      device = MTLCreateSystemDefaultDevice();
+    }
     JS_SET_RETURN(js_value_SKRenderer([SKRenderer rendererWithDevice: device]));
   }
 }
