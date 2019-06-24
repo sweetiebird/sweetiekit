@@ -17,13 +17,13 @@
 JS_WRAP_CLASS(SKPhysicsContactDelegate, NSObject);
   JS_PROP(didBeginContact);
   JS_PROP(didEndContact);
-  
-  sweetiekit::JSFunction _didBeginContact;
-  sweetiekit::JSFunction _didEndContact;
 JS_WRAP_CLASS_END(SKPhysicsContactDelegate);
 
 #if __OBJC__
-typedef SSKPhysicsContactDelegate SKPhysicsContactDelegate;
+@interface SKPhysicsContactDelegate : NSObject<SKPhysicsContactDelegate>
+- (void)didBeginContact:(SKPhysicsContact *)contact;
+- (void)didEndContact:(SKPhysicsContact *)contact;
+@end
 #endif
 
 #endif /* NSKPhysicsContactDelegate_h */

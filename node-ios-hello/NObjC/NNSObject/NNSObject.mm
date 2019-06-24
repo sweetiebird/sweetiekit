@@ -817,7 +817,12 @@ NAN_METHOD(NClass::New) {
 #include "NSKTexture.h"
 #include "NSKTransformNode.h"
 #include "NSKPhysicsBody.h"
-#include "NSKPhysicsWorld.h"
+#include "NSKPhysicsJoint.h"
+#include "NSKPhysicsJointFixed.h"
+#include "NSKPhysicsJointLimit.h"
+#include "NSKPhysicsJointPin.h"
+#include "NSKPhysicsJointSliding.h"
+#include "NSKPhysicsJointSpring.h"
 #include "NSKPhysicsContactDelegate.h"
 #include "NSKPhysicsContact.h"
 #include "NSKPhysicsWorld.h"
@@ -1253,6 +1258,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsContact);
     JS_EXPORT_TYPE(SKView);
     JS_EXPORT_TYPE(SKPhysicsBody);
+    JS_EXPORT_TYPE(SKPhysicsJoint);
+    JS_EXPORT_TYPE(SKPhysicsJointFixed);
+    JS_EXPORT_TYPE(SKPhysicsJointLimit);
+    JS_EXPORT_TYPE(SKPhysicsJointPin);
+    JS_EXPORT_TYPE(SKPhysicsJointSliding);
+    JS_EXPORT_TYPE(SKPhysicsJointSpring);
     JS_EXPORT_TYPE(SKNode);
     JS_EXPORT_TYPE(SKTransformNode);
     JS_EXPORT_TYPE(SKEmitterNode);
@@ -1433,8 +1444,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if ([NSStringFromClass([obj class]) isEqual: @"PKPhysicsContact"]) {
         return NSKPhysicsContact::type;
       }
-      JS_RETURN_TYPE_FROM(SKPhysicsContactDelegate, SSKPhysicsContactDelegate);
+      JS_RETURN_TYPE(SKPhysicsContactDelegate);
       JS_RETURN_TYPE(SKPhysicsWorld);
+      JS_RETURN_TYPE(SKPhysicsJointSpring);
+      JS_RETURN_TYPE(SKPhysicsJointSliding);
+      JS_RETURN_TYPE(SKPhysicsJointPin);
+      JS_RETURN_TYPE(SKPhysicsJointLimit);
+      JS_RETURN_TYPE(SKPhysicsJointFixed);
+      JS_RETURN_TYPE(SKPhysicsJoint);
       JS_RETURN_TYPE(SKPhysicsBody);
       JS_RETURN_TYPE(SKSpriteNode);
       JS_RETURN_TYPE(SKScene);

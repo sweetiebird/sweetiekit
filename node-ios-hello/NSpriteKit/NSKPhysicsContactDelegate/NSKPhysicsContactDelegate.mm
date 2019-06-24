@@ -6,76 +6,64 @@
 //
 #include "NSKPhysicsContactDelegate.h"
 
+#define instancetype SKPhysicsContactDelegate
+#define js_value_instancetype js_value_SKPhysicsContactDelegate
+
 NSKPhysicsContactDelegate::NSKPhysicsContactDelegate() {}
 NSKPhysicsContactDelegate::~NSKPhysicsContactDelegate() {}
 
 JS_INIT_CLASS(SKPhysicsContactDelegate, NSObject);
+  JS_ASSIGN_PROTO_PROP(didBeginContact);
+  JS_ASSIGN_PROTO_PROP(didEndContact);
+
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, didBeginContact);
-  JS_ASSIGN_PROP(proto, didEndContact);
   // static members (ctor)
   JS_INIT_CTOR(SKPhysicsContactDelegate, NSObject);
 JS_INIT_CLASS_END(SKPhysicsContactDelegate, NSObject);
 
 NAN_METHOD(NSKPhysicsContactDelegate::New) {
   JS_RECONSTRUCT(SKPhysicsContactDelegate);
+  @autoreleasepool {
+    SKPhysicsContactDelegate* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NSKPhysicsContactDelegate *ui = new NSKPhysicsContactDelegate();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge SSKPhysicsContactDelegate *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[SSKPhysicsContactDelegate alloc] init]);
+    if (info[0]->IsExternal()) {
+      self = (__bridge SKPhysicsContactDelegate *)(info[0].As<External>()->Value());
+    } else if (info[0]->IsObject()) {
+      Local<Value> that(JS_NEW(NSKPhysicsContactDelegate, 0, nullptr));
+      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
+      objectAssign("NSKPhysicsContactDelegate::New", that, info[0]);
+      JS_SET_RETURN(that);
+      return;
+    } else if (info.Length() <= 0) {
+      self = [[SKPhysicsContactDelegate alloc] init];
+    }
+    if (self) {
+      NSKPhysicsContactDelegate *wrapper = new NSKPhysicsContactDelegate();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SKPhysicsContactDelegate::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
+
+DELEGATE_PROP(SKPhysicsContactDelegate, didBeginContact);
+DELEGATE_PROP(SKPhysicsContactDelegate, didEndContact);
 
 #include "NSKPhysicsContact.h"
 
-NAN_GETTER(NSKPhysicsContactDelegate::didBeginContactGetter) {
-  Nan::HandleScope scope;
-  
-  Nan::ThrowError("NSKPhysicsContactDelegate::didBeginContactGetter not yet implemented");
+@implementation SKPhysicsContactDelegate
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+  call_delegate(noop(), didBeginContact,
+    js_value_SKPhysicsContact(contact));
 }
 
-NAN_SETTER(NSKPhysicsContactDelegate::didBeginContactSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NSKPhysicsContactDelegate *wrap = ObjectWrap::Unwrap<NSKPhysicsContactDelegate>(info.This());
-  SSKPhysicsContactDelegate* del = wrap->As<SSKPhysicsContactDelegate>();
-
-  wrap->_didBeginContact.Reset(Local<Function>::Cast(value));
-
-  [del setDidBegin: ^ (SKPhysicsContact * _Nonnull contact) {
-    Nan::HandleScope scope;
-    Local<Value> contactObj = sweetiekit::GetWrapperFor(contact, NSKPhysicsContact::type);
-    wrap->_didBeginContact("NSKPhysicsContactDelegate::didBeginContactSetter", contactObj);
-  }];
+- (void)didEndContact:(SKPhysicsContact *)contact
+{
+  call_delegate(noop(), didEndContact,
+    js_value_SKPhysicsContact(contact));
 }
-
-NAN_GETTER(NSKPhysicsContactDelegate::didEndContactGetter) {
-  Nan::HandleScope scope;
-
-  Nan::ThrowError("NSKPhysicsContactDelegate::didEndContactGetter not yet implemented");
-}
-
-NAN_SETTER(NSKPhysicsContactDelegate::didEndContactSetter) {
-  Nan::EscapableHandleScope scope;
-
-  NSKPhysicsContactDelegate *wrap = ObjectWrap::Unwrap<NSKPhysicsContactDelegate>(info.This());
-  SSKPhysicsContactDelegate* del = wrap->As<SSKPhysicsContactDelegate>();
-
-  wrap->_didEndContact.Reset(Local<Function>::Cast(value));
-  
-  [del setDidEnd: ^ (SKPhysicsContact * _Nonnull contact) {
-    Nan::HandleScope scope;
-    Local<Value> contactObj = sweetiekit::GetWrapperFor(contact, NSKPhysicsContact::type);
-    wrap->_didEndContact("NSKPhysicsContactDelegate::didEndContactSetter", contactObj);
-  }];
-}
+@end

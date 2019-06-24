@@ -203,6 +203,12 @@
 		A1926EE822C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EE622C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm */; };
 		A1926EEC22C0ADAD008F16AE /* NAVCameraCalibrationData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EEA22C0ADAD008F16AE /* NAVCameraCalibrationData.mm */; };
 		A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EEF22C0B2C2008F16AE /* NUIDevice.mm */; };
+		A1926F0322C0BA34008F16AE /* NSKPhysicsJoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EF222C0BA33008F16AE /* NSKPhysicsJoint.mm */; };
+		A1926F0422C0BA34008F16AE /* NSKPhysicsJointPin.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EF622C0BA33008F16AE /* NSKPhysicsJointPin.mm */; };
+		A1926F0522C0BA34008F16AE /* NSKPhysicsJointLimit.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EF822C0BA33008F16AE /* NSKPhysicsJointLimit.mm */; };
+		A1926F0622C0BA34008F16AE /* NSKPhysicsJointSliding.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EFC22C0BA34008F16AE /* NSKPhysicsJointSliding.mm */; };
+		A1926F0722C0BA34008F16AE /* NSKPhysicsJointSpring.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EFF22C0BA34008F16AE /* NSKPhysicsJointSpring.mm */; };
+		A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F0122C0BA34008F16AE /* NSKPhysicsJointFixed.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -790,6 +796,18 @@
 		A1926EEB22C0ADAD008F16AE /* NAVCameraCalibrationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVCameraCalibrationData.h; sourceTree = "<group>"; };
 		A1926EEE22C0B2C2008F16AE /* NUIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDevice.h; sourceTree = "<group>"; };
 		A1926EEF22C0B2C2008F16AE /* NUIDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDevice.mm; sourceTree = "<group>"; };
+		A1926EF222C0BA33008F16AE /* NSKPhysicsJoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJoint.mm; sourceTree = "<group>"; };
+		A1926EF322C0BA33008F16AE /* NSKPhysicsJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJoint.h; sourceTree = "<group>"; };
+		A1926EF522C0BA33008F16AE /* NSKPhysicsJointPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJointPin.h; sourceTree = "<group>"; };
+		A1926EF622C0BA33008F16AE /* NSKPhysicsJointPin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJointPin.mm; sourceTree = "<group>"; };
+		A1926EF822C0BA33008F16AE /* NSKPhysicsJointLimit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJointLimit.mm; sourceTree = "<group>"; };
+		A1926EF922C0BA33008F16AE /* NSKPhysicsJointLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJointLimit.h; sourceTree = "<group>"; };
+		A1926EFB22C0BA34008F16AE /* NSKPhysicsJointSliding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJointSliding.h; sourceTree = "<group>"; };
+		A1926EFC22C0BA34008F16AE /* NSKPhysicsJointSliding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJointSliding.mm; sourceTree = "<group>"; };
+		A1926EFE22C0BA34008F16AE /* NSKPhysicsJointSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJointSpring.h; sourceTree = "<group>"; };
+		A1926EFF22C0BA34008F16AE /* NSKPhysicsJointSpring.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJointSpring.mm; sourceTree = "<group>"; };
+		A1926F0122C0BA34008F16AE /* NSKPhysicsJointFixed.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsJointFixed.mm; sourceTree = "<group>"; };
+		A1926F0222C0BA34008F16AE /* NSKPhysicsJointFixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsJointFixed.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2751,6 +2769,60 @@
 			path = NUIDevice;
 			sourceTree = "<group>";
 		};
+		A1926EF122C0BA33008F16AE /* NSKPhysicsJoint */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EF322C0BA33008F16AE /* NSKPhysicsJoint.h */,
+				A1926EF222C0BA33008F16AE /* NSKPhysicsJoint.mm */,
+			);
+			path = NSKPhysicsJoint;
+			sourceTree = "<group>";
+		};
+		A1926EF422C0BA33008F16AE /* NSKPhysicsJointPin */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EF522C0BA33008F16AE /* NSKPhysicsJointPin.h */,
+				A1926EF622C0BA33008F16AE /* NSKPhysicsJointPin.mm */,
+			);
+			path = NSKPhysicsJointPin;
+			sourceTree = "<group>";
+		};
+		A1926EF722C0BA33008F16AE /* NSKPhysicsJointLimit */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EF922C0BA33008F16AE /* NSKPhysicsJointLimit.h */,
+				A1926EF822C0BA33008F16AE /* NSKPhysicsJointLimit.mm */,
+			);
+			path = NSKPhysicsJointLimit;
+			sourceTree = "<group>";
+		};
+		A1926EFA22C0BA34008F16AE /* NSKPhysicsJointSliding */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EFB22C0BA34008F16AE /* NSKPhysicsJointSliding.h */,
+				A1926EFC22C0BA34008F16AE /* NSKPhysicsJointSliding.mm */,
+			);
+			path = NSKPhysicsJointSliding;
+			sourceTree = "<group>";
+		};
+		A1926EFD22C0BA34008F16AE /* NSKPhysicsJointSpring */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EFE22C0BA34008F16AE /* NSKPhysicsJointSpring.h */,
+				A1926EFF22C0BA34008F16AE /* NSKPhysicsJointSpring.mm */,
+			);
+			path = NSKPhysicsJointSpring;
+			sourceTree = "<group>";
+		};
+		A1926F0022C0BA34008F16AE /* NSKPhysicsJointFixed */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F0222C0BA34008F16AE /* NSKPhysicsJointFixed.h */,
+				A1926F0122C0BA34008F16AE /* NSKPhysicsJointFixed.mm */,
+			);
+			path = NSKPhysicsJointFixed;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4047,6 +4119,12 @@
 				A10AADE2228B881400C64F60 /* NSKPhysicsBody */,
 				A1B65496228CE80D00976024 /* NSKPhysicsContact */,
 				A1B65490228CE4AF00976024 /* NSKPhysicsContactDelegate */,
+				A1926EF122C0BA33008F16AE /* NSKPhysicsJoint */,
+				A1926F0022C0BA34008F16AE /* NSKPhysicsJointFixed */,
+				A1926EF722C0BA33008F16AE /* NSKPhysicsJointLimit */,
+				A1926EF422C0BA33008F16AE /* NSKPhysicsJointPin */,
+				A1926EFA22C0BA34008F16AE /* NSKPhysicsJointSliding */,
+				A1926EFD22C0BA34008F16AE /* NSKPhysicsJointSpring */,
 				A1B6548C228CE34D00976024 /* NSKPhysicsWorld */,
 				A1BD4B892287CA2E001D1F6E /* NSKScene */,
 				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
@@ -4875,6 +4953,7 @@
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				A13370D922AEFC6A00FA3768 /* NAVAudioBuffer.mm in Sources */,
 				A13370B522AEEC5700FA3768 /* NAVAudioSessionDataSourceDescription.mm in Sources */,
+				A1926F0522C0BA34008F16AE /* NSKPhysicsJointLimit.mm in Sources */,
 				A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
 				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,
@@ -4919,6 +4998,7 @@
 				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A1394A6C22865EF00087F712 /* main.mm in Sources */,
+				A1926F0722C0BA34008F16AE /* NSKPhysicsJointSpring.mm in Sources */,
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
@@ -5081,6 +5161,7 @@
 				A1CC12D1228E5936008C10A0 /* NUICollectionReusableView.mm in Sources */,
 				A1EE7D74229D8EEF002B53FF /* NSCNTube.mm in Sources */,
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
+				A1926F0322C0BA34008F16AE /* NSKPhysicsJoint.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
@@ -5126,6 +5207,7 @@
 				A13370CD22AEFB3B00FA3768 /* NAVAudioConnectionPoint.mm in Sources */,
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
 				A133709522AB418200FA3768 /* NNSError.mm in Sources */,
+				A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */,
 				A1D4986222BB29EB009AC951 /* NNSBlockOperation.mm in Sources */,
 				A1926EE422C0A739008F16AE /* NAVDepthData.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
@@ -5157,6 +5239,7 @@
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A13370C522AEF87500FA3768 /* NAVAudioNode.mm in Sources */,
 				A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */,
+				A1926F0422C0BA34008F16AE /* NSKPhysicsJointPin.mm in Sources */,
 				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */,
@@ -5180,6 +5263,7 @@
 				A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
 				A1D4983822BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm in Sources */,
+				A1926F0622C0BA34008F16AE /* NSKPhysicsJointSliding.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
 				A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */,
 				A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */,

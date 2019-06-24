@@ -87,7 +87,7 @@ function makeDelegate() {
   contactDel.didBeginContact = (contact) => {
     let firstBody = contact.bodyA;
     let secBody = contact.bodyB;
-    console.log(contact.bodyA, contact.bodyB);
+    console.log(contact, contact.bodyA, contact.bodyB);
     if (firstBody && firstBody.node) {
       firstBody.node.removeFromParent();
     }
