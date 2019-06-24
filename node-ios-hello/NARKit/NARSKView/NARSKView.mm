@@ -6,135 +6,113 @@
 //
 #include "NARSKView.h"
 
-NARSKView::NARSKView () {}
-NARSKView::~NARSKView () {}
+#define instancetype ARSKView
+#define js_value_instancetype js_value_ARSKView
+
+NARSKView::NARSKView() {}
+NARSKView::~NARSKView() {}
 
 JS_INIT_CLASS(ARSKView, SKView);
+  JS_ASSIGN_PROTO_METHOD(anchorForNode);
+  JS_ASSIGN_PROTO_METHOD(nodeForAnchor);
+  JS_ASSIGN_PROTO_METHOD(hitTestTypes);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP(session);
+
   // instance members (proto)
-  JS_ASSIGN_PROP_READONLY(proto, session);
-  JS_ASSIGN_PROP(proto, delegate);
-  JS_ASSIGN_METHOD(proto, presentScene);
-  JS_ASSIGN_METHOD(proto, nodeForAnchor);
-  JS_ASSIGN_METHOD(proto, anchorForNode);
-  JS_ASSIGN_METHOD(proto, hitTest);
-  
   // static members (ctor)
   JS_INIT_CTOR(ARSKView, SKView);
   
 JS_INIT_CLASS_END(ARSKView, SKView);
 
-
 NAN_METHOD(NARSKView::New) {
   JS_RECONSTRUCT(ARSKView);
-
-  Local<Object> obj = info.This();
-
-  NARSKView *view = new NARSKView();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge ARSKView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      CGRect frame = CGRectMake(x, y, width, height);
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[ARSKView alloc] initWithFrame:frame]);
-      });
-    }
-  } else {
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[ARSKView alloc] init]);
-      });
-    }
-  }
-  view->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
-}
-
-#include "NARSession.h"
-
-NAN_GETTER(NARSKView::sessionGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSKView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
-}
-
-#include "NARSKViewDelegate.h"
-
-NAN_GETTER(NARSKView::delegateGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSKView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSKViewDelegate::type));
-}
-
-NAN_SETTER(NARSKView::delegateSetter) {
-  Nan::HandleScope scope;
-  
-  NARSKView *view = ObjectWrap::Unwrap<NARSKView>(info.This());
-  NARSKViewDelegate *del = ObjectWrap::Unwrap<NARSKViewDelegate>(Local<Object>::Cast(value));
-  auto delegate = del->As<SARSKViewDelegate>();
-  view->_delegate.Reset(value);
-
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      JS_UNWRAP(ARSKView, ui);
-      [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
-      [ui setDelegate:delegate];
-    });
+    ARSKView* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge ARSKView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[ARSKView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[ARSKView alloc] init];
+    }
+    if (self) {
+      NARSKView *wrapper = new NARSKView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("ARSKView::New: invalid arguments");
+    }
   }
 }
 
-#include "NSKScene.h"
-
-NAN_METHOD(NARSKView::presentScene) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARSKView, ui);
-
-  NSKScene *scene = ObjectWrap::Unwrap<NSKScene>(Local<Object>::Cast(info[0]));
-  
-  [ui presentScene:scene->As<SKScene>()];
-}
-
-#include "NSKNode.h"
 #include "NARAnchor.h"
+#include "NSKNode.h"
 
 NAN_METHOD(NARSKView::anchorForNode) {
   JS_UNWRAP(ARSKView, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_ARAnchor([self anchorForNode:to_value_SKNode(info[0])]));
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_ARAnchor([self anchorForNode: node]));
   }
 }
 
 NAN_METHOD(NARSKView::nodeForAnchor) {
   JS_UNWRAP(ARSKView, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_SKNode([self nodeForAnchor:to_value_ARAnchor(info[0])]));
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(ARAnchor, anchor);
+    JS_SET_RETURN(js_value_SKNode([self nodeForAnchor: anchor]));
   }
 }
 
 #include "NARHitTestResult.h"
 
-NAN_METHOD(NARSKView::hitTest) {
+NAN_METHOD(NARSKView::hitTestTypes) {
   JS_UNWRAP(ARSKView, self);
-  @autoreleasepool {
-    if (is_value_CGPoint(info[0]) && is_value_ARHitTestResultType(info[1])) {
-      CGPoint point(to_value_CGPoint(info[0]));
-      ARHitTestResultType types(to_value_ARHitTestResultType(info[1]));
-      NSArray<ARHitTestResult*>* results = [self hitTest:point types:types];
-      JS_SET_RETURN(js_value_NSArray<ARHitTestResult*>(results));
-    } else {
-      JS_SET_RETURN(js_value_NSArray<SKNode*>([[self scene] nodesAtPoint:to_value_CGPoint(info[0])]));
-    }
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_value(ARHitTestResultType, types);
+    JS_SET_RETURN(js_value_NSArray<ARHitTestResult*>([self hitTest: point types: types]));
+  }
+}
+
+NAN_GETTER(NARSKView::delegateGetter) {
+  JS_UNWRAP(ARSKView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id/* <ARSKViewDelegate>*/([self delegate]));
+  }
+}
+
+NAN_SETTER(NARSKView::delegateSetter) {
+  JS_UNWRAP(ARSKView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_nullable_value(id/* <ARSKViewDelegate>*/, input);
+    [self setDelegate: input];
+    [self associateValue:input withKey:@"NARSKView::delegate"];
+  }
+}
+
+#include "NARSession.h"
+
+NAN_GETTER(NARSKView::sessionGetter) {
+  JS_UNWRAP(ARSKView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_ARSession([self session]));
+  }
+}
+
+NAN_SETTER(NARSKView::sessionSetter) {
+  JS_UNWRAP(ARSKView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(ARSession, input);
+    [self setSession: input];
   }
 }

@@ -1414,7 +1414,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
-      JS_RETURN_TYPE_FROM(ARSKViewDelegate, SARSKViewDelegate);
+      JS_RETURN_TYPE(ARSKViewDelegate);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
       JS_RETURN_TYPE(ARSCNView);
