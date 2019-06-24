@@ -649,6 +649,10 @@ NAN_METHOD(NClass::New) {
 }
 
 #include "NNSObjCRuntime.h"
+#include "NNSRunLoop.h"
+#include "NNSTimer.h"
+#include "NNSPort.h"
+#include "NNSInvocation.h"
 #include "NNSUserDefaults.h"
 #include "NNSMutableParagraphStyle.h"
 #include "NNSParagraphStyle.h"
@@ -762,6 +766,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NUIDatePicker.h"
+#include "NCADisplayLink.h"
 #include "NCATransaction.h"
 #include "NCALayer.h"
 #include "NCAMetalLayer.h"
@@ -1094,6 +1099,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSObjCRuntime);
+    JS_EXPORT_TYPE(NSRunLoop);
+    JS_EXPORT_TYPE(NSTimer);
+    JS_EXPORT_TYPE(NSPort);
+    JS_EXPORT_TYPE(NSInvocation);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
     JS_EXPORT_TYPE(NSURLRequest);
@@ -1331,6 +1340,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(GifView);
 
     // CoreAnimation
+    JS_EXPORT_TYPE(CADisplayLink);
     JS_EXPORT_TYPE(CATransaction);
     JS_EXPORT_TYPE(CAMediaTimingFunction);
     JS_EXPORT_TYPE(CAValueFunction);
@@ -2059,6 +2069,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
+      JS_RETURN_TYPE(NSInvocation);
+      JS_RETURN_TYPE(NSPort);
+      JS_RETURN_TYPE(NSTimer);
+      JS_RETURN_TYPE(NSRunLoop);
       JS_RETURN_TYPE(NSObjCRuntime);
       if (object_isClass(obj)) {
         return NClass::type;
