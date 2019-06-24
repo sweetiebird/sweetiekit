@@ -75,32 +75,24 @@ function makeMap(demoVC) {
   demoVC.view.addSubview(mapView);
 
   if (location) {
-    const region = {
-      coordinate: location.coordinate,
-      latitudinalMeters: 500,
-      longitudinalMeters: 500,
-    };
-    mapView.setRegion(region, true);
+    const region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+    mapView.setRegionAnimated(region, true);
   }
 
   return undefined;
 }
 
 function updateMap() {
-  region = {
-    coordinate: location.coordinate,
-    latitudinalMeters: distance + 200,
-    longitudinalMeters: distance + 200,
-  };
-  mapView.setRegion(region, true);
-  mapView.addAnnotation({
+  region = MKCoordinateRegionMakeWithDistance(location.coordinate, distance + 200, distance + 200);
+  mapView.setRegionAnimated(region, true);
+  mapView.addAnnotation(MKAnnotation({
     coordinate: location2.coordinate,
     title: 'GREEN DOT',
-  });
-  mapView.addAnnotation({
+  }));
+  mapView.addAnnotation(MKAnnotation({
     coordinate: location.coordinate,
     title: 'YOU ARE HERE',
-  });
+  }));
   distLabel.text = `Distance: ${Math.round(distance)} meters`;
   dest = doMath(
     location.coordinate.latitude,
@@ -207,12 +199,8 @@ async function make(nav, demoVC) {
     if (Array.isArray(locations) && locations.length > 0 && !location) {
       location = locations[0];
       if (mapView) {
-        const region = {
-          coordinate: location.coordinate,
-          latitudinalMeters: 500,
-          longitudinalMeters: 500,
-        };
-        mapView.setRegion(region, true);
+        const region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+        mapView.setRegionAnimated(region, true);
       }
     }
   };

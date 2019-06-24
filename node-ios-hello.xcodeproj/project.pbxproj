@@ -192,6 +192,11 @@
 		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
 		A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */; };
 		A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E72228A478600A42754 /* NSCNNode.mm */; };
+		A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EC622C07D17008F16AE /* NMKMapCamera.mm */; };
+		A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ECB22C08076008F16AE /* NMKOverlayRenderer.mm */; };
+		A1926ED022C081D2008F16AE /* NMKOverlayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ECE22C081D2008F16AE /* NMKOverlayView.mm */; };
+		A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ED322C08337008F16AE /* NMKUserLocation.mm */; };
+		A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ED622C08D14008F16AE /* NMKAnnotation.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -759,6 +764,16 @@
 		A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSCNViewDelegate.swift; sourceTree = "<group>"; };
 		A18F1E72228A478600A42754 /* NSCNNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNNode.mm; sourceTree = "<group>"; };
 		A18F1E74228A478D00A42754 /* NSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNNode.h; sourceTree = "<group>"; };
+		A1926EC622C07D17008F16AE /* NMKMapCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapCamera.mm; sourceTree = "<group>"; };
+		A1926EC722C07D18008F16AE /* NMKMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapCamera.h; sourceTree = "<group>"; };
+		A1926ECA22C08076008F16AE /* NMKOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKOverlayRenderer.h; sourceTree = "<group>"; };
+		A1926ECB22C08076008F16AE /* NMKOverlayRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKOverlayRenderer.mm; sourceTree = "<group>"; };
+		A1926ECE22C081D2008F16AE /* NMKOverlayView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKOverlayView.mm; sourceTree = "<group>"; };
+		A1926ECF22C081D2008F16AE /* NMKOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKOverlayView.h; sourceTree = "<group>"; };
+		A1926ED222C08337008F16AE /* NMKUserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKUserLocation.h; sourceTree = "<group>"; };
+		A1926ED322C08337008F16AE /* NMKUserLocation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKUserLocation.mm; sourceTree = "<group>"; };
+		A1926ED622C08D14008F16AE /* NMKAnnotation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKAnnotation.mm; sourceTree = "<group>"; };
+		A1926ED722C08D14008F16AE /* NMKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKAnnotation.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2619,6 +2634,51 @@
 			path = NSCNNode;
 			sourceTree = "<group>";
 		};
+		A1926EC522C07D17008F16AE /* NMKMapCamera */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EC722C07D18008F16AE /* NMKMapCamera.h */,
+				A1926EC622C07D17008F16AE /* NMKMapCamera.mm */,
+			);
+			path = NMKMapCamera;
+			sourceTree = "<group>";
+		};
+		A1926EC922C08076008F16AE /* NMKOverlayRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				A1926ECA22C08076008F16AE /* NMKOverlayRenderer.h */,
+				A1926ECB22C08076008F16AE /* NMKOverlayRenderer.mm */,
+			);
+			path = NMKOverlayRenderer;
+			sourceTree = "<group>";
+		};
+		A1926ECD22C081D2008F16AE /* NMKOverlayView */ = {
+			isa = PBXGroup;
+			children = (
+				A1926ECF22C081D2008F16AE /* NMKOverlayView.h */,
+				A1926ECE22C081D2008F16AE /* NMKOverlayView.mm */,
+			);
+			path = NMKOverlayView;
+			sourceTree = "<group>";
+		};
+		A1926ED122C08337008F16AE /* NMKUserLocation */ = {
+			isa = PBXGroup;
+			children = (
+				A1926ED222C08337008F16AE /* NMKUserLocation.h */,
+				A1926ED322C08337008F16AE /* NMKUserLocation.mm */,
+			);
+			path = NMKUserLocation;
+			sourceTree = "<group>";
+		};
+		A1926ED522C08D14008F16AE /* NMKAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				A1926ED722C08D14008F16AE /* NMKAnnotation.h */,
+				A1926ED622C08D14008F16AE /* NMKAnnotation.mm */,
+			);
+			path = NMKAnnotation;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -2687,6 +2747,11 @@
 		A194894D228A8489007BF787 /* NMapKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1926ED522C08D14008F16AE /* NMKAnnotation */,
+				A1926ED122C08337008F16AE /* NMKUserLocation */,
+				A1926ECD22C081D2008F16AE /* NMKOverlayView */,
+				A1926EC922C08076008F16AE /* NMKOverlayRenderer */,
+				A1926EC522C07D17008F16AE /* NMKMapCamera */,
 				A194896E228AA47E007BF787 /* NMKAnnotationView */,
 				A1948956228A84DB007BF787 /* NMKMapView */,
 			);
@@ -4818,12 +4883,14 @@
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
+				A1926ED022C081D2008F16AE /* NMKOverlayView.mm in Sources */,
 				A1574E8722B803FC006CC5F2 /* NUILocalNotification.mm in Sources */,
 				A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */,
 				A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
 				A19F39DD22AF4BDD00606332 /* NMDLObject.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
+				A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A1D4987122BB3A62009AC951 /* NUIPress.mm in Sources */,
@@ -4927,6 +4994,7 @@
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
+				A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
@@ -4945,6 +5013,7 @@
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
+				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */,
@@ -5012,6 +5081,7 @@
 				A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A13370C522AEF87500FA3768 /* NAVAudioNode.mm in Sources */,
+				A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */,
 				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */,

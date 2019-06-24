@@ -15,21 +15,17 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(view);
   setTimeout(() => {
-    const region = {
-      coordinate: { latitude: 41.880600, longitude: -87.630050 },
-      latitudinalMeters: 1000,
-      longitudinalMeters: 1000,
-    };
-    view.setRegion(region, true);
-    view.addAnnotation({
-      coordinate: { latitude: 41.880600, longitude: -87.630050 },
+    const region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(41.880600, -87.630050), 1000, 1000);
+    view.setRegionAnimated(region, true);
+    view.addAnnotation(MKAnnotation({
+      coordinate: CLLocationCoordinate2DMake(41.880600, -87.630050),
       title: 'Novel Coworking',
-      subtitle: 'Just Work' },
-    );
-    view.addAnnotation({
-      coordinate: { latitude: 41.909830, longitude: -87.648360 },
+      subtitle: 'Just Work'
+    }));
+    view.addAnnotation(MKAnnotation({
+      coordinate: CLLocationCoordinate2DMake(41.909830, -87.648360),
       title: 'Home Sweet Home',
-    });
+    }));
   }, 1000);
   return undefined;
 }

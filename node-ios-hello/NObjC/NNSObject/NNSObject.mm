@@ -899,7 +899,12 @@ NAN_METHOD(NClass::New) {
 #include "NNSUUID.h"
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
+#include "NMKAnnotation.h"
 #include "NMKAnnotationView.h"
+#include "NMKMapCamera.h"
+#include "NMKOverlayRenderer.h"
+#include "NMKOverlayView.h"
+#include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
@@ -1292,8 +1297,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // MapKit
     JS_EXPORT_TYPE(MKMapView);
+    JS_EXPORT_TYPE(MKAnnotation);
     JS_EXPORT_TYPE(MKAnnotationView);
     JS_EXPORT_TYPE(MKMapViewDelegate);
+    JS_EXPORT_TYPE(MKMapCamera);
+    JS_EXPORT_TYPE(MKOverlayRenderer);
+    JS_EXPORT_TYPE(MKOverlayView);
+    JS_EXPORT_TYPE(MKUserLocation);
 
     // core image
     JS_EXPORT_TYPE(CIImage);
@@ -1343,8 +1353,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CIImage);
 
       // MapKit
+      JS_RETURN_TYPE(MKUserLocation);
+      JS_RETURN_TYPE(MKOverlayView);
+      JS_RETURN_TYPE(MKOverlayRenderer);
+      JS_RETURN_TYPE(MKMapCamera);
       JS_RETURN_TYPE(MKMapView);
       JS_RETURN_TYPE(MKAnnotationView);
+      JS_RETURN_TYPE(MKAnnotation);
       JS_RETURN_TYPE_FROM(MKMapViewDelegate, SMKMapViewDelegate);
 
       // ARKit
