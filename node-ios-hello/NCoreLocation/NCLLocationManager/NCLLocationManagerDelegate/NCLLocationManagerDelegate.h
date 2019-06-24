@@ -35,6 +35,7 @@ JS_WRAP_CLASS(CLLocationManagerDelegate, NSObject);
 JS_WRAP_CLASS_END(CLLocationManagerDelegate);
 
 #if __OBJC__
+#import <CoreLocation/CLLocationManagerDelegate.h>
 @interface CLLocationManagerDelegate : NSObject<CLLocationManagerDelegate>
 /*
  *  locationManager:didUpdateLocations:

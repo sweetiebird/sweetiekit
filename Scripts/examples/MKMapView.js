@@ -2,8 +2,6 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const {
   MKMapView,
-  MKMapViewDelegate,
-  MKAnnotationView,
 } = SweetieKit;
 
 async function make(nav, demoVC) {
@@ -11,7 +9,6 @@ async function make(nav, demoVC) {
   const h = demoVC.view.frame.height;
   const frame = { x: 0, y: 0, width: w, height: h };
   const view = new MKMapView(frame);
-  const del = new MKMapViewDelegate();
 
   demoVC.view.addSubview(view);
   setTimeout(() => {

@@ -6,6 +6,7 @@
 //
 #include "NCLPlacemark.h"
 #include "NCLLocation.h"
+#import <CoreLocation/CLPlacemark.h>
 
 #define instancetype CLPlacemark
 #define js_value_instancetype js_value_CLPlacemark

@@ -9,6 +9,9 @@
 #define NCLLocation_h
 
 #import "NNSObject.h"
+#if __OBJC__
+#import <CoreLocation/CLLocation.h>
+#endif
 
 #define js_value_CLLocation(x) js_value_wrapper(x, CLLocation)
 #define to_value_CLLocation(x) to_value_wrapper(x, CLLocation)

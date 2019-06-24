@@ -26,6 +26,10 @@
 #define to_value_MKZoomScale to_value_CGFloat
 #define is_value_MKZoomScale is_value_CGFloat
 
+#if __OBJC__
+#import <MapKit/MKGeometry.h>
+#endif
+
 Local<Value> js_value_MKMapPoint(const MKMapPoint& pt);
 Local<Value> js_value_MKMapSize(const MKMapSize& size);
 Local<Value> js_value_MKMapRect(const MKMapRect& size);

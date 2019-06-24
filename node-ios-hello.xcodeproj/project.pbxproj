@@ -197,6 +197,7 @@
 		A1926ED022C081D2008F16AE /* NMKOverlayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ECE22C081D2008F16AE /* NMKOverlayView.mm */; };
 		A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ED322C08337008F16AE /* NMKUserLocation.mm */; };
 		A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ED622C08D14008F16AE /* NMKAnnotation.mm */; };
+		A1926EDC22C098D9008F16AE /* NMKClusterAnnotation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EDA22C098D9008F16AE /* NMKClusterAnnotation.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -208,9 +209,7 @@
 		A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194893A228A6AA6007BF787 /* NARLightEstimate.mm */; };
 		A1948959228A84DB007BF787 /* NMKMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948957228A84DB007BF787 /* NMKMapView.mm */; };
 		A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A194895E228A89B0007BF787 /* MapKit.framework */; };
-		A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1948966228A945E007BF787 /* SMKAnnotation.swift */; };
 		A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */; };
-		A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */; };
 		A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194896F228AA47E007BF787 /* NMKAnnotationView.mm */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
@@ -774,6 +773,8 @@
 		A1926ED322C08337008F16AE /* NMKUserLocation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKUserLocation.mm; sourceTree = "<group>"; };
 		A1926ED622C08D14008F16AE /* NMKAnnotation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKAnnotation.mm; sourceTree = "<group>"; };
 		A1926ED722C08D14008F16AE /* NMKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKAnnotation.h; sourceTree = "<group>"; };
+		A1926EDA22C098D9008F16AE /* NMKClusterAnnotation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKClusterAnnotation.mm; sourceTree = "<group>"; };
+		A1926EDB22C098D9008F16AE /* NMKClusterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKClusterAnnotation.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -793,10 +794,8 @@
 		A1948957228A84DB007BF787 /* NMKMapView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapView.mm; sourceTree = "<group>"; };
 		A1948958228A84DB007BF787 /* NMKMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapView.h; sourceTree = "<group>"; };
 		A194895E228A89B0007BF787 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		A1948966228A945E007BF787 /* SMKAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKAnnotation.swift; sourceTree = "<group>"; };
 		A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapViewDelegate.mm; sourceTree = "<group>"; };
 		A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapViewDelegate.h; sourceTree = "<group>"; };
-		A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMKMapViewDelegate.swift; sourceTree = "<group>"; };
 		A194896F228AA47E007BF787 /* NMKAnnotationView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKAnnotationView.mm; sourceTree = "<group>"; };
 		A1948970228AA47E007BF787 /* NMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKAnnotationView.h; sourceTree = "<group>"; };
 		A199AED922884F37003C1DC4 /* NUISlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUISlider.h; sourceTree = "<group>"; };
@@ -2679,6 +2678,15 @@
 			path = NMKAnnotation;
 			sourceTree = "<group>";
 		};
+		A1926ED922C098D9008F16AE /* NMKClusterAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				A1926EDB22C098D9008F16AE /* NMKClusterAnnotation.h */,
+				A1926EDA22C098D9008F16AE /* NMKClusterAnnotation.mm */,
+			);
+			path = NMKClusterAnnotation;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -2748,12 +2756,14 @@
 			isa = PBXGroup;
 			children = (
 				A1926ED522C08D14008F16AE /* NMKAnnotation */,
-				A1926ED122C08337008F16AE /* NMKUserLocation */,
-				A1926ECD22C081D2008F16AE /* NMKOverlayView */,
-				A1926EC922C08076008F16AE /* NMKOverlayRenderer */,
-				A1926EC522C07D17008F16AE /* NMKMapCamera */,
 				A194896E228AA47E007BF787 /* NMKAnnotationView */,
+				A1926ED922C098D9008F16AE /* NMKClusterAnnotation */,
+				A1926EC522C07D17008F16AE /* NMKMapCamera */,
 				A1948956228A84DB007BF787 /* NMKMapView */,
+				A1948968228AA15C007BF787 /* NMKMapViewDelegate */,
+				A1926EC922C08076008F16AE /* NMKOverlayRenderer */,
+				A1926ECD22C081D2008F16AE /* NMKOverlayView */,
+				A1926ED122C08337008F16AE /* NMKUserLocation */,
 			);
 			path = NMapKit;
 			sourceTree = "<group>";
@@ -2761,10 +2771,8 @@
 		A1948956228A84DB007BF787 /* NMKMapView */ = {
 			isa = PBXGroup;
 			children = (
-				A1948968228AA15C007BF787 /* NMKMapViewDelegate */,
 				A1948958228A84DB007BF787 /* NMKMapView.h */,
 				A1948957228A84DB007BF787 /* NMKMapView.mm */,
-				A1948966228A945E007BF787 /* SMKAnnotation.swift */,
 			);
 			path = NMKMapView;
 			sourceTree = "<group>";
@@ -2774,7 +2782,6 @@
 			children = (
 				A194896A228AA15C007BF787 /* NMKMapViewDelegate.h */,
 				A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */,
-				A194896C228AA1C2007BF787 /* SMKMapViewDelegate.swift */,
 			);
 			path = NMKMapViewDelegate;
 			sourceTree = "<group>";
@@ -4775,7 +4782,6 @@
 				A1D4989022BB4731009AC951 /* NUILexiconEntry.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
-				A194896D228AA1C2007BF787 /* SMKMapViewDelegate.swift in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
@@ -4904,6 +4910,7 @@
 				A133701922AACEC800FA3768 /* NNSURL.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
 				A1574F0422B93071006CC5F2 /* NCAKeyframeAnimation.mm in Sources */,
+				A1926EDC22C098D9008F16AE /* NMKClusterAnnotation.mm in Sources */,
 				A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
@@ -5009,7 +5016,6 @@
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
-				A1948967228A945E007BF787 /* SMKAnnotation.swift in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,

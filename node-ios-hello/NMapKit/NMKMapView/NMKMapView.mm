@@ -5,6 +5,7 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NMKMapView.h"
+#import <MapKit/MKMapView.h>
 
 #define instancetype MKMapView
 #define js_value_instancetype js_value_MKMapView

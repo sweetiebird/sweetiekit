@@ -6,117 +6,519 @@
 //
 #include "NMKAnnotationView.h"
 #include "NUIImage.h"
+#import <MapKit/MKAnnotationView.h>
+
+#define instancetype MKAnnotationView
+#define js_value_instancetype js_value_MKAnnotationView
 
 NMKAnnotationView::NMKAnnotationView () {}
 NMKAnnotationView::~NMKAnnotationView () {}
 
 JS_INIT_CLASS(MKAnnotationView, UIView);
+  JS_ASSIGN_PROTO_METHOD(initWithAnnotationReuseIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(prepareForReuse);
+  JS_ASSIGN_PROTO_METHOD(prepareForDisplay);
+  JS_ASSIGN_PROTO_METHOD(setSelectedAnimated);
+  JS_ASSIGN_PROTO_METHOD(setDragStateAnimated);
+  JS_ASSIGN_PROTO_PROP_READONLY(reuseIdentifier);
+  JS_ASSIGN_PROTO_PROP(annotation);
+  JS_ASSIGN_PROTO_PROP(image);
+  JS_ASSIGN_PROTO_PROP(centerOffset);
+  JS_ASSIGN_PROTO_PROP(calloutOffset);
+#if !TARGET_OS_IPHONE
+  JS_ASSIGN_PROTO_PROP(leftCalloutOffset);
+  JS_ASSIGN_PROTO_PROP(rightCalloutOffset);
+#endif
+  JS_ASSIGN_PROTO_PROP(isEnabled);
+  JS_ASSIGN_PROTO_PROP(isHighlighted);
+  JS_ASSIGN_PROTO_PROP(isSelected);
+  JS_ASSIGN_PROTO_PROP(canShowCallout);
+  JS_ASSIGN_PROTO_PROP(leftCalloutAccessoryView);
+  JS_ASSIGN_PROTO_PROP(rightCalloutAccessoryView);
+  JS_ASSIGN_PROTO_PROP(detailCalloutAccessoryView);
+  JS_ASSIGN_PROTO_PROP(isDraggable);
+  JS_ASSIGN_PROTO_PROP(dragState);
+  JS_ASSIGN_PROTO_PROP(clusteringIdentifier);
+  JS_ASSIGN_PROTO_PROP_READONLY(clusterAnnotationView);
+  JS_ASSIGN_PROTO_PROP(displayPriority);
+  JS_ASSIGN_PROTO_PROP(collisionMode);
+
   // instance members (proto)
-  JS_SET_PROP(proto, "image", Image);
-  JS_SET_PROP(proto, "annotation", Annotation);
   // static members (ctor)
   JS_INIT_CTOR(MKAnnotationView, UIView);
+  // constants (exports)
+  
+  // Post this notification to re-query callout information.
+  JS_ASSIGN_ENUM(MKAnnotationCalloutInfoDidChangeNotification, NSString);
+
+  //typedef NS_ENUM(NSUInteger, MKAnnotationViewDragState) {
+    JS_ASSIGN_ENUM(MKAnnotationViewDragStateNone, NSInteger); // = 0,      // View is at rest, sitting on the map.
+    JS_ASSIGN_ENUM(MKAnnotationViewDragStateStarting, NSInteger); //,      // View is beginning to drag (e.g. pin lift)
+    JS_ASSIGN_ENUM(MKAnnotationViewDragStateDragging, NSInteger); //,      // View is dragging ("lift" animations are complete)
+    JS_ASSIGN_ENUM(MKAnnotationViewDragStateCanceling, NSInteger); //,     // View was not dragged and should return to its starting position (e.g. pin drop)
+    JS_ASSIGN_ENUM(MKAnnotationViewDragStateEnding, NSInteger); //         // View was dragged, new coordinate is set and view should return to resting position (e.g. pin drop)
+  //} NS_ENUM_AVAILABLE(10_9, 4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+  //typedef float MKFeatureDisplayPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+  JS_ASSIGN_ENUM(MKFeatureDisplayPriorityRequired, MKFeatureDisplayPriority); // NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 1000;
+  JS_ASSIGN_ENUM(MKFeatureDisplayPriorityDefaultHigh, MKFeatureDisplayPriority); // NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 750;
+  JS_ASSIGN_ENUM(MKFeatureDisplayPriorityDefaultLow, MKFeatureDisplayPriority); // NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 250;
+
+  //typedef NS_ENUM(NSInteger, MKAnnotationViewCollisionMode) {
+    JS_ASSIGN_ENUM(MKAnnotationViewCollisionModeRectangle, NSInteger);
+    JS_ASSIGN_ENUM(MKAnnotationViewCollisionModeCircle, NSInteger);
+  //} NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+
 JS_INIT_CLASS_END(MKAnnotationView, UIView);
 
 NAN_METHOD(NMKAnnotationView::New) {
   JS_RECONSTRUCT(MKAnnotationView);
+  @autoreleasepool {
+    MKAnnotationView* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NMKAnnotationView *ui = new NMKAnnotationView();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge MKAnnotationView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      double lat = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("latitude")));
-      double lng = TO_DOUBLE(JS_OBJ(JS_OBJ(info[0])->Get(JS_STR("coordinate")))->Get(JS_STR("longitude")));
-      NSString *title = nullptr;
-      NSString *subtitle = nullptr;
-      if (JS_OBJ(info[0])->Get(JS_STR("title"))->IsString()) {
-        title = NJSStringToNSString(JS_OBJ(info[0])->Get(JS_STR("title")));
-      }
-      if (JS_OBJ(info[0])->Get(JS_STR("subtitle"))->IsString()) {
-        subtitle = NJSStringToNSString(JS_OBJ(info[0])->Get(JS_STR("subtitle")));
-      }
-      CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-      SMKAnnotation *note = [[SMKAnnotation alloc] initWithCoordinate:[loc coordinate] title:title about:subtitle];
-      ui->SetNSObject([[MKAnnotationView alloc] initWithAnnotation:note reuseIdentifier:nullptr]);
+    if (info[0]->IsExternal()) {
+      self = (__bridge MKAnnotationView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[MKAnnotationView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[MKAnnotationView alloc] init];
     }
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[MKAnnotationView alloc] init]);
+    if (self) {
+      NMKAnnotationView *wrapper = new NMKAnnotationView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("MKAnnotationView::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NMKAnnotationView::ImageGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(MKAnnotationView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui image], NUIImage::type));
-}
-
-NAN_SETTER(NMKAnnotationView::ImageSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(MKAnnotationView, ui);
-  
-  NUIImage *img = ObjectWrap::Unwrap<NUIImage>(Local<Object>::Cast(value));
-  
-  [ui setImage:img->As<UIImage>()];
-}
-
-NAN_GETTER(NMKAnnotationView::AnnotationGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(MKAnnotationView, ui);
-
-  __block double lat = 0;
-  __block double lng = 0;
-  __block NSString *title = nullptr;
-  __block NSString *subtitle = nullptr;
-
-  @autoreleasepool {
-    lat = [[ui annotation] coordinate].latitude;
-    lng = [[ui annotation] coordinate].longitude;
-    title = [[ui annotation] title];
-    subtitle = [[ui annotation] subtitle];
+NAN_METHOD(NMKAnnotationView::initWithAnnotationReuseIdentifier) {
+  JS_UNWRAP_OR_ALLOC(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id/* <MKAnnotation>*/, annotation);
+    declare_nullable_pointer(NSString, reuseIdentifier);
+    JS_SET_RETURN(js_value_instancetype([self initWithAnnotation: annotation reuseIdentifier: reuseIdentifier]));
   }
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  Local<Object> coordinate = Object::New(Isolate::GetCurrent());
-  coordinate->Set(JS_STR("latitude"), JS_NUM(lat));
-  coordinate->Set(JS_STR("longitude"), JS_NUM(lng));
-  result->Set(JS_STR("coordinate"), JS_OBJ(coordinate));
-  result->Set(JS_STR("title"), JS_STR([title UTF8String]));
-  result->Set(JS_STR("subtitle"), JS_STR([subtitle UTF8String]));
-
-  JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NMKAnnotationView::AnnotationSetter) {
-  Nan::HandleScope scope;
+#include "NNSCoder.h"
 
-  JS_UNWRAP(MKAnnotationView, ui);
+NAN_METHOD(NMKAnnotationView::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
+  }
+}
 
-  @autoreleasepool {
-    double lat = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("coordinate")))->Get(JS_STR("latitude")));
-    double lng = TO_DOUBLE(JS_OBJ(JS_OBJ(value)->Get(JS_STR("coordinate")))->Get(JS_STR("longitude")));
-    NSString *title = nullptr;
-    NSString *subtitle = nullptr;
-    if (JS_OBJ(value)->Get(JS_STR("title"))->IsString()) {
-      title = NJSStringToNSString(JS_OBJ(value)->Get(JS_STR("title")));
-    }
-    if (JS_OBJ(value)->Get(JS_STR("subtitle"))->IsString()) {
-      subtitle = NJSStringToNSString(JS_OBJ(value)->Get(JS_STR("subtitle")));
-    }
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-    SMKAnnotation *note = [[SMKAnnotation alloc] initWithCoordinate:[loc coordinate] title:title about:subtitle];
-    [ui setAnnotation:note];
+NAN_METHOD(NMKAnnotationView::prepareForReuse) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    [self prepareForReuse];
+  }
+}
+
+NAN_METHOD(NMKAnnotationView::prepareForDisplay) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    [self prepareForDisplay];
+  }
+}
+
+NAN_METHOD(NMKAnnotationView::setSelectedAnimated) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, selected);
+    declare_value(BOOL, animated);
+    [self setSelected: selected animated: animated];
+  }
+}
+
+NAN_METHOD(NMKAnnotationView::setDragStateAnimated) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(MKAnnotationViewDragState, newDragState);
+    declare_value(BOOL, animated);
+    [self setDragState: newDragState animated: animated];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::reuseIdentifierGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self reuseIdentifier]));
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::annotationGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id/* <MKAnnotation>*/([self annotation]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::annotationSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id/* <MKAnnotation>*/, input);
+    [self setAnnotation: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::imageGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self image]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::imageSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setImage: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::centerOffsetGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self centerOffset]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::centerOffsetSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPoint, input);
+    [self setCenterOffset: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::calloutOffsetGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self calloutOffset]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::calloutOffsetSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPoint, input);
+    [self setCalloutOffset: input];
+  }
+}
+
+#if !TARGET_OS_IPHONE
+
+NAN_GETTER(NMKAnnotationView::leftCalloutOffsetGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self leftCalloutOffset]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::leftCalloutOffsetSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPoint, input);
+    [self setLeftCalloutOffset: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::rightCalloutOffsetGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self rightCalloutOffset]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::rightCalloutOffsetSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPoint, input);
+    [self setRightCalloutOffset: input];
+  }
+}
+#endif
+
+NAN_GETTER(NMKAnnotationView::isEnabledGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isEnabled]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::isEnabledSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setEnabled: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::isHighlightedGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isHighlighted]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::isHighlightedSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHighlighted: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::isSelectedGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isSelected]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::isSelectedSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setSelected: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::canShowCalloutGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self canShowCallout]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::canShowCalloutSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setCanShowCallout: input];
+  }
+}
+
+#if TARGET_OS_IPHONE
+
+NAN_GETTER(NMKAnnotationView::leftCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self leftCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::leftCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setLeftCalloutAccessoryView: input];
+  }
+}
+
+#else
+
+NAN_GETTER(NMKAnnotationView::leftCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSView([self leftCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::leftCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSView, input);
+    [self setLeftCalloutAccessoryView: input];
+  }
+}
+
+#endif
+
+
+#if TARGET_OS_IPHONE
+
+NAN_GETTER(NMKAnnotationView::rightCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self rightCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::rightCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setRightCalloutAccessoryView: input];
+  }
+}
+
+#else
+
+NAN_GETTER(NMKAnnotationView::rightCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSView([self rightCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::rightCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSView, input);
+    [self setRightCalloutAccessoryView: input];
+  }
+}
+
+#endif
+
+#if TARGET_OS_IPHONE
+
+NAN_GETTER(NMKAnnotationView::detailCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self detailCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::detailCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setDetailCalloutAccessoryView: input];
+  }
+}
+
+#else
+
+NAN_GETTER(NMKAnnotationView::detailCalloutAccessoryViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSView([self detailCalloutAccessoryView]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::detailCalloutAccessoryViewSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSView, input);
+    [self setDetailCalloutAccessoryView: input];
+  }
+}
+
+#endif
+
+NAN_GETTER(NMKAnnotationView::isDraggableGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isDraggable]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::isDraggableSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setDraggable: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::dragStateGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MKAnnotationViewDragState([self dragState]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::dragStateSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(MKAnnotationViewDragState, input);
+    [self setDragState: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::clusteringIdentifierGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self clusteringIdentifier]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::clusteringIdentifierSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setClusteringIdentifier: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::clusterAnnotationViewGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MKAnnotationView([self clusterAnnotationView]));
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::displayPriorityGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MKFeatureDisplayPriority([self displayPriority]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::displayPrioritySetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(MKFeatureDisplayPriority, input);
+    [self setDisplayPriority: input];
+  }
+}
+
+NAN_GETTER(NMKAnnotationView::collisionModeGetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MKAnnotationViewCollisionMode([self collisionMode]));
+  }
+}
+
+NAN_SETTER(NMKAnnotationView::collisionModeSetter) {
+  JS_UNWRAP(MKAnnotationView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(MKAnnotationViewCollisionMode, input);
+    [self setCollisionMode: input];
   }
 }

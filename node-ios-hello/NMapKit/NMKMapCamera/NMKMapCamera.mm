@@ -5,6 +5,7 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NMKMapCamera.h"
+#import <MapKit/MKMapCamera.h>
 
 #define instancetype MKMapCamera
 #define js_value_instancetype js_value_MKMapCamera

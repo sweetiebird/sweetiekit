@@ -5,6 +5,7 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLHeading.h"
+#include <CoreLocation/CLHeading.h>
 
 #define instancetype CLHeading
 #define js_value_instancetype js_value_CLHeading

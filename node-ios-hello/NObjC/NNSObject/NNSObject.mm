@@ -897,9 +897,11 @@ NAN_METHOD(NClass::New) {
 #include "NCLBeaconRegion.h"
 #include "NCNPostalAddress.h"
 #include "NNSUUID.h"
+#import <MapKit/MapKit.h>
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
 #include "NMKAnnotation.h"
+#include "NMKClusterAnnotation.h"
 #include "NMKAnnotationView.h"
 #include "NMKMapCamera.h"
 #include "NMKOverlayRenderer.h"
@@ -1298,6 +1300,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // MapKit
     JS_EXPORT_TYPE(MKMapView);
     JS_EXPORT_TYPE(MKAnnotation);
+    JS_EXPORT_TYPE(MKClusterAnnotation);
     JS_EXPORT_TYPE(MKAnnotationView);
     JS_EXPORT_TYPE(MKMapViewDelegate);
     JS_EXPORT_TYPE(MKMapCamera);
@@ -1359,8 +1362,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKMapCamera);
       JS_RETURN_TYPE(MKMapView);
       JS_RETURN_TYPE(MKAnnotationView);
+      JS_RETURN_TYPE(MKClusterAnnotation);
       JS_RETURN_TYPE(MKAnnotation);
-      JS_RETURN_TYPE_FROM(MKMapViewDelegate, SMKMapViewDelegate);
+      JS_RETURN_TYPE(MKMapViewDelegate);
 
       // ARKit
       JS_RETURN_TYPE(ARLightEstimate);
