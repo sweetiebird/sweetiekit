@@ -726,6 +726,7 @@ NAN_METHOD(NClass::New) {
 #include "NUIStoryboard.h"
 #include "NUISearchController.h"
 #include "NUITabBarController.h"
+#include "NUITabBarControllerDelegate.h"
 #include "NUISplitViewController.h"
 #include "NUIBarCommon.h"
 #include "NUITabBarItem.h"
@@ -1043,6 +1044,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_TYPE(UITabBarController);
+    JS_EXPORT_TYPE(UITabBarControllerDelegate);
     JS_EXPORT_TYPE(UISplitViewController);
     JS_EXPORT_TYPE(UISearchController);
     JS_EXPORT_TYPE(UITableViewController);
@@ -1587,6 +1589,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UINavigationController);
       JS_RETURN_TYPE(UISearchController);
       JS_RETURN_TYPE(UISplitViewController);
+      JS_RETURN_TYPE(UITabBarControllerDelegate);
       JS_RETURN_TYPE(UITabBarController);
       JS_RETURN_TYPE(UIPopoverPresentationController);
       JS_RETURN_TYPE(UIPresentationController);

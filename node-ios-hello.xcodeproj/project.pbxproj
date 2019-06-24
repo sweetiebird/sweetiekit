@@ -215,6 +215,7 @@
 		A1926F1E22C0C38E008F16AE /* NCIColorKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1622C0C38D008F16AE /* NCIColorKernel.mm */; };
 		A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */; };
 		A1926F2822C0C453008F16AE /* NCIWarpKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */; };
+		A1926F2C22C0CBE9008F16AE /* NUITabBarControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F2B22C0CBE8008F16AE /* NUITabBarControllerDelegate.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -825,6 +826,8 @@
 		A1926F1D22C0C38E008F16AE /* NCIBlendKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIBlendKernel.mm; sourceTree = "<group>"; };
 		A1926F2622C0C453008F16AE /* NCIWarpKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIWarpKernel.mm; sourceTree = "<group>"; };
 		A1926F2722C0C453008F16AE /* NCIWarpKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIWarpKernel.h; sourceTree = "<group>"; };
+		A1926F2A22C0CBE8008F16AE /* NUITabBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarControllerDelegate.h; sourceTree = "<group>"; };
+		A1926F2B22C0CBE8008F16AE /* NUITabBarControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarControllerDelegate.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -2898,6 +2901,15 @@
 			path = NCIWarpKernel;
 			sourceTree = "<group>";
 		};
+		A1926F2922C0CBE8008F16AE /* NUITabBarControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F2A22C0CBE8008F16AE /* NUITabBarControllerDelegate.h */,
+				A1926F2B22C0CBE8008F16AE /* NUITabBarControllerDelegate.mm */,
+			);
+			path = NUITabBarControllerDelegate;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4323,6 +4335,7 @@
 				A164976F227E148D00CA943F /* NUISwitch */,
 				A10D697C2293B058008D0ABC /* NUITabBar */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
+				A1926F2922C0CBE8008F16AE /* NUITabBarControllerDelegate */,
 				A178B27022887901005184EE /* NUITabBarItem */,
 				A19476BA226E9450003BB393 /* NUITableView */,
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
@@ -5253,6 +5266,7 @@
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A1926EE822C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm in Sources */,
 				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
+				A1926F2C22C0CBE9008F16AE /* NUITabBarControllerDelegate.mm in Sources */,
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
 				A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,

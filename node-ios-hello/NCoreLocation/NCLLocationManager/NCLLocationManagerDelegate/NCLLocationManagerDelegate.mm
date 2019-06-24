@@ -40,6 +40,12 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge CLLocationManagerDelegate *)(info[0].As<External>()->Value());
+    } else if (info[0]->IsObject()) {
+      Local<Value> that(JS_NEW(NCLLocationManagerDelegate, 0, nullptr));
+      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
+      objectAssign("NCLLocationManagerDelegate::New", that, info[0]);
+      JS_SET_RETURN(that);
+      return;
     } else if (info.Length() <= 0) {
       self = [[CLLocationManagerDelegate alloc] init];
     }
