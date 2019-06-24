@@ -56,6 +56,10 @@ NAN_METHOD(NCIColor::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge CIColor *)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && is_value_UIColor(info[0])) {
+      declare_args();
+      declare_pointer(UIColor, color);
+      self = [[CIColor alloc] initWithColor:color];
     } else if (info.Length() <= 0) {
       self = [[CIColor alloc] init];
     }
