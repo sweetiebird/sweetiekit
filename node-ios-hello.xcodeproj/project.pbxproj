@@ -229,6 +229,8 @@
 		A1926F5B22C0E836008F16AE /* NSCNAudioSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5722C0E836008F16AE /* NSCNAudioSource.mm */; };
 		A1926F5C22C0E836008F16AE /* NSCNAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5A22C0E836008F16AE /* NSCNAudioPlayer.mm */; };
 		A1926F6022C0E8C1008F16AE /* NSceneKitTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */; };
+		A1926F6722C0F4F4008F16AE /* NSCNParticlePropertyController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F6322C0F4F3008F16AE /* NSCNParticlePropertyController.mm */; };
+		A1926F6822C0F4F4008F16AE /* NSCNParticleSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926F6522C0F4F4008F16AE /* NSCNParticleSystem.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -866,6 +868,10 @@
 		A1926F5A22C0E836008F16AE /* NSCNAudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNAudioPlayer.mm; sourceTree = "<group>"; };
 		A1926F5E22C0E8C1008F16AE /* NSceneKitTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSceneKitTypes.mm; sourceTree = "<group>"; };
 		A1926F5F22C0E8C1008F16AE /* NSceneKitTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSceneKitTypes.h; sourceTree = "<group>"; };
+		A1926F6222C0F4F3008F16AE /* NSCNParticlePropertyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNParticlePropertyController.h; sourceTree = "<group>"; };
+		A1926F6322C0F4F3008F16AE /* NSCNParticlePropertyController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNParticlePropertyController.mm; sourceTree = "<group>"; };
+		A1926F6522C0F4F4008F16AE /* NSCNParticleSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNParticleSystem.mm; sourceTree = "<group>"; };
+		A1926F6622C0F4F4008F16AE /* NSCNParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNParticleSystem.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -3064,6 +3070,24 @@
 			path = NSceneKitTypes;
 			sourceTree = "<group>";
 		};
+		A1926F6122C0F4F3008F16AE /* NSCNParticlePropertyController */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F6222C0F4F3008F16AE /* NSCNParticlePropertyController.h */,
+				A1926F6322C0F4F3008F16AE /* NSCNParticlePropertyController.mm */,
+			);
+			path = NSCNParticlePropertyController;
+			sourceTree = "<group>";
+		};
+		A1926F6422C0F4F4008F16AE /* NSCNParticleSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A1926F6622C0F4F4008F16AE /* NSCNParticleSystem.h */,
+				A1926F6522C0F4F4008F16AE /* NSCNParticleSystem.mm */,
+			);
+			path = NSCNParticleSystem;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3580,6 +3604,8 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1926F6122C0F4F3008F16AE /* NSCNParticlePropertyController */,
+				A1926F6422C0F4F4008F16AE /* NSCNParticleSystem */,
 				A1926F5D22C0E8C1008F16AE /* NSceneKitTypes */,
 				A1926F5822C0E836008F16AE /* NSCNAudioPlayer */,
 				A1926F5522C0E836008F16AE /* NSCNAudioSource */,
@@ -5171,6 +5197,7 @@
 				A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */,
 				A1574EE122B8D96C006CC5F2 /* NUICollectionViewLayoutAttributes.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
+				A1926F6822C0F4F4008F16AE /* NSCNParticleSystem.mm in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A1D4986522BB29EB009AC951 /* NNSInvocationOperation.mm in Sources */,
 				A19F39CE22AF2B3D00606332 /* NAUAudioUnitPreset.mm in Sources */,
@@ -5503,6 +5530,7 @@
 				A1D4989D22BB49BD009AC951 /* NUIDictationPhrase.mm in Sources */,
 				A19F39C922AF2AA800606332 /* NAUParameterNode.mm in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
+				A1926F6722C0F4F4008F16AE /* NSCNParticlePropertyController.mm in Sources */,
 				A1D4986422BB29EB009AC951 /* NNSOperationQueue.mm in Sources */,
 				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
 				A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */,

@@ -905,6 +905,8 @@ NAN_METHOD(NClass::New) {
 #include "NSCNGeometry.h"
 #include "NSCNText.h"
 #include "NSCNShape.h"
+#include "NSCNParticleSystem.h"
+#include "NSCNParticlePropertyController.h"
 #include "NSKScene.h"
 #include "NSKTransition.h"
 #include "NSKSpriteNode.h"
@@ -1340,6 +1342,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNPhysicsWorld);
     JS_EXPORT_TYPE(SCNView);
     JS_EXPORT_TYPE(SCNLight);
+    JS_EXPORT_TYPE(SCNParticleSystem);
+    JS_EXPORT_TYPE(SCNParticlePropertyController);
 
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -1451,6 +1455,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       JS_RETURN_TYPE(SceneKitTypes);
+      JS_RETURN_TYPE(SCNParticleSystem);
+      JS_RETURN_TYPE(SCNParticlePropertyController);
       JS_RETURN_TYPE(SCNAction);
       JS_RETURN_TYPE(SCNAudioPlayer);
       JS_RETURN_TYPE(SCNAudioSource);
