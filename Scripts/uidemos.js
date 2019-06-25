@@ -15,6 +15,7 @@ const makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
 const makeARSCNView = require('./examples/ARSCNView');
+const makeARSelection = require('./examples/ARSelection');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
 const makeCollectionView = require('./examples/UICollectionView');
@@ -100,6 +101,7 @@ const demoCtrls = {
 const arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
+  ARSelection: makeARSelection,
   GreenDot: makeGreenDot,
 };
 
