@@ -2,7 +2,7 @@ const SweetieKit = require('std:sweetiekit.node');
 
 const colors = require('./examples/colors');
 
-__DEV__ = true;
+__DEV__ = false;
 
 // apps
 const makeMiniApp = () => require('./examples/MiniApp');
@@ -10,7 +10,7 @@ makeMiniApp.lazy = true;
 const makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
 const makeFullReact = require('./examples/fullReact');
-const makePlatformer = require('./examples/Beez');
+const makePlatformer = require('./examples/Astronauts');
 const makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
