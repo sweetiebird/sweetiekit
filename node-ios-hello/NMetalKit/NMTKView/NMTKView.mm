@@ -144,12 +144,20 @@ NAN_SETTER(NMTKView::deviceSetter) {
   }
 }
 
+#if !TARGET_OS_SIMULATOR
 #include "NCAMetalDrawable.h"
+#else
+#include "NMTLDrawable.h"
+#endif
 
 NAN_GETTER(NMTKView::currentDrawableGetter) {
   JS_UNWRAP(MTKView, self);
   declare_autoreleasepool {
+#if !TARGET_OS_SIMULATOR
     JS_SET_RETURN(js_value_CAMetalDrawable([self currentDrawable]));
+#else
+    JS_SET_RETURN(js_value_MTLDrawable([self currentDrawable]));
+#endif
   }
 }
 

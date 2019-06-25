@@ -6,7 +6,9 @@
 //
 
 #ifndef NCAMetalDrawable_h
-#define NCAMetalDrawable_h    
+#define NCAMetalDrawable_h 
+
+#if !TARGET_OS_SIMULATOR   
 
 #include "NMTLDrawable.h"
 
@@ -18,5 +20,7 @@ JS_WRAP_PROTOCOL(CAMetalDrawable, NSObject);
   JS_PROP_READONLY(texture);
   JS_PROP_READONLY(layer);
 JS_WRAP_PROTOCOL_END(CAMetalDrawable, NSObject);
+
+#endif
 
 #endif /* NCAMetalDrawable_h */
