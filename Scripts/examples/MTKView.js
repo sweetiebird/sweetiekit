@@ -126,6 +126,7 @@ Uniforms = class Uniforms {
       0, 1, 0, 0,
       0, 0, 1, 0,
       0, 0, 0, 1,
+      1, 1, 1, 1,
     ]);
   }
 
@@ -135,6 +136,15 @@ Uniforms = class Uniforms {
     value = value.elements ? value.elements : value;
     for (; i < j; i++) {
       this._values[i] = value[i];
+    }
+  }
+
+  set color(value) {
+    let i = 16;
+    let j = i + 4;
+    value = [value.red, value.green, value.blue, value.alpha];
+    for (; i < j; i++) {
+      this._values[i] = value[i-16];
     }
   }
 
@@ -189,12 +199,16 @@ async function make(nav, demoVC) {
   mtkView.delegate = MTKViewDelegate({
     mtkViewDrawableSizeWillChange(mtkView, size) {
       console.log('mtkViewDrawableSizeWillChange', mtkView, size);
+      proj.width = size.width;
+      proj.height = size.height;
+      uniforms.modelViewProjectionMatrix = mvp.set(...proj.projectionMatrix.elements).multiply(cam.viewMatrix);
     },
     drawInMTKView(mtkView) {
       FPSUpdate();
       drawable = mtkView.currentDrawable;
       renderPassDescriptor = mtkView.currentRenderPassDescriptor;
       if (drawable && renderPassDescriptor) {
+        uniforms.color = UIColor(Math.random(), Math.random(), Math.random(), 1.0);
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).texture = drawable.texture;
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).loadAction = MTLLoadActionClear;
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).clearColor = /*MTLClearColor*/ RGB(0, 104, 55, 1.0);
@@ -202,6 +216,7 @@ async function make(nav, demoVC) {
         renderEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor);
         renderEncoder.setRenderPipelineState(pipelineState);
         renderEncoder.setVertexBytesLengthAtIndex(uniforms.buffer, uniforms.length, VertexBufferIndex.uniforms);
+        renderEncoder.setFragmentBytesLengthAtIndex(uniforms.buffer, uniforms.length, FragmentBufferIndex.uniforms);
         renderEncoder.setVertexBufferWithOffsetAtIndex(vertexBuffer, 0, 0);
         renderEncoder.drawPrimitivesVertexStartVertexCountInstanceCount(MTLPrimitiveTypeTriangle, 0, 3, 1);
         renderEncoder.endEncoding();
@@ -228,9 +243,14 @@ enum {
     vertexBufferIndexUniforms = 1
 };
 
+enum {
+    fragmentBufferIndexUniforms = 0
+};
+
 struct Uniforms {
   //float4x4 modelMatrix;
   float4x4 modelViewProjectionMatrix;
+  float4 color;
   //float3x3 normalMatrix;
   //float3 cameraPos;
   //float3 directionalLightInvDirection;
@@ -258,8 +278,10 @@ vertex VertexOut basic_vertex(
   return out;
 }
 
-fragment half4 basic_fragment() {
-  return half4(1.0);
+fragment half4 basic_fragment(VertexOut in                     [[stage_in]],
+                             constant Uniforms &uniforms      [[buffer(fragmentBufferIndexUniforms)]])
+{
+  return half4(uniforms.color);
 }
 `, MTLCompileOptions());
 
