@@ -44,25 +44,29 @@ NAN_METHOD(NUICollectionViewManager::New) {
     @autoreleasepool {
       dispatch_sync(dispatch_get_main_queue(), ^ {
         mgr->SetNSObject([[SUICollectionViewManager alloc] initWithNumberItemsInSection: ^ NSInteger (UICollectionView * _Nonnull collectionView, NSInteger section) {
-          Nan::HandleScope scope;
-          Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
-          Local<Value> sectionVal = JS_NUM(section);
-          Local<Value> resultVal = mgr->_numberItemsInSection("NUICollectionViewManager::New",
-            cvObj, sectionVal);
-          int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+          __block NSInteger result = 1;
+          dispatch_main(^{
+            Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
+            Local<Value> sectionVal = JS_NUM(section);
+            Local<Value> resultVal = mgr->_numberItemsInSection("NUICollectionViewManager::New",
+              cvObj, sectionVal);
+            result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+          });
           return result;
-          return 1;
         } cellForItemAt: ^ UICollectionViewCell * _Nonnull (UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath) {
-          Nan::HandleScope scope;
-          Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
-          auto section = [indexPath section];
-          auto row = [indexPath row];
-          Local<Object> indexPathObj = Nan::New<Object>();
-          Nan::Set(indexPathObj, JS_STR("section"), JS_NUM(section));
-          Nan::Set(indexPathObj, JS_STR("row"), JS_NUM(row));
-          Local<Value> result = mgr->_cellForItemAt("NUITableViewManager::New", cvObj, indexPathObj);
-          JS_UNWRAPPED(JS_OBJ(result), UICollectionViewCell, cell);
-          return cell;
+          __block UICollectionViewCell* result = nil;
+          dispatch_main(^{
+            Local<Value> cvObj = sweetiekit::GetWrapperFor(collectionView, NUICollectionView::type);
+            auto section = [indexPath section];
+            auto row = [indexPath row];
+            Local<Object> indexPathObj = Nan::New<Object>();
+            Nan::Set(indexPathObj, JS_STR("section"), JS_NUM(section));
+            Nan::Set(indexPathObj, JS_STR("row"), JS_NUM(row));
+            Local<Value> resultVal = mgr->_cellForItemAt("NUITableViewManager::New", cvObj, indexPathObj);
+            JS_UNWRAPPED(JS_OBJ(resultVal), UICollectionViewCell, cell);
+            result = cell;
+          });
+          return result;
         }]);
       });
     }

@@ -34,6 +34,7 @@ function makePlayer(demoVC) {
 }
 
 function touchesEnded(touches) {
+  touches = Array.from(touches);
   if (touches.length > 0) {
     const t = touches[0];
     const loc = t.locationInView(view);

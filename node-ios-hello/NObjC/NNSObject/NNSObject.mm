@@ -770,6 +770,7 @@ NAN_METHOD(NClass::New) {
 #include "NCADisplayLink.h"
 #include "NCATransaction.h"
 #include "NCALayer.h"
+#include "NCAMetalDrawable.h"
 #include "NCAMetalLayer.h"
 #include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
@@ -914,6 +915,9 @@ NAN_METHOD(NClass::New) {
 #include "NMTLPipeline.h"
 #include "NMTLPipelineBufferDescriptor.h" // : NSObject <NSCopying>
 #include "NMTLPipelineBufferDescriptorArray.h" // : NSObject
+
+#include "NMTKView.h"
+#include "NMTKViewDelegate.h"
 
 #include "NARSKView.h"
 #include "NARSession.h"
@@ -1574,6 +1578,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLPipelineBufferDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLPipelineBufferDescriptorArray); // : NSObject
 
+    // MetalKit
+    
+    JS_EXPORT_TYPE(MTKView);
+    JS_EXPORT_TYPE(MTKViewDelegate);
+    
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
     JS_EXPORT_TYPE(ARSKView);
@@ -1680,6 +1689,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKClusterAnnotation);
       JS_RETURN_TYPE(MKAnnotation);
       JS_RETURN_TYPE(MKMapViewDelegate);
+      
+      // MetalKit
+    
+      JS_RETURN_TYPE(MTKView);
 
       // Metal
 
@@ -2118,6 +2131,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
+
+      // MetalKit Protocols
+      
+      JS_RETURN_PROTOCOL(MTKViewDelegate);
 
       // Metal Protocols
 

@@ -52,53 +52,21 @@ NAN_METHOD(NCAMetalLayer::New) {
   }
 }
 
-NCAMetalDrawable::NCAMetalDrawable() {}
-NCAMetalDrawable::~NCAMetalDrawable() {}
-
-JS_INIT_PROTOCOL(CAMetalDrawable, NSObject);
-  JS_ASSIGN_PROTO_PROP_READONLY(texture);
-  JS_ASSIGN_PROTO_PROP_READONLY(layer);
-
-  // instance members (proto)
-  // static members (ctor)
-  JS_INIT_CTOR(CAMetalDrawable, NSObject);
-  // constant values (exports)
-JS_INIT_PROTOCOL_END(CAMetalDrawable, NSObject);
-
-NAN_METHOD(NCAMetalDrawable::New) {
-  JS_RECONSTRUCT(CAMetalDrawable);
-  @autoreleasepool {
-    id<CAMetalDrawable> self = nullptr;
-
-    if (info[0]->IsExternal()) {
-      self = (__bridge id<CAMetalDrawable>)(info[0].As<External>()->Value());
-    } else if (info.Length() >= 1 && is_value_protocol< id<CAMetalDrawable> >(info[0])) {
-      JS_UNWRAPPED_PROTOCOL(info[0], CAMetalDrawable, value);
-      self = value;
-    }
-    if (self) {
-      NCAMetalDrawable *wrapper = new NCAMetalDrawable();
-      wrapper->SetNSObject(self);
-      Local<Object> obj(info.This());
-      wrapper->Wrap(obj);
-      JS_SET_RETURN(obj);
-    } else {
-      Nan::ThrowError("CAMetalDrawable::New: invalid arguments");
-    }
-  }
-}
+#include "NCAMetalDrawable.h"
 
 NAN_METHOD(NCAMetalLayer::nextDrawable) {
   JS_UNWRAP(CAMetalLayer, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <CAMetalDrawable>*/([self nextDrawable]));
+    JS_SET_RETURN(js_value_CAMetalDrawable([self nextDrawable]));
   }
 }
+
+#include "NMTLDevice.h"
 
 NAN_GETTER(NCAMetalLayer::deviceGetter) {
   JS_UNWRAP(CAMetalLayer, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <MTLDevice>*/([self device]));
+    JS_SET_RETURN(js_value_MTLDevice([self device]));
   }
 }
 
@@ -106,7 +74,7 @@ NAN_SETTER(NCAMetalLayer::deviceSetter) {
   JS_UNWRAP(CAMetalLayer, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <MTLDevice>*/, input);
+    declare_protocol(MTLDevice, input);
     [self setDevice: input];
   }
 }
@@ -206,20 +174,6 @@ NAN_SETTER(NCAMetalLayer::allowsNextDrawableTimeoutSetter) {
     declare_setter();
     declare_value(BOOL, input);
     [self setAllowsNextDrawableTimeout: input];
-  }
-}
-
-NAN_GETTER(NCAMetalDrawable::textureGetter) {
-  JS_UNWRAP_PROTOCOL(CAMetalDrawable, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <MTLTexture>*/([self texture]));
-  }
-}
-
-NAN_GETTER(NCAMetalDrawable::layerGetter) {
-  JS_UNWRAP_PROTOCOL(CAMetalDrawable, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_CAMetalLayer([self layer]));
   }
 }
 

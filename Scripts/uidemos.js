@@ -36,6 +36,7 @@ const makeView = require('./examples/UIView');
 const makeARSKView = require('./examples/ARSKView');
 const makeCAEmitterLayer = require('./examples/CAEmitterLayer');
 const makeCAMetalLayer = require('./examples/CAMetalLayer');
+const makeMTKView = require('./examples/MTKView');
 const makeCLLocation = require('./examples/CLLocation');
 const makeGreenDot = require('./examples/GreenDot');
 
@@ -63,6 +64,7 @@ const {
 const demoTypes = {
   CAEmitterLayer: makeCAEmitterLayer,
   CAMetalLayer: makeCAMetalLayer,
+  MTKView: makeMTKView,
   CLGeocoder: makeCLLocation,
   GifView: makeGifView,
   MKMapView: makeMapView,

@@ -35,18 +35,22 @@ NAN_METHOD(NUIPickerViewManager::New) {
 
     @autoreleasepool {
       mgr->SetNSObject([[SUIPickerViewManager alloc] initWithNumberComponents: ^ NSInteger (UIPickerView * _Nonnull pickerView) {
-        Nan::HandleScope scope;
-        Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
-        Local<Value> resultVal = mgr->_numberComponents("NUIPickerViewManager::New",
-            pickerObj);
-        int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 1;
+        __block NSInteger result = 1;
+        dispatch_main(^{
+          Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
+          Local<Value> resultVal = mgr->_numberComponents("NUIPickerViewManager::New",
+              pickerObj);
+          result = resultVal->IsNumber() ? TO_INT32(resultVal) : result;
+        });
         return result;
       } numberRows: ^ NSInteger (UIPickerView * _Nonnull pickerView, NSInteger component) {
-        Nan::HandleScope scope;
-        Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
-        Local<Value> resultVal = mgr->_numberRowsInComponent("NUIPickerViewManager::New",
-            pickerObj, JS_NUM(component));
-        int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 1;
+        __block NSInteger result = 1;
+        dispatch_main(^{
+          Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
+          Local<Value> resultVal = mgr->_numberRowsInComponent("NUIPickerViewManager::New",
+              pickerObj, JS_NUM(component));
+          result = resultVal->IsNumber() ? TO_INT32(resultVal) : result;
+        });
         return result;
       }]);
     }
@@ -72,10 +76,12 @@ NAN_SETTER(NUIPickerViewManager::titleForRowSetter) {
   mgr->_titleForRow.Reset(Local<Function>::Cast(value));
   
   [sMgr setTitleForRow: ^ NSString * _Nullable (UIPickerView * _Nonnull pickerView, NSInteger row, NSInteger component) {
-    Nan::HandleScope scope;
-    Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
-    Local<Value> resultVal = mgr->_titleForRow("NUIScrollViewDelegate::didScrollSetter", pickerObj, JS_NUM(row), JS_NUM(component));
-    NSString *result = resultVal->IsString() ? NJSStringToNSString(resultVal) : nullptr;
+    __block NSString* result = nil;
+    dispatch_main(^{
+      Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
+      Local<Value> resultVal = mgr->_titleForRow("NUIScrollViewDelegate::didScrollSetter", pickerObj, JS_NUM(row), JS_NUM(component));
+      result = resultVal->IsString() ? NJSStringToNSString(resultVal) : result;
+    });
     return result;
   }];
 }
@@ -94,9 +100,10 @@ NAN_SETTER(NUIPickerViewManager::didSelectRowSetter) {
   mgr->_didSelectRow.Reset(Local<Function>::Cast(value));
   
   [sMgr setDidSelectRow: ^ (UIPickerView * _Nonnull pickerView, NSInteger row, NSInteger component) {
-    Nan::HandleScope scope;
-    Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
-    mgr->_didSelectRow("NUIScrollViewDelegate::didSelectRowSetter", pickerObj, JS_NUM(row), JS_NUM(component));
+    dispatch_main(^{
+      Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
+      mgr->_didSelectRow("NUIScrollViewDelegate::didSelectRowSetter", pickerObj, JS_NUM(row), JS_NUM(component));
+    });
   }];
 }
 
@@ -116,10 +123,13 @@ NAN_SETTER(NUIPickerViewManager::attributedTitleForRowSetter) {
   mgr->_titleForRow.Reset(Local<Function>::Cast(value));
   
   [sMgr setAttributedTitleForRow: ^ NSAttributedString * _Nullable (UIPickerView * _Nonnull pickerView, NSInteger row, NSInteger component) {
-    Nan::HandleScope scope;
-    Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
-    Local<Value> result = mgr->_attributedTitleForRow("NUIPickerViewManager::attributedTitleForRowSetter", pickerObj, JS_NUM(row), JS_NUM(component));
-    JS_UNWRAPPED(JS_OBJ(result), NSAttributedString, attrString);
-    return attrString;
+    __block NSAttributedString* result = nil;
+    dispatch_main(^{
+      Local<Value> pickerObj = sweetiekit::GetWrapperFor(pickerView, NUIPickerView::type);
+      Local<Value> resultVal = mgr->_attributedTitleForRow("NUIPickerViewManager::attributedTitleForRowSetter", pickerObj, JS_NUM(row), JS_NUM(component));
+      JS_UNWRAPPED(JS_OBJ(resultVal), NSAttributedString, attrString);
+      result = attrString;
+    });
+    return result;
   }];
 }

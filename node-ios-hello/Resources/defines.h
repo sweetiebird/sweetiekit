@@ -1559,10 +1559,13 @@ bool is_value_##type(const Local<Value>& value)
     name = nil; \
   }
 
-#define declare_persistent_function(name, keyName) \
+#define declare_persistent_function_on(self, name, keyName) \
   SweetJSFunction* name = [[SweetJSFunction alloc] init]; \
   [name jsFunction]->Reset(info[JS_ARGC++]); \
-  [self associateValue:name withKey:keyName];
+  [self associateValue:name withKey:keyName]
+
+#define declare_persistent_function(name, keyName) \
+  declare_persistent_function_on(self, name, keyName)
   
 #define get_persistent_function(from, name, key) \
       SweetJSFunction* name = (SweetJSFunction*)[from associatedValueForKey:key];

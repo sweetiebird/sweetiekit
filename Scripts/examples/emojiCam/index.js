@@ -385,6 +385,7 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesBeganWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
@@ -396,6 +397,7 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesMovedWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
@@ -410,6 +412,7 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesEndedWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);

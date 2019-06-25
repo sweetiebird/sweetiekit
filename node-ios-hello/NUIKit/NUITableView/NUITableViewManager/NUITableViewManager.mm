@@ -36,17 +36,19 @@ NAN_METHOD(NUITableViewManager::New) {
     mgr->_cellForRowAt.Reset(Local<Function>::Cast(info[1]));
 
     @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        mgr->SetNSObject([[SUITableViewManager alloc] initWithGetNumberOfRowsInSection: ^ NSInteger (UITableView * _Nonnull tableView, NSInteger section) {
-          Nan::HandleScope scope;
+      mgr->SetNSObject([[SUITableViewManager alloc] initWithGetNumberOfRowsInSection: ^ NSInteger (UITableView * _Nonnull tableView, NSInteger section) {
+        __block int result = 0;
+        dispatch_main(^{
           Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
           Local<Value> sectionVal = JS_NUM(section);
           Local<Value> resultVal = mgr->_numberRowsInSection("NUITableViewManager::New",
             tableViewObj, sectionVal);
-          int result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
-          return result;
-        } getCellForRowAt: ^ UITableViewCell * _Nonnull (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
-          Nan::HandleScope scope;
+          result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+        });
+        return result;
+      } getCellForRowAt: ^ UITableViewCell * _Nonnull (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+        __block UITableViewCell* returning = nil;
+        dispatch_main(^{
           Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
           auto section = [indexPath section];
           auto row = [indexPath row];
@@ -56,9 +58,10 @@ NAN_METHOD(NUITableViewManager::New) {
           Local<Value> result = mgr->_cellForRowAt("NUITableViewManager::New",
             tableViewObj, indexPathObj);
           JS_UNWRAPPED(JS_OBJ(result), UITableViewCell, cell);
-          return cell;
-        }]);
-      });
+          returning = cell;
+        });
+        return returning;
+      }]);
     }
   } else {
     // throw error
@@ -88,14 +91,15 @@ NAN_SETTER(NUITableViewManager::DidSelectRowAtSetter) {
   mgr->_didSelectRowAt.Reset(Local<Function>::Cast(value));
   
   [sMgr setDidSelectRowAtCallback: ^ (UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
-    Nan::HandleScope scope;
-    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-    auto section = [indexPath section];
-    auto row = [indexPath row];
-    Local<Object> indexPathObj = Nan::New<Object>();
-    Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
-    Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
-    mgr->_didSelectRowAt("NUITableViewManager::New", tableViewObj, indexPathObj);
+    dispatch_main(^{
+      Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+      auto section = [indexPath section];
+      auto row = [indexPath row];
+      Local<Object> indexPathObj = Nan::New<Object>();
+      Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
+      Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+      mgr->_didSelectRowAt("NUITableViewManager::New", tableViewObj, indexPathObj);
+    });
   }];
 }
 
@@ -117,11 +121,14 @@ NAN_SETTER(NUITableViewManager::NumberOfSectionsSetter) {
   mgr->_numberSections.Reset(Local<Function>::Cast(value));
   
   [sMgr setNumberOfSectionsCallback: ^ NSInteger (UITableView * _Nonnull tableView) {
-    Nan::HandleScope scope;
-    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-    Local<Value> resultVal = mgr->_numberSections("NUITableViewManager::NumberOfSectionsSetter",
-            tableViewObj);
-    return resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+    __block NSInteger result = 0;
+    dispatch_main(^{
+      Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+      Local<Value> resultVal = mgr->_numberSections("NUITableViewManager::NumberOfSectionsSetter",
+              tableViewObj);
+      result = resultVal->IsNumber() ? TO_INT32(resultVal) : 0;
+    });
+    return result;
   }];
 }
 
@@ -140,15 +147,18 @@ NAN_SETTER(NUITableViewManager::heightForRowAtIndexPathSetter) {
   mgr->_heightForRow.Reset(Local<Function>::Cast(value));
 
   [sMgr setHeightForRowCallback:^CGFloat(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
-    Nan::HandleScope scope;
-    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
-    auto section = [indexPath section];
-    auto row = [indexPath row];
-    Local<Object> indexPathObj = Nan::New<Object>();
-    Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
-    Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
-    Local<Value> resultVal = mgr->_heightForRow("NUITableViewManager::NumberOfSectionsSetter", tableViewObj, indexPathObj);
-    return resultVal->IsNumber() ? TO_DOUBLE(resultVal) : 0;
+  __block CGFloat result = 0;
+    dispatch_main(^{
+      Local<Value> tableViewObj = sweetiekit::GetWrapperFor(tableView, NUITableView::type);
+      auto section = [indexPath section];
+      auto row = [indexPath row];
+      Local<Object> indexPathObj = Nan::New<Object>();
+      Nan::Set(indexPathObj, JS_STR("section"), JS_INT(section));
+      Nan::Set(indexPathObj, JS_STR("row"), JS_INT(row));
+      Local<Value> resultVal = mgr->_heightForRow("NUITableViewManager::NumberOfSectionsSetter", tableViewObj, indexPathObj);
+      result = resultVal->IsNumber() ? TO_DOUBLE(resultVal) : 0;
+    });
+    return result;
   }];
 }
 
@@ -167,9 +177,12 @@ NAN_SETTER(NUITableViewManager::titleForHeaderInSectionSetter) {
   mgr->_titleForSection.Reset(Local<Function>::Cast(value));
 
   [sMgr setTitleForSectionCallback:^NSString * _Nullable(UITableView * _Nonnull table, NSInteger section) {
-    Nan::HandleScope scope;
-    Local<Value> tableViewObj = sweetiekit::GetWrapperFor(table, NUITableView::type);
-    Local<Value> resultVal = mgr->_titleForSection("NUITableViewManager::titleForHeaderInSectionSetter", tableViewObj, JS_NUM(section));
-    return resultVal->IsString() ? NJSStringToNSString(resultVal) : nil;
+    __block NSString* result = nil;
+    dispatch_main(^{
+      Local<Value> tableViewObj = sweetiekit::GetWrapperFor(table, NUITableView::type);
+      Local<Value> resultVal = mgr->_titleForSection("NUITableViewManager::titleForHeaderInSectionSetter", tableViewObj, JS_NUM(section));
+      result = resultVal->IsString() ? NJSStringToNSString(resultVal) : nil;
+    });
+    return result;
   }];
 }

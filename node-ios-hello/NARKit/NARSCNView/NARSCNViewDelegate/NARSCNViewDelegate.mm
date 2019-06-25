@@ -49,11 +49,14 @@ NAN_METHOD(NARSCNViewDelegate::New) {
 
     @autoreleasepool {
       del->SetNSObject([[SARSCNViewDelegate alloc] initWithNodeForAnchor: ^ SCNNode * _Nullable (id<SCNSceneRenderer> _Nonnull renderer, ARAnchor * _Nonnull anchor) {
-        Nan::HandleScope scope;
-        Local<Value> anchorObj = sweetiekit::GetWrapperFor(anchor, NARAnchor::type);
-        Local<Value> result = del->_nodeForAnchor("NARSCNViewDelegate::New _nodeForAnchor", Nan::Null(), anchorObj);
-        JS_UNWRAPPED(JS_OBJ(result), SCNNode, node);
-        return node;
+        __block SCNNode* result = nil;
+        dispatch_main(^{
+          Local<Value> anchorObj = sweetiekit::GetWrapperFor(anchor, NARAnchor::type);
+          Local<Value> resultVal = del->_nodeForAnchor("NARSCNViewDelegate::New _nodeForAnchor", Nan::Null(), anchorObj);
+          JS_UNWRAPPED(JS_OBJ(resultVal), SCNNode, node);
+          result = node;
+        });
+        return result;
       }]);
     }
   } else {

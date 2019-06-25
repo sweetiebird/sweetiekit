@@ -27,15 +27,6 @@ JS_WRAP_CLASS(CAMetalLayer, CALayer);
   JS_PROP(allowsNextDrawableTimeout);
 JS_WRAP_CLASS_END(CAMetalLayer);
 
-#define js_value_CAMetalDrawable(x) js_protocol_wrapper(x, CAMetalDrawable)
-#define to_value_CAMetalDrawable(x) to_protocol_wrapper(x, CAMetalDrawable)
-#define is_value_CAMetalDrawable(x) is_protocol_wrapper(x, CAMetalDrawable)
-
-JS_WRAP_PROTOCOL(CAMetalDrawable, NSObject);
-  JS_PROP_READONLY(texture);
-  JS_PROP_READONLY(layer);
-JS_WRAP_PROTOCOL_END(CAMetalDrawable, NSObject);
-
 #endif // !TARGET_OS_SIMULATOR
 
 #endif /* NCAMetalLayer_h */
