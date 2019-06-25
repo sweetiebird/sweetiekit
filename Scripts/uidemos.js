@@ -10,7 +10,7 @@ makeMiniApp.lazy = true;
 const makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
 const makeFullReact = require('./examples/fullReact');
-const makePlatformer = require('./examples/Beez');
+const makePlatformer = require('./examples/Astronauts');
 const makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos

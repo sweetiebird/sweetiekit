@@ -1,3 +1,5 @@
+THREE = require('../../vendor/three/three');
+
 const pointAdd = (left, right) => ({
   x: left.x + right.x,
   y: left.y + right.y,
