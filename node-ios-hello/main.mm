@@ -356,7 +356,9 @@ int main(int argc, char** argv)
     __builtin_trap();
   }
 //  auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
-  NSArray* arguments = @[@"node", @"--expose_gc", @"--inspect=0.0.0.0:9229", @"--jitless", @"--builtins-in-stack-traces", entry
+  NSArray* arguments = @[@"node", @"--expose_gc", @"--inspect=0.0.0.0:9229", @"--jitless", @"--builtins-in-stack-traces",
+  @"--no-use-ic", @"--no-opt", @"--no-compilation-cache", /*@"--minimal",*/ // try to avoid the IC crash
+  entry
   /*@"-e",
 @"\
 honeykit = process._linkedBinding('honeykit'); \
