@@ -15,14 +15,11 @@
 #define is_value_ARSKView(x) is_value_wrapper(x, ARSKView)
 
 JS_WRAP_CLASS(ARSKView, SKView);
-  JS_METHOD(presentScene);
-  JS_PROP(session);
-  JS_PROP(delegate);
-  JS_METHOD(hitTest);
-  JS_METHOD(nodeForAnchor);
   JS_METHOD(anchorForNode);
-  
-  Nan::Persistent<Value> _delegate;
+  JS_METHOD(nodeForAnchor);
+  JS_METHOD(hitTestTypes);
+  JS_PROP(delegate);
+  JS_PROP(session);
 JS_WRAP_CLASS_END(ARSKView);
 
 #endif /* NARSKView_h */

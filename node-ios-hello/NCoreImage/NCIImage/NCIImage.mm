@@ -10,33 +10,6 @@
 #define instancetype CIImage
 #define js_value_instancetype js_value_CIImage
 
-Local<Value> js_value_IOSurfaceRef(IOSurfaceRef _Nullable value)
-{
-  return sweetiekit::GetWrapperFor((__bridge id)value);
-}
-
-IOSurfaceRef _Nullable to_value_IOSurfaceRef(const Local<Value>& value, bool * _Nullable failed)
-{
-  if (failed) {
-    *failed = false;
-  }
-  if (!is_value_IOSurfaceRef(value)) {
-    if (failed) {
-      *failed = true;
-    } else {
-      Nan::ThrowError("to_value_IOSurfaceRef: expected an IOSurfaceRef");
-    }
-    return nil;
-  }
-  return (__bridge IOSurfaceRef)sweetiekit::GetValueFor(value, failed);
-}
-
-bool is_value_IOSurfaceRef(const Local<Value>& value)
-{
-  // TODO: test type.
-  return is_value_id(value);
-}
-
 NCIImage::NCIImage() {}
 NCIImage::~NCIImage() {}
 
@@ -61,8 +34,10 @@ JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_STATIC_METHOD(imageWithCVImageBufferOptions);
   JS_ASSIGN_STATIC_METHOD(imageWithCVPixelBuffer);
   JS_ASSIGN_STATIC_METHOD(imageWithCVPixelBufferOptions);
+#if !TARGET_OS_SIMULATOR
   JS_ASSIGN_STATIC_METHOD(imageWithIOSurface);
   JS_ASSIGN_STATIC_METHOD(imageWithIOSurfaceOptions);
+#endif
   JS_ASSIGN_STATIC_METHOD(imageWithColor);
   JS_ASSIGN_STATIC_METHOD(emptyImage);
   JS_ASSIGN_STATIC_METHOD(imageWithDepthDataOptions);
@@ -422,28 +397,26 @@ NAN_METHOD(NCIImage::imageWithCVPixelBufferOptions) {
   }
 }
 
+#if !TARGET_OS_SIMULATOR
+#include "NIOSurfaceRef.h"
+
 NAN_METHOD(NCIImage::imageWithIOSurface) {
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_args();
     declare_value(IOSurfaceRef, surface);
     JS_SET_RETURN(js_value_CIImage([CIImage imageWithIOSurface: surface]));
-    #endif
   }
 }
 
 NAN_METHOD(NCIImage::imageWithIOSurfaceOptions) {
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_args();
     declare_value(IOSurfaceRef, surface);
     declare_nullable_pointer(NSDictionary/* <CIImageOption, id>*/, options);
     JS_SET_RETURN(js_value_CIImage([CIImage imageWithIOSurface: surface options: options]));
-    #endif
   }
 }
+#endif
 
 #include "NCIColor.h"
 

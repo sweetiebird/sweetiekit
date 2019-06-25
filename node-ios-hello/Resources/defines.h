@@ -290,7 +290,6 @@ public: \
   
 #define JS_WRAP_CLASS_END(name) \
 };
-
 #define JS_EXTEND_CLASS(name, category) \
   JS_WRAP_CLASS(name##_##category, NSObject)
 
@@ -360,10 +359,29 @@ std::pair<Local<Object>, Local<FunctionTemplate>> N##name::Initialize(Isolate *i
   type.Reset(ctorSpec); \
   return result; \
 }
+
+
+#define JS_WRAP_GLOBALS(name) \
+\
+class N##name { \
+public: \
+  static void Initialize(Isolate * _Nonnull isolate, Local<Object> exports)
   
+#define JS_WRAP_GLOBALS_END(name) \
+};
+
+#define JS_INIT_GLOBALS(name) \
+\
+void N##name::Initialize(Isolate *isolate, Local<Object> exports) \
+{ \
+  Nan::HandleScope scope
+  
+#define JS_INIT_GLOBALS_END(name) \
+}
+
+
 #define JS_GET_FUNCTION(varName, objc, keyName) \
   auto& varName = *[(SweetJSFunction*)[objc associatedValueForKey:keyName] jsFunction];
-
 
 
 #define DELEGATE_PROP(type, key) \
@@ -1031,6 +1049,10 @@ SCNQuaternion  to_value_SCNQuaternion(const Local<Value>& value, bool * _Nullabl
 SCNVector3     to_value_SCNVector3(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNVector4     to_value_SCNVector4(const Local<Value>& value, bool * _Nullable failed = nullptr);
 SCNMatrix4     to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable failed = nullptr);
+bool is_value_SCNQuaternion(const Local<Value>& value);
+bool is_value_SCNVector3(const Local<Value>& value);
+bool is_value_SCNVector4(const Local<Value>& value);
+bool is_value_SCNMatrix4(const Local<Value>& value);
 
 Local<Value> js_value_CATransform3D(const CATransform3D& value);
 CATransform3D to_value_CATransform3D(const Local<Value>& value, bool * _Nullable failed = nullptr);
@@ -1401,6 +1423,11 @@ bool is_value_boxed(Local<Value> value);
 #define to_value_NSString(x) NJSStringToNSString(x)
 #define is_value_NSString(x) (x)->IsString()
 
+#define JS_DECLARE_STRUCT(type) \
+Local<Value> js_value_##type(const type& value); \
+type to_value_##type(const Local<Value>& value, bool * _Nullable failed = nullptr); \
+bool is_value_##type(const Local<Value>& value)
+
 #define JS_ENUM(type, c, x) js_value_##c(x)
 #define TO_ENUM(type, c, x) static_cast<type>(to_value_##c(x))
 #define IS_ENUM(type, c, x) is_value_##c(x)
@@ -1444,6 +1471,12 @@ bool is_value_boxed(Local<Value> value);
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(to_value_##type(info[name##_argument_index]));
   
+#define declare_protocol_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (info[name##_argument_index]->IsNullOrUndefined() || !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  id<type> name(to_value_##type(info[name##_argument_index]));
+  
 #define declare_nullable_value_(index, type, name) \
   auto name##_argument_index(index); \
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
@@ -1455,6 +1488,12 @@ bool is_value_boxed(Local<Value> value);
   if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type* name(info[name##_argument_index]->IsNullOrUndefined() ? nullptr : to_value_##type(info[name##_argument_index]));
+
+#define declare_nullable_protocol_(index, type, name) \
+  auto name##_argument_index(index); \
+  if (!info[name##_argument_index]->IsNullOrUndefined() && !is_value_##type(info[name##_argument_index])) \
+    JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
+  id<type> name(info[name##_argument_index]->IsNullOrUndefined() ? nil : to_value_##type(info[name##_argument_index]));
 
 #define declare_value_pointer_(index, type, name) \
   auto name##_argument_index(index); \
@@ -1489,11 +1528,17 @@ bool is_value_boxed(Local<Value> value);
 #define declare_pointer(...) \
   declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
 
+#define declare_protocol(...) \
+  declare_protocol_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+
 #define declare_nullable_pointer(...) \
   declare_nullable_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_nullable_value(...) \
   declare_nullable_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+  
+#define declare_nullable_protocol(...) \
+  declare_nullable_protocol_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_value_pointer(...) \
   declare_value_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
@@ -1514,10 +1559,13 @@ bool is_value_boxed(Local<Value> value);
     name = nil; \
   }
 
-#define declare_persistent_function(name, keyName) \
+#define declare_persistent_function_on(self, name, keyName) \
   SweetJSFunction* name = [[SweetJSFunction alloc] init]; \
   [name jsFunction]->Reset(info[JS_ARGC++]); \
-  [self associateValue:name withKey:keyName];
+  [self associateValue:name withKey:keyName]
+
+#define declare_persistent_function(name, keyName) \
+  declare_persistent_function_on(self, name, keyName)
   
 #define get_persistent_function(from, name, key) \
       SweetJSFunction* name = (SweetJSFunction*)[from associatedValueForKey:key];

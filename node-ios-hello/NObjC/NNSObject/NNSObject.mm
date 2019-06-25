@@ -649,6 +649,11 @@ NAN_METHOD(NClass::New) {
 }
 
 #include "NNSObjCRuntime.h"
+#include "NNSTarget.h"
+#include "NNSRunLoop.h"
+#include "NNSTimer.h"
+#include "NNSPort.h"
+#include "NNSInvocation.h"
 #include "NNSUserDefaults.h"
 #include "NNSMutableParagraphStyle.h"
 #include "NNSParagraphStyle.h"
@@ -762,8 +767,11 @@ NAN_METHOD(NClass::New) {
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NUIDatePicker.h"
+#include "NCADisplayLink.h"
 #include "NCATransaction.h"
 #include "NCALayer.h"
+#include "NCAMetalDrawable.h"
+#include "NCAMetalLayer.h"
 #include "NCAGradientLayer.h"
 #include "NCAEmitterLayer.h"
 #include "NCAEmitterCell.h"
@@ -810,9 +818,111 @@ NAN_METHOD(NClass::New) {
 #include "NUIKitGlobals.h"
 #include "NUIDictationPhrase.h"
 
+#include "NMTLPixelFormat.h"
+
+#include "NMTLType.h" // : NSObject
+#include "NMTLStructMember.h" // : NSObject
+#include "NMTLStructType.h" // : MTLType
+#include "NMTLArrayType.h" // : MTLType
+#include "NMTLPointerType.h" // : MTLType
+#include "NMTLTextureReferenceType.h" // : MTLType
+#include "NMTLArgument.h" // : NSObject
+
+#include "NMTLArgumentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDevice.h" // <NSObject>
+
+#include "NMTLResource.h" // <NSObject>
+#include "NMTLTextureDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLTexture.h" // <MTLResource>
+
+#include "NMTLRenderPassAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPassColorAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassDepthAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassStencilAttachmentDescriptor.h" // : MTLRenderPassAttachmentDescriptor
+#include "NMTLRenderPassColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLRenderPassDescriptor.h" // : NSObject <NSCopying>
+
+#include "NMTLCommandQueue.h"
+#include "NMTLHeapDescriptor.h"
+#include "NMTLHeap.h"
+#include "NMTLBuffer.h" // <MTLResource>
+
+#include "NMTLSamplerDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLSamplerState.h" // <NSObject>
+
+#include "NMTLDepthStencil.h"
+#include "NMTLStencilDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDepthStencilDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLDepthStencilState.h" // <NSObject>
+
+#include "NMTLTypes.h"
+
+#include "NMTLVertexAttribute.h" // : NSObject
+#include "NMTLAttribute.h" // : NSObject
+#include "NMTLFunctionConstant.h" // : NSObject
+#include "NMTLCompileOptions.h" // : NSObject <NSCopying>
+#include "NMTLFunction.h" // <NSObject>
+#include "NMTLLibrary.h" // <NSObject>
+
+#include "NMTLRenderPipelineColorAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineReflection.h" // : NSObject
+#include "NMTLRenderPipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLTileRenderPipelineColorAttachmentDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLTileRenderPipelineColorAttachmentDescriptorArray.h" // : NSObject
+#include "NMTLTileRenderPipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLRenderPipelineState.h" // <NSObject>
+
+#include "NMTLVertexBufferLayoutDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLVertexBufferLayoutDescriptorArray.h" // : NSObject
+#include "NMTLVertexAttributeDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLVertexAttributeDescriptorArray.h" // : NSObject
+#include "NMTLVertexDescriptor.h" // : NSObject <NSCopying>
+
+#include "NMTLComputePipelineReflection.h" // : NSObject
+#include "NMTLComputePipelineDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLComputePipelineState.h" // <NSObject>
+
+#include "NMTLFence.h" // <NSObject>
+#include "NMTLArgumentEncoder.h" // <NSObject>
+
+#include "NMTLIndirectCommandBufferDescriptor.h" // : NSObject
+#include "NMTLIndirectCommandBuffer.h" // <MTLResource>
+#include "NMTLIndirectRenderCommand.h" // <NSObject>
+#include "NMTLCommandEncoder.h" // <NSObject>
+#include "NMTLRenderCommandEncoder.h" // <MTLCommandEncoder>
+
+#include "NMTLBufferLayoutDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLBufferLayoutDescriptorArray.h" // : NSObject
+#include "NMTLAttributeDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLAttributeDescriptorArray.h" // : NSObject
+#include "NMTLStageInputOutputDescriptor.h" // : NSObject <NSCopying>
+
+#include "NMTLEvent.h" // <NSObject>
+#include "NMTLSharedEvent.h" // <MTLEvent>
+#include "NMTLSharedEventListener.h" // : NSObject
+#include "NMTLSharedEventHandle.h" // : NSObject <NSSecureCoding>
+
+#include "NMTLFunctionConstantValues.h" // : NSObject <NSCopying>
+
+#include "NMTLCommandBuffer.h" // <NSObject>
+#include "NMTLDrawable.h" // <NSObject>
+
+#include "NMTLBlitCommandEncoder.h" // <MTLCommandEncoder>
+#include "NMTLParallelRenderCommandEncoder.h" // <MTLCommandEncoder>
+#include "NMTLComputeCommandEncoder.h" // <MTLCommandEncoder>
+
+#include "NMTLPipeline.h"
+#include "NMTLPipelineBufferDescriptor.h" // : NSObject <NSCopying>
+#include "NMTLPipelineBufferDescriptorArray.h" // : NSObject
+
+#include "NMTKView.h"
+#include "NMTKViewDelegate.h"
+
 #include "NARSKView.h"
 #include "NARSession.h"
 #include "NARWorldTrackingConfiguration.h"
+#include "NSKRenderer.h"
 #include "NSKView.h"
 #include "NSKNode.h"
 #include "NSKTexture.h"
@@ -869,9 +979,25 @@ NAN_METHOD(NClass::New) {
 #include "NARLightEstimate.h"
 #include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
+
+#include "NSceneKitTypes.h"
+#include "NSCNSceneRenderer.h"
+#include "NSCNSceneRendererDelegate.h"
+#include "NSCNAction.h"
 #include "NSCNView.h"
 #include "NSCNScene.h"
+#include "NSCNPhysicsBehavior.h"
+#include "NSCNPhysicsHingeJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsBallSocketJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsSliderJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsConeTwistJoint.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsVehicleWheel.h"
+#include "NSCNPhysicsVehicle.h" // : SCNPhysicsBehavior
+#include "NSCNPhysicsShape.h"
+#include "NSCNPhysicsWorld.h"
 #include "NSCNNode.h"
+#include "NSCNAudioPlayer.h"
+#include "NSCNAudioSource.h"
 #include "NSCNLight.h"
 #include "NSCNMaterial.h"
 #include "NSCNMaterialProperty.h"
@@ -892,6 +1018,8 @@ NAN_METHOD(NClass::New) {
 #include "NSCNGeometry.h"
 #include "NSCNText.h"
 #include "NSCNShape.h"
+#include "NSCNParticleSystem.h"
+#include "NSCNParticlePropertyController.h"
 #include "NSKScene.h"
 #include "NSKTransition.h"
 #include "NSKSpriteNode.h"
@@ -976,6 +1104,12 @@ NAN_METHOD(NClass::New) {
 #define JS_EXPORT_TYPE(type) \
         JS_EXPORT_TYPE_AS(type, #type)
 
+#define JS_EXPORT_PROTOCOL(type) \
+        JS_EXPORT_TYPE_AS(type, #type)
+
+#define JS_EXPORT_GLOBALS(name) \
+        N##name::Initialize(isolate, exports)
+
 void NNSObject::RegisterTypes(Local<Object> exports) {
     Isolate* isolate = Isolate::GetCurrent();
 
@@ -983,6 +1117,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSObjCRuntime);
+    JS_EXPORT_TYPE(NSTarget);
+    JS_EXPORT_TYPE(NSRunLoop);
+    JS_EXPORT_TYPE(NSTimer);
+    JS_EXPORT_TYPE(NSPort);
+    JS_EXPORT_TYPE(NSInvocation);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
     JS_EXPORT_TYPE(NSURLRequest);
@@ -1220,6 +1359,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(GifView);
 
     // CoreAnimation
+    JS_EXPORT_TYPE(CADisplayLink);
     JS_EXPORT_TYPE(CATransaction);
     JS_EXPORT_TYPE(CAMediaTimingFunction);
     JS_EXPORT_TYPE(CAValueFunction);
@@ -1232,6 +1372,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CASpringAnimation);
 
     JS_EXPORT_TYPE(CALayer);
+#if !TARGET_OS_SIMULATOR
+    JS_EXPORT_PROTOCOL(CAMetalDrawable);
+    JS_EXPORT_TYPE(CAMetalLayer);
+#endif
     JS_EXPORT_TYPE(CAGradientLayer);
     JS_EXPORT_TYPE(CAShapeLayer);
 
@@ -1263,6 +1407,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLMaterial);
 
     // SpriteKit
+#if !TARGET_OS_SIMULATOR
+    JS_EXPORT_TYPE(SKRenderer);
+#endif
     JS_EXPORT_TYPE(SKPhysicsContact);
     JS_EXPORT_TYPE(SKView);
     JS_EXPORT_TYPE(SKPhysicsBody);
@@ -1286,6 +1433,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsContactDelegate);
 
     // SceneKit
+    JS_EXPORT_TYPE(SceneKitTypes);
+    JS_EXPORT_TYPE(SCNSceneRenderer);
+    JS_EXPORT_TYPE(SCNSceneRendererDelegate);
+    JS_EXPORT_TYPE(SCNAction);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
     JS_EXPORT_TYPE(SCNMaterialProperty);
@@ -1311,10 +1462,127 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNText);
     JS_EXPORT_TYPE(SCNShape);
     JS_EXPORT_TYPE(SCNNode);
+    JS_EXPORT_TYPE(SCNAudioPlayer);
+    JS_EXPORT_TYPE(SCNAudioSource);
     JS_EXPORT_TYPE(SCNScene);
+    JS_EXPORT_TYPE(SCNPhysicsBehavior);
+    JS_EXPORT_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsSliderJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsConeTwistJoint); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsVehicleWheel);
+    JS_EXPORT_TYPE(SCNPhysicsVehicle); // : SCNPhysicsBehavior
+    JS_EXPORT_TYPE(SCNPhysicsShape);
+    JS_EXPORT_TYPE(SCNPhysicsWorld);
     JS_EXPORT_TYPE(SCNView);
     JS_EXPORT_TYPE(SCNLight);
+    JS_EXPORT_TYPE(SCNParticleSystem);
+    JS_EXPORT_TYPE(SCNParticlePropertyController);
 
+    // Metal
+    JS_EXPORT_GLOBALS(MTLPixelFormat);
+    JS_EXPORT_GLOBALS(MTLDepthStencil);
+    JS_EXPORT_GLOBALS(MTLTypes);
+
+    JS_EXPORT_PROTOCOL(MTLResource); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLTexture); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLDevice); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLType); // : NSObject
+    JS_EXPORT_TYPE(MTLStructMember); // : NSObject
+    JS_EXPORT_TYPE(MTLStructType); // : MTLType
+    JS_EXPORT_TYPE(MTLArrayType); // : MTLType
+    JS_EXPORT_TYPE(MTLPointerType); // : MTLType
+    JS_EXPORT_TYPE(MTLTextureReferenceType); // : MTLType
+    JS_EXPORT_TYPE(MTLArgument); // : NSObject
+
+    JS_EXPORT_TYPE(MTLArgumentDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_TYPE(MTLTextureDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+    JS_EXPORT_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLCommandQueue); // <NSObject>
+    JS_EXPORT_TYPE(MTLHeapDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLHeap); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLBuffer); // <MTLResource>
+
+    JS_EXPORT_TYPE(MTLSamplerDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLSamplerState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLStencilDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLDepthStencilDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLDepthStencilState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLVertexAttribute); // : NSObject
+    JS_EXPORT_TYPE(MTLAttribute); // : NSObject
+    JS_EXPORT_TYPE(MTLFunctionConstant); // : NSObject
+    JS_EXPORT_TYPE(MTLCompileOptions); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLFunction); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLLibrary); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
+    JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLRenderPipelineState); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLVertexAttributeDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLVertexAttributeDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLVertexDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_TYPE(MTLComputePipelineReflection); // : NSObject
+    JS_EXPORT_TYPE(MTLComputePipelineDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_PROTOCOL(MTLComputePipelineState); // <NSObject>
+
+    JS_EXPORT_PROTOCOL(MTLFence); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLArgumentEncoder); // <NSObject>
+
+    JS_EXPORT_TYPE(MTLIndirectCommandBufferDescriptor); // : NSObject
+    JS_EXPORT_PROTOCOL(MTLIndirectCommandBuffer); // <MTLResource>
+    JS_EXPORT_PROTOCOL(MTLIndirectRenderCommand); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLCommandEncoder); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLRenderCommandEncoder); // <MTLCommandEncoder>
+
+    JS_EXPORT_TYPE(MTLBufferLayoutDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLBufferLayoutDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLAttributeDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLAttributeDescriptorArray); // : NSObject
+    JS_EXPORT_TYPE(MTLStageInputOutputDescriptor); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLEvent); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLSharedEvent); // <MTLEvent>
+    JS_EXPORT_TYPE(MTLSharedEventListener); // : NSObject
+    JS_EXPORT_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
+
+    JS_EXPORT_TYPE(MTLFunctionConstantValues); // : NSObject <NSCopying>
+
+    JS_EXPORT_PROTOCOL(MTLCommandBuffer); // <NSObject>
+    JS_EXPORT_PROTOCOL(MTLDrawable); // <NSObject>
+
+    JS_EXPORT_PROTOCOL(MTLBlitCommandEncoder); // <MTLCommandEncoder>
+    JS_EXPORT_PROTOCOL(MTLParallelRenderCommandEncoder); // <MTLCommandEncoder>
+    JS_EXPORT_PROTOCOL(MTLComputeCommandEncoder); // <MTLCommandEncoder>
+
+    JS_EXPORT_GLOBALS(MTLPipeline);
+    JS_EXPORT_TYPE(MTLPipelineBufferDescriptor); // : NSObject <NSCopying>
+    JS_EXPORT_TYPE(MTLPipelineBufferDescriptorArray); // : NSObject
+
+    // MetalKit
+    
+    JS_EXPORT_TYPE(MTKView);
+    JS_EXPORT_TYPE(MTKViewDelegate);
+    
     // ARKit
     JS_EXPORT_TYPE(ARLightEstimate);
     JS_EXPORT_TYPE(ARSKView);
@@ -1370,6 +1638,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
 #define JS_RETURN_TYPE(Type) \
       JS_RETURN_TYPE_FROM(Type, Type)
+    
+#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType) \
+      if ([obj conformsToProtocol:ObjcType##Protocol]) { \
+        return N##Type::type; \
+      }
+
+#define JS_RETURN_PROTOCOL(Type) \
+      JS_RETURN_PROTOCOL_FROM(Type, Type)
 
       // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
@@ -1377,6 +1653,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       JS_RETURN_TYPE(CAShapeLayer);
       JS_RETURN_TYPE(CAGradientLayer);
+#if !TARGET_OS_SIMULATOR
+      JS_RETURN_TYPE(CAMetalLayer);
+#endif
       JS_RETURN_TYPE(CALayer);
 
       JS_RETURN_TYPE(CASpringAnimation);
@@ -1389,6 +1668,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CAValueFunction);
       JS_RETURN_TYPE(CAMediaTimingFunction);
       JS_RETURN_TYPE(CATransaction);
+      JS_RETURN_TYPE(CADisplayLink);
       
       // Core Image
       JS_RETURN_TYPE(CIBlendKernel); // : CIColorKernel
@@ -1409,12 +1689,82 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKClusterAnnotation);
       JS_RETURN_TYPE(MKAnnotation);
       JS_RETURN_TYPE(MKMapViewDelegate);
+      
+      // MetalKit
+    
+      JS_RETURN_TYPE(MTKView);
+
+      // Metal
+
+      JS_RETURN_TYPE(MTLPipelineBufferDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLPipelineBufferDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLFunctionConstantValues); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLSharedEventHandle); // : NSObject <NSSecureCoding>
+      JS_RETURN_TYPE(MTLSharedEventListener); // : NSObject
+
+      JS_RETURN_TYPE(MTLStageInputOutputDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLAttributeDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLAttributeDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLBufferLayoutDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLBufferLayoutDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLIndirectCommandBufferDescriptor); // : NSObject
+
+      JS_RETURN_TYPE(MTLComputePipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLComputePipelineReflection); // : NSObject
+
+      JS_RETURN_TYPE(MTLVertexDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLVertexAttributeDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLVertexAttributeDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPipelineReflection); // : NSObject
+
+      JS_RETURN_TYPE(MTLCompileOptions); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLFunctionConstant); // : NSObject
+      JS_RETURN_TYPE(MTLAttribute); // : NSObject
+      JS_RETURN_TYPE(MTLVertexAttribute); // : NSObject
+
+      JS_RETURN_TYPE(MTLDepthStencilDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLStencilDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLSamplerDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLHeapDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLRenderPassDescriptor); // : NSObject <NSCopying>
+      JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptorArray); // : NSObject
+      JS_RETURN_TYPE(MTLRenderPassStencilAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassDepthAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassColorAttachmentDescriptor); // : MTLRenderPassAttachmentDescriptor
+      JS_RETURN_TYPE(MTLRenderPassAttachmentDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLTextureDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLArgumentDescriptor); // : NSObject <NSCopying>
+
+      JS_RETURN_TYPE(MTLArgument); // : NSObject
+      JS_RETURN_TYPE(MTLTextureReferenceType); // : MTLType
+      JS_RETURN_TYPE(MTLPointerType); // : MTLType
+      JS_RETURN_TYPE(MTLArrayType); // : MTLType
+      JS_RETURN_TYPE(MTLStructType); // : MTLType
+      JS_RETURN_TYPE(MTLStructMember); // : NSObject
+      JS_RETURN_TYPE(MTLType); // : NSObject
 
       // ARKit
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
-      JS_RETURN_TYPE_FROM(ARSKViewDelegate, SARSKViewDelegate);
+      JS_RETURN_TYPE(ARSKViewDelegate);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
       JS_RETURN_TYPE(ARSCNView);
@@ -1424,6 +1774,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
+      JS_RETURN_TYPE(SceneKitTypes);
+      // JS_RETURN_TYPE(SCNSceneRenderer);
+      JS_RETURN_TYPE(SCNSceneRendererDelegate);
+      JS_RETURN_TYPE(SCNParticleSystem);
+      JS_RETURN_TYPE(SCNParticlePropertyController);
+      JS_RETURN_TYPE(SCNAction);
+      JS_RETURN_TYPE(SCNAudioPlayer);
+      JS_RETURN_TYPE(SCNAudioSource);
       JS_RETURN_TYPE(SCNMaterial);
       JS_RETURN_TYPE(SCNMaterialProperty);
       JS_RETURN_TYPE(SCNCamera);
@@ -1450,6 +1808,15 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNGeometrySource);
       JS_RETURN_TYPE(SCNGeometry);
       JS_RETURN_TYPE(SCNLight);
+      JS_RETURN_TYPE(SCNPhysicsWorld);
+      JS_RETURN_TYPE(SCNPhysicsShape);
+      JS_RETURN_TYPE(SCNPhysicsVehicle); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsVehicleWheel);
+      JS_RETURN_TYPE(SCNPhysicsConeTwistJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsSliderJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
+      JS_RETURN_TYPE(SCNPhysicsBehavior);
       JS_RETURN_TYPE(SCNScene);
       JS_RETURN_TYPE(SCNNode);
       JS_RETURN_TYPE(SCNView);
@@ -1480,6 +1847,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SKNode);
       JS_RETURN_TYPE(SKView);
       JS_RETURN_TYPE(SKAction);
+#if !TARGET_OS_SIMULATOR
+      JS_RETURN_TYPE(SKRenderer);
+#endif
 
       // ModelIO
       JS_RETURN_TYPE(MDLMaterial);
@@ -1746,11 +2116,72 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
+      JS_RETURN_TYPE(NSInvocation);
+      JS_RETURN_TYPE(NSPort);
+      JS_RETURN_TYPE(NSTimer);
+      JS_RETURN_TYPE(NSRunLoop);
+      JS_RETURN_TYPE(NSTarget);
       JS_RETURN_TYPE(NSObjCRuntime);
-      JS_RETURN_TYPE(NSObject);
       if (object_isClass(obj)) {
         return NClass::type;
       }
+
+      // Core Animation Protocols
+
+#if !TARGET_OS_SIMULATOR
+      JS_RETURN_PROTOCOL(CAMetalDrawable);
+#endif
+
+      // MetalKit Protocols
+      
+      JS_RETURN_PROTOCOL(MTKViewDelegate);
+
+      // Metal Protocols
+
+      JS_RETURN_PROTOCOL(MTLComputeCommandEncoder); // <MTLCommandEncoder>
+      JS_RETURN_PROTOCOL(MTLParallelRenderCommandEncoder); // <MTLCommandEncoder>
+      JS_RETURN_PROTOCOL(MTLBlitCommandEncoder); // <MTLCommandEncoder>
+
+      JS_RETURN_PROTOCOL(MTLDrawable); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLCommandBuffer); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLSharedEvent); // <MTLEvent>
+      JS_RETURN_PROTOCOL(MTLEvent); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLRenderCommandEncoder); // <MTLCommandEncoder>
+
+      JS_RETURN_PROTOCOL(MTLCommandEncoder); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLIndirectRenderCommand); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLIndirectCommandBuffer); // <MTLResource>
+
+      JS_RETURN_PROTOCOL(MTLArgumentEncoder); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLFence); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLComputePipelineState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLRenderPipelineState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLLibrary); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLFunction); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLDepthStencilState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLSamplerState); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLBuffer); // <MTLResource>
+      JS_RETURN_PROTOCOL(MTLHeap); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLCommandQueue); // <NSObject>
+
+      JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
+      JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
+      JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
+
+      // Default types
+
+      JS_RETURN_TYPE(NSObject);
       return Nid::type;
     }
   }

@@ -2033,6 +2033,22 @@ SCNMatrix4 to_value_SCNMatrix4(const Local<Value>& value, bool * _Nullable faile
   return result;
 }
 
+bool is_value_SCNQuaternion(const Local<Value>& value) {
+  return sweetiekit::IsVector4(value);
+}
+
+bool is_value_SCNVector3(const Local<Value>& value) {
+  return sweetiekit::IsVector3(value);
+}
+
+bool is_value_SCNVector4(const Local<Value>& value) {
+  return sweetiekit::IsVector4(value);
+}
+
+bool is_value_SCNMatrix4(const Local<Value>& value) {
+  return sweetiekit::IsTransform(value);
+}
+
 Local<Value> js_value_CATransform3D(const CATransform3D& value) {
   return createTypedArray<Float32Array>(16, (const float*)&value);
 }
@@ -2757,11 +2773,13 @@ extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
   if ([NSThread isMainThread]) {
     {
+      v8::Locker locker(JS_ISOLATE());
       Nan::HandleScope scope;
       block();
     }
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
+      v8::Locker locker(JS_ISOLATE());
       Nan::HandleScope scope;
       block();
     });

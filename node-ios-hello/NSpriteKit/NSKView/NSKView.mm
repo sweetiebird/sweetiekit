@@ -40,31 +40,26 @@ JS_INIT_CLASS_END(SKView, UIView);
 
 NAN_METHOD(NSKView::New) {
   JS_RECONSTRUCT(SKView);
-
-  Local<Object> obj = info.This();
-
-  NSKView *view = new NSKView();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge SKView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      CGRect frame = CGRectMake(x, y, width, height);
-      view->SetNSObject([[SKView alloc] initWithFrame:frame]);
+  @autoreleasepool {
+    SKView* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge SKView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[SKView alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[SKView alloc] init];
     }
-  } else {
-    @autoreleasepool {
-      view->SetNSObject([[SKView alloc] init]);
+    if (self) {
+      NSKView *wrapper = new NSKView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SKView::New: invalid arguments");
     }
   }
-  view->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
 }
 
 #include "NSKScene.h"

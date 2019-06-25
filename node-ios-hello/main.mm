@@ -107,79 +107,75 @@ void xxx_swizzle(Class class_, SEL originalSelector, SEL swizzledSelector)
 #pragma mark - Method Swizzling
 
 - (void)xxx_viewWillAppear:(BOOL)animated {
-    [self xxx_viewWillAppear:animated];
-    //NSLog(@"viewWillAppear: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_viewWillAppear"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::viewWillAppear", JS_BOOL(animated));
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_viewWillAppear"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::viewWillAppear", JS_BOOL(animated));
-      }
+  [self xxx_viewWillAppear:animated];
+  get_persistent_function(self, fn, @"sweetiekit_viewWillAppear");
+  if (fn) {
+    dispatch_main(^{
+      [fn jsFunction]->Call("UIViewController::viewWillAppear", js_value_BOOL(animated));
     });
+  }
+  sweetiekit::forEachView([self view], ^(UIView *view) {
+    get_persistent_function(view, fn, @"sweetiekit_viewWillAppear");
+    if (fn) {
+      dispatch_main(^{
+        [fn jsFunction]->Call("UIView::viewWillAppear", js_value_BOOL(animated));
+      });
+    }
+  });
 }
 
 - (void)xxx_viewDidAppear:(BOOL)animated {
-    [self xxx_viewDidAppear:animated];
-    //NSLog(@"viewDidAppear: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_viewDidAppear"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::viewDidAppear", JS_BOOL(animated));
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_viewDidAppear"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::viewDidAppear", JS_BOOL(animated));
-      }
+  [self xxx_viewDidAppear:animated];
+  get_persistent_function(self, fn, @"sweetiekit_viewDidAppear");
+  if (fn) {
+    dispatch_main(^{
+      [fn jsFunction]->Call("UIViewController::viewDidAppear", js_value_BOOL(animated));
     });
+  }
+  sweetiekit::forEachView([self view], ^(UIView *view) {
+    get_persistent_function(view, fn, @"sweetiekit_viewDidAppear");
+    if (fn) {
+      dispatch_main(^{
+        [fn jsFunction]->Call("UIView::viewDidAppear", js_value_BOOL(animated));
+      });
+    }
+  });
 }
 
 - (void)xxx_viewWillDisappear:(BOOL)animated {
-    [self xxx_viewWillDisappear:animated];
-    //NSLog(@"viewWillDisappear: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_viewWillDisappear"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::viewWillDisappear", JS_BOOL(animated));
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_viewWillDisappear"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::viewWillDisappear", JS_BOOL(animated));
-      }
+  [self xxx_viewWillDisappear:animated];
+  get_persistent_function(self, fn, @"sweetiekit_viewWillDisappear");
+  if (fn) {
+    dispatch_main(^{
+      [fn jsFunction]->Call("UIViewController::viewWillDisappear", js_value_BOOL(animated));
     });
+  }
+  sweetiekit::forEachView([self view], ^(UIView *view) {
+    get_persistent_function(view, fn, @"sweetiekit_viewWillDisappear");
+    if (fn) {
+      dispatch_main(^{
+        [fn jsFunction]->Call("UIView::viewWillDisappear", js_value_BOOL(animated));
+      });
+    }
+  });
 }
 
 - (void)xxx_viewDidDisappear:(BOOL)animated {
-    [self xxx_viewDidDisappear:animated];
-    //NSLog(@"viewDidDisappear: %@", self);
-    id fn = [self associatedValueForKey:@"sweetiekit_viewDidDisappear"];
-    if (fn != nullptr) {
-      Nan::HandleScope scope;
-      SweetJSFunction* func = (SweetJSFunction*)fn;
-      [func jsFunction]->Call("UIViewController::viewDidDisappear", JS_BOOL(animated));
-    }
-    sweetiekit::forEachView([self view], ^(UIView *view) {
-      id fn = [view associatedValueForKey:@"sweetiekit_viewDidDisappear"];
-      if (fn != nullptr) {
-        Nan::HandleScope scope;
-        SweetJSFunction* func = (SweetJSFunction*)fn;
-        [func jsFunction]->Call("UIView::viewDidDisappear", JS_BOOL(animated));
-      }
+  [self xxx_viewDidDisappear:animated];
+  get_persistent_function(self, fn, @"sweetiekit_viewDidDisappear");
+  if (fn) {
+    dispatch_main(^{
+      [fn jsFunction]->Call("UIViewController::viewDidDisappear", js_value_BOOL(animated));
     });
+  }
+  sweetiekit::forEachView([self view], ^(UIView *view) {
+    get_persistent_function(view, fn, @"sweetiekit_viewDidDisappear");
+    if (fn) {
+      dispatch_main(^{
+        [fn jsFunction]->Call("UIView::viewDidDisappear", js_value_BOOL(animated));
+      });
+    }
+  });
 }
 @end
 
@@ -201,122 +197,58 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
     }
 }
 
+#include "NUIEvent.h"
+
 @implementation UIResponder (Sweetiekit_Hooks)
 
 + (void)load {
   static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       __block IMP originalEndedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesEnded:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          id fn = [_self associatedValueForKey:@"sweetiekit_touchesEndedWithEvent"];
-
-          if (fn != nullptr) {
-            Nan::HandleScope scope;
-
-            @try {
-              SweetJSFunction* func = (SweetJSFunction*)fn;
-              __block uint32_t count = 0;
-              auto value = Nan::New<Array>();
-              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-              }];
-              [func jsFunction]->Call("UIResponder::touchesEndedWithEvent", value, sweetiekit::GetWrapperFor(event));
-            } @catch (NSException *exception) {
-              NSLog(@"%@", [exception debugDescription]);
-            }
-//            SweetJSFunction* func = (SweetJSFunction*)fn;
-//            __block uint32_t count = 0;
-//            auto value = Nan::New<Array>();
-//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-//            }];
-//            [func jsFunction]->Call("UIResponder::touchesEndedWithEvent", value, sweetiekit::GetWrapperFor(event));
-           }
-
+          get_persistent_function(_self, fn, @"sweetiekit_touchesEndedWithEvent");
+          if (fn) {
+            dispatch_main(^{
+              [fn jsFunction]->Call("UIResponder::touchesEndedWithEvent",
+                js_value_NSSet(touches),
+                js_value_UIEvent(event));
+            });
+          }
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalEndedIMP)(_self, @selector(touchesEnded:withEvent:), touches, event);
         });
 
       __block IMP originalMovedIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesMoved:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          id fn = [_self associatedValueForKey:@"sweetiekit_touchesMovedWithEvent"];
-
-          if (fn != nullptr) {
-            Nan::HandleScope scope;
-
-            @try {
-              SweetJSFunction* func = (SweetJSFunction*)fn;
-              __block uint32_t count = 0;
-              auto value = Nan::New<Array>();
-              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-              }];
-              [func jsFunction]->Call("UIResponder::touchesMovedWithEvent", value, sweetiekit::GetWrapperFor(event));
-            } @catch (NSException *exception) {
-              NSLog(@"%@", [exception debugDescription]);
-            }
+          get_persistent_function(_self, fn, @"sweetiekit_touchesMovedWithEvent");
+          if (fn) {
+            dispatch_main(^{
+              [fn jsFunction]->Call("UIResponder::touchesMovedWithEvent",
+                js_value_NSSet(touches),
+                js_value_UIEvent(event));
+            });
           }
-//          SweetJSFunction* func = (SweetJSFunction*)fn;
-//          __block uint32_t count = 0;
-//          auto value = Nan::New<Array>();
-//          [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-//            Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-//          }];
-//          [func jsFunction]->Call("UIResponder::touchesMovedWithEvent", value, sweetiekit::GetWrapperFor(event));
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalMovedIMP)(_self, @selector(touchesMoved:withEvent:), touches, event);
         });
 
       __block IMP originalBeganIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesBegan:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          id fn = [_self associatedValueForKey:@"sweetiekit_touchesBeganWithEvent"];
-
-          if (fn != nullptr) {
-            Nan::HandleScope scope;
-            @try {
-              SweetJSFunction* func = (SweetJSFunction*)fn;
-              __block uint32_t count = 0;
-              auto value = Nan::New<Array>();
-              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-              }];
-              [func jsFunction]->Call("UIResponder::touchesBeganWithEvent", value, sweetiekit::GetWrapperFor(event));
-            } @catch (NSException *exception) {
-              NSLog(@"%@", [exception debugDescription]);
-            }
-//            SweetJSFunction* func = (SweetJSFunction*)fn;
-//            __block uint32_t count = 0;
-//            auto value = Nan::New<Array>();
-//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-//            }];
-//            [func jsFunction]->Call("UIResponder::touchesBeganWithEvent", value, sweetiekit::GetWrapperFor(event));
-           }
-
+          get_persistent_function(_self, fn, @"sweetiekit_touchesBeganWithEvent");
+          if (fn) {
+            dispatch_main(^{
+              [fn jsFunction]->Call("UIResponder::touchesBeganWithEvent",
+                js_value_NSSet(touches),
+                js_value_UIEvent(event));
+            });
+          }
           ((void ( *)(id, SEL, NSSet *, UIEvent *))originalBeganIMP)(_self, @selector(touchesBegan:withEvent:), touches, event);
         });
 
     __block IMP touchesCancelledIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(touchesCancelled:withEvent:), ^(UIResponder *_self, NSSet *touches, UIEvent *event) {
-          id fn = [_self associatedValueForKey:@"sweetiekit_touchesCancelledWithEvent"];
-
-          if (fn != nullptr) {
-            Nan::HandleScope scope;
-
-            @try {
-              SweetJSFunction* func = (SweetJSFunction*)fn;
-              __block uint32_t count = 0;
-              auto value = Nan::New<Array>();
-              [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-                Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-              }];
-              [func jsFunction]->Call("UIResponder::touchesCancelledWithEvent", value, sweetiekit::GetWrapperFor(event));
-            } @catch (NSException *exception) {
-              NSLog(@"%@", [exception debugDescription]);
-            }
-//            SweetJSFunction* func = (SweetJSFunction*)fn;
-//            __block uint32_t count = 0;
-//            auto value = Nan::New<Array>();
-//            [touches enumerateObjectsUsingBlock: ^ (UITouch * _Nonnull touch, BOOL * _Nonnull stop) {
-//              Nan::Set(value, count++, sweetiekit::GetWrapperFor(touch, NUITouch::type));
-//            }];
-//            [func jsFunction]->Call("UIResponder::touchesCancelledWithEvent", value, sweetiekit::GetWrapperFor(event));
-           }
-
+          get_persistent_function(_self, fn, @"sweetiekit_touchesCancelledWithEvent");
+          if (fn) {
+            dispatch_main(^{
+              [fn jsFunction]->Call("UIResponder::touchesCancelledWithEvent",
+                js_value_NSSet(touches),
+                js_value_UIEvent(event));
+            });
+          }
           ((void ( *)(id, SEL, NSSet *, UIEvent *))touchesCancelledIMP)(_self, @selector(touchesCancelled:withEvent:), touches, event);
         });
     });
@@ -330,13 +262,13 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
   static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       __block IMP originalUpdateIMP = SweetieKitReplaceMethodWithBlock([self class], @selector(update:), ^(SKScene *_self, NSTimeInterval currentTime) {
-          id fn = [_self associatedValueForKey:@"sweetiekit_update"];
-          if (fn != nullptr) {
-            Nan::HandleScope scope;
-            SweetJSFunction* func = (SweetJSFunction*)fn;
-            [func jsFunction]->Call("SKScene::update", JS_FLOAT(currentTime));
-           }
-
+          get_persistent_function(_self, fn, @"sweetiekit_update");
+          if (fn) {
+            dispatch_main(^{
+              [fn jsFunction]->Call("SKScene::update",
+                js_value_NSTimeInterval(currentTime));
+            });
+          }
           ((void ( *)(id, SEL, NSTimeInterval))originalUpdateIMP)(_self, @selector(update:), currentTime);
         });
     });
@@ -365,24 +297,20 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
 
 - (void) sendEvent:(UIEvent *)event
 {
-    if( event && (event.subtype==UIEventSubtypeMotionShake))
-    {
-        /*AppDelegate *objAppDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-
-        [objAppDelegate doWhatEver];*/
-        dispatch_ui_sync(dispatch_get_main_queue(), ^{
-          Nan::HandleScope scope;
-          if (JS_HAS(JS_GLOBAL(), JS_STR("OnShake")) && JS_GLOBAL()->Get(JS_STR("OnShake"))->IsFunction()) {
-            sweetiekit::JSFunction fn(JS_GLOBAL()->Get(JS_STR("OnShake")));
-            fn.Call("JSApplication:sendEvent OnShake");
-          }
-        });
-        [super sendEvent:event];
-    }
-    else
-    {
-        [super sendEvent:event];
-    }
+  if( event && (event.subtype==UIEventSubtypeMotionShake))
+  {
+    dispatch_main(^{
+      if (JS_HAS(JS_GLOBAL(), JS_STR("OnShake")) && JS_GLOBAL()->Get(JS_STR("OnShake"))->IsFunction()) {
+        sweetiekit::JSFunction fn(JS_GLOBAL()->Get(JS_STR("OnShake")));
+        fn.Call("JSApplication:sendEvent OnShake");
+      }
+    });
+    [super sendEvent:event];
+  }
+  else
+  {
+    [super sendEvent:event];
+  }
 }
 
 @end
@@ -428,7 +356,9 @@ int main(int argc, char** argv)
     __builtin_trap();
   }
 //  auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
-  NSArray* arguments = @[@"node", @"--expose_gc", @"--inspect=0.0.0.0:9229", @"--jitless", entry
+  NSArray* arguments = @[@"node", @"--expose_gc", @"--inspect=0.0.0.0:9229", @"--jitless", @"--builtins-in-stack-traces",
+  @"--no-use-ic", @"--no-opt", @"--no-compilation-cache", /*@"--minimal",*/ // try to avoid the IC crash
+  entry
   /*@"-e",
 @"\
 honeykit = process._linkedBinding('honeykit'); \
@@ -455,6 +385,8 @@ honeykit.stop = () => {                        \
   node::pNodeRunLoopRun = [](Isolate* isolate, Local<Context> context, struct uv_loop_s* loop) {
   
     NSTimer* timer = [NSTimer timerWithTimeInterval:60.0/1000.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+      v8::Locker locker(isolate);
+      isolate->Enter();
       _started = true;
       [JSApp() update:loop];
     }];
@@ -466,6 +398,9 @@ honeykit.stop = () => {                        \
     [[JSApplication sharedApplication]
      associateValue:timer
      withKey:@"honeykit.mainloop"];
+    
+    isolate->Exit();
+    v8::Unlocker unlocker(isolate);
     
     @autoreleasepool {
       UIApplicationMain(_argc, _argv,

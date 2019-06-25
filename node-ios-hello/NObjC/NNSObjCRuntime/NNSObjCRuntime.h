@@ -40,6 +40,14 @@
 #define js_value_NSQualityOfService(x) JS_ENUM(NSQualityOfService, NSInteger, x)
 #define to_value_NSQualityOfService(x) TO_ENUM(NSQualityOfService, NSInteger, x)
 #define is_value_NSQualityOfService(x) IS_ENUM(NSQualityOfService, NSInteger, x)
+  
+#define js_value_NSExceptionName(x) JS_ENUM(NSExceptionName, NSString, x)
+#define to_value_NSExceptionName(x) TO_ENUM(NSExceptionName, NSString, x)
+#define is_value_NSExceptionName(x) IS_ENUM(NSExceptionName, NSString, x)
+
+#define js_value_NSRunLoopMode(x) JS_ENUM(NSRunLoopMode, NSString, x)
+#define to_value_NSRunLoopMode(x) TO_ENUM(NSRunLoopMode, NSString, x)
+#define is_value_NSRunLoopMode(x) IS_ENUM(NSRunLoopMode, NSString, x)
 
 JS_WRAP_CLASS(NSObjCRuntime, NSObject);
   // TODO: declare NSObjCRuntime methods and properties

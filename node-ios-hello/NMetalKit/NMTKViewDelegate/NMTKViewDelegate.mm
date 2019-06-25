@@ -1,0 +1,95 @@
+//
+//  NMTKViewDelegate.mm
+//
+//  Created by Shawn Presser on 6/24/2019.
+//  Copyright © 2019 sweetiebird. All rights reserved.
+//
+#include "NMTKViewDelegate.h"
+
+#define instancetype MTKViewDelegate
+#define js_value_instancetype js_value_MTKViewDelegate
+
+NMTKViewDelegate::NMTKViewDelegate() {}
+NMTKViewDelegate::~NMTKViewDelegate() {}
+
+JS_INIT_PROTOCOL(MTKViewDelegate, NSObject);
+  JS_ASSIGN_PROTO_PROP(mtkViewDrawableSizeWillChange);
+  JS_ASSIGN_PROTO_PROP(drawInMTKView);
+
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(MTKViewDelegate, NSObject);
+  // constant values (exports)
+JS_INIT_PROTOCOL_END(MTKViewDelegate, NSObject);
+
+
+NAN_METHOD(NMTKViewDelegate::New) {
+  JS_RECONSTRUCT(MTKViewDelegate);
+  @autoreleasepool {
+    id<MTKViewDelegate> self = nullptr;
+
+    if (info[0]->IsExternal()) {
+      self = (__bridge id<MTKViewDelegate>)(info[0].As<External>()->Value());
+    } else if (info[0]->IsObject()) {
+      Local<Value> that(JS_NEW(NMTKViewDelegate, 0, nullptr));
+      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
+      objectAssign("NMTKViewDelegate::New", that, info[0]);
+      JS_SET_RETURN(that);
+      return;
+    } else if (info.Length() >= 1 && is_value_protocol< id<MTKViewDelegate> >(info[0])) {
+      JS_UNWRAPPED_PROTOCOL(info[0], MTKViewDelegate, value);
+      self = value;
+    } else if (info.Length() <= 0) {
+      self = [[MTKViewDelegateType alloc] init];
+    }
+    if (self) {
+      NMTKViewDelegate *wrapper = new NMTKViewDelegate();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("MTKViewDelegate::New: invalid arguments");
+    }
+  }
+}
+
+#define DELEGATE_PROTOCOL_PROP(type, key) \
+NAN_GETTER(N##type::key##Getter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    get_persistent_function(self_, callback, @#key); \
+    if (callback) { \
+      JS_SET_RETURN([callback jsFunction]->Get()); \
+    } \
+  } \
+} \
+\
+NAN_SETTER(N##type::key##Setter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    declare_setter(); \
+    declare_persistent_function_on(self_, callback, @#key); \
+  } \
+}
+
+DELEGATE_PROTOCOL_PROP(MTKViewDelegate, mtkViewDrawableSizeWillChange);
+DELEGATE_PROTOCOL_PROP(MTKViewDelegate, drawInMTKView);
+
+#include "NMTKView.h"
+
+@implementation MTKViewDelegateType
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
+{
+  call_delegate(noop(), mtkViewDrawableSizeWillChange,
+    js_value_MTKView(view),
+    js_value_CGSize(size));
+}
+
+- (void)drawInMTKView:(nonnull MTKView *)view
+{
+  call_delegate(noop(), drawInMTKView,
+    js_value_MTKView(view));
+}
+
+@end

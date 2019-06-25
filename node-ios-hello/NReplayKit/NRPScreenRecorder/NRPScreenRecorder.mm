@@ -46,7 +46,6 @@ NAN_METHOD(NRPScreenRecorder::startRecordingWithHandler) {
 
   [rp startRecordingWithHandler: ^ (NSError * _Nullable error) {
     dispatch_main(^{
-      Nan::HandleScope scope;
       fn.Call("NRPScreenRecorder::startRecording handler", js_value_NSError(error));
       fn.Reset();
     });
@@ -62,7 +61,6 @@ NAN_METHOD(NRPScreenRecorder::stopRecordingWithHandler) {
 
   [rp stopRecordingWithHandler: ^ (RPPreviewViewController * _Nullable previewViewController, NSError * _Nullable error) {
     dispatch_main(^{
-      Nan::HandleScope scope;
       fn.Call("NRPScreenRecorder::stopRecording handler",
         js_value_RPPreviewViewController(previewViewController),
         js_value_NSError(error));

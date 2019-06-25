@@ -46,15 +46,17 @@ NAN_SETTER(NUIViewControllerTransitioningDelegate::PresentationControllerForSett
     dispatch_sync(dispatch_get_main_queue(), ^ {
       SUIViewControllerTransitioningDelegate* d = del->As<SUIViewControllerTransitioningDelegate>();
       [d setPresentationControllerForCallback: ^ SUIPresentationController * _Nullable (UIViewController * _Nonnull presented, UIViewController * _Nullable presenting, UIViewController * _Nonnull source) {
-        
-        Local<Value> presentedObj = sweetiekit::GetWrapperFor(presented, NUIViewController::type);
-        Local<Value> presentingObj = sweetiekit::GetWrapperFor(presenting, NUIViewController::type);
-        Local<Value> sourceObj = sweetiekit::GetWrapperFor(source, NUIViewController::type);
-        
-        Local<Value> resultObj = del->_presentationControllerFor(
-          "NUIViewControllerTransitioningDelegate::PresentationControllerForSetter",
-          presentedObj, presentingObj, sourceObj);
-        auto result = ObjectWrap::Unwrap<NUIPresentationController>(JS_OBJ(resultObj))->As<SUIPresentationController>();
+        __block SUIPresentationController* result = nil;
+        dispatch_main(^{
+          Local<Value> presentedObj = sweetiekit::GetWrapperFor(presented, NUIViewController::type);
+          Local<Value> presentingObj = sweetiekit::GetWrapperFor(presenting, NUIViewController::type);
+          Local<Value> sourceObj = sweetiekit::GetWrapperFor(source, NUIViewController::type);
+          
+          Local<Value> resultObj = del->_presentationControllerFor(
+            "NUIViewControllerTransitioningDelegate::PresentationControllerForSetter",
+            presentedObj, presentingObj, sourceObj);
+          result = ObjectWrap::Unwrap<NUIPresentationController>(JS_OBJ(resultObj))->As<SUIPresentationController>();
+        });
         return result;
       }];
     });

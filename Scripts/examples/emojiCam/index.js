@@ -267,26 +267,26 @@ function emojiCam(nav, demoVC) {
       }
     };
 
-    viewDel = new ARSKViewDelegate((view, anchor) => {
-      if (active && active.anchor && active.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
-        if (!active.node) {
-          throw new Error("expected node");
-        }
-        return active.node;
-      }
-      for (let i = chars.length - 1; i >= 0; i--) {
-        let char = chars[i];
-        if (char.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
-          if (!char.node) {
+    arView.delegate = ARSKViewDelegate({
+      viewNodeForAnchor(view, anchor) {
+        if (active && active.anchor && active.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
+          if (!active.node) {
             throw new Error("expected node");
           }
-          return char.node;
+          return active.node;
         }
+        for (let i = chars.length - 1; i >= 0; i--) {
+          let char = chars[i];
+          if (char.anchor.identifier.UUIDString === anchor.identifier.UUIDString) {
+            if (!char.node) {
+              throw new Error("expected node");
+            }
+            return char.node;
+          }
+        }
+        //throw new Error("couldn't find node for anchor " + anchor.identifier.UUIDString);
       }
-      //throw new Error("couldn't find node for anchor " + anchor.identifier.UUIDString);
     });
-
-    arView.delegate = viewDel;
 
     scene = SKScene.sceneWithSize({
       width: view.frame.width,
@@ -385,10 +385,11 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesBeganWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
-      let hits = arView.hitTest(pt, 1);
+      let hits = arView.hitTestTypes(pt, 1);
       console.log('touchesBeganWithEvent', touches.length, pt);
       if (hits && hits.length > 0) {
         active = _update(hits ? hits[0] : null);
@@ -396,10 +397,11 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesMovedWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
-      let hits = arView.hitTest(pt, 1);
+      let hits = arView.hitTestTypes(pt, 1);
       //console.log('touchesMovedWithEvent', touches.length, pt);
       if (hits && hits.length > 0) {
         active = _update(hits ? hits[0] : null);
@@ -410,10 +412,11 @@ function emojiCam(nav, demoVC) {
     };
 
     scene.touchesEndedWithEvent = (touches, evt) => {
+      touches = Array.from(touches);
       let touch = touches[0];
       let pt = touches[0].locationInView(touch.view);
       pt.y -= Math.trunc(0.1*touch.view.height);
-      let hits = arView.hitTest(pt, 1);
+      let hits = arView.hitTestTypes(pt, 1);
       console.log('touchesEnded', touches.length, pt);
       if (hits && hits.length > 0) {
         active = _update(hits ? hits[0] : null);

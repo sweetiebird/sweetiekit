@@ -26,14 +26,6 @@
 #define to_value_CGImagePropertyOrientation(x) TO_ENUM(CGImagePropertyOrientation, uint32_t, x)
 #define is_value_CGImagePropertyOrientation(x) IS_ENUM(CGImagePropertyOrientation, uint32_t, x)
 
-#if __OBJC__
-#import <IOSurface/IOSurfaceRef.h>
-#endif
-
-Local<Value> js_value_IOSurfaceRef(IOSurfaceRef _Nullable value);
-IOSurfaceRef _Nullable to_value_IOSurfaceRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
-bool is_value_IOSurfaceRef(const Local<Value>& value);
-
 JS_WRAP_CLASS(CIImage, NSObject);
   JS_STATIC_METHOD(imageWithCGImage);
   JS_STATIC_METHOD(imageWithCGImageOptions);
