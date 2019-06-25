@@ -37,9 +37,9 @@ async function make(nav, demoVC) {
 
   mtkView.device = device;
   mtkView.clearColor = /*MTLClearColorMake*/ UIColor(0.3, 0.3, 0.3, 1.0);
-  mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
-  mtkView.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
-  mtkView.sampleCount = 4;
+  mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm;
+  //mtkView.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
+  mtkView.sampleCount = 1;
 
   mtkView.delegate = MTKViewDelegate({
     mtkViewDrawableSizeWillChange(mtkView, size) {
@@ -47,8 +47,9 @@ async function make(nav, demoVC) {
     },
     drawInMTKView(mtkView) {
       FPSUpdate();
-      renderPassDescriptor = mtkView.renderPassDescriptor;
-      if (renderPassDescriptor) {
+      drawable = mtkView.currentDrawable;
+      renderPassDescriptor = mtkView.currentRenderPassDescriptor;
+      if (drawable && renderPassDescriptor) {
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).texture = drawable.texture;
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).loadAction = MTLLoadActionClear;
         renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).clearColor = /*MTLClearColor*/ RGB(0, 104, 55, 1.0);
