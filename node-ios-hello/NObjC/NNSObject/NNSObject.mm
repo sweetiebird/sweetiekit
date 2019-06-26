@@ -1705,7 +1705,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MKAnnotationView);
       JS_RETURN_TYPE(MKClusterAnnotation);
       JS_RETURN_TYPE(MKAnnotation);
-      JS_RETURN_TYPE(MKMapViewDelegate);
       
       // MetalKit
     
@@ -2198,6 +2197,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
       JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
       JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
+      
+      // MapKit protocols
+      
+      JS_RETURN_PROTOCOL(MKMapViewDelegate);
       
       // ARKit protocols
       

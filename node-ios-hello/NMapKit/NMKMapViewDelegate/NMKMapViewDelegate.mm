@@ -9,7 +9,7 @@
 NMKMapViewDelegate::NMKMapViewDelegate () {}
 NMKMapViewDelegate::~NMKMapViewDelegate () {}
 
-JS_INIT_CLASS(MKMapViewDelegate, NSObject);
+JS_INIT_PROTOCOL(MKMapViewDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(mapViewRegionWillChangeAnimated);
   JS_ASSIGN_PROTO_PROP(mapViewRegionDidChangeAnimated);
   JS_ASSIGN_PROTO_PROP(mapViewDidChangeVisibleRegion);
@@ -38,27 +38,21 @@ JS_INIT_CLASS(MKMapViewDelegate, NSObject);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(MKMapViewDelegate, NSObject);
-JS_INIT_CLASS_END(MKMapViewDelegate, NSObject);
+JS_INIT_PROTOCOL_END(MKMapViewDelegate, NSObject);
 
 NAN_METHOD(NMKMapViewDelegate::New) {
-  JS_RECONSTRUCT(MKMapViewDelegate);
+  JS_RECONSTRUCT_PROTOCOL(MKMapViewDelegate);
   @autoreleasepool {
-    MKMapViewDelegate* self = nullptr;
+    id<MKMapViewDelegate> self = nullptr;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge MKMapViewDelegate *)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NMKMapViewDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NMKMapViewDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
+      self = (__bridge id<MKMapViewDelegate>)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [[MKMapViewDelegate alloc] init];
+      self = [[MKMapViewDelegateType alloc] init];
     }
     if (self) {
       NMKMapViewDelegate *wrapper = new NMKMapViewDelegate();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);
@@ -68,30 +62,30 @@ NAN_METHOD(NMKMapViewDelegate::New) {
   }
 }
 
-DELEGATE_PROP(MKMapViewDelegate, mapViewRegionWillChangeAnimated);
-DELEGATE_PROP(MKMapViewDelegate, mapViewRegionDidChangeAnimated);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidChangeVisibleRegion);
-DELEGATE_PROP(MKMapViewDelegate, mapViewWillStartLoadingMap);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidFinishLoadingMap);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidFailLoadingMapWithError);
-DELEGATE_PROP(MKMapViewDelegate, mapViewWillStartRenderingMap);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidFinishRenderingMapFullyRendered);
-DELEGATE_PROP(MKMapViewDelegate, mapViewViewForAnnotation);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidAddAnnotationViews);
-DELEGATE_PROP(MKMapViewDelegate, mapViewAnnotationViewCalloutAccessoryControlTapped);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidSelectAnnotationView);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidDeselectAnnotationView);
-DELEGATE_PROP(MKMapViewDelegate, mapViewWillStartLocatingUser);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidStopLocatingUser);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidUpdateUserLocation);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidFailToLocateUserWithError);
-DELEGATE_PROP(MKMapViewDelegate, mapViewAnnotationViewDidChangeDragStateFromOldState);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidChangeUserTrackingModeAnimated);
-DELEGATE_PROP(MKMapViewDelegate, mapViewRendererForOverlay);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidAddOverlayRenderers);
-DELEGATE_PROP(MKMapViewDelegate, mapViewViewForOverlay);
-DELEGATE_PROP(MKMapViewDelegate, mapViewDidAddOverlayViews);
-DELEGATE_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnotations);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewRegionWillChangeAnimated);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewRegionDidChangeAnimated);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidChangeVisibleRegion);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewWillStartLoadingMap);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidFinishLoadingMap);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidFailLoadingMapWithError);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewWillStartRenderingMap);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidFinishRenderingMapFullyRendered);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewViewForAnnotation);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidAddAnnotationViews);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewAnnotationViewCalloutAccessoryControlTapped);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidSelectAnnotationView);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidDeselectAnnotationView);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewWillStartLocatingUser);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidStopLocatingUser);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidUpdateUserLocation);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidFailToLocateUserWithError);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewAnnotationViewDidChangeDragStateFromOldState);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidChangeUserTrackingModeAnimated);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewRendererForOverlay);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidAddOverlayRenderers);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewViewForOverlay);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewDidAddOverlayViews);
+DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnotations);
 
 #include "NMKMapView.h"
 #include "NNSError.h"
@@ -100,7 +94,7 @@ DELEGATE_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnotations);
 #include "NMKUserLocation.h"
 #include "NMKClusterAnnotation.h"
 
-@implementation MKMapViewDelegate
+@implementation MKMapViewDelegateType
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
   call_delegate(noop(), mapViewRegionWillChangeAnimated,
