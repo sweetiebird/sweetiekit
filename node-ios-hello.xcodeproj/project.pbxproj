@@ -334,6 +334,7 @@
 		A19270FE22C2F80C008F16AE /* NCALayerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270FA22C2F80C008F16AE /* NCALayerDelegate.mm */; };
 		A192710222C303E1008F16AE /* NCAAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710022C303E1008F16AE /* NCAAction.mm */; };
 		A192710622C32A6B008F16AE /* NSCNSceneSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710422C32A6A008F16AE /* NSCNSceneSource.mm */; };
+		A192710A22C336B0008F16AE /* NSCNSkinner.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710822C336B0008F16AE /* NSCNSkinner.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -1178,6 +1179,8 @@
 		A192710122C303E1008F16AE /* NCAAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAAction.h; sourceTree = "<group>"; };
 		A192710422C32A6A008F16AE /* NSCNSceneSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNSceneSource.mm; sourceTree = "<group>"; };
 		A192710522C32A6A008F16AE /* NSCNSceneSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNSceneSource.h; sourceTree = "<group>"; };
+		A192710822C336B0008F16AE /* NSCNSkinner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNSkinner.mm; sourceTree = "<group>"; };
+		A192710922C336B0008F16AE /* NSCNSkinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNSkinner.h; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -4404,6 +4407,15 @@
 			path = NSCNSceneSource;
 			sourceTree = "<group>";
 		};
+		A192710722C336AF008F16AE /* NSCNSkinner */ = {
+			isa = PBXGroup;
+			children = (
+				A192710922C336B0008F16AE /* NSCNSkinner.h */,
+				A192710822C336B0008F16AE /* NSCNSkinner.mm */,
+			);
+			path = NSCNSkinner;
+			sourceTree = "<group>";
+		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4920,6 +4932,7 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				A192710722C336AF008F16AE /* NSCNSkinner */,
 				A192710322C32A6A008F16AE /* NSCNSceneSource */,
 				A1926F5D22C0E8C1008F16AE /* NSceneKitTypes */,
 				A1926F5122C0E720008F16AE /* NSCNAction */,
@@ -6928,6 +6941,7 @@
 				A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */,
 				A1D4986222BB29EB009AC951 /* NNSBlockOperation.mm in Sources */,
 				A1926EE422C0A739008F16AE /* NAVDepthData.mm in Sources */,
+				A192710A22C336B0008F16AE /* NSCNSkinner.mm in Sources */,
 				A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */,
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A1D4986922BB2D6F009AC951 /* NNSObjCRuntime.mm in Sources */,

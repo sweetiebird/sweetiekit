@@ -995,6 +995,7 @@ NAN_METHOD(NClass::New) {
 #include "NSCNView.h"
 #include "NSCNScene.h"
 #include "NSCNSceneSource.h"
+#include "NSCNSkinner.h"
 #include "NSCNPhysicsBehavior.h"
 #include "NSCNPhysicsHingeJoint.h" // : SCNPhysicsBehavior
 #include "NSCNPhysicsBallSocketJoint.h" // : SCNPhysicsBehavior
@@ -1484,6 +1485,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNAudioSource);
     JS_EXPORT_TYPE(SCNScene);
     JS_EXPORT_TYPE(SCNSceneSource);
+    JS_EXPORT_TYPE(SCNSkinner);
     JS_EXPORT_TYPE(SCNPhysicsBehavior);
     JS_EXPORT_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
     JS_EXPORT_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
@@ -1834,6 +1836,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNPhysicsBallSocketJoint); // : SCNPhysicsBehavior
       JS_RETURN_TYPE(SCNPhysicsHingeJoint); // : SCNPhysicsBehavior
       JS_RETURN_TYPE(SCNPhysicsBehavior);
+      JS_RETURN_TYPE(SCNSkinner);
       JS_RETURN_TYPE(SCNSceneSource);
       JS_RETURN_TYPE(SCNScene);
       JS_RETURN_TYPE(SCNNode);
