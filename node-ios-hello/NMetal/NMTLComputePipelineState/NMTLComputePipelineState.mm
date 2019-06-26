@@ -20,7 +20,7 @@ JS_INIT_PROTOCOL(MTLComputePipelineState, NSObject);
 JS_INIT_PROTOCOL_END(MTLComputePipelineState, NSObject);
 
 NAN_METHOD(NMTLComputePipelineState::New) {
-  JS_RECONSTRUCT(MTLComputePipelineState);
+  JS_RECONSTRUCT_PROTOCOL(MTLComputePipelineState);
   @autoreleasepool {
     id<MTLComputePipelineState> self = nullptr;
 

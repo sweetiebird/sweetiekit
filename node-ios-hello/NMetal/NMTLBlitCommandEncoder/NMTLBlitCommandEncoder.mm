@@ -21,7 +21,7 @@ JS_INIT_PROTOCOL_END(MTLBlitCommandEncoder, MTLCommandEncoder);
 
 
 NAN_METHOD(NMTLBlitCommandEncoder::New) {
-  JS_RECONSTRUCT(MTLBlitCommandEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLBlitCommandEncoder);
   @autoreleasepool {
     id<MTLBlitCommandEncoder> self = nullptr;
 

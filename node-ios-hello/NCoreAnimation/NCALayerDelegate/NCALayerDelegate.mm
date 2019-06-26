@@ -27,7 +27,7 @@ JS_INIT_PROTOCOL_END(CALayerDelegate, NSObject);
 
 
 NAN_METHOD(NCALayerDelegate::New) {
-  JS_RECONSTRUCT(CALayerDelegate);
+  JS_RECONSTRUCT_PROTOCOL(CALayerDelegate);
   @autoreleasepool {
     id<CALayerDelegate> self = nullptr;
 
@@ -41,7 +41,7 @@ NAN_METHOD(NCALayerDelegate::New) {
     }
     if (self) {
       NCALayerDelegate *wrapper = new NCALayerDelegate();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);

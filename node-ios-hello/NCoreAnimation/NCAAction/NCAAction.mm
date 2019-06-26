@@ -23,7 +23,7 @@ JS_INIT_PROTOCOL_END(CAAction, NSObject);
 DELEGATE_PROTOCOL_PROP(CAAction, runActionForKeyObjectArguments);
 
 NAN_METHOD(NCAAction::New) {
-  JS_RECONSTRUCT(CAAction);
+  JS_RECONSTRUCT_PROTOCOL(CAAction);
   @autoreleasepool {
     id<CAAction> self = nullptr;
 

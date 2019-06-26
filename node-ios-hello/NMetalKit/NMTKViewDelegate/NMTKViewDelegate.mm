@@ -24,18 +24,12 @@ JS_INIT_PROTOCOL_END(MTKViewDelegate, NSObject);
 
 
 NAN_METHOD(NMTKViewDelegate::New) {
-  JS_RECONSTRUCT(MTKViewDelegate);
+  JS_RECONSTRUCT_PROTOCOL(MTKViewDelegate);
   @autoreleasepool {
     id<MTKViewDelegate> self = nullptr;
 
     if (info[0]->IsExternal()) {
       self = (__bridge id<MTKViewDelegate>)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NMTKViewDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NMTKViewDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
     } else if (info.Length() >= 1 && is_value_protocol< id<MTKViewDelegate> >(info[0])) {
       JS_UNWRAPPED_PROTOCOL(info[0], MTKViewDelegate, value);
       self = value;

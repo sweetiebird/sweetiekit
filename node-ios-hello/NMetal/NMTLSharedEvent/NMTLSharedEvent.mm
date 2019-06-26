@@ -21,7 +21,7 @@ JS_INIT_PROTOCOL_END(MTLSharedEvent, MTLEvent);
 
 
 NAN_METHOD(NMTLSharedEvent::New) {
-  JS_RECONSTRUCT(MTLSharedEvent);
+  JS_RECONSTRUCT_PROTOCOL(MTLSharedEvent);
   @autoreleasepool {
     id<MTLSharedEvent> self = nullptr;
 

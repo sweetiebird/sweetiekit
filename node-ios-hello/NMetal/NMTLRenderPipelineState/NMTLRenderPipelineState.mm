@@ -28,7 +28,7 @@ JS_INIT_PROTOCOL(MTLRenderPipelineState, NSObject);
 JS_INIT_PROTOCOL_END(MTLRenderPipelineState, NSObject);
 
 NAN_METHOD(NMTLRenderPipelineState::New) {
-  JS_RECONSTRUCT(MTLRenderPipelineState);
+  JS_RECONSTRUCT_PROTOCOL(MTLRenderPipelineState);
   @autoreleasepool {
     id<MTLRenderPipelineState> self = nullptr;
 

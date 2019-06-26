@@ -23,7 +23,7 @@ JS_INIT_PROTOCOL(MTLDepthStencilState, NSObject);
 JS_INIT_PROTOCOL_END(MTLDepthStencilState, NSObject);
 
 NAN_METHOD(NMTLDepthStencilState::New) {
-  JS_RECONSTRUCT(MTLDepthStencilState);
+  JS_RECONSTRUCT_PROTOCOL(MTLDepthStencilState);
   @autoreleasepool {
     id<MTLDepthStencilState> self = nullptr;
 

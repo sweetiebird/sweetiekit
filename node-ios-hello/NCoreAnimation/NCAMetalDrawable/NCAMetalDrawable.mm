@@ -25,7 +25,7 @@ JS_INIT_PROTOCOL(CAMetalDrawable, NSObject);
 JS_INIT_PROTOCOL_END(CAMetalDrawable, NSObject);
 
 NAN_METHOD(NCAMetalDrawable::New) {
-  JS_RECONSTRUCT(CAMetalDrawable);
+  JS_RECONSTRUCT_PROTOCOL(CAMetalDrawable);
   @autoreleasepool {
     id<CAMetalDrawable> self = nullptr;
 

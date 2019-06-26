@@ -26,7 +26,7 @@ JS_INIT_PROTOCOL(MTLCommandQueue, NSObject);
 JS_INIT_PROTOCOL_END(MTLCommandQueue, NSObject);
 
 NAN_METHOD(NMTLCommandQueue::New) {
-  JS_RECONSTRUCT(MTLCommandQueue);
+  JS_RECONSTRUCT_PROTOCOL(MTLCommandQueue);
   @autoreleasepool {
     id<MTLCommandQueue> self = nullptr;
 

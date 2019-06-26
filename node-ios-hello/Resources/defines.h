@@ -132,6 +132,16 @@ using namespace node;
     JS_SET_RETURN_NEW(type, info); \
     return; \
   }
+  
+#define JS_RECONSTRUCT_PROTOCOL(type) \
+  JS_RECONSTRUCT(type); \
+  if (info.Length() == 1 && info[0]->IsObject()) { /* TODO: check for plain object */ \
+    Local<Value> that(JS_NEW(N##type, 0, nullptr)); \
+    sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign"))); \
+    objectAssign("N"#type"::New", that, info[0]); \
+    JS_SET_RETURN(that); \
+    return; \
+  }
 
 #define JS_SET_RETURN_NEW_1(type, arg0) \
   { \

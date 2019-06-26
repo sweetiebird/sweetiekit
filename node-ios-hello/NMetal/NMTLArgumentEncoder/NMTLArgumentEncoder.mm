@@ -21,7 +21,7 @@ JS_INIT_PROTOCOL_END(MTLArgumentEncoder, NSObject);
 
 
 NAN_METHOD(NMTLArgumentEncoder::New) {
-  JS_RECONSTRUCT(MTLArgumentEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLArgumentEncoder);
   @autoreleasepool {
     id<MTLArgumentEncoder> self = nullptr;
 

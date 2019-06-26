@@ -21,7 +21,7 @@ JS_INIT_PROTOCOL_END(MTLEvent, NSObject);
 
 
 NAN_METHOD(NMTLEvent::New) {
-  JS_RECONSTRUCT(MTLEvent);
+  JS_RECONSTRUCT_PROTOCOL(MTLEvent);
   @autoreleasepool {
     id<MTLEvent> self = nullptr;
 

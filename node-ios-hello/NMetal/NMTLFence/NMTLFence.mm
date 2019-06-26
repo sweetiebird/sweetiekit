@@ -23,7 +23,7 @@ JS_INIT_PROTOCOL(MTLFence, NSObject);
 JS_INIT_PROTOCOL_END(MTLFence, NSObject);
 
 NAN_METHOD(NMTLFence::New) {
-  JS_RECONSTRUCT(MTLFence);
+  JS_RECONSTRUCT_PROTOCOL(MTLFence);
   @autoreleasepool {
     id<MTLFence> self = nullptr;
 

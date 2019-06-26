@@ -188,7 +188,7 @@ JS_INIT_PROTOCOL(MTLResource, NSObject);
 JS_INIT_PROTOCOL_END(MTLResource, NSObject);
 
 NAN_METHOD(NMTLResource::New) {
-  JS_RECONSTRUCT(MTLResource);
+  JS_RECONSTRUCT_PROTOCOL(MTLResource);
   @autoreleasepool {
     id<MTLResource> self = nullptr;
 

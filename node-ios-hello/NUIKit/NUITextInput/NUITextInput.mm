@@ -118,7 +118,7 @@ JS_INIT_PROTOCOL(UITextInput, NSObject);
 JS_INIT_PROTOCOL_END(UITextInput, NSObject);
 
 NAN_METHOD(NUITextInput::New) {
-  JS_RECONSTRUCT(UITextInput);
+  JS_RECONSTRUCT_PROTOCOL(UITextInput);
   @autoreleasepool {
     id<UITextInput> self = nullptr;
 

@@ -45,7 +45,7 @@ JS_INIT_PROTOCOL_END(${name}, ${superClass});
 
 
 NAN_METHOD(N${name}::New) {
-  JS_RECONSTRUCT(${name});
+  JS_RECONSTRUCT_PROTOCOL(${name});
   @autoreleasepool {
     id<${name}> self = nullptr;
 

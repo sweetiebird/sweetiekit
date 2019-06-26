@@ -32,7 +32,7 @@ JS_INIT_PROTOCOL_END(MTLIndirectRenderCommand, NSObject);
 
 
 NAN_METHOD(NMTLIndirectRenderCommand::New) {
-  JS_RECONSTRUCT(MTLIndirectRenderCommand);
+  JS_RECONSTRUCT_PROTOCOL(MTLIndirectRenderCommand);
   @autoreleasepool {
     id<MTLIndirectRenderCommand> self = nullptr;
 

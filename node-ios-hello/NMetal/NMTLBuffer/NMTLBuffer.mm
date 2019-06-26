@@ -29,7 +29,7 @@ JS_INIT_PROTOCOL(MTLBuffer, MTLResource);
 JS_INIT_PROTOCOL_END(MTLBuffer, MTLResource);
 
 NAN_METHOD(NMTLBuffer::New) {
-  JS_RECONSTRUCT(MTLBuffer);
+  JS_RECONSTRUCT_PROTOCOL(MTLBuffer);
   @autoreleasepool {
     id<MTLBuffer> self = nullptr;
 

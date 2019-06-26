@@ -1352,7 +1352,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CLFloor);
     JS_EXPORT_TYPE(CLLocation);
     JS_EXPORT_TYPE(CLLocationManager);
-    JS_EXPORT_TYPE(CLLocationManagerDelegate);
+    JS_EXPORT_PROTOCOL(CLLocationManagerDelegate);
     JS_EXPORT_TYPE(CLGeocoder);
     JS_EXPORT_TYPE(CLPlacemark);
     JS_EXPORT_TYPE(CLVisit);
@@ -1611,7 +1611,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARCamera);
     JS_EXPORT_TYPE(ARFrame);
     JS_EXPORT_TYPE(ARAnchor);
-    JS_EXPORT_TYPE(ARSKViewDelegate);
+    JS_EXPORT_PROTOCOL(ARSKViewDelegate);
     JS_EXPORT_TYPE(ARSCNViewDelegate);
 
     // MapKit
@@ -1781,7 +1781,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
-      JS_RETURN_TYPE(ARSKViewDelegate);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
       JS_RETURN_TYPE(ARSCNView);
@@ -1908,7 +1907,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CLFloor);
       JS_RETURN_TYPE(CLHeading);
       JS_RETURN_TYPE(CLLocationManager);
-      JS_RETURN_TYPE(CLLocationManagerDelegate);
       
       // ReplayKit
       JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
@@ -2200,8 +2198,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
       JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
       JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
+      
+      // ARKit protocols
+      
+      JS_RETURN_PROTOCOL(ARSKViewDelegate);
+      
+      // Core Location protocols
+      JS_RETURN_PROTOCOL(CLLocationManagerDelegate);
 
       // CoreAnimation protocols
+      
       JS_RETURN_PROTOCOL(CALayerDelegate);
       JS_RETURN_PROTOCOL(CAAction);
 

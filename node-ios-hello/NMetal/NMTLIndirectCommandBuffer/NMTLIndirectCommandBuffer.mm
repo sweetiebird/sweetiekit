@@ -25,7 +25,7 @@ JS_INIT_PROTOCOL_END(MTLIndirectCommandBuffer, MTLResource);
 
 
 NAN_METHOD(NMTLIndirectCommandBuffer::New) {
-  JS_RECONSTRUCT(MTLIndirectCommandBuffer);
+  JS_RECONSTRUCT_PROTOCOL(MTLIndirectCommandBuffer);
   @autoreleasepool {
     id<MTLIndirectCommandBuffer> self = nullptr;
 
