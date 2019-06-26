@@ -173,6 +173,27 @@ async function make(nav, demoVC) {
     fighterNode.physicsBody = SCNPhysicsBody.dynamicBody();
     rootNode.addChildNode(fighterNode);
 
+    if (typeof turtleMaterial === 'undefined') {
+      turtleScatteringFunction = MDLScatteringFunction();
+      turtleMaterial = MDLMaterial.alloc().initWithNameScatteringFunction('turtleMaterial', turtleScatteringFunction);
+      turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_color.png', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_color.png'))));
+      turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_normal.png', MDLMaterialSemanticTangentSpaceNormal, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_normal.png'))));
+      turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_alpha.png'))));
+    }
+    if (typeof turtleGeometry === 'undefined') {
+      turtleAsset = MDLAsset.alloc().initWithURL(NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle.obj')));
+      turtleObject = turtleAsset.objectAtIndex(0);
+      for (let submesh of turtleObject.submeshes) {
+        submesh.material = turtleMaterial;
+      }
+      turtleGeometry = SCNGeometry.geometryWithMDLMesh(turtleObject);
+    }
+    turtleNode = SCNNode.nodeWithGeometry(turtleGeometry);
+    turtleNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
+    // turtleNode.transform = new THREE.Matrix4().makeScale(3.0/1000, 3.0/1000, 3.0/1000);
+    turtleNode.physicsBody = SCNPhysicsBody.dynamicBody();
+    rootNode.addChildNode(turtleNode);
+
     if (typeof sphere === 'undefined') {
       sphere = SCNSphere(1.0);
       sphere.firstMaterial.diffuse.contents = {red: 1.0, green: 0.1, blue: 0.1};

@@ -192,6 +192,7 @@
 		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
 		A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */; };
 		A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E72228A478600A42754 /* NSCNNode.mm */; };
+		A190B7AD22C303D4007268E4 /* turtle.scn in Resources */ = {isa = PBXBuildFile; fileRef = A190B7AC22C303D4007268E4 /* turtle.scn */; };
 		A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EC622C07D17008F16AE /* NMKMapCamera.mm */; };
 		A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ECB22C08076008F16AE /* NMKOverlayRenderer.mm */; };
 		A1926ED022C081D2008F16AE /* NMKOverlayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926ECE22C081D2008F16AE /* NMKOverlayView.mm */; };
@@ -893,6 +894,7 @@
 		A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSCNViewDelegate.swift; sourceTree = "<group>"; };
 		A18F1E72228A478600A42754 /* NSCNNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNNode.mm; sourceTree = "<group>"; };
 		A18F1E74228A478D00A42754 /* NSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNNode.h; sourceTree = "<group>"; };
+		A190B7AC22C303D4007268E4 /* turtle.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = turtle.scn; sourceTree = "<group>"; };
 		A1926EC622C07D17008F16AE /* NMKMapCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMKMapCamera.mm; sourceTree = "<group>"; };
 		A1926EC722C07D18008F16AE /* NMKMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKMapCamera.h; sourceTree = "<group>"; };
 		A1926ECA22C08076008F16AE /* NMKOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMKOverlayRenderer.h; sourceTree = "<group>"; };
@@ -2803,6 +2805,7 @@
 				A16EF594229D0BD6007BCB49 /* Spark.sks */,
 				A16EF592229D0917007BCB49 /* Magic.sks */,
 				A16EF58F229D07D4007BCB49 /* Assets.xcassets */,
+				A190B7AC22C303D4007268E4 /* turtle.scn */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -6448,6 +6451,7 @@
 				A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */,
 				A1CE2B90228F020C00D9B3B8 /* Lato-Regular.ttf in Resources */,
 				A16EF590229D07D4007BCB49 /* Fire.sks in Resources */,
+				A190B7AD22C303D4007268E4 /* turtle.scn in Resources */,
 				A1BD4B8E2287CCF4001D1F6E /* Scene.sks in Resources */,
 				A1926F6C22C0FAFD008F16AE /* Spark.png in Resources */,
 				A1FC1A09225C65DC00085571 /* Main.storyboard in Resources */,

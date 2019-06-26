@@ -14,7 +14,7 @@ const makePlatformer = require('./examples/Astronauts');
 const makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
-const makeARSCNView = require('./examples/ARSCNView');
+const makeARSCNView = require('./examples/ARSCNView2');
 const makeARSelection = require('./examples/ARSelection');
 const makeButton = require('./examples/UIButton');
 const makeBarButtonItem = require('./examples/UIBarButtonItem');
