@@ -54,10 +54,12 @@ NAN_METHOD(N${name}::New) {
     } else if (info.Length() >= 1 && is_value_protocol< id<${name}> >(info[0])) {
       JS_UNWRAPPED_PROTOCOL(info[0], ${name}, value);
       self = value;
+    } else if (info.Length() <= 0) {
+      self = [[${name}Type alloc] init];
     }
     if (self) {
       N${name} *wrapper = new N${name}();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);
@@ -66,6 +68,9 @@ NAN_METHOD(N${name}::New) {
     }
   }
 }
+
+@implementation ${name}Type
+@end
 `;
 
   const hData = `//
@@ -87,6 +92,11 @@ NAN_METHOD(N${name}::New) {
 JS_WRAP_PROTOCOL(${name}, ${superClass});
   // TODO: declare ${name} methods and properties
 JS_WRAP_PROTOCOL_END(${name}, ${superClass});
+
+#if __OBJC__
+@interface ${name}Type : NSObject<${name}>
+@end
+#endif
 
 #endif /* N${name}_h */`;
 
