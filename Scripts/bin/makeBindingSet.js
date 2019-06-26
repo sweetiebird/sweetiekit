@@ -6,10 +6,10 @@ const path = require('path');
 function makeBindingSet(group, name, superClass, me) {
   const groupLoc = path.resolve(__dirname, '../../node-ios-hello', `N${group}`);
   const subLoc = path.resolve(groupLoc, `N${name}`);
-  console.log(groupLoc);
+  //console.log(groupLoc);
   try {
     fs.mkdirSync(groupLoc);
-    console.log(`made ${groupLoc}`);
+    //console.log(`made ${groupLoc}`);
   } catch (e) {
     // nothin
   }
@@ -104,10 +104,10 @@ JS_WRAP_CLASS_END(${name});
   }
 
   try {
-    fs.writeFileSync(hPath, hData);
     fs.writeFileSync(mPath, mData);
-    console.log(hPath);
+    fs.writeFileSync(hPath, hData);
     console.log(mPath);
+    console.log(hPath);
     process.exit(0);
   } catch (e) {
     console.log('cant write');
