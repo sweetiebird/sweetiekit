@@ -15,7 +15,20 @@
 #define is_value_NSPort(x) is_value_wrapper(x, NSPort)
 
 JS_WRAP_CLASS(NSPort, NSObject);
-  // TODO: declare NSPort methods and properties
+  JS_STATIC_METHOD(port);
+  JS_METHOD(invalidate);
+  JS_METHOD(setDelegate);
+  JS_METHOD(delegate);
+  JS_METHOD(scheduleInRunLoopForMode);
+  JS_METHOD(removeFromRunLoopForMode);
+  JS_METHOD(sendBeforeDateComponentsFromReserved);
+  JS_METHOD(sendBeforeDateMsgidComponentsFromReserved);
+  JS_METHOD(addConnectionToRunLoopForMode);
+  JS_METHOD(removeConnectionFromRunLoopForMode);
+  JS_PROP_READONLY(isValid);
+  JS_PROP_READONLY(reservedSpaceLength);
+
+
 JS_WRAP_CLASS_END(NSPort);
 
 #endif /* NNSPort_h */

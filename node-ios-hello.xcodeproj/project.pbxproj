@@ -325,6 +325,11 @@
 		A19270DB22C19C9B008F16AE /* NMTKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270DA22C19C9A008F16AE /* NMTKView.mm */; };
 		A19270DF22C19D0A008F16AE /* NMTKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270DD22C19D0A008F16AE /* NMTKViewDelegate.mm */; };
 		A19270E322C19D7A008F16AE /* NCAMetalDrawable.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270E222C19D7A008F16AE /* NCAMetalDrawable.mm */; };
+		A19270F022C2E27C008F16AE /* NNSSocketPort.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270E522C2E27C008F16AE /* NNSSocketPort.mm */; };
+		A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270E922C2E27C008F16AE /* NNSMachPort.mm */; };
+		A19270F222C2E27D008F16AE /* NNSPortDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270EB22C2E27C008F16AE /* NNSPortDelegate.mm */; };
+		A19270F322C2E27D008F16AE /* NNSMessagePort.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270EF22C2E27C008F16AE /* NNSMessagePort.mm */; };
+		A19270F722C2E344008F16AE /* NNSMachPortDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19270F622C2E343008F16AE /* NNSMachPortDelegate.mm */; };
 		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
 		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
@@ -1152,6 +1157,16 @@
 		A19270DE22C19D0A008F16AE /* NMTKViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTKViewDelegate.h; sourceTree = "<group>"; };
 		A19270E122C19D7A008F16AE /* NCAMetalDrawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAMetalDrawable.h; sourceTree = "<group>"; };
 		A19270E222C19D7A008F16AE /* NCAMetalDrawable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAMetalDrawable.mm; sourceTree = "<group>"; };
+		A19270E522C2E27C008F16AE /* NNSSocketPort.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSSocketPort.mm; sourceTree = "<group>"; };
+		A19270E622C2E27C008F16AE /* NNSSocketPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSSocketPort.h; sourceTree = "<group>"; };
+		A19270E822C2E27C008F16AE /* NNSMachPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMachPort.h; sourceTree = "<group>"; };
+		A19270E922C2E27C008F16AE /* NNSMachPort.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMachPort.mm; sourceTree = "<group>"; };
+		A19270EB22C2E27C008F16AE /* NNSPortDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSPortDelegate.mm; sourceTree = "<group>"; };
+		A19270EC22C2E27C008F16AE /* NNSPortDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSPortDelegate.h; sourceTree = "<group>"; };
+		A19270EE22C2E27C008F16AE /* NNSMessagePort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMessagePort.h; sourceTree = "<group>"; };
+		A19270EF22C2E27C008F16AE /* NNSMessagePort.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMessagePort.mm; sourceTree = "<group>"; };
+		A19270F522C2E343008F16AE /* NNSMachPortDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMachPortDelegate.h; sourceTree = "<group>"; };
+		A19270F622C2E343008F16AE /* NNSMachPortDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMachPortDelegate.mm; sourceTree = "<group>"; };
 		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
 		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
 		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
@@ -4162,8 +4177,8 @@
 		A19270A722C164AC008F16AE /* NNSPort */ = {
 			isa = PBXGroup;
 			children = (
-				A19270A822C164AC008F16AE /* NNSPort.mm */,
 				A19270A922C164AC008F16AE /* NNSPort.h */,
+				A19270A822C164AC008F16AE /* NNSPort.mm */,
 			);
 			path = NNSPort;
 			sourceTree = "<group>";
@@ -4301,6 +4316,51 @@
 				A19270E222C19D7A008F16AE /* NCAMetalDrawable.mm */,
 			);
 			path = NCAMetalDrawable;
+			sourceTree = "<group>";
+		};
+		A19270E422C2E27C008F16AE /* NNSSocketPort */ = {
+			isa = PBXGroup;
+			children = (
+				A19270E622C2E27C008F16AE /* NNSSocketPort.h */,
+				A19270E522C2E27C008F16AE /* NNSSocketPort.mm */,
+			);
+			path = NNSSocketPort;
+			sourceTree = "<group>";
+		};
+		A19270E722C2E27C008F16AE /* NNSMachPort */ = {
+			isa = PBXGroup;
+			children = (
+				A19270E822C2E27C008F16AE /* NNSMachPort.h */,
+				A19270E922C2E27C008F16AE /* NNSMachPort.mm */,
+			);
+			path = NNSMachPort;
+			sourceTree = "<group>";
+		};
+		A19270EA22C2E27C008F16AE /* NNSPortDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A19270EC22C2E27C008F16AE /* NNSPortDelegate.h */,
+				A19270EB22C2E27C008F16AE /* NNSPortDelegate.mm */,
+			);
+			path = NNSPortDelegate;
+			sourceTree = "<group>";
+		};
+		A19270ED22C2E27C008F16AE /* NNSMessagePort */ = {
+			isa = PBXGroup;
+			children = (
+				A19270EE22C2E27C008F16AE /* NNSMessagePort.h */,
+				A19270EF22C2E27C008F16AE /* NNSMessagePort.mm */,
+			);
+			path = NNSMessagePort;
+			sourceTree = "<group>";
+		};
+		A19270F422C2E343008F16AE /* NNSMachPortDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A19270F522C2E343008F16AE /* NNSMachPortDelegate.h */,
+				A19270F622C2E343008F16AE /* NNSMachPortDelegate.mm */,
+			);
+			path = NNSMachPortDelegate;
 			sourceTree = "<group>";
 		};
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
@@ -5897,6 +5957,11 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A19270F422C2E343008F16AE /* NNSMachPortDelegate */,
+				A19270E722C2E27C008F16AE /* NNSMachPort */,
+				A19270ED22C2E27C008F16AE /* NNSMessagePort */,
+				A19270EA22C2E27C008F16AE /* NNSPortDelegate */,
+				A19270E422C2E27C008F16AE /* NNSSocketPort */,
 				A19270AF22C174C7008F16AE /* NNSTarget */,
 				A19270A722C164AC008F16AE /* NNSPort */,
 				A19270A322C16422008F16AE /* NNSInvocation */,
@@ -6181,45 +6246,45 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A19270D722C19C9A008F16AE /* NMetalKit */,
-				A192708222C14C47008F16AE /* NIOSurface */,
-				A1926F7922C10729008F16AE /* NMetal */,
-				A1D4985122BAFD40009AC951 /* NSecurity */,
-				A1D4981C22B9BBD0009AC951 /* NContacts */,
-				A19F39D522AF4AE100606332 /* NModelIO */,
-				A133708122AB382200FA3768 /* NMediaPlayer */,
-				A1482A93229D4DAC001502C0 /* GameFiles */,
-				A16EF58D229D07B8007BCB49 /* Templates */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
+				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
+				A1482A93229D4DAC001502C0 /* GameFiles */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
 				A1058B422268029E00CEAA5C /* libs_main.mm */,
 				A1394A6D22865F200087F712 /* main.h */,
 				A1394A6B22865EF00087F712 /* main.mm */,
-				A1D672A12269944C00562A42 /* NativeClasses */,
-				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1D65E0B22819C1600AC0BD9 /* NARKit */,
+				A1D672A12269944C00562A42 /* NativeClasses */,
 				A13370DA22AEFDDC00FA3768 /* NAudioToolbox */,
-				A13370FB22AF1C9000FA3768 /* NCoreAudio */,
 				A174A1672282214B002A8216 /* NAVFoundation */,
+				A1D4981C22B9BBD0009AC951 /* NContacts */,
 				216392A2226BD43600051DE0 /* NCoreAnimation */,
+				A13370FB22AF1C9000FA3768 /* NCoreAudio */,
 				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
+				A192708222C14C47008F16AE /* NIOSurface */,
 				A194894D228A8489007BF787 /* NMapKit */,
+				A133708122AB382200FA3768 /* NMediaPlayer */,
+				A1926F7922C10729008F16AE /* NMetal */,
+				A19270D722C19C9A008F16AE /* NMetalKit */,
+				A19F39D522AF4AE100606332 /* NModelIO */,
 				A1E2D7A5226A500100FA1562 /* NObjC */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1710E9F229A58A100EC7C86 /* NReplayKit */,
 				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
+				A1D4985122BAFD40009AC951 /* NSecurity */,
 				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
 				A133701A22AAE65000FA3768 /* NWebKit */,
-				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A1D672A02269942100562A42 /* Resources */,
 				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
 				A1D672A22269945B00562A42 /* Storyboards */,
+				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
+				A16EF58D229D07B8007BCB49 /* Templates */,
 			);
 			path = "node-ios-hello";
 			sourceTree = "<group>";
@@ -6479,6 +6544,7 @@
 				A1926F0522C0BA34008F16AE /* NSKPhysicsJointLimit.mm in Sources */,
 				A133702E22AAF29C00FA3768 /* NNSInputStream.mm in Sources */,
 				212BA5DB227DA9E9000B8D1D /* defines.mm in Sources */,
+				A19270F722C2E344008F16AE /* NNSMachPortDelegate.mm in Sources */,
 				A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */,
 				A19270CA22C184CB008F16AE /* NMTLComputeCommandEncoder.mm in Sources */,
 				A192708022C14B8A008F16AE /* NMTLEvent.mm in Sources */,
@@ -6662,6 +6728,7 @@
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
 				A1BD4B882287C564001D1F6E /* NSKLabelNode.mm in Sources */,
 				A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */,
+				A19270F222C2E27D008F16AE /* NNSPortDelegate.mm in Sources */,
 				A19F39F122AF65F400606332 /* NMDLScatteringFunction.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
@@ -6735,6 +6802,7 @@
 				A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */,
 				A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
+				A19270F022C2E27C008F16AE /* NNSSocketPort.mm in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				A192707E22C14B8A008F16AE /* NMTLSharedEventHandle.mm in Sources */,
@@ -6753,10 +6821,12 @@
 				211E76A22269F41D00B838AF /* NNSObject.mm in Sources */,
 				A1926F0322C0BA34008F16AE /* NSKPhysicsJoint.mm in Sources */,
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
+				A19270F322C2E27D008F16AE /* NNSMessagePort.mm in Sources */,
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
+				A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */,
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */,

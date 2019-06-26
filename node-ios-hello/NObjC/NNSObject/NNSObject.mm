@@ -653,6 +653,12 @@ NAN_METHOD(NClass::New) {
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
 #include "NNSPort.h"
+#include "NNSPortDelegate.h"
+#include "NNSMachPort.h"
+#include "NNSMachPortDelegate.h"
+#include "NNSMessagePort.h"
+#include "NNSSocketPort.h"
+
 #include "NNSInvocation.h"
 #include "NNSUserDefaults.h"
 #include "NNSMutableParagraphStyle.h"
@@ -1121,6 +1127,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSRunLoop);
     JS_EXPORT_TYPE(NSTimer);
     JS_EXPORT_TYPE(NSPort);
+    JS_EXPORT_PROTOCOL(NSPortDelegate);
+    JS_EXPORT_TYPE(NSMessagePort);
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+    JS_EXPORT_TYPE(NSSocketPort);
+    JS_EXPORT_TYPE(NSMachPort);
+    JS_EXPORT_PROTOCOL(NSMachPortDelegate);
+#endif
     JS_EXPORT_TYPE(NSInvocation);
     JS_EXPORT_TYPE(NSCoder);
     JS_EXPORT_TYPE(NSURL);
@@ -2117,6 +2130,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSCoder);
       JS_RETURN_TYPE(NSUserDefaults);
       JS_RETURN_TYPE(NSInvocation);
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+      JS_RETURN_TYPE(NSMachPort);
+      JS_RETURN_TYPE(NSSocketPort);
+#endif
+      JS_RETURN_TYPE(NSMessagePort);
       JS_RETURN_TYPE(NSPort);
       JS_RETURN_TYPE(NSTimer);
       JS_RETURN_TYPE(NSRunLoop);
@@ -2178,6 +2196,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
       JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
       JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
+
+      // Foundation protocols
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+      JS_RETURN_PROTOCOL(NSMachPortDelegate);
+#endif
+      JS_RETURN_PROTOCOL(NSPortDelegate);
 
       // Default types
 
