@@ -32,7 +32,7 @@ JS_INIT_PROTOCOL(MTLFunction, NSObject);
 JS_INIT_PROTOCOL_END(MTLFunction, NSObject);
 
 NAN_METHOD(NMTLFunction::New) {
-  JS_RECONSTRUCT(MTLFunction);
+  JS_RECONSTRUCT_PROTOCOL(MTLFunction);
   @autoreleasepool {
     id<MTLFunction> self = nullptr;
 

@@ -9,12 +9,13 @@
 #define NCLLocationManagerDelegate_h
 
 #import "NNSObject.h"
+#import <CoreLocation/CLLocationManagerDelegate.h>
 
 #define js_value_CLLocationManagerDelegate(x) js_value_wrapper(x, CLLocationManagerDelegate)
 #define to_value_CLLocationManagerDelegate(x) to_value_wrapper(x, CLLocationManagerDelegate)
 #define is_value_CLLocationManagerDelegate(x) is_value_wrapper(x, CLLocationManagerDelegate)
 
-JS_WRAP_CLASS(CLLocationManagerDelegate, NSObject);
+JS_WRAP_PROTOCOL(CLLocationManagerDelegate, NSObject);
   JS_PROP(locationManagerDidUpdateToLocationFromLocation);
   JS_PROP(locationManagerDidUpdateLocations);
   JS_PROP(locationManagerDidUpdateHeading);
@@ -32,11 +33,10 @@ JS_WRAP_CLASS(CLLocationManagerDelegate, NSObject);
   JS_PROP(locationManagerDidResumeLocationUpdates);
   JS_PROP(locationManagerDidFinishDeferredUpdatesWithError);
   JS_PROP(locationManagerDidVisit);
-JS_WRAP_CLASS_END(CLLocationManagerDelegate);
+JS_WRAP_PROTOCOL_END(CLLocationManagerDelegate, NSObject);
 
 #if __OBJC__
-#import <CoreLocation/CLLocationManagerDelegate.h>
-@interface CLLocationManagerDelegate : NSObject<CLLocationManagerDelegate>
+@interface CLLocationManagerDelegateType : NSObject<CLLocationManagerDelegate>
 /*
  *  locationManager:didUpdateLocations:
  *

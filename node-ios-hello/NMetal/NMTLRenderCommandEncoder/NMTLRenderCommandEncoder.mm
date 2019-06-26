@@ -271,7 +271,7 @@ JS_INIT_PROTOCOL_END(MTLRenderCommandEncoder, MTLCommandEncoder);
 
 
 NAN_METHOD(NMTLRenderCommandEncoder::New) {
-  JS_RECONSTRUCT(MTLRenderCommandEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLRenderCommandEncoder);
   @autoreleasepool {
     id<MTLRenderCommandEncoder> self = nullptr;
 

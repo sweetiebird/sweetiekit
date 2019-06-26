@@ -158,6 +158,7 @@ NAN_SETTER(NCAAnimation::delegateSetter) {
     declare_setter();
     declare_value(id/* <CAAnimationDelegate>*/, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"CAAnimation::delegate"];
   }
 }
 

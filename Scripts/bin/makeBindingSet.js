@@ -55,7 +55,7 @@ NAN_METHOD(N${name}::New) {
     }
     if (self) {
       N${name} *wrapper = new N${name}();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);

@@ -24,18 +24,12 @@ JS_INIT_PROTOCOL_END(MTKViewDelegate, NSObject);
 
 
 NAN_METHOD(NMTKViewDelegate::New) {
-  JS_RECONSTRUCT(MTKViewDelegate);
+  JS_RECONSTRUCT_PROTOCOL(MTKViewDelegate);
   @autoreleasepool {
     id<MTKViewDelegate> self = nullptr;
 
     if (info[0]->IsExternal()) {
       self = (__bridge id<MTKViewDelegate>)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NMTKViewDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NMTKViewDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
     } else if (info.Length() >= 1 && is_value_protocol< id<MTKViewDelegate> >(info[0])) {
       JS_UNWRAPPED_PROTOCOL(info[0], MTKViewDelegate, value);
       self = value;
@@ -52,25 +46,6 @@ NAN_METHOD(NMTKViewDelegate::New) {
       Nan::ThrowError("MTKViewDelegate::New: invalid arguments");
     }
   }
-}
-
-#define DELEGATE_PROTOCOL_PROP(type, key) \
-NAN_GETTER(N##type::key##Getter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    get_persistent_function(self_, callback, @#key); \
-    if (callback) { \
-      JS_SET_RETURN([callback jsFunction]->Get()); \
-    } \
-  } \
-} \
-\
-NAN_SETTER(N##type::key##Setter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    declare_setter(); \
-    declare_persistent_function_on(self_, callback, @#key); \
-  } \
 }
 
 DELEGATE_PROTOCOL_PROP(MTKViewDelegate, mtkViewDrawableSizeWillChange);

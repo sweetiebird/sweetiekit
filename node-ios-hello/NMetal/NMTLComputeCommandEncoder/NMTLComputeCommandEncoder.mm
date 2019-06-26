@@ -49,7 +49,7 @@ JS_INIT_PROTOCOL_END(MTLComputeCommandEncoder, MTLCommandEncoder);
 
 
 NAN_METHOD(NMTLComputeCommandEncoder::New) {
-  JS_RECONSTRUCT(MTLComputeCommandEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLComputeCommandEncoder);
   @autoreleasepool {
     id<MTLComputeCommandEncoder> self = nullptr;
 

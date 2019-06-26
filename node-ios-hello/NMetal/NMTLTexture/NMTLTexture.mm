@@ -46,7 +46,7 @@ JS_INIT_PROTOCOL(MTLTexture, MTLResource);
 JS_INIT_PROTOCOL_END(MTLTexture, MTLResource);
 
 NAN_METHOD(NMTLTexture::New) {
-  JS_RECONSTRUCT(MTLTexture);
+  JS_RECONSTRUCT_PROTOCOL(MTLTexture);
   @autoreleasepool {
     id<MTLTexture> self = nullptr;
 

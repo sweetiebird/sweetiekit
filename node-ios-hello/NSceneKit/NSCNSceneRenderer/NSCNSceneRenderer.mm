@@ -61,7 +61,7 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
 JS_INIT_PROTOCOL_END(SCNSceneRenderer, NSObject);
 
 NAN_METHOD(NSCNSceneRenderer::New) {
-  JS_RECONSTRUCT(SCNSceneRenderer);
+  JS_RECONSTRUCT_PROTOCOL(SCNSceneRenderer);
   @autoreleasepool {
     id<SCNSceneRenderer> self = nullptr;
 

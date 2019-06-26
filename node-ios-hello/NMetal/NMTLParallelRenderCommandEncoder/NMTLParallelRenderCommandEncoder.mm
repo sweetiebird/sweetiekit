@@ -21,7 +21,7 @@ JS_INIT_PROTOCOL_END(MTLParallelRenderCommandEncoder, MTLCommandEncoder);
 
 
 NAN_METHOD(NMTLParallelRenderCommandEncoder::New) {
-  JS_RECONSTRUCT(MTLParallelRenderCommandEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLParallelRenderCommandEncoder);
   @autoreleasepool {
     id<MTLParallelRenderCommandEncoder> self = nullptr;
 

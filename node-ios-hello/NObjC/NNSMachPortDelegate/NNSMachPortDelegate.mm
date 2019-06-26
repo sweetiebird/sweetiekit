@@ -25,7 +25,7 @@ JS_INIT_PROTOCOL_END(NSMachPortDelegate, NSPortDelegate);
 
 
 NAN_METHOD(NNSMachPortDelegate::New) {
-  JS_RECONSTRUCT(NSMachPortDelegate);
+  JS_RECONSTRUCT_PROTOCOL(NSMachPortDelegate);
   @autoreleasepool {
     id<NSMachPortDelegate> self = nullptr;
 

@@ -353,6 +353,11 @@
       (and (str-starts? name "init") 
            (uppercase-code? (or (code name 4) 0)))))
 
+(define-global objc-delegate? (name (o kind))
+  (or (= kind "protocol")
+      (and (str-ends? name "Delegate") 
+           (not (= name "Delegate")))))
+
 (define-macro js-type-method (self-type return-type name args static: static? rest: body)
   (let (return-type (expand return-type)
         self (if (objc-init? name) `self static? `(%instancetype) `self)
@@ -438,11 +443,12 @@
               `(JS_ASSIGN_PROTO_PROP_READONLY ,getter)
               `(JS_ASSIGN_PROTO_PROP          ,getter)))))
       source
-      `(do (js-type-getter ,class ,type ,getter ,setter ,static?)
-         ,(unless readonly?
-            `(js-type-setter ,class ,type ,getter ,setter ,static?))))))
+      (js-print-type class
+        `(do (js-type-getter ,class ,type ,getter ,setter ,static?)
+           ,(unless readonly?
+              `(js-type-setter ,class ,type ,getter ,setter ,static?)))))))
 
-(define-macro js-method (name: name args: args type: type class: (o class (getenv 'Class 'type)) static: static?)
+(define-macro js-method (name: name args: args type: type kind: (o kind (getenv 'Class 'kind)) class: (o class (getenv 'Class 'type)) static: static?)
   (when (objc-init? name)
     (set static? 'init))
   (let class (if (obj? class) (hd class) class)
@@ -452,15 +458,25 @@
         (let name (objc-method-name name args static: static?)
           `(%indent ,(if (and static? (not (= static? 'init)))
             `(JS_STATIC_METHOD ,name)
+            (objc-delegate? class kind)
+            `(JS_PROP ,name)
             `(JS_METHOD ,name)))))
       ctor
       (js-print-type class
         (let name (objc-method-name name args static: static?)
-          `(%indent ,(if (and static? (not (= static? 'init)))
+          `(%indent ,(if (objc-delegate? class kind)
+              `(JS_ASSIGN_PROTO_PROP ,name)
+              (and static? (not (= static? 'init)))
               `(JS_ASSIGN_STATIC_METHOD ,name)
               `(JS_ASSIGN_PROTO_METHOD ,name)))))
+      delegate
+      (js-print-type class
+        (let name (objc-method-name name args static: static?)
+          (if (objc-delegate? class kind)
+            `(DELEGATE_PROTOCOL_PROP ,class ,name))))
       source
-      `(js-type-method ,class ,type ,name ,args static: ,static?))))
+      (js-print-type class
+        `(js-type-method ,class ,type ,name ,args static: ,static?)))))
 
 (set reader (require 'reader))
 
@@ -622,21 +638,21 @@
         form `(do))
     (step x props
       (when (in (hd? x) 'interface 'protocol)
-        (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
+        (add form `(when-compiling (setenv 'Class kind: ',(at x 0) type: ',(at x 1)) '(do))))
       (when (and (hd? x 'method) (= (at x 1) "+"))
         (add form x)))
     (step x props
       (when (in (hd? x) 'interface 'protocol)
-        (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
+        (add form `(when-compiling (setenv 'Class kind: ',(at x 0) type: ',(at x 1)) '(do))))
       (when (and (hd? x 'method) (= (at x 1) "-"))
         (add form x)))
     (step x props
       ;(print (str x))
       (when (in (hd? x) 'interface 'protocol)
-        (add form `(when-compiling (setenv 'Class type: ',(at x 1)) '(do))))
+        (add form `(when-compiling (setenv 'Class kind: ',(at x 0) type: ',(at x 1)) '(do))))
       (when (hd? x 'property)
         (add form x)))
-    (step stage '(header ctor source)
+    (step stage '(header ctor delegate source)
       (print (cat "// --------- begin " stage " --------------"))
       (when (= stage "source")
         (print (cat "#define instancetype " type))

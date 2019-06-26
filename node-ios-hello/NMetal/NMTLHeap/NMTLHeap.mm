@@ -32,7 +32,7 @@ JS_INIT_PROTOCOL(MTLHeap, NSObject);
 JS_INIT_PROTOCOL_END(MTLHeap, NSObject);
 
 NAN_METHOD(NMTLHeap::New) {
-  JS_RECONSTRUCT(MTLHeap);
+  JS_RECONSTRUCT_PROTOCOL(MTLHeap);
   @autoreleasepool {
     id<MTLHeap> self = nullptr;
 

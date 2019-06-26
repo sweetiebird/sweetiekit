@@ -43,7 +43,7 @@ JS_INIT_PROTOCOL_END(MTLCommandEncoder, NSObject);
 
 
 NAN_METHOD(NMTLCommandEncoder::New) {
-  JS_RECONSTRUCT(MTLCommandEncoder);
+  JS_RECONSTRUCT_PROTOCOL(MTLCommandEncoder);
   @autoreleasepool {
     id<MTLCommandEncoder> self = nullptr;
 

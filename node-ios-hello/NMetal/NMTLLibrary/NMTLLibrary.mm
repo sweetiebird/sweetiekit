@@ -84,7 +84,7 @@ JS_INIT_PROTOCOL(MTLLibrary, NSObject);
 JS_INIT_PROTOCOL_END(MTLLibrary, NSObject);
 
 NAN_METHOD(NMTLLibrary::New) {
-  JS_RECONSTRUCT(MTLLibrary);
+  JS_RECONSTRUCT_PROTOCOL(MTLLibrary);
   @autoreleasepool {
     id<MTLLibrary> self = nullptr;
 

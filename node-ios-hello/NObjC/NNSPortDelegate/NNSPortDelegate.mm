@@ -23,7 +23,7 @@ JS_INIT_PROTOCOL_END(NSPortDelegate, NSObject);
 
 
 NAN_METHOD(NNSPortDelegate::New) {
-  JS_RECONSTRUCT(NSPortDelegate);
+  JS_RECONSTRUCT_PROTOCOL(NSPortDelegate);
   @autoreleasepool {
     id<NSPortDelegate> self = nullptr;
 

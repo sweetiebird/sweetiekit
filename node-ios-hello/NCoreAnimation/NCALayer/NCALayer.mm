@@ -213,15 +213,13 @@ NAN_METHOD(NCALayer::needsDisplayForKey) {
   }
 }
 
-#define js_value_CAAction(x) js_value_wrapper_unknown(x, CAAction)
-#define to_value_CAAction(x) to_value_wrapper_unknown(x, CAAction)
-#define is_value_CAAction(x) is_value_wrapper_unknown(x, CAAction)
+#include "NCAAction.h"
 
 NAN_METHOD(NCALayer::defaultActionForKey) {
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, event);
-    JS_SET_RETURN(js_value_id/* <CAAction>*/([CALayer defaultActionForKey: event]));
+    JS_SET_RETURN(js_value_CAAction([CALayer defaultActionForKey: event]));
   }
 }
 
@@ -518,7 +516,7 @@ NAN_METHOD(NCALayer::actionForKey) {
   declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, event);
-    JS_SET_RETURN(js_value_id/* <CAAction>*/([self actionForKey: event]));
+    JS_SET_RETURN(js_value_CAAction([self actionForKey: event]));
   }
 }
 
@@ -563,65 +561,6 @@ NAN_METHOD(NCALayer::animationForKey) {
     JS_SET_RETURN(js_value_CAAnimation([self animationForKey: key]));
   }
 }
-
-#if TODO
-NAN_METHOD(NCAAction::runActionForKeyObject) {
-  JS_UNWRAP(CAAction, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(NSString, event);
-    declare_value(id, anObject);
-    [self runActionForKey: event object: anObject];
-  }
-}
-
-NAN_METHOD(NCALayerDelegate::displayLayer) {
-  JS_UNWRAP(CALayerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(CALayer, layer);
-    [self displayLayer: layer];
-  }
-}
-
-NAN_METHOD(NCALayerDelegate::drawLayerInContext) {
-  JS_UNWRAP(CALayerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(CALayer, layer);
-    declare_value(CGContextRef, ctx);
-    [self drawLayer: layer inContext: ctx];
-  }
-}
-
-NAN_METHOD(NCALayerDelegate::layerWillDraw) {
-  JS_UNWRAP(CALayerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(CALayer, layer);
-    [self layerWillDraw: layer];
-  }
-}
-
-NAN_METHOD(NCALayerDelegate::layoutSublayersOfLayer) {
-  JS_UNWRAP(CALayerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(CALayer, layer);
-    [self layoutSublayersOfLayer: layer];
-  }
-}
-
-NAN_METHOD(NCALayerDelegate::actionForLayerForKey) {
-  JS_UNWRAP(CALayerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(CALayer, layer);
-    declare_pointer(NSString, event);
-    JS_SET_RETURN(js_value_id/* <CAAction>*/([self actionForLayer: layer forKey: event]));
-  }
-}
-#endif
 
 #include "NCABasicAnimation.h"
 
@@ -1398,10 +1337,12 @@ NAN_SETTER(NCALayer::nameSetter) {
   }
 }
 
+#include "NCALayerDelegate.h"
+
 NAN_GETTER(NCALayer::delegateGetter) {
   JS_UNWRAP(CALayer, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <CALayerDelegate>*/([self delegate]));
+    JS_SET_RETURN(js_value_CALayerDelegate([self delegate]));
   }
 }
 
@@ -1409,8 +1350,9 @@ NAN_SETTER(NCALayer::delegateSetter) {
   JS_UNWRAP(CALayer, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <CALayerDelegate>*/, input);
+    declare_protocol(CALayerDelegate, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NCALayer::delegate"];
   }
 }
 

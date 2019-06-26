@@ -159,7 +159,7 @@ JS_INIT_PROTOCOL_END(MTLCommandBuffer, NSObject);
 
 
 NAN_METHOD(NMTLCommandBuffer::New) {
-  JS_RECONSTRUCT(MTLCommandBuffer);
+  JS_RECONSTRUCT_PROTOCOL(MTLCommandBuffer);
   @autoreleasepool {
     id<MTLCommandBuffer> self = nullptr;
 

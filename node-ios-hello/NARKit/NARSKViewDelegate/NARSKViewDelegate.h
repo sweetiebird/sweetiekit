@@ -14,16 +14,16 @@
 #define to_value_ARSKViewDelegate(x) to_value_wrapper(x, ARSKViewDelegate)
 #define is_value_ARSKViewDelegate(x) is_value_wrapper(x, ARSKViewDelegate)
 
-JS_WRAP_CLASS(ARSKViewDelegate, NSObject);
+JS_WRAP_PROTOCOL(ARSKViewDelegate, NSObject);
   JS_PROP(viewNodeForAnchor);
   JS_PROP(viewDidAddNodeForAnchor);
   JS_PROP(viewWillUpdateNodeForAnchor);
   JS_PROP(viewDidUpdateNodeForAnchor);
   JS_PROP(viewDidRemoveNodeForAnchor);
-JS_WRAP_CLASS_END(ARSKViewDelegate);
+JS_WRAP_PROTOCOL_END(ARSKViewDelegate, NSObject);
 
 #if __OBJC__
-@interface ARSKViewDelegate : NSObject<ARSKViewDelegate>
+@interface ARSKViewDelegateType : NSObject<ARSKViewDelegate>
 /**
  Implement this to provide a custom node for the given anchor.
  

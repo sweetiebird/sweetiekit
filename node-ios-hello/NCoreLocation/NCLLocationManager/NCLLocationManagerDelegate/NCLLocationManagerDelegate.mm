@@ -9,7 +9,7 @@
 NCLLocationManagerDelegate::NCLLocationManagerDelegate () {}
 NCLLocationManagerDelegate::~NCLLocationManagerDelegate () {}
 
-JS_INIT_CLASS(CLLocationManagerDelegate, NSObject);
+JS_INIT_PROTOCOL(CLLocationManagerDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(locationManagerDidUpdateToLocationFromLocation);
   JS_ASSIGN_PROTO_PROP(locationManagerDidUpdateLocations);
   JS_ASSIGN_PROTO_PROP(locationManagerDidUpdateHeading);
@@ -31,27 +31,21 @@ JS_INIT_CLASS(CLLocationManagerDelegate, NSObject);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(CLLocationManagerDelegate, NSObject);
-JS_INIT_CLASS_END(CLLocationManagerDelegate, NSObject);
+JS_INIT_PROTOCOL_END(CLLocationManagerDelegate, NSObject);
 
 NAN_METHOD(NCLLocationManagerDelegate::New) {
-  JS_RECONSTRUCT(CLLocationManagerDelegate);
+  JS_RECONSTRUCT_PROTOCOL(CLLocationManagerDelegate);
   @autoreleasepool {
-    CLLocationManagerDelegate* self = nullptr;
+    id<CLLocationManagerDelegate> self = nullptr;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge CLLocationManagerDelegate *)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NCLLocationManagerDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NCLLocationManagerDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
+      self = (__bridge id<CLLocationManagerDelegate>)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [[CLLocationManagerDelegate alloc] init];
+      self = [[CLLocationManagerDelegateType alloc] init];
     }
     if (self) {
       NCLLocationManagerDelegate *wrapper = new NCLLocationManagerDelegate();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);
@@ -61,23 +55,23 @@ NAN_METHOD(NCLLocationManagerDelegate::New) {
   }
 }
 
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidUpdateToLocationFromLocation);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidUpdateLocations);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidUpdateHeading);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerShouldDisplayHeadingCalibration);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidDetermineStateForRegion);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidRangeBeaconsInRegion);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerRangingBeaconsDidFailForRegionWithError);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidEnterRegion);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidExitRegion);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidFailWithError);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerMonitoringDidFailForRegionWithError);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidChangeAuthorizationStatus);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidStartMonitoringForRegion);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidPauseLocationUpdates);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidResumeLocationUpdates);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidFinishDeferredUpdatesWithError);
-DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidUpdateToLocationFromLocation);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidUpdateLocations);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidUpdateHeading);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerShouldDisplayHeadingCalibration);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidDetermineStateForRegion);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidRangeBeaconsInRegion);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerRangingBeaconsDidFailForRegionWithError);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidEnterRegion);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidExitRegion);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidFailWithError);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerMonitoringDidFailForRegionWithError);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidChangeAuthorizationStatus);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidStartMonitoringForRegion);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidPauseLocationUpdates);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidResumeLocationUpdates);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidFinishDeferredUpdatesWithError);
+DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 
 #include "NCLLocationManager.h"
 #include "NCLHeading.h"
@@ -86,7 +80,7 @@ DELEGATE_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 #include "NNSError.h"
 #include "NCLVisit.h"
 
-@implementation CLLocationManagerDelegate
+@implementation CLLocationManagerDelegateType
 
 /*
  *  locationManager:didUpdateLocations:

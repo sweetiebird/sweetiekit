@@ -28,7 +28,7 @@ JS_INIT_PROTOCOL_END(MTLDrawable, NSObject);
 
 
 NAN_METHOD(NMTLDrawable::New) {
-  JS_RECONSTRUCT(MTLDrawable);
+  JS_RECONSTRUCT_PROTOCOL(MTLDrawable);
   @autoreleasepool {
     id<MTLDrawable> self = nullptr;
 

@@ -149,7 +149,7 @@ JS_INIT_PROTOCOL(MTLDevice, NSObject);
 JS_INIT_PROTOCOL_END(MTLDevice, NSObject);
 
 NAN_METHOD(NMTLDevice::New) {
-  JS_RECONSTRUCT(MTLDevice);
+  JS_RECONSTRUCT_PROTOCOL(MTLDevice);
   @autoreleasepool {
     id<MTLDevice> self = nullptr;
 

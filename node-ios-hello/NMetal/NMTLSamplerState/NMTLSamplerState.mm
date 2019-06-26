@@ -23,7 +23,7 @@ JS_INIT_PROTOCOL(MTLSamplerState, NSObject);
 JS_INIT_PROTOCOL_END(MTLSamplerState, NSObject);
 
 NAN_METHOD(NMTLSamplerState::New) {
-  JS_RECONSTRUCT(MTLSamplerState);
+  JS_RECONSTRUCT_PROTOCOL(MTLSamplerState);
   @autoreleasepool {
     id<MTLSamplerState> self = nullptr;
 

@@ -10,11 +10,15 @@
 
 #include "NNSObject.h"
 
+#if __OBJC__
+#import <MapKit/MKMapView.h>
+#endif
+
 #define js_value_MKMapViewDelegate(x) js_value_wrapper(x, MKMapViewDelegate)
 #define to_value_MKMapViewDelegate(x) to_value_wrapper(x, MKMapViewDelegate)
 #define is_value_MKMapViewDelegate(x) is_value_wrapper(x, MKMapViewDelegate)
 
-JS_WRAP_CLASS(MKMapViewDelegate, NSObject);
+JS_WRAP_PROTOCOL(MKMapViewDelegate, NSObject);
   JS_PROP(mapViewRegionWillChangeAnimated);
   JS_PROP(mapViewRegionDidChangeAnimated);
   JS_PROP(mapViewDidChangeVisibleRegion);
@@ -39,13 +43,11 @@ JS_WRAP_CLASS(MKMapViewDelegate, NSObject);
   JS_PROP(mapViewViewForOverlay);
   JS_PROP(mapViewDidAddOverlayViews);
   JS_PROP(mapViewClusterAnnotationForMemberAnnotations);
-JS_WRAP_CLASS_END(MKMapViewDelegate);
+JS_WRAP_PROTOCOL_END(MKMapViewDelegate, NSObject);
 
 #if __OBJC__
 
-#import <MapKit/MKMapView.h>
-
-@interface MKMapViewDelegate : NSObject<MKMapViewDelegate>
+@interface MKMapViewDelegateType : NSObject<MKMapViewDelegate>
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated;
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;

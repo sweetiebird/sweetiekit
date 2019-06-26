@@ -17,7 +17,7 @@
 NARSKViewDelegate::NARSKViewDelegate() {}
 NARSKViewDelegate::~NARSKViewDelegate() {}
 
-JS_INIT_CLASS(ARSKViewDelegate, NSObject);
+JS_INIT_PROTOCOL(ARSKViewDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(viewNodeForAnchor);
   JS_ASSIGN_PROTO_PROP(viewDidAddNodeForAnchor);
   JS_ASSIGN_PROTO_PROP(viewWillUpdateNodeForAnchor);
@@ -28,27 +28,21 @@ JS_INIT_CLASS(ARSKViewDelegate, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(ARSKViewDelegate, NSObject);
   // constants (exports)
-JS_INIT_CLASS_END(ARSKViewDelegate, NSObject);
+JS_INIT_PROTOCOL_END(ARSKViewDelegate, NSObject);
 
 NAN_METHOD(NARSKViewDelegate::New) {
-  JS_RECONSTRUCT(ARSKViewDelegate);
+  JS_RECONSTRUCT_PROTOCOL(ARSKViewDelegate);
   @autoreleasepool {
-    ARSKViewDelegate* self = nullptr;
+    id<ARSKViewDelegate> self = nullptr;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge ARSKViewDelegate *)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NARSKViewDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NARSKViewDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
+      self = (__bridge id<ARSKViewDelegate>)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [[ARSKViewDelegate alloc] init];
+      self = [[ARSKViewDelegateType alloc] init];
     }
     if (self) {
       NARSKViewDelegate *wrapper = new NARSKViewDelegate();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);
@@ -58,13 +52,13 @@ NAN_METHOD(NARSKViewDelegate::New) {
   }
 }
 
-DELEGATE_PROP(ARSKViewDelegate, viewNodeForAnchor);
-DELEGATE_PROP(ARSKViewDelegate, viewDidAddNodeForAnchor);
-DELEGATE_PROP(ARSKViewDelegate, viewWillUpdateNodeForAnchor);
-DELEGATE_PROP(ARSKViewDelegate, viewDidUpdateNodeForAnchor);
-DELEGATE_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
+DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewNodeForAnchor);
+DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidAddNodeForAnchor);
+DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewWillUpdateNodeForAnchor);
+DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidUpdateNodeForAnchor);
+DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
 
-@implementation ARSKViewDelegate
+@implementation ARSKViewDelegateType
 
 /**
  Implement this to provide a custom node for the given anchor.
