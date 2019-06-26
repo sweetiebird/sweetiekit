@@ -267,6 +267,9 @@ using namespace node;
 #define JS_ASSIGN_VALUE(name) \
   JS_ASSIGN_ENUM(name, id)
 
+#define JS_ASSIGN_ALIAS(newName, oldName) \
+  exports->Set(JS_STR(#newName), JS_STR(#oldName))
+
 #define JS_GETTER(ElType, el, jsName, ...) \
 NAN_GETTER(N##ElType::jsName##Getter) { \
   Nan::HandleScope scope; \

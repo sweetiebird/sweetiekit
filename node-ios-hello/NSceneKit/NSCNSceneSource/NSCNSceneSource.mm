@@ -12,9 +12,6 @@
 NSCNSceneSource::NSCNSceneSource() {}
 NSCNSceneSource::~NSCNSceneSource() {}
 
-#define JS_ASSIGN_ALIAS(newName, oldName) \
-  exports->Set(JS_STR(#newName), JS_STR(#oldName))
-
 JS_INIT_CLASS(SCNSceneSource, NSObject);
   JS_ASSIGN_STATIC_METHOD(sceneSourceWithURLOptions);
   JS_ASSIGN_STATIC_METHOD(sceneSourceWithDataOptions);
