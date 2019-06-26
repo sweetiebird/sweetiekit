@@ -32,9 +32,7 @@ async function make(nav, demoVC) {
   arView.scene = scene;
 
   spotlight = new SCNLight();
-  spotlight.type = SCNLightTypeSpot;
-  spotlight.spotInnerAngle = 45;
-  spotlight.spotOuterAngle = 45;
+  spotlight.type = SCNLightTypeOmni;
 
   scene.rootNode.light = spotlight;
   scene.rootNode.position = { x: 1, y: 1, z: 0 };
@@ -62,29 +60,40 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(arView);
   nav.pushViewController(demoVC);
 
-  const url = NSBundle.main().URLForResourceWithExtension('turtle', 'scn');
-  turtleScene = SCNScene.sceneWithURLOptionsError(url);
-  containerNode = SCNNode();
-
-
   setTimeout(() => {
-    turtleScene.rootNode.enumerateChildNodes((n) => {
-      containerNode.addChildNode(n);
-      console.log(n);
-    });
-
     arView.session.run(config);
     function configure() {
       const frame = arView.session.currentFrame;
       if (!frame) {
         setTimeout(configure, 10);
       } else {
-        console.log(containerNode);
+        if (typeof turtleMaterial === 'undefined') {
+          turtleScatteringFunction = MDLScatteringFunction();
+          turtleMaterial = MDLMaterial.alloc().initWithNameScatteringFunction('turtleMaterial', turtleScatteringFunction);
+          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_color.png', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_color.png'))));
+          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_normal.png', MDLMaterialSemanticTangentSpaceNormal, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_normal.png'))));
+          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_OBJ/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle_alpha.png'))));
+        }
+        if (typeof turtleGeometry === 'undefined') {
+          turtleAsset = MDLAsset.alloc().initWithURL(NSURL(Path.join(MediaPath, 'models/Turtle_OBJ/turtle.obj')));
+          turtleObject = turtleAsset.objectAtIndex(0);
+          for (let submesh of turtleObject.submeshes) {
+            submesh.material = turtleMaterial;
+          }
+          turtleGeometry = SCNGeometry.geometryWithMDLMesh(turtleObject);
+        }
+        turtleNode = SCNNode.nodeWithGeometry(turtleGeometry);
+        turtleNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
+        // turtleNode.transform = new THREE.Matrix4().makeScale(3.0/1000, 3.0/1000, 3.0/1000);
+        // turtleNode.physicsBody = SCNPhysicsBody.dynamicBody();
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
-        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-0.3));
-        containerNode.simdTransform = xform;
-        scene.rootNode.addChildNode(containerNode);
+        xform.multiply(new THREE.Matrix4().makeScale(2.0/10, 2.0/10, 2.0/10));
+        xform.multiply(new THREE.Matrix4().makeTranslation(0,-1,-0.3));
+        turtleNode.simdTransform = xform;
+
+        scene.rootNode.addChildNode(turtleNode);
+
         // const child = node.clone();
         // child.simdTransform = new THREE.Matrix4().makeTranslation(0,0,-0.3);
         // node.addChildNode(child);
