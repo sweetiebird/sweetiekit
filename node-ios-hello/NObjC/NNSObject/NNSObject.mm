@@ -775,6 +775,8 @@ NAN_METHOD(NClass::New) {
 #include "NUIDatePicker.h"
 #include "NCADisplayLink.h"
 #include "NCATransaction.h"
+#include "NCAAction.h"
+#include "NCALayerDelegate.h"
 #include "NCALayer.h"
 #include "NCAMetalDrawable.h"
 #include "NCAMetalLayer.h"
@@ -1384,6 +1386,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CABasicAnimation);
     JS_EXPORT_TYPE(CASpringAnimation);
 
+    JS_EXPORT_PROTOCOL(CAAction);
+    JS_EXPORT_PROTOCOL(CALayerDelegate);
     JS_EXPORT_TYPE(CALayer);
 #if !TARGET_OS_SIMULATOR
     JS_EXPORT_PROTOCOL(CAMetalDrawable);
@@ -2196,6 +2200,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(MTLDevice); // <NSObject>
       JS_RETURN_PROTOCOL(MTLTexture); // <MTLResource>
       JS_RETURN_PROTOCOL(MTLResource); // <MTLResource>
+
+      // CoreAnimation protocols
+      JS_RETURN_PROTOCOL(CALayerDelegate);
+      JS_RETURN_PROTOCOL(CAAction);
 
       // Foundation protocols
 

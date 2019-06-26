@@ -121,7 +121,7 @@ template <typename T> struct ObjCProtocolTraits;
 \
 extern Protocol* name##Protocol; \
 \
-template<> struct ObjCProtocolTraits< id<name> > { static Protocol* protocol() { return name##Protocol; } };
+template<> struct ObjCProtocolTraits< id<name> > { static Protocol* _Nonnull protocol() { return name##Protocol; } };
 
 
 #define JS_INIT_PROTOCOL(name, base)     JS_INIT_CLASS_ALLOC(name, base, noop()); \
@@ -133,17 +133,19 @@ Protocol* name##Protocol
 
 #define JS_UNWRAP_PROTOCOL(type, name) \
   JS_UNWRAP_(id, name##_); \
-  id<type> name(name##_);
+  id<type> name(name##_); \
+  JS_UNUSED(name)
 
 #define JS_UNWRAPPED_PROTOCOL(info, type, name) \
   JS_UNWRAPPED_(info, id, name##_); \
-  id<type> name(name##_);
+  id<type> name(name##_); \
+  JS_UNUSED(name)
 
 template<typename T>
 Local<Value>
 js_value_protocol(T x, Protocol* _Nullable protocol = ObjCProtocolTraits<T>::protocol())
 {
-  if (protocol && x && ![x conformsToProtocol: protocol]) {
+  if (protocol && x && ![(NSObject *)x conformsToProtocol: protocol]) {
     return Nan::Undefined();
   }
   return js_value_id(x);

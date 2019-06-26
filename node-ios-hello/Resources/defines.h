@@ -29,6 +29,7 @@ using namespace v8;
 #define JS_NEW_ARGV(type, argv) JS_NEW(type, sizeof(argv)/sizeof(argv[0]), argv)
 #define JS_FUNC(x) ((x)->GetFunction(Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked())
 #define JS_WRAPPER(el, ElType) sweetiekit::GetWrapperFor(el, N##ElType::type)
+#define JS_UNUSED(x) (void)x
 
 #define JS_ISOLATE() (Isolate::GetCurrent())
 #define JS_CONTEXT() (Isolate::GetCurrent()->GetCurrentContext())
@@ -177,39 +178,39 @@ using namespace node;
   static NAN_METHOD(name)
   
 #define JS_UNWRAP_(type, name) \
-  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
-  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
-  type name = n##name->self<type>(); name = name;
+  auto JS_METHOD_NAME(__FUNCTION__); JS_UNUSED(JS_METHOD_NAME); \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_UNUSED(JS_PRETTY_METHOD_NAME); \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); JS_UNUSED(n##name); \
+  type name = n##name->self<type>(); JS_UNUSED(name);
 
 #define JS_UNWRAP(type, name) \
-  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
-  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
-  N##type* n##name = info.This().IsEmpty() ? nullptr : ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  auto JS_METHOD_NAME(__FUNCTION__); JS_UNUSED(JS_METHOD_NAME); \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_UNUSED(JS_PRETTY_METHOD_NAME); \
+  N##type* n##name = info.This().IsEmpty() ? nullptr : ObjectWrap::Unwrap<N##type>(info.This()); JS_UNUSED(n##name); \
   if (!n##name) { \
     js_panic_noreturn("Expected `this` context to be an instance, but `this` was null"); \
     return; \
   } \
   type* name##_ = n##name ? n##name->As<type>() : nil; \
-  __weak type* name = name##_; name = name
+  __weak type* name = name##_; JS_UNUSED(name)
 
 #define JS_UNWRAP_OR_ALLOC(type, name) \
   JS_UNWRAP(type, name)
 
 #define JS_UNWRAP_SWIFT(type, name) \
-  auto JS_METHOD_NAME(__FUNCTION__); JS_METHOD_NAME = JS_METHOD_NAME; \
-  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_PRETTY_METHOD_NAME = JS_PRETTY_METHOD_NAME; \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); n##name = n##name; \
+  auto JS_METHOD_NAME(__FUNCTION__); JS_UNUSED(JS_METHOD_NAME); \
+  auto JS_PRETTY_METHOD_NAME(__PRETTY_FUNCTION__); JS_UNUSED(JS_PRETTY_METHOD_NAME); \
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(info.This()); JS_UNUSED(n##name); \
   S##type* name##_ = n##name->As<S##type>(); \
-  __weak S##type* name = name##_; name = name;
+  __weak S##type* name = name##_; JS_UNUSED(name)
   
 #define JS_UNWRAPPED_(info, type, name) \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
-  __block type name = n##name->self<type>(); name = name;
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); JS_UNUSED(n##name); \
+  __block type name = n##name->self<type>(); JS_UNUSED(name)
 
 #define JS_UNWRAPPED(info, type, name) \
-  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); n##name = n##name; \
-  __block type* name = n##name->As<type>(); name = name;
+  N##type* n##name = ObjectWrap::Unwrap<N##type>(JS_OBJ(info)); JS_UNUSED(n##name); \
+  __block type* name = n##name->As<type>(); JS_UNUSED(name)
 
 #define JS_SET_PROP(proto, jsName, cppName) \
   Nan::SetAccessor(proto, JS_STR(jsName), cppName##Getter, cppName##Setter)
@@ -403,16 +404,37 @@ NAN_SETTER(N##type::key##Setter) { \
   } \
 }
 
+#define DELEGATE_PROTOCOL_PROP(type, key) \
+NAN_GETTER(N##type::key##Getter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    get_persistent_function(self_, callback, @#key); \
+    if (callback) { \
+      JS_SET_RETURN([callback jsFunction]->Get()); \
+    } \
+  } \
+} \
+\
+NAN_SETTER(N##type::key##Setter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    declare_setter(); \
+    declare_persistent_function_on(self_, callback, @#key); \
+  } \
+}
+
 #define call_persistent_function_noreturn(from, name, key, ...) \
   Local<Value> JS_RESULT; \
   get_persistent_function(from, name, @key); \
   if (name) { \
     JS_RESULT = [name jsFunction]->Call(key, __VA_ARGS__); \
+    JS_UNUSED(JS_RESULT); \
   }
   
 #define call_delegate(after_callback, key, ...) \
   dispatch_main(^{ \
     call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
+    JS_UNUSED(self); \
     if (callback) { \
       after_callback; \
     } \

@@ -83,17 +83,6 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_METHOD(removeAnimationForKey);
   JS_METHOD(animationKeys);
   JS_METHOD(animationForKey);
-#if TODO
-// CAAction
-  JS_METHOD(runActionForKeyObjectArguments);
-// CALayerDelegate
-  JS_METHOD(displayLayer);
-  JS_METHOD(drawLayerInContext);
-  JS_METHOD(layerWillDraw);
-  JS_METHOD(layoutSublayersOfLayer);
-  JS_METHOD(actionForLayerForKey);
-#endif
-// CALayer
   JS_PROP(bounds);
   JS_PROP(position);
   JS_PROP(zPosition);
@@ -144,8 +133,6 @@ JS_WRAP_CLASS(CALayer, NSObject);
   JS_PROP(name);
   JS_PROP(delegate);
   JS_PROP(style);
-
-
 JS_WRAP_CLASS_END(CALayer);
 
 

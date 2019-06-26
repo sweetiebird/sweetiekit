@@ -54,25 +54,6 @@ NAN_METHOD(NMTKViewDelegate::New) {
   }
 }
 
-#define DELEGATE_PROTOCOL_PROP(type, key) \
-NAN_GETTER(N##type::key##Getter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    get_persistent_function(self_, callback, @#key); \
-    if (callback) { \
-      JS_SET_RETURN([callback jsFunction]->Get()); \
-    } \
-  } \
-} \
-\
-NAN_SETTER(N##type::key##Setter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    declare_setter(); \
-    declare_persistent_function_on(self_, callback, @#key); \
-  } \
-}
-
 DELEGATE_PROTOCOL_PROP(MTKViewDelegate, mtkViewDrawableSizeWillChange);
 DELEGATE_PROTOCOL_PROP(MTKViewDelegate, drawInMTKView);
 
