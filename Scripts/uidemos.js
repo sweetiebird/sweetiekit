@@ -5,53 +5,53 @@ const colors = require('./examples/colors');
 __DEV__ = false;
 
 // apps
-const makeMiniApp = () => require('./examples/MiniApp');
+makeMiniApp = () => require('./examples/MiniApp');
 makeMiniApp.lazy = true;
-const makeMiniAppReact = () => require('./examples/miniAppReact');
+makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
-const makeFullReact = require('./examples/fullReact');
-const makePlatformer = require('./examples/Astronauts');
-const makeEmojiCam = require('./examples/emojiCam');
+makeFullReact = require('./examples/fullReact');
+makePlatformer = require('./examples/Astronauts');
+makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
-const makeARSCNView = require('./examples/ARSCNView2');
-const makeARSelection = require('./examples/ARSelection');
-const makeButton = require('./examples/UIButton');
-const makeBarButtonItem = require('./examples/UIBarButtonItem');
-const makeCollectionView = require('./examples/UICollectionView');
-const makeGifView = require('./examples/GifView');
-const makeRemoteGifView = require('./examples/RemoteGifView');
-const makeImageView = require('./examples/UIImageView');
-const makeLabel = require('./examples/UILabel');
-const makePageControl = require('./examples/UIPageControl');
-const makePicker = require('./examples/UIPickerView');
-const makeMapView = require('./examples/MKMapView');
-const makeSKScene = require('./examples/SKScene');
-const makeSCNScene = require('./examples/SCNScene');
-// const makeSKSceneSockets = require('./examples/SKSceneSockets');
-const makeScrollView = require('./examples/UIScrollView');
-const makeSlider = require('./examples/UISlider');
-const makeSwitch = require('./examples/UISwitch');
-const makeTextField = require('./examples/UITextField');
-const makeView = require('./examples/UIView');
-const makeARSKView = require('./examples/ARSKView');
-const makeCAEmitterLayer = require('./examples/CAEmitterLayer');
-const makeCAMetalLayer = require('./examples/CAMetalLayer');
-const makeMTKView = require('./examples/MTKView');
-const makeCLLocation = require('./examples/CLLocation');
-const makeGreenDot = require('./examples/GreenDot');
+makeARSCNView = require('./examples/ARSCNView2');
+makeARSelection = require('./examples/ARSelection');
+makeButton = require('./examples/UIButton');
+makeBarButtonItem = require('./examples/UIBarButtonItem');
+makeCollectionView = require('./examples/UICollectionView');
+makeGifView = require('./examples/GifView');
+makeRemoteGifView = require('./examples/RemoteGifView');
+makeImageView = require('./examples/UIImageView');
+makeLabel = require('./examples/UILabel');
+makePageControl = require('./examples/UIPageControl');
+makePicker = require('./examples/UIPickerView');
+makeMapView = require('./examples/MKMapView');
+makeSKScene = require('./examples/SKScene');
+makeSCNScene = require('./examples/SCNScene');
+// makeSKSceneSockets = require('./examples/SKSceneSockets');
+makeScrollView = require('./examples/UIScrollView');
+makeSlider = require('./examples/UISlider');
+makeSwitch = require('./examples/UISwitch');
+makeTextField = require('./examples/UITextField');
+makeView = require('./examples/UIView');
+makeARSKView = require('./examples/ARSKView');
+makeCAEmitterLayer = require('./examples/CAEmitterLayer');
+makeCAMetalLayer = require('./examples/CAMetalLayer');
+makeMTKView = require('./examples/MTKView');
+makeCLLocation = require('./examples/CLLocation');
+makeGreenDot = require('./examples/GreenDot');
 
 // controller based demos
-const makeAlertCtrl = require('./examples/UIAlertController');
-const makeImagePickerCtrl = require('./examples/UIImagePickerController');
-const makeNavigationCtrl = require('./examples/UINavigationController');
-const makeTabBarCtrl = require('./examples/UITabBarController');
-const makeTableView = require('./examples/UITableView');
-const makePopover = require('./examples/Popover');
+makeAlertCtrl = require('./examples/UIAlertController');
+makeImagePickerCtrl = require('./examples/UIImagePickerController');
+makeNavigationCtrl = require('./examples/UINavigationController');
+makeTabBarCtrl = require('./examples/UITabBarController');
+makeTableView = require('./examples/UITableView');
+makePopover = require('./examples/Popover');
 
 // misc demos
-const makeThreeObj = require('./examples/ThreeOBJ');
-const makeScreenshotDemo = require('./examples/Screenshot');
+makeThreeObj = require('./examples/ThreeOBJ');
+makeScreenshotDemo = require('./examples/Screenshot');
 
 const {
   UIApplication,
@@ -62,7 +62,7 @@ const {
   UITableViewManager,
 } = SweetieKit;
 
-const demoTypes = {
+demoTypes = {
   CAEmitterLayer: makeCAEmitterLayer,
   CAMetalLayer: makeCAMetalLayer,
   MTKView: makeMTKView,
@@ -87,7 +87,7 @@ const demoTypes = {
   UIView: makeView,
 };
 
-const demoCtrls = {
+demoCtrls = {
   Popover: makePopover,
   UIAlertController: makeAlertCtrl,
   UIBarButtonItem: makeBarButtonItem,
@@ -98,14 +98,14 @@ const demoCtrls = {
   UITableView: makeTableView,
 };
 
-const arDemos = {
+arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
   ARSelection: makeARSelection,
   GreenDot: makeGreenDot,
 };
 
-const appDemos = {
+appDemos = {
   MiniApp: makeMiniApp,
   MiniAppReact: makeMiniAppReact,
   FullReact: makeFullReact,
@@ -113,13 +113,13 @@ const appDemos = {
   EmojiCam: makeEmojiCam,
 };
 
-const demoTypeNames = Object.keys(demoTypes).sort();
-const demoCtrlNames = Object.keys(demoCtrls).sort();
-const arDemoNames = Object.keys(arDemos).sort();
-const appDemoNames = Object.keys(appDemos).sort();
+demoTypeNames = Object.keys(demoTypes).sort();
+demoCtrlNames = Object.keys(demoCtrls).sort();
+arDemoNames = Object.keys(arDemos).sort();
+appDemoNames = Object.keys(appDemos).sort();
 
-const allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames, appDemoNames];
-const allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demos'];
+allDemoNames = [demoTypeNames, demoCtrlNames, arDemoNames, appDemoNames];
+allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demos'];
 
 global.SweetieKitEnums = require('./examples/enums');
 
