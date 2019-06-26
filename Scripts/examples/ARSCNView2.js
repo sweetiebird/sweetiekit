@@ -14,6 +14,7 @@ const {
   ARWorldTrackingConfiguration,
   SCNLight,
   NSBundle,
+  SCNSceneSource,
 } = SweetieKit;
 
 const modelFile = 'turtle.scn';
@@ -21,18 +22,29 @@ const modelFile = 'turtle.scn';
 DAEPath = Path.resolve(Path.join(Path.dirname(Require.resolve('.')),'node_modules', 'sweetiekit-art', 'media', 'models', 'Turtle_dae', 'turtle.dae'));
 
 async function make(nav, demoVC) {
+  const sceneUrl = NSBundle.main().URLForResourceWithExtension('turtle', 'dae');
+  scene = SCNScene.sceneWithURLOptionsError(sceneUrl);
+  // nodesInFile = [];
+  // containerNode = SCNNode();
+  // turtleScene.rootNode.enumerateChildNodes((n) => {
+  //   nodesInFile.push(n);
+  //   containerNode.addChildNode(n);
+  // });
+
+  // console.log(containerNode.childNodes);
+
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
   viewDel = new ARSCNViewDelegate(() => {
     return new SCNNode();
   });
-  scene = new SCNScene();
-  geo = SCNTube(0.01, 0.02, 0.1);
-  mat = new SCNMaterial();
-  mat.diffuse.contents = {red: 1, green: 0.5, blue: 0.5};
-  geo.materials = [mat];
-  node = new SCNNode(geo);
+  // scene = new SCNScene();
+  // geo = SCNTube(0.01, 0.02, 0.1);
+  // mat = new SCNMaterial();
+  // mat.diffuse.contents = {red: 1, green: 0.5, blue: 0.5};
+  // geo.materials = [mat];
+  // node = new SCNNode(geo);
 
   arView.delegate = viewDel;
   arView.scene = scene;
@@ -78,12 +90,24 @@ async function make(nav, demoVC) {
   //   });
   // }
 
-  async function loadModel() {
-    const response = await axios.get('https://emkolar.ninja/media/models/Turtle_dae/turtle.dae');
-    const { data } = response;
-    const filePath = 'turtle.dae';
-    console.log(filePath);
-    fs.writeFileSync(filePath, data, 'utf8');
+  function str2ab(str) {
+    var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i=0, strLen=str.length; i < strLen; i++) {
+      bufView[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+
+  // async function loadModel() {
+    // const { data } = response;
+    // const arrBuffer = str2ab(data);
+    // const source = SCNSceneSource.sceneSourceWithDataOptions(arrBuffer);
+    // const tNode = source.entryWithIdentifierWithClass('Turtle', NSClassFromString('SCNNode'));
+    // console.log('turtle node exists', !!tNode);
+    // const filePath = 'turtle.dae';
+    // console.log(filePath);
+    // fs.writeFileSync(filePath, data, 'utf8');
 
     // if (typeof turtleGeometry === 'undefined') {
     //   turtleAsset = MDLAsset.alloc().initWithURL(NSURL(filePath));
@@ -94,12 +118,12 @@ async function make(nav, demoVC) {
     //   turtleGeometry = SCNGeometry.geometryWithMDLMesh(turtleObject);
     // }
     // turtleNode = SCNNode.nodeWithGeometry(turtleGeometry);
-    turtleNode = SCNNode(filePath);
-    turtleNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
+    // turtleNode = SCNNode(filePath);
+    // containerNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
     // turtleNode.transform = new THREE.Matrix4().makeScale(3.0/1000, 3.0/1000, 3.0/1000);
     // turtleNode.physicsBody = SCNPhysicsBody.dynamicBody();
-    scene.rootNode.addChildNode(turtleNode);
-  }
+    // scene.rootNode.addChildNode(containerNode);
+  // }
 
   setTimeout(() => {
     arView.session.run(config);
@@ -123,7 +147,8 @@ async function make(nav, demoVC) {
           turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_alpha.png'))));
           turtleSCNMaterial = SCNMaterial.materialWithMDLMaterial(turtleMaterial);
         }
-        await loadModel();
+        // containerNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
+        // scene.rootNode.addChildNode(containerNode);
         // await loadIt();
         // if (typeof turtleNode === 'undefined') {
         //   turtleScene = SCNScene.sceneWithURLOptionsError(NSURL(DAEPath));
