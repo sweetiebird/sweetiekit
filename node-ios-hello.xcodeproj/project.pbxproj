@@ -23,6 +23,7 @@
 		216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 216392A8226BDBF000051DE0 /* ColorHelper.mm */; };
 		21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21C872CD226A87C500B5192B /* NNSUserDefaults.mm */; };
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
+		A104841A22C337CB001C8BAE /* turtle.dae in Resources */ = {isa = PBXBuildFile; fileRef = A104841922C337CA001C8BAE /* turtle.dae */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
@@ -593,6 +594,7 @@
 		21C872CD226A87C500B5192B /* NNSUserDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserDefaults.mm; sourceTree = "<group>"; };
 		21C872CE226A87C500B5192B /* NNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserDefaults.h; sourceTree = "<group>"; };
 		21C872D0226A989400B5192B /* UIView+stringTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+stringTag.swift"; sourceTree = "<group>"; };
+		A104841922C337CA001C8BAE /* turtle.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = turtle.dae; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "/opt/sweet/node-ios/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
@@ -2815,6 +2817,7 @@
 		A16EF58D229D07B8007BCB49 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A104841922C337CA001C8BAE /* turtle.dae */,
 				A1926F6922C0FAFD008F16AE /* Reactor.scnp */,
 				A1926F6A22C0FAFD008F16AE /* Spark.png */,
 				A16EF596229D0C5F007BCB49 /* Spark2.sks */,
@@ -6497,6 +6500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1CE2B8D228F020800D9B3B8 /* Lato-Bold.ttf in Resources */,
+				A104841A22C337CB001C8BAE /* turtle.dae in Resources */,
 				A1E2D7BF226A63C900FA1562 /* PasswordTextField.xib in Resources */,
 				A174A171228227A2002A8216 /* sunflower.mp3 in Resources */,
 				A1CE2B8E228F020800D9B3B8 /* Lato-Light.ttf in Resources */,
