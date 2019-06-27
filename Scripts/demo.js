@@ -127,6 +127,7 @@ SweetieKitPrefixes = {
   CL: "CoreLocation",
   CM: "CoreMotion",
   CN: "Contacts",
+  EA: "OpenGLES",
   GK: "GameplayKit",
   MDL: "ModelIO",
   MK: "MapKit",
