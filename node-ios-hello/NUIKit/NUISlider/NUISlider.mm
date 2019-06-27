@@ -6,129 +6,334 @@
 //
 #include "NUISlider.h"
 
+#define instancetype UISlider
+#define js_value_instancetype js_value_UISlider
+
 NUISlider::NUISlider() {}
 NUISlider::~NUISlider() {}
 
 JS_INIT_CLASS(UISlider, UIControl);
+  JS_ASSIGN_PROTO_METHOD(setValueAnimated);
+  JS_ASSIGN_PROTO_METHOD(setThumbImageForState);
+  JS_ASSIGN_PROTO_METHOD(setMinimumTrackImageForState);
+  JS_ASSIGN_PROTO_METHOD(setMaximumTrackImageForState);
+  JS_ASSIGN_PROTO_METHOD(thumbImageForState);
+  JS_ASSIGN_PROTO_METHOD(minimumTrackImageForState);
+  JS_ASSIGN_PROTO_METHOD(maximumTrackImageForState);
+  JS_ASSIGN_PROTO_METHOD(minimumValueImageRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(maximumValueImageRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(trackRectForBounds);
+  JS_ASSIGN_PROTO_METHOD(thumbRectForBoundsTrackRectValue);
+  JS_ASSIGN_PROTO_PROP(value);
+  JS_ASSIGN_PROTO_PROP(minimumValue);
+  JS_ASSIGN_PROTO_PROP(maximumValue);
+  JS_ASSIGN_PROTO_PROP(minimumValueImage);
+  JS_ASSIGN_PROTO_PROP(maximumValueImage);
+  JS_ASSIGN_PROTO_PROP(isContinuous);
+  JS_ASSIGN_PROTO_PROP(minimumTrackTintColor);
+  JS_ASSIGN_PROTO_PROP(maximumTrackTintColor);
+  JS_ASSIGN_PROTO_PROP(thumbTintColor);
+  JS_ASSIGN_PROTO_PROP_READONLY(currentThumbImage);
+  JS_ASSIGN_PROTO_PROP_READONLY(currentMinimumTrackImage);
+  JS_ASSIGN_PROTO_PROP_READONLY(currentMaximumTrackImage);
+
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, value);
-  JS_ASSIGN_METHOD(proto, setValue);
-  JS_ASSIGN_METHOD(proto, setThumbImage);
-  JS_ASSIGN_PROP_READONLY(proto, currentThumbImage);
-  JS_ASSIGN_PROP(proto, thumbTintColor);
-  JS_ASSIGN_PROP(proto, continuous);
   // static members (ctor)
   JS_INIT_CTOR(UISlider, UIControl);
 JS_INIT_CLASS_END(UISlider, UIControl);
 
 NAN_METHOD(NUISlider::New) {
   JS_RECONSTRUCT(UISlider);
-
-  Local<Object> obj = info.This();
-
-  NUISlider *ui = new NUISlider();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge UISlider *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    @autoreleasepool {
-      double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-      double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-      double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-      double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-      CGRect frame = CGRectMake(x, y, width, height);
-      ui->SetNSObject([[UISlider alloc] initWithFrame:frame]);
+  @autoreleasepool {
+    UISlider* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge UISlider *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UISlider alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UISlider alloc] init];
     }
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[UISlider alloc] init]);
+    if (self) {
+      NUISlider *wrapper = new NUISlider();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UISlider::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NUISlider::valueGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UISlider, ui);
-  
-  JS_SET_RETURN(JS_NUM([ui value]));
-}
-
-NAN_SETTER(NUISlider::valueSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UISlider, ui);
-
-  [ui setValue:TO_DOUBLE(value)];
-}
-
-NAN_METHOD(NUISlider::setValue) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UISlider, ui);
-
-  [ui setValue:TO_FLOAT(info[0]) animated:TO_BOOL(info[1])];
+NAN_METHOD(NUISlider::setValueAnimated) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(float, value);
+    declare_value(BOOL, animated);
+    [self setValue: value animated: animated];
+  }
 }
 
 #include "NUIImage.h"
 
-NAN_METHOD(NUISlider::setThumbImage) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UISlider, ui);
-  
-  if (!JS_INSTANCEOF(info[0], NUIImage)) {
-    Nan::ThrowError("NUISlider::setThumbImage: expected 1st arg to be a UIImage");
-    return;
+NAN_METHOD(NUISlider::setThumbImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIImage, image);
+    declare_value(UIControlState, state);
+    [self setThumbImage: image forState: state];
   }
-  
-  JS_UNWRAPPED(info[0], UIImage, img);
-  
-  UIControlState state = [ui state];
-  if (info[1]->IsUint32()) {
-    state = TO_UINT32(info[1]);
-  }
-  [ui setThumbImage:img forState:state];
 }
 
-JS_GETTER(UISlider, ui, currentThumbImage, {
-  UIImage* img = [ui currentThumbImage];
-  if (img != nullptr) {
-    JS_SET_RETURN(sweetiekit::GetWrapperFor(img, NUIImage::type));
+NAN_METHOD(NUISlider::setMinimumTrackImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIImage, image);
+    declare_value(UIControlState, state);
+    [self setMinimumTrackImage: image forState: state];
   }
-});
-
-JS_GETTER(UISlider, ui, thumbTintColor, {
-  UIColor* color = [ui thumbTintColor];
-  if (color != nullptr) {
-    JS_SET_RETURN(sweetiekit::JSObjFromUIColor(color));
-  }
-});
-
-JS_SETTER(UISlider, ui, thumbTintColor, {
-  UIColor* color = sweetiekit::UIColorFromJSColor(value);
-  if (color == nullptr) {
-    Nan::ThrowError("NUISlider::thumbTintColorSetter: Expected a UIColor");
-    return;
-  }
-  [ui setThumbTintColor:color];
-});
-
-NAN_GETTER(NUISlider::continuousGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UISlider, ui);
-  
-  JS_SET_RETURN(JS_BOOL([ui isContinuous]));
 }
 
-NAN_SETTER(NUISlider::continuousSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UISlider, ui);
+NAN_METHOD(NUISlider::setMaximumTrackImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(UIImage, image);
+    declare_value(UIControlState, state);
+    [self setMaximumTrackImage: image forState: state];
+  }
+}
 
-  [ui setContinuous:TO_BOOL(value)];
+NAN_METHOD(NUISlider::thumbImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIControlState, state);
+    JS_SET_RETURN(js_value_UIImage([self thumbImageForState: state]));
+  }
+}
+
+NAN_METHOD(NUISlider::minimumTrackImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIControlState, state);
+    JS_SET_RETURN(js_value_UIImage([self minimumTrackImageForState: state]));
+  }
+}
+
+NAN_METHOD(NUISlider::maximumTrackImageForState) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UIControlState, state);
+    JS_SET_RETURN(js_value_UIImage([self maximumTrackImageForState: state]));
+  }
+}
+
+NAN_METHOD(NUISlider::minimumValueImageRectForBounds) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self minimumValueImageRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUISlider::maximumValueImageRectForBounds) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self maximumValueImageRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUISlider::trackRectForBounds) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    JS_SET_RETURN(js_value_CGRect([self trackRectForBounds: bounds]));
+  }
+}
+
+NAN_METHOD(NUISlider::thumbRectForBoundsTrackRectValue) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, bounds);
+    declare_value(CGRect, rect);
+    declare_value(float, value);
+    JS_SET_RETURN(js_value_CGRect([self thumbRectForBounds: bounds trackRect: rect value: value]));
+  }
+}
+
+NAN_GETTER(NUISlider::valueGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self value]));
+  }
+}
+
+NAN_SETTER(NUISlider::valueSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setValue: input];
+  }
+}
+
+NAN_GETTER(NUISlider::minimumValueGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self minimumValue]));
+  }
+}
+
+NAN_SETTER(NUISlider::minimumValueSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setMinimumValue: input];
+  }
+}
+
+NAN_GETTER(NUISlider::maximumValueGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self maximumValue]));
+  }
+}
+
+NAN_SETTER(NUISlider::maximumValueSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setMaximumValue: input];
+  }
+}
+
+NAN_GETTER(NUISlider::minimumValueImageGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self minimumValueImage]));
+  }
+}
+
+NAN_SETTER(NUISlider::minimumValueImageSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setMinimumValueImage: input];
+  }
+}
+
+NAN_GETTER(NUISlider::maximumValueImageGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self maximumValueImage]));
+  }
+}
+
+NAN_SETTER(NUISlider::maximumValueImageSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setMaximumValueImage: input];
+  }
+}
+
+NAN_GETTER(NUISlider::isContinuousGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isContinuous]));
+  }
+}
+
+NAN_SETTER(NUISlider::isContinuousSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setContinuous: input];
+  }
+}
+
+NAN_GETTER(NUISlider::minimumTrackTintColorGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self minimumTrackTintColor]));
+  }
+}
+
+NAN_SETTER(NUISlider::minimumTrackTintColorSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setMinimumTrackTintColor: input];
+  }
+}
+
+NAN_GETTER(NUISlider::maximumTrackTintColorGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self maximumTrackTintColor]));
+  }
+}
+
+NAN_SETTER(NUISlider::maximumTrackTintColorSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setMaximumTrackTintColor: input];
+  }
+}
+
+NAN_GETTER(NUISlider::thumbTintColorGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self thumbTintColor]));
+  }
+}
+
+NAN_SETTER(NUISlider::thumbTintColorSetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setThumbTintColor: input];
+  }
+}
+
+NAN_GETTER(NUISlider::currentThumbImageGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self currentThumbImage]));
+  }
+}
+
+NAN_GETTER(NUISlider::currentMinimumTrackImageGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self currentMinimumTrackImage]));
+  }
+}
+
+NAN_GETTER(NUISlider::currentMaximumTrackImageGetter) {
+  JS_UNWRAP(UISlider, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self currentMaximumTrackImage]));
+  }
 }
