@@ -979,6 +979,9 @@ NAN_METHOD(NClass::New) {
 #include "NAVPortraitEffectsMatte.h"
 #include "NAVCameraCalibrationData.h"
 
+#include "NEAGLContext.h"
+#include "NEAGLSharegroup.h"
+
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
@@ -1060,6 +1063,7 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
+#include "NCGContext.h"
 #include "NRPScreenRecorder.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
@@ -1305,6 +1309,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // Core Graphics
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
+    JS_EXPORT_GLOBALS(CGContext);
     
     // Audio Toolbox
     JS_EXPORT_TYPE(AUAudioUnit);
@@ -1401,8 +1406,14 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(CAEmitterCell);
     JS_EXPORT_TYPE(CAEmitterLayer);
+
+    // OpenGLES
+
+    JS_EXPORT_TYPE(EAGLContext);
+    JS_EXPORT_TYPE(EAGLSharegroup);
     
     // ModelIO
+
     JS_EXPORT_TYPE(MDLAsset);
     JS_EXPORT_TYPE(MDLObject);
     JS_EXPORT_TYPE(MDLCamera);
@@ -1898,6 +1909,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MDLSubmesh);
       JS_RETURN_TYPE(MDLObject);
       JS_RETURN_TYPE(MDLAsset);
+
+      // OpenGLES
+      JS_RETURN_TYPE(EAGLContext);
+      JS_RETURN_TYPE(EAGLSharegroup);
 
       // Custom UIKit
       JS_RETURN_TYPE(GifManager);

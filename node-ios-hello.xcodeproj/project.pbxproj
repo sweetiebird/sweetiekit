@@ -25,6 +25,8 @@
 		21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C872D0226A989400B5192B /* UIView+stringTag.swift */; };
 		A104841A22C337CB001C8BAE /* turtle.dae in Resources */ = {isa = PBXBuildFile; fileRef = A104841922C337CA001C8BAE /* turtle.dae */; };
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
+		A10862ED22C48E05001A15A9 /* NEAGLSharegroup.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862E922C48E04001A15A9 /* NEAGLSharegroup.mm */; };
+		A10862EE22C48E05001A15A9 /* NEAGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862EC22C48E04001A15A9 /* NEAGLContext.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -599,6 +601,10 @@
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
 		A1058B44226810B700CEAA5C /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1058B46226810BF00CEAA5C /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
+		A10862E822C48E04001A15A9 /* NEAGLSharegroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAGLSharegroup.h; sourceTree = "<group>"; };
+		A10862E922C48E04001A15A9 /* NEAGLSharegroup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NEAGLSharegroup.mm; sourceTree = "<group>"; };
+		A10862EB22C48E04001A15A9 /* NEAGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAGLContext.h; sourceTree = "<group>"; };
+		A10862EC22C48E04001A15A9 /* NEAGLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NEAGLContext.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -1717,6 +1723,33 @@
 				211E76942269AED300B838AF /* NUIApplication.mm */,
 			);
 			path = NUIApplication;
+			sourceTree = "<group>";
+		};
+		A10862E622C48E04001A15A9 /* NOpenGLES */ = {
+			isa = PBXGroup;
+			children = (
+				A10862E722C48E04001A15A9 /* NEAGLSharegroup */,
+				A10862EA22C48E04001A15A9 /* NEAGLContext */,
+			);
+			path = NOpenGLES;
+			sourceTree = "<group>";
+		};
+		A10862E722C48E04001A15A9 /* NEAGLSharegroup */ = {
+			isa = PBXGroup;
+			children = (
+				A10862E822C48E04001A15A9 /* NEAGLSharegroup.h */,
+				A10862E922C48E04001A15A9 /* NEAGLSharegroup.mm */,
+			);
+			path = NEAGLSharegroup;
+			sourceTree = "<group>";
+		};
+		A10862EA22C48E04001A15A9 /* NEAGLContext */ = {
+			isa = PBXGroup;
+			children = (
+				A10862EB22C48E04001A15A9 /* NEAGLContext.h */,
+				A10862EC22C48E04001A15A9 /* NEAGLContext.mm */,
+			);
+			path = NEAGLContext;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -6317,6 +6350,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A10862E622C48E04001A15A9 /* NOpenGLES */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -6630,6 +6664,7 @@
 				A133701E22AAE65100FA3768 /* NWKWebView.mm in Sources */,
 				A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */,
 				A1926FA122C11E7D008F16AE /* NMTLDevice.mm in Sources */,
+				A10862ED22C48E05001A15A9 /* NEAGLSharegroup.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
@@ -7021,6 +7056,7 @@
 				A133702622AAEF2400FA3768 /* NNSMutableURLRequest.mm in Sources */,
 				A1574EAF22B82030006CC5F2 /* NUISegmentedControl.mm in Sources */,
 				A19270FE22C2F80C008F16AE /* NCALayerDelegate.mm in Sources */,
+				A10862EE22C48E05001A15A9 /* NEAGLContext.mm in Sources */,
 				A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
 				A1926F9522C112BA008F16AE /* NCAMetalLayer.mm in Sources */,
