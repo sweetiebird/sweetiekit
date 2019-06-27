@@ -6,112 +6,178 @@
 //
 #include "NUISwitch.h"
 
+#define instancetype UISwitch
+#define js_value_instancetype js_value_UISwitch
+
 NUISwitch::NUISwitch() {}
 NUISwitch::~NUISwitch() {}
 
 JS_INIT_CLASS(UISwitch, UIControl);
+  JS_ASSIGN_PROTO_METHOD(initWithFrame);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(setOnAnimated);
+  JS_ASSIGN_PROTO_PROP(onTintColor);
+  JS_ASSIGN_PROTO_PROP(tintColor);
+  JS_ASSIGN_PROTO_PROP(thumbTintColor);
+  JS_ASSIGN_PROTO_PROP(onImage);
+  JS_ASSIGN_PROTO_PROP(offImage);
+  JS_ASSIGN_PROTO_PROP(isOn);
+
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, setOn);
-  JS_ASSIGN_PROP(proto, isOn);
-  JS_ASSIGN_PROP(proto, onTintColor);
   // static members (ctor)
   JS_INIT_CTOR(UISwitch, UIControl);
 JS_INIT_CLASS_END(UISwitch, UIControl);
 
 NAN_METHOD(NUISwitch::New) {
   JS_RECONSTRUCT(UISwitch);
-  
-  Local<Object> obj = info.This();
-  
-  NUISwitch *view = new NUISwitch();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge UISwitch *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-      double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-      double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-      double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-      CGRect frame = CGRectMake(x, y, width, height);
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[UISwitch alloc] initWithFrame:frame]);
-      });
+  @autoreleasepool {
+    UISwitch* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge UISwitch *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[UISwitch alloc] initWithFrame:to_value_CGRect(info[0])];
+    } else if (info.Length() <= 0) {
+      self = [[UISwitch alloc] init];
+    }
+    if (self) {
+      NUISwitch *wrapper = new NUISwitch();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UISwitch::New: invalid arguments");
     }
   }
-  view->Wrap(obj);
-  
-  JS_SET_RETURN(obj);
 }
 
-NAN_GETTER(NUISwitch::isOnGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UISwitch, ui);
-  
-  __block BOOL isOn = false;
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      isOn = [ui isOn];
-    });
+NAN_METHOD(NUISwitch::initWithFrame) {
+  JS_UNWRAP_OR_ALLOC(UISwitch, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    JS_SET_RETURN(js_value_instancetype([self initWithFrame: frame]));
   }
-  
-  auto result = JS_BOOL(isOn);
-  JS_SET_RETURN(result);
 }
 
-NAN_SETTER(NUISwitch::isOnSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UISwitch, ui);
-  
-  bool isOn = value->IsBoolean() ? TO_BOOL(value) : false;
+#include "NNSCoder.h"
 
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui setOn:isOn];
-    });
+NAN_METHOD(NUISwitch::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UISwitch, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
+  }
+}
+
+NAN_METHOD(NUISwitch::setOnAnimated) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, on);
+    declare_value(BOOL, animated);
+    [self setOn: on animated: animated];
   }
 }
 
 NAN_GETTER(NUISwitch::onTintColorGetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UISwitch, ui);
-  
-  // TOOD: Deal with UIColor
-//  __block BOOL isOn = false;
-//  @autoreleasepool {
-//    dispatch_sync(dispatch_get_main_queue(), ^ {
-//      isOn = [ui isOn];
-//    });
-//  }
-//
-//  auto result = JS_BOOL(isOn);
-//  JS_SET_RETURN(result);
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self onTintColor]));
+  }
 }
 
 NAN_SETTER(NUISwitch::onTintColorSetter) {
-  Nan::HandleScope scope;
-  JS_UNWRAP(UISwitch, ui);
-  
-  // TODO: Deal with UIColor
-//  bool isOn = value->IsBoolean() ? TO_BOOL(value) : false;
-//
-//  @autoreleasepool {
-//    dispatch_sync(dispatch_get_main_queue(), ^ {
-//      [ui setOn:isOn];
-//    });
-//  }
-}
-
-NAN_METHOD(NUISwitch::setOn) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(UISwitch, ui);
-
-  bool isOn = info[0]->IsBoolean() ? TO_BOOL(info[0]) : false;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [ui setOn:isOn];
-    });
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setOnTintColor: input];
   }
 }
+
+NAN_GETTER(NUISwitch::tintColorGetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self tintColor]));
+  }
+}
+
+NAN_SETTER(NUISwitch::tintColorSetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setTintColor: input];
+  }
+}
+
+NAN_GETTER(NUISwitch::thumbTintColorGetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self thumbTintColor]));
+  }
+}
+
+NAN_SETTER(NUISwitch::thumbTintColorSetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setThumbTintColor: input];
+  }
+}
+
+#include "NUIImage.h"
+
+NAN_GETTER(NUISwitch::onImageGetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self onImage]));
+  }
+}
+
+NAN_SETTER(NUISwitch::onImageSetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setOnImage: input];
+  }
+}
+
+NAN_GETTER(NUISwitch::offImageGetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self offImage]));
+  }
+}
+
+NAN_SETTER(NUISwitch::offImageSetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setOffImage: input];
+  }
+}
+
+NAN_GETTER(NUISwitch::isOnGetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isOn]));
+  }
+}
+
+NAN_SETTER(NUISwitch::isOnSetter) {
+  JS_UNWRAP(UISwitch, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setOn: input];
+  }
+}
+
+
