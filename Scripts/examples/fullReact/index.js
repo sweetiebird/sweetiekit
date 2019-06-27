@@ -1,11 +1,39 @@
-module.exports = (nav, demoVC) => {
-  Nav = nav;
-  VC = demoVC;
-  Require = require;
-  if (__DEV__) {
-    win=(skdom = require('sweetiekit-dom')).load('http://localhost:8080');
-  } else {
-    win=(skdom = require('sweetiekit-dom')).load('https://emkolar.ninja/sweetie-react');
+__PLATFORM__ = typeof __PLATFORM__ === 'undefined' ? 'ios' : __PLATFORM__;
+__DEV__ = typeof __DEV__ === 'undefined' ? 'dev' : __DEV__;
+
+SWEET = typeof SWEET === 'undefined' ? {} : SWEET;
+SWEET.require = SWEET.require || require;
+
+SweetieKit = typeof SweetieKit === 'undefined' ? SWEET.require('std:sweetiekit.node') : SweetieKit;
+SweetieKitDOM = SWEET.require('sweetiekit-dom');
+SWEET.window = window = (typeof window === 'undefined') ? SweetieKitDOM() : window;
+
+SWEET.kit = SWEET.kit || SweetieKit;
+SWEET.dom = SWEET.dom || SweetieKitDOM;
+
+SWEET.getConfig = () =>
+  (typeof __DEV__ === 'object') ? __DEV__.cfg :
+  (typeof __DEV__ === 'string') ? __DEV__ :
+  (typeof __DEV__ === 'undefined') ? 'dev' :
+  (__DEV__ ? 'dev' : 'prod'),
+
+SWEET.FullReact = SWEET.FullReact || {};
+SWEET.FullReact.getUrl = (cfg = SWEET.getConfig()) => {
+  switch (cfg) {
+    case 'prod': return 'https://emkolar.ninja/sweetie-react';
+    case 'phone': return 'http://ios.shawwn.com:31337';
+    default: return 'http://localhost:8080';
   }
-  __PLATFORM__ = 'ios';
+}
+SWEET.FullReact.refresh = async (url = SWEET.FullReact.getUrl()) => {
+  return window = await SWEET.dom.load(url);
+}
+
+SWEET.FullReact.mount = async (nav, demoVC) => {
+  await SWEET.FullReact.refresh();
+}
+
+module.exports = async (...args) => {
+  SWEET.require = Require = require;
+  return await SWEET.FullReact.mount(...args);
 };
