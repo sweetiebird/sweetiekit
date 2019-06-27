@@ -25,12 +25,19 @@ SWEET.FullReact.getUrl = (cfg = SWEET.getConfig()) => {
     default: return 'http://localhost:8080';
   }
 }
-SWEET.FullReact.refresh = async (url = SWEET.FullReact.getUrl()) => {
-  return window = await SWEET.dom.load(url);
+SWEET.FullReact.refresh = async (url, cfg = SWEET.getConfig()) => {
+  url = url || SWEET.FullReact.getUrl(cfg);
+  window = await SWEET.dom.load(url);
+  __DEV__ = cfg;
+  return url;
 }
 
 SWEET.FullReact.mount = async (nav, demoVC) => {
   await SWEET.FullReact.refresh();
+}
+
+global.OnShake = () => {
+  SWEET.FullReact.refresh();
 }
 
 module.exports = async (...args) => {
