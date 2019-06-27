@@ -127,8 +127,6 @@ JS_WRAP_CLASS(UITextField, UIControl);
   JS_PROP(isSecureTextEntry);
   JS_PROP(textContentType);
   JS_PROP(passwordRules);
-
-  Nan::Persistent<Function>* _callback;
 JS_WRAP_CLASS_END(UITextField);
 
 #endif /* NUITextField_h */

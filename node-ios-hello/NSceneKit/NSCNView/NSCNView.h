@@ -18,10 +18,6 @@
 #define to_value_EAGLContext to_value_id
 
 // SceneKit enums
-#define js_value_SCNAntialiasingMode(x) JS_ENUM(SCNAntialiasingMode, NSInteger, x)
-#define to_value_SCNAntialiasingMode(x) TO_ENUM(SCNAntialiasingMode, NSInteger, x)
-#define is_value_SCNAntialiasingMode(x) IS_ENUM(SCNAntialiasingMode, NSInteger, x)
-
 #define js_value_SCNDebugOptions(x) JS_ENUM(SCNDebugOptions, NSUInteger, x)
 #define to_value_SCNDebugOptions(x) TO_ENUM(SCNDebugOptions, NSUInteger, x)
 #define is_value_SCNDebugOptions(x) IS_ENUM(SCNDebugOptions, NSUInteger, x)
@@ -29,10 +25,6 @@
 #define js_value_SCNRenderingAPI(x) JS_ENUM(SCNRenderingAPI, NSInteger, x)
 #define to_value_SCNRenderingAPI(x) TO_ENUM(SCNRenderingAPI, NSInteger, x)
 #define is_value_SCNRenderingAPI(x) IS_ENUM(SCNRenderingAPI, NSInteger, x)
-
-#define js_value_MTLPixelFormat(x) JS_ENUM(MTLPixelFormat, NSInteger, x)
-#define to_value_MTLPixelFormat(x) TO_ENUM(MTLPixelFormat, NSInteger, x)
-#define is_value_MTLPixelFormat(x) IS_ENUM(MTLPixelFormat, NSInteger, x)
 
 JS_WRAP_CLASS(SCNView, UIView);
   JS_METHOD(hitTest);

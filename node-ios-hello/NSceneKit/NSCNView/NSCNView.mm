@@ -195,6 +195,8 @@ NAN_SETTER(NSCNView::eaglContextSetter) {
   }
 }
 
+#include "NSCNSceneRenderer.h"
+
 NAN_GETTER(NSCNView::antialiasingModeGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
@@ -450,6 +452,8 @@ NAN_GETTER(NSCNView::deviceGetter) {
     return;
   }
 }
+
+#include "NMTLPixelFormat.h"
 
 NAN_GETTER(NSCNView::colorPixelFormatGetter) {
   JS_UNWRAP(SCNView, self);
