@@ -975,6 +975,15 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioFile.h"
 #include "NAVAudioChannelLayout.h"
 
+#include "NAVAudioStereoMixing.h" // <NSObject>
+#include "NAVAudio3DMixing.h" // <NSObject>
+#include "NAVAudioMixing.h" // <AVAudioStereoMixing, AVAudio3DMixing>
+#include "NAVAudioMixingDestination.h" // : NSObject <AVAudioMixing>
+
+#include "NAVAudioEnvironmentNode.h" // : AVAudioNode <AVAudioMixing>
+#include "NAVAudioEnvironmentDistanceAttenuationParameters.h" // : NSObject
+#include "NAVAudioEnvironmentReverbParameters.h" // : NSObject
+
 #include "NAVDepthData.h"
 #include "NAVPortraitEffectsMatte.h"
 #include "NAVCameraCalibrationData.h"
@@ -1343,6 +1352,14 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVAudioPlayerNode);
     JS_EXPORT_TYPE(AVAudioFile);
     JS_EXPORT_TYPE(AVAudioChannelLayout);
+
+    JS_EXPORT_PROTOCOL(AVAudioStereoMixing); // <NSObject>
+    JS_EXPORT_PROTOCOL(AVAudio3DMixing); // <NSObject>
+    JS_EXPORT_PROTOCOL(AVAudioMixing); // <AVAudioStereoMixing, AVAudio3DMixing>
+    JS_EXPORT_TYPE(AVAudioMixingDestination); // : NSObject <AVAudioMixing>
+    JS_EXPORT_TYPE(AVAudioEnvironmentNode); // : AVAudioNode <AVAudioMixing>
+    JS_EXPORT_TYPE(AVAudioEnvironmentDistanceAttenuationParameters); // : NSObject
+    JS_EXPORT_TYPE(AVAudioEnvironmentReverbParameters); // : NSObject
 
     JS_EXPORT_TYPE(AVDepthData);
     JS_EXPORT_TYPE(AVPortraitEffectsMatte);
@@ -1975,6 +1992,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AVAudioSessionPortDescription);
       JS_RETURN_TYPE(AVAudioSessionRouteDescription);
 
+      JS_RETURN_TYPE(AVAudioEnvironmentReverbParameters); // : NSObject
+      JS_RETURN_TYPE(AVAudioEnvironmentDistanceAttenuationParameters); // : NSObject
+      JS_RETURN_TYPE(AVAudioEnvironmentNode); // : AVAudioNode <AVAudioMixing>
+      JS_RETURN_TYPE(AVAudioMixingDestination); // : NSObject <AVAudioMixing>
+
       JS_RETURN_TYPE(AVAudioChannelLayout);
       JS_RETURN_TYPE(AVAudioFile);
       JS_RETURN_TYPE(AVAudioPlayerNode);
@@ -2182,6 +2204,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
+
+      // AVFoundation Protocols
+
+      JS_RETURN_PROTOCOL(AVAudioMixing); // <AVAudioStereoMixing, AVAudio3DMixing>
+      JS_RETURN_PROTOCOL(AVAudio3DMixing); // <NSObject>
+      JS_RETURN_PROTOCOL(AVAudioStereoMixing); // <NSObject>
 
       // MetalKit Protocols
       

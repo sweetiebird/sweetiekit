@@ -31,6 +31,13 @@
 		A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862FD22C48F5F001A15A9 /* NSCNPhysicsField.mm */; };
 		A108630222C48FE0001A15A9 /* NSCNRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108630022C48FE0001A15A9 /* NSCNRenderer.mm */; };
 		A108630622C4905F001A15A9 /* NSCNNodeRendererDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108630422C4905E001A15A9 /* NSCNNodeRendererDelegate.mm */; };
+		A108631C22C4937D001A15A9 /* NAVAudio3DMixing.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108630922C4937C001A15A9 /* NAVAudio3DMixing.mm */; };
+		A108631D22C4937D001A15A9 /* NAVAudioMixing.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108630B22C4937C001A15A9 /* NAVAudioMixing.mm */; };
+		A108631E22C4937D001A15A9 /* NAVAudioEnvironmentReverbParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108630E22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters.mm */; };
+		A108631F22C4937D001A15A9 /* NAVAudioStereoMixing.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108631222C4937C001A15A9 /* NAVAudioStereoMixing.mm */; };
+		A108632022C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108631522C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm */; };
+		A108632122C4937D001A15A9 /* NAVAudioEnvironmentNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108631822C4937D001A15A9 /* NAVAudioEnvironmentNode.mm */; };
+		A108632222C4937D001A15A9 /* NAVAudioMixingDestination.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108631B22C4937D001A15A9 /* NAVAudioMixingDestination.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -617,6 +624,20 @@
 		A108630122C48FE0001A15A9 /* NSCNRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNRenderer.h; sourceTree = "<group>"; };
 		A108630422C4905E001A15A9 /* NSCNNodeRendererDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNNodeRendererDelegate.mm; sourceTree = "<group>"; };
 		A108630522C4905E001A15A9 /* NSCNNodeRendererDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNNodeRendererDelegate.h; sourceTree = "<group>"; };
+		A108630822C4937C001A15A9 /* NAVAudio3DMixing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudio3DMixing.h; sourceTree = "<group>"; };
+		A108630922C4937C001A15A9 /* NAVAudio3DMixing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudio3DMixing.mm; sourceTree = "<group>"; };
+		A108630B22C4937C001A15A9 /* NAVAudioMixing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioMixing.mm; sourceTree = "<group>"; };
+		A108630C22C4937C001A15A9 /* NAVAudioMixing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioMixing.h; sourceTree = "<group>"; };
+		A108630E22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioEnvironmentReverbParameters.mm; sourceTree = "<group>"; };
+		A108630F22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioEnvironmentReverbParameters.h; sourceTree = "<group>"; };
+		A108631122C4937C001A15A9 /* NAVAudioStereoMixing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioStereoMixing.h; sourceTree = "<group>"; };
+		A108631222C4937C001A15A9 /* NAVAudioStereoMixing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioStereoMixing.mm; sourceTree = "<group>"; };
+		A108631422C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioEnvironmentDistanceAttenuationParameters.h; sourceTree = "<group>"; };
+		A108631522C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioEnvironmentDistanceAttenuationParameters.mm; sourceTree = "<group>"; };
+		A108631722C4937D001A15A9 /* NAVAudioEnvironmentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioEnvironmentNode.h; sourceTree = "<group>"; };
+		A108631822C4937D001A15A9 /* NAVAudioEnvironmentNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioEnvironmentNode.mm; sourceTree = "<group>"; };
+		A108631A22C4937D001A15A9 /* NAVAudioMixingDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioMixingDestination.h; sourceTree = "<group>"; };
+		A108631B22C4937D001A15A9 /* NAVAudioMixingDestination.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioMixingDestination.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -1800,6 +1821,69 @@
 			path = NSCNNodeRendererDelegate;
 			sourceTree = "<group>";
 		};
+		A108630722C4937C001A15A9 /* NAVAudio3DMixing */ = {
+			isa = PBXGroup;
+			children = (
+				A108630822C4937C001A15A9 /* NAVAudio3DMixing.h */,
+				A108630922C4937C001A15A9 /* NAVAudio3DMixing.mm */,
+			);
+			path = NAVAudio3DMixing;
+			sourceTree = "<group>";
+		};
+		A108630A22C4937C001A15A9 /* NAVAudioMixing */ = {
+			isa = PBXGroup;
+			children = (
+				A108630C22C4937C001A15A9 /* NAVAudioMixing.h */,
+				A108630B22C4937C001A15A9 /* NAVAudioMixing.mm */,
+			);
+			path = NAVAudioMixing;
+			sourceTree = "<group>";
+		};
+		A108630D22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters */ = {
+			isa = PBXGroup;
+			children = (
+				A108630F22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters.h */,
+				A108630E22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters.mm */,
+			);
+			path = NAVAudioEnvironmentReverbParameters;
+			sourceTree = "<group>";
+		};
+		A108631022C4937C001A15A9 /* NAVAudioStereoMixing */ = {
+			isa = PBXGroup;
+			children = (
+				A108631122C4937C001A15A9 /* NAVAudioStereoMixing.h */,
+				A108631222C4937C001A15A9 /* NAVAudioStereoMixing.mm */,
+			);
+			path = NAVAudioStereoMixing;
+			sourceTree = "<group>";
+		};
+		A108631322C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters */ = {
+			isa = PBXGroup;
+			children = (
+				A108631422C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.h */,
+				A108631522C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm */,
+			);
+			path = NAVAudioEnvironmentDistanceAttenuationParameters;
+			sourceTree = "<group>";
+		};
+		A108631622C4937D001A15A9 /* NAVAudioEnvironmentNode */ = {
+			isa = PBXGroup;
+			children = (
+				A108631722C4937D001A15A9 /* NAVAudioEnvironmentNode.h */,
+				A108631822C4937D001A15A9 /* NAVAudioEnvironmentNode.mm */,
+			);
+			path = NAVAudioEnvironmentNode;
+			sourceTree = "<group>";
+		};
+		A108631922C4937D001A15A9 /* NAVAudioMixingDestination */ = {
+			isa = PBXGroup;
+			children = (
+				A108631A22C4937D001A15A9 /* NAVAudioMixingDestination.h */,
+				A108631B22C4937D001A15A9 /* NAVAudioMixingDestination.mm */,
+			);
+			path = NAVAudioMixingDestination;
+			sourceTree = "<group>";
+		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
 			isa = PBXGroup;
 			children = (
@@ -2975,6 +3059,13 @@
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				A108630722C4937C001A15A9 /* NAVAudio3DMixing */,
+				A108631322C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters */,
+				A108631622C4937D001A15A9 /* NAVAudioEnvironmentNode */,
+				A108630D22C4937C001A15A9 /* NAVAudioEnvironmentReverbParameters */,
+				A108630A22C4937C001A15A9 /* NAVAudioMixing */,
+				A108631922C4937D001A15A9 /* NAVAudioMixingDestination */,
+				A108631022C4937C001A15A9 /* NAVAudioStereoMixing */,
 				A13370D422AEFC6A00FA3768 /* NAVAudioBuffer */,
 				A13370F722AF12A000FA3768 /* NAVAudioChannelLayout */,
 				A13370D122AEFC6A00FA3768 /* NAVAudioCompressedBuffer */,
@@ -6688,6 +6779,7 @@
 				A1926FBF22C11F99008F16AE /* NMTLTextureReferenceType.mm in Sources */,
 				A192706E22C146C6008F16AE /* NMTLBufferLayoutDescriptorArray.mm in Sources */,
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
+				A108632022C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
@@ -6759,6 +6851,7 @@
 				A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
+				A108632222C4937D001A15A9 /* NAVAudioMixingDestination.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
 				A19270B622C17FA3008F16AE /* NMTLFunctionConstantValues.mm in Sources */,
 				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
@@ -6807,6 +6900,7 @@
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
+				A108631E22C4937D001A15A9 /* NAVAudioEnvironmentReverbParameters.mm in Sources */,
 				A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */,
 				A174A47F22B0207B00415AD8 /* NMDLVertexAttribute.mm in Sources */,
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
@@ -6867,7 +6961,9 @@
 				A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */,
 				A19F39D022AF33BC00606332 /* NSCNGeometrySource.mm in Sources */,
 				A1926F8F22C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptor.mm in Sources */,
+				A108632122C4937D001A15A9 /* NAVAudioEnvironmentNode.mm in Sources */,
 				A192702C22C1344E008F16AE /* NMTLRenderPipelineReflection.mm in Sources */,
+				A108631F22C4937D001A15A9 /* NAVAudioStereoMixing.mm in Sources */,
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
 				A1D4987922BB3DBC009AC951 /* NNSUserActivityDelegate.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
@@ -6977,6 +7073,7 @@
 				A1926F2822C0C453008F16AE /* NCIWarpKernel.mm in Sources */,
 				A1D4985522BAFD40009AC951 /* NSecBase.mm in Sources */,
 				211E769B2269B10A00B838AF /* NUIWindow.mm in Sources */,
+				A108631C22C4937D001A15A9 /* NAVAudio3DMixing.mm in Sources */,
 				A192707122C146C6008F16AE /* NMTLAttributeDescriptorArray.mm in Sources */,
 				A1EE7D85229EF5FC002B53FF /* SKSpriteNode+GIF.swift in Sources */,
 				A1CE2B49228E694C00D9B3B8 /* NUIScrollViewDelegate.mm in Sources */,
@@ -7122,6 +7219,7 @@
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
 				A1D4983822BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm in Sources */,
 				A1926F0622C0BA34008F16AE /* NSKPhysicsJointSliding.mm in Sources */,
+				A108631D22C4937D001A15A9 /* NAVAudioMixing.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
 				A19F39E522AF4F3700606332 /* NMDLVertexDescriptor.mm in Sources */,
 				A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */,
