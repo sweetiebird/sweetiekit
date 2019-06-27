@@ -1,3 +1,15 @@
+SweetieKit_verbose = false;
+SweetieKit_uncaughtException = (err) => {
+  if (SweetieKit_verbose) {
+    console.log(`Uncaught exception`, err);
+  }
+  SweetieKit_uncaughtError = err;
+  console.log(err.stack);
+}
+process.on('uncaughtException', (...args) => {
+  SweetieKit_uncaughtException(...args);
+});
+
 console.log([].concat(...Object.values(require('os').networkInterfaces()).map(x => { return x.filter(y => y.family === 'IPv4').map(y => y.address); }).filter(x => x.length > 0)));
 
 if (typeof gc === 'undefined') {
