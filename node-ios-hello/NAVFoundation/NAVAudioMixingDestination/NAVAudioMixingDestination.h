@@ -15,7 +15,7 @@
 #define is_value_AVAudioMixingDestination(x) is_value_wrapper(x, AVAudioMixingDestination)
 
 JS_WRAP_CLASS(AVAudioMixingDestination, AVAudioMixing);
-  // TODO: declare AVAudioMixingDestination methods and properties
+  JS_PROP_READONLY(connectionPoint);
 JS_WRAP_CLASS_END(AVAudioMixingDestination);
 
 #endif /* NAVAudioMixingDestination_h */

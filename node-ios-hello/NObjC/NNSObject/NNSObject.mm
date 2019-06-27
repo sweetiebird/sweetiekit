@@ -948,6 +948,7 @@ NAN_METHOD(NClass::New) {
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
 #include "NARSKViewDelegate.h"
+#include "NAVAudioTypes.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
 #include "NAVAudioSession.h"
@@ -955,6 +956,7 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioSessionDataSourceDescription.h"
 #include "NAVAudioSessionPortDescription.h"
 #include "NAVAudioSessionRouteDescription.h"
+#include "NAudioComponent.h"
 #include "NAUAudioUnit.h"
 #include "NAUParameterTree.h"
 #include "NAUParameterNode.h"
@@ -983,6 +985,12 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioEnvironmentNode.h" // : AVAudioNode <AVAudioMixing>
 #include "NAVAudioEnvironmentDistanceAttenuationParameters.h" // : NSObject
 #include "NAVAudioEnvironmentReverbParameters.h" // : NSObject
+
+#include "NAVAudioUnit.h" // : AVAudioNode
+#include "NAVAudioUnitEffect.h" // : AVAudioUnit
+#include "NAVAudioUnitEQFilterParameters.h" // : NSObject
+#include "NAVAudioUnitEQ.h" // : AVAudioUnitEffect
+#include "NAVAudioUnitReverb.h" // : AVAudioUnitEffect
 
 #include "NAVDepthData.h"
 #include "NAVPortraitEffectsMatte.h"
@@ -1324,6 +1332,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(CGContext);
     
     // Audio Toolbox
+    JS_EXPORT_GLOBALS(AudioComponent);
     JS_EXPORT_TYPE(AUAudioUnit);
     JS_EXPORT_TYPE(AUParameterNode);
     JS_EXPORT_TYPE(AUParameterGroup);
@@ -1331,6 +1340,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AUAudioUnitPreset);
     
     // AVFoundation
+    JS_EXPORT_GLOBALS(AVAudioTypes);
     JS_EXPORT_TYPE(AVAudioPlayer);
     JS_EXPORT_TYPE(AVAudioFormat);
     JS_EXPORT_TYPE(AVAudioSession);
@@ -1360,6 +1370,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVAudioEnvironmentNode); // : AVAudioNode <AVAudioMixing>
     JS_EXPORT_TYPE(AVAudioEnvironmentDistanceAttenuationParameters); // : NSObject
     JS_EXPORT_TYPE(AVAudioEnvironmentReverbParameters); // : NSObject
+
+    JS_EXPORT_TYPE(AVAudioUnit); // : AVAudioNode
+    JS_EXPORT_TYPE(AVAudioUnitEffect); // : AVAudioUnit
+    JS_EXPORT_TYPE(AVAudioUnitEQFilterParameters); // : NSObject
+    JS_EXPORT_TYPE(AVAudioUnitEQ); // : AVAudioUnitEffect
+    JS_EXPORT_TYPE(AVAudioUnitReverb); // : AVAudioUnitEffect
 
     JS_EXPORT_TYPE(AVDepthData);
     JS_EXPORT_TYPE(AVPortraitEffectsMatte);
@@ -1991,6 +2007,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AVAudioSessionDataSourceDescription);
       JS_RETURN_TYPE(AVAudioSessionPortDescription);
       JS_RETURN_TYPE(AVAudioSessionRouteDescription);
+
+      JS_RETURN_TYPE(AVAudioUnitReverb); // : AVAudioUnitEffect
+      JS_RETURN_TYPE(AVAudioUnitEQ); // : AVAudioUnitEffect
+      JS_RETURN_TYPE(AVAudioUnitEQFilterParameters); // : NSObject
+      JS_RETURN_TYPE(AVAudioUnitEffect); // : AVAudioUnit
+      JS_RETURN_TYPE(AVAudioUnit); // : AVAudioNode
 
       JS_RETURN_TYPE(AVAudioEnvironmentReverbParameters); // : NSObject
       JS_RETURN_TYPE(AVAudioEnvironmentDistanceAttenuationParameters); // : NSObject

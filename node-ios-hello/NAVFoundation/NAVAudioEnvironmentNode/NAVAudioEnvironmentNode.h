@@ -19,7 +19,14 @@
 #define is_value_AVAudioEnvironmentDistanceAttenuationModel(x) IS_ENUM(AVAudioEnvironmentDistanceAttenuationModel, NSInteger, x)
 
 JS_WRAP_CLASS(AVAudioEnvironmentNode, AVAudioMixing);
-  // TODO: declare AVAudioEnvironmentNode methods and properties
+  JS_PROP(outputVolume);
+  JS_PROP_READONLY(nextAvailableInputBus);
+  JS_PROP(listenerPosition);
+  JS_PROP(listenerVectorOrientation);
+  JS_PROP(listenerAngularOrientation);
+  JS_PROP_READONLY(distanceAttenuationParameters);
+  JS_PROP_READONLY(reverbParameters);
+  JS_PROP_READONLY(applicableRenderingAlgorithms);
 JS_WRAP_CLASS_END(AVAudioEnvironmentNode);
 
 #endif /* NAVAudioEnvironmentNode_h */

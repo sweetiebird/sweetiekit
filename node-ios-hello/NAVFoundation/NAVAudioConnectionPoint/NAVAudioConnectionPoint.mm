@@ -13,12 +13,12 @@ NAVAudioConnectionPoint::NAVAudioConnectionPoint() {}
 NAVAudioConnectionPoint::~NAVAudioConnectionPoint() {}
 
 JS_INIT_CLASS(AVAudioConnectionPoint, NSObject);
-  // instance members (proto)
   JS_ASSIGN_PROTO_PROP_READONLY(node);
   JS_ASSIGN_PROTO_PROP_READONLY(bus);
+  JS_ASSIGN_PROTO_METHOD(initWithNodeBus);
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(AVAudioConnectionPoint, NSObject);
-  JS_ASSIGN_PROTO_METHOD(initWithNodeBus);
 JS_INIT_CLASS_END(AVAudioConnectionPoint, NSObject);
 
 NAN_METHOD(NAVAudioConnectionPoint::New) {

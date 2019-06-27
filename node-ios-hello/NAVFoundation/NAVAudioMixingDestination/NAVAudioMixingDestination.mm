@@ -13,6 +13,8 @@ NAVAudioMixingDestination::NAVAudioMixingDestination() {}
 NAVAudioMixingDestination::~NAVAudioMixingDestination() {}
 
 JS_INIT_CLASS(AVAudioMixingDestination, AVAudioMixing);
+  JS_ASSIGN_PROTO_PROP_READONLY(connectionPoint);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(AVAudioMixingDestination, AVAudioMixing);
@@ -36,5 +38,14 @@ NAN_METHOD(NAVAudioMixingDestination::New) {
     } else {
       Nan::ThrowError("AVAudioMixingDestination::New: invalid arguments");
     }
+  }
+}
+
+#include "NAVAudioConnectionPoint.h"
+
+NAN_GETTER(NAVAudioMixingDestination::connectionPointGetter) {
+  JS_UNWRAP(AVAudioMixingDestination, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioConnectionPoint([self connectionPoint]));
   }
 }

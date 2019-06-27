@@ -33,12 +33,14 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
   JS_ASSIGN_PROTO_PROP(overlaySKScene);
   JS_ASSIGN_PROTO_PROP_READONLY(renderingAPI);
   JS_ASSIGN_PROTO_PROP_READONLY(context);
+#if SCN_ENABLE_METAL
   JS_ASSIGN_PROTO_PROP_READONLY(currentRenderCommandEncoder);
   JS_ASSIGN_PROTO_PROP_READONLY(device);
   JS_ASSIGN_PROTO_PROP_READONLY(colorPixelFormat);
   JS_ASSIGN_PROTO_PROP_READONLY(depthPixelFormat);
   JS_ASSIGN_PROTO_PROP_READONLY(stencilPixelFormat);
   JS_ASSIGN_PROTO_PROP_READONLY(commandQueue);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(audioEngine);
   JS_ASSIGN_PROTO_PROP_READONLY(audioEnvironmentNode);
   JS_ASSIGN_PROTO_PROP(audioListener);
@@ -319,6 +321,8 @@ NAN_GETTER(NSCNSceneRenderer::contextGetter) {
   }
 }
 
+#if SCN_ENABLE_METAL
+
 #include "NMTLRenderCommandEncoder.h"
 
 NAN_GETTER(NSCNSceneRenderer::currentRenderCommandEncoderGetter) {
@@ -368,6 +372,7 @@ NAN_GETTER(NSCNSceneRenderer::commandQueueGetter) {
     JS_SET_RETURN(js_value_MTLCommandQueue([self commandQueue]));
   }
 }
+#endif // #if SCN_ENABLE_METAL
 
 #include "NAVAudioEngine.h"
 

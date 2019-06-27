@@ -15,7 +15,10 @@
 #define is_value_AVAudioEnvironmentReverbParameters(x) is_value_wrapper(x, AVAudioEnvironmentReverbParameters)
 
 JS_WRAP_CLASS(AVAudioEnvironmentReverbParameters, NSObject);
-  // TODO: declare AVAudioEnvironmentReverbParameters methods and properties
+  JS_METHOD(loadFactoryReverbPreset);
+  JS_PROP(enable);
+  JS_PROP(level);
+  JS_PROP_READONLY(filterParameters);
 JS_WRAP_CLASS_END(AVAudioEnvironmentReverbParameters);
 
 #endif /* NAVAudioEnvironmentReverbParameters_h */

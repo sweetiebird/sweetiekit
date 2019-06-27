@@ -15,7 +15,10 @@
 #define is_value_AVAudioEnvironmentDistanceAttenuationParameters(x) is_value_wrapper(x, AVAudioEnvironmentDistanceAttenuationParameters)
 
 JS_WRAP_CLASS(AVAudioEnvironmentDistanceAttenuationParameters, NSObject);
-  // TODO: declare AVAudioEnvironmentDistanceAttenuationParameters methods and properties
+  JS_PROP(distanceAttenuationModel);
+  JS_PROP(referenceDistance);
+  JS_PROP(maximumDistance);
+  JS_PROP(rolloffFactor);
 JS_WRAP_CLASS_END(AVAudioEnvironmentDistanceAttenuationParameters);
 
 #endif /* NAVAudioEnvironmentDistanceAttenuationParameters_h */

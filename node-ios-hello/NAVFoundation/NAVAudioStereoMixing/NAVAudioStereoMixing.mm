@@ -13,6 +13,8 @@ NAVAudioStereoMixing::NAVAudioStereoMixing() {}
 NAVAudioStereoMixing::~NAVAudioStereoMixing() {}
 
 JS_INIT_PROTOCOL(AVAudioStereoMixing, NSObject);
+  JS_ASSIGN_PROTO_PROP(pan);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(AVAudioStereoMixing, NSObject);
@@ -44,6 +46,23 @@ NAN_METHOD(NAVAudioStereoMixing::New) {
     }
   }
 }
+
+NAN_GETTER(NAVAudioStereoMixing::panGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudioStereoMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self pan]));
+  }
+}
+
+NAN_SETTER(NAVAudioStereoMixing::panSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudioStereoMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setPan: input];
+  }
+}
+
 
 @implementation AVAudioStereoMixingType
 @end

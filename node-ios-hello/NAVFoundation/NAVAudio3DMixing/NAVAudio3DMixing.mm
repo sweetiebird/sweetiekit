@@ -13,6 +13,13 @@ NAVAudio3DMixing::NAVAudio3DMixing() {}
 NAVAudio3DMixing::~NAVAudio3DMixing() {}
 
 JS_INIT_PROTOCOL(AVAudio3DMixing, NSObject);
+  JS_ASSIGN_PROTO_PROP(renderingAlgorithm);
+  JS_ASSIGN_PROTO_PROP(rate);
+  JS_ASSIGN_PROTO_PROP(reverbBlend);
+  JS_ASSIGN_PROTO_PROP(obstruction);
+  JS_ASSIGN_PROTO_PROP(occlusion);
+  JS_ASSIGN_PROTO_PROP(position);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(AVAudio3DMixing, NSObject);
@@ -42,6 +49,108 @@ NAN_METHOD(NAVAudio3DMixing::New) {
     } else {
       Nan::ThrowError("AVAudio3DMixing::New: invalid arguments");
     }
+  }
+}
+
+#include "NAVAudioMixing.h"
+
+NAN_GETTER(NAVAudio3DMixing::renderingAlgorithmGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudio3DMixingRenderingAlgorithm([self renderingAlgorithm]));
+  }
+}
+
+#include "NAVAudioMixing.h"
+
+NAN_SETTER(NAVAudio3DMixing::renderingAlgorithmSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(AVAudio3DMixingRenderingAlgorithm, input);
+    [self setRenderingAlgorithm: input];
+  }
+}
+
+NAN_GETTER(NAVAudio3DMixing::rateGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self rate]));
+  }
+}
+
+NAN_SETTER(NAVAudio3DMixing::rateSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setRate: input];
+  }
+}
+
+NAN_GETTER(NAVAudio3DMixing::reverbBlendGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self reverbBlend]));
+  }
+}
+
+NAN_SETTER(NAVAudio3DMixing::reverbBlendSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setReverbBlend: input];
+  }
+}
+
+NAN_GETTER(NAVAudio3DMixing::obstructionGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self obstruction]));
+  }
+}
+
+NAN_SETTER(NAVAudio3DMixing::obstructionSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setObstruction: input];
+  }
+}
+
+NAN_GETTER(NAVAudio3DMixing::occlusionGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self occlusion]));
+  }
+}
+
+NAN_SETTER(NAVAudio3DMixing::occlusionSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setOcclusion: input];
+  }
+}
+
+#include "NAVAudioTypes.h"
+
+NAN_GETTER(NAVAudio3DMixing::positionGetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudio3DPoint([self position]));
+  }
+}
+
+NAN_SETTER(NAVAudio3DMixing::positionSetter) {
+  JS_UNWRAP_PROTOCOL(AVAudio3DMixing, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(AVAudio3DPoint, input);
+    [self setPosition: input];
   }
 }
 

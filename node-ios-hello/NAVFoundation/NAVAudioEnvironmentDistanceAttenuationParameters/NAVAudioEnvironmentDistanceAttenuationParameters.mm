@@ -13,6 +13,11 @@ NAVAudioEnvironmentDistanceAttenuationParameters::NAVAudioEnvironmentDistanceAtt
 NAVAudioEnvironmentDistanceAttenuationParameters::~NAVAudioEnvironmentDistanceAttenuationParameters() {}
 
 JS_INIT_CLASS(AVAudioEnvironmentDistanceAttenuationParameters, NSObject);
+  JS_ASSIGN_PROTO_PROP(distanceAttenuationModel);
+  JS_ASSIGN_PROTO_PROP(referenceDistance);
+  JS_ASSIGN_PROTO_PROP(maximumDistance);
+  JS_ASSIGN_PROTO_PROP(rolloffFactor);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(AVAudioEnvironmentDistanceAttenuationParameters, NSObject);
@@ -38,3 +43,70 @@ NAN_METHOD(NAVAudioEnvironmentDistanceAttenuationParameters::New) {
     }
   }
 }
+
+#include "NAVAudioEnvironmentNode.h"
+
+NAN_GETTER(NAVAudioEnvironmentDistanceAttenuationParameters::distanceAttenuationModelGetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioEnvironmentDistanceAttenuationModel([self distanceAttenuationModel]));
+  }
+}
+
+NAN_SETTER(NAVAudioEnvironmentDistanceAttenuationParameters::distanceAttenuationModelSetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(AVAudioEnvironmentDistanceAttenuationModel, input);
+    [self setDistanceAttenuationModel: input];
+  }
+}
+
+NAN_GETTER(NAVAudioEnvironmentDistanceAttenuationParameters::referenceDistanceGetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self referenceDistance]));
+  }
+}
+
+NAN_SETTER(NAVAudioEnvironmentDistanceAttenuationParameters::referenceDistanceSetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setReferenceDistance: input];
+  }
+}
+
+NAN_GETTER(NAVAudioEnvironmentDistanceAttenuationParameters::maximumDistanceGetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self maximumDistance]));
+  }
+}
+
+NAN_SETTER(NAVAudioEnvironmentDistanceAttenuationParameters::maximumDistanceSetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setMaximumDistance: input];
+  }
+}
+
+NAN_GETTER(NAVAudioEnvironmentDistanceAttenuationParameters::rolloffFactorGetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_float([self rolloffFactor]));
+  }
+}
+
+NAN_SETTER(NAVAudioEnvironmentDistanceAttenuationParameters::rolloffFactorSetter) {
+  JS_UNWRAP(AVAudioEnvironmentDistanceAttenuationParameters, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(float, input);
+    [self setRolloffFactor: input];
+  }
+}
+
