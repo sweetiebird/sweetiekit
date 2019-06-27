@@ -809,6 +809,43 @@ namespace sweetiekit
   bool SetQuaternion(simd_quatf& quat, Local<Value> value) {
     return SetQuaternion((float*)&quat, value);
   }
+  bool IsQuaternion(Local<Value> value) {
+    const int size = 4;
+    if (value->IsFloat32Array()) {
+      Local<Float32Array> xform(Local<Float32Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsArray()) {
+      Local<Array> xform(Local<Array>::Cast(value));
+      for (uint32_t i = 0; i < size; i++) {
+        if (!is_value_float(xform->Get(i))) {
+          return false;
+        }
+      }
+      return true;
+    } else if (value->IsFloat64Array()) {
+      Local<Float64Array> xform(Local<Float64Array>::Cast(value));
+      if (xform->Length() >= size) {
+        return true;
+      }
+    } else if (value->IsObject()) {
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("y")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("z")))) {
+        return false;
+      }
+      if (!is_value_float(JS_OBJ(value)->Get(JS_STR("w")))) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
   bool SetQuaternion(float* elements, Local<Value> value) {
     Nan::HandleScope scope;
     const int size = 4;
@@ -1748,6 +1785,10 @@ simd_float4x4 to_value_simd_float4x4(const Local<Value>& value, bool * _Nullable
     Nan::ThrowError("Expected simd_float4x4");
   }
   return result;
+}
+
+bool  is_value_simd_quatf(const Local<Value>& value) {
+  return sweetiekit::IsQuaternion(value);
 }
 
 bool  is_value_simd_float1(const Local<Value>& value) {
