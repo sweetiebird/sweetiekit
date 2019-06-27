@@ -992,6 +992,7 @@ NAN_METHOD(NClass::New) {
 #include "NARSCNViewDelegate.h"
 
 #include "NSceneKitTypes.h"
+#include "NSCNPhysicsField.h"
 #include "NSCNSceneRenderer.h"
 #include "NSCNSceneRendererDelegate.h"
 #include "NSCNAction.h"
@@ -1465,6 +1466,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // SceneKit
     JS_EXPORT_TYPE(SceneKitTypes);
+    JS_EXPORT_TYPE(SCNPhysicsField);
     JS_EXPORT_TYPE(SCNSceneRenderer);
     JS_EXPORT_TYPE(SCNSceneRendererDelegate);
     JS_EXPORT_TYPE(SCNAction);
@@ -1807,6 +1809,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       //SceneKit
       JS_RETURN_TYPE(SceneKitTypes);
+      JS_RETURN_TYPE(SCNPhysicsField);
       // JS_RETURN_TYPE(SCNSceneRenderer);
       JS_RETURN_TYPE(SCNSceneRendererDelegate);
       JS_RETURN_TYPE(SCNParticleSystem);

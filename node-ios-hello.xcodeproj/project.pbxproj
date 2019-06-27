@@ -27,6 +27,8 @@
 		A1058B432268029E00CEAA5C /* libs_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1058B422268029E00CEAA5C /* libs_main.mm */; };
 		A10862ED22C48E05001A15A9 /* NEAGLSharegroup.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862E922C48E04001A15A9 /* NEAGLSharegroup.mm */; };
 		A10862EE22C48E05001A15A9 /* NEAGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862EC22C48E04001A15A9 /* NEAGLContext.mm */; };
+		A10862FA22C48F48001A15A9 /* NCGContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862F822C48F48001A15A9 /* NCGContext.mm */; };
+		A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10862FD22C48F5F001A15A9 /* NSCNPhysicsField.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -605,6 +607,10 @@
 		A10862E922C48E04001A15A9 /* NEAGLSharegroup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NEAGLSharegroup.mm; sourceTree = "<group>"; };
 		A10862EB22C48E04001A15A9 /* NEAGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAGLContext.h; sourceTree = "<group>"; };
 		A10862EC22C48E04001A15A9 /* NEAGLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NEAGLContext.mm; sourceTree = "<group>"; };
+		A10862F822C48F48001A15A9 /* NCGContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGContext.mm; sourceTree = "<group>"; };
+		A10862F922C48F48001A15A9 /* NCGContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGContext.h; sourceTree = "<group>"; };
+		A10862FC22C48F5F001A15A9 /* NSCNPhysicsField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNPhysicsField.h; sourceTree = "<group>"; };
+		A10862FD22C48F5F001A15A9 /* NSCNPhysicsField.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNPhysicsField.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -1750,6 +1756,24 @@
 				A10862EC22C48E04001A15A9 /* NEAGLContext.mm */,
 			);
 			path = NEAGLContext;
+			sourceTree = "<group>";
+		};
+		A10862F722C48F48001A15A9 /* NCGContext */ = {
+			isa = PBXGroup;
+			children = (
+				A10862F922C48F48001A15A9 /* NCGContext.h */,
+				A10862F822C48F48001A15A9 /* NCGContext.mm */,
+			);
+			path = NCGContext;
+			sourceTree = "<group>";
+		};
+		A10862FB22C48F5F001A15A9 /* NSCNPhysicsField */ = {
+			isa = PBXGroup;
+			children = (
+				A10862FC22C48F5F001A15A9 /* NSCNPhysicsField.h */,
+				A10862FD22C48F5F001A15A9 /* NSCNPhysicsField.mm */,
+			);
+			path = NSCNPhysicsField;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -4861,6 +4885,7 @@
 		A1B2056B229788FC006CA4C6 /* NCoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				A10862F722C48F48001A15A9 /* NCGContext */,
 				A1B2056C229788FC006CA4C6 /* NCoreGraphicsGlobals */,
 			);
 			path = NCoreGraphics;
@@ -4980,7 +5005,6 @@
 		A1BD4B3F2287BC91001D1F6E /* NSceneKit */ = {
 			isa = PBXGroup;
 			children = (
-				A192710B22C337F6008F16AE /* NSCNMorpher */,
 				A1926F5D22C0E8C1008F16AE /* NSceneKitTypes */,
 				A1926F5122C0E720008F16AE /* NSCNAction */,
 				A1926F5822C0E836008F16AE /* NSCNAudioPlayer */,
@@ -4997,6 +5021,7 @@
 				A1948930228A5D33007BF787 /* NSCNLight */,
 				A1EE7D51229D84F9002B53FF /* NSCNMaterial */,
 				A1EE7D8622A41637002B53FF /* NSCNMaterialProperty */,
+				A192710B22C337F6008F16AE /* NSCNMorpher */,
 				A18F1E71228A477800A42754 /* NSCNNode */,
 				A1926F6122C0F4F3008F16AE /* NSCNParticlePropertyController */,
 				A1926F6422C0F4F4008F16AE /* NSCNParticleSystem */,
@@ -5004,6 +5029,7 @@
 				A1926F3122C0DDFB008F16AE /* NSCNPhysicsBehavior */,
 				A1EE7D9222A435FD002B53FF /* NSCNPhysicsBody */,
 				A1926F3922C0E284008F16AE /* NSCNPhysicsConeTwistJoint */,
+				A10862FB22C48F5F001A15A9 /* NSCNPhysicsField */,
 				A1926F4522C0E285008F16AE /* NSCNPhysicsHingeJoint */,
 				A1926F3522C0DEA6008F16AE /* NSCNPhysicsShape */,
 				A1926F4222C0E285008F16AE /* NSCNPhysicsSliderJoint */,
@@ -6350,7 +6376,6 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A10862E622C48E04001A15A9 /* NOpenGLES */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -6379,6 +6404,7 @@
 				A1E2D7A5226A500100FA1562 /* NObjC */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
+				A10862E622C48E04001A15A9 /* NOpenGLES */,
 				A1710E9F229A58A100EC7C86 /* NReplayKit */,
 				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
 				A1D4985122BAFD40009AC951 /* NSecurity */,
@@ -6697,6 +6723,7 @@
 				A19270E322C19D7A008F16AE /* NCAMetalDrawable.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
 				A1926FF522C12DB5008F16AE /* NMTLDepthStencilState.mm in Sources */,
+				A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
 				A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */,
 				A1926FDD22C12999008F16AE /* NMTLBuffer.mm in Sources */,
@@ -6938,6 +6965,7 @@
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */,
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
+				A10862FA22C48F48001A15A9 /* NCGContext.mm in Sources */,
 				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
