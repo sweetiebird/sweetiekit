@@ -13,6 +13,36 @@ NSCNSceneRenderer::NSCNSceneRenderer() {}
 NSCNSceneRenderer::~NSCNSceneRenderer() {}
 
 JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
+  JS_ASSIGN_PROTO_PROP(presentSceneWithTransitionIncomingPointOfViewCompletionHandler);
+  JS_ASSIGN_PROTO_PROP(hitTestOptions);
+  JS_ASSIGN_PROTO_PROP(isNodeInsideFrustumWithPointOfView);
+  JS_ASSIGN_PROTO_PROP(nodesInsideFrustumWithPointOfView);
+  JS_ASSIGN_PROTO_PROP(projectPoint);
+  JS_ASSIGN_PROTO_PROP(unprojectPoint);
+  JS_ASSIGN_PROTO_PROP(prepareObjectsWithCompletionHandler);
+  JS_ASSIGN_PROTO_PROP(scene);
+  JS_ASSIGN_PROTO_PROP(sceneTime);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP(isPlaying);
+  JS_ASSIGN_PROTO_PROP(loops);
+  JS_ASSIGN_PROTO_PROP(pointOfView);
+  JS_ASSIGN_PROTO_PROP(autoenablesDefaultLighting);
+  JS_ASSIGN_PROTO_PROP(isJitteringEnabled);
+  JS_ASSIGN_PROTO_PROP(showsStatistics);
+  JS_ASSIGN_PROTO_PROP(debugOptions);
+  JS_ASSIGN_PROTO_PROP(overlaySKScene);
+  JS_ASSIGN_PROTO_PROP_READONLY(renderingAPI);
+  JS_ASSIGN_PROTO_PROP_READONLY(context);
+  JS_ASSIGN_PROTO_PROP_READONLY(currentRenderCommandEncoder);
+  JS_ASSIGN_PROTO_PROP_READONLY(device);
+  JS_ASSIGN_PROTO_PROP_READONLY(colorPixelFormat);
+  JS_ASSIGN_PROTO_PROP_READONLY(depthPixelFormat);
+  JS_ASSIGN_PROTO_PROP_READONLY(stencilPixelFormat);
+  JS_ASSIGN_PROTO_PROP_READONLY(commandQueue);
+  JS_ASSIGN_PROTO_PROP_READONLY(audioEngine);
+  JS_ASSIGN_PROTO_PROP_READONLY(audioEnvironmentNode);
+  JS_ASSIGN_PROTO_PROP(audioListener);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(SCNSceneRenderer, NSObject);
@@ -82,3 +112,402 @@ NAN_METHOD(NSCNSceneRenderer::New) {
     }
   }
 }
+
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, presentSceneWithTransitionIncomingPointOfViewCompletionHandler);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, hitTestOptions);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, isNodeInsideFrustumWithPointOfView);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, nodesInsideFrustumWithPointOfView);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, projectPoint);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, unprojectPoint);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectsWithCompletionHandler);
+
+#include "NSCNScene.h"
+
+NAN_GETTER(NSCNSceneRenderer::sceneGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNScene([self scene]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::sceneSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNScene, input);
+    [self setScene: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::sceneTimeGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSTimeInterval([self sceneTime]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::sceneTimeSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSTimeInterval, input);
+    [self setSceneTime: input];
+  }
+}
+
+#include "NSCNSceneRendererDelegate.h"
+
+NAN_GETTER(NSCNSceneRenderer::delegateGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNSceneRendererDelegate([self delegate]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::delegateSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_protocol(SCNSceneRendererDelegate, input);
+    [self setDelegate: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::isPlayingGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isPlaying]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::isPlayingSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setPlaying: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::loopsGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self loops]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::loopsSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setLoops: input];
+  }
+}
+
+#include "NSCNNode.h"
+
+NAN_GETTER(NSCNSceneRenderer::pointOfViewGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNNode([self pointOfView]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::pointOfViewSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNNode, input);
+    [self setPointOfView: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::autoenablesDefaultLightingGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self autoenablesDefaultLighting]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::autoenablesDefaultLightingSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setAutoenablesDefaultLighting: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::isJitteringEnabledGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isJitteringEnabled]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::isJitteringEnabledSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setJitteringEnabled: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::showsStatisticsGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsStatistics]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::showsStatisticsSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsStatistics: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::debugOptionsGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNDebugOptions([self debugOptions]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::debugOptionsSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SCNDebugOptions, input);
+    [self setDebugOptions: input];
+  }
+}
+
+#include "NSKScene.h"
+
+NAN_GETTER(NSCNSceneRenderer::overlaySKSceneGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SKScene([self overlaySKScene]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::overlaySKSceneSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SKScene, input);
+    [self setOverlaySKScene: input];
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::renderingAPIGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNRenderingAPI([self renderingAPI]));
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::contextGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_void_pointer([self context]));
+  }
+}
+
+#include "NMTLRenderCommandEncoder.h"
+
+NAN_GETTER(NSCNSceneRenderer::currentRenderCommandEncoderGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLRenderCommandEncoder([self currentRenderCommandEncoder]));
+  }
+}
+
+#include "NMTLDevice.h"
+
+NAN_GETTER(NSCNSceneRenderer::deviceGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLDevice([self device]));
+  }
+}
+
+#include "NMTLPixelFormat.h"
+
+NAN_GETTER(NSCNSceneRenderer::colorPixelFormatGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self colorPixelFormat]));
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::depthPixelFormatGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self depthPixelFormat]));
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::stencilPixelFormatGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLPixelFormat([self stencilPixelFormat]));
+  }
+}
+
+#include "NMTLCommandQueue.h"
+
+NAN_GETTER(NSCNSceneRenderer::commandQueueGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_MTLCommandQueue([self commandQueue]));
+  }
+}
+
+#include "NAVAudioEngine.h"
+
+NAN_GETTER(NSCNSceneRenderer::audioEngineGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioEngine([self audioEngine]));
+  }
+}
+
+#include "NAVAudioEnvironmentNode.h"
+
+NAN_GETTER(NSCNSceneRenderer::audioEnvironmentNodeGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_AVAudioEnvironmentNode([self audioEnvironmentNode]));
+  }
+}
+
+NAN_GETTER(NSCNSceneRenderer::audioListenerGetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNNode([self audioListener]));
+  }
+}
+
+NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
+  JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNNode, input);
+    [self setAudioListener: input];
+  }
+}
+
+
+
+@implementation SCNSceneRendererType
+
+/*!
+ @method presentScene:withTransition:incomingPointOfView:
+ @abstract Present a SCNScene in the receiver, replacing the current scene.
+ @param scene The new scene to present.
+ @param transition the transition to use when presenting the scene.
+ @param pointOfView the point of view to use to render the new scene.
+ @param completionHandler the block invoked on completion.
+ */
+- (void)presentScene:(SCNScene *_Nonnull)scene withTransition:(SKTransition *_Nonnull)transition incomingPointOfView:(nullable SCNNode *)pointOfView completionHandler:(nullable void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0))
+{
+}
+
+/*!
+ @method hitTest:options:
+ @abstract Returns an array of SCNHitTestResult for each node that contains a specified point.
+ @param point A point in the coordinate system of the receiver.
+ @param options Optional parameters (see the "Hit test options" group for the available options).
+ */
+- (NSArray<SCNHitTestResult *> *_Nonnull)hitTest:(CGPoint)point options:(nullable NSDictionary<SCNHitTestOption, id> *)options
+{
+  __block NSArray<SCNHitTestResult *> *_Nonnull result = @[];
+  return result;
+}
+
+#if !TARGET_OS_IPHONE
+/*!
+ @method isNodeInsideFrustum:withPointOfView:
+ @abstract Test whether node is visible from the specified point of view.
+ @param node The node to test the visibility of.
+ @param pointOfView The point of view used to test the visibility.
+ @discussion Return YES if the node is inside or intersects the clipping planes of the point of view. This method doesn't test if 'node' is occluded by another node.
+ */
+- (BOOL)isNodeInsideFrustum:(SCNNode *_Nonnull)node withPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.9))
+{
+  return YES;
+}
+#endif
+
+/*!
+ @method nodesInsideFrustumWithPointOfView:
+ @abstract Returns an array containing the nodes visible from the specified point of view.
+ @param pointOfView The point of view used to test the visibility.
+ @discussion Returns an array of all the nodes that are inside or intersects the clipping planes of the point of view. Starting in macOS10.13/iOS11 this method work with the presentation tree.
+ */
+- (NSArray<SCNNode *> *_Nonnull)nodesInsideFrustumWithPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.11), ios(9.0))
+{
+  __block NSArray<SCNNode *> *_Nonnull result = @[];
+  return result;
+}
+
+#if !TARGET_OS_IPHONE
+/*!
+ @method projectPoint
+ @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport.
+ @param point The world position to be projected.
+ @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
+ */
+- (SCNVector3)projectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9))
+{
+  return SCNVector3Zero;
+}
+
+/*!
+ @method unprojectPoint
+ @abstract Unprojects a screenspace 2D point with depth info using the receiver's current point of view and viewport.
+ @param point The screenspace position to be unprojected.
+ @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
+ */
+- (SCNVector3)unprojectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9))
+{
+  return SCNVector3Zero;
+}
+#endif
+
+#if !TARGET_OS_IPHONE
+/*!
+ @method prepareObject:shouldAbortBlock:
+ @abstract Prepare the specified object for drawing.
+ @param object The object to prepare. It can be an instance of SCNScene, SCNNode, SCNGeometry, or SCNMaterial
+ @param block This block will be called repeatedly while the object is prepared. Return YES if you want the operation to abort.
+ @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread. This method is observable using NSProgress.
+ */
+- (BOOL)prepareObject:(id _Nonnull)object shouldAbortBlock:(nullable NS_NOESCAPE BOOL (^)(void))block API_AVAILABLE(macos(10.9))
+{
+  return YES;
+}
+#endif
+
+#if !TARGET_OS_IPHONE
+/*!
+ @method prepareObjects:withCompletionHandler:
+ @abstract Prepare the specified objects for drawing on the background.
+ @param objects The objects to prepare. It can be one or more instances of SCNScene, SCNNode, SCNGeometry, or SCNMaterial
+ @param completionHandler This block will be called when all objects has been prepared, or on failure.
+ @discussion This method is observable using NSProgress.
+ */
+- (void)prepareObjects:(NSArray *_Nonnull)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler API_AVAILABLE(macos(10.10))
+{
+}
+#endif
+
+@end
+
+

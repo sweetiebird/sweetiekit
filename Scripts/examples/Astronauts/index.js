@@ -241,7 +241,12 @@ function makeDemo(navigation, dvc) {
   // sometimes the ground contact never seems to fire. This unsticks the player.
   let prevPos = v2(0, 0);
   let curPos = v2(0, 0);
-  setInterval(() => {
+  let interval;
+  interval = setInterval(() => {
+    if (scene == null || scene.size == null || scene.size.height == null) {
+      clearInterval(interval);
+      return;
+    }
     prevPos.x = curPos.x;
     prevPos.y = curPos.y;
     let pos = player.node.position;

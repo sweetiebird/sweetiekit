@@ -1,5 +1,8 @@
 const SweetieKit = require('std:sweetiekit.node');
 
+SWEET = typeof SWEET === 'undefined' ? {} : SWEET;
+SWEET.SCNScene = SWEET.SCNScene || {};
+
 Path = require('path');
 MediaPath = Path.resolve(Path.join(Path.dirname(Require.resolve('.')),'node_modules', 'sweetiekit-art', 'media'));
 
@@ -35,7 +38,9 @@ function V3(v, ...args) {
   }
 }
 
-async function make(nav, demoVC) {
+SWEET.SCNScene.mount = async (nav, demoVC) => {
+  SWEET.SCNScene.nav = nav;
+  SWEET.SCNScene.demoVC = demoVC;
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;
   const frame = { x: 0, y: 0, width: w, height: h };
@@ -54,7 +59,7 @@ async function make(nav, demoVC) {
   hitExpr = (hit) => {
     return moveExpr(hit.worldCoordinates);
   };
-  currentPos = (node) => node.presentation.position;
+  currentPos = (node) => node.presentationNode.position;
   moveExpr = (xyz, node=sphereNode) => {
     dir = V3(pos1, xyz).sub(currentPos(node));
     if (physNormalize) {
@@ -259,6 +264,10 @@ async function make(nav, demoVC) {
   };
 
   return scnView;
+};
+
+async function make(...args) {
+  return SWEET.SCNScene.mount(...args);
 }
 
 module.exports = make;
