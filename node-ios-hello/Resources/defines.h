@@ -1648,16 +1648,11 @@ bool is_value_##type(const Local<Value>& value)
 
 
 // CoreGraphics types
-
 #define js_value_CGBlendMode(x) JS_ENUM(CGBlendMode, NSInteger, x)
 #define to_value_CGBlendMode(x) TO_ENUM(CGBlendMode, NSInteger, x)
 #define is_value_CGBlendMode(x) IS_ENUM(CGBlendMode, NSInteger, x)
 
 // SceneKit types
-#define js_value_SCNMorpher(x) js_value_wrapper_unknown(x, SCNMorpher)
-#define to_value_SCNMorpher(x) to_value_wrapper_unknown(x, SCNMorpher)
-#define js_value_SCNSkinner(x) js_value_wrapper_unknown(x, SCNSkinner)
-#define to_value_SCNSkinner(x) to_value_wrapper_unknown(x, SCNSkinner)
 #define js_value_SCNPhysicsField(x) js_value_wrapper_unknown(x, SCNPhysicsField)
 #define to_value_SCNPhysicsField(x) to_value_wrapper_unknown(x, SCNPhysicsField)
 
