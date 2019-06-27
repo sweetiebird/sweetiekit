@@ -1011,6 +1011,7 @@ NAN_METHOD(NClass::New) {
 #include "NSCNPhysicsVehicle.h" // : SCNPhysicsBehavior
 #include "NSCNPhysicsShape.h"
 #include "NSCNPhysicsWorld.h"
+#include "NSCNNodeRendererDelegate.h"
 #include "NSCNNode.h"
 #include "NSCNAudioPlayer.h"
 #include "NSCNAudioSource.h"
@@ -1496,6 +1497,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNTube);
     JS_EXPORT_TYPE(SCNText);
     JS_EXPORT_TYPE(SCNShape);
+    JS_EXPORT_PROTOCOL(SCNNodeRendererDelegate);
     JS_EXPORT_TYPE(SCNNode);
     JS_EXPORT_TYPE(SCNAudioPlayer);
     JS_EXPORT_TYPE(SCNAudioSource);
@@ -2231,6 +2233,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // MapKit protocols
       
       JS_RETURN_PROTOCOL(MKMapViewDelegate);
+
+      // SceneKit protocols
+
+      JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
       
       // ARKit protocols
       
