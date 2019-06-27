@@ -635,6 +635,21 @@ namespace sweetiekit {
       Local<Value> argv[] = { arg0, arg1, arg2, arg3 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
      }
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
+     }
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4, Local<Value> arg5) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4, arg5 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
+     }
+     Local<Value> Call(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4, Local<Value> arg5, Local<Value> arg6) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, sizeof(argv)/sizeof(argv[0]), argv));
+     }
      Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2) const {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2 };
@@ -644,6 +659,21 @@ namespace sweetiekit {
        Nan::EscapableHandleScope scope;
       Local<Value> argv[] = { arg0, arg1, arg2, arg3 };
       return scope.Escape(sweetiekit::CallSync(Get(), methodName, 4, argv));
+     }
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 5, argv));
+     }
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4, Local<Value> arg5) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4, arg5 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 6, argv));
+     }
+     Local<Value> operator()(const char* _Nonnull methodName, Local<Value> arg0, Local<Value> arg1, Local<Value> arg2, Local<Value> arg3, Local<Value> arg4, Local<Value> arg5, Local<Value> arg6) const {
+       Nan::EscapableHandleScope scope;
+      Local<Value> argv[] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6 };
+      return scope.Escape(sweetiekit::CallSync(Get(), methodName, 7, argv));
      }
      static JSArgs Args() {
       return JSArgs();
