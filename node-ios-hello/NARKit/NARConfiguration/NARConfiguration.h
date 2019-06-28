@@ -22,13 +22,17 @@
 #define to_value_AREnvironmentTexturing(x) TO_ENUM(AREnvironmentTexturing, NSInteger, x)
 #define is_value_AREnvironmentTexturing(x) IS_ENUM(AREnvironmentTexturing, NSInteger, x)
 
-#define js_value_ARPlaneDetection(x) JS_OPTS(ARPlaneDetection, NSUnteger, x)
-#define to_value_ARPlaneDetection(x) TO_OPTS(ARPlaneDetection, NSUnteger, x)
-#define is_value_ARPlaneDetection(x) IS_OPTS(ARPlaneDetection, NSUnteger, x)
+#define js_value_ARPlaneDetection(x) JS_OPTS(ARPlaneDetection, NSUInteger, x)
+#define to_value_ARPlaneDetection(x) TO_OPTS(ARPlaneDetection, NSUInteger, x)
+#define is_value_ARPlaneDetection(x) IS_OPTS(ARPlaneDetection, NSUInteger, x)
 
 JS_WRAP_CLASS(ARConfiguration, NSObject);
-  JS_PROP(isLightEstimationEnabled);
+  JS_STATIC_PROP_READONLY(isSupported);
+  JS_STATIC_PROP_READONLY(supportedVideoFormats);
+  JS_PROP(videoFormat);
   JS_PROP(worldAlignment);
+  JS_PROP(isLightEstimationEnabled);
+  JS_PROP(providesAudioData);
 JS_WRAP_CLASS_END(ARConfiguration);
 
 #endif /* NARConfiguration_h */

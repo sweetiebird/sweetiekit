@@ -48,6 +48,16 @@
 		A108635122C5973C001A15A9 /* NSKAttributeValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108634C22C5973B001A15A9 /* NSKAttributeValue.mm */; };
 		A108635222C5973C001A15A9 /* NSKAttribute.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635022C5973B001A15A9 /* NSKAttribute.mm */; };
 		A108635622C597F3001A15A9 /* NSKReachConstraints.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635522C597F3001A15A9 /* NSKReachConstraints.mm */; };
+		A108636622C6C5B4001A15A9 /* NARObjectScanningConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635922C6C5B2001A15A9 /* NARObjectScanningConfiguration.mm */; };
+		A108636722C6C5B4001A15A9 /* NARFaceTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635C22C6C5B3001A15A9 /* NARFaceTrackingConfiguration.mm */; };
+		A108636822C6C5B4001A15A9 /* NAROrientationTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635F22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration.mm */; };
+		A108636922C6C5B4001A15A9 /* NARWorldTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108636122C6C5B3001A15A9 /* NARWorldTrackingConfiguration.mm */; };
+		A108636A22C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108636422C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm */; };
+		A108636E22C6C7BB001A15A9 /* NARVideoFormat.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108636C22C6C7BB001A15A9 /* NARVideoFormat.mm */; };
+		A108637222C6C822001A15A9 /* NARWorldMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637122C6C822001A15A9 /* NARWorldMap.mm */; };
+		A108637622C6C874001A15A9 /* NARReferenceImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637422C6C874001A15A9 /* NARReferenceImage.mm */; };
+		A108637A22C6C9B2001A15A9 /* NARPointCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637922C6C9B2001A15A9 /* NARPointCloud.mm */; };
+		A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -668,6 +678,26 @@
 		A108635022C5973B001A15A9 /* NSKAttribute.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKAttribute.mm; sourceTree = "<group>"; };
 		A108635422C597F3001A15A9 /* NSKReachConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKReachConstraints.h; sourceTree = "<group>"; };
 		A108635522C597F3001A15A9 /* NSKReachConstraints.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKReachConstraints.mm; sourceTree = "<group>"; };
+		A108635822C6C5B2001A15A9 /* NARObjectScanningConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARObjectScanningConfiguration.h; sourceTree = "<group>"; };
+		A108635922C6C5B2001A15A9 /* NARObjectScanningConfiguration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARObjectScanningConfiguration.mm; sourceTree = "<group>"; };
+		A108635B22C6C5B3001A15A9 /* NARFaceTrackingConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARFaceTrackingConfiguration.h; sourceTree = "<group>"; };
+		A108635C22C6C5B3001A15A9 /* NARFaceTrackingConfiguration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARFaceTrackingConfiguration.mm; sourceTree = "<group>"; };
+		A108635E22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAROrientationTrackingConfiguration.h; sourceTree = "<group>"; };
+		A108635F22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAROrientationTrackingConfiguration.mm; sourceTree = "<group>"; };
+		A108636122C6C5B3001A15A9 /* NARWorldTrackingConfiguration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARWorldTrackingConfiguration.mm; sourceTree = "<group>"; };
+		A108636222C6C5B3001A15A9 /* NARWorldTrackingConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARWorldTrackingConfiguration.h; sourceTree = "<group>"; };
+		A108636422C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARImageTrackingConfiguration.mm; sourceTree = "<group>"; };
+		A108636522C6C5B4001A15A9 /* NARImageTrackingConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARImageTrackingConfiguration.h; sourceTree = "<group>"; };
+		A108636C22C6C7BB001A15A9 /* NARVideoFormat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARVideoFormat.mm; sourceTree = "<group>"; };
+		A108636D22C6C7BB001A15A9 /* NARVideoFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARVideoFormat.h; sourceTree = "<group>"; };
+		A108637022C6C822001A15A9 /* NARWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARWorldMap.h; sourceTree = "<group>"; };
+		A108637122C6C822001A15A9 /* NARWorldMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARWorldMap.mm; sourceTree = "<group>"; };
+		A108637422C6C874001A15A9 /* NARReferenceImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARReferenceImage.mm; sourceTree = "<group>"; };
+		A108637522C6C874001A15A9 /* NARReferenceImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARReferenceImage.h; sourceTree = "<group>"; };
+		A108637822C6C9B2001A15A9 /* NARPointCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARPointCloud.h; sourceTree = "<group>"; };
+		A108637922C6C9B2001A15A9 /* NARPointCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARPointCloud.mm; sourceTree = "<group>"; };
+		A108637C22C6CC38001A15A9 /* NARReferenceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARReferenceObject.h; sourceTree = "<group>"; };
+		A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARReferenceObject.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -2002,6 +2032,96 @@
 				A108635522C597F3001A15A9 /* NSKReachConstraints.mm */,
 			);
 			path = NSKReachConstraints;
+			sourceTree = "<group>";
+		};
+		A108635722C6C5B2001A15A9 /* NARObjectScanningConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A108635822C6C5B2001A15A9 /* NARObjectScanningConfiguration.h */,
+				A108635922C6C5B2001A15A9 /* NARObjectScanningConfiguration.mm */,
+			);
+			path = NARObjectScanningConfiguration;
+			sourceTree = "<group>";
+		};
+		A108635A22C6C5B3001A15A9 /* NARFaceTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A108635B22C6C5B3001A15A9 /* NARFaceTrackingConfiguration.h */,
+				A108635C22C6C5B3001A15A9 /* NARFaceTrackingConfiguration.mm */,
+			);
+			path = NARFaceTrackingConfiguration;
+			sourceTree = "<group>";
+		};
+		A108635D22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A108635E22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration.h */,
+				A108635F22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration.mm */,
+			);
+			path = NAROrientationTrackingConfiguration;
+			sourceTree = "<group>";
+		};
+		A108636022C6C5B3001A15A9 /* NARWorldTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A108636222C6C5B3001A15A9 /* NARWorldTrackingConfiguration.h */,
+				A108636122C6C5B3001A15A9 /* NARWorldTrackingConfiguration.mm */,
+			);
+			path = NARWorldTrackingConfiguration;
+			sourceTree = "<group>";
+		};
+		A108636322C6C5B4001A15A9 /* NARImageTrackingConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A108636522C6C5B4001A15A9 /* NARImageTrackingConfiguration.h */,
+				A108636422C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm */,
+			);
+			path = NARImageTrackingConfiguration;
+			sourceTree = "<group>";
+		};
+		A108636B22C6C7BB001A15A9 /* NARVideoFormat */ = {
+			isa = PBXGroup;
+			children = (
+				A108636D22C6C7BB001A15A9 /* NARVideoFormat.h */,
+				A108636C22C6C7BB001A15A9 /* NARVideoFormat.mm */,
+			);
+			path = NARVideoFormat;
+			sourceTree = "<group>";
+		};
+		A108636F22C6C822001A15A9 /* NARWorldMap */ = {
+			isa = PBXGroup;
+			children = (
+				A108637022C6C822001A15A9 /* NARWorldMap.h */,
+				A108637122C6C822001A15A9 /* NARWorldMap.mm */,
+			);
+			path = NARWorldMap;
+			sourceTree = "<group>";
+		};
+		A108637322C6C874001A15A9 /* NARReferenceImage */ = {
+			isa = PBXGroup;
+			children = (
+				A108637522C6C874001A15A9 /* NARReferenceImage.h */,
+				A108637422C6C874001A15A9 /* NARReferenceImage.mm */,
+			);
+			path = NARReferenceImage;
+			sourceTree = "<group>";
+		};
+		A108637722C6C9B2001A15A9 /* NARPointCloud */ = {
+			isa = PBXGroup;
+			children = (
+				A108637822C6C9B2001A15A9 /* NARPointCloud.h */,
+				A108637922C6C9B2001A15A9 /* NARPointCloud.mm */,
+			);
+			path = NARPointCloud;
+			sourceTree = "<group>";
+		};
+		A108637B22C6CC38001A15A9 /* NARReferenceObject */ = {
+			isa = PBXGroup;
+			children = (
+				A108637C22C6CC38001A15A9 /* NARReferenceObject.h */,
+				A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */,
+			);
+			path = NARReferenceObject;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -6023,6 +6143,16 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
+				A108637B22C6CC38001A15A9 /* NARReferenceObject */,
+				A108637722C6C9B2001A15A9 /* NARPointCloud */,
+				A108637322C6C874001A15A9 /* NARReferenceImage */,
+				A108636F22C6C822001A15A9 /* NARWorldMap */,
+				A108636B22C6C7BB001A15A9 /* NARVideoFormat */,
+				A108635A22C6C5B3001A15A9 /* NARFaceTrackingConfiguration */,
+				A108636322C6C5B4001A15A9 /* NARImageTrackingConfiguration */,
+				A108635722C6C5B2001A15A9 /* NARObjectScanningConfiguration */,
+				A108635D22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration */,
+				A108636022C6C5B3001A15A9 /* NARWorldTrackingConfiguration */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1948934228A68A0007BF787 /* NARConfiguration */,
@@ -6917,8 +7047,10 @@
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A192708122C14B8A008F16AE /* NMTLSharedEvent.mm in Sources */,
+				A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
 				A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */,
+				A108637222C6C822001A15A9 /* NARWorldMap.mm in Sources */,
 				A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				A13370D922AEFC6A00FA3768 /* NAVAudioBuffer.mm in Sources */,
@@ -6947,6 +7079,7 @@
 				A1D4984A22BAF405009AC951 /* NNSURLResponse.mm in Sources */,
 				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
+				A108637A22C6C9B2001A15A9 /* NARPointCloud.mm in Sources */,
 				A108630222C48FE0001A15A9 /* NSCNRenderer.mm in Sources */,
 				A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */,
 				A1710EBC229A92C000EC7C86 /* NCIImage.mm in Sources */,
@@ -7017,6 +7150,7 @@
 				A19476C7226F7410003BB393 /* DashboardViewController.swift in Sources */,
 				A1CE2B57228E808200D9B3B8 /* UIImageView+NGif.swift in Sources */,
 				A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */,
+				A108636722C6C5B4001A15A9 /* NARFaceTrackingConfiguration.mm in Sources */,
 				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
 				A192701522C133A3008F16AE /* NMTLRenderPipelineState.mm in Sources */,
 				A192707F22C14B8A008F16AE /* NMTLSharedEventListener.mm in Sources */,
@@ -7027,6 +7161,7 @@
 				A1926F1022C0C09F008F16AE /* NCIFilter.mm in Sources */,
 				A133700122AA805100FA3768 /* NUIToolbar.mm in Sources */,
 				A19F39D222AF364800606332 /* NSCNGeometryElement.mm in Sources */,
+				A108636822C6C5B4001A15A9 /* NAROrientationTrackingConfiguration.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
@@ -7049,6 +7184,7 @@
 				A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */,
 				A192700D22C12F5F008F16AE /* NMTLLibrary.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
+				A108636922C6C5B4001A15A9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A108632F22C496EF001A15A9 /* NAVAudioUnit.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A1D4987122BB3A62009AC951 /* NUIPress.mm in Sources */,
@@ -7147,6 +7283,7 @@
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
 				A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */,
 				A1926FC822C120E3008F16AE /* NMTLTexture.mm in Sources */,
+				A108636A22C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm in Sources */,
 				A1D4988922BB4691009AC951 /* NUIInputViewController.mm in Sources */,
 				A13370AD22AEE79F00FA3768 /* NAVAudioSession.mm in Sources */,
 				A1926FCD22C1216A008F16AE /* NMTLResource.mm in Sources */,
@@ -7240,6 +7377,7 @@
 				A19270BE22C18220008F16AE /* NMTLDrawable.mm in Sources */,
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
 				A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */,
+				A108636E22C6C7BB001A15A9 /* NARVideoFormat.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1926FE522C12B20008F16AE /* NMTLSamplerState.mm in Sources */,
@@ -7271,6 +7409,7 @@
 				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				A19F3A1822AF75A400606332 /* NMDLVertexAttributeData.mm in Sources */,
+				A108637622C6C874001A15A9 /* NARReferenceImage.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
@@ -7288,6 +7427,7 @@
 				21C872D1226A989400B5192B /* UIView+stringTag.swift in Sources */,
 				A1D4986922BB2D6F009AC951 /* NNSObjCRuntime.mm in Sources */,
 				A1D498AA22BB4A03009AC951 /* NUITextPosition.mm in Sources */,
+				A108636622C6C5B4001A15A9 /* NARObjectScanningConfiguration.mm in Sources */,
 				A10BD045228F490400184286 /* NNSNotification.mm in Sources */,
 				A1926F4B22C0E286008F16AE /* NSCNPhysicsConeTwistJoint.mm in Sources */,
 				A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */,

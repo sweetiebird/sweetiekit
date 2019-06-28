@@ -927,9 +927,6 @@ NAN_METHOD(NClass::New) {
 #include "NMTKView.h"
 #include "NMTKViewDelegate.h"
 
-#include "NARSKView.h"
-#include "NARSession.h"
-#include "NARWorldTrackingConfiguration.h"
 #include "NSKRenderer.h"
 #include "NSKView.h"
 #include "NSKNode.h"
@@ -947,7 +944,6 @@ NAN_METHOD(NClass::New) {
 #include "NSKPhysicsWorld.h"
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
-#include "NARSKViewDelegate.h"
 #include "NAVAudioTypes.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
@@ -1000,12 +996,25 @@ NAN_METHOD(NClass::New) {
 #include "NEAGLSharegroup.h"
 
 #include "NARAnchor.h"
+#include "NARConfiguration.h"
+#include "NARWorldTrackingConfiguration.h"
+#include "NARFaceTrackingConfiguration.h"
+#include "NARImageTrackingConfiguration.h"
+#include "NARObjectScanningConfiguration.h"
+#include "NAROrientationTrackingConfiguration.h"
+#include "NARPointCloud.h"
+#include "NARReferenceImage.h"
+#include "NARReferenceObject.h"
+#include "NARVideoFormat.h"
+#include "NARWorldMap.h"
+#include "NARSKView.h"
+#include "NARSKViewDelegate.h"
+#include "NARSession.h"
 #include "NARFrame.h"
 #include "NARCamera.h"
 #include "NARSCNView.h"
 #include "NARHitTestResult.h"
 #include "NARLightEstimate.h"
-#include "NARConfiguration.h"
 #include "NARSCNViewDelegate.h"
 
 #include "NSceneKitTypes.h"
@@ -1664,6 +1673,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARSession);
     JS_EXPORT_TYPE(ARConfiguration);
     JS_EXPORT_TYPE(ARWorldTrackingConfiguration);
+    JS_EXPORT_TYPE(ARFaceTrackingConfiguration);
+    JS_EXPORT_TYPE(ARImageTrackingConfiguration);
+    JS_EXPORT_TYPE(ARObjectScanningConfiguration);
+    JS_EXPORT_TYPE(AROrientationTrackingConfiguration);
+    JS_EXPORT_TYPE(ARPointCloud);
+    JS_EXPORT_TYPE(ARReferenceImage);
+    JS_EXPORT_TYPE(ARReferenceObject);
+    JS_EXPORT_TYPE(ARVideoFormat);
+    JS_EXPORT_TYPE(ARWorldMap);
     JS_EXPORT_TYPE(ARCamera);
     JS_EXPORT_TYPE(ARFrame);
     JS_EXPORT_TYPE(ARAnchor);
@@ -1841,6 +1859,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARSCNView);
       JS_RETURN_TYPE(ARHitTestResult);
       JS_RETURN_TYPE(ARSession);
+      JS_RETURN_TYPE(ARVideoFormat);
+      JS_RETURN_TYPE(ARReferenceObject);
+      JS_RETURN_TYPE(ARReferenceImage);
+      JS_RETURN_TYPE(ARPointCloud);
+      JS_RETURN_TYPE(AROrientationTrackingConfiguration);
+      JS_RETURN_TYPE(ARObjectScanningConfiguration);
+      JS_RETURN_TYPE(ARImageTrackingConfiguration);
+      JS_RETURN_TYPE(ARFaceTrackingConfiguration);
       JS_RETURN_TYPE(ARWorldTrackingConfiguration);
       JS_RETURN_TYPE(ARConfiguration);
 

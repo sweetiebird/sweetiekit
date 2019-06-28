@@ -10,13 +10,16 @@ NARConfiguration::NARConfiguration () {}
 NARConfiguration::~NARConfiguration () {}
 
 JS_INIT_CLASS(ARConfiguration, NSObject);
-  // instance members (proto)
-  JS_ASSIGN_PROP(proto, isLightEstimationEnabled);
-  JS_ASSIGN_PROP(proto, worldAlignment);
+  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
+  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
+  JS_ASSIGN_PROTO_PROP(videoFormat);
+  JS_ASSIGN_PROTO_PROP(worldAlignment);
+  JS_ASSIGN_PROTO_PROP(isLightEstimationEnabled);
+  JS_ASSIGN_PROTO_PROP(providesAudioData);
 
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(ARConfiguration, NSObject);
-  
   // constants (exports)
 
 /**
@@ -74,70 +77,98 @@ JS_INIT_CLASS_END(ARConfiguration, NSObject);
 
 NAN_METHOD(NARConfiguration::New) {
   JS_RECONSTRUCT(ARConfiguration);
-
-  Local<Object> obj = info.This();
-
-  NARConfiguration *config = new NARConfiguration();
-
-  if (info[0]->IsExternal()) {
-    config->SetNSObject((__bridge ARConfiguration *)(info[0].As<External>()->Value()));
-  } else {
-    Nan::ThrowError("Init not available");
-  }
-  config->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
-}
-
-NAN_GETTER(NARConfiguration::isLightEstimationEnabledGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARConfiguration, config);
-  
-  JS_SET_RETURN(JS_BOOL([config isLightEstimationEnabled]));
-}
-
-NAN_SETTER(NARConfiguration::isLightEstimationEnabledSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARConfiguration, config);
-
   @autoreleasepool {
-    [config setLightEstimationEnabled:TO_BOOL(value)];
+    ARConfiguration* self = nullptr;
+
+    if (info[0]->IsExternal()) {
+      self = (__bridge ARConfiguration *)(info[0].As<External>()->Value());
+    }
+    if (self) {
+      NARConfiguration *wrapper = new NARConfiguration();
+      wrapper->set_self(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("ARConfiguration::New: invalid arguments");
+    }
+  }
+}
+
+NAN_GETTER(NARConfiguration::isSupportedGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([ARConfiguration isSupported]));
+  }
+}
+
+NAN_GETTER(NARConfiguration::supportedVideoFormatsGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([ARConfiguration supportedVideoFormats]));
+  }
+}
+
+#include "NARVideoFormat.h"
+
+NAN_GETTER(NARConfiguration::videoFormatGetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_ARVideoFormat([self videoFormat]));
+  }
+}
+
+NAN_SETTER(NARConfiguration::videoFormatSetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(ARVideoFormat, input);
+    [self setVideoFormat: input];
   }
 }
 
 NAN_GETTER(NARConfiguration::worldAlignmentGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARConfiguration, config);
-  
-  ARWorldAlignment align = [config worldAlignment];
-
-  int alignVal = 0;
-  if (align == ARWorldAlignmentGravityAndHeading) {
-    alignVal = 2;
-  } else if (align == ARWorldAlignmentGravity) {
-    alignVal = 1;
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_ARWorldAlignment([self worldAlignment]));
   }
-
-  JS_SET_RETURN(JS_NUM(alignVal));
 }
 
 NAN_SETTER(NARConfiguration::worldAlignmentSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARConfiguration, config);
-
-  ARWorldAlignment align = ARWorldAlignmentCamera;
-  int alignVal = TO_INT32(value);
-  if (alignVal == 1) {
-    align = ARWorldAlignmentGravity;
-  } else if (alignVal == 2) {
-    align = ARWorldAlignmentGravityAndHeading;
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(ARWorldAlignment, input);
+    [self setWorldAlignment: input];
   }
-  
-  @autoreleasepool {
-    [config setWorldAlignment:align];
+}
+
+NAN_GETTER(NARConfiguration::isLightEstimationEnabledGetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isLightEstimationEnabled]));
+  }
+}
+
+NAN_SETTER(NARConfiguration::isLightEstimationEnabledSetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setLightEstimationEnabled: input];
+  }
+}
+
+NAN_GETTER(NARConfiguration::providesAudioDataGetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self providesAudioData]));
+  }
+}
+
+NAN_SETTER(NARConfiguration::providesAudioDataSetter) {
+  JS_UNWRAP(ARConfiguration, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setProvidesAudioData: input];
   }
 }
