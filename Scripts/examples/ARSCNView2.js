@@ -147,6 +147,9 @@ async function make(nav, demoVC) {
           turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_alpha.png'))));
           turtleSCNMaterial = SCNMaterial.materialWithMDLMaterial(turtleMaterial);
         }
+        if (scene.rootNode.geometry) {
+          scene.rootNode.geometry.firstMaterial = turtleSCNMaterial;
+        }
         // containerNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
         // scene.rootNode.addChildNode(containerNode);
         // await loadIt();
