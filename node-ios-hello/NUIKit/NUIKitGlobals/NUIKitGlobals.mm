@@ -18,6 +18,13 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   JS_ASSIGN_STATIC_PROP_READONLY(UITextFieldViewMode);
   JS_ASSIGN_STATIC_PROP_READONLY(UIControlEvents);
   JS_ASSIGN_STATIC_PROP_READONLY(UIControlState);
+
+
+  #if TARGET_OS_SIMULATOR
+  exports->Set(JS_STR("__DEV__"), js_value_BOOL(true));
+  #else
+  exports->Set(JS_STR("__DEV__"), js_value_BOOL(false);
+  #endif
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
 NAN_METHOD(NUIKitGlobals::New) {
