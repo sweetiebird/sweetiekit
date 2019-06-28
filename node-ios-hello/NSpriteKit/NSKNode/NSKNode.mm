@@ -6,48 +6,98 @@
 //
 #include "NSKNode.h"
 
+#define instancetype SKNode
+#define js_value_instancetype js_value_SKNode
+
 NSKNode::NSKNode() {}
 NSKNode::~NSKNode() {}
 
 JS_INIT_CLASS(SKNode, UIResponder);
-  // instance members (proto)
-  JS_ASSIGN_METHOD(proto, addChild);
-  JS_ASSIGN_METHOD(proto, removeFromParent);
-  JS_ASSIGN_METHOD(proto, runAction);
-  JS_ASSIGN_METHOD(proto, childNodeWithName);
-  JS_ASSIGN_METHOD(proto, containsPoint);
-  JS_ASSIGN_METHOD(proto, convertPointFromNode);
-  JS_ASSIGN_METHOD(proto, convertPointToNode);
+  JS_ASSIGN_STATIC_METHOD(node);
+  JS_ASSIGN_STATIC_METHOD(nodeWithFileNamed);
+  JS_ASSIGN_STATIC_METHOD(nodeWithFileNamedSecurelyWithClassesAndError);
+  JS_ASSIGN_PROTO_METHOD(init);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(calculateAccumulatedFrame);
+  JS_ASSIGN_PROTO_METHOD(valueForAttributeNamed);
+  JS_ASSIGN_PROTO_METHOD(setValueForAttributeNamed);
+  JS_ASSIGN_PROTO_METHOD(setScale);
+  JS_ASSIGN_PROTO_METHOD(addChild);
+  JS_ASSIGN_PROTO_METHOD(insertChildAtIndex);
+  JS_ASSIGN_PROTO_METHOD(removeChildrenInArray);
+  JS_ASSIGN_PROTO_METHOD(removeAllChildren);
+  JS_ASSIGN_PROTO_METHOD(removeFromParent);
+  JS_ASSIGN_PROTO_METHOD(moveToParent);
+  JS_ASSIGN_PROTO_METHOD(childNodeWithName);
+  JS_ASSIGN_PROTO_METHOD(enumerateChildNodesWithNameUsingBlock);
+  JS_ASSIGN_PROTO_METHOD(objectForKeyedSubscript);
+  JS_ASSIGN_PROTO_METHOD(inParentHierarchy);
+  JS_ASSIGN_PROTO_METHOD(runAction);
+  JS_ASSIGN_PROTO_METHOD(runActionCompletion);
+  JS_ASSIGN_PROTO_METHOD(runActionWithKey);
+  JS_ASSIGN_PROTO_METHOD(hasActions);
+  JS_ASSIGN_PROTO_METHOD(actionForKey);
+  JS_ASSIGN_PROTO_METHOD(removeActionForKey);
+  JS_ASSIGN_PROTO_METHOD(removeAllActions);
+  JS_ASSIGN_PROTO_METHOD(containsPoint);
   JS_ASSIGN_PROTO_METHOD(nodeAtPoint);
   JS_ASSIGN_PROTO_METHOD(nodesAtPoint);
-  JS_ASSIGN_PROP_READONLY(proto, frame);
-  JS_ASSIGN_PROP_READONLY(proto, width);
-  JS_ASSIGN_PROP_READONLY(proto, height);
-  JS_ASSIGN_PROP(proto, position);
-  JS_ASSIGN_PROP(proto, x);
-  JS_ASSIGN_PROP(proto, y);
-  JS_ASSIGN_PROP(proto, z);
-  JS_ASSIGN_PROP(proto, zPosition);
-  JS_ASSIGN_PROP(proto, zRotation);
-  JS_ASSIGN_PROP(proto, xScale);
-  JS_ASSIGN_PROP(proto, yScale);
-  JS_ASSIGN_PROP(proto, speed);
-  JS_ASSIGN_PROP(proto, alpha);
-  JS_ASSIGN_PROP(proto, paused);
-  JS_ASSIGN_PROP(proto, hidden);
-  JS_ASSIGN_PROP(proto, userInteractionEnabled);
-  JS_ASSIGN_PROP(proto, focusBehavior);
-  JS_ASSIGN_PROP_READONLY(proto, parent);
-  JS_ASSIGN_PROP_READONLY(proto, children);
-  JS_ASSIGN_PROP(proto, name);
-  JS_ASSIGN_PROP_READONLY(proto, scene);
-  JS_ASSIGN_PROP(proto, physicsBody);
-  JS_ASSIGN_PROP(proto, userData);
-  JS_ASSIGN_PROP(proto, reachConstraints);
-  JS_ASSIGN_PROP(proto, constraints);
-  JS_ASSIGN_PROP(proto, attributeValues);
+  JS_ASSIGN_PROTO_METHOD(convertPointFromNode);
+  JS_ASSIGN_PROTO_METHOD(convertPointToNode);
+  JS_ASSIGN_PROTO_METHOD(intersectsNode);
+  JS_ASSIGN_PROTO_METHOD(isEqualToNode);
+#if TODO
+// UITouch
+  JS_ASSIGN_PROTO_METHOD(locationInNode);
+  JS_ASSIGN_PROTO_METHOD(previousLocationInNode);
+// NSEvent
+  JS_ASSIGN_PROTO_METHOD(locationInNode);
+#endif
+// SKNode
+  JS_ASSIGN_PROTO_PROP_READONLY(frame);
+  JS_ASSIGN_PROTO_PROP(position);
+  JS_ASSIGN_PROTO_PROP(zPosition);
+  JS_ASSIGN_PROTO_PROP(zRotation);
+  JS_ASSIGN_PROTO_PROP(xScale);
+  JS_ASSIGN_PROTO_PROP(yScale);
+  JS_ASSIGN_PROTO_PROP(speed);
+  JS_ASSIGN_PROTO_PROP(alpha);
+  JS_ASSIGN_PROTO_PROP(isPaused);
+  JS_ASSIGN_PROTO_PROP(isHidden);
+  JS_ASSIGN_PROTO_PROP(isUserInteractionEnabled);
+  JS_ASSIGN_PROTO_PROP(focusBehavior);
+  JS_ASSIGN_PROTO_PROP_READONLY(parent);
+  JS_ASSIGN_PROTO_PROP_READONLY(children);
+  JS_ASSIGN_PROTO_PROP(name);
+  JS_ASSIGN_PROTO_PROP_READONLY(scene);
+  JS_ASSIGN_PROTO_PROP(physicsBody);
+  JS_ASSIGN_PROTO_PROP(userData);
+  JS_ASSIGN_PROTO_PROP(reachConstraints);
+  JS_ASSIGN_PROTO_PROP(constraints);
+  JS_ASSIGN_PROTO_PROP(attributeValues);
+
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(SKNode, UIResponder);
+  // constants (exports)
+  
+  //typedef NS_ENUM(NSInteger, SKBlendMode) {
+    JS_ASSIGN_ENUM(SKBlendModeAlpha, NSInteger); //          = 0,    
+    JS_ASSIGN_ENUM(SKBlendModeAdd, NSInteger); //            = 1,    
+    JS_ASSIGN_ENUM(SKBlendModeSubtract, NSInteger); //       = 2,    
+    JS_ASSIGN_ENUM(SKBlendModeMultiply, NSInteger); //       = 3,    
+    JS_ASSIGN_ENUM(SKBlendModeMultiplyX2, NSInteger); //     = 4,    
+    JS_ASSIGN_ENUM(SKBlendModeScreen, NSInteger); //         = 5,    
+    JS_ASSIGN_ENUM(SKBlendModeReplace, NSInteger); //        = 6,    
+    JS_ASSIGN_ENUM(SKBlendModeMultiplyAlpha, NSInteger); //  = 7     
+  //} NS_ENUM_AVAILABLE(10_9, 7_0);
+
+  //typedef NS_ENUM(NSInteger, SKNodeFocusBehavior) {
+    JS_ASSIGN_ENUM(SKNodeFocusBehaviorNone, NSInteger); //  = 0,    
+    JS_ASSIGN_ENUM(SKNodeFocusBehaviorOccluding, NSInteger);
+    JS_ASSIGN_ENUM(SKNodeFocusBehaviorFocusable, NSInteger);
+  //} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+
 JS_INIT_CLASS_END(SKNode, UIResponder);
 
 NAN_METHOD(NSKNode::New) {
@@ -69,541 +119,569 @@ NAN_METHOD(NSKNode::New) {
   info.GetReturnValue().Set(obj);
 }
 
+NAN_METHOD(NSKNode::node) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([SKNode node]));
+  }
+}
+
+NAN_METHOD(NSKNode::nodeWithFileNamed) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, filename);
+    JS_SET_RETURN(js_value_instancetype([SKNode nodeWithFileNamed: filename]));
+  }
+}
+
+NAN_METHOD(NSKNode::nodeWithFileNamedSecurelyWithClassesAndError) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, filename);
+    declare_pointer(NSSet/* <Class>*/, classes);
+    declare_error();
+    JS_SET_RETURN(js_value_instancetype([SKNode nodeWithFileNamed: filename securelyWithClasses: classes andError: &error]));
+    js_panic_NSError(error);
+  }
+}
+
+NAN_METHOD(NSKNode::init) {
+  JS_UNWRAP_OR_ALLOC(SKNode, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_instancetype([self init]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NSKNode::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
+  }
+}
+
+NAN_METHOD(NSKNode::calculateAccumulatedFrame) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGRect([self calculateAccumulatedFrame]));
+  }
+}
+
+#include "NSKAttributeValue.h"
+
+NAN_METHOD(NSKNode::valueForAttributeNamed) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_SKAttributeValue([self valueForAttributeNamed: key]));
+  }
+}
+
+NAN_METHOD(NSKNode::setValueForAttributeNamed) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKAttributeValue, value);
+    declare_pointer(NSString, key);
+    [self setValue: value forAttributeNamed: key];
+  }
+}
+
+NAN_METHOD(NSKNode::setScale) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGFloat, scale);
+    [self setScale: scale];
+  }
+}
+
 NAN_METHOD(NSKNode::addChild) {
-  Nan::HandleScope scope;
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    [self addChild: node];
+  }
+}
 
-  JS_UNWRAP(SKNode, node);
+NAN_METHOD(NSKNode::insertChildAtIndex) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    declare_value(NSInteger, index);
+    [self insertChild: node atIndex: index];
+  }
+}
 
-  NSKNode *child = ObjectWrap::Unwrap<NSKNode>(Local<Object>::Cast(info[0]));
+NAN_METHOD(NSKNode::removeChildrenInArray) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<SKNode*>, nodes);
+    [self removeChildrenInArray: nodes];
+  }
+}
 
-  [node addChild:child->As<SKNode>()];
+NAN_METHOD(NSKNode::removeAllChildren) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    [self removeAllChildren];
+  }
 }
 
 NAN_METHOD(NSKNode::removeFromParent) {
-  Nan::HandleScope scope;
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    [self removeFromParent];
+  }
+}
 
-  JS_UNWRAP(SKNode, node);
+NAN_METHOD(NSKNode::moveToParent) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, parent);
+    [self moveToParent: parent];
+  }
+}
 
-  [node removeFromParent];
+NAN_METHOD(NSKNode::childNodeWithName) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    JS_SET_RETURN(js_value_SKNode([self childNodeWithName: name]));
+  }
+}
+
+NAN_METHOD(NSKNode::enumerateChildNodesWithNameUsingBlock) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    declare_callback(block);
+    [self enumerateChildNodesWithName: name usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
+      dispatch_main(^{
+        if (block) {
+          [block jsFunction]->Call("NSKNode::enumerateChildNodesWithNameUsingBlock",
+            js_value_SKNode(node)//,
+            /*js_box_BOOL(stop)*/); // TODO
+        }
+      });
+    }];
+  }
+}
+
+NAN_METHOD(NSKNode::objectForKeyedSubscript) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    JS_SET_RETURN(js_value_NSArray<SKNode*>([self objectForKeyedSubscript: name]));
+  }
+}
+
+NAN_METHOD(NSKNode::inParentHierarchy) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, parent);
+    JS_SET_RETURN(js_value_BOOL([self inParentHierarchy: parent]));
+  }
 }
 
 #include "NSKAction.h"
 
 NAN_METHOD(NSKNode::runAction) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKNode, node);
-
-  NSKAction *action = ObjectWrap::Unwrap<NSKAction>(Local<Object>::Cast(info[0]));
-  __block sweetiekit::JSFunction fn(info[1]);
-
-  [node runAction:action->As<SKAction>() completion: ^ {
-    dispatch_ui_sync(dispatch_get_main_queue(), ^{
-      Nan::HandleScope scope;
-      fn.Call("NSKNode::runAction completion handler");
-      fn.Reset();
-    });
-  }];
-  [node runAction:action->As<SKAction>()];
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKAction, action);
+    [self runAction: action];
+  }
 }
 
-NAN_METHOD(NSKNode::childNodeWithName) {
-  Nan::HandleScope scope;
+NAN_METHOD(NSKNode::runActionCompletion) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKAction, action);
+    declare_callback(block);
+    [self runAction: action completion:^{
+      dispatch_main(^{
+        if (block) {
+          [block jsFunction]->Call("NSKNode::runActionCompletion");
+        }
+      });
+    }];
+  }
+}
 
-  JS_UNWRAP(SKNode, node);
+NAN_METHOD(NSKNode::runActionWithKey) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKAction, action);
+    declare_pointer(NSString, key);
+    [self runAction: action withKey: key];
+  }
+}
 
-  id child = [node childNodeWithName:NJSStringToNSString(info[0])];
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor(child, NSKNode::type));
+NAN_METHOD(NSKNode::hasActions) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hasActions]));
+  }
+}
+
+NAN_METHOD(NSKNode::actionForKey) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_SKAction([self actionForKey: key]));
+  }
+}
+
+NAN_METHOD(NSKNode::removeActionForKey) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self removeActionForKey: key];
+  }
+}
+
+NAN_METHOD(NSKNode::removeAllActions) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    [self removeAllActions];
+  }
 }
 
 NAN_METHOD(NSKNode::containsPoint) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKNode, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  bool contains = [node containsPoint:CGPointMake(x, y)];
-
-  JS_SET_RETURN(JS_BOOL(contains));
-}
-
-NAN_METHOD(NSKNode::convertPointFromNode) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKNode, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  NSKNode *child = ObjectWrap::Unwrap<NSKNode>(Local<Object>::Cast(info[1]));
-  CGPoint pt  = [node convertPoint:CGPointMake(x, y) fromNode:child->As<SKNode>()];
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(pt.x));
-  result->Set(JS_STR("y"), JS_FLOAT(pt.y));
-
-  JS_SET_RETURN(result);
-  return;
-}
-
-NAN_METHOD(NSKNode::convertPointToNode) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(SKNode, node);
-
-  float x = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("x")));
-  float y = TO_FLOAT(JS_OBJ(info[0])->Get(JS_STR("y")));
-  NSKNode *child = ObjectWrap::Unwrap<NSKNode>(Local<Object>::Cast(info[1]));
-  CGPoint pt = [node convertPoint:CGPointMake(x, y) toNode:child->As<SKNode>()];
-
-  Local<Object> result = Object::New(Isolate::GetCurrent());
-  result->Set(JS_STR("x"), JS_FLOAT(pt.x));
-  result->Set(JS_STR("y"), JS_FLOAT(pt.y));
-
-  JS_SET_RETURN(result);
-  return;
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    JS_SET_RETURN(js_value_BOOL([self containsPoint: p]));
+  }
 }
 
 NAN_METHOD(NSKNode::nodeAtPoint) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_SKNode([self nodeAtPoint:to_value_CGPoint(info[0])]));
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    JS_SET_RETURN(js_value_SKNode([self nodeAtPoint: p]));
   }
 }
 
 NAN_METHOD(NSKNode::nodesAtPoint) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<SKNode*>([self nodesAtPoint:to_value_CGPoint(info[0])]));
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, p);
+    JS_SET_RETURN(js_value_NSArray<SKNode*>([self nodesAtPoint: p]));
   }
 }
 
+NAN_METHOD(NSKNode::convertPointFromNode) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point fromNode: node]));
+  }
+}
 
-//NAN_GETTER(NSKNode::PositionGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  Local<Object> result = Object::New(Isolate::GetCurrent());
-//  result->Set(JS_STR("x"), JS_FLOAT([node position].x));
-//  result->Set(JS_STR("y"), JS_FLOAT([node position].y));
-//
-//  JS_SET_RETURN(result);
-//}
-//
-//NAN_SETTER(NSKNode::PositionSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  __block float x = 0;
-//  __block float y = 0;
-//  @autoreleasepool {
-//    x = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("x")));
-//    y = TO_FLOAT(JS_OBJ(value)->Get(JS_STR("y")));
-//  }
-//
-//  [node setPosition:CGPointMake(x, y)];
-//}
-//
-//NAN_GETTER(NSKNode::ZPositionGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  JS_SET_RETURN(JS_FLOAT([node zPosition]));
-//}
-//
-//NAN_SETTER(NSKNode::ZPositionSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  float z = TO_FLOAT(value);
-//
-//  [node setZPosition:z];
-//}
-//
-//NAN_GETTER(NSKNode::ZRotationGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  JS_SET_RETURN(JS_FLOAT([node zRotation]));
-//}
-//
-//NAN_SETTER(NSKNode::ZRotationSetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  __block float rotation = 0;
-//  @autoreleasepool {
-//    rotation = TO_FLOAT(value);
-//  }
-//
-//  [node setZRotation:rotation];
-//}
-//
-//NAN_GETTER(NSKNode::PhysicsBodyGetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  JS_SET_RETURN(sweetiekit::GetWrapperFor([node physicsBody], NSKPhysicsBody::type));
-//}
-//
-//NAN_SETTER(NSKNode::PhysicsBodySetter) {
-//  Nan::HandleScope scope;
-//
-//  JS_UNWRAP(SKNode, node);
-//
-//  NSKPhysicsBody *body = ObjectWrap::Unwrap<NSKPhysicsBody>(Local<Object>::Cast(value));
-//
-//  [node setPhysicsBody:body->As<SKPhysicsBody>()];
-//}
+NAN_METHOD(NSKNode::convertPointToNode) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_CGPoint([self convertPoint: point toNode: node]));
+  }
+}
 
-//JS_GETTER(SKNode, node, xScale, {
-//  JS_SET_RETURN(JS_NUM([node xScale]));
-//});
-//
-//JS_SETTER(SKNode, node, xScale, {
-//  [node setXScale:TO_DOUBLE(value)];
-//});
-//
-//JS_GETTER(SKNode, node, yScale, {
-//  JS_SET_RETURN(JS_NUM([node yScale]));
-//});
-//
-//JS_SETTER(SKNode, node, yScale, {
-//  [node setYScale:TO_DOUBLE(value)];
-//});
+NAN_METHOD(NSKNode::intersectsNode) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_BOOL([self intersectsNode: node]));
+  }
+}
+
+NAN_METHOD(NSKNode::isEqualToNode) {
+  JS_UNWRAP(SKNode, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_BOOL([self isEqualToNode: node]));
+  }
+}
+
+#if TODO
+
+// UITouch
+
+NAN_METHOD(NUITouch::locationInNode) {
+  JS_UNWRAP(UITouch, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_CGPoint([self locationInNode: node]));
+  }
+}
+
+NAN_METHOD(NUITouch::previousLocationInNode) {
+  JS_UNWRAP(UITouch, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_CGPoint([self previousLocationInNode: node]));
+  }
+}
+// NSEvent
+
+NAN_METHOD(NNSEvent::locationInNode) {
+  JS_UNWRAP(NSEvent, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SKNode, node);
+    JS_SET_RETURN(js_value_CGPoint([self locationInNode: node]));
+  }
+}
+
+#endif
 
 NAN_GETTER(NSKNode::frameGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    auto __rect = [self frame];
-    auto __obj = Nan::New<Object>();
-    Nan::Set(__obj, JS_STR("x"), JS_NUM(__rect.origin.x));
-    Nan::Set(__obj, JS_STR("y"), JS_NUM(__rect.origin.y));
-    Nan::Set(__obj, JS_STR("width"), JS_NUM(__rect.size.width));
-    Nan::Set(__obj, JS_STR("height"), JS_NUM(__rect.size.height));
-    JS_SET_RETURN(__obj);
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGRect([self frame]));
   }
 }
 
 NAN_GETTER(NSKNode::positionGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    auto __point = [self position];
-    auto __obj1 = Nan::New<Object>();
-    Nan::Set(__obj1, JS_STR("x"), JS_NUM(__point.x));
-    Nan::Set(__obj1, JS_STR("y"), JS_NUM(__point.y));
-    JS_SET_RETURN(__obj1);
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGPoint([self position]));
   }
 }
 
 NAN_SETTER(NSKNode::positionSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setPosition: to_value_CGPoint(value)];
-  }
-}
-
-NAN_GETTER(NSKNode::widthGetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self frame].size.width));
-    return;
-  }
-}
-
-NAN_GETTER(NSKNode::heightGetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self frame].size.height));
-    return;
-  }
-}
-
-NAN_GETTER(NSKNode::xGetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self position].x));
-    return;
-  }
-}
-
-NAN_SETTER(NSKNode::xSetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setPosition: CGPointMake(TO_FLOAT(value), [self position].y)];
-  }
-}
-
-NAN_GETTER(NSKNode::yGetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self position].y));
-    return;
-  }
-}
-
-NAN_SETTER(NSKNode::ySetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setPosition: CGPointMake([self position].x, TO_FLOAT(value))];
-  }
-}
-
-NAN_GETTER(NSKNode::zGetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self zPosition]));
-    return;
-  }
-}
-
-NAN_SETTER(NSKNode::zSetter) {
-  JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setZPosition: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGPoint, input);
+    [self setPosition: input];
   }
 }
 
 NAN_GETTER(NSKNode::zPositionGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self zPosition]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self zPosition]));
   }
 }
 
 NAN_SETTER(NSKNode::zPositionSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setZPosition: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setZPosition: input];
   }
 }
 
 NAN_GETTER(NSKNode::zRotationGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self zRotation]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self zRotation]));
   }
 }
 
 NAN_SETTER(NSKNode::zRotationSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setZRotation: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setZRotation: input];
   }
 }
 
 NAN_GETTER(NSKNode::xScaleGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self xScale]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self xScale]));
   }
 }
 
 NAN_SETTER(NSKNode::xScaleSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setXScale: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setXScale: input];
   }
 }
 
 NAN_GETTER(NSKNode::yScaleGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self yScale]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self yScale]));
   }
 }
 
 NAN_SETTER(NSKNode::yScaleSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setYScale: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setYScale: input];
   }
 }
 
 NAN_GETTER(NSKNode::speedGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self speed]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self speed]));
   }
 }
 
 NAN_SETTER(NSKNode::speedSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setSpeed: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setSpeed: input];
   }
 }
 
 NAN_GETTER(NSKNode::alphaGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_FLOAT([self alpha]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self alpha]));
   }
 }
 
 NAN_SETTER(NSKNode::alphaSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setAlpha: TO_FLOAT(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setAlpha: input];
   }
 }
 
-NAN_GETTER(NSKNode::pausedGetter) {
+NAN_GETTER(NSKNode::isPausedGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isPaused]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isPaused]));
   }
 }
 
-NAN_SETTER(NSKNode::pausedSetter) {
+NAN_SETTER(NSKNode::isPausedSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setPaused: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setPaused: input];
   }
 }
 
-NAN_GETTER(NSKNode::hiddenGetter) {
+NAN_GETTER(NSKNode::isHiddenGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isHidden]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isHidden]));
   }
 }
 
-NAN_SETTER(NSKNode::hiddenSetter) {
+NAN_SETTER(NSKNode::isHiddenSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setHidden: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidden: input];
   }
 }
 
-NAN_GETTER(NSKNode::userInteractionEnabledGetter) {
+NAN_GETTER(NSKNode::isUserInteractionEnabledGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    JS_SET_RETURN(JS_BOOL([self isUserInteractionEnabled]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isUserInteractionEnabled]));
   }
 }
 
-NAN_SETTER(NSKNode::userInteractionEnabledSetter) {
+NAN_SETTER(NSKNode::isUserInteractionEnabledSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setUserInteractionEnabled: TO_BOOL(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setUserInteractionEnabled: input];
   }
 }
 
 NAN_GETTER(NSKNode::focusBehaviorGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKNodeFocusBehavior([self focusBehavior]));
-    return;
   }
 }
 
 NAN_SETTER(NSKNode::focusBehaviorSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setFocusBehavior: to_value_SKNodeFocusBehavior(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SKNodeFocusBehavior, input);
+    [self setFocusBehavior: input];
   }
 }
 
 NAN_GETTER(NSKNode::parentGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKNode([self parent]));
-    return;
   }
 }
 
 NAN_GETTER(NSKNode::childrenGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSArray<SKNode*>([self children]));
-    return;
   }
 }
 
 NAN_GETTER(NSKNode::nameGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    auto __it = [self name];
-    Local<Value> __e31;
-    if (__it) {
-      __e31 = JS_STR([__it UTF8String]);
-    } else {
-      __e31 = Nan::Undefined();
-    }
-    JS_SET_RETURN(__e31);
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self name]));
   }
 }
 
 NAN_SETTER(NSKNode::nameSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setName: to_value_NSString(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setName: input];
   }
 }
 
 #include "NSKScene.h"
+
 NAN_GETTER(NSKNode::sceneGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKScene([self scene]));
-    return;
   }
 }
 
@@ -611,86 +689,82 @@ NAN_GETTER(NSKNode::sceneGetter) {
 
 NAN_GETTER(NSKNode::physicsBodyGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKPhysicsBody([self physicsBody]));
-    return;
   }
 }
 
 NAN_SETTER(NSKNode::physicsBodySetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setPhysicsBody: to_value_SKPhysicsBody(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SKPhysicsBody, input);
+    [self setPhysicsBody: input];
   }
 }
 
 NAN_GETTER(NSKNode::userDataGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSMutableDictionary([self userData]));
-    return;
   }
 }
 
 NAN_SETTER(NSKNode::userDataSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setUserData: to_value_NSMutableDictionary(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSMutableDictionary, input);
+    [self setUserData: input];
   }
 }
 
 NAN_GETTER(NSKNode::reachConstraintsGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_SKReachConstraints([self reachConstraints]));
-    return;
   }
 }
 
+#include "NSKReachConstraints.h"
+
 NAN_SETTER(NSKNode::reachConstraintsSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setReachConstraints: to_value_SKReachConstraints(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SKReachConstraints, input);
+    [self setReachConstraints: input];
   }
 }
 
 NAN_GETTER(NSKNode::constraintsGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
+  declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSArray<SKConstraint*>([self constraints]));
-    return;
   }
 }
 
 NAN_SETTER(NSKNode::constraintsSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-    [self setConstraints: to_value_NSArray<SKConstraint*>(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<SKConstraint*>, input);
+    [self setConstraints: input];
   }
 }
 
 NAN_GETTER(NSKNode::attributeValuesGetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-//    JS_SET_RETURN(js_value_NSDictionary<NSString4232SKAttributeValue4232>([self attributeValues]));
-    return;
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSDictionary/* <NSString*, SKAttributeValue*>*/([self attributeValues]));
   }
 }
 
 NAN_SETTER(NSKNode::attributeValuesSetter) {
   JS_UNWRAP(SKNode, self);
-  @autoreleasepool
-  {
-//    [self setAttributeValues: to_value_NSDictionary<NSString4232SKAttributeValue4232>(value)];
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSDictionary/* <NSString*, SKAttributeValue*>*/, input);
+    [self setAttributeValues: input];
   }
 }
-
