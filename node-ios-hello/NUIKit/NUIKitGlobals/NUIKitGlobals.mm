@@ -23,7 +23,7 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   #if TARGET_OS_SIMULATOR
   exports->Set(JS_STR("__DEV__"), js_value_BOOL(true));
   #else
-  exports->Set(JS_STR("__DEV__"), js_value_BOOL(false);
+  exports->Set(JS_STR("__DEV__"), js_value_BOOL(false));
   #endif
 JS_INIT_CLASS_END(UIKitGlobals, NSObject);
 
