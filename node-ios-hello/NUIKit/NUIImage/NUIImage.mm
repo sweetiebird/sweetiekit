@@ -464,7 +464,7 @@ NAN_METHOD(NUIImage::stretchableImageWithLeftCapWidthTopCapHeight) {
   }
 }
 
-#if 0
+#if TODO
 NAN_METHOD(NCIImage::initWithImage) {
   declare_autoreleasepool {
     declare_args();
