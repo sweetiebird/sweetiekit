@@ -45,6 +45,9 @@
 		A108633622C4983F001A15A9 /* NAudioComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108633422C4983E001A15A9 /* NAudioComponent.mm */; };
 		A108633A22C49FB7001A15A9 /* NAVAudioUnitReverb.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108633922C49FB7001A15A9 /* NAVAudioUnitReverb.mm */; };
 		A108633E22C4A097001A15A9 /* NAVAudioTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108633D22C4A097001A15A9 /* NAVAudioTypes.mm */; };
+		A108635122C5973C001A15A9 /* NSKAttributeValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108634C22C5973B001A15A9 /* NSKAttributeValue.mm */; };
+		A108635222C5973C001A15A9 /* NSKAttribute.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635022C5973B001A15A9 /* NSKAttribute.mm */; };
+		A108635622C597F3001A15A9 /* NSKReachConstraints.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108635522C597F3001A15A9 /* NSKReachConstraints.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -659,6 +662,12 @@
 		A108633922C49FB7001A15A9 /* NAVAudioUnitReverb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioUnitReverb.mm; sourceTree = "<group>"; };
 		A108633C22C4A097001A15A9 /* NAVAudioTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAudioTypes.h; sourceTree = "<group>"; };
 		A108633D22C4A097001A15A9 /* NAVAudioTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioTypes.mm; sourceTree = "<group>"; };
+		A108634C22C5973B001A15A9 /* NSKAttributeValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKAttributeValue.mm; sourceTree = "<group>"; };
+		A108634D22C5973B001A15A9 /* NSKAttributeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKAttributeValue.h; sourceTree = "<group>"; };
+		A108634F22C5973B001A15A9 /* NSKAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKAttribute.h; sourceTree = "<group>"; };
+		A108635022C5973B001A15A9 /* NSKAttribute.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKAttribute.mm; sourceTree = "<group>"; };
+		A108635422C597F3001A15A9 /* NSKReachConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKReachConstraints.h; sourceTree = "<group>"; };
+		A108635522C597F3001A15A9 /* NSKReachConstraints.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKReachConstraints.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -1966,6 +1975,33 @@
 				A108633D22C4A097001A15A9 /* NAVAudioTypes.mm */,
 			);
 			path = NAVAudioTypes;
+			sourceTree = "<group>";
+		};
+		A108634B22C5973B001A15A9 /* NSKAttributeValue */ = {
+			isa = PBXGroup;
+			children = (
+				A108634C22C5973B001A15A9 /* NSKAttributeValue.mm */,
+				A108634D22C5973B001A15A9 /* NSKAttributeValue.h */,
+			);
+			path = NSKAttributeValue;
+			sourceTree = "<group>";
+		};
+		A108634E22C5973B001A15A9 /* NSKAttribute */ = {
+			isa = PBXGroup;
+			children = (
+				A108634F22C5973B001A15A9 /* NSKAttribute.h */,
+				A108635022C5973B001A15A9 /* NSKAttribute.mm */,
+			);
+			path = NSKAttribute;
+			sourceTree = "<group>";
+		};
+		A108635322C597F3001A15A9 /* NSKReachConstraints */ = {
+			isa = PBXGroup;
+			children = (
+				A108635422C597F3001A15A9 /* NSKReachConstraints.h */,
+				A108635522C597F3001A15A9 /* NSKReachConstraints.mm */,
+			);
+			path = NSKReachConstraints;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -6006,6 +6042,8 @@
 			isa = PBXGroup;
 			children = (
 				A1B65487228CD87500976024 /* NSKAction */,
+				A108634E22C5973B001A15A9 /* NSKAttribute */,
+				A108634B22C5973B001A15A9 /* NSKAttributeValue */,
 				A11029D3228E4C9C0078FAC0 /* NSKCameraNode */,
 				A16EF587229CE73B007BCB49 /* NSKEmitterNode */,
 				A1BD4B852287C551001D1F6E /* NSKLabelNode */,
@@ -6020,6 +6058,7 @@
 				A1926EFA22C0BA34008F16AE /* NSKPhysicsJointSliding */,
 				A1926EFD22C0BA34008F16AE /* NSKPhysicsJointSpring */,
 				A1B6548C228CE34D00976024 /* NSKPhysicsWorld */,
+				A108635322C597F3001A15A9 /* NSKReachConstraints */,
 				A1926F7522C105F1008F16AE /* NSKRenderer */,
 				A1BD4B892287CA2E001D1F6E /* NSKScene */,
 				A1BD4B912287D53B001D1F6E /* NSKSpriteNode */,
@@ -7102,6 +7141,7 @@
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A192703022C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
+				A108635222C5973C001A15A9 /* NSKAttribute.mm in Sources */,
 				A192703122C1344E008F16AE /* NMTLTileRenderPipelineDescriptor.mm in Sources */,
 				A192706D22C146C6008F16AE /* NMTLAttributeDescriptor.mm in Sources */,
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
@@ -7263,6 +7303,7 @@
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				A1574F0222B93071006CC5F2 /* NCAAnimationGroup.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
+				A108635622C597F3001A15A9 /* NSKReachConstraints.mm in Sources */,
 				A1D4989D22BB49BD009AC951 /* NUIDictationPhrase.mm in Sources */,
 				A19F39C922AF2AA800606332 /* NAUParameterNode.mm in Sources */,
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
@@ -7298,6 +7339,7 @@
 				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
 				A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */,
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
+				A108635122C5973C001A15A9 /* NSKAttributeValue.mm in Sources */,
 				A192703D22C1375D008F16AE /* NMTLComputePipelineReflection.mm in Sources */,
 				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
