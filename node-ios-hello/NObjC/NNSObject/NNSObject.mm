@@ -995,6 +995,11 @@ NAN_METHOD(NClass::New) {
 #include "NEAGLContext.h"
 #include "NEAGLSharegroup.h"
 
+#include "NGLKView.h"
+#include "NGLKViewController.h"
+#include "NGLKViewDelegate.h"
+#include "NGLKViewControllerDelegate.h"
+
 #include "NARAnchor.h"
 #include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1456,6 +1461,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
+
+    // GLKit
+
+    JS_EXPORT_PROTOCOL(GLKViewControllerDelegate);
+    JS_EXPORT_PROTOCOL(GLKViewDelegate);
+    JS_EXPORT_TYPE(GLKViewController);
+    JS_EXPORT_TYPE(GLKView);
     
     // ModelIO
 
@@ -1737,6 +1749,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
 #define JS_RETURN_PROTOCOL(Type) \
       JS_RETURN_PROTOCOL_FROM(Type, Type)
+
+      // GLKit
+
+      JS_RETURN_TYPE(GLKViewController);
+      JS_RETURN_TYPE(GLKView);
 
       // Core Animation
       JS_RETURN_TYPE(CAEmitterCell);
@@ -2246,6 +2263,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       if (object_isClass(obj)) {
         return NClass::type;
       }
+
+      // GLKit protocols
+
+      JS_RETURN_PROTOCOL(GLKViewControllerDelegate);
+      JS_RETURN_PROTOCOL(GLKViewDelegate);
 
       // Core Animation Protocols
 

@@ -57,6 +57,10 @@
 		A108637622C6C874001A15A9 /* NARReferenceImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637422C6C874001A15A9 /* NARReferenceImage.mm */; };
 		A108637A22C6C9B2001A15A9 /* NARPointCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637922C6C9B2001A15A9 /* NARPointCloud.mm */; };
 		A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */; };
+		A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638222C6E573001A15A9 /* NGLKViewController.mm */; };
+		A108638A22C6E574001A15A9 /* NGLKViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638522C6E573001A15A9 /* NGLKViewControllerDelegate.mm */; };
+		A108638B22C6E574001A15A9 /* NGLKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638722C6E573001A15A9 /* NGLKView.mm */; };
+		A108638F22C6E8C1001A15A9 /* NGLKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -695,6 +699,14 @@
 		A108637922C6C9B2001A15A9 /* NARPointCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARPointCloud.mm; sourceTree = "<group>"; };
 		A108637C22C6CC38001A15A9 /* NARReferenceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARReferenceObject.h; sourceTree = "<group>"; };
 		A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARReferenceObject.mm; sourceTree = "<group>"; };
+		A108638122C6E573001A15A9 /* NGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKViewController.h; sourceTree = "<group>"; };
+		A108638222C6E573001A15A9 /* NGLKViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGLKViewController.mm; sourceTree = "<group>"; };
+		A108638422C6E573001A15A9 /* NGLKViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKViewControllerDelegate.h; sourceTree = "<group>"; };
+		A108638522C6E573001A15A9 /* NGLKViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGLKViewControllerDelegate.mm; sourceTree = "<group>"; };
+		A108638722C6E573001A15A9 /* NGLKView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGLKView.mm; sourceTree = "<group>"; };
+		A108638822C6E573001A15A9 /* NGLKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKView.h; sourceTree = "<group>"; };
+		A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGLKViewDelegate.mm; sourceTree = "<group>"; };
+		A108638E22C6E8C1001A15A9 /* NGLKViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKViewDelegate.h; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -2110,6 +2122,53 @@
 				A108637D22C6CC38001A15A9 /* NARReferenceObject.mm */,
 			);
 			path = NARReferenceObject;
+			sourceTree = "<group>";
+		};
+		A108637F22C6E573001A15A9 /* NGLKit */ = {
+			isa = PBXGroup;
+			children = (
+				A108638C22C6E8C1001A15A9 /* NGLKViewDelegate */,
+				A108638022C6E573001A15A9 /* NGLKViewController */,
+				A108638322C6E573001A15A9 /* NGLKViewControllerDelegate */,
+				A108638622C6E573001A15A9 /* NGLKView */,
+			);
+			path = NGLKit;
+			sourceTree = "<group>";
+		};
+		A108638022C6E573001A15A9 /* NGLKViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A108638122C6E573001A15A9 /* NGLKViewController.h */,
+				A108638222C6E573001A15A9 /* NGLKViewController.mm */,
+			);
+			path = NGLKViewController;
+			sourceTree = "<group>";
+		};
+		A108638322C6E573001A15A9 /* NGLKViewControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A108638422C6E573001A15A9 /* NGLKViewControllerDelegate.h */,
+				A108638522C6E573001A15A9 /* NGLKViewControllerDelegate.mm */,
+			);
+			path = NGLKViewControllerDelegate;
+			sourceTree = "<group>";
+		};
+		A108638622C6E573001A15A9 /* NGLKView */ = {
+			isa = PBXGroup;
+			children = (
+				A108638822C6E573001A15A9 /* NGLKView.h */,
+				A108638722C6E573001A15A9 /* NGLKView.mm */,
+			);
+			path = NGLKView;
+			sourceTree = "<group>";
+		};
+		A108638C22C6E8C1001A15A9 /* NGLKViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A108638E22C6E8C1001A15A9 /* NGLKViewDelegate.h */,
+				A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */,
+			);
+			path = NGLKViewDelegate;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -6740,6 +6799,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A108637F22C6E573001A15A9 /* NGLKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -7033,6 +7093,7 @@
 				A108633122C496EF001A15A9 /* NAVAudioUnitEffect.mm in Sources */,
 				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
+				A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */,
 				A192708122C14B8A008F16AE /* NMTLSharedEvent.mm in Sources */,
 				A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
@@ -7121,6 +7182,7 @@
 				A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */,
 				A1D498B522BB798D009AC951 /* NUITextInputDelegate.mm in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
+				A108638F22C6E8C1001A15A9 /* NGLKViewDelegate.mm in Sources */,
 				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A192705C22C13EC0008F16AE /* NMTLCommandEncoder.mm in Sources */,
 				A192709822C15B4C008F16AE /* NMTLVertexDescriptor.mm in Sources */,
@@ -7389,6 +7451,7 @@
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
 				A1574EC122B8A3AB006CC5F2 /* NUIVisualEffectView.mm in Sources */,
 				A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */,
+				A108638A22C6E574001A15A9 /* NGLKViewControllerDelegate.mm in Sources */,
 				A1948933228A5D46007BF787 /* NSCNLight.mm in Sources */,
 				A13370A522AB480400FA3768 /* NMPMediaEntity.mm in Sources */,
 				A1574E9922B8108F006CC5F2 /* NNSCalendar.mm in Sources */,
@@ -7484,6 +7547,7 @@
 				A1574F1122B948D8006CC5F2 /* NCATransaction.mm in Sources */,
 				A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */,
 				A1D4983822BAEEBC009AC951 /* NNSURLAuthenticationChallenge.mm in Sources */,
+				A108638B22C6E574001A15A9 /* NGLKView.mm in Sources */,
 				A1926F0622C0BA34008F16AE /* NSKPhysicsJointSliding.mm in Sources */,
 				A108631D22C4937D001A15A9 /* NAVAudioMixing.mm in Sources */,
 				A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */,
