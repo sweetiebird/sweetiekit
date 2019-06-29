@@ -38,6 +38,7 @@ makeARSKView = require('./examples/ARSKView');
 makeCAEmitterLayer = require('./examples/CAEmitterLayer');
 makeCAMetalLayer = require('./examples/CAMetalLayer');
 makeMTKView = require('./examples/MTKView');
+makeGLKView = require('./examples/GLKView');
 makeCLLocation = require('./examples/CLLocation');
 makeGreenDot = require('./examples/GreenDot');
 
@@ -66,6 +67,7 @@ demoTypes = {
   CAEmitterLayer: makeCAEmitterLayer,
   CAMetalLayer: makeCAMetalLayer,
   MTKView: makeMTKView,
+  GLKView: makeGLKView,
   CLGeocoder: makeCLLocation,
   GifView: makeGifView,
   MKMapView: makeMapView,
@@ -236,6 +238,11 @@ class UIDemosApp {
   }
 
   showDemoUI(view, shouldPush) {
+    if (view instanceof UIViewController) {
+      this.demoVC = view;
+      view = null;
+      shouldPush = true;
+    }
     if (view) {
       this.demoVC.view.addSubview(view);
     }
