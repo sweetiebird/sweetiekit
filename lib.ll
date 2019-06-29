@@ -590,6 +590,10 @@
     (when subframework
       (cat! r ".framework/Frameworks/" subframework))
     (cat! r ".framework/Headers/")
+    (let-when i (search type "_")
+      (set type (clip type (+ i 1)))
+      (when (str-ends? type "_t")
+        (set type (clip type 0 (- (edge type) 1)))))
     (cat! r type ".h")))
 
  
@@ -605,12 +609,14 @@
        CN: "Contacts"
        EA: "OpenGLES"
        GK: "GameplayKit"
+      GLK: "GLKit"
       MDL: "ModelIO"
        MK: "MapKit"
        MP: "MediaPlayer"
       MTK: "MetalKit"
       MTL: "Metal"
        NS: "Foundation"
+      nw_: "Network"
        RP: "ReplayKit"
       SCN: "SceneKit"
       Sec: "Security"
