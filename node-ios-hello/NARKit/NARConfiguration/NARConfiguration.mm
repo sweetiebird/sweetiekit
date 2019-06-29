@@ -10,8 +10,6 @@ NARConfiguration::NARConfiguration () {}
 NARConfiguration::~NARConfiguration () {}
 
 JS_INIT_CLASS(ARConfiguration, NSObject);
-  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
-  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_ASSIGN_PROTO_PROP(videoFormat);
   JS_ASSIGN_PROTO_PROP(worldAlignment);
   JS_ASSIGN_PROTO_PROP(isLightEstimationEnabled);
@@ -92,18 +90,6 @@ NAN_METHOD(NARConfiguration::New) {
     } else {
       Nan::ThrowError("ARConfiguration::New: invalid arguments");
     }
-  }
-}
-
-NAN_GETTER(NARConfiguration::isSupportedGetter) {
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([ARConfiguration isSupported]));
-  }
-}
-
-NAN_GETTER(NARConfiguration::supportedVideoFormatsGetter) {
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([ARConfiguration supportedVideoFormats]));
   }
 }
 

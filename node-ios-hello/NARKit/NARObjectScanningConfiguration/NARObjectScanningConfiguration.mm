@@ -7,12 +7,27 @@
 #include "NARObjectScanningConfiguration.h"
 
 #define instancetype ARObjectScanningConfiguration
+#define Ninstancetype NARObjectScanningConfiguration
 #define js_value_instancetype js_value_ARObjectScanningConfiguration
+
+NAN_GETTER(Ninstancetype::isSupportedGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([instancetype isSupported]));
+  }
+}
+
+NAN_GETTER(Ninstancetype::supportedVideoFormatsGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([instancetype supportedVideoFormats]));
+  }
+}
 
 NARObjectScanningConfiguration::NARObjectScanningConfiguration() {}
 NARObjectScanningConfiguration::~NARObjectScanningConfiguration() {}
 
 JS_INIT_CLASS(ARObjectScanningConfiguration, ARConfiguration);
+  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
+  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_ASSIGN_PROTO_PROP(isAutoFocusEnabled);
   JS_ASSIGN_PROTO_PROP(planeDetection);
 

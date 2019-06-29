@@ -15,6 +15,8 @@
 #define is_value_ARObjectScanningConfiguration(x) is_value_wrapper(x, ARObjectScanningConfiguration)
 
 JS_WRAP_CLASS(ARObjectScanningConfiguration, ARConfiguration);
+  JS_STATIC_PROP_READONLY(isSupported);
+  JS_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_PROP(isAutoFocusEnabled);
   JS_PROP(planeDetection);
 JS_WRAP_CLASS_END(ARObjectScanningConfiguration);

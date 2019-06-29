@@ -15,6 +15,8 @@
 #define is_value_ARWorldTrackingConfiguration(x) is_value_wrapper(x, ARWorldTrackingConfiguration)
 
 JS_WRAP_CLASS(ARWorldTrackingConfiguration, ARConfiguration);
+  JS_STATIC_PROP_READONLY(isSupported);
+  JS_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_PROP(isAutoFocusEnabled);
   JS_PROP(environmentTexturing);
   JS_PROP(planeDetection);

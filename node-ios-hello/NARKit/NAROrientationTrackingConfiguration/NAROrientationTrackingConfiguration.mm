@@ -7,12 +7,27 @@
 #include "NAROrientationTrackingConfiguration.h"
 
 #define instancetype AROrientationTrackingConfiguration
+#define Ninstancetype NAROrientationTrackingConfiguration
 #define js_value_instancetype js_value_AROrientationTrackingConfiguration
+
+NAN_GETTER(Ninstancetype::isSupportedGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([instancetype isSupported]));
+  }
+}
+
+NAN_GETTER(Ninstancetype::supportedVideoFormatsGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([instancetype supportedVideoFormats]));
+  }
+}
 
 NAROrientationTrackingConfiguration::NAROrientationTrackingConfiguration() {}
 NAROrientationTrackingConfiguration::~NAROrientationTrackingConfiguration() {}
 
 JS_INIT_CLASS(AROrientationTrackingConfiguration, ARConfiguration);
+  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
+  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_ASSIGN_PROTO_PROP(isAutoFocusEnabled);
 
   // instance members (proto)

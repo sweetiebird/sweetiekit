@@ -7,12 +7,27 @@
 #include "NARFaceTrackingConfiguration.h"
 
 #define instancetype ARFaceTrackingConfiguration
+#define Ninstancetype NARFaceTrackingConfiguration
 #define js_value_instancetype js_value_ARFaceTrackingConfiguration
+
+NAN_GETTER(Ninstancetype::isSupportedGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([instancetype isSupported]));
+  }
+}
+
+NAN_GETTER(Ninstancetype::supportedVideoFormatsGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([instancetype supportedVideoFormats]));
+  }
+}
 
 NARFaceTrackingConfiguration::NARFaceTrackingConfiguration() {}
 NARFaceTrackingConfiguration::~NARFaceTrackingConfiguration() {}
 
 JS_INIT_CLASS(ARFaceTrackingConfiguration, ARConfiguration);
+  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
+  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(ARFaceTrackingConfiguration, ARConfiguration);

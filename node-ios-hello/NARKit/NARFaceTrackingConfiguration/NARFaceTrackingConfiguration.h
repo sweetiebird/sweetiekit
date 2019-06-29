@@ -15,7 +15,8 @@
 #define is_value_ARFaceTrackingConfiguration(x) is_value_wrapper(x, ARFaceTrackingConfiguration)
 
 JS_WRAP_CLASS(ARFaceTrackingConfiguration, ARConfiguration);
-  // TODO: declare ARFaceTrackingConfiguration methods and properties
+  JS_STATIC_PROP_READONLY(isSupported);
+  JS_STATIC_PROP_READONLY(supportedVideoFormats);
 JS_WRAP_CLASS_END(ARFaceTrackingConfiguration);
 
 #endif /* NARFaceTrackingConfiguration_h */

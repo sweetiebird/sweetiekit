@@ -15,6 +15,8 @@
 #define is_value_ARImageTrackingConfiguration(x) is_value_wrapper(x, ARImageTrackingConfiguration)
 
 JS_WRAP_CLASS(ARImageTrackingConfiguration, ARConfiguration);
+  JS_STATIC_PROP_READONLY(isSupported);
+  JS_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_PROP(isAutoFocusEnabled);
   JS_PROP(trackingImages);
   JS_PROP(maximumNumberOfTrackedImages);

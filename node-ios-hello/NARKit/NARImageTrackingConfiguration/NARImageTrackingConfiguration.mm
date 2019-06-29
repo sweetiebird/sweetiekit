@@ -7,12 +7,27 @@
 #include "NARImageTrackingConfiguration.h"
 
 #define instancetype ARImageTrackingConfiguration
+#define Ninstancetype NARImageTrackingConfiguration
 #define js_value_instancetype js_value_ARImageTrackingConfiguration
+
+NAN_GETTER(Ninstancetype::isSupportedGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([instancetype isSupported]));
+  }
+}
+
+NAN_GETTER(Ninstancetype::supportedVideoFormatsGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<ARVideoFormat*>([instancetype supportedVideoFormats]));
+  }
+}
 
 NARImageTrackingConfiguration::NARImageTrackingConfiguration() {}
 NARImageTrackingConfiguration::~NARImageTrackingConfiguration() {}
 
 JS_INIT_CLASS(ARImageTrackingConfiguration, ARConfiguration);
+  JS_ASSIGN_STATIC_PROP_READONLY(isSupported);
+  JS_ASSIGN_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_ASSIGN_PROTO_PROP(isAutoFocusEnabled);
   JS_ASSIGN_PROTO_PROP(trackingImages);
   JS_ASSIGN_PROTO_PROP(maximumNumberOfTrackedImages);

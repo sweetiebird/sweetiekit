@@ -27,8 +27,6 @@
 #define is_value_ARPlaneDetection(x) IS_OPTS(ARPlaneDetection, NSUInteger, x)
 
 JS_WRAP_CLASS(ARConfiguration, NSObject);
-  JS_STATIC_PROP_READONLY(isSupported);
-  JS_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_PROP(videoFormat);
   JS_PROP(worldAlignment);
   JS_PROP(isLightEstimationEnabled);
