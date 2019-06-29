@@ -8,7 +8,7 @@
 #ifndef NGLKView_h
 #define NGLKView_h    
 
-#include "NNSObject.h"
+#include "NUIView.h"
 
 #define js_value_GLKView(x) js_value_wrapper(x, GLKView)
 #define to_value_GLKView(x) to_value_wrapper(x, GLKView)
@@ -34,7 +34,7 @@
 #define to_value_GLKViewDrawableMultisample(x) TO_ENUM(GLKViewDrawableMultisample, GLint, x)
 #define is_value_GLKViewDrawableMultisample(x) IS_ENUM(GLKViewDrawableMultisample, GLint, x)
 
-JS_WRAP_CLASS(GLKView, NSObject);
+JS_WRAP_CLASS(GLKView, UIView);
   JS_METHOD(initWithFrameContext);
   JS_METHOD(bindDrawable);
   JS_METHOD(deleteDrawable);

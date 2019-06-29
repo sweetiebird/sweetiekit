@@ -9,13 +9,13 @@
 #define NGLKViewController_h    
 
 
-#include "NNSObject.h"
+#include "NUIViewController.h"
 
 #define js_value_GLKViewController(x) js_value_wrapper(x, GLKViewController)
 #define to_value_GLKViewController(x) to_value_wrapper(x, GLKViewController)
 #define is_value_GLKViewController(x) is_value_wrapper(x, GLKViewController)
 
-JS_WRAP_CLASS(GLKViewController, NSObject);
+JS_WRAP_CLASS(GLKViewController, UIViewController);
   JS_PROP(delegate);
   JS_PROP(preferredFramesPerSecond);
   JS_PROP_READONLY(framesPerSecond);

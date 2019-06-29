@@ -14,7 +14,7 @@
 NGLKViewController::NGLKViewController() {}
 NGLKViewController::~NGLKViewController() {}
 
-JS_INIT_CLASS(GLKViewController, NSObject);
+JS_INIT_CLASS(GLKViewController, UIViewController);
   JS_ASSIGN_PROTO_PROP(delegate);
   JS_ASSIGN_PROTO_PROP(preferredFramesPerSecond);
   JS_ASSIGN_PROTO_PROP_READONLY(framesPerSecond);
@@ -29,9 +29,9 @@ JS_INIT_CLASS(GLKViewController, NSObject);
 
   // instance members (proto)
   // static members (ctor)
-  JS_INIT_CTOR(GLKViewController, NSObject);
+  JS_INIT_CTOR(GLKViewController, UIViewController);
   // constant values (exports)
-JS_INIT_CLASS_END(GLKViewController, NSObject);
+JS_INIT_CLASS_END(GLKViewController, UIViewController);
 
 NAN_METHOD(NGLKViewController::New) {
   JS_RECONSTRUCT(GLKViewController);

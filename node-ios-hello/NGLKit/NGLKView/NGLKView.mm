@@ -14,7 +14,7 @@
 NGLKView::NGLKView() {}
 NGLKView::~NGLKView() {}
 
-JS_INIT_CLASS(GLKView, NSObject);
+JS_INIT_CLASS(GLKView, UIView);
   JS_ASSIGN_PROTO_METHOD(initWithFrameContext);
   JS_ASSIGN_PROTO_METHOD(bindDrawable);
   JS_ASSIGN_PROTO_METHOD(deleteDrawable);
@@ -32,7 +32,7 @@ JS_INIT_CLASS(GLKView, NSObject);
 
   // instance members (proto)
   // static members (ctor)
-  JS_INIT_CTOR(GLKView, NSObject);
+  JS_INIT_CTOR(GLKView, UIView);
   // constant values (exports)
 
   //typedef NS_ENUM(GLint, GLKViewDrawableColorFormat) {
@@ -57,7 +57,7 @@ JS_INIT_CLASS(GLKView, NSObject);
     JS_ASSIGN_ENUM(GLKViewDrawableMultisample4X, GLint);
   //} NS_ENUM_AVAILABLE(10_8, 5_0);
 
-JS_INIT_CLASS_END(GLKView, NSObject);
+JS_INIT_CLASS_END(GLKView, UIView);
 
 NAN_METHOD(NGLKView::New) {
   JS_RECONSTRUCT(GLKView);
