@@ -42,7 +42,7 @@ NAN_METHOD(NUITabBarController::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UITabBarController *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UITabBarController alloc]; // TODO: init causes layout issues
+      self = [[UITabBarController alloc] init];
     }
     if (self) {
       NUITabBarController *wrapper = new NUITabBarController();
