@@ -15,6 +15,8 @@ const {
   SCNLight,
   NSBundle,
   SCNSceneSource,
+  SCNMaterial,
+  UIImage,
 } = SweetieKit;
 
 const modelFile = 'turtle.scn';
@@ -139,16 +141,30 @@ async function make(nav, demoVC) {
         //   turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_Normal.png', MDLMaterialSemanticTangentSpaceNormal, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_Normal.png'))));
         //   turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_alpha.png'))));
         // }
-        if (typeof turtleSCNMaterial === 'undefined') {
-          turtleScatteringFunction = MDLScatteringFunction();
-          turtleMaterial = MDLMaterial.alloc().initWithNameScatteringFunction('turtleMaterial', turtleScatteringFunction);
-          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_color.png', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_color.png'))));
-          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_Normal.png', MDLMaterialSemanticTangentSpaceNormal, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_Normal.png'))));
-          turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_alpha.png'))));
-          turtleSCNMaterial = SCNMaterial.materialWithMDLMaterial(turtleMaterial);
+        if (typeof turtleSCNMaterialColor === 'undefined') {
+          turtleSCNMaterialColor = SCNMaterial();
+          turtleSCNMaterialColor.isDoubleSided = false;
+          turtleSCNMaterialColor.diffuse.contents = UIImage('turtle_color');
+          // turtleScatteringFunction = MDLScatteringFunction();
+          // turtleMaterial = MDLMaterial.alloc().initWithNameScatteringFunction('turtleMaterial', turtleScatteringFunction);
+          // turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_color.png', MDLMaterialSemanticBaseColor, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_color.png'))));
+          // turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_Normal.png', MDLMaterialSemanticTangentSpaceNormal, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_Normal.png'))));
+          // turtleMaterial.setProperty(MDLMaterialProperty.alloc().initWithNameSemanticURL('models/Turtle_dae/turtle_alpha.png', MDLMaterialSemanticOpacity, NSURL(Path.join(MediaPath, 'models/Turtle_dae/turtle_alpha.png'))));
+          // turtleSCNMaterial = SCNMaterial.materialWithMDLMaterial(turtleMaterial);
         }
-        if (scene.rootNode.geometry) {
-          scene.rootNode.geometry.firstMaterial = turtleSCNMaterial;
+        if (typeof turtleSCNMaterialNormal === 'undefined') {
+          turtleSCNMaterialNormal = SCNMaterial();
+          turtleSCNMaterialNormal.isDoubleSided = false;
+          turtleSCNMaterialNormal.diffuse.contents = UIImage('turtle_normal');
+        }
+        if (typeof turtleSCNMaterialAlpha === 'undefined') {
+          turtleSCNMaterialAlpha = SCNMaterial();
+          turtleSCNMaterialAlpha.isDoubleSided = false;
+          turtleSCNMaterialAlpha.diffuse.contents = UIImage('turtle_alpha');
+        }
+        const turtleNode = scene.rootNode.childNodeWithNameRecursively('Turtle', true);
+        if (turtleNode) {
+          turtleNode.geometry.materials = [turtleSCNMaterialColor, turtleSCNMaterialNormal, turtleSCNMaterialAlpha];
         }
         // containerNode.position = new THREE.Vector3(1.0, 3.0, 0.0);
         // scene.rootNode.addChildNode(containerNode);
