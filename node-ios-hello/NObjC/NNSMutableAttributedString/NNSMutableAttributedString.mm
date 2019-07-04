@@ -16,6 +16,7 @@ JS_INIT_CLASS(NSMutableAttributedString, NSAttributedString);
   JS_ASSIGN_PROTO_METHOD(replaceCharactersInRangeWithString);
   JS_ASSIGN_PROTO_METHOD(setAttributesRange);
   JS_ASSIGN_PROTO_METHOD(addAttributeValueRange);
+  JS_ASSIGN_PROTO_METHOD_AS(addAttributeValueRange, "addAttribute");
   JS_ASSIGN_PROTO_METHOD(addAttributesRange);
   JS_ASSIGN_PROTO_METHOD(removeAttributeRange);
   JS_ASSIGN_PROTO_METHOD(replaceCharactersInRangeWithAttributedString);
