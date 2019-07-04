@@ -50,6 +50,7 @@ makeNavigationCtrl = require('./examples/UINavigationController');
 makeTabBarCtrl = require('./examples/UITabBarController');
 makeTableView = require('./examples/UITableView');
 makePopover = require('./examples/Popover');
+makePopoverTableViewController = require('./examples/PopoverTableViewController');
 
 // misc demos
 makeThreeObj = require('./examples/ThreeOBJ');
@@ -91,6 +92,7 @@ demoTypes = {
 
 demoCtrls = {
   Popover: makePopover,
+  PopoverTableViewController: makePopoverTableViewController,
   UIAlertController: makeAlertCtrl,
   UIAlertControllerActionSheet: makeAlertCtrlActionSheet,
   UIBarButtonItem: makeBarButtonItem,
