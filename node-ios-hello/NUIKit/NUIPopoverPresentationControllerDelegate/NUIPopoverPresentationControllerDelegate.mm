@@ -9,7 +9,7 @@
 NUIPopoverPresentationControllerDelegate::NUIPopoverPresentationControllerDelegate() {}
 NUIPopoverPresentationControllerDelegate::~NUIPopoverPresentationControllerDelegate() {}
 
-JS_INIT_CLASS(UIPopoverPresentationControllerDelegate, NSObject);
+JS_INIT_PROTOCOL(UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate);
   JS_ASSIGN_PROTO_PROP(prepareForPopoverPresentation);
   JS_ASSIGN_PROTO_PROP(popoverPresentationControllerShouldDismissPopover);
   JS_ASSIGN_PROTO_PROP(popoverPresentationControllerDidDismissPopover);
@@ -17,22 +17,22 @@ JS_INIT_CLASS(UIPopoverPresentationControllerDelegate, NSObject);
 
   // instance members (proto)
   // static members (ctor)
-  JS_INIT_CTOR(UIPopoverPresentationControllerDelegate, NSObject);
-JS_INIT_CLASS_END(UIPopoverPresentationControllerDelegate, NSObject);
+  JS_INIT_CTOR(UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate);
+JS_INIT_PROTOCOL_END(UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate);
 
 NAN_METHOD(NUIPopoverPresentationControllerDelegate::New) {
-  JS_RECONSTRUCT(UIPopoverPresentationControllerDelegate);
+  JS_RECONSTRUCT_PROTOCOL(UIPopoverPresentationControllerDelegate);
   @autoreleasepool {
-    UIPopoverPresentationControllerDelegate* self = nullptr;
+    id<UIPopoverPresentationControllerDelegate> self = nil;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge UIPopoverPresentationControllerDelegate *)(info[0].As<External>()->Value());
+      self = (__bridge id<UIPopoverPresentationControllerDelegate>)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [[UIPopoverPresentationControllerDelegate alloc] init];
+      self = [[UIPopoverPresentationControllerDelegateType alloc] init];
     }
     if (self) {
       NUIPopoverPresentationControllerDelegate *wrapper = new NUIPopoverPresentationControllerDelegate();
-      wrapper->SetNSObject(self);
+      wrapper->set_self(self);
       Local<Object> obj(info.This());
       wrapper->Wrap(obj);
       JS_SET_RETURN(obj);
@@ -42,15 +42,15 @@ NAN_METHOD(NUIPopoverPresentationControllerDelegate::New) {
   }
 }
 
-DELEGATE_PROP(UIPopoverPresentationControllerDelegate, prepareForPopoverPresentation);
-DELEGATE_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerShouldDismissPopover);
-DELEGATE_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerDidDismissPopover);
-DELEGATE_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerWillRepositionPopoverToRectInView);
+DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, prepareForPopoverPresentation);
+DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerShouldDismissPopover);
+DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerDidDismissPopover);
+DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentationControllerWillRepositionPopoverToRectInView);
 
 #include "NUIPopoverPresentationController.h"
 #include "NUIView.h"
 
-@implementation UIPopoverPresentationControllerDelegate
+@implementation UIPopoverPresentationControllerDelegateType
 
 - (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {

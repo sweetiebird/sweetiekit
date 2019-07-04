@@ -224,6 +224,10 @@
 		A15878FE22CE3FE900847196 /* NUIBarPositioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878F622CE3FE800847196 /* NUIBarPositioningDelegate.mm */; };
 		A15878FF22CE3FE900847196 /* NUINavigationBarDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878FA22CE3FE800847196 /* NUINavigationBarDelegate.mm */; };
 		A158790022CE3FE900847196 /* NUIBarPositioning.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */; };
+		A158790422CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790222CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm */; };
+		A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790622CE638500847196 /* NUIViewControllerTransitionCoordinator.mm */; };
+		A158790C22CE638600847196 /* NUIViewControllerTransitionCoordinatorContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790922CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.mm */; };
+		A158791022CE678F00847196 /* NUIViewControllerTransitioning.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -1053,6 +1057,14 @@
 		A15878FA22CE3FE800847196 /* NUINavigationBarDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationBarDelegate.mm; sourceTree = "<group>"; };
 		A15878FC22CE3FE800847196 /* NUIBarPositioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBarPositioning.h; sourceTree = "<group>"; };
 		A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarPositioning.mm; sourceTree = "<group>"; };
+		A158790222CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIAdaptivePresentationControllerDelegate.mm; sourceTree = "<group>"; };
+		A158790322CE615600847196 /* NUIAdaptivePresentationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIAdaptivePresentationControllerDelegate.h; sourceTree = "<group>"; };
+		A158790622CE638500847196 /* NUIViewControllerTransitionCoordinator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitionCoordinator.mm; sourceTree = "<group>"; };
+		A158790722CE638500847196 /* NUIViewControllerTransitionCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitionCoordinator.h; sourceTree = "<group>"; };
+		A158790922CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitionCoordinatorContext.mm; sourceTree = "<group>"; };
+		A158790A22CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitionCoordinatorContext.h; sourceTree = "<group>"; };
+		A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioning.mm; sourceTree = "<group>"; };
+		A158790F22CE678F00847196 /* NUIViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioning.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3649,6 +3661,42 @@
 				A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */,
 			);
 			path = NUIBarPositioning;
+			sourceTree = "<group>";
+		};
+		A158790122CE615600847196 /* NUIAdaptivePresentationControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A158790322CE615600847196 /* NUIAdaptivePresentationControllerDelegate.h */,
+				A158790222CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm */,
+			);
+			path = NUIAdaptivePresentationControllerDelegate;
+			sourceTree = "<group>";
+		};
+		A158790522CE638500847196 /* NUIViewControllerTransitionCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				A158790722CE638500847196 /* NUIViewControllerTransitionCoordinator.h */,
+				A158790622CE638500847196 /* NUIViewControllerTransitionCoordinator.mm */,
+			);
+			path = NUIViewControllerTransitionCoordinator;
+			sourceTree = "<group>";
+		};
+		A158790822CE638500847196 /* NUIViewControllerTransitionCoordinatorContext */ = {
+			isa = PBXGroup;
+			children = (
+				A158790A22CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.h */,
+				A158790922CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.mm */,
+			);
+			path = NUIViewControllerTransitionCoordinatorContext;
+			sourceTree = "<group>";
+		};
+		A158790D22CE678E00847196 /* NUIViewControllerTransitioning */ = {
+			isa = PBXGroup;
+			children = (
+				A158790F22CE678F00847196 /* NUIViewControllerTransitioning.h */,
+				A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */,
+			);
+			path = NUIViewControllerTransitioning;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -6776,11 +6824,15 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A158790D22CE678E00847196 /* NUIViewControllerTransitioning */,
+				A158790522CE638500847196 /* NUIViewControllerTransitionCoordinator */,
+				A158790822CE638500847196 /* NUIViewControllerTransitionCoordinatorContext */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
 				A1336FEA22A660FE00FA3768 /* NNSLayoutXAxisAnchor */,
 				A1336FED22A660FE00FA3768 /* NNSLayoutYAxisAnchor */,
+				A158790122CE615600847196 /* NUIAdaptivePresentationControllerDelegate */,
 				A178B26C228863B5005184EE /* NUIAlertAction */,
 				A199AEE022885C63003C1DC4 /* NUIAlertController */,
 				21F5520E2269AE0500D8516A /* NUIApplication */,
@@ -7610,6 +7662,7 @@
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A192703B22C1375D008F16AE /* NMTLComputePipelineState.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
+				A158790422CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm in Sources */,
 				A1926F9022C10729008F16AE /* NMTLRenderPassDescriptor.mm in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
@@ -7719,6 +7772,7 @@
 				A19270DB22C19C9B008F16AE /* NMTKView.mm in Sources */,
 				A1574ED122B8BE2A006CC5F2 /* NUIKeyCommand.mm in Sources */,
 				A1CE2B45228E605200D9B3B8 /* NUIPageControl.mm in Sources */,
+				A158790C22CE638600847196 /* NUIViewControllerTransitionCoordinatorContext.mm in Sources */,
 				A1EE7D73229D8EEF002B53FF /* NSCNPyramid.mm in Sources */,
 				A108632222C4937D001A15A9 /* NAVAudioMixingDestination.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
@@ -7857,6 +7911,7 @@
 				A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */,
 				A15878EB22CDEF4000847196 /* NUIDragPreviewTarget.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
+				A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
@@ -7955,6 +8010,7 @@
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
 				A108639322C70161001A15A9 /* NWebGL.mm in Sources */,
 				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
+				A158791022CE678F00847196 /* NUIViewControllerTransitioning.mm in Sources */,
 				A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */,
 				A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,

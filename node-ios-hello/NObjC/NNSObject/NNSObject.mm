@@ -1206,6 +1206,10 @@ NAN_METHOD(NClass::New) {
 #include "NCABasicAnimation.h" // : CAPropertyAnimation
 #include "NCASpringAnimation.h" // : CABasicAnimation
 #include "NCAShapeLayer.h"
+#include "NUIViewControllerTransitioning.h" // globals
+#include "NUIViewControllerTransitionCoordinatorContext.h" // NSObject
+#include "NUIViewControllerTransitionCoordinator.h" // NSObject<UIViewControllerTransitionCoordinatorContext>
+#include "NUIAdaptivePresentationControllerDelegate.h" // NSObject
 #include "NUIPresentationController.h"
 #include "NUIInputViewController.h"
 #include "NUIAlertController.h"
@@ -1689,6 +1693,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(UINavigationControllerDelegate);
     JS_EXPORT_TYPE(UIImagePickerController);
     JS_EXPORT_TYPE(UIInputViewController);
+    JS_EXPORT_GLOBALS(UIViewControllerTransitioning); // globals
+    JS_EXPORT_PROTOCOL(UIViewControllerTransitionCoordinatorContext); // NSObject
+    JS_EXPORT_PROTOCOL(UIViewControllerTransitionCoordinator); // NSObject<UIViewControllerTransitionCoordinator>
     JS_EXPORT_TYPE(UIPresentationController);
     JS_EXPORT_TYPE(UIPopoverPresentationController);
     JS_EXPORT_TYPE(UIAlertController);
@@ -1770,7 +1777,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // UIKit delegates
 
-    JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
+    JS_EXPORT_PROTOCOL(UIAdaptivePresentationControllerDelegate);
+    JS_EXPORT_PROTOCOL(UIPopoverPresentationControllerDelegate);
     JS_EXPORT_TYPE(UIPickerViewManager);
     JS_EXPORT_PROTOCOL(UIScrollViewDelegate);
     JS_EXPORT_PROTOCOL(UITableViewDelegate);
@@ -2679,7 +2687,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBarButtonItem);
       JS_RETURN_TYPE(UIBarCommon);
       // ========= delegates
-      JS_RETURN_TYPE(UIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
@@ -2861,6 +2868,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(CAAction);
 
       // UIKit protocols
+
+      JS_RETURN_PROTOCOL(UIPopoverPresentationControllerDelegate);
+      JS_RETURN_PROTOCOL(UIAdaptivePresentationControllerDelegate);
+      JS_RETURN_PROTOCOL(UIViewControllerTransitionCoordinator); // NSObject<UIViewControllerTransitionCoordinatorContext>
+      JS_RETURN_PROTOCOL(UIViewControllerTransitionCoordinatorContext); // NSObject
 
       JS_RETURN_PROTOCOL(UITableViewDragDelegate);
       JS_RETURN_PROTOCOL(UITableViewDropCoordinator);

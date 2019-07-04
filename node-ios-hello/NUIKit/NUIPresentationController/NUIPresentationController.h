@@ -15,14 +15,6 @@
 #define is_value_UIPresentationController(x) is_value_wrapper(x, UIPresentationController)
 
 JS_WRAP_CLASS(UIPresentationController, NSObject);
-#if TODO
-// UIAdaptivePresentationControllerDelegate
-  JS_METHOD(adaptivePresentationStyleForPresentationController);
-  JS_METHOD(adaptivePresentationStyleForPresentationControllerTraitCollection);
-  JS_METHOD(presentationControllerViewControllerForAdaptivePresentationStyle);
-  JS_METHOD(presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator);
-#endif
-// UIPresentationController
   JS_METHOD(initWithPresentedViewControllerPresentingViewController);
   JS_METHOD(adaptivePresentationStyle);
   JS_METHOD(adaptivePresentationStyleForTraitCollection);

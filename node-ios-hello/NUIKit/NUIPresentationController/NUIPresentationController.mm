@@ -13,15 +13,6 @@ NUIPresentationController::NUIPresentationController() {}
 NUIPresentationController::~NUIPresentationController() {}
 
 JS_INIT_CLASS(UIPresentationController, NSObject);
-  // instance members (proto)
-#if TODO
-// UIAdaptivePresentationControllerDelegate
-  JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyleForPresentationController);
-  JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyleForPresentationControllerTraitCollection);
-  JS_ASSIGN_PROTO_METHOD(presentationControllerViewControllerForAdaptivePresentationStyle);
-  JS_ASSIGN_PROTO_METHOD(presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator);
-#endif
-// UIPresentationController
   JS_ASSIGN_PROTO_METHOD(initWithPresentedViewControllerPresentingViewController);
   JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyle);
   JS_ASSIGN_PROTO_METHOD(adaptivePresentationStyleForTraitCollection);
@@ -47,6 +38,7 @@ JS_INIT_CLASS(UIPresentationController, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(shouldRemovePresentersView);
   JS_ASSIGN_PROTO_PROP(overrideTraitCollection);
 
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UIPresentationController, NSObject);
 JS_INIT_CLASS_END(UIPresentationController, NSObject);
@@ -72,48 +64,6 @@ NAN_METHOD(NUIPresentationController::New) {
     }
   }
 }
-
-#if TODO
-NAN_METHOD(NUIAdaptivePresentationControllerDelegate::adaptivePresentationStyleForPresentationController) {
-  JS_UNWRAP(UIAdaptivePresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPresentationController, controller);
-    JS_SET_RETURN(js_value_UIModalPresentationStyle([self adaptivePresentationStyleForPresentationController: controller]));
-  }
-}
-
-NAN_METHOD(NUIAdaptivePresentationControllerDelegate::adaptivePresentationStyleForPresentationControllerTraitCollection) {
-  JS_UNWRAP(UIAdaptivePresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPresentationController, controller);
-    declare_pointer(UITraitCollection, traitCollection);
-    JS_SET_RETURN(js_value_UIModalPresentationStyle([self adaptivePresentationStyleForPresentationController: controller traitCollection: traitCollection]));
-  }
-}
-
-NAN_METHOD(NUIAdaptivePresentationControllerDelegate::presentationControllerViewControllerForAdaptivePresentationStyle) {
-  JS_UNWRAP(UIAdaptivePresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPresentationController, controller);
-    declare_value(UIModalPresentationStyle, style);
-    JS_SET_RETURN(js_value_UIViewController([self presentationController: controller viewControllerForAdaptivePresentationStyle: style]));
-  }
-}
-
-NAN_METHOD(NUIAdaptivePresentationControllerDelegate::presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator) {
-  JS_UNWRAP(UIAdaptivePresentationControllerDelegate, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(UIPresentationController, presentationController);
-    declare_value(UIModalPresentationStyle, style);
-    declare_nullable_value(id<UIViewControllerTransitionCoordinator>, transitionCoordinator);
-    [self presentationController: presentationController willPresentWithAdaptiveStyle: style transitionCoordinator: transitionCoordinator];
-  }
-}
-#endif
 
 NAN_METHOD(NUIPresentationController::initWithPresentedViewControllerPresentingViewController) {
   JS_UNWRAP_OR_ALLOC(UIPresentationController, self);
@@ -247,10 +197,12 @@ NAN_GETTER(NUIPresentationController::containerViewGetter) {
   }
 }
 
+#include "NUIAdaptivePresentationControllerDelegate.h"
+
 NAN_GETTER(NUIPresentationController::delegateGetter) {
   JS_UNWRAP(UIPresentationController, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <UIAdaptivePresentationControllerDelegate>*/([self delegate]));
+    JS_SET_RETURN(js_value_UIAdaptivePresentationControllerDelegate([self delegate]));
   }
 }
 
@@ -258,7 +210,7 @@ NAN_SETTER(NUIPresentationController::delegateSetter) {
   JS_UNWRAP(UIPresentationController, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <UIAdaptivePresentationControllerDelegate>*/, input);
+    declare_protocol(UIAdaptivePresentationControllerDelegate, input);
     [self setDelegate: input];
     [self associateValue:input withKey:@"NUIPresentationController::delegate"];
   }
