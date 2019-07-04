@@ -31,6 +31,30 @@
 Nid::Nid() : _self(nullptr) {}
 Nid::~Nid() {}
 
+NAN_METHOD(_NSSelectorFromString)
+{
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    SEL result = NSSelectorFromString(name);
+    JS_SET_RETURN(js_value_SEL(result));
+  }
+}
+
+NAN_METHOD(_NSSelectorFromStringAddress)
+{
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    SEL result = NSSelectorFromString(name);
+    Local<Array> array = Nan::New<Array>(2);
+    size_t address = (size_t)(void*)result;
+    array->Set(0, Nan::New<Integer>((uint32_t)(address >> 32)));
+    array->Set(1, Nan::New<Integer>((uint32_t)(address & 0xFFFFFFFF)));
+    JS_SET_RETURN(array);
+  }
+}
+
 JS_INIT_CLASS_BASE(id, nil);
   // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, self);
@@ -49,6 +73,8 @@ JS_INIT_CLASS_BASE(id, nil);
   JS_ASSIGN_METHOD(proto, invoke);
   // static members (ctor)
   JS_INIT_CTOR(id, objc);
+  Nan::SetMethod(ctor, "NSSelectorFromString", _NSSelectorFromString);
+  Nan::SetMethod(ctor, "NSSelectorFromStringAddress", _NSSelectorFromStringAddress);
   Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
   Nan::SetMethod(ctor, "objc_msgSend", _objc_msgSend);
   Nan::SetMethod(ctor, "NSSearchPathForDirectoriesInDomains", _NSSearchPathForDirectoriesInDomains);
@@ -288,17 +314,11 @@ NAN_METHOD(Nid::invokeBooleanSetter)
 
 NAN_METHOD(Nid::_NSClassFromString)
 {
-  @autoreleasepool {
-    NSString* name = to_value_NSString(info[0]);
-    if (!name) {
-        Nan::ThrowError("Nid::NSClassFromString: expected first argument to be a string");
-        return;
-    }
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
     Class result = NSClassFromString(name);
-    Local<Value> argv[] = {
-      Nan::New<External>((__bridge void*)result)
-    };
-    JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+    JS_SET_RETURN(js_value_id/* Class*/(result));
   }
 }
 
