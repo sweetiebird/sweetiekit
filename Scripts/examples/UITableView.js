@@ -94,7 +94,7 @@ function getRows() {
 }
 
 function getCell(tableView, { section, row }) {
-  const cell = new UITableViewCell();
+  const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
   const todo = todos[row];
   if (todo && todo.text) {
     cell.textLabel.text = todo.text;

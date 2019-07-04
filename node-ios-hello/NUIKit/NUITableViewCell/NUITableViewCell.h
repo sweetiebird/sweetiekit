@@ -49,12 +49,53 @@
 
 
 JS_WRAP_CLASS(UITableViewCell, UIView);
-  JS_PROP(TextLabel);
-  JS_PROP(DetailTextLabel);
-  JS_PROP(IsEditing);
-  JS_PROP(IsSelected);
+  JS_METHOD(initWithStyleReuseIdentifier);
+  JS_METHOD(initWithCoder);
+  JS_METHOD(prepareForReuse);
+  JS_METHOD(setSelectedAnimated);
+  JS_METHOD(setHighlightedAnimated);
+  JS_METHOD(setEditingAnimated);
+  JS_METHOD(willTransitionToState);
+  JS_METHOD(didTransitionToState);
+  JS_METHOD(dragStateDidChange);
+  JS_METHOD(initWithFrameReuseIdentifier);
+  JS_PROP_READONLY(imageView);
+  JS_PROP_READONLY(textLabel);
+  JS_PROP_READONLY(detailTextLabel);
+  JS_PROP_READONLY(contentView);
+  JS_PROP(backgroundView);
+  JS_PROP(selectedBackgroundView);
+  JS_PROP(multipleSelectionBackgroundView);
+  JS_PROP_READONLY(reuseIdentifier);
   JS_PROP(selectionStyle);
-  JS_PROP(cellStyle);
+  JS_PROP(isSelected);
+  JS_PROP(isHighlighted);
+  JS_PROP_READONLY(editingStyle);
+  JS_PROP(showsReorderControl);
+  JS_PROP(shouldIndentWhileEditing);
+  JS_PROP(accessoryType);
+  JS_PROP(accessoryView);
+  JS_PROP(editingAccessoryType);
+  JS_PROP(editingAccessoryView);
+  JS_PROP(indentationLevel);
+  JS_PROP(indentationWidth);
+  JS_PROP(separatorInset);
+  JS_PROP(isEditing);
+  JS_PROP_READONLY(showingDeleteConfirmation);
+  JS_PROP(focusStyle);
+  JS_PROP(userInteractionEnabledWhileDragging);
+  JS_PROP(text);
+  JS_PROP(font);
+  JS_PROP(textAlignment);
+  JS_PROP(lineBreakMode);
+  JS_PROP(textColor);
+  JS_PROP(selectedTextColor);
+  JS_PROP(image);
+  JS_PROP(selectedImage);
+  JS_PROP(hidesAccessoryWhenEditing);
+  JS_PROP(target);
+  JS_PROP(editAction);
+  JS_PROP(accessoryAction);
 JS_WRAP_CLASS_END(UITableViewCell);
 
 #endif /* NUITableViewCell_h */

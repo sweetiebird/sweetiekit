@@ -171,7 +171,7 @@ class UIDemosApp {
 
   getCellFor(tableView, indexPath) {
     let { row, section } = indexPath;
-    const cell = new UITableViewCell();
+    const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
     const names = allDemoNames[section];
     const type = names[row];
     if (type) {
