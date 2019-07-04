@@ -132,6 +132,7 @@ class UIDemosApp {
   constructor(app) {
     this.app = app;
     this.vc = UIViewController();
+    this.vc.edgesForExtendedLayout = UIRectEdgeNone;
     this.table = new UITableView();
     this.vc.view.addSubview(this.table);
     this.setupConstraints();
@@ -146,6 +147,7 @@ class UIDemosApp {
   createDemoVC() {
     gc();
     this.demoVC = UIViewController();
+    this.demoVC.edgesForExtendedLayout = UIRectEdgeNone;
     gc();
     this.demoVC.view.backgroundColor = colors.getTheme().backgroundColor;
     gc();
