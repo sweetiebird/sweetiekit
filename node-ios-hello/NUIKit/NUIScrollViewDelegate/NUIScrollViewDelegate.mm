@@ -9,7 +9,7 @@
 NUIScrollViewDelegate::NUIScrollViewDelegate() {}
 NUIScrollViewDelegate::~NUIScrollViewDelegate() {}
 
-JS_INIT_CLASS(UIScrollViewDelegate, NSObject);
+JS_INIT_PROTOCOL(UIScrollViewDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(scrollViewDidScroll);
   JS_ASSIGN_PROTO_PROP(scrollViewDidZoom);
   JS_ASSIGN_PROTO_PROP(scrollViewWillBeginDragging);
@@ -28,17 +28,20 @@ JS_INIT_CLASS(UIScrollViewDelegate, NSObject);
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UIScrollViewDelegate, NSObject);
-JS_INIT_CLASS_END(UIScrollViewDelegate, NSObject);
+JS_INIT_PROTOCOL_END(UIScrollViewDelegate, NSObject);
 
 NAN_METHOD(NUIScrollViewDelegate::New) {
   JS_RECONSTRUCT(UIScrollViewDelegate);
   @autoreleasepool {
-    UIScrollViewDelegate* self = nullptr;
+    id <UIScrollViewDelegate> self = nil;
     
     if (info[0]->IsExternal()) {
-      self = (__bridge UIScrollViewDelegate *)(info[0].As<External>()->Value());
+      self = (__bridge id <UIScrollViewDelegate>)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && is_value_protocol< id<UIScrollViewDelegate> >(info[0])) {
+      JS_UNWRAPPED_PROTOCOL(info[0], UIScrollViewDelegate, value);
+      self = value;
     } else if (info.Length() <= 0) {
-      self = [[UIScrollViewDelegate alloc] init];
+      self = [[UIScrollViewDelegateType alloc] init];
     }
     if (self) {
       NUIScrollViewDelegate *wrapper = new NUIScrollViewDelegate();
@@ -52,24 +55,24 @@ NAN_METHOD(NUIScrollViewDelegate::New) {
   }
 }
 
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidScroll);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidZoom);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginDragging);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillEndDraggingWithVelocityTargetContentOffset);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndDraggingWillDecelerate);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginDecelerating);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndDecelerating);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndScrollingAnimation);
-DELEGATE_PROP(UIScrollViewDelegate, viewForZoomingInScrollView);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewWillBeginZoomingWithView);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidEndZoomingWithViewAtScale);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewShouldScrollToTop);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidScrollToTop);
-DELEGATE_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentInset);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidScroll);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidZoom);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewWillBeginDragging);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewWillEndDraggingWithVelocityTargetContentOffset);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidEndDraggingWillDecelerate);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewWillBeginDecelerating);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidEndDecelerating);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidEndScrollingAnimation);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, viewForZoomingInScrollView);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewWillBeginZoomingWithView);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidEndZoomingWithViewAtScale);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewShouldScrollToTop);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidScrollToTop);
+DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentInset);
 
 #include "NUIScrollView.h"
 
-@implementation UIScrollViewDelegate
+@implementation UIScrollViewDelegateType
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView // any offset changes
 {
