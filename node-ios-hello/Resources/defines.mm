@@ -309,6 +309,29 @@ namespace sweetiekit
     return g_wrapperMap;
   }
   
+  bool IsPlainObject(const Local<Value>& value)
+  {
+    if (!value->IsObject()) {
+      return false;
+    }
+    if (value->IsExternal()) {
+      return false;
+    }
+    Local<Object> obj(JS_OBJ(value));
+    Local<Value> proto(obj->Get(JS_STR("__proto__")));
+    if (proto->IsNullOrUndefined()) {
+      return true; // value was created via Object.create(null)
+    }
+    if (proto->IsObject()) {
+      Local<Value> ctor(JS_OBJ(proto)->Get(JS_STR("constructor")));
+      Local<Value> Object(JS_GLOBAL()->Get(JS_STR("Object")));
+      if (ctor->StrictEquals(Object)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   Local<Value> GetWrapperFor(__weak id pThing)
   {
     return GetWrapperFor(pThing, NNSObject::type);
