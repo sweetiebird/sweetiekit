@@ -75,8 +75,6 @@
 		A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D1298227EA6B40038C262 /* NUIScrollView.mm */; };
 		A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */; };
 		A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */; };
-		A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */; };
-		A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */; };
 		A124EFE522AF383800F29727 /* NWKNavigationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */; };
 		A12655F922719CE400D3DF47 /* tslint.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655E922719CE300D3DF47 /* tslint.json */; };
 		A12655FB22719CE400D3DF47 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655EB22719CE300D3DF47 /* index.js */; };
@@ -769,9 +767,6 @@
 		A11D129C227F6ACB0038C262 /* NNSLayoutConstraint.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutConstraint.mm; sourceTree = "<group>"; };
 		A11D129F227F6D550038C262 /* NNSLayoutAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSLayoutAnchor.h; sourceTree = "<group>"; };
 		A11D12A0227F706F0038C262 /* NNSLayoutAnchor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSLayoutAnchor.mm; sourceTree = "<group>"; };
-		A11D12A3227F8D950038C262 /* NUITableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewManager.h; sourceTree = "<group>"; };
-		A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewManager.mm; sourceTree = "<group>"; };
-		A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewManager.swift; sourceTree = "<group>"; };
 		A124EFE222AF383800F29727 /* NWKNavigationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWKNavigationDelegate.mm; sourceTree = "<group>"; };
 		A124EFE322AF383800F29727 /* NWKNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWKNavigationDelegate.h; sourceTree = "<group>"; };
 		A12655E922719CE300D3DF47 /* tslint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tslint.json; sourceTree = "<group>"; };
@@ -2400,16 +2395,6 @@
 			);
 			name = NNSLayoutAnchor;
 			path = ../NObjC/NNSLayoutAnchor;
-			sourceTree = "<group>";
-		};
-		A11D12A2227F8D780038C262 /* NUITableViewManager */ = {
-			isa = PBXGroup;
-			children = (
-				A11D12A3227F8D950038C262 /* NUITableViewManager.h */,
-				A11D12A4227F8DC90038C262 /* NUITableViewManager.mm */,
-				A11D12A6227F8DD60038C262 /* SUITableViewManager.swift */,
-			);
-			path = NUITableViewManager;
 			sourceTree = "<group>";
 		};
 		A124EFE122AF383800F29727 /* NWKNavigationDelegate */ = {
@@ -5388,7 +5373,6 @@
 		A19476BA226E9450003BB393 /* NUITableView */ = {
 			isa = PBXGroup;
 			children = (
-				A11D12A2227F8D780038C262 /* NUITableViewManager */,
 				A19476BB226E9461003BB393 /* NUITableView.h */,
 				A19476BC226E9469003BB393 /* NUITableView.mm */,
 			);
@@ -7608,7 +7592,6 @@
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A108633122C496EF001A15A9 /* NAVAudioUnitEffect.mm in Sources */,
-				A11D12A7227F8DD60038C262 /* SUITableViewManager.swift in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */,
 				A192708122C14B8A008F16AE /* NMTLSharedEvent.mm in Sources */,
@@ -7832,7 +7815,6 @@
 				A192702D22C1344E008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
 				A1926F7822C105F1008F16AE /* NSKRenderer.mm in Sources */,
 				A13370D722AEFC6A00FA3768 /* NAVAudioPCMBuffer.mm in Sources */,
-				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
 				A158788022CDBAE700847196 /* NUIDropInteraction.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
 				A1926F9D22C1144C008F16AE /* NMTLPixelFormat.mm in Sources */,

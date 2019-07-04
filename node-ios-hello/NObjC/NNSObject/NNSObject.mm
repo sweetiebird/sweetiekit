@@ -854,7 +854,6 @@ NAN_METHOD(NClass::New) {
 #include "NNSLayoutYAxisAnchor.h"
 #include "NUIMotionEffect.h"
 #include "NUILayoutGuide.h"
-//#include "NUITableViewManager.h"
 #include "NUIEvent.h"
 #include "NUIPressesEvent.h"
 #include "NUITouch.h"
@@ -1373,7 +1372,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITableView);
     JS_EXPORT_TYPE(UICollectionView);
     JS_EXPORT_TYPE(UICollectionViewCell);
-    //JS_EXPORT_TYPE(UITableViewManager);
     JS_EXPORT_TYPE(UICollectionViewManager);
     JS_EXPORT_TYPE(UICollectionViewLayout);
     JS_EXPORT_TYPE(UICollectionViewLayoutAttributes);
@@ -2312,7 +2310,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
-      //JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects

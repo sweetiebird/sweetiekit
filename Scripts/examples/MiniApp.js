@@ -18,7 +18,6 @@ const {
   UIViewController,
   UITableViewCell,
   UITableView,
-  UITableViewManager,
   UITabBarController,
   UITabBarItem,
   UIAlertController,

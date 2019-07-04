@@ -5,7 +5,6 @@ const enums = require('./enums');
 const {
   UITableViewCell,
   UITableView,
-  UITableViewManager,
   UIBarButtonItem,
   NSUserDefaults,
 } = SweetieKit;
