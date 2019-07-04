@@ -19,6 +19,7 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
   JS_ASSIGN_PROTO_PROP(nodesInsideFrustumWithPointOfView);
   JS_ASSIGN_PROTO_PROP(projectPoint);
   JS_ASSIGN_PROTO_PROP(unprojectPoint);
+  JS_ASSIGN_PROTO_PROP(prepareObjectShouldAbortBlock);
   JS_ASSIGN_PROTO_PROP(prepareObjectsWithCompletionHandler);
   JS_ASSIGN_PROTO_PROP(scene);
   JS_ASSIGN_PROTO_PROP(sceneTime);
@@ -114,14 +115,6 @@ NAN_METHOD(NSCNSceneRenderer::New) {
     }
   }
 }
-
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, presentSceneWithTransitionIncomingPointOfViewCompletionHandler);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, hitTestOptions);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, isNodeInsideFrustumWithPointOfView);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, nodesInsideFrustumWithPointOfView);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, projectPoint);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, unprojectPoint);
-DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectsWithCompletionHandler);
 
 #include "NSCNScene.h"
 
@@ -409,6 +402,16 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 }
 
 
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, presentSceneWithTransitionIncomingPointOfViewCompletionHandler);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, hitTestOptions);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, isNodeInsideFrustumWithPointOfView);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, nodesInsideFrustumWithPointOfView);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, projectPoint);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, unprojectPoint);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectShouldAbortBlock);
+DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectsWithCompletionHandler);
+
+#include "NSKTransition.h"
 
 @implementation SCNSceneRendererType
 
@@ -422,6 +425,18 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (void)presentScene:(SCNScene *_Nonnull)scene withTransition:(SKTransition *_Nonnull)transition incomingPointOfView:(nullable SCNNode *)pointOfView completionHandler:(nullable void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0))
 {
+  dispatch_main(^{
+    Local<Value> completionHandlerCallback(sweetiekit::FromBlock("presentSceneWithTransitionIncomingPointOfViewCompletionHandler::completionHandler", ^(JSInfo info) {
+      if (completionHandler) {
+        completionHandler();
+      }
+    }));
+    call_delegate(noop(), presentSceneWithTransitionIncomingPointOfViewCompletionHandler,
+      js_value_SCNScene(scene),
+      js_value_SKTransition(transition),
+      js_value_SCNNode(pointOfView),
+      completionHandlerCallback);
+  });
 }
 
 /*!
@@ -433,6 +448,9 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 - (NSArray<SCNHitTestResult *> *_Nonnull)hitTest:(CGPoint)point options:(nullable NSDictionary<SCNHitTestOption, id> *)options
 {
   __block NSArray<SCNHitTestResult *> *_Nonnull result = @[];
+  call_delegate(result = is_value_NSArray<SCNHitTestResult *>(JS_RESULT) ? to_value_NSArray<SCNHitTestResult *>(JS_RESULT) : result, hitTestOptions,
+    js_value_CGPoint(point),
+    js_value_NSDictionary/* <SCNHitTestOption, id>*/(options));
   return result;
 }
 
@@ -445,7 +463,11 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (BOOL)isNodeInsideFrustum:(SCNNode *_Nonnull)node withPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.9))
 {
-  return YES;
+  __block BOOL result = YES;
+  call_delegate(result = is_value_BOOL(JS_RESULT) ? to_value_BOOL(JS_RESULT) : result, isNodeInsideFrustumWithPointOfView,
+    js_value_SCNNode(node),
+    js_value_SCNNode(pointOfView));
+  return result;
 }
 
 /*!
@@ -457,6 +479,8 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 - (NSArray<SCNNode *> *_Nonnull)nodesInsideFrustumWithPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.11), ios(9.0))
 {
   __block NSArray<SCNNode *> *_Nonnull result = @[];
+  call_delegate(result = is_value_NSArray<SCNNode *>(JS_RESULT) ? to_value_NSArray<SCNNode *>(JS_RESULT) : result, nodesInsideFrustumWithPointOfView,
+    js_value_SCNNode(pointOfView));
   return result;
 }
 
@@ -468,7 +492,10 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (SCNVector3)projectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9))
 {
-  return SCNVector3Zero;
+  __block SCNVector3 result(SCNVector3Zero);
+  call_delegate(result = is_value_SCNVector3(JS_RESULT) ? to_value_SCNVector3(JS_RESULT) : result, projectPoint,
+    js_value_SCNVector3(point));
+  return result;
 }
 
 /*!
@@ -479,7 +506,10 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (SCNVector3)unprojectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9))
 {
-  return SCNVector3Zero;
+  __block SCNVector3 result(SCNVector3Zero);
+  call_delegate(result = is_value_SCNVector3(JS_RESULT) ? to_value_SCNVector3(JS_RESULT) : result, unprojectPoint,
+    js_value_SCNVector3(point));
+  return result;
 }
 
 /*!
@@ -491,7 +521,20 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (BOOL)prepareObject:(id _Nonnull)object shouldAbortBlock:(nullable NS_NOESCAPE BOOL (^)(void))block API_AVAILABLE(macos(10.9))
 {
-  return YES;
+  __block BOOL result = YES;
+  dispatch_main(^{
+    Local<Value> blockCallback(sweetiekit::FromBlock("prepareObjectShouldAbortBlock::block", ^(JSInfo info) {
+      __block BOOL result = NO;
+      if (block) {
+        result = block();
+      }
+      JS_SET_RETURN(js_value_BOOL(result));
+    }));
+    call_delegate(result = is_value_BOOL(JS_RESULT) ? to_value_BOOL(JS_RESULT) : result, prepareObjectShouldAbortBlock,
+      js_value_id(object),
+      blockCallback);
+  });
+  return result;
 }
 
 /*!
@@ -503,6 +546,18 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
  */
 - (void)prepareObjects:(NSArray *_Nonnull)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler API_AVAILABLE(macos(10.10))
 {
+  dispatch_main(^{
+    Local<Value> completionHandlerCallback(sweetiekit::FromBlock("prepareObjectsWithCompletionHandler::completionHandler", ^(JSInfo info) {
+      if (completionHandler) {
+        declare_args();
+        declare_value(BOOL, success);
+        completionHandler(success);
+      }
+    }));
+    call_delegate(noop(), prepareObjectsWithCompletionHandler,
+      js_value_NSArray(objects),
+      completionHandlerCallback);
+  });
 }
 
 @end

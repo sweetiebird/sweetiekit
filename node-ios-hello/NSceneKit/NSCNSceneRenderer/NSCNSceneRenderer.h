@@ -33,6 +33,7 @@ JS_WRAP_PROTOCOL(SCNSceneRenderer, NSObject);
   JS_PROP(nodesInsideFrustumWithPointOfView);
   JS_PROP(projectPoint);
   JS_PROP(unprojectPoint);
+  JS_PROP(prepareObjectShouldAbortBlock);
   JS_PROP(prepareObjectsWithCompletionHandler);
   JS_PROP(scene);
   JS_PROP(sceneTime);
