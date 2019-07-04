@@ -60,7 +60,6 @@ const {
   UIViewController,
   UITableView,
   UITableViewCell,
-  UITableViewManager,
 } = SweetieKit;
 
 demoTypes = {
@@ -137,7 +136,7 @@ class UIDemosApp {
   }
 
   setupNav() {
-    this.nav = new UINavigationController(this.vc);
+    this.nav = UINavigationController.alloc().initWithRootViewController(this.vc);
   }
 
   createDemoVC() {
@@ -195,7 +194,7 @@ class UIDemosApp {
   async handleCellSelected(tableView, indexPath) {
     let { section, row } = indexPath;
 
-    const cell = this.table.cellForRowAt(indexPath);
+    const cell = this.table.cellForRowAtIndexPath(indexPath);
     if (cell) {
       cell.isSelected = false;
     }
@@ -247,26 +246,24 @@ class UIDemosApp {
       this.demoVC.view.addSubview(view);
     }
     if (shouldPush) {
-      this.nav.pushViewController(this.demoVC);
+      this.nav.pushViewControllerAnimated(this.demoVC, true);
     }
   }
 
   setTableManager() {
-    this.mgr = new UITableViewManager(
-      this.getNumberRows.bind(this),
-      this.getCellFor.bind(this),
-    );
-
-    this.mgr.numberOfSections = () => {
-      return allDemoNames.length;
-    };
-    this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
-    this.mgr.titleForHeaderInSection = (tv, section) => {
-      return allDemoSections[section];
-    };
-
-    this.table.dataSource = this.mgr;
-    this.table.delegate = this.mgr;
+    this.table.dataSource = UITableViewDataSource({
+      tableViewNumberOfRowsInSection: this.getNumberRows.bind(this),
+      tableViewCellForRowAtIndexPath: this.getCellFor.bind(this),
+      numberOfSectionsInTableView(tableView) {
+        return allDemoNames.length;
+      },
+      tableViewTitleForHeaderInSection(tableView, section) {
+        return allDemoSections[section];
+      },
+    });
+    this.table.delegate = UITableViewDelegate({
+      tableViewDidSelectRowAtIndexPath: this.handleCellSelected.bind(this),
+    });
   }
 
   launch() {

@@ -261,7 +261,7 @@ async function userPhoto() {
 
   photoVC.view.addSubview(nextBtn);
 
-  nav.pushViewController(photoVC, true);
+  nav.pushViewControllerAnimated(photoVC, true);
 }
 
 async function setupApp() {

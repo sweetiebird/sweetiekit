@@ -356,7 +356,7 @@ function makeDemo(navigation, dvc) {
       }
     };
 
-    nav.pushViewController(demoVC);
+    nav.pushViewControllerAnimated(demoVC, true);
 
     skView.viewWillAppear = () => {
       start();

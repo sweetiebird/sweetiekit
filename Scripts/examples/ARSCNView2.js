@@ -67,7 +67,7 @@ async function make(nav, demoVC) {
   }, 1000);
 
   demoVC.view.addSubview(arView);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 
   function str2ab(str) {
     var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char

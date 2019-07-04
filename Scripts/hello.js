@@ -1500,7 +1500,7 @@ function iosApp() {
 
         vc2.view.addSubview(imgView);
 
-        nav.pushViewController(vc2);
+        nav.pushViewControllerAnimated(vc2, true);
       }
       picker.dismissViewControllerAnimatedCompletion(true, () => {});
     };

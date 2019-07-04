@@ -31,7 +31,7 @@ JS_INIT_PROTOCOL(UIScrollViewDelegate, NSObject);
 JS_INIT_PROTOCOL_END(UIScrollViewDelegate, NSObject);
 
 NAN_METHOD(NUIScrollViewDelegate::New) {
-  JS_RECONSTRUCT(UIScrollViewDelegate);
+  JS_RECONSTRUCT_PROTOCOL(UIScrollViewDelegate);
   @autoreleasepool {
     id <UIScrollViewDelegate> self = nil;
     

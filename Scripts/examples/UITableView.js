@@ -67,7 +67,7 @@ function addNewTodo() {
 
   table.reloadData();
 
-  table.scrollToRowAt(
+  table.scrollToRowAtIndexPathAtScrollPositionAnimated(
     { section: 0, row: todos.length - 1 },
     UITableViewScrollPositionTop,
     true,
@@ -108,7 +108,7 @@ function getCell(tableView, { section, row }) {
 }
 
 function handleCellSelected(tableView, { section, row }) {
-  const cell = tableView.cellForRowAt({ section, row });
+  const cell = tableView.cellForRowAtIndexPath({ section, row });
   if (cell) {
     cell.isSelected = false;
   }
@@ -121,10 +121,13 @@ function handleCellSelected(tableView, { section, row }) {
 }
 
 function setTableManager() {
-  mgr = new UITableViewManager(getRows, getCell);
-  mgr.didSelectRowAt = handleCellSelected;
-  table.dataSource = mgr;
-  table.delegate = mgr;
+  table.dataSource = UITableViewDataSource({
+    tableViewNumberOfRowsInSection: getRows,
+    tableViewCellForRowAtIndexPath: getCell,
+  });
+  table.delegate = UITableViewDelegate({
+    tableViewDidSelectRowAtIndexPath: handleCellSelected,
+  });
 }
 
 async function make(nav, demoVC) {
@@ -135,7 +138,7 @@ async function make(nav, demoVC) {
   addBarItem(nav, demoVC);
   setTableManager();
   nav.isToolbarHidden = false;
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

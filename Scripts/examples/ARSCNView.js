@@ -59,7 +59,7 @@ async function make(nav, demoVC) {
   }, 1000);
 
   demoVC.view.addSubview(arView);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 
   setTimeout(() => {
     arView.session.run(config);

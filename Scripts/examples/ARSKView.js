@@ -434,7 +434,7 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(arView);
   arView.pinToSuperview();
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 
   arView.presentScene(scene);
 

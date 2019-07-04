@@ -21,7 +21,7 @@ JS_INIT_CLASS(UIViewControllerTransitioningDelegate, NSObject);
 JS_INIT_CLASS_END(UIViewControllerTransitioningDelegate, NSObject);
 
 NAN_METHOD(NUIViewControllerTransitioningDelegate::New) {
-  JS_RECONSTRUCT(UIViewControllerTransitioningDelegate);
+  JS_RECONSTRUCT_PROTOCOL(UIViewControllerTransitioningDelegate);
   @autoreleasepool {
     UIViewControllerTransitioningDelegate* self = nullptr;
 

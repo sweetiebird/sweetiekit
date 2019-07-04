@@ -194,6 +194,34 @@
 		A158787F22CDBAE700847196 /* NUIDropInteractionDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787822CDBAE600847196 /* NUIDropInteractionDelegate.mm */; };
 		A158788022CDBAE700847196 /* NUIDropInteraction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787B22CDBAE600847196 /* NUIDropInteraction.mm */; };
 		A158788122CDBAE700847196 /* NUIDropProposal.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787E22CDBAE600847196 /* NUIDropProposal.mm */; };
+		A158788422CDC6E200847196 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158788222CDC6E200847196 /* NUITableViewDataSource.mm */; };
+		A15878A022CDC77000847196 /* NUITableViewDragDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158788722CDC76E00847196 /* NUITableViewDragDelegate.mm */; };
+		A15878A122CDC77000847196 /* NUITableViewDropProposal.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158788A22CDC76E00847196 /* NUITableViewDropProposal.mm */; };
+		A15878A222CDC77000847196 /* NUITableViewDropDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158788D22CDC76E00847196 /* NUITableViewDropDelegate.mm */; };
+		A15878A322CDC77000847196 /* NUITableViewDropPlaceholder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789022CDC76F00847196 /* NUITableViewDropPlaceholder.mm */; };
+		A15878A422CDC77000847196 /* NUITableViewDropItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789322CDC76F00847196 /* NUITableViewDropItem.mm */; };
+		A15878A522CDC77000847196 /* NUITableViewDropPlaceholderContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789622CDC76F00847196 /* NUITableViewDropPlaceholderContext.mm */; };
+		A15878A622CDC77000847196 /* NUITableViewDataSourcePrefetching.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789922CDC76F00847196 /* NUITableViewDataSourcePrefetching.mm */; };
+		A15878A722CDC77000847196 /* NUITableViewPlaceholder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789B22CDC76F00847196 /* NUITableViewPlaceholder.mm */; };
+		A15878A822CDC77000847196 /* NUITableViewDropCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158789F22CDC77000847196 /* NUITableViewDropCoordinator.mm */; };
+		A15878B222CDCCDB00847196 /* NUIDragInteractionDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878AA22CDCCDA00847196 /* NUIDragInteractionDelegate.mm */; };
+		A15878B322CDCCDB00847196 /* NUIDragInteraction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878AE22CDCCDA00847196 /* NUIDragInteraction.mm */; };
+		A15878B422CDCCDB00847196 /* NUIDragAnimating.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878B122CDCCDB00847196 /* NUIDragAnimating.mm */; };
+		A15878B822CDD4A500847196 /* NUITableViewHeaderFooterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878B722CDD4A400847196 /* NUITableViewHeaderFooterView.mm */; };
+		A15878BF22CDD5B200847196 /* NNSIndexSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878BB22CDD5B100847196 /* NNSIndexSet.mm */; };
+		A15878C022CDD5B200847196 /* NNSMutableIndexSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878BE22CDD5B100847196 /* NNSMutableIndexSet.mm */; };
+		A15878C422CDD95E00847196 /* NUIDragItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878C322CDD95E00847196 /* NUIDragItem.mm */; };
+		A15878CE22CDDA1E00847196 /* NNSItemProviderReading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878C722CDDA1D00847196 /* NNSItemProviderReading.mm */; };
+		A15878CF22CDDA1E00847196 /* NNSItemProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878CA22CDDA1E00847196 /* NNSItemProvider.mm */; };
+		A15878D022CDDA1E00847196 /* NNSItemProviderWriting.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878CD22CDDA1E00847196 /* NNSItemProviderWriting.mm */; };
+		A15878D422CDDD8400847196 /* NNSProgress.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878D322CDDD8300847196 /* NNSProgress.mm */; };
+		A15878D822CDE3FF00847196 /* NUIDragPreviewParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878D622CDE3FE00847196 /* NUIDragPreviewParameters.mm */; };
+		A15878E222CDEA4200847196 /* NUIDropSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878DA22CDEA4100847196 /* NUIDropSession.mm */; };
+		A15878E322CDEA4200847196 /* NUIDragSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878DE22CDEA4200847196 /* NUIDragSession.mm */; };
+		A15878E422CDEA4200847196 /* NUIDragDropSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878E122CDEA4200847196 /* NUIDragDropSession.mm */; };
+		A15878EB22CDEF4000847196 /* NUIDragPreviewTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878E722CDEF3F00847196 /* NUIDragPreviewTarget.mm */; };
+		A15878EC22CDEF4000847196 /* NUITargetedDragPreview.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */; };
+		A15878F022CE11AC00847196 /* NUINavigationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -384,8 +412,6 @@
 		A192710622C32A6B008F16AE /* NSCNSceneSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710422C32A6A008F16AE /* NSCNSceneSource.mm */; };
 		A192710A22C336B0008F16AE /* NSCNSkinner.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710822C336B0008F16AE /* NSCNSkinner.mm */; };
 		A192710E22C337F6008F16AE /* NSCNMorpher.mm in Sources */ = {isa = PBXBuildFile; fileRef = A192710C22C337F6008F16AE /* NSCNMorpher.mm */; };
-		A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */; };
-		A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */; };
 		A19476B9226E9109003BB393 /* NUITableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476B8226E9109003BB393 /* NUITableViewCell.mm */; };
 		A19476BD226E9469003BB393 /* NUITableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476BC226E9469003BB393 /* NUITableView.mm */; };
 		A19476C2226F5BE1003BB393 /* NUIRefreshControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19476C1226F5BE1003BB393 /* NUIRefreshControl.mm */; };
@@ -964,6 +990,62 @@
 		A158787B22CDBAE600847196 /* NUIDropInteraction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropInteraction.mm; sourceTree = "<group>"; };
 		A158787D22CDBAE600847196 /* NUIDropProposal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDropProposal.h; sourceTree = "<group>"; };
 		A158787E22CDBAE600847196 /* NUIDropProposal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropProposal.mm; sourceTree = "<group>"; };
+		A158788222CDC6E200847196 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
+		A158788322CDC6E200847196 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
+		A158788622CDC76E00847196 /* NUITableViewDragDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDragDelegate.h; sourceTree = "<group>"; };
+		A158788722CDC76E00847196 /* NUITableViewDragDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDragDelegate.mm; sourceTree = "<group>"; };
+		A158788922CDC76E00847196 /* NUITableViewDropProposal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropProposal.h; sourceTree = "<group>"; };
+		A158788A22CDC76E00847196 /* NUITableViewDropProposal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropProposal.mm; sourceTree = "<group>"; };
+		A158788C22CDC76E00847196 /* NUITableViewDropDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropDelegate.h; sourceTree = "<group>"; };
+		A158788D22CDC76E00847196 /* NUITableViewDropDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropDelegate.mm; sourceTree = "<group>"; };
+		A158788F22CDC76F00847196 /* NUITableViewDropPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropPlaceholder.h; sourceTree = "<group>"; };
+		A158789022CDC76F00847196 /* NUITableViewDropPlaceholder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropPlaceholder.mm; sourceTree = "<group>"; };
+		A158789222CDC76F00847196 /* NUITableViewDropItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropItem.h; sourceTree = "<group>"; };
+		A158789322CDC76F00847196 /* NUITableViewDropItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropItem.mm; sourceTree = "<group>"; };
+		A158789522CDC76F00847196 /* NUITableViewDropPlaceholderContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropPlaceholderContext.h; sourceTree = "<group>"; };
+		A158789622CDC76F00847196 /* NUITableViewDropPlaceholderContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropPlaceholderContext.mm; sourceTree = "<group>"; };
+		A158789822CDC76F00847196 /* NUITableViewDataSourcePrefetching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSourcePrefetching.h; sourceTree = "<group>"; };
+		A158789922CDC76F00847196 /* NUITableViewDataSourcePrefetching.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSourcePrefetching.mm; sourceTree = "<group>"; };
+		A158789B22CDC76F00847196 /* NUITableViewPlaceholder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewPlaceholder.mm; sourceTree = "<group>"; };
+		A158789C22CDC76F00847196 /* NUITableViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewPlaceholder.h; sourceTree = "<group>"; };
+		A158789E22CDC77000847196 /* NUITableViewDropCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewDropCoordinator.h; sourceTree = "<group>"; };
+		A158789F22CDC77000847196 /* NUITableViewDropCoordinator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDropCoordinator.mm; sourceTree = "<group>"; };
+		A15878AA22CDCCDA00847196 /* NUIDragInteractionDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragInteractionDelegate.mm; sourceTree = "<group>"; };
+		A15878AB22CDCCDA00847196 /* NUIDragInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragInteractionDelegate.h; sourceTree = "<group>"; };
+		A15878AD22CDCCDA00847196 /* NUIDragInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragInteraction.h; sourceTree = "<group>"; };
+		A15878AE22CDCCDA00847196 /* NUIDragInteraction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragInteraction.mm; sourceTree = "<group>"; };
+		A15878B022CDCCDB00847196 /* NUIDragAnimating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragAnimating.h; sourceTree = "<group>"; };
+		A15878B122CDCCDB00847196 /* NUIDragAnimating.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragAnimating.mm; sourceTree = "<group>"; };
+		A15878B622CDD4A400847196 /* NUITableViewHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewHeaderFooterView.h; sourceTree = "<group>"; };
+		A15878B722CDD4A400847196 /* NUITableViewHeaderFooterView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewHeaderFooterView.mm; sourceTree = "<group>"; };
+		A15878BA22CDD5B100847196 /* NNSIndexSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSIndexSet.h; sourceTree = "<group>"; };
+		A15878BB22CDD5B100847196 /* NNSIndexSet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSIndexSet.mm; sourceTree = "<group>"; };
+		A15878BD22CDD5B100847196 /* NNSMutableIndexSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSMutableIndexSet.h; sourceTree = "<group>"; };
+		A15878BE22CDD5B100847196 /* NNSMutableIndexSet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSMutableIndexSet.mm; sourceTree = "<group>"; };
+		A15878C222CDD95E00847196 /* NUIDragItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragItem.h; sourceTree = "<group>"; };
+		A15878C322CDD95E00847196 /* NUIDragItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragItem.mm; sourceTree = "<group>"; };
+		A15878C622CDDA1D00847196 /* NNSItemProviderReading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSItemProviderReading.h; sourceTree = "<group>"; };
+		A15878C722CDDA1D00847196 /* NNSItemProviderReading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSItemProviderReading.mm; sourceTree = "<group>"; };
+		A15878C922CDDA1E00847196 /* NNSItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSItemProvider.h; sourceTree = "<group>"; };
+		A15878CA22CDDA1E00847196 /* NNSItemProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSItemProvider.mm; sourceTree = "<group>"; };
+		A15878CC22CDDA1E00847196 /* NNSItemProviderWriting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSItemProviderWriting.h; sourceTree = "<group>"; };
+		A15878CD22CDDA1E00847196 /* NNSItemProviderWriting.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSItemProviderWriting.mm; sourceTree = "<group>"; };
+		A15878D222CDDD8300847196 /* NNSProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSProgress.h; sourceTree = "<group>"; };
+		A15878D322CDDD8300847196 /* NNSProgress.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSProgress.mm; sourceTree = "<group>"; };
+		A15878D622CDE3FE00847196 /* NUIDragPreviewParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragPreviewParameters.mm; sourceTree = "<group>"; };
+		A15878D722CDE3FE00847196 /* NUIDragPreviewParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragPreviewParameters.h; sourceTree = "<group>"; };
+		A15878DA22CDEA4100847196 /* NUIDropSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropSession.mm; sourceTree = "<group>"; };
+		A15878DB22CDEA4100847196 /* NUIDropSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDropSession.h; sourceTree = "<group>"; };
+		A15878DD22CDEA4200847196 /* NUIDragSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragSession.h; sourceTree = "<group>"; };
+		A15878DE22CDEA4200847196 /* NUIDragSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragSession.mm; sourceTree = "<group>"; };
+		A15878E022CDEA4200847196 /* NUIDragDropSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragDropSession.h; sourceTree = "<group>"; };
+		A15878E122CDEA4200847196 /* NUIDragDropSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragDropSession.mm; sourceTree = "<group>"; };
+		A15878E622CDEF3F00847196 /* NUIDragPreviewTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDragPreviewTarget.h; sourceTree = "<group>"; };
+		A15878E722CDEF3F00847196 /* NUIDragPreviewTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDragPreviewTarget.mm; sourceTree = "<group>"; };
+		A15878E922CDEF4000847196 /* NUITargetedDragPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITargetedDragPreview.h; sourceTree = "<group>"; };
+		A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITargetedDragPreview.mm; sourceTree = "<group>"; };
+		A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationControllerDelegate.mm; sourceTree = "<group>"; };
+		A15878EF22CE11AC00847196 /* NUINavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationControllerDelegate.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1328,9 +1410,6 @@
 		A192710922C336B0008F16AE /* NSCNSkinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNSkinner.h; sourceTree = "<group>"; };
 		A192710C22C337F6008F16AE /* NSCNMorpher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNMorpher.mm; sourceTree = "<group>"; };
 		A192710D22C337F6008F16AE /* NSCNMorpher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCNMorpher.h; sourceTree = "<group>"; };
-		A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewDataSource.mm; sourceTree = "<group>"; };
-		A19476B3226E9066003BB393 /* NUITableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewDataSource.h; sourceTree = "<group>"; };
-		A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITableViewDataSource.swift; sourceTree = "<group>"; };
 		A19476B7226E90FF003BB393 /* NUITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableViewCell.h; sourceTree = "<group>"; };
 		A19476B8226E9109003BB393 /* NUITableViewCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewCell.mm; sourceTree = "<group>"; };
 		A19476BB226E9461003BB393 /* NUITableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUITableView.h; sourceTree = "<group>"; };
@@ -3296,6 +3375,249 @@
 			path = NUIDropProposal;
 			sourceTree = "<group>";
 		};
+		A158788522CDC76E00847196 /* NUITableViewDragDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A158788622CDC76E00847196 /* NUITableViewDragDelegate.h */,
+				A158788722CDC76E00847196 /* NUITableViewDragDelegate.mm */,
+			);
+			path = NUITableViewDragDelegate;
+			sourceTree = "<group>";
+		};
+		A158788822CDC76E00847196 /* NUITableViewDropProposal */ = {
+			isa = PBXGroup;
+			children = (
+				A158788922CDC76E00847196 /* NUITableViewDropProposal.h */,
+				A158788A22CDC76E00847196 /* NUITableViewDropProposal.mm */,
+			);
+			path = NUITableViewDropProposal;
+			sourceTree = "<group>";
+		};
+		A158788B22CDC76E00847196 /* NUITableViewDropDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A158788C22CDC76E00847196 /* NUITableViewDropDelegate.h */,
+				A158788D22CDC76E00847196 /* NUITableViewDropDelegate.mm */,
+			);
+			path = NUITableViewDropDelegate;
+			sourceTree = "<group>";
+		};
+		A158788E22CDC76F00847196 /* NUITableViewDropPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				A158788F22CDC76F00847196 /* NUITableViewDropPlaceholder.h */,
+				A158789022CDC76F00847196 /* NUITableViewDropPlaceholder.mm */,
+			);
+			path = NUITableViewDropPlaceholder;
+			sourceTree = "<group>";
+		};
+		A158789122CDC76F00847196 /* NUITableViewDropItem */ = {
+			isa = PBXGroup;
+			children = (
+				A158789222CDC76F00847196 /* NUITableViewDropItem.h */,
+				A158789322CDC76F00847196 /* NUITableViewDropItem.mm */,
+			);
+			path = NUITableViewDropItem;
+			sourceTree = "<group>";
+		};
+		A158789422CDC76F00847196 /* NUITableViewDropPlaceholderContext */ = {
+			isa = PBXGroup;
+			children = (
+				A158789522CDC76F00847196 /* NUITableViewDropPlaceholderContext.h */,
+				A158789622CDC76F00847196 /* NUITableViewDropPlaceholderContext.mm */,
+			);
+			path = NUITableViewDropPlaceholderContext;
+			sourceTree = "<group>";
+		};
+		A158789722CDC76F00847196 /* NUITableViewDataSourcePrefetching */ = {
+			isa = PBXGroup;
+			children = (
+				A158789822CDC76F00847196 /* NUITableViewDataSourcePrefetching.h */,
+				A158789922CDC76F00847196 /* NUITableViewDataSourcePrefetching.mm */,
+			);
+			path = NUITableViewDataSourcePrefetching;
+			sourceTree = "<group>";
+		};
+		A158789A22CDC76F00847196 /* NUITableViewPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				A158789C22CDC76F00847196 /* NUITableViewPlaceholder.h */,
+				A158789B22CDC76F00847196 /* NUITableViewPlaceholder.mm */,
+			);
+			path = NUITableViewPlaceholder;
+			sourceTree = "<group>";
+		};
+		A158789D22CDC76F00847196 /* NUITableViewDropCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				A158789E22CDC77000847196 /* NUITableViewDropCoordinator.h */,
+				A158789F22CDC77000847196 /* NUITableViewDropCoordinator.mm */,
+			);
+			path = NUITableViewDropCoordinator;
+			sourceTree = "<group>";
+		};
+		A15878A922CDCCDA00847196 /* NUIDragInteractionDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A15878AB22CDCCDA00847196 /* NUIDragInteractionDelegate.h */,
+				A15878AA22CDCCDA00847196 /* NUIDragInteractionDelegate.mm */,
+			);
+			path = NUIDragInteractionDelegate;
+			sourceTree = "<group>";
+		};
+		A15878AC22CDCCDA00847196 /* NUIDragInteraction */ = {
+			isa = PBXGroup;
+			children = (
+				A15878AD22CDCCDA00847196 /* NUIDragInteraction.h */,
+				A15878AE22CDCCDA00847196 /* NUIDragInteraction.mm */,
+			);
+			path = NUIDragInteraction;
+			sourceTree = "<group>";
+		};
+		A15878AF22CDCCDB00847196 /* NUIDragAnimating */ = {
+			isa = PBXGroup;
+			children = (
+				A15878B022CDCCDB00847196 /* NUIDragAnimating.h */,
+				A15878B122CDCCDB00847196 /* NUIDragAnimating.mm */,
+			);
+			path = NUIDragAnimating;
+			sourceTree = "<group>";
+		};
+		A15878B522CDD4A400847196 /* NUITableViewHeaderFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				A15878B622CDD4A400847196 /* NUITableViewHeaderFooterView.h */,
+				A15878B722CDD4A400847196 /* NUITableViewHeaderFooterView.mm */,
+			);
+			path = NUITableViewHeaderFooterView;
+			sourceTree = "<group>";
+		};
+		A15878B922CDD5B100847196 /* NNSIndexSet */ = {
+			isa = PBXGroup;
+			children = (
+				A15878BA22CDD5B100847196 /* NNSIndexSet.h */,
+				A15878BB22CDD5B100847196 /* NNSIndexSet.mm */,
+			);
+			path = NNSIndexSet;
+			sourceTree = "<group>";
+		};
+		A15878BC22CDD5B100847196 /* NNSMutableIndexSet */ = {
+			isa = PBXGroup;
+			children = (
+				A15878BD22CDD5B100847196 /* NNSMutableIndexSet.h */,
+				A15878BE22CDD5B100847196 /* NNSMutableIndexSet.mm */,
+			);
+			path = NNSMutableIndexSet;
+			sourceTree = "<group>";
+		};
+		A15878C122CDD95E00847196 /* NUIDragItem */ = {
+			isa = PBXGroup;
+			children = (
+				A15878C222CDD95E00847196 /* NUIDragItem.h */,
+				A15878C322CDD95E00847196 /* NUIDragItem.mm */,
+			);
+			path = NUIDragItem;
+			sourceTree = "<group>";
+		};
+		A15878C522CDDA1D00847196 /* NNSItemProviderReading */ = {
+			isa = PBXGroup;
+			children = (
+				A15878C622CDDA1D00847196 /* NNSItemProviderReading.h */,
+				A15878C722CDDA1D00847196 /* NNSItemProviderReading.mm */,
+			);
+			path = NNSItemProviderReading;
+			sourceTree = "<group>";
+		};
+		A15878C822CDDA1E00847196 /* NNSItemProvider */ = {
+			isa = PBXGroup;
+			children = (
+				A15878C922CDDA1E00847196 /* NNSItemProvider.h */,
+				A15878CA22CDDA1E00847196 /* NNSItemProvider.mm */,
+			);
+			path = NNSItemProvider;
+			sourceTree = "<group>";
+		};
+		A15878CB22CDDA1E00847196 /* NNSItemProviderWriting */ = {
+			isa = PBXGroup;
+			children = (
+				A15878CC22CDDA1E00847196 /* NNSItemProviderWriting.h */,
+				A15878CD22CDDA1E00847196 /* NNSItemProviderWriting.mm */,
+			);
+			path = NNSItemProviderWriting;
+			sourceTree = "<group>";
+		};
+		A15878D122CDDD8300847196 /* NNSProgress */ = {
+			isa = PBXGroup;
+			children = (
+				A15878D222CDDD8300847196 /* NNSProgress.h */,
+				A15878D322CDDD8300847196 /* NNSProgress.mm */,
+			);
+			path = NNSProgress;
+			sourceTree = "<group>";
+		};
+		A15878D522CDE3FE00847196 /* NUIDragPreviewParameters */ = {
+			isa = PBXGroup;
+			children = (
+				A15878D722CDE3FE00847196 /* NUIDragPreviewParameters.h */,
+				A15878D622CDE3FE00847196 /* NUIDragPreviewParameters.mm */,
+			);
+			path = NUIDragPreviewParameters;
+			sourceTree = "<group>";
+		};
+		A15878D922CDEA4100847196 /* NUIDropSession */ = {
+			isa = PBXGroup;
+			children = (
+				A15878DB22CDEA4100847196 /* NUIDropSession.h */,
+				A15878DA22CDEA4100847196 /* NUIDropSession.mm */,
+			);
+			path = NUIDropSession;
+			sourceTree = "<group>";
+		};
+		A15878DC22CDEA4200847196 /* NUIDragSession */ = {
+			isa = PBXGroup;
+			children = (
+				A15878DD22CDEA4200847196 /* NUIDragSession.h */,
+				A15878DE22CDEA4200847196 /* NUIDragSession.mm */,
+			);
+			path = NUIDragSession;
+			sourceTree = "<group>";
+		};
+		A15878DF22CDEA4200847196 /* NUIDragDropSession */ = {
+			isa = PBXGroup;
+			children = (
+				A15878E022CDEA4200847196 /* NUIDragDropSession.h */,
+				A15878E122CDEA4200847196 /* NUIDragDropSession.mm */,
+			);
+			path = NUIDragDropSession;
+			sourceTree = "<group>";
+		};
+		A15878E522CDEF3F00847196 /* NUIDragPreviewTarget */ = {
+			isa = PBXGroup;
+			children = (
+				A15878E622CDEF3F00847196 /* NUIDragPreviewTarget.h */,
+				A15878E722CDEF3F00847196 /* NUIDragPreviewTarget.mm */,
+			);
+			path = NUIDragPreviewTarget;
+			sourceTree = "<group>";
+		};
+		A15878E822CDEF4000847196 /* NUITargetedDragPreview */ = {
+			isa = PBXGroup;
+			children = (
+				A15878E922CDEF4000847196 /* NUITargetedDragPreview.h */,
+				A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */,
+			);
+			path = NUITargetedDragPreview;
+			sourceTree = "<group>";
+		};
+		A15878ED22CE11AC00847196 /* NUINavigationControllerDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A15878EF22CE11AC00847196 /* NUINavigationControllerDelegate.h */,
+				A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */,
+			);
+			path = NUINavigationControllerDelegate;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -5048,9 +5370,8 @@
 		A19476B0226E9043003BB393 /* NUITableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				A19476B3226E9066003BB393 /* NUITableViewDataSource.h */,
-				A19476B1226E905B003BB393 /* NUITableViewDataSource.mm */,
-				A19476B4226E9091003BB393 /* SUITableViewDataSource.swift */,
+				A158788322CDC6E200847196 /* NUITableViewDataSource.h */,
+				A158788222CDC6E200847196 /* NUITableViewDataSource.mm */,
 			);
 			path = NUITableViewDataSource;
 			sourceTree = "<group>";
@@ -6423,9 +6744,6 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A158787922CDBAE600847196 /* NUIDropInteraction */,
-				A158787622CDBAE600847196 /* NUIDropInteractionDelegate */,
-				A158787C22CDBAE600847196 /* NUIDropProposal */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
@@ -6456,6 +6774,18 @@
 				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
 				A1926EED22C0B2C2008F16AE /* NUIDevice */,
 				A1D4989A22BB49BC009AC951 /* NUIDictationPhrase */,
+				A15878AF22CDCCDB00847196 /* NUIDragAnimating */,
+				A15878DF22CDEA4200847196 /* NUIDragDropSession */,
+				A15878AC22CDCCDA00847196 /* NUIDragInteraction */,
+				A15878A922CDCCDA00847196 /* NUIDragInteractionDelegate */,
+				A15878C122CDD95E00847196 /* NUIDragItem */,
+				A15878D522CDE3FE00847196 /* NUIDragPreviewParameters */,
+				A15878E522CDEF3F00847196 /* NUIDragPreviewTarget */,
+				A15878DC22CDEA4200847196 /* NUIDragSession */,
+				A158787922CDBAE600847196 /* NUIDropInteraction */,
+				A158787622CDBAE600847196 /* NUIDropInteractionDelegate */,
+				A158787C22CDBAE600847196 /* NUIDropProposal */,
+				A15878D922CDEA4100847196 /* NUIDropSession */,
 				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
 				A158786A22CDB33000847196 /* NUIFocus */,
 				A158787122CDB50600847196 /* NUIFocusAnimationContext */,
@@ -6483,6 +6813,7 @@
 				A1336FFA22A673C900FA3768 /* NUIMotionEffect */,
 				A1CE2B82228EFCAC00D9B3B8 /* NUINavigationBar */,
 				A1E48222226AA078002AF96F /* NUINavigationController */,
+				A15878ED22CE11AC00847196 /* NUINavigationControllerDelegate */,
 				A10BD04A228F6B5400184286 /* NUINavigationItem */,
 				A1BD4BCA22882EA5001D1F6E /* NUINib */,
 				A1CE2B42228E605100D9B3B8 /* NUIPageControl */,
@@ -6520,10 +6851,21 @@
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
 				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
 				A19476B0226E9043003BB393 /* NUITableViewDataSource */,
+				A158789722CDC76F00847196 /* NUITableViewDataSourcePrefetching */,
 				A158785222CDA5BC00847196 /* NUITableViewDelegate */,
+				A158788522CDC76E00847196 /* NUITableViewDragDelegate */,
+				A158789D22CDC76F00847196 /* NUITableViewDropCoordinator */,
+				A158788B22CDC76E00847196 /* NUITableViewDropDelegate */,
+				A158789122CDC76F00847196 /* NUITableViewDropItem */,
+				A158788E22CDC76F00847196 /* NUITableViewDropPlaceholder */,
+				A158789422CDC76F00847196 /* NUITableViewDropPlaceholderContext */,
+				A158788822CDC76E00847196 /* NUITableViewDropProposal */,
 				A158786622CDB27F00847196 /* NUITableViewFocusUpdateContext */,
+				A15878B522CDD4A400847196 /* NUITableViewHeaderFooterView */,
+				A158789A22CDC76F00847196 /* NUITableViewPlaceholder */,
 				A158785E22CDAB4C00847196 /* NUITableViewRowAction */,
 				A1646B9822922B8F0078CF4B /* NUITapGestureRecognizer */,
+				A15878E822CDEF4000847196 /* NUITargetedDragPreview */,
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D498AE22BB62A5009AC951 /* NUITextFieldDelegate */,
 				A1D4989622BB4932009AC951 /* NUITextInput */,
@@ -6669,6 +7011,12 @@
 		A1E2D7A5226A500100FA1562 /* NObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A15878D122CDDD8300847196 /* NNSProgress */,
+				A15878C822CDDA1E00847196 /* NNSItemProvider */,
+				A15878C522CDDA1D00847196 /* NNSItemProviderReading */,
+				A15878CB22CDDA1E00847196 /* NNSItemProviderWriting */,
+				A15878B922CDD5B100847196 /* NNSIndexSet */,
+				A15878BC22CDD5B100847196 /* NNSMutableIndexSet */,
 				A19270F422C2E343008F16AE /* NNSMachPortDelegate */,
 				A19270E722C2E27C008F16AE /* NNSMachPort */,
 				A19270ED22C2E27C008F16AE /* NNSMessagePort */,
@@ -7217,6 +7565,7 @@
 				A1D4986522BB29EB009AC951 /* NNSInvocationOperation.mm in Sources */,
 				A19F39CE22AF2B3D00606332 /* NAUAudioUnitPreset.mm in Sources */,
 				A1D4988122BB4112009AC951 /* NNSUndoManager.mm in Sources */,
+				A15878A422CDC77000847196 /* NUITableViewDropItem.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
 				A1926FBD22C11F99008F16AE /* NMTLType.mm in Sources */,
@@ -7230,15 +7579,19 @@
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
 				A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */,
+				A15878D022CDDA1E00847196 /* NNSItemProviderWriting.mm in Sources */,
+				A15878CE22CDDA1E00847196 /* NNSItemProviderReading.mm in Sources */,
 				A192700A22C12F5F008F16AE /* NMTLFunctionConstant.mm in Sources */,
 				A1926FC022C11F99008F16AE /* NMTLPointerType.mm in Sources */,
 				A1CE2B53228E7FFD00D9B3B8 /* NGifManager.swift in Sources */,
 				A1D498AB22BB4A03009AC951 /* NUITextSelectionRect.mm in Sources */,
+				A15878E222CDEA4200847196 /* NUIDropSession.mm in Sources */,
 				A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */,
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
 				A1D498B122BB62A5009AC951 /* NUITextFieldDelegate.mm in Sources */,
+				A15878B822CDD4A500847196 /* NUITableViewHeaderFooterView.mm in Sources */,
 				A174A48A22B1945300415AD8 /* NUISearchController.mm in Sources */,
 				A19F39F522AF662800606332 /* NMDLPhysicallyPlausibleScatteringFunction.mm in Sources */,
 				A1574EB722B88759006CC5F2 /* NUITextInputPasswordRules.mm in Sources */,
@@ -7251,6 +7604,7 @@
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
 				A108632022C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm in Sources */,
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
+				A15878C422CDD95E00847196 /* NUIDragItem.mm in Sources */,
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
 				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A108633122C496EF001A15A9 /* NAVAudioUnitEffect.mm in Sources */,
@@ -7294,6 +7648,7 @@
 				A108630222C48FE0001A15A9 /* NSCNRenderer.mm in Sources */,
 				A1BD4BC12288240F001D1F6E /* NUICollectionViewManager.mm in Sources */,
 				A1710EBC229A92C000EC7C86 /* NCIImage.mm in Sources */,
+				A15878A022CDC77000847196 /* NUITableViewDragDelegate.mm in Sources */,
 				A19F39CA22AF2AA800606332 /* NAUParameterTree.mm in Sources */,
 				A1D65E1B2281A04900AC0BD9 /* NARWorldTrackingConfiguration.mm in Sources */,
 				A1E2D7BD226A63B300FA1562 /* PasswordTextField.swift in Sources */,
@@ -7321,6 +7676,7 @@
 				A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
 				A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */,
+				A15878F022CE11AC00847196 /* NUINavigationControllerDelegate.mm in Sources */,
 				A1926FDD22C12999008F16AE /* NMTLBuffer.mm in Sources */,
 				A19270B222C174C8008F16AE /* NNSTarget.mm in Sources */,
 				A19270DB22C19C9B008F16AE /* NMTKView.mm in Sources */,
@@ -7340,10 +7696,12 @@
 				211E76B5226A332D00B838AF /* NodeUIViewController.swift in Sources */,
 				A1D672C02269A06F00562A42 /* NUIImage.mm in Sources */,
 				211E76A9226A0DE400B838AF /* NUIResponder.mm in Sources */,
+				A15878C022CDD5B200847196 /* NNSMutableIndexSet.mm in Sources */,
 				A1926FC922C120E3008F16AE /* NMTLTextureDescriptor.mm in Sources */,
 				A1926FE922C12CE1008F16AE /* NMTLDepthStencil.mm in Sources */,
 				A1646B9C22922B900078CF4B /* NUITapGestureRecognizer.mm in Sources */,
 				A1D498AD22BB4A03009AC951 /* NUITextInputStringTokenizer.mm in Sources */,
+				A15878A722CDC77000847196 /* NUITableViewPlaceholder.mm in Sources */,
 				A1D498B522BB798D009AC951 /* NUITextInputDelegate.mm in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A108638F22C6E8C1001A15A9 /* NGLKViewDelegate.mm in Sources */,
@@ -7400,10 +7758,12 @@
 				A192700D22C12F5F008F16AE /* NMTLLibrary.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A108632F22C496EF001A15A9 /* NAVAudioUnit.mm in Sources */,
+				A15878A622CDC77000847196 /* NUITableViewDataSourcePrefetching.mm in Sources */,
 				A1EE7D8922A41637002B53FF /* NSCNMaterialProperty.mm in Sources */,
 				A1D4987122BB3A62009AC951 /* NUIPress.mm in Sources */,
 				A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */,
 				A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */,
+				A15878B322CDCCDB00847196 /* NUIDragInteraction.mm in Sources */,
 				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
 				A1926F4C22C0E286008F16AE /* NSCNPhysicsBallSocketJoint.mm in Sources */,
 				A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */,
@@ -7413,6 +7773,7 @@
 				A133701922AACEC800FA3768 /* NNSURL.mm in Sources */,
 				A1649772227E14A200CA943F /* NUISwitch.mm in Sources */,
 				A1574F0422B93071006CC5F2 /* NCAKeyframeAnimation.mm in Sources */,
+				A15878A522CDC77000847196 /* NUITableViewDropPlaceholderContext.mm in Sources */,
 				A1926FBE22C11F99008F16AE /* NMTLArrayType.mm in Sources */,
 				A1926EDC22C098D9008F16AE /* NMKClusterAnnotation.mm in Sources */,
 				A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */,
@@ -7424,12 +7785,14 @@
 				A19270DF22C19D0A008F16AE /* NMTKViewDelegate.mm in Sources */,
 				A1926FA522C11EC8008F16AE /* NMTLArgumentDescriptor.mm in Sources */,
 				A1D65DD52281745500AC0BD9 /* NUITarget.mm in Sources */,
+				A158788422CDC6E200847196 /* NUITableViewDataSource.mm in Sources */,
 				A1D4986322BB29EB009AC951 /* NNSOperation.mm in Sources */,
 				A192705122C13C82008F16AE /* NMTLIndirectCommandBuffer.mm in Sources */,
 				A192701122C132FC008F16AE /* NMTLRenderPipeline.mm in Sources */,
 				A13370BD22AEEE1800FA3768 /* NAVAudioSessionChannelDescription.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
 				A1926FD922C128E4008F16AE /* NMTLHeap.mm in Sources */,
+				A15878E422CDEA4200847196 /* NUIDragDropSession.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
 				A108633E22C4A097001A15A9 /* NAVAudioTypes.mm in Sources */,
@@ -7455,6 +7818,7 @@
 				A158786D22CDB33100847196 /* NUIFocus.mm in Sources */,
 				A1D4982022B9BBD0009AC951 /* NCNPostalAddress.mm in Sources */,
 				A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */,
+				A15878EB22CDEF4000847196 /* NUIDragPreviewTarget.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
@@ -7477,6 +7841,8 @@
 				A19F3A1122AF72AB00606332 /* NMDLMesh.mm in Sources */,
 				A19270F222C2E27D008F16AE /* NNSPortDelegate.mm in Sources */,
 				A19F39F122AF65F400606332 /* NMDLScatteringFunction.mm in Sources */,
+				A15878B222CDCCDB00847196 /* NUIDragInteractionDelegate.mm in Sources */,
+				A15878EC22CDEF4000847196 /* NUITargetedDragPreview.mm in Sources */,
 				A19476BD226E9469003BB393 /* NUITableView.mm in Sources */,
 				A1BD4B9D2287DC11001D1F6E /* NCLLocationManagerDelegate.mm in Sources */,
 				A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */,
@@ -7492,6 +7858,7 @@
 				A19F3A0522AF68F400606332 /* NMDLTransform.mm in Sources */,
 				A158786922CDB27F00847196 /* NUITableViewFocusUpdateContext.mm in Sources */,
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
+				A15878B422CDCCDB00847196 /* NUIDragAnimating.mm in Sources */,
 				A192703022C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptor.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A108635222C5973C001A15A9 /* NSKAttribute.mm in Sources */,
@@ -7505,6 +7872,7 @@
 				A13370AD22AEE79F00FA3768 /* NAVAudioSession.mm in Sources */,
 				A1926FCD22C1216A008F16AE /* NMTLResource.mm in Sources */,
 				A1926F3822C0DEA6008F16AE /* NSCNPhysicsShape.mm in Sources */,
+				A15878A222CDC77000847196 /* NUITableViewDropDelegate.mm in Sources */,
 				A1574EC322B8A3AB006CC5F2 /* NUIVisualEffect.mm in Sources */,
 				A1926EE022C0A6B9008F16AE /* NCIColor.mm in Sources */,
 				A133702222AAE76E00FA3768 /* NNSURLRequest.mm in Sources */,
@@ -7530,6 +7898,7 @@
 				A192700822C12F5F008F16AE /* NMTLFunction.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
+				A15878A822CDC77000847196 /* NUITableViewDropCoordinator.mm in Sources */,
 				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
 				A108630622C4905F001A15A9 /* NSCNNodeRendererDelegate.mm in Sources */,
 				A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */,
@@ -7581,7 +7950,6 @@
 				A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */,
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
 				A10862FA22C48F48001A15A9 /* NCGContext.mm in Sources */,
-				A19476B5226E9091003BB393 /* SUITableViewDataSource.swift in Sources */,
 				A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A1926FE422C12B20008F16AE /* NMTLSamplerDescriptor.mm in Sources */,
@@ -7589,7 +7957,6 @@
 				A192702B22C1344E008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptor.mm in Sources */,
 				A1BD4BCD22882EB9001D1F6E /* NUINib.mm in Sources */,
 				A1926EE822C0A7E5008F16AE /* NAVPortraitEffectsMatte.mm in Sources */,
-				A19476B2226E905B003BB393 /* NUITableViewDataSource.mm in Sources */,
 				A1926F2C22C0CBE9008F16AE /* NUITabBarControllerDelegate.mm in Sources */,
 				A19270BE22C18220008F16AE /* NMTLDrawable.mm in Sources */,
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
@@ -7610,6 +7977,7 @@
 				A19F39D922AF4AE200606332 /* NMDLAsset.mm in Sources */,
 				A1926F5C22C0E836008F16AE /* NSCNAudioPlayer.mm in Sources */,
 				A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */,
+				A15878BF22CDD5B200847196 /* NNSIndexSet.mm in Sources */,
 				A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */,
 				A1D65E1322819D9500AC0BD9 /* NARSKView.mm in Sources */,
 				A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */,
@@ -7632,9 +8000,11 @@
 				A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */,
+				A15878E322CDEA4200847196 /* NUIDragSession.mm in Sources */,
 				A13370CD22AEFB3B00FA3768 /* NAVAudioConnectionPoint.mm in Sources */,
 				A1926FD822C128E4008F16AE /* NMTLHeapDescriptor.mm in Sources */,
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
+				A15878D822CDE3FF00847196 /* NUIDragPreviewParameters.mm in Sources */,
 				A1926FBB22C11F99008F16AE /* NMTLArgument.mm in Sources */,
 				A133709522AB418200FA3768 /* NNSError.mm in Sources */,
 				A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */,
@@ -7659,6 +8029,7 @@
 				A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */,
 				A1D4987522BB3D84009AC951 /* NNSUserActivity.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
+				A15878A322CDC77000847196 /* NUITableViewDropPlaceholder.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
 				A1574F0222B93071006CC5F2 /* NCAAnimationGroup.mm in Sources */,
 				211E76A02269EF7500B838AF /* NSObject+AssociatedObject.swift in Sources */,
@@ -7668,6 +8039,7 @@
 				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
 				A1926F6722C0F4F4008F16AE /* NSCNParticlePropertyController.mm in Sources */,
 				A1D4986422BB29EB009AC951 /* NNSOperationQueue.mm in Sources */,
+				A15878D422CDDD8400847196 /* NNSProgress.mm in Sources */,
 				A1EE7D76229D8EEF002B53FF /* NSCNTorus.mm in Sources */,
 				A1336FF922A6702500FA3768 /* NUILayoutGuide.mm in Sources */,
 				A108633622C4983F001A15A9 /* NAudioComponent.mm in Sources */,
@@ -7700,7 +8072,9 @@
 				A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */,
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
 				A108635122C5973C001A15A9 /* NSKAttributeValue.mm in Sources */,
+				A15878CF22CDDA1E00847196 /* NNSItemProvider.mm in Sources */,
 				A192703D22C1375D008F16AE /* NMTLComputePipelineReflection.mm in Sources */,
+				A15878A122CDC77000847196 /* NUITableViewDropProposal.mm in Sources */,
 				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */,

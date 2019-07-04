@@ -113,7 +113,7 @@ function makeQuizDelegate(pageControl) {
   del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
-      sv.setContentOffset({ x, y: 0 }, false);
+      sv.setContentOffsetAnimated({ x, y: 0 }, false);
     }
   };
   quizScroll.delegate = del;
@@ -183,7 +183,7 @@ function setupQuizView() {
   pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
-    quizScroll.setContentOffset({ x: offsetX, y: 0 }, true);
+    quizScroll.setContentOffsetAnimated({ x: offsetX, y: 0 }, true);
   }, UIControlEventValueChanged);
 
   makeQuizDelegate(pageControl);
@@ -213,7 +213,7 @@ function startQuiz() {
 
   setupQuizButton();
 
-  nav.pushViewController(quizVC);
+  nav.pushViewControllerAnimated(quizVC, true);
 
   setTimeout(() => {
     progressView.setProgress(0.2, true);
@@ -243,7 +243,7 @@ function makeDelegate(pageControl) {
   del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
-      sv.setContentOffset({ x, y: 0 }, false);
+      sv.setContentOffsetAnimated({ x, y: 0 }, false);
     }
   };
   scrollView.delegate = del;
@@ -340,7 +340,7 @@ function setupWelcomeView() {
   pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
-    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
+    scrollView.setContentOffsetAnimated({ x: offsetX, y: 0 }, true);
   }, UIControlEventValueChanged);
 
   makeDelegate(pageControl);
@@ -396,7 +396,7 @@ async function make(n, d) {
 
   setupNavStyle(n);
 
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

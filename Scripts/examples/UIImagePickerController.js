@@ -44,7 +44,7 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(btn);
 
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

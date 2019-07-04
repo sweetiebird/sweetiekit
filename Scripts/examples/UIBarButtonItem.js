@@ -11,7 +11,7 @@ async function make(nav, demoVC) {
   });
   demoVC.toolbarItems = [item];
   nav.isToolbarHidden = false;
-  nav.pushViewController(demoVC)
+  nav.pushViewControllerAnimated(demoVC, true)
 }
 
 module.exports = make;

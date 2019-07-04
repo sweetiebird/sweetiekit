@@ -1531,6 +1531,10 @@ bool is_value_##type(const Local<Value>& value)
     JS_PANIC("Expected arg[%u] to be a " #type, name##_argument_index); \
   type name(to_value_##type(info[name##_argument_index]));
   
+#define declare_optional_value_(index, type, name, defaultValue) \
+  auto name##_argument_index(index); \
+  type name(is_value_##type(info[name##_argument_index]) ? to_value_##type(info[name##_argument_index]) : (defaultValue))
+  
 #define declare_pointer_(index, type, name) \
   auto name##_argument_index(index); \
   if (info[name##_argument_index]->IsNullOrUndefined() || !is_value_##type(info[name##_argument_index])) \
@@ -1590,6 +1594,9 @@ bool is_value_##type(const Local<Value>& value)
 
 #define declare_value(...) \
   declare_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
+
+#define declare_optional_value(...) \
+  declare_optional_value_(JS_ARGC, __VA_ARGS__); JS_ARGC++;
   
 #define declare_pointer(...) \
   declare_pointer_(JS_ARGC, __VA_ARGS__); JS_ARGC++;

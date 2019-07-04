@@ -14,19 +14,27 @@
 #define to_value_UINavigationController(x) to_value_wrapper(x, UINavigationController)
 #define is_value_UINavigationController(x) is_value_wrapper(x, UINavigationController)
 
+#define js_value_UINavigationControllerOperation(x) JS_ENUM(UINavigationControllerOperation, NSInteger, x)
+#define to_value_UINavigationControllerOperation(x) TO_ENUM(UINavigationControllerOperation, NSInteger, x)
+#define is_value_UINavigationControllerOperation(x) IS_ENUM(UINavigationControllerOperation, NSInteger, x)
+
 JS_WRAP_CLASS(UINavigationController, UIViewController);
-  JS_METHOD(SetViewControllers);
-  JS_METHOD(PushViewController);
-  JS_METHOD(PopViewController);
-  JS_METHOD(PopToRootViewController);
-  JS_METHOD(PopToViewController);
-  
+  JS_METHOD(initWithNavigationBarClassToolbarClass);
+  JS_METHOD(initWithRootViewController);
+  JS_METHOD(pushViewControllerAnimated);
+  JS_METHOD(popViewControllerAnimated);
+  JS_METHOD(popToViewControllerAnimated);
+  JS_METHOD(popToRootViewControllerAnimated);
+  JS_METHOD(setViewControllersAnimated);
+  JS_METHOD(setNavigationBarHiddenAnimated);
+  JS_METHOD(setToolbarHiddenAnimated);
+  JS_METHOD(showViewControllerSender);
   JS_PROP_READONLY(topViewController);
   JS_PROP_READONLY(visibleViewController);
   JS_PROP(viewControllers);
-  JS_PROP(navigationBarHidden);
+  JS_PROP(isNavigationBarHidden);
   JS_PROP_READONLY(navigationBar);
-  JS_PROP(toolbarHidden);
+  JS_PROP(isToolbarHidden);
   JS_PROP_READONLY(toolbar);
   JS_PROP(delegate);
   JS_PROP_READONLY(interactivePopGestureRecognizer);
@@ -36,7 +44,6 @@ JS_WRAP_CLASS(UINavigationController, UIViewController);
   JS_PROP(hidesBarsWhenVerticallyCompact);
   JS_PROP(hidesBarsOnTap);
   JS_PROP_READONLY(barHideOnTapGestureRecognizer);
-
 JS_WRAP_CLASS_END(UINavigationController);
 
 // UIViewController (UINavigationControllerItem)

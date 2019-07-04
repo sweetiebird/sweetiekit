@@ -128,7 +128,7 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(collection);
   collection.pinToSuperview();
   setNavStyles(nav);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

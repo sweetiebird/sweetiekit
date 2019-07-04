@@ -14,7 +14,7 @@ async function make(nav, demoVC) {
     alert.dismissViewControllerAnimatedCompletion(true, () => {});
   });
   alert.addAction(action);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
   demoVC.presentViewControllerAnimatedCompletion(alert, true, () => {});
 }
 

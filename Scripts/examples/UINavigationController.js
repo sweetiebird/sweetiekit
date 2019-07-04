@@ -12,12 +12,12 @@ async function make(nav, demoVC) {
   btn.addTargetActionForControlEvents(() => {
     const lastVC = UIViewController();
     lastVC.view.backgroundColor = RGB(205, 37, 83);
-    nav.pushViewController(lastVC);
+    nav.pushViewControllerAnimated(lastVC, true);
   }, UIControlEventTouchUpInside);
   btn.backgroundColor = RGB(87, 174, 176);
   btn.layer.cornerRadius = 4;
   demoVC.view.addSubview(btn);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

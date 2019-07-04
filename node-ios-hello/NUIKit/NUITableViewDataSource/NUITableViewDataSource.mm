@@ -1,639 +1,190 @@
 //
-//  NUITableViewDataSourceDataSource.mm
+//  NUITableViewDataSource.mm
 //
-//  Created by Emily Kolar on 4/22/19.
+//  Created by Shawn Presser on 7/4/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUITableViewDataSource.h"
 
-NUITableViewDataSource::NUITableViewDataSource()
-: _numberRowsCallback(new Nan::Persistent<Function>())
-, _cellCallback(new Nan::Persistent<Function>())
-, _displayCallback(new Nan::Persistent<Function>())
-{
-}
+#define instancetype UITableViewDataSource
+#define js_value_instancetype js_value_UITableViewDataSource
 
-NUITableViewDataSource::~NUITableViewDataSource()
-{
-  delete _numberRowsCallback;
-  delete _cellCallback;
-  delete _displayCallback;
-}
+NUITableViewDataSource::NUITableViewDataSource() {}
+NUITableViewDataSource::~NUITableViewDataSource() {}
 
-JS_INIT_CLASS(UITableViewDataSource, NSObject);
+JS_INIT_PROTOCOL(UITableViewDataSource, NSObject);
+  JS_ASSIGN_PROTO_PROP(tableViewNumberOfRowsInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewCellForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(numberOfSectionsInTableView);
+  JS_ASSIGN_PROTO_PROP(tableViewTitleForHeaderInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewTitleForFooterInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewCanEditRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewCanMoveRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(sectionIndexTitlesForTableView);
+  JS_ASSIGN_PROTO_PROP(tableViewSectionForSectionIndexTitleAtIndex);
+  JS_ASSIGN_PROTO_PROP(tableViewCommitEditingStyleForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewMoveRowAtIndexPathToIndexPath);
+
   // instance members (proto)
-  JS_SET_PROP(proto, "numberOfRowsInSection", NumberOfRowsInSection);
-  JS_SET_PROP(proto, "cellForRowAt", CellForRowAt);
-  JS_SET_PROP(proto, "willDisplayCellForRowAt", WillDisplayCellForRowAt);
   // static members (ctor)
   JS_INIT_CTOR(UITableViewDataSource, NSObject);
-JS_INIT_CLASS_END(UITableViewDataSource, NSObject);
+  // constant values (exports)
+JS_INIT_PROTOCOL_END(UITableViewDataSource, NSObject);
+
 
 NAN_METHOD(NUITableViewDataSource::New) {
-  JS_RECONSTRUCT(UITableViewDataSource);
-
-  Local<Object> dObj = info.This();
-
-  NUITableViewDataSource *nd = new NUITableViewDataSource();
-
+  JS_RECONSTRUCT_PROTOCOL(UITableViewDataSource);
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      nd->SetNSObject([[SUITableViewDataSource alloc] init]);
-    });
-  }
-  nd->Wrap(dObj);
+    id<UITableViewDataSource> self = nullptr;
 
-  info.GetReturnValue().Set(dObj);
-}
-
-NAN_GETTER(NUITableViewDataSource::NumberOfRowsInSectionGetter) {
-  Nan::HandleScope scope;
-
-  NUITableViewDataSource *view = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_numberRowsCallback));
-}
-#include <vector>
-namespace sweetiekit {
-
-//
-//
-//template<typename T>
-//void boring_template_fn(T t){
-//    auto identity = [](decltype(t) t){ return t;};
-//    std::cout << identity(t) << std::endl;
-//}
-//
-//int main(int argc, char *argv[]) {
-//    std::string s("My string");
-//    boring_template_fn(s);
-//    boring_template_fn(1024);
-//    boring_template_fn(true);
-//}
-  struct NodeArgs {
-  private:
-    std::vector< Nan::Global<Value> > args;
-  public:
-    
-    NodeArgs() { }
-    ~NodeArgs() { Reset(); }
-    
-    void Reset() {
-      args.clear();
+    if (info[0]->IsExternal()) {
+      self = (__bridge id<UITableViewDataSource>)(info[0].As<External>()->Value());
+    } else if (info.Length() >= 1 && is_value_protocol< id<UITableViewDataSource> >(info[0])) {
+      JS_UNWRAPPED_PROTOCOL(info[0], UITableViewDataSource, value);
+      self = value;
+    } else if (info.Length() <= 0) {
+      self = [[UITableViewDataSourceType alloc] init];
     }
-    
-    void Reset(const Local<Value>* argv, int argc) {
-      Reset();
-      for (auto i = 0; i < argc; i++) {
-        args.push_back(Nan::Global<Value>(argv[i]));
-      }
+    if (self) {
+      NUITableViewDataSource *wrapper = new NUITableViewDataSource();
+      wrapper->set_self(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UITableViewDataSource::New: invalid arguments");
     }
-    std::vector< Local<Value> > Get() {
-      std::vector< Local<Value> > arguments;
-      for (auto i = 0; i < args.size(); i++) {
-        arguments.push_back(Nan::New(args[i]));
-      }
-      return arguments;
-    }
-  };
-  
-  
-  typedef void (^RunnerFn) ();
-  
-  struct NodeCall : Task {
-    RunnerFn runner;
-    NodeCall(RunnerFn fn) {
-      runner = fn;
-    }
-    void Run() final {
-      runner();
-    }
-  };
-
-  class EnterIsolate
-  {
-      Isolate* isolate;
-    public:
-      EnterIsolate(Isolate* iso) {
-        isolate = iso;
-        isolate->Enter();
-      }
-      ~EnterIsolate() {
-        isolate->Exit();
-      }
-  };
-  template<typename GetArgsFn, typename OnFinishedFn>
-  void Call(
-    Isolate* isolate,
-    const Nan::Global<Function>& cb,
-    const char* method,
-    GetArgsFn getArgs,
-    OnFinishedFn onFinished)
-  {
-  #if 0
-    __block uv_sem_t sem;
-    uv_sem_init(&sem, 0);
-    __block volatile bool resultSet = false;
-    
-    @autoreleasepool {
-      dispatch_async([AppDelegate queue], ^ {
-    node::MultiIsolatePlatform* platform = GetMainThreadMultiIsolatePlatform();
-    platform->CallOnForegroundThread(isolate, new NodeCall(^ {
-        Nan::HandleScope scope;
-        Local<Function> callback = Nan::New(cb);
-        if (!callback.IsEmpty()) {
-          
-          Local<Object> asyncObject = Nan::New<Object>();
-          AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-          std::vector< Local<Value> > argv(getArgs());
-          Local<Value> res = asyncResource.MakeCallback(callback, (int)argv.size(), &argv[0]).ToLocalChecked();
-          sweetiekit::Kick();
-          //result.Reset(res);
-          //auto onFinishedFn = [](decltype(onFinished) onFinished){ return onFinished;};
-          onFinished(res);
-          resultSet = true;
-          uv_sem_post(&sem);
-        }
-      }));
-    });
-    }
-//    {
-//      EnterIsolate enter(isolate);
-//      assert(platform->FlushForegroundTasks(isolate));
-//    }
-    if (!resultSet) {
-      uv_sem_wait(&sem);
-    }
-    uv_sem_destroy(&sem);
-    assert(resultSet);
-  #elif 0
-    @autoreleasepool {
-      dispatch_async([AppDelegate queue], ^ {
-        Local<Function> callback = Nan::New(cb);
-        if (!callback.IsEmpty()) {
-          
-          Local<Object> asyncObject = Nan::New<Object>();
-          AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-          std::vector< Local<Value> > argv(getArgs());
-          Local<Value> res = asyncResource.MakeCallback(callback, (int)argv.size(), &argv[0]).ToLocalChecked();
-          sweetiekit::Kick();
-          //result.Reset(res);
-          //auto onFinishedFn = [](decltype(onFinished) onFinished){ return onFinished;};
-          onFinished(res);
-        }
-      });
-    }
-  #elif 1
-  Nan::Global<Value> result;
-  Local<Object> asyncObject = Nan::New<Object>();
-  AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-
-  Local<Function> cbFn = Nan::New(cb);
-  std::vector< Local<Value> > argv(getArgs());
-  Local<Value> ret = asyncResource.MakeCallback(cbFn, (int)argv.size(), &argv[0]).ToLocalChecked();
-  result.Reset(ret);
-  onFinished(Nan::New(result));
-  #elif 1
-  Nan::Global<Value> result;
-  volatile bool done = false;
-  //Local<Function> cbFn = Local<Function>::Cast(info[10]);
-
-  //Nan::Global<Function> cb(cbFn);
-  {
-    std::lock_guard<std::mutex> lock(sweetiekit::reqMutex);
-    sweetiekit::reqCbs.push_back([ &onFinished, &getArgs, &result, &cb, method, &done]() -> void {
-
-      // platform code.
-
-      {
-        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-
-        sweetiekit::resCbs.push_back([ &onFinished, &getArgs, &result, &cb, method, &done]() -> void {
-          {
-            Local<Object> asyncObject = Nan::New<Object>();
-            AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-
-            Local<Function> cbFn = Nan::New(cb);
-            std::vector< Local<Value> > argv(getArgs());
-            Local<Value> ret = asyncResource.MakeCallback(cbFn, (int)argv.size(), &argv[0]).ToLocalChecked();
-            result.Reset(ret);
-            onFinished(Nan::New(result));
-            done = true;
-          }
-
-          //delete vrPoseRes;
-        });
-      }
-
-      uv_async_send(&sweetiekit::resAsync);
-
-    });
-  }
-
-  uv_sem_post(&sweetiekit::reqSem);
-  while (!done) {
-    UIKit_PumpEvents();
-  }
-  #elif 1
-  uv_sem_t sem;
-  uv_sem_init(&sem, 0);
-  Nan::Global<Value> result;
-  //Local<Function> cbFn = Local<Function>::Cast(info[10]);
-
-  //Nan::Global<Function> cb(cbFn);
-  {
-    std::lock_guard<std::mutex> lock(sweetiekit::reqMutex);
-    sweetiekit::reqCbs.push_back([&sem, &onFinished, &getArgs, &result, &cb, method]() -> void {
-
-      // platform code.
-
-      {
-        std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-
-        sweetiekit::resCbs.push_back([&sem, &onFinished, &getArgs, &result, &cb, method]() -> void {
-          {
-            Local<Object> asyncObject = Nan::New<Object>();
-            AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-
-            Local<Function> cbFn = Nan::New(cb);
-            std::vector< Local<Value> > argv(getArgs());
-            Local<Value> ret = asyncResource.MakeCallback(cbFn, (int)argv.size(), &argv[0]).ToLocalChecked();
-            result.Reset(ret);
-            onFinished(Nan::New(result));
-            uv_sem_post(&sem);
-          }
-
-          //delete vrPoseRes;
-        });
-      }
-
-      uv_async_send(&sweetiekit::resAsync);
-
-    });
-  }
-
-  uv_sem_post(&sweetiekit::reqSem);
-  uv_sem_wait(&sem);
-  uv_sem_destroy(&sem);
-
-  #elif 1
-    uv_sem_t sem;
-    uv_sem_init(&sem, 0);
-    //Nan::Global<Value> result;
-    volatile bool resultSet = false;
-    
-    {
-      std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-        sweetiekit::resCbs.push_back([method, &cb, /*&result,*/ &sem, &getArgs, &onFinished, &resultSet]() -> void {
-        
-        Local<Function> callback = Nan::New(cb);
-        if (!callback.IsEmpty()) {
-          
-          Local<Object> asyncObject = Nan::New<Object>();
-          AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-          std::vector< Local<Value> > argv(getArgs());
-          Local<Value> res = asyncResource.MakeCallback(callback, (int)argv.size(), &argv[0]).ToLocalChecked();
-          sweetiekit::Kick();
-          //result.Reset(res);
-          //auto onFinishedFn = [](decltype(onFinished) onFinished){ return onFinished;};
-          onFinished(res);
-          resultSet = true;
-        }
-        uv_sem_post(&sem);
-      });
-    }
-    uv_async_send(&sweetiekit::resAsync);
-    if (!resultSet) {
-      uv_sem_wait(&sem);
-    }
-    uv_sem_destroy(&sem);
-    //return result;
-    #endif
-  }
-
-
-  
-  template<typename R>
-  void Call(
-    const Nan::Global<Function>& cb,
-    const char* method,
-    int argc,
-    Nan::Global<Value>* args,
-    R onFinished)
-  {
-    uv_sem_t sem;
-    uv_sem_init(&sem, 0);
-    Nan::Global<Value> result;
-    
-    {
-      std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-        sweetiekit::resCbs.push_back([method, argc, &cb, args, &result, &sem, &onFinished]() -> void {
-        
-        Local<Function> callback = Nan::New(cb);
-        if (!callback.IsEmpty()) {
-          Local<Value>* argv = new Local<Value>[argc];
-          for (auto i = 0; i < argc; i++) {
-            argv[i] = Nan::New(args[i]);
-          }
-          
-          Local<Object> asyncObject = Nan::New<Object>();
-          AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-          Local<Value> res = asyncResource.MakeCallback(callback, argc, argv).ToLocalChecked();
-          result.Reset(res);
-          //auto onFinishedFn = [](decltype(onFinished) onFinished){ return onFinished;};
-          onFinished(res);
-          
-          delete [] argv;
-        }
-        uv_sem_post(&sem);
-      });
-    }
-    uv_async_send(&sweetiekit::resAsync);
-    uv_sem_wait(&sem);
-    uv_sem_destroy(&sem);
-    //return result;
-  }
-
-
-  Local<Value> Call(
-    Local<Function> function,
-    const char* method,
-    int argc,
-    Local<Value>* argv)
-  {
-    uv_sem_t sem;
-    uv_sem_init(&sem, 0);
-    Nan::Global<Function> cb(function);
-    Nan::Global<Value>* args = new Nan::Global<Value>[argc];
-    for (auto i = 0; i < argc; i++) {
-      args[i].Reset(argv[i]);
-    }
-    Nan::Global<Value> result;
-    
-    {
-      std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-        sweetiekit::resCbs.push_back([method, argc, &cb, &args, &result, &sem]() -> void {
-        
-        Local<Function> callback = Nan::New(cb);
-        if (!callback.IsEmpty()) {
-          Local<Value>* argv = new Local<Value>[argc];
-          for (auto i = 0; i < argc; i++) {
-            argv[i] = Nan::New(args[i]);
-          }
-          
-          Local<Object> asyncObject = Nan::New<Object>();
-          AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, method);
-          Local<Value> res = asyncResource.MakeCallback(callback, sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-          result.Reset(res);
-          
-          delete [] argv;
-        }
-        uv_sem_post(&sem);
-      });
-    }
-    uv_async_send(&sweetiekit::resAsync);
-    uv_sem_wait(&sem);
-    uv_sem_destroy(&sem);
-    delete [] args;
-    return Nan::New(result);
-  }
-
-};
-NAN_SETTER(NUITableViewDataSource::NumberOfRowsInSectionSetter) {
-  Nan::HandleScope scope;
-
-  NUITableViewDataSource *del = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-  SUITableViewDataSource* d = del->As<SUITableViewDataSource>();
-
-  del->_numberRowsCallback->Reset(Local<Function>::Cast(value));
-  Isolate* isolate = JS_ISOLATE();
-  __block Nan::Global<Function> cb(Local<Function>::Cast(value));
-
-  //dispatch_queue_t q = dispatch_get_current_queue();
-
-  //auto loop = GetCurrentEventLoop(JS_ISOLATE());
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [d setNumberRowsClosureWithClosure:^NSInteger(UITableView * _Nonnull tv, NSInteger section) {
-
-#if 1
-        __block NSInteger result = 0;
-        sweetiekit::Call(isolate, cb, "NUITableViewDataSource::NumberOfRowsInSectionSetter",
-        ^{
-          std::vector< Local<Value> > argv;
-          argv.push_back(JS_STR(""));
-          argv.push_back(JS_INT(static_cast<int32_t>(section)));
-          return argv;
-        },
-        ^void(Local<Value> ret){
-          result = TO_INT32(ret);
-        });
-        return result;
-#elif 1
-        Local<Value> argv[] = {
-          JS_STR(""),
-          JS_INT(static_cast<int32_t>(section)),
-        };
-        NSInteger result TO_INT32(sweetiekit::Call(
-          Nan::New(*del->_numberRowsCallback),
-          "NUITableViewDataSource::NumberOfRowsInSectionSetter",
-          sizeof(argv)/sizeof(argv[0]), argv));
-        return result;
-#elif 1
-        volatile NSInteger result = -1;
-        volatile bool resultSet = false;
-        uv_sem_t sem;
-        uv_sem_init(&sem, 0);
-        {
-          std::lock_guard<std::mutex> lock(sweetiekit::resMutex);
-            sweetiekit::resCbs.push_back([section, del, &result, &resultSet, &sem]() -> void {
-            
-            Local<Function> callback = Nan::New(*del->_numberRowsCallback);
-            if (!callback.IsEmpty()) {
-              Local<Value> argv[] = {
-                JS_STR(""),
-                JS_INT(static_cast<int32_t>(section)),
-              };
-            
-              Local<Object> asyncObject = Nan::New<Object>();
-              AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "NUITableViewDataSource::NumberOfRowsInSectionSetter");
-              result = TO_INT32(asyncResource.MakeCallback(callback, sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
-            }
-            resultSet = true;
-            uv_sem_post(&sem);
-          });
-        }
-        uv_async_send(&sweetiekit::resAsync);
-        uv_sem_wait(&sem);
-        assert(resultSet);
-        assert(result >= 0);
-
-        return result;
-#else
-        __block NSInteger result = 0;
-        //dispatch_sync(dispatch_get_main_queue(), ^ {
-        
-            Local<Function> callback = Nan::New(*del->_numberRowsCallback);
-            if (!callback.IsEmpty()) {
-              Local<Value> argv[] = {
-                JS_STR(""),
-                JS_INT(static_cast<int32_t>(section)),
-              };
-              Local<Object> asyncObject = Nan::New<Object>();
-              AsyncResource asyncResource(Isolate::GetCurrent(), asyncObject, "UIButton::New");
-              result = TO_INT32(asyncResource.MakeCallback(callback, sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
-            }
-        //});
-
-        return result;
-#endif
-      }];
-    });
   }
 }
 
-#include "NUITableViewCell.h"
-
-NAN_GETTER(NUITableViewDataSource::CellForRowAtGetter) {
-  Nan::HandleScope scope;
-
-  NUITableViewDataSource *view = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_cellCallback));
-}
-
-NAN_SETTER(NUITableViewDataSource::CellForRowAtSetter) {
-  Nan::HandleScope scope;
-
-
-  NUITableViewDataSource *nui = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-  SUITableViewDataSource* ui = nui->As<SUITableViewDataSource>();
-  
-  NUITableViewDataSource *del = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-
-  del->_cellCallback->Reset(Local<Function>::Cast(value));
-  __block Nan::Global<Function> cb(Local<Function>::Cast(value));
-  Isolate* isolate = JS_ISOLATE();
-  
-  //dispatch_queue_t q = dispatch_queue_create_with_target(DISPATCH_CURRENT_QUEUE_LABEL, nullptr, nullptr);
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      SUITableViewDataSource* d = del->As<SUITableViewDataSource>();
-      [d setCellClosureWithClosure:^UITableViewCell *(UITableView * _Nonnull tv, NSIndexPath * _Nonnull indexPath, UITableViewCell * cell) {
-        __block UITableViewCell* result = nullptr;
-        
-        auto section = [indexPath section];
-        auto row = [indexPath row];
-#if 1
-        sweetiekit::Call(isolate, cb, "NUITableViewDataSource::CellForRowAtSetter",
-        ^{
-          Local<Object> indexPathObj = Object::New(Isolate::GetCurrent());
-          indexPathObj->Set(JS_STR("section"), JS_NUM(section));
-          indexPathObj->Set(JS_STR("row"), JS_NUM(row));
-          std::vector< Local<Value> > args;
-          args.push_back(JS_STR(""));
-          args.push_back(JS_OBJ(indexPathObj));
-          if (cell != nullptr)
-          {
-            Local<Value> argv[] = {
-              Nan::New<v8::External>((__bridge void*)cell)
-            };
-            Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, NUITableViewCell::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-            args.push_back(value);
-          }
-          return args;
-        },
-        ^void(Local<Value> ret){
-          NUITableViewCell *ncell = ObjectWrap::Unwrap<NUITableViewCell>(JS_OBJ(ret));
-          result = ncell->As<UITableViewCell>();
-        });
-
-        return result;
-#else
-        dispatch_sync(q, ^ {
-        
-          [indexPath section];
-          
-          Local<Object> indexPathObj = Object::New(Isolate::GetCurrent());
-          indexPathObj->Set(JS_STR("section"), JS_NUM(section));
-          indexPathObj->Set(JS_STR("row"), JS_NUM(row));
-
-          Local<Value> argv[] = {
-            JS_STR(""),
-            JS_OBJ(indexPathObj),
-          };
-          
-          Local<Function> cb = Nan::New(*del->_cellCallback);
-          
-          Local<Value> obj = (cb->Call(JS_CONTEXT(), v8::Undefined(JS_ISOLATE()), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked());
-          
-          NUITableViewCell *ncell = ObjectWrap::Unwrap<NUITableViewCell>(JS_OBJ(obj));
-          result = ncell->As<UITableViewCell>();
-        });
-
-        return result;
-#endif
-      }];
-    });
-  }
-}
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewNumberOfRowsInSection);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewCellForRowAtIndexPath);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, numberOfSectionsInTableView);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewTitleForHeaderInSection);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewTitleForFooterInSection);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewCanEditRowAtIndexPath);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewCanMoveRowAtIndexPath);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, sectionIndexTitlesForTableView);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewSectionForSectionIndexTitleAtIndex);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewCommitEditingStyleForRowAtIndexPath);
+DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewMoveRowAtIndexPathToIndexPath);
 
 #include "NUITableView.h"
+#include "NUITableViewCell.h"
 
-NAN_SETTER(NUITableViewDataSource::WillDisplayCellForRowAtSetter) {
-  Nan::HandleScope scope;
+@implementation UITableViewDataSourceType
 
-  NUITableViewDataSource *del = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-  del->_displayCallback->Reset(Local<Function>::Cast(value));
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      Nan::HandleScope scope;
-      SUITableViewDataSource* d = del->As<SUITableViewDataSource>();
-      [d setWillDsiplayCellClosureWithClosure:^(UITableView * _Nonnull tv, UITableViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath) {
-        Local<Object> tvObj;
-        {
-          Local<Value> argv[] = {
-            Nan::New<v8::External>((__bridge void*)tv)
-          };
-          tvObj = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(tv, NUITableView::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-        }
-        Local<Object> cellObj;
-        {
-          Local<Value> argv[] = {
-            Nan::New<v8::External>((__bridge void*)cell)
-          };
-          cellObj = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(cell, NUITableViewCell::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-        }
-        
-        auto section = [indexPath section];
-        auto row = [indexPath row];
-        Local<Object> indexPathObj = Object::New(Isolate::GetCurrent());
-        indexPathObj->Set(JS_STR("section"), JS_NUM(section));
-        indexPathObj->Set(JS_STR("row"), JS_NUM(row));
-      
-        Local<Value> argv[] = {
-          tvObj,
-          cellObj,
-          indexPathObj
-        };
-        sweetiekit::CallSync(Nan::New(*del->_displayCallback), "NUITableViewDataSource::WillDisplayCellForRowAtSetter", 3, argv);
-        
-      }];
-//      [d setOnCancelClosureWithClosure:^(UIImagePickerController * _Nonnull) {
-//        sweetiekit::Resolve(del->_onCancel);
-//        return true;
-//      }];
-    });
-  }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  __block NSInteger result = 0;
+  call_delegate(result = is_value_NSInteger(JS_RESULT) ? to_value_NSInteger(JS_RESULT) : result, tableViewNumberOfRowsInSection,
+    js_value_UITableView(tableView),
+    js_value_NSInteger(section));
+  return result;
 }
 
-NAN_GETTER(NUITableViewDataSource::WillDisplayCellForRowAtGetter) {
-  Nan::HandleScope scope;
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
-  NUITableViewDataSource *view = ObjectWrap::Unwrap<NUITableViewDataSource>(info.This());
-
-  info.GetReturnValue().Set(Nan::New(view->_displayCallback));
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  __block UITableViewCell* result = nil;
+  call_delegate(result = is_value_UITableViewCell(JS_RESULT) ? to_value_UITableViewCell(JS_RESULT) : result, tableViewCellForRowAtIndexPath,
+    js_value_UITableView(tableView),
+    js_value_NSIndexPath(indexPath));
+  return result;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
+{
+  __block NSInteger result = 1;
+  call_delegate(result = is_value_NSInteger(JS_RESULT) ? to_value_NSInteger(JS_RESULT) : result, numberOfSectionsInTableView,
+    js_value_UITableView(tableView));
+  return result;
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section    // fixed font style. use custom view (UILabel) if you want something different
+{
+  __block NSString* result = nil;
+  call_delegate(result = is_value_NSString(JS_RESULT) ? to_value_NSString(JS_RESULT) : result, tableViewTitleForHeaderInSection,
+    js_value_UITableView(tableView),
+    js_value_NSInteger(section));
+  return result;
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+  __block NSString* result = nil;
+  call_delegate(result = is_value_NSString(JS_RESULT) ? to_value_NSString(JS_RESULT) : result, tableViewTitleForFooterInSection,
+    js_value_UITableView(tableView),
+    js_value_NSInteger(section));
+  return result;
+}
+
+// Editing
+
+// Individual rows can opt out of having the -editing property set for them. If not implemented, all rows are assumed to be editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  __block BOOL result = YES;
+  call_delegate(result = is_value_BOOL(JS_RESULT) ? to_value_BOOL(JS_RESULT) : result, tableViewCanEditRowAtIndexPath,
+    js_value_UITableView(tableView),
+    js_value_NSIndexPath(indexPath));
+  return result;
+}
+
+// Moving/reordering
+
+// Allows the reorder accessory view to optionally be shown for a particular row. By default, the reorder control will be shown only if the datasource implements -tableView:moveRowAtIndexPath:toIndexPath:
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  __block BOOL result = NO; // TODO: unsure about this default
+  call_delegate(result = is_value_BOOL(JS_RESULT) ? to_value_BOOL(JS_RESULT) : result, tableViewCanMoveRowAtIndexPath,
+    js_value_UITableView(tableView),
+    js_value_NSIndexPath(indexPath));
+  return result;
+}
+
+// Index
+
+- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView                                // return list of section titles to display in section index view (e.g. "ABCD...Z#")
+{
+  __block NSArray<NSString *>* result = nil;
+  call_delegate(result = is_value_NSArray<NSString *>(JS_RESULT) ? to_value_NSArray<NSString *>(JS_RESULT) : result, sectionIndexTitlesForTableView,
+    js_value_UITableView(tableView));
+  return result;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index   // tell table which section corresponds to section title/index (e.g. "B",1))
+{
+  __block NSInteger result = 0; // TODO: unsure about this default.
+  call_delegate(result = is_value_NSInteger(JS_RESULT) ? to_value_NSInteger(JS_RESULT) : result, tableViewSectionForSectionIndexTitleAtIndex,
+    js_value_UITableView(tableView),
+    js_value_NSString(title),
+    js_value_NSInteger(index));
+  return result;
+}
+
+// Data manipulation - insert and delete support
+
+// After a row has the minus or plus button invoked (based on the UITableViewCellEditingStyle for the cell), the dataSource must commit the change
+// Not called for edit actions using UITableViewRowAction - the action's handler will be invoked instead
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  call_delegate(noop(), tableViewCommitEditingStyleForRowAtIndexPath,
+    js_value_UITableView(tableView),
+    js_value_UITableViewCellEditingStyle(editingStyle),
+    js_value_NSIndexPath(indexPath));
+}
+
+// Data manipulation - reorder / moving support
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+  call_delegate(noop(), tableViewMoveRowAtIndexPathToIndexPath,
+    js_value_UITableView(tableView),
+    js_value_NSIndexPath(sourceIndexPath),
+    js_value_NSIndexPath(destinationIndexPath));
+}
+
+@end

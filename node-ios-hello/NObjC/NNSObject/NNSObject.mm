@@ -658,9 +658,16 @@ NAN_METHOD(NClass::New) {
 #include "NNSMachPortDelegate.h"
 #include "NNSMessagePort.h"
 #include "NNSSocketPort.h"
-
 #include "NNSInvocation.h"
 #include "NNSUserDefaults.h"
+
+#include "NNSIndexSet.h"
+#include "NNSMutableIndexSet.h"
+#include "NNSItemProvider.h"
+#include "NNSItemProviderReading.h"
+#include "NNSItemProviderWriting.h"
+#include "NNSProgress.h"
+
 #include "NNSMutableParagraphStyle.h"
 #include "NNSParagraphStyle.h"
 #include "NNSAttributedString.h"
@@ -745,6 +752,7 @@ NAN_METHOD(NClass::New) {
 #include "NUITabBar.h"
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
+#include "NUINavigationControllerDelegate.h"
 #include "NUINavigationBar.h"
 #include "NUINavigationItem.h"
 #include "NUIImagePickerController.h"
@@ -766,8 +774,31 @@ NAN_METHOD(NClass::New) {
 #include "NUIDropInteraction.h"
 #include "NUIDropProposal.h"
 
-#include "NUITableViewController.h"
+#include "NUIDragAnimating.h"
+#include "NUIDragDropSession.h"
+#include "NUIDragSession.h"
+#include "NUIDropSession.h"
+#include "NUIDragInteractionDelegate.h"
+#include "NUITableViewDataSource.h"
+#include "NUITableViewDataSourcePrefetching.h"
+#include "NUITableViewDragDelegate.h"
+#include "NUITableViewDropItem.h"
+#include "NUITableViewDropCoordinator.h"
+#include "NUITableViewDropDelegate.h"
+#include "NUITableViewDropPlaceholderContext.h" // <UIDragAnimating>
+
+#include "NUIDragInteraction.h"
+#include "NUIDragItem.h"
+#include "NUIDragPreviewParameters.h"
+#include "NUIDragPreviewTarget.h"
 #include "NUITableView.h"
+#include "NUITableViewDropPlaceholder.h"
+#include "NUITableViewDropProposal.h" // : UIDropProposal
+#include "NUITableViewHeaderFooterView.h" // : UIView
+#include "NUITableViewPlaceholder.h"
+#include "NUITargetedDragPreview.h"
+
+#include "NUITableViewController.h"
 #include "NUITableViewCell.h"
 #include "NUIPickerView.h"
 #include "NUIPickerViewManager.h"
@@ -783,7 +814,6 @@ NAN_METHOD(NClass::New) {
 #include "NUICollectionViewFlowLayout.h"
 #include "NUICollectionViewFlowLayoutInvalidationContext.h"
 #include "NUICollectionViewTransitionLayout.h"
-#include "NUITableViewDataSource.h"
 #include "NUIPageControl.h"
 #include "NUIProgressView.h"
 #include "NUIDatePicker.h"
@@ -824,7 +854,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSLayoutYAxisAnchor.h"
 #include "NUIMotionEffect.h"
 #include "NUILayoutGuide.h"
-#include "NUITableViewManager.h"
+//#include "NUITableViewManager.h"
 #include "NUIEvent.h"
 #include "NUIPressesEvent.h"
 #include "NUITouch.h"
@@ -1207,6 +1237,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSCache);
     JS_EXPORT_TYPE(NSBundle);
     JS_EXPORT_TYPE(NSUserDefaults);
+    JS_EXPORT_TYPE(NSIndexSet);
+    JS_EXPORT_TYPE(NSMutableIndexSet);
+    JS_EXPORT_TYPE(NSItemProvider);
+    JS_EXPORT_PROTOCOL(NSItemProviderReading);
+    JS_EXPORT_PROTOCOL(NSItemProviderWriting);
+    JS_EXPORT_TYPE(NSProgress);
     JS_EXPORT_TYPE(NSParagraphStyle);
     JS_EXPORT_TYPE(NSMutableParagraphStyle);
     JS_EXPORT_TYPE(NSAttributedString);
@@ -1228,6 +1264,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSUserActivityDelegate);
 
     // UIKit
+
     JS_EXPORT_TYPE(UIGestureRecognizer);
     JS_EXPORT_TYPE(UITapGestureRecognizer);
     JS_EXPORT_TYPE(UIPinchGestureRecognizer);
@@ -1268,15 +1305,26 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIDropInteraction);
     JS_EXPORT_TYPE(UIDropProposal);
 
+    JS_EXPORT_TYPE(UIDragInteraction);
+    JS_EXPORT_TYPE(UIDragItem);
+    JS_EXPORT_TYPE(UIDragPreviewParameters);
+    JS_EXPORT_TYPE(UIDragPreviewTarget);
+    JS_EXPORT_TYPE(UITableViewPlaceholder);
+    JS_EXPORT_TYPE(UITableViewDropPlaceholder); // : UITableViewPlaceholder
+    JS_EXPORT_TYPE(UITableViewDropProposal); // : UIDropProposal
+    JS_EXPORT_TYPE(UITargetedDragPreview);
+
     JS_EXPORT_TYPE(UITableViewController);
     JS_EXPORT_TYPE(UICollectionViewController);
     JS_EXPORT_TYPE(UINavigationController);
+    JS_EXPORT_PROTOCOL(UINavigationControllerDelegate);
     JS_EXPORT_TYPE(UIImagePickerController);
     JS_EXPORT_TYPE(UIInputViewController);
     JS_EXPORT_TYPE(UIPresentationController);
     JS_EXPORT_TYPE(UIPopoverPresentationController);
     JS_EXPORT_TYPE(UIAlertController);
     JS_EXPORT_TYPE(UIView);
+    JS_EXPORT_TYPE(UITableViewHeaderFooterView); // : UIView
     JS_EXPORT_TYPE(UIWindow);
     JS_EXPORT_TYPE(UIScreen);
     JS_EXPORT_TYPE(UIScreenMode);
@@ -1325,7 +1373,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITableView);
     JS_EXPORT_TYPE(UICollectionView);
     JS_EXPORT_TYPE(UICollectionViewCell);
-    JS_EXPORT_TYPE(UITableViewManager);
+    //JS_EXPORT_TYPE(UITableViewManager);
     JS_EXPORT_TYPE(UICollectionViewManager);
     JS_EXPORT_TYPE(UICollectionViewLayout);
     JS_EXPORT_TYPE(UICollectionViewLayoutAttributes);
@@ -1353,27 +1401,42 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
 
     // UIKit delegates
+
     JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
     JS_EXPORT_TYPE(UIPickerViewManager);
     JS_EXPORT_PROTOCOL(UIScrollViewDelegate);
     JS_EXPORT_PROTOCOL(UITableViewDelegate);
+    JS_EXPORT_PROTOCOL(UITableViewDataSource);
+    JS_EXPORT_PROTOCOL(UITableViewDataSourcePrefetching);
+    JS_EXPORT_PROTOCOL(UITableViewDragDelegate);
+    JS_EXPORT_PROTOCOL(UITableViewDropCoordinator);
+    JS_EXPORT_PROTOCOL(UITableViewDropDelegate);
+    JS_EXPORT_PROTOCOL(UITableViewDropItem);
+    JS_EXPORT_PROTOCOL(UIDragAnimating);
+    JS_EXPORT_PROTOCOL(UITableViewDropPlaceholderContext); // <UIDragAnimating>
+    JS_EXPORT_PROTOCOL(UIDragDropSession);
+    JS_EXPORT_PROTOCOL(UIDragSession);
+    JS_EXPORT_PROTOCOL(UIDropSession);
+    JS_EXPORT_PROTOCOL(UIDragInteractionDelegate);
     JS_EXPORT_PROTOCOL(UIDropInteractionDelegate);
     JS_EXPORT_TYPE(UIImagePickerControllerDelegate);
-    JS_EXPORT_TYPE(UITableViewDataSource);
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
     
     // WebKit
+
     JS_EXPORT_TYPE(WKWebView);
     JS_EXPORT_TYPE(WKNavigation);
     JS_EXPORT_TYPE(WKNavigationDelegate);
     
     // Core Graphics
+
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
     JS_EXPORT_GLOBALS(CGContext);
     
     // Audio Toolbox
+
     JS_EXPORT_GLOBALS(AudioComponent);
     JS_EXPORT_TYPE(AUAudioUnit);
     JS_EXPORT_TYPE(AUParameterNode);
@@ -1382,6 +1445,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AUAudioUnitPreset);
     
     // AVFoundation
+
     JS_EXPORT_GLOBALS(AVAudioTypes);
     JS_EXPORT_TYPE(AVAudioPlayer);
     JS_EXPORT_TYPE(AVAudioFormat);
@@ -1424,6 +1488,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVCameraCalibrationData);
     
     // MediaPlayer
+
     JS_EXPORT_TYPE(MPMediaEntity);
     JS_EXPORT_TYPE(MPMediaItem);
     JS_EXPORT_TYPE(MPMediaItemCollection);
@@ -1434,6 +1499,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MPMusicPlayerQueueDescriptor);
 
     // Core Location
+
     JS_EXPORT_TYPE(CLHeading);
     JS_EXPORT_TYPE(CLFloor);
     JS_EXPORT_TYPE(CLLocation);
@@ -1447,19 +1513,23 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(CLBeaconRegion);
 
     // Contacts
+
     JS_EXPORT_TYPE(CNPostalAddress);
     
     // ReplayKit
+
     JS_EXPORT_TYPE(RPScreenRecorder);
     JS_EXPORT_TYPE(RPPreviewViewController);
     JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
 
     // UIKit Custom
+
     JS_EXPORT_TYPE(GifManager);
     JS_EXPORT_TYPE(Gif);
     JS_EXPORT_TYPE(GifView);
 
     // CoreAnimation
+
     JS_EXPORT_TYPE(CADisplayLink);
     JS_EXPORT_TYPE(CATransaction);
     JS_EXPORT_TYPE(CAMediaTimingFunction);
@@ -1527,6 +1597,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MDLMaterial);
 
     // SpriteKit
+
 #if !TARGET_OS_SIMULATOR
     JS_EXPORT_TYPE(SKRenderer);
 #endif
@@ -1553,6 +1624,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SKPhysicsContactDelegate);
 
     // SceneKit
+
     JS_EXPORT_TYPE(SceneKitTypes);
     JS_EXPORT_TYPE(SCNPhysicsField);
     JS_EXPORT_TYPE(SCNRenderer);
@@ -1606,6 +1678,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(SCNParticlePropertyController);
 
     // Metal
+
     JS_EXPORT_GLOBALS(MTLPixelFormat);
     JS_EXPORT_GLOBALS(MTLDepthStencil);
     JS_EXPORT_GLOBALS(MTLTypes);
@@ -1710,6 +1783,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTKViewDelegate);
     
     // ARKit
+
     JS_EXPORT_TYPE(ARLightEstimate);
     JS_EXPORT_TYPE(ARSKView);
     JS_EXPORT_TYPE(ARSCNView);
@@ -1733,6 +1807,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARSCNViewDelegate);
 
     // MapKit
+
     JS_EXPORT_TYPE(MKMapView);
     JS_EXPORT_TYPE(MKAnnotation);
     JS_EXPORT_TYPE(MKClusterAnnotation);
@@ -1744,6 +1819,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MKUserLocation);
 
     // core image
+
     JS_EXPORT_TYPE(CIColor);
     JS_EXPORT_TYPE(CIImage);
     JS_EXPORT_TYPE(CIFilter);
@@ -1788,6 +1864,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(GLKView);
 
       // Core Animation
+
       JS_RETURN_TYPE(CAEmitterCell);
       JS_RETURN_TYPE(CAEmitterLayer);
 
@@ -1811,6 +1888,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CADisplayLink);
       
       // Core Image
+
       JS_RETURN_TYPE(CIBlendKernel); // : CIColorKernel
       JS_RETURN_TYPE(CIWarpKernel); // : CIKernel
       JS_RETURN_TYPE(CIColorKernel); // : CIKernel
@@ -1820,6 +1898,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CIColor);
 
       // MapKit
+
       JS_RETURN_TYPE(MKUserLocation);
       JS_RETURN_TYPE(MKOverlayView);
       JS_RETURN_TYPE(MKOverlayRenderer);
@@ -1900,6 +1979,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLType); // : NSObject
 
       // ARKit
+
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
@@ -1920,6 +2000,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARConfiguration);
 
       //SceneKit
+
       JS_RETURN_TYPE(SceneKitTypes);
       JS_RETURN_TYPE(SCNPhysicsField);
       JS_RETURN_TYPE(SCNRenderer);
@@ -1973,6 +2054,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SCNView);
       
       // SpriteKit
+
       JS_RETURN_TYPE(SKTexture);
       JS_RETURN_TYPE(SKEmitterNode);
       JS_RETURN_TYPE(SKCameraNode);
@@ -2003,6 +2085,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #endif
 
       // ModelIO
+
       JS_RETURN_TYPE(MDLMaterial);
       JS_RETURN_TYPE(MDLMaterialProperty);
       JS_RETURN_TYPE(MDLPhysicallyPlausibleScatteringFunction);
@@ -2027,15 +2110,18 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MDLAsset);
 
       // OpenGLES
+
       JS_RETURN_TYPE(EAGLContext);
       JS_RETURN_TYPE(EAGLSharegroup);
 
       // Custom UIKit
+
       JS_RETURN_TYPE(GifManager);
       JS_RETURN_TYPE(Gif);
       JS_RETURN_TYPE(GifView);
 
       // Core Location
+
       JS_RETURN_TYPE(CLBeaconRegion);
       JS_RETURN_TYPE(CLBeacon);
       JS_RETURN_TYPE(CLRegion);
@@ -2048,11 +2134,13 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(CLLocationManager);
       
       // ReplayKit
+
       JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
       JS_RETURN_TYPE(RPScreenRecorder);
       JS_RETURN_TYPE(RPPreviewViewController);
       
       // MediaPlayer
+
       JS_RETURN_TYPE(MPMusicPlayerQueueDescriptor);
       JS_RETURN_TYPE(MPMusicPlayerApplicationController);
       JS_RETURN_TYPE(MPMusicPlayerController);
@@ -2063,6 +2151,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MPMediaEntity);
       
       // Audio Toolbox
+
       JS_RETURN_TYPE(AUAudioUnit);
       JS_RETURN_TYPE(AUAudioUnitPreset);
       JS_RETURN_TYPE(AUParameterTree);
@@ -2110,11 +2199,22 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AVAudioEngine);
 
       // WebKit
+
       JS_RETURN_TYPE(WKNavigationDelegate);
       JS_RETURN_TYPE(WKNavigation);
       JS_RETURN_TYPE(WKWebView);
 
       // UIKit
+
+      JS_RETURN_TYPE(UITargetedDragPreview);
+      JS_RETURN_TYPE(UITableViewHeaderFooterView); // : UIView
+      JS_RETURN_TYPE(UITableViewDropProposal); // : UIDropProposal
+      JS_RETURN_TYPE(UITableViewDropPlaceholder);
+      JS_RETURN_TYPE(UITableViewPlaceholder);
+      JS_RETURN_TYPE(UIDragPreviewTarget);
+      JS_RETURN_TYPE(UIDragPreviewParameters);
+      JS_RETURN_TYPE(UIDragItem);
+      JS_RETURN_TYPE(UIDragInteraction);
 
       JS_RETURN_TYPE(UIDropProposal);
       JS_RETURN_TYPE(UIDropInteraction);
@@ -2212,9 +2312,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
-      JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
+      //JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
-      JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
       JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects
       JS_RETURN_TYPE(NSLayoutYAxisAnchor);
@@ -2288,6 +2387,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSURLRequest);
       JS_RETURN_TYPE(NSURL);
       JS_RETURN_TYPE(NSCoder);
+      JS_RETURN_TYPE(NSProgress);
+      JS_RETURN_TYPE(NSItemProvider);
+      JS_RETURN_TYPE(NSMutableIndexSet);
+      JS_RETURN_TYPE(NSIndexSet);
       JS_RETURN_TYPE(NSUserDefaults);
       JS_RETURN_TYPE(NSInvocation);
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
@@ -2390,12 +2493,28 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // UIKit protocols
 
+      JS_RETURN_PROTOCOL(UITableViewDragDelegate);
+      JS_RETURN_PROTOCOL(UITableViewDropCoordinator);
+      JS_RETURN_PROTOCOL(UITableViewDropDelegate);
+      JS_RETURN_PROTOCOL(UITableViewDropItem);
+      JS_RETURN_PROTOCOL(UITableViewDropPlaceholderContext); // <UIDragAnimating>
+      JS_RETURN_PROTOCOL(UITableViewDataSourcePrefetching);
+      JS_RETURN_PROTOCOL(UITableViewDataSource);
       JS_RETURN_PROTOCOL(UITableViewDelegate);
       JS_RETURN_PROTOCOL(UIScrollViewDelegate);
+      JS_RETURN_PROTOCOL(UINavigationControllerDelegate);
       JS_RETURN_PROTOCOL(UIFocusAnimationContext);
       JS_RETURN_PROTOCOL(UIDropInteractionDelegate);
+      JS_RETURN_PROTOCOL(UIDragInteractionDelegate);
+      JS_RETURN_PROTOCOL(UIDragAnimating);
+      JS_RETURN_PROTOCOL(UIDragDropSession);
+      JS_RETURN_PROTOCOL(UIDragSession);
+      JS_RETURN_PROTOCOL(UIDropSession);
 
       // Foundation protocols
+
+      JS_RETURN_PROTOCOL(NSItemProviderWriting);
+      JS_RETURN_PROTOCOL(NSItemProviderReading);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
       JS_RETURN_PROTOCOL(NSMachPortDelegate);

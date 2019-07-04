@@ -13,6 +13,48 @@ NUITableViewDelegate::NUITableViewDelegate() {}
 NUITableViewDelegate::~NUITableViewDelegate() {}
 
 JS_INIT_PROTOCOL(UITableViewDelegate, UIScrollViewDelegate);
+  JS_ASSIGN_PROTO_PROP(tableViewWillDisplayCellForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewWillDisplayHeaderViewForSection);
+  JS_ASSIGN_PROTO_PROP(tableViewWillDisplayFooterViewForSection);
+  JS_ASSIGN_PROTO_PROP(tableViewDidEndDisplayingCellForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidEndDisplayingHeaderViewForSection);
+  JS_ASSIGN_PROTO_PROP(tableViewDidEndDisplayingFooterViewForSection);
+  JS_ASSIGN_PROTO_PROP(tableViewHeightForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewHeightForHeaderInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewHeightForFooterInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewEstimatedHeightForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewEstimatedHeightForHeaderInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewEstimatedHeightForFooterInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewViewForHeaderInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewViewForFooterInSection);
+  JS_ASSIGN_PROTO_PROP(tableViewAccessoryTypeForRowWithIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewAccessoryButtonTappedForRowWithIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewShouldHighlightRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidHighlightRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidUnhighlightRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewWillSelectRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewWillDeselectRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidSelectRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidDeselectRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewEditingStyleForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewTitleForDeleteConfirmationButtonForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewEditActionsForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewLeadingSwipeActionsConfigurationForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewTrailingSwipeActionsConfigurationForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewShouldIndentWhileEditingRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewWillBeginEditingRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewDidEndEditingRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewTargetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewIndentationLevelForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewShouldShowMenuForRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewCanPerformActionForRowAtIndexPathWithSender);
+  JS_ASSIGN_PROTO_PROP(tableViewPerformActionForRowAtIndexPathWithSender);
+  JS_ASSIGN_PROTO_PROP(tableViewCanFocusRowAtIndexPath);
+  JS_ASSIGN_PROTO_PROP(tableViewShouldUpdateFocusInContext);
+  JS_ASSIGN_PROTO_PROP(tableViewDidUpdateFocusInContextWithAnimationCoordinator);
+  JS_ASSIGN_PROTO_PROP(indexPathForPreferredFocusedViewInTableView);
+  JS_ASSIGN_PROTO_PROP(tableViewShouldSpringLoadRowAtIndexPathWithContext);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UITableViewDelegate, UIScrollViewDelegate);
@@ -267,7 +309,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 // Called before the user changes the selection. Return a new indexPath, or nil, to change the proposed selection.
 - (nullable NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  __block NSIndexPath* result = nil;
+  __block NSIndexPath* result = indexPath;
   call_delegate(result = is_value_NSIndexPath(JS_RESULT) ? to_value_NSIndexPath(JS_RESULT) : result, tableViewWillSelectRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
@@ -276,7 +318,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (nullable NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0)
 {
-  __block NSIndexPath* result = nil;
+  __block NSIndexPath* result = indexPath;
   call_delegate(result = is_value_NSIndexPath(JS_RESULT) ? to_value_NSIndexPath(JS_RESULT) : result, tableViewWillDeselectRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));

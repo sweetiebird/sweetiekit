@@ -8,7 +8,7 @@ const {
 
 function make(nav, demoVC) {
 
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 
   const view = demoVC.view;
 

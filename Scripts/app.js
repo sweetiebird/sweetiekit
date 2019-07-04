@@ -220,7 +220,7 @@ function createTable() {
    photoVC.view.addSubview(nextBtn);
   console.log('userPhoto5');
 
-   nav.pushViewController(photoVC);
+   nav.pushViewControllerAnimated(photoVC, true);
   console.log('userPhoto6');
  }
 

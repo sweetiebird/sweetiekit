@@ -101,7 +101,7 @@ function setNavStyles(nav) {
 }
 
 function setInnerAppNavStyles(nav) {
-  //nav.setNavigationBarHidden(true);
+  //nav.setNavigationBarHiddenAnimated(true);
 }
 
 function makeAppButton(title) {
@@ -149,7 +149,7 @@ function makeScrollDelegate(pageControl) {
   del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
-      sv.setContentOffset({ x, y: 0 }, false);
+      sv.setContentOffsetAnimated({ x, y: 0 }, false);
     }
   };
 
@@ -306,43 +306,36 @@ function makePartyTable() {
     height: h - 172,
   });
 
-  const mgr = new UITableViewManager(() => {
-    return party.length;
-  }, (_, { row }) => {
-    const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleSubtitle, "id");
-    const person = party[row];
-    cell.textLabel.text = person.name;
-    cell.textLabel.textColor = colors.white;
-    if (cell.detailTextLabel) {
-      cell.detailTextLabel.text = `${person.experience} • ${person.item}`;
-      cell.detailTextLabel.textColor = {
-        ...colors.white,
-        alpha: 0.7,
-      };
-    }
-    cell.backgroundColor = colors.clear;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+  partyTable.dataSource = UITableViewDataSource({
+    tableViewNumberOfRowsInSection() {
+      return party.length;
+    },
+    tableViewCellForRowAtIndexPath(_, { row }) {
+      const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleSubtitle, "id");
+      const person = party[row];
+      cell.textLabel.text = person.name;
+      cell.textLabel.textColor = colors.white;
+      if (cell.detailTextLabel) {
+        cell.detailTextLabel.text = `${person.experience} • ${person.item}`;
+        cell.detailTextLabel.textColor = {
+          ...colors.white,
+          alpha: 0.7,
+        };
+      }
+      cell.backgroundColor = colors.clear;
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      return cell;
+    },
   });
-
-  mgr.heightForRowAtIndexPath = () => {
-    return cellH;
-  };
-
-  partyTable.delegate = mgr;
-  partyTable.dataSource = mgr;
+  partyTable.delegate = UITableViewDelegate({
+    tableViewHeightForRowAtIndexPath() {
+      return cellH;
+    },
+  });
 }
 
 function makeInnerAppControllers(nav) {
   setInnerAppNavStyles(nav);
-
-  const tabVC = new UITabBarController();
-  tabVC.tabBar.barTintColor = colors.fitbodMedGrey;
-  tabVC.tabBar.tintColor = colors.fitbodPink;
-  tabVC.tabBar.unselectedItemTintColor = {
-    ...colors.white,
-    alpha: 0.8,
-  };
 
   const partyVC = UIViewController();
   partyVC.view.backgroundColor = colors.fitbodDarkGrey;
@@ -397,9 +390,19 @@ function makeInnerAppControllers(nav) {
     console.log('editor view controller');
   }, UIControlEventTouchUpInside);
 
+  const tabVC = new UITabBarController();
   nav.setViewControllersAnimated([tabVC], true);
 
   tabVC.setViewControllersAnimated([partyVC, wagonVC], false);
+
+  if (tabVC.tabBar) {
+    tabVC.tabBar.barTintColor = colors.fitbodMedGrey;
+    tabVC.tabBar.tintColor = colors.fitbodPink;
+    tabVC.tabBar.unselectedItemTintColor = {
+      ...colors.white,
+      alpha: 0.8,
+    };
+  }
 }
 
 function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
@@ -425,55 +428,52 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
 
     const contentY = labelY + label.frame.height + 10;
 
-    const del = new UITableViewManager((tv, section) => {
-      return 3;
-    }, (tv, indexPath) => {
-      const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
-      const text = items[indexPath.row];
-      cell.textLabel.numberOfLines = 0;
-      cell.textLabel.textAlignment = NSTextAlignmentLeft;
-      cell.textLabel.font = contentFont;
-
-      if (indexPath.row === responseSelections[i]) {
-        cell.textLabel.textColor = colors.fitbodPink;
-      } else {
-        cell.textLabel.textColor = RGB(255, 255, 255, 0.9);
-      }
-
-      cell.backgroundColor = UIColor.clear;
-
-      const attrText = new NSMutableAttributedString(text);
-      attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
-        location: 0,
-        length: text.length,
-      });
-
-      cell.textLabel.attributedText = attrText;
-
-      cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-      return cell;
-    });
-
-    del.numberOfSections = () => {
-      return 1;
-    };
-
-    del.didSelectRowAt = (tv, indexPath) => {
-      const { row } = indexPath;
-      responseSelections[i] = row;
-      tv.reloadData();
-    };
-
-    del.heightForRowAtIndexPath = (tv, indexPath) => {
-      return 80;
-    };
-
     const slideView = new UITableView({ x: w * i, y: contentY, width: w, height: viewH - contentY });
     slideView.backgroundColor = UIColor.clear;
     slideView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    slideView.delegate = del;
-    slideView.dataSource = del;
+    slideView.dataSource = UITableViewDataSource({
+      tableViewNumberOfRowsInSection(tableView, section) {
+        return 3;
+      },
+      tableViewCellForRowAtIndexPath(tableView, indexPath) {
+        const { row } = indexPath;
+        const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
+        const text = items[row];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        cell.textLabel.font = contentFont;
+
+        if (row === responseSelections[i]) {
+          cell.textLabel.textColor = colors.fitbodPink;
+        } else {
+          cell.textLabel.textColor = RGB(255, 255, 255, 0.9);
+        }
+
+        cell.backgroundColor = UIColor.clear;
+
+        const attrText = new NSMutableAttributedString(text);
+        attrText.addAttribute(NSParagraphStyleAttributeName, pStyle, {
+          location: 0,
+          length: text.length,
+        });
+
+        cell.textLabel.attributedText = attrText;
+
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        return cell;
+      },
+    });
+    slideView.delegate = UITableViewDelegate({
+      tableViewHeightForRowAtIndexPath(tableView, indexPath) {
+        return 80;
+      },
+      tableViewDidSelectRowAtIndexPath(tableView, indexPath) {
+        const { row } = indexPath;
+        responseSelections[i] = row;
+        tableView.reloadData();
+      },
+    });
 
     scroll.addSubview(imageView);
     scroll.addSubview(label);
@@ -504,7 +504,7 @@ function startQuiz(nav) {
   pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
-    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
+    scrollView.setContentOffsetAnimated({ x: offsetX, y: 0 }, true);
     if (i !== quizStep) {
       quizStep = i;
     }
@@ -527,7 +527,7 @@ function startQuiz(nav) {
       quizStep += 1;
       if (quizStep <= numQuestions - 1) {
         const newContentOffset = w * quizStep;
-        scrollView.setContentOffset({ x: newContentOffset, y: 0 }, true);
+        scrollView.setContentOffsetAnimated({ x: newContentOffset, y: 0 }, true);
         progressView.setProgress((quizStep + 1) / 3, true);
       } else {
         quizStep = numQuestions - 1;
@@ -562,7 +562,7 @@ function startQuiz(nav) {
   del.scrollViewDidEndDecelerating = (sv) => {
     const { x, y } = sv.contentOffset;
     if (y < 0 || y > 0) {
-      sv.setContentOffset({ x, y: 0 }, false);
+      sv.setContentOffsetAnimated({ x, y: 0 }, false);
     }
     const page = Math.round(x / w);
     if (page !== quizStep) {
@@ -580,7 +580,7 @@ function startQuiz(nav) {
   vc.view.addSubview(pageControl);
   vc.view.addSubview(nextButton);
 
-  nav.pushViewController(vc);
+  nav.pushViewControllerAnimated(vc, true);
 
   setTimeout(() => {
     progressView.setProgress(1/3, true);
@@ -610,7 +610,7 @@ async function make(nav, demoVC) {
   pageControl.addTargetActionForControlEvents(() => {
     const i = pageControl.currentPage;
     const offsetX = w * i;
-    scrollView.setContentOffset({ x: offsetX, y: 0 }, true);
+    scrollView.setContentOffsetAnimated({ x: offsetX, y: 0 }, true);
   }, UIControlEventValueChanged);
   demoVC.view.addSubview(pageControl);
 
@@ -620,7 +620,7 @@ async function make(nav, demoVC) {
   }, UIControlEventTouchUpInside);
   demoVC.view.addSubview(startButton);
 
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 }
 
 module.exports = make;

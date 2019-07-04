@@ -15,7 +15,7 @@ async function make(nav, demoVC) {
   demoVC.tabBarItem = demoItem;
   otherVC.tabBarItem = otherItem;
   tabCtrl.setViewControllersAnimated([demoVC, otherVC], true);
-  nav.pushViewController(tabCtrl);
+  nav.pushViewControllerAnimated(tabCtrl, true);
 }
 
 module.exports = make;

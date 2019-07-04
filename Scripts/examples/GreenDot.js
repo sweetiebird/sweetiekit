@@ -101,7 +101,7 @@ async function make(nav, demoVC) {
   scene.rootNode.eulerAngles = { x: Math.PI / 2, y: 0, z: 0 };
 
   demoVC.view.addSubview(arView);
-  nav.pushViewController(demoVC);
+  nav.pushViewControllerAnimated(demoVC, true);
 
   function configure() {
     const frame = arView.session.currentFrame;

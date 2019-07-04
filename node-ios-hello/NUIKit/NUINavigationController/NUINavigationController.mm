@@ -6,37 +6,39 @@
 //
 #include "NUINavigationController.h"
 
+#define instancetype UINavigationController
+#define js_value_instancetype js_value_UINavigationController
+
 NUINavigationController::NUINavigationController() {}
 NUINavigationController::~NUINavigationController() {}
 
 JS_INIT_CLASS(UINavigationController, UIViewController);
-  // instance members (proto)
-  JS_SET_METHOD(proto, "pushViewController", PushViewController);
-  JS_SET_METHOD(proto, "popViewController", PopViewController);
-  JS_SET_METHOD(proto, "popToRootViewController", PopToRootViewController);
-  JS_SET_METHOD(proto, "popToViewController", PopToViewController);
-  JS_SET_METHOD(proto, "setViewControllers", SetViewControllers);
-  JS_ASSIGN_PROP_READONLY(proto, topViewController);
-  JS_ASSIGN_PROP_READONLY(proto, visibleViewController);
-  JS_ASSIGN_PROP(proto, viewControllers);
-  JS_ASSIGN_PROP(proto, navigationBarHidden);
-  JS_SET_PROP(proto, "isNavigationBarHidden", navigationBarHidden);
-  JS_ASSIGN_PROP_READONLY(proto, navigationBar);
-  JS_ASSIGN_PROP(proto, toolbarHidden);
-  JS_SET_PROP(proto, "isToolbarHidden", toolbarHidden);
-  JS_ASSIGN_PROP_READONLY(proto, toolbar);
-  JS_ASSIGN_PROP(proto, delegate);
-  JS_ASSIGN_PROP_READONLY(proto, interactivePopGestureRecognizer);
-  JS_ASSIGN_PROP(proto, hidesBarsWhenKeyboardAppears);
-  JS_ASSIGN_PROP(proto, hidesBarsOnSwipe);
-  JS_ASSIGN_PROP_READONLY(proto, barHideOnSwipeGestureRecognizer);
-  JS_ASSIGN_PROP(proto, hidesBarsWhenVerticallyCompact);
-  JS_ASSIGN_PROP(proto, hidesBarsOnTap);
-  JS_ASSIGN_PROP_READONLY(proto, barHideOnTapGestureRecognizer);
+  JS_ASSIGN_PROTO_METHOD(initWithNavigationBarClassToolbarClass);
+  JS_ASSIGN_PROTO_METHOD(initWithRootViewController);
+  JS_ASSIGN_PROTO_METHOD(pushViewControllerAnimated);
+  JS_ASSIGN_PROTO_METHOD(popViewControllerAnimated);
+  JS_ASSIGN_PROTO_METHOD(popToViewControllerAnimated);
+  JS_ASSIGN_PROTO_METHOD(popToRootViewControllerAnimated);
+  JS_ASSIGN_PROTO_METHOD(setViewControllersAnimated);
+  JS_ASSIGN_PROTO_METHOD(setNavigationBarHiddenAnimated);
+  JS_ASSIGN_PROTO_METHOD(setToolbarHiddenAnimated);
+  JS_ASSIGN_PROTO_METHOD(showViewControllerSender);
+  JS_ASSIGN_PROTO_PROP_READONLY(topViewController);
+  JS_ASSIGN_PROTO_PROP_READONLY(visibleViewController);
+  JS_ASSIGN_PROTO_PROP(viewControllers);
+  JS_ASSIGN_PROTO_PROP(isNavigationBarHidden);
+  JS_ASSIGN_PROTO_PROP_READONLY(navigationBar);
+  JS_ASSIGN_PROTO_PROP(isToolbarHidden);
+  JS_ASSIGN_PROTO_PROP_READONLY(toolbar);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP_READONLY(interactivePopGestureRecognizer);
+  JS_ASSIGN_PROTO_PROP(hidesBarsWhenKeyboardAppears);
+  JS_ASSIGN_PROTO_PROP(hidesBarsOnSwipe);
+  JS_ASSIGN_PROTO_PROP_READONLY(barHideOnSwipeGestureRecognizer);
+  JS_ASSIGN_PROTO_PROP(hidesBarsWhenVerticallyCompact);
+  JS_ASSIGN_PROTO_PROP(hidesBarsOnTap);
+  JS_ASSIGN_PROTO_PROP_READONLY(barHideOnTapGestureRecognizer);
 
-  // static members (ctor)
-  JS_INIT_CTOR(UINavigationController, UIViewController);
-  
   // UIViewController (UINavigationControllerItem)
   {
     JS_WITH_TYPE(UIViewController);
@@ -50,163 +52,201 @@ JS_INIT_CLASS(UINavigationController, UIViewController);
     JS_ASSIGN_PROTO_PROP_READONLY_AS(NUIViewController_UINavigationControllerContextualToolbarItems::navigationController, "navigationController");
     JS_ASSIGN_PROTO_PROP_AS(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItems, "toolbarItems");
   }
+  
+  // instance members (proto)
+  // static members (ctor)
+  JS_INIT_CTOR(UINavigationController, UIViewController);
+  // constants (exports)
+
+  //typedef NS_ENUM(NSInteger, UINavigationControllerOperation) {
+    JS_ASSIGN_ENUM(UINavigationControllerOperationNone, NSInteger);
+    JS_ASSIGN_ENUM(UINavigationControllerOperationPush, NSInteger);
+    JS_ASSIGN_ENUM(UINavigationControllerOperationPop, NSInteger);
+  //};
+  
+  JS_ASSIGN_ENUM(UINavigationControllerHideShowBarDuration, CGFloat);
+
 JS_INIT_CLASS_END(UINavigationController, UIViewController);
 
 NAN_METHOD(NUINavigationController::New) {
   JS_RECONSTRUCT(UINavigationController);
-
-  Local<Object> ctrlObj = info.This();
-
-  NUINavigationController *ctrl = new NUINavigationController();
-
-  if (info[0]->IsExternal()) {
-    ctrl->SetNSObject((__bridge UINavigationController *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    NUIViewController *child = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
-
-    @autoreleasepool {
-      ctrl->SetNSObject([[UINavigationController alloc] initWithRootViewController:child->As<UIViewController>()]);
-    }
-  } else {
-    @autoreleasepool {
-      ctrl->SetNSObject([[UINavigationController alloc] init]);
-    }
-  }
-  ctrl->Wrap(ctrlObj);
-
-  info.GetReturnValue().Set(ctrlObj);
-}
-
-NAN_METHOD(NUINavigationController::SetViewControllers) {
-  NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
-
-  Local<Array> array = Local<Array>::Cast(info[0]);
-  bool animated = TO_BOOL(info[1]);
-  
-  NSMutableArray *controllers = [NSMutableArray array];
-
-  for (unsigned int i = 0; i < array->Length(); i++ ) {
-    if (Nan::Has(array, i).FromJust()) {
-      NUIViewController *view = ObjectWrap::Unwrap<NUIViewController>(JS_OBJ(array->Get(i)));
-      [controllers addObject:view->As<UIViewController>()];
-    }
-  }
-  
-  UINavigationController* c = vc->As<UINavigationController>();
-  
   @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [c setViewControllers:controllers animated:animated];
-    });
+    UINavigationController* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge UINavigationController *)(info[0].As<External>()->Value());
+    } else if (is_value_UIViewController(info[0])) {
+      declare_args();
+      declare_pointer(UIViewController, viewController);
+      self = [[UINavigationController alloc] initWithRootViewController:viewController];
+    } else if (info.Length() <= 0) {
+      self = [[UINavigationController alloc] init];
+    }
+    if (self) {
+      NUINavigationController *wrapper = new NUINavigationController();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NUINavigationController::New: invalid arguments");
+    }
   }
 }
 
-NAN_METHOD(NUINavigationController::PushViewController) {
-  NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
-
-  NUIViewController *child = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
-
-  bool animated = info[1]->IsBoolean() ? TO_BOOL(info[1]) : true;
-
-  UINavigationController* c = vc->As<UINavigationController>();
-  
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      [c pushViewController:child->As<UIViewController>() animated:animated];
-    });
+NAN_METHOD(NUIViewController_UINavigationControllerItem::setToolbarItemsAnimated) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_pointer(NSArray<UIBarButtonItem*>, toolbarItems);
+    declare_value(BOOL, animated);
+    [self setToolbarItems: toolbarItems animated: animated];
   }
 }
 
-NAN_METHOD(NUINavigationController::PopViewController) {
-  NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
+#include "NUINavigationItem.h"
 
-  bool animated = info[0]->IsBoolean() ? TO_BOOL(info[0]) : true;
-
-  UINavigationController* c = vc->As<UINavigationController>();
-  
-  __block UIViewController* obj = nullptr;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      obj = [c popViewControllerAnimated:animated];
-    });
-  }
-
-  if (obj != nullptr) {
-    Local<Value> argv[] = {
-      Nan::New<v8::External>((__bridge void*)obj)
-    };
-    Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(obj, NUIViewController::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-    info.GetReturnValue().Set(value);
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationItemGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UINavigationItem([self navigationItem]));
   }
 }
 
-NAN_METHOD(NUINavigationController::PopToRootViewController) {
-  NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
-
-  bool animated = info[0]->IsBoolean() ? TO_BOOL(info[0]) : true;
-
-  UINavigationController* c = vc->As<UINavigationController>();
-  
-  __block NSArray* controllers = nullptr;
-  __block NSInteger count = 0;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      controllers = [c popToRootViewControllerAnimated:animated];
-      count = [controllers count];
-    });
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hidesBottomBarWhenPushed]));
   }
-
-  auto result = Nan::New<Array>();
-
-  for (NSInteger i = 0; i < count; i++) {
-    UIViewController* child = [controllers objectAtIndex:i];
-    if (child != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)child)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(child, NUIViewController::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(result, static_cast<uint32_t>(i), value);
-    }
-  }
-
-  info.GetReturnValue().Set(result);
 }
 
-NAN_METHOD(NUINavigationController::PopToViewController) {
-  NUINavigationController *vc = ObjectWrap::Unwrap<NUINavigationController>(Local<Object>::Cast(info.This()));
-
-  NUIViewController *child = ObjectWrap::Unwrap<NUIViewController>(Local<Object>::Cast(info[0]));
-
-  bool animated = info[1]->IsBoolean() ? TO_BOOL(info[1]) : true;
-
-  UINavigationController* c = vc->As<UINavigationController>();
-  
-  __block NSArray* controllers = nullptr;
-  __block NSInteger count = 0;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      controllers = [c popToViewController:child->As<UIViewController>() animated:animated];
-      count = [controllers count];
-    });
+NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedSetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidesBottomBarWhenPushed: input];
   }
+}
 
-  auto result = Nan::New<Array>();
-
-  for (NSInteger i = 0; i < count; i++) {
-    UIViewController* child = [controllers objectAtIndex:i];
-    if (child != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)child)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(child, NUIViewController::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      Nan::Set(result, static_cast<uint32_t>(i), value);
-    }
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationControllerGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UINavigationController([self navigationController]));
   }
+}
 
-  info.GetReturnValue().Set(result);
+NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsGetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self toolbarItems]));
+  }
+}
+
+NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsSetter) {
+  JS_UNWRAP(UIViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSArray<UIBarButtonItem*>, input);
+    [self setToolbarItems: input];
+  }
+}
+
+NAN_METHOD(NUINavigationController::initWithNavigationBarClassToolbarClass) {
+  JS_UNWRAP_OR_ALLOC(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id/* Class*/, navigationBarClass);
+    declare_nullable_value(id/* Class*/, toolbarClass);
+    JS_SET_RETURN(js_value_instancetype([self initWithNavigationBarClass: navigationBarClass toolbarClass: toolbarClass]));
+  }
+}
+
+NAN_METHOD(NUINavigationController::initWithRootViewController) {
+  JS_UNWRAP_OR_ALLOC(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIViewController, rootViewController);
+    JS_SET_RETURN(js_value_instancetype([self initWithRootViewController: rootViewController]));
+  }
+}
+
+NAN_METHOD(NUINavigationController::pushViewControllerAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIViewController, viewController);
+    declare_value(BOOL, animated);
+    [self pushViewController: viewController animated: animated];
+  }
+}
+
+NAN_METHOD(NUINavigationController::popViewControllerAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, animated);
+    JS_SET_RETURN(js_value_UIViewController([self popViewControllerAnimated: animated]));
+  }
+}
+
+NAN_METHOD(NUINavigationController::popToViewControllerAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIViewController, viewController);
+    declare_value(BOOL, animated);
+    JS_SET_RETURN(js_value_NSArray<UIViewController*>([self popToViewController: viewController animated: animated]));
+  }
+}
+
+NAN_METHOD(NUINavigationController::popToRootViewControllerAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, animated);
+    JS_SET_RETURN(js_value_NSArray<UIViewController*>([self popToRootViewControllerAnimated: animated]));
+  }
+}
+
+NAN_METHOD(NUINavigationController::setViewControllersAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<UIViewController*>, viewControllers);
+    declare_value(BOOL, animated);
+    [self setViewControllers: viewControllers animated: animated];
+  }
+}
+
+NAN_METHOD(NUINavigationController::setNavigationBarHiddenAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, hidden);
+    declare_value(BOOL, animated);
+    [self setNavigationBarHidden: hidden animated: animated];
+  }
+}
+
+NAN_METHOD(NUINavigationController::setToolbarHiddenAnimated) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, hidden);
+    declare_value(BOOL, animated);
+    [self setToolbarHidden: hidden animated: animated];
+  }
+}
+
+NAN_METHOD(NUINavigationController::showViewControllerSender) {
+  JS_UNWRAP(UINavigationController, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIViewController, vc);
+    declare_nullable_value(id, sender);
+    [self showViewController: vc sender: sender];
+  }
 }
 
 NAN_GETTER(NUINavigationController::topViewControllerGetter) {
@@ -239,14 +279,14 @@ NAN_SETTER(NUINavigationController::viewControllersSetter) {
   }
 }
 
-NAN_GETTER(NUINavigationController::navigationBarHiddenGetter) {
+NAN_GETTER(NUINavigationController::isNavigationBarHiddenGetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self isNavigationBarHidden]));
   }
 }
 
-NAN_SETTER(NUINavigationController::navigationBarHiddenSetter) {
+NAN_SETTER(NUINavigationController::isNavigationBarHiddenSetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     declare_setter();
@@ -264,14 +304,14 @@ NAN_GETTER(NUINavigationController::navigationBarGetter) {
   }
 }
 
-NAN_GETTER(NUINavigationController::toolbarHiddenGetter) {
+NAN_GETTER(NUINavigationController::isToolbarHiddenGetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self isToolbarHidden]));
   }
 }
 
-NAN_SETTER(NUINavigationController::toolbarHiddenSetter) {
+NAN_SETTER(NUINavigationController::isToolbarHiddenSetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     declare_setter();
@@ -280,17 +320,21 @@ NAN_SETTER(NUINavigationController::toolbarHiddenSetter) {
   }
 }
 
+#include "NUIToolbar.h"
+
 NAN_GETTER(NUINavigationController::toolbarGetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* UIToolbar*/([self toolbar]));
+    JS_SET_RETURN(js_value_UIToolbar([self toolbar]));
   }
 }
+
+#include "NUINavigationControllerDelegate.h"
 
 NAN_GETTER(NUINavigationController::delegateGetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <UINavigationControllerDelegate>*/([self delegate]));
+    JS_SET_RETURN(js_value_UINavigationControllerDelegate([self delegate]));
   }
 }
 
@@ -298,8 +342,9 @@ NAN_SETTER(NUINavigationController::delegateSetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <UINavigationControllerDelegate>*/, input);
+    declare_protocol(UINavigationControllerDelegate, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NUINavigationController::delegate"];
   }
 }
 
@@ -389,114 +434,5 @@ NAN_GETTER(NUINavigationController::barHideOnTapGestureRecognizerGetter) {
   JS_UNWRAP(UINavigationController, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_UITapGestureRecognizer([self barHideOnTapGestureRecognizer]));
-  }
-}
-
-/*
-
-#include "NUINavigationItem.h"
-
-NAN_GETTER(NUIViewController::navigationItemGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationItem([self navigationItem]));
-  }
-}
-
-NAN_GETTER(NUIViewController::hidesBottomBarWhenPushedGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self hidesBottomBarWhenPushed]));
-  }
-}
-
-NAN_SETTER(NUIViewController::hidesBottomBarWhenPushedSetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_value(BOOL, input);
-    [self setHidesBottomBarWhenPushed: input];
-  }
-}
-
-NAN_GETTER(NUIViewController::navigationControllerGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationController([self navigationController]));
-  }
-}
-
-NAN_GETTER(NUIViewController::toolbarItemsGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self toolbarItems]));
-  }
-}
-
-NAN_SETTER(NUIViewController::toolbarItemsSetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_pointer(NSArray<UIBarButtonItem*>, input);
-    [self setToolbarItems: input];
-  }
-}
-*/
-
-NAN_METHOD(NUIViewController_UINavigationControllerItem::setToolbarItemsAnimated) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_pointer(NSArray<UIBarButtonItem*>, toolbarItems);
-    declare_value(BOOL, animated);
-    [self setToolbarItems: toolbarItems animated: animated];
-  }
-}
-
-#include "NUINavigationItem.h"
-
-NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationItemGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationItem([self navigationItem]));
-  }
-}
-
-NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self hidesBottomBarWhenPushed]));
-  }
-}
-
-NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::hidesBottomBarWhenPushedSetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_value(BOOL, input);
-    [self setHidesBottomBarWhenPushed: input];
-  }
-}
-
-NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::navigationControllerGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_UINavigationController([self navigationController]));
-  }
-}
-
-NAN_GETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsGetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<UIBarButtonItem*>([self toolbarItems]));
-  }
-}
-
-NAN_SETTER(NUIViewController_UINavigationControllerContextualToolbarItems::toolbarItemsSetter) {
-  JS_UNWRAP(UIViewController, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_pointer(NSArray<UIBarButtonItem*>, input);
-    [self setToolbarItems: input];
   }
 }

@@ -59,7 +59,7 @@ JS_WRAP_PROTOCOL(UITableViewDelegate, UIScrollViewDelegate);
 JS_WRAP_PROTOCOL_END(UITableViewDelegate, UIScrollViewDelegate);
 
 #if __OBJC__
-@interface UITableViewDelegateType : NSObject<UITableViewDelegate>
+@interface UITableViewDelegateType : UIScrollViewDelegateType<UITableViewDelegate>
 
 // Display customization
 

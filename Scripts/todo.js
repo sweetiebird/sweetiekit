@@ -445,7 +445,7 @@ class MyApp {
 
     this.todoTable.reloadData();
 
-    this.todoTable.scrollToRowAt(
+    this.todoTable.scrollToRowAtIndexPathAtScrollPositionAnimated(
       { section: 0, row: this.todos.length - 1 },
       UITableViewScrollPositionTop,
       true,
@@ -477,7 +477,7 @@ class MyApp {
   }
 
   handleCellSelected(tableView, { section, row }) {
-    const cell = this.todoTable.cellForRowAt({ section, row });
+    const cell = this.todoTable.cellForRowAtIndexPath({ section, row });
     if (cell) {
       cell.isSelected = false;
     }
