@@ -345,7 +345,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 // Allows customization of the editingStyle for a particular cell located at 'indexPath'. If not implemented, all editable cells will have UITableViewCellEditingStyleDelete set for them when the table has editing property set to YES.
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  __block UITableViewCellEditingStyle result = UITableViewCellEditingStyleNone;
+  __block UITableViewCellEditingStyle result = UITableViewCellEditingStyleDelete;
   call_delegate(result = is_value_UITableViewCellEditingStyle(JS_RESULT) ? to_value_UITableViewCellEditingStyle(JS_RESULT) : result, tableViewEditingStyleForRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
