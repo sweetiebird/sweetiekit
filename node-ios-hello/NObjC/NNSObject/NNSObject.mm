@@ -795,6 +795,9 @@ NAN_METHOD(NClass::New) {
 #include "NUIViewController.h"
 #include "NUINavigationController.h"
 #include "NUINavigationControllerDelegate.h"
+#include "NUIBarPositioning.h"
+#include "NUIBarPositioningDelegate.h"
+#include "NUINavigationBarDelegate.h"
 #include "NUINavigationBar.h"
 #include "NUINavigationItem.h"
 #include "NUIImagePickerController.h"
@@ -1462,6 +1465,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(UIDropInteractionDelegate);
     JS_EXPORT_TYPE(UIImagePickerControllerDelegate);
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
+    JS_EXPORT_PROTOCOL(UIBarPositioning);
+    JS_EXPORT_PROTOCOL(UIBarPositioningDelegate);
+    JS_EXPORT_PROTOCOL(UINavigationBarDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
     
@@ -2544,6 +2550,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(UITabBarDelegate);
       JS_RETURN_PROTOCOL(UITabBarControllerDelegate);
       JS_RETURN_PROTOCOL(UINavigationControllerDelegate);
+      JS_RETURN_PROTOCOL(UINavigationBarDelegate);
+      JS_RETURN_PROTOCOL(UIBarPositioningDelegate);
+      JS_RETURN_PROTOCOL(UIBarPositioning);
       JS_RETURN_PROTOCOL(UIFocusAnimationContext);
       JS_RETURN_PROTOCOL(UIDropInteractionDelegate);
       JS_RETURN_PROTOCOL(UIDragInteractionDelegate);

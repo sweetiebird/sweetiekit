@@ -221,6 +221,9 @@
 		A15878EC22CDEF4000847196 /* NUITargetedDragPreview.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */; };
 		A15878F022CE11AC00847196 /* NUINavigationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */; };
 		A15878F422CE1F4F00847196 /* NUITabBarDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */; };
+		A15878FE22CE3FE900847196 /* NUIBarPositioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878F622CE3FE800847196 /* NUIBarPositioningDelegate.mm */; };
+		A15878FF22CE3FE900847196 /* NUINavigationBarDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878FA22CE3FE800847196 /* NUINavigationBarDelegate.mm */; };
+		A158790022CE3FE900847196 /* NUIBarPositioning.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -1044,6 +1047,12 @@
 		A15878EF22CE11AC00847196 /* NUINavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationControllerDelegate.h; sourceTree = "<group>"; };
 		A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarDelegate.mm; sourceTree = "<group>"; };
 		A15878F322CE1F4F00847196 /* NUITabBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarDelegate.h; sourceTree = "<group>"; };
+		A15878F622CE3FE800847196 /* NUIBarPositioningDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarPositioningDelegate.mm; sourceTree = "<group>"; };
+		A15878F722CE3FE800847196 /* NUIBarPositioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBarPositioningDelegate.h; sourceTree = "<group>"; };
+		A15878F922CE3FE800847196 /* NUINavigationBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationBarDelegate.h; sourceTree = "<group>"; };
+		A15878FA22CE3FE800847196 /* NUINavigationBarDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationBarDelegate.mm; sourceTree = "<group>"; };
+		A15878FC22CE3FE800847196 /* NUIBarPositioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIBarPositioning.h; sourceTree = "<group>"; };
+		A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIBarPositioning.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3613,6 +3622,33 @@
 				A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */,
 			);
 			path = NUITabBarDelegate;
+			sourceTree = "<group>";
+		};
+		A15878F522CE3FE800847196 /* NUIBarPositioningDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A15878F722CE3FE800847196 /* NUIBarPositioningDelegate.h */,
+				A15878F622CE3FE800847196 /* NUIBarPositioningDelegate.mm */,
+			);
+			path = NUIBarPositioningDelegate;
+			sourceTree = "<group>";
+		};
+		A15878F822CE3FE800847196 /* NUINavigationBarDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A15878F922CE3FE800847196 /* NUINavigationBarDelegate.h */,
+				A15878FA22CE3FE800847196 /* NUINavigationBarDelegate.mm */,
+			);
+			path = NUINavigationBarDelegate;
+			sourceTree = "<group>";
+		};
+		A15878FB22CE3FE800847196 /* NUIBarPositioning */ = {
+			isa = PBXGroup;
+			children = (
+				A15878FC22CE3FE800847196 /* NUIBarPositioning.h */,
+				A15878FD22CE3FE800847196 /* NUIBarPositioning.mm */,
+			);
+			path = NUIBarPositioning;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -6740,6 +6776,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A15878FB22CE3FE800847196 /* NUIBarPositioning */,
+				A15878F522CE3FE800847196 /* NUIBarPositioningDelegate */,
+				A15878F822CE3FE800847196 /* NUINavigationBarDelegate */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
@@ -7615,6 +7654,7 @@
 				A133708922AB399D00FA3768 /* NMPMediaQuery.mm in Sources */,
 				A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */,
 				A13370D922AEFC6A00FA3768 /* NAVAudioBuffer.mm in Sources */,
+				A15878FE22CE3FE900847196 /* NUIBarPositioningDelegate.mm in Sources */,
 				A13370B522AEEC5700FA3768 /* NAVAudioSessionDataSourceDescription.mm in Sources */,
 				A1926F8C22C10729008F16AE /* NMTLRenderPassAttachmentDescriptor.mm in Sources */,
 				A1926F0522C0BA34008F16AE /* NSKPhysicsJointLimit.mm in Sources */,
@@ -7991,6 +8031,7 @@
 				A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */,
 				A1CE2B5D228E827200D9B3B8 /* NGif.mm in Sources */,
 				A19F3A1822AF75A400606332 /* NMDLVertexAttributeData.mm in Sources */,
+				A158790022CE3FE900847196 /* NUIBarPositioning.mm in Sources */,
 				A108637622C6C874001A15A9 /* NARReferenceImage.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */,
@@ -8060,6 +8101,7 @@
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */,
 				A19270D522C18EFF008F16AE /* NMTLPipelineBufferDescriptorArray.mm in Sources */,
+				A15878FF22CE3FE900847196 /* NUINavigationBarDelegate.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
 				A158785522CDA5BC00847196 /* NUITableViewDelegate.mm in Sources */,
 				A19270A222C16332008F16AE /* NNSTimer.mm in Sources */,

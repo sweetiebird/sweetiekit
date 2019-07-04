@@ -20,7 +20,6 @@
 #define UIToolbarPositionTop UIBarPositionTop
 
 JS_WRAP_CLASS(UINavigationBar, UIView);
-// UINavigationBar
   JS_METHOD(pushNavigationItemAnimated);
   JS_METHOD(popNavigationItemAnimated);
   JS_METHOD(setItemsAnimated);
@@ -30,14 +29,6 @@ JS_WRAP_CLASS(UINavigationBar, UIView);
   JS_METHOD(backgroundImageForBarMetrics);
   JS_METHOD(setTitleVerticalPositionAdjustmentForBarMetrics);
   JS_METHOD(titleVerticalPositionAdjustmentForBarMetrics);
-#if TODO
-// UINavigationBarDelegate
-  JS_METHOD(navigationBarShouldPushItem);
-  JS_METHOD(navigationBarDidPushItem);
-  JS_METHOD(navigationBarShouldPopItem);
-  JS_METHOD(navigationBarDidPopItem);
-#endif
-// UINavigationBar
   JS_PROP(barStyle);
   JS_PROP(delegate);
   JS_PROP(isTranslucent);
@@ -52,7 +43,6 @@ JS_WRAP_CLASS(UINavigationBar, UIView);
   JS_PROP(largeTitleTextAttributes);
   JS_PROP(backIndicatorImage);
   JS_PROP(backIndicatorTransitionMaskImage);
-
 JS_WRAP_CLASS_END(UINavigationBar);
 
 #endif /* NUINavigationBar_h */
