@@ -326,7 +326,7 @@ async function make(nav, demoVC) {
   };
 
   _text = (txt) => {
-    return txt || text || defaultText;
+    return txt || text || '👀';
   };
 
   _node = (text) => {
@@ -486,7 +486,7 @@ async function make(nav, demoVC) {
   const horOffset = 24;
 
   const field = await makeTextField(demoVC, fieldHeight, horOffset, () => {
-    text = field.text;
+    text = field.text.trim() || defaultText;
   });
 
   const topView = makeTopView(demoVC, fieldHeight);
