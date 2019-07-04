@@ -260,6 +260,7 @@ NAN_SETTER(NUIPresentationController::delegateSetter) {
     declare_setter();
     declare_value(id/* <UIAdaptivePresentationControllerDelegate>*/, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NUIPresentationController::delegate"];
   }
 }
 

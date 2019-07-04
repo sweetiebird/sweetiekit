@@ -424,7 +424,6 @@
 		A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */; };
 		A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20576229799BF006CA4C6 /* SUIKitGlobals.swift */; };
 		A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057A22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm */; };
-		A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057C22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift */; };
 		A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B205802297A423006CA4C6 /* NUIPopoverPresentationController.mm */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
 		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
@@ -1386,7 +1385,6 @@
 		A1B20576229799BF006CA4C6 /* SUIKitGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIKitGlobals.swift; sourceTree = "<group>"; };
 		A1B2057922979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPopoverPresentationControllerDelegate.h; sourceTree = "<group>"; };
 		A1B2057A22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPopoverPresentationControllerDelegate.mm; sourceTree = "<group>"; };
-		A1B2057C22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPopoverPresentationControllerDelegate.swift; sourceTree = "<group>"; };
 		A1B2057F2297A423006CA4C6 /* NUIPopoverPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIPopoverPresentationController.h; sourceTree = "<group>"; };
 		A1B205802297A423006CA4C6 /* NUIPopoverPresentationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPopoverPresentationController.mm; sourceTree = "<group>"; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
@@ -5337,7 +5335,6 @@
 			children = (
 				A1B2057922979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.h */,
 				A1B2057A22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm */,
-				A1B2057C22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift */,
 			);
 			path = NUIPopoverPresentationControllerDelegate;
 			sourceTree = "<group>";
@@ -7356,7 +7353,6 @@
 				A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */,
 				A1CE2B9C228F051200D9B3B8 /* SUIPickerViewManager.swift in Sources */,
 				A19F3A0122AF68B400606332 /* NMDLTexture.mm in Sources */,
-				A1B2057D22979FE5006CA4C6 /* SUIPopoverPresentationControllerDelegate.swift in Sources */,
 				A1574EC522B8B3B3006CC5F2 /* UIView+Constraints.swift in Sources */,
 				A1EE7D7A229D8EEF002B53FF /* NSCNBox.mm in Sources */,
 				A192704122C1391C008F16AE /* NMTLFence.mm in Sources */,
