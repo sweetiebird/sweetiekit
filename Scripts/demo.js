@@ -167,6 +167,10 @@ global.DocumentsPath = objc.NSSearchPathForDirectoriesInDomains(9, 1, true)[0]
 
 global.Require = require;
 
+global.NSMakeRange = (location, length) => {
+  return {location, length};
+};
+
 global.CGRectMake = (x, y, width, height) => {
   return {x, y, width, height};
 };
