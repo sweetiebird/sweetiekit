@@ -2972,6 +2972,49 @@ bool is_value_NSDictionary(Local<Value> value) {
   return true;
 }
 
+Local<Value> js_value_NSMutableSet(NSMutableSet* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Set> result(Set::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> v = js_value_id(obj);
+      (void)result->Add(JS_CONTEXT(), v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSMutableSet* _Nullable to_value_NSMutableSet(Local<Value> dict, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (dict->IsSet()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Set>::Cast(dict)->AsArray());
+    auto result = [[NSMutableSet alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id v = to_value_id(value->Get(i));
+      [result addObject:v];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSMutableSet failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSMutableSet(Local<Value> value) {
+  if (!value->IsSet()) {
+    return false;
+  }
+  return true;
+}
+
 Local<Value> js_value_NSSet(NSSet* _Nullable value) {
   if (value == nullptr) {
     return Nan::Undefined();

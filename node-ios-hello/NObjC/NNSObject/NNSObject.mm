@@ -614,7 +614,57 @@ NNSObject::~NNSObject() {}
 
 JS_INIT_CLASS(NSObject, id);
   JS_ASSIGN_PROTO_METHOD(associatedValueForKey);
-  JS_ASSIGN_PROTO_METHOD(associateValue);
+  JS_ASSIGN_PROTO_METHOD(associateValueWithKey);
+
+  // NSKeyValueCoding.h
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+  JS_ASSIGN_PROTO_METHOD(validateValueForKeyError);
+  JS_ASSIGN_PROTO_METHOD(mutableArrayValueForKey);
+  JS_ASSIGN_PROTO_METHOD(mutableOrderedSetValueForKey);
+  JS_ASSIGN_PROTO_METHOD(mutableSetValueForKey);
+  JS_ASSIGN_PROTO_METHOD(valueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(setValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(validateValueForKeyPathError);
+  JS_ASSIGN_PROTO_METHOD(mutableArrayValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(mutableOrderedSetValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(mutableSetValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(valueForUndefinedKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForUndefinedKey);
+  JS_ASSIGN_PROTO_METHOD(setNilValueForKey);
+  JS_ASSIGN_PROTO_METHOD(dictionaryWithValuesForKeys);
+  JS_ASSIGN_PROTO_METHOD(setValuesForKeysWithDictionary);
+#if TODO
+// NSArray<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSDictionary<KeyType
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+// NSMutableDictionary<KeyType
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSOrderedSet<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSSet<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+#endif
+// NSObject
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+  JS_ASSIGN_STATIC_METHOD(useStoredAccessor);
+  JS_ASSIGN_PROTO_METHOD(storedValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeStoredValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(handleQueryWithUnboundKey);
+  JS_ASSIGN_PROTO_METHOD(handleTakeValueForUnboundKey);
+  JS_ASSIGN_PROTO_METHOD(unableToSetNilForKey);
+  JS_ASSIGN_PROTO_METHOD(valuesForKeys);
+  JS_ASSIGN_PROTO_METHOD(takeValuesFromDictionary);
+#endif
+#if TODO
+  JS_ASSIGN_STATIC_PROP_READONLY(accessInstanceVariablesDirectly);
+#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -652,7 +702,7 @@ NAN_METHOD(NNSObject::associatedValueForKey) {
   }
 }
 
-NAN_METHOD(NNSObject::associateValue) {
+NAN_METHOD(NNSObject::associateValueWithKey) {
   JS_UNWRAP(NSObject, self);
   declare_autoreleasepool {
     declare_args();
@@ -661,6 +711,280 @@ NAN_METHOD(NNSObject::associateValue) {
     [self associateValue:value withKey:key];
   }
 }
+
+NAN_METHOD(NNSObject::valueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self valueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self setValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::validateValueForKeyError) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(inout-id-_Nullable-pointer-_Nonnull, ioValue);
+    declare_pointer(NSString, inKey);
+    declare_pointer(out-NSError-pointer, outError);
+    JS_SET_RETURN(js_value_BOOL([self validateValue: ioValue forKey: inKey error: outError]));
+    #endif
+  }
+}
+
+NAN_METHOD(NNSObject::mutableArrayValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableArray([self mutableArrayValueForKey: key]));
+  }
+}
+
+#define js_value_NSMutableOrderedSet(x) js_value_wrapper_unknown(x, NSMutableOrderedSet)
+#define to_value_NSMutableOrderedSet(x) to_value_wrapper_unknown(x, NSMutableOrderedSet)
+#define is_value_NSMutableOrderedSet(x) is_value_wrapper_unknown(x, NSMutableOrderedSet)
+
+NAN_METHOD(NNSObject::mutableOrderedSetValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableOrderedSet([self mutableOrderedSetValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableSetValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableSet([self mutableSetValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::valueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_id([self valueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, keyPath);
+    [self setValue: value forKeyPath: keyPath];
+  }
+}
+
+NAN_METHOD(NNSObject::validateValueForKeyPathError) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(inout-id-_Nullable-pointer-_Nonnull, ioValue);
+    declare_pointer(NSString, inKeyPath);
+    declare_pointer(out-NSError-pointer, outError);
+    JS_SET_RETURN(js_value_BOOL([self validateValue: ioValue forKeyPath: inKeyPath error: outError]));
+    #endif
+  }
+}
+
+NAN_METHOD(NNSObject::mutableArrayValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableArray([self mutableArrayValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableOrderedSetValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableOrderedSet([self mutableOrderedSetValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableSetValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableSet([self mutableSetValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::valueForUndefinedKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self valueForUndefinedKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForUndefinedKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self setValue: value forUndefinedKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::setNilValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self setNilValueForKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::dictionaryWithValuesForKeys) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<NSString*>, keys);
+    JS_SET_RETURN(js_value_NSDictionary/* <NSString*, id>*/([self dictionaryWithValuesForKeys: keys]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValuesForKeysWithDictionary) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDictionary/* <NSString*, id>*/, keyedValues);
+    [self setValuesForKeysWithDictionary: keyedValues];
+  }
+}
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+NAN_METHOD(NNSObject::useStoredAccessor) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([NSObject useStoredAccessor]));
+  }
+}
+
+NAN_METHOD(NNSObject::storedValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self storedValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::takeStoredValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self takeStoredValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::takeValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self takeValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::takeValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, keyPath);
+    [self takeValue: value forKeyPath: keyPath];
+  }
+}
+
+NAN_METHOD(NNSObject::handleQueryWithUnboundKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self handleQueryWithUnboundKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::handleTakeValueForUnboundKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self handleTakeValue: value forUnboundKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::unableToSetNilForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self unableToSetNilForKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::valuesForKeys) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray, keys);
+    JS_SET_RETURN(js_value_NSDictionary([self valuesForKeys: keys]));
+  }
+}
+
+NAN_METHOD(NNSObject::takeValuesFromDictionary) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDictionary, properties);
+    [self takeValuesFromDictionary: properties];
+  }
+}
+
+#endif // #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+#if TODO
+NAN_GETTER(NNSObject::accessInstanceVariablesDirectlyGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([NSObject accessInstanceVariablesDirectly]));
+  }
+}
+#endif
+
 
 NClass::NClass() {}
 NClass::~NClass() {}
