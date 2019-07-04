@@ -6690,26 +6690,26 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
-				A108637B22C6CC38001A15A9 /* NARReferenceObject */,
-				A108637722C6C9B2001A15A9 /* NARPointCloud */,
-				A108637322C6C874001A15A9 /* NARReferenceImage */,
-				A108636F22C6C822001A15A9 /* NARWorldMap */,
-				A108636B22C6C7BB001A15A9 /* NARVideoFormat */,
-				A108635A22C6C5B3001A15A9 /* NARFaceTrackingConfiguration */,
-				A108636322C6C5B4001A15A9 /* NARImageTrackingConfiguration */,
-				A108635722C6C5B2001A15A9 /* NARObjectScanningConfiguration */,
-				A108635D22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration */,
-				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1948934228A68A0007BF787 /* NARConfiguration */,
+				A108635A22C6C5B3001A15A9 /* NARFaceTrackingConfiguration */,
 				A1BD4BAC22880999001D1F6E /* NARFrame */,
 				A1EE7D9A22A47948002B53FF /* NARHitTestResult */,
+				A108636322C6C5B4001A15A9 /* NARImageTrackingConfiguration */,
 				A1948938228A6A8F007BF787 /* NARLightEstimate */,
+				A108635722C6C5B2001A15A9 /* NARObjectScanningConfiguration */,
+				A108635D22C6C5B3001A15A9 /* NAROrientationTrackingConfiguration */,
+				A108637722C6C9B2001A15A9 /* NARPointCloud */,
+				A108637322C6C874001A15A9 /* NARReferenceImage */,
+				A108637B22C6CC38001A15A9 /* NARReferenceObject */,
 				A18F1E62228A418300A42754 /* NARSCNView */,
 				A1D65E1422819F7B00AC0BD9 /* NARSession */,
 				A1D65E1022819D7C00AC0BD9 /* NARSKView */,
 				A1BD4B762287BF0E001D1F6E /* NARSKViewDelegate */,
+				A108636B22C6C7BB001A15A9 /* NARVideoFormat */,
+				A108636F22C6C822001A15A9 /* NARWorldMap */,
+				A1D65E192281A03B00AC0BD9 /* NARWorldTrackingConfiguration */,
 			);
 			path = NARKit;
 			sourceTree = "<group>";
