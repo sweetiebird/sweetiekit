@@ -44,6 +44,7 @@ makeGreenDot = require('./examples/GreenDot');
 
 // controller based demos
 makeAlertCtrl = require('./examples/UIAlertController');
+makeAlertCtrlActionSheet = require('./examples/UIAlertControllerActionSheet');
 makeImagePickerCtrl = require('./examples/UIImagePickerController');
 makeNavigationCtrl = require('./examples/UINavigationController');
 makeTabBarCtrl = require('./examples/UITabBarController');
@@ -91,6 +92,7 @@ demoTypes = {
 demoCtrls = {
   Popover: makePopover,
   UIAlertController: makeAlertCtrl,
+  UIAlertControllerActionSheet: makeAlertCtrlActionSheet,
   UIBarButtonItem: makeBarButtonItem,
   UICollectionView: makeCollectionView,
   UIImagePickerController: makeImagePickerCtrl,
