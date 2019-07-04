@@ -6,27 +6,30 @@
 //
 #include "NNSMutableAttributedString.h"
 
+#define instancetype NSMutableAttributedString
+#define js_value_instancetype js_value_NSMutableAttributedString
+
 NNSMutableAttributedString::NNSMutableAttributedString () {}
 NNSMutableAttributedString::~NNSMutableAttributedString () {}
 
 JS_INIT_CLASS(NSMutableAttributedString, NSAttributedString);
-  // instance members (proto)
-  JS_ASSIGN_METHOD(proto, addAttribute);
-  JS_ASSIGN_METHOD(proto, replaceCharactersInRangeWithString);
-  JS_ASSIGN_METHOD(proto, setAttributesRange);
-  JS_ASSIGN_METHOD(proto, addAttributeValueRange);
-  JS_ASSIGN_METHOD(proto, addAttributesRange);
-  JS_ASSIGN_METHOD(proto, removeAttributeRange);
-  JS_ASSIGN_METHOD(proto, replaceCharactersInRangeWithAttributedString);
-  JS_ASSIGN_METHOD(proto, insertAttributedStringAtIndex);
-  JS_ASSIGN_METHOD(proto, appendAttributedString);
-  JS_ASSIGN_METHOD(proto, deleteCharactersInRange);
-  JS_ASSIGN_METHOD(proto, setAttributedString);
-  JS_ASSIGN_METHOD(proto, beginEditing);
-  JS_ASSIGN_METHOD(proto, endEditing);
+  JS_ASSIGN_PROTO_METHOD(replaceCharactersInRangeWithString);
+  JS_ASSIGN_PROTO_METHOD(setAttributesRange);
+  JS_ASSIGN_PROTO_METHOD(addAttributeValueRange);
+  JS_ASSIGN_PROTO_METHOD(addAttributesRange);
+  JS_ASSIGN_PROTO_METHOD(removeAttributeRange);
+  JS_ASSIGN_PROTO_METHOD(replaceCharactersInRangeWithAttributedString);
+  JS_ASSIGN_PROTO_METHOD(insertAttributedStringAtIndex);
+  JS_ASSIGN_PROTO_METHOD(appendAttributedString);
+  JS_ASSIGN_PROTO_METHOD(deleteCharactersInRange);
+  JS_ASSIGN_PROTO_METHOD(setAttributedString);
+  JS_ASSIGN_PROTO_METHOD(beginEditing);
+  JS_ASSIGN_PROTO_METHOD(endEditing);
 
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(NSMutableAttributedString, NSAttributedString);
+
 JS_INIT_CLASS_END(NSMutableAttributedString, NSAttributedString);
 
 NAN_METHOD(NNSMutableAttributedString::New) {
