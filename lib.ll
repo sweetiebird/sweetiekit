@@ -574,6 +574,17 @@
                       (when (obj? (hd rest))
                         (set attrs (hd rest))
                         (set rest (tl rest)))
+                      (when (one? rest)
+                        ; try to split e.g.
+                        ; `id<RPPreviewViewControllerDelegate>previewControllerDelegate`
+                        ; into two tokens:
+                        ; `id<RPPreviewViewControllerDelegate>` and `previewControllerDelegate`
+                        (let-when i (search (hd rest) ">")
+                          (while true
+                            (let j (search (hd rest) ">" (+ i 1))
+                              (if (is? j) (set i j) (break))))
+                          (inc i)
+                          (set rest (list (clip (hd rest) 0 i) (clip (hd rest) i)))))
                       (let (name (drop rest)
                             type (trim (apply concat " " (map trim rest))))
                         (when (some? type)
