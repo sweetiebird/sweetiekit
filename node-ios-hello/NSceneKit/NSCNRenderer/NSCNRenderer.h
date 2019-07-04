@@ -8,13 +8,13 @@
 #ifndef NSCNRenderer_h
 #define NSCNRenderer_h    
 
-#include "NNSObject.h"
+#include "NSCNSceneRenderer.h"
 
 #define js_value_SCNRenderer(x) js_value_wrapper(x, SCNRenderer)
 #define to_value_SCNRenderer(x) to_value_wrapper(x, SCNRenderer)
 #define is_value_SCNRenderer(x) is_value_wrapper(x, SCNRenderer)
 
-JS_WRAP_CLASS(SCNRenderer, NSObject);
+JS_WRAP_CLASS(SCNRenderer, SCNSceneRenderer);
   JS_STATIC_METHOD(rendererWithContextOptions);
   JS_STATIC_METHOD(rendererWithDeviceOptions);
   JS_METHOD(renderAtTimeViewportCommandBufferPassDescriptor);

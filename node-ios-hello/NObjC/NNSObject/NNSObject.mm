@@ -2006,9 +2006,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(SceneKitTypes);
     JS_EXPORT_TYPE(SCNPhysicsField);
-    JS_EXPORT_TYPE(SCNRenderer);
-    JS_EXPORT_TYPE(SCNSceneRenderer);
-    JS_EXPORT_TYPE(SCNSceneRendererDelegate);
+    JS_EXPORT_PROTOCOL(SCNSceneRendererDelegate);
+    JS_EXPORT_PROTOCOL(SCNSceneRenderer);
+    JS_EXPORT_TYPE(SCNRenderer); // : SCNSceneRenderer
     JS_EXPORT_TYPE(SCNAction);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
@@ -2383,8 +2383,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SceneKitTypes);
       JS_RETURN_TYPE(SCNPhysicsField);
       JS_RETURN_TYPE(SCNRenderer);
-      // JS_RETURN_TYPE(SCNSceneRenderer);
-      JS_RETURN_TYPE(SCNSceneRendererDelegate);
       JS_RETURN_TYPE(SCNParticleSystem);
       JS_RETURN_TYPE(SCNParticlePropertyController);
       JS_RETURN_TYPE(SCNAction);
@@ -2856,6 +2854,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SceneKit protocols
 
+      JS_RETURN_PROTOCOL(SCNSceneRendererDelegate);
+      JS_RETURN_PROTOCOL(SCNSceneRenderer);
       JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
       
       // ARKit protocols

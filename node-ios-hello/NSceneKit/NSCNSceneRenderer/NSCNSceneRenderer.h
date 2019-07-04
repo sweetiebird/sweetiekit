@@ -98,7 +98,6 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  */
 - (NSArray<SCNHitTestResult *> *_Nonnull)hitTest:(CGPoint)point options:(nullable NSDictionary<SCNHitTestOption, id> *)options;
 
-#if !TARGET_OS_IPHONE
 /*!
  @method isNodeInsideFrustum:withPointOfView:
  @abstract Test whether node is visible from the specified point of view.
@@ -107,7 +106,6 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  @discussion Return YES if the node is inside or intersects the clipping planes of the point of view. This method doesn't test if 'node' is occluded by another node.
  */
 - (BOOL)isNodeInsideFrustum:(SCNNode *_Nonnull)node withPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.9));
-#endif
 
 /*!
  @method nodesInsideFrustumWithPointOfView:
@@ -117,7 +115,6 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  */
 - (NSArray<SCNNode *> *_Nonnull)nodesInsideFrustumWithPointOfView:(SCNNode *_Nonnull)pointOfView API_AVAILABLE(macos(10.11), ios(9.0));
 
-#if !TARGET_OS_IPHONE
 /*!
  @method projectPoint
  @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport.
@@ -133,7 +130,6 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
  */
 - (SCNVector3)unprojectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9));
-#endif
 
 /*! 
  @property playing
@@ -169,7 +165,6 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  */
 @property(nonatomic, getter=isJitteringEnabled) BOOL jitteringEnabled;
 
-#if !TARGET_OS_IPHONE
 /*!
  @method prepareObject:shouldAbortBlock:
  @abstract Prepare the specified object for drawing.
@@ -178,9 +173,7 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread. This method is observable using NSProgress.
  */
 - (BOOL)prepareObject:(id _Nonnull)object shouldAbortBlock:(nullable NS_NOESCAPE BOOL (^)(void))block API_AVAILABLE(macos(10.9));
-#endif
 
-#if !TARGET_OS_IPHONE
 /*!
  @method prepareObjects:withCompletionHandler:
  @abstract Prepare the specified objects for drawing on the background.
@@ -189,16 +182,13 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  @discussion This method is observable using NSProgress.
  */
 - (void)prepareObjects:(NSArray *_Nonnull)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler API_AVAILABLE(macos(10.10));
-#endif
 
-#if !TARGET_OS_IPHONE
 /*!
  @property showsStatistics
  @abstract Determines whether the receiver should display statistics info like FPS. Defaults to NO.
  @discussion  When set to YES, statistics are displayed in a overlay on top of the rendered scene.
  */
 @property(nonatomic) BOOL showsStatistics API_AVAILABLE(macos(10.9));
-#endif
 
 /*!
  @property debugOptions
@@ -206,13 +196,11 @@ JS_WRAP_PROTOCOL_END(SCNSceneRenderer, NSObject);
  */
 @property(nonatomic) SCNDebugOptions debugOptions API_AVAILABLE(macos(10.11), ios(9.0));
 
-#if !TARGET_OS_IPHONE
 /*!
  @property overlaySKScene
  @abstract Specifies the overlay of the receiver as a SpriteKit scene instance. Defaults to nil.
  */
 @property(nonatomic, retain, nullable) SKScene *overlaySKScene API_AVAILABLE(macos(10.10));
-#endif
 
 /*!
  @property renderingAPI

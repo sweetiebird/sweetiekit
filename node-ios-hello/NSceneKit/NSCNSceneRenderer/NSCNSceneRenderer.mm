@@ -55,9 +55,9 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
    @abstract antialiasing modes for scene renderers
    */
   //typedef NS_ENUM(NSUInteger, SCNAntialiasingMode) {
-    JS_ASSIGN_ENUM(SCNAntialiasingModeNone, NSUInteger); //,
-    JS_ASSIGN_ENUM(SCNAntialiasingModeMultisampling2X, NSUInteger); //,
-    JS_ASSIGN_ENUM(SCNAntialiasingModeMultisampling4X, NSUInteger); //
+    JS_ASSIGN_ENUM(SCNAntialiasingModeNone, NSUInteger);
+    JS_ASSIGN_ENUM(SCNAntialiasingModeMultisampling2X, NSUInteger);
+    JS_ASSIGN_ENUM(SCNAntialiasingModeMultisampling4X, NSUInteger);
   //} API_AVAILABLE(macos(10.10));
 
   /*!
@@ -67,8 +67,8 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
    If Metal is requested but not available then it fallbacks to SCNRenderingAPIOpenGLES2 on iOS and to SCNRenderingAPIOpenGLLegacy on macOS.
    */
   //typedef NS_ENUM(NSUInteger, SCNRenderingAPI) {
-    JS_ASSIGN_ENUM(SCNRenderingAPIMetal, NSUInteger); //,
-    JS_ASSIGN_ENUM(SCNRenderingAPIOpenGLES2, NSUInteger); //
+    JS_ASSIGN_ENUM(SCNRenderingAPIMetal, NSUInteger);
+    JS_ASSIGN_ENUM(SCNRenderingAPIOpenGLES2, NSUInteger);
   //} API_AVAILABLE(macos(10.11), ios(9.0));
 
   /*!
@@ -436,7 +436,6 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
   return result;
 }
 
-#if !TARGET_OS_IPHONE
 /*!
  @method isNodeInsideFrustum:withPointOfView:
  @abstract Test whether node is visible from the specified point of view.
@@ -448,7 +447,6 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 {
   return YES;
 }
-#endif
 
 /*!
  @method nodesInsideFrustumWithPointOfView:
@@ -462,7 +460,6 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
   return result;
 }
 
-#if !TARGET_OS_IPHONE
 /*!
  @method projectPoint
  @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport.
@@ -484,9 +481,7 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 {
   return SCNVector3Zero;
 }
-#endif
 
-#if !TARGET_OS_IPHONE
 /*!
  @method prepareObject:shouldAbortBlock:
  @abstract Prepare the specified object for drawing.
@@ -498,9 +493,7 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 {
   return YES;
 }
-#endif
 
-#if !TARGET_OS_IPHONE
 /*!
  @method prepareObjects:withCompletionHandler:
  @abstract Prepare the specified objects for drawing on the background.
@@ -511,7 +504,6 @@ NAN_SETTER(NSCNSceneRenderer::audioListenerSetter) {
 - (void)prepareObjects:(NSArray *_Nonnull)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler API_AVAILABLE(macos(10.10))
 {
 }
-#endif
 
 @end
 

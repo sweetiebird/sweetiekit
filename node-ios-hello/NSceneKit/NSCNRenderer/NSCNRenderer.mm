@@ -12,7 +12,7 @@
 NSCNRenderer::NSCNRenderer() {}
 NSCNRenderer::~NSCNRenderer() {}
 
-JS_INIT_CLASS(SCNRenderer, NSObject);
+JS_INIT_CLASS(SCNRenderer, SCNSceneRenderer);
   JS_ASSIGN_STATIC_METHOD(rendererWithContextOptions);
   JS_ASSIGN_STATIC_METHOD(rendererWithDeviceOptions);
   JS_ASSIGN_PROTO_METHOD(renderAtTimeViewportCommandBufferPassDescriptor);
@@ -27,9 +27,9 @@ JS_INIT_CLASS(SCNRenderer, NSObject);
 
   // instance members (proto)
   // static members (ctor)
-  JS_INIT_CTOR(SCNRenderer, NSObject);
+  JS_INIT_CTOR(SCNRenderer, SCNSceneRenderer);
   // constant values (exports)
-JS_INIT_CLASS_END(SCNRenderer, NSObject);
+JS_INIT_CLASS_END(SCNRenderer, SCNSceneRenderer);
 
 NAN_METHOD(NSCNRenderer::New) {
   JS_RECONSTRUCT(SCNRenderer);

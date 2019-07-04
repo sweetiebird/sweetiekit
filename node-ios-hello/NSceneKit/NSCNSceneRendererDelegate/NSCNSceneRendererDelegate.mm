@@ -12,7 +12,7 @@
 NSCNSceneRendererDelegate::NSCNSceneRendererDelegate() {}
 NSCNSceneRendererDelegate::~NSCNSceneRendererDelegate() {}
 
-JS_INIT_CLASS(SCNSceneRendererDelegate, NSObject);
+JS_INIT_PROTOCOL(SCNSceneRendererDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(rendererUpdateAtTime);
   JS_ASSIGN_PROTO_PROP(rendererDidApplyAnimationsAtTime);
   JS_ASSIGN_PROTO_PROP(rendererDidSimulatePhysicsAtTime);
@@ -24,17 +24,17 @@ JS_INIT_CLASS(SCNSceneRendererDelegate, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(SCNSceneRendererDelegate, NSObject);
   // constant values (exports)
-JS_INIT_CLASS_END(SCNSceneRendererDelegate, NSObject);
+JS_INIT_PROTOCOL_END(SCNSceneRendererDelegate, NSObject);
 
 NAN_METHOD(NSCNSceneRendererDelegate::New) {
-  JS_RECONSTRUCT(SCNSceneRendererDelegate);
+  JS_RECONSTRUCT_PROTOCOL(SCNSceneRendererDelegate);
   @autoreleasepool {
-    SCNSceneRendererDelegate* self = nullptr;
+    id<SCNSceneRendererDelegate> self = nil;
 
     if (info[0]->IsExternal()) {
-      self = (__bridge SCNSceneRendererDelegate *)(info[0].As<External>()->Value());
+      self = (__bridge id<SCNSceneRendererDelegate>)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [[SCNSceneRendererDelegate alloc] init];
+      self = [[SCNSceneRendererDelegateType alloc] init];
     }
     if (self) {
       NSCNSceneRendererDelegate *wrapper = new NSCNSceneRendererDelegate();
@@ -48,14 +48,17 @@ NAN_METHOD(NSCNSceneRendererDelegate::New) {
   }
 }
 
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererUpdateAtTime);
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidApplyAnimationsAtTime);
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidSimulatePhysicsAtTime);
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidApplyConstraintsAtTime);
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererWillRenderSceneAtTime);
-DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererUpdateAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidApplyAnimationsAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidSimulatePhysicsAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidApplyConstraintsAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererWillRenderSceneAtTime);
+DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 
-@implementation SCNSceneRendererDelegate
+#include "NSCNSceneRenderer.h"
+#include "NSCNScene.h"
+
+@implementation SCNSceneRendererDelegateType
 
 /*!
  @method renderer:updateAtTime:
@@ -67,7 +70,7 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
   call_delegate(noop(), rendererUpdateAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
 
@@ -81,7 +84,7 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer didApplyAnimationsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
   call_delegate(noop(), rendererDidApplyAnimationsAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
 
@@ -95,7 +98,7 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
   call_delegate(noop(), rendererDidSimulatePhysicsAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
 
@@ -109,7 +112,7 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer didApplyConstraintsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 {
   call_delegate(noop(), rendererDidApplyConstraintsAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
 
@@ -124,7 +127,8 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
 {
   call_delegate(noop(), rendererWillRenderSceneAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
+    js_value_SCNScene(scene),
     js_value_NSTimeInterval(time));
 }
 
@@ -139,7 +143,8 @@ DELEGATE_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
 - (void)renderer:(id <SCNSceneRenderer>)renderer didRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
 {
   call_delegate(noop(), rendererDidRenderSceneAtTime,
-    js_value_id/* <SCNSceneRenderer>*/(renderer),
+    js_value_SCNSceneRenderer(renderer),
+    js_value_SCNScene(scene),
     js_value_NSTimeInterval(time));
 }
 
