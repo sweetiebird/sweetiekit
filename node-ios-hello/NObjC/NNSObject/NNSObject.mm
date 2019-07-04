@@ -994,7 +994,7 @@ NAN_METHOD(NClass::New) {
 
 #include "NEAGLContext.h"
 #include "NEAGLSharegroup.h"
-
+#include "NWebGL.h"
 #include "NGLKView.h"
 #include "NGLKViewController.h"
 #include "NGLKViewDelegate.h"
@@ -1461,6 +1461,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
+    
+    // WebGL
+    
+    exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
 
     // GLKit
 

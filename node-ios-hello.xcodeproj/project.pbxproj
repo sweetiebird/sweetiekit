@@ -61,6 +61,7 @@
 		A108638A22C6E574001A15A9 /* NGLKViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638522C6E573001A15A9 /* NGLKViewControllerDelegate.mm */; };
 		A108638B22C6E574001A15A9 /* NGLKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638722C6E573001A15A9 /* NGLKView.mm */; };
 		A108638F22C6E8C1001A15A9 /* NGLKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */; };
+		A108639322C70161001A15A9 /* NWebGL.mm in Sources */ = {isa = PBXBuildFile; fileRef = A108639222C70160001A15A9 /* NWebGL.mm */; };
 		A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */; };
 		A10BD041228F483B00184286 /* NNSNotificationCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */; };
 		A10BD045228F490400184286 /* NNSNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD044228F490400184286 /* NNSNotification.mm */; };
@@ -707,6 +708,8 @@
 		A108638822C6E573001A15A9 /* NGLKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKView.h; sourceTree = "<group>"; };
 		A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGLKViewDelegate.mm; sourceTree = "<group>"; };
 		A108638E22C6E8C1001A15A9 /* NGLKViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLKViewDelegate.h; sourceTree = "<group>"; };
+		A108639122C70160001A15A9 /* NWebGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWebGL.h; sourceTree = "<group>"; };
+		A108639222C70160001A15A9 /* NWebGL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NWebGL.mm; sourceTree = "<group>"; };
 		A10AADE3228B881400C64F60 /* NSKPhysicsBody.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKPhysicsBody.mm; sourceTree = "<group>"; };
 		A10AADE4228B881400C64F60 /* NSKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKPhysicsBody.h; sourceTree = "<group>"; };
 		A10BD03F228F483B00184286 /* NNSNotificationCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSNotificationCenter.mm; sourceTree = "<group>"; };
@@ -2169,6 +2172,15 @@
 				A108638D22C6E8C1001A15A9 /* NGLKViewDelegate.mm */,
 			);
 			path = NGLKViewDelegate;
+			sourceTree = "<group>";
+		};
+		A108639022C70160001A15A9 /* NWebGL */ = {
+			isa = PBXGroup;
+			children = (
+				A108639122C70160001A15A9 /* NWebGL.h */,
+				A108639222C70160001A15A9 /* NWebGL.mm */,
+			);
+			path = NWebGL;
 			sourceTree = "<group>";
 		};
 		A10AADE2228B881400C64F60 /* NSKPhysicsBody */ = {
@@ -6799,6 +6811,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A108639022C70160001A15A9 /* NWebGL */,
 				A108637F22C6E573001A15A9 /* NGLKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
@@ -7380,6 +7393,7 @@
 				A1574EA322B812DC006CC5F2 /* NNSMutableCharacterSet.mm in Sources */,
 				A13370E922AF02F500FA3768 /* NAVAudioOutputNode.mm in Sources */,
 				211E76B3226A1C3600B838AF /* NUIImageView.mm in Sources */,
+				A108639322C70161001A15A9 /* NWebGL.mm in Sources */,
 				A19F3A1022AF72AB00606332 /* NMDLLight.mm in Sources */,
 				A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */,
 				A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */,

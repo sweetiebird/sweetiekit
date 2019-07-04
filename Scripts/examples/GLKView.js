@@ -20,8 +20,8 @@ function initGL() {
   glkView.delegate = GLKViewDelegate({
     glkViewDrawInRect(view, rect) {
       console.log('glkViewDrawInRect', view, rect);
-      // glClearColor(0.85, 0.85, 0.85, 1.0)
-      // glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+      //gl.clearColor(0.85, 0.05, 0.85, 1.0);
+      //gl.clear(gl.COLOR_BUFFER_BIT);
       // ....
     }
   });
