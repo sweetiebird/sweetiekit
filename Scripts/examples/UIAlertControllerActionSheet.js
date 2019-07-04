@@ -27,7 +27,7 @@ UIAlertControllerActionSheet_make = async function UIAlertControllerActionSheet_
 
   // https://stackoverflow.com/questions/40675816/uialertcontroller-and-uialertcontrollerstyleactionsheet-customization
 
-  const alertVC = UIAlertController.alertControllerWithTitleMessagePreferredStyle(
+  alertVC = UIAlertController.alertControllerWithTitleMessagePreferredStyle(
     'Alert Title',
     'And an informative subtitle',
     UIAlertControllerStyleActionSheet,
@@ -36,10 +36,10 @@ UIAlertControllerActionSheet_make = async function UIAlertControllerActionSheet_
   title.addAttributeValueRange(NSFontAttributeName, UIFont.systemFontOfSize(30.0), NSMakeRange(5, 5));
   alertVC.setValueForKey(title, 'attributedTitle');
 
-  const button = UIAlertAction.actionWithTitleStyleHandler('First button', UIAlertActionStyleDefault, (action) => {
+  const button = UIAlertAction.actionWithTitleStyleHandler('First button', UIAlertActionStyleCancel, (action) => {
     alertVC.dismissViewControllerAnimatedCompletion(true, () => {});
   });
-  const button2 = UIAlertAction.actionWithTitleStyleHandler('Second button', UIAlertActionStyleDefault, (action) => {
+  const button2 = UIAlertAction.actionWithTitleStyleHandler('Second button', UIAlertActionStyleDestructive, (action) => {
     alertVC.dismissViewControllerAnimatedCompletion(true, () => {});
   });
   const button3 = UIAlertAction.actionWithTitleStyleHandler('Third button', UIAlertActionStyleDefault, (action) => {
