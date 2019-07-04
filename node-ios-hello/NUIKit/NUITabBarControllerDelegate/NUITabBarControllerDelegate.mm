@@ -12,7 +12,7 @@
 NUITabBarControllerDelegate::NUITabBarControllerDelegate() {}
 NUITabBarControllerDelegate::~NUITabBarControllerDelegate() {}
 
-JS_INIT_CLASS(UITabBarControllerDelegate, NSObject);
+JS_INIT_PROTOCOL(UITabBarControllerDelegate, NSObject);
   JS_ASSIGN_PROTO_PROP(tabBarControllerShouldSelectViewController);
   JS_ASSIGN_PROTO_PROP(tabBarControllerDidSelectViewController);
   JS_ASSIGN_PROTO_PROP(tabBarControllerWillBeginCustomizingViewControllers);
@@ -27,21 +27,15 @@ JS_INIT_CLASS(UITabBarControllerDelegate, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(UITabBarControllerDelegate, NSObject);
   // constant values (exports)
-JS_INIT_CLASS_END(UITabBarControllerDelegate, NSObject);
+JS_INIT_PROTOCOL_END(UITabBarControllerDelegate, NSObject);
 
 NAN_METHOD(NUITabBarControllerDelegate::New) {
-  JS_RECONSTRUCT(UITabBarControllerDelegate);
+  JS_RECONSTRUCT_PROTOCOL(UITabBarControllerDelegate);
   @autoreleasepool {
     UITabBarControllerDelegate* self = nullptr;
 
     if (info[0]->IsExternal()) {
       self = (__bridge UITabBarControllerDelegate *)(info[0].As<External>()->Value());
-    } else if (info[0]->IsObject()) {
-      Local<Value> that(JS_NEW(NUITabBarControllerDelegate, 0, nullptr));
-      sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign")));
-      objectAssign("NUITabBarControllerDelegate::New", that, info[0]);
-      JS_SET_RETURN(that);
-      return;
     } else if (info.Length() <= 0) {
       self = [[UITabBarControllerDelegate alloc] init];
     }

@@ -1289,7 +1289,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_TYPE(UITabBarController);
-    JS_EXPORT_TYPE(UITabBarControllerDelegate);
+    JS_EXPORT_PROTOCOL(UITabBarControllerDelegate);
     JS_EXPORT_TYPE(UISplitViewController);
     JS_EXPORT_TYPE(UISearchController);
 
@@ -2231,7 +2231,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UINavigationController);
       JS_RETURN_TYPE(UISearchController);
       JS_RETURN_TYPE(UISplitViewController);
-      JS_RETURN_TYPE(UITabBarControllerDelegate);
       JS_RETURN_TYPE(UITabBarController);
       JS_RETURN_TYPE(UIPopoverPresentationController);
       JS_RETURN_TYPE(UIPresentationController);
@@ -2499,6 +2498,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(UITableViewDataSource);
       JS_RETURN_PROTOCOL(UITableViewDelegate);
       JS_RETURN_PROTOCOL(UIScrollViewDelegate);
+      JS_RETURN_PROTOCOL(UITabBarControllerDelegate);
       JS_RETURN_PROTOCOL(UINavigationControllerDelegate);
       JS_RETURN_PROTOCOL(UIFocusAnimationContext);
       JS_RETURN_PROTOCOL(UIDropInteractionDelegate);

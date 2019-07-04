@@ -10,11 +10,11 @@
 
 #include "NNSObject.h"
 
-#define js_value_UITabBarControllerDelegate(x) js_value_wrapper(x, UITabBarControllerDelegate)
-#define to_value_UITabBarControllerDelegate(x) to_value_wrapper(x, UITabBarControllerDelegate)
-#define is_value_UITabBarControllerDelegate(x) is_value_wrapper(x, UITabBarControllerDelegate)
+#define js_value_UITabBarControllerDelegate(x) js_protocol_wrapper(x, UITabBarControllerDelegate)
+#define to_value_UITabBarControllerDelegate(x) to_protocol_wrapper(x, UITabBarControllerDelegate)
+#define is_value_UITabBarControllerDelegate(x) is_protocol_wrapper(x, UITabBarControllerDelegate)
 
-JS_WRAP_CLASS(UITabBarControllerDelegate, NSObject);
+JS_WRAP_PROTOCOL(UITabBarControllerDelegate, NSObject);
   JS_PROP(tabBarControllerShouldSelectViewController);
   JS_PROP(tabBarControllerDidSelectViewController);
   JS_PROP(tabBarControllerWillBeginCustomizingViewControllers);
@@ -24,7 +24,7 @@ JS_WRAP_CLASS(UITabBarControllerDelegate, NSObject);
   JS_PROP(tabBarControllerPreferredInterfaceOrientationForPresentation);
   JS_PROP(tabBarControllerInteractionControllerForAnimationController);
   JS_PROP(tabBarControllerAnimationControllerForTransitionFromViewControllerToViewController);
-JS_WRAP_CLASS_END(UITabBarControllerDelegate);
+JS_WRAP_PROTOCOL_END(UITabBarControllerDelegate, NSObject);
 
 #if __OBJC__
 @interface UITabBarControllerDelegate : NSObject<UITabBarControllerDelegate>
