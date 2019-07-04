@@ -1515,6 +1515,7 @@ NAN_METHOD(NClass::New) {
 #include "NCoreGraphicsGlobals.h"
 #include "NCGContext.h"
 #include "NRPScreenRecorder.h"
+#include "NRPScreenRecorderDelegate.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIColor.h"
@@ -1898,6 +1899,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // ReplayKit
 
     JS_EXPORT_TYPE(RPScreenRecorder);
+    JS_EXPORT_PROTOCOL(RPScreenRecorderDelegate);
     JS_EXPORT_TYPE(RPPreviewViewController);
     JS_EXPORT_PROTOCOL(RPPreviewViewControllerDelegate);
 
@@ -2793,6 +2795,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // ReplayKit protocols
 
+      JS_RETURN_PROTOCOL(RPScreenRecorderDelegate);
       JS_RETURN_PROTOCOL(RPPreviewViewControllerDelegate);
 
       // AVFoundation Protocols
@@ -2863,6 +2866,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(ARSKViewDelegate);
       
       // Core Location protocols
+
       JS_RETURN_PROTOCOL(CLLocationManagerDelegate);
 
       // CoreAnimation protocols

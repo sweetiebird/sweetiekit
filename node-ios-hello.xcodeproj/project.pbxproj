@@ -230,6 +230,7 @@
 		A158791022CE678F00847196 /* NUIViewControllerTransitioning.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */; };
 		A158791322CEA8AF00847196 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */; };
 		A158791622CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */; };
+		A158791B22CEB82B00847196 /* NRPScreenRecorderDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -1069,6 +1070,8 @@
 		A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewController.mm; sourceTree = "<group>"; };
 		A158791422CEA8B600847196 /* NRPPreviewViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewControllerDelegate.h; sourceTree = "<group>"; };
 		A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
+		A158791922CEB82B00847196 /* NRPScreenRecorderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorderDelegate.h; sourceTree = "<group>"; };
+		A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorderDelegate.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3699,6 +3702,15 @@
 			path = NUIViewControllerTransitioning;
 			sourceTree = "<group>";
 		};
+		A158791822CEB82B00847196 /* NRPScreenRecorderDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A158791922CEB82B00847196 /* NRPScreenRecorderDelegate.h */,
+				A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */,
+			);
+			path = NRPScreenRecorderDelegate;
+			sourceTree = "<group>";
+		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3841,6 +3853,7 @@
 				A1710EA4229A648900EC7C86 /* NRPPreviewViewController */,
 				A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */,
 				A1710EA0229A58A100EC7C86 /* NRPScreenRecorder */,
+				A158791822CEB82B00847196 /* NRPScreenRecorderDelegate */,
 			);
 			path = NReplayKit;
 			sourceTree = "<group>";
@@ -7724,6 +7737,7 @@
 				A174A48622B1856700415AD8 /* NUIBarCommon.mm in Sources */,
 				A133701E22AAE65100FA3768 /* NWKWebView.mm in Sources */,
 				A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */,
+				A158791B22CEB82B00847196 /* NRPScreenRecorderDelegate.mm in Sources */,
 				A1926FA122C11E7D008F16AE /* NMTLDevice.mm in Sources */,
 				A10862ED22C48E05001A15A9 /* NEAGLSharegroup.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
