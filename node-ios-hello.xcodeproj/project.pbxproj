@@ -723,7 +723,6 @@
 		A10D697E2293B058008D0ABC /* NUITabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBar.h; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
-		A11CB498226BE0390006A0D4 /* NUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NUITableViewController.h; path = "node-ios-hello/NUIKit/NUITableViewController.h"; sourceTree = SOURCE_ROOT; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
 		A11D1294227EA0A90038C262 /* todo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = todo.js; sourceTree = "<group>"; };
 		A11D1297227EA6AD0038C262 /* NUIScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIScrollView.h; sourceTree = "<group>"; };
@@ -928,6 +927,7 @@
 		A1574F0C22B93B96006CC5F2 /* NCAMediaTimingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAMediaTimingFunction.h; sourceTree = "<group>"; };
 		A1574F0F22B948D8006CC5F2 /* NCATransaction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCATransaction.mm; sourceTree = "<group>"; };
 		A1574F1022B948D8006CC5F2 /* NCATransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCATransaction.h; sourceTree = "<group>"; };
+		A158785122CDA53300847196 /* NUITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITableViewController.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -2252,7 +2252,7 @@
 		A11CB497226BDFF90006A0D4 /* NUITableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A11CB498226BE0390006A0D4 /* NUITableViewController.h */,
+				A158785122CDA53300847196 /* NUITableViewController.h */,
 				A11CB499226BE0420006A0D4 /* NUITableViewController.mm */,
 			);
 			path = NUITableViewController;
