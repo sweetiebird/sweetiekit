@@ -2179,7 +2179,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE_FROM(UITableViewDataSource, SUITableViewDataSource);
-      JS_RETURN_TYPE_FROM(UIViewControllerTransitioningDelegate, SUIViewControllerTransitioningDelegate);
+      JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects
       JS_RETURN_TYPE(NSLayoutYAxisAnchor);
       JS_RETURN_TYPE(NSLayoutXAxisAnchor);

@@ -221,8 +221,6 @@
 		A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B26E228863C9005184EE /* NUIAlertAction.mm */; };
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
-		A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */; };
-		A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1887109227E370500129A75 /* SUIPresentationController.swift */; };
 		A188710E227E51D700129A75 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A188710D227E51D700129A75 /* node_modules */; };
 		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
 		A18F1E61228A3D1500A42754 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = A18F1E60228A3D1500A42754 /* vendor */; };
@@ -999,8 +997,6 @@
 		A178B27222887913005184EE /* NUITabBarItem.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarItem.mm; sourceTree = "<group>"; };
 		A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
 		A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioningDelegate.mm; sourceTree = "<group>"; };
-		A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIViewControllerTransitioningDelegate.swift; sourceTree = "<group>"; };
-		A1887109227E370500129A75 /* SUIPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIPresentationController.swift; sourceTree = "<group>"; };
 		A188710D227E51D700129A75 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_modules; sourceTree = "<group>"; };
 		A18E802122657B6C000438E0 /* Client.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Client.framework; sourceTree = "<group>"; };
 		A18F1E60228A3D1500A42754 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vendor; sourceTree = "<group>"; };
@@ -3263,7 +3259,6 @@
 			children = (
 				A1649776227E1F8300CA943F /* NUIPresentationController.h */,
 				A1649777227E1F8B00CA943F /* NUIPresentationController.mm */,
-				A1887109227E370500129A75 /* SUIPresentationController.swift */,
 			);
 			path = NUIPresentationController;
 			sourceTree = "<group>";
@@ -3502,7 +3497,6 @@
 			children = (
 				A1887104227E338800129A75 /* NUIViewControllerTransitioningDelegate.h */,
 				A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */,
-				A1887107227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift */,
 			);
 			path = NUIViewControllerTransitioningDelegate;
 			sourceTree = "<group>";
@@ -7528,7 +7522,6 @@
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */,
 				A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */,
-				A1887108227E33A700129A75 /* SUIViewControllerTransitioningDelegate.swift in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */,
 				A19270D522C18EFF008F16AE /* NMTLPipelineBufferDescriptorArray.mm in Sources */,
@@ -7568,7 +7561,6 @@
 				A192704522C13B04008F16AE /* NMTLTypes.mm in Sources */,
 				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
-				A188710A227E370500129A75 /* SUIPresentationController.swift in Sources */,
 				A192702F22C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
 				A1574F0322B93071006CC5F2 /* NCAAnimation.mm in Sources */,
 			);
