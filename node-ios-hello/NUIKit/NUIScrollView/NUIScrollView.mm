@@ -285,7 +285,7 @@ NAN_GETTER(NUIScrollView::frameLayoutGuideGetter) {
 NAN_GETTER(NUIScrollView::delegateGetter) {
   JS_UNWRAP(UIScrollView, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id<UIScrollViewDelegate>([self delegate]));
+    JS_SET_RETURN(js_value_UIScrollViewDelegate([self delegate]));
   }
 }
 
@@ -293,7 +293,7 @@ NAN_SETTER(NUIScrollView::delegateSetter) {
   JS_UNWRAP(UIScrollView, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <UIScrollViewDelegate>*/, input);
+    declare_protocol(UIScrollViewDelegate, input);
     [self setDelegate: input];
     [self associateValue:input withKey:@"NUIScrollView::delegate"];
   }

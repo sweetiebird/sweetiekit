@@ -6,16 +6,62 @@
 //
 #include "NUITableViewCell.h"
 
+#define instancetype UITableViewCell
+#define js_value_instancetype js_value_UITableViewCell
+
 NUITableViewCell::NUITableViewCell() {}
 NUITableViewCell::~NUITableViewCell() {}
 
 JS_INIT_CLASS(UITableViewCell, UIView);
+  JS_ASSIGN_PROTO_METHOD(initWithStyleReuseIdentifier);
+  JS_ASSIGN_PROTO_METHOD(initWithCoder);
+  JS_ASSIGN_PROTO_METHOD(prepareForReuse);
+  JS_ASSIGN_PROTO_METHOD(setSelectedAnimated);
+  JS_ASSIGN_PROTO_METHOD(setHighlightedAnimated);
+  JS_ASSIGN_PROTO_METHOD(setEditingAnimated);
+  JS_ASSIGN_PROTO_METHOD(willTransitionToState);
+  JS_ASSIGN_PROTO_METHOD(didTransitionToState);
+  JS_ASSIGN_PROTO_METHOD(dragStateDidChange);
+  JS_ASSIGN_PROTO_METHOD(initWithFrameReuseIdentifier);
+  JS_ASSIGN_PROTO_PROP_READONLY(imageView);
+  JS_ASSIGN_PROTO_PROP_READONLY(textLabel);
+  JS_ASSIGN_PROTO_PROP_READONLY(detailTextLabel);
+  JS_ASSIGN_PROTO_PROP_READONLY(contentView);
+  JS_ASSIGN_PROTO_PROP(backgroundView);
+  JS_ASSIGN_PROTO_PROP(selectedBackgroundView);
+  JS_ASSIGN_PROTO_PROP(multipleSelectionBackgroundView);
+  JS_ASSIGN_PROTO_PROP_READONLY(reuseIdentifier);
+  JS_ASSIGN_PROTO_PROP(selectionStyle);
+  JS_ASSIGN_PROTO_PROP(isSelected);
+  JS_ASSIGN_PROTO_PROP(isHighlighted);
+  JS_ASSIGN_PROTO_PROP_READONLY(editingStyle);
+  JS_ASSIGN_PROTO_PROP(showsReorderControl);
+  JS_ASSIGN_PROTO_PROP(shouldIndentWhileEditing);
+  JS_ASSIGN_PROTO_PROP(accessoryType);
+  JS_ASSIGN_PROTO_PROP(accessoryView);
+  JS_ASSIGN_PROTO_PROP(editingAccessoryType);
+  JS_ASSIGN_PROTO_PROP(editingAccessoryView);
+  JS_ASSIGN_PROTO_PROP(indentationLevel);
+  JS_ASSIGN_PROTO_PROP(indentationWidth);
+  JS_ASSIGN_PROTO_PROP(separatorInset);
+  JS_ASSIGN_PROTO_PROP(isEditing);
+  JS_ASSIGN_PROTO_PROP_READONLY(showingDeleteConfirmation);
+  JS_ASSIGN_PROTO_PROP(focusStyle);
+  JS_ASSIGN_PROTO_PROP(userInteractionEnabledWhileDragging);
+  JS_ASSIGN_PROTO_PROP(text);
+  JS_ASSIGN_PROTO_PROP(font);
+  JS_ASSIGN_PROTO_PROP(textAlignment);
+  JS_ASSIGN_PROTO_PROP(lineBreakMode);
+  JS_ASSIGN_PROTO_PROP(textColor);
+  JS_ASSIGN_PROTO_PROP(selectedTextColor);
+  JS_ASSIGN_PROTO_PROP(image);
+  JS_ASSIGN_PROTO_PROP(selectedImage);
+  JS_ASSIGN_PROTO_PROP(hidesAccessoryWhenEditing);
+  JS_ASSIGN_PROTO_PROP(target);
+  JS_ASSIGN_PROTO_PROP(editAction);
+  JS_ASSIGN_PROTO_PROP(accessoryAction);
+
   // instance members (proto)
-  JS_SET_PROP_READONLY(proto, "textLabel", TextLabel);
-  JS_SET_PROP_READONLY(proto, "detailTextLabel", DetailTextLabel);
-  JS_SET_PROP(proto, "isEditing", IsEditing);
-  JS_SET_PROP(proto, "isSelected", IsSelected);
-  JS_ASSIGN_PROP(proto, selectionStyle);
   // static members (ctor)
   JS_INIT_CTOR(UITableViewCell, UIView);
   // constants (exports)
@@ -75,144 +121,657 @@ JS_INIT_CLASS_END(UITableViewCell, UIView);
 
 NAN_METHOD(NUITableViewCell::New) {
   JS_RECONSTRUCT(UITableViewCell);
+  @autoreleasepool {
+    UITableViewCell* self = nullptr;
 
-  Local<Object> ctrlObj = info.This();
-
-  NUITableViewCell *ctrl = new NUITableViewCell();
-
-  if (info[0]->IsExternal()) {
-    ctrl->SetNSObject((__bridge UITableViewCell *)(info[0].As<External>()->Value()));
-  } else {
-#if 1
-    @autoreleasepool {
-      //auto cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
-      double styleVal = info.Length() > 0 && info[0]->IsNumber() ? UITableViewCellStyle(TO_DOUBLE(info[0])) : 0;
-      UITableViewCellStyle style = UITableViewCellStyle(styleVal);
-      auto cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"id"];
-      //[cell initWithFrame:CGRectMake(0, 0, 300, 40)];
-      ctrl->SetNSObject(cell);
+    if (info[0]->IsExternal()) {
+      self = (__bridge UITableViewCell *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UITableViewCell alloc] init];
     }
-#elif 1
-    ctrl->SetNSObject([[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)]);
-#else
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          ctrl->SetNSObject([[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 40)]);
-      });
+    if (self) {
+      NUITableViewCell *wrapper = new NUITableViewCell();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UITableViewCell::New: invalid arguments");
     }
-#endif
   }
-  ctrl->Wrap(ctrlObj);
+}
 
-  JS_SET_RETURN(ctrlObj);
+NAN_METHOD(NUITableViewCell::initWithStyleReuseIdentifier) {
+  JS_UNWRAP_OR_ALLOC(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UITableViewCellStyle, style);
+    declare_nullable_pointer(NSString, reuseIdentifier);
+    JS_SET_RETURN(js_value_instancetype([self initWithStyle: style reuseIdentifier: reuseIdentifier]));
+  }
+}
+
+#include "NNSCoder.h"
+
+NAN_METHOD(NUITableViewCell::initWithCoder) {
+  JS_UNWRAP_OR_ALLOC(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSCoder, aDecoder);
+    JS_SET_RETURN(js_value_instancetype([self initWithCoder: aDecoder]));
+  }
+}
+
+NAN_METHOD(NUITableViewCell::prepareForReuse) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    [self prepareForReuse];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::setSelectedAnimated) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, selected);
+    declare_value(BOOL, animated);
+    [self setSelected: selected animated: animated];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::setHighlightedAnimated) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, highlighted);
+    declare_value(BOOL, animated);
+    [self setHighlighted: highlighted animated: animated];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::setEditingAnimated) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(BOOL, editing);
+    declare_value(BOOL, animated);
+    [self setEditing: editing animated: animated];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::willTransitionToState) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UITableViewCellStateMask, state);
+    [self willTransitionToState: state];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::didTransitionToState) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UITableViewCellStateMask, state);
+    [self didTransitionToState: state];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::dragStateDidChange) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(UITableViewCellDragState, dragState);
+    [self dragStateDidChange: dragState];
+  }
+}
+
+NAN_METHOD(NUITableViewCell::initWithFrameReuseIdentifier) {
+  JS_UNWRAP_OR_ALLOC(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGRect, frame);
+    declare_nullable_pointer(NSString, reuseIdentifier);
+    JS_SET_RETURN(js_value_id([self initWithFrame: frame reuseIdentifier: reuseIdentifier]));
+  }
+}
+
+#include "NUIImageView.h"
+
+NAN_GETTER(NUITableViewCell::imageViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImageView([self imageView]));
+  }
 }
 
 #include "NUILabel.h"
 
-NAN_GETTER(NUITableViewCell::TextLabelGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-  
-  __block UILabel* result = nullptr;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      result = [ui textLabel];
-    });
-  }
-
-  if (result != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)result)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(result, NUILabel::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      JS_SET_RETURN(value);
+NAN_GETTER(NUITableViewCell::textLabelGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UILabel([self textLabel]));
   }
 }
 
-NAN_GETTER(NUITableViewCell::DetailTextLabelGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-  
-  __block UILabel* result = nullptr;
-
-  @autoreleasepool {
-    dispatch_sync(dispatch_get_main_queue(), ^ {
-      result = [ui detailTextLabel];
-    });
-  }
-
-  if (result != nullptr) {
-      Local<Value> argv[] = {
-        Nan::New<v8::External>((__bridge void*)result)
-      };
-      Local<Object> value = JS_FUNC(Nan::New(NNSObject::GetNSObjectType(result, NUILabel::type)))->NewInstance(JS_CONTEXT(), sizeof(argv)/sizeof(argv[0]), argv).ToLocalChecked();
-      JS_SET_RETURN(value);
+NAN_GETTER(NUITableViewCell::detailTextLabelGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UILabel([self detailTextLabel]));
   }
 }
 
-NAN_GETTER(NUITableViewCell::IsEditingGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-
-  JS_SET_RETURN(JS_BOOL([ui isEditing]));
+NAN_GETTER(NUITableViewCell::contentViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self contentView]));
+  }
 }
 
-NAN_SETTER(NUITableViewCell::IsEditingSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-
-  [ui setEditing:TO_BOOL(value)];
+NAN_GETTER(NUITableViewCell::backgroundViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self backgroundView]));
+  }
 }
 
-NAN_GETTER(NUITableViewCell::IsSelectedGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-
-  JS_SET_RETURN(JS_BOOL([ui isSelected]));
+NAN_SETTER(NUITableViewCell::backgroundViewSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setBackgroundView: input];
+  }
 }
 
-NAN_SETTER(NUITableViewCell::IsSelectedSetter) {
-  Nan::HandleScope scope;
+NAN_GETTER(NUITableViewCell::selectedBackgroundViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self selectedBackgroundView]));
+  }
+}
 
-  JS_UNWRAP(UITableViewCell, ui);
+NAN_SETTER(NUITableViewCell::selectedBackgroundViewSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setSelectedBackgroundView: input];
+  }
+}
 
-  [ui setSelected:TO_BOOL(value)];
+NAN_GETTER(NUITableViewCell::multipleSelectionBackgroundViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView([self multipleSelectionBackgroundView]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::multipleSelectionBackgroundViewSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView, input);
+    [self setMultipleSelectionBackgroundView: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::reuseIdentifierGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self reuseIdentifier]));
+  }
 }
 
 NAN_GETTER(NUITableViewCell::selectionStyleGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-  
-  UITableViewCellSelectionStyle style = [ui selectionStyle];
-  int styleInt = 0;
-
-  if (style == UITableViewCellSelectionStyleBlue) {
-    styleInt = 1;
-  } else if (style == UITableViewCellSelectionStyleGray) {
-    styleInt = 2;
-  } else if (style == UITableViewCellSelectionStyleDefault) {
-    styleInt = 3;
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITableViewCellSelectionStyle([self selectionStyle]));
   }
-
-  JS_SET_RETURN(JS_NUM(styleInt));
 }
 
 NAN_SETTER(NUITableViewCell::selectionStyleSetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(UITableViewCell, ui);
-
-  double styleVal = TO_DOUBLE(value);
-  UITableViewCellSelectionStyle style = UITableViewCellSelectionStyle(styleVal);
-
-  @autoreleasepool {
-    [ui setSelectionStyle:style];
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITableViewCellSelectionStyle, input);
+    [self setSelectionStyle: input];
   }
 }
+
+NAN_GETTER(NUITableViewCell::isSelectedGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isSelected]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::isSelectedSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setSelected: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::isHighlightedGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isHighlighted]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::isHighlightedSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHighlighted: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::editingStyleGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITableViewCellEditingStyle([self editingStyle]));
+  }
+}
+
+NAN_GETTER(NUITableViewCell::showsReorderControlGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showsReorderControl]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::showsReorderControlSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShowsReorderControl: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::shouldIndentWhileEditingGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self shouldIndentWhileEditing]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::shouldIndentWhileEditingSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setShouldIndentWhileEditing: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::accessoryTypeGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITableViewCellAccessoryType([self accessoryType]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::accessoryTypeSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITableViewCellAccessoryType, input);
+    [self setAccessoryType: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::accessoryViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView ([self accessoryView]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::accessoryViewSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView , input);
+    [self setAccessoryView: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::editingAccessoryTypeGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITableViewCellAccessoryType([self editingAccessoryType]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::editingAccessoryTypeSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITableViewCellAccessoryType, input);
+    [self setEditingAccessoryType: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::editingAccessoryViewGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIView ([self editingAccessoryView]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::editingAccessoryViewSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIView , input);
+    [self setEditingAccessoryView: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::indentationLevelGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSInteger([self indentationLevel]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::indentationLevelSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSInteger, input);
+    [self setIndentationLevel: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::indentationWidthGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_CGFloat([self indentationWidth]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::indentationWidthSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(CGFloat, input);
+    [self setIndentationWidth: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::separatorInsetGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIEdgeInsets([self separatorInset]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::separatorInsetSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UIEdgeInsets, input);
+    [self setSeparatorInset: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::isEditingGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self isEditing]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::isEditingSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setEditing: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::showingDeleteConfirmationGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self showingDeleteConfirmation]));
+  }
+}
+
+NAN_GETTER(NUITableViewCell::focusStyleGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UITableViewCellFocusStyle([self focusStyle]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::focusStyleSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(UITableViewCellFocusStyle, input);
+    [self setFocusStyle: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::userInteractionEnabledWhileDraggingGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self userInteractionEnabledWhileDragging]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::userInteractionEnabledWhileDraggingSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setUserInteractionEnabledWhileDragging: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::textGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSString([self text]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::textSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(NSString, input);
+    [self setText: input];
+  }
+}
+
+#include "NUIFont.h"
+
+NAN_GETTER(NUITableViewCell::fontGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIFont([self font]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::fontSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIFont, input);
+    [self setFont: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::textAlignmentGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSTextAlignment([self textAlignment]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::textAlignmentSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSTextAlignment, input);
+    [self setTextAlignment: input];
+  }
+}
+
+#include "NNSParagraphStyle.h"
+
+NAN_GETTER(NUITableViewCell::lineBreakModeGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_NSLineBreakMode([self lineBreakMode]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::lineBreakModeSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(NSLineBreakMode, input);
+    [self setLineBreakMode: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::textColorGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self textColor]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::textColorSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setTextColor: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::selectedTextColorGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIColor([self selectedTextColor]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::selectedTextColorSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIColor, input);
+    [self setSelectedTextColor: input];
+  }
+}
+
+#include "NUIImage.h"
+
+NAN_GETTER(NUITableViewCell::imageGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self image]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::imageSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setImage: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::selectedImageGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIImage([self selectedImage]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::selectedImageSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIImage, input);
+    [self setSelectedImage: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::hidesAccessoryWhenEditingGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self hidesAccessoryWhenEditing]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::hidesAccessoryWhenEditingSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setHidesAccessoryWhenEditing: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::targetGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_id([self target]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::targetSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(id, input);
+    [self setTarget: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::editActionGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SEL([self editAction]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::editActionSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SEL, input);
+    [self setEditAction: input];
+  }
+}
+
+NAN_GETTER(NUITableViewCell::accessoryActionGetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SEL([self accessoryAction]));
+  }
+}
+
+NAN_SETTER(NUITableViewCell::accessoryActionSetter) {
+  JS_UNWRAP(UITableViewCell, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(SEL, input);
+    [self setAccessoryAction: input];
+  }
+}
+

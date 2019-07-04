@@ -10,11 +10,11 @@
 
 #include "NNSObject.h"
 
-#define js_value_UIScrollViewDelegate(x) js_value_wrapper(x, UIScrollViewDelegate)
-#define to_value_UIScrollViewDelegate(x) to_value_wrapper(x, UIScrollViewDelegate)
-#define is_value_UIScrollViewDelegate(x) is_value_wrapper(x, UIScrollViewDelegate)
+#define js_value_UIScrollViewDelegate(x) js_protocol_wrapper(x, UIScrollViewDelegate)
+#define to_value_UIScrollViewDelegate(x) to_protocol_wrapper(x, UIScrollViewDelegate)
+#define is_value_UIScrollViewDelegate(x) is_protocol_wrapper(x, UIScrollViewDelegate)
 
-JS_WRAP_CLASS(UIScrollViewDelegate, NSObject);
+JS_WRAP_PROTOCOL(UIScrollViewDelegate, NSObject);
   JS_PROP(scrollViewDidScroll);
   JS_PROP(scrollViewDidZoom);
   JS_PROP(scrollViewWillBeginDragging);
@@ -29,10 +29,10 @@ JS_WRAP_CLASS(UIScrollViewDelegate, NSObject);
   JS_PROP(scrollViewShouldScrollToTop);
   JS_PROP(scrollViewDidScrollToTop);
   JS_PROP(scrollViewDidChangeAdjustedContentInset);
-JS_WRAP_CLASS_END(UIScrollViewDelegate);
+JS_WRAP_PROTOCOL_END(UIScrollViewDelegate, NSObject);
 
 #if __OBJC__
-@interface UIScrollViewDelegate : NSObject<UIScrollViewDelegate>
+@interface UIScrollViewDelegateType : NSObject<UIScrollViewDelegate>
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;                                               // any offset changes
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView NS_AVAILABLE_IOS(3_2); // any zoom scale changes

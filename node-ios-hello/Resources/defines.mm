@@ -2676,6 +2676,12 @@ Local<Value> js_value_SEL(id _Nullable value) {
   return sweetiekit::GetWrapperFor(value);
 }
 
+Local<Value> js_value_SEL(SEL _Nullable value) {
+  @autoreleasepool {
+    return js_value_NSString(NSStringFromSelector(value));
+  }
+}
+
 SEL _Nullable to_value_SEL(Local<Value> value, bool* _Nullable failed) {
   @autoreleasepool {
     if (!is_value_SEL(value)) {

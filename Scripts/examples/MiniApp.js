@@ -309,7 +309,7 @@ function makePartyTable() {
   const mgr = new UITableViewManager(() => {
     return party.length;
   }, (_, { row }) => {
-    const cell = new UITableViewCell(UITableViewCellStyleSubtitle);
+    const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleSubtitle, "id");
     const person = party[row];
     cell.textLabel.text = person.name;
     cell.textLabel.textColor = colors.white;
@@ -428,7 +428,7 @@ function makeQuizSlides(scroll, numSlides, titles, contentTexts, iconImages) {
     const del = new UITableViewManager((tv, section) => {
       return 3;
     }, (tv, indexPath) => {
-      const cell = new UITableViewCell();
+      const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
       const text = items[indexPath.row];
       cell.textLabel.numberOfLines = 0;
       cell.textLabel.textAlignment = NSTextAlignmentLeft;

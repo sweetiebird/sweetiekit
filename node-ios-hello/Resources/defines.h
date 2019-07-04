@@ -1335,6 +1335,7 @@ bool is_value_NSDictionary(Local<Value> value) {
 }
 
 Local<Value> js_value_SEL(id _Nullable value);
+Local<Value> js_value_SEL(SEL _Nullable value);
 SEL _Nullable to_value_SEL(Local<Value> value, bool* _Nullable failed = nullptr);
 bool is_value_SEL(Local<Value> value);
 
