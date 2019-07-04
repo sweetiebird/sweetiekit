@@ -228,6 +228,8 @@
 		A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790622CE638500847196 /* NUIViewControllerTransitionCoordinator.mm */; };
 		A158790C22CE638600847196 /* NUIViewControllerTransitionCoordinatorContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790922CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.mm */; };
 		A158791022CE678F00847196 /* NUIViewControllerTransitioning.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */; };
+		A158791322CEA8AF00847196 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */; };
+		A158791622CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -249,8 +251,6 @@
 		A16EF595229D0BD6007BCB49 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF594229D0BD6007BCB49 /* Spark.sks */; };
 		A16EF597229D0C5F007BCB49 /* Spark2.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF596229D0C5F007BCB49 /* Spark2.sks */; };
 		A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */; };
-		A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */; };
-		A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */; };
 		A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */; };
 		A1710EBC229A92C000EC7C86 /* NCIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1710EBB229A92BF00EC7C86 /* NCIImage.mm */; };
 		A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A174A16A22822169002A8216 /* NAVAudioPlayer.mm */; };
@@ -1065,6 +1065,10 @@
 		A158790A22CE638500847196 /* NUIViewControllerTransitionCoordinatorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitionCoordinatorContext.h; sourceTree = "<group>"; };
 		A158790E22CE678F00847196 /* NUIViewControllerTransitioning.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewControllerTransitioning.mm; sourceTree = "<group>"; };
 		A158790F22CE678F00847196 /* NUIViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIViewControllerTransitioning.h; sourceTree = "<group>"; };
+		A158791122CEA8AE00847196 /* NRPPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewController.h; sourceTree = "<group>"; };
+		A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewController.mm; sourceTree = "<group>"; };
+		A158791422CEA8B600847196 /* NRPPreviewViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewControllerDelegate.h; sourceTree = "<group>"; };
+		A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -1099,10 +1103,6 @@
 		A16EF596229D0C5F007BCB49 /* Spark2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark2.sks; sourceTree = "<group>"; };
 		A1710EA1229A58A100EC7C86 /* NRPScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorder.h; sourceTree = "<group>"; };
 		A1710EA2229A58A100EC7C86 /* NRPScreenRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorder.mm; sourceTree = "<group>"; };
-		A1710EA5229A648900EC7C86 /* NRPPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewController.h; sourceTree = "<group>"; };
-		A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewController.mm; sourceTree = "<group>"; };
-		A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
-		A1710EAA229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPPreviewViewControllerDelegate.h; sourceTree = "<group>"; };
 		A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SRPPreviewViewControllerDelegate.swift; path = "node-ios-hello/NReplayKit/SRPPreviewViewControllerDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		A1710EBA229A92BF00EC7C86 /* NCIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIImage.h; sourceTree = "<group>"; };
 		A1710EBB229A92BF00EC7C86 /* NCIImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCIImage.mm; sourceTree = "<group>"; };
@@ -3857,8 +3857,8 @@
 		A1710EA4229A648900EC7C86 /* NRPPreviewViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A1710EA5229A648900EC7C86 /* NRPPreviewViewController.h */,
-				A1710EA6229A648900EC7C86 /* NRPPreviewViewController.mm */,
+				A158791122CEA8AE00847196 /* NRPPreviewViewController.h */,
+				A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */,
 			);
 			path = NRPPreviewViewController;
 			sourceTree = "<group>";
@@ -3866,8 +3866,8 @@
 		A1710EA8229A64E500EC7C86 /* NRPPreviewViewControllerDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				A1710EAA229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.h */,
-				A1710EA9229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm */,
+				A158791422CEA8B600847196 /* NRPPreviewViewControllerDelegate.h */,
+				A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */,
 				A1710EAC229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift */,
 			);
 			path = NRPPreviewViewControllerDelegate;
@@ -7843,6 +7843,7 @@
 				A174A47B22B01FD700415AD8 /* NMDLVertexBufferLayout.mm in Sources */,
 				A1926F8E22C10729008F16AE /* NMTLRenderPassStencilAttachmentDescriptor.mm in Sources */,
 				A133708022AB34E600FA3768 /* NNSCache.mm in Sources */,
+				A158791322CEA8AF00847196 /* NRPPreviewViewController.mm in Sources */,
 				A19F39DD22AF4BDD00606332 /* NMDLObject.mm in Sources */,
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */,
@@ -7985,6 +7986,7 @@
 				A1574E9F22B811E9006CC5F2 /* NNSCharacterSet.mm in Sources */,
 				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
+				A158791622CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A1D4983422BAED95009AC951 /* NWKNavigation.mm in Sources */,
 				A192700822C12F5F008F16AE /* NMTLFunction.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
@@ -8129,7 +8131,6 @@
 				A108635622C597F3001A15A9 /* NSKReachConstraints.mm in Sources */,
 				A1D4989D22BB49BD009AC951 /* NUIDictationPhrase.mm in Sources */,
 				A19F39C922AF2AA800606332 /* NAUParameterNode.mm in Sources */,
-				A1710EA7229A648900EC7C86 /* NRPPreviewViewController.mm in Sources */,
 				A1926F6722C0F4F4008F16AE /* NSCNParticlePropertyController.mm in Sources */,
 				A1D4986422BB29EB009AC951 /* NNSOperationQueue.mm in Sources */,
 				A15878D422CDDD8400847196 /* NNSProgress.mm in Sources */,
@@ -8169,7 +8170,6 @@
 				A15878CF22CDDA1E00847196 /* NNSItemProvider.mm in Sources */,
 				A192703D22C1375D008F16AE /* NMTLComputePipelineReflection.mm in Sources */,
 				A15878A122CDC77000847196 /* NUITableViewDropProposal.mm in Sources */,
-				A1710EAB229A64E500EC7C86 /* NRPPreviewViewControllerDelegate.mm in Sources */,
 				A174A16F2282229B002A8216 /* NNSBundle.mm in Sources */,
 				A1574EC222B8A3AB006CC5F2 /* NUIBlurEffect.mm in Sources */,
 				A1926FD122C12520008F16AE /* NMTLCommandQueue.mm in Sources */,

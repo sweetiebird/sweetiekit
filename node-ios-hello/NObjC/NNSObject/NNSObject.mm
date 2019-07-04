@@ -1899,7 +1899,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(RPScreenRecorder);
     JS_EXPORT_TYPE(RPPreviewViewController);
-    JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
+    JS_EXPORT_PROTOCOL(RPPreviewViewControllerDelegate);
 
     // UIKit Custom
 
@@ -2514,7 +2514,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // ReplayKit
 
-      JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
       JS_RETURN_TYPE(RPScreenRecorder);
       JS_RETURN_TYPE(RPPreviewViewController);
       
@@ -2793,6 +2792,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
+
+      // ReplayKit protocols
+
+      JS_RETURN_PROTOCOL(RPPreviewViewControllerDelegate);
 
       // AVFoundation Protocols
 
