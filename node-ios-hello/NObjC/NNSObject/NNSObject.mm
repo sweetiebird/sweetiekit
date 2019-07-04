@@ -14,16 +14,16 @@
 
 - (void) associateValue:(id)value withKey:(NSString *)aKey {
   
-  objc_setAssociatedObject(self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN);
+  objc_setAssociatedObject(self, (void *)NSSelectorFromString(aKey), value, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (id) associatedValueForKey:(NSString *)aKey {
   
-  return objc_getAssociatedObject( self, (__bridge void *)aKey );
+  return objc_getAssociatedObject(self, (void *)NSSelectorFromString(aKey));
 }
 
 - (void) dissociateValueForKey:(NSString *)aKey {
-  objc_setAssociatedObject(self, (__bridge void *)aKey, nil, OBJC_ASSOCIATION_RETAIN);
+  objc_setAssociatedObject(self, (void *)NSSelectorFromString(aKey), nil, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end
@@ -593,6 +593,9 @@ NNSObject::NNSObject() {}
 NNSObject::~NNSObject() {}
 
 JS_INIT_CLASS(NSObject, id);
+  JS_ASSIGN_PROTO_METHOD(associatedValueForKey);
+  JS_ASSIGN_PROTO_METHOD(associateValue);
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(NSObject, id);
@@ -620,6 +623,24 @@ NAN_METHOD(NNSObject::New) {
   }
 }
 
+NAN_METHOD(NNSObject::associatedValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self associatedValueForKey:key]));
+  }
+}
+
+NAN_METHOD(NNSObject::associateValue) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self associateValue:value withKey:key];
+  }
+}
 
 NClass::NClass() {}
 NClass::~NClass() {}

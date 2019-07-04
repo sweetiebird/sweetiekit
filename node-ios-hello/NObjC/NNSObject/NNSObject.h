@@ -100,6 +100,8 @@ JS_WRAP_CLASS_END(Class);
 #define is_value_NSObject(x) is_value_wrapper(x, NSObject)
 
 JS_WRAP_CLASS(NSObject, id);
+  JS_METHOD(associatedValueForKey);
+  JS_METHOD(associateValue);
 
   NSObject* _Nullable SetNSObject(__weak NSObject* _Nullable obj) {
     set_self(obj);
