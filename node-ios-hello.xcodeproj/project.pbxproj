@@ -220,6 +220,7 @@
 		A15878EB22CDEF4000847196 /* NUIDragPreviewTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878E722CDEF3F00847196 /* NUIDragPreviewTarget.mm */; };
 		A15878EC22CDEF4000847196 /* NUITargetedDragPreview.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */; };
 		A15878F022CE11AC00847196 /* NUINavigationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */; };
+		A15878F422CE1F4F00847196 /* NUITabBarDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -1041,6 +1042,8 @@
 		A15878EA22CDEF4000847196 /* NUITargetedDragPreview.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITargetedDragPreview.mm; sourceTree = "<group>"; };
 		A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUINavigationControllerDelegate.mm; sourceTree = "<group>"; };
 		A15878EF22CE11AC00847196 /* NUINavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUINavigationControllerDelegate.h; sourceTree = "<group>"; };
+		A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBarDelegate.mm; sourceTree = "<group>"; };
+		A15878F322CE1F4F00847196 /* NUITabBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBarDelegate.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3601,6 +3604,15 @@
 				A15878EE22CE11AC00847196 /* NUINavigationControllerDelegate.mm */,
 			);
 			path = NUINavigationControllerDelegate;
+			sourceTree = "<group>";
+		};
+		A15878F122CE1F4F00847196 /* NUITabBarDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A15878F322CE1F4F00847196 /* NUITabBarDelegate.h */,
+				A15878F222CE1F4F00847196 /* NUITabBarDelegate.mm */,
+			);
+			path = NUITabBarDelegate;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -6830,6 +6842,7 @@
 				A10D697C2293B058008D0ABC /* NUITabBar */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
 				A1926F2922C0CBE8008F16AE /* NUITabBarControllerDelegate */,
+				A15878F122CE1F4F00847196 /* NUITabBarDelegate */,
 				A178B27022887901005184EE /* NUITabBarItem */,
 				A19476BA226E9450003BB393 /* NUITableView */,
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
@@ -7645,6 +7658,7 @@
 				A1926FBC22C11F99008F16AE /* NMTLStructMember.mm in Sources */,
 				A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */,
 				A19F3A0F22AF72AB00606332 /* NMDLSubmesh.mm in Sources */,
+				A15878F422CE1F4F00847196 /* NUITabBarDelegate.mm in Sources */,
 				A1D4989122BB4731009AC951 /* NUILexicon.mm in Sources */,
 				A11D1299227EA6B40038C262 /* NUIScrollView.mm in Sources */,
 				211E76B7226A3E4D00B838AF /* NodeUITabBarController.swift in Sources */,
