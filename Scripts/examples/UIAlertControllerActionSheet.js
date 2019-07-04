@@ -6,7 +6,7 @@ const {
 } = SweetieKit;
 
 UIAlertControllerActionSheetImage = () => {
-  let img = UIImage('laarc').imageWithRenderingMode(UIImageRenderingModeAlwaysOriginal);
+  let img = UIImage('nic').imageWithRenderingMode(UIImageRenderingModeAlwaysOriginal);
   UIAlertControllerActionSheetImage = (newImg = img) => {
     img = newImg;
     return img;
@@ -14,7 +14,19 @@ UIAlertControllerActionSheetImage = () => {
   return img;
 };
 
+UIAlertControllerActionSheetImage2 = () => {
+  let img = UIImage('laarc').imageWithRenderingMode(UIImageRenderingModeAlwaysOriginal);
+  UIAlertControllerActionSheetImage2 = (newImg = img) => {
+    img = newImg;
+    return img;
+  };
+  return img;
+};
+
 UIAlertControllerActionSheet_make = async function UIAlertControllerActionSheet_make(nav, demoVC) {
+
+  // https://stackoverflow.com/questions/40675816/uialertcontroller-and-uialertcontrollerstyleactionsheet-customization
+
   const alertVC = UIAlertController.alertControllerWithTitleMessagePreferredStyle(
     'Alert Title',
     'And an informative subtitle',
@@ -30,9 +42,14 @@ UIAlertControllerActionSheet_make = async function UIAlertControllerActionSheet_
   const button2 = UIAlertAction.actionWithTitleStyleHandler('Second button', UIAlertActionStyleDefault, (action) => {
     alertVC.dismissViewControllerAnimatedCompletion(true, () => {});
   });
+  const button3 = UIAlertAction.actionWithTitleStyleHandler('Third button', UIAlertActionStyleDefault, (action) => {
+    alertVC.dismissViewControllerAnimatedCompletion(true, () => {});
+  });
   button.setValueForKey(UIAlertControllerActionSheetImage(), 'image');
+  button2.setValueForKey(UIAlertControllerActionSheetImage2(), 'image');
   alertVC.addAction(button);
   alertVC.addAction(button2);
+  alertVC.addAction(button3);
   nav.pushViewControllerAnimated(demoVC, true);
   demoVC.presentViewControllerAnimatedCompletion(alertVC, true, () => {});
 };
