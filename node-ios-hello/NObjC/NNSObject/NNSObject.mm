@@ -762,6 +762,9 @@ NAN_METHOD(NClass::New) {
 #include "NUIFocusAnimationCoordinator.h"
 #include "NUIFocusAnimationContext.h"
 #include "NUITableViewDelegate.h"
+#include "NUIDropInteractionDelegate.h"
+#include "NUIDropInteraction.h"
+#include "NUIDropProposal.h"
 
 #include "NUITableViewController.h"
 #include "NUITableView.h"
@@ -1262,6 +1265,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(UIFocus);
     JS_EXPORT_TYPE(UIFocusAnimationCoordinator);
     JS_EXPORT_PROTOCOL(UIFocusAnimationContext);
+    JS_EXPORT_TYPE(UIDropInteraction);
+    JS_EXPORT_TYPE(UIDropProposal);
 
     JS_EXPORT_TYPE(UITableViewController);
     JS_EXPORT_TYPE(UICollectionViewController);
@@ -1352,6 +1357,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIPickerViewManager);
     JS_EXPORT_PROTOCOL(UIScrollViewDelegate);
     JS_EXPORT_PROTOCOL(UITableViewDelegate);
+    JS_EXPORT_PROTOCOL(UIDropInteractionDelegate);
     JS_EXPORT_TYPE(UIImagePickerControllerDelegate);
     JS_EXPORT_TYPE(UITableViewDataSource);
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
@@ -2110,6 +2116,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // UIKit
 
+      JS_RETURN_TYPE(UIDropProposal);
+      JS_RETURN_TYPE(UIDropInteraction);
       JS_RETURN_TYPE(UIFocusAnimationCoordinator);
       JS_RETURN_TYPE(UITableViewFocusUpdateContext); // : NUIFocusUpdateContext
       JS_RETURN_TYPE(UIFocusUpdateContext);
@@ -2385,6 +2393,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(UITableViewDelegate);
       JS_RETURN_PROTOCOL(UIScrollViewDelegate);
       JS_RETURN_PROTOCOL(UIFocusAnimationContext);
+      JS_RETURN_PROTOCOL(UIDropInteractionDelegate);
 
       // Foundation protocols
 

@@ -191,6 +191,9 @@
 		A158786D22CDB33100847196 /* NUIFocus.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158786B22CDB33000847196 /* NUIFocus.mm */; };
 		A158787422CDB50600847196 /* NUIFocusAnimationCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158786F22CDB50600847196 /* NUIFocusAnimationCoordinator.mm */; };
 		A158787522CDB50600847196 /* NUIFocusAnimationContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787222CDB50600847196 /* NUIFocusAnimationContext.mm */; };
+		A158787F22CDBAE700847196 /* NUIDropInteractionDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787822CDBAE600847196 /* NUIDropInteractionDelegate.mm */; };
+		A158788022CDBAE700847196 /* NUIDropInteraction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787B22CDBAE600847196 /* NUIDropInteraction.mm */; };
+		A158788122CDBAE700847196 /* NUIDropProposal.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158787E22CDBAE600847196 /* NUIDropProposal.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -955,6 +958,12 @@
 		A158787022CDB50600847196 /* NUIFocusAnimationCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFocusAnimationCoordinator.h; sourceTree = "<group>"; };
 		A158787222CDB50600847196 /* NUIFocusAnimationContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIFocusAnimationContext.mm; sourceTree = "<group>"; };
 		A158787322CDB50600847196 /* NUIFocusAnimationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIFocusAnimationContext.h; sourceTree = "<group>"; };
+		A158787722CDBAE600847196 /* NUIDropInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDropInteractionDelegate.h; sourceTree = "<group>"; };
+		A158787822CDBAE600847196 /* NUIDropInteractionDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropInteractionDelegate.mm; sourceTree = "<group>"; };
+		A158787A22CDBAE600847196 /* NUIDropInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDropInteraction.h; sourceTree = "<group>"; };
+		A158787B22CDBAE600847196 /* NUIDropInteraction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropInteraction.mm; sourceTree = "<group>"; };
+		A158787D22CDBAE600847196 /* NUIDropProposal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIDropProposal.h; sourceTree = "<group>"; };
+		A158787E22CDBAE600847196 /* NUIDropProposal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIDropProposal.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3258,6 +3267,33 @@
 				A158787222CDB50600847196 /* NUIFocusAnimationContext.mm */,
 			);
 			path = NUIFocusAnimationContext;
+			sourceTree = "<group>";
+		};
+		A158787622CDBAE600847196 /* NUIDropInteractionDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A158787722CDBAE600847196 /* NUIDropInteractionDelegate.h */,
+				A158787822CDBAE600847196 /* NUIDropInteractionDelegate.mm */,
+			);
+			path = NUIDropInteractionDelegate;
+			sourceTree = "<group>";
+		};
+		A158787922CDBAE600847196 /* NUIDropInteraction */ = {
+			isa = PBXGroup;
+			children = (
+				A158787A22CDBAE600847196 /* NUIDropInteraction.h */,
+				A158787B22CDBAE600847196 /* NUIDropInteraction.mm */,
+			);
+			path = NUIDropInteraction;
+			sourceTree = "<group>";
+		};
+		A158787C22CDBAE600847196 /* NUIDropProposal */ = {
+			isa = PBXGroup;
+			children = (
+				A158787D22CDBAE600847196 /* NUIDropProposal.h */,
+				A158787E22CDBAE600847196 /* NUIDropProposal.mm */,
+			);
+			path = NUIDropProposal;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -6387,15 +6423,9 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A158787122CDB50600847196 /* NUIFocusAnimationContext */,
-				A158786E22CDB50600847196 /* NUIFocusAnimationCoordinator */,
-				A158786A22CDB33000847196 /* NUIFocus */,
-				A158786622CDB27F00847196 /* NUITableViewFocusUpdateContext */,
-				A158786222CDB26A00847196 /* NUIFocusUpdateContext */,
-				A158785E22CDAB4C00847196 /* NUITableViewRowAction */,
-				A158785A22CDA92600847196 /* NUIContextualAction */,
-				A158785622CDA8E700847196 /* NUISwipeActionsConfiguration */,
-				A158785222CDA5BC00847196 /* NUITableViewDelegate */,
+				A158787922CDBAE600847196 /* NUIDropInteraction */,
+				A158787622CDBAE600847196 /* NUIDropInteractionDelegate */,
+				A158787C22CDBAE600847196 /* NUIDropProposal */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
 				A11D129A227F6A9F0038C262 /* NNSLayoutConstraint */,
 				A1336FF022A660FE00FA3768 /* NNSLayoutDimension */,
@@ -6421,12 +6451,17 @@
 				A1574ED522B8D96B006CC5F2 /* NUICollectionViewLayoutInvalidationContext */,
 				A1574EEA22B8E851006CC5F2 /* NUICollectionViewTransitionLayout */,
 				A1574ED822B8D96B006CC5F2 /* NUICollectionViewUpdateItem */,
+				A158785A22CDA92600847196 /* NUIContextualAction */,
 				211E76A6226A0CFE00B838AF /* NUIControl */,
 				A1574E8C22B80F2E006CC5F2 /* NUIDatePicker */,
 				A1926EED22C0B2C2008F16AE /* NUIDevice */,
 				A1D4989A22BB49BC009AC951 /* NUIDictationPhrase */,
 				A19F4D9F229F7D5A00E7F593 /* NUIEvent */,
+				A158786A22CDB33000847196 /* NUIFocus */,
+				A158787122CDB50600847196 /* NUIFocusAnimationContext */,
+				A158786E22CDB50600847196 /* NUIFocusAnimationCoordinator */,
 				A1574E8022B7FD40006CC5F2 /* NUIFocusSystem */,
+				A158786222CDB26A00847196 /* NUIFocusUpdateContext */,
 				A1CE2B66228EA6EC00D9B3B8 /* NUIFont */,
 				A1646B9522922B8F0078CF4B /* NUIGestureRecognizer */,
 				A133700C22AAA8FF00FA3768 /* NUIGraphicsImageRendererFormat */,
@@ -6475,6 +6510,7 @@
 				A1D6729F2269940B00562A42 /* NUIStoryboard */,
 				A1574EC622B8BC4D006CC5F2 /* NUIStoryboardSegue */,
 				A1574EC922B8BC4D006CC5F2 /* NUIStoryboardUnwindSegueSource */,
+				A158785622CDA8E700847196 /* NUISwipeActionsConfiguration */,
 				A164976F227E148D00CA943F /* NUISwitch */,
 				A10D697C2293B058008D0ABC /* NUITabBar */,
 				A1D672B822699DB900562A42 /* NUITabBarController */,
@@ -6484,6 +6520,9 @@
 				A19476B6226E90F0003BB393 /* NUITableViewCell */,
 				A11CB497226BDFF90006A0D4 /* NUITableViewController */,
 				A19476B0226E9043003BB393 /* NUITableViewDataSource */,
+				A158785222CDA5BC00847196 /* NUITableViewDelegate */,
+				A158786622CDB27F00847196 /* NUITableViewFocusUpdateContext */,
+				A158785E22CDAB4C00847196 /* NUITableViewRowAction */,
 				A1646B9822922B8F0078CF4B /* NUITapGestureRecognizer */,
 				A1D672B422699DB300562A42 /* NUITextField */,
 				A1D498AE22BB62A5009AC951 /* NUITextFieldDelegate */,
@@ -7327,6 +7366,7 @@
 				A1646B9B22922B900078CF4B /* NUIGestureRecognizer.mm in Sources */,
 				A108636722C6C5B4001A15A9 /* NARFaceTrackingConfiguration.mm in Sources */,
 				A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */,
+				A158788122CDBAE700847196 /* NUIDropProposal.mm in Sources */,
 				A192701522C133A3008F16AE /* NMTLRenderPipelineState.mm in Sources */,
 				A192707F22C14B8A008F16AE /* NMTLSharedEventListener.mm in Sources */,
 				A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */,
@@ -7429,6 +7469,7 @@
 				A1926F7822C105F1008F16AE /* NSKRenderer.mm in Sources */,
 				A13370D722AEFC6A00FA3768 /* NAVAudioPCMBuffer.mm in Sources */,
 				A11D12A5227F8DC90038C262 /* NUITableViewManager.mm in Sources */,
+				A158788022CDBAE700847196 /* NUIDropInteraction.mm in Sources */,
 				A1BD4BBD228821C0001D1F6E /* NUICollectionViewController.mm in Sources */,
 				A1926F9D22C1144C008F16AE /* NMTLPixelFormat.mm in Sources */,
 				A1BD4B8C2287CA3F001D1F6E /* NSKScene.mm in Sources */,
@@ -7637,6 +7678,7 @@
 				A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */,
 				A1CE2B69228EA6ED00D9B3B8 /* NUIFont.mm in Sources */,
 				A13370C522AEF87500FA3768 /* NAVAudioNode.mm in Sources */,
+				A158787F22CDBAE700847196 /* NUIDropInteractionDelegate.mm in Sources */,
 				A1926ED422C08337008F16AE /* NMKUserLocation.mm in Sources */,
 				A1926F0422C0BA34008F16AE /* NSKPhysicsJointPin.mm in Sources */,
 				A1D4982C22B9C968009AC951 /* NCLBeacon.mm in Sources */,
