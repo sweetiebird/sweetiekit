@@ -11,11 +11,44 @@ const {
 
 let todos = [];
 let defaults;
-let mgr;
 let table;
 
 const boldFont = UIFont('Arial-BoldMT', 17);
 const regFont = UIFont('Arial', 17);
+
+getTodos = function getTodos() {
+  return todos;
+};
+
+getTodo = function getTodo(index) {
+  return getTodos()[index];
+};
+
+saveTodos = function saveTodos(todos = getTodos(), defaults = NSUserDefaults.standardUserDefaults) {
+  const todosStr = JSON.stringify(todos);
+  defaults.setValueForKey(todosStr, 'TODOS');
+  return todos;
+};
+
+removeTodo = function removeTodo(index, todos = getTodos()) {
+  if (index >= 0 && index < todos.length) {
+    todos.splice(index, 1);
+  }
+};
+
+moveTodo = function moveTodo(srcIndex, dstIndex, todos = getTodos()) {
+  const todo = todos[srcIndex];
+  removeTodo(srcIndex);
+  if (todo) {
+    if (dstIndex < 0) {
+      dstIndex = 0;
+    }
+    if (dstIndex > todos.length) {
+      dstIndex = todos.length;
+    }
+    todos.splice(dstIndex, 0, todo);
+  }
+};
 
 function setupDefaults() {
   defaults = NSUserDefaults.standardUserDefaults;
@@ -27,8 +60,7 @@ function setupDefaults() {
       todos = todosObj;
     }
   } else {
-    const strTodos = JSON.stringify(todos);
-    defaults.setValueForKey(strTodos, 'TODOS');
+    saveTodos();
   }
 }
 
@@ -72,8 +104,7 @@ function addNewTodo() {
     true,
   );
 
-  const todosStr = JSON.stringify(todos);
-  defaults.setValueForKey(todosStr, 'TODOS');
+  saveTodos();
 }
 
 function done(nav) {
@@ -85,7 +116,12 @@ function addBarItem(nav, demoVC) {
   const doneBarItem = new UIBarButtonItem('Done', () => {
     done(nav);
   });
-  demoVC.toolbarItems = [addBarItem, doneBarItem];
+  const editBarItem = new UIBarButtonItem('Edit', () => {
+    if (table) {
+      table.isEditing = !table.isEditing;
+    }
+  });
+  demoVC.toolbarItems = [addBarItem, doneBarItem, editBarItem];
 }
 
 function getRows() {
@@ -94,7 +130,7 @@ function getRows() {
 
 function getCell(tableView, { section, row }) {
   const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault, "id");
-  const todo = todos[row];
+  const todo = getTodo(row);
   if (todo && todo.text) {
     cell.textLabel.text = todo.text;
     if (!todo.isDone) {
@@ -113,8 +149,7 @@ function handleCellSelected(tableView, { section, row }) {
   }
   if (todos[row]) {
     todos[row].isDone = !todos[row].isDone;
-    const todosStr = JSON.stringify(todos);
-    defaults.setValueForKey(todosStr, 'TODOS');
+    saveTodos();
     tableView.reloadData();
   }
 }
@@ -127,6 +162,23 @@ function setTableManager() {
   table.delegate = UITableViewDelegate({
     tableViewDidSelectRowAtIndexPath: handleCellSelected,
   });
+  table.delegate.tableViewTitleForDeleteConfirmationButtonForRowAtIndexPath = () =>
+    "Delete?";
+  table.dataSource.tableViewCommitEditingStyleForRowAtIndexPath = (tableView, style, path) => {
+    if (style === UITableViewCellEditingStyleDelete) {
+      removeTodo(path.row);
+      saveTodos();
+      table.reloadData();
+    //} else if (style === UITableViewCellEditingStyleInsert) {
+    } else {
+      console.warn('tableViewCommitEditingStyleForRowAtIndexPath: unknown style', style, path);
+    }
+  };
+  table.dataSource.tableViewMoveRowAtIndexPathToIndexPath = (tableView, src, dst) => {
+    moveTodo(src.row, dst.row);
+    saveTodos();
+    table.reloadData();
+  };
 }
 
 async function make(nav, demoVC) {
