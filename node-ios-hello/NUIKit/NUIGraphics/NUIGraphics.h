@@ -11,7 +11,6 @@
 #include "NNSObject.h"
 
 JS_WRAP_GLOBALS(UIGraphics);
-  // TODO: declare UIGraphics globals
 JS_WRAP_GLOBALS_END(UIGraphics);
 
 #endif /* NUIGraphics_h */

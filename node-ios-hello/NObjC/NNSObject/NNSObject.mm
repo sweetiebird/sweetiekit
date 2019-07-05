@@ -1118,6 +1118,11 @@ NAN_METHOD(NClass::New) {
 #include "NUIBarButtonItem.h"
 #include "NUITabBar.h"
 #include "NUIViewController.h"
+#include "NUITimingCurveProvider.h"
+#include "NUIViewAnimating.h"
+#include "NUIViewImplicitlyAnimating.h"
+#include "NUIViewPropertyAnimator.h"
+#include "NUITimingCurveProvider.h"
 #include "NUINavigationController.h"
 #include "NUINavigationControllerDelegate.h"
 #include "NUIBarPositioning.h"
@@ -1665,6 +1670,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIApplication);
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
+    JS_EXPORT_PROTOCOL(UITimingCurveProvider);
+    JS_EXPORT_PROTOCOL(UIViewAnimating);
+    JS_EXPORT_PROTOCOL(UIViewImplicitlyAnimating);
+    JS_EXPORT_TYPE(UIViewPropertyAnimator);
     JS_EXPORT_TYPE(UITabBarController);
     JS_EXPORT_PROTOCOL(UITabBarControllerDelegate);
     JS_EXPORT_PROTOCOL(UITabBarDelegate);
@@ -2620,6 +2629,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIPresentationController);
       JS_RETURN_TYPE(UIInputViewController);
       JS_RETURN_TYPE(UIViewController);
+      JS_RETURN_TYPE(UIViewPropertyAnimator);
       // ========= views
       JS_RETURN_TYPE(UIInputView);
       JS_RETURN_TYPE(UIStackView);
@@ -2879,6 +2889,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(CAAction);
 
       // UIKit protocols
+
+      JS_RETURN_PROTOCOL(UIViewImplicitlyAnimating);
+      JS_RETURN_PROTOCOL(UIViewAnimating);
+      JS_RETURN_PROTOCOL(UITimingCurveProvider);
 
       JS_RETURN_PROTOCOL(UIPopoverPresentationControllerDelegate);
       JS_RETURN_PROTOCOL(UIAdaptivePresentationControllerDelegate);
