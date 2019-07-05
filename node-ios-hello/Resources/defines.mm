@@ -2838,6 +2838,7 @@ bool is_value_NSNumber(Local<Value> value)
   return false;
 }
 
+#undef dispatch_sync
 
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
