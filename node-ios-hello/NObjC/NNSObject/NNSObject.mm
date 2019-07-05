@@ -1119,10 +1119,11 @@ NAN_METHOD(NClass::New) {
 #include "NUITabBar.h"
 #include "NUIViewController.h"
 #include "NUITimingCurveProvider.h"
+#include "NUICubicTimingParameters.h"
+#include "NUISpringTimingParameters.h"
 #include "NUIViewAnimating.h"
 #include "NUIViewImplicitlyAnimating.h"
 #include "NUIViewPropertyAnimator.h"
-#include "NUITimingCurveProvider.h"
 #include "NUINavigationController.h"
 #include "NUINavigationControllerDelegate.h"
 #include "NUIBarPositioning.h"
@@ -1671,6 +1672,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_PROTOCOL(UITimingCurveProvider);
+    JS_EXPORT_TYPE(UICubicTimingParameters);
+    JS_EXPORT_TYPE(UISpringTimingParameters);
     JS_EXPORT_PROTOCOL(UIViewAnimating);
     JS_EXPORT_PROTOCOL(UIViewImplicitlyAnimating);
     JS_EXPORT_TYPE(UIViewPropertyAnimator);
@@ -2596,6 +2599,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(WKWebView);
 
       // UIKit
+
+      JS_RETURN_TYPE(UICubicTimingParameters);
+      JS_RETURN_TYPE(UISpringTimingParameters);
 
       JS_RETURN_TYPE(UITargetedDragPreview);
       JS_RETURN_TYPE(UITableViewHeaderFooterView); // : UIView

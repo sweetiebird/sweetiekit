@@ -137,6 +137,8 @@
 		A13370F622AF0DE700FA3768 /* NAVAudioFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370F522AF0DE700FA3768 /* NAVAudioFile.mm */; };
 		A13370FA22AF12A000FA3768 /* NAVAudioChannelLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370F922AF12A000FA3768 /* NAVAudioChannelLayout.mm */; };
 		A13370FF22AF1C9100FA3768 /* NCoreAudioTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370FD22AF1C9000FA3768 /* NCoreAudioTypes.mm */; };
+		A134E27822CF0FF300BAB748 /* NUICubicTimingParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27422CF0FF300BAB748 /* NUICubicTimingParameters.mm */; };
+		A134E27922CF0FF300BAB748 /* NUISpringTimingParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -894,6 +896,10 @@
 		A13370F922AF12A000FA3768 /* NAVAudioChannelLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAudioChannelLayout.mm; sourceTree = "<group>"; };
 		A13370FD22AF1C9000FA3768 /* NCoreAudioTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreAudioTypes.mm; sourceTree = "<group>"; };
 		A13370FE22AF1C9000FA3768 /* NCoreAudioTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreAudioTypes.h; sourceTree = "<group>"; };
+		A134E27322CF0FF300BAB748 /* NUICubicTimingParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUICubicTimingParameters.h; sourceTree = "<group>"; };
+		A134E27422CF0FF300BAB748 /* NUICubicTimingParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICubicTimingParameters.mm; sourceTree = "<group>"; };
+		A134E27622CF0FF300BAB748 /* NUISpringTimingParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISpringTimingParameters.h; sourceTree = "<group>"; };
+		A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISpringTimingParameters.mm; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -2945,6 +2951,24 @@
 				A13370FD22AF1C9000FA3768 /* NCoreAudioTypes.mm */,
 			);
 			path = NCoreAudioTypes;
+			sourceTree = "<group>";
+		};
+		A134E27222CF0FF200BAB748 /* NUICubicTimingParameters */ = {
+			isa = PBXGroup;
+			children = (
+				A134E27322CF0FF300BAB748 /* NUICubicTimingParameters.h */,
+				A134E27422CF0FF300BAB748 /* NUICubicTimingParameters.mm */,
+			);
+			path = NUICubicTimingParameters;
+			sourceTree = "<group>";
+		};
+		A134E27522CF0FF300BAB748 /* NUISpringTimingParameters */ = {
+			isa = PBXGroup;
+			children = (
+				A134E27622CF0FF300BAB748 /* NUISpringTimingParameters.h */,
+				A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */,
+			);
+			path = NUISpringTimingParameters;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -6910,6 +6934,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A134E27222CF0FF200BAB748 /* NUICubicTimingParameters */,
+				A134E27522CF0FF300BAB748 /* NUISpringTimingParameters */,
 				A158793022CEE63400847196 /* NUIViewPropertyAnimator */,
 				A158792C22CEE5D100847196 /* NUITimingCurveProvider */,
 				A158792722CEE2F600847196 /* NUIViewAnimating */,
@@ -7485,8 +7511,6 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A108639022C70160001A15A9 /* NWebGL */,
-				A108637F22C6E573001A15A9 /* NGLKit */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -7506,6 +7530,7 @@
 				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
+				A108637F22C6E573001A15A9 /* NGLKit */,
 				A192708222C14C47008F16AE /* NIOSurface */,
 				A194894D228A8489007BF787 /* NMapKit */,
 				A133708122AB382200FA3768 /* NMediaPlayer */,
@@ -7521,6 +7546,7 @@
 				A1D4985122BAFD40009AC951 /* NSecurity */,
 				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
+				A108639022C70160001A15A9 /* NWebGL */,
 				A133701A22AAE65000FA3768 /* NWebKit */,
 				A1D672A02269942100562A42 /* Resources */,
 				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
@@ -7871,6 +7897,7 @@
 				A108632222C4937D001A15A9 /* NAVAudioMixingDestination.mm in Sources */,
 				A1D65DD222816F0100AC0BD9 /* SUITarget.swift in Sources */,
 				A19270B622C17FA3008F16AE /* NMTLFunctionConstantValues.mm in Sources */,
+				A134E27822CF0FF300BAB748 /* NUICubicTimingParameters.mm in Sources */,
 				A178B27322887913005184EE /* NUITabBarItem.mm in Sources */,
 				A1BD4BB322880B30001D1F6E /* NARCamera.mm in Sources */,
 				A192710222C303E1008F16AE /* NCAAction.mm in Sources */,
@@ -8252,6 +8279,7 @@
 				A192709E22C161F6008F16AE /* NNSRunLoop.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */,
+				A134E27922CF0FF300BAB748 /* NUISpringTimingParameters.mm in Sources */,
 				A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */,
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */,
