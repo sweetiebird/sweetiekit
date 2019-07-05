@@ -1514,6 +1514,7 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
+#include "NCGImage.h"
 #include "NCGContext.h"
 #include "NRPScreenRecorder.h"
 #include "NRPScreenRecorderDelegate.h"
@@ -1815,6 +1816,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Core Graphics
 
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
+    JS_EXPORT_GLOBALS(CGImage);
     JS_EXPORT_GLOBALS(CGContext);
     
     // Audio Toolbox
