@@ -231,6 +231,7 @@
 		A158791322CEA8AF00847196 /* NRPPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791222CEA8AE00847196 /* NRPPreviewViewController.mm */; };
 		A158791622CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */; };
 		A158791B22CEB82B00847196 /* NRPScreenRecorderDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */; };
+		A158791F22CED3EF00847196 /* NUIGraphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158791D22CED3EE00847196 /* NUIGraphics.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
@@ -1072,6 +1073,8 @@
 		A158791522CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPPreviewViewControllerDelegate.mm; sourceTree = "<group>"; };
 		A158791922CEB82B00847196 /* NRPScreenRecorderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRPScreenRecorderDelegate.h; sourceTree = "<group>"; };
 		A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NRPScreenRecorderDelegate.mm; sourceTree = "<group>"; };
+		A158791D22CED3EE00847196 /* NUIGraphics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIGraphics.mm; sourceTree = "<group>"; };
+		A158791E22CED3EE00847196 /* NUIGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIGraphics.h; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
@@ -3709,6 +3712,15 @@
 				A158791A22CEB82B00847196 /* NRPScreenRecorderDelegate.mm */,
 			);
 			path = NRPScreenRecorderDelegate;
+			sourceTree = "<group>";
+		};
+		A158791C22CED3EE00847196 /* NUIGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				A158791E22CED3EE00847196 /* NUIGraphics.h */,
+				A158791D22CED3EE00847196 /* NUIGraphics.mm */,
+			);
+			path = NUIGraphics;
 			sourceTree = "<group>";
 		};
 		A158FD86229A292F000F7ABA /* NCAShapeLayer */ = {
@@ -6837,6 +6849,7 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A158791C22CED3EE00847196 /* NUIGraphics */,
 				A158790D22CE678E00847196 /* NUIViewControllerTransitioning */,
 				A158790522CE638500847196 /* NUIViewControllerTransitionCoordinator */,
 				A158790822CE638500847196 /* NUIViewControllerTransitionCoordinatorContext */,
@@ -7849,6 +7862,7 @@
 				A174A47F22B0207B00415AD8 /* NMDLVertexAttribute.mm in Sources */,
 				A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */,
 				A1710EAD229A64FE00EC7C86 /* SRPPreviewViewControllerDelegate.swift in Sources */,
+				A158791F22CED3EF00847196 /* NUIGraphics.mm in Sources */,
 				A192700B22C12F5F008F16AE /* NMTLAttribute.mm in Sources */,
 				A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */,
 				A1926ED022C081D2008F16AE /* NMKOverlayView.mm in Sources */,

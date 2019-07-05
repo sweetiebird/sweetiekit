@@ -1066,6 +1066,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSUserActivity.h"
 #include "NNSUserActivityDelegate.h"
 
+#include "NUIGraphics.h"
 #include "NUIBezierPath.h"
 #include "NUILabel.h"
 #include "NUIFont.h"
@@ -1638,6 +1639,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // UIKit
 
+    JS_EXPORT_GLOBALS(UIGraphics);
     JS_EXPORT_TYPE(UIGestureRecognizer);
     JS_EXPORT_TYPE(UITapGestureRecognizer);
     JS_EXPORT_TYPE(UIPinchGestureRecognizer);
