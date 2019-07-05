@@ -234,9 +234,8 @@ function makeTopView(demoVC, fieldHeight) {
 }
 
 async function make(nav, demoVC) {
-  const recorder = new RPScreenRecorder();
+  const recorder = RPScreenRecorder.sharedRecorder();
   console.log(recorder);
-
 
   const _navBarHeight = global.navBarHeight = (nav_ = nav) => {
     return nav_.navigationBar.frame.height;
