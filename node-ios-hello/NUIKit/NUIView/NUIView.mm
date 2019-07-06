@@ -12,6 +12,9 @@
 NUIView::NUIView() {}
 NUIView::~NUIView() {}
 
+NAN_METHOD(setNeedsDisplay);
+NAN_METHOD(setNeedsDisplayInRect);
+
 JS_INIT_CLASS(UIView, UIResponder);
   // instance members (proto)
   JS_ASSIGN_PROTO_PROP(origin);
@@ -42,6 +45,8 @@ JS_INIT_CLASS(UIView, UIResponder);
   JS_ASSIGN_PROTO_METHOD(viewWithTag);
   JS_ASSIGN_PROTO_METHOD(viewWithStringTag);
   JS_ASSIGN_PROTO_METHOD(setNeedsLayout);
+  JS_ASSIGN_PROTO_METHOD(setNeedsDisplay);
+  JS_ASSIGN_PROTO_METHOD(setNeedsDisplayInRect);
   JS_ASSIGN_PROTO_METHOD(layoutIfNeeded);
   JS_ASSIGN_PROTO_METHOD(layoutSubviews);
   JS_ASSIGN_PROTO_METHOD(addGestureRecognizer);
@@ -1090,6 +1095,24 @@ NAN_METHOD(NUIView::setNeedsLayout) {
   @autoreleasepool
   {
     JS_SET_RETURN(js_value_void([self setNeedsLayout]));
+  }
+}
+
+NAN_METHOD(setNeedsDisplay) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    JS_SET_RETURN(js_value_void([self setNeedsDisplay]));
+  }
+}
+
+NAN_METHOD(setNeedsDisplayInRect) {
+  JS_UNWRAP(UIView, self);
+  @autoreleasepool
+  {
+    declare_args();
+    declare_value(CGRect, rect);
+    JS_SET_RETURN(js_value_void([self setNeedsDisplayInRect: rect]));
   }
 }
 
