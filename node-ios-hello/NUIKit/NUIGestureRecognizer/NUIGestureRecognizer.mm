@@ -200,7 +200,9 @@ NAN_METHOD(NUIGestureRecognizer::locationOfTouchInView) {
     declare_args();
     declare_value(NSUInteger, touchIndex);
     declare_pointer(UIView, view);
-    JS_SET_RETURN(js_value_CGPoint([self locationOfTouch: touchIndex inView: view]));
+    if (touchIndex < [self numberOfTouches]) {
+      JS_SET_RETURN(js_value_CGPoint([self locationOfTouch: touchIndex inView: view]));
+    }
   }
 }
 /*
