@@ -17,6 +17,7 @@ makeEmojiCam = require('./examples/emojiCam');
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
 makeButton = require('./examples/UIButton');
+makeFluidButton = require('./examples/FluidButton');
 makeBarButtonItem = require('./examples/UIBarButtonItem');
 makeCollectionView = require('./examples/UICollectionView');
 makeGifView = require('./examples/GifView');
@@ -79,6 +80,7 @@ demoTypes = {
   // SKSceneSockets: makeSKSceneSockets,
   ThreeOBJ: makeThreeObj,
   UIButton: makeButton,
+  FluidButton: makeFluidButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
   UIPageControl: makePageControl,
