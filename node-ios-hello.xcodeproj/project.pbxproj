@@ -69,6 +69,7 @@
 		A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD04B228F6B5400184286 /* NUINavigationItem.mm */; };
 		A10BD051228F8ACB00184286 /* NUIProgressView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10BD04F228F8ACB00184286 /* NUIProgressView.mm */; };
 		A10D697F2293B058008D0ABC /* NUITabBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = A10D697D2293B058008D0ABC /* NUITabBar.mm */; };
+		A10E72A922CE22690077C9FF /* CellTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10E72A822CE22690077C9FF /* CellTest.xib */; };
 		A11029D6228E4C9D0078FAC0 /* NSKCameraNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */; };
 		A11CB49A226BE0420006A0D4 /* NUITableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A11CB499226BE0420006A0D4 /* NUITableViewController.mm */; };
 		A11D1295227EA0A90038C262 /* todo.js in Resources */ = {isa = PBXBuildFile; fileRef = A11D1294227EA0A90038C262 /* todo.js */; };
@@ -759,6 +760,7 @@
 		A10BD050228F8ACB00184286 /* NUIProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIProgressView.h; sourceTree = "<group>"; };
 		A10D697D2293B058008D0ABC /* NUITabBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITabBar.mm; sourceTree = "<group>"; };
 		A10D697E2293B058008D0ABC /* NUITabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITabBar.h; sourceTree = "<group>"; };
+		A10E72A822CE22690077C9FF /* CellTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellTest.xib; sourceTree = "<group>"; };
 		A11029D4228E4C9C0078FAC0 /* NSKCameraNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKCameraNode.mm; sourceTree = "<group>"; };
 		A11029D5228E4C9C0078FAC0 /* NSKCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKCameraNode.h; sourceTree = "<group>"; };
 		A11CB499226BE0420006A0D4 /* NUITableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITableViewController.mm; sourceTree = "<group>"; };
@@ -3750,6 +3752,7 @@
 				A16EF592229D0917007BCB49 /* Magic.sks */,
 				A16EF58F229D07D4007BCB49 /* Assets.xcassets */,
 				A190B7AC22C303D4007268E4 /* turtle.scn */,
+				A10E72A822CE22690077C9FF /* CellTest.xib */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -7506,6 +7509,7 @@
 				A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */,
 				A1FC1A0B225C65DD00085571 /* Assets.xcassets in Resources */,
 				A1CE2B8C228F020800D9B3B8 /* Lato-Hairline.ttf in Resources */,
+				A10E72A922CE22690077C9FF /* CellTest.xib in Resources */,
 				A1CE2B5F228E83D400D9B3B8 /* 1.gif in Resources */,
 				A1CE2B8F228F020800D9B3B8 /* Lato-Black.ttf in Resources */,
 				A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */,

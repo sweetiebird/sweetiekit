@@ -15,10 +15,7 @@
     "colyseus.js": "^0.10.8",
     "http-server": "^0.11.1",
     "leftpad": "^0.0.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "npm:@hot-loader/react-dom",
-    "react-hot-loader": "^4.8.2",
+    "lodash": "^4.17.11",
     "socket.io-client": "^2.2.0",
     "sweetiekit-art": "^0.0.3",
     "sweetiekit-dom": "^0.0.5"
