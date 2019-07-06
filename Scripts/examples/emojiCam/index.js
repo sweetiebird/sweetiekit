@@ -12,6 +12,7 @@ const {
   SKScene,
   ARAnchor,
   UITextField,
+  UITextFieldDelegate,
   UIApplication,
   UIButton,
   UIImage,
@@ -19,6 +20,7 @@ const {
   UIFont,
   UIView,
   UISlider,
+  UIStoryboard,
   CoreGraphics,
   SKTexture,
   SKSpriteNode,
@@ -30,7 +32,49 @@ const {
   SKAction,
 } = SweetieKit;
 
-function emojiCam(nav, demoVC) {
+function emojiCam(nav) {
+  let manualTrackMsgHide = false;
+
+  const vcId = 'emojicamVC';
+  const intoVcId = 'introVC';
+  const closeBtnTag = 'closeBtnTag';
+  const topViewTag = 'topViewTag';
+  const hideTrackingBtnTag = 'hideTrackingBtnTag';
+  const trackingViewTag = 'trackingViewTag';
+  const trackingLabelTag = 'trackingLabelTag';
+
+  const sb = UIStoryboard.storyboardWithNameBundle('Main');
+  const demoVC = sb.instantiateViewControllerWithIdentifier(vcId);
+  const introVC = sb.instantiateViewControllerWithIdentifier(intoVcId);
+  const menuButton = demoVC.view.viewWithTag(1);
+  const sbTopView = demoVC.view.viewWithStringTag(topViewTag);
+  const sbTextField = sbTopView.viewWithTag(2);
+
+  const trackingMsgView = demoVC.view.viewWithStringTag(trackingViewTag);
+  const hideTrackingMsgBtn = demoVC.view.viewWithStringTag(hideTrackingBtnTag);
+  const trackingLabel = trackingMsgView.viewWithStringTag(trackingLabelTag);
+
+  function toggleTrackingMsgView(showMessage = false) {
+    if (showMessage) {
+      trackingMsgView.hidden = false;
+      sbTopView.hidden = true;
+      if (scaleSlider) scaleSlider.hidden = true;
+    }
+
+    UIView.animateWithDurationAnimationsCompletion(0.2, () => {
+      trackingMsgView.alpha = showMessage ? 1 : 0;
+    }, () => {
+      if (!showMessage) {
+        trackingMsgView.hidden = true;
+        sbTopView.hidden = false;
+        if (scaleSlider) scaleSlider.hidden = false;
+      }
+    });
+  }
+
+  hideTrackingMsgBtn.addTargetActionForControlEvents(() => {
+    toggleTrackingMsgView(false);
+    }, UIControlEventTouchUpInside);
   //let text = '👀';
   let text = SKTexture(UIImage('nic'));
   UIImage.transparent = UIImage.transparent || UIImage('transparent');
@@ -66,6 +110,33 @@ function emojiCam(nav, demoVC) {
   //   camBtn.setBackgroundImageForState(UIImage('camera_btn_thin'), UIControlStateNormal);
   //   return camBtn;
   // }
+
+  const trackViewGradient = CAGradientLayer();
+  trackViewGradient.frame = demoVC.view.bounds;
+  trackViewGradient.colors = [
+    { ...colors.white, alpha: 0.4 },
+    { ...colors.white, alpha: 0.4 },
+    { ...colors.white, alpha: 0.4 },
+    { ...colors.white, alpha: 0.75 },
+    { ...colors.white, alpha: 1 },
+  ];
+  trackingMsgView.layer.insertSublayerAtIndex(trackViewGradient, 0);
+
+  trackingLabel.text = 'Establishing tracking';
+  // const attrText = NSMutableAttributedString('Establishing tracking');
+  // attrText.addAttribute(NSStrokeWidthAttributeName, 1, {
+  //   location: 0,
+  //   length: attrText.length,
+  // });
+  // attrText.addAttribute(NSStrokeColorAttributeName, colors.black, {
+  //   location: 0,
+  //   length: attrText.length,
+  // });
+  // attrText.addAttribute(NSForegroundColorAttributeName, colors.white, {
+  //   location: 0,
+  //   length: placeholderText.length,
+  // });
+  // trackingLabel.attributedText = attrText;
 
   function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     const frame = CGRectMake(
@@ -293,6 +364,29 @@ function emojiCam(nav, demoVC) {
       height: view.frame.height
     });
 
+    trackingInterval = setInterval(() => {
+      if (arView.session) {
+        const { currentFrame } = arView.session;
+
+        if (currentFrame) {
+          const { trackingState, trackingStateReason } = currentFrame.camera;
+          if (trackingState === ARTrackingStateNotAvailable) {
+            console.log('tracking state: not available');
+          } else if (trackingState === ARTrackingStateLimited) {
+            console.log('tracking state: limited');
+            toggleTrackingMsgView(true);
+            console.log(trackingMsgView);
+            // if (!manualTrackMsgHide) {
+            //   toggleTrackingMsgView(true);
+            // }
+          } else if (trackingState === ARTrackingStateNormal) {
+            console.log('tracking state: normal');
+            toggleTrackingMsgView(false);
+          }
+        }
+      }
+    }, 3500);
+
     arView.scene = scene;
 
     mat1 = new THREE.Matrix4();
@@ -379,7 +473,7 @@ function emojiCam(nav, demoVC) {
         delete char.anchor;
       }
       xform = _xform(xform);
-      char.anchor = ARAnchor.initWithTransform(xform);
+      char.anchor = ARAnchor().initWithTransform(xform);
       arView.session.add(char.anchor);
       return char;
     };
@@ -478,26 +572,46 @@ function emojiCam(nav, demoVC) {
     const fieldHeight = 50;
     const horOffset = 24;
 
-    const field = makeTextField(demoVC, fieldHeight, horOffset, () => {
-      text = field.text;
+    sbTextField.addTargetActionForControlEvents(() => {
+      text = sbTextField.text;
+    }, UIControlEventAllEditingEvents);
+    const fieldDel = new UITextFieldDelegate({
+      textFieldShouldReturn: () => true,
     });
+    sbTextField.delegate = fieldDel;
 
-    const topView = makeTopView(demoVC, fieldHeight);
-    demoVC.view.addSubview(topView);
+    const placeholderText = 'Enter some text';
+    const attrPlaceholder = NSMutableAttributedString(placeholderText);
+
+    attrPlaceholder.addAttribute(NSForegroundColorAttributeName, colors.white, {
+      location: 0,
+      length: placeholderText.length,
+    });
+    attrPlaceholder.addAttribute(NSKernAttributeName, 1.1, {
+      location: 0,
+      length: placeholderText.length,
+    });
+    sbTextField.attributedPlaceholder = attrPlaceholder;
+    // const field = makeTextField(demoVC, fieldHeight, horOffset, () => {
+    //   text = field.text;
+    // });
+
+    // const topView = makeTopView(demoVC, fieldHeight);
+    // demoVC.view.addSubview(topView);
     /*
     topView.pinToSuperviewWithInsetsEdges(
       UIEdgeInsetsMake(0, 0, 0, 0),
       UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeRight);
       */
 
-    topView.addSubview(field);
+    // topView.addSubview(field);
     /*
     field.pinToSuperviewWithInsetsEdges(
       UIEdgeInsetsMake(0, 0, 0, fireBtn.width),
       UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight);
       */
 
-    topView.addSubview(fireBtn);
+    // topView.addSubview(fireBtn);
     /*
     fireBtn.pinToSuperviewWithInsetsEdges(
       UIEdgeInsetsMake(0, field.width, 0, 0),
@@ -505,21 +619,21 @@ function emojiCam(nav, demoVC) {
       */
 
     // noinspection JSSuspiciousNameCombination
-    const closeBtn = UIButton({ x: 0, y: fieldHeight * 0.5, width: fieldHeight, height: fieldHeight });
-    closeBtn.setTitleForState('x', UIControlStateNormal);
-    closeBtn.setTitleColorForState(colors.white, UIControlStateNormal);
-    closeBtn.backgroundColor = colors.clear;
-    closeBtn.addTargetActionForControlEvents(() => {
-      demoVC.dismissViewControllerAnimatedCompletion(true, () => {});
-    }, UIControlEventTouchUpInside);
-    closeBtn.alpha = 0.6;
-    demoVC.view.addSubview(closeBtn);
+    // const closeBtn = UIButton({ x: 0, y: fieldHeight * 0.5, width: fieldHeight, height: fieldHeight });
+    // closeBtn.setTitleForState('x', UIControlStateNormal);
+    // closeBtn.setTitleColorForState(colors.white, UIControlStateNormal);
+    // closeBtn.backgroundColor = colors.clear;
+    // closeBtn.addTargetActionForControlEvents(() => {
+    //   demoVC.dismissViewControllerAnimatedCompletion(true, () => {});
+    // }, UIControlEventTouchUpInside);
+    // closeBtn.alpha = 0.6;
+    // demoVC.view.addSubview(closeBtn);
 
     const viewW = view.frame.width;
     const scaleSliderY = (fieldHeight * 2) + 40;
     const sliderHeight = 20;
 
-    const scaleSlider = UISlider({
+    scaleSlider = UISlider({
       x: horOffset, y: scaleSliderY, width: viewW - (horOffset * 2), height: sliderHeight,
     });
     demoVC.view.addSubview(scaleSlider);
@@ -529,7 +643,7 @@ function emojiCam(nav, demoVC) {
       UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeRight);
       */
     scaleSlider.value = 0.25;
-    scaleSlider.setThumbImage(UIImage.transparent);
+    scaleSlider.setThumbImageForState(UIImage.transparent, UIControlStateNormal);
     scaleSlider.addTargetActionForControlEvents(() => {
       console.log('scale slider changed', scaleSlider.value);
       if (active && active.node) {
@@ -543,7 +657,7 @@ function emojiCam(nav, demoVC) {
       x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
     });
     distSlider.value = 0.5;
-    distSlider.setThumbImage(UIImage.transparent);
+    distSlider.setThumbImageForState(UIImage.transparent, UIControlStateNormal);
     distSlider.addTargetActionForControlEvents(() => {
       console.log('distance slider changed', distSlider.value);
     }, UIControlEventValueChanged);
@@ -552,12 +666,13 @@ function emojiCam(nav, demoVC) {
       x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
     });
     rotSlider.value = 0.5;
-    rotSlider.setThumbImage(UIImage.transparent);
+    rotSlider.setThumbImageForState(UIImage.transparent, UIControlStateNormal);
     rotSlider.addTargetActionForControlEvents(() => {
       console.log('rotation slider changed', rotSlider.value);
     }, UIControlEventValueChanged);
 
-    const subviews = [topView, scaleSlider/*, distSlider, rotSlider, camBtn */];
+    menuButton.layer.cornerRadius = menuButton.frame.height / 2;
+    const subviews = [scaleSlider, sbTopView, menuButton, trackingMsgView]; /*, distSlider, rotSlider, camBtn */
     subviews.forEach((s) => {
       //demoVC.view.addSubview(s);
       demoVC.view.bringSubviewToFront(s);

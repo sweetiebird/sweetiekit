@@ -1,3 +1,4 @@
+
 //
 //  NARCamera.h
 //
@@ -25,7 +26,11 @@
 #define is_value_ARTrackingStateReason(x) IS_ENUM(ARTrackingStateReason, NSInteger, x)
 
 JS_WRAP_CLASS(ARCamera, NSObject);
-  JS_PROP(transform);
+  JS_METHOD(projectionMatrixForOrientationViewportSizeZNearZFar);
+  JS_METHOD(projectPointOrientationViewportSize);
+  JS_METHOD(unprojectPointOntoPlaneWithTransformOrientationViewportSize);
+  JS_METHOD(viewMatrixForOrientation);
+  JS_PROP_READONLY(transform);
   JS_PROP_READONLY(eulerAngles);
   JS_PROP_READONLY(trackingState);
   JS_PROP_READONLY(trackingStateReason);
