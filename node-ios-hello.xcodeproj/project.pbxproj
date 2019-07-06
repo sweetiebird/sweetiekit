@@ -139,6 +139,15 @@
 		A13370FF22AF1C9100FA3768 /* NCoreAudioTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13370FD22AF1C9000FA3768 /* NCoreAudioTypes.mm */; };
 		A134E27822CF0FF300BAB748 /* NUICubicTimingParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27422CF0FF300BAB748 /* NUICubicTimingParameters.mm */; };
 		A134E27922CF0FF300BAB748 /* NUISpringTimingParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */; };
+		A134E27D22D02DC000BAB748 /* NCGPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27C22D02DC000BAB748 /* NCGPath.mm */; };
+		A134E28122D033EB00BAB748 /* NCGPattern.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E27F22D033EB00BAB748 /* NCGPattern.mm */; };
+		A134E28522D0341800BAB748 /* NCGGradient.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E28422D0341800BAB748 /* NCGGradient.mm */; };
+		A134E28922D034AF00BAB748 /* NCGShading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E28822D034AE00BAB748 /* NCGShading.mm */; };
+		A134E28D22D034FB00BAB748 /* NCGFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E28B22D034FA00BAB748 /* NCGFont.mm */; };
+		A134E29122D0367B00BAB748 /* NCGColorSpace.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29022D0367B00BAB748 /* NCGColorSpace.mm */; };
+		A134E29522D0371600BAB748 /* NCGPDFPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29322D0371600BAB748 /* NCGPDFPage.mm */; };
+		A134E29922D037D200BAB748 /* NCGPDFDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29722D037D100BAB748 /* NCGPDFDocument.mm */; };
+		A134E29E22D0384E00BAB748 /* NCFDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29C22D0384E00BAB748 /* NCFDictionary.mm */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -900,6 +909,24 @@
 		A134E27422CF0FF300BAB748 /* NUICubicTimingParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUICubicTimingParameters.mm; sourceTree = "<group>"; };
 		A134E27622CF0FF300BAB748 /* NUISpringTimingParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUISpringTimingParameters.h; sourceTree = "<group>"; };
 		A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUISpringTimingParameters.mm; sourceTree = "<group>"; };
+		A134E27B22D02DC000BAB748 /* NCGPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGPath.h; sourceTree = "<group>"; };
+		A134E27C22D02DC000BAB748 /* NCGPath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGPath.mm; sourceTree = "<group>"; };
+		A134E27F22D033EB00BAB748 /* NCGPattern.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGPattern.mm; sourceTree = "<group>"; };
+		A134E28022D033EB00BAB748 /* NCGPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGPattern.h; sourceTree = "<group>"; };
+		A134E28322D0341800BAB748 /* NCGGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGGradient.h; sourceTree = "<group>"; };
+		A134E28422D0341800BAB748 /* NCGGradient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGGradient.mm; sourceTree = "<group>"; };
+		A134E28722D034AE00BAB748 /* NCGShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGShading.h; sourceTree = "<group>"; };
+		A134E28822D034AE00BAB748 /* NCGShading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGShading.mm; sourceTree = "<group>"; };
+		A134E28B22D034FA00BAB748 /* NCGFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGFont.mm; sourceTree = "<group>"; };
+		A134E28C22D034FB00BAB748 /* NCGFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGFont.h; sourceTree = "<group>"; };
+		A134E28F22D0367B00BAB748 /* NCGColorSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGColorSpace.h; sourceTree = "<group>"; };
+		A134E29022D0367B00BAB748 /* NCGColorSpace.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGColorSpace.mm; sourceTree = "<group>"; };
+		A134E29322D0371600BAB748 /* NCGPDFPage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGPDFPage.mm; sourceTree = "<group>"; };
+		A134E29422D0371600BAB748 /* NCGPDFPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGPDFPage.h; sourceTree = "<group>"; };
+		A134E29722D037D100BAB748 /* NCGPDFDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGPDFDocument.mm; sourceTree = "<group>"; };
+		A134E29822D037D100BAB748 /* NCGPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGPDFDocument.h; sourceTree = "<group>"; };
+		A134E29C22D0384E00BAB748 /* NCFDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCFDictionary.mm; sourceTree = "<group>"; };
+		A134E29D22D0384E00BAB748 /* NCFDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCFDictionary.h; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -2969,6 +2996,95 @@
 				A134E27722CF0FF300BAB748 /* NUISpringTimingParameters.mm */,
 			);
 			path = NUISpringTimingParameters;
+			sourceTree = "<group>";
+		};
+		A134E27A22D02DC000BAB748 /* NCGPath */ = {
+			isa = PBXGroup;
+			children = (
+				A134E27B22D02DC000BAB748 /* NCGPath.h */,
+				A134E27C22D02DC000BAB748 /* NCGPath.mm */,
+			);
+			path = NCGPath;
+			sourceTree = "<group>";
+		};
+		A134E27E22D033EB00BAB748 /* NCGPattern */ = {
+			isa = PBXGroup;
+			children = (
+				A134E28022D033EB00BAB748 /* NCGPattern.h */,
+				A134E27F22D033EB00BAB748 /* NCGPattern.mm */,
+			);
+			path = NCGPattern;
+			sourceTree = "<group>";
+		};
+		A134E28222D0341800BAB748 /* NCGGradient */ = {
+			isa = PBXGroup;
+			children = (
+				A134E28322D0341800BAB748 /* NCGGradient.h */,
+				A134E28422D0341800BAB748 /* NCGGradient.mm */,
+			);
+			path = NCGGradient;
+			sourceTree = "<group>";
+		};
+		A134E28622D034AE00BAB748 /* NCGShading */ = {
+			isa = PBXGroup;
+			children = (
+				A134E28722D034AE00BAB748 /* NCGShading.h */,
+				A134E28822D034AE00BAB748 /* NCGShading.mm */,
+			);
+			path = NCGShading;
+			sourceTree = "<group>";
+		};
+		A134E28A22D034FA00BAB748 /* NCGFont */ = {
+			isa = PBXGroup;
+			children = (
+				A134E28C22D034FB00BAB748 /* NCGFont.h */,
+				A134E28B22D034FA00BAB748 /* NCGFont.mm */,
+			);
+			path = NCGFont;
+			sourceTree = "<group>";
+		};
+		A134E28E22D0367B00BAB748 /* NCGColorSpace */ = {
+			isa = PBXGroup;
+			children = (
+				A134E28F22D0367B00BAB748 /* NCGColorSpace.h */,
+				A134E29022D0367B00BAB748 /* NCGColorSpace.mm */,
+			);
+			path = NCGColorSpace;
+			sourceTree = "<group>";
+		};
+		A134E29222D0371600BAB748 /* NCGPDFPage */ = {
+			isa = PBXGroup;
+			children = (
+				A134E29422D0371600BAB748 /* NCGPDFPage.h */,
+				A134E29322D0371600BAB748 /* NCGPDFPage.mm */,
+			);
+			path = NCGPDFPage;
+			sourceTree = "<group>";
+		};
+		A134E29622D037D100BAB748 /* NCGPDFDocument */ = {
+			isa = PBXGroup;
+			children = (
+				A134E29822D037D100BAB748 /* NCGPDFDocument.h */,
+				A134E29722D037D100BAB748 /* NCGPDFDocument.mm */,
+			);
+			path = NCGPDFDocument;
+			sourceTree = "<group>";
+		};
+		A134E29A22D0384E00BAB748 /* NCoreFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				A134E29B22D0384E00BAB748 /* NCFDictionary */,
+			);
+			path = NCoreFoundation;
+			sourceTree = "<group>";
+		};
+		A134E29B22D0384E00BAB748 /* NCFDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				A134E29D22D0384E00BAB748 /* NCFDictionary.h */,
+				A134E29C22D0384E00BAB748 /* NCFDictionary.mm */,
+			);
+			path = NCFDictionary;
 			sourceTree = "<group>";
 		};
 		A13768EA2288394C00CDB13B /* NCLHeading */ = {
@@ -5952,8 +6068,16 @@
 		A1B2056B229788FC006CA4C6 /* NCoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
-				A158792022CEDAFF00847196 /* NCGImage */,
+				A134E28E22D0367B00BAB748 /* NCGColorSpace */,
 				A10862F722C48F48001A15A9 /* NCGContext */,
+				A134E28A22D034FA00BAB748 /* NCGFont */,
+				A134E28222D0341800BAB748 /* NCGGradient */,
+				A158792022CEDAFF00847196 /* NCGImage */,
+				A134E27A22D02DC000BAB748 /* NCGPath */,
+				A134E27E22D033EB00BAB748 /* NCGPattern */,
+				A134E29622D037D100BAB748 /* NCGPDFDocument */,
+				A134E29222D0371600BAB748 /* NCGPDFPage */,
+				A134E28622D034AE00BAB748 /* NCGShading */,
 				A1B2056C229788FC006CA4C6 /* NCoreGraphicsGlobals */,
 			);
 			path = NCoreGraphics;
@@ -7511,6 +7635,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A134E29A22D0384E00BAB748 /* NCoreFoundation */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
@@ -7783,6 +7908,7 @@
 				A158790422CE615600847196 /* NUIAdaptivePresentationControllerDelegate.mm in Sources */,
 				A1926F9022C10729008F16AE /* NMTLRenderPassDescriptor.mm in Sources */,
 				A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */,
+				A134E29E22D0384E00BAB748 /* NCFDictionary.mm in Sources */,
 				A1E2D7B7226A5BC100FA1562 /* EmailTextField.swift in Sources */,
 				A133701022AAA90000FA3768 /* NUIImageAsset.mm in Sources */,
 				A1574F0922B93294006CC5F2 /* NCAValueFunction.mm in Sources */,
@@ -7819,6 +7945,7 @@
 				A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */,
 				A192708122C14B8A008F16AE /* NMTLSharedEvent.mm in Sources */,
 				A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */,
+				A134E28922D034AF00BAB748 /* NCGShading.mm in Sources */,
 				A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */,
 				A174A47722B0199800415AD8 /* NMDLMeshBufferDataAllocator.mm in Sources */,
 				A108637222C6C822001A15A9 /* NARWorldMap.mm in Sources */,
@@ -8005,6 +8132,7 @@
 				A192701122C132FC008F16AE /* NMTLRenderPipeline.mm in Sources */,
 				A13370BD22AEEE1800FA3768 /* NAVAudioSessionChannelDescription.mm in Sources */,
 				A10AADE5228B881400C64F60 /* NSKPhysicsBody.mm in Sources */,
+				A134E27D22D02DC000BAB748 /* NCGPath.mm in Sources */,
 				A1926FD922C128E4008F16AE /* NMTLHeap.mm in Sources */,
 				A15878E422CDEA4200847196 /* NUIDragDropSession.mm in Sources */,
 				A158792B22CEE2F600847196 /* NUIViewAnimating.mm in Sources */,
@@ -8128,6 +8256,7 @@
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1926FF022C12D7E008F16AE /* NMTLDepthStencilDescriptor.mm in Sources */,
 				A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */,
+				A134E28122D033EB00BAB748 /* NCGPattern.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
 				A192700922C12F5F008F16AE /* NMTLVertexAttribute.mm in Sources */,
@@ -8180,6 +8309,7 @@
 				A1574EE822B8DF60006CC5F2 /* NUICollectionViewFlowLayout.mm in Sources */,
 				A1D4984922BAF405009AC951 /* NNSHTTPURLResponse.mm in Sources */,
 				A108636E22C6C7BB001A15A9 /* NARVideoFormat.mm in Sources */,
+				A134E28D22D034FB00BAB748 /* NCGFont.mm in Sources */,
 				A13370A322AB480400FA3768 /* NMPMediaItem.mm in Sources */,
 				A1710EA3229A58A100EC7C86 /* NRPScreenRecorder.mm in Sources */,
 				A1926FE522C12B20008F16AE /* NMTLSamplerState.mm in Sources */,
@@ -8203,6 +8333,7 @@
 				A1E5849A22B1DFFC00A967EF /* NUIPopoverController.mm in Sources */,
 				A13370D822AEFC6A00FA3768 /* NAVAudioCompressedBuffer.mm in Sources */,
 				A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */,
+				A134E29922D037D200BAB748 /* NCGPDFDocument.mm in Sources */,
 				A192705522C13D8E008F16AE /* NMTLIndirectRenderCommand.mm in Sources */,
 				A1BD4BA32287DE1C001D1F6E /* NCLLocation.mm in Sources */,
 				A1574EC122B8A3AB006CC5F2 /* NUIVisualEffectView.mm in Sources */,
@@ -8226,6 +8357,7 @@
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
 				A15878D822CDE3FF00847196 /* NUIDragPreviewParameters.mm in Sources */,
 				A1926FBB22C11F99008F16AE /* NMTLArgument.mm in Sources */,
+				A134E28522D0341800BAB748 /* NCGGradient.mm in Sources */,
 				A133709522AB418200FA3768 /* NNSError.mm in Sources */,
 				A1926F0822C0BA34008F16AE /* NSKPhysicsJointFixed.mm in Sources */,
 				A1D4986222BB29EB009AC951 /* NNSBlockOperation.mm in Sources */,
@@ -8277,6 +8409,7 @@
 				A19270C622C18367008F16AE /* NMTLParallelRenderCommandEncoder.mm in Sources */,
 				A192709922C15B4C008F16AE /* NMTLVertexBufferLayoutDescriptorArray.mm in Sources */,
 				A192709E22C161F6008F16AE /* NNSRunLoop.mm in Sources */,
+				A134E29122D0367B00BAB748 /* NCGColorSpace.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
 				A1926EF022C0B2C2008F16AE /* NUIDevice.mm in Sources */,
 				A134E27922CF0FF300BAB748 /* NUISpringTimingParameters.mm in Sources */,
@@ -8306,6 +8439,7 @@
 				A10862EE22C48E05001A15A9 /* NEAGLContext.mm in Sources */,
 				A1D4984B22BAF405009AC951 /* NNSURLProtectionSpace.mm in Sources */,
 				A13370B922AEEDC200FA3768 /* NAVAudioSessionRouteDescription.mm in Sources */,
+				A134E29522D0371600BAB748 /* NCGPDFPage.mm in Sources */,
 				A1926F9522C112BA008F16AE /* NCAMetalLayer.mm in Sources */,
 				A1D6729B22696D7A00562A42 /* NUIStoryboard.mm in Sources */,
 				A1926F7422C0FD1D008F16AE /* NSCNSceneRendererDelegate.mm in Sources */,
