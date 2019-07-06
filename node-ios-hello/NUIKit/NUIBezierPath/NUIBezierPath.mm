@@ -56,32 +56,14 @@ JS_INIT_CLASS(UIBezierPath, NSObject);
   
   // constants
 
-//typedef NS_OPTIONS(NSUInteger, UIRectCorner)
-{
-  JS_ASSIGN_ENUM(UIRectCornerTopLeft, NSUInteger);
-  JS_ASSIGN_ENUM(UIRectCornerTopRight, NSUInteger);
-  JS_ASSIGN_ENUM(UIRectCornerBottomLeft, NSUInteger);
-  JS_ASSIGN_ENUM(UIRectCornerBottomRight, NSUInteger);
-  JS_ASSIGN_ENUM(UIRectCornerAllCorners, NSUInteger);
-};
-
-/* Line join styles. */
-
-//typedef CF_ENUM(int32_t, CGLineJoin)
-{
-    JS_ASSIGN_ENUM(kCGLineJoinMiter, int32_t);
-    JS_ASSIGN_ENUM(kCGLineJoinRound, int32_t);
-    JS_ASSIGN_ENUM(kCGLineJoinBevel, int32_t);
-};
-
-/* Line cap styles. */
-
-//typedef CF_ENUM(int32_t, CGLineCap)
-{
-    JS_ASSIGN_ENUM(kCGLineCapButt, int32_t);
-    JS_ASSIGN_ENUM(kCGLineCapRound, int32_t);
-    JS_ASSIGN_ENUM(kCGLineCapSquare, int32_t);
-};
+  //typedef NS_OPTIONS(NSUInteger, UIRectCorner)
+  {
+    JS_ASSIGN_ENUM(UIRectCornerTopLeft, NSUInteger);
+    JS_ASSIGN_ENUM(UIRectCornerTopRight, NSUInteger);
+    JS_ASSIGN_ENUM(UIRectCornerBottomLeft, NSUInteger);
+    JS_ASSIGN_ENUM(UIRectCornerBottomRight, NSUInteger);
+    JS_ASSIGN_ENUM(UIRectCornerAllCorners, NSUInteger);
+  };
 
 JS_INIT_CLASS_END(UIBezierPath, NSObject);
 
@@ -404,6 +386,8 @@ NAN_SETTER(NUIBezierPath::lineWidthSetter) {
     [self setLineWidth: input];
   }
 }
+
+#include "NCGPath.h"
 
 NAN_GETTER(NUIBezierPath::lineCapStyleGetter) {
   JS_UNWRAP(UIBezierPath, self);

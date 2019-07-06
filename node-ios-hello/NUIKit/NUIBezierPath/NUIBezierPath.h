@@ -20,14 +20,6 @@
 #define to_value_UIRectCorner(x) TO_OPTS(UIRectCorner, NSUInteger, x)
 #define is_value_UIRectCorner(x) IS_OPTS(UIRectCorner, NSUInteger, x)
 
-#define js_value_CGLineJoin(x) JS_ENUM(CGLineJoin, int32_t, x)
-#define to_value_CGLineJoin(x) TO_ENUM(CGLineJoin, int32_t, x)
-#define is_value_CGLineJoin(x) IS_ENUM(CGLineJoin, int32_t, x)
-
-#define js_value_CGLineCap(x) JS_ENUM(CGLineCap, int32_t, x)
-#define to_value_CGLineCap(x) TO_ENUM(CGLineCap, int32_t, x)
-#define is_value_CGLineCap(x) IS_ENUM(CGLineCap, int32_t, x)
-
 JS_WRAP_CLASS(UIBezierPath, NSObject);
   JS_STATIC_METHOD(bezierPath);
   JS_STATIC_METHOD(bezierPathWithRect);

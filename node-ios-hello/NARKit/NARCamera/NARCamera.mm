@@ -1,4 +1,3 @@
-
 //
 //  NARCamera.mm
 //
@@ -40,10 +39,10 @@ JS_INIT_CLASS(ARCamera, NSObject);
   //typedef NS_ENUM(NSInteger, ARTrackingState) {
     /** Tracking is not available. */
     JS_ASSIGN_ENUM(ARTrackingStateNotAvailable, NSInteger); // ,
-
+    
     /** Tracking is limited. See tracking reason for details. */
     JS_ASSIGN_ENUM(ARTrackingStateLimited, NSInteger); // ,
-
+    
     /** Tracking is Normal. */
     JS_ASSIGN_ENUM(ARTrackingStateNormal, NSInteger); // ,
   //} NS_REFINED_FOR_SWIFT;
@@ -55,20 +54,20 @@ JS_INIT_CLASS(ARCamera, NSObject);
   //typedef NS_ENUM(NSInteger, ARTrackingStateReason) {
     /** Tracking is not limited. */
     JS_ASSIGN_ENUM(ARTrackingStateReasonNone, NSInteger); // ,
-
+    
     /** Tracking is limited due to initialization in progress. */
     JS_ASSIGN_ENUM(ARTrackingStateReasonInitializing, NSInteger); // ,
-
+    
     /** Tracking is limited due to a excessive motion of the camera. */
     JS_ASSIGN_ENUM(ARTrackingStateReasonExcessiveMotion, NSInteger); // ,
-
+    
     /** Tracking is limited due to a lack of features visible to the camera. */
     JS_ASSIGN_ENUM(ARTrackingStateReasonInsufficientFeatures, NSInteger); // ,
-
+    
     /** Tracking is limited due to a relocalization in progress. */
     JS_ASSIGN_ENUM(ARTrackingStateReasonRelocalizing, NSInteger); //  API_AVAILABLE(ios(11.3)),
   //} NS_REFINED_FOR_SWIFT;
-
+  
 JS_INIT_CLASS_END(ARCamera, NSObject);
 
 NAN_METHOD(NARCamera::New) {

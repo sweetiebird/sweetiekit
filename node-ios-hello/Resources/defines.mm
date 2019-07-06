@@ -667,7 +667,7 @@ namespace sweetiekit
       if (xform->Length() >= 16) {
         return true;
       }
-      return true;
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform = Local<Array>::Cast(value);
       for (uint32_t i = 0; i < 16; i++) {
@@ -681,6 +681,7 @@ namespace sweetiekit
       if (xform->Length() >= 16) {
         return true;
       }
+      return false;
     } else {
       return false;
     }
@@ -725,7 +726,7 @@ namespace sweetiekit
       if (xform->Length() >= 9) {
         return true;
       }
-      return true;
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform = Local<Array>::Cast(value);
       for (uint32_t i = 0; i < 9; i++) {
@@ -739,6 +740,7 @@ namespace sweetiekit
       if (xform->Length() >= 9) {
         return true;
       }
+      return false;
     } else {
       return false;
     }
@@ -783,7 +785,7 @@ namespace sweetiekit
       if (xform->Length() >= 4*3) {
         return true;
       }
-      return true;
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform = Local<Array>::Cast(value);
       for (uint32_t i = 0; i < 4*3; i++) {
@@ -797,6 +799,7 @@ namespace sweetiekit
       if (xform->Length() >= 4*3) {
         return true;
       }
+      return false;
     } else {
       return false;
     }
@@ -839,6 +842,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -852,6 +856,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsObject()) {
       if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
         return false;
@@ -908,6 +913,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -921,6 +927,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsObject()) {
       if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
         return false;
@@ -965,6 +972,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -978,6 +986,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsObject()) {
       if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
         return false;
@@ -1026,6 +1035,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1039,6 +1049,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsObject()) {
       if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
         return false;
@@ -1091,6 +1102,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1104,6 +1116,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsObject()) {
       if (!is_value_float(JS_OBJ(value)->Get(JS_STR("x")))) {
         return false;
@@ -1163,6 +1176,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1210,6 +1224,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1261,6 +1276,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1316,6 +1332,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1378,6 +1395,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1425,6 +1443,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1476,6 +1495,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {
@@ -1531,6 +1551,7 @@ namespace sweetiekit
       if (xform->Length() >= size) {
         return true;
       }
+      return false;
     } else if (value->IsArray()) {
       Local<Array> xform(Local<Array>::Cast(value));
       for (uint32_t i = 0; i < size; i++) {

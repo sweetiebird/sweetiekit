@@ -35,7 +35,6 @@
 #define is_value_CGBlendMode(x) IS_ENUM(CGBlendMode, int32_t, x)
 
 JS_WRAP_GLOBALS(CGContext);
-  // TODO: declare CGContext globals
 JS_WRAP_GLOBALS_END(CGContext);
 
 #endif /* NCGContext_h */

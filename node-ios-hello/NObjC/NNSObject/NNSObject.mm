@@ -1520,8 +1520,18 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
-#include "NCGImage.h"
+#include "NCFDictionary.h"
+#include "NCGColorSpace.h"
 #include "NCGContext.h"
+#include "NCGFont.h"
+#include "NCGGradient.h"
+#include "NCGImage.h"
+#include "NCGPDFDocument.h"
+#include "NCGPDFPage.h"
+#include "NCGPath.h"
+#include "NCGPattern.h"
+#include "NCGShading.h"
+
 #include "NRPScreenRecorder.h"
 #include "NRPScreenRecorderDelegate.h"
 #include "NRPPreviewViewController.h"
@@ -1828,8 +1838,17 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Core Graphics
 
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
-    JS_EXPORT_GLOBALS(CGImage);
+    JS_EXPORT_GLOBALS(CFDictionary);
+    JS_EXPORT_GLOBALS(CGColorSpace);
     JS_EXPORT_GLOBALS(CGContext);
+    JS_EXPORT_GLOBALS(CGFont);
+    JS_EXPORT_GLOBALS(CGGradient);
+    JS_EXPORT_GLOBALS(CGImage);
+    JS_EXPORT_GLOBALS(CGPDFDocument);
+    JS_EXPORT_GLOBALS(CGPDFPage);
+    JS_EXPORT_GLOBALS(CGPath);
+    JS_EXPORT_GLOBALS(CGPattern);
+    JS_EXPORT_GLOBALS(CGShading);
     
     // Audio Toolbox
 
