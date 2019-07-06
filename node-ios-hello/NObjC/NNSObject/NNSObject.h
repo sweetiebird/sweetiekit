@@ -100,6 +100,60 @@ JS_WRAP_CLASS_END(Class);
 #define is_value_NSObject(x) is_value_wrapper(x, NSObject)
 
 JS_WRAP_CLASS(NSObject, id);
+  JS_METHOD(associatedValueForKey);
+  JS_METHOD(associateValueWithKey);
+  
+  // NSKeyValueCoding.h
+  
+  JS_METHOD(valueForKey);
+  JS_METHOD(setValueForKey);
+  JS_METHOD(validateValueForKeyError);
+  JS_METHOD(mutableArrayValueForKey);
+  JS_METHOD(mutableOrderedSetValueForKey);
+  JS_METHOD(mutableSetValueForKey);
+  JS_METHOD(valueForKeyPath);
+  JS_METHOD(setValueForKeyPath);
+  JS_METHOD(validateValueForKeyPathError);
+  JS_METHOD(mutableArrayValueForKeyPath);
+  JS_METHOD(mutableOrderedSetValueForKeyPath);
+  JS_METHOD(mutableSetValueForKeyPath);
+  JS_METHOD(valueForUndefinedKey);
+  JS_METHOD(setValueForUndefinedKey);
+  JS_METHOD(setNilValueForKey);
+  JS_METHOD(dictionaryWithValuesForKeys);
+  JS_METHOD(setValuesForKeysWithDictionary);
+#if TODO
+// NSArray<ObjectType>
+  JS_METHOD(valueForKey);
+  JS_METHOD(setValueForKey);
+// NSDictionary<KeyType
+  JS_METHOD(valueForKey);
+// NSMutableDictionary<KeyType
+  JS_METHOD(setValueForKey);
+// NSOrderedSet<ObjectType>
+  JS_METHOD(valueForKey);
+  JS_METHOD(setValueForKey);
+// NSSet<ObjectType>
+  JS_METHOD(valueForKey);
+  JS_METHOD(setValueForKey);
+#endif
+// NSObject
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+  JS_STATIC_METHOD(useStoredAccessor);
+  JS_METHOD(storedValueForKey);
+  JS_METHOD(takeStoredValueForKey);
+  JS_METHOD(takeValueForKey);
+  JS_METHOD(takeValueForKeyPath);
+  JS_METHOD(handleQueryWithUnboundKey);
+  JS_METHOD(handleTakeValueForUnboundKey);
+  JS_METHOD(unableToSetNilForKey);
+  JS_METHOD(valuesForKeys);
+  JS_METHOD(takeValuesFromDictionary);
+#endif
+#if TODO
+  JS_STATIC_PROP_READONLY(accessInstanceVariablesDirectly);
+#endif
+
 
   NSObject* _Nullable SetNSObject(__weak NSObject* _Nullable obj) {
     set_self(obj);

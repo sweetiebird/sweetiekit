@@ -8,21 +8,21 @@
 #ifndef NUIPopoverPresentationControllerDelegate_h
 #define NUIPopoverPresentationControllerDelegate_h    
 
-#include "NNSObject.h"
+#include "NUIAdaptivePresentationControllerDelegate.h"
 
 #define js_value_UIPopoverPresentationControllerDelegate(x) js_value_wrapper(x, UIPopoverPresentationControllerDelegate)
 #define to_value_UIPopoverPresentationControllerDelegate(x) to_value_wrapper(x, UIPopoverPresentationControllerDelegate)
 #define is_value_UIPopoverPresentationControllerDelegate(x) is_value_wrapper(x, UIPopoverPresentationControllerDelegate)
 
-JS_WRAP_CLASS(UIPopoverPresentationControllerDelegate, NSObject);
+JS_WRAP_PROTOCOL(UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate);
   JS_PROP(prepareForPopoverPresentation);
   JS_PROP(popoverPresentationControllerShouldDismissPopover);
   JS_PROP(popoverPresentationControllerDidDismissPopover);
   JS_PROP(popoverPresentationControllerWillRepositionPopoverToRectInView);
-JS_WRAP_CLASS_END(UIPopoverPresentationControllerDelegate);
+JS_WRAP_PROTOCOL_END(UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate);
 
 #if __OBJC__
-@interface UIPopoverPresentationControllerDelegate : NSObject<UIPopoverPresentationControllerDelegate>
+@interface UIPopoverPresentationControllerDelegateType : UIAdaptivePresentationControllerDelegateType<UIPopoverPresentationControllerDelegate>
 
 - (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController;
 

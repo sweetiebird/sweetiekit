@@ -18,7 +18,6 @@ const {
   UIViewController,
   UITableViewCell,
   UITableView,
-  UITableViewManager,
   UITabBarController,
   UITabBarItem,
   UIAlertController,
@@ -339,7 +338,7 @@ function makeInnerAppControllers(nav) {
 
   const partyVC = UIViewController();
   partyVC.view.backgroundColor = colors.fitbodDarkGrey;
-  partyVC.tabBarItem = new UITabBarItem(
+  partyVC.tabBarItem = UITabBarItem(
     'Party',
     UIImage('user_unselected'),
     UIImage('user'),
@@ -372,7 +371,7 @@ function makeInnerAppControllers(nav) {
 
   const wagonVC = UIViewController();
   wagonVC.view.backgroundColor = colors.fitbodDarkGrey;
-  wagonVC.tabBarItem = new UITabBarItem(
+  wagonVC.tabBarItem = UITabBarItem(
     'Wagon',
     UIImage('truck_unselected'),
     UIImage('truck'),

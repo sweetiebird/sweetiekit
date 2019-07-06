@@ -1,61 +1,93 @@
 //
-//  RPPreviewViewController.mm
+//  NRPPreviewViewController.mm
 //
-//  Created by Emily Kolar on 2019-5-26.
+//  Created by Shawn Presser on 7/4/2019.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NRPPreviewViewController.h"
-#include "NRPPreviewViewControllerDelegate.h"
 
-NRPPreviewViewController::NRPPreviewViewController () {}
-NRPPreviewViewController::~NRPPreviewViewController () {}
+#define instancetype RPPreviewViewController
+#define js_value_instancetype js_value_RPPreviewViewController
+
+NRPPreviewViewController::NRPPreviewViewController() {}
+NRPPreviewViewController::~NRPPreviewViewController() {}
 
 JS_INIT_CLASS(RPPreviewViewController, UIViewController);
+  JS_ASSIGN_PROTO_PROP(previewControllerDelegate);
+#if !TARGET_OS_IPHONE
+  JS_ASSIGN_PROTO_PROP(mode);
+#endif
+
   // instance members (proto)
-  JS_ASSIGN_PROP(proto, previewControllerDelegate);
   // static members (ctor)
   JS_INIT_CTOR(RPPreviewViewController, UIViewController);
+  // constant values (exports)
+
+  //NS_ENUM_AVAILABLE_IOS(10_0)
+  //typedef NS_ENUM(NSInteger, RPPreviewViewControllerMode) {
+    JS_ASSIGN_ENUM(RPPreviewViewControllerModePreview, NSInteger);
+    JS_ASSIGN_ENUM(RPPreviewViewControllerModeShare, NSInteger);
+  //}; __IOS_PROHIBITED
+
 JS_INIT_CLASS_END(RPPreviewViewController, UIViewController);
 
 NAN_METHOD(NRPPreviewViewController::New) {
   JS_RECONSTRUCT(RPPreviewViewController);
+  @autoreleasepool {
+    RPPreviewViewController* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NRPPreviewViewController *ui = new NRPPreviewViewController();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge RPPreviewViewController *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[RPPreviewViewController alloc] init]);
+    if (info[0]->IsExternal()) {
+      self = (__bridge RPPreviewViewController *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[RPPreviewViewController alloc] init];
+    }
+    if (self) {
+      NRPPreviewViewController *wrapper = new NRPPreviewViewController();
+      wrapper->set_self(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("RPPreviewViewController::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
+#include "NRPPreviewViewControllerDelegate.h"
+
 NAN_GETTER(NRPPreviewViewController::previewControllerDelegateGetter) {
-  Nan::HandleScope scope;
-  
-  Nan::ThrowError("NRPPreviewViewController::previewControllerDelegateGetter not implemented");
+  JS_UNWRAP(RPPreviewViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_RPPreviewViewControllerDelegate([self previewControllerDelegate]));
+  }
 }
 
 NAN_SETTER(NRPPreviewViewController::previewControllerDelegateSetter) {
-  Nan::HandleScope scope;
-  
-  NRPPreviewViewController *rp = ObjectWrap::Unwrap<NRPPreviewViewController>(info.This());
-  NRPPreviewViewControllerDelegate *del = ObjectWrap::Unwrap<NRPPreviewViewControllerDelegate>(Local<Object>::Cast(value));
-  auto delegate = del->As<SRPPreviewViewControllerDelegate>();
-
-  rp->_delegate.Reset(value);
-  
-  @autoreleasepool {
-    auto ui = rp->As<RPPreviewViewController>();
-    [ui associateValue:delegate withKey:@"sweetiekit.pickerview.delegate"];
-    [ui setPreviewControllerDelegate:delegate];
+  JS_UNWRAP(RPPreviewViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_protocol(RPPreviewViewControllerDelegate, input);
+    [self setPreviewControllerDelegate: input];
+    [self associateValue:input withKey:@"NRPPreviewViewController::previewControllerDelegate"];
   }
 }
 
+#if !TARGET_OS_IPHONE
 
+NAN_GETTER(NRPPreviewViewController::modeGetter) {
+  JS_UNWRAP(RPPreviewViewController, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_RPPreviewViewControllerMode([self mode]));
+  }
+}
+
+NAN_SETTER(NRPPreviewViewController::modeSetter) {
+  JS_UNWRAP(RPPreviewViewController, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(RPPreviewViewControllerMode, input);
+    [self setMode: input];
+  }
+}
+
+#endif // #if !TARGET_OS_IPHONE

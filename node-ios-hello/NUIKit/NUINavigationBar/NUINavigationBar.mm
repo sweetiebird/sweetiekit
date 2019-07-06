@@ -6,11 +6,13 @@
 //
 #include "NUINavigationBar.h"
 
+#define instancetype UINavigationBar
+#define js_value_instancetype js_value_UINavigationBar
+
 NUINavigationBar::NUINavigationBar() {}
 NUINavigationBar::~NUINavigationBar() {}
 
 JS_INIT_CLASS(UINavigationBar, UIView);
-  // instance members (proto)
   JS_ASSIGN_PROTO_METHOD(pushNavigationItemAnimated);
   JS_ASSIGN_PROTO_METHOD(popNavigationItemAnimated);
   JS_ASSIGN_PROTO_METHOD(setItemsAnimated);
@@ -20,14 +22,6 @@ JS_INIT_CLASS(UINavigationBar, UIView);
   JS_ASSIGN_PROTO_METHOD(backgroundImageForBarMetrics);
   JS_ASSIGN_PROTO_METHOD(setTitleVerticalPositionAdjustmentForBarMetrics);
   JS_ASSIGN_PROTO_METHOD(titleVerticalPositionAdjustmentForBarMetrics);
-#if TODO
-// UINavigationBarDelegate
-  JS_ASSIGN_PROTO_METHOD(navigationBarShouldPushItem);
-  JS_ASSIGN_PROTO_METHOD(navigationBarDidPushItem);
-  JS_ASSIGN_PROTO_METHOD(navigationBarShouldPopItem);
-  JS_ASSIGN_PROTO_METHOD(navigationBarDidPopItem);
-#endif
-// UINavigationBar
   JS_ASSIGN_PROTO_PROP(barStyle);
   JS_ASSIGN_PROTO_PROP(delegate);
   JS_ASSIGN_PROTO_PROP(isTranslucent);
@@ -42,27 +36,32 @@ JS_INIT_CLASS(UINavigationBar, UIView);
   JS_ASSIGN_PROTO_PROP(largeTitleTextAttributes);
   JS_ASSIGN_PROTO_PROP(backIndicatorImage);
   JS_ASSIGN_PROTO_PROP(backIndicatorTransitionMaskImage);
+
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(UINavigationBar, UIView);
 JS_INIT_CLASS_END(UINavigationBar, UIView);
 
 NAN_METHOD(NUINavigationBar::New) {
   JS_RECONSTRUCT(UINavigationBar);
-
-  Local<Object> obj = info.This();
-
-  NUINavigationBar *ui = new NUINavigationBar();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge UINavigationBar *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[UINavigationBar alloc] init]);
+  @autoreleasepool {
+    UINavigationBar* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge UINavigationBar *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UINavigationBar alloc] init];
+    }
+    if (self) {
+      NUINavigationBar *wrapper = new NUINavigationBar();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("NUINavigationBar::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 #include "NUINavigationItem.h"
@@ -216,10 +215,12 @@ NAN_SETTER(NUINavigationBar::barStyleSetter) {
   }
 }
 
+#include "NUINavigationBarDelegate.h"
+
 NAN_GETTER(NUINavigationBar::delegateGetter) {
   JS_UNWRAP(UINavigationBar, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <UINavigationBarDelegate>*/([self delegate]));
+    JS_SET_RETURN(js_value_UINavigationBarDelegate([self delegate]));
   }
 }
 
@@ -227,8 +228,9 @@ NAN_SETTER(NUINavigationBar::delegateSetter) {
   JS_UNWRAP(UINavigationBar, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <UINavigationBarDelegate>*/, input);
+    declare_protocol(UINavigationBarDelegate, input);
     [self setDelegate: input];
+    [self associateValue:input withKey:@"NUINavigationBar::delegate"];
   }
 }
 

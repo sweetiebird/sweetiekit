@@ -33,7 +33,6 @@ const {
   UIScrollView,
   NSLayoutConstraint,
   NSLayoutAnchor,
-  UITableViewManager,
   NSObject,
   NSUserDefaults,
   ARSKView,
@@ -490,12 +489,13 @@ class MyApp {
   }
 
   setTableManager() {
-    this.mgr = new UITableViewManager(this.getRowsFor.bind(this), this.getCellFor.bind(this));
-
-    this.mgr.didSelectRowAt = this.handleCellSelected.bind(this);
-
-    this.todoTable.dataSource = this.mgr;
-    this.todoTable.delegate = this.mgr;
+    this.todoTable.dataSource = UITableViewDataSource({
+      tableViewNumberOfRowsInSection: this.getRowsFor.bind(this),
+      tableViewCellForRowAtIndexPath: this.getCellFor.bind(this),
+    });
+    this.todoTable.delegate = UITableViewDelegate({
+      tableViewDidSelectRowAtIndexPath: this.handleCellSelected.bind(this),
+    });
   }
 
   createNavController() {

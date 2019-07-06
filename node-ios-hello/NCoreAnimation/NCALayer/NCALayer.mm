@@ -562,22 +562,6 @@ NAN_METHOD(NCALayer::animationForKey) {
   }
 }
 
-#include "NCABasicAnimation.h"
-
-NAN_METHOD(NCALayer::AddAnimation) {
-  JS_UNWRAP(CALayer, self);
-  @autoreleasepool {
-    if (info[0]->IsNullOrUndefined()) {
-      return;
-    }
-    if (!is_value_CABasicAnimation(info[0])) {
-      Nan::ThrowError("NCALayer::AddAnimation: expected first argument to be a CABasicAnimation");
-      return;
-    }
-    [self addAnimation:to_value_CABasicAnimation(info[0]) forKey:to_value_NSString(info[1])];
-  }
-}
-
 NAN_GETTER(NCALayer::boundsGetter) {
   JS_UNWRAP(CALayer, self);
   declare_autoreleasepool {

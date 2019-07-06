@@ -138,7 +138,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewMoveRowAtIndexPathToIndex
 // Allows the reorder accessory view to optionally be shown for a particular row. By default, the reorder control will be shown only if the datasource implements -tableView:moveRowAtIndexPath:toIndexPath:
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  __block BOOL result = NO; // TODO: unsure about this default
+  __block BOOL result = ([self associatedValueForKey:@"tableViewMoveRowAtIndexPathToIndexPath"] != nullptr) ? YES : NO;
   call_delegate(result = is_value_BOOL(JS_RESULT) ? to_value_BOOL(JS_RESULT) : result, tableViewCanMoveRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));

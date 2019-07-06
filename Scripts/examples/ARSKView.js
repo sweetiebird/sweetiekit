@@ -30,7 +30,8 @@ const {
 } = SweetieKit;
 
 //let text = '👀';
-let text = new SKTexture(UIImage("nic"));
+let defaultText = new SKTexture(UIImage("nic"));
+let text = defaultText;
 UIImage.transparent = UIImage.transparent || UIImage("transparent");
 
 let isEffectMode = false;
@@ -72,12 +73,32 @@ async function makeTextField(demoVC, fieldHeight, horOffset, callback) {
     demoVC.view.frame.width - (horOffset * 2),
     fieldHeight);
 
-  const field = UITextField.alloc().initWithFrameCallback(frame, callback);
+  const field = UITextField.alloc().initWithFrame(frame);
+  field.placeholder = 'Enter text here';
+  field.font = UIFont.systemFontOfSize(15);
+  field.borderStyle = UITextBorderStyleRoundedRect;
+  field.autocorrectionType = UITextAutocorrectionTypeNo;
+  field.keyboardType = UIKeyboardTypeDefault;
+  field.returnKeyType = UIReturnKeyDone;
+  field.clearButtonMode = UITextFieldViewModeWhileEditing;
+  field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
   field.textColor = {
     ...colors.white,
     alpha: 0.8,
   };
   field.backgroundColor = colors.clear;
+
+  field.addTargetActionForControlEvents((self) => {
+    callback(self, self.text);
+  },UIControlEventAllEditingEvents);
+
+  field.delegate = UITextFieldDelegate({
+    textFieldShouldReturn(self) {
+      self.resignFirstResponder();
+      return true;
+    },
+  });
+
   const placeholderText = 'Enter some text...';
   const placeholderFont = UIFont('Lato-Bold', 17);
   const attrPlaceholder = new NSMutableAttributedString(placeholderText);
@@ -213,8 +234,12 @@ function makeTopView(demoVC, fieldHeight) {
 }
 
 async function make(nav, demoVC) {
-  const recorder = new RPScreenRecorder();
+  const recorder = RPScreenRecorder.sharedRecorder();
   console.log(recorder);
+
+  const _navBarHeight = global.navBarHeight = (nav_ = nav) => {
+    return nav_.navigationBar.frame.height;
+  };
 
   view = demoVC.view;
   arView = new ARSKView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
@@ -434,6 +459,7 @@ async function make(nav, demoVC) {
 
   demoVC.view.addSubview(arView);
   arView.pinToSuperview();
+
   nav.pushViewControllerAnimated(demoVC, true);
 
   arView.presentScene(scene);
@@ -459,7 +485,7 @@ async function make(nav, demoVC) {
   const horOffset = 24;
 
   const field = await makeTextField(demoVC, fieldHeight, horOffset, () => {
-    text = field.text;
+    text = field.text.trim() || defaultText;
   });
 
   const topView = makeTopView(demoVC, fieldHeight);
@@ -498,7 +524,7 @@ async function make(nav, demoVC) {
     UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeRight);
     */
   scaleSlider.value = 0.25;
-  scaleSlider.setThumbImage(UIImage.transparent);
+  scaleSlider.setThumbImageForState(UIImage.transparent, scaleSlider.state);
   scaleSlider.addTargetActionForControlEvents(() => {
     console.log('scale slider changed', scaleSlider.value);
     if (active && active.node) {
@@ -512,7 +538,7 @@ async function make(nav, demoVC) {
     x: horOffset, y: scaleSliderY + sliderHeight, width: viewW - (horOffset * 2), height: sliderHeight,
   });
   distSlider.value = 0.5;
-  distSlider.setThumbImage(UIImage.transparent);
+  distSlider.setThumbImageForState(UIImage.transparent, distSlider.state);
   distSlider.addTargetActionForControlEvents(() => {
     console.log('distance slider changed', distSlider.value);
   }, UIControlEventValueChanged);
@@ -521,7 +547,7 @@ async function make(nav, demoVC) {
     x: horOffset, y: scaleSliderY + (sliderHeight * 2), width: viewW - (horOffset * 2), height: sliderHeight,
   });
   rotSlider.value = 0.5;
-  rotSlider.setThumbImage(UIImage.transparent);
+  rotSlider.setThumbImageForState(UIImage.transparent, rotSlider.state);
   rotSlider.addTargetActionForControlEvents(() => {
     console.log('rotation slider changed', rotSlider.value);
   }, UIControlEventValueChanged);
@@ -534,7 +560,7 @@ async function make(nav, demoVC) {
 
   arView.viewWillAppear = () => {
     arView.session.run(config);
-  }
+  };
 
   arView.configure = () => {
     if (arView.size.width !== arView.scene.size.width ||

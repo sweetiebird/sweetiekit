@@ -37,6 +37,8 @@ JS_WRAP_CLASS(UIControl, UIView);
   JS_METHOD(cancelTrackingWithEvent);
   JS_METHOD(addTargetActionForControlEvents);
   JS_METHOD(removeTargetActionForControlEvents);
+  JS_METHOD(addTargetForControlEvents);
+  JS_METHOD(removeTargetForControlEvents);
   JS_METHOD(allTargets);
   JS_METHOD(allControlEvents);
   JS_METHOD(actionsForTargetForControlEvent);

@@ -42,7 +42,7 @@ NAN_METHOD(NUITabBarController::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge UITabBarController *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
-      self = [UITabBarController alloc]; // TODO: init causes layout issues
+      self = [[UITabBarController alloc] init];
     }
     if (self) {
       NUITabBarController *wrapper = new NUITabBarController();
@@ -150,10 +150,12 @@ NAN_GETTER(NUITabBarController::tabBarGetter) {
   }
 }
 
+#include "NUITabBarControllerDelegate.h"
+
 NAN_GETTER(NUITabBarController::delegateGetter) {
   JS_UNWRAP(UITabBarController, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_id/* <UITabBarControllerDelegate>*/([self delegate]));
+    JS_SET_RETURN(js_value_UITabBarControllerDelegate([self delegate]));
   }
 }
 
@@ -161,7 +163,7 @@ NAN_SETTER(NUITabBarController::delegateSetter) {
   JS_UNWRAP(UITabBarController, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(id/* <UITabBarControllerDelegate>*/, input);
+    declare_protocol(UITabBarControllerDelegate, input);
     [self setDelegate: input];
     [self associateValue:input withKey:@"NUITabBarController::delegate"];
   }

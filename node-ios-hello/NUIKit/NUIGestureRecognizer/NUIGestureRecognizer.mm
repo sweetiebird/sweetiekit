@@ -37,9 +37,9 @@ JS_INIT_CLASS(UIGestureRecognizer, NSObject);
   JS_ASSIGN_PROP(proto, requiresExclusiveTouchType);
   JS_ASSIGN_PROP_READONLY(proto, numberOfTouches);
   JS_ASSIGN_PROP(proto, name);
+  JS_ASSIGN_METHOD(proto, initWithTargetAction);
   // static members (ctor)
   JS_INIT_CTOR(UIGestureRecognizer, NSObject);
-  JS_ASSIGN_METHOD(ctor, initWithTargetAction);
   // constants (exports)
 
   //typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
@@ -112,6 +112,7 @@ NAN_METHOD(NUIGestureRecognizer::addTarget) {
 }
 
 NAN_METHOD(NUIGestureRecognizer::initWithTargetAction) {
+  JS_UNWRAP_OR_ALLOC(UIGestureRecognizer, self);
   @autoreleasepool
   {
     declare_args();
@@ -121,7 +122,7 @@ NAN_METHOD(NUIGestureRecognizer::initWithTargetAction) {
     if (!action) {
       JS_PANIC("NSSelectorFromString returned nil for name %s", [selectorName UTF8String]);
     }
-    JS_SET_RETURN(js_value_UIGestureRecognizer([[UIGestureRecognizer alloc] initWithTarget: target action: action]));
+    JS_SET_RETURN(js_value_UIGestureRecognizer([self initWithTarget: target action: action]));
   }
 }
 

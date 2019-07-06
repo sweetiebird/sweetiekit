@@ -17,6 +17,8 @@ JS_INIT_CLASS(UIControl, UIView);
   JS_ASSIGN_PROTO_METHOD(cancelTrackingWithEvent);
   JS_ASSIGN_PROTO_METHOD(addTargetActionForControlEvents);
   JS_ASSIGN_PROTO_METHOD(removeTargetActionForControlEvents);
+  JS_ASSIGN_PROTO_METHOD(addTargetForControlEvents);
+  JS_ASSIGN_PROTO_METHOD(removeTargetForControlEvents);
   JS_ASSIGN_PROTO_METHOD(allTargets);
   JS_ASSIGN_PROTO_METHOD(allControlEvents);
   JS_ASSIGN_PROTO_METHOD(actionsForTargetForControlEvent);
@@ -222,6 +224,7 @@ NAN_METHOD(NUIControl::addTargetActionForControlEvents) {
     [self associateValue:target withKey:UIControlEventsName(events)];
 
     nself->SetNSObject(self);
+    JS_SET_RETURN(js_value_id(target));
   }
 }
 
@@ -242,6 +245,35 @@ NAN_METHOD(NUIControl::removeTargetActionForControlEvents) {
     }
   }
 }
+
+NAN_METHOD(NUIControl::addTargetForControlEvents) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, target);
+    declare_nullable_value(SEL, action);
+    declare_value(UIControlEvents, controlEvents);
+    if (!action) {
+      action = NSSelectorFromString(@"callback:");
+    }
+    [self addTarget: target action: action forControlEvents: controlEvents];
+  }
+}
+
+NAN_METHOD(NUIControl::removeTargetForControlEvents) {
+  JS_UNWRAP(UIControl, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, target);
+    declare_nullable_value(SEL, action);
+    declare_value(UIControlEvents, controlEvents);
+    if (!action) {
+      action = NSSelectorFromString(@"callback:");
+    }
+    [self removeTarget: target action: action forControlEvents: controlEvents];
+  }
+}
+
 
 NAN_METHOD(NUIControl::allTargets) {
   JS_UNWRAP(UIControl, self);

@@ -135,7 +135,7 @@ using namespace node;
   
 #define JS_RECONSTRUCT_PROTOCOL(type) \
   JS_RECONSTRUCT(type); \
-  if (info.Length() == 1 && info[0]->IsObject()) { /* TODO: check for plain object */ \
+  if (info.Length() == 1 && sweetiekit::IsPlainObject(info[0])) { \
     Local<Value> that(JS_NEW(N##type, 0, nullptr)); \
     sweetiekit::JSFunction objectAssign(JS_OBJ(JS_GLOBAL()->Get(JS_STR("Object")))->Get(JS_STR("assign"))); \
     objectAssign("N"#type"::New", that, info[0]); \
@@ -443,10 +443,27 @@ NAN_SETTER(N##type::key##Setter) { \
     JS_RESULT = [name jsFunction]->Call(key, __VA_ARGS__); \
     JS_UNUSED(JS_RESULT); \
   }
+
+#define call_persistent_function_noreturn_0(from, name, key) \
+  Local<Value> JS_RESULT; \
+  get_persistent_function(from, name, @key); \
+  if (name) { \
+    JS_RESULT = [name jsFunction]->Call(key); \
+    JS_UNUSED(JS_RESULT); \
+  }
   
 #define call_delegate(after_callback, key, ...) \
   dispatch_main(^{ \
     call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
+    JS_UNUSED(self); \
+    if (callback) { \
+      after_callback; \
+    } \
+  })
+  
+#define call_delegate_0(after_callback, key) \
+  dispatch_main(^{ \
+    call_persistent_function_noreturn_0(self, callback, #key); \
     JS_UNUSED(self); \
     if (callback) { \
       after_callback; \
@@ -739,6 +756,7 @@ namespace sweetiekit {
 #endif
 
 namespace sweetiekit {
+  bool IsPlainObject(const Local<Value>& value);
   Local<Value> GetWrapperFor(__weak id _Nullable pThing, Nan::Persistent<FunctionTemplate>& defaultType);
   Local<Value> GetWrapperFor(__weak id _Nullable pThing);
   id _Nullable GetValueFor(Local<Value> value, bool* _Nullable failed = nullptr);

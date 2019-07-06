@@ -27,7 +27,9 @@ JS_INIT_PROTOCOL(UITableViewDelegate, UIScrollViewDelegate);
   JS_ASSIGN_PROTO_PROP(tableViewEstimatedHeightForFooterInSection);
   JS_ASSIGN_PROTO_PROP(tableViewViewForHeaderInSection);
   JS_ASSIGN_PROTO_PROP(tableViewViewForFooterInSection);
+#if DEPRECATED
   JS_ASSIGN_PROTO_PROP(tableViewAccessoryTypeForRowWithIndexPath);
+#endif
   JS_ASSIGN_PROTO_PROP(tableViewAccessoryButtonTappedForRowWithIndexPath);
   JS_ASSIGN_PROTO_PROP(tableViewShouldHighlightRowAtIndexPath);
   JS_ASSIGN_PROTO_PROP(tableViewDidHighlightRowAtIndexPath);
@@ -263,6 +265,15 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 // Accessories (disclosures). 
 
+#if DEPRECATED
+/*
+ node-ios-hello[49662:2207864] WARNING: Using legacy cell layout due to
+ delegate implementation of tableView:accessoryTypeForRowWithIndexPath: in
+ <UITableViewDelegateType: 0x6000036b9bd0>.  Please remove your implementation
+ of this method and set the cell properties accessoryType and/or
+ editingAccessoryType to move to the new cell layout behavior.  This method
+ will no longer be called in a future release.
+*/
 - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED
 {
   __block UITableViewCellAccessoryType result = UITableViewCellAccessoryNone;
@@ -271,6 +282,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
     js_value_NSIndexPath(indexPath));
   return result;
 }
+#endif
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -345,7 +357,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 // Allows customization of the editingStyle for a particular cell located at 'indexPath'. If not implemented, all editable cells will have UITableViewCellEditingStyleDelete set for them when the table has editing property set to YES.
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  __block UITableViewCellEditingStyle result = UITableViewCellEditingStyleNone;
+  __block UITableViewCellEditingStyle result = UITableViewCellEditingStyleDelete;
   call_delegate(result = is_value_UITableViewCellEditingStyle(JS_RESULT) ? to_value_UITableViewCellEditingStyle(JS_RESULT) : result, tableViewEditingStyleForRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));

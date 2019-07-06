@@ -6,26 +6,30 @@
 //
 #include "NNSAttributedString.h"
 
+#define instancetype NSAttributedString
+#define js_value_instancetype js_value_NSAttributedString
+
 NNSAttributedString::NNSAttributedString () {}
 NNSAttributedString::~NNSAttributedString () {}
 
 JS_INIT_CLASS(NSAttributedString, NSObject);
+  JS_ASSIGN_PROTO_METHOD(attributesAtIndexEffectiveRange);
+  JS_ASSIGN_PROTO_METHOD(attributeAtIndexEffectiveRange);
+  JS_ASSIGN_PROTO_METHOD(attributedSubstringFromRange);
+  JS_ASSIGN_PROTO_METHOD(attributesAtIndexLongestEffectiveRangeInRange);
+  JS_ASSIGN_PROTO_METHOD(attributeAtIndexLongestEffectiveRangeInRange);
+  JS_ASSIGN_PROTO_METHOD(isEqualToAttributedString);
+  JS_ASSIGN_PROTO_METHOD(initWithString);
+  JS_ASSIGN_PROTO_METHOD(initWithStringAttributes);
+  JS_ASSIGN_PROTO_METHOD(initWithAttributedString);
+  JS_ASSIGN_PROTO_METHOD(enumerateAttributesInRangeOptionsUsingBlock);
+  JS_ASSIGN_PROTO_METHOD(enumerateAttributeInRangeOptionsUsingBlock);
+  JS_ASSIGN_PROTO_PROP_READONLY(string);
+  JS_ASSIGN_PROTO_PROP_READONLY(length);
+
   // instance members (proto)
-  JS_ASSIGN_METHOD(proto, attributesAtIndexEffectiveRange);
-  JS_ASSIGN_METHOD(proto, attributeAtIndexEffectiveRange);
-  JS_ASSIGN_METHOD(proto, attributedSubstringFromRange);
-  JS_ASSIGN_METHOD(proto, attributesAtIndexLongestEffectiveRangeInRange);
-  JS_ASSIGN_METHOD(proto, attributeAtIndexLongestEffectiveRangeInRange);
-  JS_ASSIGN_METHOD(proto, isEqualToAttributedString);
-  JS_ASSIGN_METHOD(proto, enumerateAttributesInRangeOptionsUsingBlock);
-  JS_ASSIGN_METHOD(proto, enumerateAttributeInRangeOptionsUsingBlock);
-  JS_ASSIGN_PROP_READONLY(proto, string);
-  JS_ASSIGN_PROP_READONLY(proto, length);
   // static members (ctor)
   JS_INIT_CTOR(NSAttributedString, NSObject);
-  JS_ASSIGN_METHOD(ctor, initWithString);
-  JS_ASSIGN_METHOD(ctor, initWithStringAttributes);
-  JS_ASSIGN_METHOD(ctor, initWithAttributedString);
   // constants (exports)
 
   // Predefined character attributes for text. If the key is not present in the dictionary, it indicates the default value described below.
@@ -53,8 +57,6 @@ JS_INIT_CLASS(NSAttributedString, NSObject);
   JS_ASSIGN_ENUM(NSWritingDirectionAttributeName, NSAttributedStringKey); // NS_AVAILABLE(10_6, 7_0);    // NSArray of NSNumbers representing the nested levels of writing direction overrides as defined by Unicode LRE, RLE, LRO, and RLO characters.  The control characters can be obtained by masking NSWritingDirection and NSWritingDirectionFormatType values.  LRE: NSWritingDirectionLeftToRight|NSWritingDirectionEmbedding, RLE: NSWritingDirectionRightToLeft|NSWritingDirectionEmbedding, LRO: NSWritingDirectionLeftToRight|NSWritingDirectionOverride, RLO: NSWritingDirectionRightToLeft|NSWritingDirectionOverride,
 
   JS_ASSIGN_ENUM(NSVerticalGlyphFormAttributeName, NSAttributedStringKey); // NS_AVAILABLE(10_7, 6_0);   // An NSNumber containing an integer value.  0 means horizontal text.  1 indicates vertical text.  If not specified, it could follow higher-level vertical orientation settings.  Currently on iOS, it's always horizontal.  The behavior for any other value is undefined.
-
-
 
   /************************ Attribute values ************************/
   // This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName. These values are or'ed together to produce an underline style.
@@ -275,34 +277,30 @@ NAN_METHOD(NNSAttributedString::isEqualToAttributedString) {
 }
 
 NAN_METHOD(NNSAttributedString::initWithString) {
-  @autoreleasepool
-  {
+  JS_UNWRAP_OR_ALLOC(NSAttributedString, self);
+  declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, str);
-    
-    JS_SET_RETURN_EXTERNAL(NSAttributedString,
-      [[NSAttributedString alloc] initWithString: str]);
-    return;
+    JS_SET_RETURN(js_value_instancetype([self initWithString: str]));
   }
 }
 
 NAN_METHOD(NNSAttributedString::initWithStringAttributes) {
-  @autoreleasepool
-  {
+  JS_UNWRAP_OR_ALLOC(NSAttributedString, self);
+  declare_autoreleasepool {
     declare_args();
     declare_pointer(NSString, str);
-    declare_pointer(NSDictionary, attrs);
-    
-    JS_SET_RETURN_EXTERNAL(NSAttributedString,
-      [[NSAttributedString alloc] initWithString: str attributes: attrs]);
+    declare_nullable_pointer(NSDictionary/* <NSAttributedStringKey, id>*/, attrs);
+    JS_SET_RETURN(js_value_instancetype([self initWithString: str attributes: attrs]));
   }
 }
 
 NAN_METHOD(NNSAttributedString::initWithAttributedString) {
-  @autoreleasepool
-  {
-    NSAttributedString* attrStr(to_value_NSAttributedString(info[0]));
-    JS_SET_RETURN_EXTERNAL(NSAttributedString, [[NSAttributedString alloc] initWithAttributedString: attrStr]);
+  JS_UNWRAP_OR_ALLOC(NSAttributedString, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSAttributedString, attrStr);
+    JS_SET_RETURN(js_value_instancetype([self initWithAttributedString: attrStr]));
   }
 }
 

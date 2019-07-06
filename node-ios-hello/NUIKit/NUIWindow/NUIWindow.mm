@@ -9,6 +9,8 @@
 NUIWindow::NUIWindow() {}
 NUIWindow::~NUIWindow() {}
 
+#include "NNSNotification.h"
+
 JS_INIT_CLASS(UIWindow, UIView);
   // instance members (proto)
   JS_ASSIGN_PROTO_METHOD(becomeKeyWindow);
@@ -26,6 +28,36 @@ JS_INIT_CLASS(UIWindow, UIView);
   JS_ASSIGN_PROTO_PROP(rootViewController);
   // static members (ctor)
   JS_INIT_CTOR(UIWindow, UIView);
+  // constants (exports)
+  
+  JS_ASSIGN_ENUM(UIWindowLevelNormal, UIWindowLevel); // ;
+  JS_ASSIGN_ENUM(UIWindowLevelAlert, UIWindowLevel); // ;
+  JS_ASSIGN_ENUM(UIWindowLevelStatusBar, UIWindowLevel); //  __TVOS_PROHIBITED;
+
+  JS_ASSIGN_ENUM(UIWindowDidBecomeVisibleNotification, NSNotificationName); // ; 
+  JS_ASSIGN_ENUM(UIWindowDidBecomeHiddenNotification, NSNotificationName); // ;  
+  JS_ASSIGN_ENUM(UIWindowDidBecomeKeyNotification, NSNotificationName); // ;     
+  JS_ASSIGN_ENUM(UIWindowDidResignKeyNotification, NSNotificationName); // ;     
+
+  JS_ASSIGN_ENUM(UIKeyboardWillShowNotification, NSNotificationName); //  __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardDidShowNotification, NSNotificationName); //  __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardWillHideNotification, NSNotificationName); //  __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardDidHideNotification, NSNotificationName); //  __TVOS_PROHIBITED;
+
+  JS_ASSIGN_ENUM(UIKeyboardFrameBeginUserInfoKey, NSString); //         NS_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED; 
+  JS_ASSIGN_ENUM(UIKeyboardFrameEndUserInfoKey, NSString); //           NS_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED; 
+  JS_ASSIGN_ENUM(UIKeyboardAnimationDurationUserInfoKey, NSString); //  NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; 
+  JS_ASSIGN_ENUM(UIKeyboardAnimationCurveUserInfoKey, NSString); //     NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; 
+  JS_ASSIGN_ENUM(UIKeyboardIsLocalUserInfoKey, NSString); //            NS_AVAILABLE_IOS(9_0) __TVOS_PROHIBITED; 
+
+  JS_ASSIGN_ENUM(UIKeyboardWillChangeFrameNotification, NSNotificationName); //   NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardDidChangeFrameNotification, NSNotificationName); //    NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED;
+
+  JS_ASSIGN_ENUM(UIKeyboardCenterBeginUserInfoKey, NSString); //    NS_DEPRECATED_IOS(2_0, 3_2) __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardCenterEndUserInfoKey, NSString); //      NS_DEPRECATED_IOS(2_0, 3_2) __TVOS_PROHIBITED;
+  JS_ASSIGN_ENUM(UIKeyboardBoundsUserInfoKey, NSString); //         NS_DEPRECATED_IOS(2_0, 3_2) __TVOS_PROHIBITED;
+
+
 JS_INIT_CLASS_END(UIWindow, UIView);
 
 NAN_METHOD(NUIWindow::New) {

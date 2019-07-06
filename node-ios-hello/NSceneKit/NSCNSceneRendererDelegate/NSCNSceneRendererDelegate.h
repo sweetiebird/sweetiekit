@@ -10,21 +10,21 @@
 
 #include "NNSObject.h"
 
-#define js_value_SCNSceneRendererDelegate(x) js_value_wrapper(x, SCNSceneRendererDelegate)
-#define to_value_SCNSceneRendererDelegate(x) to_value_wrapper(x, SCNSceneRendererDelegate)
-#define is_value_SCNSceneRendererDelegate(x) is_value_wrapper(x, SCNSceneRendererDelegate)
+#define js_value_SCNSceneRendererDelegate(x) js_protocol_wrapper(x, SCNSceneRendererDelegate)
+#define to_value_SCNSceneRendererDelegate(x) to_protocol_wrapper(x, SCNSceneRendererDelegate)
+#define is_value_SCNSceneRendererDelegate(x) is_protocol_wrapper(x, SCNSceneRendererDelegate)
 
-JS_WRAP_CLASS(SCNSceneRendererDelegate, NSObject);
+JS_WRAP_PROTOCOL(SCNSceneRendererDelegate, NSObject);
   JS_PROP(rendererUpdateAtTime);
   JS_PROP(rendererDidApplyAnimationsAtTime);
   JS_PROP(rendererDidSimulatePhysicsAtTime);
   JS_PROP(rendererDidApplyConstraintsAtTime);
   JS_PROP(rendererWillRenderSceneAtTime);
   JS_PROP(rendererDidRenderSceneAtTime);
-JS_WRAP_CLASS_END(SCNSceneRendererDelegate);
+JS_WRAP_PROTOCOL_END(SCNSceneRendererDelegate, NSObject);
 
 #if __OBJC__
-@interface SCNSceneRendererDelegate : NSObject<SCNSceneRendererDelegate>
+@interface SCNSceneRendererDelegateType : NSObject<SCNSceneRendererDelegate>
 
 /*!
  @method renderer:updateAtTime:

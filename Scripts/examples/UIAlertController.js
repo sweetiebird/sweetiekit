@@ -6,11 +6,12 @@ const {
 } = SweetieKit;
 
 async function make(nav, demoVC) {
-  const alert = new UIAlertController(
+  const alert = UIAlertController.alertControllerWithTitleMessagePreferredStyle(
     'Alert Title',
     'And an informative message',
+    UIAlertControllerStyleAlert,
   );
-  const action = new UIAlertAction('Okay', () => {
+  const action = UIAlertAction.actionWithTitleStyleHandler('Okay', UIAlertActionStyleDefault, (action) => {
     alert.dismissViewControllerAnimatedCompletion(true, () => {});
   });
   alert.addAction(action);

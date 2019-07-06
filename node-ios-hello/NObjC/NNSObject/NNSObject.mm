@@ -14,22 +14,46 @@
 
 - (void) associateValue:(id)value withKey:(NSString *)aKey {
   
-  objc_setAssociatedObject(self, (__bridge void *)aKey, value, OBJC_ASSOCIATION_RETAIN);
+  objc_setAssociatedObject(self, (void *)NSSelectorFromString(aKey), value, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (id) associatedValueForKey:(NSString *)aKey {
   
-  return objc_getAssociatedObject( self, (__bridge void *)aKey );
+  return objc_getAssociatedObject(self, (void *)NSSelectorFromString(aKey));
 }
 
 - (void) dissociateValueForKey:(NSString *)aKey {
-  objc_setAssociatedObject(self, (__bridge void *)aKey, nil, OBJC_ASSOCIATION_RETAIN);
+  objc_setAssociatedObject(self, (void *)NSSelectorFromString(aKey), nil, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end
 
 Nid::Nid() : _self(nullptr) {}
 Nid::~Nid() {}
+
+NAN_METHOD(_NSSelectorFromString)
+{
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    SEL result = NSSelectorFromString(name);
+    JS_SET_RETURN(js_value_SEL(result));
+  }
+}
+
+NAN_METHOD(_NSSelectorFromStringAddress)
+{
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
+    SEL result = NSSelectorFromString(name);
+    Local<Array> array = Nan::New<Array>(2);
+    size_t address = (size_t)(void*)result;
+    array->Set(0, Nan::New<Integer>((uint32_t)(address >> 32)));
+    array->Set(1, Nan::New<Integer>((uint32_t)(address & 0xFFFFFFFF)));
+    JS_SET_RETURN(array);
+  }
+}
 
 JS_INIT_CLASS_BASE(id, nil);
   // instance members (proto)
@@ -49,6 +73,8 @@ JS_INIT_CLASS_BASE(id, nil);
   JS_ASSIGN_METHOD(proto, invoke);
   // static members (ctor)
   JS_INIT_CTOR(id, objc);
+  Nan::SetMethod(ctor, "NSSelectorFromString", _NSSelectorFromString);
+  Nan::SetMethod(ctor, "NSSelectorFromStringAddress", _NSSelectorFromStringAddress);
   Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
   Nan::SetMethod(ctor, "objc_msgSend", _objc_msgSend);
   Nan::SetMethod(ctor, "NSSearchPathForDirectoriesInDomains", _NSSearchPathForDirectoriesInDomains);
@@ -288,17 +314,11 @@ NAN_METHOD(Nid::invokeBooleanSetter)
 
 NAN_METHOD(Nid::_NSClassFromString)
 {
-  @autoreleasepool {
-    NSString* name = to_value_NSString(info[0]);
-    if (!name) {
-        Nan::ThrowError("Nid::NSClassFromString: expected first argument to be a string");
-        return;
-    }
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, name);
     Class result = NSClassFromString(name);
-    Local<Value> argv[] = {
-      Nan::New<External>((__bridge void*)result)
-    };
-    JS_SET_RETURN(JS_NEW_ARGV(Nid, argv));
+    JS_SET_RETURN(js_value_id/* Class*/(result));
   }
 }
 
@@ -593,6 +613,59 @@ NNSObject::NNSObject() {}
 NNSObject::~NNSObject() {}
 
 JS_INIT_CLASS(NSObject, id);
+  JS_ASSIGN_PROTO_METHOD(associatedValueForKey);
+  JS_ASSIGN_PROTO_METHOD(associateValueWithKey);
+
+  // NSKeyValueCoding.h
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+  JS_ASSIGN_PROTO_METHOD(validateValueForKeyError);
+  JS_ASSIGN_PROTO_METHOD(mutableArrayValueForKey);
+  JS_ASSIGN_PROTO_METHOD(mutableOrderedSetValueForKey);
+  JS_ASSIGN_PROTO_METHOD(mutableSetValueForKey);
+  JS_ASSIGN_PROTO_METHOD(valueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(setValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(validateValueForKeyPathError);
+  JS_ASSIGN_PROTO_METHOD(mutableArrayValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(mutableOrderedSetValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(mutableSetValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(valueForUndefinedKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForUndefinedKey);
+  JS_ASSIGN_PROTO_METHOD(setNilValueForKey);
+  JS_ASSIGN_PROTO_METHOD(dictionaryWithValuesForKeys);
+  JS_ASSIGN_PROTO_METHOD(setValuesForKeysWithDictionary);
+#if TODO
+// NSArray<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSDictionary<KeyType
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+// NSMutableDictionary<KeyType
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSOrderedSet<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+// NSSet<ObjectType>
+  JS_ASSIGN_PROTO_METHOD(valueForKey);
+  JS_ASSIGN_PROTO_METHOD(setValueForKey);
+#endif
+// NSObject
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+  JS_ASSIGN_STATIC_METHOD(useStoredAccessor);
+  JS_ASSIGN_PROTO_METHOD(storedValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeStoredValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeValueForKey);
+  JS_ASSIGN_PROTO_METHOD(takeValueForKeyPath);
+  JS_ASSIGN_PROTO_METHOD(handleQueryWithUnboundKey);
+  JS_ASSIGN_PROTO_METHOD(handleTakeValueForUnboundKey);
+  JS_ASSIGN_PROTO_METHOD(unableToSetNilForKey);
+  JS_ASSIGN_PROTO_METHOD(valuesForKeys);
+  JS_ASSIGN_PROTO_METHOD(takeValuesFromDictionary);
+#endif
+#if TODO
+  JS_ASSIGN_STATIC_PROP_READONLY(accessInstanceVariablesDirectly);
+#endif
+
   // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(NSObject, id);
@@ -619,6 +692,298 @@ NAN_METHOD(NNSObject::New) {
     }
   }
 }
+
+NAN_METHOD(NNSObject::associatedValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self associatedValueForKey:key]));
+  }
+}
+
+NAN_METHOD(NNSObject::associateValueWithKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self associateValue:value withKey:key];
+  }
+}
+
+NAN_METHOD(NNSObject::valueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self valueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self setValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::validateValueForKeyError) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(inout-id-_Nullable-pointer-_Nonnull, ioValue);
+    declare_pointer(NSString, inKey);
+    declare_pointer(out-NSError-pointer, outError);
+    JS_SET_RETURN(js_value_BOOL([self validateValue: ioValue forKey: inKey error: outError]));
+    #endif
+  }
+}
+
+NAN_METHOD(NNSObject::mutableArrayValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableArray([self mutableArrayValueForKey: key]));
+  }
+}
+
+#define js_value_NSMutableOrderedSet(x) js_value_wrapper_unknown(x, NSMutableOrderedSet)
+#define to_value_NSMutableOrderedSet(x) to_value_wrapper_unknown(x, NSMutableOrderedSet)
+#define is_value_NSMutableOrderedSet(x) is_value_wrapper_unknown(x, NSMutableOrderedSet)
+
+NAN_METHOD(NNSObject::mutableOrderedSetValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableOrderedSet([self mutableOrderedSetValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableSetValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_NSMutableSet([self mutableSetValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::valueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_id([self valueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, keyPath);
+    [self setValue: value forKeyPath: keyPath];
+  }
+}
+
+NAN_METHOD(NNSObject::validateValueForKeyPathError) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
+    declare_args();
+    declare_value(inout-id-_Nullable-pointer-_Nonnull, ioValue);
+    declare_pointer(NSString, inKeyPath);
+    declare_pointer(out-NSError-pointer, outError);
+    JS_SET_RETURN(js_value_BOOL([self validateValue: ioValue forKeyPath: inKeyPath error: outError]));
+    #endif
+  }
+}
+
+NAN_METHOD(NNSObject::mutableArrayValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableArray([self mutableArrayValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableOrderedSetValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableOrderedSet([self mutableOrderedSetValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::mutableSetValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, keyPath);
+    JS_SET_RETURN(js_value_NSMutableSet([self mutableSetValueForKeyPath: keyPath]));
+  }
+}
+
+NAN_METHOD(NNSObject::valueForUndefinedKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self valueForUndefinedKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValueForUndefinedKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self setValue: value forUndefinedKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::setNilValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self setNilValueForKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::dictionaryWithValuesForKeys) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray<NSString*>, keys);
+    JS_SET_RETURN(js_value_NSDictionary/* <NSString*, id>*/([self dictionaryWithValuesForKeys: keys]));
+  }
+}
+
+NAN_METHOD(NNSObject::setValuesForKeysWithDictionary) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDictionary/* <NSString*, id>*/, keyedValues);
+    [self setValuesForKeysWithDictionary: keyedValues];
+  }
+}
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+NAN_METHOD(NNSObject::useStoredAccessor) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([NSObject useStoredAccessor]));
+  }
+}
+
+NAN_METHOD(NNSObject::storedValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self storedValueForKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::takeStoredValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self takeStoredValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::takeValueForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self takeValue: value forKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::takeValueForKeyPath) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, keyPath);
+    [self takeValue: value forKeyPath: keyPath];
+  }
+}
+
+NAN_METHOD(NNSObject::handleQueryWithUnboundKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    JS_SET_RETURN(js_value_id([self handleQueryWithUnboundKey: key]));
+  }
+}
+
+NAN_METHOD(NNSObject::handleTakeValueForUnboundKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(id, value);
+    declare_pointer(NSString, key);
+    [self handleTakeValue: value forUnboundKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::unableToSetNilForKey) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSString, key);
+    [self unableToSetNilForKey: key];
+  }
+}
+
+NAN_METHOD(NNSObject::valuesForKeys) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSArray, keys);
+    JS_SET_RETURN(js_value_NSDictionary([self valuesForKeys: keys]));
+  }
+}
+
+NAN_METHOD(NNSObject::takeValuesFromDictionary) {
+  JS_UNWRAP(NSObject, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(NSDictionary, properties);
+    [self takeValuesFromDictionary: properties];
+  }
+}
+
+#endif // #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+#if TODO
+NAN_GETTER(NNSObject::accessInstanceVariablesDirectlyGetter) {
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([NSObject accessInstanceVariablesDirectly]));
+  }
+}
+#endif
 
 
 NClass::NClass() {}
@@ -701,6 +1066,7 @@ NAN_METHOD(NClass::New) {
 #include "NNSUserActivity.h"
 #include "NNSUserActivityDelegate.h"
 
+#include "NUIGraphics.h"
 #include "NUIBezierPath.h"
 #include "NUILabel.h"
 #include "NUIFont.h"
@@ -745,14 +1111,24 @@ NAN_METHOD(NClass::New) {
 #include "NUISearchController.h"
 #include "NUITabBarController.h"
 #include "NUITabBarControllerDelegate.h"
+#include "NUITabBarDelegate.h"
 #include "NUISplitViewController.h"
 #include "NUIBarCommon.h"
 #include "NUITabBarItem.h"
 #include "NUIBarButtonItem.h"
 #include "NUITabBar.h"
 #include "NUIViewController.h"
+#include "NUITimingCurveProvider.h"
+#include "NUICubicTimingParameters.h"
+#include "NUISpringTimingParameters.h"
+#include "NUIViewAnimating.h"
+#include "NUIViewImplicitlyAnimating.h"
+#include "NUIViewPropertyAnimator.h"
 #include "NUINavigationController.h"
 #include "NUINavigationControllerDelegate.h"
+#include "NUIBarPositioning.h"
+#include "NUIBarPositioningDelegate.h"
+#include "NUINavigationBarDelegate.h"
 #include "NUINavigationBar.h"
 #include "NUINavigationItem.h"
 #include "NUIImagePickerController.h"
@@ -837,6 +1213,10 @@ NAN_METHOD(NClass::New) {
 #include "NCABasicAnimation.h" // : CAPropertyAnimation
 #include "NCASpringAnimation.h" // : CABasicAnimation
 #include "NCAShapeLayer.h"
+#include "NUIViewControllerTransitioning.h" // globals
+#include "NUIViewControllerTransitionCoordinatorContext.h" // NSObject
+#include "NUIViewControllerTransitionCoordinator.h" // NSObject<UIViewControllerTransitionCoordinatorContext>
+#include "NUIAdaptivePresentationControllerDelegate.h" // NSObject
 #include "NUIPresentationController.h"
 #include "NUIInputViewController.h"
 #include "NUIAlertController.h"
@@ -854,7 +1234,6 @@ NAN_METHOD(NClass::New) {
 #include "NNSLayoutYAxisAnchor.h"
 #include "NUIMotionEffect.h"
 #include "NUILayoutGuide.h"
-//#include "NUITableViewManager.h"
 #include "NUIEvent.h"
 #include "NUIPressesEvent.h"
 #include "NUITouch.h"
@@ -1141,8 +1520,10 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
+#include "NCGImage.h"
 #include "NCGContext.h"
 #include "NRPScreenRecorder.h"
+#include "NRPScreenRecorderDelegate.h"
 #include "NRPPreviewViewController.h"
 #include "NRPPreviewViewControllerDelegate.h"
 #include "NCIColor.h"
@@ -1265,6 +1646,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // UIKit
 
+    JS_EXPORT_GLOBALS(UIGraphics);
     JS_EXPORT_TYPE(UIGestureRecognizer);
     JS_EXPORT_TYPE(UITapGestureRecognizer);
     JS_EXPORT_TYPE(UIPinchGestureRecognizer);
@@ -1289,8 +1671,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIApplication);
     JS_EXPORT_TYPE(UIResponder);
     JS_EXPORT_TYPE(UIViewController);
+    JS_EXPORT_PROTOCOL(UITimingCurveProvider);
+    JS_EXPORT_TYPE(UICubicTimingParameters);
+    JS_EXPORT_TYPE(UISpringTimingParameters);
+    JS_EXPORT_PROTOCOL(UIViewAnimating);
+    JS_EXPORT_PROTOCOL(UIViewImplicitlyAnimating);
+    JS_EXPORT_TYPE(UIViewPropertyAnimator);
     JS_EXPORT_TYPE(UITabBarController);
-    JS_EXPORT_TYPE(UITabBarControllerDelegate);
+    JS_EXPORT_PROTOCOL(UITabBarControllerDelegate);
+    JS_EXPORT_PROTOCOL(UITabBarDelegate);
     JS_EXPORT_TYPE(UISplitViewController);
     JS_EXPORT_TYPE(UISearchController);
 
@@ -1320,6 +1709,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(UINavigationControllerDelegate);
     JS_EXPORT_TYPE(UIImagePickerController);
     JS_EXPORT_TYPE(UIInputViewController);
+    JS_EXPORT_GLOBALS(UIViewControllerTransitioning); // globals
+    JS_EXPORT_PROTOCOL(UIViewControllerTransitionCoordinatorContext); // NSObject
+    JS_EXPORT_PROTOCOL(UIViewControllerTransitionCoordinator); // NSObject<UIViewControllerTransitionCoordinator>
     JS_EXPORT_TYPE(UIPresentationController);
     JS_EXPORT_TYPE(UIPopoverPresentationController);
     JS_EXPORT_TYPE(UIAlertController);
@@ -1373,7 +1765,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITableView);
     JS_EXPORT_TYPE(UICollectionView);
     JS_EXPORT_TYPE(UICollectionViewCell);
-    //JS_EXPORT_TYPE(UITableViewManager);
     JS_EXPORT_TYPE(UICollectionViewManager);
     JS_EXPORT_TYPE(UICollectionViewLayout);
     JS_EXPORT_TYPE(UICollectionViewLayoutAttributes);
@@ -1402,7 +1793,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // UIKit delegates
 
-    JS_EXPORT_TYPE(UIPopoverPresentationControllerDelegate);
+    JS_EXPORT_PROTOCOL(UIAdaptivePresentationControllerDelegate);
+    JS_EXPORT_PROTOCOL(UIPopoverPresentationControllerDelegate);
     JS_EXPORT_TYPE(UIPickerViewManager);
     JS_EXPORT_PROTOCOL(UIScrollViewDelegate);
     JS_EXPORT_PROTOCOL(UITableViewDelegate);
@@ -1421,6 +1813,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(UIDropInteractionDelegate);
     JS_EXPORT_TYPE(UIImagePickerControllerDelegate);
     JS_EXPORT_TYPE(UIViewControllerTransitioningDelegate);
+    JS_EXPORT_PROTOCOL(UIBarPositioning);
+    JS_EXPORT_PROTOCOL(UIBarPositioningDelegate);
+    JS_EXPORT_PROTOCOL(UINavigationBarDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
     
@@ -1433,6 +1828,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Core Graphics
 
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
+    JS_EXPORT_GLOBALS(CGImage);
     JS_EXPORT_GLOBALS(CGContext);
     
     // Audio Toolbox
@@ -1519,8 +1915,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // ReplayKit
 
     JS_EXPORT_TYPE(RPScreenRecorder);
+    JS_EXPORT_PROTOCOL(RPScreenRecorderDelegate);
     JS_EXPORT_TYPE(RPPreviewViewController);
-    JS_EXPORT_TYPE(RPPreviewViewControllerDelegate);
+    JS_EXPORT_PROTOCOL(RPPreviewViewControllerDelegate);
 
     // UIKit Custom
 
@@ -1627,9 +2024,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     JS_EXPORT_TYPE(SceneKitTypes);
     JS_EXPORT_TYPE(SCNPhysicsField);
-    JS_EXPORT_TYPE(SCNRenderer);
-    JS_EXPORT_TYPE(SCNSceneRenderer);
-    JS_EXPORT_TYPE(SCNSceneRendererDelegate);
+    JS_EXPORT_PROTOCOL(SCNSceneRendererDelegate);
+    JS_EXPORT_PROTOCOL(SCNSceneRenderer);
+    JS_EXPORT_TYPE(SCNRenderer); // : SCNSceneRenderer
     JS_EXPORT_TYPE(SCNAction);
     JS_EXPORT_TYPE(SCNCamera);
     JS_EXPORT_TYPE(SCNCameraController);
@@ -2004,8 +2401,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(SceneKitTypes);
       JS_RETURN_TYPE(SCNPhysicsField);
       JS_RETURN_TYPE(SCNRenderer);
-      // JS_RETURN_TYPE(SCNSceneRenderer);
-      JS_RETURN_TYPE(SCNSceneRendererDelegate);
       JS_RETURN_TYPE(SCNParticleSystem);
       JS_RETURN_TYPE(SCNParticlePropertyController);
       JS_RETURN_TYPE(SCNAction);
@@ -2135,7 +2530,6 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // ReplayKit
 
-      JS_RETURN_TYPE_FROM(RPPreviewViewControllerDelegate, SRPPreviewViewControllerDelegate);
       JS_RETURN_TYPE(RPScreenRecorder);
       JS_RETURN_TYPE(RPPreviewViewController);
       
@@ -2206,6 +2600,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // UIKit
 
+      JS_RETURN_TYPE(UICubicTimingParameters);
+      JS_RETURN_TYPE(UISpringTimingParameters);
+
       JS_RETURN_TYPE(UITargetedDragPreview);
       JS_RETURN_TYPE(UITableViewHeaderFooterView); // : UIView
       JS_RETURN_TYPE(UITableViewDropProposal); // : UIDropProposal
@@ -2233,12 +2630,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UINavigationController);
       JS_RETURN_TYPE(UISearchController);
       JS_RETURN_TYPE(UISplitViewController);
-      JS_RETURN_TYPE(UITabBarControllerDelegate);
       JS_RETURN_TYPE(UITabBarController);
       JS_RETURN_TYPE(UIPopoverPresentationController);
       JS_RETURN_TYPE(UIPresentationController);
       JS_RETURN_TYPE(UIInputViewController);
       JS_RETURN_TYPE(UIViewController);
+      JS_RETURN_TYPE(UIViewPropertyAnimator);
       // ========= views
       JS_RETURN_TYPE(UIInputView);
       JS_RETURN_TYPE(UIStackView);
@@ -2309,10 +2706,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBarButtonItem);
       JS_RETURN_TYPE(UIBarCommon);
       // ========= delegates
-      JS_RETURN_TYPE(UIPopoverPresentationControllerDelegate);
       JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
       JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
-      //JS_RETURN_TYPE_FROM(UITableViewManager, SUITableViewManager);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects
@@ -2418,6 +2813,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
 
+      // ReplayKit protocols
+
+      JS_RETURN_PROTOCOL(RPScreenRecorderDelegate);
+      JS_RETURN_PROTOCOL(RPPreviewViewControllerDelegate);
+
       // AVFoundation Protocols
 
       JS_RETURN_PROTOCOL(AVAudioMixing); // <AVAudioStereoMixing, AVAudio3DMixing>
@@ -2477,6 +2877,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // SceneKit protocols
 
+      JS_RETURN_PROTOCOL(SCNSceneRendererDelegate);
+      JS_RETURN_PROTOCOL(SCNSceneRenderer);
       JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
       
       // ARKit protocols
@@ -2484,6 +2886,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(ARSKViewDelegate);
       
       // Core Location protocols
+
       JS_RETURN_PROTOCOL(CLLocationManagerDelegate);
 
       // CoreAnimation protocols
@@ -2492,6 +2895,15 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(CAAction);
 
       // UIKit protocols
+
+      JS_RETURN_PROTOCOL(UIViewImplicitlyAnimating);
+      JS_RETURN_PROTOCOL(UIViewAnimating);
+      JS_RETURN_PROTOCOL(UITimingCurveProvider);
+
+      JS_RETURN_PROTOCOL(UIPopoverPresentationControllerDelegate);
+      JS_RETURN_PROTOCOL(UIAdaptivePresentationControllerDelegate);
+      JS_RETURN_PROTOCOL(UIViewControllerTransitionCoordinator); // NSObject<UIViewControllerTransitionCoordinatorContext>
+      JS_RETURN_PROTOCOL(UIViewControllerTransitionCoordinatorContext); // NSObject
 
       JS_RETURN_PROTOCOL(UITableViewDragDelegate);
       JS_RETURN_PROTOCOL(UITableViewDropCoordinator);
@@ -2502,7 +2914,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(UITableViewDataSource);
       JS_RETURN_PROTOCOL(UITableViewDelegate);
       JS_RETURN_PROTOCOL(UIScrollViewDelegate);
+      JS_RETURN_PROTOCOL(UITabBarDelegate);
+      JS_RETURN_PROTOCOL(UITabBarControllerDelegate);
       JS_RETURN_PROTOCOL(UINavigationControllerDelegate);
+      JS_RETURN_PROTOCOL(UINavigationBarDelegate);
+      JS_RETURN_PROTOCOL(UIBarPositioningDelegate);
+      JS_RETURN_PROTOCOL(UIBarPositioning);
       JS_RETURN_PROTOCOL(UIFocusAnimationContext);
       JS_RETURN_PROTOCOL(UIDropInteractionDelegate);
       JS_RETURN_PROTOCOL(UIDragInteractionDelegate);

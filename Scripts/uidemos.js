@@ -17,6 +17,7 @@ makeEmojiCam = require('./examples/emojiCam');
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
 makeButton = require('./examples/UIButton');
+makeFluidButton = require('./examples/FluidButton');
 makeBarButtonItem = require('./examples/UIBarButtonItem');
 makeCollectionView = require('./examples/UICollectionView');
 makeGifView = require('./examples/GifView');
@@ -44,11 +45,13 @@ makeGreenDot = require('./examples/GreenDot');
 
 // controller based demos
 makeAlertCtrl = require('./examples/UIAlertController');
+makeAlertCtrlActionSheet = require('./examples/UIAlertControllerActionSheet');
 makeImagePickerCtrl = require('./examples/UIImagePickerController');
 makeNavigationCtrl = require('./examples/UINavigationController');
 makeTabBarCtrl = require('./examples/UITabBarController');
 makeTableView = require('./examples/UITableView');
 makePopover = require('./examples/Popover');
+makePopoverTableViewController = require('./examples/PopoverTableViewController');
 
 // misc demos
 makeThreeObj = require('./examples/ThreeOBJ');
@@ -77,6 +80,7 @@ demoTypes = {
   // SKSceneSockets: makeSKSceneSockets,
   ThreeOBJ: makeThreeObj,
   UIButton: makeButton,
+  FluidButton: makeFluidButton,
   UIImageView: makeImageView,
   UILabel: makeLabel,
   UIPageControl: makePageControl,
@@ -90,7 +94,9 @@ demoTypes = {
 
 demoCtrls = {
   Popover: makePopover,
+  PopoverTableViewController: makePopoverTableViewController,
   UIAlertController: makeAlertCtrl,
+  UIAlertControllerActionSheet: makeAlertCtrlActionSheet,
   UIBarButtonItem: makeBarButtonItem,
   UICollectionView: makeCollectionView,
   UIImagePickerController: makeImagePickerCtrl,
@@ -128,6 +134,7 @@ class UIDemosApp {
   constructor(app) {
     this.app = app;
     this.vc = UIViewController();
+    this.vc.edgesForExtendedLayout = UIRectEdgeNone;
     this.table = new UITableView();
     this.vc.view.addSubview(this.table);
     this.setupConstraints();
@@ -142,6 +149,7 @@ class UIDemosApp {
   createDemoVC() {
     gc();
     this.demoVC = UIViewController();
+    this.demoVC.edgesForExtendedLayout = UIRectEdgeNone;
     gc();
     this.demoVC.view.backgroundColor = colors.getTheme().backgroundColor;
     gc();

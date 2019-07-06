@@ -35,10 +35,6 @@
 #define is_value_CALayerContentsFilter(x) IS_ENUM(CALayerContentsFilter, NSString, x)
 
 JS_WRAP_CLASS(CALayer, NSObject);
-  JS_METHOD(AddAnimation);
-  JS_METHOD(AddSublayer);
-
- // CALayer
   JS_STATIC_METHOD(layer);
   JS_STATIC_METHOD(defaultValueForKey);
   JS_STATIC_METHOD(needsDisplayForKey);

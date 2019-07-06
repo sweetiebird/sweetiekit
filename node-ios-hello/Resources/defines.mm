@@ -309,6 +309,29 @@ namespace sweetiekit
     return g_wrapperMap;
   }
   
+  bool IsPlainObject(const Local<Value>& value)
+  {
+    if (!value->IsObject()) {
+      return false;
+    }
+    if (value->IsExternal()) {
+      return false;
+    }
+    Local<Object> obj(JS_OBJ(value));
+    Local<Value> proto(obj->Get(JS_STR("__proto__")));
+    if (proto->IsNullOrUndefined()) {
+      return true; // value was created via Object.create(null)
+    }
+    if (proto->IsObject()) {
+      Local<Value> ctor(JS_OBJ(proto)->Get(JS_STR("constructor")));
+      Local<Value> Object(JS_GLOBAL()->Get(JS_STR("Object")));
+      if (ctor->StrictEquals(Object)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   Local<Value> GetWrapperFor(__weak id pThing)
   {
     return GetWrapperFor(pThing, NNSObject::type);
@@ -2815,6 +2838,7 @@ bool is_value_NSNumber(Local<Value> value)
   return false;
 }
 
+#undef dispatch_sync
 
 extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
@@ -2944,6 +2968,49 @@ NSDictionary* _Nullable to_value_NSDictionary(Local<Value> dict, bool* _Nullable
 
 bool is_value_NSDictionary(Local<Value> value) {
   if (!value->IsMap()) {
+    return false;
+  }
+  return true;
+}
+
+Local<Value> js_value_NSMutableSet(NSMutableSet* _Nullable value) {
+  if (value == nullptr) {
+    return Nan::Undefined();
+  } else {
+    Nan::EscapableHandleScope scope;
+    Local<Set> result(Set::New(JS_ISOLATE()));
+    [value enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+      Local<Value> v = js_value_id(obj);
+      (void)result->Add(JS_CONTEXT(), v);
+    }];
+    return scope.Escape(result);
+  }
+}
+
+NSMutableSet* _Nullable to_value_NSMutableSet(Local<Value> dict, bool* _Nullable failed) {
+  if (failed) {
+    *failed = false;
+  }
+  if (dict->IsSet()) {
+    Nan::HandleScope scope;
+    Local<Array> value(Local<Set>::Cast(dict)->AsArray());
+    auto result = [[NSMutableSet alloc] init];
+    for (uint32_t i = 0, n = value->Length(); i < n; i++) {
+      id v = to_value_id(value->Get(i));
+      [result addObject:v];
+    }
+    return result;
+  } else if (failed) {
+    *failed = true;
+    return nullptr;
+  } else {
+    Nan::ThrowError("to_value_NSMutableSet failed");
+    return nullptr;
+  }
+}
+
+bool is_value_NSMutableSet(Local<Value> value) {
+  if (!value->IsSet()) {
     return false;
   }
   return true;

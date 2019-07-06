@@ -14,11 +14,12 @@ async function make(nav, demoVC) {
   button.widthAnchor.constraintGreaterThanOrEqualToAnchorConstant(view.widthAnchor, -24).isActive = true;
   button.setTitleForState('👋 Hello Button', UIControlStateNormal);
   button.addTargetActionForControlEvents(() => {
-    const alert = new UIAlertController(
+    const alert = UIAlertController.alertControllerWithTitleMessagePreferredStyle(
       'Button pressed',
       'Hello',
+      UIAlertControllerStyleAlert,
     );
-    const action = new UIAlertAction('Okay', () => {
+    const action = UIAlertAction.actionWithTitleStyleHandler('Okay', UIAlertActionStyleDefault, (action) => {
       alert.dismissViewControllerAnimatedCompletion(true, () => {});
     });
     alert.addAction(action);

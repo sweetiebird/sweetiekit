@@ -43,7 +43,6 @@ JS_INIT_PROTOCOL(${name}, ${superClass});
   // constant values (exports)
 JS_INIT_PROTOCOL_END(${name}, ${superClass});
 
-
 NAN_METHOD(N${name}::New) {
   JS_RECONSTRUCT_PROTOCOL(${name});
   @autoreleasepool {
@@ -94,7 +93,7 @@ JS_WRAP_PROTOCOL(${name}, ${superClass});
 JS_WRAP_PROTOCOL_END(${name}, ${superClass});
 
 #if __OBJC__
-@interface ${name}Type : NSObject<${name}>
+@interface ${name}Type : ${superClass === 'NSObject' ? superClass : (superClass + 'Type')}<${name}>
 @end
 #endif
 
