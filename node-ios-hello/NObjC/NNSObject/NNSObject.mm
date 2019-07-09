@@ -1567,6 +1567,7 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayRenderer.h"
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
+
 #include "NCoreGraphicsGlobals.h"
 #include "NCGColorSpace.h"
 #include "NCGContext.h"
@@ -1578,6 +1579,15 @@ NAN_METHOD(NClass::New) {
 #include "NCGPath.h"
 #include "NCGPattern.h"
 #include "NCGShading.h"
+
+#include "NCGImageProperties.h" // globals
+
+#import <Vision/Vision.h>
+#include "NVNRequest.h" // : NSObject
+#include "NVNImageBasedRequest.h" // : VNRequest
+#include "NVNRequestProgressProviding.h" // <NSObject>
+#include "NVNImageRequestHandler.h" // : NSObject
+#include "NVNSequenceRequestHandler.h" // : NSObject
 
 #include "NRPScreenRecorder.h"
 #include "NRPScreenRecorderDelegate.h"
@@ -1908,6 +1918,17 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(CGPath);
     JS_EXPORT_GLOBALS(CGPattern);
     JS_EXPORT_GLOBALS(CGShading);
+
+    // ImageIO
+
+    JS_EXPORT_GLOBALS(CGImageProperties);
+
+    // Vision
+
+    JS_EXPORT_TYPE(VNRequest);
+    JS_EXPORT_PROTOCOL(VNRequestProgressProviding);
+    JS_EXPORT_TYPE(VNImageRequestHandler);
+    JS_EXPORT_TYPE(VNSequenceRequestHandler);
 
     // CoreMedia
 
@@ -2698,6 +2719,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // CoreMedia
 
+      // Vision
+
+      JS_RETURN_TYPE(VNSequenceRequestHandler);
+      JS_RETURN_TYPE(VNImageRequestHandler);
+      JS_RETURN_TYPE(VNRequest);
+
       // AVFoundation
 
       JS_RETURN_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
@@ -2996,6 +3023,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       JS_RETURN_PROTOCOL(RPScreenRecorderDelegate);
       JS_RETURN_PROTOCOL(RPPreviewViewControllerDelegate);
+
+      // Vision protocols
+
+      JS_RETURN_PROTOCOL(VNRequestProgressProviding);
 
       // AVFoundation Protocols
 
