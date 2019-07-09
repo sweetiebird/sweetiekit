@@ -23,6 +23,15 @@ const {
 
 const animalImagesCache = {};
 
+const sounds = {};
+
+function makeBloom() {
+  const bloomFilter = CIFilter.filterWithName('CIBloom');
+  bloomFilter.setValueForKey(10.0, 'inputIntensity');
+  bloomFilter.setValueForKey(20.0, 'inputRadius');
+  return bloomFilter;
+}
+
 function makeAnimalNodes(animals) {
   return animals.map((animal) => {
     const cardGeo = SCNBox({ width: 0.25, height: 0.35, length: 0.01, chamferRadius: 0 });
@@ -70,17 +79,33 @@ function setMaterials(nodes, selected = false) {
   });
 }
 
+function preloadSounds(nodes) {
+  nodes.forEach(async (n) => {
+    const nodeName = n.name;
+
+    try {
+      const soundUrl = `https://emkolar.ninja/sweetiekit/sound/${nodeName}.mp3`;
+
+      const resp = await axios({
+        method: 'GET',
+        url: soundUrl,
+        responseType: 'arraybuffer',
+      });
+
+      const { data } = resp;
+
+      if (data) {
+        sounds[nodeName] = data;
+      }
+    } catch (err) {
+      console.log(err, err.response, err.message);
+    }
+  });
+}
+
 async function playSound(nodeName) {
   try {
-    const soundUrl = `https://emkolar.ninja/sweetiekit/sound/${nodeName}.mp3`;
-
-    const resp = await axios({
-      method: 'GET',
-      url: soundUrl,
-      responseType: 'arraybuffer',
-    });
-
-    const { data } = resp;
+    const data = sounds[nodeName];
 
     if (data && audioPlayer) {
       audioPlayer = audioPlayer.initWithDataError(data);
@@ -148,6 +173,8 @@ async function make(nav, demoVC) {
   scene = new SCNScene();
   animalNodes = makeAnimalNodes(animals);
 
+  preloadSounds(animalNodes);
+
   containerNode = SCNNode();
   containerNode.position = { x: 0, y: 0, z: -2 };
 
@@ -182,15 +209,18 @@ async function make(nav, demoVC) {
         const filterNode = n.childNodeWithNameRecursively('filter', true);
         filterNode.filters = [];
 
-        if (audioPlayer && audioPlayer.isPlaying) {
-          audioPlayer.stop();
+        try {
+          if (audioPlayer && audioPlayer.isPlaying) {
+            audioPlayer.stop();
+          }
+        } catch (err) {
+          console.log(err);
         }
       }
 
       if (hit.node) {
-        const bloomFilter = CIFilter.filterWithName('CIBloom');
-        bloomFilter.setValueForKey(10.0, 'inputIntensity');
-        bloomFilter.setValueForKey(20.0, 'inputRadius');
+        const bloomFilter = makeBloom();
+
         const filterNode = hit.node.childNodeWithNameRecursively('filter', true);
         filterNode.filters = [bloomFilter];
 
