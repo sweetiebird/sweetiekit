@@ -1,5 +1,6 @@
 const SweetieKit = require('std:sweetiekit.node');
 const axios = require('axios');
+const Path = require('path');
 
 const colors = require('../colors');
 
@@ -8,6 +9,8 @@ THREE = require('../../vendor/three/three');
 const {
   ARSCNView,
   ARSCNViewDelegate,
+  AVAudioPlayer,
+  AVAudioSession,
   SCNScene,
   SCNNode,
   SCNBox,
@@ -16,45 +19,89 @@ const {
   UIImage,
 } = SweetieKit;
 
+const animalImagesCache = {};
+
 function makeAnimalNodes(animals) {
   return animals.map((animal, idx) => {
     const cardGeo = SCNBox({ width: 0.25, height: 0.35, length: 0.01, chamferRadius: 0 });
-    // const cardMat = new SCNMaterial();
-    // const imgUrl = NSURL.URLWithString(`https://emkolar.ninja/sweetiekit/img/${animal}.png`);
-    // cardMat.diffuse.contents = UIImage.imageNamed(animal);
-    // cardGeo.materials = [cardMat];
     const animalNode = new SCNNode(cardGeo);
     animalNode.name = animal;
     return animalNode;
   });
 }
 
-function setMaterials(nodes) {
+async function getImage(name, selected = false) {
+  if (selected && animalImagesCache[`${name}_selected`]) {
+    return animalImagesCache[`${name}_selected`];
+  } else if (!selected && animalImagesCache[name]) {
+    return animalImagesCache[name];
+  }
+
+  const imgKey = `${name}${selected ? '_selected' : ''}`;
+  const imgUrl = `https://emkolar.ninja/sweetiekit/img/${imgKey}.png`;
+
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: imgUrl,
+      responseType: 'arraybuffer',
+    });
+
+    const cardImage = UIImage.imageWithData(response.data);
+
+    animalImagesCache[imgKey] = cardImage;
+
+    return cardImage;
+  } catch (err) {
+    console.log(err, err.response, err.message);
+  }
+}
+
+function setMaterials(nodes, selected = false) {
   nodes.forEach(async (n) => {
-    console.log('node name', n.name);
+    const cardImage = await getImage(n.name, selected);
 
-    const imgUrl = `https://emkolar.ninja/sweetiekit/img/${n.name}.png`;
-
-    try {
-      const response = await axios({
-        method: 'GET',
-        url: imgUrl,
-        responseType: 'arraybuffer',
-      });
-      const cardImage = UIImage.imageWithData(response.data);
-      if (cardImage) {
-        const cardMat = new SCNMaterial();
-        cardMat.diffuse.contents = cardImage;
-        n.geometry.materials = [cardMat];
-      }
-    } catch (err) {
-      console.log(err, err.response, err.message);
+    if (cardImage) {
+      const cardMat = new SCNMaterial();
+      cardMat.diffuse.contents = cardImage;
+      n.geometry.materials = [cardMat];
     }
   });
 }
 
+function playSound(nodeName) {
+  try {
+    const soundPath = Path.resolve(Path.join(
+      Path.dirname(
+        Require.resolve('.')),
+      'node_modules',
+      'sweetiekit-art',
+      'media',
+      'sound',
+      `${nodeName}.mp3`,
+    ));
+
+    const soundUrl = NSURL.initFileURLWithPath(soundPath);
+
+    if (audioPlayer) {
+      audioPlayer = audioPlayer.initWithContentsOfURLError(soundUrl);
+
+      if (audioPlayer.prepareToPlay()) {
+        audioPlayer.play();
+      }
+    }
+  } catch (err) {
+    console.log(err, err.response, err.message);
+  }
+}
+
 async function make(nav, demoVC) {
   const animals = ['rooster', 'cow', 'duck'];
+
+  audioSession = AVAudioSession.sharedInstance();
+  audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
+
+  audioPlayer = AVAudioPlayer.alloc();
 
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
@@ -78,20 +125,29 @@ async function make(nav, demoVC) {
   demoVC.view.addSubview(arView);
   nav.pushViewControllerAnimated(demoVC, true);
 
-  arView.touchesBeganWithEvent = (touches, evt) => {
+  arView.touchesBeganWithEvent = async (touches, evt) => {
     touches = Array.from(touches);
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
-    pt.y -= Math.trunc(0.1*touch.view.height);
     let hits = arView.hitTest(pt);
+
     if (hits && hits.length > 0) {
       let hit = hits[0];
-      console.log(hit);
+
+      if (typeof lastNode !== 'undefined') {
+        const n = scene.rootNode.childNodeWithNameRecursively(lastNode, true);
+
+        if (n) {
+          setMaterials([n]);
+        }
+      }
+
       if (hit.node) {
-        animalNodes.forEach((n) => {
-          n.geometry.firstMaterial.diffuse.contents = UIImage.imageNamed(n.name);
-        });
-        hit.node.geometry.firstMaterial.diffuse.contents = UIColor(1.0, 0.5, 0.5);
+        setMaterials([hit.node], true);
+
+        playSound(hit.node.name);
+
+        lastNode = hit.node.name;
       }
     }
   };
