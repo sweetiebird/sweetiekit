@@ -1590,6 +1590,7 @@ NAN_METHOD(NClass::New) {
 #include "NVNRequest.h" // : NSObject
 #include "NVNImageBasedRequest.h" // : VNRequest
 #include "NVNDetectTextRectanglesRequest.h" // : VNImageBasedRequest
+#include "NVNRecognizeTextRequest.h" // : VNImageBasedRequest
 #include "NVNRequestProgressProviding.h" // <NSObject>
 #include "NVNImageRequestHandler.h" // : NSObject
 #include "NVNSequenceRequestHandler.h" // : NSObject
@@ -1952,6 +1953,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(VNRequest);
     JS_EXPORT_TYPE_INHERITS(VNImageBasedRequest, VNRequest);
     JS_EXPORT_TYPE_INHERITS(VNDetectTextRectanglesRequest, VNImageBasedRequest);
+    JS_EXPORT_TYPE_INHERITS(VNRecognizeTextRequest, VNImageBasedRequest);
     JS_EXPORT_PROTOCOL(VNRequestProgressProviding);
     JS_EXPORT_TYPE(VNImageRequestHandler);
     JS_EXPORT_TYPE(VNSequenceRequestHandler);
@@ -2788,6 +2790,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(VNObservation);
       JS_RETURN_TYPE(VNSequenceRequestHandler);
       JS_RETURN_TYPE(VNImageRequestHandler);
+      JS_RETURN_TYPE_INHERITS(VNRecognizeTextRequest, VNImageBasedRequest);
       JS_RETURN_TYPE_INHERITS(VNDetectTextRectanglesRequest, VNImageBasedRequest);
       JS_RETURN_TYPE_INHERITS(VNImageBasedRequest, VNRequest);
       JS_RETURN_TYPE(VNRequest);
