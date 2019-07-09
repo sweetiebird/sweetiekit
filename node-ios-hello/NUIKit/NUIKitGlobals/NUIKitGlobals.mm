@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUIKitGlobals.h"
-#import <AVFoundation/AVFoundation.h>
 
 NUIKitGlobals::NUIKitGlobals() {}
 NUIKitGlobals::~NUIKitGlobals() {}
