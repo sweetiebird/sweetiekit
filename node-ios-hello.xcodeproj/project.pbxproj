@@ -305,6 +305,7 @@
 		A1678C3A22D4878D00E1CF52 /* NAVAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3822D4878C00E1CF52 /* NAVAnimation.mm */; };
 		A1678C4222D4A6D800E1CF52 /* NCVBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3D22D4A6D800E1CF52 /* NCVBuffer.mm */; };
 		A1678C4322D4A6D800E1CF52 /* NCVImageBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */; };
+		A1678C4722D4A9D800E1CF52 /* NCFBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C4522D4A9D800E1CF52 /* NCFBase.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1272,6 +1273,8 @@
 		A1678C3E22D4A6D800E1CF52 /* NCVBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVBuffer.h; sourceTree = "<group>"; };
 		A1678C4022D4A6D800E1CF52 /* NCVImageBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVImageBuffer.h; sourceTree = "<group>"; };
 		A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVImageBuffer.mm; sourceTree = "<group>"; };
+		A1678C4522D4A9D800E1CF52 /* NCFBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCFBase.mm; sourceTree = "<group>"; };
+		A1678C4622D4A9D800E1CF52 /* NCFBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCFBase.h; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -3202,6 +3205,7 @@
 		A134E29A22D0384E00BAB748 /* NCoreFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				A1678C4422D4A9D800E1CF52 /* NCFBase */,
 				A134E29B22D0384E00BAB748 /* NCFDictionary */,
 			);
 			path = NCoreFoundation;
@@ -4523,6 +4527,15 @@
 				A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */,
 			);
 			path = NCVImageBuffer;
+			sourceTree = "<group>";
+		};
+		A1678C4422D4A9D800E1CF52 /* NCFBase */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C4622D4A9D800E1CF52 /* NCFBase.h */,
+				A1678C4522D4A9D800E1CF52 /* NCFBase.mm */,
+			);
+			path = NCFBase;
 			sourceTree = "<group>";
 		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
@@ -8596,6 +8609,7 @@
 				A192705C22C13EC0008F16AE /* NMTLCommandEncoder.mm in Sources */,
 				A192709822C15B4C008F16AE /* NMTLVertexDescriptor.mm in Sources */,
 				A19270AA22C164AD008F16AE /* NNSPort.mm in Sources */,
+				A1678C4722D4A9D800E1CF52 /* NCFBase.mm in Sources */,
 				A158787422CDB50600847196 /* NUIFocusAnimationCoordinator.mm in Sources */,
 				A1678C4322D4A6D800E1CF52 /* NCVImageBuffer.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,

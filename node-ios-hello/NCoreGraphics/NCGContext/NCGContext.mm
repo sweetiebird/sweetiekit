@@ -8,13 +8,7 @@
 
 #define js_return_value(type, x) JS_SET_RETURN(js_value_##type(x))
 
-#define js_value_bridged(x, t) sweetiekit::GetWrapperFor((__bridge id)x, Nid::type)
-#define to_value_bridged(x, t) (__bridge t)sweetiekit::GetValueFor(x)
-#define is_value_bridged(x, t) JS_INSTANCEOF(x, Nid)
-
-#define js_value_CFStringRef(x) js_value_bridged(x, CFStringRef)
-#define to_value_CFStringRef(x) to_value_bridged(x, CFStringRef)
-#define is_value_CFStringRef(x) is_value_bridged(x, CFStringRef)
+#include "NCFBase.h"
 
 typedef char* char_ptr;
 typedef const char* const_char_ptr;
