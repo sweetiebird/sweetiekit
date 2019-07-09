@@ -1,4 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
+const axios = require('axios');
 
 const colors = require('../colors');
 
@@ -12,9 +13,49 @@ const {
   SCNBox,
   ARWorldTrackingConfiguration,
   SCNLight,
+  UIImage,
 } = SweetieKit;
 
+function makeAnimalNodes(animals) {
+  return animals.map((animal, idx) => {
+    const cardGeo = SCNBox({ width: 0.25, height: 0.35, length: 0.01, chamferRadius: 0 });
+    // const cardMat = new SCNMaterial();
+    // const imgUrl = NSURL.URLWithString(`https://emkolar.ninja/sweetiekit/img/${animal}.png`);
+    // cardMat.diffuse.contents = UIImage.imageNamed(animal);
+    // cardGeo.materials = [cardMat];
+    const animalNode = new SCNNode(cardGeo);
+    animalNode.name = animal;
+    return animalNode;
+  });
+}
+
+function setMaterials(nodes) {
+  nodes.forEach(async (n) => {
+    console.log('node name', n.name);
+
+    const imgUrl = `https://emkolar.ninja/sweetiekit/img/${n.name}.png`;
+
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: imgUrl,
+        responseType: 'arraybuffer',
+      });
+      const cardImage = UIImage.imageWithData(response.data);
+      if (cardImage) {
+        const cardMat = new SCNMaterial();
+        cardMat.diffuse.contents = cardImage;
+        n.geometry.materials = [cardMat];
+      }
+    } catch (err) {
+      console.log(err, err.response, err.message);
+    }
+  });
+}
+
 async function make(nav, demoVC) {
+  const animals = ['rooster', 'cow', 'duck'];
+
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
@@ -22,13 +63,7 @@ async function make(nav, demoVC) {
     return new SCNNode();
   });
   scene = new SCNScene();
-  geo = SCNBox({ width: 0.25, height: 0.35, length: 0.01, chamferRadius: 0 });
-  mat = new SCNMaterial();
-  colorMat = new SCNMaterial();
-  mat.diffuse.contents = UIImage.imageNamed('rooster');
-  colorMat.diffuse.contents = colors.white;
-  geo.materials = [mat, colorMat];
-  node = new SCNNode(geo);
+  animalNodes = makeAnimalNodes(animals);
 
   arView.delegate = viewDel;
   arView.scene = scene;
@@ -53,7 +88,9 @@ async function make(nav, demoVC) {
       let hit = hits[0];
       console.log(hit);
       if (hit.node) {
-        node.geometry.firstMaterial.diffuse.contents = UIColor(1.0, 1.0, 1.0);
+        animalNodes.forEach((n) => {
+          n.geometry.firstMaterial.diffuse.contents = UIImage.imageNamed(n.name);
+        });
         hit.node.geometry.firstMaterial.diffuse.contents = UIColor(1.0, 0.5, 0.5);
       }
     }
@@ -68,9 +105,12 @@ async function make(nav, demoVC) {
       } else {
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
-        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-1));
-        node.simdTransform = xform;
-        scene.rootNode.addChildNode(node);
+        animalNodes.forEach((n, idx) => {
+          xform.multiply(new THREE.Matrix4().makeTranslation(idx * 0.25,0,-1));
+          n.simdTransform = xform;
+          scene.rootNode.addChildNode(n);
+        });
+        setMaterials(animalNodes);
       }
     }
     configure();
