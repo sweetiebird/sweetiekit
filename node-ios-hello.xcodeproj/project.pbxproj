@@ -303,6 +303,8 @@
 		A1678C3222D4848F00E1CF52 /* NAVCaptureSystemPressureState.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3122D4848F00E1CF52 /* NAVCaptureSystemPressureState.mm */; };
 		A1678C3622D486A400E1CF52 /* NAVCaptureVideoPreviewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3422D486A400E1CF52 /* NAVCaptureVideoPreviewLayer.mm */; };
 		A1678C3A22D4878D00E1CF52 /* NAVAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3822D4878C00E1CF52 /* NAVAnimation.mm */; };
+		A1678C4222D4A6D800E1CF52 /* NCVBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C3D22D4A6D800E1CF52 /* NCVBuffer.mm */; };
+		A1678C4322D4A6D800E1CF52 /* NCVImageBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1266,6 +1268,10 @@
 		A1678C3522D486A400E1CF52 /* NAVCaptureVideoPreviewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVCaptureVideoPreviewLayer.h; sourceTree = "<group>"; };
 		A1678C3822D4878C00E1CF52 /* NAVAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVAnimation.mm; sourceTree = "<group>"; };
 		A1678C3922D4878C00E1CF52 /* NAVAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVAnimation.h; sourceTree = "<group>"; };
+		A1678C3D22D4A6D800E1CF52 /* NCVBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVBuffer.mm; sourceTree = "<group>"; };
+		A1678C3E22D4A6D800E1CF52 /* NCVBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVBuffer.h; sourceTree = "<group>"; };
+		A1678C4022D4A6D800E1CF52 /* NCVImageBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVImageBuffer.h; sourceTree = "<group>"; };
+		A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVImageBuffer.mm; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -4490,6 +4496,33 @@
 				A1678C3822D4878C00E1CF52 /* NAVAnimation.mm */,
 			);
 			path = NAVAnimation;
+			sourceTree = "<group>";
+		};
+		A1678C3B22D4A6D800E1CF52 /* NCoreVideo */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C3C22D4A6D800E1CF52 /* NCVBuffer */,
+				A1678C3F22D4A6D800E1CF52 /* NCVImageBuffer */,
+			);
+			path = NCoreVideo;
+			sourceTree = "<group>";
+		};
+		A1678C3C22D4A6D800E1CF52 /* NCVBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C3E22D4A6D800E1CF52 /* NCVBuffer.h */,
+				A1678C3D22D4A6D800E1CF52 /* NCVBuffer.mm */,
+			);
+			path = NCVBuffer;
+			sourceTree = "<group>";
+		};
+		A1678C3F22D4A6D800E1CF52 /* NCVImageBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C4022D4A6D800E1CF52 /* NCVImageBuffer.h */,
+				A1678C4122D4A6D800E1CF52 /* NCVImageBuffer.mm */,
+			);
+			path = NCVImageBuffer;
 			sourceTree = "<group>";
 		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
@@ -8123,17 +8156,18 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A1678C0222D4751800E1CF52 /* NUsrInclude */,
-				A1678BFD22D471FF00E1CF52 /* NCoreMedia */,
+				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
+				A1394A6D22865F200087F712 /* main.h */,
+				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
+				A1D6729022694E7000562A42 /* libs_main.hpp */,
+				A1058B422268029E00CEAA5C /* libs_main.mm */,
+				A1394A6B22865EF00087F712 /* main.mm */,
+				A1FC1A0F225C65DD00085571 /* Info.plist */,
+				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
 				A1482A93229D4DAC001502C0 /* GameFiles */,
-				A1FC1A0F225C65DD00085571 /* Info.plist */,
-				A1D6729022694E7000562A42 /* libs_main.hpp */,
-				A1058B422268029E00CEAA5C /* libs_main.mm */,
-				A1394A6D22865F200087F712 /* main.h */,
-				A1394A6B22865EF00087F712 /* main.mm */,
 				A1D65E0B22819C1600AC0BD9 /* NARKit */,
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A13370DA22AEFDDC00FA3768 /* NAudioToolbox */,
@@ -8145,6 +8179,8 @@
 				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
 				A1BD4B952287DA14001D1F6E /* NCoreLocation */,
+				A1678BFD22D471FF00E1CF52 /* NCoreMedia */,
+				A1678C3B22D4A6D800E1CF52 /* NCoreVideo */,
 				A108637F22C6E573001A15A9 /* NGLKit */,
 				A192708222C14C47008F16AE /* NIOSurface */,
 				A194894D228A8489007BF787 /* NMapKit */,
@@ -8153,18 +8189,16 @@
 				A19270D722C19C9A008F16AE /* NMetalKit */,
 				A19F39D522AF4AE100606332 /* NModelIO */,
 				A1E2D7A5226A500100FA1562 /* NObjC */,
-				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
-				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A10862E622C48E04001A15A9 /* NOpenGLES */,
 				A1710E9F229A58A100EC7C86 /* NReplayKit */,
 				A1BD4B3F2287BC91001D1F6E /* NSceneKit */,
 				A1D4985122BAFD40009AC951 /* NSecurity */,
 				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
+				A1678C0222D4751800E1CF52 /* NUsrInclude */,
 				A108639022C70160001A15A9 /* NWebGL */,
 				A133701A22AAE65000FA3768 /* NWebKit */,
 				A1D672A02269942100562A42 /* Resources */,
-				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
@@ -8563,6 +8597,7 @@
 				A192709822C15B4C008F16AE /* NMTLVertexDescriptor.mm in Sources */,
 				A19270AA22C164AD008F16AE /* NNSPort.mm in Sources */,
 				A158787422CDB50600847196 /* NUIFocusAnimationCoordinator.mm in Sources */,
+				A1678C4322D4A6D800E1CF52 /* NCVImageBuffer.mm in Sources */,
 				A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */,
 				A1D4989922BB4933009AC951 /* NUITextInput.mm in Sources */,
 				A192704922C13C29008F16AE /* NMTLArgumentEncoder.mm in Sources */,
@@ -8765,6 +8800,7 @@
 				A133701122AAA90000FA3768 /* NUIGraphicsImageRendererFormat.mm in Sources */,
 				A15878A822CDC77000847196 /* NUITableViewDropCoordinator.mm in Sources */,
 				A19F39E922AF63D900606332 /* NMDLMaterial.mm in Sources */,
+				A1678C4222D4A6D800E1CF52 /* NCVBuffer.mm in Sources */,
 				A108630622C4905F001A15A9 /* NSCNNodeRendererDelegate.mm in Sources */,
 				A1574EDF22B8D96C006CC5F2 /* NUICollectionViewLayoutInvalidationContext.mm in Sources */,
 				A19270D422C18EFF008F16AE /* NMTLPipeline.mm in Sources */,
