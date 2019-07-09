@@ -176,7 +176,7 @@ async function make(nav, demoVC) {
   preloadSounds(animalNodes);
 
   containerNode = SCNNode();
-  containerNode.position = { x: 0, y: 0, z: -2 };
+  containerNode.position = { x: 0, y: -0.25, z: -1.25 };
 
   animalNodes.forEach((n) => {
     containerNode.addChildNode(n);
