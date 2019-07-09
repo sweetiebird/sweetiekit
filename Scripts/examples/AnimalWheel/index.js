@@ -1,6 +1,8 @@
 const SweetieKit = require('std:sweetiekit.node');
 const axios = require('axios');
 
+const colors = require('../colors');
+
 THREE = require('../../vendor/three/three');
 
 const {
@@ -15,6 +17,8 @@ const {
   SCNLight,
   UIImage,
   CIFilter,
+  SCNPlane,
+  SCNMaterial,
 } = SweetieKit;
 
 const animalImagesCache = {};
@@ -117,6 +121,13 @@ async function makeWheel(nodes) {
     const zPos = Math.sin(step * i) * radius;
     n.position = { x: xPos, y: 0, z: zPos };
     n.rotation = { x: 0, y: 0, z: 0, w: -Math.PI * (i/6/7.5) };
+    const filterNode = SCNNode.nodeWithGeometry(SCNPlane(0.25, 0.35));
+    filterNode.position = { x: 0, y: 0, z: -0.01 };
+    filterNode.name = 'filter';
+    const filterMat = SCNMaterial();
+    filterMat.diffuse.contents = colors.fitbodPink;
+    filterNode.geometry.materials = [filterMat];
+    n.addChildNode(filterNode);
   }
 }
 
@@ -168,7 +179,8 @@ async function make(nav, demoVC) {
 
       if (typeof lastNode !== 'undefined') {
         const n = scene.rootNode.childNodeWithNameRecursively(lastNode, true);
-        n.filters = [];
+        const filterNode = n.childNodeWithNameRecursively('filter', true);
+        filterNode.filters = [];
 
         if (audioPlayer && audioPlayer.isPlaying) {
           audioPlayer.stop();
@@ -178,8 +190,9 @@ async function make(nav, demoVC) {
       if (hit.node) {
         const bloomFilter = CIFilter.filterWithName('CIBloom');
         bloomFilter.setValueForKey(10.0, 'inputIntensity');
-        bloomFilter.setValueForKey(30.0, 'inputRadius');
-        hit.node.filters = [bloomFilter];
+        bloomFilter.setValueForKey(20.0, 'inputRadius');
+        const filterNode = hit.node.childNodeWithNameRecursively('filter', true);
+        filterNode.filters = [bloomFilter];
 
         playSound(hit.node.name);
 
