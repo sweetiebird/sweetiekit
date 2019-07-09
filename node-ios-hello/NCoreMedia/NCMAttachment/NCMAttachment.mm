@@ -24,6 +24,31 @@ NAN_METHOD(CMGetAttachment) {
   }
 }
 
+NAN_METHOD(CMCopyDictionaryOfAttachments) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CFAllocatorRef, allocator);
+    declare_value(CMAttachmentBearerRef, target);
+    declare_value(CMAttachmentMode, attachmentMode);
+    js_return_value(CVImageBufferRef, ::CMCopyDictionaryOfAttachments(allocator, target, attachmentMode));
+  }
+}
+
 JS_INIT_GLOBALS(CMAttachment);
   // global values (exports)
+  JS_ASSIGN_GLOBAL_METHOD(CMGetAttachment);
+  JS_ASSIGN_GLOBAL_METHOD(CMCopyDictionaryOfAttachments);
+
+  // The attachment modes are the same as those defined in CVBuffer.h.
+  ////typedef uint32_t CMAttachmentMode API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+  //#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+  //enum : CMAttachmentMode
+  //#else
+  //enum
+  //#endif
+  //{
+    JS_ASSIGN_ENUM(kCMAttachmentMode_ShouldNotPropagate, uint32_t); //     = 0,
+    JS_ASSIGN_ENUM(kCMAttachmentMode_ShouldPropagate, uint32_t); //        = 1
+  //} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+
 JS_INIT_GLOBALS_END(CMAttachment);

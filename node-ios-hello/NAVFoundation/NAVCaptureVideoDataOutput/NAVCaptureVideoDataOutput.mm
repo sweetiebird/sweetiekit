@@ -117,7 +117,11 @@ NAN_METHOD(NAVCaptureVideoDataOutput::setSampleBufferDelegateQueue) {
     declare_args();
     declare_nullable_protocol(AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferDelegate);
     declare_nullable_value(dispatch_queue_t, sampleBufferCallbackQueue);
+    if (!sampleBufferCallbackQueue) {
+      sampleBufferCallbackQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    }
     [self setSampleBufferDelegate: sampleBufferDelegate queue: sampleBufferCallbackQueue];
+    [self associateValue:sampleBufferDelegate withKey:@"NAVCaptureVideoDataOutput::sampleBufferDelegate"];
   }
 }
 

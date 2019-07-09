@@ -22,6 +22,10 @@
 #define to_value_CFStringRef(x) to_value_bridged_type(x, CFStringRef, NSString)
 #define is_value_CFStringRef(x) is_value_bridged_type(x, CFStringRef, NSString)
 
+#define js_value_CFAllocatorRef(x) js_value_bridged_type(x, CFAllocatorRef, NSString)
+#define to_value_CFAllocatorRef(x) to_value_bridged_type(x, CFAllocatorRef, NSString)
+#define is_value_CFAllocatorRef(x) is_value_bridged_type(x, CFAllocatorRef, NSString)
+
 JS_WRAP_GLOBALS(CFBase);
 JS_WRAP_GLOBALS_END(CFBase);
 

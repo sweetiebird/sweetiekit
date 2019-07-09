@@ -4,6 +4,11 @@ const {
   UIImage,
 } = SweetieKit;
 
+AVCaptureVideoPreviewLayer_captureOutputDidOutputSampleBufferFromConnection = function AVCaptureVideoPreviewLayer_captureOutputDidOutputSampleBufferFromConnection(output, sampleBuffer, connection) {
+  const img = CIImage.imageWithCVPixelBuffer(CMSampleBufferGetImageBuffer(sampleBuffer));
+  gc();
+};
+
 AVCaptureVideoPreviewLayer_make = async function AVCaptureVideoPreviewLayer_make(nav, demoVC) {
   view = demoVC.view;
   session = AVCaptureSession();
@@ -26,6 +31,10 @@ AVCaptureVideoPreviewLayer_make = async function AVCaptureVideoPreviewLayer_make
   options.set(kCVPixelBufferPixelFormatTypeKey, kCVPixelFormatType_420YpCbCr8BiPlanarFullRange);
   output.videoSettings = options;
   output.alwaysDiscardsLateVideoFrames = true;
+  const queue = SweetieKit.dispatch_get_global_queue(2, 0);
+  output.setSampleBufferDelegateQueue(AVCaptureVideoDataOutputSampleBufferDelegate({
+    captureOutputDidOutputSampleBufferFromConnection: AVCaptureVideoPreviewLayer_captureOutputDidOutputSampleBufferFromConnection,
+  })/*, queue*/);
   if (session.canAddOutput(output)) {
     session.addOutput(output)
   }
