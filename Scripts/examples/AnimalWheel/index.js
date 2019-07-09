@@ -94,8 +94,24 @@ function playSound(nodeName) {
   }
 }
 
+async function getAnimalsList() {
+  const dataUrl = 'https://emkolar.ninja/sweetiekit/data/animals.json';
+
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: dataUrl,
+      responseType: 'json',
+    });
+
+    return response.data.animals;
+  } catch (err) {
+    console.log(err, err.response, err.message);
+  }
+}
+
 async function make(nav, demoVC) {
-  const animals = ['horse', 'pig', 'chick', 'rooster', 'cow', 'duck'];
+  const animals = await getAnimalsList();
 
   audioSession = AVAudioSession.sharedInstance();
   audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
