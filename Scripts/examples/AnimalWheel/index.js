@@ -14,7 +14,6 @@ const {
   ARWorldTrackingConfiguration,
   SCNLight,
   UIImage,
-  SCNSphere,
 } = SweetieKit;
 
 const animalImagesCache = {};
