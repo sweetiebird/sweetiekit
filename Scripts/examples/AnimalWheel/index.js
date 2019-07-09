@@ -1,8 +1,5 @@
 const SweetieKit = require('std:sweetiekit.node');
 const axios = require('axios');
-const Path = require('path');
-
-const colors = require('../colors');
 
 THREE = require('../../vendor/three/three');
 
@@ -17,12 +14,13 @@ const {
   ARWorldTrackingConfiguration,
   SCNLight,
   UIImage,
+  SCNSphere,
 } = SweetieKit;
 
 const animalImagesCache = {};
 
 function makeAnimalNodes(animals) {
-  return animals.map((animal, idx) => {
+  return animals.map((animal) => {
     const cardGeo = SCNBox({ width: 0.25, height: 0.35, length: 0.01, chamferRadius: 0 });
     const animalNode = new SCNNode(cardGeo);
     animalNode.name = animal;
@@ -68,22 +66,20 @@ function setMaterials(nodes, selected = false) {
   });
 }
 
-function playSound(nodeName) {
+async function playSound(nodeName) {
   try {
-    const soundPath = Path.resolve(Path.join(
-      Path.dirname(
-        Require.resolve('.')),
-      'node_modules',
-      'sweetiekit-art',
-      'media',
-      'sound',
-      `${nodeName}.mp3`,
-    ));
+    const soundUrl = `https://emkolar.ninja/sweetiekit/sound/${nodeName}.mp3`;
 
-    const soundUrl = NSURL.initFileURLWithPath(soundPath);
+    const resp = await axios({
+      method: 'GET',
+      url: soundUrl,
+      responseType: 'arraybuffer',
+    });
 
-    if (audioPlayer) {
-      audioPlayer = audioPlayer.initWithContentsOfURLError(soundUrl);
+    const { data } = resp;
+
+    if (data && audioPlayer) {
+      audioPlayer = audioPlayer.initWithDataError(data);
 
       if (audioPlayer.prepareToPlay()) {
         audioPlayer.play();
@@ -110,6 +106,20 @@ async function getAnimalsList() {
   }
 }
 
+async function makeWheel(nodes) {
+  const len = nodes.length;
+  const radius = 0.5;
+  const step = (2.0 * Math.PI) / len;
+
+  for (let i = 0; i < len; i++) {
+    const n = nodes[i];
+    const xPos = Math.cos(step * i) * radius;
+    const zPos = Math.sin(step * i) * radius;
+    n.position = { x: xPos, y: 0, z: zPos };
+    n.rotation = { x: 0, y: 0, z: 0, w: -Math.PI * (i/6/7.5) };
+  }
+}
+
 async function make(nav, demoVC) {
   const animals = await getAnimalsList();
 
@@ -126,6 +136,13 @@ async function make(nav, demoVC) {
   });
   scene = new SCNScene();
   animalNodes = makeAnimalNodes(animals);
+
+  containerNode = SCNNode();
+  containerNode.position = { x: 0, y: 0, z: -2 };
+
+  animalNodes.forEach((n) => {
+    containerNode.addChildNode(n);
+  });
 
   arView.delegate = viewDel;
   arView.scene = scene;
@@ -152,14 +169,12 @@ async function make(nav, demoVC) {
       if (typeof lastNode !== 'undefined') {
         const n = scene.rootNode.childNodeWithNameRecursively(lastNode, true);
 
-        if (n) {
-          setMaterials([n]);
+        if (audioPlayer && audioPlayer.isPlaying) {
+          audioPlayer.stop();
         }
       }
 
       if (hit.node) {
-        setMaterials([hit.node], true);
-
         playSound(hit.node.name);
 
         lastNode = hit.node.name;
@@ -169,18 +184,13 @@ async function make(nav, demoVC) {
 
   arView.viewWillAppear = () => {
     arView.session.run(config);
-    function configure() {
+    async function configure() {
       const frame = arView.session.currentFrame;
       if (!frame) {
         setTimeout(configure, 10);
       } else {
-        const camXform = frame.camera.transform;
-        const xform = new THREE.Matrix4().fromArray(camXform);
-        animalNodes.forEach((n, idx) => {
-          xform.multiply(new THREE.Matrix4().makeTranslation(idx * 0.25,0,-1));
-          n.simdTransform = xform;
-          scene.rootNode.addChildNode(n);
-        });
+        scene.rootNode.addChildNode(containerNode);
+        await makeWheel(animalNodes);
         setMaterials(animalNodes);
       }
     }

@@ -15,7 +15,7 @@ class LoginViewController: NodeUIViewController {
   
   override func viewDidLoad() {
       super.viewDidLoad()
-    
+
       // using instance from nib
       emailField = EmailTextField.instanceFromNib(frame: CGRect(x: 8, y: 32, width: container.frame.size.width - 16, height: 40))
       passwordField = PasswordTextField.instanceFromNib(frame: CGRect(x: 8, y: 32, width: container.frame.size.width - 16, height: 40))
