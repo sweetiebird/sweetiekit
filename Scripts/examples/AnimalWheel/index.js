@@ -96,7 +96,7 @@ function playSound(nodeName) {
 }
 
 async function make(nav, demoVC) {
-  const animals = ['rooster', 'cow', 'duck'];
+  const animals = ['horse', 'pig', 'chick', 'rooster', 'cow', 'duck'];
 
   audioSession = AVAudioSession.sharedInstance();
   audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
@@ -161,8 +161,8 @@ async function make(nav, demoVC) {
       } else {
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
-        animalNodes.forEach((n, idx) => {
-          xform.multiply(new THREE.Matrix4().makeTranslation(idx * 0.25,0,-1));
+        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-1));
+        animalNodes.forEach((n) => {
           n.simdTransform = xform;
           scene.rootNode.addChildNode(n);
         });
