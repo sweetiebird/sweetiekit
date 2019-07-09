@@ -7,6 +7,7 @@
 
 import Foundation
 import SceneKit
+#if !targetEnvironment(UIKitForMac)
 import ARKit
 
 typealias SARSCNViewDelegate_NodeForAnchorClosure = (SCNSceneRenderer, ARAnchor) -> SCNNode?
@@ -28,3 +29,4 @@ class SARSCNViewDelegate: NSObject, ARSCNViewDelegate {
     return node;
   }
 }
+#endif

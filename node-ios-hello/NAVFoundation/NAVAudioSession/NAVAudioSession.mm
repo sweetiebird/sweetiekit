@@ -33,8 +33,10 @@ JS_INIT_CLASS(AVAudioSession, NSObject);
   JS_ASSIGN_PROTO_METHOD(setInputDataSourceError);
   JS_ASSIGN_PROTO_METHOD(setOutputDataSourceError);
   JS_ASSIGN_PROTO_METHOD(setAggregatedIOPreferenceError);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(setActiveWithFlagsError);
   JS_ASSIGN_PROTO_METHOD(setPreferredHardwareSampleRateError);
+#endif
 #if TODO
 // AVAudioSessionDelegate
   JS_ASSIGN_PROTO_METHOD(beginInterruption);
@@ -77,11 +79,13 @@ JS_INIT_CLASS(AVAudioSession, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(outputLatency);
   JS_ASSIGN_PROTO_PROP_READONLY(IOBufferDuration);
   JS_ASSIGN_PROTO_PROP(delegate);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(inputIsAvailable);
   JS_ASSIGN_PROTO_PROP_READONLY(currentHardwareSampleRate);
   JS_ASSIGN_PROTO_PROP_READONLY(currentHardwareInputNumberOfChannels);
   JS_ASSIGN_PROTO_PROP_READONLY(currentHardwareOutputNumberOfChannels);
   JS_ASSIGN_PROTO_PROP_READONLY(preferredHardwareSampleRate);
+#endif
 
   // static members (ctor)
   JS_INIT_CTOR(AVAudioSession, NSObject);
@@ -109,7 +113,9 @@ NAN_METHOD(NAVAudioSession::New) {
     if (info[0]->IsExternal()) {
       self = (__bridge AVAudioSession *)(info[0].As<External>()->Value());
     } else if (info.Length() <= 0) {
+#if !TARGET_OS_UIKITFORMAC
       self = [[AVAudioSession alloc] init];
+#endif
     }
     if (self) {
       NAVAudioSession *wrapper = new NAVAudioSession();
@@ -353,12 +359,15 @@ NAN_METHOD(NAVAudioSession::setAggregatedIOPreferenceError) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NAVAudioSession::init) {
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_instancetype([[AVAudioSession alloc] init]));
   }
 }
+#endif
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NAVAudioSession::setActiveWithFlagsError) {
   JS_UNWRAP(AVAudioSession, self);
   declare_autoreleasepool {
@@ -370,7 +379,9 @@ NAN_METHOD(NAVAudioSession::setActiveWithFlagsError) {
     js_panic_NSError(error);
   }
 }
+#endif
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NAVAudioSession::setPreferredHardwareSampleRateError) {
   JS_UNWRAP(AVAudioSession, self);
   declare_autoreleasepool {
@@ -381,6 +392,7 @@ NAN_METHOD(NAVAudioSession::setPreferredHardwareSampleRateError) {
     js_panic_NSError(error);
   }
 }
+#endif
 
 #if TODO
 NAN_METHOD(NAVAudioSessionDelegate::beginInterruption) {
@@ -788,6 +800,7 @@ NAN_SETTER(NAVAudioSession::delegateSetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVAudioSession::inputIsAvailableGetter) {
   JS_UNWRAP(AVAudioSession, self);
   declare_autoreleasepool {
@@ -822,4 +835,4 @@ NAN_GETTER(NAVAudioSession::preferredHardwareSampleRateGetter) {
     JS_SET_RETURN(js_value_double([self preferredHardwareSampleRate]));
   }
 }
-
+#endif

@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_EAGLSharegroup(x) js_value_wrapper(x, EAGLSharegroup)
 #define to_value_EAGLSharegroup(x) to_value_wrapper(x, EAGLSharegroup)
 #define is_value_EAGLSharegroup(x) is_value_wrapper(x, EAGLSharegroup)
@@ -17,5 +19,7 @@
 JS_WRAP_CLASS(EAGLSharegroup, NSObject);
   JS_PROP(debugLabel);
 JS_WRAP_CLASS_END(EAGLSharegroup);
+
+#endif
 
 #endif /* NEAGLSharegroup_h */

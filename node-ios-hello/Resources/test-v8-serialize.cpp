@@ -32,7 +32,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+#ifdef __IPHONEOS__
 #include <signal.h>
 
 #include <sys/stat.h>
@@ -3974,3 +3974,4 @@ UNINITIALIZED_TEST(SnapshotCreatorAnonClassWithKeep) {
 
 }  // namespace internal
 }  // namespace v8
+#endif

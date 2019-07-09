@@ -186,8 +186,10 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPrimitivesIndexCountIndexTypeIndexBufferIndexBufferOffsetInstanceCountBaseVertexBaseInstance);
   JS_ASSIGN_PROTO_METHOD(drawPrimitivesIndirectBufferIndirectBufferOffset);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPrimitivesIndexTypeIndexBufferIndexBufferOffsetIndirectBufferIndirectBufferOffset);
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(textureBarrier);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(updateFenceAfterStages);
   JS_ASSIGN_PROTO_METHOD(waitForFenceBeforeStages);
@@ -197,6 +199,7 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(drawPatchesPatchIndexBufferPatchIndexBufferOffsetIndirectBufferIndirectBufferOffset);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPatchesPatchStartPatchCountPatchIndexBufferPatchIndexBufferOffsetControlPointIndexBufferControlPointIndexBufferOffsetInstanceCountBaseInstance);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPatchesPatchIndexBufferPatchIndexBufferOffsetControlPointIndexBufferControlPointIndexBufferOffsetIndirectBufferIndirectBufferOffset);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_METHOD(setTileBytesLengthAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileBufferWithOffsetAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileBufferOffsetAtIndex);
@@ -207,6 +210,7 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStatesWithRange);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStateLodMinClampLodMaxClampAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStatesLodMinClampsLodMaxClampsWithRange);
+#endif
   JS_ASSIGN_PROTO_METHOD(dispatchThreadsPerTile);
   JS_ASSIGN_PROTO_METHOD(setThreadgroupMemoryLengthOffsetAtIndex);
   JS_ASSIGN_PROTO_METHOD(useResourceUsage);
@@ -219,8 +223,10 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(memoryBarrierWithScopeAfterStagesBeforeStages);
 #endif
   JS_ASSIGN_PROTO_METHOD(memoryBarrierWithResourcesCountAfterStagesBeforeStages);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_PROP_READONLY(tileWidth);
   JS_ASSIGN_PROTO_PROP_READONLY(tileHeight);
+#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -841,6 +847,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::drawIndexedPrimitivesIndexTypeIndexBufferIn
   }
 }
 
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NMTLRenderCommandEncoder::textureBarrier) {
   JS_UNWRAP_PROTOCOL(MTLRenderCommandEncoder, self);
@@ -848,6 +855,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::textureBarrier) {
     [self textureBarrier];
   }
 }
+#endif
 #endif
 
 #include "NMTLFence.h"
@@ -952,6 +960,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::drawIndexedPatchesPatchIndexBufferPatchInde
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_METHOD(NMTLRenderCommandEncoder::setTileBytesLengthAtIndex) {
   JS_UNWRAP_PROTOCOL(MTLRenderCommandEncoder, self);
   declare_autoreleasepool {
@@ -1089,6 +1098,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::setThreadgroupMemoryLengthOffsetAtIndex) {
     [self setThreadgroupMemoryLength: length offset: offset atIndex: index];
   }
 }
+#endif
 
 #include "NMTLResource.h"
 
@@ -1187,6 +1197,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::memoryBarrierWithResourcesCountAfterStagesB
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NMTLRenderCommandEncoder::tileWidthGetter) {
   JS_UNWRAP_PROTOCOL(MTLRenderCommandEncoder, self);
   declare_autoreleasepool {
@@ -1200,3 +1211,4 @@ NAN_GETTER(NMTLRenderCommandEncoder::tileHeightGetter) {
     JS_SET_RETURN(js_value_NSUInteger([self tileHeight]));
   }
 }
+#endif

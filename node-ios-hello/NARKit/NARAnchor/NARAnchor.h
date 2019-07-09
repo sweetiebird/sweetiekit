@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARAnchor(x) js_value_wrapper(x, ARAnchor)
 #define to_value_ARAnchor(x) to_value_wrapper(x, ARAnchor)
 #define is_value_ARAnchor(x) is_value_wrapper(x, ARAnchor)
@@ -23,5 +25,6 @@ JS_WRAP_CLASS(ARAnchor, NSObject);
   JS_PROP_READONLY(transform);
 JS_WRAP_CLASS_END(ARAnchor);
 
+#endif
 
 #endif /* NARAnchor_h */

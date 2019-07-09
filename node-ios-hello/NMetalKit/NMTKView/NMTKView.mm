@@ -36,7 +36,7 @@ JS_INIT_CLASS(MTKView, UIView);
   JS_ASSIGN_PROTO_PROP(autoResizeDrawable);
   JS_ASSIGN_PROTO_PROP(drawableSize);
   JS_ASSIGN_PROTO_PROP(isPaused);
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(colorspace);
 #endif
 
@@ -398,7 +398,7 @@ NAN_SETTER(NMTKView::isPausedSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NMTKView::colorspaceGetter) {
   JS_UNWRAP(MTKView, self);
   declare_autoreleasepool {

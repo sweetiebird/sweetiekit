@@ -17,9 +17,11 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_STATIC_METHOD(progressWithTotalUnitCount);
   JS_ASSIGN_STATIC_METHOD(discreteProgressWithTotalUnitCount);
   JS_ASSIGN_STATIC_METHOD(progressWithTotalUnitCountParentPendingUnitCount);
+#if TODO
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_STATIC_METHOD(addSubscriberForFileURLWithPublishingHandler);
   JS_ASSIGN_STATIC_METHOD(removeSubscriber);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(initWithParentUserInfo);
   JS_ASSIGN_PROTO_METHOD(becomeCurrentWithPendingUnitCount);
@@ -30,7 +32,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_PROTO_METHOD(cancel);
   JS_ASSIGN_PROTO_METHOD(pause);
   JS_ASSIGN_PROTO_METHOD(resume);
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(publish);
   JS_ASSIGN_PROTO_METHOD(unpublish);
 #endif
@@ -56,7 +58,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_PROTO_PROP(fileURL);
   JS_ASSIGN_PROTO_PROP(fileTotalCount);
   JS_ASSIGN_PROTO_PROP(fileCompletedCount);
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isOld);
 #endif
 
@@ -101,6 +103,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_ENUM(NSProgressFileTotalCountKey, NSProgressUserInfoKey); //  NS_AVAILABLE(10_9, 7_0);
   JS_ASSIGN_ENUM(NSProgressFileCompletedCountKey, NSProgressUserInfoKey); //  NS_AVAILABLE(10_9, 7_0);
 
+#if TODO
 #if !TARGET_OS_IPHONE
   /* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen.
   */
@@ -110,6 +113,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   /* A user info dictionary key. The value must be an NSImage containing an icon. This entry is optional but, if it is present, the Finder will use it to show the icon of a file while progress is being made on that file. For example, the App Store uses this to specify an icon for an application being downloaded before the icon can be gotten from the application bundle itself.
   */
   JS_ASSIGN_ENUM(NSProgressFileIconKey, NSProgressUserInfoKey); //  API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
 #endif
 
 JS_INIT_CLASS_END(NSProgress, NSObject);
@@ -176,7 +180,10 @@ NAN_METHOD(NNSProgress::addSubscriberForFileURLWithPublishingHandler) {
     declare_args();
     declare_pointer(NSURL, url);
     declare_callback(publishingHandler);
+    JS_TODO();
+    #if TODO
     JS_SET_RETURN(js_value_id([NSProgress addSubscriberForFileURL: url withPublishingHandler: publishingHandler]));
+    #endif
   }
 }
 
@@ -184,7 +191,10 @@ NAN_METHOD(NNSProgress::removeSubscriber) {
   declare_autoreleasepool {
     declare_args();
     declare_value(id, subscriber);
+    JS_TODO();
+    #if TODO
     [NSProgress removeSubscriber: subscriber];
+    #endif
   }
 }
 #endif
@@ -270,7 +280,7 @@ NAN_METHOD(NNSProgress::resume) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
 
 NAN_METHOD(NNSProgress::publish) {
   JS_UNWRAP(NSProgress, self);
@@ -589,7 +599,7 @@ NAN_SETTER(NNSProgress::fileCompletedCountSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NNSProgress::isOldGetter) {
   JS_UNWRAP(NSProgress, self);
   declare_autoreleasepool {

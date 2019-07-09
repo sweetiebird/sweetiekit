@@ -6,6 +6,8 @@
 //
 #include "NMTLTileRenderPipelineColorAttachmentDescriptorArray.h"
 
+#if !(TARGET_OS_MAC || TARGET_OS_UIKITFORMAC)
+
 #define instancetype MTLTileRenderPipelineColorAttachmentDescriptorArray
 #define js_value_instancetype js_value_MTLTileRenderPipelineColorAttachmentDescriptorArray
 
@@ -64,3 +66,5 @@ NAN_METHOD(NMTLTileRenderPipelineColorAttachmentDescriptorArray::setObjectAtInde
     [self setObject: attachment atIndexedSubscript: attachmentIndex];
   }
 }
+
+#endif

@@ -222,7 +222,7 @@ NAN_SETTER(NMKAnnotationView::calloutOffsetSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 NAN_GETTER(NMKAnnotationView::leftCalloutOffsetGetter) {
   JS_UNWRAP(MKAnnotationView, self);
@@ -321,7 +321,7 @@ NAN_SETTER(NMKAnnotationView::canShowCalloutSetter) {
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || TARGET_OS_UIKITFORMAC
 
 NAN_GETTER(NMKAnnotationView::leftCalloutAccessoryViewGetter) {
   JS_UNWRAP(MKAnnotationView, self);
@@ -340,6 +340,12 @@ NAN_SETTER(NMKAnnotationView::leftCalloutAccessoryViewSetter) {
 }
 
 #else
+
+#include <AppKit/NSView.h>
+//#include "NNSView.h"
+#define js_value_NSView(x) js_value_wrapper_unknown(x, NSView)
+#define to_value_NSView(x) to_value_wrapper_unknown(x, NSView)
+#define is_value_NSView(x) is_value_wrapper_unknown(x, NSView)
 
 NAN_GETTER(NMKAnnotationView::leftCalloutAccessoryViewGetter) {
   JS_UNWRAP(MKAnnotationView, self);
@@ -360,7 +366,7 @@ NAN_SETTER(NMKAnnotationView::leftCalloutAccessoryViewSetter) {
 #endif
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || TARGET_OS_UIKITFORMAC
 
 NAN_GETTER(NMKAnnotationView::rightCalloutAccessoryViewGetter) {
   JS_UNWRAP(MKAnnotationView, self);
@@ -398,7 +404,7 @@ NAN_SETTER(NMKAnnotationView::rightCalloutAccessoryViewSetter) {
 
 #endif
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || TARGET_OS_UIKITFORMAC
 
 NAN_GETTER(NMKAnnotationView::detailCalloutAccessoryViewGetter) {
   JS_UNWRAP(MKAnnotationView, self);

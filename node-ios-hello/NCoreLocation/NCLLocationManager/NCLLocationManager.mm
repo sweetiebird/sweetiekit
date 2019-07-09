@@ -11,8 +11,10 @@ NCLLocationManager::NCLLocationManager () {}
 NCLLocationManager::~NCLLocationManager () {}
 
 JS_INIT_CLASS(CLLocationManager, NSObject);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_STATIC_METHOD(locationServicesEnabled);
   JS_ASSIGN_STATIC_METHOD(headingAvailable);
+#endif
   JS_ASSIGN_STATIC_METHOD(significantLocationChangeMonitoringAvailable);
   JS_ASSIGN_STATIC_METHOD(isMonitoringAvailableForClass);
   JS_ASSIGN_STATIC_METHOD(regionMonitoringAvailable);
@@ -30,14 +32,20 @@ JS_INIT_CLASS(CLLocationManager, NSObject);
   JS_ASSIGN_PROTO_METHOD(dismissHeadingCalibrationDisplay);
   JS_ASSIGN_PROTO_METHOD(startMonitoringSignificantLocationChanges);
   JS_ASSIGN_PROTO_METHOD(stopMonitoringSignificantLocationChanges);
+#if DEPRECATED
+#if !TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(startMonitoringForRegionDesiredAccuracy);
+#endif
+#endif
   JS_ASSIGN_PROTO_METHOD(stopMonitoringForRegion);
   JS_ASSIGN_PROTO_METHOD(startMonitoringForRegion);
   JS_ASSIGN_PROTO_METHOD(requestStateForRegion);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(startRangingBeaconsInRegion);
   JS_ASSIGN_PROTO_METHOD(stopRangingBeaconsInRegion);
   JS_ASSIGN_PROTO_METHOD(allowDeferredLocationUpdatesUntilTraveledTimeout);
   JS_ASSIGN_PROTO_METHOD(disallowDeferredLocationUpdates);
+#endif
   JS_ASSIGN_PROTO_PROP(delegate);
   JS_ASSIGN_PROTO_PROP_READONLY(locationServicesEnabled);
   JS_ASSIGN_PROTO_PROP(purpose);
@@ -54,7 +62,9 @@ JS_INIT_CLASS(CLLocationManager, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(heading);
   JS_ASSIGN_PROTO_PROP_READONLY(maximumRegionMonitoringDistance);
   JS_ASSIGN_PROTO_PROP_READONLY(monitoredRegions);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(rangedRegions);
+#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -268,15 +278,19 @@ NAN_METHOD(NCLLocationManager::stopMonitoringSignificantLocationChanges) {
 #include "NCLRegion.h"
 #include "NCLLocation.h"
 
+#if DEPRECATED
+#if !TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::startMonitoringForRegionDesiredAccuracy) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
     declare_args();
     declare_pointer(CLRegion, region);
     declare_value(CLLocationAccuracy, accuracy);
-    [self startMonitoringForRegion: region desiredAccuracy: accuracy];
+    [self startMonitoringForRedgion: region desiredAccuracy: accuracy];
   }
 }
+#endif
+#endif
 
 NAN_METHOD(NCLLocationManager::stopMonitoringForRegion) {
   JS_UNWRAP(CLLocationManager, self);
@@ -307,6 +321,7 @@ NAN_METHOD(NCLLocationManager::requestStateForRegion) {
 
 #include "NCLBeaconRegion.h"
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::startRangingBeaconsInRegion) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
@@ -315,7 +330,9 @@ NAN_METHOD(NCLLocationManager::startRangingBeaconsInRegion) {
     [self startRangingBeaconsInRegion: region];
   }
 }
+#endif
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::stopRangingBeaconsInRegion) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
@@ -324,7 +341,9 @@ NAN_METHOD(NCLLocationManager::stopRangingBeaconsInRegion) {
     [self stopRangingBeaconsInRegion: region];
   }
 }
+#endif
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::allowDeferredLocationUpdatesUntilTraveledTimeout) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
@@ -334,13 +353,16 @@ NAN_METHOD(NCLLocationManager::allowDeferredLocationUpdatesUntilTraveledTimeout)
     [self allowDeferredLocationUpdatesUntilTraveled: distance timeout: timeout];
   }
 }
+#endif
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::disallowDeferredLocationUpdates) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
     [self disallowDeferredLocationUpdates];
   }
 }
+#endif
 
 NAN_GETTER(NCLLocationManager::delegateGetter) {
   JS_UNWRAP(CLLocationManager, self);
@@ -358,12 +380,14 @@ NAN_SETTER(NCLLocationManager::delegateSetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NCLLocationManager::locationServicesEnabledGetter) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self locationServicesEnabled]));
   }
 }
+#endif
 
 NAN_GETTER(NCLLocationManager::purposeGetter) {
   JS_UNWRAP(CLLocationManager, self);
@@ -484,12 +508,14 @@ NAN_GETTER(NCLLocationManager::locationGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NCLLocationManager::headingAvailableGetter) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self headingAvailable]));
   }
 }
+#endif
 
 NAN_GETTER(NCLLocationManager::headingFilterGetter) {
   JS_UNWRAP(CLLocationManager, self);
@@ -546,9 +572,11 @@ NAN_GETTER(NCLLocationManager::monitoredRegionsGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NCLLocationManager::rangedRegionsGetter) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSSet/* <CLRegion*>*/([self rangedRegions]));
   }
 }
+#endif

@@ -18,10 +18,6 @@
 #define to_value_RPCameraPosition(x) TO_ENUM(RPCameraPosition, NSInteger, x)
 #define is_value_RPCameraPosition(x) IS_ENUM(RPCameraPosition, NSInteger, x)
 
-#define js_value_CMSampleBufferRef(x) js_value_bridged(x, CMSampleBufferRef)
-#define to_value_CMSampleBufferRef(x) to_value_bridged(x, CMSampleBufferRef)
-#define is_value_CMSampleBufferRef(x) is_value_bridged(x, CMSampleBufferRef)
-
 #define js_value_RPSampleBufferType(x) JS_ENUM(RPSampleBufferType, NSInteger, x)
 #define to_value_RPSampleBufferType(x) TO_ENUM(RPSampleBufferType, NSInteger, x)
 #define is_value_RPSampleBufferType(x) IS_ENUM(RPSampleBufferType, NSInteger, x)

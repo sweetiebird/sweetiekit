@@ -37,7 +37,7 @@ JS_INIT_CLASS(AVAudioPlayer, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(isPlaying);
   JS_ASSIGN_PROTO_PROP_READONLY(numberOfChannels);
   JS_ASSIGN_PROTO_PROP_READONLY(duration);
-#ifndef __IPHONEOS__
+#if !defined(__IPHONEOS__) && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(currentDevice);
 #endif
   JS_ASSIGN_PROTO_PROP(delegate);
@@ -297,7 +297,7 @@ NAN_GETTER(NAVAudioPlayer::durationGetter) {
   }
 }
 
-#ifndef __IPHONEOS__
+#if !defined(__IPHONEOS__) && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVAudioPlayer::currentDeviceGetter) {
   JS_UNWRAP(AVAudioPlayer, self);
   declare_autoreleasepool {

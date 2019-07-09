@@ -93,7 +93,7 @@ NAN_GETTER(NUIEvent::allTouchesGetter) {
 NAN_METHOD(NUIEvent::allTouches) {
   JS_UNWRAP(UIEvent, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSSet<UITouch*>([self allTouches]));
+    JS_SET_RETURN(js_value_NSSet/* <UITouch*>*/([self allTouches]));
   }
 }
 #endif

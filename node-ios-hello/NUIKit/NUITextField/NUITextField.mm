@@ -392,7 +392,7 @@ NAN_METHOD(NUITextField::initNewWithFrameCallback) {
     [self setClearButtonMode:UITextFieldViewModeWhileEditing];
     [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [self setTargetClosureWithClosure:^(UITextField* sender){
-      __block bool result = true;
+      __block BOOL result = YES;
       dispatch_main(^{
         get_persistent_function(sender, callback, @"sweetiekit.UITextField.initWithFrameCallback");
         if (callback) {
@@ -420,7 +420,7 @@ NAN_METHOD(NUITextField::initWithFrameCallback) {
     [self setClearButtonMode:UITextFieldViewModeWhileEditing];
     [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [self setTargetClosureWithClosure:^(UITextField* sender){
-      __block bool result = true;
+      __block BOOL result = YES;
       dispatch_main(^{
         get_persistent_function(sender, callback, @"sweetiekit.UITextField.initWithFrameCallback");
         if (callback) {

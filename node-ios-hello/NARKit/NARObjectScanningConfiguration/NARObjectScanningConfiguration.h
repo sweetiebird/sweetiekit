@@ -10,6 +10,8 @@
 
 #include "NARConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARObjectScanningConfiguration(x) js_value_wrapper(x, ARObjectScanningConfiguration)
 #define to_value_ARObjectScanningConfiguration(x) to_value_wrapper(x, ARObjectScanningConfiguration)
 #define is_value_ARObjectScanningConfiguration(x) is_value_wrapper(x, ARObjectScanningConfiguration)
@@ -20,5 +22,7 @@ JS_WRAP_CLASS(ARObjectScanningConfiguration, ARConfiguration);
   JS_PROP(isAutoFocusEnabled);
   JS_PROP(planeDetection);
 JS_WRAP_CLASS_END(ARObjectScanningConfiguration);
+
+#endif
 
 #endif /* NARObjectScanningConfiguration_h */

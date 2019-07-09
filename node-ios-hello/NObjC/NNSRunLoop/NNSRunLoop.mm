@@ -24,8 +24,10 @@ JS_INIT_CLASS(NSRunLoop, NSObject);
   JS_ASSIGN_PROTO_METHOD(run);
   JS_ASSIGN_PROTO_METHOD(runUntilDate);
   JS_ASSIGN_PROTO_METHOD(runModeBeforeDate);
+#if DEPRECATED
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
   JS_ASSIGN_PROTO_METHOD(configureAsServer);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(performInModesBlock);
   JS_ASSIGN_PROTO_METHOD(performBlock);
@@ -160,6 +162,7 @@ NAN_METHOD(NNSRunLoop::runModeBeforeDate) {
   }
 }
 
+#if DEPRECATED
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 NAN_METHOD(NNSRunLoop::configureAsServer) {
   JS_UNWRAP(NSRunLoop, self);
@@ -167,6 +170,7 @@ NAN_METHOD(NNSRunLoop::configureAsServer) {
     [self configureAsServer];
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NNSRunLoop::performInModesBlock) {

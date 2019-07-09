@@ -16,14 +16,18 @@ NCIImage::~NCIImage() {}
 JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_STATIC_METHOD(imageWithCGImage);
   JS_ASSIGN_STATIC_METHOD(imageWithCGImageOptions);
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_STATIC_METHOD(imageWithCGLayer);
   JS_ASSIGN_STATIC_METHOD(imageWithCGLayerOptions);
 #endif
+#endif
   JS_ASSIGN_STATIC_METHOD(imageWithBitmapDataBytesPerRowSizeFormatColorSpace);
   JS_ASSIGN_STATIC_METHOD(imageWithTextureSizeFlippedColorSpace);
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_STATIC_METHOD(imageWithTextureSizeFlippedOptions);
+#endif
 #endif
   JS_ASSIGN_STATIC_METHOD(imageWithMTLTextureOptions);
   JS_ASSIGN_STATIC_METHOD(imageWithContentsOfURL);
@@ -46,16 +50,20 @@ JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_STATIC_METHOD(imageWithPortaitEffectsMatte);
   JS_ASSIGN_PROTO_METHOD(initWithCGImage);
   JS_ASSIGN_PROTO_METHOD(initWithCGImageOptions);
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(initWithCGLayer);
   JS_ASSIGN_PROTO_METHOD(initWithCGLayerOptions);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(initWithData);
   JS_ASSIGN_PROTO_METHOD(initWithDataOptions);
   JS_ASSIGN_PROTO_METHOD(initWithBitmapDataBytesPerRowSizeFormatColorSpace);
   JS_ASSIGN_PROTO_METHOD(initWithTextureSizeFlippedColorSpace);
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(initWithTextureSizeFlippedOptions);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(initWithMTLTextureOptions);
   JS_ASSIGN_PROTO_METHOD(initWithContentsOfURL);
@@ -64,8 +72,10 @@ JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_PROTO_METHOD(initWithIOSurface);
   JS_ASSIGN_PROTO_METHOD(initWithIOSurfaceOptions);
 #endif
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(initWithIOSurfacePlaneFormatOptions);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(initWithCVImageBuffer);
   JS_ASSIGN_PROTO_METHOD(initWithCVImageBufferOptions);
@@ -103,7 +113,7 @@ JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_PROTO_METHOD(initWithPortaitEffectsMatte);
   JS_ASSIGN_PROTO_PROP_READONLY(extent);
   JS_ASSIGN_PROTO_PROP_READONLY(properties);
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(definition);
 #endif
   JS_ASSIGN_PROTO_PROP_READONLY(url);
@@ -189,9 +199,11 @@ JS_INIT_CLASS(CIImage, NSObject);
   JS_ASSIGN_ENUM(kCIImageApplyOrientationProperty, CIImageOption); // NS_AVAILABLE(10_13, 11_0);
 
 
+#if DEPRECATED_10_14
 #if !defined(__IPHONEOS__)
   JS_ASSIGN_ENUM(kCIImageTextureTarget, CIImageOption); // CI_GL_DEPRECATED_MAC(10_9,10_14);
   JS_ASSIGN_ENUM(kCIImageTextureFormat, CIImageOption); // CI_GL_DEPRECATED_MAC(10_9,10_14);
+#endif
 #endif
 
   /* The kCIImageAuxiliaryDepth or kCIImageAuxiliaryDisparity or kCIImageAuxiliaryPortraitEffectsMatte keys can be passed to the methods:
@@ -263,6 +275,7 @@ NAN_METHOD(NCIImage::imageWithCGImageOptions) {
   }
 }
 
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NCIImage::imageWithCGLayer) {
   declare_autoreleasepool {
@@ -280,6 +293,7 @@ NAN_METHOD(NCIImage::imageWithCGLayerOptions) {
     JS_SET_RETURN(js_value_CIImage([CIImage imageWithCGLayer: layer options: options]));
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCIImage::imageWithBitmapDataBytesPerRowSizeFormatColorSpace) {
@@ -305,6 +319,7 @@ NAN_METHOD(NCIImage::imageWithTextureSizeFlippedColorSpace) {
   }
 }
 
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NCIImage::imageWithTextureSizeFlippedOptions) {
   declare_autoreleasepool {
@@ -316,6 +331,7 @@ NAN_METHOD(NCIImage::imageWithTextureSizeFlippedOptions) {
     JS_SET_RETURN(js_value_CIImage([CIImage imageWithTexture: name size: size flipped: flipped options: options]));
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCIImage::imageWithMTLTextureOptions) {
@@ -496,6 +512,7 @@ NAN_METHOD(NCIImage::initWithCGImageOptions) {
   }
 }
 
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NCIImage::initWithCGLayer) {
   JS_UNWRAP_OR_ALLOC(CIImage, self);
@@ -515,6 +532,7 @@ NAN_METHOD(NCIImage::initWithCGLayerOptions) {
     JS_SET_RETURN(js_value_instancetype([self initWithCGLayer: layer options: options]));
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCIImage::initWithData) {
@@ -561,6 +579,7 @@ NAN_METHOD(NCIImage::initWithTextureSizeFlippedColorSpace) {
   }
 }
 
+#if DEPRECATED_10_14
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NCIImage::initWithTextureSizeFlippedOptions) {
   JS_UNWRAP_OR_ALLOC(CIImage, self);
@@ -573,6 +592,7 @@ NAN_METHOD(NCIImage::initWithTextureSizeFlippedOptions) {
     JS_SET_RETURN(js_value_instancetype([self initWithTexture: name size: size flipped: flipped options: options]));
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCIImage::initWithMTLTextureOptions) {
@@ -625,6 +645,7 @@ NAN_METHOD(NCIImage::initWithIOSurfaceOptions) {
 }
 #endif
 
+#if DEPRECATED_10_11
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NCIImage::initWithIOSurfacePlaneFormatOptions) {
   JS_UNWRAP_OR_ALLOC(CIImage, self);
@@ -637,6 +658,7 @@ NAN_METHOD(NCIImage::initWithIOSurfacePlaneFormatOptions) {
     JS_SET_RETURN(js_value_instancetype([self initWithIOSurface: surface plane: plane format: format options: options]));
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCIImage::initWithCVImageBuffer) {
@@ -951,7 +973,7 @@ NAN_GETTER(NCIImage::propertiesGetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NCIImage::definitionGetter) {
   JS_UNWRAP(CIImage, self);
   declare_autoreleasepool {

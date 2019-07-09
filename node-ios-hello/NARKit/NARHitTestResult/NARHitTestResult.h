@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARHitTestResult(x) js_value_wrapper(x, ARHitTestResult)
 #define to_value_ARHitTestResult(x) to_value_wrapper(x, ARHitTestResult)
 #define is_value_ARHitTestResult(x) is_value_wrapper(x, ARHitTestResult)
@@ -27,5 +29,7 @@ JS_WRAP_CLASS(ARHitTestResult, NSObject);
   JS_PROP_READONLY(worldTransform);
   JS_PROP_READONLY(anchor);
 JS_WRAP_CLASS_END(ARHitTestResult);
+
+#endif
 
 #endif /* NARHitTestResult_h */

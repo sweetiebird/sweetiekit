@@ -6,6 +6,8 @@
 //
 #include "NGLKViewControllerDelegate.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype GLKViewControllerDelegate
 #define js_value_instancetype js_value_GLKViewControllerDelegate
 
@@ -76,3 +78,5 @@ DELEGATE_PROTOCOL_PROP(GLKViewControllerDelegate, glkViewControllerWillPause);
 }
 
 @end
+
+#endif

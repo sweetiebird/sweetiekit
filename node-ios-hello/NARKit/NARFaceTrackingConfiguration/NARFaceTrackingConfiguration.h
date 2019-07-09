@@ -8,6 +8,8 @@
 #ifndef NARFaceTrackingConfiguration_h
 #define NARFaceTrackingConfiguration_h    
 
+#ifdef __IPHONEOS__
+
 #include "NARConfiguration.h"
 
 #define js_value_ARFaceTrackingConfiguration(x) js_value_wrapper(x, ARFaceTrackingConfiguration)
@@ -18,5 +20,7 @@ JS_WRAP_CLASS(ARFaceTrackingConfiguration, ARConfiguration);
   JS_STATIC_PROP_READONLY(isSupported);
   JS_STATIC_PROP_READONLY(supportedVideoFormats);
 JS_WRAP_CLASS_END(ARFaceTrackingConfiguration);
+
+#endif
 
 #endif /* NARFaceTrackingConfiguration_h */

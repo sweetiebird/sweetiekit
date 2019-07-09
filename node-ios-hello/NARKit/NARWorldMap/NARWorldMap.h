@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARWorldMap(x) js_value_wrapper(x, ARWorldMap)
 #define to_value_ARWorldMap(x) to_value_wrapper(x, ARWorldMap)
 #define is_value_ARWorldMap(x) is_value_wrapper(x, ARWorldMap)
@@ -20,5 +22,7 @@ JS_WRAP_CLASS(ARWorldMap, NSObject);
   JS_PROP(anchors);
   JS_PROP_READONLY(rawFeaturePoints);
 JS_WRAP_CLASS_END(ARWorldMap);
+
+#endif
 
 #endif /* NARWorldMap_h */

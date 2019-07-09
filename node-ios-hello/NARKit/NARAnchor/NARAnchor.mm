@@ -7,6 +7,8 @@
 #include "NARAnchor.h"
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARAnchor
 #define js_value_instancetype js_value_ARAnchor
 
@@ -104,3 +106,5 @@ NAN_GETTER(NARAnchor::transformGetter) {
     JS_SET_RETURN(js_value_simd_float4x4([self transform]));
   }
 }
+
+#endif

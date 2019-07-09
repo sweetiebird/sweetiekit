@@ -73,10 +73,12 @@ JS_INIT_CLASS(MTLRenderPassDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(stencilAttachment);
   JS_ASSIGN_PROTO_PROP(visibilityResultBuffer);
   JS_ASSIGN_PROTO_PROP(renderTargetArrayLength);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_PROP(imageblockSampleLength);
   JS_ASSIGN_PROTO_PROP(threadgroupMemoryLength);
   JS_ASSIGN_PROTO_PROP(tileWidth);
   JS_ASSIGN_PROTO_PROP(tileHeight);
+#endif
   JS_ASSIGN_PROTO_PROP(defaultRasterSampleCount);
   JS_ASSIGN_PROTO_PROP(renderTargetWidth);
   JS_ASSIGN_PROTO_PROP(renderTargetHeight);
@@ -267,6 +269,7 @@ NAN_SETTER(NMTLRenderPassDescriptor::renderTargetArrayLengthSetter) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NMTLRenderPassDescriptor::imageblockSampleLengthGetter) {
   JS_UNWRAP(MTLRenderPassDescriptor, self);
   declare_autoreleasepool {
@@ -330,6 +333,7 @@ NAN_SETTER(NMTLRenderPassDescriptor::tileHeightSetter) {
     [self setTileHeight: input];
   }
 }
+#endif
 
 NAN_GETTER(NMTLRenderPassDescriptor::defaultRasterSampleCountGetter) {
   JS_UNWRAP(MTLRenderPassDescriptor, self);

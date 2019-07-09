@@ -33,7 +33,9 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
   JS_ASSIGN_PROTO_PROP(debugOptions);
   JS_ASSIGN_PROTO_PROP(overlaySKScene);
   JS_ASSIGN_PROTO_PROP_READONLY(renderingAPI);
+#if SCN_ENABLE_OPENGL
   JS_ASSIGN_PROTO_PROP_READONLY(context);
+#endif
 #if SCN_ENABLE_METAL
   JS_ASSIGN_PROTO_PROP_READONLY(currentRenderCommandEncoder);
   JS_ASSIGN_PROTO_PROP_READONLY(device);
@@ -69,7 +71,9 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
    */
   //typedef NS_ENUM(NSUInteger, SCNRenderingAPI) {
     JS_ASSIGN_ENUM(SCNRenderingAPIMetal, NSUInteger);
+#ifdef __IPHONEOS__
     JS_ASSIGN_ENUM(SCNRenderingAPIOpenGLES2, NSUInteger);
+#endif
   //} API_AVAILABLE(macos(10.11), ios(9.0));
 
   /*!
@@ -307,12 +311,14 @@ NAN_GETTER(NSCNSceneRenderer::renderingAPIGetter) {
   }
 }
 
+#if SCN_ENABLE_OPENGL
 NAN_GETTER(NSCNSceneRenderer::contextGetter) {
   JS_UNWRAP_PROTOCOL(SCNSceneRenderer, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_void_pointer([self context]));
   }
 }
+#endif
 
 #if SCN_ENABLE_METAL
 

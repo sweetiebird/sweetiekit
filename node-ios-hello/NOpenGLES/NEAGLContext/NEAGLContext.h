@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_EAGLContext(x) js_value_wrapper(x, EAGLContext)
 #define to_value_EAGLContext(x) to_value_wrapper(x, EAGLContext)
 #define is_value_EAGLContext(x) is_value_wrapper(x, EAGLContext)
@@ -30,5 +32,7 @@ JS_WRAP_CLASS(EAGLContext, NSObject);
   JS_PROP(isMultiThreaded);
 
 JS_WRAP_CLASS_END(EAGLContext);
+
+#endif
 
 #endif /* NEAGLContext_h */

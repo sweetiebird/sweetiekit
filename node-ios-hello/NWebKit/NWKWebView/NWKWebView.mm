@@ -7,6 +7,7 @@
 #include "NWKWebView.h"
 
 #import <WebKit/WebKit.h>
+#import <WebKit/WKWebView.h>
 
 #define instancetype WKWebView
 #define js_value_instancetype js_value_WKWebView
@@ -258,52 +259,10 @@ NAN_METHOD(NWKWebView::setMagnificationCenteredAtPoint) {
     declare_args();
     declare_value(CGFloat, magnification);
     declare_value(CGPoint, point);
+    JS_TODO();
+    #if TODO
     [self setMagnification: magnification centeredAtPoint: point];
-  }
-}
-
-NAN_METHOD(NWKWebView::goBack) {
-  JS_UNWRAP(WKWebView, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(id, sender);
-    JS_SET_RETURN(js_value_IBAction([self goBack: sender]));
-  }
-}
-
-NAN_METHOD(NWKWebView::goForward) {
-  JS_UNWRAP(WKWebView, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(id, sender);
-    JS_SET_RETURN(js_value_IBAction([self goForward: sender]));
-  }
-}
-
-NAN_METHOD(NWKWebView::reload) {
-  JS_UNWRAP(WKWebView, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(id, sender);
-    JS_SET_RETURN(js_value_IBAction([self reload: sender]));
-  }
-}
-
-NAN_METHOD(NWKWebView::reloadFromOrigin) {
-  JS_UNWRAP(WKWebView, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(id, sender);
-    JS_SET_RETURN(js_value_IBAction([self reloadFromOrigin: sender]));
-  }
-}
-
-NAN_METHOD(NWKWebView::stopLoading) {
-  JS_UNWRAP(WKWebView, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(id, sender);
-    JS_SET_RETURN(js_value_IBAction([self stopLoading: sender]));
+    #endif
   }
 }
 #endif
@@ -482,7 +441,10 @@ NAN_GETTER(NWKWebView::scrollViewGetter) {
 NAN_GETTER(NWKWebView::allowsMagnificationGetter) {
   JS_UNWRAP(WKWebView, self);
   declare_autoreleasepool {
+    JS_TODO();
+    #if TODO
     JS_SET_RETURN(js_value_BOOL([self allowsMagnification]));
+    #endif
   }
 }
 
@@ -491,14 +453,20 @@ NAN_SETTER(NWKWebView::allowsMagnificationSetter) {
   declare_autoreleasepool {
     declare_setter();
     declare_value(BOOL, input);
+    JS_TODO();
+    #if TODO
     [self setAllowsMagnification: input];
+    #endif
   }
 }
 
 NAN_GETTER(NWKWebView::magnificationGetter) {
   JS_UNWRAP(WKWebView, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_CGFloat([self magnification]));
+    JS_TODO();
+    #if TODO
+    JS_SET_RETURN(js_value_CGFloat([self magnification]))
+    #endif
   }
 }
 
@@ -507,7 +475,10 @@ NAN_SETTER(NWKWebView::magnificationSetter) {
   declare_autoreleasepool {
     declare_setter();
     declare_value(CGFloat, input);
+    JS_TODO();
+    #if TODO
     [self setMagnification: input];
+    #endif
   }
 }
 #endif

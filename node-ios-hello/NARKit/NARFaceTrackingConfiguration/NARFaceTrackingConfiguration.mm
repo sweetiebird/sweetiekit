@@ -6,6 +6,8 @@
 //
 #include "NARFaceTrackingConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARFaceTrackingConfiguration
 #define Ninstancetype NARFaceTrackingConfiguration
 #define js_value_instancetype js_value_ARFaceTrackingConfiguration
@@ -55,3 +57,5 @@ NAN_METHOD(NARFaceTrackingConfiguration::New) {
     }
   }
 }
+
+#endif

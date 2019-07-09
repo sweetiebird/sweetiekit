@@ -366,7 +366,9 @@ NAN_METHOD(Nid::_objc_msgSend)
     
     switch (info.Length()) {
       case 2: {
+#if TODO_IOS13
         nobjc_msgSend0(obj, sel);
+#endif
       } break;
       default: {
         Nan::ThrowError("Nid::objc_msgSend: input arguments not yet implemented");
@@ -650,6 +652,7 @@ JS_INIT_CLASS(NSObject, id);
   JS_ASSIGN_PROTO_METHOD(setValueForKey);
 #endif
 // NSObject
+#if UNAVAILABLE
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
   JS_ASSIGN_STATIC_METHOD(useStoredAccessor);
   JS_ASSIGN_PROTO_METHOD(storedValueForKey);
@@ -661,6 +664,7 @@ JS_INIT_CLASS(NSObject, id);
   JS_ASSIGN_PROTO_METHOD(unableToSetNilForKey);
   JS_ASSIGN_PROTO_METHOD(valuesForKeys);
   JS_ASSIGN_PROTO_METHOD(takeValuesFromDictionary);
+#endif
 #endif
 #if TODO
   JS_ASSIGN_STATIC_PROP_READONLY(accessInstanceVariablesDirectly);
@@ -882,6 +886,7 @@ NAN_METHOD(NNSObject::setValuesForKeysWithDictionary) {
   }
 }
 
+#if UNAVAILABLE
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 NAN_METHOD(NNSObject::useStoredAccessor) {
@@ -976,6 +981,7 @@ NAN_METHOD(NNSObject::takeValuesFromDictionary) {
 }
 
 #endif // #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#endif // UNAVAILABLE
 
 #if TODO
 NAN_GETTER(NNSObject::accessInstanceVariablesDirectlyGetter) {
@@ -1014,6 +1020,7 @@ NAN_METHOD(NClass::New) {
 }
 
 #include "NNSObjCRuntime.h"
+#include "NMacTypes.h"
 #include "NNSTarget.h"
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
@@ -1367,6 +1374,41 @@ NAN_METHOD(NClass::New) {
 #include "NSKPhysicsWorld.h"
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
+
+#include "NCMFormatDescription.h" // globals
+#include "NCMTime.h" // globals
+#include "NCMSync.h" // globals
+#include "NCMTimeRange.h" // globals
+#include "NCMSampleBuffer.h" // globals
+#include "NAVCaptureSession.h" // : NSObject
+#include "NAVCaptureMultiCamSession.h" // : AVCaptureSession
+#include "NAVCaptureConnection.h" // : NSObject
+#include "NAVCaptureAudioChannel.h" // : NSObject
+#include "NAVCaptureOutput.h" // : NSObject
+#include "NAVMetadataObject.h" // : NSObject
+#include "NAVMetadataFaceObject.h" // : AVMetadataObject
+#include "NAVMetadataMachineReadableCodeObject.h" // : AVMetadataObject
+#include "NAVMediaFormat.h" // globals
+#include "NAVCaptureSessionPreset.h" // globals
+#include "NAVCaptureInput.h" // : NSObject
+#include "NAVCaptureInputPort.h" // : NSObject
+#include "NAVCaptureDeviceInput.h" // : AVCaptureInput
+#include "NAVCaptureScreenInput.h" // : AVCaptureInput
+#include "NAVCaptureMetadataInput.h" // : AVCaptureInput
+#include "NAVCaptureDevice.h" // : NSObject
+#include "NAVCaptureDeviceDiscoverySession.h" // : NSObject
+#include "NAVFrameRateRange.h" // : NSObject
+#include "NAVCaptureDeviceFormat.h" // : NSObject
+#include "NAVCaptureDeviceInputSource.h" // : NSObject
+#include "NAVMetadataGroup.h" // : NSObject
+#include "NAVTimedMetadataGroup.h" // : AVMetadataGroup
+#include "NAVMutableTimedMetadataGroup.h" // : AVTimedMetadataGroup
+#include "NAVDateRangeMetadataGroup.h" // : AVMetadataGroup
+#include "NAVMutableDateRangeMetadataGroup.h" // : AVDateRangeMetadataGroup
+#include "NAVCaptureSystemPressureState.h" // : NSObject
+#include "NAVAnimation.h" // globals
+#include "NAVCaptureVideoPreviewLayer.h" // : CALayer
+
 #include "NAVAudioTypes.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
@@ -1423,6 +1465,7 @@ NAN_METHOD(NClass::New) {
 #include "NGLKViewDelegate.h"
 #include "NGLKViewControllerDelegate.h"
 
+#ifdef __IPHONEOS__
 #include "NARAnchor.h"
 #include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1444,6 +1487,7 @@ NAN_METHOD(NClass::New) {
 #include "NARHitTestResult.h"
 #include "NARLightEstimate.h"
 #include "NARSCNViewDelegate.h"
+#endif
 
 #include "NSceneKitTypes.h"
 #include "NSCNPhysicsField.h"
@@ -1581,15 +1625,21 @@ NAN_METHOD(NClass::New) {
 #include "NMDLMaterialProperty.h"
 #include "NMDLMaterial.h"
 
-#define JS_EXPORT_TYPE_AS(type, name) \
+#define JS_EXPORT_TYPE_AS(type, name, inherits) \
         auto N_##type = N##type::Initialize(isolate, exports); \
         exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
 
+#define JS_EXPORT_TYPE_INHERITS(type, inherits) \
+        JS_EXPORT_TYPE_AS(type, #type, inherits)
+
 #define JS_EXPORT_TYPE(type) \
-        JS_EXPORT_TYPE_AS(type, #type)
+        JS_EXPORT_TYPE_INHERITS(type, NSObject)
+
+#define JS_EXPORT_PROTOCOL_INHERITS(type, inherits) \
+        JS_EXPORT_TYPE_AS(type, #type, inherits)
 
 #define JS_EXPORT_PROTOCOL(type) \
-        JS_EXPORT_TYPE_AS(type, #type)
+        JS_EXPORT_PROTOCOL_INHERITS(type, NSObject)
 
 #define JS_EXPORT_GLOBALS(name) \
         N##name::Initialize(isolate, exports)
@@ -1601,6 +1651,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSObjCRuntime);
+
+    JS_EXPORT_GLOBALS(MacTypes);
+
     JS_EXPORT_TYPE(NSTarget);
     JS_EXPORT_TYPE(NSRunLoop);
     JS_EXPORT_TYPE(NSTimer);
@@ -1799,7 +1852,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
     JS_EXPORT_TYPE(UIInputView);
-    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
+    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit", NSObject);
 
     // UIKit delegates
 
@@ -1837,7 +1890,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // Core Graphics
 
-    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
+    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics", NSObject);
     JS_EXPORT_GLOBALS(CFDictionary);
     JS_EXPORT_GLOBALS(CGColorSpace);
     JS_EXPORT_GLOBALS(CGContext);
@@ -1849,6 +1902,14 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(CGPath);
     JS_EXPORT_GLOBALS(CGPattern);
     JS_EXPORT_GLOBALS(CGShading);
+
+    // CoreMedia
+
+    JS_EXPORT_GLOBALS(CMFormatDescription);
+    JS_EXPORT_GLOBALS(CMTime);
+    JS_EXPORT_GLOBALS(CMSync);
+    JS_EXPORT_GLOBALS(CMTimeRange);
+    JS_EXPORT_GLOBALS(CMSampleBuffer);
     
     // Audio Toolbox
 
@@ -1901,6 +1962,38 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVDepthData);
     JS_EXPORT_TYPE(AVPortraitEffectsMatte);
     JS_EXPORT_TYPE(AVCameraCalibrationData);
+
+    JS_EXPORT_TYPE_INHERITS(AVCaptureSession, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureConnection, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureOutput, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataObject, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataFaceObject, AVMetadataObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataMachineReadableCodeObject, AVMetadataObject);
+    JS_EXPORT_GLOBALS(AVMediaFormat);
+    JS_EXPORT_GLOBALS(AVCaptureSessionPreset);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureInput, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureInputPort, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
+#if TARGET_OS_MAC
+    JS_EXPORT_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
+#endif
+    JS_EXPORT_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDevice, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVFrameRateRange, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
+#endif
+    JS_EXPORT_TYPE_INHERITS(AVMetadataGroup, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVTimedMetadataGroup, AVMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVMutableTimedMetadataGroup, AVTimedMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVDateRangeMetadataGroup, AVMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
+    JS_EXPORT_GLOBALS(AVAnimation);
     
     // MediaPlayer
 
@@ -1961,6 +2054,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(CAAction);
     JS_EXPORT_PROTOCOL(CALayerDelegate);
     JS_EXPORT_TYPE(CALayer);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureVideoPreviewLayer, CALayer); // TODO: move this.
 #if !TARGET_OS_SIMULATOR
     JS_EXPORT_PROTOCOL(CAMetalDrawable);
     JS_EXPORT_TYPE(CAMetalLayer);
@@ -1973,19 +2067,25 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // OpenGLES
 
+#ifdef __IPHONEOS__
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
+#endif
     
     // WebGL
     
+#ifdef __IPHONEOS__ // TODO: mac
     exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
+#endif
 
     // GLKit
 
+#ifdef __IPHONEOS__
     JS_EXPORT_PROTOCOL(GLKViewControllerDelegate);
     JS_EXPORT_PROTOCOL(GLKViewDelegate);
     JS_EXPORT_TYPE(GLKViewController);
     JS_EXPORT_TYPE(GLKView);
+#endif
     
     // ModelIO
 
@@ -2145,9 +2245,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
     JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+#ifdef __IPHONEOS__
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
     JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+#endif
     JS_EXPORT_PROTOCOL(MTLRenderPipelineState); // <NSObject>
 
     JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
@@ -2198,6 +2300,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTKView);
     JS_EXPORT_TYPE(MTKViewDelegate);
     
+#ifdef __IPHONEOS__
     // ARKit
 
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -2221,6 +2324,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARAnchor);
     JS_EXPORT_PROTOCOL(ARSKViewDelegate);
     JS_EXPORT_TYPE(ARSCNViewDelegate);
+#endif
 
     // MapKit
 
@@ -2258,26 +2362,34 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
     }
     if (wrapper == nullptr) {
     
-#define JS_RETURN_TYPE_FROM(Type, ObjcType) \
+#define JS_RETURN_TYPE_FROM(Type, ObjcType, inherits) \
       if ([obj isKindOfClass:[ObjcType class]]) { \
         return N##Type::type; \
       }
 
+#define JS_RETURN_TYPE_INHERITS(Type, inherits) \
+      JS_RETURN_TYPE_FROM(Type, Type, inherits)
+
 #define JS_RETURN_TYPE(Type) \
-      JS_RETURN_TYPE_FROM(Type, Type)
-    
-#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType) \
+      JS_RETURN_TYPE_FROM(Type, Type, NSObject)
+
+#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType, inherits) \
       if ([obj conformsToProtocol:ObjcType##Protocol]) { \
         return N##Type::type; \
       }
 
+#define JS_RETURN_PROTOCOL_INHERITS(Type, inherits) \
+      JS_RETURN_PROTOCOL_FROM(Type, Type, inherits)
+
 #define JS_RETURN_PROTOCOL(Type) \
-      JS_RETURN_PROTOCOL_FROM(Type, Type)
+      JS_RETURN_PROTOCOL_FROM(Type, Type, NSObject)
 
       // GLKit
 
+#ifdef __IPHONEOS__ // TODO: mac
       JS_RETURN_TYPE(GLKViewController);
       JS_RETURN_TYPE(GLKView);
+#endif
 
       // Core Animation
 
@@ -2356,9 +2468,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+#ifdef __IPHONEOS__
       JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+#endif
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLRenderPipelineReflection); // : NSObject
@@ -2394,6 +2508,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLStructMember); // : NSObject
       JS_RETURN_TYPE(MTLType); // : NSObject
 
+#ifdef __IPHONEOS__
       // ARKit
 
       JS_RETURN_TYPE(ARLightEstimate);
@@ -2414,6 +2529,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARFaceTrackingConfiguration);
       JS_RETURN_TYPE(ARWorldTrackingConfiguration);
       JS_RETURN_TYPE(ARConfiguration);
+#endif
 
       //SceneKit
 
@@ -2525,8 +2641,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // OpenGLES
 
+#ifdef __IPHONEOS__
       JS_RETURN_TYPE(EAGLContext);
       JS_RETURN_TYPE(EAGLSharegroup);
+#endif
 
       // Custom UIKit
 
@@ -2570,8 +2688,39 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AUParameterTree);
       JS_RETURN_TYPE(AUParameterGroup);
       JS_RETURN_TYPE(AUParameterNode);
-      
+
+      // CoreMedia
+
       // AVFoundation
+
+      JS_RETURN_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVDateRangeMetadataGroup, AVMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVMutableTimedMetadataGroup, AVTimedMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVTimedMetadataGroup, AVMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVMetadataGroup, NSObject);
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
+#endif
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVFrameRateRange, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureDevice, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
+#if TARGET_OS_MAC
+      JS_RETURN_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
+#endif
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
+      JS_RETURN_TYPE_INHERITS(AVCaptureInputPort, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureInput, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataMachineReadableCodeObject, AVMetadataObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataFaceObject, AVMetadataObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataObject, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureOutput, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureConnection, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+      JS_RETURN_TYPE_INHERITS(AVCaptureSession, NSObject);
 
       JS_RETURN_TYPE(AVCameraCalibrationData);
       JS_RETURN_TYPE(AVPortraitEffectsMatte);
@@ -2725,8 +2874,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBarButtonItem);
       JS_RETURN_TYPE(UIBarCommon);
       // ========= delegates
-      JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
-      JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
+      JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager, NSObject);
+      JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager, NSObject);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects
@@ -2763,8 +2912,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // Globals
       
-      JS_RETURN_TYPE_FROM(UIKitGlobals, SUIKitGlobals);
-      JS_RETURN_TYPE_FROM(CoreGraphicsGlobals, SCoreGraphicsGlobals);
+      JS_RETURN_TYPE_FROM(UIKitGlobals, SUIKitGlobals, NSObject);
+      JS_RETURN_TYPE_FROM(CoreGraphicsGlobals, SCoreGraphicsGlobals, NSObject);
 
       // Objects
       
@@ -2809,7 +2958,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSInvocation);
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
       JS_RETURN_TYPE(NSMachPort);
+#if TODO
       JS_RETURN_TYPE(NSSocketPort);
+#endif
 #endif
       JS_RETURN_TYPE(NSMessagePort);
       JS_RETURN_TYPE(NSPort);
@@ -2823,8 +2974,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit protocols
 
+#ifdef __IPHONEOS__
       JS_RETURN_PROTOCOL(GLKViewControllerDelegate);
       JS_RETURN_PROTOCOL(GLKViewDelegate);
+#endif
 
       // Core Animation Protocols
 
@@ -2900,10 +3053,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(SCNSceneRenderer);
       JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
       
+#ifdef __IPHONEOS__
       // ARKit protocols
       
       JS_RETURN_PROTOCOL(ARSKViewDelegate);
-      
+#endif
+
       // Core Location protocols
 
       JS_RETURN_PROTOCOL(CLLocationManagerDelegate);

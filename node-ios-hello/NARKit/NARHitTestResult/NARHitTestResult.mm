@@ -6,6 +6,8 @@
 //
 #include "NARHitTestResult.h"
 
+#ifdef __IPHONEOS__
+
 NARHitTestResult::NARHitTestResult() {}
 NARHitTestResult::~NARHitTestResult() {}
 
@@ -113,3 +115,5 @@ NAN_GETTER(NARHitTestResult::anchorGetter) {
     return;
   }
 }
+
+#endif

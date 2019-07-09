@@ -90,7 +90,7 @@ NAN_METHOD(NAVPortraitEffectsMatte::dictionaryRepresentationForAuxiliaryDataType
   }
 }
 
-#include "NAUAudioUnit.h" // for OSType
+#include "NMacTypes.h"
 
 NAN_GETTER(NAVPortraitEffectsMatte::pixelFormatTypeGetter) {
   JS_UNWRAP(AVPortraitEffectsMatte, self);

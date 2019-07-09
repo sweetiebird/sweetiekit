@@ -10,6 +10,8 @@
 
 #include "NARConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARWorldTrackingConfiguration(x) js_value_wrapper(x, ARWorldTrackingConfiguration)
 #define to_value_ARWorldTrackingConfiguration(x) to_value_wrapper(x, ARWorldTrackingConfiguration)
 #define is_value_ARWorldTrackingConfiguration(x) is_value_wrapper(x, ARWorldTrackingConfiguration)
@@ -25,5 +27,7 @@ JS_WRAP_CLASS(ARWorldTrackingConfiguration, ARConfiguration);
   JS_PROP(maximumNumberOfTrackedImages);
   JS_PROP(detectionObjects);
 JS_WRAP_CLASS_END(ARWorldTrackingConfiguration);
+
+#endif
 
 #endif /* NARWorldTrackingConfiguration_h */

@@ -6,6 +6,8 @@
 //
 #include "NARVideoFormat.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARVideoFormat
 #define js_value_instancetype js_value_ARVideoFormat
 
@@ -55,3 +57,5 @@ NAN_GETTER(NARVideoFormat::framesPerSecondGetter) {
     JS_SET_RETURN(js_value_NSInteger([self framesPerSecond]));
   }
 }
+
+#endif
