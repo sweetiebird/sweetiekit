@@ -6,6 +6,8 @@
 //
 #include "NCoreAudioTypes.h"
 
+#include "NMacTypes.h"
+
 /*
 struct  AudioStreamPacketDescription
 {

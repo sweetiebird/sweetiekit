@@ -141,6 +141,8 @@ NAN_METHOD(NRPScreenRecorder::discardRecordingWithHandler) {
   }
 }
 
+#include "NCMSampleBuffer.h"
+
 NAN_METHOD(NRPScreenRecorder::startCaptureWithHandlerCompletionHandler) {
   JS_UNWRAP(RPScreenRecorder, self);
   declare_autoreleasepool {

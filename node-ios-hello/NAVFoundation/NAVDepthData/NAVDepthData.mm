@@ -73,7 +73,7 @@ NAN_METHOD(NAVDepthData::depthDataFromDictionaryRepresentationError) {
   }
 }
 
-#include "NAUAudioUnit.h" // for OSType
+#include "NMacTypes.h"
 
 NAN_METHOD(NAVDepthData::depthDataByConvertingToDepthDataType) {
   JS_UNWRAP(AVDepthData, self);

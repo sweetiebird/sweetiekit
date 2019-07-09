@@ -23,14 +23,6 @@
 #define to_value_AudioComponentInstantiationOptions(x) TO_OPTS(AudioComponentInstantiationOptions, NSUInteger, x)
 #define is_value_AudioComponentInstantiationOptions(x) IS_OPTS(AudioComponentInstantiationOptions, NSUInteger, x)
 
-#define js_value_OSStatus js_value_int32_t
-#define to_value_OSStatus to_value_int32_t
-#define is_value_OSStatus is_value_int32_t
-
-#define js_value_OSType js_value_uint32_t
-#define to_value_OSType to_value_uint32_t
-#define is_value_OSType is_value_uint32_t
-
 #define js_value_AUAudioUnitStatus js_value_OSStatus
 #define to_value_AUAudioUnitStatus to_value_OSStatus
 #define is_value_AUAudioUnitStatus is_value_OSStatus
