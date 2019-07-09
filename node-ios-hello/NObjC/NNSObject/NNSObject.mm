@@ -1021,6 +1021,8 @@ NAN_METHOD(NClass::New) {
 
 #include "NNSObjCRuntime.h"
 #include "NMacTypes.h"
+#include "NCFBase.h"
+#include "NCFDictionary.h"
 #include "NNSTarget.h"
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
@@ -1379,7 +1381,9 @@ NAN_METHOD(NClass::New) {
 #include "NCMTime.h" // globals
 #include "NCMSync.h" // globals
 #include "NCMTimeRange.h" // globals
+#include "NCMAttachment.h" // globals
 #include "NCMSampleBuffer.h" // globals
+
 #include "NAVCaptureSession.h" // : NSObject
 #include "NAVCaptureMultiCamSession.h" // : AVCaptureSession
 #include "NAVCaptureConnection.h" // : NSObject
@@ -1564,7 +1568,6 @@ NAN_METHOD(NClass::New) {
 #include "NMKOverlayView.h"
 #include "NMKUserLocation.h"
 #include "NCoreGraphicsGlobals.h"
-#include "NCFDictionary.h"
 #include "NCGColorSpace.h"
 #include "NCGContext.h"
 #include "NCGFont.h"
@@ -1706,6 +1709,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSUndoManager);
     JS_EXPORT_TYPE(NSUserActivity);
     JS_EXPORT_TYPE(NSUserActivityDelegate);
+
+    // CoreFoundation
+    JS_EXPORT_GLOBALS(CFBase);
+    JS_EXPORT_GLOBALS(CFDictionary);
 
     // UIKit
 
@@ -1891,7 +1898,6 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Core Graphics
 
     JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics", NSObject);
-    JS_EXPORT_GLOBALS(CFDictionary);
     JS_EXPORT_GLOBALS(CGColorSpace);
     JS_EXPORT_GLOBALS(CGContext);
     JS_EXPORT_GLOBALS(CGFont);
@@ -1909,6 +1915,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(CMTime);
     JS_EXPORT_GLOBALS(CMSync);
     JS_EXPORT_GLOBALS(CMTimeRange);
+    JS_EXPORT_GLOBALS(CMAttachment);
     JS_EXPORT_GLOBALS(CMSampleBuffer);
     
     // Audio Toolbox
