@@ -313,6 +313,25 @@
 		A1678C5F22D4AFF100E1CF52 /* NVNImageBasedRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C5822D4AFF100E1CF52 /* NVNImageBasedRequest.mm */; };
 		A1678C6022D4AFF100E1CF52 /* NVNRequestProgressProviding.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C5B22D4AFF100E1CF52 /* NVNRequestProgressProviding.mm */; };
 		A1678C6522D4B0B500E1CF52 /* NCGImageProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C6322D4B0B500E1CF52 /* NCGImageProperties.mm */; };
+		A1678C9C22D4B91B00E1CF52 /* NVNObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C6722D4B91700E1CF52 /* NVNObservation.mm */; };
+		A1678C9D22D4B91B00E1CF52 /* NVNBarcodeObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C6A22D4B91700E1CF52 /* NVNBarcodeObservation.mm */; };
+		A1678C9E22D4B91B00E1CF52 /* NVNPixelBufferObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C6D22D4B91700E1CF52 /* NVNPixelBufferObservation.mm */; };
+		A1678C9F22D4B91B00E1CF52 /* NVNFaceObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C7022D4B91800E1CF52 /* NVNFaceObservation.mm */; };
+		A1678CA022D4B91B00E1CF52 /* NVNRecognizedObjectObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C7322D4B91800E1CF52 /* NVNRecognizedObjectObservation.mm */; };
+		A1678CA122D4B91B00E1CF52 /* NVNRecognizedText.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C7722D4B91800E1CF52 /* NVNRecognizedText.mm */; };
+		A1678CA222D4B91B00E1CF52 /* NVNFeaturePrintObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C7922D4B91800E1CF52 /* NVNFeaturePrintObservation.mm */; };
+		A1678CA322D4B91B00E1CF52 /* NVNImageAlignmentObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C7C22D4B91900E1CF52 /* NVNImageAlignmentObservation.mm */; };
+		A1678CA422D4B91B00E1CF52 /* NVNRecognizedTextObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8022D4B91900E1CF52 /* NVNRecognizedTextObservation.mm */; };
+		A1678CA522D4B91B00E1CF52 /* NVNSaliencyImageObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8222D4B91900E1CF52 /* NVNSaliencyImageObservation.mm */; };
+		A1678CA622D4B91B00E1CF52 /* NVNDetectedObjectObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8522D4B91900E1CF52 /* NVNDetectedObjectObservation.mm */; };
+		A1678CA722D4B91B00E1CF52 /* NVNRectangleObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8822D4B91900E1CF52 /* NVNRectangleObservation.mm */; };
+		A1678CA822D4B91B00E1CF52 /* NVNImageHomographicAlignmentObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8C22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation.mm */; };
+		A1678CA922D4B91B00E1CF52 /* NVNClassificationObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C8E22D4B91A00E1CF52 /* NVNClassificationObservation.mm */; };
+		A1678CAA22D4B91B00E1CF52 /* NVNImageTranslationAlignmentObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9122D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation.mm */; };
+		A1678CAB22D4B91B00E1CF52 /* NVNTextObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9522D4B91A00E1CF52 /* NVNTextObservation.mm */; };
+		A1678CAC22D4B91B00E1CF52 /* NVNCoreMLFeatureValueObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9722D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.mm */; };
+		A1678CAD22D4B91B00E1CF52 /* NVNHorizonObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */; };
+		A1678CB122D4BD1300E1CF52 /* NVNTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1296,6 +1315,44 @@
 		A1678C5B22D4AFF100E1CF52 /* NVNRequestProgressProviding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRequestProgressProviding.mm; sourceTree = "<group>"; };
 		A1678C6322D4B0B500E1CF52 /* NCGImageProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCGImageProperties.mm; sourceTree = "<group>"; };
 		A1678C6422D4B0B500E1CF52 /* NCGImageProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGImageProperties.h; sourceTree = "<group>"; };
+		A1678C6722D4B91700E1CF52 /* NVNObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNObservation.mm; sourceTree = "<group>"; };
+		A1678C6822D4B91700E1CF52 /* NVNObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNObservation.h; sourceTree = "<group>"; };
+		A1678C6A22D4B91700E1CF52 /* NVNBarcodeObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNBarcodeObservation.mm; sourceTree = "<group>"; };
+		A1678C6B22D4B91700E1CF52 /* NVNBarcodeObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNBarcodeObservation.h; sourceTree = "<group>"; };
+		A1678C6D22D4B91700E1CF52 /* NVNPixelBufferObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNPixelBufferObservation.mm; sourceTree = "<group>"; };
+		A1678C6E22D4B91700E1CF52 /* NVNPixelBufferObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNPixelBufferObservation.h; sourceTree = "<group>"; };
+		A1678C7022D4B91800E1CF52 /* NVNFaceObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNFaceObservation.mm; sourceTree = "<group>"; };
+		A1678C7122D4B91800E1CF52 /* NVNFaceObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNFaceObservation.h; sourceTree = "<group>"; };
+		A1678C7322D4B91800E1CF52 /* NVNRecognizedObjectObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRecognizedObjectObservation.mm; sourceTree = "<group>"; };
+		A1678C7422D4B91800E1CF52 /* NVNRecognizedObjectObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNRecognizedObjectObservation.h; sourceTree = "<group>"; };
+		A1678C7622D4B91800E1CF52 /* NVNRecognizedText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNRecognizedText.h; sourceTree = "<group>"; };
+		A1678C7722D4B91800E1CF52 /* NVNRecognizedText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRecognizedText.mm; sourceTree = "<group>"; };
+		A1678C7922D4B91800E1CF52 /* NVNFeaturePrintObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNFeaturePrintObservation.mm; sourceTree = "<group>"; };
+		A1678C7A22D4B91800E1CF52 /* NVNFeaturePrintObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNFeaturePrintObservation.h; sourceTree = "<group>"; };
+		A1678C7C22D4B91900E1CF52 /* NVNImageAlignmentObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNImageAlignmentObservation.mm; sourceTree = "<group>"; };
+		A1678C7D22D4B91900E1CF52 /* NVNImageAlignmentObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNImageAlignmentObservation.h; sourceTree = "<group>"; };
+		A1678C7F22D4B91900E1CF52 /* NVNRecognizedTextObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNRecognizedTextObservation.h; sourceTree = "<group>"; };
+		A1678C8022D4B91900E1CF52 /* NVNRecognizedTextObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRecognizedTextObservation.mm; sourceTree = "<group>"; };
+		A1678C8222D4B91900E1CF52 /* NVNSaliencyImageObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNSaliencyImageObservation.mm; sourceTree = "<group>"; };
+		A1678C8322D4B91900E1CF52 /* NVNSaliencyImageObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNSaliencyImageObservation.h; sourceTree = "<group>"; };
+		A1678C8522D4B91900E1CF52 /* NVNDetectedObjectObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectedObjectObservation.mm; sourceTree = "<group>"; };
+		A1678C8622D4B91900E1CF52 /* NVNDetectedObjectObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNDetectedObjectObservation.h; sourceTree = "<group>"; };
+		A1678C8822D4B91900E1CF52 /* NVNRectangleObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRectangleObservation.mm; sourceTree = "<group>"; };
+		A1678C8922D4B91900E1CF52 /* NVNRectangleObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNRectangleObservation.h; sourceTree = "<group>"; };
+		A1678C8B22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNImageHomographicAlignmentObservation.h; sourceTree = "<group>"; };
+		A1678C8C22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNImageHomographicAlignmentObservation.mm; sourceTree = "<group>"; };
+		A1678C8E22D4B91A00E1CF52 /* NVNClassificationObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNClassificationObservation.mm; sourceTree = "<group>"; };
+		A1678C8F22D4B91A00E1CF52 /* NVNClassificationObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNClassificationObservation.h; sourceTree = "<group>"; };
+		A1678C9122D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNImageTranslationAlignmentObservation.mm; sourceTree = "<group>"; };
+		A1678C9222D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNImageTranslationAlignmentObservation.h; sourceTree = "<group>"; };
+		A1678C9422D4B91A00E1CF52 /* NVNTextObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNTextObservation.h; sourceTree = "<group>"; };
+		A1678C9522D4B91A00E1CF52 /* NVNTextObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNTextObservation.mm; sourceTree = "<group>"; };
+		A1678C9722D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNCoreMLFeatureValueObservation.mm; sourceTree = "<group>"; };
+		A1678C9822D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNCoreMLFeatureValueObservation.h; sourceTree = "<group>"; };
+		A1678C9A22D4B91A00E1CF52 /* NVNHorizonObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNHorizonObservation.h; sourceTree = "<group>"; };
+		A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNHorizonObservation.mm; sourceTree = "<group>"; };
+		A1678CAF22D4BD1300E1CF52 /* NVNTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNTypes.h; sourceTree = "<group>"; };
+		A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNTypes.mm; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -4572,11 +4629,30 @@
 		A1678C4C22D4AFF100E1CF52 /* NVision */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CAE22D4BD1300E1CF52 /* NVNTypes */,
+				A1678C6922D4B91700E1CF52 /* NVNBarcodeObservation */,
+				A1678C8D22D4B91A00E1CF52 /* NVNClassificationObservation */,
+				A1678C9622D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation */,
+				A1678C8422D4B91900E1CF52 /* NVNDetectedObjectObservation */,
+				A1678C6F22D4B91800E1CF52 /* NVNFaceObservation */,
+				A1678C7822D4B91800E1CF52 /* NVNFeaturePrintObservation */,
+				A1678C9922D4B91A00E1CF52 /* NVNHorizonObservation */,
+				A1678C7B22D4B91900E1CF52 /* NVNImageAlignmentObservation */,
 				A1678C5622D4AFF100E1CF52 /* NVNImageBasedRequest */,
+				A1678C8A22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation */,
 				A1678C5022D4AFF100E1CF52 /* NVNImageRequestHandler */,
+				A1678C9022D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation */,
+				A1678C6622D4B91700E1CF52 /* NVNObservation */,
+				A1678C6C22D4B91700E1CF52 /* NVNPixelBufferObservation */,
+				A1678C7222D4B91800E1CF52 /* NVNRecognizedObjectObservation */,
+				A1678C7522D4B91800E1CF52 /* NVNRecognizedText */,
+				A1678C7E22D4B91900E1CF52 /* NVNRecognizedTextObservation */,
+				A1678C8722D4B91900E1CF52 /* NVNRectangleObservation */,
 				A1678C4D22D4AFF100E1CF52 /* NVNRequest */,
 				A1678C5922D4AFF100E1CF52 /* NVNRequestProgressProviding */,
+				A1678C8122D4B91900E1CF52 /* NVNSaliencyImageObservation */,
 				A1678C5322D4AFF100E1CF52 /* NVNSequenceRequestHandler */,
+				A1678C9322D4B91A00E1CF52 /* NVNTextObservation */,
 			);
 			path = NVision;
 			sourceTree = "<group>";
@@ -4641,6 +4717,177 @@
 				A1678C6322D4B0B500E1CF52 /* NCGImageProperties.mm */,
 			);
 			path = NCGImageProperties;
+			sourceTree = "<group>";
+		};
+		A1678C6622D4B91700E1CF52 /* NVNObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C6822D4B91700E1CF52 /* NVNObservation.h */,
+				A1678C6722D4B91700E1CF52 /* NVNObservation.mm */,
+			);
+			path = NVNObservation;
+			sourceTree = "<group>";
+		};
+		A1678C6922D4B91700E1CF52 /* NVNBarcodeObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C6B22D4B91700E1CF52 /* NVNBarcodeObservation.h */,
+				A1678C6A22D4B91700E1CF52 /* NVNBarcodeObservation.mm */,
+			);
+			path = NVNBarcodeObservation;
+			sourceTree = "<group>";
+		};
+		A1678C6C22D4B91700E1CF52 /* NVNPixelBufferObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C6E22D4B91700E1CF52 /* NVNPixelBufferObservation.h */,
+				A1678C6D22D4B91700E1CF52 /* NVNPixelBufferObservation.mm */,
+			);
+			path = NVNPixelBufferObservation;
+			sourceTree = "<group>";
+		};
+		A1678C6F22D4B91800E1CF52 /* NVNFaceObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7122D4B91800E1CF52 /* NVNFaceObservation.h */,
+				A1678C7022D4B91800E1CF52 /* NVNFaceObservation.mm */,
+			);
+			path = NVNFaceObservation;
+			sourceTree = "<group>";
+		};
+		A1678C7222D4B91800E1CF52 /* NVNRecognizedObjectObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7422D4B91800E1CF52 /* NVNRecognizedObjectObservation.h */,
+				A1678C7322D4B91800E1CF52 /* NVNRecognizedObjectObservation.mm */,
+			);
+			path = NVNRecognizedObjectObservation;
+			sourceTree = "<group>";
+		};
+		A1678C7522D4B91800E1CF52 /* NVNRecognizedText */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7622D4B91800E1CF52 /* NVNRecognizedText.h */,
+				A1678C7722D4B91800E1CF52 /* NVNRecognizedText.mm */,
+			);
+			path = NVNRecognizedText;
+			sourceTree = "<group>";
+		};
+		A1678C7822D4B91800E1CF52 /* NVNFeaturePrintObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7A22D4B91800E1CF52 /* NVNFeaturePrintObservation.h */,
+				A1678C7922D4B91800E1CF52 /* NVNFeaturePrintObservation.mm */,
+			);
+			path = NVNFeaturePrintObservation;
+			sourceTree = "<group>";
+		};
+		A1678C7B22D4B91900E1CF52 /* NVNImageAlignmentObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7D22D4B91900E1CF52 /* NVNImageAlignmentObservation.h */,
+				A1678C7C22D4B91900E1CF52 /* NVNImageAlignmentObservation.mm */,
+			);
+			path = NVNImageAlignmentObservation;
+			sourceTree = "<group>";
+		};
+		A1678C7E22D4B91900E1CF52 /* NVNRecognizedTextObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C7F22D4B91900E1CF52 /* NVNRecognizedTextObservation.h */,
+				A1678C8022D4B91900E1CF52 /* NVNRecognizedTextObservation.mm */,
+			);
+			path = NVNRecognizedTextObservation;
+			sourceTree = "<group>";
+		};
+		A1678C8122D4B91900E1CF52 /* NVNSaliencyImageObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C8322D4B91900E1CF52 /* NVNSaliencyImageObservation.h */,
+				A1678C8222D4B91900E1CF52 /* NVNSaliencyImageObservation.mm */,
+			);
+			path = NVNSaliencyImageObservation;
+			sourceTree = "<group>";
+		};
+		A1678C8422D4B91900E1CF52 /* NVNDetectedObjectObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C8622D4B91900E1CF52 /* NVNDetectedObjectObservation.h */,
+				A1678C8522D4B91900E1CF52 /* NVNDetectedObjectObservation.mm */,
+			);
+			path = NVNDetectedObjectObservation;
+			sourceTree = "<group>";
+		};
+		A1678C8722D4B91900E1CF52 /* NVNRectangleObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C8922D4B91900E1CF52 /* NVNRectangleObservation.h */,
+				A1678C8822D4B91900E1CF52 /* NVNRectangleObservation.mm */,
+			);
+			path = NVNRectangleObservation;
+			sourceTree = "<group>";
+		};
+		A1678C8A22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C8B22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation.h */,
+				A1678C8C22D4B91900E1CF52 /* NVNImageHomographicAlignmentObservation.mm */,
+			);
+			path = NVNImageHomographicAlignmentObservation;
+			sourceTree = "<group>";
+		};
+		A1678C8D22D4B91A00E1CF52 /* NVNClassificationObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C8F22D4B91A00E1CF52 /* NVNClassificationObservation.h */,
+				A1678C8E22D4B91A00E1CF52 /* NVNClassificationObservation.mm */,
+			);
+			path = NVNClassificationObservation;
+			sourceTree = "<group>";
+		};
+		A1678C9022D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C9222D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation.h */,
+				A1678C9122D4B91A00E1CF52 /* NVNImageTranslationAlignmentObservation.mm */,
+			);
+			path = NVNImageTranslationAlignmentObservation;
+			sourceTree = "<group>";
+		};
+		A1678C9322D4B91A00E1CF52 /* NVNTextObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C9422D4B91A00E1CF52 /* NVNTextObservation.h */,
+				A1678C9522D4B91A00E1CF52 /* NVNTextObservation.mm */,
+			);
+			path = NVNTextObservation;
+			sourceTree = "<group>";
+		};
+		A1678C9622D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C9822D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.h */,
+				A1678C9722D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.mm */,
+			);
+			path = NVNCoreMLFeatureValueObservation;
+			sourceTree = "<group>";
+		};
+		A1678C9922D4B91A00E1CF52 /* NVNHorizonObservation */ = {
+			isa = PBXGroup;
+			children = (
+				A1678C9A22D4B91A00E1CF52 /* NVNHorizonObservation.h */,
+				A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */,
+			);
+			path = NVNHorizonObservation;
+			sourceTree = "<group>";
+		};
+		A1678CAE22D4BD1300E1CF52 /* NVNTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CAF22D4BD1300E1CF52 /* NVNTypes.h */,
+				A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */,
+			);
+			path = NVNTypes;
 			sourceTree = "<group>";
 		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
@@ -8555,6 +8802,7 @@
 				A1678BFB22D46C7200E1CF52 /* NAVCaptureDeviceFormat.mm in Sources */,
 				A133708522AB382300FA3768 /* NMPMusicPlayerController.mm in Sources */,
 				A1D4989022BB4731009AC951 /* NUILexiconEntry.mm in Sources */,
+				A1678C9C22D4B91B00E1CF52 /* NVNObservation.mm in Sources */,
 				A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */,
 				A192703B22C1375D008F16AE /* NMTLComputePipelineState.mm in Sources */,
 				A1EE7D77229D8EEF002B53FF /* NSCNShape.mm in Sources */,
@@ -8633,12 +8881,14 @@
 				A1D4981722B9B2AA009AC951 /* NCLFloor.mm in Sources */,
 				A158791B22CEB82B00847196 /* NRPScreenRecorderDelegate.mm in Sources */,
 				A1926FA122C11E7D008F16AE /* NMTLDevice.mm in Sources */,
+				A1678CA322D4B91B00E1CF52 /* NVNImageAlignmentObservation.mm in Sources */,
 				A10862ED22C48E05001A15A9 /* NEAGLSharegroup.mm in Sources */,
 				A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */,
 				A19F39FD22AF678500606332 /* NMDLTextureSampler.mm in Sources */,
 				A1E4822D226AB42E002AF96F /* NUIImagePickerControllerDelegate.mm in Sources */,
 				A1678C3222D4848F00E1CF52 /* NAVCaptureSystemPressureState.mm in Sources */,
 				A1CE2B65228E85ED00D9B3B8 /* NGifView.mm in Sources */,
+				A1678C9F22D4B91B00E1CF52 /* NVNFaceObservation.mm in Sources */,
 				A1D4984A22BAF405009AC951 /* NNSURLResponse.mm in Sources */,
 				A1B65484228CB87F00976024 /* NUITouch.mm in Sources */,
 				A1D672B722699DB300562A42 /* NUITextField.mm in Sources */,
@@ -8657,6 +8907,7 @@
 				A1D4983022B9D48D009AC951 /* NCLVisit.mm in Sources */,
 				A1926F5422C0E720008F16AE /* NSCNAction.mm in Sources */,
 				A1574F0122B93071006CC5F2 /* NCATransition.mm in Sources */,
+				A1678CA422D4B91B00E1CF52 /* NVNRecognizedTextObservation.mm in Sources */,
 				A1D672A5226994BD00562A42 /* NUIButton.mm in Sources */,
 				A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */,
 				A1926FBC22C11F99008F16AE /* NMTLStructMember.mm in Sources */,
@@ -8679,6 +8930,7 @@
 				A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
 				A1574EDE22B8D96C006CC5F2 /* NUICollectionViewLayout.mm in Sources */,
+				A1678C9D22D4B91B00E1CF52 /* NVNBarcodeObservation.mm in Sources */,
 				A15878F022CE11AC00847196 /* NUINavigationControllerDelegate.mm in Sources */,
 				A1926FDD22C12999008F16AE /* NMTLBuffer.mm in Sources */,
 				A19270B222C174C8008F16AE /* NNSTarget.mm in Sources */,
@@ -8749,6 +9001,7 @@
 				A108636822C6C5B4001A15A9 /* NAROrientationTrackingConfiguration.mm in Sources */,
 				A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */,
 				A11D12A1227F706F0038C262 /* NNSLayoutAnchor.mm in Sources */,
+				A1678CA522D4B91B00E1CF52 /* NVNSaliencyImageObservation.mm in Sources */,
 				A1D65E0F22819C3B00AC0BD9 /* NSKView.mm in Sources */,
 				A1058B432268029E00CEAA5C /* libs_main.mm in Sources */,
 				A108631E22C4937D001A15A9 /* NAVAudioEnvironmentReverbParameters.mm in Sources */,
@@ -8818,6 +9071,7 @@
 				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
 				A108633E22C4A097001A15A9 /* NAVAudioTypes.mm in Sources */,
 				A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */,
+				A1678CA622D4B91B00E1CF52 /* NVNDetectedObjectObservation.mm in Sources */,
 				A1926F0C22C0BFBB008F16AE /* NSKTransition.mm in Sources */,
 				A1D4984C22BAF405009AC951 /* NNSURLCredential.mm in Sources */,
 				A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */,
@@ -8834,6 +9088,7 @@
 				A192702C22C1344E008F16AE /* NMTLRenderPipelineReflection.mm in Sources */,
 				A108631F22C4937D001A15A9 /* NAVAudioStereoMixing.mm in Sources */,
 				A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */,
+				A1678C9E22D4B91B00E1CF52 /* NVNPixelBufferObservation.mm in Sources */,
 				A1D4987922BB3DBC009AC951 /* NNSUserActivityDelegate.mm in Sources */,
 				A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */,
 				A1336FFD22A673C900FA3768 /* NUIMotionEffect.mm in Sources */,
@@ -8883,6 +9138,7 @@
 				A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */,
 				A15878B422CDCCDB00847196 /* NUIDragAnimating.mm in Sources */,
 				A192703022C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptor.mm in Sources */,
+				A1678CA922D4B91B00E1CF52 /* NVNClassificationObservation.mm in Sources */,
 				A1678BB522D462D700E1CF52 /* NAVCaptureAudioChannel.mm in Sources */,
 				A1BD4B992287DA43001D1F6E /* NCLLocationManager.mm in Sources */,
 				A108635222C5973C001A15A9 /* NSKAttribute.mm in Sources */,
@@ -8891,6 +9147,7 @@
 				A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */,
 				A1574EAB22B81CA9006CC5F2 /* NUIStepper.mm in Sources */,
 				A1926FC822C120E3008F16AE /* NMTLTexture.mm in Sources */,
+				A1678CAC22D4B91B00E1CF52 /* NVNCoreMLFeatureValueObservation.mm in Sources */,
 				A158793322CEE63400847196 /* NUIViewPropertyAnimator.mm in Sources */,
 				A108636A22C6C5B4001A15A9 /* NARImageTrackingConfiguration.mm in Sources */,
 				A1D4988922BB4691009AC951 /* NUIInputViewController.mm in Sources */,
@@ -8920,6 +9177,7 @@
 				A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */,
 				A10BD049228F551100184286 /* NUIStackView.mm in Sources */,
 				A158791622CEA8B600847196 /* NRPPreviewViewControllerDelegate.mm in Sources */,
+				A1678CAD22D4B91B00E1CF52 /* NVNHorizonObservation.mm in Sources */,
 				A1D4983422BAED95009AC951 /* NWKNavigation.mm in Sources */,
 				A192700822C12F5F008F16AE /* NMTLFunction.mm in Sources */,
 				216392A6226BD48A00051DE0 /* NCALayer.mm in Sources */,
@@ -8939,6 +9197,7 @@
 				A1926FF022C12D7E008F16AE /* NMTLDepthStencilDescriptor.mm in Sources */,
 				A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */,
 				A134E28122D033EB00BAB748 /* NCGPattern.mm in Sources */,
+				A1678CA822D4B91B00E1CF52 /* NVNImageHomographicAlignmentObservation.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
 				A192700922C12F5F008F16AE /* NMTLVertexAttribute.mm in Sources */,
@@ -8978,6 +9237,7 @@
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
 				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
+				A1678CAB22D4B91B00E1CF52 /* NVNTextObservation.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */,
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
@@ -9020,6 +9280,7 @@
 				A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */,
 				A1E5849A22B1DFFC00A967EF /* NUIPopoverController.mm in Sources */,
 				A13370D822AEFC6A00FA3768 /* NAVAudioCompressedBuffer.mm in Sources */,
+				A1678CA022D4B91B00E1CF52 /* NVNRecognizedObjectObservation.mm in Sources */,
 				A174A47622B0199800415AD8 /* NMDLMeshBufferData.mm in Sources */,
 				A134E29922D037D200BAB748 /* NCGPDFDocument.mm in Sources */,
 				A192705522C13D8E008F16AE /* NMTLIndirectRenderCommand.mm in Sources */,
@@ -9041,6 +9302,7 @@
 				A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */,
 				A15878E322CDEA4200847196 /* NUIDragSession.mm in Sources */,
 				A13370CD22AEFB3B00FA3768 /* NAVAudioConnectionPoint.mm in Sources */,
+				A1678CA222D4B91B00E1CF52 /* NVNFeaturePrintObservation.mm in Sources */,
 				A1926FD822C128E4008F16AE /* NMTLHeapDescriptor.mm in Sources */,
 				A1678C2E22D47F0500E1CF52 /* NCMSampleBuffer.mm in Sources */,
 				A133700F22AAA90000FA3768 /* NUIGraphicsRendererFormat.mm in Sources */,
@@ -9071,6 +9333,7 @@
 				A1574EE922B8DF60006CC5F2 /* NUICollectionViewFlowLayoutInvalidationContext.mm in Sources */,
 				A1D4987522BB3D84009AC951 /* NNSUserActivity.mm in Sources */,
 				A1CE2B4F228E7B4B00D9B3B8 /* NUIBezierPath.mm in Sources */,
+				A1678CB122D4BD1300E1CF52 /* NVNTypes.mm in Sources */,
 				A1678BC722D464FD00E1CF52 /* NAVMetadataObject.mm in Sources */,
 				A15878A322CDC77000847196 /* NUITableViewDropPlaceholder.mm in Sources */,
 				A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */,
@@ -9099,6 +9362,7 @@
 				A19270A622C16422008F16AE /* NNSInvocation.mm in Sources */,
 				A19270C622C18367008F16AE /* NMTLParallelRenderCommandEncoder.mm in Sources */,
 				A192709922C15B4C008F16AE /* NMTLVertexBufferLayoutDescriptorArray.mm in Sources */,
+				A1678CA122D4B91B00E1CF52 /* NVNRecognizedText.mm in Sources */,
 				A192709E22C161F6008F16AE /* NNSRunLoop.mm in Sources */,
 				A134E29122D0367B00BAB748 /* NCGColorSpace.mm in Sources */,
 				A13370C922AEF99200FA3768 /* NAVAudioTime.mm in Sources */,
@@ -9108,6 +9372,7 @@
 				A174A16B22822169002A8216 /* NAVAudioPlayer.mm in Sources */,
 				A1926F9122C10729008F16AE /* NMTLRenderPassColorAttachmentDescriptorArray.mm in Sources */,
 				A1678BC822D464FD00E1CF52 /* NAVMetadataFaceObject.mm in Sources */,
+				A1678CAA22D4B91B00E1CF52 /* NVNImageTranslationAlignmentObservation.mm in Sources */,
 				A19270D522C18EFF008F16AE /* NMTLPipelineBufferDescriptorArray.mm in Sources */,
 				A15878FF22CE3FE900847196 /* NUINavigationBarDelegate.mm in Sources */,
 				211E76952269AED300B838AF /* NUIApplication.mm in Sources */,
@@ -9153,6 +9418,7 @@
 				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
 				A192702F22C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
+				A1678CA722D4B91B00E1CF52 /* NVNRectangleObservation.mm in Sources */,
 				A1678BE522D46A0C00E1CF52 /* NAVCaptureScreenInput.mm in Sources */,
 				A1574F0322B93071006CC5F2 /* NCAAnimation.mm in Sources */,
 			);

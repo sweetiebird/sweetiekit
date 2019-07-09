@@ -1583,11 +1583,30 @@ NAN_METHOD(NClass::New) {
 #include "NCGImageProperties.h" // globals
 
 #import <Vision/Vision.h>
+#include "NVNTypes.h" // globals
 #include "NVNRequest.h" // : NSObject
 #include "NVNImageBasedRequest.h" // : VNRequest
 #include "NVNRequestProgressProviding.h" // <NSObject>
 #include "NVNImageRequestHandler.h" // : NSObject
 #include "NVNSequenceRequestHandler.h" // : NSObject
+#include "NVNObservation.h" // : NSObject
+#include "NVNDetectedObjectObservation.h" // : VNObservation
+#include "NVNFaceObservation.h" // : VNDetectedObjectObservation
+#include "NVNClassificationObservation.h" // : VNObservation
+#include "NVNRecognizedObjectObservation.h" // : VNDetectedObjectObservation
+#include "NVNCoreMLFeatureValueObservation.h" // : VNObservation
+#include "NVNPixelBufferObservation.h" // : VNObservation
+#include "NVNRectangleObservation.h" // : VNDetectedObjectObservation
+#include "NVNTextObservation.h" // : VNRectangleObservation
+#include "NVNRecognizedText.h" // : NSObject
+#include "NVNRecognizedTextObservation.h" // : VNRectangleObservation
+#include "NVNBarcodeObservation.h" // : VNRectangleObservation
+#include "NVNHorizonObservation.h" // : VNObservation
+#include "NVNImageAlignmentObservation.h" // : VNObservation
+#include "NVNImageTranslationAlignmentObservation.h" // : VNImageAlignmentObservation
+#include "NVNImageHomographicAlignmentObservation.h" // : VNImageAlignmentObservation
+#include "NVNSaliencyImageObservation.h" // : VNPixelBufferObservation
+#include "NVNFeaturePrintObservation.h" // : VNObservation
 
 #include "NRPScreenRecorder.h"
 #include "NRPScreenRecorderDelegate.h"
@@ -1925,10 +1944,29 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // Vision
 
+    JS_EXPORT_GLOBALS(VNTypes);
     JS_EXPORT_TYPE(VNRequest);
     JS_EXPORT_PROTOCOL(VNRequestProgressProviding);
     JS_EXPORT_TYPE(VNImageRequestHandler);
     JS_EXPORT_TYPE(VNSequenceRequestHandler);
+    JS_EXPORT_TYPE(VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNDetectedObjectObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNFaceObservation, VNDetectedObjectObservation);
+    JS_EXPORT_TYPE_INHERITS(VNClassificationObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNRecognizedObjectObservation, VNDetectedObjectObservation);
+    JS_EXPORT_TYPE_INHERITS(VNCoreMLFeatureValueObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNPixelBufferObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNRectangleObservation, VNDetectedObjectObservation);
+    JS_EXPORT_TYPE_INHERITS(VNTextObservation, VNRectangleObservation);
+    JS_EXPORT_TYPE(VNRecognizedText);
+    JS_EXPORT_TYPE_INHERITS(VNRecognizedTextObservation, VNRectangleObservation);
+    JS_EXPORT_TYPE_INHERITS(VNBarcodeObservation, VNRectangleObservation);
+    JS_EXPORT_TYPE_INHERITS(VNHorizonObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNImageAlignmentObservation, VNObservation);
+    JS_EXPORT_TYPE_INHERITS(VNImageTranslationAlignmentObservation, VNImageAlignmentObservation);
+    JS_EXPORT_TYPE_INHERITS(VNImageHomographicAlignmentObservation, VNImageAlignmentObservation);
+    JS_EXPORT_TYPE_INHERITS(VNSaliencyImageObservation, VNPixelBufferObservation);
+    JS_EXPORT_TYPE_INHERITS(VNFeaturePrintObservation, VNObservation);
 
     // CoreMedia
 
@@ -2721,6 +2759,24 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // Vision
 
+      JS_RETURN_TYPE_INHERITS(VNFeaturePrintObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNSaliencyImageObservation, VNPixelBufferObservation);
+      JS_RETURN_TYPE_INHERITS(VNImageHomographicAlignmentObservation, VNImageAlignmentObservation);
+      JS_RETURN_TYPE_INHERITS(VNImageTranslationAlignmentObservation, VNImageAlignmentObservation);
+      JS_RETURN_TYPE_INHERITS(VNImageAlignmentObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNHorizonObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNBarcodeObservation, VNRectangleObservation);
+      JS_RETURN_TYPE_INHERITS(VNRecognizedTextObservation, VNRectangleObservation);
+      JS_RETURN_TYPE(VNRecognizedText);
+      JS_RETURN_TYPE_INHERITS(VNTextObservation, VNRectangleObservation);
+      JS_RETURN_TYPE_INHERITS(VNRectangleObservation, VNDetectedObjectObservation);
+      JS_RETURN_TYPE_INHERITS(VNPixelBufferObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNCoreMLFeatureValueObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNRecognizedObjectObservation, VNDetectedObjectObservation);
+      JS_RETURN_TYPE_INHERITS(VNClassificationObservation, VNObservation);
+      JS_RETURN_TYPE_INHERITS(VNFaceObservation, VNDetectedObjectObservation);
+      JS_RETURN_TYPE_INHERITS(VNDetectedObjectObservation, VNObservation);
+      JS_RETURN_TYPE(VNObservation);
       JS_RETURN_TYPE(VNSequenceRequestHandler);
       JS_RETURN_TYPE(VNImageRequestHandler);
       JS_RETURN_TYPE(VNRequest);
