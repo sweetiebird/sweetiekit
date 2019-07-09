@@ -31,13 +31,12 @@ function makeAnimalNodes(animals) {
 }
 
 async function getImage(name, selected = false) {
-  if (selected && animalImagesCache[`${name}_selected`]) {
-    return animalImagesCache[`${name}_selected`];
-  } else if (!selected && animalImagesCache[name]) {
-    return animalImagesCache[name];
+  const imgKey = `${name}${selected ? '_selected' : ''}`;
+
+  if (animalImagesCache[imgKey]) {
+    return animalImagesCache[imgKey];
   }
 
-  const imgKey = `${name}${selected ? '_selected' : ''}`;
   const imgUrl = `https://emkolar.ninja/sweetiekit/img/${imgKey}.png`;
 
   try {
@@ -161,8 +160,8 @@ async function make(nav, demoVC) {
       } else {
         const camXform = frame.camera.transform;
         const xform = new THREE.Matrix4().fromArray(camXform);
-        xform.multiply(new THREE.Matrix4().makeTranslation(0,0,-1));
-        animalNodes.forEach((n) => {
+        animalNodes.forEach((n, idx) => {
+          xform.multiply(new THREE.Matrix4().makeTranslation(idx * 0.25,0,-1));
           n.simdTransform = xform;
           scene.rootNode.addChildNode(n);
         });
