@@ -332,6 +332,7 @@
 		A1678CAC22D4B91B00E1CF52 /* NVNCoreMLFeatureValueObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9722D4B91A00E1CF52 /* NVNCoreMLFeatureValueObservation.mm */; };
 		A1678CAD22D4B91B00E1CF52 /* NVNHorizonObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */; };
 		A1678CB122D4BD1300E1CF52 /* NVNTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */; };
+		A1678CB522D4C42B00E1CF52 /* NVNDetectTextRectanglesRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB422D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1353,6 +1354,8 @@
 		A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNHorizonObservation.mm; sourceTree = "<group>"; };
 		A1678CAF22D4BD1300E1CF52 /* NVNTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNTypes.h; sourceTree = "<group>"; };
 		A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNTypes.mm; sourceTree = "<group>"; };
+		A1678CB322D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNDetectTextRectanglesRequest.h; sourceTree = "<group>"; };
+		A1678CB422D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectTextRectanglesRequest.mm; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -4629,6 +4632,7 @@
 		A1678C4C22D4AFF100E1CF52 /* NVision */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CB222D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest */,
 				A1678CAE22D4BD1300E1CF52 /* NVNTypes */,
 				A1678C6922D4B91700E1CF52 /* NVNBarcodeObservation */,
 				A1678C8D22D4B91A00E1CF52 /* NVNClassificationObservation */,
@@ -4888,6 +4892,15 @@
 				A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */,
 			);
 			path = NVNTypes;
+			sourceTree = "<group>";
+		};
+		A1678CB222D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CB322D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.h */,
+				A1678CB422D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */,
+			);
+			path = NVNDetectTextRectanglesRequest;
 			sourceTree = "<group>";
 		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
@@ -8779,6 +8792,7 @@
 				A1926F4D22C0E286008F16AE /* NSCNPhysicsVehicleWheel.mm in Sources */,
 				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
+				A1678CB522D4C42B00E1CF52 /* NVNDetectTextRectanglesRequest.mm in Sources */,
 				A158792A22CEE2F600847196 /* NUIViewImplicitlyAnimating.mm in Sources */,
 				A192710622C32A6B008F16AE /* NSCNSceneSource.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,

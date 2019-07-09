@@ -142,6 +142,7 @@ SweetieKitPrefixes = {
   Sec: "Security",
   SK: "SpriteKit",
   UI: "UIKit",
+  VN: "Vision",
   WK: "WebKit",
 };
 
