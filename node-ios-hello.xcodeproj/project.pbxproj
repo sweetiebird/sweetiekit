@@ -333,6 +333,9 @@
 		A1678CAD22D4B91B00E1CF52 /* NVNHorizonObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678C9B22D4B91A00E1CF52 /* NVNHorizonObservation.mm */; };
 		A1678CB122D4BD1300E1CF52 /* NVNTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */; };
 		A1678CB522D4C42B00E1CF52 /* NVNDetectTextRectanglesRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB422D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */; };
+		A1678CBC22D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CB822D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.mm */; };
+		A1678CBD22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CBA22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm */; };
+		A1678CC122D4C7D900E1CF52 /* NAVVideoSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CC022D4C7D800E1CF52 /* NAVVideoSettings.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1356,6 +1359,12 @@
 		A1678CB022D4BD1300E1CF52 /* NVNTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNTypes.mm; sourceTree = "<group>"; };
 		A1678CB322D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNDetectTextRectanglesRequest.h; sourceTree = "<group>"; };
 		A1678CB422D4C42A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectTextRectanglesRequest.mm; sourceTree = "<group>"; };
+		A1678CB722D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVCaptureVideoDataOutputSampleBufferDelegate.h; sourceTree = "<group>"; };
+		A1678CB822D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVCaptureVideoDataOutputSampleBufferDelegate.mm; sourceTree = "<group>"; };
+		A1678CBA22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVCaptureVideoDataOutput.mm; sourceTree = "<group>"; };
+		A1678CBB22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVCaptureVideoDataOutput.h; sourceTree = "<group>"; };
+		A1678CBF22D4C7D800E1CF52 /* NAVVideoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAVVideoSettings.h; sourceTree = "<group>"; };
+		A1678CC022D4C7D800E1CF52 /* NAVVideoSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAVVideoSettings.mm; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -4903,6 +4912,33 @@
 			path = NVNDetectTextRectanglesRequest;
 			sourceTree = "<group>";
 		};
+		A1678CB622D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CB722D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.h */,
+				A1678CB822D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.mm */,
+			);
+			path = NAVCaptureVideoDataOutputSampleBufferDelegate;
+			sourceTree = "<group>";
+		};
+		A1678CB922D4C68500E1CF52 /* NAVCaptureVideoDataOutput */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CBB22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.h */,
+				A1678CBA22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm */,
+			);
+			path = NAVCaptureVideoDataOutput;
+			sourceTree = "<group>";
+		};
+		A1678CBE22D4C7D800E1CF52 /* NAVVideoSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CBF22D4C7D800E1CF52 /* NAVVideoSettings.h */,
+				A1678CC022D4C7D800E1CF52 /* NAVVideoSettings.mm */,
+			);
+			path = NAVVideoSettings;
+			sourceTree = "<group>";
+		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -4994,6 +5030,9 @@
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CBE22D4C7D800E1CF52 /* NAVVideoSettings */,
+				A1678CB922D4C68500E1CF52 /* NAVCaptureVideoDataOutput */,
+				A1678CB622D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate */,
 				A1678C3722D4878C00E1CF52 /* NAVAnimation */,
 				A1678C3322D486A400E1CF52 /* NAVCaptureVideoPreviewLayer */,
 				A1678C2F22D4848F00E1CF52 /* NAVCaptureSystemPressureState */,
@@ -9062,6 +9101,7 @@
 				A1926EDC22C098D9008F16AE /* NMKClusterAnnotation.mm in Sources */,
 				A19F3A1922AF75A400606332 /* NMDLMeshBufferMap.mm in Sources */,
 				A1BD4B902287CDD9001D1F6E /* Scene.swift in Sources */,
+				A1678CBC22D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate.mm in Sources */,
 				A192708622C14C47008F16AE /* NIOSurfaceRef.mm in Sources */,
 				A1BD4B842287C369001D1F6E /* NSKNode.mm in Sources */,
 				A1EE7D7C229D8EEF002B53FF /* NSCNCapsule.mm in Sources */,
@@ -9113,6 +9153,7 @@
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
+				A1678CBD22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
 				A1948937228A68BA007BF787 /* NARConfiguration.mm in Sources */,
 				A1D498AC22BB4A03009AC951 /* NUITextRange.mm in Sources */,
@@ -9228,6 +9269,7 @@
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,
 				A1646BA3229238630078CF4B /* NSCNGeometry.mm in Sources */,
 				A1678C5D22D4AFF100E1CF52 /* NVNImageRequestHandler.mm in Sources */,
+				A1678CC122D4C7D900E1CF52 /* NAVVideoSettings.mm in Sources */,
 				A192707E22C14B8A008F16AE /* NMTLSharedEventHandle.mm in Sources */,
 				A1678BE722D46A0C00E1CF52 /* NAVCaptureDeviceInput.mm in Sources */,
 				A1926F7322C0FD1D008F16AE /* NSCNSceneRenderer.mm in Sources */,

@@ -1411,6 +1411,9 @@ NAN_METHOD(NClass::New) {
 #include "NAVMutableDateRangeMetadataGroup.h" // : AVDateRangeMetadataGroup
 #include "NAVCaptureSystemPressureState.h" // : NSObject
 #include "NAVAnimation.h" // globals
+#include "NAVVideoSettings.h" // globals
+#include "NAVCaptureVideoDataOutput.h" : NSObject
+#include "NAVCaptureVideoDataOutputSampleBufferDelegate.h" // <NSObject>
 #include "NAVCaptureVideoPreviewLayer.h" // : CALayer
 
 #include "NAVAudioTypes.h"
@@ -2063,6 +2066,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
     JS_EXPORT_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
     JS_EXPORT_GLOBALS(AVAnimation);
+    JS_EXPORT_GLOBALS(AVVideoSettings);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureVideoDataOutput, NSObject);
+    JS_EXPORT_PROTOCOL(AVCaptureVideoDataOutputSampleBufferDelegate);
     
     // MediaPlayer
 
@@ -2788,6 +2794,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // AVFoundation
 
+      JS_RETURN_TYPE_INHERITS(AVCaptureVideoDataOutput, NSObject);
       JS_RETURN_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
       JS_RETURN_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
       JS_RETURN_TYPE_INHERITS(AVDateRangeMetadataGroup, AVMetadataGroup);
@@ -3166,6 +3173,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       JS_RETURN_PROTOCOL(CALayerDelegate);
       JS_RETURN_PROTOCOL(CAAction);
+
+      // AVFoundation protocols
+
+      JS_RETURN_PROTOCOL(AVCaptureVideoDataOutputSampleBufferDelegate);
 
       // UIKit protocols
 
