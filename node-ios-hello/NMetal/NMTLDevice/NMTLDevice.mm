@@ -66,7 +66,7 @@ NAN_METHOD(NMTLDevice::MTLCreateSystemDefaultDevice) {
 #if !TARGET_OS_IPHONE
 NAN_METHOD(NMTLDevice::MTLCopyAllDevices) {
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray< id<MTLDevice> >(::MTLCopyAllDevices())));
+    JS_SET_RETURN(js_value_NSArray< id<MTLDevice> >(::MTLCopyAllDevices()));
   }
 }
 #endif
@@ -116,7 +116,9 @@ JS_INIT_PROTOCOL(MTLDevice, NSObject);
   JS_ASSIGN_PROTO_METHOD(minimumLinearTextureAlignmentForPixelFormat);
   JS_ASSIGN_PROTO_METHOD(minimumTextureBufferAlignmentForPixelFormat);
   JS_ASSIGN_PROTO_METHOD(newRenderPipelineStateWithTileDescriptorOptionsReflectionError);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_METHOD(newRenderPipelineStateWithTileDescriptorOptionsCompletionHandler);
+#endif
   JS_ASSIGN_PROTO_METHOD(getDefaultSamplePositionsCount);
   JS_ASSIGN_PROTO_METHOD(newArgumentEncoderWithArguments);
   JS_ASSIGN_PROTO_METHOD(newIndirectCommandBufferWithDescriptorMaxCommandCountOptions);
@@ -671,6 +673,7 @@ NAN_METHOD(NMTLDevice::newRenderPipelineStateWithTileDescriptorOptionsReflection
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_METHOD(NMTLDevice::newRenderPipelineStateWithTileDescriptorOptionsCompletionHandler) {
   JS_UNWRAP_PROTOCOL(MTLDevice, self);
   declare_autoreleasepool {
@@ -691,6 +694,7 @@ NAN_METHOD(NMTLDevice::newRenderPipelineStateWithTileDescriptorOptionsCompletion
     }];
   }
 }
+#endif
 
 #include "NMTLTypes.h"
 

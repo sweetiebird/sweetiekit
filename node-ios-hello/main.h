@@ -8,10 +8,20 @@
 #ifndef main_h
 #define main_h
 
+#undef TARGET_OS_IPHONE
+#undef TARGET_OS_MAC
+#if __IPHONEOS__
+#define TARGET_OS_IPHONE 1
+#else
+#define TARGET_OS_MAC 1
+#endif
+
 #import <Foundation/Foundation.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import <UIKit/UIKit.h>
+#if __IPHONEOS__
 #import <ARKit/ARKit.h>
+#endif
 #import <MetalKit/MetalKit.h>
 #import <Metal/Metal.h>
 

@@ -27,13 +27,13 @@ JS_INIT_CLASS(CIFilter, NSObject);
   JS_ASSIGN_PROTO_METHOD(name);
   JS_ASSIGN_PROTO_METHOD(setName);
   JS_ASSIGN_PROTO_METHOD(setDefaults);
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(applyArgumentsOptions);
   JS_ASSIGN_PROTO_METHOD(apply);
 #endif
   JS_ASSIGN_PROTO_PROP_READONLY(outputImage);
   JS_ASSIGN_PROTO_PROP(name);
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(isEnabled);
 #endif
   JS_ASSIGN_PROTO_PROP_READONLY(inputKeys);
@@ -190,7 +190,7 @@ NAN_METHOD(NCIFilter::setDefaults) {
 
 #include "NCIKernel.h"
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCIFilter::applyArgumentsOptions) {
   JS_UNWRAP(CIFilter, self);
   declare_autoreleasepool {
@@ -203,7 +203,7 @@ NAN_METHOD(NCIFilter::applyArgumentsOptions) {
 }
 #endif
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCIFilter::apply) {
   JS_UNWRAP(CIFilter, self);
   declare_autoreleasepool {
@@ -239,7 +239,7 @@ NAN_SETTER(NCIFilter::nameSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NCIFilter::isEnabledGetter) {
   JS_UNWRAP(CIFilter, self);
   declare_autoreleasepool {

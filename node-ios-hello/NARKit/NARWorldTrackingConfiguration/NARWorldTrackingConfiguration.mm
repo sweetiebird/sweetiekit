@@ -6,6 +6,8 @@
 //
 #include "NARWorldTrackingConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARWorldTrackingConfiguration
 #define Ninstancetype NARWorldTrackingConfiguration
 #define js_value_instancetype js_value_ARWorldTrackingConfiguration
@@ -180,3 +182,5 @@ NAN_SETTER(NARWorldTrackingConfiguration::detectionObjectsSetter) {
     [self setDetectionObjects: input];
   }
 }
+
+#endif

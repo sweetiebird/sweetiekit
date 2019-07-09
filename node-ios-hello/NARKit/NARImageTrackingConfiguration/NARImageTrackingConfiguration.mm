@@ -6,6 +6,8 @@
 //
 #include "NARImageTrackingConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARImageTrackingConfiguration
 #define Ninstancetype NARImageTrackingConfiguration
 #define js_value_instancetype js_value_ARImageTrackingConfiguration
@@ -109,3 +111,5 @@ NAN_SETTER(NARImageTrackingConfiguration::maximumNumberOfTrackedImagesSetter) {
     [self setMaximumNumberOfTrackedImages: input];
   }
 }
+
+#endif

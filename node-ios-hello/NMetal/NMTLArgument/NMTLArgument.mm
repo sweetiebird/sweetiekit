@@ -99,6 +99,7 @@ JS_INIT_CLASS(MTLArgument, NSObject);
     JS_ASSIGN_ENUM(MTLDataTypeSampler, NSInteger); // API_AVAILABLE(macos(10.13), ios(11.0)) = 59,
     JS_ASSIGN_ENUM(MTLDataTypePointer, NSInteger); // API_AVAILABLE(macos(10.13), ios(11.0)) = 60,
 
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLDataTypeR8Unorm, NSInteger); //         API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 62,
     JS_ASSIGN_ENUM(MTLDataTypeR8Snorm, NSInteger); //         API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 63,
     JS_ASSIGN_ENUM(MTLDataTypeR16Unorm, NSInteger); //        API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 64,
@@ -115,6 +116,7 @@ JS_INIT_CLASS(MTLArgument, NSObject);
     JS_ASSIGN_ENUM(MTLDataTypeRGB10A2Unorm, NSInteger); //    API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 75,
     JS_ASSIGN_ENUM(MTLDataTypeRG11B10Float, NSInteger); //    API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 76,
     JS_ASSIGN_ENUM(MTLDataTypeRGB9E5Float, NSInteger); //     API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) = 77,
+#endif
 #if !TARGET_OS_IPHONE
     JS_ASSIGN_ENUM(MTLDataTypeRenderPipeline, NSInteger); //  API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 78,
 #endif
@@ -128,8 +130,10 @@ JS_INIT_CLASS(MTLArgument, NSObject);
     JS_ASSIGN_ENUM(MTLArgumentTypeTexture, NSInteger); // = 2,
     JS_ASSIGN_ENUM(MTLArgumentTypeSampler, NSInteger); // = 3,
 
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLArgumentTypeImageblockData, NSInteger); // API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos)     = 16,
     JS_ASSIGN_ENUM(MTLArgumentTypeImageblock, NSInteger); // API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos)         = 17,
+#endif
 
   //} API_AVAILABLE(macos(10.11), ios(8.0));
 

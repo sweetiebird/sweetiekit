@@ -15,7 +15,9 @@ NMTLRenderPipelineReflection::~NMTLRenderPipelineReflection() {}
 JS_INIT_CLASS(MTLRenderPipelineReflection, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(vertexArguments);
   JS_ASSIGN_PROTO_PROP_READONLY(fragmentArguments);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_PROP_READONLY(tileArguments);
+#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -61,9 +63,11 @@ NAN_GETTER(NMTLRenderPipelineReflection::fragmentArgumentsGetter) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NMTLRenderPipelineReflection::tileArgumentsGetter) {
   JS_UNWRAP(MTLRenderPipelineReflection, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_NSArray<MTLArgument*>([self tileArguments]));
   }
 }
+#endif

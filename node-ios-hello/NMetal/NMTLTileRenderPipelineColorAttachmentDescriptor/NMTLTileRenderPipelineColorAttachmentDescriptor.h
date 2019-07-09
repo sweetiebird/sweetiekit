@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#if !(TARGET_OS_MAC || TARGET_OS_UIKITFORMAC)
+
 #define js_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) js_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)
 #define to_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) to_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)
 #define is_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) is_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)
@@ -17,5 +19,7 @@
 JS_WRAP_CLASS(MTLTileRenderPipelineColorAttachmentDescriptor, NSObject);
   JS_PROP(pixelFormat);
 JS_WRAP_CLASS_END(MTLTileRenderPipelineColorAttachmentDescriptor);
+
+#endif
 
 #endif /* NMTLTileRenderPipelineColorAttachmentDescriptor_h */

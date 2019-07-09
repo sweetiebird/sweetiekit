@@ -23,7 +23,7 @@ JS_INIT_CLASS(UIBlurEffect, UIVisualEffect);
     JS_ASSIGN_ENUM(UIBlurEffectStyleExtraLight, NSInteger);
     JS_ASSIGN_ENUM(UIBlurEffectStyleLight, NSInteger);
     JS_ASSIGN_ENUM(UIBlurEffectStyleDark, NSInteger);
-#if !defined(__IPHONEOS__) && !defined(__WATCHOS__)
+#if __TVOS__
     JS_ASSIGN_ENUM(UIBlurEffectStyleExtraDark, NSInteger); //  __TVOS_AVAILABLE(10_0) __IOS_PROHIBITED __WATCHOS_PROHIBITED,
 #endif
     JS_ASSIGN_ENUM(UIBlurEffectStyleRegular, NSInteger); //  NS_ENUM_AVAILABLE_IOS(10_0), 

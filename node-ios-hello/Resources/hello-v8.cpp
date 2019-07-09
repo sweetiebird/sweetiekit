@@ -4,7 +4,7 @@
 //  Created by Emily Kolar on 4/9/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
+#if __IPHONEOS__
 #include "hello-v8.hpp"
 
 #include <stdio.h>
@@ -274,3 +274,4 @@ extern "C" void hellov8async(const char* program_name)
         exit(42); // TODO
     }
 }
+#endif

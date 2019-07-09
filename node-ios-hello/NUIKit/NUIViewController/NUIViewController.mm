@@ -76,7 +76,7 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROTO_METHOD(targetViewControllerForActionSender);
   JS_ASSIGN_PROTO_METHOD(showViewControllerSender);
   JS_ASSIGN_PROTO_METHOD(showDetailViewControllerSender);
-#ifndef __IPHONEOS__
+#if __TVOS__
   JS_ASSIGN_PROTO_METHOD(setNeedsUserInterfaceAppearanceUpdate);
 #endif
   JS_ASSIGN_PROTO_METHOD(shouldAutorotateToInterfaceOrientation);
@@ -124,7 +124,9 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROTO_METHOD(registerForPreviewingWithDelegateSourceView);
   JS_ASSIGN_PROTO_METHOD(unregisterForPreviewingWithContext);
   JS_ASSIGN_PROTO_METHOD(setNeedsUpdateOfScreenEdgesDeferringSystemGestures);
+  #if __IPHONEOS__
   JS_ASSIGN_PROTO_METHOD(setNeedsUpdateOfHomeIndicatorAutoHidden);
+  #endif
   JS_ASSIGN_PROTO_METHOD(previewActionItems);
 #if TODO
 // UIContentContainer
@@ -825,7 +827,7 @@ NAN_METHOD(NUIViewController::showDetailViewControllerSender) {
   }
 }
 
-#ifndef __IPHONEOS__
+#if __TVOS__
 NAN_METHOD(NUIViewController::setNeedsUserInterfaceAppearanceUpdate) {
   JS_UNWRAP(UIViewController, self);
   declare_autoreleasepool {
@@ -1207,12 +1209,14 @@ NAN_METHOD(NUIViewController::setNeedsUpdateOfScreenEdgesDeferringSystemGestures
   }
 }
 
+#if __IPHONEOS__
 NAN_METHOD(NUIViewController::setNeedsUpdateOfHomeIndicatorAutoHidden) {
   JS_UNWRAP(UIViewController, self);
   declare_autoreleasepool {
     [self setNeedsUpdateOfHomeIndicatorAutoHidden];
   }
 }
+#endif
 
 NAN_METHOD(NUIViewController::previewActionItems) {
   JS_UNWRAP(UIViewController, self);
@@ -1848,6 +1852,7 @@ NAN_GETTER(NUIViewController::preferredScreenEdgesDeferringSystemGesturesGetter)
   }
 }
 
+#if __IPHONEOS__
 NAN_GETTER(NUIViewController::childViewControllerForHomeIndicatorAutoHiddenGetter) {
   JS_UNWRAP(UIViewController, self);
   declare_autoreleasepool {
@@ -1861,6 +1866,7 @@ NAN_GETTER(NUIViewController::prefersHomeIndicatorAutoHiddenGetter) {
     JS_SET_RETURN(js_value_BOOL([self prefersHomeIndicatorAutoHidden]));
   }
 }
+#endif
 
 NAN_GETTER(NUIViewController::previewActionItemsGetter) {
   JS_UNWRAP(UIViewController, self);

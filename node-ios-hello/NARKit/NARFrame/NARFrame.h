@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARFrame(x) js_value_wrapper(x, ARFrame)
 #define to_value_ARFrame(x) to_value_wrapper(x, ARFrame)
 #define is_value_ARFrame(x) is_value_wrapper(x, ARFrame)
@@ -20,5 +22,7 @@ JS_WRAP_CLASS(ARFrame, NSObject);
   JS_PROP(lightEstimate);
   JS_PROP(capturedImage);
 JS_WRAP_CLASS_END(ARFrame);
+
+#endif
 
 #endif /* NARFrame_h */

@@ -19,7 +19,9 @@ JS_INIT_CLASS(SCNView, UIView);
   JS_ASSIGN_PROP_READONLY(proto, cameraControlConfiguration);
   JS_ASSIGN_PROP_READONLY(proto, defaultCameraController);
   JS_ASSIGN_PROP(proto, preferredFramesPerSecond);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROP(proto, eaglContext);
+#endif
   JS_ASSIGN_PROP(proto, antialiasingMode);
   // SCNRenderer
   JS_ASSIGN_PROP(proto, scene);
@@ -34,7 +36,9 @@ JS_INIT_CLASS(SCNView, UIView);
   JS_ASSIGN_PROP(proto, debugOptions);
   JS_ASSIGN_PROP(proto, overlaySKScene);
   JS_ASSIGN_PROP_READONLY(proto, renderingAPI);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROP_READONLY(proto, context);
+#endif
   JS_ASSIGN_PROP_READONLY(proto, currentRenderCommandEncoder);
   JS_ASSIGN_PROP_READONLY(proto, device);
   JS_ASSIGN_PROP_READONLY(proto, colorPixelFormat);
@@ -178,6 +182,7 @@ NAN_SETTER(NSCNView::preferredFramesPerSecondSetter) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NSCNView::eaglContextGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
@@ -186,7 +191,9 @@ NAN_GETTER(NSCNView::eaglContextGetter) {
     return;
   }
 }
+#endif
 
+#ifdef __IPHONEOS__
 NAN_SETTER(NSCNView::eaglContextSetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
@@ -194,6 +201,7 @@ NAN_SETTER(NSCNView::eaglContextSetter) {
     [self setEaglContext: to_value_EAGLContext(value)];
   }
 }
+#endif
 
 #include "NSCNSceneRenderer.h"
 
@@ -418,6 +426,7 @@ NAN_GETTER(NSCNView::renderingAPIGetter) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NSCNView::contextGetter) {
   JS_UNWRAP(SCNView, self);
   @autoreleasepool
@@ -426,6 +435,7 @@ NAN_GETTER(NSCNView::contextGetter) {
     return;
   }
 }
+#endif
 
 typedef NSObject MTLRenderCommandEncoder;
 

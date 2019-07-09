@@ -6,6 +6,8 @@
 //
 #include "NARSKViewDelegate.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARSKViewDelegate
 #define js_value_instancetype js_value_ARSKViewDelegate
 
@@ -140,3 +142,5 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
 }
 
 @end
+
+#endif // #ifdef __IPHONEOS__

@@ -6,6 +6,8 @@
 //
 #include "NARObjectScanningConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARObjectScanningConfiguration
 #define Ninstancetype NARObjectScanningConfiguration
 #define js_value_instancetype js_value_ARObjectScanningConfiguration
@@ -91,3 +93,4 @@ NAN_SETTER(NARObjectScanningConfiguration::planeDetectionSetter) {
   }
 }
 
+#endif

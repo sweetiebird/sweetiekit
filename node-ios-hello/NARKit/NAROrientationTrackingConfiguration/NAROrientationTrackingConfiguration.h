@@ -10,6 +10,8 @@
 
 #include "NARConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_AROrientationTrackingConfiguration(x) js_value_wrapper(x, AROrientationTrackingConfiguration)
 #define to_value_AROrientationTrackingConfiguration(x) to_value_wrapper(x, AROrientationTrackingConfiguration)
 #define is_value_AROrientationTrackingConfiguration(x) is_value_wrapper(x, AROrientationTrackingConfiguration)
@@ -19,5 +21,7 @@ JS_WRAP_CLASS(AROrientationTrackingConfiguration, ARConfiguration);
   JS_STATIC_PROP_READONLY(supportedVideoFormats);
   JS_PROP(isAutoFocusEnabled);
 JS_WRAP_CLASS_END(AROrientationTrackingConfiguration);
+
+#endif
 
 #endif /* NAROrientationTrackingConfiguration_h */

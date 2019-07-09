@@ -6,6 +6,8 @@
 //
 #include "NARWorldMap.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARWorldMap
 #define js_value_instancetype js_value_ARWorldMap
 
@@ -82,3 +84,5 @@ NAN_GETTER(NARWorldMap::rawFeaturePointsGetter) {
     JS_SET_RETURN(js_value_ARPointCloud([self rawFeaturePoints]));
   }
 }
+
+#endif

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -153,6 +153,11 @@
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917522D1E73B0023E861 /* libv8_compiler.a */; platformFilter = uikitformac; };
+		A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917722D1E8D00023E861 /* libv8_snapshot.a */; platformFilter = ios; };
+		A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */; platformFilter = uikitformac; };
+		A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917C22D1EA530023E861 /* libicustubdata.a */; };
+		A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917F22D1EAD00023E861 /* libtorque_base.a */; platformFilter = uikitformac; };
 		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
 		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
@@ -286,7 +291,7 @@
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A188710E227E51D700129A75 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A188710D227E51D700129A75 /* node_modules */; };
-		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
+		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; platformFilter = ios; };
 		A18F1E61228A3D1500A42754 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = A18F1E60228A3D1500A42754 /* vendor */; };
 		A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E64228A41C000A42754 /* NARSCNView.mm */; };
 		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
@@ -635,11 +640,11 @@
 		A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1E225C6AB200085571 /* libv8_init.a */; };
 		A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1F225C6AB200085571 /* libllhttp.a */; };
 		A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A20225C6AB200085571 /* libnode.a */; };
-		A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */; };
+		A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */; platformFilter = uikitformac; };
 		A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A22225C6AB200085571 /* libzlib.a */; };
 		A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A23225C6AB200085571 /* libopenssl.a */; };
 		A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A24225C6AB200085571 /* libuv.a */; };
-		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; };
+		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; platformFilter = ios; };
 		A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A26225C6AB200085571 /* libv8_libplatform.a */; };
 		A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A27225C6AB200085571 /* libv8_libsampler.a */; };
 		A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A28225C6AB200085571 /* libnghttp2.a */; };
@@ -933,6 +938,12 @@
 		A1394A6D22865F200087F712 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		A1482A94229D4E3F001502C0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		A149D0A4228260D300E11EDA /* BuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderViewController.swift; sourceTree = "<group>"; };
+		A14F917522D1E73B0023E861 /* libv8_compiler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_compiler.a; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/out/Debug/libv8_compiler.a"; sourceTree = "<group>"; };
+		A14F917722D1E8D00023E861 /* libv8_snapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_snapshot.a; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/out/Debug/libv8_snapshot.a"; sourceTree = "<group>"; };
+		A14F917922D1E9620023E861 /* common.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = common.gypi; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/common.gypi"; sourceTree = "<group>"; };
+		A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base_without_compiler.a; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/out/Debug/libv8_base_without_compiler.a"; sourceTree = "<group>"; };
+		A14F917C22D1EA530023E861 /* libicustubdata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicustubdata.a; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/out/Debug/libicustubdata.a"; sourceTree = "<group>"; };
+		A14F917F22D1EAD00023E861 /* libtorque_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtorque_base.a; path = "../../../../Volumes/birdie/opt/native/node-uikitformac/out/Debug/libtorque_base.a"; sourceTree = "<group>"; };
 		A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreen.mm; sourceTree = "<group>"; };
 		A1574E7A22B7FB57006CC5F2 /* NUIScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScreen.h; sourceTree = "<group>"; };
 		A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreenMode.mm; sourceTree = "<group>"; };
@@ -1873,28 +1884,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
-				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
-				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
-				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
-				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
 				A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */,
-				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
+				A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */,
+				A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */,
+				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
+				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
+				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
+				A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */,
+				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
 				A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */,
+				A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */,
 				A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */,
-				A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */,
-				A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */,
 				A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */,
+				A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */,
 				A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */,
 				A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */,
-				A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */,
-				A18E802222657B6C000438E0 /* Client.framework in Frameworks */,
-				A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */,
-				A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */,
-				A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */,
+				A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */,
+				A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */,
+				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
 				A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */,
 				A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */,
-				A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */,
+				A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */,
+				A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */,
+				A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */,
+				A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */,
+				A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */,
+				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
+				A18E802222657B6C000438E0 /* Client.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7685,6 +7701,12 @@
 		A1FC1A1B225C6AB100085571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A14F917F22D1EAD00023E861 /* libtorque_base.a */,
+				A14F917C22D1EA530023E861 /* libicustubdata.a */,
+				A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */,
+				A14F917922D1E9620023E861 /* common.gypi */,
+				A14F917722D1E8D00023E861 /* libv8_snapshot.a */,
+				A14F917522D1E73B0023E861 /* libv8_compiler.a */,
 				A194895E228A89B0007BF787 /* MapKit.framework */,
 				A1BD4B022287B6DC001D1F6E /* libicudata.a */,
 				A1BD4B012287B6DC001D1F6E /* libicui18n.a */,
@@ -8570,7 +8592,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -8585,8 +8606,10 @@
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
-				NODE_ROOT = "/opt/sweet/node-ios";
+				NODE_ROOT = "";
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
+				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -8636,7 +8659,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -8650,8 +8672,10 @@
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
-				NODE_ROOT = "/opt/sweet/node-ios";
+				NODE_ROOT = "";
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
+				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-macosx";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -8664,13 +8688,35 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = B9452FEMTF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
+					"DEBUG=1",
+					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(NODE_ROOT)/src",
@@ -8682,13 +8728,16 @@
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Debug";
+				NODE_ROOT = "";
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
+				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -8699,6 +8748,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				STRIP_SWIFT_SYMBOLS = NO;
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "node-ios-hello/node-ios-hello-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -8711,13 +8761,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = B9452FEMTF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = (
+					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
+					"V8_INTL_SUPPORT=1",
+					"__IPHONEOS__=1",
+					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(NODE_ROOT)/src",
@@ -8729,13 +8798,16 @@
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Release";
+				NODE_ROOT = "";
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
+				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-macosx";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -8746,6 +8818,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				STRIP_SWIFT_SYMBOLS = NO;
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "node-ios-hello/node-ios-hello-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

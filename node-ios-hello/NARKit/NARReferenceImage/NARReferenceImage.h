@@ -8,6 +8,8 @@
 #ifndef NARReferenceImage_h
 #define NARReferenceImage_h    
 
+#ifdef __IPHONEOS__
+
 #include "NNSObject.h"
 
 #define js_value_ARReferenceImage(x) js_value_wrapper(x, ARReferenceImage)
@@ -25,5 +27,7 @@ JS_WRAP_CLASS(ARReferenceImage, NSObject);
   JS_PROP(name);
   JS_PROP_READONLY(physicalSize);
 JS_WRAP_CLASS_END(ARReferenceImage);
+
+#endif
 
 #endif /* NARReferenceImage_h */

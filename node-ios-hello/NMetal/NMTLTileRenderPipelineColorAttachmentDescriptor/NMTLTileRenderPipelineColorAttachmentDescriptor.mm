@@ -6,6 +6,8 @@
 //
 #include "NMTLTileRenderPipelineColorAttachmentDescriptor.h"
 
+#if !(TARGET_OS_MAC || TARGET_OS_UIKITFORMAC)
+
 #define instancetype MTLTileRenderPipelineColorAttachmentDescriptor
 #define js_value_instancetype js_value_MTLTileRenderPipelineColorAttachmentDescriptor
 
@@ -60,3 +62,5 @@ NAN_SETTER(NMTLTileRenderPipelineColorAttachmentDescriptor::pixelFormatSetter) {
     [self setPixelFormat: input];
   }
 }
+
+#endif

@@ -21,7 +21,7 @@ JS_INIT_CLASS(NSPort, NSObject);
   JS_ASSIGN_PROTO_METHOD(removeFromRunLoopForMode);
   JS_ASSIGN_PROTO_METHOD(sendBeforeDateComponentsFromReserved);
   JS_ASSIGN_PROTO_METHOD(sendBeforeDateMsgidComponentsFromReserved);
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (0)
+#if TARGET_OS_MAC || TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(addConnectionToRunLoopForMode);
   JS_ASSIGN_PROTO_METHOD(removeConnectionFromRunLoopForMode);
 #endif
@@ -137,8 +137,12 @@ NAN_METHOD(NNSPort::sendBeforeDateMsgidComponentsFromReserved) {
 }
 
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (0)
-#include "NNSConnection.h"
+#if TARGET_OS_MAC || TARGET_OS_UIKITFORMAC
+
+//#include "NNSConnection.h"
+#define js_value_NSConnection(x) js_value_wrapper_unknown(x, NSConnection)
+#define to_value_NSConnection(x) to_value_wrapper_unknown(x, NSConnection)
+#define is_value_NSConnection(x) is_value_wrapper_unknown(x, NSConnection)
 
 NAN_METHOD(NNSPort::addConnectionToRunLoopForMode) {
   JS_UNWRAP(NSPort, self);

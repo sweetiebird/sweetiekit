@@ -6,6 +6,8 @@
 //
 #include "NARReferenceImage.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARReferenceImage
 #define js_value_instancetype js_value_ARReferenceImage
 
@@ -116,3 +118,5 @@ NAN_GETTER(NARReferenceImage::physicalSizeGetter) {
     JS_SET_RETURN(js_value_CGSize([self physicalSize]));
   }
 }
+
+#endif

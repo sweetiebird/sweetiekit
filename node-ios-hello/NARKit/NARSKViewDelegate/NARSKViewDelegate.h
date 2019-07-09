@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARSKViewDelegate(x) js_value_wrapper(x, ARSKViewDelegate)
 #define to_value_ARSKViewDelegate(x) to_value_wrapper(x, ARSKViewDelegate)
 #define is_value_ARSKViewDelegate(x) is_value_wrapper(x, ARSKViewDelegate)
@@ -73,5 +75,7 @@ JS_WRAP_PROTOCOL_END(ARSKViewDelegate, NSObject);
 - (void)view:(ARSKView *)view didRemoveNode:(SKNode *)node forAnchor:(ARAnchor *)anchor;
 @end
 #endif
+
+#endif // #ifdef __IPHONEOS__
 
 #endif /* NARSKViewDelegate_h */

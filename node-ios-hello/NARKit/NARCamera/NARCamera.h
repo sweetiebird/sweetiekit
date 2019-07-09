@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARCamera(x) js_value_wrapper(x, ARCamera)
 #define to_value_ARCamera(x) to_value_wrapper(x, ARCamera)
 #define is_value_ARCamera(x) is_value_wrapper(x, ARCamera)
@@ -37,5 +39,7 @@ JS_WRAP_CLASS(ARCamera, NSObject);
   JS_PROP_READONLY(imageResolution);
   JS_PROP_READONLY(projectionMatrix);
 JS_WRAP_CLASS_END(ARCamera);
+
+#endif
 
 #endif /* NARCamera_h */

@@ -6,6 +6,8 @@
 //
 #include "NEAGLSharegroup.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype EAGLSharegroup
 #define js_value_instancetype js_value_EAGLSharegroup
 
@@ -49,3 +51,5 @@ NAN_GETTER(NEAGLSharegroup::debugLabelGetter) {
     JS_SET_RETURN(js_value_NSString([self debugLabel]));
   }
 }
+
+#endif

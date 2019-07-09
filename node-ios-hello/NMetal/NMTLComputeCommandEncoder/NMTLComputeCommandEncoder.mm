@@ -220,6 +220,7 @@ NAN_METHOD(NMTLComputeCommandEncoder::setThreadgroupMemoryLengthAtIndex) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_METHOD(NMTLComputeCommandEncoder::setImageblockWidthHeight) {
   JS_UNWRAP_PROTOCOL(MTLComputeCommandEncoder, self);
   declare_autoreleasepool {
@@ -229,6 +230,7 @@ NAN_METHOD(NMTLComputeCommandEncoder::setImageblockWidthHeight) {
     [self setImageblockWidth: width height: height];
   }
 }
+#endif
 
 #include "NMTLTypes.h"
 

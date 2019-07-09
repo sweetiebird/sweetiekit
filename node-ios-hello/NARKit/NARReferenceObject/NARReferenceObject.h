@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARReferenceObject(x) js_value_wrapper(x, ARReferenceObject)
 #define to_value_ARReferenceObject(x) to_value_wrapper(x, ARReferenceObject)
 #define is_value_ARReferenceObject(x) is_value_wrapper(x, ARReferenceObject)
@@ -26,5 +28,7 @@ JS_WRAP_CLASS(ARReferenceObject, NSObject);
   JS_PROP_READONLY(scale);
   JS_PROP_READONLY(rawFeaturePoints);
 JS_WRAP_CLASS_END(ARReferenceObject);
+
+#endif
 
 #endif /* NARReferenceObject_h */

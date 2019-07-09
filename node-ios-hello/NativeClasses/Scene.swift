@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+#if !targetEnvironment(UIKitForMac)
 import ARKit
 
 class Scene: SKScene {
@@ -37,3 +38,4 @@ class Scene: SKScene {
         }
     }
 }
+#endif

@@ -149,7 +149,7 @@ JS_INIT_GLOBALS(AudioComponent);
   */
   //typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
     JS_ASSIGN_ENUM(kAudioComponentInstantiation_LoadOutOfProcess, uint32_t); //    CF_ENUM_AVAILABLE(10_11,  9_0) = 1,
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(kAudioComponentInstantiation_LoadInProcess, uint32_t); //       CF_ENUM_AVAILABLE(10_11,  NA)  = 2
 #endif
   //};

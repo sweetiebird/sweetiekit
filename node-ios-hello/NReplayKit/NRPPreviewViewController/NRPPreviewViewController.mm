@@ -14,7 +14,7 @@ NRPPreviewViewController::~NRPPreviewViewController() {}
 
 JS_INIT_CLASS(RPPreviewViewController, UIViewController);
   JS_ASSIGN_PROTO_PROP(previewControllerDelegate);
-#if !TARGET_OS_IPHONE
+#ifdef __TVOS__
   JS_ASSIGN_PROTO_PROP(mode);
 #endif
 
@@ -72,7 +72,7 @@ NAN_SETTER(NRPPreviewViewController::previewControllerDelegateSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE
+#ifdef __TVOS__
 
 NAN_GETTER(NRPPreviewViewController::modeGetter) {
   JS_UNWRAP(RPPreviewViewController, self);

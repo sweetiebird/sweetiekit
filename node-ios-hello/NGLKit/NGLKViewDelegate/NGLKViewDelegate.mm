@@ -6,6 +6,8 @@
 //
 #include "NGLKViewDelegate.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype GLKViewDelegate
 #define js_value_instancetype js_value_GLKViewDelegate
 
@@ -65,3 +67,5 @@ DELEGATE_PROTOCOL_PROP(GLKViewDelegate, glkViewDrawInRect);
 }
 
 @end
+
+#endif

@@ -5,6 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NARSCNViewDelegate.h"
+
+#ifdef __IPHONEOS__
+
 #include "NARSession.h"
 #include "NARAnchor.h"
 #include "NSCNView.h"
@@ -68,3 +71,5 @@ NAN_METHOD(NARSCNViewDelegate::New) {
 
   info.GetReturnValue().Set(obj);
 }
+
+#endif

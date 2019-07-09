@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARVideoFormat(x) js_value_wrapper(x, ARVideoFormat)
 #define to_value_ARVideoFormat(x) to_value_wrapper(x, ARVideoFormat)
 #define is_value_ARVideoFormat(x) is_value_wrapper(x, ARVideoFormat)
@@ -18,5 +20,7 @@ JS_WRAP_CLASS(ARVideoFormat, NSObject);
   JS_PROP_READONLY(imageResolution);
   JS_PROP_READONLY(framesPerSecond);
 JS_WRAP_CLASS_END(ARVideoFormat);
+
+#endif
 
 #endif /* NARVideoFormat_h */

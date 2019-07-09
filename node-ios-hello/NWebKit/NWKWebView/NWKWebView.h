@@ -37,11 +37,6 @@ JS_WRAP_CLASS(WKWebView, UIView);
   JS_METHOD(takeSnapshotWithConfigurationCompletionHandler);
 #if !TARGET_OS_IPHONE
   JS_METHOD(setMagnificationCenteredAtPoint);
-  JS_METHOD(goBack);
-  JS_METHOD(goForward);
-  JS_METHOD(reload);
-  JS_METHOD(reloadFromOrigin);
-  JS_METHOD(stopLoading);
 #endif
   JS_PROP_READONLY(configuration);
   JS_PROP(navigationDelegate);
