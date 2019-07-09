@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARPointCloud(x) js_value_wrapper(x, ARPointCloud)
 #define to_value_ARPointCloud(x) to_value_wrapper(x, ARPointCloud)
 #define is_value_ARPointCloud(x) is_value_wrapper(x, ARPointCloud)
@@ -19,5 +21,7 @@ JS_WRAP_CLASS(ARPointCloud, NSObject);
   JS_PROP_READONLY(points);
   JS_PROP_READONLY(identifiers);
 JS_WRAP_CLASS_END(ARPointCloud);
+
+#endif
 
 #endif /* NARPointCloud_h */

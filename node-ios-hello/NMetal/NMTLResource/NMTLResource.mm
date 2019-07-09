@@ -105,7 +105,9 @@ JS_INIT_PROTOCOL(MTLResource, NSObject);
     JS_ASSIGN_ENUM(MTLStorageModeManaged, NSUInteger); // API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
 #endif
     JS_ASSIGN_ENUM(MTLStorageModePrivate, NSUInteger); // = 2,
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLStorageModeMemoryless, NSUInteger); // API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 3,
+#endif
   //} API_AVAILABLE(macos(10.11), ios(9.0));
 
 
@@ -175,8 +177,9 @@ JS_INIT_PROTOCOL(MTLResource, NSObject);
     JS_ASSIGN_ENUM(MTLResourceStorageModeManaged, NSUInteger); //    API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios)   = MTLStorageModeManaged    << MTLResourceStorageModeShift,
 #endif
     JS_ASSIGN_ENUM(MTLResourceStorageModePrivate, NSUInteger); //    API_AVAILABLE(macos(10.11), ios(9.0))  = MTLStorageModePrivate    << MTLResourceStorageModeShift,
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLResourceStorageModeMemoryless, NSUInteger); // API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,
-
+#endif
     JS_ASSIGN_ENUM(MTLResourceHazardTrackingModeUntracked, NSUInteger); // API_AVAILABLE(macos(10.13), ios(10.0)) = 0x1UL << MTLResourceHazardTrackingModeShift,
     
     // Deprecated spellings

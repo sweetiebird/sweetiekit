@@ -6,6 +6,8 @@
 //
 #include "NARConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 NARConfiguration::NARConfiguration () {}
 NARConfiguration::~NARConfiguration () {}
 
@@ -158,3 +160,6 @@ NAN_SETTER(NARConfiguration::providesAudioDataSetter) {
     [self setProvidesAudioData: input];
   }
 }
+
+#endif
+

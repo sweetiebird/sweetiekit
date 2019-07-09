@@ -6,6 +6,8 @@
 //
 #include "NARPointCloud.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARPointCloud
 #define js_value_instancetype js_value_ARPointCloud
 
@@ -73,3 +75,6 @@ NAN_GETTER(NARPointCloud::identifiersGetter) {
     JS_SET_RETURN(result);
   }
 }
+
+#endif
+

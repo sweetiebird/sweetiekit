@@ -6,6 +6,8 @@
 //
 #include "NARLightEstimate.h"
 
+#ifdef __IPHONEOS__
+
 NARLightEstimate::NARLightEstimate () {}
 NARLightEstimate::~NARLightEstimate () {}
 
@@ -51,3 +53,5 @@ NAN_GETTER(NARLightEstimate::ambientColorTemperatureGetter) {
   
   JS_SET_RETURN(JS_FLOAT([est ambientColorTemperature]));
 }
+
+#endif

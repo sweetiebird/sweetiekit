@@ -6,6 +6,8 @@
 //
 #include "NMTLTileRenderPipelineDescriptor.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype MTLTileRenderPipelineDescriptor
 #define js_value_instancetype js_value_MTLTileRenderPipelineDescriptor
 
@@ -156,3 +158,5 @@ NAN_SETTER(NMTLTileRenderPipelineDescriptor::maxTotalThreadsPerThreadgroupSetter
     [self setMaxTotalThreadsPerThreadgroup: input];
   }
 }
+
+#endif

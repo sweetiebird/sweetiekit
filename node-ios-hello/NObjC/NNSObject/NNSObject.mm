@@ -366,7 +366,9 @@ NAN_METHOD(Nid::_objc_msgSend)
     
     switch (info.Length()) {
       case 2: {
+#if TODO_IOS13
         nobjc_msgSend0(obj, sel);
+#endif
       } break;
       default: {
         Nan::ThrowError("Nid::objc_msgSend: input arguments not yet implemented");
@@ -650,6 +652,7 @@ JS_INIT_CLASS(NSObject, id);
   JS_ASSIGN_PROTO_METHOD(setValueForKey);
 #endif
 // NSObject
+#if UNAVAILABLE
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
   JS_ASSIGN_STATIC_METHOD(useStoredAccessor);
   JS_ASSIGN_PROTO_METHOD(storedValueForKey);
@@ -661,6 +664,7 @@ JS_INIT_CLASS(NSObject, id);
   JS_ASSIGN_PROTO_METHOD(unableToSetNilForKey);
   JS_ASSIGN_PROTO_METHOD(valuesForKeys);
   JS_ASSIGN_PROTO_METHOD(takeValuesFromDictionary);
+#endif
 #endif
 #if TODO
   JS_ASSIGN_STATIC_PROP_READONLY(accessInstanceVariablesDirectly);
@@ -882,6 +886,7 @@ NAN_METHOD(NNSObject::setValuesForKeysWithDictionary) {
   }
 }
 
+#if UNAVAILABLE
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 NAN_METHOD(NNSObject::useStoredAccessor) {
@@ -976,6 +981,7 @@ NAN_METHOD(NNSObject::takeValuesFromDictionary) {
 }
 
 #endif // #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#endif // UNAVAILABLE
 
 #if TODO
 NAN_GETTER(NNSObject::accessInstanceVariablesDirectlyGetter) {
@@ -1423,6 +1429,7 @@ NAN_METHOD(NClass::New) {
 #include "NGLKViewDelegate.h"
 #include "NGLKViewControllerDelegate.h"
 
+#ifdef __IPHONEOS__
 #include "NARAnchor.h"
 #include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1444,6 +1451,7 @@ NAN_METHOD(NClass::New) {
 #include "NARHitTestResult.h"
 #include "NARLightEstimate.h"
 #include "NARSCNViewDelegate.h"
+#endif
 
 #include "NSceneKitTypes.h"
 #include "NSCNPhysicsField.h"
@@ -1973,19 +1981,25 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // OpenGLES
 
+#ifdef __IPHONEOS__
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
+#endif
     
     // WebGL
     
+#ifdef __IPHONEOS__ // TODO: mac
     exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
+#endif
 
     // GLKit
 
+#ifdef __IPHONEOS__
     JS_EXPORT_PROTOCOL(GLKViewControllerDelegate);
     JS_EXPORT_PROTOCOL(GLKViewDelegate);
     JS_EXPORT_TYPE(GLKViewController);
     JS_EXPORT_TYPE(GLKView);
+#endif
     
     // ModelIO
 
@@ -2145,9 +2159,11 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
     JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
+#ifdef __IPHONEOS__
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
     JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
+#endif
     JS_EXPORT_PROTOCOL(MTLRenderPipelineState); // <NSObject>
 
     JS_EXPORT_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
@@ -2198,6 +2214,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTKView);
     JS_EXPORT_TYPE(MTKViewDelegate);
     
+#ifdef __IPHONEOS__
     // ARKit
 
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -2221,6 +2238,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARAnchor);
     JS_EXPORT_PROTOCOL(ARSKViewDelegate);
     JS_EXPORT_TYPE(ARSCNViewDelegate);
+#endif
 
     // MapKit
 
@@ -2276,8 +2294,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit
 
+#ifdef __IPHONEOS__ // TODO: mac
       JS_RETURN_TYPE(GLKViewController);
       JS_RETURN_TYPE(GLKView);
+#endif
 
       // Core Animation
 
@@ -2356,9 +2376,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+#ifdef __IPHONEOS__
       JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
+#endif
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLRenderPipelineReflection); // : NSObject
@@ -2394,6 +2416,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLStructMember); // : NSObject
       JS_RETURN_TYPE(MTLType); // : NSObject
 
+#ifdef __IPHONEOS__
       // ARKit
 
       JS_RETURN_TYPE(ARLightEstimate);
@@ -2414,6 +2437,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(ARFaceTrackingConfiguration);
       JS_RETURN_TYPE(ARWorldTrackingConfiguration);
       JS_RETURN_TYPE(ARConfiguration);
+#endif
 
       //SceneKit
 
@@ -2525,8 +2549,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // OpenGLES
 
+#ifdef __IPHONEOS__
       JS_RETURN_TYPE(EAGLContext);
       JS_RETURN_TYPE(EAGLSharegroup);
+#endif
 
       // Custom UIKit
 
@@ -2809,7 +2835,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSInvocation);
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
       JS_RETURN_TYPE(NSMachPort);
+#if TODO
       JS_RETURN_TYPE(NSSocketPort);
+#endif
 #endif
       JS_RETURN_TYPE(NSMessagePort);
       JS_RETURN_TYPE(NSPort);
@@ -2823,8 +2851,10 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit protocols
 
+#ifdef __IPHONEOS__
       JS_RETURN_PROTOCOL(GLKViewControllerDelegate);
       JS_RETURN_PROTOCOL(GLKViewDelegate);
+#endif
 
       // Core Animation Protocols
 
@@ -2900,10 +2930,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_PROTOCOL(SCNSceneRenderer);
       JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
       
+#ifdef __IPHONEOS__
       // ARKit protocols
       
       JS_RETURN_PROTOCOL(ARSKViewDelegate);
-      
+#endif
+
       // Core Location protocols
 
       JS_RETURN_PROTOCOL(CLLocationManagerDelegate);

@@ -6,6 +6,8 @@
 //
 #include "NARReferenceObject.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype ARReferenceObject
 #define js_value_instancetype js_value_ARReferenceObject
 
@@ -154,3 +156,4 @@ NAN_GETTER(NARReferenceObject::rawFeaturePointsGetter) {
   }
 }
 
+#endif

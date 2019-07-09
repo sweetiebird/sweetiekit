@@ -5,6 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NARSCNView.h"
+
+#ifdef __IPHONEOS__
+
 #include "NARSession.h"
 #include "NARSCNViewDelegate.h"
 #include "NSCNScene.h"
@@ -180,3 +183,5 @@ NAN_SETTER(NARSCNView::automaticallyUpdatesLightingSetter) {
   
   [ui setAutomaticallyUpdatesLighting:TO_BOOL(value)];
 }
+
+#endif

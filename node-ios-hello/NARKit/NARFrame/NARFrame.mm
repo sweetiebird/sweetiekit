@@ -5,6 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NARFrame.h"
+
+#ifdef __IPHONEOS__
+
 #include "NARCamera.h"
 #include "NARLightEstimate.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -85,3 +88,5 @@ NAN_METHOD(NARFrame::displayTransform) {
   const float* matrix = (const float*)&xform;
   JS_SET_RETURN(createTypedArray<Float32Array>(9, matrix));
 }
+
+#endif

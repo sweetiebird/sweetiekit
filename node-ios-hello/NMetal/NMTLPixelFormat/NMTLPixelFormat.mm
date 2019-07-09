@@ -19,7 +19,9 @@ JS_INIT_GLOBALS(MTLPixelFormat);
     JS_ASSIGN_ENUM(MTLPixelFormatA8Unorm, NSInteger); //      = 1,
     
     JS_ASSIGN_ENUM(MTLPixelFormatR8Unorm, NSInteger); //                            = 10,
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLPixelFormatR8Unorm_sRGB, NSInteger); // API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 11,
+#endif
 
     JS_ASSIGN_ENUM(MTLPixelFormatR8Snorm, NSInteger); //      = 12,
     JS_ASSIGN_ENUM(MTLPixelFormatR8Uint, NSInteger); //       = 13,
@@ -34,17 +36,21 @@ JS_INIT_GLOBALS(MTLPixelFormat);
     JS_ASSIGN_ENUM(MTLPixelFormatR16Float, NSInteger); //     = 25,
 
     JS_ASSIGN_ENUM(MTLPixelFormatRG8Unorm, NSInteger); //                            = 30,
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLPixelFormatRG8Unorm_sRGB, NSInteger); // API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 31,
+#endif
     JS_ASSIGN_ENUM(MTLPixelFormatRG8Snorm, NSInteger); //                            = 32,
     JS_ASSIGN_ENUM(MTLPixelFormatRG8Uint, NSInteger); //                             = 33,
     JS_ASSIGN_ENUM(MTLPixelFormatRG8Sint, NSInteger); //                             = 34,
 
     /* Packed 16 bit formats */
     
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLPixelFormatB5G6R5Unorm, NSInteger); // API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 40,
     JS_ASSIGN_ENUM(MTLPixelFormatA1BGR5Unorm, NSInteger); // API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 41,
     JS_ASSIGN_ENUM(MTLPixelFormatABGR4Unorm, NSInteger); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 42,
     JS_ASSIGN_ENUM(MTLPixelFormatBGR5A1Unorm, NSInteger); // API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) = 43,
+#endif
 
     /* Normal 32 bit formats */
 
@@ -78,8 +84,10 @@ JS_INIT_GLOBALS(MTLPixelFormat);
 
     JS_ASSIGN_ENUM(MTLPixelFormatBGR10A2Unorm, NSInteger); //  API_AVAILABLE(macos(10.13), ios(11.0)) = 94,
 
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLPixelFormatBGR10_XR, NSInteger); //      API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 554,
     JS_ASSIGN_ENUM(MTLPixelFormatBGR10_XR_sRGB, NSInteger); // API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 555,
+#endif
 
     /* Normal 64 bit formats */
 
@@ -93,8 +101,10 @@ JS_INIT_GLOBALS(MTLPixelFormat);
     JS_ASSIGN_ENUM(MTLPixelFormatRGBA16Sint, NSInteger); //   = 114,
     JS_ASSIGN_ENUM(MTLPixelFormatRGBA16Float, NSInteger); //  = 115,
 
+#if !TARGET_OS_MAC
     JS_ASSIGN_ENUM(MTLPixelFormatBGRA10_XR, NSInteger); //      API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 552,
     JS_ASSIGN_ENUM(MTLPixelFormatBGRA10_XR_sRGB, NSInteger); // API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 553,
+#endif
 
     /* Normal 128 bit formats */
 

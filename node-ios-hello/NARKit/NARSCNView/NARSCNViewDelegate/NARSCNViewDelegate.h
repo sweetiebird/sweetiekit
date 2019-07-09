@@ -8,6 +8,8 @@
 #ifndef NARSCNViewDelegate_h
 #define NARSCNViewDelegate_h
 
+#ifdef __IPHONEOS__
+
 #include "NNSObject.h"
 
 #define js_value_ARSCNViewDelegate(x) js_value_wrapper(x, ARSCNViewDelegate)
@@ -24,6 +26,8 @@ JS_WRAP_CLASS_END(ARSCNViewDelegate);
 
 #if __OBJC__
 typedef SARSCNViewDelegate ARSCNViewDelegate;
+#endif
+
 #endif
 
 #endif /* NARSCNViewDelegate_h */

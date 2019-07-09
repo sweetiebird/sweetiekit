@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#ifdef __IPHONEOS__
+
 #import <GLKit/GLKViewController.h>
 
 #define js_value_GLKViewControllerDelegate(x) js_protocol_wrapper(x, GLKViewControllerDelegate)
@@ -38,5 +40,7 @@ JS_WRAP_PROTOCOL_END(GLKViewControllerDelegate, NSObject);
 
 @end
 #endif
+
+#endif // #ifdef __IPHONEOS__
 
 #endif /* NGLKViewControllerDelegate_h */

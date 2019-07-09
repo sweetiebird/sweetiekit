@@ -1654,7 +1654,7 @@ NAN_METHOD(CGContextShowGlyphsWithAdvances) {
 
 #include "NCGPDFDocument.h"
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 //CG_EXTERN void CGContextDrawPDFDocument(CGContextRef cg_nullable c, CGRect rect, CGPDFDocumentRef cg_nullable document, int page,)
 NAN_METHOD(CGContextDrawPDFDocument) {
@@ -1668,7 +1668,7 @@ NAN_METHOD(CGContextDrawPDFDocument) {
   }
 }
 
-#endif // #if !TARGET_OS_IPHONE
+#endif // #if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 
 JS_INIT_GLOBALS(CGContext);
@@ -1793,7 +1793,7 @@ JS_INIT_GLOBALS(CGContext);
   JS_ASSIGN_GLOBAL_METHOD(CGContextShowGlyphs);
   JS_ASSIGN_GLOBAL_METHOD(CGContextShowGlyphsAtPoint);
   JS_ASSIGN_GLOBAL_METHOD(CGContextShowGlyphsWithAdvances);
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_GLOBAL_METHOD(CGContextDrawPDFDocument);
 #endif
 

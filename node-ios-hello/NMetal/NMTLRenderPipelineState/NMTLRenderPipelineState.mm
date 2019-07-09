@@ -13,12 +13,16 @@ NMTLRenderPipelineState::NMTLRenderPipelineState() {}
 NMTLRenderPipelineState::~NMTLRenderPipelineState() {}
 
 JS_INIT_PROTOCOL(MTLRenderPipelineState, NSObject);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_METHOD(imageblockMemoryLengthForDimensions);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(label);
   JS_ASSIGN_PROTO_PROP_READONLY(device);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_PROP_READONLY(maxTotalThreadsPerThreadgroup);
   JS_ASSIGN_PROTO_PROP_READONLY(threadgroupSizeMatchesTileSize);
   JS_ASSIGN_PROTO_PROP_READONLY(imageblockSampleLength);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(supportIndirectCommandBuffers);
 
   // instance members (proto)
@@ -52,6 +56,7 @@ NAN_METHOD(NMTLRenderPipelineState::New) {
 
 #include "NMTLTypes.h"
 
+#ifdef __IPHONEOS__
 NAN_METHOD(NMTLRenderPipelineState::imageblockMemoryLengthForDimensions) {
   JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
   declare_autoreleasepool {
@@ -60,6 +65,7 @@ NAN_METHOD(NMTLRenderPipelineState::imageblockMemoryLengthForDimensions) {
     JS_SET_RETURN(js_value_NSUInteger([self imageblockMemoryLengthForDimensions: imageblockDimensions]));
   }
 }
+#endif
 
 NAN_GETTER(NMTLRenderPipelineState::labelGetter) {
   JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
@@ -77,6 +83,7 @@ NAN_GETTER(NMTLRenderPipelineState::deviceGetter) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_GETTER(NMTLRenderPipelineState::maxTotalThreadsPerThreadgroupGetter) {
   JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);
   declare_autoreleasepool {
@@ -97,6 +104,7 @@ NAN_GETTER(NMTLRenderPipelineState::imageblockSampleLengthGetter) {
     JS_SET_RETURN(js_value_NSUInteger([self imageblockSampleLength]));
   }
 }
+#endif
 
 NAN_GETTER(NMTLRenderPipelineState::supportIndirectCommandBuffersGetter) {
   JS_UNWRAP_PROTOCOL(MTLRenderPipelineState, self);

@@ -1124,6 +1124,8 @@ bool is_value_simd_uint4(const Local<Value>& value);
 #define is_value_vector_uint3   is_value_simd_uint3
 #define is_value_vector_uint4   is_value_simd_uint4
 
+#import <SceneKit/SceneKit.h>
+
 Local<Value> js_value_SCNQuaternion(const SCNQuaternion& value);
 Local<Value> js_value_SCNVector3(const SCNVector3& value);
 Local<Value> js_value_SCNVector4(const SCNVector4& value);

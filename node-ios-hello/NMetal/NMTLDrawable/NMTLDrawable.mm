@@ -15,10 +15,12 @@ NMTLDrawable::~NMTLDrawable() {}
 JS_INIT_PROTOCOL(MTLDrawable, NSObject);
   JS_ASSIGN_PROTO_METHOD(present);
   JS_ASSIGN_PROTO_METHOD(presentAtTime);
+#ifdef __IPHONEOS__
   JS_ASSIGN_PROTO_METHOD(presentAfterMinimumDuration);
   JS_ASSIGN_PROTO_METHOD(addPresentedHandler);
   JS_ASSIGN_PROTO_PROP_READONLY(presentedTime);
   JS_ASSIGN_PROTO_PROP_READONLY(drawableID);
+#endif
 
   // instance members (proto)
   // static members (ctor)
@@ -66,6 +68,7 @@ NAN_METHOD(NMTLDrawable::presentAtTime) {
   }
 }
 
+#ifdef __IPHONEOS__
 NAN_METHOD(NMTLDrawable::presentAfterMinimumDuration) {
   JS_UNWRAP_PROTOCOL(MTLDrawable, self);
   declare_autoreleasepool {
@@ -104,3 +107,4 @@ NAN_GETTER(NMTLDrawable::drawableIDGetter) {
     JS_SET_RETURN(js_value_NSUInteger([self drawableID]));
   }
 }
+#endif

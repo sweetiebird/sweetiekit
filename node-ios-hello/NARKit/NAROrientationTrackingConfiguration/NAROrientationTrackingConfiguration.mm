@@ -6,6 +6,8 @@
 //
 #include "NAROrientationTrackingConfiguration.h"
 
+#ifdef __IPHONEOS__
+
 #define instancetype AROrientationTrackingConfiguration
 #define Ninstancetype NAROrientationTrackingConfiguration
 #define js_value_instancetype js_value_AROrientationTrackingConfiguration
@@ -73,3 +75,6 @@ NAN_SETTER(NAROrientationTrackingConfiguration::isAutoFocusEnabledSetter) {
     [self setAutoFocusEnabled: input];
   }
 }
+
+#endif
+

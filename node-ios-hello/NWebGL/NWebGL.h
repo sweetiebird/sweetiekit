@@ -29,6 +29,8 @@ SOFTWARE.
 #ifndef _WEBGLCONTEXT_WEBGL_H_
 #define _WEBGLCONTEXT_WEBGL_H_
 
+#if __IPHONEOS__ // TODO
+
 #include <nan.h>
 
 #if defined(ANDROID) || defined(LUMIN)
@@ -54,7 +56,7 @@ SOFTWARE.
 #include <GLES2/gl2ext.h>
 
 #elif defined(__APPLE__)
-#if TARGET_OS_IPHONE
+#if __IPHONEOS__
 #include <OpenGLES/ES3/gl.h>
 #include <OpenGLES/ES3/glext.h>
 #include <OpenGLES/ES2/glext.h>
@@ -69,9 +71,11 @@ SOFTWARE.
 #define GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE GL_VERTEX_ATTRIB_ARRAY_DIVISOR
 #define GL_ETC1_RGB8_OES 0x8D64
 #elif TARGET_OS_MAC
+#if TODO
 #include <GL/glew.h>
 #include <GLES2/gl2platform.h>
 #include <GLES2/gl2ext.h>
+#endif
 #else
 #error "Unknown Apple platform"
 #endif
@@ -537,5 +541,7 @@ T *getGlShader(WebGLRenderingContext *gl) {
     return t;
   }
 }
+
+#endif
 
 #endif

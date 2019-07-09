@@ -10,6 +10,8 @@
 
 #include "NSCNView.h"
 
+#ifdef __IPHONEOS__
+
 #define js_value_ARSCNView(x) js_value_wrapper(x, ARSCNView)
 #define to_value_ARSCNView(x) to_value_wrapper(x, ARSCNView)
 #define is_value_ARSCNView(x) is_value_wrapper(x, ARSCNView)
@@ -27,5 +29,7 @@ JS_WRAP_CLASS(ARSCNView, SCNView);
   
   Nan::Persistent<Value> _delegate;
 JS_WRAP_CLASS_END(ARSCNView);
+
+#endif
 
 #endif /* NARSCNView_h */

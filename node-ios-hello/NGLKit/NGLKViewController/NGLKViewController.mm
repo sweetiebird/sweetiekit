@@ -6,6 +6,8 @@
 //
 #include "NGLKViewController.h"
 
+#ifdef __IPHONEOS__
+
 #import <GLKit/GLKViewController.h>
 
 #define instancetype GLKViewController
@@ -180,3 +182,4 @@ NAN_SETTER(NGLKViewController::resumeOnDidBecomeActiveSetter) {
   }
 }
 
+#endif // #ifdef __IPHONEOS__

@@ -21,7 +21,9 @@ JS_INIT_CLASS(CLLocation, NSObject);
   JS_ASSIGN_PROTO_METHOD(initWithLatitudeLongitude);
   JS_ASSIGN_PROTO_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyTimestamp);
   JS_ASSIGN_PROTO_METHOD(initWithCoordinateAltitudeHorizontalAccuracyVerticalAccuracyCourseSpeedTimestamp);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(getDistanceFrom);
+#endif
   JS_ASSIGN_PROTO_METHOD(distanceFromLocation);
   JS_ASSIGN_PROTO_PROP_READONLY(coordinate);
   JS_ASSIGN_PROTO_PROP_READONLY(altitude);
@@ -207,6 +209,7 @@ NAN_METHOD(NCLLocation::initWithCoordinateAltitudeHorizontalAccuracyVerticalAccu
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocation::getDistanceFrom) {
   JS_UNWRAP(CLLocation, self);
   declare_autoreleasepool {
@@ -215,6 +218,7 @@ NAN_METHOD(NCLLocation::getDistanceFrom) {
     JS_SET_RETURN(js_value_CLLocationDistance([self getDistanceFrom: location]));
   }
 }
+#endif
 
 NAN_METHOD(NCLLocation::distanceFromLocation) {
   JS_UNWRAP(CLLocation, self);

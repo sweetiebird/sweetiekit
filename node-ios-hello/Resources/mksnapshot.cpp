@@ -4,7 +4,7 @@
 //  Created by Emily Kolar on 4/9/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-
+#if __IPHONEOS__
 #include "mksnapshot.hpp"
 
 // Copyright 2006-2008 the V8 project authors. All rights reserved.
@@ -425,3 +425,4 @@ extern "C" void run_mksnapshot_with_args(const char* args)
 extern "C" void gen_snapshot() {
   run_mksnapshot_with_args("mksnapshot\0--turbo_instruction_scheduling\0--embedded_variant\0Default\0--embedded_src\0embedded.S\0--startup_src\0snapshot.cc\0\0");
 }
+#endif

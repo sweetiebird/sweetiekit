@@ -5,6 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NARCamera.h"
+
+#ifdef __IPHONEOS__
+
 #include "NNSObject.h"
 #include "NARWorldTrackingConfiguration.h"
 
@@ -184,3 +187,5 @@ NAN_GETTER(NARCamera::projectionMatrixGetter) {
     JS_SET_RETURN(js_value_simd_float4x4([self projectionMatrix]));
   }
 }
+
+#endif

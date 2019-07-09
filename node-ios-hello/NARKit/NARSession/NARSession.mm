@@ -5,6 +5,9 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NARSession.h"
+
+#ifdef __IPHONEOS__
+
 #include "NARAnchor.h"
 #include "NARFrame.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -78,3 +81,5 @@ NAN_GETTER(NARSession::currentFrameGetter) {
   
   JS_SET_RETURN(sweetiekit::GetWrapperFor([session currentFrame], NARFrame::type));
 }
+
+#endif
