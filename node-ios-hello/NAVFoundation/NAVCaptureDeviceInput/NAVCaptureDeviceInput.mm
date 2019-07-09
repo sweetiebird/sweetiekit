@@ -15,10 +15,14 @@ NAVCaptureDeviceInput::~NAVCaptureDeviceInput() {}
 JS_INIT_CLASS(AVCaptureDeviceInput, AVCaptureInput);
   JS_ASSIGN_STATIC_METHOD(deviceInputWithDeviceError);
   JS_ASSIGN_PROTO_METHOD(initWithDeviceError);
-  JS_ASSIGN_PROTO_METHOD(portsWithMediaTypeSourceDeviceTypeSourceDevicePosition);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_METHOD(portsWithMediaTypeSourceDeviceTypeSourceDevicePosition);
+  #endif
   JS_ASSIGN_PROTO_PROP_READONLY(device);
   JS_ASSIGN_PROTO_PROP(unifiedAutoExposureDefaultsEnabled);
-  JS_ASSIGN_PROTO_PROP(videoMinFrameDurationOverride);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP(videoMinFrameDurationOverride);
+  #endif
 
   // instance members (proto)
   // static members (ctor)
@@ -71,16 +75,18 @@ NAN_METHOD(NAVCaptureDeviceInput::initWithDeviceError) {
 
 #include "NAVMediaFormat.h"
 
-NAN_METHOD(NAVCaptureDeviceInput::portsWithMediaTypeSourceDeviceTypeSourceDevicePosition) {
-  JS_UNWRAP(AVCaptureDeviceInput, self);
-  declare_autoreleasepool {
-    declare_args();
-    declare_nullable_value(AVMediaType, mediaType);
-    declare_nullable_value(AVCaptureDeviceType, sourceDeviceType);
-    declare_value(AVCaptureDevicePosition, sourceDevicePosition);
-    JS_SET_RETURN(js_value_NSArray<AVCaptureInputPort*>([self portsWithMediaType: mediaType sourceDeviceType: sourceDeviceType sourceDevicePosition: sourceDevicePosition]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_METHOD(NAVCaptureDeviceInput::portsWithMediaTypeSourceDeviceTypeSourceDevicePosition) {
+    JS_UNWRAP(AVCaptureDeviceInput, self);
+    declare_autoreleasepool {
+      declare_args();
+      declare_nullable_value(AVMediaType, mediaType);
+      declare_nullable_value(AVCaptureDeviceType, sourceDeviceType);
+      declare_value(AVCaptureDevicePosition, sourceDevicePosition);
+      JS_SET_RETURN(js_value_NSArray<AVCaptureInputPort*>([self portsWithMediaType: mediaType sourceDeviceType: sourceDeviceType sourceDevicePosition: sourceDevicePosition]));
+    }
   }
-}
+#endif
 
 NAN_GETTER(NAVCaptureDeviceInput::deviceGetter) {
   JS_UNWRAP(AVCaptureDeviceInput, self);
@@ -107,18 +113,20 @@ NAN_SETTER(NAVCaptureDeviceInput::unifiedAutoExposureDefaultsEnabledSetter) {
 
 #include "NCMTime.h"
 
-NAN_GETTER(NAVCaptureDeviceInput::videoMinFrameDurationOverrideGetter) {
-  JS_UNWRAP(AVCaptureDeviceInput, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_CMTime([self videoMinFrameDurationOverride]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureDeviceInput::videoMinFrameDurationOverrideGetter) {
+    JS_UNWRAP(AVCaptureDeviceInput, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_CMTime([self videoMinFrameDurationOverride]));
+    }
   }
-}
 
-NAN_SETTER(NAVCaptureDeviceInput::videoMinFrameDurationOverrideSetter) {
-  JS_UNWRAP(AVCaptureDeviceInput, self);
-  declare_autoreleasepool {
-    declare_setter();
-    declare_value(CMTime, input);
-    [self setVideoMinFrameDurationOverride: input];
+  NAN_SETTER(NAVCaptureDeviceInput::videoMinFrameDurationOverrideSetter) {
+    JS_UNWRAP(AVCaptureDeviceInput, self);
+    declare_autoreleasepool {
+      declare_setter();
+      declare_value(CMTime, input);
+      [self setVideoMinFrameDurationOverride: input];
+    }
   }
-}
+#endif

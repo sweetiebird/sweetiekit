@@ -28,7 +28,9 @@ JS_WRAP_CLASS(AVCaptureVideoPreviewLayer, CALayer);
   JS_PROP(session);
   JS_PROP_READONLY(connection);
   JS_PROP(videoGravity);
-  JS_PROP_READONLY(isPreviewing);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(isPreviewing);
+  #endif
   JS_PROP_READONLY(isOrientationSupported);
   JS_PROP(orientation);
   JS_PROP_READONLY(isMirroringSupported);

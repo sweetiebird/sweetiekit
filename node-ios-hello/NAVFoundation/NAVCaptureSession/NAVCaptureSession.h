@@ -44,7 +44,9 @@ JS_WRAP_CLASS(AVCaptureSession, NSObject);
   JS_PROP(sessionPreset);
   JS_PROP_READONLY(inputs);
   JS_PROP_READONLY(outputs);
-  JS_PROP_READONLY(connections);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(connections);
+  #endif
   JS_PROP_READONLY(isRunning);
   JS_PROP_READONLY(isInterrupted);
   JS_PROP(usesApplicationAudioSession);

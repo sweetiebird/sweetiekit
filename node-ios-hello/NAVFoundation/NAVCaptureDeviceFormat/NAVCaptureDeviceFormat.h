@@ -30,7 +30,9 @@ JS_WRAP_CLASS(AVCaptureDeviceFormat, NSObject);
   JS_PROP_READONLY(maxISO);
   JS_PROP_READONLY(isVideoHDRSupported);
   JS_PROP_READONLY(highResolutionStillImageDimensions);
-  JS_PROP_READONLY(isHighestPhotoQualitySupported);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(isHighestPhotoQualitySupported);
+  #endif
   JS_PROP_READONLY(autoFocusSystem);
   JS_PROP_READONLY(supportedColorSpaces);
   JS_PROP_READONLY(videoMinZoomFactorForDepthDataDelivery);
@@ -38,7 +40,9 @@ JS_WRAP_CLASS(AVCaptureDeviceFormat, NSObject);
   JS_PROP_READONLY(supportedDepthDataFormats);
   JS_PROP_READONLY(unsupportedCaptureOutputClasses);
   JS_PROP_READONLY(isPortraitEffectsMatteStillImageDeliverySupported);
-  JS_PROP_READONLY(isMultiCamSupported);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(isMultiCamSupported);
+  #endif
 JS_WRAP_CLASS_END(AVCaptureDeviceFormat);
 
 #endif /* NAVCaptureDeviceFormat_h */

@@ -14,6 +14,7 @@ const {
   ARWorldTrackingConfiguration,
   SCNLight,
   UIImage,
+  CIFilter,
 } = SweetieKit;
 
 const animalImagesCache = {};
@@ -167,6 +168,7 @@ async function make(nav, demoVC) {
 
       if (typeof lastNode !== 'undefined') {
         const n = scene.rootNode.childNodeWithNameRecursively(lastNode, true);
+        n.filters = [];
 
         if (audioPlayer && audioPlayer.isPlaying) {
           audioPlayer.stop();
@@ -174,6 +176,11 @@ async function make(nav, demoVC) {
       }
 
       if (hit.node) {
+        const bloomFilter = CIFilter.filterWithName('CIBloom');
+        bloomFilter.setValueForKey(10.0, 'inputIntensity');
+        bloomFilter.setValueForKey(30.0, 'inputRadius');
+        hit.node.filters = [bloomFilter];
+
         playSound(hit.node.name);
 
         lastNode = hit.node.name;

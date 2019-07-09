@@ -32,7 +32,9 @@ JS_INIT_CLASS(AVCaptureSession, NSObject);
   JS_ASSIGN_PROTO_PROP(sessionPreset);
   JS_ASSIGN_PROTO_PROP_READONLY(inputs);
   JS_ASSIGN_PROTO_PROP_READONLY(outputs);
-  JS_ASSIGN_PROTO_PROP_READONLY(connections);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(connections);
+  #endif
   JS_ASSIGN_PROTO_PROP_READONLY(isRunning);
   JS_ASSIGN_PROTO_PROP_READONLY(isInterrupted);
   JS_ASSIGN_PROTO_PROP(usesApplicationAudioSession);
@@ -289,12 +291,14 @@ NAN_GETTER(NAVCaptureSession::outputsGetter) {
   }
 }
 
-NAN_GETTER(NAVCaptureSession::connectionsGetter) {
-  JS_UNWRAP(AVCaptureSession, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<AVCaptureConnection*>([self connections]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureSession::connectionsGetter) {
+    JS_UNWRAP(AVCaptureSession, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_NSArray<AVCaptureConnection*>([self connections]));
+    }
   }
-}
+#endif
 
 NAN_GETTER(NAVCaptureSession::isRunningGetter) {
   JS_UNWRAP(AVCaptureSession, self);

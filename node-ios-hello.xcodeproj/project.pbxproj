@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -154,11 +154,6 @@
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
-		A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917522D1E73B0023E861 /* libv8_compiler.a */; platformFilter = uikitformac; };
-		A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917722D1E8D00023E861 /* libv8_snapshot.a */; platformFilter = uikitformac; settings = {ATTRIBUTES = (Required, ); }; };
-		A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */; platformFilter = uikitformac; };
-		A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917C22D1EA530023E861 /* libicustubdata.a */; platformFilter = uikitformac; };
-		A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917F22D1EAD00023E861 /* libtorque_base.a */; platformFilter = uikitformac; };
 		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
 		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
@@ -327,7 +322,7 @@
 		A178B27322887913005184EE /* NUITabBarItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A178B27222887913005184EE /* NUITabBarItem.mm */; };
 		A1887106227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1887105227E339000129A75 /* NUIViewControllerTransitioningDelegate.mm */; };
 		A188710E227E51D700129A75 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A188710D227E51D700129A75 /* node_modules */; };
-		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; platformFilter = ios; };
+		A18E802222657B6C000438E0 /* Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E802122657B6C000438E0 /* Client.framework */; };
 		A18F1E61228A3D1500A42754 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = A18F1E60228A3D1500A42754 /* vendor */; };
 		A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E64228A41C000A42754 /* NARSCNView.mm */; };
 		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
@@ -680,7 +675,7 @@
 		A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A22225C6AB200085571 /* libzlib.a */; };
 		A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A23225C6AB200085571 /* libopenssl.a */; };
 		A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A24225C6AB200085571 /* libuv.a */; };
-		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; platformFilter = ios; };
+		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; };
 		A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A26225C6AB200085571 /* libv8_libplatform.a */; };
 		A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A27225C6AB200085571 /* libv8_libsampler.a */; };
 		A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A28225C6AB200085571 /* libnghttp2.a */; };
@@ -1997,24 +1992,19 @@
 				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
 				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
 				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
-				A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */,
 				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
 				A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */,
 				A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */,
 				A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */,
 				A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */,
-				A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */,
 				A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */,
 				A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */,
-				A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */,
-				A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */,
 				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
 				A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */,
 				A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */,
 				A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */,
 				A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */,
 				A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */,
-				A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */,
 				A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */,
 				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
 				A18E802222657B6C000438E0 /* Client.framework in Frameworks */,
@@ -9198,7 +9188,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
@@ -9271,7 +9260,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;

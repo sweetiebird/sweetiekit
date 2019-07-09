@@ -1964,7 +1964,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVCameraCalibrationData);
 
     JS_EXPORT_TYPE_INHERITS(AVCaptureSession, NSObject);
-    JS_EXPORT_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+    #if TARGET_OS_IPHONE_13_0
+      JS_EXPORT_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+    #endif
     JS_EXPORT_TYPE_INHERITS(AVCaptureConnection, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVCaptureOutput, NSObject);
@@ -2719,7 +2721,9 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_INHERITS(AVCaptureOutput, NSObject);
       JS_RETURN_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
       JS_RETURN_TYPE_INHERITS(AVCaptureConnection, NSObject);
+#if TARGET_OS_IPHONE_13_0
       JS_RETURN_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+#endif
       JS_RETURN_TYPE_INHERITS(AVCaptureSession, NSObject);
 
       JS_RETURN_TYPE(AVCameraCalibrationData);

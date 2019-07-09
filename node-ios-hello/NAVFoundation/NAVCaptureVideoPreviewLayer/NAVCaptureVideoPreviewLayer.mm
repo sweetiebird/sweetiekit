@@ -26,7 +26,9 @@ JS_INIT_CLASS(AVCaptureVideoPreviewLayer, CALayer);
   JS_ASSIGN_PROTO_PROP(session);
   JS_ASSIGN_PROTO_PROP_READONLY(connection);
   JS_ASSIGN_PROTO_PROP(videoGravity);
-  JS_ASSIGN_PROTO_PROP_READONLY(isPreviewing);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(isPreviewing);
+  #endif
   JS_ASSIGN_PROTO_PROP_READONLY(isOrientationSupported);
   JS_ASSIGN_PROTO_PROP(orientation);
   JS_ASSIGN_PROTO_PROP_READONLY(isMirroringSupported);
@@ -196,12 +198,14 @@ NAN_SETTER(NAVCaptureVideoPreviewLayer::videoGravitySetter) {
   }
 }
 
-NAN_GETTER(NAVCaptureVideoPreviewLayer::isPreviewingGetter) {
-  JS_UNWRAP(AVCaptureVideoPreviewLayer, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self isPreviewing]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureVideoPreviewLayer::isPreviewingGetter) {
+    JS_UNWRAP(AVCaptureVideoPreviewLayer, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_BOOL([self isPreviewing]));
+    }
   }
-}
+#endif
 
 NAN_GETTER(NAVCaptureVideoPreviewLayer::isOrientationSupportedGetter) {
   JS_UNWRAP(AVCaptureVideoPreviewLayer, self);

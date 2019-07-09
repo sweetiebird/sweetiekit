@@ -17,7 +17,9 @@
 JS_WRAP_CLASS(AVCaptureDeviceDiscoverySession, NSObject);
   JS_STATIC_METHOD(discoverySessionWithDeviceTypesMediaTypePosition);
   JS_PROP_READONLY(devices);
-  JS_PROP_READONLY(supportedMultiCamDeviceSets);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(supportedMultiCamDeviceSets);
+  #endif
 JS_WRAP_CLASS_END(AVCaptureDeviceDiscoverySession);
 
 #endif /* NAVCaptureDeviceDiscoverySession_h */

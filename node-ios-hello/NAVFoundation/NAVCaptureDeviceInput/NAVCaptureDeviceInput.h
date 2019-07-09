@@ -17,10 +17,14 @@
 JS_WRAP_CLASS(AVCaptureDeviceInput, AVCaptureInput);
   JS_STATIC_METHOD(deviceInputWithDeviceError);
   JS_METHOD(initWithDeviceError);
-  JS_METHOD(portsWithMediaTypeSourceDeviceTypeSourceDevicePosition);
+  #if TARGET_OS_IPHONE_13_0
+    JS_METHOD(portsWithMediaTypeSourceDeviceTypeSourceDevicePosition);
+  #endif
   JS_PROP_READONLY(device);
   JS_PROP(unifiedAutoExposureDefaultsEnabled);
-  JS_PROP(videoMinFrameDurationOverride);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP(videoMinFrameDurationOverride);
+  #endif
 JS_WRAP_CLASS_END(AVCaptureDeviceInput);
 
 #endif /* NAVCaptureDeviceInput_h */

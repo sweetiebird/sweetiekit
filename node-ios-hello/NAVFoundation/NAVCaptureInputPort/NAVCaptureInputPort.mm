@@ -18,8 +18,10 @@ JS_INIT_CLASS(AVCaptureInputPort, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(formatDescription);
   JS_ASSIGN_PROTO_PROP(isEnabled);
   JS_ASSIGN_PROTO_PROP_READONLY(clock);
-  JS_ASSIGN_PROTO_PROP_READONLY(sourceDeviceType);
-  JS_ASSIGN_PROTO_PROP_READONLY(sourceDevicePosition);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(sourceDeviceType);
+    JS_ASSIGN_PROTO_PROP_READONLY(sourceDevicePosition);
+  #endif
 
   // instance members (proto)
   // static members (ctor)
@@ -101,16 +103,18 @@ NAN_GETTER(NAVCaptureInputPort::clockGetter) {
 
 #include "NAVCaptureDevice.h"
 
-NAN_GETTER(NAVCaptureInputPort::sourceDeviceTypeGetter) {
-  JS_UNWRAP(AVCaptureInputPort, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_AVCaptureDeviceType([self sourceDeviceType]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureInputPort::sourceDeviceTypeGetter) {
+    JS_UNWRAP(AVCaptureInputPort, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_AVCaptureDeviceType([self sourceDeviceType]));
+    }
   }
-}
 
-NAN_GETTER(NAVCaptureInputPort::sourceDevicePositionGetter) {
-  JS_UNWRAP(AVCaptureInputPort, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_AVCaptureDevicePosition([self sourceDevicePosition]));
+  NAN_GETTER(NAVCaptureInputPort::sourceDevicePositionGetter) {
+    JS_UNWRAP(AVCaptureInputPort, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_AVCaptureDevicePosition([self sourceDevicePosition]));
+    }
   }
-}
+#endif

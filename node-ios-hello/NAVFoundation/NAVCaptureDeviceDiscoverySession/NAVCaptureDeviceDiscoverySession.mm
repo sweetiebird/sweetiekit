@@ -15,7 +15,9 @@ NAVCaptureDeviceDiscoverySession::~NAVCaptureDeviceDiscoverySession() {}
 JS_INIT_CLASS(AVCaptureDeviceDiscoverySession, NSObject);
   JS_ASSIGN_STATIC_METHOD(discoverySessionWithDeviceTypesMediaTypePosition);
   JS_ASSIGN_PROTO_PROP_READONLY(devices);
-  JS_ASSIGN_PROTO_PROP_READONLY(supportedMultiCamDeviceSets);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(supportedMultiCamDeviceSets);
+  #endif
 
   // instance members (proto)
   // static members (ctor)
@@ -63,9 +65,11 @@ NAN_GETTER(NAVCaptureDeviceDiscoverySession::devicesGetter) {
   }
 }
 
-NAN_GETTER(NAVCaptureDeviceDiscoverySession::supportedMultiCamDeviceSetsGetter) {
-  JS_UNWRAP(AVCaptureDeviceDiscoverySession, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<NSSet<AVCaptureDevice*>*>([self supportedMultiCamDeviceSets]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureDeviceDiscoverySession::supportedMultiCamDeviceSetsGetter) {
+    JS_UNWRAP(AVCaptureDeviceDiscoverySession, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_NSArray<NSSet<AVCaptureDevice*>*>([self supportedMultiCamDeviceSets]));
+    }
   }
-}
+#endif

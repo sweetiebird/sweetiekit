@@ -84,7 +84,9 @@ JS_WRAP_CLASS(AVCaptureDevice, NSObject);
   JS_STATIC_METHOD(defaultDeviceWithDeviceTypeMediaTypePosition);
   JS_STATIC_METHOD(authorizationStatusForMediaType);
   JS_STATIC_METHOD(requestAccessForMediaTypeCompletionHandler);
-  JS_STATIC_METHOD(extrinsicMatrixFromDeviceToDevice);
+  #if TARGET_OS_IPHONE_13_0
+    JS_STATIC_METHOD(extrinsicMatrixFromDeviceToDevice);
+  #endif
   JS_METHOD(hasMediaType);
   JS_METHOD(lockForConfiguration);
   JS_METHOD(unlockForConfiguration);
@@ -124,8 +126,10 @@ JS_WRAP_CLASS(AVCaptureDevice, NSObject);
   JS_PROP_READONLY(position);
   JS_PROP_READONLY(deviceType);
   JS_PROP_READONLY(systemPressureState);
-  JS_PROP_READONLY(isVirtualDevice);
-  JS_PROP_READONLY(constituentDevices);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(isVirtualDevice);
+    JS_PROP_READONLY(constituentDevices);
+  #endif
   JS_PROP_READONLY(hasFlash);
   JS_PROP_READONLY(isFlashAvailable);
   JS_PROP_READONLY(isFlashActive);

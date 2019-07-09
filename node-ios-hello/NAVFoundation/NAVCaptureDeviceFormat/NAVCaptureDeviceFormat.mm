@@ -28,7 +28,9 @@ JS_INIT_CLASS(AVCaptureDeviceFormat, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(maxISO);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoHDRSupported);
   JS_ASSIGN_PROTO_PROP_READONLY(highResolutionStillImageDimensions);
-  JS_ASSIGN_PROTO_PROP_READONLY(isHighestPhotoQualitySupported);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(isHighestPhotoQualitySupported);
+  #endif
   JS_ASSIGN_PROTO_PROP_READONLY(autoFocusSystem);
   JS_ASSIGN_PROTO_PROP_READONLY(supportedColorSpaces);
   JS_ASSIGN_PROTO_PROP_READONLY(videoMinZoomFactorForDepthDataDelivery);
@@ -36,7 +38,9 @@ JS_INIT_CLASS(AVCaptureDeviceFormat, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(supportedDepthDataFormats);
   JS_ASSIGN_PROTO_PROP_READONLY(unsupportedCaptureOutputClasses);
   JS_ASSIGN_PROTO_PROP_READONLY(isPortraitEffectsMatteStillImageDeliverySupported);
-  JS_ASSIGN_PROTO_PROP_READONLY(isMultiCamSupported);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(isMultiCamSupported);
+  #endif
 
   // instance members (proto)
   // static members (ctor)
@@ -181,12 +185,14 @@ NAN_GETTER(NAVCaptureDeviceFormat::highResolutionStillImageDimensionsGetter) {
   }
 }
 
-NAN_GETTER(NAVCaptureDeviceFormat::isHighestPhotoQualitySupportedGetter) {
-  JS_UNWRAP(AVCaptureDeviceFormat, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self isHighestPhotoQualitySupported]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureDeviceFormat::isHighestPhotoQualitySupportedGetter) {
+    JS_UNWRAP(AVCaptureDeviceFormat, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_BOOL([self isHighestPhotoQualitySupported]));
+    }
   }
-}
+#endif
 
 NAN_GETTER(NAVCaptureDeviceFormat::autoFocusSystemGetter) {
   JS_UNWRAP(AVCaptureDeviceFormat, self);
@@ -237,9 +243,11 @@ NAN_GETTER(NAVCaptureDeviceFormat::isPortraitEffectsMatteStillImageDeliverySuppo
   }
 }
 
-NAN_GETTER(NAVCaptureDeviceFormat::isMultiCamSupportedGetter) {
-  JS_UNWRAP(AVCaptureDeviceFormat, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self isMultiCamSupported]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureDeviceFormat::isMultiCamSupportedGetter) {
+    JS_UNWRAP(AVCaptureDeviceFormat, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_BOOL([self isMultiCamSupported]));
+    }
   }
-}
+#endif

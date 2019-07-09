@@ -20,8 +20,10 @@ JS_WRAP_CLASS(AVCaptureInputPort, NSObject);
   JS_PROP_READONLY(formatDescription);
   JS_PROP(isEnabled);
   JS_PROP_READONLY(clock);
-  JS_PROP_READONLY(sourceDeviceType);
-  JS_PROP_READONLY(sourceDevicePosition);
+  #if TARGET_OS_IPHONE_13_0
+    JS_PROP_READONLY(sourceDeviceType);
+    JS_PROP_READONLY(sourceDevicePosition);
+  #endif
 JS_WRAP_CLASS_END(AVCaptureInputPort);
 
 #endif /* NAVCaptureInputPort_h */

@@ -105,7 +105,9 @@ JS_INIT_GLOBALS(AVMediaFormat);
    @discussion
    To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
    */
-  JS_ASSIGN_ENUM(AVMediaCharacteristicContainsAlphaChannel, AVMediaCharacteristic); //  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_ENUM(AVMediaCharacteristicContainsAlphaChannel, AVMediaCharacteristic); //  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+  #endif
 
   /*!
    @constant AVMediaCharacteristicIsMainProgramContent
@@ -143,7 +145,9 @@ JS_INIT_GLOBALS(AVMediaFormat);
 
    Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
   */
-  JS_ASSIGN_ENUM(AVMediaCharacteristicIsOriginalContent, AVMediaCharacteristic); //  API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_ENUM(AVMediaCharacteristicIsOriginalContent, AVMediaCharacteristic); //  API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+  #endif
 
   /*!
    @constant AVMediaCharacteristicContainsOnlyForcedSubtitles

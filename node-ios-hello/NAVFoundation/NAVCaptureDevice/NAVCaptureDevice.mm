@@ -112,7 +112,9 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_STATIC_METHOD(defaultDeviceWithDeviceTypeMediaTypePosition);
   JS_ASSIGN_STATIC_METHOD(authorizationStatusForMediaType);
   JS_ASSIGN_STATIC_METHOD(requestAccessForMediaTypeCompletionHandler);
-  JS_ASSIGN_STATIC_METHOD(extrinsicMatrixFromDeviceToDevice);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_STATIC_METHOD(extrinsicMatrixFromDeviceToDevice);
+  #endif
   JS_ASSIGN_PROTO_METHOD(hasMediaType);
   JS_ASSIGN_PROTO_METHOD(lockForConfiguration);
   JS_ASSIGN_PROTO_METHOD(unlockForConfiguration);
@@ -160,8 +162,10 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(position);
   JS_ASSIGN_PROTO_PROP_READONLY(deviceType);
   JS_ASSIGN_PROTO_PROP_READONLY(systemPressureState);
-  JS_ASSIGN_PROTO_PROP_READONLY(isVirtualDevice);
-  JS_ASSIGN_PROTO_PROP_READONLY(constituentDevices);
+  #if TARGET_OS_IPHONE_13_0
+    JS_ASSIGN_PROTO_PROP_READONLY(isVirtualDevice);
+    JS_ASSIGN_PROTO_PROP_READONLY(constituentDevices);
+  #endif
   JS_ASSIGN_PROTO_PROP_READONLY(hasFlash);
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashAvailable);
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashActive);
@@ -434,14 +438,16 @@ NAN_METHOD(NAVCaptureDevice::requestAccessForMediaTypeCompletionHandler) {
   }
 }
 
-NAN_METHOD(NAVCaptureDevice::extrinsicMatrixFromDeviceToDevice) {
-  declare_autoreleasepool {
-    declare_args();
-    declare_pointer(AVCaptureDevice, fromDevice);
-    declare_pointer(AVCaptureDevice, toDevice);
-    JS_SET_RETURN(js_value_NSData([AVCaptureDevice extrinsicMatrixFromDevice: fromDevice toDevice: toDevice]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_METHOD(NAVCaptureDevice::extrinsicMatrixFromDeviceToDevice) {
+    declare_autoreleasepool {
+      declare_args();
+      declare_pointer(AVCaptureDevice, fromDevice);
+      declare_pointer(AVCaptureDevice, toDevice);
+      JS_SET_RETURN(js_value_NSData([AVCaptureDevice extrinsicMatrixFromDevice: fromDevice toDevice: toDevice]));
+    }
   }
-}
+#endif
 
 NAN_METHOD(NAVCaptureDevice::hasMediaType) {
   JS_UNWRAP(AVCaptureDevice, self);
@@ -838,20 +844,21 @@ NAN_GETTER(NAVCaptureDevice::systemPressureStateGetter) {
   }
 }
 
-NAN_GETTER(NAVCaptureDevice::isVirtualDeviceGetter) {
-  JS_UNWRAP(AVCaptureDevice, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_BOOL([self isVirtualDevice]));
+#if TARGET_OS_IPHONE_13_0
+  NAN_GETTER(NAVCaptureDevice::isVirtualDeviceGetter) {
+    JS_UNWRAP(AVCaptureDevice, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_BOOL([self isVirtualDevice]));
+    }
   }
-}
 
-NAN_GETTER(NAVCaptureDevice::constituentDevicesGetter) {
-  JS_UNWRAP(AVCaptureDevice, self);
-  declare_autoreleasepool {
-    JS_SET_RETURN(js_value_NSArray<AVCaptureDevice*>([self constituentDevices]));
+  NAN_GETTER(NAVCaptureDevice::constituentDevicesGetter) {
+    JS_UNWRAP(AVCaptureDevice, self);
+    declare_autoreleasepool {
+      JS_SET_RETURN(js_value_NSArray<AVCaptureDevice*>([self constituentDevices]));
+    }
   }
-}
-
+#endif
 NAN_GETTER(NAVCaptureDevice::hasFlashGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {

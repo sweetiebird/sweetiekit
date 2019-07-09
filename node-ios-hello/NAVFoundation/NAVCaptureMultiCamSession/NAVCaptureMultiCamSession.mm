@@ -9,6 +9,7 @@
 #define instancetype AVCaptureMultiCamSession
 #define js_value_instancetype js_value_AVCaptureMultiCamSession
 
+#if TARGET_OS_IPHONE_13_0
 NAVCaptureMultiCamSession::NAVCaptureMultiCamSession() {}
 NAVCaptureMultiCamSession::~NAVCaptureMultiCamSession() {}
 
@@ -64,3 +65,4 @@ NAN_GETTER(NAVCaptureMultiCamSession::systemPressureCostGetter) {
     JS_SET_RETURN(js_value_float([self systemPressureCost]));
   }
 }
+#endif
