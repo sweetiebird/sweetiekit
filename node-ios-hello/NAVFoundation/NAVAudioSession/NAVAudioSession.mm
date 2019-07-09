@@ -87,6 +87,14 @@ JS_INIT_CLASS(AVAudioSession, NSObject);
   JS_INIT_CTOR(AVAudioSession, NSObject);
   JS_ASSIGN_STATIC_METHOD(sharedInstance);
   JS_ASSIGN_STATIC_METHOD(init);
+
+  // AVAudioSessionCategory
+  JS_ASSIGN_ENUM(AVAudioSessionCategoryAmbient, NSString);
+  JS_ASSIGN_ENUM(AVAudioSessionCategoryMultiRoute, NSString);
+  JS_ASSIGN_ENUM(AVAudioSessionCategoryPlayAndRecord, NSString);
+  JS_ASSIGN_ENUM(AVAudioSessionCategoryPlayback, NSString);
+  JS_ASSIGN_ENUM(AVAudioSessionCategoryRecord, NSString);
+  JS_ASSIGN_ENUM(AVAudioSessionCategorySoloAmbient, NSString);
 JS_INIT_CLASS_END(AVAudioSession, NSObject);
 
 NAN_METHOD(NAVAudioSession::New) {

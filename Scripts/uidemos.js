@@ -16,6 +16,7 @@ makeEmojiCam = require('./examples/emojiCam');
 // view based demos
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
+makeAnimalWheel = require('./examples/AnimalWheel');
 makeButton = require('./examples/UIButton');
 makeFluidButton = require('./examples/FluidButton');
 makeBarButtonItem = require('./examples/UIBarButtonItem');
@@ -52,6 +53,7 @@ makeTabBarCtrl = require('./examples/UITabBarController');
 makeTableView = require('./examples/UITableView');
 makePopover = require('./examples/Popover');
 makePopoverTableViewController = require('./examples/PopoverTableViewController');
+makeAVAudioPlayer = require('./examples/AVAudioPlayer');
 
 // misc demos
 makeThreeObj = require('./examples/ThreeOBJ');
@@ -103,12 +105,14 @@ demoCtrls = {
   UINavigationController: makeNavigationCtrl,
   UITabBarController: makeTabBarCtrl,
   UITableView: makeTableView,
+  AVAudioPlayer: makeAVAudioPlayer,
 };
 
 arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
   ARSelection: makeARSelection,
+  AnimalWheel: makeAnimalWheel,
   GreenDot: makeGreenDot,
 };
 
