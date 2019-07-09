@@ -16,6 +16,7 @@ makeEmojiCam = require('./examples/emojiCam');
 // view based demos
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
+makeAVCaptureVideoPreviewLayer = require('./examples/AVCaptureVideoPreviewLayer');
 makeAnimalWheel = require('./examples/AnimalWheel');
 makeButton = require('./examples/UIButton');
 makeFluidButton = require('./examples/FluidButton');
@@ -68,6 +69,7 @@ const {
 } = SweetieKit;
 
 demoTypes = {
+  AVCaptureVideoPreviewLayer: makeAVCaptureVideoPreviewLayer,
   CAEmitterLayer: makeCAEmitterLayer,
   CAMetalLayer: makeCAMetalLayer,
   MTKView: makeMTKView,

@@ -127,6 +127,7 @@ SweetieKitPrefixes = {
   CL: "CoreLocation",
   CM: "CoreMotion",
   CN: "Contacts",
+  CV: "CoreVideo",
   EA: "OpenGLES",
   GK: "GameplayKit",
   GLK: "GLKit",
