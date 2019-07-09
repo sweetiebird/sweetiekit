@@ -337,6 +337,11 @@
 		A1678CC122D4C7D900E1CF52 /* NAVVideoSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CC022D4C7D800E1CF52 /* NAVVideoSettings.mm */; };
 		A1678CC522D4D33A00E1CF52 /* NVNDetectTextRectanglesRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CC422D4D33A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */; };
 		A1678CC922D4D37D00E1CF52 /* NVNRecognizeTextRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CC822D4D37D00E1CF52 /* NVNRecognizeTextRequest.mm */; };
+		A1678CD022D4E23100E1CF52 /* NVNDetectFaceRectanglesRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CCC22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest.mm */; };
+		A1678CD122D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CCF22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.mm */; };
+		A1678CD522D4E40E00E1CF52 /* NVNFaceObservationAccepting.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CD322D4E40D00E1CF52 /* NVNFaceObservationAccepting.mm */; };
+		A1678CD922D4E8BA00E1CF52 /* NCVPixelBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CD822D4E8BA00E1CF52 /* NCVPixelBuffer.mm */; };
+		A1678CDD22D4E98500E1CF52 /* NCVBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CDC22D4E98500E1CF52 /* NCVBase.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -1368,6 +1373,16 @@
 		A1678CC422D4D33A00E1CF52 /* NVNDetectTextRectanglesRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectTextRectanglesRequest.mm; sourceTree = "<group>"; };
 		A1678CC722D4D37D00E1CF52 /* NVNRecognizeTextRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNRecognizeTextRequest.h; sourceTree = "<group>"; };
 		A1678CC822D4D37D00E1CF52 /* NVNRecognizeTextRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNRecognizeTextRequest.mm; sourceTree = "<group>"; };
+		A1678CCB22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNDetectFaceRectanglesRequest.h; sourceTree = "<group>"; };
+		A1678CCC22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectFaceRectanglesRequest.mm; sourceTree = "<group>"; };
+		A1678CCE22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNDetectFaceLandmarksRequest.h; sourceTree = "<group>"; };
+		A1678CCF22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNDetectFaceLandmarksRequest.mm; sourceTree = "<group>"; };
+		A1678CD322D4E40D00E1CF52 /* NVNFaceObservationAccepting.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVNFaceObservationAccepting.mm; sourceTree = "<group>"; };
+		A1678CD422D4E40D00E1CF52 /* NVNFaceObservationAccepting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNFaceObservationAccepting.h; sourceTree = "<group>"; };
+		A1678CD722D4E8BA00E1CF52 /* NCVPixelBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVPixelBuffer.h; sourceTree = "<group>"; };
+		A1678CD822D4E8BA00E1CF52 /* NCVPixelBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVPixelBuffer.mm; sourceTree = "<group>"; };
+		A1678CDB22D4E98500E1CF52 /* NCVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVBase.h; sourceTree = "<group>"; };
+		A1678CDC22D4E98500E1CF52 /* NCVBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVBase.mm; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -4599,6 +4614,8 @@
 		A1678C3B22D4A6D800E1CF52 /* NCoreVideo */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CDA22D4E98500E1CF52 /* NCVBase */,
+				A1678CD622D4E8BA00E1CF52 /* NCVPixelBuffer */,
 				A1678C3C22D4A6D800E1CF52 /* NCVBuffer */,
 				A1678C3F22D4A6D800E1CF52 /* NCVImageBuffer */,
 			);
@@ -4644,6 +4661,9 @@
 		A1678C4C22D4AFF100E1CF52 /* NVision */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CD222D4E40D00E1CF52 /* NVNFaceObservationAccepting */,
+				A1678CCD22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest */,
+				A1678CCA22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest */,
 				A1678CC622D4D37D00E1CF52 /* NVNRecognizeTextRequest */,
 				A1678CC222D4D33A00E1CF52 /* NVNDetectTextRectanglesRequest */,
 				A1678CAE22D4BD1300E1CF52 /* NVNTypes */,
@@ -4952,6 +4972,51 @@
 			path = NVNRecognizeTextRequest;
 			sourceTree = "<group>";
 		};
+		A1678CCA22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CCB22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest.h */,
+				A1678CCC22D4E23000E1CF52 /* NVNDetectFaceRectanglesRequest.mm */,
+			);
+			path = NVNDetectFaceRectanglesRequest;
+			sourceTree = "<group>";
+		};
+		A1678CCD22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CCE22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.h */,
+				A1678CCF22D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.mm */,
+			);
+			path = NVNDetectFaceLandmarksRequest;
+			sourceTree = "<group>";
+		};
+		A1678CD222D4E40D00E1CF52 /* NVNFaceObservationAccepting */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CD422D4E40D00E1CF52 /* NVNFaceObservationAccepting.h */,
+				A1678CD322D4E40D00E1CF52 /* NVNFaceObservationAccepting.mm */,
+			);
+			path = NVNFaceObservationAccepting;
+			sourceTree = "<group>";
+		};
+		A1678CD622D4E8BA00E1CF52 /* NCVPixelBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CD722D4E8BA00E1CF52 /* NCVPixelBuffer.h */,
+				A1678CD822D4E8BA00E1CF52 /* NCVPixelBuffer.mm */,
+			);
+			path = NCVPixelBuffer;
+			sourceTree = "<group>";
+		};
+		A1678CDA22D4E98500E1CF52 /* NCVBase */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CDB22D4E98500E1CF52 /* NCVBase.h */,
+				A1678CDC22D4E98500E1CF52 /* NCVBase.mm */,
+			);
+			path = NCVBase;
+			sourceTree = "<group>";
+		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -5043,12 +5108,7 @@
 		A174A1672282214B002A8216 /* NAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				A1678CBE22D4C7D800E1CF52 /* NAVVideoSettings */,
-				A1678CB922D4C68500E1CF52 /* NAVCaptureVideoDataOutput */,
-				A1678CB622D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate */,
 				A1678C3722D4878C00E1CF52 /* NAVAnimation */,
-				A1678C3322D486A400E1CF52 /* NAVCaptureVideoPreviewLayer */,
-				A1678C2F22D4848F00E1CF52 /* NAVCaptureSystemPressureState */,
 				A108630722C4937C001A15A9 /* NAVAudio3DMixing */,
 				A13370D422AEFC6A00FA3768 /* NAVAudioBuffer */,
 				A13370F722AF12A000FA3768 /* NAVAudioChannelLayout */,
@@ -5100,6 +5160,10 @@
 				A1678BD822D46A0B00E1CF52 /* NAVCaptureScreenInput */,
 				A1678BAC22D462D600E1CF52 /* NAVCaptureSession */,
 				A1678BCD22D4685B00E1CF52 /* NAVCaptureSessionPreset */,
+				A1678C2F22D4848F00E1CF52 /* NAVCaptureSystemPressureState */,
+				A1678CB922D4C68500E1CF52 /* NAVCaptureVideoDataOutput */,
+				A1678CB622D4C68500E1CF52 /* NAVCaptureVideoDataOutputSampleBufferDelegate */,
+				A1678C3322D486A400E1CF52 /* NAVCaptureVideoPreviewLayer */,
 				A1678C1322D47D4D00E1CF52 /* NAVDateRangeMetadataGroup */,
 				A1926EE122C0A739008F16AE /* NAVDepthData */,
 				A1678BEF22D46C7200E1CF52 /* NAVFrameRateRange */,
@@ -5112,6 +5176,7 @@
 				A1678C1922D47D4D00E1CF52 /* NAVMutableTimedMetadataGroup */,
 				A1926EE522C0A7E5008F16AE /* NAVPortraitEffectsMatte */,
 				A1678C1C22D47D4D00E1CF52 /* NAVTimedMetadataGroup */,
+				A1678CBE22D4C7D800E1CF52 /* NAVVideoSettings */,
 			);
 			path = NAVFoundation;
 			sourceTree = "<group>";
@@ -8844,6 +8909,7 @@
 				A1926F4D22C0E286008F16AE /* NSCNPhysicsVehicleWheel.mm in Sources */,
 				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
+				A1678CD122D4E23100E1CF52 /* NVNDetectFaceLandmarksRequest.mm in Sources */,
 				A158792A22CEE2F600847196 /* NUIViewImplicitlyAnimating.mm in Sources */,
 				A192710622C32A6B008F16AE /* NSCNSceneSource.mm in Sources */,
 				A13370EA22AF02F500FA3768 /* NAVAudioInputNode.mm in Sources */,
@@ -8862,6 +8928,7 @@
 				A19F39CE22AF2B3D00606332 /* NAUAudioUnitPreset.mm in Sources */,
 				A1D4988122BB4112009AC951 /* NNSUndoManager.mm in Sources */,
 				A15878A422CDC77000847196 /* NUITableViewDropItem.mm in Sources */,
+				A1678CD522D4E40E00E1CF52 /* NVNFaceObservationAccepting.mm in Sources */,
 				A1646B9422920E930078CF4B /* NCLPlacemark.mm in Sources */,
 				A13370A422AB480400FA3768 /* NMPMediaItemCollection.mm in Sources */,
 				A1926FBD22C11F99008F16AE /* NMTLType.mm in Sources */,
@@ -8900,10 +8967,12 @@
 				A178B26F228863C9005184EE /* NUIAlertAction.mm in Sources */,
 				A192705D22C13EC0008F16AE /* NMTLRenderCommandEncoder.mm in Sources */,
 				A1678C3A22D4878D00E1CF52 /* NAVAnimation.mm in Sources */,
+				A1678CD922D4E8BA00E1CF52 /* NCVPixelBuffer.mm in Sources */,
 				A1678C0A22D47B9D00E1CF52 /* NCMTime.mm in Sources */,
 				A1574F0022B93071006CC5F2 /* NCAPropertyAnimation.mm in Sources */,
 				A192709622C15B4C008F16AE /* NMTLVertexAttributeDescriptorArray.mm in Sources */,
 				A1926FBF22C11F99008F16AE /* NMTLTextureReferenceType.mm in Sources */,
+				A1678CD022D4E23100E1CF52 /* NVNDetectFaceRectanglesRequest.mm in Sources */,
 				A192706E22C146C6008F16AE /* NMTLBufferLayoutDescriptorArray.mm in Sources */,
 				A13370F222AF0B1500FA3768 /* NAVAudioPlayerNode.mm in Sources */,
 				A108632022C4937D001A15A9 /* NAVAudioEnvironmentDistanceAttenuationParameters.mm in Sources */,
@@ -9032,6 +9101,7 @@
 				A1D498B522BB798D009AC951 /* NUITextInputDelegate.mm in Sources */,
 				A1CE2B85228EFCAD00D9B3B8 /* NUINavigationBar.mm in Sources */,
 				A108638F22C6E8C1001A15A9 /* NGLKViewDelegate.mm in Sources */,
+				A1678CDD22D4E98500E1CF52 /* NCVBase.mm in Sources */,
 				A133709122AB3F5100FA3768 /* NMPMusicPlayerApplicationController.mm in Sources */,
 				A192705C22C13EC0008F16AE /* NMTLCommandEncoder.mm in Sources */,
 				A192709822C15B4C008F16AE /* NMTLVertexDescriptor.mm in Sources */,

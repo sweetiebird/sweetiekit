@@ -1377,6 +1377,11 @@ NAN_METHOD(NClass::New) {
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
 
+#include "NCVBase.h" // globals
+#include "NCVBuffer.h" // globals
+#include "NCVImageBuffer.h" // globals
+#include "NCVPixelBuffer.h" // globals
+
 #include "NCMFormatDescription.h" // globals
 #include "NCMTime.h" // globals
 #include "NCMSync.h" // globals
@@ -1590,6 +1595,9 @@ NAN_METHOD(NClass::New) {
 #include "NVNRequest.h" // : NSObject
 #include "NVNImageBasedRequest.h" // : VNRequest
 #include "NVNDetectTextRectanglesRequest.h" // : VNImageBasedRequest
+#include "NVNDetectFaceRectanglesRequest.h" // : VNImageBasedRequest
+#include "NVNFaceObservationAccepting.h" // <NSObject>
+#include "NVNDetectFaceLandmarksRequest.h" // : VNImageBasedRequest
 #include "NVNRecognizeTextRequest.h" // : VNImageBasedRequest
 #include "NVNRequestProgressProviding.h" // <NSObject>
 #include "NVNImageRequestHandler.h" // : NSObject
@@ -1953,6 +1961,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(VNRequest);
     JS_EXPORT_TYPE_INHERITS(VNImageBasedRequest, VNRequest);
     JS_EXPORT_TYPE_INHERITS(VNDetectTextRectanglesRequest, VNImageBasedRequest);
+    JS_EXPORT_TYPE_INHERITS(VNDetectFaceRectanglesRequest, VNImageBasedRequest);
+    JS_EXPORT_PROTOCOL_INHERITS(VNFaceObservationAccepting, NSObject);
+    JS_EXPORT_TYPE_INHERITS(VNDetectFaceLandmarksRequest, VNImageBasedRequest);
     JS_EXPORT_TYPE_INHERITS(VNRecognizeTextRequest, VNImageBasedRequest);
     JS_EXPORT_PROTOCOL(VNRequestProgressProviding);
     JS_EXPORT_TYPE(VNImageRequestHandler);
@@ -1975,6 +1986,13 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_INHERITS(VNImageHomographicAlignmentObservation, VNImageAlignmentObservation);
     JS_EXPORT_TYPE_INHERITS(VNSaliencyImageObservation, VNPixelBufferObservation);
     JS_EXPORT_TYPE_INHERITS(VNFeaturePrintObservation, VNObservation);
+
+    // CoreVideo
+ 
+    JS_EXPORT_GLOBALS(CVBase);
+    JS_EXPORT_GLOBALS(CVBuffer);
+    JS_EXPORT_GLOBALS(CVImageBuffer);
+    JS_EXPORT_GLOBALS(CVPixelBuffer);
 
     // CoreMedia
 
@@ -2478,6 +2496,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_TYPE(CAMetalLayer);
 #endif
+      JS_RETURN_TYPE_INHERITS(AVCaptureVideoPreviewLayer, CALayer); // TODO: move this.
       JS_RETURN_TYPE(CALayer);
 
       JS_RETURN_TYPE(CASpringAnimation);
@@ -2791,6 +2810,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(VNSequenceRequestHandler);
       JS_RETURN_TYPE(VNImageRequestHandler);
       JS_RETURN_TYPE_INHERITS(VNRecognizeTextRequest, VNImageBasedRequest);
+      JS_RETURN_TYPE_INHERITS(VNDetectFaceLandmarksRequest, VNImageBasedRequest);
+      JS_RETURN_TYPE_INHERITS(VNDetectFaceRectanglesRequest, VNImageBasedRequest);
       JS_RETURN_TYPE_INHERITS(VNDetectTextRectanglesRequest, VNImageBasedRequest);
       JS_RETURN_TYPE_INHERITS(VNImageBasedRequest, VNRequest);
       JS_RETURN_TYPE(VNRequest);
@@ -3098,6 +3119,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // Vision protocols
 
       JS_RETURN_PROTOCOL(VNRequestProgressProviding);
+      JS_RETURN_PROTOCOL(VNFaceObservationAccepting);
 
       // AVFoundation Protocols
 
