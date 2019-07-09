@@ -1,0 +1,3 @@
+// VNRequest
+// VNDetectTextRectanglesRequest
+// VNTextObservation

@@ -5,6 +5,7 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NUIKitGlobals.h"
+#import <AVFoundation/AVFoundation.h>
 
 NUIKitGlobals::NUIKitGlobals() {}
 NUIKitGlobals::~NUIKitGlobals() {}
@@ -18,7 +19,6 @@ JS_INIT_CLASS(UIKitGlobals, NSObject);
   JS_ASSIGN_STATIC_PROP_READONLY(UITextFieldViewMode);
   JS_ASSIGN_STATIC_PROP_READONLY(UIControlEvents);
   JS_ASSIGN_STATIC_PROP_READONLY(UIControlState);
-
 
   #if TARGET_OS_SIMULATOR
   exports->Set(JS_STR("__DEV__"), js_value_BOOL(true));

@@ -592,6 +592,129 @@
             <point key="canvasLocation" x="-2328.8000000000002" y="-2497.6011994003002"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="Wdz-in-ZAx">
+            <objects>
+                <viewController storyboardIdentifier="blackjackVC" id="NFf-4a-zIO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Y8-SC-8ZO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZI-tx-kNS">
+                                <rect key="frame" x="102" y="200" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.68235294120000001" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Hit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="hitTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mM-6S-QC8">
+                                <rect key="frame" x="102" y="256" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.82745098039999998" green="0.20000000000000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Stay">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="stayTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mv1-UH-R2a">
+                                <rect key="frame" x="102" y="483" width="170" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="sZY-RD-Rlm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Bet +1">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="betTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghd-YF-hQQ">
+                                <rect key="frame" x="102" y="344" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.41176470590000003" green="0.27058823529999998" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Split">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="splitTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZt-Aw-BNK">
+                                <rect key="frame" x="102" y="401" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.58039215690000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Double Down">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="ddTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DB-1R-bad">
+                                <rect key="frame" x="102" y="531" width="170" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="stringTag" value="amtTag"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWo-Kq-7Zp">
+                                <rect key="frame" x="166" y="61" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiC-uF-e9P">
+                                <rect key="frame" x="166" y="110" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0mM-6S-QC8" firstAttribute="height" secondItem="ghd-YF-hQQ" secondAttribute="height" id="36v-9F-ILZ"/>
+                            <constraint firstItem="mv1-UH-R2a" firstAttribute="top" secondItem="iZt-Aw-BNK" secondAttribute="bottom" constant="42" id="6Pt-pf-UDf"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="mv1-UH-R2a" secondAttribute="trailing" constant="103" id="72z-rm-L7x"/>
+                            <constraint firstItem="ghd-YF-hQQ" firstAttribute="top" secondItem="0mM-6S-QC8" secondAttribute="bottom" constant="48" id="9yl-i2-Rpd"/>
+                            <constraint firstItem="mv1-UH-R2a" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="CNP-xL-D4E"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="0mM-6S-QC8" secondAttribute="trailing" constant="103" id="EyU-qs-DLk"/>
+                            <constraint firstItem="iZt-Aw-BNK" firstAttribute="height" secondItem="mv1-UH-R2a" secondAttribute="height" id="Itf-f7-Qnf"/>
+                            <constraint firstItem="8DB-1R-bad" firstAttribute="width" secondItem="mv1-UH-R2a" secondAttribute="width" id="Jqg-f6-Tx2"/>
+                            <constraint firstItem="sZI-tx-kNS" firstAttribute="height" secondItem="0mM-6S-QC8" secondAttribute="height" id="LgC-U7-cRS"/>
+                            <constraint firstItem="ghd-YF-hQQ" firstAttribute="height" secondItem="iZt-Aw-BNK" secondAttribute="height" id="MTV-4f-ajF"/>
+                            <constraint firstItem="8DB-1R-bad" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="Nlz-VH-E6Q"/>
+                            <constraint firstItem="iZt-Aw-BNK" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="Oo0-1O-PwR"/>
+                            <constraint firstItem="0mM-6S-QC8" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="aMt-5U-cdb"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="ghd-YF-hQQ" secondAttribute="trailing" constant="103" id="efU-O6-b4g"/>
+                            <constraint firstItem="sZI-tx-kNS" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="gc5-4M-HGK"/>
+                            <constraint firstItem="0mM-6S-QC8" firstAttribute="top" secondItem="sZI-tx-kNS" secondAttribute="bottom" constant="16" id="kK1-Zp-JbM"/>
+                            <constraint firstItem="ghd-YF-hQQ" firstAttribute="centerY" secondItem="orf-Kx-fBp" secondAttribute="centerY" constant="20.5" id="r6A-EC-440"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="iZt-Aw-BNK" secondAttribute="trailing" constant="103" id="sVk-b6-LmZ"/>
+                            <constraint firstItem="8DB-1R-bad" firstAttribute="top" secondItem="mv1-UH-R2a" secondAttribute="bottom" constant="8" id="tIc-BK-4gh"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="sZI-tx-kNS" secondAttribute="trailing" constant="103" id="tge-KE-aRO"/>
+                            <constraint firstItem="iZt-Aw-BNK" firstAttribute="top" secondItem="ghd-YF-hQQ" secondAttribute="bottom" constant="17" id="uGm-D4-Ff4"/>
+                            <constraint firstItem="orf-Kx-fBp" firstAttribute="trailing" secondItem="8DB-1R-bad" secondAttribute="trailing" constant="103" id="xid-C4-YTq"/>
+                            <constraint firstItem="ghd-YF-hQQ" firstAttribute="leading" secondItem="orf-Kx-fBp" secondAttribute="leading" constant="102" id="yax-hk-SUA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="orf-Kx-fBp"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tge-aO-bR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1426.4000000000001" y="-2498.5007496251874"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="Cjt-Ep-Wqy">
             <objects>
                 <viewController storyboardIdentifier="loginVC" id="YPC-80-QtI" sceneMemberID="viewController">

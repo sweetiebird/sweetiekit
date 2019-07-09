@@ -25,12 +25,15 @@ const {
   SKEmitterNode,
   SKNode,
   SKAction,
+  UIPopoverPresentationControllerDelegate,
+  UITableViewController,
+  UITableViewDataSource,
+  UITableViewDelegate,
 } = SweetieKit;
 
 function emojiCam(nav) {
-  let isEffectMode = false;
   const nicTexture = SKTexture(UIImage('nic'));
-
+  let isEffectMode = false;
   let text = nicTexture;
 
   const vcId = 'emojicamVC';
@@ -50,6 +53,8 @@ function emojiCam(nav) {
   const trackingMsgView = demoVC.view.viewWithStringTag(trackingViewTag);
   const hideTrackingMsgBtn = demoVC.view.viewWithStringTag(hideTrackingBtnTag);
   const trackingLabel = trackingMsgView.viewWithStringTag(trackingLabelTag);
+
+  const menuOptions = [];
 
   function toggleTrackingMsgView(showMessage = false) {
     if (showMessage) {
@@ -97,6 +102,47 @@ function emojiCam(nav) {
 
   function textWrap(s) {
     return s.split('\n').map(line => lineWrap(line)).join('\n');
+  }
+
+  function onMenuItemSelect(tv, { row }) {
+    console.log('menu item selected', row);
+  }
+
+  function popoverMenu() {
+    const tableVC = UITableViewController();
+
+    tableVC.tableView.delegate = UITableViewDelegate({
+      tableViewDidSelectRowAtIndexPath: onMenuItemSelect,
+    });
+
+    tableVC.tableView.dataSource = UITableViewDataSource({
+      tableViewNumberOfRowsInSection: () => menuOptions.length,
+      tableViewCellForRowAtIndexPath: (tableView, { section, row }) => {
+        const cell = UITableViewCell.alloc().initWithStyleReuseIdentifier(UITableViewCellStyleDefault,
+          `EmojiCamMenuTableViewController_${tableVC.selfAddress}_${section},${row}`);
+        try {
+          let choice = menuOptions[row];
+          if (typeof choice === 'function') {
+            choice = choice(row);
+          }
+          if (choice != null) {
+            if (typeof choice === 'object') {
+              let { text: choiceText, backgroundColor } = choice;
+              if (!text) {
+                text = '';
+              }
+              cell.textLabel.text = text;
+              if (backgroundColor) {
+                cell.contentView.backgroundColor = backgroundColor;
+              }
+            }
+          }
+        } catch (err) {
+          console.warn(err.stack);
+        }
+        return cell;
+      },
+    });
   }
 
   const trackViewGradient = CAGradientLayer();
