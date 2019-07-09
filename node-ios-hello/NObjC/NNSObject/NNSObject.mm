@@ -1020,6 +1020,7 @@ NAN_METHOD(NClass::New) {
 }
 
 #include "NNSObjCRuntime.h"
+#include "NMacTypes.h"
 #include "NNSTarget.h"
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
@@ -1373,6 +1374,41 @@ NAN_METHOD(NClass::New) {
 #include "NSKPhysicsWorld.h"
 #include "NSKLabelNode.h"
 #include "NSKAction.h"
+
+#include "NCMFormatDescription.h" // globals
+#include "NCMTime.h" // globals
+#include "NCMSync.h" // globals
+#include "NCMTimeRange.h" // globals
+#include "NCMSampleBuffer.h" // globals
+#include "NAVCaptureSession.h" // : NSObject
+#include "NAVCaptureMultiCamSession.h" // : AVCaptureSession
+#include "NAVCaptureConnection.h" // : NSObject
+#include "NAVCaptureAudioChannel.h" // : NSObject
+#include "NAVCaptureOutput.h" // : NSObject
+#include "NAVMetadataObject.h" // : NSObject
+#include "NAVMetadataFaceObject.h" // : AVMetadataObject
+#include "NAVMetadataMachineReadableCodeObject.h" // : AVMetadataObject
+#include "NAVMediaFormat.h" // globals
+#include "NAVCaptureSessionPreset.h" // globals
+#include "NAVCaptureInput.h" // : NSObject
+#include "NAVCaptureInputPort.h" // : NSObject
+#include "NAVCaptureDeviceInput.h" // : AVCaptureInput
+#include "NAVCaptureScreenInput.h" // : AVCaptureInput
+#include "NAVCaptureMetadataInput.h" // : AVCaptureInput
+#include "NAVCaptureDevice.h" // : NSObject
+#include "NAVCaptureDeviceDiscoverySession.h" // : NSObject
+#include "NAVFrameRateRange.h" // : NSObject
+#include "NAVCaptureDeviceFormat.h" // : NSObject
+#include "NAVCaptureDeviceInputSource.h" // : NSObject
+#include "NAVMetadataGroup.h" // : NSObject
+#include "NAVTimedMetadataGroup.h" // : AVMetadataGroup
+#include "NAVMutableTimedMetadataGroup.h" // : AVTimedMetadataGroup
+#include "NAVDateRangeMetadataGroup.h" // : AVMetadataGroup
+#include "NAVMutableDateRangeMetadataGroup.h" // : AVDateRangeMetadataGroup
+#include "NAVCaptureSystemPressureState.h" // : NSObject
+#include "NAVAnimation.h" // globals
+#include "NAVCaptureVideoPreviewLayer.h" // : CALayer
+
 #include "NAVAudioTypes.h"
 #include "NAVAudioPlayer.h"
 #include "NAVAudioFormat.h"
@@ -1589,15 +1625,21 @@ NAN_METHOD(NClass::New) {
 #include "NMDLMaterialProperty.h"
 #include "NMDLMaterial.h"
 
-#define JS_EXPORT_TYPE_AS(type, name) \
+#define JS_EXPORT_TYPE_AS(type, name, inherits) \
         auto N_##type = N##type::Initialize(isolate, exports); \
         exports->Set(Nan::New(name).ToLocalChecked(), N_##type.first)
 
+#define JS_EXPORT_TYPE_INHERITS(type, inherits) \
+        JS_EXPORT_TYPE_AS(type, #type, inherits)
+
 #define JS_EXPORT_TYPE(type) \
-        JS_EXPORT_TYPE_AS(type, #type)
+        JS_EXPORT_TYPE_INHERITS(type, NSObject)
+
+#define JS_EXPORT_PROTOCOL_INHERITS(type, inherits) \
+        JS_EXPORT_TYPE_AS(type, #type, inherits)
 
 #define JS_EXPORT_PROTOCOL(type) \
-        JS_EXPORT_TYPE_AS(type, #type)
+        JS_EXPORT_PROTOCOL_INHERITS(type, NSObject)
 
 #define JS_EXPORT_GLOBALS(name) \
         N##name::Initialize(isolate, exports)
@@ -1609,6 +1651,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(Class);
     JS_EXPORT_TYPE(NSObject);
     JS_EXPORT_TYPE(NSObjCRuntime);
+
+    JS_EXPORT_GLOBALS(MacTypes);
+
     JS_EXPORT_TYPE(NSTarget);
     JS_EXPORT_TYPE(NSRunLoop);
     JS_EXPORT_TYPE(NSTimer);
@@ -1807,7 +1852,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UITabBar);
     JS_EXPORT_TYPE(UIStackView);
     JS_EXPORT_TYPE(UIInputView);
-    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit");
+    JS_EXPORT_TYPE_AS(UIKitGlobals, "UIKit", NSObject);
 
     // UIKit delegates
 
@@ -1845,7 +1890,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     
     // Core Graphics
 
-    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics");
+    JS_EXPORT_TYPE_AS(CoreGraphicsGlobals, "CoreGraphics", NSObject);
     JS_EXPORT_GLOBALS(CFDictionary);
     JS_EXPORT_GLOBALS(CGColorSpace);
     JS_EXPORT_GLOBALS(CGContext);
@@ -1857,6 +1902,14 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(CGPath);
     JS_EXPORT_GLOBALS(CGPattern);
     JS_EXPORT_GLOBALS(CGShading);
+
+    // CoreMedia
+
+    JS_EXPORT_GLOBALS(CMFormatDescription);
+    JS_EXPORT_GLOBALS(CMTime);
+    JS_EXPORT_GLOBALS(CMSync);
+    JS_EXPORT_GLOBALS(CMTimeRange);
+    JS_EXPORT_GLOBALS(CMSampleBuffer);
     
     // Audio Toolbox
 
@@ -1909,6 +1962,38 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AVDepthData);
     JS_EXPORT_TYPE(AVPortraitEffectsMatte);
     JS_EXPORT_TYPE(AVCameraCalibrationData);
+
+    JS_EXPORT_TYPE_INHERITS(AVCaptureSession, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureConnection, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureOutput, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataObject, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataFaceObject, AVMetadataObject);
+    JS_EXPORT_TYPE_INHERITS(AVMetadataMachineReadableCodeObject, AVMetadataObject);
+    JS_EXPORT_GLOBALS(AVMediaFormat);
+    JS_EXPORT_GLOBALS(AVCaptureSessionPreset);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureInput, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureInputPort, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
+#if TARGET_OS_MAC
+    JS_EXPORT_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
+#endif
+    JS_EXPORT_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDevice, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVFrameRateRange, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+    JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
+#endif
+    JS_EXPORT_TYPE_INHERITS(AVMetadataGroup, NSObject);
+    JS_EXPORT_TYPE_INHERITS(AVTimedMetadataGroup, AVMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVMutableTimedMetadataGroup, AVTimedMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVDateRangeMetadataGroup, AVMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
+    JS_EXPORT_GLOBALS(AVAnimation);
     
     // MediaPlayer
 
@@ -1969,6 +2054,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(CAAction);
     JS_EXPORT_PROTOCOL(CALayerDelegate);
     JS_EXPORT_TYPE(CALayer);
+    JS_EXPORT_TYPE_INHERITS(AVCaptureVideoPreviewLayer, CALayer); // TODO: move this.
 #if !TARGET_OS_SIMULATOR
     JS_EXPORT_PROTOCOL(CAMetalDrawable);
     JS_EXPORT_TYPE(CAMetalLayer);
@@ -2276,21 +2362,27 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
     }
     if (wrapper == nullptr) {
     
-#define JS_RETURN_TYPE_FROM(Type, ObjcType) \
+#define JS_RETURN_TYPE_FROM(Type, ObjcType, inherits) \
       if ([obj isKindOfClass:[ObjcType class]]) { \
         return N##Type::type; \
       }
 
+#define JS_RETURN_TYPE_INHERITS(Type, inherits) \
+      JS_RETURN_TYPE_FROM(Type, Type, inherits)
+
 #define JS_RETURN_TYPE(Type) \
-      JS_RETURN_TYPE_FROM(Type, Type)
-    
-#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType) \
+      JS_RETURN_TYPE_FROM(Type, Type, NSObject)
+
+#define JS_RETURN_PROTOCOL_FROM(Type, ObjcType, inherits) \
       if ([obj conformsToProtocol:ObjcType##Protocol]) { \
         return N##Type::type; \
       }
 
+#define JS_RETURN_PROTOCOL_INHERITS(Type, inherits) \
+      JS_RETURN_PROTOCOL_FROM(Type, Type, inherits)
+
 #define JS_RETURN_PROTOCOL(Type) \
-      JS_RETURN_PROTOCOL_FROM(Type, Type)
+      JS_RETURN_PROTOCOL_FROM(Type, Type, NSObject)
 
       // GLKit
 
@@ -2596,8 +2688,39 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(AUParameterTree);
       JS_RETURN_TYPE(AUParameterGroup);
       JS_RETURN_TYPE(AUParameterNode);
-      
+
+      // CoreMedia
+
       // AVFoundation
+
+      JS_RETURN_TYPE_INHERITS(AVCaptureSystemPressureState, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVMutableDateRangeMetadataGroup, AVDateRangeMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVDateRangeMetadataGroup, AVMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVMutableTimedMetadataGroup, AVTimedMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVTimedMetadataGroup, AVMetadataGroup);
+      JS_RETURN_TYPE_INHERITS(AVMetadataGroup, NSObject);
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
+#endif
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVFrameRateRange, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureDevice, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
+#if TARGET_OS_MAC
+      JS_RETURN_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
+#endif
+      JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
+      JS_RETURN_TYPE_INHERITS(AVCaptureInputPort, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureInput, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataMachineReadableCodeObject, AVMetadataObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataFaceObject, AVMetadataObject);
+      JS_RETURN_TYPE_INHERITS(AVMetadataObject, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureOutput, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureAudioChannel, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureConnection, NSObject);
+      JS_RETURN_TYPE_INHERITS(AVCaptureMultiCamSession, AVCaptureSession);
+      JS_RETURN_TYPE_INHERITS(AVCaptureSession, NSObject);
 
       JS_RETURN_TYPE(AVCameraCalibrationData);
       JS_RETURN_TYPE(AVPortraitEffectsMatte);
@@ -2751,8 +2874,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBarButtonItem);
       JS_RETURN_TYPE(UIBarCommon);
       // ========= delegates
-      JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager);
-      JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager);
+      JS_RETURN_TYPE_FROM(UIPickerViewManager, SUIPickerViewManager, NSObject);
+      JS_RETURN_TYPE_FROM(UICollectionViewManager, SUICollectionViewManager, NSObject);
       JS_RETURN_TYPE(UIImagePickerControllerDelegate);
       JS_RETURN_TYPE(UIViewControllerTransitioningDelegate);
       // ========= objects
@@ -2789,8 +2912,8 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       // Globals
       
-      JS_RETURN_TYPE_FROM(UIKitGlobals, SUIKitGlobals);
-      JS_RETURN_TYPE_FROM(CoreGraphicsGlobals, SCoreGraphicsGlobals);
+      JS_RETURN_TYPE_FROM(UIKitGlobals, SUIKitGlobals, NSObject);
+      JS_RETURN_TYPE_FROM(CoreGraphicsGlobals, SCoreGraphicsGlobals, NSObject);
 
       // Objects
       

@@ -32,8 +32,10 @@ JS_INIT_CLASS(CLLocationManager, NSObject);
   JS_ASSIGN_PROTO_METHOD(dismissHeadingCalibrationDisplay);
   JS_ASSIGN_PROTO_METHOD(startMonitoringSignificantLocationChanges);
   JS_ASSIGN_PROTO_METHOD(stopMonitoringSignificantLocationChanges);
-#if !TARGET_OS_UIKITFORMAC
+#if DEPRECATED
+#if !TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(startMonitoringForRegionDesiredAccuracy);
+#endif
 #endif
   JS_ASSIGN_PROTO_METHOD(stopMonitoringForRegion);
   JS_ASSIGN_PROTO_METHOD(startMonitoringForRegion);
@@ -276,7 +278,8 @@ NAN_METHOD(NCLLocationManager::stopMonitoringSignificantLocationChanges) {
 #include "NCLRegion.h"
 #include "NCLLocation.h"
 
-#if !TARGET_OS_UIKITFORMAC
+#if DEPRECATED
+#if !TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NCLLocationManager::startMonitoringForRegionDesiredAccuracy) {
   JS_UNWRAP(CLLocationManager, self);
   declare_autoreleasepool {
@@ -286,6 +289,7 @@ NAN_METHOD(NCLLocationManager::startMonitoringForRegionDesiredAccuracy) {
     [self startMonitoringForRedgion: region desiredAccuracy: accuracy];
   }
 }
+#endif
 #endif
 
 NAN_METHOD(NCLLocationManager::stopMonitoringForRegion) {
