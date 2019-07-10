@@ -86,4 +86,8 @@ ARSelection_make =  async function ARSelection_make(nav, demoVC) {
   }
 }
 
+function make(...args) {
+  return ARSelection_make(...args);
+}
+
 module.exports = make;
