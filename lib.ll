@@ -595,8 +595,11 @@
                                      name))))))
                     (add r (list kind)))))))))))
 
+;(define-global xcode-path* "/Applications/Xcode.app/")
+(define-global xcode-path* "/Applications/Xcode-beta.app/")
+
 (define-global ios-header-path (framework type subframework)
-  (with r "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/"
+  (with r (cat xcode-path* "Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/")
     (cat! r framework)
     (when subframework
       (cat! r ".framework/Frameworks/" subframework))
