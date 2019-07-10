@@ -130,8 +130,10 @@ async function make(nav, demoVC) {
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
-  viewDel = new ARSCNViewDelegate(() => {
-    return new SCNNode();
+  viewDel = ARSCNViewDelegate({
+    rendererNodeForAnchor: () => {
+      return new SCNNode();
+    },
   });
   scene = new SCNScene();
   animalNodes = makeAnimalNodes(animals);
