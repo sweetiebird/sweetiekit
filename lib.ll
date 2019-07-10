@@ -652,7 +652,7 @@
 (define-global test-parse-properties (type framework subframework)
   (let ((framework: framework subframework: subframework path: path)
         (objc-resolve type framework subframework)
-        contents (read-file path)
+        contents (read-file (prn path))
         props (parse-properties contents)
         form `(do))
     (step x props
