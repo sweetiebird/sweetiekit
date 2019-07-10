@@ -6,7 +6,7 @@
 //
 #include "NMTLTileRenderPipelineDescriptor.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define instancetype MTLTileRenderPipelineDescriptor
 #define js_value_instancetype js_value_MTLTileRenderPipelineDescriptor

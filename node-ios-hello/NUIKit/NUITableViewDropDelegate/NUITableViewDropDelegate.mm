@@ -75,7 +75,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDropDelegate, tableViewDropPreviewParametersFo
 // revert back to its initial state before the drop session entered.
 - (void)tableView:(UITableView *)tableView performDropWithCoordinator:(id<UITableViewDropCoordinator>)coordinator
 {
-  call_delegate(noop(), tableViewPerformDropWithCoordinator,
+  call_delegate_async(noop(), tableViewPerformDropWithCoordinator,
     js_value_UITableView(tableView),
     js_value_UITableViewDropCoordinator(coordinator));
 }
@@ -94,7 +94,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDropDelegate, tableViewDropPreviewParametersFo
 // Called when the drop session begins tracking in the table view's coordinate space.
 - (void)tableView:(UITableView *)tableView dropSessionDidEnter:(id<UIDropSession>)session
 {
-  call_delegate(noop(), tableViewDropSessionDidEnter,
+  call_delegate_async(noop(), tableViewDropSessionDidEnter,
     js_value_UITableView(tableView),
     js_value_UIDropSession(session));
 }
@@ -118,7 +118,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDropDelegate, tableViewDropPreviewParametersFo
 // Called when the drop session is no longer being tracked inside the table view's coordinate space.
 - (void)tableView:(UITableView *)tableView dropSessionDidExit:(id<UIDropSession>)session
 {
-  call_delegate(noop(), tableViewDropSessionDidExit,
+  call_delegate_async(noop(), tableViewDropSessionDidExit,
     js_value_UITableView(tableView),
     js_value_UIDropSession(session));
 }
@@ -126,7 +126,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDropDelegate, tableViewDropPreviewParametersFo
 // Called when the drop session completed, regardless of outcome. Useful for performing any cleanup.
 - (void)tableView:(UITableView *)tableView dropSessionDidEnd:(id<UIDropSession>)session
 {
-  call_delegate(noop(), tableViewDropSessionDidEnd,
+  call_delegate_async(noop(), tableViewDropSessionDidEnd,
     js_value_UITableView(tableView),
     js_value_UIDropSession(session));
 }

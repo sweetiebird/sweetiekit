@@ -10,7 +10,7 @@
 
 #include "NAVCaptureInput.h"
 
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #define js_value_AVCaptureScreenInput(x) js_value_wrapper(x, AVCaptureScreenInput)
 #define to_value_AVCaptureScreenInput(x) to_value_wrapper(x, AVCaptureScreenInput)

@@ -6,7 +6,7 @@
 //
 #include "NAVCaptureDeviceInputSource.h"
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #define instancetype AVCaptureDeviceInputSource
 #define js_value_instancetype js_value_AVCaptureDeviceInputSource
@@ -60,4 +60,4 @@ NAN_GETTER(NAVCaptureDeviceInputSource::localizedNameGetter) {
   }
 }
 
-#endif // #if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#endif // #if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV

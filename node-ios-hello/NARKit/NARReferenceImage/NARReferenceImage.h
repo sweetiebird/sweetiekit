@@ -8,7 +8,7 @@
 #ifndef NARReferenceImage_h
 #define NARReferenceImage_h    
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #include "NNSObject.h"
 

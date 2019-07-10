@@ -69,7 +69,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
-  call_delegate(noop(), rendererUpdateAtTime,
+  call_delegate_async(noop(), rendererUpdateAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
@@ -83,7 +83,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer didApplyAnimationsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
-  call_delegate(noop(), rendererDidApplyAnimationsAtTime,
+  call_delegate_async(noop(), rendererDidApplyAnimationsAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
@@ -97,7 +97,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.10))
 {
-  call_delegate(noop(), rendererDidSimulatePhysicsAtTime,
+  call_delegate_async(noop(), rendererDidSimulatePhysicsAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
@@ -111,7 +111,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer didApplyConstraintsAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 {
-  call_delegate(noop(), rendererDidApplyConstraintsAtTime,
+  call_delegate_async(noop(), rendererDidApplyConstraintsAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_NSTimeInterval(time));
 }
@@ -126,7 +126,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
 {
-  call_delegate(noop(), rendererWillRenderSceneAtTime,
+  call_delegate_async(noop(), rendererWillRenderSceneAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_SCNScene(scene),
     js_value_NSTimeInterval(time));
@@ -142,7 +142,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRendererDelegate, rendererDidRenderSceneAtTime);
  */
 - (void)renderer:(id <SCNSceneRenderer>)renderer didRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
 {
-  call_delegate(noop(), rendererDidRenderSceneAtTime,
+  call_delegate_async(noop(), rendererDidRenderSceneAtTime,
     js_value_SCNSceneRenderer(renderer),
     js_value_SCNScene(scene),
     js_value_NSTimeInterval(time));

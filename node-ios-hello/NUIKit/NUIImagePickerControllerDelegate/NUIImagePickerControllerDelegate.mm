@@ -50,7 +50,7 @@ DELEGATE_PROP(UIImagePickerControllerDelegate, imagePickerControllerDidCancel);
 @implementation UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey, id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
 {
-  call_delegate(noop(), imagePickerControllerDidFinishPickingImageEditingInfo,
+  call_delegate_async(noop(), imagePickerControllerDidFinishPickingImageEditingInfo,
     js_value_UIImagePickerController(picker),
     js_value_UIImage(image),
     js_value_NSDictionary(editingInfo));
@@ -58,14 +58,14 @@ DELEGATE_PROP(UIImagePickerControllerDelegate, imagePickerControllerDidCancel);
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info
 {
-  call_delegate(noop(), imagePickerControllerDidFinishPickingMediaWithInfo,
+  call_delegate_async(noop(), imagePickerControllerDidFinishPickingMediaWithInfo,
     js_value_UIImagePickerController(picker),
     js_value_NSDictionary(info));
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  call_delegate(noop(), imagePickerControllerDidCancel,
+  call_delegate_async(noop(), imagePickerControllerDidCancel,
     js_value_UIImagePickerController(picker));
 }
 @end

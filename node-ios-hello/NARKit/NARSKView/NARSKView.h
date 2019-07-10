@@ -10,7 +10,7 @@
 
 #include "NSKView.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARSKView(x) js_value_wrapper(x, ARSKView)
 #define to_value_ARSKView(x) to_value_wrapper(x, ARSKView)

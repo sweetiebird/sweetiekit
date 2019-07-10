@@ -63,25 +63,25 @@ DELEGATE_PROP(UITextInputDelegate, textDidChange);
 
 - (void)selectionWillChange:(nullable id <UITextInput>)textInput
 {
-  call_delegate(noop(), selectionWillChange,
+  call_delegate_async(noop(), selectionWillChange,
     js_value_UITextInput(textInput));
 }
 
 - (void)selectionDidChange:(nullable id <UITextInput>)textInput
 {
-  call_delegate(noop(), selectionDidChange,
+  call_delegate_async(noop(), selectionDidChange,
     js_value_UITextInput(textInput));
 }
 
 - (void)textWillChange:(nullable id <UITextInput>)textInput
 {
-  call_delegate(noop(), textWillChange,
+  call_delegate_async(noop(), textWillChange,
     js_value_UITextInput(textInput));
 }
 
 - (void)textDidChange:(nullable id <UITextInput>)textInput
 {
-  call_delegate(noop(), textDidChange,
+  call_delegate_async(noop(), textDidChange,
     js_value_UITextInput(textInput));
 }
 

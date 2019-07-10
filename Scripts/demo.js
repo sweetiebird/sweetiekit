@@ -154,7 +154,7 @@ Object.getOwnPropertyNames(SweetieKit)
   .sort()
   .forEach(x => {
     console.log(x);
-    BindClass(SweetieKit[x]);
+    //BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
 

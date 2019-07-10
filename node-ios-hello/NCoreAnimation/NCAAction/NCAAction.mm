@@ -57,7 +57,7 @@ NAN_METHOD(NCAAction::New) {
 - (void)runActionForKey:(NSString * _Null_unspecified)event object:(id _Null_unspecified)anObject
     arguments:(nullable NSDictionary *)dict
 {
-  call_delegate(noop(), runActionForKeyObjectArguments,
+  call_delegate_async(noop(), runActionForKeyObjectArguments,
     js_value_NSString(event),
     js_value_id(anObject),
     js_value_NSDictionary(dict));

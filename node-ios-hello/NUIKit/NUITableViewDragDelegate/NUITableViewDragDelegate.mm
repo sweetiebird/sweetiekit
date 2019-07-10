@@ -109,7 +109,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDragDelegate, tableViewDragSessionIsRestricted
 // This call will always be balanced with a corresponding call to -tableView:dragSessionDidEnd:
 - (void)tableView:(UITableView *)tableView dragSessionWillBegin:(id<UIDragSession>)session
 {
-  call_delegate(noop(), tableViewDragSessionWillBegin,
+  call_delegate_async(noop(), tableViewDragSessionWillBegin,
     js_value_UITableView(tableView),
     js_value_id/* <UIDragSession>*/(session));
 }
@@ -117,7 +117,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDragDelegate, tableViewDragSessionIsRestricted
 // Called to signal the end of the drag session.
 - (void)tableView:(UITableView *)tableView dragSessionDidEnd:(id<UIDragSession>)session
 {
-  call_delegate(noop(), tableViewDragSessionDidEnd,
+  call_delegate_async(noop(), tableViewDragSessionDidEnd,
     js_value_UITableView(tableView),
     js_value_id/* <UIDragSession>*/(session));
 }

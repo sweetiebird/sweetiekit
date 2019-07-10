@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARAnchor(x) js_value_wrapper(x, ARAnchor)
 #define to_value_ARAnchor(x) to_value_wrapper(x, ARAnchor)

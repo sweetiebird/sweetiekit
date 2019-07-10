@@ -6,7 +6,7 @@
 //
 #include "NGLKView.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #import <GLKit/GLKView.h>
 
@@ -254,4 +254,4 @@ NAN_SETTER(NGLKView::enableSetNeedsDisplaySetter) {
   }
 }
 
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE

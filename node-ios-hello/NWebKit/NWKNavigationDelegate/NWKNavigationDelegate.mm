@@ -100,7 +100,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
 {
-  call_delegate(noop(), webViewDidStartProvisionalNavigation,
+  call_delegate_async(noop(), webViewDidStartProvisionalNavigation,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation));
 }
@@ -112,7 +112,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation
 {
-  call_delegate(noop(), webViewDidReceiveServerRedirectForProvisionalNavigation,
+  call_delegate_async(noop(), webViewDidReceiveServerRedirectForProvisionalNavigation,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation));
 }
@@ -125,7 +125,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-  call_delegate(noop(), webViewDidFailProvisionalNavigationWithError,
+  call_delegate_async(noop(), webViewDidFailProvisionalNavigationWithError,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation),
     js_value_NSError(error));
@@ -137,7 +137,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation
 {
-  call_delegate(noop(), webViewDidCommitNavigation,
+  call_delegate_async(noop(), webViewDidCommitNavigation,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation));
 }
@@ -148,7 +148,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
-  call_delegate(noop(), webViewDidFinishNavigation,
+  call_delegate_async(noop(), webViewDidFinishNavigation,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation));
 }
@@ -161,7 +161,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-  call_delegate(noop(), webViewDidFailNavigationWithError,
+  call_delegate_async(noop(), webViewDidFailNavigationWithError,
     js_value_WKWebView(webView),
     js_value_WKNavigation(navigation),
     js_value_NSError(error));
@@ -180,7 +180,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
 {
-  call_delegate(noop(), webViewDidReceiveAuthenticationChallengeCompletionHandler,
+  call_delegate_async(noop(), webViewDidReceiveAuthenticationChallengeCompletionHandler,
     js_value_WKWebView(webView),
     js_value_NSURLAuthenticationChallenge(challenge)
     js_value_callback(completionHandler));
@@ -192,7 +192,7 @@ DELEGATE_PROP(WKNavigationDelegate, webViewWebContentProcessDidTerminate);
  */
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0))
 {
-  call_delegate(noop(), webViewDidFinishNavigation,
+  call_delegate_async(noop(), webViewDidFinishNavigation,
     js_value_WKWebView(webView));
 }
 @end

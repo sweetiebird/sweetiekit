@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARFrame(x) js_value_wrapper(x, ARFrame)
 #define to_value_ARFrame(x) to_value_wrapper(x, ARFrame)

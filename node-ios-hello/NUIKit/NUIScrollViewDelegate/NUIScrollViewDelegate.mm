@@ -76,20 +76,20 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView // any offset changes
 {
-  call_delegate(noop(), scrollViewDidScroll,
+  call_delegate_async(noop(), scrollViewDidScroll,
     js_value_UIScrollView(scrollView));
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView NS_AVAILABLE_IOS(3_2) // any zoom scale changes
 {
-  call_delegate(noop(), scrollViewDidZoom,
+  call_delegate_async(noop(), scrollViewDidZoom,
     js_value_UIScrollView(scrollView));
 }
 
 // called on start of dragging (may require some time and or distance to move)
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
 {
-  call_delegate(noop(), scrollViewWillBeginDragging,
+  call_delegate_async(noop(), scrollViewWillBeginDragging,
     js_value_UIScrollView(scrollView));
 }
 
@@ -98,7 +98,7 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
 {
   dispatch_main(^{
     auto jsPoint(js_value_boxed(targetContentOffset ? js_value_CGPoint(*targetContentOffset) : js_value_id(nil)));
-    call_delegate(noop(), scrollViewWillEndDraggingWithVelocityTargetContentOffset,
+    call_delegate_async(noop(), scrollViewWillEndDraggingWithVelocityTargetContentOffset,
       js_value_UIScrollView(scrollView),
       js_value_CGPoint(velocity),
       jsPoint);
@@ -114,26 +114,26 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
 // called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate 
 {
-  call_delegate(noop(), scrollViewDidEndDraggingWillDecelerate,
+  call_delegate_async(noop(), scrollViewDidEndDraggingWillDecelerate,
     js_value_UIScrollView(scrollView),
     js_value_BOOL(decelerate));
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView    // called on finger up as we are moving
 {
-  call_delegate(noop(), scrollViewWillBeginDecelerating,
+  call_delegate_async(noop(), scrollViewWillBeginDecelerating,
     js_value_UIScrollView(scrollView));
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView       // called when scroll view grinds to a halt
 {
-  call_delegate(noop(), scrollViewDidEndDecelerating,
+  call_delegate_async(noop(), scrollViewDidEndDecelerating,
     js_value_UIScrollView(scrollView));
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView  // called when setContentOffset/scrollRectVisible:animated: finishes. not called if not animating
 {
-  call_delegate(noop(), scrollViewDidEndScrollingAnimation,
+  call_delegate_async(noop(), scrollViewDidEndScrollingAnimation,
     js_value_UIScrollView(scrollView));
 }
 
@@ -147,14 +147,14 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view NS_AVAILABLE_IOS(3_2)  // called before the scroll view begins zooming its content
 {
-  call_delegate(noop(), scrollViewWillBeginZoomingWithView,
+  call_delegate_async(noop(), scrollViewWillBeginZoomingWithView,
     js_value_UIScrollView(scrollView),
     js_value_UIView(view));
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale  // scale between minimum and maximum. called after any 'bounce' animations
 {
-  call_delegate(noop(), scrollViewDidEndZoomingWithViewAtScale,
+  call_delegate_async(noop(), scrollViewDidEndZoomingWithViewAtScale,
     js_value_UIScrollView(scrollView),
     js_value_UIView(view),
     js_value_CGFloat(scale));
@@ -170,7 +170,7 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView       // called when scrolling animation finished. may be called immediately if already at top
 {
-  call_delegate(noop(), scrollViewDidScrollToTop,
+  call_delegate_async(noop(), scrollViewDidScrollToTop,
     js_value_UIScrollView(scrollView));
 }
 
@@ -178,7 +178,7 @@ DELEGATE_PROTOCOL_PROP(UIScrollViewDelegate, scrollViewDidChangeAdjustedContentI
  */
 - (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0)) 
 {
-  call_delegate(noop(), scrollViewDidChangeAdjustedContentInset,
+  call_delegate_async(noop(), scrollViewDidChangeAdjustedContentInset,
     js_value_UIScrollView(scrollView));
 }
 

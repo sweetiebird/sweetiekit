@@ -28,7 +28,7 @@ JS_INIT_CLASS(MTLSamplerDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(normalizedCoordinates);
   JS_ASSIGN_PROTO_PROP(lodMinClamp);
   JS_ASSIGN_PROTO_PROP(lodMaxClamp);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_PROP(lodAverage);
 #endif
   JS_ASSIGN_PROTO_PROP(compareFunction);
@@ -53,18 +53,18 @@ JS_INIT_CLASS(MTLSamplerDescriptor, NSObject);
 
   //typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
     JS_ASSIGN_ENUM(MTLSamplerAddressModeClampToEdge, NSUInteger); // = 0,
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE
     JS_ASSIGN_ENUM(MTLSamplerAddressModeMirrorClampToEdge, NSUInteger); // API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
 #endif
     JS_ASSIGN_ENUM(MTLSamplerAddressModeRepeat, NSUInteger); // = 2,
     JS_ASSIGN_ENUM(MTLSamplerAddressModeMirrorRepeat, NSUInteger); // = 3,
     JS_ASSIGN_ENUM(MTLSamplerAddressModeClampToZero, NSUInteger); // = 4,
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE
     JS_ASSIGN_ENUM(MTLSamplerAddressModeClampToBorderColor, NSUInteger); // API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios) = 5,
 #endif
   //} API_AVAILABLE(macos(10.11), ios(8.0));
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE
   //typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     JS_ASSIGN_ENUM(MTLSamplerBorderColorTransparentBlack, NSUInteger); // = 0,  
     JS_ASSIGN_ENUM(MTLSamplerBorderColorOpaqueBlack, NSUInteger); // = 1,       
@@ -276,7 +276,7 @@ NAN_SETTER(NMTLSamplerDescriptor::lodMaxClampSetter) {
   }
 }
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_GETTER(NMTLSamplerDescriptor::lodAverageGetter) {
   JS_UNWRAP(MTLSamplerDescriptor, self);
   declare_autoreleasepool {

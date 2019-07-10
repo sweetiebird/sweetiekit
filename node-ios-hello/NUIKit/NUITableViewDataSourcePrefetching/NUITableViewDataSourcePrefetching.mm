@@ -58,7 +58,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDataSourcePrefetching, tableViewCancelPrefetch
 // indexPaths are ordered ascending by geometric distance from the table view
 - (void)tableView:(UITableView *)tableView prefetchRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
 {
-  call_delegate(noop(), tableViewPrefetchRowsAtIndexPaths,
+  call_delegate_async(noop(), tableViewPrefetchRowsAtIndexPaths,
     js_value_UITableView(tableView),
     js_value_NSArray<NSIndexPath *>(indexPaths));
 }
@@ -66,7 +66,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDataSourcePrefetching, tableViewCancelPrefetch
 // indexPaths that previously were considered as candidates for pre-fetching, but were not actually used; may be a subset of the previous call to -tableView:prefetchRowsAtIndexPaths:
 - (void)tableView:(UITableView *)tableView cancelPrefetchingForRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
 {
-  call_delegate(noop(), tableViewCancelPrefetchingForRowsAtIndexPaths,
+  call_delegate_async(noop(), tableViewCancelPrefetchingForRowsAtIndexPaths,
     js_value_UITableView(tableView),
     js_value_NSArray<NSIndexPath *>(indexPaths));
 }

@@ -267,7 +267,6 @@
 		A1646BA6229239FF0078CF4B /* RobotoMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1646BA5229239FF0078CF4B /* RobotoMono-Medium.ttf */; };
 		A1649772227E14A200CA943F /* NUISwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649771227E14A200CA943F /* NUISwitch.mm */; };
 		A1649778227E1F8B00CA943F /* NUIPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1649777227E1F8B00CA943F /* NUIPresentationController.mm */; };
-		A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */; };
 		A1678BB522D462D700E1CF52 /* NAVCaptureAudioChannel.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678BAB22D462D500E1CF52 /* NAVCaptureAudioChannel.mm */; };
 		A1678BB622D462D700E1CF52 /* NAVCaptureSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678BAE22D462D600E1CF52 /* NAVCaptureSession.mm */; };
 		A1678BB722D462D700E1CF52 /* NAVCaptureMultiCamSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678BB122D462D600E1CF52 /* NAVCaptureMultiCamSession.mm */; };
@@ -342,6 +341,14 @@
 		A1678CD522D4E40E00E1CF52 /* NVNFaceObservationAccepting.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CD322D4E40D00E1CF52 /* NVNFaceObservationAccepting.mm */; };
 		A1678CD922D4E8BA00E1CF52 /* NCVPixelBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CD822D4E8BA00E1CF52 /* NCVPixelBuffer.mm */; };
 		A1678CDD22D4E98500E1CF52 /* NCVBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CDC22D4E98500E1CF52 /* NCVBase.mm */; };
+		A1678CE122D50DA400E1CF52 /* NARRaycastQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CE022D50DA400E1CF52 /* NARRaycastQuery.mm */; };
+		A1678CE522D50E8600E1CF52 /* NARRaycastResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CE322D50E8600E1CF52 /* NARRaycastResult.mm */; };
+		A1678CE922D50EE500E1CF52 /* NARCollaborationData.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CE822D50EE500E1CF52 /* NARCollaborationData.mm */; };
+		A1678CED22D50FCE00E1CF52 /* NARTrackedRaycast.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CEC22D50FCE00E1CF52 /* NARTrackedRaycast.mm */; };
+		A1678CF722D5109C00E1CF52 /* NARSessionObserver.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CF022D5109B00E1CF52 /* NARSessionObserver.mm */; };
+		A1678CF822D5109C00E1CF52 /* NARSessionProviding.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CF322D5109B00E1CF52 /* NARSessionProviding.mm */; };
+		A1678CF922D5109C00E1CF52 /* NARSessionDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CF522D5109B00E1CF52 /* NARSessionDelegate.mm */; };
+		A1678CFD22D5128600E1CF52 /* NDispatchQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1678CFB22D5128500E1CF52 /* NDispatchQueue.mm */; };
 		A16EF58A229CE73B007BCB49 /* NSKEmitterNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */; };
 		A16EF590229D07D4007BCB49 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58E229D07D4007BCB49 /* Fire.sks */; };
 		A16EF591229D07D4007BCB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EF58F229D07D4007BCB49 /* Assets.xcassets */; };
@@ -370,7 +377,6 @@
 		A18F1E61228A3D1500A42754 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = A18F1E60228A3D1500A42754 /* vendor */; };
 		A18F1E65228A41C000A42754 /* NARSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E64228A41C000A42754 /* NARSCNView.mm */; };
 		A18F1E69228A429E00A42754 /* NARSCNViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */; };
-		A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */; };
 		A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F1E72228A478600A42754 /* NSCNNode.mm */; };
 		A190B7AD22C303D4007268E4 /* turtle.scn in Resources */ = {isa = PBXBuildFile; fileRef = A190B7AC22C303D4007268E4 /* turtle.scn */; };
 		A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1926EC622C07D17008F16AE /* NMKMapCamera.mm */; };
@@ -729,7 +735,6 @@
 		A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2C225C6AB200085571 /* libcares.a */; };
 		A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A3E225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp */; };
 		A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E5F225C9A97004D7C82 /* test-v8-serialize.cpp */; };
-		A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E62225CD7FB004D7C82 /* mksnapshot.cpp */; };
 		A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E6B225D3CEB004D7C82 /* hello-node.mm */; };
 /* End PBXBuildFile section */
 
@@ -1383,6 +1388,23 @@
 		A1678CD822D4E8BA00E1CF52 /* NCVPixelBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVPixelBuffer.mm; sourceTree = "<group>"; };
 		A1678CDB22D4E98500E1CF52 /* NCVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCVBase.h; sourceTree = "<group>"; };
 		A1678CDC22D4E98500E1CF52 /* NCVBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCVBase.mm; sourceTree = "<group>"; };
+		A1678CDF22D50DA400E1CF52 /* NARRaycastQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARRaycastQuery.h; sourceTree = "<group>"; };
+		A1678CE022D50DA400E1CF52 /* NARRaycastQuery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARRaycastQuery.mm; sourceTree = "<group>"; };
+		A1678CE322D50E8600E1CF52 /* NARRaycastResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARRaycastResult.mm; sourceTree = "<group>"; };
+		A1678CE422D50E8600E1CF52 /* NARRaycastResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARRaycastResult.h; sourceTree = "<group>"; };
+		A1678CE722D50EE500E1CF52 /* NARCollaborationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARCollaborationData.h; sourceTree = "<group>"; };
+		A1678CE822D50EE500E1CF52 /* NARCollaborationData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARCollaborationData.mm; sourceTree = "<group>"; };
+		A1678CEB22D50FCE00E1CF52 /* NARTrackedRaycast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARTrackedRaycast.h; sourceTree = "<group>"; };
+		A1678CEC22D50FCE00E1CF52 /* NARTrackedRaycast.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARTrackedRaycast.mm; sourceTree = "<group>"; };
+		A1678CEF22D5109B00E1CF52 /* NARSessionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARSessionObserver.h; sourceTree = "<group>"; };
+		A1678CF022D5109B00E1CF52 /* NARSessionObserver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSessionObserver.mm; sourceTree = "<group>"; };
+		A1678CF222D5109B00E1CF52 /* NARSessionProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARSessionProviding.h; sourceTree = "<group>"; };
+		A1678CF322D5109B00E1CF52 /* NARSessionProviding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSessionProviding.mm; sourceTree = "<group>"; };
+		A1678CF522D5109B00E1CF52 /* NARSessionDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSessionDelegate.mm; sourceTree = "<group>"; };
+		A1678CF622D5109B00E1CF52 /* NARSessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARSessionDelegate.h; sourceTree = "<group>"; };
+		A1678CFB22D5128500E1CF52 /* NDispatchQueue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NDispatchQueue.mm; sourceTree = "<group>"; };
+		A1678CFC22D5128500E1CF52 /* NDispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDispatchQueue.h; sourceTree = "<group>"; };
+		A1678CFE22D558F500E1CF52 /* SweetieKit.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SweetieKit.pch; sourceTree = "<group>"; };
 		A16EF588229CE73B007BCB49 /* NSKEmitterNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKEmitterNode.mm; sourceTree = "<group>"; };
 		A16EF589229CE73B007BCB49 /* NSKEmitterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKEmitterNode.h; sourceTree = "<group>"; };
 		A16EF58E229D07D4007BCB49 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -1430,7 +1452,6 @@
 		A18F1E64228A41C000A42754 /* NARSCNView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSCNView.mm; sourceTree = "<group>"; };
 		A18F1E67228A429500A42754 /* NARSCNViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NARSCNViewDelegate.h; sourceTree = "<group>"; };
 		A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NARSCNViewDelegate.mm; sourceTree = "<group>"; };
-		A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SARSCNViewDelegate.swift; sourceTree = "<group>"; };
 		A18F1E72228A478600A42754 /* NSCNNode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNNode.mm; sourceTree = "<group>"; };
 		A18F1E74228A478D00A42754 /* NSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSCNNode.h; sourceTree = "<group>"; };
 		A190B7AC22C303D4007268E4 /* turtle.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = turtle.scn; sourceTree = "<group>"; };
@@ -4489,6 +4510,7 @@
 		A1678C0222D4751800E1CF52 /* NUsrInclude */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CFA22D5128500E1CF52 /* NDispatchQueue */,
 				A1678C0322D4751800E1CF52 /* NMacTypes */,
 			);
 			path = NUsrInclude;
@@ -5017,6 +5039,78 @@
 			path = NCVBase;
 			sourceTree = "<group>";
 		};
+		A1678CDE22D50DA400E1CF52 /* NARRaycastQuery */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CDF22D50DA400E1CF52 /* NARRaycastQuery.h */,
+				A1678CE022D50DA400E1CF52 /* NARRaycastQuery.mm */,
+			);
+			path = NARRaycastQuery;
+			sourceTree = "<group>";
+		};
+		A1678CE222D50E8600E1CF52 /* NARRaycastResult */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CE422D50E8600E1CF52 /* NARRaycastResult.h */,
+				A1678CE322D50E8600E1CF52 /* NARRaycastResult.mm */,
+			);
+			path = NARRaycastResult;
+			sourceTree = "<group>";
+		};
+		A1678CE622D50EE500E1CF52 /* NARCollaborationData */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CE722D50EE500E1CF52 /* NARCollaborationData.h */,
+				A1678CE822D50EE500E1CF52 /* NARCollaborationData.mm */,
+			);
+			path = NARCollaborationData;
+			sourceTree = "<group>";
+		};
+		A1678CEA22D50FCE00E1CF52 /* NARTrackedRaycast */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CEB22D50FCE00E1CF52 /* NARTrackedRaycast.h */,
+				A1678CEC22D50FCE00E1CF52 /* NARTrackedRaycast.mm */,
+			);
+			path = NARTrackedRaycast;
+			sourceTree = "<group>";
+		};
+		A1678CEE22D5109B00E1CF52 /* NARSessionObserver */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CEF22D5109B00E1CF52 /* NARSessionObserver.h */,
+				A1678CF022D5109B00E1CF52 /* NARSessionObserver.mm */,
+			);
+			path = NARSessionObserver;
+			sourceTree = "<group>";
+		};
+		A1678CF122D5109B00E1CF52 /* NARSessionProviding */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CF222D5109B00E1CF52 /* NARSessionProviding.h */,
+				A1678CF322D5109B00E1CF52 /* NARSessionProviding.mm */,
+			);
+			path = NARSessionProviding;
+			sourceTree = "<group>";
+		};
+		A1678CF422D5109B00E1CF52 /* NARSessionDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CF622D5109B00E1CF52 /* NARSessionDelegate.h */,
+				A1678CF522D5109B00E1CF52 /* NARSessionDelegate.mm */,
+			);
+			path = NARSessionDelegate;
+			sourceTree = "<group>";
+		};
+		A1678CFA22D5128500E1CF52 /* NDispatchQueue */ = {
+			isa = PBXGroup;
+			children = (
+				A1678CFC22D5128500E1CF52 /* NDispatchQueue.h */,
+				A1678CFB22D5128500E1CF52 /* NDispatchQueue.mm */,
+			);
+			path = NDispatchQueue;
+			sourceTree = "<group>";
+		};
 		A16EF587229CE73B007BCB49 /* NSKEmitterNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -5304,7 +5398,6 @@
 			children = (
 				A18F1E67228A429500A42754 /* NARSCNViewDelegate.h */,
 				A18F1E68228A429E00A42754 /* NARSCNViewDelegate.mm */,
-				A18F1E6A228A42A800A42754 /* SARSCNViewDelegate.swift */,
 			);
 			path = NARSCNViewDelegate;
 			sourceTree = "<group>";
@@ -7988,6 +8081,13 @@
 		A1D65E0B22819C1600AC0BD9 /* NARKit */ = {
 			isa = PBXGroup;
 			children = (
+				A1678CF422D5109B00E1CF52 /* NARSessionDelegate */,
+				A1678CEE22D5109B00E1CF52 /* NARSessionObserver */,
+				A1678CF122D5109B00E1CF52 /* NARSessionProviding */,
+				A1678CEA22D50FCE00E1CF52 /* NARTrackedRaycast */,
+				A1678CE622D50EE500E1CF52 /* NARCollaborationData */,
+				A1678CE222D50E8600E1CF52 /* NARRaycastResult */,
+				A1678CDE22D50DA400E1CF52 /* NARRaycastQuery */,
 				A1BD4B7C2287C20E001D1F6E /* NARAnchor */,
 				A1BD4BB022880B1A001D1F6E /* NARCamera */,
 				A1948934228A68A0007BF787 /* NARConfiguration */,
@@ -8651,14 +8751,13 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A1678C6122D4B0B500E1CF52 /* NImageIO */,
-				A1678C4C22D4AFF100E1CF52 /* NVision */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1394A6D22865F200087F712 /* main.h */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
 				A1058B422268029E00CEAA5C /* libs_main.mm */,
 				A1394A6B22865EF00087F712 /* main.mm */,
+				A1678CFE22D558F500E1CF52 /* SweetieKit.pch */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
 				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
 				A1FC1A0A225C65DD00085571 /* Assets.xcassets */,
@@ -8679,6 +8778,7 @@
 				A1678BFD22D471FF00E1CF52 /* NCoreMedia */,
 				A1678C3B22D4A6D800E1CF52 /* NCoreVideo */,
 				A108637F22C6E573001A15A9 /* NGLKit */,
+				A1678C6122D4B0B500E1CF52 /* NImageIO */,
 				A192708222C14C47008F16AE /* NIOSurface */,
 				A194894D228A8489007BF787 /* NMapKit */,
 				A133708122AB382200FA3768 /* NMediaPlayer */,
@@ -8693,6 +8793,7 @@
 				A1D65E0C22819C1E00AC0BD9 /* NSpriteKit */,
 				A1D6729522695C9C00562A42 /* NUIKit */,
 				A1678C0222D4751800E1CF52 /* NUsrInclude */,
+				A1678C4C22D4AFF100E1CF52 /* NVision */,
 				A108639022C70160001A15A9 /* NWebGL */,
 				A133701A22AAE65000FA3768 /* NWebKit */,
 				A1D672A02269942100562A42 /* Resources */,
@@ -8983,6 +9084,7 @@
 				A108633122C496EF001A15A9 /* NAVAudioUnitEffect.mm in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */,
+				A1678CF922D5109C00E1CF52 /* NARSessionDelegate.mm in Sources */,
 				A1678C2322D47D4D00E1CF52 /* NAVMetadataGroup.mm in Sources */,
 				A192708122C14B8A008F16AE /* NMTLSharedEvent.mm in Sources */,
 				A108637E22C6CC38001A15A9 /* NARReferenceObject.mm in Sources */,
@@ -9161,6 +9263,7 @@
 				A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */,
 				A1926EC822C07D18008F16AE /* NMKMapCamera.mm in Sources */,
 				A1678C5C22D4AFF100E1CF52 /* NVNRequest.mm in Sources */,
+				A1678CE922D50EE500E1CF52 /* NARCollaborationData.mm in Sources */,
 				A192700D22C12F5F008F16AE /* NMTLLibrary.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A108632F22C496EF001A15A9 /* NAVAudioUnit.mm in Sources */,
@@ -9173,7 +9276,7 @@
 				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
 				A1926F4C22C0E286008F16AE /* NSCNPhysicsBallSocketJoint.mm in Sources */,
 				A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */,
-				A18F1E6B228A42A800A42754 /* SARSCNViewDelegate.swift in Sources */,
+				A1678CF722D5109C00E1CF52 /* NARSessionObserver.mm in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
 				A1678BB622D462D700E1CF52 /* NAVCaptureSession.mm in Sources */,
 				A1EE7D79229D8EEF002B53FF /* NSCNCone.mm in Sources */,
@@ -9234,6 +9337,7 @@
 				A1D4982022B9BBD0009AC951 /* NCNPostalAddress.mm in Sources */,
 				A1574F0D22B93B97006CC5F2 /* NCAMediaTimingFunction.mm in Sources */,
 				A15878EB22CDEF4000847196 /* NUIDragPreviewTarget.mm in Sources */,
+				A1678CFD22D5128600E1CF52 /* NDispatchQueue.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
@@ -9270,6 +9374,7 @@
 				A19270BA22C181AA008F16AE /* NMTLCommandBuffer.mm in Sources */,
 				A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */,
 				A1926EEC22C0ADAD008F16AE /* NAVCameraCalibrationData.mm in Sources */,
+				A1678CED22D50FCE00E1CF52 /* NARTrackedRaycast.mm in Sources */,
 				A13370A222AB480400FA3768 /* NMPMediaPlaylist.mm in Sources */,
 				A19F3A0522AF68F400606332 /* NMDLTransform.mm in Sources */,
 				A1678BBC22D4648600E1CF52 /* NAVCaptureOutput.mm in Sources */,
@@ -9307,6 +9412,7 @@
 				A13370FF22AF1C9100FA3768 /* NCoreAudioTypes.mm in Sources */,
 				A1BD4BAB2287F678001D1F6E /* NSKTexture.mm in Sources */,
 				A1926FC122C11F99008F16AE /* NMTLStructType.mm in Sources */,
+				A1678CF822D5109C00E1CF52 /* NARSessionProviding.mm in Sources */,
 				A1BD4B942287D555001D1F6E /* NSKSpriteNode.mm in Sources */,
 				A1D6729822695D0200562A42 /* NUIView.mm in Sources */,
 				216392A9226BDBF000051DE0 /* ColorHelper.mm in Sources */,
@@ -9334,6 +9440,7 @@
 				A1926F5B22C0E836008F16AE /* NSCNAudioSource.mm in Sources */,
 				A1574F0522B93071006CC5F2 /* NCASpringAnimation.mm in Sources */,
 				A1926FF022C12D7E008F16AE /* NMTLDepthStencilDescriptor.mm in Sources */,
+				A1678CE122D50DA400E1CF52 /* NARRaycastQuery.mm in Sources */,
 				A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */,
 				A134E28122D033EB00BAB748 /* NCGPattern.mm in Sources */,
 				A1678CA822D4B91B00E1CF52 /* NVNImageHomographicAlignmentObservation.mm in Sources */,
@@ -9375,7 +9482,6 @@
 				A194893B228A6AA6007BF787 /* NARLightEstimate.mm in Sources */,
 				A19270F322C2E27D008F16AE /* NNSMessagePort.mm in Sources */,
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
-				A166C3D222A57F0E005318ED /* embedded-file-writer.cc in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
 				A1678CAB22D4B91B00E1CF52 /* NVNTextObservation.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
@@ -9406,6 +9512,7 @@
 				A11D129D227F6ACB0038C262 /* NNSLayoutConstraint.mm in Sources */,
 				A192709722C15B4C008F16AE /* NMTLVertexAttributeDescriptor.mm in Sources */,
 				A158792F22CEE5D200847196 /* NUITimingCurveProvider.mm in Sources */,
+				A1678CE522D50E8600E1CF52 /* NARRaycastResult.mm in Sources */,
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
 				A19270C222C18302008F16AE /* NMTLBlitCommandEncoder.mm in Sources */,
@@ -9520,7 +9627,6 @@
 				A158785522CDA5BC00847196 /* NUITableViewDelegate.mm in Sources */,
 				A19270A222C16332008F16AE /* NNSTimer.mm in Sources */,
 				A192703C22C1375D008F16AE /* NMTLComputePipelineDescriptor.mm in Sources */,
-				A1FF9E64225CD7FB004D7C82 /* mksnapshot.cpp in Sources */,
 				A1574ECC22B8BC4E006CC5F2 /* NUIStoryboardSegue.mm in Sources */,
 				A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */,
 				A108635122C5973C001A15A9 /* NSKAttributeValue.mm in Sources */,
@@ -9770,7 +9876,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = NO;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = B9452FEMTF;
 				ENABLE_BITCODE = NO;
@@ -9778,6 +9883,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "node-ios-hello/SweetieKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
@@ -9809,7 +9917,7 @@
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_GENERATE_MAP_FILE = YES;
+				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9843,7 +9951,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "node-ios-hello/node-ios-hello.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = NO;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = B9452FEMTF;
 				ENABLE_BITCODE = NO;
@@ -9851,6 +9958,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "node-ios-hello/SweetieKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
 					"V8_INTL_SUPPORT=1",
@@ -9879,7 +9989,7 @@
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_GENERATE_MAP_FILE = YES;
+				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

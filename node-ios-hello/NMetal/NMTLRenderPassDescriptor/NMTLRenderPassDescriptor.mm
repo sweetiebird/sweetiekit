@@ -73,7 +73,7 @@ JS_INIT_CLASS(MTLRenderPassDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(stencilAttachment);
   JS_ASSIGN_PROTO_PROP(visibilityResultBuffer);
   JS_ASSIGN_PROTO_PROP(renderTargetArrayLength);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_PROP(imageblockSampleLength);
   JS_ASSIGN_PROTO_PROP(threadgroupMemoryLength);
   JS_ASSIGN_PROTO_PROP(tileWidth);
@@ -269,7 +269,7 @@ NAN_SETTER(NMTLRenderPassDescriptor::renderTargetArrayLengthSetter) {
   }
 }
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_GETTER(NMTLRenderPassDescriptor::imageblockSampleLengthGetter) {
   JS_UNWRAP(MTLRenderPassDescriptor, self);
   declare_autoreleasepool {

@@ -95,7 +95,7 @@ DELEGATE_PROTOCOL_PROP(UIAdaptivePresentationControllerDelegate, presentationCon
 // If there is no adaptation happening and an original style is used UIModalPresentationNone will be passed as an argument.
 - (void)presentationController:(UIPresentationController *)presentationController willPresentWithAdaptiveStyle:(UIModalPresentationStyle)style transitionCoordinator:(nullable id <UIViewControllerTransitionCoordinator>)transitionCoordinator NS_AVAILABLE_IOS(8_3)
 {
-  call_delegate(noop(), presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator,
+  call_delegate_async(noop(), presentationControllerWillPresentWithAdaptiveStyleTransitionCoordinator,
     js_value_UIPresentationController(presentationController),
     js_value_UIModalPresentationStyle(style),
     js_value_UIViewControllerTransitionCoordinator(transitionCoordinator));

@@ -46,7 +46,7 @@
 
 //typedef struct CF_BRIDGED_TYPE(id) SECTYPE(SecKeychain) *SecKeychainRef
 //  API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, tvos, watchos);
-#if !defined(__IPHONEOS__) && !defined(__TVOS__) && !defined(__WATCHOS__)
+#if !TARGET_OS_IPHONE && !TARGET_OS_TV && !TARGET_OS_WATCH
 #define js_value_SecKeychainRef(x) js_value_bridged(x, SecKeychainRef)
 #define to_value_SecKeychainRef(x) to_value_bridged(x, SecKeychainRef)
 #define is_value_SecKeychainRef(x) is_value_bridged(x, SecKeychainRef)
@@ -54,7 +54,7 @@
 
 //typedef struct CF_BRIDGED_TYPE(id) SECTYPE(SecKeychainItem) *SecKeychainItemRef
 //  API_UNAVAILABLE(ios);
-#ifndef __IPHONEOS__
+#if !TARGET_OS_IPHONE
 #define js_value_SecKeychainItemRef(x) js_value_bridged(x, SecKeychainItemRef)
 #define to_value_SecKeychainItemRef(x) to_value_bridged(x, SecKeychainItemRef)
 #define is_value_SecKeychainItemRef(x) is_value_bridged(x, SecKeychainItemRef)
@@ -62,7 +62,7 @@
 
 //typedef struct CF_BRIDGED_TYPE(id) SECTYPE(SecKeychainSearch) *SecKeychainSearchRef
 //  API_UNAVAILABLE(ios);
-#ifndef __IPHONEOS__
+#if !TARGET_OS_IPHONE
 #define js_value_SecKeychainSearchRef(x) js_value_bridged(x, SecKeychainSearchRef)
 #define to_value_SecKeychainSearchRef(x) to_value_bridged(x, SecKeychainSearchRef)
 #define is_value_SecKeychainSearchRef(x) is_value_bridged(x, SecKeychainSearchRef)

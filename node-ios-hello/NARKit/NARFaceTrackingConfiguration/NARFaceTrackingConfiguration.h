@@ -8,7 +8,7 @@
 #ifndef NARFaceTrackingConfiguration_h
 #define NARFaceTrackingConfiguration_h    
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #include "NARConfiguration.h"
 

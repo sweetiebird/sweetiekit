@@ -71,7 +71,7 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
    */
   //typedef NS_ENUM(NSUInteger, SCNRenderingAPI) {
     JS_ASSIGN_ENUM(SCNRenderingAPIMetal, NSUInteger);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
     JS_ASSIGN_ENUM(SCNRenderingAPIOpenGLES2, NSUInteger);
 #endif
   //} API_AVAILABLE(macos(10.11), ios(9.0));
@@ -437,7 +437,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectsWithCompletionHandler);
         completionHandler();
       }
     }));
-    call_delegate(noop(), presentSceneWithTransitionIncomingPointOfViewCompletionHandler,
+    call_delegate_async(noop(), presentSceneWithTransitionIncomingPointOfViewCompletionHandler,
       js_value_SCNScene(scene),
       js_value_SKTransition(transition),
       js_value_SCNNode(pointOfView),
@@ -560,7 +560,7 @@ DELEGATE_PROTOCOL_PROP(SCNSceneRenderer, prepareObjectsWithCompletionHandler);
         completionHandler(success);
       }
     }));
-    call_delegate(noop(), prepareObjectsWithCompletionHandler,
+    call_delegate_async(noop(), prepareObjectsWithCompletionHandler,
       js_value_NSArray(objects),
       completionHandlerCallback);
   });

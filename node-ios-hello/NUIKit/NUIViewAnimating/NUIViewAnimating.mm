@@ -113,29 +113,6 @@ NAN_SETTER(NUIViewAnimating::fractionCompleteSetter) {
   }
 }
 
-#define DELEGATE_PROTOCOL_PROP_2(type, key) \
-NAN_GETTER(N##type::key##Getter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    if ([self isKindOfClass:[type##Type class]]) { \
-      get_persistent_function(self_, callback, @#key); \
-      if (callback) { \
-        JS_SET_RETURN([callback jsFunction]->Get()); \
-      } \
-    } else { \
-      JS_SET_RETURN(JS_FUNC(Nan::New<v8::FunctionTemplate>(N##type::key, info.This()))); \
-    } \
-  } \
-} \
-\
-NAN_SETTER(N##type::key##Setter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    declare_setter(); \
-    declare_persistent_function_on(self_, callback, @#key); \
-  } \
-}
-
 NAN_METHOD(NUIViewAnimating::startAnimation) {
   JS_UNWRAP_PROTOCOL(UIViewAnimating, self);
   declare_autoreleasepool {
@@ -194,7 +171,7 @@ DELEGATE_PROTOCOL_PROP_2(UIViewAnimating, finishAnimationAtPosition);
 // Starts the animation after the given delay.
 - (void)startAnimationAfterDelay:(NSTimeInterval)delay
 {
-  call_delegate(noop(), startAnimationAfterDelay,
+  call_delegate_async(noop(), startAnimationAfterDelay,
     js_value_NSTimeInterval(delay));
 }
 
@@ -213,7 +190,7 @@ DELEGATE_PROTOCOL_PROP_2(UIViewAnimating, finishAnimationAtPosition);
 // when an animation finishes naturally this method is not called.
 - (void)stopAnimation:(BOOL) withoutFinishing
 {
-  call_delegate(noop(), stopAnimation,
+  call_delegate_async(noop(), stopAnimation,
     js_value_BOOL(withoutFinishing));
 }
 
@@ -221,7 +198,7 @@ DELEGATE_PROTOCOL_PROP_2(UIViewAnimating, finishAnimationAtPosition);
 // The finalPosition argument should indicate the final values of the animated properties.
 - (void)finishAnimationAtPosition:(UIViewAnimatingPosition)finalPosition
 {
-  call_delegate(noop(), finishAnimationAtPosition,
+  call_delegate_async(noop(), finishAnimationAtPosition,
     js_value_UIViewAnimatingPosition(finalPosition));
 }
 

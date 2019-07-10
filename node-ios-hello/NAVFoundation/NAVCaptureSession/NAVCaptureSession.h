@@ -14,7 +14,7 @@
 #define to_value_AVCaptureVideoOrientation(x) TO_ENUM(AVCaptureVideoOrientation, NSInteger, x)
 #define is_value_AVCaptureVideoOrientation(x) IS_ENUM(AVCaptureVideoOrientation, NSInteger, x)
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 #define js_value_AVVideoFieldMode(x) JS_ENUM(AVVideoFieldMode, NSInteger, x)
 #define to_value_AVVideoFieldMode(x) TO_ENUM(AVVideoFieldMode, NSInteger, x)
 #define is_value_AVVideoFieldMode(x) IS_ENUM(AVVideoFieldMode, NSInteger, x)

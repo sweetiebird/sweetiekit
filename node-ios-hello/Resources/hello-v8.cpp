@@ -4,7 +4,7 @@
 //  Created by Emily Kolar on 4/9/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
 #include "hello-v8.hpp"
 
 #include <stdio.h>

@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #define js_value_AVCaptureDeviceInputSource(x) js_value_wrapper(x, AVCaptureDeviceInputSource)
 #define to_value_AVCaptureDeviceInputSource(x) to_value_wrapper(x, AVCaptureDeviceInputSource)

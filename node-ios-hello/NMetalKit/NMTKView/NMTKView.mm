@@ -36,7 +36,7 @@ JS_INIT_CLASS(MTKView, UIView);
   JS_ASSIGN_PROTO_PROP(autoResizeDrawable);
   JS_ASSIGN_PROTO_PROP(drawableSize);
   JS_ASSIGN_PROTO_PROP(isPaused);
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_10_12
   JS_ASSIGN_PROTO_PROP(colorspace);
 #endif
 
@@ -398,7 +398,7 @@ NAN_SETTER(NMTKView::isPausedSetter) {
   }
 }
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_10_12
 NAN_GETTER(NMTKView::colorspaceGetter) {
   JS_UNWRAP(MTKView, self);
   declare_autoreleasepool {

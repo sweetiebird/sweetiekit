@@ -1021,6 +1021,7 @@ NAN_METHOD(NClass::New) {
 
 #include "NNSObjCRuntime.h"
 #include "NMacTypes.h"
+#include "NDispatchQueue.h"
 #include "NCFBase.h"
 #include "NCFDictionary.h"
 #include "NNSTarget.h"
@@ -1477,7 +1478,8 @@ NAN_METHOD(NClass::New) {
 #include "NGLKViewDelegate.h"
 #include "NGLKViewControllerDelegate.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
+@import ARKit;
 #include "NARAnchor.h"
 #include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -1496,9 +1498,16 @@ NAN_METHOD(NClass::New) {
 #include "NARFrame.h"
 #include "NARCamera.h"
 #include "NARSCNView.h"
+#include "NARSCNViewDelegate.h"
 #include "NARHitTestResult.h"
 #include "NARLightEstimate.h"
-#include "NARSCNViewDelegate.h"
+#include "NARCollaborationData.h"
+#include "NARTrackedRaycast.h"
+#include "NARSessionObserver.h"
+#include "NARSessionDelegate.h"
+#include "NARSessionProviding.h"
+#include "NARRaycastQuery.h"
+#include "NARRaycastResult.h"
 #endif
 
 #include "NSceneKitTypes.h"
@@ -1698,6 +1707,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(NSObjCRuntime);
 
     JS_EXPORT_GLOBALS(MacTypes);
+    JS_EXPORT_GLOBALS(DispatchQueue);
 
     JS_EXPORT_TYPE(NSTarget);
     JS_EXPORT_TYPE(NSRunLoop);
@@ -2068,7 +2078,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_INHERITS(AVCaptureInput, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVCaptureInputPort, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
     JS_EXPORT_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
 #endif
     JS_EXPORT_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
@@ -2076,7 +2086,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVFrameRateRange, NSObject);
     JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
     JS_EXPORT_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
 #endif
     JS_EXPORT_TYPE_INHERITS(AVMetadataGroup, NSObject);
@@ -2162,20 +2172,20 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // OpenGLES
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
 #endif
     
     // WebGL
     
-#ifdef __IPHONEOS__ // TODO: mac
+#if TARGET_OS_IPHONE // TODO: mac
     exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
 #endif
 
     // GLKit
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
     JS_EXPORT_PROTOCOL(GLKViewControllerDelegate);
     JS_EXPORT_PROTOCOL(GLKViewDelegate);
     JS_EXPORT_TYPE(GLKViewController);
@@ -2340,7 +2350,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
     JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
     JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
@@ -2395,7 +2405,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTKView);
     JS_EXPORT_TYPE(MTKViewDelegate);
     
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
     // ARKit
 
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -2417,8 +2427,15 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(ARCamera);
     JS_EXPORT_TYPE(ARFrame);
     JS_EXPORT_TYPE(ARAnchor);
+    JS_EXPORT_TYPE(ARCollaborationData);
+    JS_EXPORT_TYPE(ARTrackedRaycast);
+    JS_EXPORT_PROTOCOL(ARSessionObserver);
+    JS_EXPORT_PROTOCOL(ARSessionDelegate);
+    JS_EXPORT_PROTOCOL(ARSessionProviding);
+    JS_EXPORT_TYPE(ARRaycastQuery);
+    JS_EXPORT_TYPE(ARRaycastResult);
     JS_EXPORT_PROTOCOL(ARSKViewDelegate);
-    JS_EXPORT_TYPE(ARSCNViewDelegate);
+    JS_EXPORT_PROTOCOL(ARSCNViewDelegate);
 #endif
 
     // MapKit
@@ -2481,7 +2498,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit
 
-#ifdef __IPHONEOS__ // TODO: mac
+#if TARGET_OS_IPHONE // TODO: mac
       JS_RETURN_TYPE(GLKViewController);
       JS_RETURN_TYPE(GLKView);
 #endif
@@ -2564,7 +2581,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
       JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
@@ -2604,12 +2621,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLStructMember); // : NSObject
       JS_RETURN_TYPE(MTLType); // : NSObject
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
       // ARKit
 
       JS_RETURN_TYPE(ARLightEstimate);
       JS_RETURN_TYPE(ARCamera);
       JS_RETURN_TYPE(ARFrame);
+      JS_RETURN_TYPE(ARTrackedRaycast);
+      JS_RETURN_TYPE(ARCollaborationData);
       JS_RETURN_TYPE(ARAnchor);
       JS_RETURN_TYPE(ARSKView);
       JS_RETURN_TYPE(ARSCNView);
@@ -2737,7 +2756,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // OpenGLES
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
       JS_RETURN_TYPE(EAGLContext);
       JS_RETURN_TYPE(EAGLSharegroup);
 #endif
@@ -2825,7 +2844,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_INHERITS(AVMutableTimedMetadataGroup, AVTimedMetadataGroup);
       JS_RETURN_TYPE_INHERITS(AVTimedMetadataGroup, AVMetadataGroup);
       JS_RETURN_TYPE_INHERITS(AVMetadataGroup, NSObject);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
       JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInputSource, NSObject);
 #endif
       JS_RETURN_TYPE_INHERITS(AVCaptureDeviceFormat, NSObject);
@@ -2833,7 +2852,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE_INHERITS(AVCaptureDeviceDiscoverySession, NSObject);
       JS_RETURN_TYPE_INHERITS(AVCaptureDevice, NSObject);
       JS_RETURN_TYPE_INHERITS(AVCaptureMetadataInput, AVCaptureInput);
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
       JS_RETURN_TYPE_INHERITS(AVCaptureScreenInput, AVCaptureInput);
 #endif
       JS_RETURN_TYPE_INHERITS(AVCaptureDeviceInput, AVCaptureInput);
@@ -3100,7 +3119,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit protocols
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
       JS_RETURN_PROTOCOL(GLKViewControllerDelegate);
       JS_RETURN_PROTOCOL(GLKViewDelegate);
 #endif
@@ -3177,18 +3196,22 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       // MapKit protocols
       
       JS_RETURN_PROTOCOL(MKMapViewDelegate);
+      
+#if TARGET_OS_IPHONE
+      // ARKit protocols
+      
+      JS_RETURN_PROTOCOL(ARSCNViewDelegate);
+      JS_RETURN_PROTOCOL(ARSKViewDelegate);
+      JS_RETURN_PROTOCOL(ARSessionProviding);
+      JS_RETURN_PROTOCOL(ARSessionDelegate);
+      JS_RETURN_PROTOCOL(ARSessionObserver);
+#endif
 
       // SceneKit protocols
 
       JS_RETURN_PROTOCOL(SCNSceneRendererDelegate);
       JS_RETURN_PROTOCOL(SCNSceneRenderer);
       JS_RETURN_PROTOCOL(SCNNodeRendererDelegate);
-      
-#ifdef __IPHONEOS__
-      // ARKit protocols
-      
-      JS_RETURN_PROTOCOL(ARSKViewDelegate);
-#endif
 
       // Core Location protocols
 

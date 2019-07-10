@@ -15,7 +15,6 @@
 #define is_value_CMSampleBufferRef(x) is_value_bridged(x, CMSampleBufferRef)
 
 JS_WRAP_GLOBALS(CMSampleBuffer);
-  // TODO: declare CMSampleBuffer globals
 JS_WRAP_GLOBALS_END(CMSampleBuffer);
 
 #endif /* NCMSampleBuffer_h */

@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARPointCloud(x) js_value_wrapper(x, ARPointCloud)
 #define to_value_ARPointCloud(x) to_value_wrapper(x, ARPointCloud)

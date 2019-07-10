@@ -10,7 +10,7 @@
 
 #include "NARConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARObjectScanningConfiguration(x) js_value_wrapper(x, ARObjectScanningConfiguration)
 #define to_value_ARObjectScanningConfiguration(x) to_value_wrapper(x, ARObjectScanningConfiguration)

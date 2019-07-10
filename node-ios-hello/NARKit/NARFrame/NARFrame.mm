@@ -6,7 +6,7 @@
 //
 #include "NARFrame.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #include "NARCamera.h"
 #include "NARLightEstimate.h"

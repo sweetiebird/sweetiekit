@@ -311,10 +311,10 @@ NAN_METHOD(NSCNAction::runBlock) {
   }
 }
 
+#include "NDispatchQueue.h"
+
 NAN_METHOD(NSCNAction::runBlockQueue) {
   declare_autoreleasepool {
-    JS_TODO();
-#if TODO
     declare_args();
     declare_callback(block);
     declare_value(dispatch_queue_t, queue);
@@ -326,7 +326,6 @@ NAN_METHOD(NSCNAction::runBlockQueue) {
         }
       });
     } queue: queue]));
-#endif
   }
 }
 

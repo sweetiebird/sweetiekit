@@ -54,7 +54,7 @@ DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentat
 
 - (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
-  call_delegate(noop(), prepareForPopoverPresentation,
+  call_delegate_async(noop(), prepareForPopoverPresentation,
     js_value_UIPopoverPresentationController(popoverPresentationController));
 }
 
@@ -71,7 +71,7 @@ DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentat
 // Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
 - (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
-  call_delegate(noop(), popoverPresentationControllerDidDismissPopover,
+  call_delegate_async(noop(), popoverPresentationControllerDidDismissPopover,
     js_value_UIPopoverPresentationController(popoverPresentationController));
 }
 
@@ -86,7 +86,7 @@ DELEGATE_PROTOCOL_PROP(UIPopoverPresentationControllerDelegate, popoverPresentat
   dispatch_main(^{
     auto jsRect(js_value_boxed(rect ? js_value_CGRect(*inoutRect) : js_value_id(nil)));
     auto jsView(js_value_boxed(inoutView ? js_value_UIView(*inoutView) : js_value_id(nil)));
-    call_delegate(noop(), popoverPresentationControllerWillRepositionPopoverToRectInView,
+    call_delegate_async(noop(), popoverPresentationControllerWillRepositionPopoverToRectInView,
       js_value_UIPopoverPresentationController(popoverPresentationController),
       jsRect,
       jsView);

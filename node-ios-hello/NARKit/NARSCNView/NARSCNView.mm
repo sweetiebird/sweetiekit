@@ -6,63 +6,61 @@
 //
 #include "NARSCNView.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
-#include "NARSession.h"
-#include "NARSCNViewDelegate.h"
-#include "NSCNScene.h"
+#define instancetype ARSCNView
+#define js_value_instancetype js_value_ARSCNView
 
 NARSCNView::NARSCNView () {}
 NARSCNView::~NARSCNView () {}
 
 JS_INIT_CLASS(ARSCNView, SCNView);
-  // instance members (proto)
-  JS_ASSIGN_PROTO_METHOD(presentScene);
   JS_ASSIGN_PROTO_METHOD(anchorForNode);
   JS_ASSIGN_PROTO_METHOD(nodeForAnchor);
-  JS_ASSIGN_PROTO_METHOD(hitTest);
+  JS_ASSIGN_PROTO_METHOD(hitTestTypes);
   JS_ASSIGN_PROTO_METHOD(unprojectPointOntoPlaneWithTransform);
-  JS_ASSIGN_PROP_READONLY(proto, session);
-  JS_ASSIGN_PROP(proto, delegate);
-  JS_ASSIGN_PROP(proto, scene);
-  JS_ASSIGN_PROP(proto, automaticallyUpdatesLighting);
+  JS_ASSIGN_PROTO_METHOD(raycastQueryFromPointAllowingTargetAlignment);
+  JS_ASSIGN_PROTO_PROP(delegate);
+  JS_ASSIGN_PROTO_PROP(session);
+  JS_ASSIGN_PROTO_PROP(scene);
+  JS_ASSIGN_PROTO_PROP(automaticallyUpdatesLighting);
+  JS_ASSIGN_PROTO_PROP(rendersCameraGrain);
+  JS_ASSIGN_PROTO_PROP(rendersMotionBlur);
 
+  JS_ASSIGN_PROTO_METHOD(hitTest);
+  JS_ASSIGN_PROTO_METHOD(presentScene);
+
+  // instance members (proto)
   // static members (ctor)
   JS_INIT_CTOR(ARSCNView, SCNView);
+
+  // constants (exports)
 
 JS_INIT_CLASS_END(ARSCNView, SCNView);
 
 NAN_METHOD(NARSCNView::New) {
   JS_RECONSTRUCT(ARSCNView);
+  @autoreleasepool {
+    ARSCNView* self = nullptr;
 
-  Local<Object> obj = info.This();
-
-  NARSCNView *view = new NARSCNView();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge ARSCNView *)(info[0].As<External>()->Value()));
-  } else if (info.Length() > 0) {
-    double width = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("width")));
-    double height = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("height")));
-    double x = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("x")));
-    double y = TO_DOUBLE(JS_OBJ(info[0])->Get(JS_STR("y")));
-
-    @autoreleasepool {
-      CGRect frame = CGRectMake(x, y, width, height);
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-          view->SetNSObject([[ARSCNView alloc] initWithFrame:frame]);
-      });
+    if (info[0]->IsExternal()) {
+      self = (__bridge ARSCNView *)(info[0].As<External>()->Value());
+    } else if (info.Length() > 0 && is_value_CGRect(info[0])) {
+      CGRect frame(to_value_CGRect(info[0]));
+      self = [[ARSCNView alloc] initWithFrame:frame];
+    } else if (info.Length() <= 0) {
+      self = [[ARSCNView alloc] init];
     }
-  } else {
-    @autoreleasepool {
-      dispatch_sync(dispatch_get_main_queue(), ^ {
-        view->SetNSObject([[ARSCNView alloc] init]);
-      });
+    if (self) {
+      NARSCNView *wrapper = new NARSCNView();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("ARSCNView::New: invalid arguments");
     }
   }
-  view->Wrap(obj);
-
-  info.GetReturnValue().Set(obj);
 }
 
 #include "NSCNNode.h"
@@ -84,6 +82,41 @@ NAN_METHOD(NARSCNView::nodeForAnchor) {
 
 #include "NARHitTestResult.h"
 
+NAN_METHOD(NARSCNView::hitTestTypes) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_value(ARHitTestResultType, types);
+    JS_SET_RETURN(js_value_NSArray<ARHitTestResult*>([self hitTest: point types: types]));
+  }
+}
+
+NAN_METHOD(NARSCNView::unprojectPointOntoPlaneWithTransform) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_value(simd_float4x4, planeTransform);
+    JS_SET_RETURN(js_value_simd_float3([self unprojectPoint: point ontoPlaneWithTransform: planeTransform]));
+  }
+}
+
+#include "NARRaycastQuery.h"
+
+NAN_METHOD(NARSCNView::raycastQueryFromPointAllowingTargetAlignment) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(CGPoint, point);
+    declare_value(ARRaycastTarget, target);
+    declare_value(ARRaycastTargetAlignment, alignment);
+    JS_SET_RETURN(js_value_ARRaycastQuery([self raycastQueryFromPoint: point allowingTarget: target alignment: alignment]));
+  }
+}
+
+#include "NARHitTestResult.h"
+
 NAN_METHOD(NARSCNView::hitTest) {
   JS_UNWRAP(ARSCNView, self);
   @autoreleasepool {
@@ -98,90 +131,122 @@ NAN_METHOD(NARSCNView::hitTest) {
   }
 }
 
-NAN_METHOD(NARSCNView::unprojectPointOntoPlaneWithTransform) {
+#include "NSCNScene.h"
+
+NAN_METHOD(NARSCNView::presentScene) {
   JS_UNWRAP(ARSCNView, self);
-  @autoreleasepool {
-    CGPoint point(to_value_CGPoint(info[0]));
-    simd_float3 result([self unprojectPoint:point ontoPlaneWithTransform:to_value_simd_float4x4(info[1])]);
-    JS_SET_RETURN(js_value_simd_float3(result)); 
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(SCNScene, scene);
+    
+    SKTransition *transition = [SKTransition fadeWithDuration:0.2];
+    [self presentScene:scene withTransition:transition incomingPointOfView:nullptr completionHandler: ^ {
+      printf("transitioned to scene");
+    }];
   }
 }
 
-NAN_GETTER(NARSCNView::sessionGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSCNView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui session], NARSession::type));
-}
+#include "NARSCNViewDelegate.h"
 
 NAN_GETTER(NARSCNView::delegateGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSCNView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui delegate], NARSCNViewDelegate::type));
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_ARSCNViewDelegate([self delegate]));
+  }
 }
 
 NAN_SETTER(NARSCNView::delegateSetter) {
-  Nan::HandleScope scope;
-  
-  NARSCNView *view = ObjectWrap::Unwrap<NARSCNView>(info.This());
-  NARSCNViewDelegate *del = ObjectWrap::Unwrap<NARSCNViewDelegate>(Local<Object>::Cast(value));
-  auto delegate = del->As<SARSCNViewDelegate>();
-  view->_delegate.Reset(value);
-
-  @autoreleasepool {
-    JS_UNWRAP(ARSCNView, ui);
-    [ui associateValue:delegate withKey:@"sweetiekit.delegate"];
-    [ui setDelegate:delegate];
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_protocol(ARSCNViewDelegate, input);
+    [self setDelegate: input];
+    [self associateValue:input withKey:@"NARSCNView::delegate"];
   }
 }
 
-NAN_METHOD(NARSCNView::presentScene) {
-  Nan::HandleScope scope;
+#include "NARSession.h"
 
-  JS_UNWRAP(ARSCNView, ui);
+NAN_GETTER(NARSCNView::sessionGetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_ARSession([self session]));
+  }
+}
 
-  NSCNScene *scene = ObjectWrap::Unwrap<NSCNScene>(Local<Object>::Cast(info[0]));
-  
-  SKTransition *transition = [SKTransition fadeWithDuration:0.2];
-  [ui presentScene:scene->As<SCNScene>() withTransition:transition incomingPointOfView:nullptr completionHandler: ^ {
-    printf("transitioned to scene");
-  }];
+NAN_SETTER(NARSCNView::sessionSetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(ARSession, input);
+    [self setSession: input];
+    [self associateValue:input withKey:@"NARSCNView::session"];
+  }
 }
 
 NAN_GETTER(NARSCNView::sceneGetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSCNView, ui);
-  
-  JS_SET_RETURN(sweetiekit::GetWrapperFor([ui scene], NSCNScene::type));
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_SCNScene([self scene]));
+  }
 }
 
 NAN_SETTER(NARSCNView::sceneSetter) {
-  Nan::HandleScope scope;
-  
-  JS_UNWRAP(ARSCNView, ui);
-  NSCNScene *scene = ObjectWrap::Unwrap<NSCNScene>(Local<Object>::Cast(value));
-
-  [ui setScene:scene->As<SCNScene>()];
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(SCNScene, input);
+    [self setScene: input];
+    [self associateValue:input withKey:@"NARSCNView::scene"];
+  }
 }
 
 NAN_GETTER(NARSCNView::automaticallyUpdatesLightingGetter) {
-  Nan::HandleScope scope;
-
-  JS_UNWRAP(ARSCNView, ui);
-
-  JS_SET_RETURN(JS_BOOL([ui automaticallyUpdatesLighting]));
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self automaticallyUpdatesLighting]));
+  }
 }
 
 NAN_SETTER(NARSCNView::automaticallyUpdatesLightingSetter) {
-  Nan::HandleScope scope;
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setAutomaticallyUpdatesLighting: input];
+  }
+}
 
-  JS_UNWRAP(ARSCNView, ui);
-  
-  [ui setAutomaticallyUpdatesLighting:TO_BOOL(value)];
+NAN_GETTER(NARSCNView::rendersCameraGrainGetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self rendersCameraGrain]));
+  }
+}
+
+NAN_SETTER(NARSCNView::rendersCameraGrainSetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setRendersCameraGrain: input];
+  }
+}
+
+NAN_GETTER(NARSCNView::rendersMotionBlurGetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_BOOL([self rendersMotionBlur]));
+  }
+}
+
+NAN_SETTER(NARSCNView::rendersMotionBlurSetter) {
+  JS_UNWRAP(ARSCNView, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_value(BOOL, input);
+    [self setRendersMotionBlur: input];
+  }
 }
 
 #endif

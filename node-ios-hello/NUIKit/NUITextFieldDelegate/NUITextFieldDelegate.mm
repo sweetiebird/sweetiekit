@@ -79,7 +79,7 @@ DELEGATE_PROP(UITextFieldDelegate, textFieldShouldReturn);
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField            // became first responder
 {
-  call_delegate(noop(), textFieldDidBeginEditing,
+  call_delegate_async(noop(), textFieldDidBeginEditing,
     js_value_UITextField(textField));
 }
 
@@ -93,13 +93,13 @@ DELEGATE_PROP(UITextFieldDelegate, textFieldShouldReturn);
 
 - (void)textFieldDidEndEditing:(UITextField *)textField              // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
 {
-  call_delegate(noop(), textFieldDidEndEditing,
+  call_delegate_async(noop(), textFieldDidEndEditing,
     js_value_UITextField(textField));
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason NS_AVAILABLE_IOS(10_0)  // if implemented, called in place of textFieldDidEndEditing:
 {
-  call_delegate(noop(), textFieldDidEndEditingReason,
+  call_delegate_async(noop(), textFieldDidEndEditingReason,
     js_value_UITextField(textField),
     js_value_UITextFieldDidEndEditingReason(reason));
 }

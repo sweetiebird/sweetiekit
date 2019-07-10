@@ -77,21 +77,21 @@ DELEGATE_PROP(UITabBarControllerDelegate, tabBarControllerAnimationControllerFor
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-  call_delegate(noop(), tabBarControllerDidSelectViewController,
+  call_delegate_async(noop(), tabBarControllerDidSelectViewController,
     js_value_UITabBarController(tabBarController),
     js_value_UIViewController(viewController));
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED
 {
-  call_delegate(noop(), tabBarControllerWillBeginCustomizingViewControllers,
+  call_delegate_async(noop(), tabBarControllerWillBeginCustomizingViewControllers,
     js_value_UITabBarController(tabBarController),
     js_value_NSArray<UIViewController*>(viewControllers));
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers changed:(BOOL)changed NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED
 {
-  call_delegate(noop(), tabBarControllerWillEndCustomizingViewControllersChanged,
+  call_delegate_async(noop(), tabBarControllerWillEndCustomizingViewControllersChanged,
     js_value_UITabBarController(tabBarController),
     js_value_NSArray<UIViewController*>(viewControllers),
     js_value_BOOL(changed));
@@ -99,7 +99,7 @@ DELEGATE_PROP(UITabBarControllerDelegate, tabBarControllerAnimationControllerFor
 
 - (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers changed:(BOOL)changed __TVOS_PROHIBITED
 {
-  call_delegate(noop(), tabBarControllerDidEndCustomizingViewControllersChanged,
+  call_delegate_async(noop(), tabBarControllerDidEndCustomizingViewControllersChanged,
     js_value_UITabBarController(tabBarController),
     js_value_NSArray<UIViewController*>(viewControllers),
     js_value_BOOL(changed));

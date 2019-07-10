@@ -97,52 +97,52 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 @implementation MKMapViewDelegateType
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-  call_delegate(noop(), mapViewRegionWillChangeAnimated,
+  call_delegate_async(noop(), mapViewRegionWillChangeAnimated,
     js_value_MKMapView(mapView),
     js_value_BOOL(animated));
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-  call_delegate(noop(), mapViewRegionDidChangeAnimated,
+  call_delegate_async(noop(), mapViewRegionDidChangeAnimated,
     js_value_MKMapView(mapView),
     js_value_BOOL(animated));
 }
 
 - (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView API_AVAILABLE(ios(11), tvos(11), macos(10.13))
 {
-  call_delegate(noop(), mapViewDidChangeVisibleRegion,
+  call_delegate_async(noop(), mapViewDidChangeVisibleRegion,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView
 {
-  call_delegate(noop(), mapViewWillStartLoadingMap,
+  call_delegate_async(noop(), mapViewWillStartLoadingMap,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
-  call_delegate(noop(), mapViewDidFinishLoadingMap,
+  call_delegate_async(noop(), mapViewDidFinishLoadingMap,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
 {
-  call_delegate(noop(), mapViewDidFailLoadingMapWithError,
+  call_delegate_async(noop(), mapViewDidFailLoadingMapWithError,
     js_value_MKMapView(mapView),
     js_value_NSError(error));
 }
 
 - (void)mapViewWillStartRenderingMap:(MKMapView *)mapView NS_AVAILABLE(10_9, 7_0)
 {
-  call_delegate(noop(), mapViewWillStartRenderingMap,
+  call_delegate_async(noop(), mapViewWillStartRenderingMap,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered NS_AVAILABLE(10_9, 7_0)
 {
-  call_delegate(noop(), mapViewDidFinishRenderingMapFullyRendered,
+  call_delegate_async(noop(), mapViewDidFinishRenderingMapFullyRendered,
     js_value_MKMapView(mapView),
     js_value_BOOL(fullyRendered));
 }
@@ -164,7 +164,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 // Use the current positions of the annotation views as the destinations of the animation.
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views
 {
-  call_delegate(noop(), mapViewDidAddAnnotationViews,
+  call_delegate_async(noop(), mapViewDidAddAnnotationViews,
     js_value_MKMapView(mapView),
     js_value_NSArray<MKAnnotationView *>(views));
 }
@@ -173,7 +173,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 // mapView:annotationView:calloutAccessoryControlTapped: is called when the user taps on left & right callout accessory UIControls.
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control __TVOS_PROHIBITED
 {
-  call_delegate(noop(), mapViewAnnotationViewCalloutAccessoryControlTapped,
+  call_delegate_async(noop(), mapViewAnnotationViewCalloutAccessoryControlTapped,
     js_value_MKMapView(mapView),
     js_value_MKAnnotationView(view),
     js_value_UIControl(control));
@@ -182,40 +182,40 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewDidSelectAnnotationView,
+  call_delegate_async(noop(), mapViewDidSelectAnnotationView,
     js_value_MKMapView(mapView),
     js_value_MKAnnotationView(view));
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewDidDeselectAnnotationView,
+  call_delegate_async(noop(), mapViewDidDeselectAnnotationView,
     js_value_MKMapView(mapView),
     js_value_MKAnnotationView(view));
 }
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewWillStartLocatingUser,
+  call_delegate_async(noop(), mapViewWillStartLocatingUser,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewDidStopLocatingUser,
+  call_delegate_async(noop(), mapViewDidStopLocatingUser,
     js_value_MKMapView(mapView));
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewDidUpdateUserLocation,
+  call_delegate_async(noop(), mapViewDidUpdateUserLocation,
     js_value_MKMapView(mapView),
     js_value_MKUserLocation(userLocation));
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error NS_AVAILABLE(10_9, 4_0)
 {
-  call_delegate(noop(), mapViewDidFailToLocateUserWithError,
+  call_delegate_async(noop(), mapViewDidFailToLocateUserWithError,
     js_value_MKMapView(mapView),
     js_value_NSError(error));
 }
@@ -223,7 +223,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState 
    fromOldState:(MKAnnotationViewDragState)oldState NS_AVAILABLE(10_9, 4_0) __TVOS_PROHIBITED
 {
-  call_delegate(noop(), mapViewAnnotationViewDidChangeDragStateFromOldState,
+  call_delegate_async(noop(), mapViewAnnotationViewDidChangeDragStateFromOldState,
     js_value_MKMapView(mapView),
     js_value_MKAnnotationView(view),
     js_value_MKAnnotationViewDragState(newState));
@@ -232,7 +232,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 #if TARGET_OS_IPHONE
 - (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated NS_AVAILABLE(NA, 5_0)
 {
-  call_delegate(noop(), mapViewDidChangeUserTrackingModeAnimated,
+  call_delegate_async(noop(), mapViewDidChangeUserTrackingModeAnimated,
     js_value_MKMapView(mapView),
     js_value_MKUserTrackingMode(mode),
     js_value_BOOL(animated));
@@ -252,7 +252,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 
 - (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0)
 {
-  call_delegate(noop(), mapViewDidAddOverlayRenderers,
+  call_delegate_async(noop(), mapViewDidAddOverlayRenderers,
     js_value_MKMapView(mapView),
     js_value_NSArray<MKOverlayRenderer*>(renderers));
 }
@@ -274,7 +274,7 @@ DELEGATE_PROTOCOL_PROP(MKMapViewDelegate, mapViewClusterAnnotationForMemberAnnot
 // Prefer -mapView:didAddOverlayRenderers:
 - (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews NS_DEPRECATED_IOS(4_0, 7_0) __TVOS_PROHIBITED
 {
-  call_delegate(noop(), mapViewDidAddOverlayViews,
+  call_delegate_async(noop(), mapViewDidAddOverlayViews,
     js_value_MKMapView(mapView),
     js_value_NSArray(overlayViews));
 }

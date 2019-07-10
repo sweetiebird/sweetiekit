@@ -6,7 +6,7 @@
 //
 #include "NARWorldTrackingConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define instancetype ARWorldTrackingConfiguration
 #define Ninstancetype NARWorldTrackingConfiguration

@@ -39,6 +39,8 @@ JS_INIT_GLOBALS(CFBase);
      "use the functions given in the context to allocate the allocator
      itself as well". 
   */
+  #if TODO
   JS_ASSIGN_ENUM(kCFAllocatorUseContext, CFAllocatorRef);
+  #endif
 
 JS_INIT_GLOBALS_END(CFBase);

@@ -6,7 +6,7 @@
 //
 #include "NAROrientationTrackingConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define instancetype AROrientationTrackingConfiguration
 #define Ninstancetype NAROrientationTrackingConfiguration

@@ -15,7 +15,7 @@ NAVCaptureAudioChannel::~NAVCaptureAudioChannel() {}
 JS_INIT_CLASS(AVCaptureAudioChannel, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(averagePowerLevel);
   JS_ASSIGN_PROTO_PROP_READONLY(peakHoldLevel);
-#if !defined(__IPHONEOS__) && !defined(__WATCHOS__) && !defined(__TVOS__)
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP(volume);
   JS_ASSIGN_PROTO_PROP(isEnabled);
 #endif
@@ -60,7 +60,7 @@ NAN_GETTER(NAVCaptureAudioChannel::peakHoldLevelGetter) {
   }
 }
 
-#if !defined(__IPHONEOS__) && !defined(__WATCHOS__) && !defined(__TVOS__)
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureAudioChannel::volumeGetter) {
   JS_UNWRAP(AVCaptureAudioChannel, self);
   declare_autoreleasepool {

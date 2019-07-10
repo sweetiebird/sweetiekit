@@ -8,23 +8,25 @@
 #ifndef main_h
 #define main_h
 
-#undef TARGET_OS_IPHONE
-#undef TARGET_OS_MAC
-#if __IPHONEOS__
-#define TARGET_OS_IPHONE 1
-#else
-#define TARGET_OS_MAC 1
-#endif
+#include <Availability.h>
 
-#import <Foundation/Foundation.h>
-#import <CoreFoundation/CoreFoundation.h>
-#import <UIKit/UIKit.h>
-#if __IPHONEOS__
-#import <ARKit/ARKit.h>
+#if __OBJC__
+@import Foundation;
+@import CoreFoundation;
+@import UIKit;
+@import QuartzCore;
+@import SceneKit;
+@import ModelIO;
+#import <SceneKit/ModelIO.h>
+@import SpriteKit;
+#if TARGET_OS_IPHONE
+@import ARKit;
 #endif
-#import <MetalKit/MetalKit.h>
-#import <Metal/Metal.h>
-
+@import MetalKit;
+@import Metal;
+@import Vision;
+@import AVFoundation;
+#endif
 
 #ifdef __cplusplus
 #include <functional>
@@ -57,12 +59,14 @@ typedef struct foo_s {
 } foo_t;
 
 
+#if __OBJC__
 @interface JSApplication : UIApplication
 
 @property bool started;
 @property CGRect frame;
 
 @end
+#endif
 
 
 #endif /* main_h */

@@ -10,24 +10,27 @@
 
 #include "NSCNView.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARSCNView(x) js_value_wrapper(x, ARSCNView)
 #define to_value_ARSCNView(x) to_value_wrapper(x, ARSCNView)
 #define is_value_ARSCNView(x) is_value_wrapper(x, ARSCNView)
 
 JS_WRAP_CLASS(ARSCNView, SCNView);
-  JS_METHOD(presentScene);
   JS_METHOD(anchorForNode);
   JS_METHOD(nodeForAnchor);
-  JS_METHOD(hitTest);
+  JS_METHOD(hitTestTypes);
   JS_METHOD(unprojectPointOntoPlaneWithTransform);
-  JS_PROP(session);
+  JS_METHOD(raycastQueryFromPointAllowingTargetAlignment);
   JS_PROP(delegate);
+  JS_PROP(session);
   JS_PROP(scene);
   JS_PROP(automaticallyUpdatesLighting);
-  
-  Nan::Persistent<Value> _delegate;
+  JS_PROP(rendersCameraGrain);
+  JS_PROP(rendersMotionBlur);
+
+  JS_METHOD(hitTest);
+  JS_METHOD(presentScene);
 JS_WRAP_CLASS_END(ARSCNView);
 
 #endif

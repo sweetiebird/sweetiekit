@@ -18,7 +18,7 @@ JS_INIT_PROTOCOL(MTLCommandBuffer, NSObject);
   JS_ASSIGN_PROTO_METHOD(addScheduledHandler);
   JS_ASSIGN_PROTO_METHOD(presentDrawable);
   JS_ASSIGN_PROTO_METHOD(presentDrawableAtTime);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(presentDrawableAfterMinimumDuration);
 #endif
   JS_ASSIGN_PROTO_METHOD(waitUntilScheduled);
@@ -233,7 +233,7 @@ NAN_METHOD(NMTLCommandBuffer::presentDrawableAtTime) {
   }
 }
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_METHOD(NMTLCommandBuffer::presentDrawableAfterMinimumDuration) {
   JS_UNWRAP_PROTOCOL(MTLCommandBuffer, self);
   declare_autoreleasepool {

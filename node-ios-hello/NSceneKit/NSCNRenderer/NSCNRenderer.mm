@@ -13,7 +13,7 @@ NSCNRenderer::NSCNRenderer() {}
 NSCNRenderer::~NSCNRenderer() {}
 
 JS_INIT_CLASS(SCNRenderer, SCNSceneRenderer);
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_STATIC_METHOD(rendererWithContextOptions);
 #endif
   JS_ASSIGN_STATIC_METHOD(rendererWithDeviceOptions);
@@ -23,7 +23,7 @@ JS_INIT_CLASS(SCNRenderer, SCNSceneRenderer);
   JS_ASSIGN_PROTO_METHOD(renderWithViewportCommandBufferPassDescriptor);
   JS_ASSIGN_PROTO_METHOD(snapshotAtTimeWithSizeAntialiasingMode);
   JS_ASSIGN_PROTO_METHOD(updateProbesAtTime);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_PROTO_METHOD(render);
 #endif
   JS_ASSIGN_PROTO_PROP(scene);
@@ -59,7 +59,7 @@ NAN_METHOD(NSCNRenderer::New) {
 
 #include "NEAGLContext.h"
 
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_METHOD(NSCNRenderer::rendererWithContextOptions) {
   declare_autoreleasepool {
     declare_args();
@@ -149,7 +149,7 @@ NAN_METHOD(NSCNRenderer::updateProbesAtTime) {
   }
 }
 
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_METHOD(NSCNRenderer::render) {
   JS_UNWRAP(SCNRenderer, self);
   declare_autoreleasepool {

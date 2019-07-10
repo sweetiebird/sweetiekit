@@ -6,7 +6,7 @@
 //
 #include "NEAGLSharegroup.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define instancetype EAGLSharegroup
 #define js_value_instancetype js_value_EAGLSharegroup

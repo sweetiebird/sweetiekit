@@ -77,7 +77,7 @@ DELEGATE_PROTOCOL_PROP(AVCaptureVideoDataOutputSampleBufferDelegate, captureOutp
  */
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-  call_delegate(noop(), captureOutputDidOutputSampleBufferFromConnection,
+  call_delegate_async(noop(), captureOutputDidOutputSampleBufferFromConnection,
     js_value_AVCaptureOutput(output),
     js_value_CMSampleBufferRef(sampleBuffer),
     js_value_AVCaptureConnection(connection));
@@ -100,7 +100,7 @@ DELEGATE_PROTOCOL_PROP(AVCaptureVideoDataOutputSampleBufferDelegate, captureOutp
  */
 - (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(6.0))
 {
-  call_delegate(noop(), captureOutputDidDropSampleBufferFromConnection,
+  call_delegate_async(noop(), captureOutputDidDropSampleBufferFromConnection,
     js_value_AVCaptureOutput(output),
     js_value_CMSampleBufferRef(sampleBuffer),
     js_value_AVCaptureConnection(connection));

@@ -1,0 +1,29 @@
+//
+//  SweetieKit.pch
+//  node-ios-hello
+//
+//  Created by Emily Kolar on 7/9/19.
+//  Copyright © 2019 sweetiebird. All rights reserved.
+//
+
+#ifndef SweetieKit_pch
+#define SweetieKit_pch
+
+#include <stdarg.h>
+#include <uv.h>
+#include <nan.h>
+#include <v8.h>
+#include <vector>
+#include <string>
+
+#include "main.h"
+#if __OBJC__
+#include "defines.h"
+#include "NNSObject.h"
+#endif
+#include "hello-v8.hpp"
+#include "hello-node.hpp"
+#include "mksnapshot.hpp"
+#include "libs_main.hpp"
+
+#endif /* SweetieKit_h */

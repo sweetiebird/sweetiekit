@@ -28,7 +28,7 @@ JS_INIT_CLASS(AVCaptureConnection, NSObject);
   JS_ASSIGN_PROTO_PROP(automaticallyAdjustsVideoMirroring);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoOrientationSupported);
   JS_ASSIGN_PROTO_PROP(videoOrientation);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoFieldModeSupported);
   JS_ASSIGN_PROTO_PROP(videoFieldMode);
 #endif
@@ -230,7 +230,7 @@ NAN_SETTER(NAVCaptureConnection::videoOrientationSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureConnection::isVideoFieldModeSupportedGetter) {
   JS_UNWRAP(AVCaptureConnection, self);
   declare_autoreleasepool {

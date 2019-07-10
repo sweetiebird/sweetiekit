@@ -10,7 +10,14 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
+
+#if __OBJC__
+@protocol ARSKViewDelegate;
+@class ARSKView;
+@class ARAnchor;
+@class SKNode;
+#endif
 
 #define js_value_ARSKViewDelegate(x) js_value_wrapper(x, ARSKViewDelegate)
 #define to_value_ARSKViewDelegate(x) to_value_wrapper(x, ARSKViewDelegate)
@@ -76,6 +83,6 @@ JS_WRAP_PROTOCOL_END(ARSKViewDelegate, NSObject);
 @end
 #endif
 
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE
 
 #endif /* NARSKViewDelegate_h */

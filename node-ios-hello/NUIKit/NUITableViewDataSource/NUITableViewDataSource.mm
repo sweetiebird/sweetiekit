@@ -171,7 +171,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewMoveRowAtIndexPathToIndex
 // Not called for edit actions using UITableViewRowAction - the action's handler will be invoked instead
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  call_delegate(noop(), tableViewCommitEditingStyleForRowAtIndexPath,
+  call_delegate_async(noop(), tableViewCommitEditingStyleForRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_UITableViewCellEditingStyle(editingStyle),
     js_value_NSIndexPath(indexPath));
@@ -181,7 +181,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDataSource, tableViewMoveRowAtIndexPathToIndex
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-  call_delegate(noop(), tableViewMoveRowAtIndexPathToIndexPath,
+  call_delegate_async(noop(), tableViewMoveRowAtIndexPathToIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(sourceIndexPath),
     js_value_NSIndexPath(destinationIndexPath));

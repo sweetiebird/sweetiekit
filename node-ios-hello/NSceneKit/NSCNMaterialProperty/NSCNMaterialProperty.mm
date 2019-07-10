@@ -19,7 +19,7 @@ JS_INIT_CLASS(SCNMaterialProperty, NSObject);
   JS_ASSIGN_PROP(proto, contentsTransform);
   JS_ASSIGN_PROP(proto, wrapS);
   JS_ASSIGN_PROP(proto, wrapT);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
   JS_ASSIGN_PROP(proto, borderColor);
 #endif
   JS_ASSIGN_PROP(proto, mappingChannel);
@@ -187,7 +187,7 @@ NAN_SETTER(NSCNMaterialProperty::wrapTSetter) {
   }
 }
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 NAN_GETTER(NSCNMaterialProperty::borderColorGetter) {
   JS_UNWRAP(SCNMaterialProperty, self);
   @autoreleasepool
@@ -204,7 +204,7 @@ NAN_SETTER(NSCNMaterialProperty::borderColorSetter) {
     [self setBorderColor: to_value_id(value)];
   }
 }
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE
 
 NAN_GETTER(NSCNMaterialProperty::mappingChannelGetter) {
   JS_UNWRAP(SCNMaterialProperty, self);

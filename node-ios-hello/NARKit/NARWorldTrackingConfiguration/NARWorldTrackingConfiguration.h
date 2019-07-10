@@ -10,7 +10,7 @@
 
 #include "NARConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define js_value_ARWorldTrackingConfiguration(x) js_value_wrapper(x, ARWorldTrackingConfiguration)
 #define to_value_ARWorldTrackingConfiguration(x) to_value_wrapper(x, ARWorldTrackingConfiguration)

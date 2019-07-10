@@ -46,7 +46,7 @@
 #define to_value_AVAuthorizationStatus(x) TO_ENUM(AVAuthorizationStatus, NSInteger, x)
 #define is_value_AVAuthorizationStatus(x) IS_ENUM(AVAuthorizationStatus, NSInteger, x)
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 #define js_value_AVCaptureDeviceTransportControlsSpeed(x) JS_ENUM(AVCaptureDeviceTransportControlsSpeed, float, x)
 #define to_value_AVCaptureDeviceTransportControlsSpeed(x) TO_ENUM(AVCaptureDeviceTransportControlsSpeed, float, x)
 #define is_value_AVCaptureDeviceTransportControlsSpeed(x) IS_ENUM(AVCaptureDeviceTransportControlsSpeed, float, x)

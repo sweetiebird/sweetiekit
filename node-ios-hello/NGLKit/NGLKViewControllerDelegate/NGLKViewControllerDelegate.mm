@@ -6,7 +6,7 @@
 //
 #include "NGLKViewControllerDelegate.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE
 
 #define instancetype GLKViewControllerDelegate
 #define js_value_instancetype js_value_GLKViewControllerDelegate
@@ -64,7 +64,7 @@ DELEGATE_PROTOCOL_PROP(GLKViewControllerDelegate, glkViewControllerWillPause);
  */
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
-  call_delegate(noop(), glkViewControllerUpdate,
+  call_delegate_async(noop(), glkViewControllerUpdate,
     js_value_GLKViewController(controller));
 }
 
@@ -72,7 +72,7 @@ DELEGATE_PROTOCOL_PROP(GLKViewControllerDelegate, glkViewControllerWillPause);
  Delegate method that gets called when the pause state changes. 
  */
 - (void)glkViewController:(GLKViewController *)controller willPause:(BOOL)pause {
-  call_delegate(noop(), glkViewControllerUpdate,
+  call_delegate_async(noop(), glkViewControllerUpdate,
     js_value_GLKViewController(controller),
     js_value_BOOL(pause));
 }
