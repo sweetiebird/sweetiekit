@@ -633,6 +633,7 @@
       Sec: "Security"
        SK: "SpriteKit"
        UI: "UIKit"
+       VN: "Vision"
        WK: "WebKit"))
 
 (define-global ios-framework-from-type (type)
