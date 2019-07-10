@@ -46,7 +46,6 @@ ARSelection_make =  async function ARSelection_make(nav, demoVC) {
     touches = Array.from(touches);
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
-    pt.y -= Math.trunc(0.1*touch.view.height);
     let hits = arView.hitTest(pt);
     if (hits && hits.length > 0) {
       let hit = hits[0];
