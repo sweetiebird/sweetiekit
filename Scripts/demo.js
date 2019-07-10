@@ -269,6 +269,9 @@ RGB.orange   = RGB(255, 102, 0);
 RGB.darkred  = RGB(180, 0, 0);
 RGB.darkblue = RGB(0, 0, 120);
 
+global.SCNVector3Make = (x, y, z) => {
+  return {x, y, z};
+};
 
 // gc periodically
 setInterval(() => {
