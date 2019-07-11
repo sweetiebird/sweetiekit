@@ -37,7 +37,7 @@ SWEET.FullReact.mount = async (nav, demoVC) => {
 }
 
 global.OnShake = () => {
-  SWEET.FullReact.refresh();
+//  SWEET.FullReact.refresh();
 }
 
 module.exports = async (...args) => {
