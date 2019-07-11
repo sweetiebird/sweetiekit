@@ -54,6 +54,10 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidAddAnchors);
 DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidUpdateAnchors);
 DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
 
+#include "NARSession.h"
+#include "NARFrame.h"
+#include "NARAnchor.h"
+
 @implementation ARSessionDelegateType
 
 /**
@@ -64,6 +68,9 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
  */
 - (void)session:(ARSession *)session didUpdateFrame:(ARFrame *)frame
 {
+  call_delegate_async(noop(), sessionDidUpdateFrame,
+    js_value_ARSession(session),
+    js_value_ARFrame(frame));
 }
 
 /**
@@ -74,6 +81,9 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
  */
 - (void)session:(ARSession *)session didAddAnchors:(NSArray<__kindof ARAnchor*>*)anchors
 {
+  call_delegate_async(noop(), sessionDidAddAnchors,
+    js_value_ARSession(session),
+    js_value_NSArray<ARAnchor*>(anchors));
 }
 
 /**
@@ -84,6 +94,9 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
  */
 - (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor*>*)anchors
 {
+  call_delegate_async(noop(), sessionDidUpdateAnchors,
+    js_value_ARSession(session),
+    js_value_NSArray<ARAnchor*>(anchors));
 }
 
 /**
@@ -94,6 +107,9 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
  */
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor*>*)anchors
 {
+  call_delegate_async(noop(), sessionDidRemoveAnchors,
+    js_value_ARSession(session),
+    js_value_NSArray<ARAnchor*>(anchors));
 }
 
 @end
