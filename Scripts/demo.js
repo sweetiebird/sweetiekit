@@ -273,11 +273,10 @@ global.SCNVector3Make = (x, y, z) => {
   return {x, y, z};
 };
 
-/*
+
 // gc periodically
 SweetieKit._gcInterval = setInterval(() => {
   gc();
 }, 1000);
- */
 
 uidemos = require('./uidemos');
