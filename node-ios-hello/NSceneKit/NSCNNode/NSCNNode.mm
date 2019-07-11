@@ -9,9 +9,6 @@
 #define instancetype SCNNode
 #define js_value_instancetype js_value_SCNNode
 
-#import <SceneKit/SceneKit.h>
-#import <SceneKit/ModelIO.h>
-
 NSCNNode::NSCNNode () {}
 NSCNNode::~NSCNNode () {}
 
@@ -1265,7 +1262,6 @@ NAN_GETTER(NSCNNode::simdWorldFrontGetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLObject.h"
 
 NAN_METHOD(NSCNNode::nodeWithMDLObject) {

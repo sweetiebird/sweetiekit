@@ -8,8 +8,6 @@
 
 #if TARGET_OS_IPHONE
 
-#import <ARKit/ARSCNView.h>
-
 #define instancetype ARSCNViewDelegate
 #define js_value_instancetype js_value_ARSCNViewDelegate
 

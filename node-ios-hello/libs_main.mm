@@ -5,7 +5,6 @@
 //  Copyright © 2019 Sweetiebird. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 #include "NNSObject.h"
 #include "NUIApplication.h"
@@ -19,8 +18,6 @@
 #include "nan.h"
 #include "main.h"
 
-#import <CoreFoundation/CoreFoundation.h>
-#import <Foundation/Foundation.h>
 #import "libs_main.hpp"
 
 extern "C" void iOSLog(const char* format, ...);

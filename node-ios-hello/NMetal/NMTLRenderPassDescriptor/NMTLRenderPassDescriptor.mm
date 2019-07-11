@@ -9,8 +9,6 @@
 #define instancetype MTLRenderPassDescriptor
 #define js_value_instancetype js_value_MTLRenderPassDescriptor
 
-#import <Metal/MTLRenderPass.h>
-
 Local<Value> js_value_MTLClearColor(const MTLClearColor& value) {
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));

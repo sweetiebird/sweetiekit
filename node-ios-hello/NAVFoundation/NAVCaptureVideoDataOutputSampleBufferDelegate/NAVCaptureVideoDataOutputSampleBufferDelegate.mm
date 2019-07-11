@@ -77,9 +77,33 @@ DELEGATE_PROTOCOL_PROP(AVCaptureVideoDataOutputSampleBufferDelegate, captureOutp
  */
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-  call_delegate_async(noop(), captureOutputDidOutputSampleBufferFromConnection,
+#define call_persistent_function(before_callback, after_callback, from, name, key, ...) \
+  Local<Value> JS_RESULT; \
+  JS_UNUSED(from); \
+  get_persistent_function(from, name, @key); \
+  if (name) { \
+    before_callback; \
+    JS_RESULT = [name jsFunction]->Call(key, __VA_ARGS__); \
+    JS_UNUSED(JS_RESULT); \
+    after_callback; \
+  }
+
+#define call_delegate_sync(before_callback, after_callback, key, ...) \
+  dispatch_main(^{ \
+    call_persistent_function(before_callback, after_callback, self, callback, #key, __VA_ARGS__); \
+  })
+
+  call_delegate_sync(
+      Local<Value> jsSampleBuffer(js_value_CMSampleBufferRef(sampleBuffer));
+      if (jsSampleBuffer->IsNullOrUndefined()) {
+        return;
+      }
+      Nid *pSampleBuffer = ObjectWrap::Unwrap<Nid>(JS_OBJ(jsSampleBuffer));
+    ,
+    pSampleBuffer->set_self(nil),
+    captureOutputDidOutputSampleBufferFromConnection,
     js_value_AVCaptureOutput(output),
-    js_value_CMSampleBufferRef(sampleBuffer),
+    jsSampleBuffer,
     js_value_AVCaptureConnection(connection));
 }
 
@@ -100,7 +124,7 @@ DELEGATE_PROTOCOL_PROP(AVCaptureVideoDataOutputSampleBufferDelegate, captureOutp
  */
 - (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(6.0))
 {
-  call_delegate_async(noop(), captureOutputDidDropSampleBufferFromConnection,
+  call_delegate(noop(), captureOutputDidDropSampleBufferFromConnection,
     js_value_AVCaptureOutput(output),
     js_value_CMSampleBufferRef(sampleBuffer),
     js_value_AVCaptureConnection(connection));

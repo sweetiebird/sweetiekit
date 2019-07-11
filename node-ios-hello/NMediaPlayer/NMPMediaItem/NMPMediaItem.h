@@ -8,7 +8,6 @@
 #ifndef NMPMediaItem_h
 #define NMPMediaItem_h    
 
-#import <MediaPlayer/MediaPlayer.h>
 #include "NMPMediaEntity.h"
 
 #define js_value_MPMediaItem(x) js_value_wrapper(x, MPMediaItem)

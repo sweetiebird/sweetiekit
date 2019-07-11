@@ -9,8 +9,6 @@
 #define instancetype WKNavigation
 #define js_value_instancetype js_value_WKNavigation
 
-#import <WebKit/WebKit.h>
-
 NWKNavigation::NWKNavigation() {}
 NWKNavigation::~NWKNavigation() {}
 

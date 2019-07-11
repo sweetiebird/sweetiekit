@@ -6,8 +6,6 @@
 //
 #include "NNSItemProvider.h"
 
-#import <Foundation/NSItemProvider.h>
-
 #define instancetype NSItemProvider
 #define js_value_instancetype js_value_NSItemProvider
 

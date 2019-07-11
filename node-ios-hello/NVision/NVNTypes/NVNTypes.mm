@@ -6,8 +6,6 @@
 //
 #include "NVNTypes.h"
 
-#include <Vision/VNTypes.h>
-
 JS_INIT_GLOBALS(VNTypes);
   // global values (exports)
 

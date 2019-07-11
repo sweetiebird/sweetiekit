@@ -12,10 +12,6 @@
 
 #include "NNSObject.h"
 
-#if __OBJC__
-#import <IOSurface/IOSurfaceRef.h>
-#endif
-
 Local<Value> js_value_IOSurfaceRef(IOSurfaceRef _Nullable value);
 IOSurfaceRef _Nullable to_value_IOSurfaceRef(const Local<Value>& value, bool * _Nullable failed = nullptr);
 bool is_value_IOSurfaceRef(const Local<Value>& value);

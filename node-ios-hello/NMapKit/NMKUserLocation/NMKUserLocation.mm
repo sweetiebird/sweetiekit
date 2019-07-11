@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NMKUserLocation.h"
-#import <MapKit/MKUserLocation.h>
 
 #define instancetype MKUserLocation
 #define js_value_instancetype js_value_MKUserLocation

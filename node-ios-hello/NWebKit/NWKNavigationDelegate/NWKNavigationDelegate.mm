@@ -4,7 +4,6 @@
 //  Created by Emily Kolar on 2019-6-7.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-#import <WebKit/WebKit.h>
 #include "NWKNavigationDelegate.h"
 #include "NWKWebView.h"
 

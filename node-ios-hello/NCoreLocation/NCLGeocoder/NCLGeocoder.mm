@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLGeocoder.h"
-#include <CoreLocation/CLGeocoder.h>
 
 #define instancetype CLGeocoder
 #define js_value_instancetype js_value_CLGeocoder

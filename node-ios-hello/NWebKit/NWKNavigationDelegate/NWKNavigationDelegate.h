@@ -28,7 +28,6 @@ JS_WRAP_CLASS(WKNavigationDelegate, NSObject);
 JS_WRAP_CLASS_END(WKNavigationDelegate);
 
 #if __OBJC__
-#import <WebKit/WKNavigationDelegate.h>
 @interface WKNavigationDelegate : NSObject<WKNavigationDelegate>
 
 #if TODO

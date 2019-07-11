@@ -6,7 +6,6 @@
 //
 #include "NMKAnnotationView.h"
 #include "NUIImage.h"
-#import <MapKit/MKAnnotationView.h>
 
 #define instancetype MKAnnotationView
 #define js_value_instancetype js_value_MKAnnotationView

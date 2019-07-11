@@ -439,7 +439,6 @@ NAN_SETTER(NSCNMaterial::blendModeSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLMaterial.h"
 
 NAN_METHOD(NSCNMaterial::materialWithMDLMaterial) {

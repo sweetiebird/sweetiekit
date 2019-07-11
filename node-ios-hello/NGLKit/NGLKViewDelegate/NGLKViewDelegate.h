@@ -12,8 +12,6 @@
 
 #if TARGET_OS_IPHONE
 
-#import <GLKit/GLKView.h>
-
 #define js_value_GLKViewDelegate(x) js_protocol_wrapper(x, GLKViewDelegate)
 #define to_value_GLKViewDelegate(x) to_protocol_wrapper(x, GLKViewDelegate)
 #define is_value_GLKViewDelegate(x) is_protocol_wrapper(x, GLKViewDelegate)

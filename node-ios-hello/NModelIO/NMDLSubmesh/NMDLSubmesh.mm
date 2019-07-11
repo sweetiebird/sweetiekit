@@ -63,7 +63,6 @@ NAN_METHOD(NMDLSubmesh::New) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNGeometry.h"
 
 NAN_METHOD(NMDLSubmesh::submeshWithSCNGeometryElement) {

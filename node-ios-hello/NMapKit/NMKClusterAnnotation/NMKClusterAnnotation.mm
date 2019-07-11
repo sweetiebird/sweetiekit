@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NMKClusterAnnotation.h"
-#import <MapKit/MKClusterAnnotation.h>
 
 #define instancetype MKClusterAnnotation
 #define js_value_instancetype js_value_MKClusterAnnotation

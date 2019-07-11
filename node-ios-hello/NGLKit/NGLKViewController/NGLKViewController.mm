@@ -8,8 +8,6 @@
 
 #if TARGET_OS_IPHONE
 
-#import <GLKit/GLKViewController.h>
-
 #define instancetype GLKViewController
 #define js_value_instancetype js_value_GLKViewController
 

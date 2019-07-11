@@ -253,7 +253,6 @@ NAN_SETTER(NSCNScene::isPausedSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLAsset.h"
 
 NAN_METHOD(NSCNScene::sceneWithMDLAsset) {

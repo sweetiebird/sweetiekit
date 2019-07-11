@@ -240,7 +240,6 @@ NAN_SETTER(NMDLObject::hiddenSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNNode.h"
 
 NAN_METHOD(NMDLObject::objectWithSCNNode) {

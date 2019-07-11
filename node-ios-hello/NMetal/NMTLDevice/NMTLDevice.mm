@@ -9,8 +9,6 @@
 #define instancetype MTLDevice
 #define js_value_instancetype js_value_MTLDevice
 
-#import <Metal/MTLDevice.h>
-
 Local<Value> js_value_MTLSizeAndAlign(const MTLSizeAndAlign& value) {
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));

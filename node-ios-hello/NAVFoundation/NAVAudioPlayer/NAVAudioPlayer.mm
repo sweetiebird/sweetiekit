@@ -4,7 +4,6 @@
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-#import <AVFoundation/AVFoundation.h>
 #include "NAVAudioPlayer.h"
 
 #define instancetype AVAudioPlayer

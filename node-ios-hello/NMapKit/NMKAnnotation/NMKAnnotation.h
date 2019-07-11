@@ -22,7 +22,6 @@ JS_WRAP_CLASS(MKAnnotation, NSObject);
 JS_WRAP_CLASS_END(MKAnnotation);
 
 #if __OBJC__
-#import <MapKit/MKAnnotation.h>
 @interface MKAnnotation : NSObject<MKAnnotation>
 // Center latitude and longitude of the annotation view.
 // The implementation of this property must be KVO compliant.

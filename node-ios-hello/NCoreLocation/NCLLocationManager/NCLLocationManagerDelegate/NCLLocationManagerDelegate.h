@@ -9,7 +9,6 @@
 #define NCLLocationManagerDelegate_h
 
 #import "NNSObject.h"
-#import <CoreLocation/CLLocationManagerDelegate.h>
 
 #define js_value_CLLocationManagerDelegate(x) js_value_wrapper(x, CLLocationManagerDelegate)
 #define to_value_CLLocationManagerDelegate(x) to_value_wrapper(x, CLLocationManagerDelegate)

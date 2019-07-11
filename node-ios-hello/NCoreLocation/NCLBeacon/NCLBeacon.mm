@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLBeacon.h"
-#include <CoreLocation/CLBeaconRegion.h>
 
 #define instancetype CLBeacon
 #define js_value_instancetype js_value_CLBeacon

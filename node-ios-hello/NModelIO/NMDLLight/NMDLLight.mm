@@ -45,7 +45,6 @@ NAN_METHOD(NMDLLight::New) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNLight.h"
 
 NAN_METHOD(NMDLLight::lightWithSCNLight) {

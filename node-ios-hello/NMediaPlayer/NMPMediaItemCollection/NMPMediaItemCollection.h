@@ -8,7 +8,6 @@
 #ifndef NMPMediaItemCollection_h
 #define NMPMediaItemCollection_h    
 
-#include <MediaPlayer/MediaPlayer.h>
 #include "NMPMediaEntity.h"
 
 #define js_value_MPMediaItemCollection(x) js_value_wrapper(x, MPMediaItemCollection)

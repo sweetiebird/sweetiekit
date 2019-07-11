@@ -10,10 +10,6 @@
 
 #include "NNSObject.h"
 
-#if __OBJC__
-#import <Contacts/Contacts.h>
-#endif
-
 #define js_value_CNPostalAddress(x) js_value_wrapper(x, CNPostalAddress)
 #define to_value_CNPostalAddress(x) to_value_wrapper(x, CNPostalAddress)
 #define is_value_CNPostalAddress(x) is_value_wrapper(x, CNPostalAddress)

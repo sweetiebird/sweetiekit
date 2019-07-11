@@ -9,8 +9,6 @@
 #define instancetype MTLRenderPassColorAttachmentDescriptor
 #define js_value_instancetype js_value_MTLRenderPassColorAttachmentDescriptor
 
-#import <Metal/MTLRenderPass.h>
-
 NMTLRenderPassColorAttachmentDescriptor::NMTLRenderPassColorAttachmentDescriptor() {}
 NMTLRenderPassColorAttachmentDescriptor::~NMTLRenderPassColorAttachmentDescriptor() {}
 

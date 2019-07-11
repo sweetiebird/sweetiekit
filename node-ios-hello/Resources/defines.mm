@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NSKNode.h"
 

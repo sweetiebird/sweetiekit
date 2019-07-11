@@ -11,11 +11,13 @@
 #include <Availability.h>
 
 #if __OBJC__
+#import <objc/runtime.h>
 @import Foundation;
 @import CoreFoundation;
 @import UIKit;
 @import QuartzCore;
 @import SceneKit;
+@import SpriteKit;
 @import ModelIO;
 #import <SceneKit/ModelIO.h>
 @import SpriteKit;
@@ -26,6 +28,17 @@
 @import Metal;
 @import Vision;
 @import AVFoundation;
+@import AudioToolbox;
+@import CoreGraphics;
+@import CoreMotion;
+@import Contacts;
+@import GameplayKit;
+@import GLKit;
+@import MapKit;
+@import MediaPlayer;
+@import ReplayKit;
+@import WebKit;
+@import IOSurface;
 #endif
 
 #ifdef __cplusplus

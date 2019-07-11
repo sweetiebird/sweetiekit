@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NMKOverlayView.h"
-#import <MapKit/MKOverlayView.h>
 
 #define instancetype MKOverlayView
 #define js_value_instancetype js_value_MKOverlayView

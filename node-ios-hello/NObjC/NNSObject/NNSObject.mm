@@ -6,8 +6,6 @@
 //
 #include "NNSObject.h"
 
-#import <objc/runtime.h>
-
 @implementation NSObject (CategoryNSObject)
 
 #pragma mark Associated Methods:
@@ -1574,7 +1572,6 @@ NAN_METHOD(NClass::New) {
 #include "NCLBeaconRegion.h"
 #include "NCNPostalAddress.h"
 #include "NNSUUID.h"
-#import <MapKit/MapKit.h>
 #include "NMKMapView.h"
 #include "NMKMapViewDelegate.h"
 #include "NMKAnnotation.h"
@@ -1599,7 +1596,6 @@ NAN_METHOD(NClass::New) {
 
 #include "NCGImageProperties.h" // globals
 
-#import <Vision/Vision.h>
 #include "NVNTypes.h" // globals
 #include "NVNRequest.h" // : NSObject
 #include "NVNImageBasedRequest.h" // : VNRequest
@@ -1642,7 +1638,6 @@ NAN_METHOD(NClass::New) {
 #include "NCIWarpKernel.h" // : CIKernel
 #include "NCIBlendKernel.h" // : CIColorKernel
 
-#import <WebKit/WebKit.h>
 #include "NWKNavigation.h"
 #include "NWKNavigationDelegate.h"
 #include "NWKWebView.h"

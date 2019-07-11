@@ -5,10 +5,8 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #include "main.h"
 #include "NNSObject.h"
-#import <objc/runtime.h>
 #include "defines.h"
 #include "NUITouch.h"
 

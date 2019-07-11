@@ -6,8 +6,6 @@
 //
 #include "NMTLPixelFormat.h"
 
-#import <Metal/MTLPixelFormat.h>
-
 JS_INIT_GLOBALS(MTLPixelFormat);
   // constant values (exports)
 

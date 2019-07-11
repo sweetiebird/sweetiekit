@@ -9,8 +9,6 @@
 #define instancetype MTLTexture
 #define js_value_instancetype js_value_MTLTexture
 
-#import <Metal/MTLTexture.h>
-
 NMTLTexture::NMTLTexture() {}
 NMTLTexture::~NMTLTexture() {}
 

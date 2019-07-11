@@ -9,7 +9,6 @@
 #define NMPMusicPlayerController_h    
 
 #include "NNSObject.h"
-#import <MediaPlayer/MediaPlayer.h>
 
 #define js_value_MPMusicPlayerController(x) js_value_wrapper(x, MPMusicPlayerController)
 #define to_value_MPMusicPlayerController(x) to_value_wrapper(x, MPMusicPlayerController)

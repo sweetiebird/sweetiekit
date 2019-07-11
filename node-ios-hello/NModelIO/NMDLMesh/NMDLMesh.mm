@@ -719,7 +719,6 @@ NAN_GETTER(NMDLMesh::allocatorGetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNGeometry.h"
 
 NAN_METHOD(NMDLMesh::meshWithSCNGeometry) {
