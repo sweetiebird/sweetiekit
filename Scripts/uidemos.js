@@ -16,6 +16,7 @@ makeEmojiCam = require('./examples/emojiCam');
 // view based demos
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
+makeARRain = require('./examples/ARRain');
 makeAVCaptureVideoPreviewLayer = require('./examples/AVCaptureVideoPreviewLayer');
 makeAnimalWheel = require('./examples/AnimalWheel');
 makeButton = require('./examples/UIButton');
@@ -114,6 +115,7 @@ arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
   ARSelection: makeARSelection,
+  ARRain: makeARRain,
   AnimalWheel: makeAnimalWheel,
   GreenDot: makeGreenDot,
 };
