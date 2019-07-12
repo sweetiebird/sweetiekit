@@ -23,12 +23,11 @@
 extern "C" void iOSLog(const char* format, ...);
 
 namespace node {
-    extern std::map<std::string, std::pair<void *, bool>> dlibs;
+    //extern std::map<std::string, std::pair<void *, bool>> dlibs;
 }
 using namespace v8;
 
 
-#include <array>
 #include <deque>
 #include <mutex>
 #include <thread>
@@ -237,11 +236,16 @@ extern "C" {
 }
 
 inline void registerDlibs(std::map<std::string, std::pair<void *, bool>> &dlibs) {
-    dlibs["std:sweetiekit.node"] = std::pair<void *, bool>((void *)&node_register_module_sweetiekit, false);
+    //dlibs["std:sweetiekit.node"] = std::pair<void *, bool>((void *)&node_register_module_sweetiekit, false);
 }
 
+NAN_MODULE_INIT(sweetiekit_init) {
+  sweetiekit::Init(target);
+}
+NODE_MODULE_LINKED(sweetiekit, sweetiekit_init);
+
 extern "C" void registerNodeDLibs() {
-    registerDlibs(node::dlibs);
+    //registerDlibs(node::dlibs);
 }
 
 extern "C" void UIKit_PumpEvents() {

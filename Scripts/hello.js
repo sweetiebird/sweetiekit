@@ -1209,7 +1209,7 @@ https.get(options, function(res) {
 
 //process.stderr.write(leftpad(' sweetiekit-node\n', 30, '='));
 
-const sweetiekit = require('std:sweetiekit.node');
+const sweetiekit = process._linkedBinding('sweetiekit');
 const {
   NSObject,
   NSUserDefaults,

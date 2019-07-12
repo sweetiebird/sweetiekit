@@ -15,7 +15,7 @@ console.log([].concat(...Object.values(require('os').networkInterfaces()).map(x 
 if (typeof gc === 'undefined') {
   gc = (() => { console.log('gc stub'); });
 }
-SweetieKit = require('std:sweetiekit.node');
+SweetieKit = process._linkedBinding('sweetiekit');
 
 
 GetterNameToSetterName = function GetterNameToSetterName(name) {

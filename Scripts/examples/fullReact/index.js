@@ -3,8 +3,9 @@ __DEV__ = typeof __DEV__ === 'undefined' ? 'dev' : __DEV__;
 
 SWEET = typeof SWEET === 'undefined' ? {} : SWEET;
 SWEET.require = SWEET.require || require;
+SWEET.process = process;
 
-SweetieKit = typeof SweetieKit === 'undefined' ? SWEET.require('std:sweetiekit.node') : SweetieKit;
+SweetieKit = typeof SweetieKit === 'undefined' ? SWEET.process._linkedBinding('sweetiekit') : SweetieKit;
 SweetieKitDOM = SWEET.require('sweetiekit-dom');
 SWEET.window = window = (typeof window === 'undefined') ? SweetieKitDOM() : window;
 
