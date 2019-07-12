@@ -138,7 +138,7 @@ allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demo
 
 global.SweetieKitEnums = require('./examples/enums');
 
-class UIDemosApp {
+UIDemosApp = class UIDemosApp {
   constructor(app) {
     this.app = app;
     this.vc = UIViewController();
@@ -287,15 +287,15 @@ class UIDemosApp {
   }
 }
 
-async function start() {
+UIDemos_start = async function start() {
   gc();
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
     const myApp = this.myApp = SweetieKitApp = new UIDemosApp(sharedApp);
     myApp.launch();
   } else {
-    setTimeout(start, 10);
+    setTimeout(UIDemos_start, 10);
   }
 }
 
-setTimeout(start, 1);
+setTimeout(UIDemos_start, 1);
