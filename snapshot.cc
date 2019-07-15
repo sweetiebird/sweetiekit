@@ -1,4 +1,4 @@
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
 #if !NODE_IOS_SIMULATOR
 #ifdef DEBUG
 #include "./Debug/snapshot.cc"

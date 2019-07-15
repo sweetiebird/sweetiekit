@@ -154,11 +154,6 @@
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
-		A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917522D1E73B0023E861 /* libv8_compiler.a */; platformFilter = uikitformac; };
-		A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917722D1E8D00023E861 /* libv8_snapshot.a */; platformFilter = uikitformac; settings = {ATTRIBUTES = (Required, ); }; };
-		A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */; platformFilter = uikitformac; };
-		A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917C22D1EA530023E861 /* libicustubdata.a */; platformFilter = uikitformac; };
-		A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F917F22D1EAD00023E861 /* libtorque_base.a */; platformFilter = uikitformac; };
 		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
 		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
@@ -565,6 +560,7 @@
 		A19F3A1D22AF7C8100606332 /* NMDLCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A1B22AF7C8100606332 /* NMDLCamera.mm */; };
 		A19F3A2122AF90F100606332 /* NMDLSubmeshTopology.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F3A2022AF90F000606332 /* NMDLSubmeshTopology.mm */; };
 		A19F4DA2229F7D5A00E7F593 /* NUIEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */; };
+		A1A04CDB22D6ED0B00B7A7B1 /* SWTUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */; };
 		A1B2056F229788FC006CA4C6 /* NCoreGraphicsGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */; };
 		A1B2057122978949006CA4C6 /* SCoreGraphicsGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */; };
 		A1B20575229799A9006CA4C6 /* NUIKitGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B20574229799A9006CA4C6 /* NUIKitGlobals.mm */; };
@@ -577,9 +573,6 @@
 		A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */; };
 		A1B65493228CE4AF00976024 /* NSKPhysicsContactDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65492228CE4AF00976024 /* NSKPhysicsContactDelegate.mm */; };
 		A1B65499228CE80D00976024 /* NSKPhysicsContact.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65498228CE80D00976024 /* NSKPhysicsContact.mm */; };
-		A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B002287B6DC001D1F6E /* libicuucx.a */; };
-		A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B012287B6DC001D1F6E /* libicui18n.a */; };
-		A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BD4B022287B6DC001D1F6E /* libicudata.a */; };
 		A1BD4B432287BCBC001D1F6E /* NSCNView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B422287BCBC001D1F6E /* NSCNView.mm */; };
 		A1BD4B792287BF28001D1F6E /* NARSKViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B782287BF28001D1F6E /* NARSKViewDelegate.mm */; };
 		A1BD4B7F2287C222001D1F6E /* NARAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1BD4B7E2287C222001D1F6E /* NARAnchor.mm */; };
@@ -708,6 +701,31 @@
 		A1EE7D9522A435FF002B53FF /* NSCNPhysicsBody.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9422A435FD002B53FF /* NSCNPhysicsBody.mm */; };
 		A1EE7D9922A4401D002B53FF /* NSCNHitTestResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9822A4401B002B53FF /* NSCNHitTestResult.mm */; };
 		A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1EE7D9B22A47948002B53FF /* NARHitTestResult.mm */; };
+		A1EF5EE522D81E5900AAF9AD /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ECD22D81E5400AAF9AD /* libicuucx.a */; };
+		A1EF5EE622D81E5900AAF9AD /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ECE22D81E5400AAF9AD /* libicudata.a */; };
+		A1EF5EE722D81E5900AAF9AD /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ECF22D81E5400AAF9AD /* libuv.a */; };
+		A1EF5EE822D81E5900AAF9AD /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED022D81E5400AAF9AD /* libopenssl.a */; };
+		A1EF5EE922D81E5900AAF9AD /* libhistogram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED122D81E5500AAF9AD /* libhistogram.a */; };
+		A1EF5EEA22D81E5900AAF9AD /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED222D81E5500AAF9AD /* libv8_libplatform.a */; };
+		A1EF5EEB22D81E5900AAF9AD /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED322D81E5500AAF9AD /* libv8_libsampler.a */; };
+		A1EF5EEC22D81E5900AAF9AD /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED422D81E5500AAF9AD /* libnghttp2.a */; };
+		A1EF5EED22D81E5900AAF9AD /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED522D81E5500AAF9AD /* libllhttp.a */; };
+		A1EF5EEE22D81E5900AAF9AD /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED622D81E5600AAF9AD /* libcares.a */; };
+		A1EF5EEF22D81E5900AAF9AD /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED722D81E5600AAF9AD /* libbrotli.a */; };
+		A1EF5EF022D81E5900AAF9AD /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED822D81E5600AAF9AD /* libv8_base_without_compiler.a */; };
+		A1EF5EF122D81E5900AAF9AD /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5ED922D81E5600AAF9AD /* libicui18n.a */; };
+		A1EF5EF222D81E5900AAF9AD /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDA22D81E5600AAF9AD /* libicustubdata.a */; };
+		A1EF5EF322D81E5900AAF9AD /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDB22D81E5600AAF9AD /* libv8_compiler.a */; };
+		A1EF5EF422D81E5900AAF9AD /* libv8_initializers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDC22D81E5700AAF9AD /* libv8_initializers.a */; };
+		A1EF5EF522D81E5900AAF9AD /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDD22D81E5700AAF9AD /* libv8_libbase.a */; };
+		A1EF5EF622D81E5900AAF9AD /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDE22D81E5700AAF9AD /* libnode.a */; };
+		A1EF5EF722D81E5900AAF9AD /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EDF22D81E5700AAF9AD /* libtorque_base.a */; };
+		A1EF5EF822D81E5900AAF9AD /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE022D81E5700AAF9AD /* libv8_init.a */; };
+		A1EF5EF922D81E5900AAF9AD /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE122D81E5800AAF9AD /* libv8_nosnapshot.a */; };
+		A1EF5EFA22D81E5900AAF9AD /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE222D81E5800AAF9AD /* libhttp_parser.a */; };
+		A1EF5EFB22D81E5900AAF9AD /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE322D81E5800AAF9AD /* libv8_snapshot.a */; };
+		A1EF5EFC22D81E5900AAF9AD /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE422D81E5800AAF9AD /* libzlib.a */; };
+		A1EF5EFE22D81EBD00AAF9AD /* node_code_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1EF5EFD22D81EBC00AAF9AD /* node_code_cache.cc */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -716,23 +734,6 @@
 		A1FC1A0E225C65DD00085571 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FC1A0C225C65DD00085571 /* LaunchScreen.storyboard */; };
 		A1FC1A17225C66D000085571 /* hello.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A16225C66D000085571 /* hello.mm */; };
 		A1FC1A1A225C6A4A00085571 /* hello-v8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A18225C6A4A00085571 /* hello-v8.cpp */; };
-		A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1C225C6AB200085571 /* libhttp_parser.a */; };
-		A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1D225C6AB200085571 /* libbrotli.a */; };
-		A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1E225C6AB200085571 /* libv8_init.a */; };
-		A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A1F225C6AB200085571 /* libllhttp.a */; };
-		A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A20225C6AB200085571 /* libnode.a */; };
-		A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A21225C6AB200085571 /* libv8_nosnapshot.a */; };
-		A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A22225C6AB200085571 /* libzlib.a */; };
-		A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A23225C6AB200085571 /* libopenssl.a */; };
-		A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A24225C6AB200085571 /* libuv.a */; };
-		A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A25225C6AB200085571 /* libv8_base.a */; platformFilter = ios; };
-		A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A26225C6AB200085571 /* libv8_libplatform.a */; };
-		A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A27225C6AB200085571 /* libv8_libsampler.a */; };
-		A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A28225C6AB200085571 /* libnghttp2.a */; };
-		A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A29225C6AB200085571 /* libhistogram.a */; };
-		A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2A225C6AB200085571 /* libv8_initializers.a */; };
-		A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2B225C6AB200085571 /* libv8_libbase.a */; };
-		A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC1A2C225C6AB200085571 /* libcares.a */; };
 		A1FC1A40225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A3E225C82AC00085571 /* v8-snapshot-blob-arm64-debug.cpp */; };
 		A1FF9E61225C9A97004D7C82 /* test-v8-serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E5F225C9A97004D7C82 /* test-v8-serialize.cpp */; };
 		A1FF9E6D225D3CEB004D7C82 /* hello-node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1FF9E6B225D3CEB004D7C82 /* hello-node.mm */; };
@@ -1817,6 +1818,8 @@
 		A19F3A2022AF90F000606332 /* NMDLSubmeshTopology.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NMDLSubmeshTopology.mm; sourceTree = "<group>"; };
 		A19F4DA0229F7D5A00E7F593 /* NUIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIEvent.h; sourceTree = "<group>"; };
 		A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIEvent.mm; sourceTree = "<group>"; };
+		A1A04CD922D6ECE600B7A7B1 /* SWTUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWTUtils.h; sourceTree = "<group>"; };
+		A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SWTUtils.mm; sourceTree = "<group>"; };
 		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
 		A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreGraphicsGlobals.mm; sourceTree = "<group>"; };
 		A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCoreGraphicsGlobals.swift; sourceTree = "<group>"; };
@@ -2084,6 +2087,31 @@
 		A1EE7D9822A4401B002B53FF /* NSCNHitTestResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSCNHitTestResult.mm; sourceTree = "<group>"; };
 		A1EE7D9B22A47948002B53FF /* NARHitTestResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NARHitTestResult.mm; sourceTree = "<group>"; };
 		A1EE7D9C22A47948002B53FF /* NARHitTestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NARHitTestResult.h; sourceTree = "<group>"; };
+		A1EF5ECD22D81E5400AAF9AD /* libicuucx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuucx.a; path = "../opt/sweet/node-1260/out/Debug/libicuucx.a"; sourceTree = "<group>"; };
+		A1EF5ECE22D81E5400AAF9AD /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = "../opt/sweet/node-1260/out/Debug/libicudata.a"; sourceTree = "<group>"; };
+		A1EF5ECF22D81E5400AAF9AD /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuv.a; path = "../opt/sweet/node-1260/out/Debug/libuv.a"; sourceTree = "<group>"; };
+		A1EF5ED022D81E5400AAF9AD /* libopenssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenssl.a; path = "../opt/sweet/node-1260/out/Debug/libopenssl.a"; sourceTree = "<group>"; };
+		A1EF5ED122D81E5500AAF9AD /* libhistogram.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhistogram.a; path = "../opt/sweet/node-1260/out/Debug/libhistogram.a"; sourceTree = "<group>"; };
+		A1EF5ED222D81E5500AAF9AD /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libplatform.a; path = "../opt/sweet/node-1260/out/Debug/libv8_libplatform.a"; sourceTree = "<group>"; };
+		A1EF5ED322D81E5500AAF9AD /* libv8_libsampler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libsampler.a; path = "../opt/sweet/node-1260/out/Debug/libv8_libsampler.a"; sourceTree = "<group>"; };
+		A1EF5ED422D81E5500AAF9AD /* libnghttp2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnghttp2.a; path = "../opt/sweet/node-1260/out/Debug/libnghttp2.a"; sourceTree = "<group>"; };
+		A1EF5ED522D81E5500AAF9AD /* libllhttp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libllhttp.a; path = "../opt/sweet/node-1260/out/Debug/libllhttp.a"; sourceTree = "<group>"; };
+		A1EF5ED622D81E5600AAF9AD /* libcares.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcares.a; path = "../opt/sweet/node-1260/out/Debug/libcares.a"; sourceTree = "<group>"; };
+		A1EF5ED722D81E5600AAF9AD /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = "../opt/sweet/node-1260/out/Debug/libbrotli.a"; sourceTree = "<group>"; };
+		A1EF5ED822D81E5600AAF9AD /* libv8_base_without_compiler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base_without_compiler.a; path = "../opt/sweet/node-1260/out/Debug/libv8_base_without_compiler.a"; sourceTree = "<group>"; };
+		A1EF5ED922D81E5600AAF9AD /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = "../opt/sweet/node-1260/out/Debug/libicui18n.a"; sourceTree = "<group>"; };
+		A1EF5EDA22D81E5600AAF9AD /* libicustubdata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicustubdata.a; path = "../opt/sweet/node-1260/out/Debug/libicustubdata.a"; sourceTree = "<group>"; };
+		A1EF5EDB22D81E5600AAF9AD /* libv8_compiler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_compiler.a; path = "../opt/sweet/node-1260/out/Debug/libv8_compiler.a"; sourceTree = "<group>"; };
+		A1EF5EDC22D81E5700AAF9AD /* libv8_initializers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_initializers.a; path = "../opt/sweet/node-1260/out/Debug/libv8_initializers.a"; sourceTree = "<group>"; };
+		A1EF5EDD22D81E5700AAF9AD /* libv8_libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libbase.a; path = "../opt/sweet/node-1260/out/Debug/libv8_libbase.a"; sourceTree = "<group>"; };
+		A1EF5EDE22D81E5700AAF9AD /* libnode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnode.a; path = "../opt/sweet/node-1260/out/Debug/libnode.a"; sourceTree = "<group>"; };
+		A1EF5EDF22D81E5700AAF9AD /* libtorque_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtorque_base.a; path = "../opt/sweet/node-1260/out/Debug/libtorque_base.a"; sourceTree = "<group>"; };
+		A1EF5EE022D81E5700AAF9AD /* libv8_init.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_init.a; path = "../opt/sweet/node-1260/out/Debug/libv8_init.a"; sourceTree = "<group>"; };
+		A1EF5EE122D81E5800AAF9AD /* libv8_nosnapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_nosnapshot.a; path = "../opt/sweet/node-1260/out/Debug/libv8_nosnapshot.a"; sourceTree = "<group>"; };
+		A1EF5EE222D81E5800AAF9AD /* libhttp_parser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhttp_parser.a; path = "../opt/sweet/node-1260/out/Debug/libhttp_parser.a"; sourceTree = "<group>"; };
+		A1EF5EE322D81E5800AAF9AD /* libv8_snapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_snapshot.a; path = "../opt/sweet/node-1260/out/Debug/libv8_snapshot.a"; sourceTree = "<group>"; };
+		A1EF5EE422D81E5800AAF9AD /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = "../opt/sweet/node-1260/out/Debug/libzlib.a"; sourceTree = "<group>"; };
+		A1EF5EFD22D81EBC00AAF9AD /* node_code_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node_code_cache.cc; path = Debug/node_code_cache.cc; sourceTree = "<group>"; };
 		A1FC19FE225C65DC00085571 /* node-ios-hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "node-ios-hello.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC1A01225C65DC00085571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1FC1A03225C65DC00085571 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -2129,31 +2157,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1FC1A2E225C6AB200085571 /* libbrotli.a in Frameworks */,
-				A1FC1A3D225C6AB200085571 /* libcares.a in Frameworks */,
-				A1FC1A3A225C6AB200085571 /* libhistogram.a in Frameworks */,
-				A1FC1A2D225C6AB200085571 /* libhttp_parser.a in Frameworks */,
-				A1BD4B052287B6DC001D1F6E /* libicudata.a in Frameworks */,
-				A1BD4B042287B6DC001D1F6E /* libicui18n.a in Frameworks */,
-				A14F917E22D1EA530023E861 /* libicustubdata.a in Frameworks */,
-				A1BD4B032287B6DC001D1F6E /* libicuucx.a in Frameworks */,
-				A1FC1A30225C6AB200085571 /* libllhttp.a in Frameworks */,
-				A1FC1A39225C6AB200085571 /* libnghttp2.a in Frameworks */,
-				A1FC1A31225C6AB200085571 /* libnode.a in Frameworks */,
-				A1FC1A34225C6AB200085571 /* libopenssl.a in Frameworks */,
-				A14F918022D1EAD00023E861 /* libtorque_base.a in Frameworks */,
-				A1FC1A35225C6AB200085571 /* libuv.a in Frameworks */,
-				A1FC1A36225C6AB200085571 /* libv8_base.a in Frameworks */,
-				A14F917D22D1EA530023E861 /* libv8_base_without_compiler.a in Frameworks */,
-				A14F917622D1E73B0023E861 /* libv8_compiler.a in Frameworks */,
-				A1FC1A2F225C6AB200085571 /* libv8_init.a in Frameworks */,
-				A1FC1A3B225C6AB200085571 /* libv8_initializers.a in Frameworks */,
-				A1FC1A3C225C6AB200085571 /* libv8_libbase.a in Frameworks */,
-				A1FC1A37225C6AB200085571 /* libv8_libplatform.a in Frameworks */,
-				A1FC1A38225C6AB200085571 /* libv8_libsampler.a in Frameworks */,
-				A1FC1A32225C6AB200085571 /* libv8_nosnapshot.a in Frameworks */,
-				A14F917822D1E8D00023E861 /* libv8_snapshot.a in Frameworks */,
-				A1FC1A33225C6AB200085571 /* libzlib.a in Frameworks */,
+				A1EF5EE522D81E5900AAF9AD /* libicuucx.a in Frameworks */,
+				A1EF5EE622D81E5900AAF9AD /* libicudata.a in Frameworks */,
+				A1EF5EE722D81E5900AAF9AD /* libuv.a in Frameworks */,
+				A1EF5EE822D81E5900AAF9AD /* libopenssl.a in Frameworks */,
+				A1EF5EE922D81E5900AAF9AD /* libhistogram.a in Frameworks */,
+				A1EF5EEA22D81E5900AAF9AD /* libv8_libplatform.a in Frameworks */,
+				A1EF5EEB22D81E5900AAF9AD /* libv8_libsampler.a in Frameworks */,
+				A1EF5EEC22D81E5900AAF9AD /* libnghttp2.a in Frameworks */,
+				A1EF5EED22D81E5900AAF9AD /* libllhttp.a in Frameworks */,
+				A1EF5EEE22D81E5900AAF9AD /* libcares.a in Frameworks */,
+				A1EF5EEF22D81E5900AAF9AD /* libbrotli.a in Frameworks */,
+				A1EF5EF022D81E5900AAF9AD /* libv8_base_without_compiler.a in Frameworks */,
+				A1EF5EF122D81E5900AAF9AD /* libicui18n.a in Frameworks */,
+				A1EF5EF222D81E5900AAF9AD /* libicustubdata.a in Frameworks */,
+				A1EF5EF322D81E5900AAF9AD /* libv8_compiler.a in Frameworks */,
+				A1EF5EF422D81E5900AAF9AD /* libv8_initializers.a in Frameworks */,
+				A1EF5EF522D81E5900AAF9AD /* libv8_libbase.a in Frameworks */,
+				A1EF5EF622D81E5900AAF9AD /* libnode.a in Frameworks */,
+				A1EF5EF722D81E5900AAF9AD /* libtorque_base.a in Frameworks */,
+				A1EF5EF822D81E5900AAF9AD /* libv8_init.a in Frameworks */,
+				A1EF5EF922D81E5900AAF9AD /* libv8_nosnapshot.a in Frameworks */,
+				A1EF5EFA22D81E5900AAF9AD /* libhttp_parser.a in Frameworks */,
+				A1EF5EFB22D81E5900AAF9AD /* libv8_snapshot.a in Frameworks */,
+				A1EF5EFC22D81E5900AAF9AD /* libzlib.a in Frameworks */,
 				A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */,
 				A18E802222657B6C000438E0 /* Client.framework in Frameworks */,
 			);
@@ -7287,6 +7314,7 @@
 		A1BD4B072287B753001D1F6E /* DebugSnapshot */ = {
 			isa = PBXGroup;
 			children = (
+				A1EF5EFD22D81EBC00AAF9AD /* node_code_cache.cc */,
 				A1BD4B0A2287B769001D1F6E /* embedded.S */,
 				A1BD4B092287B769001D1F6E /* snapshot.cc */,
 			);
@@ -8800,6 +8828,8 @@
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
+				A1A04CD922D6ECE600B7A7B1 /* SWTUtils.h */,
+				A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */,
 			);
 			path = "node-ios-hello";
 			sourceTree = "<group>";
@@ -8810,6 +8840,30 @@
 				A14F917F22D1EAD00023E861 /* libtorque_base.a */,
 				A14F917C22D1EA530023E861 /* libicustubdata.a */,
 				A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */,
+				A1EF5ED722D81E5600AAF9AD /* libbrotli.a */,
+				A1EF5ED622D81E5600AAF9AD /* libcares.a */,
+				A1EF5ED122D81E5500AAF9AD /* libhistogram.a */,
+				A1EF5EE222D81E5800AAF9AD /* libhttp_parser.a */,
+				A1EF5ECE22D81E5400AAF9AD /* libicudata.a */,
+				A1EF5ED922D81E5600AAF9AD /* libicui18n.a */,
+				A1EF5EDA22D81E5600AAF9AD /* libicustubdata.a */,
+				A1EF5ECD22D81E5400AAF9AD /* libicuucx.a */,
+				A1EF5ED522D81E5500AAF9AD /* libllhttp.a */,
+				A1EF5ED422D81E5500AAF9AD /* libnghttp2.a */,
+				A1EF5EDE22D81E5700AAF9AD /* libnode.a */,
+				A1EF5ED022D81E5400AAF9AD /* libopenssl.a */,
+				A1EF5EDF22D81E5700AAF9AD /* libtorque_base.a */,
+				A1EF5ECF22D81E5400AAF9AD /* libuv.a */,
+				A1EF5ED822D81E5600AAF9AD /* libv8_base_without_compiler.a */,
+				A1EF5EDB22D81E5600AAF9AD /* libv8_compiler.a */,
+				A1EF5EE022D81E5700AAF9AD /* libv8_init.a */,
+				A1EF5EDC22D81E5700AAF9AD /* libv8_initializers.a */,
+				A1EF5EDD22D81E5700AAF9AD /* libv8_libbase.a */,
+				A1EF5ED222D81E5500AAF9AD /* libv8_libplatform.a */,
+				A1EF5ED322D81E5500AAF9AD /* libv8_libsampler.a */,
+				A1EF5EE122D81E5800AAF9AD /* libv8_nosnapshot.a */,
+				A1EF5EE322D81E5800AAF9AD /* libv8_snapshot.a */,
+				A1EF5EE422D81E5800AAF9AD /* libzlib.a */,
 				A14F917922D1E9620023E861 /* common.gypi */,
 				A14F917722D1E8D00023E861 /* libv8_snapshot.a */,
 				A14F917522D1E73B0023E861 /* libv8_compiler.a */,
@@ -9340,6 +9394,7 @@
 				A1678CFD22D5128600E1CF52 /* NDispatchQueue.mm in Sources */,
 				A1FC1A17225C66D000085571 /* hello.mm in Sources */,
 				A158790B22CE638600847196 /* NUIViewControllerTransitionCoordinator.mm in Sources */,
+				A1A04CDB22D6ED0B00B7A7B1 /* SWTUtils.mm in Sources */,
 				211E76B9226A44CA00B838AF /* UITextField+AddTargetClosure.swift in Sources */,
 				A1678CBD22D4C68500E1CF52 /* NAVCaptureVideoDataOutput.mm in Sources */,
 				A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */,
@@ -9663,6 +9718,7 @@
 				A192704522C13B04008F16AE /* NMTLTypes.mm in Sources */,
 				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
+				A1EF5EFE22D81EBD00AAF9AD /* node_code_cache.cc in Sources */,
 				A192702F22C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
 				A1678CA722D4B91B00E1CF52 /* NVNRectangleObservation.mm in Sources */,
 				A1678BE522D46A0C00E1CF52 /* NAVCaptureScreenInput.mm in Sources */,
@@ -9787,13 +9843,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
 				NODE_ROOT = "";
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
+				"NODE_ROOT[sdk=iphoneos*]" = "/Users/emily/sweetiebird/opt/sweet/node-1260";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				ONLY_ACTIVE_ARCH = YES;
@@ -9853,13 +9909,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				NODE_IOS_SIMULATOR = 0;
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
 				NODE_ROOT = "";
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
+				"NODE_ROOT[sdk=iphoneos*]" = "/Users/emily/sweetiebird/opt/sweet/node-1260";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-macosx";
 				SDKROOT = iphoneos;
@@ -9916,16 +9972,13 @@
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Debug";
-				NODE_ROOT = "";
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
-				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
@@ -9988,16 +10041,13 @@
 					../nan,
 				);
 				INFOPLIST_FILE = "node-ios-hello/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(NODE_ROOT)/out/Release";
-				NODE_ROOT = "";
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweet/node-ios";
-				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-macosx";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fmodules",
