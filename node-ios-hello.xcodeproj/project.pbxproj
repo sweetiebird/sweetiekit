@@ -9887,6 +9887,14 @@
 		A1FC1A10225C65DD00085571 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/native/node-uikitformac";
+			};
+			name = Debug;
+      platformFilter = uikitformac; 
+		};
+		A1FC1A10225C65DD00085571 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -9952,6 +9960,14 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
+		};
+		A1FC1A11225C65DD00085571 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"NODE_ROOT[sdk=iphoneos*]" = "/opt/native/node-uikitformac";
+			};
+			name = Release;
+      platformFilter = uikitformac; 
 		};
 		A1FC1A11225C65DD00085571 /* Release */ = {
 			isa = XCBuildConfiguration;
