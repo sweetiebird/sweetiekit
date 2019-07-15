@@ -301,6 +301,8 @@ static volatile int embed_closed;
 
 static int embed_timer_called;
 
+#include "SWTUtils.h"
+
 namespace sweetiekit {
 
   void nodePump(Isolate* isolate) {

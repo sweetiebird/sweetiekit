@@ -336,10 +336,17 @@ void Init(Local<Object> exports) {
     }).ToLocalChecked());
 }
 
-NAN_MODULE_INIT(init) {
+NAN_MODULE_INIT(honeykit_init) {
   Init(target);
 }
-NODE_MODULE_LINKED(honeykit, init);
+NODE_MODULE_LINKED(honeykit, honeykit_init);
+
+#include "SWTUtils.h"
+
+namespace sweetiekit {
+  extern Isolate* nodeIsolate;
+  extern Persistent<Context>* nodeContext;
+}
 
 int main(int argc, char** argv)
 {
