@@ -27,6 +27,7 @@ JS_INIT_CLASS(ARRaycastQuery, NSObject);
   /**
    A value describing the target of a ray used for raycasting.
    */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   //API_AVAILABLE(ios(13.0))
   //typedef NS_ENUM(NSInteger, ARRaycastTarget) {
     
@@ -44,10 +45,12 @@ JS_INIT_CLASS(ARRaycastQuery, NSObject);
     JS_ASSIGN_ENUM(ARRaycastTargetEstimatedPlane, NSInteger);
 
   //} NS_SWIFT_NAME(ARRaycastQuery.Target);
+#endif
 
   /**
    A value describing the alignment of a target.
    */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   //API_AVAILABLE(ios(13.0))
   //typedef NS_ENUM(NSInteger, ARRaycastTargetAlignment) {
     /** A target that is horizontal with respect to gravity. */
@@ -60,6 +63,7 @@ JS_INIT_CLASS(ARRaycastQuery, NSObject);
     JS_ASSIGN_ENUM(ARRaycastTargetAlignmentAny, NSInteger);
     
   //} NS_SWIFT_NAME(ARRaycastQuery.TargetAlignment);
+#endif
 
 JS_INIT_CLASS_END(ARRaycastQuery, NSObject);
 

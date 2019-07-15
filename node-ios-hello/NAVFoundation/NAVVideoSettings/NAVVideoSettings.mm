@@ -22,13 +22,14 @@ JS_INIT_GLOBALS(AVVideoSettings);
   JS_ASSIGN_ENUM(AVVideoCodecTypeJPEG, AVVideoCodecType); //  /* @"jpeg" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecTypeAppleProRes4444, AVVideoCodecType); //  /* @"ap4h" */         API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecTypeAppleProRes422, AVVideoCodecType); //  /* @"apcn" */          API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   JS_ASSIGN_ENUM(AVVideoCodecTypeAppleProRes422HQ, AVVideoCodecType); //  /* @"apch" */    API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecTypeAppleProRes422LT, AVVideoCodecType); //  /* @"apcs" */    API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecTypeAppleProRes422Proxy, AVVideoCodecType); //  /* @"apco" */    API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
   /* IMPORTANT NOTE: this constant is used to select the appropriate encoder, but is NOT used on the encoded content, which is backwards compatible and hence uses 'hvc1' as its codec type. */
   JS_ASSIGN_ENUM(AVVideoCodecTypeHEVCWithAlpha, AVVideoCodecType); //  /* @"muxa" */           API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-
+#endif
   JS_ASSIGN_ENUM(AVVideoCodecHEVC, NSString); //  /* @"hvc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeHEVC", macos(10.13, 10.13), ios(11.0, 11.0), tvos(11.0, 11.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecH264, NSString); //  /* @"avc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeH264", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
   JS_ASSIGN_ENUM(AVVideoCodecJPEG, NSString); //  /* @"jpeg" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeJPEG", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);

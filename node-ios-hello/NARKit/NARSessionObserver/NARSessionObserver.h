@@ -99,7 +99,9 @@ JS_WRAP_PROTOCOL_END(ARSessionObserver, NSObject);
  @param data Collaboration data to be sent to participants.
  @see ARCollaborationData
  */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
 - (void)session:(ARSession *)session didOutputCollaborationData:(ARCollaborationData *)data API_AVAILABLE(ios(13.0));
+#endif
 
 @end
 #endif

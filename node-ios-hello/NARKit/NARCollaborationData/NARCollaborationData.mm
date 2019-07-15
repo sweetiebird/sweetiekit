@@ -23,6 +23,7 @@ JS_INIT_CLASS(ARCollaborationData, NSObject);
   /**
    A value describing the priority of the collaboration data.
    */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   //API_AVAILABLE(ios(13.0))
   //typedef NS_ENUM(NSInteger, ARCollaborationDataPriority) {
     
@@ -33,6 +34,7 @@ JS_INIT_CLASS(ARCollaborationData, NSObject);
     /// For best results, use network transmission mechanisms that prioritize speed over delivery guarantees, such as MCSessionSendDataModeUnreliable.
     JS_ASSIGN_ENUM(ARCollaborationDataPriorityOptional, NSInteger);
   //} NS_SWIFT_NAME(ARCollaborationData.Priority);
+#endif
 
 JS_INIT_CLASS_END(ARCollaborationData, NSObject);
 

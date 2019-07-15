@@ -40,10 +40,13 @@ JS_INIT_GLOBALS(VNTypes);
   JS_ASSIGN_ENUM(VNBarcodeSymbologyQR, VNBarcodeSymbology); //  API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
   JS_ASSIGN_ENUM(VNBarcodeSymbologyUPCE, VNBarcodeSymbology); //  API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   //API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
   //typedef NS_ENUM(NSUInteger, VNElementType) {
     JS_ASSIGN_ENUM(VNElementTypeUnknown, NSUInteger); //  = 0,
     JS_ASSIGN_ENUM(VNElementTypeFloat, NSUInteger); //    = 1,    // IEEE 754 single-precision floating point value
     JS_ASSIGN_ENUM(VNElementTypeDouble, NSUInteger); //   = 2,    // IEEE 754 double-precision floating point value
   //};
+#endif
+
 JS_INIT_GLOBALS_END(VNTypes);

@@ -48,6 +48,7 @@ JS_INIT_CLASS(ARFrame, NSObject);
    @see -[ARConfiguration setFrameSemantics:]
    @see -[ARFrame segmentationBuffer]
   */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   //API_AVAILABLE(ios(13.0))
   //typedef NS_ENUM(uint8_t, ARSegmentationClass) {
 
@@ -58,6 +59,7 @@ JS_INIT_CLASS(ARFrame, NSObject);
     JS_ASSIGN_ENUM(ARSegmentationClassPerson, uint8_t); //     = 255
 
   //} NS_SWIFT_NAME(ARFrame.SegmentationClass);
+#endif
 
   /**
    A value describing the world mapping status for the area visible in a given frame.

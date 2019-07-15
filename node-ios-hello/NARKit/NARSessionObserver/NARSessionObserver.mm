@@ -169,11 +169,13 @@ DELEGATE_PROTOCOL_PROP(ARSessionObserver, sessionDidOutputCollaborationData);
  @param data Collaboration data to be sent to participants.
  @see ARCollaborationData
  */
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
 - (void)session:(ARSession *)session didOutputCollaborationData:(ARCollaborationData *)data API_AVAILABLE(ios(13.0))
 {
   call_delegate_async(noop(), sessionDidOutputCollaborationData,
     js_value_ARSession(session),
     js_value_ARCollaborationData(data));
 }
+#endif
 
 @end

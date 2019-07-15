@@ -88,12 +88,14 @@ JS_INIT_GLOBALS(CMSampleBuffer);
 
   JS_ASSIGN_ENUM(kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType, CFStringRef); //       // CFNumber(Int), optional.  Corresponds to 'sync' sample group.
     //API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
-    
+
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0)
   // The kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount sample attachment
   // is only present if the audio sample is an IndependentFrame (IF, value is non-zero) or ImmediatePlayoutFrame (IPF, value is zero).
   JS_ASSIGN_ENUM(kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount, CFStringRef); //   // CFNumber(Int), optional.
     //API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
-    
+#endif
+
   /*!
     @constant  kCMSampleBufferAttachmentKey_TransitionID
     @abstract  Marks a transition from one source of buffers (eg. song) to another
