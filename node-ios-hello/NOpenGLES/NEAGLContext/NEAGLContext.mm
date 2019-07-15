@@ -6,7 +6,7 @@
 //
 #include "NEAGLContext.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype EAGLContext
 #define js_value_instancetype js_value_EAGLContext

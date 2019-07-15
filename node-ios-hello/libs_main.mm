@@ -244,10 +244,6 @@ NAN_MODULE_INIT(sweetiekit_init) {
 }
 NODE_MODULE_LINKED(sweetiekit, sweetiekit_init);
 
-extern "C" void registerNodeDLibs() {
-    //registerDlibs(node::dlibs);
-}
-
 extern "C" void UIKit_PumpEvents() {
   const CFTimeInterval seconds = 0.000002;
   SInt32 result;

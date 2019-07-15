@@ -1,4 +1,4 @@
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 #if !NODE_IOS_SIMULATOR
 #ifdef DEBUG
 #include "./Debug/snapshot.cc"

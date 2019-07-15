@@ -6,6 +6,8 @@
 //
 #include "NARSessionDelegate.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARSessionDelegate
 #define js_value_instancetype js_value_ARSessionDelegate
 
@@ -113,3 +115,5 @@ DELEGATE_PROTOCOL_PROP(ARSessionDelegate, sessionDidRemoveAnchors);
 }
 
 @end
+
+#endif

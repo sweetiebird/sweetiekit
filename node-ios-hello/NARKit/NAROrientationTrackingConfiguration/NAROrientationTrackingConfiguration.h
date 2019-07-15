@@ -10,7 +10,7 @@
 
 #include "NARConfiguration.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_AROrientationTrackingConfiguration(x) js_value_wrapper(x, AROrientationTrackingConfiguration)
 #define to_value_AROrientationTrackingConfiguration(x) to_value_wrapper(x, AROrientationTrackingConfiguration)

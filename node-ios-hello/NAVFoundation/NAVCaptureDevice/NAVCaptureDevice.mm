@@ -164,7 +164,9 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(constituentDevices);
   JS_ASSIGN_PROTO_PROP_READONLY(hasFlash);
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashAvailable);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashActive);
+#endif
   JS_ASSIGN_PROTO_PROP(flashMode);
   JS_ASSIGN_PROTO_PROP_READONLY(hasTorch);
   JS_ASSIGN_PROTO_PROP_READONLY(isTorchAvailable);
@@ -866,12 +868,14 @@ NAN_GETTER(NAVCaptureDevice::isFlashAvailableGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureDevice::isFlashActiveGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self isFlashActive]));
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureDevice::flashModeGetter) {
   JS_UNWRAP(AVCaptureDevice, self);

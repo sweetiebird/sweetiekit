@@ -10,7 +10,7 @@
 
 #include "NARConfiguration.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARImageTrackingConfiguration(x) js_value_wrapper(x, ARImageTrackingConfiguration)
 #define to_value_ARImageTrackingConfiguration(x) to_value_wrapper(x, ARImageTrackingConfiguration)

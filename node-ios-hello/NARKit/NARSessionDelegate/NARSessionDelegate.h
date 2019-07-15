@@ -6,9 +6,11 @@
 //
 
 #ifndef NARSessionDelegate_h
-#define NARSessionDelegate_h    
+#define NARSessionDelegate_h
 
 #include "NARSessionObserver.h"
+
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #if __OBJC__
 @protocol ARSessionDelegate;
@@ -65,6 +67,8 @@ JS_WRAP_PROTOCOL_END(ARSessionDelegate, ARSessionObserver);
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
 
 @end
+#endif
+
 #endif
 
 #endif /* NARSessionDelegate_h */

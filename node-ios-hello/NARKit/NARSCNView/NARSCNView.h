@@ -10,7 +10,7 @@
 
 #include "NSCNView.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARSCNView(x) js_value_wrapper(x, ARSCNView)
 #define to_value_ARSCNView(x) to_value_wrapper(x, ARSCNView)

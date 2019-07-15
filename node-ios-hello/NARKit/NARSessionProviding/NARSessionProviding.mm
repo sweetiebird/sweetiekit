@@ -6,6 +6,8 @@
 //
 #include "NARSessionProviding.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARSessionProviding
 #define js_value_instancetype js_value_ARSessionProviding
 
@@ -57,3 +59,5 @@ NAN_GETTER(NARSessionProviding::sessionGetter) {
 
 @implementation ARSessionProvidingType
 @end
+
+#endif

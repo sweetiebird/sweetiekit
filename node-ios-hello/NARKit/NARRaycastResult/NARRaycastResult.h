@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define js_value_ARRaycastResult(x) js_value_wrapper(x, ARRaycastResult)
 #define to_value_ARRaycastResult(x) to_value_wrapper(x, ARRaycastResult)
 #define is_value_ARRaycastResult(x) is_value_wrapper(x, ARRaycastResult)
@@ -20,5 +22,7 @@ JS_WRAP_CLASS(ARRaycastResult, NSObject);
   JS_PROP_READONLY(targetAlignment);
   JS_PROP_READONLY(anchor);
 JS_WRAP_CLASS_END(ARRaycastResult);
+
+#endif
 
 #endif /* NARRaycastResult_h */

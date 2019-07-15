@@ -6,6 +6,8 @@
 //
 #include "NARTrackedRaycast.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARTrackedRaycast
 #define js_value_instancetype js_value_ARTrackedRaycast
 
@@ -59,3 +61,5 @@ NAN_METHOD(NARTrackedRaycast::stopTracking) {
     [self stopTracking];
   }
 }
+
+#endif

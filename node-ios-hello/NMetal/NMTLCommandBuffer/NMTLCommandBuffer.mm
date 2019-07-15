@@ -18,7 +18,7 @@ JS_INIT_PROTOCOL(MTLCommandBuffer, NSObject);
   JS_ASSIGN_PROTO_METHOD(addScheduledHandler);
   JS_ASSIGN_PROTO_METHOD(presentDrawable);
   JS_ASSIGN_PROTO_METHOD(presentDrawableAtTime);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(presentDrawableAfterMinimumDuration);
 #endif
   JS_ASSIGN_PROTO_METHOD(waitUntilScheduled);
@@ -132,7 +132,7 @@ JS_INIT_PROTOCOL(MTLCommandBuffer, NSObject);
     JS_ASSIGN_ENUM(MTLCommandBufferErrorNotPermitted, NSUInteger); // = 7,
     JS_ASSIGN_ENUM(MTLCommandBufferErrorOutOfMemory, NSUInteger); // = 8,
     JS_ASSIGN_ENUM(MTLCommandBufferErrorInvalidResource, NSUInteger); // = 9,
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(MTLCommandBufferErrorMemoryless, NSUInteger); // API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 10,
 #elif !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(MTLCommandBufferErrorDeviceRemoved, NSUInteger); // API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) = 11,
@@ -233,7 +233,7 @@ NAN_METHOD(NMTLCommandBuffer::presentDrawableAtTime) {
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NMTLCommandBuffer::presentDrawableAfterMinimumDuration) {
   JS_UNWRAP_PROTOCOL(MTLCommandBuffer, self);
   declare_autoreleasepool {

@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARSegmentationClass(x) JS_ENUM(ARSegmentationClass, uint8_t, x)
 #define to_value_ARSegmentationClass(x) TO_ENUM(ARSegmentationClass, uint8_t, x)

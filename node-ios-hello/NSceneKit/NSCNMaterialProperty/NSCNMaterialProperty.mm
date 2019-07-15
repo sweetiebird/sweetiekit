@@ -19,7 +19,7 @@ JS_INIT_CLASS(SCNMaterialProperty, NSObject);
   JS_ASSIGN_PROP(proto, contentsTransform);
   JS_ASSIGN_PROP(proto, wrapS);
   JS_ASSIGN_PROP(proto, wrapT);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROP(proto, borderColor);
 #endif
   JS_ASSIGN_PROP(proto, mappingChannel);
@@ -187,7 +187,7 @@ NAN_SETTER(NSCNMaterialProperty::wrapTSetter) {
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NSCNMaterialProperty::borderColorGetter) {
   JS_UNWRAP(SCNMaterialProperty, self);
   @autoreleasepool

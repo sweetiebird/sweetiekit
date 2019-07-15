@@ -71,7 +71,7 @@ JS_INIT_PROTOCOL(SCNSceneRenderer, NSObject);
    */
   //typedef NS_ENUM(NSUInteger, SCNRenderingAPI) {
     JS_ASSIGN_ENUM(SCNRenderingAPIMetal, NSUInteger);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(SCNRenderingAPIOpenGLES2, NSUInteger);
 #endif
   //} API_AVAILABLE(macos(10.11), ios(9.0));

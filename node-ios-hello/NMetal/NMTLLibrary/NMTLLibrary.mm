@@ -52,7 +52,7 @@ JS_INIT_PROTOCOL(MTLLibrary, NSObject);
   //} API_AVAILABLE(macos(10.11), ios(8.0));
 
   //typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(MTLLanguageVersion1_0, NSUInteger); // API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) = (1 << 16),
 #endif
     JS_ASSIGN_ENUM(MTLLanguageVersion1_1, NSUInteger); // API_AVAILABLE(macos(10.11), ios(9.0)) = (1 << 16) + 1,

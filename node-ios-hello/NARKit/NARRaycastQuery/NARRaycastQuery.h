@@ -8,6 +8,8 @@
 #ifndef NARRaycastQuery_h
 #define NARRaycastQuery_h    
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #include "NNSObject.h"
 
 #define js_value_ARRaycastTarget(x) JS_ENUM(ARRaycastTarget, NSInteger, x)
@@ -29,5 +31,7 @@ JS_WRAP_CLASS(ARRaycastQuery, NSObject);
   JS_PROP_READONLY(target);
   JS_PROP_READONLY(targetAlignment);
 JS_WRAP_CLASS_END(ARRaycastQuery);
+
+#endif
 
 #endif /* NARRaycastQuery_h */

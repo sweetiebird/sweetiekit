@@ -117,11 +117,15 @@ JS_INIT_GLOBALS(CVPixelBuffer);
   JS_ASSIGN_ENUM(kCVPixelBufferOpenGLCompatibilityKey, CFStringRef); //  API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));   // CFBoolean
   JS_ASSIGN_ENUM(kCVPixelBufferPlaneAlignmentKey, CFStringRef); //  API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));        // CFNumber
   JS_ASSIGN_ENUM(kCVPixelBufferIOSurfacePropertiesKey, CFStringRef); //  API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));     // CFDictionary; presence requests buffer allocation via IOSurface
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_ENUM(kCVPixelBufferOpenGLESCompatibilityKey, CFStringRef); //  API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx, uikitformac) __WATCHOS_PROHIBITED;      // CFBoolean
+#endif
   JS_ASSIGN_ENUM(kCVPixelBufferMetalCompatibilityKey, CFStringRef); //  API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0), watchos(4.0));      // CFBoolean
 #if !TARGET_OS_IPHONE && !TARGET_OS_TV && !TARGET_OS_WATCH
   JS_ASSIGN_ENUM(kCVPixelBufferOpenGLTextureCacheCompatibilityKey, CFStringRef); //  API_AVAILABLE(macosx(10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 #endif
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_ENUM(kCVPixelBufferOpenGLESTextureCacheCompatibilityKey, CFStringRef); //  API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx, uikitformac) __WATCHOS_PROHIBITED;
+#endif
 
 JS_INIT_GLOBALS_END(CVPixelBuffer);

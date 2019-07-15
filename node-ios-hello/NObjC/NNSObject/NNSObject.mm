@@ -1476,8 +1476,7 @@ NAN_METHOD(NClass::New) {
 #include "NGLKViewDelegate.h"
 #include "NGLKViewControllerDelegate.h"
 
-#if TARGET_OS_IPHONE
-@import ARKit;
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 #include "NARAnchor.h"
 #include "NARConfiguration.h"
 #include "NARWorldTrackingConfiguration.h"
@@ -2167,20 +2166,20 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // OpenGLES
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_EXPORT_TYPE(EAGLContext);
     JS_EXPORT_TYPE(EAGLSharegroup);
 #endif
     
     // WebGL
     
-#if TARGET_OS_IPHONE // TODO: mac
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC // TODO: mac
     exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
 #endif
 
     // GLKit
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_EXPORT_PROTOCOL(GLKViewControllerDelegate);
     JS_EXPORT_PROTOCOL(GLKViewDelegate);
     JS_EXPORT_TYPE(GLKViewController);
@@ -2345,7 +2344,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTLRenderPipelineReflection); // : NSObject
     JS_EXPORT_TYPE(MTLRenderPipelineDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLRenderPipelineColorAttachmentDescriptorArray); // : NSObject
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
     JS_EXPORT_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
     JS_EXPORT_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
@@ -2400,7 +2399,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(MTKView);
     JS_EXPORT_TYPE(MTKViewDelegate);
     
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
     // ARKit
 
     JS_EXPORT_TYPE(ARLightEstimate);
@@ -2493,7 +2492,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit
 
-#if TARGET_OS_IPHONE // TODO: mac
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC // TODO: mac
       JS_RETURN_TYPE(GLKViewController);
       JS_RETURN_TYPE(GLKView);
 #endif
@@ -2576,7 +2575,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLVertexBufferLayoutDescriptor); // : NSObject <NSCopying>
 
       JS_RETURN_TYPE(MTLRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
       JS_RETURN_TYPE(MTLTileRenderPipelineDescriptor); // : NSObject <NSCopying>
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptorArray); // : NSObject
       JS_RETURN_TYPE(MTLTileRenderPipelineColorAttachmentDescriptor); // : NSObject <NSCopying>
@@ -2616,7 +2615,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(MTLStructMember); // : NSObject
       JS_RETURN_TYPE(MTLType); // : NSObject
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
       // ARKit
 
       JS_RETURN_TYPE(ARLightEstimate);
@@ -2751,7 +2750,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // OpenGLES
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
       JS_RETURN_TYPE(EAGLContext);
       JS_RETURN_TYPE(EAGLSharegroup);
 #endif
@@ -3114,7 +3113,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 
       // GLKit protocols
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
       JS_RETURN_PROTOCOL(GLKViewControllerDelegate);
       JS_RETURN_PROTOCOL(GLKViewDelegate);
 #endif
@@ -3192,7 +3191,7 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       
       JS_RETURN_PROTOCOL(MKMapViewDelegate);
       
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
       // ARKit protocols
       
       JS_RETURN_PROTOCOL(ARSCNViewDelegate);

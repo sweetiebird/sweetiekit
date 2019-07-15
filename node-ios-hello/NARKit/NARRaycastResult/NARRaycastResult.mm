@@ -6,6 +6,8 @@
 //
 #include "NARRaycastResult.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARRaycastResult
 #define js_value_instancetype js_value_ARRaycastResult
 
@@ -75,3 +77,5 @@ NAN_GETTER(NARRaycastResult::anchorGetter) {
     JS_SET_RETURN(js_value_ARAnchor([self anchor]));
   }
 }
+
+#endif

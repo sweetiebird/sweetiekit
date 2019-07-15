@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARLightEstimate(x) js_value_wrapper(x, ARLightEstimate)
 #define to_value_ARLightEstimate(x) to_value_wrapper(x, ARLightEstimate)

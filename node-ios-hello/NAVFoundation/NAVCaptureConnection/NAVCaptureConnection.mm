@@ -41,8 +41,10 @@ JS_INIT_CLASS(AVCaptureConnection, NSObject);
   JS_ASSIGN_PROTO_PROP(preferredVideoStabilizationMode);
   JS_ASSIGN_PROTO_PROP_READONLY(activeVideoStabilizationMode);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoStabilizationSupported);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoStabilizationEnabled);
   JS_ASSIGN_PROTO_PROP(enablesVideoStabilizationWhenAvailable);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(isCameraIntrinsicMatrixDeliverySupported);
   JS_ASSIGN_PROTO_PROP(isCameraIntrinsicMatrixDeliveryEnabled);
 
@@ -358,6 +360,7 @@ NAN_GETTER(NAVCaptureConnection::isVideoStabilizationSupportedGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureConnection::isVideoStabilizationEnabledGetter) {
   JS_UNWRAP(AVCaptureConnection, self);
   declare_autoreleasepool {
@@ -380,6 +383,7 @@ NAN_SETTER(NAVCaptureConnection::enablesVideoStabilizationWhenAvailableSetter) {
     [self setEnablesVideoStabilizationWhenAvailable: input];
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureConnection::isCameraIntrinsicMatrixDeliverySupportedGetter) {
   JS_UNWRAP(AVCaptureConnection, self);

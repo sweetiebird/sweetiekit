@@ -10,6 +10,8 @@
 
 #include "NNSObject.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define js_value_ARSessionObserver(x) js_protocol_wrapper(x, ARSessionObserver)
 #define to_value_ARSessionObserver(x) to_protocol_wrapper(x, ARSessionObserver)
 #define is_value_ARSessionObserver(x) is_protocol_wrapper(x, ARSessionObserver)
@@ -104,6 +106,8 @@ JS_WRAP_PROTOCOL_END(ARSessionObserver, NSObject);
 #endif
 
 @end
+#endif
+
 #endif
 
 #endif /* NARSessionObserver_h */

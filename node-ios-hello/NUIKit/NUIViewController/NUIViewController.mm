@@ -124,9 +124,9 @@ JS_INIT_CLASS(UIViewController, UIResponder);
   JS_ASSIGN_PROTO_METHOD(registerForPreviewingWithDelegateSourceView);
   JS_ASSIGN_PROTO_METHOD(unregisterForPreviewingWithContext);
   JS_ASSIGN_PROTO_METHOD(setNeedsUpdateOfScreenEdgesDeferringSystemGestures);
-  #if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(setNeedsUpdateOfHomeIndicatorAutoHidden);
-  #endif
+#endif
   JS_ASSIGN_PROTO_METHOD(previewActionItems);
 #if TODO
 // UIContentContainer
@@ -203,8 +203,10 @@ JS_INIT_CLASS(UIViewController, UIResponder);
 // UIViewController
   JS_ASSIGN_PROTO_PROP_READONLY(childViewControllerForScreenEdgesDeferringSystemGestures);
   JS_ASSIGN_PROTO_PROP_READONLY(preferredScreenEdgesDeferringSystemGestures);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(childViewControllerForHomeIndicatorAutoHidden);
   JS_ASSIGN_PROTO_PROP_READONLY(prefersHomeIndicatorAutoHidden);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(previewActionItems);
 #if TODO
 // UIPreviewActionItem
@@ -1209,7 +1211,7 @@ NAN_METHOD(NUIViewController::setNeedsUpdateOfScreenEdgesDeferringSystemGestures
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NUIViewController::setNeedsUpdateOfHomeIndicatorAutoHidden) {
   JS_UNWRAP(UIViewController, self);
   declare_autoreleasepool {
@@ -1852,7 +1854,7 @@ NAN_GETTER(NUIViewController::preferredScreenEdgesDeferringSystemGesturesGetter)
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NUIViewController::childViewControllerForHomeIndicatorAutoHiddenGetter) {
   JS_UNWRAP(UIViewController, self);
   declare_autoreleasepool {

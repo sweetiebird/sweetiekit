@@ -11,7 +11,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARCamera(x) js_value_wrapper(x, ARCamera)
 #define to_value_ARCamera(x) to_value_wrapper(x, ARCamera)

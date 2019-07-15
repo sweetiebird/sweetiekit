@@ -199,7 +199,7 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(drawPatchesPatchIndexBufferPatchIndexBufferOffsetIndirectBufferIndirectBufferOffset);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPatchesPatchStartPatchCountPatchIndexBufferPatchIndexBufferOffsetControlPointIndexBufferControlPointIndexBufferOffsetInstanceCountBaseInstance);
   JS_ASSIGN_PROTO_METHOD(drawIndexedPatchesPatchIndexBufferPatchIndexBufferOffsetControlPointIndexBufferControlPointIndexBufferOffsetIndirectBufferIndirectBufferOffset);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(setTileBytesLengthAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileBufferWithOffsetAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileBufferOffsetAtIndex);
@@ -210,9 +210,9 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStatesWithRange);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStateLodMinClampLodMaxClampAtIndex);
   JS_ASSIGN_PROTO_METHOD(setTileSamplerStatesLodMinClampsLodMaxClampsWithRange);
-#endif
   JS_ASSIGN_PROTO_METHOD(dispatchThreadsPerTile);
   JS_ASSIGN_PROTO_METHOD(setThreadgroupMemoryLengthOffsetAtIndex);
+#endif
   JS_ASSIGN_PROTO_METHOD(useResourceUsage);
   JS_ASSIGN_PROTO_METHOD(useResourcesCountUsage);
   JS_ASSIGN_PROTO_METHOD(useHeap);
@@ -223,7 +223,7 @@ JS_INIT_PROTOCOL(MTLRenderCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(memoryBarrierWithScopeAfterStagesBeforeStages);
 #endif
   JS_ASSIGN_PROTO_METHOD(memoryBarrierWithResourcesCountAfterStagesBeforeStages);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(tileWidth);
   JS_ASSIGN_PROTO_PROP_READONLY(tileHeight);
 #endif
@@ -960,7 +960,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::drawIndexedPatchesPatchIndexBufferPatchInde
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NMTLRenderCommandEncoder::setTileBytesLengthAtIndex) {
   JS_UNWRAP_PROTOCOL(MTLRenderCommandEncoder, self);
   declare_autoreleasepool {
@@ -1197,7 +1197,7 @@ NAN_METHOD(NMTLRenderCommandEncoder::memoryBarrierWithResourcesCountAfterStagesB
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NMTLRenderCommandEncoder::tileWidthGetter) {
   JS_UNWRAP_PROTOCOL(MTLRenderCommandEncoder, self);
   declare_autoreleasepool {

@@ -6,7 +6,7 @@
 //
 #include "NARWorldTrackingConfiguration.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARWorldTrackingConfiguration
 #define Ninstancetype NARWorldTrackingConfiguration

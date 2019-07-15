@@ -6,7 +6,7 @@
 //
 #include "NARLightEstimate.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 NARLightEstimate::NARLightEstimate () {}
 NARLightEstimate::~NARLightEstimate () {}

@@ -8,6 +8,8 @@
 #ifndef NARCollaborationData_h
 #define NARCollaborationData_h    
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #include "NNSObject.h"
 
 #define js_value_ARCollaborationDataPriority(x) JS_ENUM(ARCollaborationDataPriority, NSInteger, x)
@@ -21,5 +23,7 @@
 JS_WRAP_CLASS(ARCollaborationData, NSObject);
   JS_PROP_READONLY(priority);
 JS_WRAP_CLASS_END(ARCollaborationData);
+
+#endif
 
 #endif /* NARCollaborationData_h */

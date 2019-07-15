@@ -46,6 +46,8 @@ JS_INIT_CLASS(MTKView, UIView);
   // constant values (exports)
 JS_INIT_CLASS_END(MTKView, UIView);
 
+#include "NMTLDevice.h"
+
 NAN_METHOD(NMTKView::New) {
   JS_RECONSTRUCT(MTKView);
   @autoreleasepool {
@@ -53,8 +55,16 @@ NAN_METHOD(NMTKView::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge MTKView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0]) && is_value_MTLDevice(info[1])) {
+      declare_args();
+      declare_value(CGRect, frame);
+      declare_protocol(MTLDevice, device);
+      self = [[MTKView alloc] initWithFrame:frame device:device];
     } else if (is_value_CGRect(info[0])) {
-      self = [[MTKView alloc] initWithFrame:to_value_CGRect(info[0])];
+      declare_args();
+      declare_value(CGRect, frame);
+      id<MTLDevice> device(MTLCreateSystemDefaultDevice());
+      self = [[MTKView alloc] initWithFrame:frame device:device];
     } else if (info.Length() <= 0) {
       self = [[MTKView alloc] init];
     }
@@ -69,8 +79,6 @@ NAN_METHOD(NMTKView::New) {
     }
   }
 }
-
-#include "NMTLDevice.h"
 
 NAN_METHOD(NMTKView::initWithFrameDevice) {
   JS_UNWRAP_OR_ALLOC(MTKView, self);

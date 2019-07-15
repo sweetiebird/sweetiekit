@@ -6,6 +6,8 @@
 //
 #include "NARSessionObserver.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARSessionObserver
 #define js_value_instancetype js_value_ARSessionObserver
 
@@ -179,3 +181,5 @@ DELEGATE_PROTOCOL_PROP(ARSessionObserver, sessionDidOutputCollaborationData);
 #endif
 
 @end
+
+#endif

@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_GLKViewDelegate(x) js_protocol_wrapper(x, GLKViewDelegate)
 #define to_value_GLKViewDelegate(x) to_protocol_wrapper(x, GLKViewDelegate)

@@ -28,7 +28,7 @@ JS_INIT_CLASS(MTLSamplerDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(normalizedCoordinates);
   JS_ASSIGN_PROTO_PROP(lodMinClamp);
   JS_ASSIGN_PROTO_PROP(lodMaxClamp);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(lodAverage);
 #endif
   JS_ASSIGN_PROTO_PROP(compareFunction);
@@ -276,7 +276,7 @@ NAN_SETTER(NMTLSamplerDescriptor::lodMaxClampSetter) {
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NMTLSamplerDescriptor::lodAverageGetter) {
   JS_UNWRAP(MTLSamplerDescriptor, self);
   declare_autoreleasepool {

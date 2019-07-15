@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARHitTestResult(x) js_value_wrapper(x, ARHitTestResult)
 #define to_value_ARHitTestResult(x) to_value_wrapper(x, ARHitTestResult)

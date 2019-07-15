@@ -22,7 +22,9 @@ JS_INIT_CLASS(AVCaptureVideoDataOutput, AVCaptureOutput);
   JS_ASSIGN_PROTO_PROP(videoSettings);
   JS_ASSIGN_PROTO_PROP_READONLY(availableVideoCVPixelFormatTypes);
   JS_ASSIGN_PROTO_PROP_READONLY(availableVideoCodecTypes);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(minFrameDuration);
+#endif
   JS_ASSIGN_PROTO_PROP(alwaysDiscardsLateVideoFrames);
   JS_ASSIGN_PROTO_PROP(automaticallyConfiguresOutputBufferDimensions);
   JS_ASSIGN_PROTO_PROP(deliversPreviewSizedOutputBuffers);
@@ -152,6 +154,7 @@ NAN_GETTER(NAVCaptureVideoDataOutput::availableVideoCodecTypesGetter) {
 
 #include "NCMTime.h"
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureVideoDataOutput::minFrameDurationGetter) {
   JS_UNWRAP(AVCaptureVideoDataOutput, self);
   declare_autoreleasepool {
@@ -167,6 +170,7 @@ NAN_SETTER(NAVCaptureVideoDataOutput::minFrameDurationSetter) {
     [self setMinFrameDuration: input];
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureVideoDataOutput::alwaysDiscardsLateVideoFramesGetter) {
   JS_UNWRAP(AVCaptureVideoDataOutput, self);

@@ -352,7 +352,7 @@ int main(int argc, char** argv)
 {
   static auto _argc = argc;
   static auto _argv = argv;
-  registerNodeDLibs();
+//  registerNodeDLibs();
   chdir(getenv("HOME"));
   chdir("Documents");
 
@@ -361,13 +361,13 @@ int main(int argc, char** argv)
     __builtin_trap();
   }
 //  auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
-  NSArray* arguments = @[@"node", @"--expose_gc", @"--inspect=0.0.0.0:9229", @"--jitless", @"--builtins-in-stack-traces",
-#if 0
-#if !TARGET_OS_SIMULATOR
-  // try to avoid the IC crash
-  @"--no-use-ic", @"--no-opt", @"--no-compilation-cache", /*@"--minimal",*/
+  NSArray* arguments = @[@"node",
+  @"--expose_gc",
+  @"--inspect=0.0.0.0:9229",
+#if !TARGET_OS_UIKITFORMAC
+  @"--jitless",
 #endif
-#endif
+  @"--builtins-in-stack-traces",
   entry
   /*@"-e",
 @"\
@@ -421,4 +421,21 @@ honeykit.stop = () => {                        \
   node::Start(node_argc, node_argv.data());
 }
 
+extern "C" void registerNodeDLibs()
+{
+  UIApplication* application = [UIApplication sharedApplication];
 
+  [application requestSceneSessionActivation: nil userActivity: nil options: nil errorHandler: nil];
+  auto session = [[UIApplication sharedApplication] openSessions].anyObject;
+  UIScene* scene = [session scene];
+  if ([scene isKindOfClass:[UIWindowScene class]]) {
+    UIWindowScene* windowScene = (UIWindowScene*)scene;
+    UIWindow* window = [[UIWindow alloc] initWithWindowScene: windowScene];
+    SceneDelegate* sceneDelegate = [SceneDelegate new];
+    windowScene.delegate = sceneDelegate;
+//    window.rootViewController = [SceneDelegate getHostingController];
+    window.rootViewController = [[UIViewController alloc] init];
+    sceneDelegate.window = window;
+    [window makeKeyAndVisible];
+  }
+}

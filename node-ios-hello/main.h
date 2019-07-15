@@ -21,7 +21,7 @@
 @import ModelIO;
 #import <SceneKit/ModelIO.h>
 @import SpriteKit;
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 @import ARKit;
 #endif
 @import MetalKit;
@@ -33,7 +33,9 @@
 @import CoreMotion;
 @import Contacts;
 @import GameplayKit;
+#if !TARGET_OS_UIKITFORMAC
 @import GLKit;
+#endif
 @import MapKit;
 @import MediaPlayer;
 @import ReplayKit;

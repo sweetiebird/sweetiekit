@@ -6,6 +6,8 @@
 //
 #include "NARRaycastQuery.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARRaycastQuery
 #define js_value_instancetype js_value_ARRaycastQuery
 
@@ -126,3 +128,5 @@ NAN_GETTER(NARRaycastQuery::targetAlignmentGetter) {
     JS_SET_RETURN(js_value_ARRaycastTargetAlignment([self targetAlignment]));
   }
 }
+
+#endif

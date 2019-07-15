@@ -1283,7 +1283,13 @@ process.stderr.write('sweetiekit-node\\n');
         }
         iOSLog0("Finished running node\n");
         // Override point for customization after application launch.
+        AppDelegate.OnStart();
         return true
+    }
+    
+    @objc
+    class func OnStart() {
+      registerNodeDLibs();
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

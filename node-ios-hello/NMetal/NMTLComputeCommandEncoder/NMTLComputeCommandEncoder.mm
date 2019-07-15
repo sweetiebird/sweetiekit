@@ -25,7 +25,9 @@ JS_INIT_PROTOCOL(MTLComputeCommandEncoder, MTLCommandEncoder);
   JS_ASSIGN_PROTO_METHOD(setSamplerStateLodMinClampLodMaxClampAtIndex);
   JS_ASSIGN_PROTO_METHOD(setSamplerStatesLodMinClampsLodMaxClampsWithRange);
   JS_ASSIGN_PROTO_METHOD(setThreadgroupMemoryLengthAtIndex);
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(setImageblockWidthHeight);
+#endif
   JS_ASSIGN_PROTO_METHOD(setStageInRegion);
   JS_ASSIGN_PROTO_METHOD(setStageInRegionWithIndirectBufferIndirectBufferOffset);
   JS_ASSIGN_PROTO_METHOD(dispatchThreadgroupsThreadsPerThreadgroup);
@@ -220,7 +222,7 @@ NAN_METHOD(NMTLComputeCommandEncoder::setThreadgroupMemoryLengthAtIndex) {
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NMTLComputeCommandEncoder::setImageblockWidthHeight) {
   JS_UNWRAP_PROTOCOL(MTLComputeCommandEncoder, self);
   declare_autoreleasepool {

@@ -114,7 +114,7 @@ JS_INIT_PROTOCOL(MTLDevice, NSObject);
   JS_ASSIGN_PROTO_METHOD(minimumLinearTextureAlignmentForPixelFormat);
   JS_ASSIGN_PROTO_METHOD(minimumTextureBufferAlignmentForPixelFormat);
   JS_ASSIGN_PROTO_METHOD(newRenderPipelineStateWithTileDescriptorOptionsReflectionError);
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_METHOD(newRenderPipelineStateWithTileDescriptorOptionsCompletionHandler);
 #endif
   JS_ASSIGN_PROTO_METHOD(getDefaultSamplePositionsCount);
@@ -671,7 +671,7 @@ NAN_METHOD(NMTLDevice::newRenderPipelineStateWithTileDescriptorOptionsReflection
   }
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NMTLDevice::newRenderPipelineStateWithTileDescriptorOptionsCompletionHandler) {
   JS_UNWRAP_PROTOCOL(MTLDevice, self);
   declare_autoreleasepool {

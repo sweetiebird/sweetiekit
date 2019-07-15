@@ -11,10 +11,8 @@ NCLLocationManager::NCLLocationManager () {}
 NCLLocationManager::~NCLLocationManager () {}
 
 JS_INIT_CLASS(CLLocationManager, NSObject);
-#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_STATIC_METHOD(locationServicesEnabled);
   JS_ASSIGN_STATIC_METHOD(headingAvailable);
-#endif
   JS_ASSIGN_STATIC_METHOD(significantLocationChangeMonitoringAvailable);
   JS_ASSIGN_STATIC_METHOD(isMonitoringAvailableForClass);
   JS_ASSIGN_STATIC_METHOD(regionMonitoringAvailable);
@@ -47,7 +45,9 @@ JS_INIT_CLASS(CLLocationManager, NSObject);
   JS_ASSIGN_PROTO_METHOD(disallowDeferredLocationUpdates);
 #endif
   JS_ASSIGN_PROTO_PROP(delegate);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(locationServicesEnabled);
+#endif
   JS_ASSIGN_PROTO_PROP(purpose);
   JS_ASSIGN_PROTO_PROP(activityType);
   JS_ASSIGN_PROTO_PROP(distanceFilter);
@@ -56,7 +56,9 @@ JS_INIT_CLASS(CLLocationManager, NSObject);
   JS_ASSIGN_PROTO_PROP(allowsBackgroundLocationUpdates);
   JS_ASSIGN_PROTO_PROP(showsBackgroundLocationIndicator);
   JS_ASSIGN_PROTO_PROP_READONLY(location);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(headingAvailable);
+#endif
   JS_ASSIGN_PROTO_PROP(headingFilter);
   JS_ASSIGN_PROTO_PROP(headingOrientation);
   JS_ASSIGN_PROTO_PROP_READONLY(heading);

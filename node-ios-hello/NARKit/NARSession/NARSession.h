@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_ARSessionRunOptions(x) JS_ENUM(ARSessionRunOptions, NSUInteger, x)
 #define to_value_ARSessionRunOptions(x) TO_ENUM(ARSessionRunOptions, NSUInteger, x)

@@ -6,6 +6,8 @@
 //
 #include "NARCollaborationData.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define instancetype ARCollaborationData
 #define js_value_instancetype js_value_ARCollaborationData
 
@@ -64,3 +66,5 @@ NAN_GETTER(NARCollaborationData::priorityGetter) {
     JS_SET_RETURN(js_value_ARCollaborationDataPriority([self priority]));
   }
 }
+
+#endif
