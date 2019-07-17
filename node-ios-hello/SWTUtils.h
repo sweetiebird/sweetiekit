@@ -76,7 +76,7 @@ public:
 typedef char* char_ptr;
 typedef const char* const_char_ptr;
 
-#define js_value_const_char_ptr(x) js_value_NSString(x)
+#define js_value_const_char_ptr(x) js_value_NSString([NSString stringWithUTF8String:(x)])
 #define to_value_const_char_ptr(x) [to_value_NSString(x) UTF8String]
 #define is_value_const_char_ptr(x) is_value_NSString(x)
 
