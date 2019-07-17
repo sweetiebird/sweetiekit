@@ -423,19 +423,25 @@ honeykit.stop = () => {                        \
 
 extern "C" void registerNodeDLibs()
 {
-  UIApplication* application = [UIApplication sharedApplication];
-
-  [application requestSceneSessionActivation: nil userActivity: nil options: nil errorHandler: nil];
-  auto session = [[UIApplication sharedApplication] openSessions].anyObject;
-  UIScene* scene = [session scene];
-  if ([scene isKindOfClass:[UIWindowScene class]]) {
-    UIWindowScene* windowScene = (UIWindowScene*)scene;
-    UIWindow* window = [[UIWindow alloc] initWithWindowScene: windowScene];
-    SceneDelegate* sceneDelegate = [SceneDelegate new];
-    windowScene.delegate = sceneDelegate;
-//    window.rootViewController = [SceneDelegate getHostingController];
-    window.rootViewController = [[UIViewController alloc] init];
-    sceneDelegate.window = window;
-    [window makeKeyAndVisible];
+  if (@available(iOS 13.0, *)) {
+    UIApplication* application = [UIApplication sharedApplication];
+    [application requestSceneSessionActivation: nil userActivity: nil options: nil errorHandler: nil];
+    auto session = [[UIApplication sharedApplication] openSessions].anyObject;
+    UIScene* scene = [session scene];
+    if ([scene isKindOfClass:[UIWindowScene class]]) {
+      UIWindowScene* windowScene = (UIWindowScene*)scene;
+      UIWindow* window = [[UIWindow alloc] initWithWindowScene: windowScene];
+      SceneDelegate* sceneDelegate = [SceneDelegate new];
+      windowScene.delegate = sceneDelegate;
+  //    window.rootViewController = [SceneDelegate getHostingController];
+      window.rootViewController = [[UIViewController alloc] init];
+      sceneDelegate.window = window;
+      [window makeKeyAndVisible];
+    } else {
+      UIWindow* window = [[UIWindow alloc] init];
+  //    window.rootViewController = [SceneDelegate getHostingController];
+      window.rootViewController = [[UIViewController alloc] init];
+      [window makeKeyAndVisible];
+    }
   }
 }
