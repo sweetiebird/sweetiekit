@@ -87,8 +87,8 @@
 		A126560622719CE400D3DF47 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = A12655F722719CE400D3DF47 /* demo.js */; };
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
 		A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12C1503228A3718005BDD9D /* NSCNScene.mm */; };
-		A1311C4E2292BF340064FE1D /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
+		A13148B222DECCCB007B2108 /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1AD024322DC7AB600F0D8FE /* embedded.S */; };
 		A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */; };
 		A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */; };
 		A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */; };
@@ -593,6 +593,7 @@
 		A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2057A22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm */; };
 		A1B205812297A423006CA4C6 /* NUIPopoverPresentationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B205802297A423006CA4C6 /* NUIPopoverPresentationController.mm */; };
 		A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */; };
+		A1B6440D22DCC7A7005AD792 /* NNSOpenGL.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6440C22DCC7A7005AD792 /* NNSOpenGL.mm */; };
 		A1B65484228CB87F00976024 /* NUITouch.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65482228CB87E00976024 /* NUITouch.mm */; };
 		A1B6548A228CD87600976024 /* NSKAction.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B65489228CD87500976024 /* NSKAction.mm */; };
 		A1B6548F228CE34D00976024 /* NSKPhysicsWorld.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B6548D228CE34D00976024 /* NSKPhysicsWorld.mm */; };
@@ -1867,6 +1868,8 @@
 		A19F4DA1229F7D5A00E7F593 /* NUIEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIEvent.mm; sourceTree = "<group>"; };
 		A1A04CD922D6ECE600B7A7B1 /* SWTUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWTUtils.h; sourceTree = "<group>"; };
 		A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SWTUtils.mm; sourceTree = "<group>"; };
+		A1AD024222DC7AB600F0D8FE /* snapshot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = snapshot.cc; sourceTree = "<group>"; };
+		A1AD024322DC7AB600F0D8FE /* embedded.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = embedded.S; sourceTree = "<group>"; };
 		A1B2056D229788FC006CA4C6 /* NCoreGraphicsGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreGraphicsGlobals.h; sourceTree = "<group>"; };
 		A1B2056E229788FC006CA4C6 /* NCoreGraphicsGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreGraphicsGlobals.mm; sourceTree = "<group>"; };
 		A1B2057022978949006CA4C6 /* SCoreGraphicsGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCoreGraphicsGlobals.swift; sourceTree = "<group>"; };
@@ -1879,6 +1882,9 @@
 		A1B205802297A423006CA4C6 /* NUIPopoverPresentationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIPopoverPresentationController.mm; sourceTree = "<group>"; };
 		A1B5ABCF227D1124004B3CB2 /* NCABasicAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCABasicAnimation.h; sourceTree = "<group>"; };
 		A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCABasicAnimation.mm; sourceTree = "<group>"; };
+		A1B6440B22DCC7A7005AD792 /* NNSOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSOpenGL.h; sourceTree = "<group>"; };
+		A1B6440C22DCC7A7005AD792 /* NNSOpenGL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSOpenGL.mm; sourceTree = "<group>"; };
+		A1B6440E22DCC9D1005AD792 /* NNSOpenGL_uikitformac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNSOpenGL_uikitformac.h; sourceTree = "<group>"; };
 		A1B65482228CB87E00976024 /* NUITouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUITouch.mm; sourceTree = "<group>"; };
 		A1B65483228CB87E00976024 /* NUITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUITouch.h; sourceTree = "<group>"; };
 		A1B65488228CD87500976024 /* NSKAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKAction.h; sourceTree = "<group>"; };
@@ -7272,6 +7278,31 @@
 			path = NUIEvent;
 			sourceTree = "<group>";
 		};
+		A1AD023F22DC7AB600F0D8FE /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				A1AD024022DC7AB600F0D8FE /* uikitformac */,
+			);
+			path = Snapshot;
+			sourceTree = "<group>";
+		};
+		A1AD024022DC7AB600F0D8FE /* uikitformac */ = {
+			isa = PBXGroup;
+			children = (
+				A1AD024122DC7AB600F0D8FE /* Release */,
+			);
+			path = uikitformac;
+			sourceTree = "<group>";
+		};
+		A1AD024122DC7AB600F0D8FE /* Release */ = {
+			isa = PBXGroup;
+			children = (
+				A1AD024222DC7AB600F0D8FE /* snapshot.cc */,
+				A1AD024322DC7AB600F0D8FE /* embedded.S */,
+			);
+			path = Release;
+			sourceTree = "<group>";
+		};
 		A1B2056B229788FC006CA4C6 /* NCoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -7335,6 +7366,24 @@
 				A1B5ABD0227D112E004B3CB2 /* NCABasicAnimation.mm */,
 			);
 			path = NCABasicAnimation;
+			sourceTree = "<group>";
+		};
+		A1B6440922DCC7A7005AD792 /* NAppKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6440A22DCC7A7005AD792 /* NNSOpenGL */,
+			);
+			path = NAppKit;
+			sourceTree = "<group>";
+		};
+		A1B6440A22DCC7A7005AD792 /* NNSOpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6440B22DCC7A7005AD792 /* NNSOpenGL.h */,
+				A1B6440C22DCC7A7005AD792 /* NNSOpenGL.mm */,
+				A1B6440E22DCC9D1005AD792 /* NNSOpenGL_uikitformac.h */,
+			);
+			path = NNSOpenGL;
 			sourceTree = "<group>";
 		};
 		A1B65481228CB87E00976024 /* NUITouch */ = {
@@ -8824,6 +8873,7 @@
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A1AD023F22DC7AB600F0D8FE /* Snapshot */,
 				A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */,
 				A1FF9E6E225D7BB9004D7C82 /* shell.cc */,
 				A1CE2B5E228E83D400D9B3B8 /* 1.gif */,
@@ -8851,6 +8901,7 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A1B6440922DCC7A7005AD792 /* NAppKit */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1394A6D22865F200087F712 /* main.h */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
@@ -9230,7 +9281,6 @@
 				A1B20577229799BF006CA4C6 /* SUIKitGlobals.swift in Sources */,
 				A15878C422CDD95E00847196 /* NUIDragItem.mm in Sources */,
 				A1EE7D7B229D8EEF002B53FF /* NSCNPlane.mm in Sources */,
-				A1311C4E2292BF340064FE1D /* embedded.S in Sources */,
 				A108633122C496EF001A15A9 /* NAVAudioUnitEffect.mm in Sources */,
 				A13370A922AEE60900FA3768 /* NAVAudioFormat.mm in Sources */,
 				A108638922C6E574001A15A9 /* NGLKViewController.mm in Sources */,
@@ -9311,6 +9361,7 @@
 				A192700C22C12F5F008F16AE /* NMTLCompileOptions.mm in Sources */,
 				A19270E322C19D7A008F16AE /* NCAMetalDrawable.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
+				A13148B222DECCCB007B2108 /* embedded.S in Sources */,
 				A1926FF522C12DB5008F16AE /* NMTLDepthStencilState.mm in Sources */,
 				A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,
@@ -9638,6 +9689,7 @@
 				A1926ECC22C08076008F16AE /* NMKOverlayRenderer.mm in Sources */,
 				A10862FA22C48F48001A15A9 /* NCGContext.mm in Sources */,
 				A1926F4E22C0E286008F16AE /* NSCNPhysicsSliderJoint.mm in Sources */,
+				A1B6440D22DCC7A7005AD792 /* NNSOpenGL.mm in Sources */,
 				A1EE7D8D22A41FEC002B53FF /* NSCNCamera.mm in Sources */,
 				A1926FE422C12B20008F16AE /* NMTLSamplerDescriptor.mm in Sources */,
 				A19F39E122AF4C1900606332 /* NMDLTypes.mm in Sources */,
@@ -9887,14 +9939,6 @@
 		A1FC1A10225C65DD00085571 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/native/node-uikitformac";
-			};
-			name = Debug;
-      platformFilter = uikitformac; 
-		};
-		A1FC1A10225C65DD00085571 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -9954,20 +9998,14 @@
 				"NODE_ROOT[sdk=iphoneos*]" = "/Users/emily/sweetiebird/opt/sweet/node-1260";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
+				NODE_UIKITFORMAC = 0;
+				"NODE_UIKITFORMAC[sdk=macosx*]" = 1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
-		};
-		A1FC1A11225C65DD00085571 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"NODE_ROOT[sdk=iphoneos*]" = "/opt/native/node-uikitformac";
-			};
-			name = Release;
-      platformFilter = uikitformac; 
 		};
 		A1FC1A11225C65DD00085571 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -10028,6 +10066,8 @@
 				"NODE_ROOT[sdk=iphoneos*]" = "/Users/emily/sweetiebird/opt/sweet/node-1260";
 				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
+				NODE_UIKITFORMAC = 0;
+				"NODE_UIKITFORMAC[sdk=macosx*]" = 1;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
