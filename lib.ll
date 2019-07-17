@@ -505,8 +505,8 @@
               (set s (clip s (+ j 2)))))))))
 
 (define-global parse-properties (s)
-  (set s (strip-c-comments s))
   (print s)
+  (set s (strip-c-comments s))
   (let hdr (str-replace s
                         ;";" ";\n"
                         "," " "
@@ -598,8 +598,10 @@
 ;(define-global xcode-path* "/Applications/Xcode.app/")
 (define-global xcode-path* "/Applications/Xcode-beta.app/")
 
+(define-global sdk* "iPhoneOS")
+
 (define-global ios-header-path (framework type subframework)
-  (with r (cat xcode-path* "Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/")
+  (with r (cat xcode-path* "Contents/Developer/Platforms/" sdk* ".platform/Developer/SDKs/" sdk* ".sdk/System/Library/Frameworks/")
     (cat! r framework)
     (when subframework
       (cat! r ".framework/Frameworks/" subframework))
@@ -655,7 +657,8 @@
 (define-global test-parse-properties (type framework subframework)
   (let ((framework: framework subframework: subframework path: path)
         (objc-resolve type framework subframework)
-        contents (read-file (prn path))
+        contents (read-file path)
+        path (prn path)
         props (parse-properties contents)
         form `(do))
     (step x props
@@ -836,10 +839,16 @@
 ;        (%block (var Nan::HandleScope scope) (autoreleasepool (var Local<Object> ,(cat self "Obj") (info (.This))) (var ,(cat "N" el-type "*") ,self (new (,(cat "N" el-type)))) ,@body))))
 
 (define-global main (argv)
-  (let ((type (o framework) (o subframework) resolve: (o resolve))
-        (keep (fn (x) (not (obj? x)))
-              (parse-arguments (obj r: "resolve") argv)))
+  (let (parsed (parse-arguments (obj r: "resolve" s: "sdk") argv)
+        (resolve: (o resolve) sdk: (o sdk-base)) parsed
+        (type (o framework) (o subframework)) 
+        (keep (fn (x) (not (obj? x))) parsed))
     (set target* 'c)
+    ;(print (str argv))
+    ;(print (str (parse-arguments (obj r: "resolve" s: "sdk") argv)))
+    ;(print (str parsed))
+    (when sdk-base
+      (set sdk* (hd sdk-base)))
     (if resolve
         (let ((path: path) (objc-resolve type framework subframework)
               contents (read-file path))
