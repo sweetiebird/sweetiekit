@@ -361,6 +361,8 @@ int main(int argc, char** argv)
   }
 //  auto args = [NSString stringWithFormat:@"node\0--jitless\0--builtins-in-stack-traces\0--abort-on-uncaught-exception\0%@\0\0", entry];
   NSArray* arguments = @[@"node",
+  @"--experimental-vm-modules",
+  @"--experimental-repl-await",
   @"--expose_gc",
   @"--inspect=0.0.0.0:9229",
 #if !TARGET_OS_UIKITFORMAC
