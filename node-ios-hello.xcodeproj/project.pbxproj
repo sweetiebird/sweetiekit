@@ -155,6 +155,9 @@
 		A1482A95229D4E3F001502C0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
 		A1495AA322DC259B002A4682 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495AA222DC259B002A4682 /* SceneDelegate.swift */; };
 		A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149D0A4228260D300E11EDA /* BuilderViewController.swift */; };
+		A156284522DF226800969CF7 /* NAUComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = A156284322DF226800969CF7 /* NAUComponent.mm */; };
+		A156284922DF24BE00969CF7 /* NAudioUnitProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = A156284822DF24BE00969CF7 /* NAudioUnitProperties.mm */; };
+		A156284B22DF313C00969CF7 /* sweet.js in Resources */ = {isa = PBXBuildFile; fileRef = A156284A22DF313C00969CF7 /* sweet.js */; };
 		A1574E7B22B7FB57006CC5F2 /* NUIScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */; };
 		A1574E7F22B7FC1C006CC5F2 /* NUIScreenMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */; };
 		A1574E8322B7FD40006CC5F2 /* NUIFocusSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1574E8222B7FD40006CC5F2 /* NUIFocusSystem.mm */; };
@@ -1050,6 +1053,11 @@
 		A14F917B22D1EA530023E861 /* libv8_base_without_compiler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_base_without_compiler.a; sourceTree = "<group>"; };
 		A14F917C22D1EA530023E861 /* libicustubdata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libicustubdata.a; sourceTree = "<group>"; };
 		A14F917F22D1EAD00023E861 /* libtorque_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtorque_base.a; sourceTree = "<group>"; };
+		A156284322DF226800969CF7 /* NAUComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAUComponent.mm; sourceTree = "<group>"; };
+		A156284422DF226800969CF7 /* NAUComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAUComponent.h; sourceTree = "<group>"; };
+		A156284722DF24BE00969CF7 /* NAudioUnitProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAudioUnitProperties.h; sourceTree = "<group>"; };
+		A156284822DF24BE00969CF7 /* NAudioUnitProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NAudioUnitProperties.mm; sourceTree = "<group>"; };
+		A156284A22DF313C00969CF7 /* sweet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sweet.js; sourceTree = "<group>"; };
 		A1574E7922B7FB57006CC5F2 /* NUIScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreen.mm; sourceTree = "<group>"; };
 		A1574E7A22B7FB57006CC5F2 /* NUIScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScreen.h; sourceTree = "<group>"; };
 		A1574E7D22B7FC1C006CC5F2 /* NUIScreenMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScreenMode.mm; sourceTree = "<group>"; };
@@ -3246,6 +3254,8 @@
 		A13370DA22AEFDDC00FA3768 /* NAudioToolbox */ = {
 			isa = PBXGroup;
 			children = (
+				A156284622DF24BE00969CF7 /* NAudioUnitProperties */,
+				A156284222DF226800969CF7 /* NAUComponent */,
 				A108633322C4983E001A15A9 /* NAudioComponent */,
 				A13370DB22AEFDDC00FA3768 /* NAUAudioUnit */,
 				A19F39CB22AF2B3D00606332 /* NAUAudioUnitPreset */,
@@ -3468,6 +3478,24 @@
 				A1482A94229D4E3F001502C0 /* GameScene.sks */,
 			);
 			path = GameFiles;
+			sourceTree = "<group>";
+		};
+		A156284222DF226800969CF7 /* NAUComponent */ = {
+			isa = PBXGroup;
+			children = (
+				A156284422DF226800969CF7 /* NAUComponent.h */,
+				A156284322DF226800969CF7 /* NAUComponent.mm */,
+			);
+			path = NAUComponent;
+			sourceTree = "<group>";
+		};
+		A156284622DF24BE00969CF7 /* NAudioUnitProperties */ = {
+			isa = PBXGroup;
+			children = (
+				A156284722DF24BE00969CF7 /* NAudioUnitProperties.h */,
+				A156284822DF24BE00969CF7 /* NAudioUnitProperties.mm */,
+			);
+			path = NAudioUnitProperties;
 			sourceTree = "<group>";
 		};
 		A1574E7822B7FB57006CC5F2 /* NUIScreen */ = {
@@ -7013,6 +7041,7 @@
 		A19E90F8225D7EA8004FC391 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				A156284A22DF313C00969CF7 /* sweet.js */,
 				A12655EE22719CE300D3DF47 /* app.js */,
 				A12655F722719CE400D3DF47 /* demo.js */,
 				A199AEDE22885581003C1DC4 /* examples */,
@@ -9139,6 +9168,7 @@
 				A126560522719CE400D3DF47 /* js-blockchain in Resources */,
 				A18F1E61228A3D1500A42754 /* vendor in Resources */,
 				A12655FC22719CE400D3DF47 /* tsconfig.json in Resources */,
+				A156284B22DF313C00969CF7 /* sweet.js in Resources */,
 				A12655F922719CE400D3DF47 /* tslint.json in Resources */,
 				A126560622719CE400D3DF47 /* demo.js in Resources */,
 				A188710E227E51D700129A75 /* node_modules in Resources */,
@@ -9714,6 +9744,7 @@
 				A192709722C15B4C008F16AE /* NMTLVertexAttributeDescriptor.mm in Sources */,
 				A158792F22CEE5D200847196 /* NUITimingCurveProvider.mm in Sources */,
 				A1678CE522D50E8600E1CF52 /* NARRaycastResult.mm in Sources */,
+				A156284522DF226800969CF7 /* NAUComponent.mm in Sources */,
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
 				A19270C222C18302008F16AE /* NMTLBlitCommandEncoder.mm in Sources */,
@@ -9746,6 +9777,7 @@
 				A108637622C6C874001A15A9 /* NARReferenceImage.mm in Sources */,
 				211E76AB226A11E200B838AF /* NUIControl.mm in Sources */,
 				A19F39D422AF375200606332 /* NSCNGeometryTessellator.mm in Sources */,
+				A156284922DF24BE00969CF7 /* NAudioUnitProperties.mm in Sources */,
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */,
 				A15878E322CDEA4200847196 /* NUIDragSession.mm in Sources */,

@@ -1434,6 +1434,8 @@ NAN_METHOD(NClass::New) {
 #include "NAVAudioSessionPortDescription.h"
 #include "NAVAudioSessionRouteDescription.h"
 #include "NAudioComponent.h"
+#include "NAudioUnitProperties.h"
+#include "NAUComponent.h"
 #include "NAUAudioUnit.h"
 #include "NAUParameterTree.h"
 #include "NAUParameterNode.h"
@@ -2021,6 +2023,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // Audio Toolbox
 
     JS_EXPORT_GLOBALS(AudioComponent);
+    JS_EXPORT_GLOBALS(AudioUnitProperties);
+    JS_EXPORT_GLOBALS(AUComponent);
     JS_EXPORT_TYPE(AUAudioUnit);
     JS_EXPORT_TYPE(AUParameterNode);
     JS_EXPORT_TYPE(AUParameterGroup);
