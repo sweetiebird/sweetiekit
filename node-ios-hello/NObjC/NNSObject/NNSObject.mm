@@ -2185,7 +2185,9 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     // WebGL
     
 #if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC // TODO: mac
-    exports->Set(JS_STR("WebGLRenderingContext"), WebGLRenderingContext::Initialize(isolate).first);
+    auto webGL = WebGLRenderingContext::Initialize(isolate);
+    exports->Set(JS_STR("WebGLRenderingContext"), webGL.first);
+    exports->Set(JS_STR("WebGL2RenderingContext"), WebGL2RenderingContext::Initialize(isolate, webGL.second).first);
 #endif
 
     // GLKit
