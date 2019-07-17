@@ -42,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>639</string>
+	<string>701</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -82,13 +82,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>PICS.</string>
+	<string>To use the camera.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location tracking examples.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location tracking examples.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Tp save screenshots.</string>
+	<string>To save screenshots.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoMono-Medium.ttf</string>
