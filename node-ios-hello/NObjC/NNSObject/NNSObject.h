@@ -199,9 +199,13 @@ template<typename T>
 Local<Value>
 js_value_protocol(T x, Protocol* _Nullable protocol = ObjCProtocolTraits<T>::protocol())
 {
+  // be willing to return an object even if it doesn't necessarily conform to the protocol.
+  // Previously, this code uncovered a bug: https://twitter.com/theshawwn/status/1151309463565062145
+  #if 0
   if (protocol && x && ![(NSObject *)x conformsToProtocol: protocol]) {
     return Nan::Undefined();
   }
+  #endif
   return js_value_id(x);
 }
 

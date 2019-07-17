@@ -3139,6 +3139,12 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
 #if !TARGET_OS_SIMULATOR
       JS_RETURN_PROTOCOL(CAMetalDrawable);
 #endif
+#if TARGET_OS_UIKITFORMAC
+      // Work around uikitformac bug: https://twitter.com/theshawwn/status/1151309463565062145
+      if ([NSStringFromClass([obj class]) isEqual: @"CaptureMTLDrawable"]) {
+        return NCAMetalDrawable::type;
+      }
+#endif
 
       // ReplayKit protocols
 
