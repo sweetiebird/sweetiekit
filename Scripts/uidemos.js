@@ -261,6 +261,7 @@ UIDemosApp = class UIDemosApp {
     }
     if (view) {
       this.demoVC.view.addSubview(view);
+      view.pinToSuperview();
     }
     if (shouldPush) {
       this.nav.pushViewControllerAnimated(this.demoVC, true);
