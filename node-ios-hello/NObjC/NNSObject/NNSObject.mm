@@ -1022,6 +1022,11 @@ NAN_METHOD(NClass::New) {
 #include "NDispatchQueue.h"
 #include "NCFBase.h"
 #include "NCFDictionary.h"
+#if TARGET_OS_UIKITFORMAC
+#include "NNSOpenGL.h"
+#define APPKIT_EXTERN extern "C"
+#include "NNSOpenGL_uikitformac.h"
+#endif
 #include "NNSTarget.h"
 #include "NNSRunLoop.h"
 #include "NNSTimer.h"
@@ -1703,6 +1708,12 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_GLOBALS(MacTypes);
     JS_EXPORT_GLOBALS(DispatchQueue);
 
+#if TARGET_OS_UIKITFORMAC
+    JS_EXPORT_GLOBALS(NSOpenGL);
+    JS_EXPORT_TYPE(NSOpenGLContext);
+    JS_EXPORT_TYPE(NSOpenGLPixelFormat);
+    JS_EXPORT_TYPE(NSOpenGLPixelBuffer);
+#endif
     JS_EXPORT_TYPE(NSTarget);
     JS_EXPORT_TYPE(NSRunLoop);
     JS_EXPORT_TYPE(NSTimer);
@@ -3105,6 +3116,11 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(NSPort);
       JS_RETURN_TYPE(NSTimer);
       JS_RETURN_TYPE(NSRunLoop);
+#if TARGET_OS_UIKITFORMAC
+      JS_RETURN_TYPE(NSOpenGLPixelBuffer);
+      JS_RETURN_TYPE(NSOpenGLPixelFormat);
+      JS_RETURN_TYPE(NSOpenGLContext);
+#endif
       JS_RETURN_TYPE(NSTarget);
       JS_RETURN_TYPE(NSObjCRuntime);
       if (object_isClass(obj)) {
