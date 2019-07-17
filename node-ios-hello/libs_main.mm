@@ -405,7 +405,6 @@ extern "C" void hello_node(const char* args);
 //int main(int argc, char** argv)
 //{
 //#if 1
-//    registerNodeDLibs();
 //    chdir(getenv("HOME"));
 //    chdir("Documents");
 //

@@ -10,7 +10,7 @@ extern "C" {
 
 extern void iOSLog0(const char* msg);
 extern void iOSTrap();
-extern void registerNodeDLibs();
+extern void OnStartup();
 
 extern void embed_start();
 

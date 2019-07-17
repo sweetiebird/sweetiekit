@@ -352,7 +352,6 @@ int main(int argc, char** argv)
 {
   static auto _argc = argc;
   static auto _argv = argv;
-//  registerNodeDLibs();
   chdir(getenv("HOME"));
   chdir("Documents");
 
@@ -421,7 +420,7 @@ honeykit.stop = () => {                        \
   node::Start(node_argc, node_argv.data());
 }
 
-extern "C" void registerNodeDLibs()
+extern "C" void OnStartup()
 {
   if (@available(iOS 13.0, *)) {
     UIApplication* application = [UIApplication sharedApplication];
