@@ -114,6 +114,7 @@ async function make(nav, demoVC) {
   }
   animation.beginTime = CACurrentMediaTime() + delay;
 
+  /*
   CATransaction.setCompletionBlock(() => {
     const pos = ggView.layer.position;
     console.log('CATransaction.setCompletionBlock', pos);
@@ -125,6 +126,7 @@ async function make(nav, demoVC) {
 
   ggView.layer.addAnimationForKey(animation);
   CATransaction.commit();
+  */
 
   // gesture recognizers
 
