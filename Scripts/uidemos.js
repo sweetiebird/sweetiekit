@@ -9,7 +9,8 @@ makeMiniApp = () => require('./examples/MiniApp');
 makeMiniApp.lazy = true;
 makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
-makeFullReact = require('./examples/fullReact');
+makeFullReact = () => require('./examples/fullReact');
+makeFullReact.lazy = true;
 makePlatformer = require('./examples/Astronauts');
 makeEmojiCam = require('./examples/emojiCam');
 
