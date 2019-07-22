@@ -1393,6 +1393,7 @@ NAN_METHOD(NClass::New) {
 #include "NCMAttachment.h" // globals
 #include "NCMSampleBuffer.h" // globals
 
+#include "NCoreAudioBaseTypes.h"
 #include "NAVCaptureSession.h" // : NSObject
 #include "NAVCaptureMultiCamSession.h" // : AVCaptureSession
 #include "NAVCaptureConnection.h" // : NSObject
@@ -2030,7 +2031,10 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AUParameterGroup);
     JS_EXPORT_TYPE(AUParameterTree);
     JS_EXPORT_TYPE(AUAudioUnitPreset);
-    
+
+    // CoreAudio
+    JS_EXPORT_GLOBALS(CoreAudioBaseTypes);
+
     // AVFoundation
 
     JS_EXPORT_GLOBALS(AVAudioTypes);

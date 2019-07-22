@@ -255,6 +255,7 @@
 		A158793322CEE63400847196 /* NUIViewPropertyAnimator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158793222CEE63400847196 /* NUIViewPropertyAnimator.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
+		A160E02522E65F740012070E /* NCoreAudioBaseTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A160E02422E65F740012070E /* NCoreAudioBaseTypes.mm */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
 		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
@@ -1252,6 +1253,8 @@
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
 		A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTransformNode.mm; sourceTree = "<group>"; };
+		A160E02322E65F740012070E /* NCoreAudioBaseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreAudioBaseTypes.h; sourceTree = "<group>"; };
+		A160E02422E65F740012070E /* NCoreAudioBaseTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCoreAudioBaseTypes.mm; sourceTree = "<group>"; };
 		A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterCell.mm; sourceTree = "<group>"; };
 		A1646B7E2291E6E90078CF4B /* NCAEmitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAEmitterCell.h; sourceTree = "<group>"; };
 		A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAEmitterLayer.mm; sourceTree = "<group>"; };
@@ -4333,6 +4336,23 @@
 				A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */,
 			);
 			path = NSKTransformNode;
+			sourceTree = "<group>";
+		};
+		A160E02122E65F740012070E /* NCoreAudioTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A160E02222E65F740012070E /* NCoreAudioBaseTypes */,
+			);
+			path = NCoreAudioTypes;
+			sourceTree = "<group>";
+		};
+		A160E02222E65F740012070E /* NCoreAudioBaseTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A160E02322E65F740012070E /* NCoreAudioBaseTypes.h */,
+				A160E02422E65F740012070E /* NCoreAudioBaseTypes.mm */,
+			);
+			path = NCoreAudioBaseTypes;
 			sourceTree = "<group>";
 		};
 		A1646B7C2291E6E90078CF4B /* NCAEmitterCell */ = {
@@ -8930,13 +8950,14 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
-				A1B6440922DCC7A7005AD792 /* NAppKit */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1394A6D22865F200087F712 /* main.h */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
+				A1A04CD922D6ECE600B7A7B1 /* SWTUtils.h */,
 				A1D6729022694E7000562A42 /* libs_main.hpp */,
 				A1058B422268029E00CEAA5C /* libs_main.mm */,
 				A1394A6B22865EF00087F712 /* main.mm */,
+				A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */,
 				A1678CFE22D558F500E1CF52 /* SweetieKit.pch */,
 				A1FC1A0F225C65DD00085571 /* Info.plist */,
 				A1BD4B8D2287CCF3001D1F6E /* Scene.sks */,
@@ -8944,6 +8965,7 @@
 				A1CE2B50228E7FDB00D9B3B8 /* Custom */,
 				A1CE2B86228F01D900D9B3B8 /* Fonts */,
 				A1482A93229D4DAC001502C0 /* GameFiles */,
+				A1B6440922DCC7A7005AD792 /* NAppKit */,
 				A1D65E0B22819C1600AC0BD9 /* NARKit */,
 				A1D672A12269944C00562A42 /* NativeClasses */,
 				A13370DA22AEFDDC00FA3768 /* NAudioToolbox */,
@@ -8951,6 +8973,7 @@
 				A1D4981C22B9BBD0009AC951 /* NContacts */,
 				216392A2226BD43600051DE0 /* NCoreAnimation */,
 				A13370FB22AF1C9000FA3768 /* NCoreAudio */,
+				A160E02122E65F740012070E /* NCoreAudioTypes */,
 				A134E29A22D0384E00BAB748 /* NCoreFoundation */,
 				A1B2056B229788FC006CA4C6 /* NCoreGraphics */,
 				A1710EB8229A92BF00EC7C86 /* NCoreImage */,
@@ -8980,8 +9003,6 @@
 				A1D672A22269945B00562A42 /* Storyboards */,
 				A1D65DD022816EE000AC0BD9 /* SwiftInterfaces */,
 				A16EF58D229D07B8007BCB49 /* Templates */,
-				A1A04CD922D6ECE600B7A7B1 /* SWTUtils.h */,
-				A1A04CDA22D6ED0B00B7A7B1 /* SWTUtils.mm */,
 			);
 			path = "node-ios-hello";
 			sourceTree = "<group>";
@@ -9685,6 +9706,7 @@
 				A158791022CE678F00847196 /* NUIViewControllerTransitioning.mm in Sources */,
 				A1926ED822C08D14008F16AE /* NMKAnnotation.mm in Sources */,
 				A19270AE22C16897008F16AE /* NCADisplayLink.mm in Sources */,
+				A160E02522E65F740012070E /* NCoreAudioBaseTypes.mm in Sources */,
 				A1EE7D54229D84F9002B53FF /* NSCNMaterial.mm in Sources */,
 				A19270F022C2E27C008F16AE /* NNSSocketPort.mm in Sources */,
 				A1646BA4229238630078CF4B /* NSCNText.mm in Sources */,

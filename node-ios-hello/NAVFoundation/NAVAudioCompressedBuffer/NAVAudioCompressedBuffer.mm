@@ -142,7 +142,10 @@ NAN_SETTER(NAVAudioCompressedBuffer::byteLengthSetter) {
 NAN_GETTER(NAVAudioCompressedBuffer::packetDescriptionsGetter) {
   JS_UNWRAP(AVAudioCompressedBuffer, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_AudioStreamPacketDescription([self packetDescriptions]));
+    auto result = [self packetDescriptions];
+    if (result) {
+      JS_SET_RETURN(js_value_AudioStreamPacketDescription(*result));
+    }
   }
 }
 

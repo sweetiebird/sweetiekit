@@ -14,17 +14,9 @@
 #define to_value_CoreAudioTypes(x) to_value_wrapper(x, CoreAudioTypes)
 #define is_value_CoreAudioTypes(x) is_value_wrapper(x, CoreAudioTypes)
 
-Local<Value> js_value_AudioStreamPacketDescription(const AudioStreamPacketDescription* _Nullable value);
-AudioStreamPacketDescription to_value_AudioStreamPacketDescription(Local<Value> value, bool* _Nullable failed = nullptr);
-bool is_value_AudioStreamPacketDescription(Local<Value> value);
-
-Local<Value> js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* _Nullable value);
-AudioStreamBasicDescription to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed = nullptr);
-bool is_value_AudioStreamBasicDescription(Local<Value> value);
-
-Local<Value> js_value_AudioComponentDescription(const AudioComponentDescription& value);
-AudioComponentDescription to_value_AudioComponentDescription(Local<Value> value, bool* _Nullable failed = nullptr);
-bool is_value_AudioComponentDescription(Local<Value> value);
+JS_DECLARE_STRUCT(AudioStreamPacketDescription);
+JS_DECLARE_STRUCT(AudioStreamBasicDescription);
+JS_DECLARE_STRUCT(AudioComponentDescription);
 
 #ifdef __OBJC__
 @interface CoreAudioTypes : NSObject
@@ -32,8 +24,6 @@ bool is_value_AudioComponentDescription(Local<Value> value);
 #endif
 
 JS_WRAP_CLASS(CoreAudioTypes, NSObject);
-  //JS_METHOD(iosMethodName);
-  //JS_PROP(iosPropertyName);
 JS_WRAP_CLASS_END(CoreAudioTypes);
 
 #endif /* NCoreAudioTypes_h */

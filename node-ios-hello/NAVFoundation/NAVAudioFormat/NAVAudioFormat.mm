@@ -197,7 +197,10 @@ NAN_GETTER(NAVAudioFormat::isInterleavedGetter) {
 NAN_GETTER(NAVAudioFormat::streamDescriptionGetter) {
   JS_UNWRAP(AVAudioFormat, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_AudioStreamBasicDescription([self streamDescription]));
+    auto result = [self streamDescription];
+    if (result) {
+      JS_SET_RETURN(js_value_AudioStreamBasicDescription(*result));
+    }
   }
 }
 
