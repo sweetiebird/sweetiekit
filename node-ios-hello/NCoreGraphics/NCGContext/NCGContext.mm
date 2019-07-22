@@ -6,8 +6,6 @@
 //
 #include "NCGContext.h"
 
-#define js_return_value(type, x) JS_SET_RETURN(js_value_##type(x))
-
 #include "NCFBase.h"
 
 #include "SWTUtils.h"

@@ -113,8 +113,8 @@ Local<T> createExternalTypedArray(size_t size, size_t stride, const typename V8T
 using namespace v8;
 using namespace node;
 
-#define JS_SET_RETURN(x) \
-  info.GetReturnValue().Set(x)
+#define JS_SET_RETURN(x) info.GetReturnValue().Set(x)
+#define js_return_value(type, x) JS_SET_RETURN(js_value_##type(x))
 
 // forwards arguments to type's constructor.
 #define JS_SET_RETURN_NEW(type, info) \

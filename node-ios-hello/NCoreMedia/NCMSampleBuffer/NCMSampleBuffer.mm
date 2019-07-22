@@ -9,8 +9,6 @@
 #include "NCVImageBuffer.h"
 #include "NCFBase.h"
 
-#define js_return_value(type, x) JS_SET_RETURN(js_value_##type(x)) // TODO: move this to defines.h
-
 NAN_METHOD(CMSampleBufferGetImageBuffer) {
   declare_autoreleasepool {
     declare_args();

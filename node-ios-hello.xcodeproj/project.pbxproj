@@ -88,7 +88,6 @@
 		A126560722719CE400D3DF47 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A12655F822719CE400D3DF47 /* package.json */; };
 		A12C1504228A3718005BDD9D /* NSCNScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A12C1503228A3718005BDD9D /* NSCNScene.mm */; };
 		A1311C4F2292BF440064FE1D /* snapshot.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1058B46226810BF00CEAA5C /* snapshot.cc */; };
-		A13148B222DECCCB007B2108 /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1AD024322DC7AB600F0D8FE /* embedded.S */; };
 		A1336FF322A660FF00FA3768 /* NNSLayoutXAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEC22A660FE00FA3768 /* NNSLayoutXAxisAnchor.mm */; };
 		A1336FF422A660FF00FA3768 /* NNSLayoutYAxisAnchor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FEE22A660FE00FA3768 /* NNSLayoutYAxisAnchor.mm */; };
 		A1336FF522A660FF00FA3768 /* NNSLayoutDimension.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1336FF122A660FE00FA3768 /* NNSLayoutDimension.mm */; };
@@ -256,6 +255,7 @@
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A160E02522E65F740012070E /* NCoreAudioBaseTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A160E02422E65F740012070E /* NCoreAudioBaseTypes.mm */; };
+		A160E02622E66AA30012070E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
 		A1646B7F2291E6E90078CF4B /* NCAEmitterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B7D2291E6E90078CF4B /* NCAEmitterCell.mm */; };
 		A1646B8C229201B50078CF4B /* NCAEmitterLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8A229201B50078CF4B /* NCAEmitterLayer.mm */; };
 		A1646B9022920CFC0078CF4B /* NCLGeocoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1646B8F22920CFC0078CF4B /* NCLGeocoder.mm */; };
@@ -9259,6 +9259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A158785922CDA8E800847196 /* NUISwipeActionsConfiguration.mm in Sources */,
+				A160E02622E66AA30012070E /* embedded.S in Sources */,
 				A1926F4D22C0E286008F16AE /* NSCNPhysicsVehicleWheel.mm in Sources */,
 				A1574ECD22B8BC4E006CC5F2 /* NUIStoryboardUnwindSegueSource.mm in Sources */,
 				A1EE7D9D22A47949002B53FF /* NARHitTestResult.mm in Sources */,
@@ -9412,7 +9413,6 @@
 				A192700C22C12F5F008F16AE /* NMTLCompileOptions.mm in Sources */,
 				A19270E322C19D7A008F16AE /* NCAMetalDrawable.mm in Sources */,
 				A1E48224226AA259002AF96F /* NUINavigationController.mm in Sources */,
-				A13148B222DECCCB007B2108 /* embedded.S in Sources */,
 				A1926FF522C12DB5008F16AE /* NMTLDepthStencilState.mm in Sources */,
 				A10862FE22C48F60001A15A9 /* NSCNPhysicsField.mm in Sources */,
 				A13370DE22AEFDDC00FA3768 /* NAUAudioUnit.mm in Sources */,

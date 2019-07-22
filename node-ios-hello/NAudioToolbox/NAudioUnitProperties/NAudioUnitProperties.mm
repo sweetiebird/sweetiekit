@@ -757,7 +757,6 @@ JS_INIT_GLOBALS(AudioUnitProperties);
     JS_ASSIGN_ENUM(kAudioUnitProperty_MIDIOutputCallbackInfo, AudioUnitPropertyID); //        = 47,
     JS_ASSIGN_ENUM(kAudioUnitProperty_MIDIOutputCallback, AudioUnitPropertyID); //            = 48,
   //};
-
 #if AU_SUPPORT_INTERAPP_AUDIO
   /*
       @enum           Inter-App Audio Property IDs
