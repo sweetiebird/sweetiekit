@@ -66,6 +66,8 @@ NAN_METHOD(NGLKView::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge GLKView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[GLKView alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[GLKView alloc] init];
     }
