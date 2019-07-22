@@ -6,9 +6,134 @@
 //
 #include "NAUComponent.h"
 
+#include "NAudioComponent.h"
+
 #include "NMacTypes.h"
 
+#define NXThrowIfError(error, operation)                    \
+  do {                                  \
+    OSStatus __err = error;                        \
+    if (__err) {                            \
+      js_panic_CAXError(__err, operation);              \
+    }                                  \
+  } while (0)
+
+#define js_panic_CAXError(error, operation) \
+    if (error) { \
+      Nan::ThrowError([[NSString stringWithFormat:@"%@: code %d", @operation, static_cast<int>(error)] UTF8String]); \
+      return; \
+    }
+
+
+
+/*!
+  @function    AudioUnitGetProperty
+  @abstract    retrieves the value of a specified property
+  @discussion    The API can is used to retrieve the value of the property. Property values for 
+          audio units are always passed by reference
+          
+  @param      inUnit
+          the audio unit
+  @param      inID
+          the property identifier
+  @param      inScope
+          the scope of the property
+  @param      inElement
+          the element of the scope
+  @param      outData
+          used to retrieve the value of the property. It should point to memory at least 
+          as large as the value described by ioDataSize
+  @param      ioDataSize  
+          on input contains the size of the data pointed to by outData, on output, the 
+          size of the data that was returned.
+
+  @result      noErr, or various audio unit errors related to properties
+*/
+/*
+extern OSStatus
+AudioUnitGetProperty(        AudioUnit        inUnit,
+                  AudioUnitPropertyID    inID,
+                  AudioUnitScope      inScope,
+                  AudioUnitElement    inElement,
+                  void *          outData,
+                  UInt32 *        ioDataSize)        
+                        API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+
+
+NAN_METHOD(AudioUnitGetProperty) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, inUnit);
+    declare_value(AudioUnitPropertyID, inID);
+    declare_value(AudioUnitScope, inScope);
+    declare_value(AudioUnitElement, inElement);
+    if (is_value_UInt32(info[JS_ARGC])) {
+      declare_value(UInt32, inValue);
+      UInt32 inValueSize = sizeof(inValue);
+      NXThrowIfError(::AudioUnitGetProperty(inUnit, inID, inScope, inElement, &inValue, &inValueSize), "AudioUnitGetProperty failed");
+      js_return_value(UInt32, inValue);
+    } else {
+      js_panic_noreturn("AudioUnitGetProperty failed: value type not yet implemented");
+    }
+  }
+}
+
+/*!
+  @function    AudioUnitSetProperty
+  @abstract    sets the value of a specified property
+  @discussion    The API can is used to set the value of the property. Property values for 
+          audio units are always passed by reference
+          
+  @param      inUnit
+          the audio unit
+  @param      inID
+          the property identifier
+  @param      inScope
+          the scope of the property
+  @param      inElement
+          the element of the scope
+  @param      inData
+          if not null, then is the new value for the property that will be set. If null, 
+          then inDataSize should be zero, and the call is then used to remove a 
+          previously set value for a property. This removal is only valid for
+          some properties, as most properties will always have a default value if not 
+          set.
+  @param      inDataSize  
+          the size of the data being provided in inData
+
+  @result      noErr, or various audio unit errors related to properties
+*/
+/*
+extern OSStatus
+AudioUnitSetProperty(        AudioUnit        inUnit,
+                  AudioUnitPropertyID    inID,
+                  AudioUnitScope      inScope,
+                  AudioUnitElement    inElement,
+                  const void * __nullable  inData,
+                  UInt32          inDataSize)        
+                        API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+
+NAN_METHOD(AudioUnitSetProperty) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, inUnit);
+    declare_value(AudioUnitPropertyID, inID);
+    declare_value(AudioUnitScope, inScope);
+    declare_value(AudioUnitElement, inElement);
+    if (is_value_UInt32(info[JS_ARGC])) {
+      declare_value(UInt32, inValue);
+      NXThrowIfError(::AudioUnitSetProperty(inUnit, inID, inScope, inElement, &inValue, sizeof(inValue)), "AudioUnitSetProperty failed");
+    } else {
+      js_panic_noreturn("AudioUnitSetProperty failed: value type not yet implemented");
+    }
+  }
+}
+
 JS_INIT_GLOBALS(AUComponent);
+  JS_ASSIGN_GLOBAL_METHOD(AudioUnitGetProperty);
+  JS_ASSIGN_GLOBAL_METHOD(AudioUnitSetProperty);
 
   // global values (exports)
   /*!

@@ -67,6 +67,10 @@
 #define to_value_AUParameterEventType(x) TO_ENUM(AUParameterEventType, UInt32, x)
 #define is_value_AUParameterEventType(x) IS_ENUM(AUParameterEventType, UInt32, x)
 
+#define js_value_AudioUnit js_value_AudioComponentInstance
+#define to_value_AudioUnit to_value_AudioComponentInstance
+#define is_value_AudioUnit is_value_AudioComponentInstance
+
 JS_WRAP_GLOBALS(AUComponent);
 JS_WRAP_GLOBALS_END(AUComponent);
 
