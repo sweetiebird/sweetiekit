@@ -25,6 +25,9 @@ JS_INIT_CLASS(AVAudioPCMBuffer, AVAudioBuffer);
   JS_ASSIGN_PROTO_METHOD(initWithPCMFormatFrameCapacity);
 JS_INIT_CLASS_END(AVAudioPCMBuffer, AVAudioBuffer);
 
+#include "NAVAudioFormat.h"
+#include "NAVAudioNode.h"
+
 NAN_METHOD(NAVAudioPCMBuffer::New) {
   @autoreleasepool {
     if (!info.IsConstructCall()) {
@@ -36,6 +39,11 @@ NAN_METHOD(NAVAudioPCMBuffer::New) {
     AVAudioPCMBuffer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge AVAudioPCMBuffer *)(info[0].As<External>()->Value());
+    } else if (is_value_AVAudioFormat(info[0]) && is_value_AVAudioFrameCount(info[1])) {
+      declare_args();
+      declare_pointer(AVAudioFormat, format);
+      declare_value(AVAudioFrameCount, frameCapacity);
+      self = [[AVAudioPCMBuffer alloc] initWithPCMFormat: format frameCapacity: frameCapacity];
     } else if (info.Length() <= 0) {
       self = [[AVAudioPCMBuffer alloc] init];
     }
@@ -50,9 +58,6 @@ NAN_METHOD(NAVAudioPCMBuffer::New) {
     }
   }
 }
-
-#include "NAVAudioFormat.h"
-#include "NAVAudioNode.h"
 
 NAN_METHOD(NAVAudioPCMBuffer::initWithPCMFormatFrameCapacity) {
   JS_UNWRAP_OR_ALLOC(AVAudioPCMBuffer, self);
