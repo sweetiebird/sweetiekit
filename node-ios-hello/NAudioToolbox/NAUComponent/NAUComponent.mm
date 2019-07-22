@@ -7,7 +7,7 @@
 #include "NAUComponent.h"
 
 #include "NAudioComponent.h"
-
+#include "NCoreAudioTypes.h"
 #include "NMacTypes.h"
 
 #define NXThrowIfError(error, operation)                    \
@@ -73,6 +73,11 @@ NAN_METHOD(AudioUnitGetProperty) {
       UInt32 inValueSize = sizeof(inValue);
       NXThrowIfError(::AudioUnitGetProperty(inUnit, inID, inScope, inElement, &inValue, &inValueSize), "AudioUnitGetProperty failed");
       js_return_value(UInt32, inValue);
+    } else if (is_value_AudioStreamBasicDescription(info[JS_ARGC])) {
+      declare_value(AudioStreamBasicDescription, inValue);
+      UInt32 inValueSize = sizeof(inValue);
+      NXThrowIfError(::AudioUnitGetProperty(inUnit, inID, inScope, inElement, &inValue, &inValueSize), "AudioUnitGetProperty failed");
+      js_return_value(AudioStreamBasicDescription, inValue);
     } else {
       js_panic_noreturn("AudioUnitGetProperty failed: value type not yet implemented");
     }
@@ -124,6 +129,9 @@ NAN_METHOD(AudioUnitSetProperty) {
     declare_value(AudioUnitElement, inElement);
     if (is_value_UInt32(info[JS_ARGC])) {
       declare_value(UInt32, inValue);
+      NXThrowIfError(::AudioUnitSetProperty(inUnit, inID, inScope, inElement, &inValue, sizeof(inValue)), "AudioUnitSetProperty failed");
+    } else if (is_value_AudioStreamBasicDescription(info[JS_ARGC])) {
+      declare_value(AudioStreamBasicDescription, inValue);
       NXThrowIfError(::AudioUnitSetProperty(inUnit, inID, inScope, inElement, &inValue, sizeof(inValue)), "AudioUnitSetProperty failed");
     } else {
       js_panic_noreturn("AudioUnitSetProperty failed: value type not yet implemented");
