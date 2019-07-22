@@ -48,7 +48,6 @@ JS_INIT_GLOBALS_END(${name});
 #include "N${superClass}.h"
 
 JS_WRAP_GLOBALS(${name});
-  // TODO: declare ${name} globals
 JS_WRAP_GLOBALS_END(${name});
 
 #endif /* N${name}_h */`;
