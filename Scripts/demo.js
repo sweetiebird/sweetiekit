@@ -147,6 +147,7 @@ SweetieKitPrefixes = {
   WK: "WebKit",
 };
 
+/*
 Object.getOwnPropertyNames(SweetieKit)
   .filter(x => Object.keys(SweetieKitPrefixes)
                  .filter(y => (x.startsWith(y) || x.startsWith("k"+y)))
@@ -162,6 +163,9 @@ global.id = SweetieKit.id;
 global.objc = SweetieKit.id;
 global.NSClassFromString = objc.NSClassFromString;
 global.NSSearchPathForDirectoriesInDomains = objc.NSSearchPathForDirectoriesInDomains;
+*/
+global.objc = SweetieKit.id;
+Object.assign(global, SweetieKit);
 
 global.FS = require('fs');
 global.Path = require('path');
