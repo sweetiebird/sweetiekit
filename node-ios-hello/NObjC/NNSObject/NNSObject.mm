@@ -2033,6 +2033,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(AUAudioUnitPreset);
 
     // CoreAudio
+
     JS_EXPORT_GLOBALS(CoreAudioBaseTypes);
 
     // AVFoundation
