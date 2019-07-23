@@ -10,6 +10,14 @@
 
 #include "NNSObject.h"
 
+#define js_value_AudioFormatID js_value_UInt32
+#define to_value_AudioFormatID to_value_UInt32
+#define is_value_AudioFormatID is_value_UInt32
+
+#define js_value_AudioFormatFlags js_value_UInt32
+#define to_value_AudioFormatFlags to_value_UInt32
+#define is_value_AudioFormatFlags is_value_UInt32
+
 #define js_value_AudioTimeStampFlags(x) JS_ENUM(AudioTimeStampFlags, UInt32, x)
 #define to_value_AudioTimeStampFlags(x) TO_ENUM(AudioTimeStampFlags, UInt32, x)
 #define is_value_AudioTimeStampFlags(x) IS_ENUM(AudioTimeStampFlags, UInt32, x)
