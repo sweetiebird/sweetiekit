@@ -5,7 +5,6 @@
 //  Copyright © 2019 Sweetiebird. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 #include "NNSObject.h"
 #include "NUIApplication.h"
@@ -19,19 +18,16 @@
 #include "nan.h"
 #include "main.h"
 
-#import <CoreFoundation/CoreFoundation.h>
-#import <Foundation/Foundation.h>
 #import "libs_main.hpp"
 
 extern "C" void iOSLog(const char* format, ...);
 
 namespace node {
-    extern std::map<std::string, std::pair<void *, bool>> dlibs;
+    //extern std::map<std::string, std::pair<void *, bool>> dlibs;
 }
 using namespace v8;
 
 
-#include <array>
 #include <deque>
 #include <mutex>
 #include <thread>
@@ -240,12 +236,13 @@ extern "C" {
 }
 
 inline void registerDlibs(std::map<std::string, std::pair<void *, bool>> &dlibs) {
-    dlibs["std:sweetiekit.node"] = std::pair<void *, bool>((void *)&node_register_module_sweetiekit, false);
+    //dlibs["std:sweetiekit.node"] = std::pair<void *, bool>((void *)&node_register_module_sweetiekit, false);
 }
 
-extern "C" void registerNodeDLibs() {
-    registerDlibs(node::dlibs);
+NAN_MODULE_INIT(sweetiekit_init) {
+  sweetiekit::Init(target);
 }
+NODE_MODULE_LINKED(sweetiekit, sweetiekit_init);
 
 extern "C" void UIKit_PumpEvents() {
   const CFTimeInterval seconds = 0.000002;
@@ -299,6 +296,8 @@ static uv_sem_t embed_sem;
 static volatile int embed_closed;
 
 static int embed_timer_called;
+
+#include "SWTUtils.h"
 
 namespace sweetiekit {
 
@@ -406,7 +405,6 @@ extern "C" void hello_node(const char* args);
 //int main(int argc, char** argv)
 //{
 //#if 1
-//    registerNodeDLibs();
 //    chdir(getenv("HOME"));
 //    chdir("Documents");
 //

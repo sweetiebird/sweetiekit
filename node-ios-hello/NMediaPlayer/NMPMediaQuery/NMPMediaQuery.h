@@ -8,7 +8,6 @@
 #ifndef NMPMediaQuery_h
 #define NMPMediaQuery_h    
 
-#import <MediaPlayer/MediaPlayer.h>
 #include "NNSObject.h"
 
 #define js_value_MPMediaQuery(x) js_value_wrapper(x, MPMediaQuery)

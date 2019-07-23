@@ -6,7 +6,7 @@
 //
 #include "NARSKView.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARSKView
 #define js_value_instancetype js_value_ARSKView

@@ -197,31 +197,21 @@ NAN_SETTER(NNSOperationQueue::qualityOfServiceSetter) {
   }
 }
 
-#define js_value_dispatch_queue_t(x) js_value_bridged(x, dispatch_queue_t)
-#define to_value_dispatch_queue_t(x) to_value_bridged(x, dispatch_queue_t)
-#define is_value_dispatch_queue_t(x) is_value_bridged(x, dispatch_queue_t)
+#include "NDispatchQueue.h"
 
 NAN_GETTER(NNSOperationQueue::underlyingQueueGetter) {
   JS_UNWRAP(NSOperationQueue, self);
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
-    // TODO: Incompatible types casting 'dispatch_queue_t _Nullable' (aka 'NSObject<OS_dispatch_queue> *') to 'id' with a __bridge cast
     JS_SET_RETURN(js_value_dispatch_queue_t([self underlyingQueue]));
-    #endif
   }
 }
 
 NAN_SETTER(NNSOperationQueue::underlyingQueueSetter) {
   JS_UNWRAP(NSOperationQueue, self);
   declare_autoreleasepool {
-    JS_TODO();
-    #if TODO
     declare_setter();
-    // TODO: Incompatible types casting 'id _Nullable' to 'dispatch_queue_t' (aka 'NSObject<OS_dispatch_queue> *') with a __bridge cast
     declare_value(dispatch_queue_t, input);
     [self setUnderlyingQueue: input];
-    #endif
   }
 }
 

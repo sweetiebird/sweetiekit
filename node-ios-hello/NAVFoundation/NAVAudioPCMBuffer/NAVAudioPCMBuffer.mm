@@ -25,6 +25,9 @@ JS_INIT_CLASS(AVAudioPCMBuffer, AVAudioBuffer);
   JS_ASSIGN_PROTO_METHOD(initWithPCMFormatFrameCapacity);
 JS_INIT_CLASS_END(AVAudioPCMBuffer, AVAudioBuffer);
 
+#include "NAVAudioFormat.h"
+#include "NAVAudioNode.h"
+
 NAN_METHOD(NAVAudioPCMBuffer::New) {
   @autoreleasepool {
     if (!info.IsConstructCall()) {
@@ -36,6 +39,11 @@ NAN_METHOD(NAVAudioPCMBuffer::New) {
     AVAudioPCMBuffer* self = nullptr;
     if (info[0]->IsExternal()) {
       self = (__bridge AVAudioPCMBuffer *)(info[0].As<External>()->Value());
+    } else if (is_value_AVAudioFormat(info[0]) && is_value_AVAudioFrameCount(info[1])) {
+      declare_args();
+      declare_pointer(AVAudioFormat, format);
+      declare_value(AVAudioFrameCount, frameCapacity);
+      self = [[AVAudioPCMBuffer alloc] initWithPCMFormat: format frameCapacity: frameCapacity];
     } else if (info.Length() <= 0) {
       self = [[AVAudioPCMBuffer alloc] init];
     }
@@ -50,9 +58,6 @@ NAN_METHOD(NAVAudioPCMBuffer::New) {
     }
   }
 }
-
-#include "NAVAudioFormat.h"
-#include "NAVAudioNode.h"
 
 NAN_METHOD(NAVAudioPCMBuffer::initWithPCMFormatFrameCapacity) {
   JS_UNWRAP_OR_ALLOC(AVAudioPCMBuffer, self);
@@ -98,15 +103,25 @@ NAN_GETTER(NAVAudioPCMBuffer::floatChannelDataGetter) {
   JS_UNWRAP(AVAudioPCMBuffer, self);
   declare_autoreleasepool {
     auto channelData = [self floatChannelData];
-    auto channelCount = [self format].channelCount;
-    Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
-    for (uint32_t i = 0, n = channelCount; i < n; i++) {
-      result->Set(i, createExternalTypedArray<Float32Array>(
-        static_cast<size_t>([self frameLength]),
-        static_cast<size_t>([self stride]),
-        channelData[0]));
+    AVAudioFormat* format = [self format];
+    if (channelData && format) {
+      if (format.interleaved) {
+        JS_SET_RETURN(createExternalTypedArray<Float32Array>(
+            static_cast<size_t>([self stride] * [self frameLength]),
+            1,
+            channelData[0]));
+      } else {
+        auto channelCount = format.channelCount;
+        Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
+        for (uint32_t i = 0, n = channelCount; i < n; i++) {
+          result->Set(i, createExternalTypedArray<Float32Array>(
+            static_cast<size_t>([self frameLength]),
+            static_cast<size_t>([self stride]),
+            channelData[i]));
+        }
+        JS_SET_RETURN(result);
+      }
     }
-    JS_SET_RETURN(result);
   }
 }
 
@@ -114,15 +129,25 @@ NAN_GETTER(NAVAudioPCMBuffer::int16ChannelDataGetter) {
   JS_UNWRAP(AVAudioPCMBuffer, self);
   declare_autoreleasepool {
     auto channelData = [self int16ChannelData];
-    auto channelCount = [self format].channelCount;
-    Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
-    for (uint32_t i = 0, n = channelCount; i < n; i++) {
-      result->Set(i, createExternalTypedArray<Int16Array>(
-        static_cast<size_t>([self frameLength]),
-        static_cast<size_t>([self stride]),
-        channelData[i]));
+    AVAudioFormat* format = [self format];
+    if (channelData && format) {
+      if (format.interleaved) {
+        JS_SET_RETURN(createExternalTypedArray<Int16Array>(
+            static_cast<size_t>([self stride] * [self frameLength]),
+            1,
+            channelData[0]));
+      } else {
+        auto channelCount = format.channelCount;
+        Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
+        for (uint32_t i = 0, n = channelCount; i < n; i++) {
+          result->Set(i, createExternalTypedArray<Int16Array>(
+            static_cast<size_t>([self frameLength]),
+            static_cast<size_t>([self stride]),
+            channelData[i]));
+        }
+        JS_SET_RETURN(result);
+      }
     }
-    JS_SET_RETURN(result);
   }
 }
 
@@ -130,14 +155,24 @@ NAN_GETTER(NAVAudioPCMBuffer::int32ChannelDataGetter) {
   JS_UNWRAP(AVAudioPCMBuffer, self);
   declare_autoreleasepool {
     auto channelData = [self int32ChannelData];
-    auto channelCount = [self format].channelCount;
-    Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
-    for (uint32_t i = 0, n = channelCount; i < n; i++) {
-      result->Set(i, createExternalTypedArray<Int32Array>(
-        static_cast<size_t>([self frameLength]),
-        static_cast<size_t>([self stride]),
-        channelData[i]));
+    AVAudioFormat* format = [self format];
+    if (channelData && format) {
+      if (format.interleaved) {
+        JS_SET_RETURN(createExternalTypedArray<Int32Array>(
+            static_cast<size_t>([self stride] * [self frameLength]),
+            1,
+            channelData[0]));
+      } else {
+        auto channelCount = format.channelCount;
+        Local<Array> result(Array::New(JS_ISOLATE(), channelCount));
+        for (uint32_t i = 0, n = channelCount; i < n; i++) {
+          result->Set(i, createExternalTypedArray<Int32Array>(
+            static_cast<size_t>([self frameLength]),
+            static_cast<size_t>([self stride]),
+            channelData[i]));
+        }
+        JS_SET_RETURN(result);
+      }
     }
-    JS_SET_RETURN(result);
   }
 }

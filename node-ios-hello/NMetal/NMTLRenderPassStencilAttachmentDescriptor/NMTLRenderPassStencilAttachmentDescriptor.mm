@@ -9,8 +9,6 @@
 #define instancetype MTLRenderPassStencilAttachmentDescriptor
 #define js_value_instancetype js_value_MTLRenderPassStencilAttachmentDescriptor
 
-#import <Metal/MTLRenderPass.h>
-
 NMTLRenderPassStencilAttachmentDescriptor::NMTLRenderPassStencilAttachmentDescriptor() {}
 NMTLRenderPassStencilAttachmentDescriptor::~NMTLRenderPassStencilAttachmentDescriptor() {}
 

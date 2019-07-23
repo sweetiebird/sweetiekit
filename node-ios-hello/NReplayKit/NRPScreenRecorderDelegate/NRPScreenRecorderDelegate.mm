@@ -70,7 +70,7 @@ DELEGATE_PROTOCOL_PROP(RPScreenRecorderDelegate, screenRecorderDidChangeAvailabi
  */
 - (void)screenRecorder:(RPScreenRecorder *)screenRecorder didStopRecordingWithError:(NSError *)error previewViewController:(nullable RPPreviewViewController *)previewViewController API_DEPRECATED("No longer supported", ios(9.0, 10.0), tvos(10.0,10.0))
 {
-  call_delegate(noop(), screenRecorderDidStopRecordingWithErrorPreviewViewController,
+  call_delegate_async(noop(), screenRecorderDidStopRecordingWithErrorPreviewViewController,
     js_value_RPScreenRecorder(screenRecorder),
     js_value_NSError(error),
     js_value_RPPreviewViewController(previewViewController));
@@ -79,7 +79,7 @@ DELEGATE_PROTOCOL_PROP(RPScreenRecorderDelegate, screenRecorderDidChangeAvailabi
 
 - (void)screenRecorder:(RPScreenRecorder *)screenRecorder didStopRecordingWithPreviewViewController:(nullable RPPreviewViewController *)previewViewController error:(nullable NSError *)error API_AVAILABLE(ios(11.0), tvos(11.0))
 {
-  call_delegate(noop(), screenRecorderDidStopRecordingWithPreviewViewControllerError,
+  call_delegate_async(noop(), screenRecorderDidStopRecordingWithPreviewViewControllerError,
     js_value_RPScreenRecorder(screenRecorder),
     js_value_RPPreviewViewController(previewViewController),
     js_value_NSError(error));
@@ -90,7 +90,7 @@ DELEGATE_PROTOCOL_PROP(RPScreenRecorderDelegate, screenRecorderDidChangeAvailabi
  */
 - (void)screenRecorderDidChangeAvailability:(RPScreenRecorder *)screenRecorder
 {
-  call_delegate(noop(), screenRecorderDidChangeAvailability,
+  call_delegate_async(noop(), screenRecorderDidChangeAvailability,
     js_value_RPScreenRecorder(screenRecorder));
 }
 

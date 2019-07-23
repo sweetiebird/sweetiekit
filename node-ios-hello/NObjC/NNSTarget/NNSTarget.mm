@@ -68,7 +68,7 @@ NAN_GETTER(NNSTarget::selectorGetter)
 @implementation NSTarget
 - (IBAction)callback:(id)sender
 {
-  call_delegate(noop(), callback,
+  call_delegate_async(noop(), callback,
     js_value_id(sender));
 }
 

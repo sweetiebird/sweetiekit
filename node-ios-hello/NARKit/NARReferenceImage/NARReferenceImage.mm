@@ -6,7 +6,7 @@
 //
 #include "NARReferenceImage.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARReferenceImage
 #define js_value_instancetype js_value_ARReferenceImage

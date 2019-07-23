@@ -419,7 +419,6 @@ NAN_SETTER(NMDLLightProbeIrradianceDataSource::sphericalHarmonicsLevelSetter) {
 }
 #endif
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNScene.h"
 
 NAN_METHOD(NMDLAsset::assetWithSCNScene) {

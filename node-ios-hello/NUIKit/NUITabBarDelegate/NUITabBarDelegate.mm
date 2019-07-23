@@ -63,7 +63,7 @@ DELEGATE_PROTOCOL_PROP(UITabBarDelegate, tabBarDidEndCustomizingItemsChanged);
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item // called when a new view is selected by the user (but not programatically)
 {
-  call_delegate(noop(), tabBarDidSelectItem,
+  call_delegate_async(noop(), tabBarDidSelectItem,
     js_value_UITabBar(tabBar),
     js_value_UITabBarItem(item));
 }
@@ -75,21 +75,21 @@ DELEGATE_PROTOCOL_PROP(UITabBarDelegate, tabBarDidEndCustomizingItemsChanged);
 
 - (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray<UITabBarItem *> *)items __TVOS_PROHIBITED                      // called before customize sheet is shown. items is current item list
 {
-  call_delegate(noop(), tabBarWillBeginCustomizingItems,
+  call_delegate_async(noop(), tabBarWillBeginCustomizingItems,
     js_value_UITabBar(tabBar),
     js_value_NSArray<UITabBarItem *>(items));
 }
 
 - (void)tabBar:(UITabBar *)tabBar didBeginCustomizingItems:(NSArray<UITabBarItem *> *)items __TVOS_PROHIBITED                       // called after customize sheet is shown. items is current item list
 {
-  call_delegate(noop(), tabBarDidBeginCustomizingItems,
+  call_delegate_async(noop(), tabBarDidBeginCustomizingItems,
     js_value_UITabBar(tabBar),
     js_value_NSArray<UITabBarItem *>(items));
 }
 
 - (void)tabBar:(UITabBar *)tabBar willEndCustomizingItems:(NSArray<UITabBarItem *> *)items changed:(BOOL)changed __TVOS_PROHIBITED  // called before customize sheet is hidden. items is new item list
 {
-  call_delegate(noop(), tabBarWillEndCustomizingItemsChanged,
+  call_delegate_async(noop(), tabBarWillEndCustomizingItemsChanged,
     js_value_UITabBar(tabBar),
     js_value_NSArray<UITabBarItem *>(items),
     js_value_BOOL(changed));
@@ -97,7 +97,7 @@ DELEGATE_PROTOCOL_PROP(UITabBarDelegate, tabBarDidEndCustomizingItemsChanged);
 
 - (void)tabBar:(UITabBar *)tabBar didEndCustomizingItems:(NSArray<UITabBarItem *> *)items changed:(BOOL)changed __TVOS_PROHIBITED   // called after customize sheet is hidden. items is new item list
 {
-  call_delegate(noop(), tabBarDidEndCustomizingItemsChanged,
+  call_delegate_async(noop(), tabBarDidEndCustomizingItemsChanged,
     js_value_UITabBar(tabBar),
     js_value_NSArray<UITabBarItem *>(items),
     js_value_BOOL(changed));

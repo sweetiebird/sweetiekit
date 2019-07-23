@@ -193,7 +193,9 @@ NAN_METHOD(NMPMusicPlayerController::endGeneratingPlaybackNotifications) {
 
 NAN_GETTER(NMPMusicPlayerController::applicationMusicPlayerGetter) {
   declare_autoreleasepool {
+#if !TARGET_OS_UIKITFORMAC
     JS_SET_RETURN(js_value_MPMusicPlayerController([MPMusicPlayerController applicationMusicPlayer]));
+#endif
   }
 }
 
@@ -201,13 +203,17 @@ NAN_GETTER(NMPMusicPlayerController::applicationMusicPlayerGetter) {
 
 NAN_GETTER(NMPMusicPlayerController::applicationQueuePlayerGetter) {
   declare_autoreleasepool {
+#if !TARGET_OS_UIKITFORMAC
     JS_SET_RETURN(js_value_MPMusicPlayerApplicationController([MPMusicPlayerController applicationQueuePlayer]));
+#endif
   }
 }
 
 NAN_GETTER(NMPMusicPlayerController::systemMusicPlayerGetter) {
   declare_autoreleasepool {
+#if !TARGET_OS_UIKITFORMAC
     JS_SET_RETURN(js_value_MPMusicPlayerController/* <MPSystemMusicPlayerController>*/([MPMusicPlayerController systemMusicPlayer]));
+#endif
   }
 }
 
@@ -293,7 +299,9 @@ NAN_GETTER(NMPMusicPlayerController::indexOfNowPlayingItemGetter) {
 
 NAN_GETTER(NMPMusicPlayerController::iPodMusicPlayerGetter) {
   declare_autoreleasepool {
+#if !TARGET_OS_UIKITFORMAC
     JS_SET_RETURN(js_value_MPMusicPlayerController([MPMusicPlayerController iPodMusicPlayer]));
+#endif
   }
 }
 

@@ -9,8 +9,6 @@
 #define instancetype MTLRenderPassDescriptor
 #define js_value_instancetype js_value_MTLRenderPassDescriptor
 
-#import <Metal/MTLRenderPass.h>
-
 Local<Value> js_value_MTLClearColor(const MTLClearColor& value) {
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));
@@ -73,7 +71,7 @@ JS_INIT_CLASS(MTLRenderPassDescriptor, NSObject);
   JS_ASSIGN_PROTO_PROP(stencilAttachment);
   JS_ASSIGN_PROTO_PROP(visibilityResultBuffer);
   JS_ASSIGN_PROTO_PROP(renderTargetArrayLength);
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(imageblockSampleLength);
   JS_ASSIGN_PROTO_PROP(threadgroupMemoryLength);
   JS_ASSIGN_PROTO_PROP(tileWidth);
@@ -269,7 +267,7 @@ NAN_SETTER(NMTLRenderPassDescriptor::renderTargetArrayLengthSetter) {
   }
 }
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NMTLRenderPassDescriptor::imageblockSampleLengthGetter) {
   JS_UNWRAP(MTLRenderPassDescriptor, self);
   declare_autoreleasepool {

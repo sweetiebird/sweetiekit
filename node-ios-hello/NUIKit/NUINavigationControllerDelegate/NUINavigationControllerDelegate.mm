@@ -67,7 +67,7 @@ DELEGATE_PROTOCOL_PROP(UINavigationControllerDelegate, navigationControllerAnima
 // Called when the navigation controller shows a new top view controller via a push, pop or setting of the view controller stack.
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-  call_delegate(noop(), navigationControllerWillShowViewControllerAnimated,
+  call_delegate_async(noop(), navigationControllerWillShowViewControllerAnimated,
     js_value_UINavigationController(navigationController),
     js_value_UIViewController(viewController),
     js_value_BOOL(animated));
@@ -75,7 +75,7 @@ DELEGATE_PROTOCOL_PROP(UINavigationControllerDelegate, navigationControllerAnima
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-  call_delegate(noop(), navigationControllerDidShowViewControllerAnimated,
+  call_delegate_async(noop(), navigationControllerDidShowViewControllerAnimated,
     js_value_UINavigationController(navigationController),
     js_value_UIViewController(viewController),
     js_value_BOOL(animated));

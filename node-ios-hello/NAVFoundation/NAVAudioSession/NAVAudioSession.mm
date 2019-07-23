@@ -90,7 +90,9 @@ JS_INIT_CLASS(AVAudioSession, NSObject);
   // static members (ctor)
   JS_INIT_CTOR(AVAudioSession, NSObject);
   JS_ASSIGN_STATIC_METHOD(sharedInstance);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_STATIC_METHOD(init);
+#endif
 
   // AVAudioSessionCategory
   JS_ASSIGN_ENUM(AVAudioSessionCategoryAmbient, NSString);

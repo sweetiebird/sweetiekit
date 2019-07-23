@@ -45,7 +45,6 @@ NAN_METHOD(NMDLCamera::New) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNCamera.h"
 
 NAN_METHOD(NMDLCamera::cameraWithSCNCamera) {

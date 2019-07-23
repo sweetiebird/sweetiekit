@@ -153,7 +153,6 @@ NAN_SETTER(NSCNGeometryElement::maximumPointScreenSpaceRadiusSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLSubmesh.h"
 
 NAN_METHOD(NSCNGeometryElement::geometryElementWithMDLSubmesh) {

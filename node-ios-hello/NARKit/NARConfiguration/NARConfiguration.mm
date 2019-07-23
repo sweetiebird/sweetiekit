@@ -6,7 +6,7 @@
 //
 #include "NARConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 NARConfiguration::NARConfiguration () {}
 NARConfiguration::~NARConfiguration () {}

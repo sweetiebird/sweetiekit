@@ -6,8 +6,6 @@
 //
 #include "NNSItemProviderWriting.h"
 
-#import <Foundation/NSItemProvider.h>
-
 #define instancetype NSItemProviderWriting
 #define js_value_instancetype js_value_NSItemProviderWriting
 
@@ -53,7 +51,6 @@ NAN_METHOD(NNSItemProviderWriting::New) {
 }
 
 #include "NNSItemProvider.h"
-#import <Foundation/NSItemProvider.h>
 
 NAN_METHOD(NNSItemProviderWriting::itemProviderVisibilityForRepresentationWithTypeIdentifier) {
   declare_autoreleasepool {

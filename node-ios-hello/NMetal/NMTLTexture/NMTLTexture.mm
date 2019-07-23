@@ -9,8 +9,6 @@
 #define instancetype MTLTexture
 #define js_value_instancetype js_value_MTLTexture
 
-#import <Metal/MTLTexture.h>
-
 NMTLTexture::NMTLTexture() {}
 NMTLTexture::~NMTLTexture() {}
 
@@ -29,7 +27,7 @@ JS_INIT_PROTOCOL(MTLTexture, MTLResource);
     JS_ASSIGN_ENUM(MTLTextureTypeCube, NSInteger); // = 5,
     JS_ASSIGN_ENUM(MTLTextureTypeCubeArray, NSInteger); // API_AVAILABLE(macos(10.11), ios(11.0)) = 6,
     JS_ASSIGN_ENUM(MTLTextureType3D, NSInteger); // = 7,
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE
     JS_ASSIGN_ENUM(MTLTextureType2DMultisampleArray, NSInteger); // API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 8,
 #endif
     JS_ASSIGN_ENUM(MTLTextureTypeTextureBuffer, NSInteger); // API_AVAILABLE(macos(10.14), ios(12.0)) = 9

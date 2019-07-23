@@ -81,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      rootViewController = firstChild
                 }
             }*/
-            registerNodeDLibs()
             chdir(getenv("HOME"))
             chdir("Documents")
             guard let bundleURL = Bundle.main.url(forResource: "Scripts", withExtension: "bundle") else { iOSLog0("Scripts bundle not found"); iOSTrap(); return false; }
@@ -1283,7 +1282,13 @@ process.stderr.write('sweetiekit-node\\n');
         }
         iOSLog0("Finished running node\n");
         // Override point for customization after application launch.
+        AppDelegate.OnStart();
         return true
+    }
+    
+    @objc
+    class func OnStart() {
+      OnStartup();
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

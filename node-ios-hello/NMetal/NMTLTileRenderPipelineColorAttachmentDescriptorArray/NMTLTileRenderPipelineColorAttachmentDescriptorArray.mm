@@ -6,7 +6,7 @@
 //
 #include "NMTLTileRenderPipelineColorAttachmentDescriptorArray.h"
 
-#if !(TARGET_OS_MAC || TARGET_OS_UIKITFORMAC)
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype MTLTileRenderPipelineColorAttachmentDescriptorArray
 #define js_value_instancetype js_value_MTLTileRenderPipelineColorAttachmentDescriptorArray

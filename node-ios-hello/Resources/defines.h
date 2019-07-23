@@ -113,8 +113,8 @@ Local<T> createExternalTypedArray(size_t size, size_t stride, const typename V8T
 using namespace v8;
 using namespace node;
 
-#define JS_SET_RETURN(x) \
-  info.GetReturnValue().Set(x)
+#define JS_SET_RETURN(x) info.GetReturnValue().Set(x)
+#define js_return_value(type, x) JS_SET_RETURN(js_value_##type(x))
 
 // forwards arguments to type's constructor.
 #define JS_SET_RETURN_NEW(type, info) \
@@ -436,6 +436,30 @@ NAN_SETTER(N##type::key##Setter) { \
   } \
 }
 
+
+#define DELEGATE_PROTOCOL_PROP_2(type, key) \
+NAN_GETTER(N##type::key##Getter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    if ([self isKindOfClass:[type##Type class]]) { \
+      get_persistent_function(self_, callback, @#key); \
+      if (callback) { \
+        JS_SET_RETURN([callback jsFunction]->Get()); \
+      } \
+    } else { \
+      JS_SET_RETURN(JS_FUNC(Nan::New<v8::FunctionTemplate>(N##type::key, info.This()))); \
+    } \
+  } \
+} \
+\
+NAN_SETTER(N##type::key##Setter) { \
+  JS_UNWRAP_PROTOCOL(type, self); \
+  declare_autoreleasepool { \
+    declare_setter(); \
+    declare_persistent_function_on(self_, callback, @#key); \
+  } \
+}
+
 #define call_persistent_function_noreturn(from, name, key, ...) \
   Local<Value> JS_RESULT; \
   get_persistent_function(from, name, @key); \
@@ -454,6 +478,15 @@ NAN_SETTER(N##type::key##Setter) { \
   
 #define call_delegate(after_callback, key, ...) \
   dispatch_main(^{ \
+    call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
+    JS_UNUSED(self); \
+    if (callback) { \
+      after_callback; \
+    } \
+  })
+  
+#define call_delegate_async(after_callback, key, ...) \
+  dispatch_main_async(^{ \
     call_persistent_function_noreturn(self, callback, #key, __VA_ARGS__); \
     JS_UNUSED(self); \
     if (callback) { \
@@ -835,6 +868,9 @@ void iOSLog0(const char* _Nonnull msg);
 void dispatch_ui_sync(dispatch_queue_t _Nonnull queue, dispatch_block_t _Nonnull block);
 #define dispatch_sync dispatch_ui_sync
 #define dispatch_main(block) declare_autoreleasepool { dispatch_ui_sync(dispatch_get_main_queue(), block); }
+
+void dispatch_ui_async(dispatch_queue_t _Nonnull queue, dispatch_block_t _Nonnull block);
+#define dispatch_main_async(block) declare_autoreleasepool { dispatch_ui_async(dispatch_get_main_queue(), block); }
 
 bool NJSStringGetUTF8String(Local<Value> jsStr, std::string& outStr);
 

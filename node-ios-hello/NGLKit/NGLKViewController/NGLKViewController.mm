@@ -6,9 +6,7 @@
 //
 #include "NGLKViewController.h"
 
-#ifdef __IPHONEOS__
-
-#import <GLKit/GLKViewController.h>
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype GLKViewController
 #define js_value_instancetype js_value_GLKViewController
@@ -182,4 +180,4 @@ NAN_SETTER(NGLKViewController::resumeOnDidBecomeActiveSetter) {
   }
 }
 
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE

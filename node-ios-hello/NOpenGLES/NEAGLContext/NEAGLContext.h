@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define js_value_EAGLContext(x) js_value_wrapper(x, EAGLContext)
 #define to_value_EAGLContext(x) to_value_wrapper(x, EAGLContext)

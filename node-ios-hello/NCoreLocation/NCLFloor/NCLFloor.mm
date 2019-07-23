@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLFloor.h"
-#import <CoreLocation/CLLocation.h>
 
 #define instancetype CLFloor
 #define js_value_instancetype js_value_CLFloor

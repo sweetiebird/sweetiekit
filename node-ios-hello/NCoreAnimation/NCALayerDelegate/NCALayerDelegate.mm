@@ -68,7 +68,7 @@ DELEGATE_PROTOCOL_PROP(CALayerDelegate, actionForLayerForKey);
 
 - (void)displayLayer:(CALayer *)layer
 {
-  call_delegate(noop(), displayLayer,
+  call_delegate_async(noop(), displayLayer,
     js_value_CALayer(layer));
 }
 
@@ -76,7 +76,7 @@ DELEGATE_PROTOCOL_PROP(CALayerDelegate, actionForLayerForKey);
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
-  call_delegate(noop(), drawLayerInContext,
+  call_delegate_async(noop(), drawLayerInContext,
     js_value_CALayer(layer),
     js_value_CGContextRef(ctx));
 }
@@ -89,7 +89,7 @@ DELEGATE_PROTOCOL_PROP(CALayerDelegate, actionForLayerForKey);
 - (void)layerWillDraw:(CALayer *)layer
   API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 {
-  call_delegate(noop(), layerWillDraw,
+  call_delegate_async(noop(), layerWillDraw,
     js_value_CALayer(layer));
 }
 
@@ -99,7 +99,7 @@ DELEGATE_PROTOCOL_PROP(CALayerDelegate, actionForLayerForKey);
 
 - (void)layoutSublayersOfLayer:(CALayer *)layer
 {
-  call_delegate(noop(), layoutSublayersOfLayer,
+  call_delegate_async(noop(), layoutSublayersOfLayer,
     js_value_CALayer(layer));
 }
 

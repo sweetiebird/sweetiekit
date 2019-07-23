@@ -18,21 +18,18 @@ struct  AudioStreamPacketDescription
 */
 
 Local<Value>
-js_value_AudioStreamPacketDescription(const AudioStreamPacketDescription* value)
+js_value_AudioStreamPacketDescription(const AudioStreamPacketDescription& value)
 {
-  if (!value) {
-    return Nan::Undefined();
-  }
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));
-  result->Set(JS_STR("StartOffset"), js_value_int64_t(value->mStartOffset));
-  result->Set(JS_STR("VariableFramesInPacket"), js_value_uint32_t(value->mVariableFramesInPacket));
-  result->Set(JS_STR("DataByteSize"), js_value_uint32_t(value->mDataByteSize));
+  result->Set(JS_STR("StartOffset"), js_value_int64_t(value.mStartOffset));
+  result->Set(JS_STR("VariableFramesInPacket"), js_value_uint32_t(value.mVariableFramesInPacket));
+  result->Set(JS_STR("DataByteSize"), js_value_uint32_t(value.mDataByteSize));
   return scope.Escape(result);
 }
 
 AudioStreamPacketDescription
-to_value_AudioStreamPacketDescription(Local<Value> value, bool* _Nullable failed)
+to_value_AudioStreamPacketDescription(const Local<Value>& value, bool* _Nullable failed)
 {
   AudioStreamPacketDescription result;
   if (failed) {
@@ -55,7 +52,7 @@ to_value_AudioStreamPacketDescription(Local<Value> value, bool* _Nullable failed
 }
 
 bool
-is_value_AudioStreamPacketDescription(Local<Value> value)
+is_value_AudioStreamPacketDescription(const Local<Value>& value)
 {
   if (!value->IsObject()) {
     return false;
@@ -89,27 +86,24 @@ struct AudioStreamBasicDescription
 */
 
 Local<Value>
-js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription* value)
+js_value_AudioStreamBasicDescription(const AudioStreamBasicDescription& value)
 {
-  if (!value) {
-    return Nan::Undefined();
-  }
   Nan::EscapableHandleScope scope;
   Local<Object> result(Object::New(JS_ISOLATE()));
-  result->Set(JS_STR("SampleRate"), js_value_double(value->mSampleRate));
-  result->Set(JS_STR("FormatID"), js_value_uint32_t(value->mFormatID));
-  result->Set(JS_STR("FormatFlags"), js_value_uint32_t(value->mFormatFlags));
-  result->Set(JS_STR("BytesPerPacket"), js_value_uint32_t(value->mBytesPerPacket));
-  result->Set(JS_STR("FramesPerPacket"), js_value_uint32_t(value->mFramesPerPacket));
-  result->Set(JS_STR("BytesPerFrame"), js_value_uint32_t(value->mBytesPerFrame));
-  result->Set(JS_STR("ChannelsPerFrame"), js_value_uint32_t(value->mChannelsPerFrame));
-  result->Set(JS_STR("BitsPerChannel"), js_value_uint32_t(value->mBitsPerChannel));
-  result->Set(JS_STR("Reserved"), js_value_uint32_t(value->mReserved));
+  result->Set(JS_STR("SampleRate"), js_value_double(value.mSampleRate));
+  result->Set(JS_STR("FormatID"), js_value_uint32_t(value.mFormatID));
+  result->Set(JS_STR("FormatFlags"), js_value_uint32_t(value.mFormatFlags));
+  result->Set(JS_STR("BytesPerPacket"), js_value_uint32_t(value.mBytesPerPacket));
+  result->Set(JS_STR("FramesPerPacket"), js_value_uint32_t(value.mFramesPerPacket));
+  result->Set(JS_STR("BytesPerFrame"), js_value_uint32_t(value.mBytesPerFrame));
+  result->Set(JS_STR("ChannelsPerFrame"), js_value_uint32_t(value.mChannelsPerFrame));
+  result->Set(JS_STR("BitsPerChannel"), js_value_uint32_t(value.mBitsPerChannel));
+  result->Set(JS_STR("Reserved"), js_value_uint32_t(value.mReserved));
   return scope.Escape(result);
 }
 
 AudioStreamBasicDescription
-to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed)
+to_value_AudioStreamBasicDescription(const Local<Value>& value, bool* _Nullable failed)
 {
   AudioStreamBasicDescription result;
   if (failed) {
@@ -138,7 +132,7 @@ to_value_AudioStreamBasicDescription(Local<Value> value, bool* _Nullable failed)
 }
 
 bool
-is_value_AudioStreamBasicDescription(Local<Value> value)
+is_value_AudioStreamBasicDescription(const Local<Value>& value)
 {
   if (!value->IsObject()) {
     return false;
@@ -200,7 +194,7 @@ js_value_AudioComponentDescription(const AudioComponentDescription& value)
 }
 
 AudioComponentDescription
-to_value_AudioComponentDescription(Local<Value> value, bool* _Nullable failed)
+to_value_AudioComponentDescription(const Local<Value>& value, bool* _Nullable failed)
 {
   AudioComponentDescription result;
   if (failed) {
@@ -225,7 +219,7 @@ to_value_AudioComponentDescription(Local<Value> value, bool* _Nullable failed)
 }
 
 bool
-is_value_AudioComponentDescription(Local<Value> value)
+is_value_AudioComponentDescription(const Local<Value>& value)
 {
   if (!value->IsObject()) {
     return false;

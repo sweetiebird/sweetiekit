@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 
 const {
   MTKView,
@@ -170,7 +170,7 @@ async function make(nav, demoVC) {
   uniforms.modelViewProjectionMatrix = mvp.set(...proj.projectionMatrix.elements).multiply(cam.viewMatrix);
 
   view = demoVC.view;
-  mtkView = MTKView(view.frame);
+  mtkView = MTKView(view.frame, device);
   view.addSubview(mtkView);
   mtkView.pinToSuperview();
 

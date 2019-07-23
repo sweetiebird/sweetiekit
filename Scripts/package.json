@@ -10,6 +10,7 @@
     "build": "npx babel reactkit/components --out-dir dist/components && npx babel reactkit/renderer --out-dir dist/renderer && npx babel reactkit/utils --out-dir dist/utils && npx babel reactkit/index.js --out-file dist/index.js"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^1.2.2",
     "Faker": "^0.7.2",
     "axios": "^0.18.0",
     "colyseus.js": "^0.10.8",
@@ -18,6 +19,6 @@
     "lodash": "^4.17.11",
     "socket.io-client": "^2.2.0",
     "sweetiekit-art": "^0.0.5",
-    "sweetiekit-dom": "^0.0.5"
+    "sweetiekit-dom": "^0.0.7"
   }
 }

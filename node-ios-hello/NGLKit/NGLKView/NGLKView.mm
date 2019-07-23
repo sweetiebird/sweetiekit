@@ -6,9 +6,7 @@
 //
 #include "NGLKView.h"
 
-#ifdef __IPHONEOS__
-
-#import <GLKit/GLKView.h>
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype GLKView
 #define js_value_instancetype js_value_GLKView
@@ -68,6 +66,8 @@ NAN_METHOD(NGLKView::New) {
 
     if (info[0]->IsExternal()) {
       self = (__bridge GLKView *)(info[0].As<External>()->Value());
+    } else if (is_value_CGRect(info[0])) {
+      self = [[GLKView alloc] initWithFrame:to_value_CGRect(info[0])];
     } else if (info.Length() <= 0) {
       self = [[GLKView alloc] init];
     }
@@ -254,4 +254,4 @@ NAN_SETTER(NGLKView::enableSetNeedsDisplaySetter) {
   }
 }
 
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE

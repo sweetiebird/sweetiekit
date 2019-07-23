@@ -108,30 +108,6 @@ NAN_METHOD(NUIViewImplicitlyAnimating::continueAnimationWithTimingParametersDura
   }
 }
 
-
-#define DELEGATE_PROTOCOL_PROP_2(type, key) \
-NAN_GETTER(N##type::key##Getter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    if ([self isKindOfClass:[type##Type class]]) { \
-      get_persistent_function(self_, callback, @#key); \
-      if (callback) { \
-        JS_SET_RETURN([callback jsFunction]->Get()); \
-      } \
-    } else { \
-      JS_SET_RETURN(JS_FUNC(Nan::New<v8::FunctionTemplate>(N##type::key, info.This()))); \
-    } \
-  } \
-} \
-\
-NAN_SETTER(N##type::key##Setter) { \
-  JS_UNWRAP_PROTOCOL(type, self); \
-  declare_autoreleasepool { \
-    declare_setter(); \
-    declare_persistent_function_on(self_, callback, @#key); \
-  } \
-}
-
 DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, addAnimationsDelayFactor);
 DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, addAnimations);
 DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, addCompletion);
@@ -151,7 +127,7 @@ DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, continueAnimationWithTimingP
       }
     }));
     
-    call_delegate(noop(), addAnimationsDelayFactor,
+    call_delegate_async(noop(), addAnimationsDelayFactor,
       animationCallback,
       js_value_CGFloat(delayFactor));
   });
@@ -166,7 +142,7 @@ DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, continueAnimationWithTimingP
       }
     }));
     
-    call_delegate(noop(), addAnimations,
+    call_delegate_async(noop(), addAnimations,
       animationCallback);
   });
 }
@@ -182,14 +158,14 @@ DELEGATE_PROTOCOL_PROP_2(UIViewImplicitlyAnimating, continueAnimationWithTimingP
       }
     }));
     
-    call_delegate(noop(), addCompletion,
+    call_delegate_async(noop(), addCompletion,
       completionCallback);
   });
 }
 
 - (void)continueAnimationWithTimingParameters:(nullable id <UITimingCurveProvider>)parameters durationFactor:(CGFloat)durationFactor
 {
-  call_delegate(noop(), continueAnimationWithTimingParametersDurationFactor,
+  call_delegate_async(noop(), continueAnimationWithTimingParametersDurationFactor,
     js_value_UITimingCurveProvider(parameters),
     js_value_CGFloat(durationFactor));
 }

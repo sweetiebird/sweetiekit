@@ -10,6 +10,8 @@
 
 #include "NUIView.h"
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
 #define js_value_GLKView(x) js_value_wrapper(x, GLKView)
 #define to_value_GLKView(x) to_value_wrapper(x, GLKView)
 #define is_value_GLKView(x) is_value_wrapper(x, GLKView)
@@ -50,5 +52,7 @@ JS_WRAP_CLASS(GLKView, UIView);
   JS_PROP_READONLY(snapshot);
   JS_PROP(enableSetNeedsDisplay);
 JS_WRAP_CLASS_END(GLKView);
+
+#endif
 
 #endif /* NGLKView_h */

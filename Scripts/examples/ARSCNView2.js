@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 
 const fs = require('fs');
 const axios = require('axios');
@@ -34,8 +34,10 @@ async function make(nav, demoVC) {
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
   config.planeDetection = ARPlaneDetectionVertical;
-  viewDel = new ARSCNViewDelegate(() => {
-    return anchorNode;
+  viewDel = ARSCNViewDelegate({
+    rendererNodeForAnchor: () => {
+      return anchorNode;
+    }
   });
 
   arView.delegate = viewDel;

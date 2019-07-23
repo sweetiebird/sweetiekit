@@ -6,85 +6,102 @@
 //
 #include "NAudioComponent.h"
 
-#if 0
-#include "NAUAudioUnit.h" // for OSType
 
-/*
-typedef struct AudioComponentDescription {
-    OSType              componentType;
-    OSType              componentSubType;
-    OSType              componentManufacturer;
-    UInt32              componentFlags;
-    UInt32              componentFlagsMask;
-} AudioComponentDescription;
-*/
+#define NXThrowIfError(error, operation)                    \
+  do {                                  \
+    OSStatus __err = error;                        \
+    if (__err) {                            \
+      js_panic_CAXError(__err, operation);              \
+    }                                  \
+  } while (0)
 
-Local<Value>
-js_value_AudioComponentDescription(const AudioComponentDescription& value)
-{
-  Nan::EscapableHandleScope scope;
-  Local<Object> result(Object::New(JS_ISOLATE()));
-  result->Set(JS_STR("componentType"), js_value_OSType(value.componentType));
-  result->Set(JS_STR("componentSubType"), js_value_OSType(value.componentSubType));
-  result->Set(JS_STR("componentManufacturer"), js_value_OSType(value.componentManufacturer));
-  result->Set(JS_STR("componentFlags"), js_value_uint32_t(value.componentFlags));
-  result->Set(JS_STR("componentFlagsMask"), js_value_uint32_t(value.componentFlagsMask));
-  return scope.Escape(result);
-}
-
-AudioComponentDescription
-to_value_AudioComponentDescription(const Local<Value>& value, bool* _Nullable failed)
-{
-  AudioComponentDescription result;
-  if (failed) {
-    *failed = false;
-  }
-  if (!is_value_AudioComponentDescription(value))
-  {
-    if (failed) {
-      *failed = true;
-    } else {
-      Nan::ThrowError("Expected a AudioComponentDescription");
+#define js_panic_CAXError(error, operation) \
+    if (error) { \
+      Nan::ThrowError([[NSString stringWithFormat:@"%@: code %d", @operation, static_cast<int>(error)] UTF8String]); \
+      return; \
     }
-    return result;
+
+
+/*!
+    @function       AudioComponentFindNext
+    @abstract       Finds an audio component.
+    @discussion     This function is used to find an audio component that is the closest match
+                    to the provided values. Note that the list of available components may change
+          dynamically in situations involving inter-app audio on iOS, or version 3
+          audio unit extensions. See kAudioComponentRegistrationsChangedNotification.
+
+    @param          inComponent
+                        If NULL, then the search starts from the beginning until an audio
+                        component is found that matches the description provided by inDesc.
+                        If non-NULL, then the search starts (continues) from the previously
+                        found audio component specified by inComponent, and will return the next
+                        found audio component.
+    @param          inDesc
+                        The type, subtype and manufacturer fields are used to specify the audio
+                        component to search for. A value of 0 (zero) for any of these fields is
+                        a wildcard, so the first match found is returned.
+    @result         An audio component that matches the search parameters, or NULL if none found.
+*/
+/*
+extern AudioComponent __nullable
+AudioComponentFindNext (    AudioComponent __nullable           inComponent,
+                            const AudioComponentDescription *   inDesc) 
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
+
+ */
+
+#include "NCoreAudioTypes.h"
+
+@import AudioToolbox;
+
+NAN_METHOD(AudioComponentFindNext) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(AudioComponent, inComponent);
+    declare_value(AudioComponentDescription, inDesc);
+    js_return_value(AudioComponent, ::AudioComponentFindNext(inComponent, &inDesc));
   }
-  Local<Object> object(JS_OBJ(value));
-  result.componentType = to_value_OSType(object->Get(JS_STR("componentType")));
-  result.componentSubType = to_value_OSType(object->Get(JS_STR("componentSubType")));
-  result.componentManufacturer = to_value_OSType(object->Get(JS_STR("componentManufacturer")));
-  result.componentFlags = to_value_uint32_t(object->Get(JS_STR("componentFlags")));
-  result.componentFlagsMask = to_value_uint32_t(object->Get(JS_STR("componentFlagsMask")));
-  return result;
 }
 
-bool
-is_value_AudioComponentDescription(const Local<Value>& value)
-{
-  if (!value->IsObject()) {
-    return false;
+/*!
+    @function       AudioComponentInstanceNew
+    @abstract       Creates an audio component instance.
+    @discussion     This function creates an instance of a given audio component. The audio
+                    component instance is the object that does all of the work, whereas the
+                    audio component is the way an application finds and then creates this object
+                    to do this work. For example, an audio unit is a type of audio component
+                    instance, so to use an audio unit, one finds its audio component, and then
+                    creates a new instance of that component. This instance is then used to
+                    perform the audio tasks for which it was designed (process, mix, synthesise,
+                    etc.).
+    @param          inComponent
+                        the audio component (must not be NULL)
+    @param          outInstance
+                        the audio component instance
+    @result         an OSStatus result code.
+*/
+/*
+extern OSStatus 
+AudioComponentInstanceNew(      AudioComponent                                inComponent,
+                                AudioComponentInstance __nullable * __nonnull outInstance)
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+NAN_METHOD(AudioComponentInstanceNew) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioComponent, inComponent);
+    AudioComponentInstance instance = nullptr;
+    NXThrowIfError(::AudioComponentInstanceNew(inComponent, &instance), "AudioComponentInstanceNew failed");
+    js_return_value(AudioComponentInstance, instance);
+    
   }
-  Local<Object> object(JS_OBJ(value));
-  if (!is_value_OSType(object->Get(JS_STR("componentType")))) {
-    return false;
-  }
-  if (!is_value_OSType(object->Get(JS_STR("componentSubType")))) {
-    return false;
-  }
-  if (!is_value_OSType(object->Get(JS_STR("componentManufacturer")))) {
-    return false;
-  }
-  if (!is_value_uint32_t(object->Get(JS_STR("componentFlags")))) {
-    return false;
-  }
-  if (!is_value_uint32_t(object->Get(JS_STR("componentFlagsMask")))) {
-    return false;
-  }
-  return true;
 }
-#endif
 
 JS_INIT_GLOBALS(AudioComponent);
   // global values (exports)
+  
+  JS_ASSIGN_GLOBAL_METHOD(AudioComponentFindNext);
+  JS_ASSIGN_GLOBAL_METHOD(AudioComponentInstanceNew);
 
   /*!
     @constant  kAudioComponentFlag_Unsearchable

@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLRegion.h"
-#include <CoreLocation/CLRegion.h>
 
 #define instancetype CLRegion
 #define js_value_instancetype js_value_CLRegion

@@ -57,14 +57,14 @@ DELEGATE_PROTOCOL_PROP(RPPreviewViewControllerDelegate, previewControllerDidFini
 /* @abstract Called when the view controller is finished. */
 - (void)previewControllerDidFinish:(RPPreviewViewController *)previewController
 {
-  call_delegate(noop(), previewControllerDidFinish,
+  call_delegate_async(noop(), previewControllerDidFinish,
     js_value_RPPreviewViewController(previewController));
 }
 
 /* @abstract Called when the view controller is finished and returns a set of activity types that the user has completed on the recording. The built in activity types are listed in UIActivity.h. */
 - (void)previewController:(RPPreviewViewController *)previewController didFinishWithActivityTypes:(NSSet <NSString *> *)activityTypes __TVOS_PROHIBITED
 {
-  call_delegate(noop(), previewControllerDidFinishWithActivityTypes,
+  call_delegate_async(noop(), previewControllerDidFinishWithActivityTypes,
     js_value_RPPreviewViewController(previewController),
     js_value_NSSet/* <NSString *>*/(activityTypes));
 }

@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 
 THREE = require('../vendor/three/three');
 
@@ -11,12 +11,16 @@ const {
   SCNLight,
 } = SweetieKit;
 
-async function make(nav, demoVC) {
+ARSelection_make =  async function ARSelection_make(nav, demoVC) {
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
-  viewDel = new ARSCNViewDelegate(() => {
-    return new SCNNode();
+  config.planeDetection = ARPlaneDetectionHorizontal;
+  config.environmentTexturing = AREnvironmentTexturingAutomatic;
+  viewDel = ARSCNViewDelegate({
+    rendererNodeForAnchor: () => {
+      return new SCNNode();
+    },
   });
   scene = new SCNScene();
   geo = SCNTube(0.01, 0.02, 0.1);
@@ -42,7 +46,6 @@ async function make(nav, demoVC) {
     touches = Array.from(touches);
     let touch = touches[0];
     let pt = touches[0].locationInView(touch.view);
-    pt.y -= Math.trunc(0.1*touch.view.height);
     let hits = arView.hitTest(pt);
     if (hits && hits.length > 0) {
       let hit = hits[0];
@@ -81,6 +84,10 @@ async function make(nav, demoVC) {
     }
     configure();
   }
+}
+
+function make(...args) {
+  return ARSelection_make(...args);
 }
 
 module.exports = make;

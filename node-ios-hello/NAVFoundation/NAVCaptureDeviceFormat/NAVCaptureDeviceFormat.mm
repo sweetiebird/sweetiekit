@@ -19,7 +19,9 @@ JS_INIT_CLASS(AVCaptureDeviceFormat, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(videoSupportedFrameRateRanges);
   JS_ASSIGN_PROTO_PROP_READONLY(videoFieldOfView);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoBinned);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoStabilizationSupported);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(videoMaxZoomFactor);
   JS_ASSIGN_PROTO_PROP_READONLY(videoZoomFactorUpscaleThreshold);
   JS_ASSIGN_PROTO_PROP_READONLY(minExposureDuration);
@@ -118,12 +120,14 @@ NAN_GETTER(NAVCaptureDeviceFormat::isVideoBinnedGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureDeviceFormat::isVideoStabilizationSupportedGetter) {
   JS_UNWRAP(AVCaptureDeviceFormat, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self isVideoStabilizationSupported]));
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureDeviceFormat::videoMaxZoomFactorGetter) {
   JS_UNWRAP(AVCaptureDeviceFormat, self);

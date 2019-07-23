@@ -9,8 +9,6 @@
 #define instancetype MTLResource
 #define js_value_instancetype js_value_MTLResource
 
-#import <Metal/MTLResource.h>
-
 NMTLResource::NMTLResource() {}
 NMTLResource::~NMTLResource() {}
 

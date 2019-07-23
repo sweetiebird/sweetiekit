@@ -6,7 +6,7 @@
 //
 #include "NARFaceTrackingConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARFaceTrackingConfiguration
 #define Ninstancetype NARFaceTrackingConfiguration

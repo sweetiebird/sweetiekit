@@ -900,7 +900,6 @@ NAN_SETTER(NSCNCamera::focalDistanceSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLCamera.h"
 
 NAN_METHOD(NSCNCamera::cameraWithMDLCamera) {

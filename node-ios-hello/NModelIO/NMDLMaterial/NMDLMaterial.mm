@@ -421,7 +421,6 @@ NAN_SETTER(NMDLMaterial::materialFaceSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NSCNMaterial.h"
 
 NAN_METHOD(NMDLMaterial::materialWithSCNMaterial) {

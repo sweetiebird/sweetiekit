@@ -4,7 +4,6 @@
 //  Created by Emily Kolar on 5/7/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-#import <AVFoundation/AVFoundation.h>
 #include "NAVAudioPlayer.h"
 
 #define instancetype AVAudioPlayer
@@ -37,7 +36,7 @@ JS_INIT_CLASS(AVAudioPlayer, NSObject);
   JS_ASSIGN_PROTO_PROP_READONLY(isPlaying);
   JS_ASSIGN_PROTO_PROP_READONLY(numberOfChannels);
   JS_ASSIGN_PROTO_PROP_READONLY(duration);
-#if !defined(__IPHONEOS__) && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP(currentDevice);
 #endif
   JS_ASSIGN_PROTO_PROP(delegate);
@@ -297,7 +296,7 @@ NAN_GETTER(NAVAudioPlayer::durationGetter) {
   }
 }
 
-#if !defined(__IPHONEOS__) && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVAudioPlayer::currentDeviceGetter) {
   JS_UNWRAP(AVAudioPlayer, self);
   declare_autoreleasepool {

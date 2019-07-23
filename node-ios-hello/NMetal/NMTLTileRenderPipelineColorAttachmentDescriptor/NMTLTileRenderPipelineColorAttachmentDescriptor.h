@@ -10,7 +10,7 @@
 
 #include "NNSObject.h"
 
-#if !(TARGET_OS_MAC || TARGET_OS_UIKITFORMAC)
+#if TARGET_OS_IPHONE
 
 #define js_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) js_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)
 #define to_value_MTLTileRenderPipelineColorAttachmentDescriptor(x) to_value_wrapper(x, MTLTileRenderPipelineColorAttachmentDescriptor)

@@ -6,7 +6,7 @@
 //
 #include "NARCamera.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #include "NNSObject.h"
 #include "NARWorldTrackingConfiguration.h"

@@ -42,7 +42,7 @@ JS_WRAP_CLASS(AVAudioPlayer, NSObject);
   JS_PROP_READONLY(isPlaying);
   JS_PROP_READONLY(numberOfChannels);
   JS_PROP_READONLY(duration);
-#ifndef __IPHONEOS__
+#if !TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
   JS_PROP(currentDevice);
 #endif
   JS_PROP(delegate);

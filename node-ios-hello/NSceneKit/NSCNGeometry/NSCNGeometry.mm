@@ -304,7 +304,6 @@ NAN_SETTER(NSCNGeometry::edgeCreasesSourceSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLMesh.h"
 
 NAN_METHOD(NSCNGeometry::geometryWithMDLMesh) {

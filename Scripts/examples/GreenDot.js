@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 const math = require('./helpers/math');
 THREE = require('../vendor/three/three');
 
@@ -57,33 +57,35 @@ async function make(nav, demoVC) {
   const config = new ARWorldTrackingConfiguration();
   config.worldAlignment = ARWorldAlignmentGravityAndHeading;
 
-  const viewDel = new ARSCNViewDelegate(() => {
-    const parentNode = new SCNNode();
-    const node = new SCNNode(modelFile);
-    const camXform = arView.session.currentFrame.camera.transform;
+  const viewDel = ARSCNViewDelegate({
+    rendererNodeForAnchor: () => {
+      const parentNode = new SCNNode();
+      const node = new SCNNode(modelFile);
+      const camXform = arView.session.currentFrame.camera.transform;
 
-    const text = new SCNText('NAV', 1);
-    text.font = font;
-    const textNode = new SCNNode(text);
-    const xform2 = new THREE.Matrix4().fromArray(camXform);
-    xform2.multiply(new THREE.Matrix4().makeTranslation(-0.7,0.4,0));
-    textNode.simdTransform = xform2;
-    textNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
+      const text = new SCNText('NAV', 1);
+      text.font = font;
+      const textNode = new SCNNode(text);
+      const xform2 = new THREE.Matrix4().fromArray(camXform);
+      xform2.multiply(new THREE.Matrix4().makeTranslation(-0.7,0.4,0));
+      textNode.simdTransform = xform2;
+      textNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
 
-    const distText = new SCNText('0 Meters', 1);
-    text.font = font;
-    distNode = new SCNNode(distText);
-    const xform3 = new THREE.Matrix4().fromArray(camXform);
-    xform3.multiply(new THREE.Matrix4().makeTranslation(-2.5,-1.8,0));
-    distNode.simdTransform = xform3;
-    distNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
+      const distText = new SCNText('0 Meters', 1);
+      text.font = font;
+      distNode = new SCNNode(distText);
+      const xform3 = new THREE.Matrix4().fromArray(camXform);
+      xform3.multiply(new THREE.Matrix4().makeTranslation(-2.5,-1.8,0));
+      distNode.simdTransform = xform3;
+      distNode.scale = { x: 0.1, y: 0.1, z: 0.4 };
 
 
-    parentNode.addChildNode(textNode);
-    parentNode.addChildNode(node);
-    parentNode.addChildNode(distNode);
+      parentNode.addChildNode(textNode);
+      parentNode.addChildNode(node);
+      parentNode.addChildNode(distNode);
 
-    return parentNode;
+      return parentNode;
+    }
   });
 
   const scene = new SCNScene();

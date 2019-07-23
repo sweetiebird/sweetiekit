@@ -6,7 +6,7 @@
 //
 #include "NARPointCloud.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARPointCloud
 #define js_value_instancetype js_value_ARPointCloud

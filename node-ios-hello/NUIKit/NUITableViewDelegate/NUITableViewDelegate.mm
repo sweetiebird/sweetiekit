@@ -144,42 +144,42 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  call_delegate(noop(), tableViewWillDisplayCellForRowAtIndexPath,
+  call_delegate_async(noop(), tableViewWillDisplayCellForRowAtIndexPath,
     js_value_UITableViewCell(cell),
     js_value_NSIndexPath(indexPath));
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewWillDisplayHeaderViewForSection,
+  call_delegate_async(noop(), tableViewWillDisplayHeaderViewForSection,
     js_value_UIView(view),
     js_value_NSInteger(section));
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewWillDisplayFooterViewForSection,
+  call_delegate_async(noop(), tableViewWillDisplayFooterViewForSection,
     js_value_UIView(view),
     js_value_NSInteger(section));
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewDidEndDisplayingCellForRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidEndDisplayingCellForRowAtIndexPath,
     js_value_UITableViewCell(cell),
     js_value_NSIndexPath(indexPath));
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewDidEndDisplayingHeaderViewForSection,
+  call_delegate_async(noop(), tableViewDidEndDisplayingHeaderViewForSection,
     js_value_UIView(view),
     js_value_NSInteger(section));
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewDidEndDisplayingFooterViewForSection,
+  call_delegate_async(noop(), tableViewDidEndDisplayingFooterViewForSection,
     js_value_UIView(view),
     js_value_NSInteger(section));
 }
@@ -286,7 +286,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  call_delegate(noop(), tableViewAccessoryButtonTappedForRowWithIndexPath,
+  call_delegate_async(noop(), tableViewAccessoryButtonTappedForRowWithIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
@@ -306,14 +306,14 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewDidHighlightRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidHighlightRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
 
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(6_0)
 {
-  call_delegate(noop(), tableViewDidUnhighlightRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidUnhighlightRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
@@ -340,14 +340,14 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  call_delegate(noop(), tableViewDidSelectRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidSelectRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0)
 {
-  call_delegate(noop(), tableViewDidDeselectRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidDeselectRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
@@ -418,14 +418,14 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 // The willBegin/didEnd methods are called whenever the 'editing' property is automatically changed by the table (allowing insert/delete/move). This is done by a swipe activating a single row
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath __TVOS_PROHIBITED
 {
-  call_delegate(noop(), tableViewWillBeginEditingRowAtIndexPath,
+  call_delegate_async(noop(), tableViewWillBeginEditingRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath __TVOS_PROHIBITED
 {
-  call_delegate(noop(), tableViewDidEndEditingRowAtIndexPath,
+  call_delegate_async(noop(), tableViewDidEndEditingRowAtIndexPath,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath));
 }
@@ -477,7 +477,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender NS_AVAILABLE_IOS(5_0)
 {
-  call_delegate(noop(), tableViewPerformActionForRowAtIndexPathWithSender,
+  call_delegate_async(noop(), tableViewPerformActionForRowAtIndexPathWithSender,
     js_value_UITableView(tableView),
     js_value_NSIndexPath(indexPath),
     js_value_id(sender));
@@ -505,7 +505,7 @@ DELEGATE_PROTOCOL_PROP(UITableViewDelegate, tableViewShouldSpringLoadRowAtIndexP
 
 - (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator NS_AVAILABLE_IOS(9_0)
 {
-  call_delegate(noop(), tableViewDidUpdateFocusInContextWithAnimationCoordinator,
+  call_delegate_async(noop(), tableViewDidUpdateFocusInContextWithAnimationCoordinator,
     js_value_UITableView(tableView),
     js_value_UITableViewFocusUpdateContext(context),
     js_value_UIFocusAnimationCoordinator(coordinator));

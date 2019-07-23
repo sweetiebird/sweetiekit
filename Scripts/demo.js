@@ -15,7 +15,7 @@ console.log([].concat(...Object.values(require('os').networkInterfaces()).map(x 
 if (typeof gc === 'undefined') {
   gc = (() => { console.log('gc stub'); });
 }
-SweetieKit = require('std:sweetiekit.node');
+SweetieKit = process._linkedBinding('sweetiekit');
 
 
 GetterNameToSetterName = function GetterNameToSetterName(name) {
@@ -127,6 +127,7 @@ SweetieKitPrefixes = {
   CL: "CoreLocation",
   CM: "CoreMotion",
   CN: "Contacts",
+  CV: "CoreVideo",
   EA: "OpenGLES",
   GK: "GameplayKit",
   GLK: "GLKit",
@@ -142,9 +143,11 @@ SweetieKitPrefixes = {
   Sec: "Security",
   SK: "SpriteKit",
   UI: "UIKit",
+  VN: "Vision",
   WK: "WebKit",
 };
 
+/*
 Object.getOwnPropertyNames(SweetieKit)
   .filter(x => Object.keys(SweetieKitPrefixes)
                  .filter(y => (x.startsWith(y) || x.startsWith("k"+y)))
@@ -152,7 +155,7 @@ Object.getOwnPropertyNames(SweetieKit)
   .sort()
   .forEach(x => {
     console.log(x);
-    BindClass(SweetieKit[x]);
+    //BindClass(SweetieKit[x]);
     global[x] = SweetieKit[x];
    });
 
@@ -160,6 +163,9 @@ global.id = SweetieKit.id;
 global.objc = SweetieKit.id;
 global.NSClassFromString = objc.NSClassFromString;
 global.NSSearchPathForDirectoriesInDomains = objc.NSSearchPathForDirectoriesInDomains;
+*/
+global.objc = SweetieKit.id;
+Object.assign(global, SweetieKit);
 
 global.FS = require('fs');
 global.Path = require('path');
@@ -267,9 +273,14 @@ RGB.orange   = RGB(255, 102, 0);
 RGB.darkred  = RGB(180, 0, 0);
 RGB.darkblue = RGB(0, 0, 120);
 
+global.SCNVector3Make = (x, y, z) => {
+  return {x, y, z};
+};
+
 
 // gc periodically
-setInterval(() => {
+SweetieKit._gcInterval = setInterval(() => {
   gc();
 }, 1000);
-require('./uidemos');
+
+uidemos = require('./uidemos');

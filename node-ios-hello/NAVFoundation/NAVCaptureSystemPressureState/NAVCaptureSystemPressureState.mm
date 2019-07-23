@@ -27,7 +27,7 @@ JS_INIT_CLASS(AVCaptureSystemPressureState, NSObject);
    @discussion
       The AVCaptureSystemPressureLevel string constants describe varying levels of system pressure that affect capture hardware availability and/or quality.
    */
-#if !TARGET_OS_MAC && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_MAC && !TARGET_OS_WATCH && !TARGET_OS_TV
 //typedef NSString *AVCaptureSystemPressureLevel NS_STRING_ENUM API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
   /*!
@@ -71,7 +71,7 @@ JS_INIT_CLASS(AVCaptureSystemPressureState, NSObject);
    @constant AVCaptureDeviceTransportControlsPlayingMode
       Indicates that the tape transport is threaded through the play head.
    */
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     JS_ASSIGN_ENUM(AVCaptureDeviceTransportControlsNotPlayingMode, NSInteger); //  = 0,
     JS_ASSIGN_ENUM(AVCaptureDeviceTransportControlsPlayingMode, NSInteger); //     = 1,

@@ -6,7 +6,7 @@
 //
 #include "NGLKViewDelegate.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype GLKViewDelegate
 #define js_value_instancetype js_value_GLKViewDelegate
@@ -61,7 +61,7 @@ DELEGATE_PROTOCOL_PROP(GLKViewDelegate, glkViewDrawInRect);
  */
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-  call_delegate(noop(), glkViewDrawInRect,
+  call_delegate_async(noop(), glkViewDrawInRect,
     js_value_GLKView(view),
     js_value_CGRect(rect));
 }

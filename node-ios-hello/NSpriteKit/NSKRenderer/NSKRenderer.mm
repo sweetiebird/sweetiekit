@@ -9,8 +9,6 @@
 /* SKRenderer is not available for WatchKit apps and the iOS simulator */
 #if SKVIEW_AVAILABLE && !TARGET_OS_SIMULATOR
 
-#import <SpriteKit/SKRenderer.h>
-
 #define instancetype SKRenderer
 #define js_value_instancetype js_value_SKRenderer
 

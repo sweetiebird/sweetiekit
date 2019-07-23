@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 
 const colors = require('./examples/colors');
 
@@ -9,13 +9,16 @@ makeMiniApp = () => require('./examples/MiniApp');
 makeMiniApp.lazy = true;
 makeMiniAppReact = () => require('./examples/miniAppReact');
 makeMiniAppReact.lazy = true;
-makeFullReact = require('./examples/fullReact');
+makeFullReact = () => require('./examples/fullReact');
+makeFullReact.lazy = true;
 makePlatformer = require('./examples/Astronauts');
 makeEmojiCam = require('./examples/emojiCam');
 
 // view based demos
 makeARSCNView = require('./examples/ARSCNView2');
 makeARSelection = require('./examples/ARSelection');
+makeARRain = require('./examples/ARRain');
+makeAVCaptureVideoPreviewLayer = require('./examples/AVCaptureVideoPreviewLayer');
 makeAnimalWheel = require('./examples/AnimalWheel');
 makeButton = require('./examples/UIButton');
 makeFluidButton = require('./examples/FluidButton');
@@ -68,6 +71,7 @@ const {
 } = SweetieKit;
 
 demoTypes = {
+  AVCaptureVideoPreviewLayer: makeAVCaptureVideoPreviewLayer,
   CAEmitterLayer: makeCAEmitterLayer,
   CAMetalLayer: makeCAMetalLayer,
   MTKView: makeMTKView,
@@ -112,6 +116,7 @@ arDemos = {
   ARSKView: makeARSKView,
   ARSCNView: makeARSCNView,
   ARSelection: makeARSelection,
+  ARRain: makeARRain,
   AnimalWheel: makeAnimalWheel,
   GreenDot: makeGreenDot,
 };
@@ -134,7 +139,7 @@ allDemoSections = ['View Demos', 'Controller-Based Demos', 'AR Demos', 'App Demo
 
 global.SweetieKitEnums = require('./examples/enums');
 
-class UIDemosApp {
+UIDemosApp = class UIDemosApp {
   constructor(app) {
     this.app = app;
     this.vc = UIViewController();
@@ -256,6 +261,7 @@ class UIDemosApp {
     }
     if (view) {
       this.demoVC.view.addSubview(view);
+      view.pinToSuperview();
     }
     if (shouldPush) {
       this.nav.pushViewControllerAnimated(this.demoVC, true);
@@ -283,15 +289,15 @@ class UIDemosApp {
   }
 }
 
-async function start() {
+UIDemos_start = async function start() {
   gc();
   const sharedApp = new UIApplication();
   if (sharedApp.keyWindow) {
     const myApp = this.myApp = SweetieKitApp = new UIDemosApp(sharedApp);
     myApp.launch();
   } else {
-    setTimeout(start, 10);
+    setTimeout(UIDemos_start, 10);
   }
 }
 
-setTimeout(start, 1);
+setTimeout(UIDemos_start, 1);

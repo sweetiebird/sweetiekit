@@ -9,8 +9,6 @@
 #define instancetype MTLRenderPassAttachmentDescriptor
 #define js_value_instancetype js_value_MTLRenderPassAttachmentDescriptor
 
-#import <Metal/MTLRenderPass.h>
-
 NMTLRenderPassAttachmentDescriptor::NMTLRenderPassAttachmentDescriptor() {}
 NMTLRenderPassAttachmentDescriptor::~NMTLRenderPassAttachmentDescriptor() {}
 

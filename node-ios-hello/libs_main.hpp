@@ -8,8 +8,6 @@
 #ifndef libs_main_h
 #define libs_main_h
 
-#import <UIKit/UIKit.h>
-
 #if defined(__cplusplus)
 extern "C" {
 #endif

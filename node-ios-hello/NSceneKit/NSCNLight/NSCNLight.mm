@@ -284,7 +284,6 @@ NAN_SETTER(NSCNLight::attenuationFalloffExponentSetter) {
   }
 }
 
-#include <SceneKit/ModelIO.h>
 #include "NMDLLight.h"
 
 NAN_METHOD(NSCNLight::lightWithMDLLight) {

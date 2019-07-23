@@ -8,6 +8,7 @@
 #ifndef NGLKViewController_h
 #define NGLKViewController_h    
 
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #include "NUIViewController.h"
 
@@ -28,5 +29,7 @@ JS_WRAP_CLASS(GLKViewController, UIViewController);
   JS_PROP(pauseOnWillResignActive);
   JS_PROP(resumeOnDidBecomeActive);
 JS_WRAP_CLASS_END(GLKViewController);
+
+#endif
 
 #endif /* NGLKViewController_h */

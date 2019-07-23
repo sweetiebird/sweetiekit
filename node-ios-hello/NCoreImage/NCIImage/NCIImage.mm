@@ -200,7 +200,7 @@ JS_INIT_CLASS(CIImage, NSObject);
 
 
 #if DEPRECATED_10_14
-#if !defined(__IPHONEOS__)
+#if !TARGET_OS_IPHONE
   JS_ASSIGN_ENUM(kCIImageTextureTarget, CIImageOption); // CI_GL_DEPRECATED_MAC(10_9,10_14);
   JS_ASSIGN_ENUM(kCIImageTextureFormat, CIImageOption); // CI_GL_DEPRECATED_MAC(10_9,10_14);
 #endif

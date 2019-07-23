@@ -4,7 +4,7 @@
 //  Created by Emily Kolar on 4/9/19.
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE
 #include "mksnapshot.hpp"
 
 // Copyright 2006-2008 the V8 project authors. All rights reserved.

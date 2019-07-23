@@ -1,4 +1,4 @@
-const SweetieKit = require('std:sweetiekit.node');
+const SweetieKit = process._linkedBinding('sweetiekit');
 
 THREE = require('../vendor/three/three');
 
@@ -17,8 +17,10 @@ async function make(nav, demoVC) {
   view = demoVC.view;
   arView = new ARSCNView({ x: 0, y: 0, width: view.frame.width, height: view.frame.height });
   config = new ARWorldTrackingConfiguration();
-  viewDel = new ARSCNViewDelegate(() => {
-    return new SCNNode();
+  viewDel = ARSCNViewDelegate({
+    rendererNodeForAnchor: () => {
+      return new SCNNode();
+    },
   });
   scene = new SCNScene();
   geo = SCNTube(0.01, 0.02, 0.1);

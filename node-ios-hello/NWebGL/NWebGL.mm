@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if __IPHONEOS__ // TODO
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC // TODO
 
 #include <cstring>
 #include <vector>
@@ -2572,7 +2572,7 @@ NAN_METHOD(WebGLRenderingContext::LoadSubTexture) {
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
     glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
-#if !defined(LUMIN) && !defined(ANDROID) && !defined(__IPHONEOS__)
+#if !defined(LUMIN) && !defined(ANDROID) && !TARGET_OS_IPHONE
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, newTextureWidth, newTextureHeight, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, NULL);
 #else
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, newTextureWidth, newTextureHeight, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, NULL);
@@ -2585,7 +2585,7 @@ NAN_METHOD(WebGLRenderingContext::LoadSubTexture) {
   /* glPixelStorei(GL_UNPACK_SKIP_PIXELS, x);
   glPixelStorei(GL_UNPACK_SKIP_ROWS, y); */
   uint8_t *buffer = (uint8_t *)bufferUint8Array->Buffer()->GetContents().Data() + bufferUint8Array->ByteOffset();
-#if !defined(LUMIN) && !defined(ANDROID) && !defined(__IPHONEOS__)
+#if !defined(LUMIN) && !defined(ANDROID) && !TARGET_OS_IPHONE
   glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, buffer);
 #else
   glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height, GL_BGRA_EXT, GL_UNSIGNED_BYTE, buffer);
@@ -2623,7 +2623,7 @@ NAN_METHOD(WebGLRenderingContext::FramebufferTextureMultiviewOVR) {
   GLint baseViewIndex = TO_INT32(info[4]);
   GLsizei numViews = TO_UINT32(info[5]);
 
-#if !defined(ANDROID) && !defined(LUMIN) && !defined(__IPHONEOS__)
+#if !defined(ANDROID) && !defined(LUMIN) && !TARGET_OS_IPHONE
   glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews);
 #endif
 #if defined(ANDROID) || defined(LUMIN)
@@ -2641,7 +2641,7 @@ NAN_METHOD(WebGLRenderingContext::FramebufferTextureMultisampleMultiviewOVR) {
   GLint baseViewIndex = TO_INT32(info[5]);
   GLsizei numViews = TO_UINT32(info[6]);
 
-#if !defined(ANDROID) && !defined(LUMIN) && !defined(__IPHONEOS__)
+#if !defined(ANDROID) && !defined(LUMIN) && !TARGET_OS_IPHONE
   glFramebufferTextureMultisampleMultiviewOVR(target, attachment, texture, level, samples, baseViewIndex, numViews);
 #endif
 #if defined(ANDROID) || defined(LUMIN)

@@ -6,7 +6,7 @@
 //
 #include "NAVCaptureScreenInput.h"
 
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #define instancetype AVCaptureScreenInput
 #define js_value_instancetype js_value_AVCaptureScreenInput

@@ -70,7 +70,7 @@ DELEGATE_PROTOCOL_PROP(UINavigationBarDelegate, navigationBarDidPopItem);
 
 - (void)navigationBar:(UINavigationBar *)navigationBar didPushItem:(UINavigationItem *)item     // called at end of animation of push or immediately if not animated
 {
-  call_delegate(noop(), navigationBarDidPushItem,
+  call_delegate_async(noop(), navigationBarDidPushItem,
     js_value_UINavigationBar(navigationBar),
     js_value_UINavigationItem(item));
 }
@@ -86,7 +86,7 @@ DELEGATE_PROTOCOL_PROP(UINavigationBarDelegate, navigationBarDidPopItem);
 
 - (void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
 {
-  call_delegate(noop(), navigationBarDidPopItem,
+  call_delegate_async(noop(), navigationBarDidPopItem,
     js_value_UINavigationBar(navigationBar),
     js_value_UINavigationItem(item));
 }

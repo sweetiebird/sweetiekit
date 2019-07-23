@@ -82,7 +82,7 @@ JS_INIT_CLASS(AVCaptureSession, NSObject);
    @constant AVVideoFieldModeDeinterlace
       Indicates that top and bottom video fields in interlaced content should be deinterlaced.
    */
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVVideoFieldMode) {
     JS_ASSIGN_ENUM(AVVideoFieldModeBoth, NSInteger); //         = 0,
     JS_ASSIGN_ENUM(AVVideoFieldModeTopOnly, NSInteger); //      = 1,

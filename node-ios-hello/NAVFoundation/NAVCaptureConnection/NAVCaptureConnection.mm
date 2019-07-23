@@ -28,7 +28,7 @@ JS_INIT_CLASS(AVCaptureConnection, NSObject);
   JS_ASSIGN_PROTO_PROP(automaticallyAdjustsVideoMirroring);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoOrientationSupported);
   JS_ASSIGN_PROTO_PROP(videoOrientation);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoFieldModeSupported);
   JS_ASSIGN_PROTO_PROP(videoFieldMode);
 #endif
@@ -41,8 +41,10 @@ JS_INIT_CLASS(AVCaptureConnection, NSObject);
   JS_ASSIGN_PROTO_PROP(preferredVideoStabilizationMode);
   JS_ASSIGN_PROTO_PROP_READONLY(activeVideoStabilizationMode);
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoStabilizationSupported);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isVideoStabilizationEnabled);
   JS_ASSIGN_PROTO_PROP(enablesVideoStabilizationWhenAvailable);
+#endif
   JS_ASSIGN_PROTO_PROP_READONLY(isCameraIntrinsicMatrixDeliverySupported);
   JS_ASSIGN_PROTO_PROP(isCameraIntrinsicMatrixDeliveryEnabled);
 
@@ -230,7 +232,7 @@ NAN_SETTER(NAVCaptureConnection::videoOrientationSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureConnection::isVideoFieldModeSupportedGetter) {
   JS_UNWRAP(AVCaptureConnection, self);
   declare_autoreleasepool {
@@ -358,6 +360,7 @@ NAN_GETTER(NAVCaptureConnection::isVideoStabilizationSupportedGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureConnection::isVideoStabilizationEnabledGetter) {
   JS_UNWRAP(AVCaptureConnection, self);
   declare_autoreleasepool {
@@ -380,6 +383,7 @@ NAN_SETTER(NAVCaptureConnection::enablesVideoStabilizationWhenAvailableSetter) {
     [self setEnablesVideoStabilizationWhenAvailable: input];
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureConnection::isCameraIntrinsicMatrixDeliverySupportedGetter) {
   JS_UNWRAP(AVCaptureConnection, self);

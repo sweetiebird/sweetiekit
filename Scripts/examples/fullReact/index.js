@@ -1,22 +1,4 @@
-__PLATFORM__ = typeof __PLATFORM__ === 'undefined' ? 'ios' : __PLATFORM__;
-__DEV__ = typeof __DEV__ === 'undefined' ? 'dev' : __DEV__;
-
-SWEET = typeof SWEET === 'undefined' ? {} : SWEET;
-SWEET.require = SWEET.require || require;
-
-SweetieKit = typeof SweetieKit === 'undefined' ? SWEET.require('std:sweetiekit.node') : SweetieKit;
-SweetieKitDOM = SWEET.require('sweetiekit-dom');
-SWEET.window = window = (typeof window === 'undefined') ? SweetieKitDOM() : window;
-
-SWEET.kit = SWEET.kit || SweetieKit;
-SWEET.dom = SWEET.dom || SweetieKitDOM;
-
-SWEET.getConfig = () =>
-  (typeof __DEV__ === 'object') ? __DEV__.cfg :
-  (typeof __DEV__ === 'string') ? __DEV__ :
-  (typeof __DEV__ === 'undefined') ? 'dev' :
-  (__DEV__ ? 'dev' : 'prod'),
-
+SWEET = require('../../sweet');
 SWEET.FullReact = SWEET.FullReact || {};
 SWEET.FullReact.getUrl = (cfg = SWEET.getConfig()) => {
   switch (cfg) {
@@ -28,7 +10,7 @@ SWEET.FullReact.getUrl = (cfg = SWEET.getConfig()) => {
 SWEET.FullReact.refresh = async (url, cfg = SWEET.getConfig()) => {
   url = url || SWEET.FullReact.getUrl(cfg);
   window = await SWEET.dom.load(url);
-  __DEV__ = cfg;
+  SWEET.__DEV__ = cfg;
   return url;
 }
 
@@ -37,7 +19,7 @@ SWEET.FullReact.mount = async (nav, demoVC) => {
 }
 
 global.OnShake = () => {
-  SWEET.FullReact.refresh();
+//  SWEET.FullReact.refresh();
 }
 
 module.exports = async (...args) => {

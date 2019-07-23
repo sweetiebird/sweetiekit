@@ -10,10 +10,6 @@
 
 #include "NNSObject.h"
 
-#if __OBJC__
-#import <MapKit/MKMapView.h>
-#endif
-
 #define js_value_MKMapViewDelegate(x) js_value_wrapper(x, MKMapViewDelegate)
 #define to_value_MKMapViewDelegate(x) to_value_wrapper(x, MKMapViewDelegate)
 #define is_value_MKMapViewDelegate(x) is_value_wrapper(x, MKMapViewDelegate)

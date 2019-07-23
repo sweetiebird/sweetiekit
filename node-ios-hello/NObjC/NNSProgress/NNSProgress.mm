@@ -32,7 +32,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_PROTO_METHOD(cancel);
   JS_ASSIGN_PROTO_METHOD(pause);
   JS_ASSIGN_PROTO_METHOD(resume);
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_METHOD(publish);
   JS_ASSIGN_PROTO_METHOD(unpublish);
 #endif
@@ -58,7 +58,7 @@ JS_INIT_CLASS(NSProgress, NSObject);
   JS_ASSIGN_PROTO_PROP(fileURL);
   JS_ASSIGN_PROTO_PROP(fileTotalCount);
   JS_ASSIGN_PROTO_PROP(fileCompletedCount);
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(isOld);
 #endif
 
@@ -280,7 +280,7 @@ NAN_METHOD(NNSProgress::resume) {
   }
 }
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 NAN_METHOD(NNSProgress::publish) {
   JS_UNWRAP(NSProgress, self);
@@ -296,7 +296,7 @@ NAN_METHOD(NNSProgress::unpublish) {
   }
 }
 
-#endif // !TARGET_OS_IPHONE
+#endif
 
 NAN_GETTER(NNSProgress::totalUnitCountGetter) {
   JS_UNWRAP(NSProgress, self);
@@ -599,7 +599,7 @@ NAN_SETTER(NNSProgress::fileCompletedCountSetter) {
   }
 }
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NNSProgress::isOldGetter) {
   JS_UNWRAP(NSProgress, self);
   declare_autoreleasepool {

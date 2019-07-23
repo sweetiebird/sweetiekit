@@ -10,17 +10,38 @@
 
 #include "NNSObject.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
+
+#define js_value_ARSessionRunOptions(x) JS_ENUM(ARSessionRunOptions, NSUInteger, x)
+#define to_value_ARSessionRunOptions(x) TO_ENUM(ARSessionRunOptions, NSUInteger, x)
+#define is_value_ARSessionRunOptions(x) IS_ENUM(ARSessionRunOptions, NSUInteger, x)
 
 #define js_value_ARSession(x) js_value_wrapper(x, ARSession)
 #define to_value_ARSession(x) to_value_wrapper(x, ARSession)
 #define is_value_ARSession(x) is_value_wrapper(x, ARSession)
 
 JS_WRAP_CLASS(ARSession, NSObject);
+  // old
   JS_METHOD(run);
   JS_METHOD(add);
   JS_METHOD(remove);
-  JS_PROP(currentFrame);
+
+  JS_METHOD(runWithConfiguration);
+  JS_METHOD(runWithConfigurationOptions);
+  JS_METHOD(pause);
+  JS_METHOD(addAnchor);
+  JS_METHOD(removeAnchor);
+  JS_METHOD(setWorldOrigin);
+  JS_METHOD(getCurrentWorldMapWithCompletionHandler);
+  JS_METHOD(createReferenceObjectWithTransformCenterExtentCompletionHandler);
+  JS_METHOD(raycast);
+  JS_METHOD(trackedRaycastUpdateHandler);
+  JS_METHOD(updateWithCollaborationData);
+  JS_PROP_READONLY(identifier);
+  JS_PROP(delegate);
+  JS_PROP(delegateQueue);
+  JS_PROP_READONLY(currentFrame);
+  JS_PROP_READONLY(configuration);
 JS_WRAP_CLASS_END(ARSession);
 
 #endif

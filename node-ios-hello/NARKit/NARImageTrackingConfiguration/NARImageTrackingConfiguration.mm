@@ -6,7 +6,7 @@
 //
 #include "NARImageTrackingConfiguration.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARImageTrackingConfiguration
 #define Ninstancetype NARImageTrackingConfiguration

@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #include "defines.h"
 #include "NSKNode.h"
 
@@ -2870,7 +2869,24 @@ extern "C" void dispatch_ui_sync(dispatch_queue_t queue, dispatch_block_t block)
       block();
     }
   } else {
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_sync(queue, ^{
+      v8::Locker locker(JS_ISOLATE());
+      Nan::HandleScope scope;
+      block();
+    });
+  }
+}
+
+extern "C" void dispatch_ui_async(dispatch_queue_t queue, dispatch_block_t block)
+{
+  if ([NSThread isMainThread]) {
+    {
+      v8::Locker locker(JS_ISOLATE());
+      Nan::HandleScope scope;
+      block();
+    }
+  } else {
+    dispatch_async(queue, ^{
       v8::Locker locker(JS_ISOLATE());
       Nan::HandleScope scope;
       block();

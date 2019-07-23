@@ -32,7 +32,7 @@ JS_INIT_CLASS(NSCoder, NSObject);
   JS_ASSIGN_METHOD(proto, decodeValuesOfObjCTypes);
   JS_ASSIGN_METHOD(proto, decodeArrayOfObjCTypeCountAt);
   JS_ASSIGN_METHOD(proto, decodeBytesWithReturnedLength);
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if TARGET_OS_OSX && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_METHOD(proto, encodePropertyList);
   JS_ASSIGN_METHOD(proto, decodePropertyList);
 #endif
@@ -65,7 +65,7 @@ JS_INIT_CLASS(NSCoder, NSObject);
   JS_ASSIGN_METHOD(proto, decodeTopLevelObjectOfClassesForKeyError);
   JS_ASSIGN_METHOD(proto, decodePropertyListForKey);
   JS_ASSIGN_METHOD(proto, failWithError);
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if TARGET_OS_OSX && !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_METHOD(proto, encodeNXObject);
   JS_ASSIGN_METHOD(proto, decodeNXObject);
 #endif
@@ -296,7 +296,7 @@ NAN_METHOD(NNSCoder::decodeBytesWithReturnedLength) {
   }
 }
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if TARGET_OS_OSX && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NNSCoder::encodePropertyList) {
   JS_UNWRAP(NSCoder, self);
   declare_autoreleasepool {
@@ -619,7 +619,7 @@ NAN_METHOD(NNSCoder::failWithError) {
   }
 }
 
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if TARGET_OS_OSX && !TARGET_OS_UIKITFORMAC
 NAN_METHOD(NNSCoder::encodeNXObject) {
   JS_UNWRAP(NSCoder, self);
   declare_autoreleasepool {

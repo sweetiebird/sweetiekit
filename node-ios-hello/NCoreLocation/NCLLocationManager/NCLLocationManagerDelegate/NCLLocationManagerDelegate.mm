@@ -95,7 +95,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
    didUpdateLocations:(NSArray<CLLocation *> *)locations API_AVAILABLE(ios(6.0), macos(10.9))
 {
-  call_delegate(noop(), locationManagerDidUpdateLocations,
+  call_delegate_async(noop(), locationManagerDidUpdateLocations,
     js_value_CLLocationManager(manager),
     js_value_NSArray(locations));
 }
@@ -109,7 +109,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidUpdateHeading,
+  call_delegate_async(noop(), locationManagerDidUpdateHeading,
     js_value_CLLocationManager(manager),
     js_value_CLHeading(newHeading));
 }
@@ -140,7 +140,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region API_AVAILABLE(ios(7.0), macos(10.10)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidDetermineStateForRegion,
+  call_delegate_async(noop(), locationManagerDidDetermineStateForRegion,
     js_value_CLLocationManager(manager),
     js_value_CLRegionState(state),
     js_value_CLRegion(region));
@@ -159,7 +159,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidRangeBeaconsInRegion,
+  call_delegate_async(noop(), locationManagerDidRangeBeaconsInRegion,
     js_value_CLLocationManager(manager),
     js_value_NSArray(beacons),
     js_value_CLBeaconRegion(region));
@@ -175,7 +175,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
   rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
   withError:(NSError *)error API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerRangingBeaconsDidFailForRegionWithError,
+  call_delegate_async(noop(), locationManagerRangingBeaconsDidFailForRegionWithError,
     js_value_CLLocationManager(manager),
     js_value_CLBeaconRegion(region),
     js_value_NSError(error));
@@ -191,7 +191,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didEnterRegion:(CLRegion *)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidEnterRegion,
+  call_delegate_async(noop(), locationManagerDidEnterRegion,
     js_value_CLLocationManager(manager),
     js_value_CLBeaconRegion(region));
 }
@@ -206,7 +206,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didExitRegion:(CLRegion *)region API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidExitRegion,
+  call_delegate_async(noop(), locationManagerDidExitRegion,
     js_value_CLLocationManager(manager),
     js_value_CLBeaconRegion(region));
 }
@@ -220,7 +220,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didFailWithError:(NSError *)error
 {
-  call_delegate(noop(), locationManagerDidFailWithError,
+  call_delegate_async(noop(), locationManagerDidFailWithError,
     js_value_CLLocationManager(manager),
     js_value_NSError(error));
 }
@@ -235,7 +235,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
   monitoringDidFailForRegion:(nullable CLRegion *)region
   withError:(NSError *)error API_AVAILABLE(ios(4.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerMonitoringDidFailForRegionWithError,
+  call_delegate_async(noop(), locationManagerMonitoringDidFailForRegionWithError,
     js_value_CLLocationManager(manager),
     js_value_CLBeaconRegion(region),
     js_value_NSError(error));
@@ -249,7 +249,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
  */
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_AVAILABLE(ios(4.2), macos(10.7))
 {
-  call_delegate(noop(), locationManagerDidChangeAuthorizationStatus,
+  call_delegate_async(noop(), locationManagerDidChangeAuthorizationStatus,
     js_value_CLLocationManager(manager),
     js_value_CLAuthorizationStatus(status));
 }
@@ -263,7 +263,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didStartMonitoringForRegion:(CLRegion *)region API_AVAILABLE(ios(5.0), macos(10.8)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidStartMonitoringForRegion,
+  call_delegate_async(noop(), locationManagerDidStartMonitoringForRegion,
     js_value_CLLocationManager(manager),
     js_value_CLBeaconRegion(region));
 }
@@ -274,7 +274,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
  */
 - (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidPauseLocationUpdates,
+  call_delegate_async(noop(), locationManagerDidPauseLocationUpdates,
     js_value_CLLocationManager(manager));
 }
 
@@ -287,7 +287,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
  */
 - (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidResumeLocationUpdates,
+  call_delegate_async(noop(), locationManagerDidResumeLocationUpdates,
     js_value_CLLocationManager(manager));
 }
 
@@ -305,7 +305,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
 - (void)locationManager:(CLLocationManager *)manager
   didFinishDeferredUpdatesWithError:(nullable NSError *)error API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidFinishDeferredUpdatesWithError,
+  call_delegate_async(noop(), locationManagerDidFinishDeferredUpdatesWithError,
     js_value_CLLocationManager(manager),
     js_value_NSError(error));
 }
@@ -320,7 +320,7 @@ DELEGATE_PROTOCOL_PROP(CLLocationManagerDelegate, locationManagerDidVisit);
  */
 - (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
 {
-  call_delegate(noop(), locationManagerDidVisit,
+  call_delegate_async(noop(), locationManagerDidVisit,
     js_value_CLLocationManager(manager),
     js_value_CLVisit(visit));
 }

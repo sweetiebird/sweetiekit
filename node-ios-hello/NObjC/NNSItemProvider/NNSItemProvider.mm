@@ -6,8 +6,6 @@
 //
 #include "NNSItemProvider.h"
 
-#import <Foundation/NSItemProvider.h>
-
 #define instancetype NSItemProvider
 #define js_value_instancetype js_value_NSItemProvider
 
@@ -46,7 +44,7 @@ JS_INIT_CLASS(NSItemProvider, NSObject);
     JS_ASSIGN_ENUM(NSItemProviderRepresentationVisibilityAll, NSInteger); //  = 0,                                  // All processes can see this representation
     JS_ASSIGN_ENUM(NSItemProviderRepresentationVisibilityTeam, NSInteger); //                                       // Only processes from the same dev team can see this representation
     //API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0)) API_UNAVAILABLE(macos) = 1,
-#if TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
+#if !TARGET_OS_MAC && !TARGET_OS_UIKITFORMAC
     JS_ASSIGN_ENUM(NSItemProviderRepresentationVisibilityGroup, NSInteger); //                                      // Only processes from the same group can see this representation
 #endif
     //API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos) = 2 ,

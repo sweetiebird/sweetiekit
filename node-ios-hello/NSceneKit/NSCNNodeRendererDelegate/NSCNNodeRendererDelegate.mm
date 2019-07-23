@@ -66,7 +66,7 @@ DELEGATE_PROTOCOL_PROP(SCNNodeRendererDelegate, renderNodeRendererArguments);
  */
 - (void)renderNode:(SCNNode *)node renderer:(SCNRenderer *)renderer arguments:(NSDictionary<NSString *, id> *)arguments
 {
-  call_delegate(noop(), renderNodeRendererArguments,
+  call_delegate_async(noop(), renderNodeRendererArguments,
     js_value_SCNNode(node),
     js_value_SCNRenderer(renderer),
     js_value_NSDictionary/* <NSString*, id>*/(arguments));

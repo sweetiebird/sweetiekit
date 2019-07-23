@@ -135,18 +135,18 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_PROTO_METHOD(deviceWhiteBalanceGainsForTemperatureAndTintValues);
   JS_ASSIGN_PROTO_METHOD(rampToVideoZoomFactorWithRate);
   JS_ASSIGN_PROTO_METHOD(cancelVideoZoomRamp);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_METHOD(setTransportControlsPlaybackModeSpeed);
 #endif
   JS_ASSIGN_PROTO_PROP_READONLY(uniqueID);
   JS_ASSIGN_PROTO_PROP_READONLY(modelID);
   JS_ASSIGN_PROTO_PROP_READONLY(localizedName);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(manufacturer);
   JS_ASSIGN_PROTO_PROP_READONLY(transportType);
 #endif
   JS_ASSIGN_PROTO_PROP_READONLY(isConnected);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(isInUseByAnotherApplication);
   JS_ASSIGN_PROTO_PROP_READONLY(isSuspended);
   JS_ASSIGN_PROTO_PROP_READONLY(linkedDevices);
@@ -155,7 +155,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_PROTO_PROP(activeFormat);
   JS_ASSIGN_PROTO_PROP(activeVideoMinFrameDuration);
   JS_ASSIGN_PROTO_PROP(activeVideoMaxFrameDuration);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(inputSources);
   JS_ASSIGN_PROTO_PROP(activeInputSource);
 #endif
@@ -168,7 +168,9 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   #endif
   JS_ASSIGN_PROTO_PROP_READONLY(hasFlash);
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashAvailable);
+#if !TARGET_OS_UIKITFORMAC
   JS_ASSIGN_PROTO_PROP_READONLY(isFlashActive);
+#endif
   JS_ASSIGN_PROTO_PROP(flashMode);
   JS_ASSIGN_PROTO_PROP_READONLY(hasTorch);
   JS_ASSIGN_PROTO_PROP_READONLY(isTorchAvailable);
@@ -210,7 +212,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_PROTO_PROP(videoZoomFactor);
   JS_ASSIGN_PROTO_PROP_READONLY(isRampingVideoZoom);
   JS_ASSIGN_PROTO_PROP_READONLY(dualCameraSwitchOverVideoZoomFactor);
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_PROTO_PROP_READONLY(transportControlsSupported);
   JS_ASSIGN_PROTO_PROP_READONLY(transportControlsPlaybackMode);
   JS_ASSIGN_PROTO_PROP_READONLY(transportControlsSpeed);
@@ -234,7 +236,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   JS_ASSIGN_ENUM(AVCaptureDeviceSubjectAreaDidChangeNotification, NSString); //  API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_ENUM(AVCaptureDeviceTypeExternalUnknown, AVCaptureDeviceType); //  API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
   JS_ASSIGN_ENUM(AVCaptureDeviceTypeBuiltInMicrophone, AVCaptureDeviceType); //  API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
@@ -251,14 +253,14 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
 #if !TARGET_OS_MAC
   JS_ASSIGN_ENUM(AVCaptureLensPositionCurrent, float); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
 #endif
-#if !TARGET_OS_MAC && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_MAC && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_ENUM(AVCaptureExposureDurationCurrent, CMTime); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
   JS_ASSIGN_ENUM(AVCaptureISOCurrent, float); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
   JS_ASSIGN_ENUM(AVCaptureExposureTargetBiasCurrent, float); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
   JS_ASSIGN_ENUM(AVCaptureWhiteBalanceGainsCurrent, AVCaptureWhiteBalanceGains); //  API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
     JS_ASSIGN_ENUM(AVCaptureDevicePositionUnspecified, NSInteger); //  = 0,
     JS_ASSIGN_ENUM(AVCaptureDevicePositionBack, NSInteger); //         = 1,
@@ -284,7 +286,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   //} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_MAC && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_MAC && !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
     JS_ASSIGN_ENUM(AVCaptureAutoFocusRangeRestrictionNone, NSInteger); //  = 0,
     JS_ASSIGN_ENUM(AVCaptureAutoFocusRangeRestrictionNear, NSInteger); //  = 1,
@@ -292,7 +294,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   //} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
     JS_ASSIGN_ENUM(AVCaptureExposureModeLocked, NSInteger); //                             = 0,
     JS_ASSIGN_ENUM(AVCaptureExposureModeAutoExpose, NSInteger); //                         = 1,
@@ -314,7 +316,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   //} API_AVAILABLE(macos(10.14), ios(7.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef float AVCaptureDeviceTransportControlsSpeed API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
   //typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
@@ -323,7 +325,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   //} API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
-#if !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
     JS_ASSIGN_ENUM(AVCaptureColorSpace_sRGB, NSInteger); //        = 0,
     JS_ASSIGN_ENUM(AVCaptureColorSpace_P3_D65, NSInteger); //      = 1,
@@ -343,7 +345,7 @@ JS_INIT_CLASS(AVCaptureDevice, NSObject);
   //} API_AVAILABLE(macos(10.15), ios(8.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 #endif
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   //typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     JS_ASSIGN_ENUM(AVCaptureDeviceTransportControlsNotPlayingMode, NSInteger); //  = 0,
     JS_ASSIGN_ENUM(AVCaptureDeviceTransportControlsPlayingMode, NSInteger); //     = 1,
@@ -660,7 +662,7 @@ NAN_METHOD(NAVCaptureDevice::cancelVideoZoomRamp) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_METHOD(NAVCaptureDevice::setTransportControlsPlaybackModeSpeed) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
@@ -693,7 +695,7 @@ NAN_GETTER(NAVCaptureDevice::localizedNameGetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureDevice::manufacturerGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
@@ -716,7 +718,7 @@ NAN_GETTER(NAVCaptureDevice::isConnectedGetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureDevice::isInUseByAnotherApplicationGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
@@ -796,7 +798,7 @@ NAN_SETTER(NAVCaptureDevice::activeVideoMaxFrameDurationSetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureDevice::inputSourcesGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
@@ -873,12 +875,14 @@ NAN_GETTER(NAVCaptureDevice::isFlashAvailableGetter) {
   }
 }
 
+#if !TARGET_OS_UIKITFORMAC
 NAN_GETTER(NAVCaptureDevice::isFlashActiveGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {
     JS_SET_RETURN(js_value_BOOL([self isFlashActive]));
   }
 }
+#endif
 
 NAN_GETTER(NAVCaptureDevice::flashModeGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
@@ -1284,7 +1288,7 @@ NAN_GETTER(NAVCaptureDevice::dualCameraSwitchOverVideoZoomFactorGetter) {
   }
 }
 
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCHOS && !TARGET_OS_TVOS
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 NAN_GETTER(NAVCaptureDevice::transportControlsSupportedGetter) {
   JS_UNWRAP(AVCaptureDevice, self);
   declare_autoreleasepool {

@@ -5,7 +5,6 @@
 //  Copyright © 2019 sweetiebird. All rights reserved.
 //
 #include "NCLVisit.h"
-#import <CoreLocation/CLVisit.h>
 
 #define instancetype CLVisit
 #define js_value_instancetype js_value_CLVisit

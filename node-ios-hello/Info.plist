@@ -8,6 +8,8 @@
 	<string>SweetieKit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -42,7 +44,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>613</string>
+	<string>701</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -80,13 +84,15 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>PICS.</string>
+	<string>To use the camera.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location tracking examples.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location tracking examples.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>SweetieKit uses the Microphone for audio input.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Tp save screenshots.</string>
+	<string>To save screenshots.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoMono-Medium.ttf</string>

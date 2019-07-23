@@ -14,10 +14,6 @@
 #define to_value_CFTypeID to_value_uint64_t
 #define is_value_CFTypeID is_value_uint64_t
 
-#define js_value_CFStringRef(x) js_value_bridged(x, CFStringRef)
-#define to_value_CFStringRef(x) to_value_bridged(x, CFStringRef)
-#define is_value_CFStringRef(x) is_value_bridged(x, CFStringRef)
-
 #define js_value_CGImageAlphaInfo(x) JS_ENUM(CGImageAlphaInfo, uint32_t, x)
 #define to_value_CGImageAlphaInfo(x) TO_ENUM(CGImageAlphaInfo, uint32_t, x)
 #define is_value_CGImageAlphaInfo(x) IS_ENUM(CGImageAlphaInfo, uint32_t, x)

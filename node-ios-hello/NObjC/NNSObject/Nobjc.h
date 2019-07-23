@@ -9,8 +9,6 @@
 #define Nobjc_h
 #if __OBJC__
 
-#import <Foundation/Foundation.h>
-
 #ifdef __cplusplus
 #define NOBJC_EXPORT extern "C"
 #else

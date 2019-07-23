@@ -57,13 +57,13 @@ DELEGATE_PROP(SKPhysicsContactDelegate, didEndContact);
 @implementation SKPhysicsContactDelegate
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-  call_delegate(noop(), didBeginContact,
+  call_delegate_async(noop(), didBeginContact,
     js_value_SKPhysicsContact(contact));
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
-  call_delegate(noop(), didEndContact,
+  call_delegate_async(noop(), didEndContact,
     js_value_SKPhysicsContact(contact));
 }
 @end

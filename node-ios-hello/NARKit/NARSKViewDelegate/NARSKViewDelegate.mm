@@ -6,7 +6,7 @@
 //
 #include "NARSKViewDelegate.h"
 
-#ifdef __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 
 #define instancetype ARSKViewDelegate
 #define js_value_instancetype js_value_ARSKViewDelegate
@@ -90,7 +90,7 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
  */
 - (void)view:(ARSKView *)view didAddNode:(SKNode *)node forAnchor:(ARAnchor *)anchor
 {
-  call_delegate(noop(), viewDidAddNodeForAnchor,
+  call_delegate_async(noop(), viewDidAddNodeForAnchor,
     js_value_ARSKView(view),
     js_value_SKNode(node),
     js_value_ARAnchor(anchor));
@@ -105,7 +105,7 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
  */
 - (void)view:(ARSKView *)view willUpdateNode:(SKNode *)node forAnchor:(ARAnchor *)anchor
 {
-  call_delegate(noop(), viewWillUpdateNodeForAnchor,
+  call_delegate_async(noop(), viewWillUpdateNodeForAnchor,
     js_value_ARSKView(view),
     js_value_SKNode(node),
     js_value_ARAnchor(anchor));
@@ -120,7 +120,7 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
  */
 - (void)view:(ARSKView *)view didUpdateNode:(SKNode *)node forAnchor:(ARAnchor *)anchor
 {
-  call_delegate(noop(), viewDidUpdateNodeForAnchor,
+  call_delegate_async(noop(), viewDidUpdateNodeForAnchor,
     js_value_ARSKView(view),
     js_value_SKNode(node),
     js_value_ARAnchor(anchor));
@@ -135,7 +135,7 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
  */
 - (void)view:(ARSKView *)view didRemoveNode:(SKNode *)node forAnchor:(ARAnchor *)anchor
 {
-  call_delegate(noop(), viewDidRemoveNodeForAnchor,
+  call_delegate_async(noop(), viewDidRemoveNodeForAnchor,
     js_value_ARSKView(view),
     js_value_SKNode(node),
     js_value_ARAnchor(anchor));
@@ -143,4 +143,4 @@ DELEGATE_PROTOCOL_PROP(ARSKViewDelegate, viewDidRemoveNodeForAnchor);
 
 @end
 
-#endif // #ifdef __IPHONEOS__
+#endif // #if TARGET_OS_IPHONE

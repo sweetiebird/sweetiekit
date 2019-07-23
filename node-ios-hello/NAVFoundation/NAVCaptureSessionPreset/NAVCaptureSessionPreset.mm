@@ -65,7 +65,7 @@ JS_INIT_GLOBALS(AVCaptureSessionPreset);
    @discussion
       Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset320x240 to achieve 320x240 output.
    */
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_ENUM(AVCaptureSessionPreset320x240, AVCaptureSessionPreset); //  API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
@@ -97,7 +97,7 @@ JS_INIT_GLOBALS(AVCaptureSessionPreset);
    @discussion
       Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset960x540 to achieve quarter HD quality (960x540) output.
    */
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
   JS_ASSIGN_ENUM(AVCaptureSessionPreset960x540, AVCaptureSessionPreset); //  API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 

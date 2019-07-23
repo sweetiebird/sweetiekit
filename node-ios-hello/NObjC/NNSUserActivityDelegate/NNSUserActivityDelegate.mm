@@ -59,7 +59,7 @@ DELEGATE_PROP(NSUserActivityDelegate, userActivityDidReceiveInputStreamOutputStr
 */
 - (void)userActivityWillSave:(NSUserActivity *)userActivity
 {
-  call_delegate(noop(), userActivityWillSave,
+  call_delegate_async(noop(), userActivityWillSave,
     js_value_NSUserActivity(userActivity));
 }
 
@@ -67,7 +67,7 @@ DELEGATE_PROP(NSUserActivityDelegate, userActivityDidReceiveInputStreamOutputStr
 */
 - (void)userActivityWasContinued:(NSUserActivity *)userActivity
 {
-  call_delegate(noop(), userActivityWasContinued,
+  call_delegate_async(noop(), userActivityWasContinued,
     js_value_NSUserActivity(userActivity));
 }
 
@@ -75,7 +75,7 @@ DELEGATE_PROP(NSUserActivityDelegate, userActivityDidReceiveInputStreamOutputStr
 */
 - (void)userActivity:(NSUserActivity *)userActivity didReceiveInputStream:(NSInputStream *) inputStream outputStream:(NSOutputStream *)outputStream
 {
-  call_delegate(noop(), userActivityDidReceiveInputStreamOutputStream,
+  call_delegate_async(noop(), userActivityDidReceiveInputStreamOutputStream,
     js_value_NSUserActivity(userActivity),
     js_value_NSInputStream(inputStream),
     js_value_NSOutputStream(outputStream));

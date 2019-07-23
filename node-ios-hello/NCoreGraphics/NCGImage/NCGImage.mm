@@ -6,6 +6,8 @@
 //
 #include "NCGImage.h"
 
+#include "NCFBase.h"
+
 NAN_METHOD(CGImageGetTypeID) {
   declare_autoreleasepool {
     declare_args();

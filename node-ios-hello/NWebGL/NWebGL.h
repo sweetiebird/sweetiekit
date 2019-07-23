@@ -29,7 +29,7 @@ SOFTWARE.
 #ifndef _WEBGLCONTEXT_WEBGL_H_
 #define _WEBGLCONTEXT_WEBGL_H_
 
-#if __IPHONEOS__ // TODO
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC // TODO
 
 #include <nan.h>
 
@@ -56,7 +56,7 @@ SOFTWARE.
 #include <GLES2/gl2ext.h>
 
 #elif defined(__APPLE__)
-#if __IPHONEOS__
+#if TARGET_OS_IPHONE && !TARGET_OS_UIKITFORMAC
 #include <OpenGLES/ES3/gl.h>
 #include <OpenGLES/ES3/glext.h>
 #include <OpenGLES/ES2/glext.h>

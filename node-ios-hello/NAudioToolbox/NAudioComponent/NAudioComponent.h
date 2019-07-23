@@ -31,8 +31,19 @@ typedef struct AudioComponentDescription {
 JS_DECLARE_STRUCT(AudioComponentDescription);
 #endif
 
+#define js_value_pointer(type, x) Nan::New<External>((void*)x)
+#define to_value_pointer(type, x) (type)((x).As<External>()->Value())
+#define is_value_pointer(type, x) (x)->IsExternal() 
+
+#define js_value_AudioComponent(x) js_value_pointer(AudioComponent, x)
+#define to_value_AudioComponent(x) to_value_pointer(AudioComponent, x)
+#define is_value_AudioComponent(x) is_value_pointer(AudioComponent, x)
+
+#define js_value_AudioComponentInstance(x) js_value_pointer(AudioComponentInstance, x)
+#define to_value_AudioComponentInstance(x) to_value_pointer(AudioComponentInstance, x)
+#define is_value_AudioComponentInstance(x) is_value_pointer(AudioComponentInstance, x)
+
 JS_WRAP_GLOBALS(AudioComponent);
-  // TODO: declare AudioComponent globals
 JS_WRAP_GLOBALS_END(AudioComponent);
 
 #endif /* NAudioComponent_h */

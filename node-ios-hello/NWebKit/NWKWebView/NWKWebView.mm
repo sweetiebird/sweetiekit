@@ -6,9 +6,6 @@
 //
 #include "NWKWebView.h"
 
-#import <WebKit/WebKit.h>
-#import <WebKit/WKWebView.h>
-
 #define instancetype WKWebView
 #define js_value_instancetype js_value_WKWebView
 
