@@ -3,11 +3,7 @@ const SweetieKit = process._linkedBinding('sweetiekit');
 const colors = require('./colors');
 
 const {
-  CAGradientLayer,
-  UIBezierPath,
   UIView,
-  UITapGestureRecognizer,
-  UIPanGestureRecognizer,
   AVAudioPlayer,
   AVAudioSession,
   UIButton,
