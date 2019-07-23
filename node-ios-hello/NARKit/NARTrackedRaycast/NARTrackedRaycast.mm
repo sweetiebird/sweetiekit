@@ -15,7 +15,9 @@ NARTrackedRaycast::NARTrackedRaycast() {}
 NARTrackedRaycast::~NARTrackedRaycast() {}
 
 JS_INIT_CLASS(ARTrackedRaycast, NSObject);
+#if TODO
   JS_ASSIGN_PROTO_METHOD(updateQuery);
+#endif
   JS_ASSIGN_PROTO_METHOD(stopTracking);
 
   // instance members (proto)
@@ -46,6 +48,7 @@ NAN_METHOD(NARTrackedRaycast::New) {
 
 #include "NARRaycastQuery.h"
 
+#if TODO
 NAN_METHOD(NARTrackedRaycast::updateQuery) {
   JS_UNWRAP(ARTrackedRaycast, self);
   declare_autoreleasepool {
@@ -54,6 +57,7 @@ NAN_METHOD(NARTrackedRaycast::updateQuery) {
     [self updateQuery: query];
   }
 }
+#endif
 
 NAN_METHOD(NARTrackedRaycast::stopTracking) {
   JS_UNWRAP(ARTrackedRaycast, self);
