@@ -99,9 +99,7 @@ JS_INIT_CLASS(SKAction, NSObject);
   JS_ASSIGN_PROTO_METHOD(reversedAction);
   JS_ASSIGN_PROTO_PROP(duration);
   JS_ASSIGN_PROTO_PROP(timingMode);
-  #if TODO
   JS_ASSIGN_PROTO_PROP(timingFunction);
-  #endif
   JS_ASSIGN_PROTO_PROP(speed);
 
   // instance members (proto)
@@ -952,12 +950,13 @@ NAN_SETTER(NSKAction::timingModeSetter) {
   }
 }
 
-#if TODO
-
 NAN_GETTER(NSKAction::timingFunctionGetter) {
   JS_UNWRAP(SKAction, self);
   declare_autoreleasepool {
-    JS_SET_RETURN(js_value_SKActionTimingFunction([self timingFunction]));
+    get_persistent_function(self, input, @"NSKAction::timingFunction");
+    if (input && [input jsFunction]) {
+      JS_SET_RETURN([input jsFunction]->Get());
+    }
   }
 }
 
@@ -965,12 +964,23 @@ NAN_SETTER(NSKAction::timingFunctionSetter) {
   JS_UNWRAP(SKAction, self);
   declare_autoreleasepool {
     declare_setter();
-    declare_value(SKActionTimingFunction, input);
-    [self setTimingFunction: input];
+    declare_persistent_function(input, @"NSKAction::timingFunction");
+    [self setTimingFunction:^float(float time) {
+      __block float result = 0.0f;
+      dispatch_main(^{
+        get_persistent_function(self, input, @"NSKAction::timingFunction");
+        if (input && [input jsFunction]) {
+          Local<Value> result_([input jsFunction]->Call("NSKAction::timingFunction",
+            js_value_float(time)));
+          if (is_value_float(result_)) {
+            result = to_value_float(result_);
+          }
+        }
+      });
+      return result;
+    }];
   }
 }
-
-#endif
 
 NAN_GETTER(NSKAction::speedGetter) {
   JS_UNWRAP(SKAction, self);
