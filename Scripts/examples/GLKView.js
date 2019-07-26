@@ -220,7 +220,7 @@ NSOpenGLView_make = function NSOpenGLView_make(glContext) {
   return glkVC;
 }
 
-GLKView_make = function GLKView_make() {
+GLKView_make = function GLKView_make(draw = GLKView_draw) {
   glContext = GLKView_setupContext();
   if (!glContext) {
     return;
@@ -235,7 +235,7 @@ GLKView_make = function GLKView_make() {
   glkView.context = glContext;
   glkView.delegate = GLKViewDelegate({
     glkViewDrawInRect(...args) {
-      return GLKView_draw(...args);
+      return draw(...args);
     }
   });
   return glkVC;
