@@ -10224,7 +10224,7 @@
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
 				NODE_ROOT = "";
 				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweetie/node-1260-iphoneos";
-				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
+				"NODE_ROOT[sdk=iphonesimulator*]" = "/opt/sweetie/node-1260-iphonesimulator";
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				NODE_UIKITFORMAC = 0;
 				"NODE_UIKITFORMAC[sdk=macosx*]" = 1;
@@ -10296,7 +10296,7 @@
 				"NODE_IOS_SIMULATOR[sdk=iphonesimulator*]" = 1;
 				NODE_ROOT = "";
 				"NODE_ROOT[sdk=iphoneos*]" = "/opt/sweetie/node-1260-iphoneos";
-				"NODE_ROOT[sdk=iphonesimulator*]" = /opt/sweet/node;
+				"NODE_ROOT[sdk=iphonesimulator*]" = "/opt/sweetie/node-1260-iphonesimulator";
 				"NODE_ROOT[sdk=macosx*]" = "/opt/native/node-uikitformac";
 				NODE_UIKITFORMAC = 0;
 				"NODE_UIKITFORMAC[sdk=macosx*]" = 1;

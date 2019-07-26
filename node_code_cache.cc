@@ -5,7 +5,7 @@
 #if TARGET_OS_UIKITFORMAC
 #include "./Snapshot/uikitformac/Release/node_code_cache.cc"
 #else
-#if !NODE_IOS_SIMULATOR
+#if !NODE_IOS_SIMULATOR || 1
 #ifdef DEBUG
 #include "./Debug/node_code_cache.cc"
 #else
