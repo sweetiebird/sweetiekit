@@ -56,21 +56,16 @@ HIDCallback(void *context, IOReturn result, void *sender, IOHIDValueRef value)
     }
 
     IOHIDElementRef elem = IOHIDValueGetElement(value);
-    /*
     if (IOHIDElementGetUsagePage(elem) != kHIDPage_KeyboardOrKeypad
-        || IOHIDElementGetUsage(elem) != kHIDUsage_KeyboardCapsLock) {
+    /* || IOHIDElementGetUsage(elem) != kHIDUsage_KeyboardCapsLock*/) {
         return;
     }
-     */
+    
+    uint32_t key = IOHIDElementGetUsage(elem);
     CFIndex pressed = IOHIDValueGetIntegerValue(value);
-    if (pressed) {
-      int debug = 42;
-      debug++;
-    } else {
-      int debug = 43;
-      debug--;
+    if (key != (int)-1 && key != 1) { // not sure what these are.
+      iOSLog0([[NSString stringWithFormat:@"key %s: 0x%08x\n", (pressed ? "down" : "  up"), key] UTF8String]);
     }
-//    SDL_SendKeyboardKey(pressed ? SDL_PRESSED : SDL_RELEASED, SDL_SCANCODE_CAPSLOCK);
 }
 
 static CFDictionaryRef
