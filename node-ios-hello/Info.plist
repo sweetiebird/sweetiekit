@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>703</string>
+	<string>718</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -53,7 +53,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>15796eca.ngrok.io</key>
+			<key>981d7a37.ngrok.io</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
