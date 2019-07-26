@@ -1,4 +1,3 @@
-#define NODE_WANT_INTERNALS 1
 #include <cinttypes>
 #include "node_native_module_env.h"
 
@@ -1927,19 +1926,4 @@ void NativeModuleEnv::InitializeCodeCache() {
 
 }  // namespace native_module
 }  // namespace node
-
-#include "node_main_instance.h"
-
-namespace node {
-
-v8::StartupData* NodeMainInstance::GetEmbeddedSnapshotBlob() {
-  return nullptr;
-}
-
-const std::vector<size_t>* NodeMainInstance::GetIsolateDataIndexes() {
-  return nullptr;
-}
-
-}  // namespace node
-
 

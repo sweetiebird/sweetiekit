@@ -7,8 +7,7 @@
 #ifdef DEBUG
 #include "./Debug/snapshot.cc"
 #else
-#include "./Debug/snapshot.cc"
-//#include "./Release/snapshot.cc"
+#include "./Release/snapshot.cc"
 #endif
 #endif
 #endif

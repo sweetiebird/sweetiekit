@@ -1,3 +1,5 @@
+#include <Availability.h>
+
 #if TARGET_OS_UIKITFORMAC
 #include "./Snapshot/uikitformac/Release/embedded.S"
 #else
@@ -5,8 +7,7 @@
 #ifdef DEBUG
 #include "./Debug/embedded.S"
 #else
-#include "./Debug/embedded.S"
-//#include "./Release/embedded.S"
+#include "./Release/embedded.S"
 #endif
 #endif
 #endif
