@@ -75,6 +75,10 @@ NAN_METHOD(NNSSocketPort::initWithProtocolFamilySocketTypeProtocolAddress) {
   }
 }
 
+#define js_value_NSSocketNativeHandle js_value_int32_t
+#define to_value_NSSocketNativeHandle to_value_int32_t
+#define is_value_NSSocketNativeHandle is_value_int32_t
+
 NAN_METHOD(NNSSocketPort::initWithProtocolFamilySocketTypeProtocolSocket) {
   JS_UNWRAP_OR_ALLOC(NSSocketPort, self);
   declare_autoreleasepool {
