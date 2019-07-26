@@ -14,6 +14,10 @@
 #define to_value_SKAction(x) to_value_wrapper(x, SKAction)
 #define is_value_SKAction(x) is_value_wrapper(x, SKAction)
 
+#define js_value_SKActionTimingMode(x) JS_ENUM(SKActionTimingMode, NSInteger, x)
+#define to_value_SKActionTimingMode(x) TO_ENUM(SKActionTimingMode, NSInteger, x)
+#define is_value_SKActionTimingMode(x) IS_ENUM(SKActionTimingMode, NSInteger, x)
+
 JS_WRAP_CLASS(SKAction, NSObject);
   JS_STATIC_METHOD(moveByDuration);
   JS_STATIC_METHOD(moveByXYDuration);
