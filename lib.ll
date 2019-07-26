@@ -630,6 +630,7 @@
        CM: "CoreMotion"
        CN: "Contacts"
        EA: "OpenGLES"
+       GC: "GameController"
        GK: "GameplayKit"
       GLK: "GLKit"
       MDL: "ModelIO"
