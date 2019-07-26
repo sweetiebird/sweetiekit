@@ -274,6 +274,8 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
 
 @end
 
+#include "NUIEvent.h"
+
 @implementation JSApplication
 
 - (instancetype)init
@@ -303,12 +305,18 @@ IMP SweetieKitReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
         fn.Call("JSApplication:sendEvent OnShake");
       }
     });
-    [super sendEvent:event];
   }
-  else
+  if(event)
   {
-    [super sendEvent:event];
+    dispatch_main(^{
+      if (JS_HAS(JS_GLOBAL(), JS_STR("OnEvent")) && JS_GLOBAL()->Get(JS_STR("OnEvent"))->IsFunction()) {
+        sweetiekit::JSFunction fn(JS_GLOBAL()->Get(JS_STR("OnEvent")));
+        fn.Call("JSApplication:sendEvent OnEvent",
+          js_value_UIEvent(event));
+      }
+    });
   }
+  [super sendEvent:event];
 }
 
 @end
