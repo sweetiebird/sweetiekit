@@ -23,8 +23,9 @@ const distToRightX = (parentSize, childSize) => (parentSize.width - childSize.wi
 const distToTopY = (parentSize, childSize) => (parentSize.width - childSize.width) * 0.5;
 const distToBtmY = (parentSize, childSize) => (parentSize.height - childSize.height) * -0.5;
 
+Astronauts_players = [];
 
-function makeDemo(navigation, dvc) {
+Astronauts_makeDemo = function Astronauts_makeDemo(navigation, dvc) {
   //let player;
   //let scene;
   //let skView;
@@ -38,7 +39,6 @@ function makeDemo(navigation, dvc) {
     console.log(room.id);
     console.log('joined!');
   });
-  var isMoving = false;
 
   const PhysicsCategory = {
     none: 0,
@@ -68,7 +68,6 @@ function makeDemo(navigation, dvc) {
   }
 
   function touchesEnded() {
-    isMoving = false;
     // player.jump(joystickKnob.position);
     const action = SKAction.moveToDuration(v2(0, 0), 0.1);
     joystickKnob.runAction(action, () => {
@@ -77,7 +76,28 @@ function makeDemo(navigation, dvc) {
   }
 
   function touchesBegan() {
-    isMoving = true;
+  }
+  
+  function inputJump(player) {
+    // const bothZero = joystickKnob.position.x === 0 && joystickKnob.position.y === 0;
+    // const jumpPos = {
+    //   x: !bothZero ? joystickKnob.position.x : player.node.position.x,
+    //   y: !bothZero ? joystickKnob.position.y : player.node.position.y + player.node.size.height,
+    // };
+    // console.log(jumpPos);
+    /*
+    const force = {
+      x: 0,
+      y: Player.jumpForce,
+    };
+    player.jump(force);
+    if (knob.position.x === 0 && knob.position.y === 0) {
+    } else {
+      const { x, y } = knob.position;
+      player.jump({ x, y: y + 30 });
+    }
+    */
+    player.jump();
   }
 
   function sceneTouchesBegan(touches = []) {
@@ -86,22 +106,7 @@ function makeDemo(navigation, dvc) {
       const last = copy[copy.length - 1];
       const viewLoc = last.locationInView(skView);
       if (viewLoc.x < skView.frame.width * 0.6) {
-        // const bothZero = joystickKnob.position.x === 0 && joystickKnob.position.y === 0;
-        // const jumpPos = {
-        //   x: !bothZero ? joystickKnob.position.x : player.node.position.x,
-        //   y: !bothZero ? joystickKnob.position.y : player.node.position.y + player.node.size.height,
-        // };
-        // console.log(jumpPos);
-        if (joystickKnob.position.x === 0 && joystickKnob.position.y === 0) {
-          const force = {
-            x: 0,
-            y: player.node.size.height,
-          };
-          player.jump(force);
-        } else {
-          const { x, y } = joystickKnob.position;
-          player.jump({ x, y: y + 30 });
-        }
+        inputJump(Astronauts_players[0]);
       }
     }
   }
@@ -208,12 +213,43 @@ function makeDemo(navigation, dvc) {
     scene.addChild(joystick);
   }
 
-  function makePlayer(demoVC) {
+  function makePlayer(playerIndex, demoVC, position = v2(0, 0)) {
     const node = SKSpriteNode('game_player');
+    node.name = `player ${playerIndex}`;
     node.size = { width: 36, height: 49 };
-    node.position = v2(0, 0);
-    // node.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(node.size);
-    return new Player(node);
+    node.position = position;
+    const physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(node.size);
+    physicsBody.isDynamic = true;
+    physicsBody.categoryBitMask = PhysicsCategory.player;
+    physicsBody.contactTestBitMask = PhysicsCategory.player | PhysicsCategory.ground;
+    physicsBody.collisionBitMask = PhysicsCategory.player | PhysicsCategory.ground;
+    physicsBody.allowsRotation = false;
+    node.physicsBody = physicsBody;
+    const player = new Player(node);
+
+    // sometimes the ground contact never seems to fire. This unsticks the player.
+    let prevPos = v2(0, 0);
+    let curPos = v2(0, 0);
+    player._checkGroundInterval = setInterval(() => {
+      if (scene == null || scene.size == null || scene.size.height == null) {
+        clearInterval(player._checkGroundInterval);
+        return;
+      }
+      prevPos.x = curPos.x;
+      prevPos.y = curPos.y;
+      let pos = player.node.position;
+      if (!pos || pos.y < -scene.size.height) {
+        player.kill();
+      } else {
+        curPos.x = pos.x;
+        curPos.y = pos.y;
+        if (curPos.distanceTo(prevPos) < 0.01) {
+          player.touchedGround();
+        }
+      }
+    }, 1000);
+    
+    return player;
   }
 
   function makeDelegate() {
@@ -225,40 +261,19 @@ function makeDemo(navigation, dvc) {
         if (bodyB && bodyB.node && bodyB.node.name) {
           const nameA = String(bodyA.node.name);
           const nameB = String(bodyB.node.name);
-          if (
-            (nameA.includes('ground') && nameB === 'player') ||
-            (nameA === 'player' && nameB.includes('ground'))
-          ) {
-            player.touchedGround();
+          for (let i = 0; i < Astronauts_players.length; i++) {
+            if (
+              (nameA.includes('ground') && nameB === `player ${i}`) ||
+              (nameA === `player ${i}` && nameB.includes('ground'))
+            ) {
+              Astronauts_players[i].touchedGround();
+            }
           }
         }
       }
     };
     return del;
   }
-
-  // sometimes the ground contact never seems to fire. This unsticks the player.
-  let prevPos = v2(0, 0);
-  let curPos = v2(0, 0);
-  let interval;
-  interval = setInterval(() => {
-    if (scene == null || scene.size == null || scene.size.height == null) {
-      clearInterval(interval);
-      return;
-    }
-    prevPos.x = curPos.x;
-    prevPos.y = curPos.y;
-    let pos = player.node.position;
-    if (!pos || pos.y < -scene.size.height) {
-      player.kill();
-    } else {
-      curPos.x = pos.x;
-      curPos.y = pos.y;
-      if (curPos.distanceTo(prevPos) < 0.01) {
-        player.touchedGround();
-      }
-    }
-  }, 1000);
 
   function makeView(demoVC) {
     const w = demoVC.view.frame.width;
@@ -276,12 +291,6 @@ function makeDemo(navigation, dvc) {
   }
 
   function setPhysicsBodies() {
-    player.node.physicsBody = SKPhysicsBody.bodyWithRectangleOfSize(player.node.size);
-    player.node.physicsBody.isDynamic = true;
-    player.node.physicsBody.categoryBitMask = PhysicsCategory.player;
-    player.node.physicsBody.contactTestBitMask = PhysicsCategory.ground;
-    player.node.physicsBody.collisionBitMask = PhysicsCategory.ground;
-    player.node.physicsBody.allowsRotation = false;
     scene.physicsBody = SKPhysicsBody.bodyWithEdgeLoopFromRect(scene.frame);
     scene.physicsBody.isDynamic = false;
     scene.physicsBody.categoryBitMask = PhysicsCategory.ground;
@@ -296,11 +305,43 @@ function makeDemo(navigation, dvc) {
     addPlatforms();
   }
 
+  Astronauts_joystickRadius = 30;
+  Astronauts_OnGamepadValueChanged = (gamepad, input) => {
+    const desc = input.debugDescription;
+    const playerIndex = gamepad.controller.playerIndex;
+    const player = Astronauts_players[playerIndex];
+    console.log('GamepadValueChanged', gamepad, input, `Player ${playerIndex}`, desc);
+    if (player) {
+      if (desc.startsWith("Button A ")) {
+        if (input.isPressed) {
+          // jump
+          console.log(`Player ${playerIndex} jump`);
+          inputJump(player);
+        }
+      } else if (desc.startsWith("Left Thumbstick")) {
+        player.impulse = {
+          x: input.xAxis.value,
+          y: input.yAxis.value,
+        };
+        if (playerIndex === 0) {
+          const radius = Astronauts_joystickRadius;
+          joystickKnob.position = {
+            x: player.impulse.x * radius,
+            y: player.impulse.y * radius,
+          };
+        }
+      }
+    }
+  }
+
   async function make(nav, demoVC) {
     scene = makeScene(demoVC);
-    player = makePlayer(demoVC);
+    Astronauts_players[0] = makePlayer(0, demoVC, v2(30, 0));
+    Astronauts_players[1] = makePlayer(1, demoVC, v2(-30, 0));
 
-    scene.addChild(player.node);
+    for (let player of Astronauts_players) {
+      scene.addChild(player.node);
+    }
 
     contactDel = makeDelegate();
     skView = makeView(demoVC);
@@ -320,8 +361,8 @@ function makeDemo(navigation, dvc) {
     // scene.touchesEndedWithEvent = touchesEnded;
 
     scene.update = () => {
-      if (isMoving) {
-        player.move(joystickKnob.position);
+      for (let player of Astronauts_players) {
+        player.update(scene);
       }
     };
 
@@ -330,9 +371,11 @@ function makeDemo(navigation, dvc) {
     skView.viewWillAppear = () => {
       start();
     }
+    
+    OnGamepadValueChanged = (...args) => Astronauts_OnGamepadValueChanged(...args);
   }
 
   make(navigation, dvc);
 }
 
-module.exports = makeDemo;
+module.exports = Astronauts_makeDemo;
