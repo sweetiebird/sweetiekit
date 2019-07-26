@@ -57,6 +57,7 @@ makeTableView = require('./examples/UITableView');
 makePopover = require('./examples/Popover');
 makePopoverTableViewController = require('./examples/PopoverTableViewController');
 makeAVAudioPlayer = require('./examples/AVAudioPlayer');
+makeAurioTouch = require('./examples/aurioTouch/index.js');
 
 // misc demos
 makeThreeObj = require('./examples/ThreeOBJ');
@@ -99,6 +100,8 @@ demoTypes = {
 };
 
 demoCtrls = {
+  AVAudioPlayer: makeAVAudioPlayer,
+  AurioTouch: makeAurioTouch,
   Popover: makePopover,
   PopoverTableViewController: makePopoverTableViewController,
   UIAlertController: makeAlertCtrl,
@@ -109,7 +112,6 @@ demoCtrls = {
   UINavigationController: makeNavigationCtrl,
   UITabBarController: makeTabBarCtrl,
   UITableView: makeTableView,
-  AVAudioPlayer: makeAVAudioPlayer,
 };
 
 arDemos = {

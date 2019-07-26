@@ -11,8 +11,6 @@ const {
   NSURL,
 } = SweetieKit;
 
-const { AVAudioSessionCategory } = UIKit;
-
 async function make(nav, demoVC) {
   const w = demoVC.view.frame.width;
   const h = demoVC.view.frame.height;

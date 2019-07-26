@@ -148,6 +148,7 @@
 		A134E29522D0371600BAB748 /* NCGPDFPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29322D0371600BAB748 /* NCGPDFPage.mm */; };
 		A134E29922D037D200BAB748 /* NCGPDFDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29722D037D100BAB748 /* NCGPDFDocument.mm */; };
 		A134E29E22D0384E00BAB748 /* NCFDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = A134E29C22D0384E00BAB748 /* NCFDictionary.mm */; };
+		A13730A122E7831000B241D6 /* node_code_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = A13730A022E7831000B241D6 /* node_code_cache.cc */; };
 		A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */ = {isa = PBXBuildFile; fileRef = A13768EB2288396400CDB13B /* NCLHeading.mm */; };
 		A1394A6C22865EF00087F712 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1394A6B22865EF00087F712 /* main.mm */; };
 		A14099CA229E54AF00148A41 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A1482A94229D4E3F001502C0 /* GameScene.sks */; };
@@ -533,30 +534,30 @@
 		A194895F228A89B0007BF787 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A194895E228A89B0007BF787 /* MapKit.framework */; platformFilter = ios; };
 		A194896B228AA15C007BF787 /* NMKMapViewDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1948969228AA15C007BF787 /* NMKMapViewDelegate.mm */; };
 		A1948971228AA47E007BF787 /* NMKAnnotationView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A194896F228AA47E007BF787 /* NMKAnnotationView.mm */; };
-		A197F40722DC21DD00123D18 /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3EF22DC21DA00123D18 /* libv8_compiler.a */; platformFilter = maccatalyst; };
-		A197F40822DC21DD00123D18 /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F022DC21DA00123D18 /* libnode.a */; platformFilter = maccatalyst; };
-		A197F40922DC21DD00123D18 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F122DC21DA00123D18 /* libopenssl.a */; platformFilter = maccatalyst; };
-		A197F40A22DC21DD00123D18 /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F222DC21DA00123D18 /* libicuucx.a */; platformFilter = maccatalyst; };
-		A197F40B22DC21DD00123D18 /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F322DC21DA00123D18 /* libicustubdata.a */; platformFilter = maccatalyst; };
-		A197F40C22DC21DD00123D18 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F422DC21DA00123D18 /* libv8_libsampler.a */; platformFilter = maccatalyst; };
-		A197F40D22DC21DD00123D18 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F522DC21DB00123D18 /* libicui18n.a */; platformFilter = maccatalyst; };
-		A197F40E22DC21DD00123D18 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F622DC21DB00123D18 /* libzlib.a */; platformFilter = maccatalyst; };
-		A197F40F22DC21DD00123D18 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F722DC21DB00123D18 /* libhttp_parser.a */; platformFilter = maccatalyst; };
-		A197F41022DC21DD00123D18 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F822DC21DB00123D18 /* libbrotli.a */; platformFilter = maccatalyst; };
-		A197F41122DC21DD00123D18 /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F922DC21DB00123D18 /* libtorque_base.a */; platformFilter = maccatalyst; };
-		A197F41222DC21DD00123D18 /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FA22DC21DB00123D18 /* libv8_init.a */; platformFilter = maccatalyst; };
-		A197F41322DC21DD00123D18 /* libv8_initializers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FB22DC21DB00123D18 /* libv8_initializers.a */; platformFilter = maccatalyst; };
-		A197F41422DC21DD00123D18 /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FC22DC21DB00123D18 /* libv8_libbase.a */; platformFilter = maccatalyst; };
-		A197F41522DC21DD00123D18 /* libhistogram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FD22DC21DB00123D18 /* libhistogram.a */; platformFilter = maccatalyst; };
-		A197F41622DC21DD00123D18 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FE22DC21DC00123D18 /* libllhttp.a */; platformFilter = maccatalyst; };
-		A197F41722DC21DD00123D18 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FF22DC21DC00123D18 /* libuv.a */; platformFilter = maccatalyst; };
-		A197F41822DC21DD00123D18 /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40022DC21DC00123D18 /* libv8_base_without_compiler.a */; platformFilter = maccatalyst; };
-		A197F41922DC21DD00123D18 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40122DC21DC00123D18 /* libv8_snapshot.a */; platformFilter = maccatalyst; };
-		A197F41A22DC21DD00123D18 /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40222DC21DC00123D18 /* libcares.a */; platformFilter = maccatalyst; };
-		A197F41B22DC21DD00123D18 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40322DC21DC00123D18 /* libnghttp2.a */; platformFilter = maccatalyst; };
-		A197F41C22DC21DD00123D18 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40422DC21DC00123D18 /* libv8_libplatform.a */; platformFilter = maccatalyst; };
-		A197F41D22DC21DD00123D18 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40522DC21DC00123D18 /* libv8_nosnapshot.a */; platformFilter = maccatalyst; };
-		A197F41E22DC21DD00123D18 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40622DC21DC00123D18 /* libicudata.a */; platformFilter = maccatalyst; };
+		A197F40722DC21DD00123D18 /* libv8_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3EF22DC21DA00123D18 /* libv8_compiler.a */; };
+		A197F40822DC21DD00123D18 /* libnode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F022DC21DA00123D18 /* libnode.a */; };
+		A197F40922DC21DD00123D18 /* libopenssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F122DC21DA00123D18 /* libopenssl.a */; };
+		A197F40A22DC21DD00123D18 /* libicuucx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F222DC21DA00123D18 /* libicuucx.a */; };
+		A197F40B22DC21DD00123D18 /* libicustubdata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F322DC21DA00123D18 /* libicustubdata.a */; };
+		A197F40C22DC21DD00123D18 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F422DC21DA00123D18 /* libv8_libsampler.a */; };
+		A197F40D22DC21DD00123D18 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F522DC21DB00123D18 /* libicui18n.a */; };
+		A197F40E22DC21DD00123D18 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F622DC21DB00123D18 /* libzlib.a */; };
+		A197F40F22DC21DD00123D18 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F722DC21DB00123D18 /* libhttp_parser.a */; };
+		A197F41022DC21DD00123D18 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F822DC21DB00123D18 /* libbrotli.a */; };
+		A197F41122DC21DD00123D18 /* libtorque_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3F922DC21DB00123D18 /* libtorque_base.a */; };
+		A197F41222DC21DD00123D18 /* libv8_init.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FA22DC21DB00123D18 /* libv8_init.a */; };
+		A197F41322DC21DD00123D18 /* libv8_initializers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FB22DC21DB00123D18 /* libv8_initializers.a */; };
+		A197F41422DC21DD00123D18 /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FC22DC21DB00123D18 /* libv8_libbase.a */; };
+		A197F41522DC21DD00123D18 /* libhistogram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FD22DC21DB00123D18 /* libhistogram.a */; };
+		A197F41622DC21DD00123D18 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FE22DC21DC00123D18 /* libllhttp.a */; };
+		A197F41722DC21DD00123D18 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F3FF22DC21DC00123D18 /* libuv.a */; };
+		A197F41822DC21DD00123D18 /* libv8_base_without_compiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40022DC21DC00123D18 /* libv8_base_without_compiler.a */; };
+		A197F41922DC21DD00123D18 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40122DC21DC00123D18 /* libv8_snapshot.a */; };
+		A197F41A22DC21DD00123D18 /* libcares.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40222DC21DC00123D18 /* libcares.a */; };
+		A197F41B22DC21DD00123D18 /* libnghttp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40322DC21DC00123D18 /* libnghttp2.a */; };
+		A197F41C22DC21DD00123D18 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40422DC21DC00123D18 /* libv8_libplatform.a */; };
+		A197F41D22DC21DD00123D18 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40522DC21DC00123D18 /* libv8_nosnapshot.a */; };
+		A197F41E22DC21DD00123D18 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A197F40622DC21DC00123D18 /* libicudata.a */; };
 		A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A199AEDA22884F3E003C1DC4 /* NUISlider.mm */; };
 		A199AEDD22885573003C1DC4 /* uidemos.js in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDC22885573003C1DC4 /* uidemos.js */; };
 		A199AEDF22885581003C1DC4 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = A199AEDE22885581003C1DC4 /* examples */; };
@@ -755,7 +756,6 @@
 		A1EF5EFA22D81E5900AAF9AD /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE222D81E5800AAF9AD /* libhttp_parser.a */; platformFilter = ios; };
 		A1EF5EFB22D81E5900AAF9AD /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE322D81E5800AAF9AD /* libv8_snapshot.a */; platformFilter = ios; };
 		A1EF5EFC22D81E5900AAF9AD /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EF5EE422D81E5800AAF9AD /* libzlib.a */; platformFilter = ios; };
-		A1EF5EFE22D81EBD00AAF9AD /* node_code_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = A1EF5EFD22D81EBC00AAF9AD /* node_code_cache.cc */; };
 		A1FC1A02225C65DC00085571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A01225C65DC00085571 /* AppDelegate.swift */; };
 		A1FC1A04225C65DC00085571 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A03225C65DC00085571 /* FirstViewController.swift */; };
 		A1FC1A06225C65DC00085571 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FC1A05225C65DC00085571 /* SecondViewController.swift */; };
@@ -803,6 +803,7 @@
 		21C872CD226A87C500B5192B /* NNSUserDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NNSUserDefaults.mm; sourceTree = "<group>"; };
 		21C872CE226A87C500B5192B /* NNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSUserDefaults.h; sourceTree = "<group>"; };
 		21C872D0226A989400B5192B /* UIView+stringTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+stringTag.swift"; sourceTree = "<group>"; };
+		A102F11F22E91B930052E6D3 /* node_code_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = node_code_cache.cc; sourceTree = "<group>"; };
 		A104841922C337CA001C8BAE /* turtle.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = turtle.dae; sourceTree = "<group>"; };
 		A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "embedded-file-writer.cc"; path = "/opt/sweet/node-ios/deps/v8/src/snapshot/embedded-file-writer.cc"; sourceTree = "<group>"; };
 		A1058B422268029E00CEAA5C /* libs_main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libs_main.mm; sourceTree = "<group>"; };
@@ -1041,6 +1042,8 @@
 		A134E29822D037D100BAB748 /* NCGPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCGPDFDocument.h; sourceTree = "<group>"; };
 		A134E29C22D0384E00BAB748 /* NCFDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCFDictionary.mm; sourceTree = "<group>"; };
 		A134E29D22D0384E00BAB748 /* NCFDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCFDictionary.h; sourceTree = "<group>"; };
+		A13730A022E7831000B241D6 /* node_code_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = node_code_cache.cc; sourceTree = "<group>"; };
+		A13730A222E7835300B241D6 /* node_code_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node_code_cache.cc; path = Release/node_code_cache.cc; sourceTree = "<group>"; };
 		A13768EB2288396400CDB13B /* NCLHeading.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NCLHeading.mm; sourceTree = "<group>"; };
 		A13768ED2288398300CDB13B /* NCLHeading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLHeading.h; sourceTree = "<group>"; };
 		A1394A6B22865EF00087F712 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -7346,6 +7349,7 @@
 		A1AD024122DC7AB600F0D8FE /* Release */ = {
 			isa = PBXGroup;
 			children = (
+				A102F11F22E91B930052E6D3 /* node_code_cache.cc */,
 				A1AD024222DC7AB600F0D8FE /* snapshot.cc */,
 				A1AD024322DC7AB600F0D8FE /* embedded.S */,
 			);
@@ -7493,6 +7497,7 @@
 		A1BD4B082287B75A001D1F6E /* ReleaseSnapshot */ = {
 			isa = PBXGroup;
 			children = (
+				A13730A222E7835300B241D6 /* node_code_cache.cc */,
 				A1BD4B0D2287B773001D1F6E /* embedded.S */,
 				A1BD4B0E2287B773001D1F6E /* snapshot.cc */,
 			);
@@ -8922,6 +8927,7 @@
 		A1FC19F5225C65DC00085571 = {
 			isa = PBXGroup;
 			children = (
+				A13730A022E7831000B241D6 /* node_code_cache.cc */,
 				A1AD023F22DC7AB600F0D8FE /* Snapshot */,
 				A1058B402267FE7E00CEAA5C /* embedded-file-writer.cc */,
 				A1FF9E6E225D7BB9004D7C82 /* shell.cc */,
@@ -9559,6 +9565,7 @@
 				A158792B22CEE2F600847196 /* NUIViewAnimating.mm in Sources */,
 				A199AEE322885C76003C1DC4 /* NUIAlertController.mm in Sources */,
 				A1574E8F22B80F2F006CC5F2 /* NUIDatePicker.mm in Sources */,
+				A13730A122E7831000B241D6 /* node_code_cache.cc in Sources */,
 				A108633E22C4A097001A15A9 /* NAVAudioTypes.mm in Sources */,
 				A1574EE022B8D96C006CC5F2 /* NUICollectionViewUpdateItem.mm in Sources */,
 				A1678CA622D4B91B00E1CF52 /* NVNDetectedObjectObservation.mm in Sources */,
@@ -9918,7 +9925,6 @@
 				A192704522C13B04008F16AE /* NMTLTypes.mm in Sources */,
 				A1CE2B7D228EC15800D9B3B8 /* NNSMutableAttributedString.mm in Sources */,
 				211E76BD226A52AC00B838AF /* NUILabel.mm in Sources */,
-				A1EF5EFE22D81EBD00AAF9AD /* node_code_cache.cc in Sources */,
 				A192702F22C1344E008F16AE /* NMTLRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
 				A1678CA722D4B91B00E1CF52 /* NVNRectangleObservation.mm in Sources */,
 				A1678BE522D46A0C00E1CF52 /* NAVCaptureScreenInput.mm in Sources */,
@@ -10095,7 +10101,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
