@@ -59,7 +59,10 @@ Astronauts_makeDemo = function Astronauts_makeDemo(navigation, dvc) {
       );
 
       const angle = Math.atan2(jPos.y, jPos.x);
-
+      Astronauts_players[0].impulse = {
+        x: Math.cos(angle),
+        y: -Math.sin(angle),
+      };
       joystickKnob.position = {
         x: Math.cos(angle) * radius,
         y: Math.sin(angle) * radius,
