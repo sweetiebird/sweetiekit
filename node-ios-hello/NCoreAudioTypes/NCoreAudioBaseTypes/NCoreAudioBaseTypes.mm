@@ -116,6 +116,99 @@ bool is_value_SMPTETime(const Local<Value>& value)
   return true;
 }
 
+/*
+    UInt32              mNumberChannels;
+    UInt32              mDataByteSize;
+    void* __nullable    mData;
+ */
+
+Local<Value> js_value_AudioBuffer(const AudioBuffer& value) {
+  Nan::EscapableHandleScope scope;
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  js_struct_value(UInt32, mNumberChannels);
+  js_struct_value(UInt32, mDataByteSize);
+  if (value.mData) {
+    result->Set(JS_STR("mData"), ArrayBuffer::New(Isolate::GetCurrent(), (void*)value.mData, value.mDataByteSize));
+  }
+  return scope.Escape(result);
+}
+
+AudioBuffer to_value_AudioBuffer(const Local<Value>& value, bool * _Nullable failed) {
+  AudioBuffer result;
+  memset(&result, 0, sizeof(AudioBuffer));
+  check_struct_type(AudioBuffer);
+  to_struct_value(UInt32, mNumberChannels);
+  to_struct_value(UInt32, mDataByteSize);
+  {
+    Local<Value> value_(JS_OBJ(value)->Get(JS_STR("mData")));
+    if (value_->IsNullOrUndefined()) {
+      result.mData = nullptr;
+    } else {
+      Local<ArrayBuffer> mData(Local<ArrayBuffer>::Cast(value_));
+      result.mData = mData->GetContents().Data();
+    }
+  }
+  return result;
+}
+
+bool is_value_AudioBuffer(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  check_struct_value(UInt32, mNumberChannels);
+  check_struct_value(UInt32, mDataByteSize);
+  return true;
+}
+
+/*
+    UInt32      mNumberBuffers;
+    AudioBuffer mBuffers[1]; // this is a variable length array of mNumberBuffers elements
+ */
+
+Local<Value> js_value_AudioBufferList(const AudioBufferList& value) {
+  Nan::EscapableHandleScope scope;
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  js_struct_value(UInt32, mNumberBuffers);
+  Local<Array> mBuffers(Nan::New<Array>(value.mNumberBuffers));
+  for (UInt32 i = 0, n = value.mNumberBuffers; i < n; i++) {
+    mBuffers->Set(i, js_value_AudioBuffer(value.mBuffers[i]));
+  }
+  result->Set(JS_STR("mBuffers"), mBuffers);
+  return scope.Escape(result);
+}
+
+AudioBufferList to_value_AudioBufferList(const Local<Value>& value, bool * _Nullable failed) {
+  AudioBufferList result;
+  memset(&result, 0, sizeof(AudioBufferList));
+  check_struct_type(AudioBufferList);
+  to_struct_value(UInt32, mNumberBuffers);
+  if (result.mNumberBuffers > 1) {
+    js_panic_noreturn("AudioBufferList::mNumberBuffers must be <= 1");
+    return result;
+  }
+  Local<Value> array(JS_OBJ(value)->Get(JS_STR("mBuffers")));
+  if (array->IsArray()) {
+    Local<Array> values(Local<Array>::Cast(array));
+    uint32_t length(result.mNumberBuffers);
+    for (uint32_t i = 0; i < length; i++) {
+      result.mBuffers[i] = to_value_AudioBuffer(values->Get(i));
+    }
+  }
+  return result;
+}
+
+bool is_value_AudioBufferList(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  check_struct_value(UInt32, mNumberBuffers);
+  check_struct_value(NSArray<AudioBuffer>, mBuffers);
+  return true;
+}
+
+
 
 JS_INIT_GLOBALS(CoreAudioBaseTypes);
   // global values (exports)

@@ -395,6 +395,9 @@ honeykit.stop = () => {                        \
   
   node::pNodeRunLoopRun = [](Isolate* isolate, Local<Context> context, struct uv_loop_s* loop) {
   
+    sweetiekit::nodeIsolate = isolate;
+    sweetiekit::nodeContext = new Persistent<Context>(isolate, context);
+  
     NSTimer* timer = [NSTimer timerWithTimeInterval:60.0/1000.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
       v8::Locker locker(isolate);
       isolate->Enter();

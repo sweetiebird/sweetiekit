@@ -104,6 +104,56 @@ typedef struct SMPTETime    SMPTETime;
  */
 JS_DECLARE_STRUCT(SMPTETime);
 
+
+/*!
+    @struct         AudioBuffer
+    @abstract       A structure to hold a buffer of audio data.
+    @var            mNumberChannels
+                        The number of interleaved channels in the buffer.
+    @var            mDataByteSize
+                        The number of bytes in the buffer pointed at by mData.
+    @var            mData
+                        A pointer to the buffer of audio data.
+*/
+/*
+struct AudioBuffer
+{
+    UInt32              mNumberChannels;
+    UInt32              mDataByteSize;
+    void* __nullable    mData;
+};
+typedef struct AudioBuffer  AudioBuffer;
+ */
+JS_DECLARE_STRUCT(AudioBuffer);
+
+/*!
+    @struct         AudioBufferList
+    @abstract       A variable length array of AudioBuffer structures.
+    @var            mNumberBuffers
+                        The number of AudioBuffers in the mBuffers array.
+    @var            mBuffers
+                        A variable length array of AudioBuffers.
+*/
+/*
+struct AudioBufferList
+{
+    UInt32      mNumberBuffers;
+    AudioBuffer mBuffers[1]; // this is a variable length array of mNumberBuffers elements
+  
+#if defined(__cplusplus) && defined(CA_STRICT) && CA_STRICT
+public:
+    AudioBufferList() {}
+private:
+    //  Copying and assigning a variable length struct is problematic; generate a compile error.
+    AudioBufferList(const AudioBufferList&);
+    AudioBufferList&    operator=(const AudioBufferList&);
+#endif
+
+};
+typedef struct AudioBufferList  AudioBufferList;
+ */
+JS_DECLARE_STRUCT(AudioBufferList);
+
 JS_WRAP_GLOBALS(CoreAudioBaseTypes);
 JS_WRAP_GLOBALS_END(CoreAudioBaseTypes);
 

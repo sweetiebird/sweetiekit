@@ -8,6 +8,7 @@
 
 #include "NAudioComponent.h"
 #include "NCoreAudioTypes.h"
+#include "NCoreAudioBaseTypes.h"
 #include "NMacTypes.h"
 
 #define NXThrowIfError(error, operation)                    \
@@ -24,6 +25,155 @@
       return; \
     }
 
+
+/*
+extern OSStatus
+AudioOutputUnitStart(  AudioUnit  ci)                      API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+NAN_METHOD(AudioOutputUnitStart) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, ci);
+    NXThrowIfError(::AudioOutputUnitStart(ci), "AudioOutputUnitStart failed");
+  }
+}
+
+/*
+extern OSStatus
+AudioOutputUnitStop(  AudioUnit  ci)                      API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+NAN_METHOD(AudioOutputUnitStop) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, ci);
+    NXThrowIfError(::AudioOutputUnitStop(ci), "AudioOutputUnitStop failed");
+  }
+}
+
+
+/*!
+  @function    AudioUnitRender
+  @abstract    the render operation where ioData will contain the results of the audio unit's
+          render operations
+  @discussion    an audio unit will render the amount of audio data described by 
+          inNumberOfFrames and the results of that render will be contained within 
+          ioData. The caller should provide audio time stamps where at least the sample 
+          time is valid and it is incrementing sequentially from its previous call 
+          (so, the next time stamp will be the current time stamp + inNumberFrames) 
+          If the sample time is not incrementing sequentially, the audio unit will infer
+          that there is some discontinuity with the timeline it is rendering for
+  
+          The caller must provide a valid ioData AudioBufferList that matches the 
+          expected topology for the current audio format for the given bus. The buffer 
+          list can be of two variants:
+          (1) If the mData pointers are non-null then the audio unit will render its 
+          output into those buffers. These buffers should be aligned to 16 byte 
+          boundaries (which is normally what malloc will return).
+          (2) If the mData pointers are null, then the audio unit can provide pointers 
+          to its own buffers. In this case the audio unit is required to keep those
+          buffers valid for the duration of the calling thread's I/O cycle
+           
+  @param      inUnit
+          the audio unit
+  @param      ioActionFlags
+          any appropriate action flags for the render operation
+  @param      inTimeStamp
+          the time stamp that applies to this particular render operation. when 
+          rendering for multiple output buses the time stamp will generally be the same 
+          for each output bus, so the audio unit is able to determine without doubt that 
+          this the same render operation
+  @param      inOutputBusNumber
+          the output bus to render for
+  @param      inNumberFrames
+          the number of sample frames to render
+  @param      ioData
+          the audio buffer list that the audio unit is to render into.
+  
+  @result      noErr, or an audio unit render error
+*/
+/*
+extern OSStatus
+AudioUnitRender(          AudioUnit            inUnit,
+                  AudioUnitRenderActionFlags * __nullable ioActionFlags,
+                  const AudioTimeStamp *      inTimeStamp,
+                  UInt32              inOutputBusNumber,
+                  UInt32              inNumberFrames,
+                  AudioBufferList *        ioData)      
+                        API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
+ */
+NAN_METHOD(AudioUnitRender) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, inUnit);
+    declare_optional_value(AudioUnitRenderActionFlags, ioActionFlags, 0);
+    declare_value(AudioTimeStamp, inTimeStamp);
+    declare_value(UInt32, inOutputBusNumber);
+    declare_value(UInt32, inNumberFrames);
+    declare_value(AudioBufferList, ioData);
+    NXThrowIfError(::AudioUnitRender(inUnit, ioActionFlags ? &ioActionFlags : nullptr, &inTimeStamp, inOutputBusNumber, inNumberFrames, &ioData), "AudioUnitRender failed");
+  }
+}
+
+/*!
+  @function    AudioUnitInitialize
+  @abstract    initialize an audio unit
+  @discussion    Upon success, the audio unit has been successfully initialized. This means 
+          that the formats for input and output are valid and can be supported and it 
+          has based its allocations on the max number of frames that it is able to 
+          render at any given time. Once initialized, it is in a state where it can be 
+          asked to render.
+          
+          In common practice, major state of an audio unit (such as its I/O formats,
+          memory allocations) cannot be changed while an audio unit is initialized.
+  
+  @param      inUnit
+          The audio unit to initialize
+  @result      noErr, or an error representing the reasons why the audio unit was not able 
+          to be initialized successfully
+*/
+/*
+extern OSStatus
+AudioUnitInitialize(        AudioUnit        inUnit)            
+                        API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+
+ */
+NAN_METHOD(AudioUnitInitialize) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, inUnit);
+    NXThrowIfError(::AudioUnitInitialize(inUnit), "AudioUnitInitialize failed");
+  }
+}
+
+/*!
+  @function    AudioUnitUninitialize
+  @abstract    uninitialize an audio unit
+  @discussion    Once an audio unit has been initialized, to change its state in response to 
+          some kind of environmental change, the audio unit should be uninitialized. 
+          This will have the effect of the audio unit de-allocating its resources.
+          The caller can then reconfigure the audio unit to match the new environment 
+          (for instance, the sample rate to process audio is different than it was) and 
+          then re-initialize the audio unit when those changes have been applied.
+  
+  @param      inUnit
+          The audio unit to uninitialize
+  @result      noErr, or an error representing the reasons why the audio unit was not able 
+          to be initialized successfully. Typically this call won't return an error 
+          unless the audio unit in question is no longer valid.
+*/
+/*
+extern OSStatus
+AudioUnitUninitialize(        AudioUnit        inUnit)            
+                        API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
+
+ */
+NAN_METHOD(AudioUnitUninitialize) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(AudioUnit, inUnit);
+    NXThrowIfError(::AudioUnitUninitialize(inUnit), "AudioUnitUninitialize failed");
+  }
+}
 
 
 /*!
@@ -120,6 +270,60 @@ AudioUnitSetProperty(        AudioUnit        inUnit,
                         API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
  */
 
+NSMutableSet<SweetJSFunction*>* AudioUnitSetProperty_functions;
+BOOL AudioUnitSetProperty_callback = YES;
+
+namespace sweetiekit {
+  extern Isolate* nodeIsolate;
+  extern Persistent<Context>* nodeContext;
+}
+
+static OSStatus
+AudioUnitSetProperty_performRender(
+   void                         *inRefCon,
+   AudioUnitRenderActionFlags   *ioActionFlags,
+   const AudioTimeStamp     *inTimeStamp,
+   UInt32             inBusNumber,
+   UInt32             inNumberFrames,
+   AudioBufferList              *ioData)
+{
+  __block OSStatus err = noErr;
+//  dispatch_main(^{
+  ({
+    Isolate* isolate = sweetiekit::nodeIsolate;
+    v8::Locker locker(isolate);
+    isolate->Enter();
+    {
+      v8::Isolate::Scope isolateScope(isolate);
+      Nan::HandleScope handleScope;
+      Local<Context> context(Nan::New(*sweetiekit::nodeContext));
+      v8::Context::Scope context_scope(context);
+    
+      SweetJSFunction* callback = (__bridge SweetJSFunction*)inRefCon;
+      if (callback && AudioUnitSetProperty_callback) {
+        if ([callback jsFunction]) {
+          Local<Value> ioActionFlags_;
+          if (ioActionFlags) {
+            ioActionFlags_ = js_value_AudioUnitRenderActionFlags(*ioActionFlags);
+          }
+          Local<Value> result([callback jsFunction]->Call("AudioUnitSetProperty_performRender",
+            ioActionFlags_,
+            js_value_AudioTimeStamp(*inTimeStamp),
+            js_value_UInt32(inBusNumber),
+            js_value_UInt32(inNumberFrames),
+            js_value_AudioBufferList(*ioData)
+          ));
+          if (is_value_OSStatus(result)) {
+            err = to_value_OSStatus(result);
+          }
+        }
+      }
+    }
+    isolate->Exit();
+  });
+  return err;
+}
+
 NAN_METHOD(AudioUnitSetProperty) {
   declare_autoreleasepool {
     declare_args();
@@ -133,15 +337,590 @@ NAN_METHOD(AudioUnitSetProperty) {
     } else if (is_value_AudioStreamBasicDescription(info[JS_ARGC])) {
       declare_value(AudioStreamBasicDescription, inValue);
       NXThrowIfError(::AudioUnitSetProperty(inUnit, inID, inScope, inElement, &inValue, sizeof(inValue)), "AudioUnitSetProperty failed");
+    } else if (info[JS_ARGC]->IsFunction()) {
+      declare_callback(inCallback);
+      if (!AudioUnitSetProperty_functions) {
+        AudioUnitSetProperty_functions = [[NSMutableSet alloc] init];
+      }
+      [AudioUnitSetProperty_functions addObject: inCallback];
+      AURenderCallbackStruct inValue;
+      inValue.inputProc = AudioUnitSetProperty_performRender;
+      inValue.inputProcRefCon = (__bridge void*)inCallback;
+      NXThrowIfError(::AudioUnitSetProperty(inUnit, inID, inScope, inElement, &inValue, sizeof(inValue)), "AudioUnitSetProperty failed");
     } else {
       js_panic_noreturn("AudioUnitSetProperty failed: value type not yet implemented");
     }
   }
 }
 
+template<typename Type>
+inline Type* getArrayData(Local<Value> arg, int* num = NULL) {
+  Type *data=NULL;
+  if (num) {
+    *num = 0;
+  }
+
+  if (!arg->IsNull()) {
+    if (arg->IsArrayBufferView()) {
+      Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(arg);
+      if (num) {
+        *num = arr->ByteLength()/sizeof(Type);
+      }
+      data = reinterpret_cast<Type*>((char *)arr->Buffer()->GetContents().Data() + arr->ByteOffset());
+    } else {
+      Nan::ThrowError("Bad array argument");
+    }
+  }
+
+  return data;
+}
+
+typedef Float32* Float32_ptr;
+Local<Value> js_value_Float32_ptr(const Float32* _Nullable value, Uint32 count);
+Float32_ptr _Nullable to_value_Float32_ptr(const Local<Value>& value, bool* _Nullable failed = nullptr);
+bool is_value_Float32_ptr(const Local<Value>& value);
+
+Float32_ptr _Nullable to_value_Float32_ptr(const Local<Value>& value, bool* _Nullable failed)
+{
+  Float32_ptr result = nullptr;
+  if (failed) {
+    *failed = false;
+  }
+  if (!is_value_Float32_ptr(value)) {
+    if (failed) {
+      *failed = true;
+    } else {
+      Nan::ThrowError("Expected Float32_ptr");
+    }
+    return result;
+  }
+  
+  result = getArrayData<Float32>(value);
+  
+  return result;
+}
+
+bool is_value_Float32_ptr(const Local<Value>& value)
+{
+  if (!value->IsFloat32Array()) {
+    return false;
+  }
+  return true;
+}
+
+#define js_value_long js_value_int32_t
+#define to_value_long to_value_int32_t
+#define is_value_long is_value_int32_t
+
+#define js_value_unsigned_long js_value_uint32_t
+#define to_value_unsigned_long to_value_uint32_t
+#define is_value_unsigned_long is_value_uint32_t
+
+#define js_value_long_long js_value_int64_t
+#define to_value_long_long to_value_int64_t
+#define is_value_long_long is_value_int64_t
+
+@import Accelerate;
+
+#define js_value_vDSP_Length js_value_unsigned_long
+#define to_value_vDSP_Length to_value_unsigned_long
+#define is_value_vDSP_Length is_value_unsigned_long
+
+#if defined __arm64__ && !defined __LP64__
+#define js_value_vDSP_Stride js_value_long_long
+#define to_value_vDSP_Stride to_value_long_long
+#define is_value_vDSP_Stride is_value_long_long
+#else
+#define js_value_vDSP_Stride js_value_long
+#define to_value_vDSP_Stride to_value_long
+#define is_value_vDSP_Stride is_value_long
+#endif
+
+JS_DECLARE_STRUCT(DSPSplitComplex);
+
+/*
+    float  * __nonnull realp;
+    float  * __nonnull imagp;
+ */
+#if TODO
+Local<Value> js_value_DSPSplitComplex(const DSPSplitComplex& value) {
+  Nan::EscapableHandleScope scope;
+  Local<Object> result(Object::New(JS_ISOLATE()));
+  js_struct_value(Float32_ptr, realp);
+  js_struct_value(Float32_ptr, imagp);
+  return scope.Escape(result);
+}
+#endif
+
+DSPSplitComplex to_value_DSPSplitComplex(const Local<Value>& value, bool * _Nullable failed) {
+  DSPSplitComplex result;
+  memset(&result, 0, sizeof(DSPSplitComplex));
+  check_struct_type(DSPSplitComplex);
+  to_struct_value(Float32_ptr, realp);
+  to_struct_value(Float32_ptr, imagp);
+  return result;
+}
+
+bool is_value_DSPSplitComplex(const Local<Value>& value)
+{
+  if (!value->IsObject()) {
+    return false;
+  }
+  check_struct_value(Float32_ptr, realp);
+  check_struct_value(Float32_ptr, imagp);
+  return true;
+}
+
+NAN_METHOD(vDSP_ctoz) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __Cp);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(DSPSplitComplex, __Z);
+    declare_value(vDSP_Stride, __IZ);
+    declare_value(vDSP_Length, __N);
+    const DSPComplex* __C = (const DSPComplex*)__Cp;
+    ::vDSP_ctoz(__C, __IC, &__Z, __IZ, __N);
+  }
+}
+
+/*  vDSP_create_fftsetup and vDSP_create_ffsetupD allocate memory and prepare
+    constants used by single- and double-precision FFT routines, respectively.
+
+    vDSP_destroy_fftsetup and vDSP_destroy_fftsetupD free the memory.  They
+    may be passed a null pointer, in which case they have no effect.
+*/
+/*
+extern __nullable FFTSetup vDSP_create_fftsetup(
+    vDSP_Length __Log2n,
+    FFTRadix    __Radix)
+    API_AVAILABLE(macos(10.0), ios(4.0));
+ */
+
+#define js_value_FFTSetup(x) js_value_pointer(FFTSetup, x)
+#define to_value_FFTSetup(x) to_value_pointer(FFTSetup, x)
+#define is_value_FFTSetup(x) is_value_pointer(FFTSetup, x)
+
+//typedef int FFTDirection;
+#define js_value_FFTDirection js_value_int
+#define to_value_FFTDirection to_value_int
+#define is_value_FFTDirection is_value_int
+
+//typedef int FFTRadix;
+#define js_value_FFTRadix js_value_int
+#define to_value_FFTRadix to_value_int
+#define is_value_FFTRadix is_value_int
+
+NAN_METHOD(vDSP_create_fftsetup) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(vDSP_Length, __Log2n);
+    declare_value(FFTRadix, __Radix);
+    js_return_value(FFTSetup, ::vDSP_create_fftsetup(__Log2n, __Radix));
+  }
+}
+
+/*
+extern void vDSP_destroy_fftsetup(__nullable FFTSetup __setup)
+        API_AVAILABLE(macos(10.0), ios(4.0));
+ */
+NAN_METHOD(vDSP_destroy_fftsetup) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_nullable_value(FFTSetup, __setup);
+    ::vDSP_destroy_fftsetup(__setup);
+  }
+}
+
+/*  In-place real-to-complex Discrete Fourier Transform routines, with and
+    without temporary memory.  We suggest you use the DFT routines instead of
+    these.
+*/
+/*
+extern void vDSP_fft_zrip(
+    FFTSetup               __Setup,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __Log2N,
+    FFTDirection           __Direction)
+        API_AVAILABLE(macos(10.0), ios(4.0));
+ */
+NAN_METHOD(vDSP_fft_zrip) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(FFTSetup, __setup);
+    declare_value(DSPSplitComplex, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __Log2N);
+    declare_value(FFTDirection, __Direction);
+    ::vDSP_fft_zrip(__setup, &__C, __IC, __Log2N, __Direction);
+  }
+}
+
+/*
+extern void vDSP_vsmul(
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
+        API_AVAILABLE(macos(10.0), ios(4.0));
+extern void vDSP_vsmulD(
+    const double *__A,
+    vDSP_Stride   __IA,
+    const double *__B,
+    double       *__C,
+    vDSP_Stride   __IC,
+    vDSP_Length   __N)
+        API_AVAILABLE(macos(10.2), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] * B[0];
+    */
+NAN_METHOD(vDSP_vsmul) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __B);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_vsmul(__A, __IA, __B, __C, __IC, __N);
+  }
+}
+
+/*
+// Vector-scalar add.
+extern void vDSP_vsadd(
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_vsaddD(
+    const double *__A,
+    vDSP_Stride   __IA,
+    const double *__B,
+    double       *__C,
+    vDSP_Stride   __IC,
+    vDSP_Length   __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_vsaddi(
+    const int   *__A,
+    vDSP_Stride  __IA,
+    const int   *__B,
+    int         *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] + B[0];
+    */
+NAN_METHOD(vDSP_vsadd) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __B);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_vsadd(__A, __IA, __B, __C, __IC, __N);
+  }
+}
+
+/*
+// Vector-scalar divide.
+extern void vDSP_vsdiv(
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_vsdivD(
+    const double *__A,
+    vDSP_Stride   __IA,
+    const double *__B,
+    double       *__C,
+    vDSP_Stride   __IC,
+    vDSP_Length   __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_vsdivi(
+    const int   *__A,
+    vDSP_Stride  __IA,
+    const int   *__B,
+    int         *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] / B[0];
+    */
+NAN_METHOD(vDSP_vsdiv) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __B);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_vsdiv(__A, __IA, __B, __C, __IC, __N);
+  }
+}
+
+/*
+// Vector magnitudes squared.
+extern void vDSP_zvmags(
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    float                 *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_zvmagsD(
+    const DSPDoubleSplitComplex *__A,
+    vDSP_Stride                  __IA,
+    double                      *__C,
+    vDSP_Stride                  __IC,
+    vDSP_Length                  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = |A[n]| ** 2;
+    */
+NAN_METHOD(vDSP_zvmags) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(DSPSplitComplex, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_zvmags(&__A, __IA, __C, __IC, __N);
+  }
+}
+
+/*
+// Complex-split accumulating autospectrum.
+extern void vDSP_zaspec(
+    const DSPSplitComplex *__A,
+    float                 *__C,
+    vDSP_Length            __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_zaspecD(
+    const DSPDoubleSplitComplex *__A,
+    double                      *__C,
+    vDSP_Length                  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:
+
+            No strides are used; arrays map directly to memory.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] += |A[n]| ** 2;
+    */
+NAN_METHOD(vDSP_zaspec) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(DSPSplitComplex, __A);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_zaspec(&__A, __C, __N);
+  }
+}
+
+/*
+// Create Blackman window.
+extern void vDSP_blkman_window(
+    float       *__C,
+    vDSP_Length  __N,
+    int          __Flag)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_blkman_windowD(
+    double      *__C,
+    vDSP_Length  __N,
+    int          __Flag)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:
+
+            No strides are used; the array maps directly to memory.
+
+        These compute:
+
+            If Flag & vDSP_HALF_WINDOW:
+                Length = (N+1)/2;
+            Else
+                Length = N;
+
+            for (n = 0; n < Length; ++n)
+            {
+                angle = 2*pi*n/N;
+                C[n] = .42 - .5 * cos(angle) + .08 * cos(2*angle);
+            }
+    */
+NAN_METHOD(vDSP_blkman_window) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Length, __N);
+    declare_optional_value(int, __Flag, 0);
+    ::vDSP_blkman_window(__C, __N, __Flag);
+  }
+}
+
+/*
+// Vector convert to decibels, power, or amplitude.
+extern void vDSP_vdbcon(
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N,
+    unsigned int __F)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_vdbconD(
+    const double *__A,
+    vDSP_Stride   __IA,
+    const double *__B,
+    double       *__C,
+    vDSP_Stride   __IC,
+    vDSP_Length   __N,
+    unsigned int  __F)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            If Flag is 1:
+                alpha = 20;
+            If Flag is 0:
+                alpha = 10;
+
+            for (n = 0; n < N; ++n)
+                C[n] = alpha * log10(A[n] / B[0]);
+    */
+NAN_METHOD(vDSP_vdbcon) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(Float32_ptr, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __B);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    declare_optional_value(int, __F, 1);
+    ::vDSP_vdbcon(__A, __IA, __B, __C, __IC, __N, __F);
+  }
+}
+
+/*
+// Vector magnitudes square and add.
+extern void vDSP_zvmgsa(
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    const float           *__B,
+    vDSP_Stride            __IB,
+    float                 *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+extern void vDSP_zvmgsaD(
+    const DSPDoubleSplitComplex *__A,
+    vDSP_Stride                  __IA,
+    const double                *__B,
+    vDSP_Stride                  __IB,
+    double                      *__C,
+    vDSP_Stride                  __IC,
+    vDSP_Length                  __N)
+        API_AVAILABLE(macos(10.4), ios(4.0));
+ */
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = |A[n]| ** 2 + B[n];
+    */
+NAN_METHOD(vDSP_zvmgsa) {
+  declare_autoreleasepool {
+    declare_args();
+    declare_value(DSPSplitComplex, __A);
+    declare_value(vDSP_Stride, __IA);
+    declare_value(Float32_ptr, __B);
+    declare_value(vDSP_Stride, __IB);
+    declare_value(Float32_ptr, __C);
+    declare_value(vDSP_Stride, __IC);
+    declare_value(vDSP_Length, __N);
+    ::vDSP_zvmgsa(&__A, __IA, __B, __IB, __C, __IC, __N);
+  }
+}
+
 JS_INIT_GLOBALS(AUComponent);
+  JS_ASSIGN_GLOBAL_METHOD(AudioOutputUnitStart);
+  JS_ASSIGN_GLOBAL_METHOD(AudioOutputUnitStop);
+  JS_ASSIGN_GLOBAL_METHOD(AudioUnitRender);
+  JS_ASSIGN_GLOBAL_METHOD(AudioUnitInitialize);
+  JS_ASSIGN_GLOBAL_METHOD(AudioUnitUninitialize);
   JS_ASSIGN_GLOBAL_METHOD(AudioUnitGetProperty);
   JS_ASSIGN_GLOBAL_METHOD(AudioUnitSetProperty);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_ctoz);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_create_fftsetup);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_destroy_fftsetup);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_fft_zrip);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_vsmul);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_vsadd);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_vsdiv);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_zaspec);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_blkman_window);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_vdbcon);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_zvmags);
+  JS_ASSIGN_GLOBAL_METHOD(vDSP_zvmgsa);
+  //enum {
+    JS_ASSIGN_ENUM(kFFTDirection_Forward, int); //          = +1,
+    JS_ASSIGN_ENUM(kFFTDirection_Inverse, int); //          = -1
+  //};
+  //enum {
+    JS_ASSIGN_ENUM(kFFTRadix2, int); //                     = 0,
+    JS_ASSIGN_ENUM(kFFTRadix3, int); //                     = 1,
+    JS_ASSIGN_ENUM(kFFTRadix5, int); //                     = 2
+  //};
+  //enum {
+    JS_ASSIGN_ENUM(vDSP_HALF_WINDOW, int); //               = 1,
+    JS_ASSIGN_ENUM(vDSP_HANN_DENORM, int); //               = 0,
+    JS_ASSIGN_ENUM(vDSP_HANN_NORM, int); //                 = 2
+  //};
+
 
   // global values (exports)
   /*!
@@ -757,17 +1536,16 @@ JS_INIT_GLOBALS(AUComponent);
             situations where you are sure you are providing the correct arguments
             and structures to the various render calls
   */
-  typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
-  {
-    kAudioUnitRenderAction_PreRender      = (1UL << 2),
-    kAudioUnitRenderAction_PostRender      = (1UL << 3),
-    kAudioUnitRenderAction_OutputIsSilence    = (1UL << 4),
-    kAudioOfflineUnitRenderAction_Preflight    = (1UL << 5),
-    kAudioOfflineUnitRenderAction_Render    = (1UL << 6),
-    kAudioOfflineUnitRenderAction_Complete    = (1UL << 7),
-    kAudioUnitRenderAction_PostRenderError    = (1UL << 8),
-    kAudioUnitRenderAction_DoNotCheckRenderArgs  = (1UL << 9)
-  };
+  //typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags) {
+    JS_ASSIGN_ENUM(kAudioUnitRenderAction_PreRender, AudioUnitRenderActionFlags); //       = (1UL << 2),
+    JS_ASSIGN_ENUM(kAudioUnitRenderAction_PostRender, AudioUnitRenderActionFlags); //       = (1UL << 3),
+    JS_ASSIGN_ENUM(kAudioUnitRenderAction_OutputIsSilence, AudioUnitRenderActionFlags); //     = (1UL << 4),
+    JS_ASSIGN_ENUM(kAudioOfflineUnitRenderAction_Preflight, AudioUnitRenderActionFlags); //     = (1UL << 5),
+    JS_ASSIGN_ENUM(kAudioOfflineUnitRenderAction_Render, AudioUnitRenderActionFlags); //     = (1UL << 6),
+    JS_ASSIGN_ENUM(kAudioOfflineUnitRenderAction_Complete, AudioUnitRenderActionFlags); //     = (1UL << 7),
+    JS_ASSIGN_ENUM(kAudioUnitRenderAction_PostRenderError, AudioUnitRenderActionFlags); //     = (1UL << 8),
+    JS_ASSIGN_ENUM(kAudioUnitRenderAction_DoNotCheckRenderArgs, AudioUnitRenderActionFlags); //   = (1UL << 9)
+  //};
 
   /*!
     @enum      Audio unit errors

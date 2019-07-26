@@ -313,6 +313,7 @@ namespace sweetiekit {
   }
   
   Isolate* nodeIsolate;
+  Persistent<Context>* nodeContext;
   
   uint64_t nodeTick() {
     auto start = uv_hrtime();
