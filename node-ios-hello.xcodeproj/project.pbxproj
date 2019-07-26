@@ -10043,6 +10043,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"$(inherited)",
+					"TARGET_OS_UIKITFORMAC=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -10111,6 +10115,10 @@
 					"V8_INTL_SUPPORT=1",
 					"$(inherited)",
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"$(inherited)",
+					"TARGET_OS_UIKITFORMAC=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -10153,26 +10161,6 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "node-ios-hello/SweetieKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(NODE_ROOT)/src",
 					"$(NODE_ROOT)/deps/uv/include",
@@ -10227,23 +10215,6 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "node-ios-hello/SweetieKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"$(inherited)",
-				);
-				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
-					"$(inherited)",
-				);
-				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = (
-					"NODE_IOS_SIMULATOR=$(NODE_IOS_SIMULATOR)",
-					"V8_INTL_SUPPORT=1",
-					"__IPHONEOS__=1",
-					"$(inherited)",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(NODE_ROOT)/src",
 					"$(NODE_ROOT)/deps/uv/include",
