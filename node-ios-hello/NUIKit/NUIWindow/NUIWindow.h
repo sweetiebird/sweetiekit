@@ -19,6 +19,7 @@
 #define is_value_UIWindowLevel(x) IS_ENUM(UIWindowLevel, CGFloat, x)
 
 JS_WRAP_CLASS(UIWindow, UIView);
+  JS_METHOD(initWithWindowScene);
   JS_METHOD(becomeKeyWindow);
   JS_METHOD(resignKeyWindow);
   JS_METHOD(makeKeyWindow);
@@ -28,6 +29,7 @@ JS_WRAP_CLASS(UIWindow, UIView);
   JS_METHOD(convertPointFromWindow);
   JS_METHOD(convertRectToWindow);
   JS_METHOD(convertRectFromWindow);
+  JS_PROP(windowScene);
   JS_PROP(screen);
   JS_PROP(windowLevel);
   JS_PROP_READONLY(isKeyWindow);

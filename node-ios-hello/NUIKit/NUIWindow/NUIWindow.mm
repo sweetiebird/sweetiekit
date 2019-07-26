@@ -6,6 +6,9 @@
 //
 #include "NUIWindow.h"
 
+#define instancetype UIWindow
+#define js_value_instancetype js_value_UIWindow
+
 NUIWindow::NUIWindow() {}
 NUIWindow::~NUIWindow() {}
 
@@ -13,6 +16,9 @@ NUIWindow::~NUIWindow() {}
 
 JS_INIT_CLASS(UIWindow, UIView);
   // instance members (proto)
+  if (@available(iOS 13.0, *)) {
+    JS_ASSIGN_PROTO_METHOD(initWithWindowScene);
+  }
   JS_ASSIGN_PROTO_METHOD(becomeKeyWindow);
   JS_ASSIGN_PROTO_METHOD(resignKeyWindow);
   JS_ASSIGN_PROTO_METHOD(makeKeyWindow);
@@ -22,6 +28,9 @@ JS_INIT_CLASS(UIWindow, UIView);
   JS_ASSIGN_PROTO_METHOD(convertPointFromWindow);
   JS_ASSIGN_PROTO_METHOD(convertRectToWindow);
   JS_ASSIGN_PROTO_METHOD(convertRectFromWindow);
+  if (@available(iOS 13.0, *)) {
+    JS_ASSIGN_PROTO_PROP(windowScene);
+  }
   JS_ASSIGN_PROTO_PROP(screen);
   JS_ASSIGN_PROTO_PROP(windowLevel);
   JS_ASSIGN_PROTO_PROP_READONLY(isKeyWindow);
@@ -62,19 +71,35 @@ JS_INIT_CLASS_END(UIWindow, UIView);
 
 NAN_METHOD(NUIWindow::New) {
   JS_RECONSTRUCT(UIWindow);
+  @autoreleasepool {
+    UIWindow* self = nullptr;
 
-  Local<Object> viewObj = info.This();
-
-  NUIWindow *view = new NUIWindow();
-
-  if (info[0]->IsExternal()) {
-    view->SetNSObject((__bridge UIWindow *)(info[0].As<External>()->Value()));
-  } else {
-    Nan::ThrowError("NUIWindow::New must receive a UIWindow");
+    if (info[0]->IsExternal()) {
+      self = (__bridge UIWindow *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[UIWindow alloc] init];
+    }
+    if (self) {
+      NUIWindow *wrapper = new NUIWindow();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("UIWindow::New: invalid arguments");
+    }
   }
-  view->Wrap(viewObj);
+}
 
-  info.GetReturnValue().Set(viewObj);
+#include "NUIWindowScene.h"
+
+NAN_METHOD(NUIWindow::initWithWindowScene) {
+  JS_UNWRAP_OR_ALLOC(UIWindow, self);
+  declare_autoreleasepool {
+    declare_args();
+    declare_pointer(UIWindowScene, windowScene);
+    JS_SET_RETURN(js_value_instancetype([self initWithWindowScene: windowScene]));
+  }
 }
 
 #include "NUIViewController.h"
@@ -155,6 +180,22 @@ NAN_METHOD(NUIWindow::convertRectFromWindow) {
     declare_value(CGRect, rect);
     declare_nullable_pointer(UIWindow, window);
     JS_SET_RETURN(js_value_CGRect([self convertRect: rect fromWindow: window]));
+  }
+}
+
+NAN_GETTER(NUIWindow::windowSceneGetter) {
+  JS_UNWRAP(UIWindow, self);
+  declare_autoreleasepool {
+    JS_SET_RETURN(js_value_UIWindowScene([self windowScene]));
+  }
+}
+
+NAN_SETTER(NUIWindow::windowSceneSetter) {
+  JS_UNWRAP(UIWindow, self);
+  declare_autoreleasepool {
+    declare_setter();
+    declare_pointer(UIWindowScene, input);
+    [self setWindowScene: input];
   }
 }
 
