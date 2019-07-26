@@ -53,6 +53,8 @@ NAN_METHOD(_NSSelectorFromStringAddress)
   }
 }
 
+#include "NDispatchQueue.h"
+
 JS_INIT_CLASS_BASE(id, nil);
   // instance members (proto)
   JS_ASSIGN_PROP_READONLY(proto, self);
@@ -76,6 +78,34 @@ JS_INIT_CLASS_BASE(id, nil);
   Nan::SetMethod(ctor, "NSClassFromString", _NSClassFromString);
   Nan::SetMethod(ctor, "objc_msgSend", _objc_msgSend);
   Nan::SetMethod(ctor, "NSSearchPathForDirectoriesInDomains", _NSSearchPathForDirectoriesInDomains);
+  sweetiekit::Set(ctor, "dispatch_ui_sync", ^(JSInfo info) {
+    declare_autoreleasepool {
+      declare_args();
+      declare_optional_value(dispatch_queue_t, queue, dispatch_get_main_queue());
+      declare_callback(thunk);
+      if (thunk) {
+        dispatch_ui_sync(queue, ^{
+          if ([thunk jsFunction]) {
+            [thunk jsFunction]->Call("dispatch_ui_sync");
+          }
+        });
+      }
+    }
+  });
+  sweetiekit::Set(ctor, "dispatch_ui_async", ^(JSInfo info) {
+    declare_autoreleasepool {
+      declare_args();
+      declare_optional_value(dispatch_queue_t, queue, dispatch_get_main_queue());
+      declare_callback(thunk);
+      if (thunk) {
+        dispatch_ui_async(queue, ^{
+          if ([thunk jsFunction]) {
+            [thunk jsFunction]->Call("dispatch_ui_async");
+          }
+        });
+      }
+    }
+  });
   sweetiekit::Set(ctor, "classFromString", ^(JSInfo info) {
     Nan::HandleScope scope;
     Class cls = NSClassFromString(NJSStringToNSString(info[0]));
