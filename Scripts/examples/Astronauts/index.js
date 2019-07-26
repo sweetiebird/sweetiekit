@@ -70,7 +70,7 @@ function makeDemo(navigation, dvc) {
   function touchesEnded() {
     isMoving = false;
     // player.jump(joystickKnob.position);
-    const action = SKAction.moveTo(v2(0, 0), 0.1);
+    const action = SKAction.moveToDuration(v2(0, 0), 0.1);
     joystickKnob.runAction(action, () => {
       joystickKnob.position = v2(0, 0);
     });

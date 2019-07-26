@@ -65,7 +65,7 @@ function touchesEnded(touches) {
     }, 1500);
 
 
-    const actionMove = SKAction.moveTo(realDest, 2);
+    const actionMove = SKAction.moveToDuration(realDest, 2);
     const moveDone = SKAction.removeFromParent();
     const sequence = SKAction.sequence([actionMove, moveDone]);
     projectile.runAction(sequence, () => {});
@@ -125,7 +125,7 @@ function addMonster(demoVC) {
   scene.addChild(monster);
 
   const duration  = random(2, 4);
-  const actionMove = SKAction.moveTo({ x: -size.width / 2, y }, duration);
+  const actionMove = SKAction.moveToDuration({ x: -size.width / 2, y }, duration);
   const moveDone = SKAction.removeFromParent();
   const sequence = SKAction.sequence([actionMove, moveDone]);
 

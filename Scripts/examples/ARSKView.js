@@ -438,8 +438,8 @@ async function make(nav, demoVC) {
       if (kids.length) {
         const node = kids[0];
         const actionGroup = SKAction.group([
-          SKAction.moveBy({ dx: 0, dy: -30 }, 0.6),
-          SKAction.scaleBy(-0.4, 0.6),
+          SKAction.moveByDuration({ dx: 0, dy: -30 }, 0.6),
+          SKAction.scaleByDuration(-0.4, 0.6),
         ]);
         node.runAction(actionGroup, () => {});
       }
