@@ -1,8 +1,5 @@
-SweetieKit_verbose = false;
+SweetieKit_verbose = true;
 SweetieKit_uncaughtException = (err) => {
-  if (SweetieKit_verbose) {
-    console.log(`Uncaught exception`, err);
-  }
   SweetieKit_uncaughtError = err;
   console.log(err.stack);
 }
@@ -129,6 +126,7 @@ SweetieKitPrefixes = {
   CN: "Contacts",
   CV: "CoreVideo",
   EA: "OpenGLES",
+  GC: "GameController",
   GK: "GameplayKit",
   GLK: "GLKit",
   MDL: "ModelIO",
@@ -278,9 +276,70 @@ global.SCNVector3Make = (x, y, z) => {
 };
 
 
+/*
 // gc periodically
 SweetieKit._gcInterval = setInterval(() => {
   gc();
 }, 1000);
+*/
+
+OnEvent = (event) => {
+  if (SweetieKit_verbose) {
+    console.log("OnEvent", event);
+  }
+}
+
+SweetieKit_findMinPlayerIndex = (controllers = GCController.controllers()) => {
+  let index = -1;
+  if (controllers.length > 0) {
+    index = controllers[0].playerIndex;
+    for (let controller of controllers) {
+      if (controller.playerIndex < index) {
+        index = controller.playerIndex;
+      }
+    }
+  }
+  return index;
+}
+
+SweetieKit_findMaxPlayerIndex = (controllers = GCController.controllers()) => {
+  let index = -1;
+  if (controllers.length > 0) {
+    index = controllers[0].playerIndex;
+    for (let controller of controllers) {
+      if (controller.playerIndex > index) {
+        index = controller.playerIndex;
+      }
+    }
+  }
+  return index;
+}
+
+OnGamepadValueChanged = (gamepad, input) => {
+  console.log('OnGamepadValueChanged', gamepad, input, `Player ${gamepad.controller.playerIndex}`, input.debugDescription);
+}
+
+SweetieKit_checkControllers = (controllers = GCController.controllers()) => {
+  for (let controller of controllers) {
+    let gamepad = controller.extendedGamepad;
+    if (gamepad && (controller.playerIndex < 0)) {
+      let min = SweetieKit_findMinPlayerIndex(controllers);
+      if (min > 0) {
+        controller.playerIndex = min - 1;
+      } else {
+        let max = SweetieKit_findMaxPlayerIndex(controllers);
+        controller.playerIndex = max + 1;
+      }
+      gamepad.valueChangedHandler = (...args) => OnGamepadValueChanged(...args);
+    }
+  }
+}
+
+// check controllers periodically
+if (typeof GCController !== 'undefined') {
+  SweetieKit._controllersInterval = setInterval(() => {
+    SweetieKit_checkControllers();
+  }, 4000);
+}
 
 uidemos = require('./uidemos');
