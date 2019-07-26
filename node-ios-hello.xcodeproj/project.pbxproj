@@ -254,6 +254,16 @@
 		A158792F22CEE5D200847196 /* NUITimingCurveProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158792E22CEE5D100847196 /* NUITimingCurveProvider.mm */; };
 		A158793322CEE63400847196 /* NUIViewPropertyAnimator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158793222CEE63400847196 /* NUIViewPropertyAnimator.mm */; };
 		A158FD89229A292F000F7ABA /* NCAShapeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */; };
+		A159DEB622EAEA87006B668A /* NIOHIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEB422EAEA87006B668A /* NIOHIDManager.mm */; };
+		A159DEBD22EAF926006B668A /* NUIWindowScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEB922EAF925006B668A /* NUIWindowScene.mm */; };
+		A159DEBE22EAF926006B668A /* NUIScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEBB22EAF926006B668A /* NUIScene.mm */; };
+		A159DEC322EB0CA7006B668A /* NGCController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEC222EB0CA6006B668A /* NGCController.mm */; };
+		A159DEE222EB3106006B668A /* NGCEventViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DED222EB3104006B668A /* NGCEventViewController.mm */; };
+		A159DEE322EB3106006B668A /* NGCControllerButtonInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DED422EB3104006B668A /* NGCControllerButtonInput.mm */; };
+		A159DEE422EB3106006B668A /* NGCControllerAxisInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DED722EB3105006B668A /* NGCControllerAxisInput.mm */; };
+		A159DEE522EB3106006B668A /* NGCExtendedGamepad.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEDA22EB3105006B668A /* NGCExtendedGamepad.mm */; };
+		A159DEE622EB3106006B668A /* NGCControllerDirectionPad.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEDE22EB3105006B668A /* NGCControllerDirectionPad.mm */; };
+		A159DEE722EB3106006B668A /* NGCControllerElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = A159DEE022EB3105006B668A /* NGCControllerElement.mm */; };
 		A15B60A6229D20FB00A4887E /* NSKTransformNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */; };
 		A160E02522E65F740012070E /* NCoreAudioBaseTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = A160E02422E65F740012070E /* NCoreAudioBaseTypes.mm */; };
 		A160E02622E66AA30012070E /* embedded.S in Sources */ = {isa = PBXBuildFile; fileRef = A1058B44226810B700CEAA5C /* embedded.S */; };
@@ -1254,6 +1264,26 @@
 		A158793222CEE63400847196 /* NUIViewPropertyAnimator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIViewPropertyAnimator.mm; sourceTree = "<group>"; };
 		A158FD87229A292F000F7ABA /* NCAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCAShapeLayer.h; sourceTree = "<group>"; };
 		A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCAShapeLayer.mm; sourceTree = "<group>"; };
+		A159DEB422EAEA87006B668A /* NIOHIDManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NIOHIDManager.mm; sourceTree = "<group>"; };
+		A159DEB522EAEA87006B668A /* NIOHIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIOHIDManager.h; sourceTree = "<group>"; };
+		A159DEB822EAF925006B668A /* NUIWindowScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIWindowScene.h; sourceTree = "<group>"; };
+		A159DEB922EAF925006B668A /* NUIWindowScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIWindowScene.mm; sourceTree = "<group>"; };
+		A159DEBB22EAF926006B668A /* NUIScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NUIScene.mm; sourceTree = "<group>"; };
+		A159DEBC22EAF926006B668A /* NUIScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUIScene.h; sourceTree = "<group>"; };
+		A159DEC122EB0CA6006B668A /* NGCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCController.h; sourceTree = "<group>"; };
+		A159DEC222EB0CA6006B668A /* NGCController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCController.mm; sourceTree = "<group>"; };
+		A159DED122EB3104006B668A /* NGCEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCEventViewController.h; sourceTree = "<group>"; };
+		A159DED222EB3104006B668A /* NGCEventViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCEventViewController.mm; sourceTree = "<group>"; };
+		A159DED422EB3104006B668A /* NGCControllerButtonInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCControllerButtonInput.mm; sourceTree = "<group>"; };
+		A159DED522EB3104006B668A /* NGCControllerButtonInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCControllerButtonInput.h; sourceTree = "<group>"; };
+		A159DED722EB3105006B668A /* NGCControllerAxisInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCControllerAxisInput.mm; sourceTree = "<group>"; };
+		A159DED822EB3105006B668A /* NGCControllerAxisInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCControllerAxisInput.h; sourceTree = "<group>"; };
+		A159DEDA22EB3105006B668A /* NGCExtendedGamepad.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCExtendedGamepad.mm; sourceTree = "<group>"; };
+		A159DEDB22EB3105006B668A /* NGCExtendedGamepad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCExtendedGamepad.h; sourceTree = "<group>"; };
+		A159DEDD22EB3105006B668A /* NGCControllerDirectionPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCControllerDirectionPad.h; sourceTree = "<group>"; };
+		A159DEDE22EB3105006B668A /* NGCControllerDirectionPad.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCControllerDirectionPad.mm; sourceTree = "<group>"; };
+		A159DEE022EB3105006B668A /* NGCControllerElement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NGCControllerElement.mm; sourceTree = "<group>"; };
+		A159DEE122EB3105006B668A /* NGCControllerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGCControllerElement.h; sourceTree = "<group>"; };
 		A15B60A4229D20FB00A4887E /* NSKTransformNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKTransformNode.h; sourceTree = "<group>"; };
 		A15B60A5229D20FB00A4887E /* NSKTransformNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSKTransformNode.mm; sourceTree = "<group>"; };
 		A160E02322E65F740012070E /* NCoreAudioBaseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCoreAudioBaseTypes.h; sourceTree = "<group>"; };
@@ -4330,6 +4360,126 @@
 				A158FD88229A292F000F7ABA /* NCAShapeLayer.mm */,
 			);
 			path = NCAShapeLayer;
+			sourceTree = "<group>";
+		};
+		A159DEB122EAEA87006B668A /* NIOKit */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEB222EAEA87006B668A /* hid */,
+			);
+			path = NIOKit;
+			sourceTree = "<group>";
+		};
+		A159DEB222EAEA87006B668A /* hid */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEB322EAEA87006B668A /* NIOHIDManager */,
+			);
+			path = hid;
+			sourceTree = "<group>";
+		};
+		A159DEB322EAEA87006B668A /* NIOHIDManager */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEB522EAEA87006B668A /* NIOHIDManager.h */,
+				A159DEB422EAEA87006B668A /* NIOHIDManager.mm */,
+			);
+			path = NIOHIDManager;
+			sourceTree = "<group>";
+		};
+		A159DEB722EAF925006B668A /* NUIWindowScene */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEB822EAF925006B668A /* NUIWindowScene.h */,
+				A159DEB922EAF925006B668A /* NUIWindowScene.mm */,
+			);
+			path = NUIWindowScene;
+			sourceTree = "<group>";
+		};
+		A159DEBA22EAF926006B668A /* NUIScene */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEBC22EAF926006B668A /* NUIScene.h */,
+				A159DEBB22EAF926006B668A /* NUIScene.mm */,
+			);
+			path = NUIScene;
+			sourceTree = "<group>";
+		};
+		A159DEBF22EB0CA6006B668A /* NGameController */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEC022EB0CA6006B668A /* NGCController */,
+				A159DED622EB3104006B668A /* NGCControllerAxisInput */,
+				A159DED322EB3104006B668A /* NGCControllerButtonInput */,
+				A159DEDC22EB3105006B668A /* NGCControllerDirectionPad */,
+				A159DEDF22EB3105006B668A /* NGCControllerElement */,
+				A159DED022EB3104006B668A /* NGCEventViewController */,
+				A159DED922EB3105006B668A /* NGCExtendedGamepad */,
+			);
+			path = NGameController;
+			sourceTree = "<group>";
+		};
+		A159DEC022EB0CA6006B668A /* NGCController */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEC122EB0CA6006B668A /* NGCController.h */,
+				A159DEC222EB0CA6006B668A /* NGCController.mm */,
+			);
+			path = NGCController;
+			sourceTree = "<group>";
+		};
+		A159DED022EB3104006B668A /* NGCEventViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A159DED122EB3104006B668A /* NGCEventViewController.h */,
+				A159DED222EB3104006B668A /* NGCEventViewController.mm */,
+			);
+			path = NGCEventViewController;
+			sourceTree = "<group>";
+		};
+		A159DED322EB3104006B668A /* NGCControllerButtonInput */ = {
+			isa = PBXGroup;
+			children = (
+				A159DED522EB3104006B668A /* NGCControllerButtonInput.h */,
+				A159DED422EB3104006B668A /* NGCControllerButtonInput.mm */,
+			);
+			path = NGCControllerButtonInput;
+			sourceTree = "<group>";
+		};
+		A159DED622EB3104006B668A /* NGCControllerAxisInput */ = {
+			isa = PBXGroup;
+			children = (
+				A159DED822EB3105006B668A /* NGCControllerAxisInput.h */,
+				A159DED722EB3105006B668A /* NGCControllerAxisInput.mm */,
+			);
+			path = NGCControllerAxisInput;
+			sourceTree = "<group>";
+		};
+		A159DED922EB3105006B668A /* NGCExtendedGamepad */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEDB22EB3105006B668A /* NGCExtendedGamepad.h */,
+				A159DEDA22EB3105006B668A /* NGCExtendedGamepad.mm */,
+			);
+			path = NGCExtendedGamepad;
+			sourceTree = "<group>";
+		};
+		A159DEDC22EB3105006B668A /* NGCControllerDirectionPad */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEDD22EB3105006B668A /* NGCControllerDirectionPad.h */,
+				A159DEDE22EB3105006B668A /* NGCControllerDirectionPad.mm */,
+			);
+			path = NGCControllerDirectionPad;
+			sourceTree = "<group>";
+		};
+		A159DEDF22EB3105006B668A /* NGCControllerElement */ = {
+			isa = PBXGroup;
+			children = (
+				A159DEE122EB3105006B668A /* NGCControllerElement.h */,
+				A159DEE022EB3105006B668A /* NGCControllerElement.mm */,
+			);
+			path = NGCControllerElement;
 			sourceTree = "<group>";
 		};
 		A15B60A3229D20FB00A4887E /* NSKTransformNode */ = {
@@ -8376,6 +8526,8 @@
 		A1D6729522695C9C00562A42 /* NUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A159DEBA22EAF926006B668A /* NUIScene */,
+				A159DEB722EAF925006B668A /* NUIWindowScene */,
 				A174A48422B1835D00415AD8 /* NUIBarCommon.h */,
 				A174A48522B1856700415AD8 /* NUIBarCommon.mm */,
 				A11D129E227F6D3D0038C262 /* NNSLayoutAnchor */,
@@ -8956,6 +9108,8 @@
 		A1FC1A00225C65DC00085571 /* node-ios-hello */ = {
 			isa = PBXGroup;
 			children = (
+				A159DEBF22EB0CA6006B668A /* NGameController */,
+				A159DEB122EAEA87006B668A /* NIOKit */,
 				A174A16622821DDB002A8216 /* node-ios-hello.entitlements */,
 				A1394A6D22865F200087F712 /* main.h */,
 				A1FC1A15225C66D000085571 /* node-ios-hello-Bridging-Header.h */,
@@ -9281,6 +9435,7 @@
 				A1926F8D22C10729008F16AE /* NMTLRenderPassDepthAttachmentDescriptor.mm in Sources */,
 				A149D0A5228260D300E11EDA /* BuilderViewController.swift in Sources */,
 				A1926F6822C0F4F4008F16AE /* NSCNParticleSystem.mm in Sources */,
+				A159DEBE22EAF926006B668A /* NUIScene.mm in Sources */,
 				A1BD4BB922882131001D1F6E /* NUICollectionView.mm in Sources */,
 				A158786122CDAB4C00847196 /* NUITableViewRowAction.mm in Sources */,
 				A1D4986522BB29EB009AC951 /* NNSInvocationOperation.mm in Sources */,
@@ -9315,6 +9470,7 @@
 				A1D498AB22BB4A03009AC951 /* NUITextSelectionRect.mm in Sources */,
 				A15878E222CDEA4200847196 /* NUIDropSession.mm in Sources */,
 				A1D4982822B9C727009AC951 /* NNSUUID.mm in Sources */,
+				A159DEE222EB3106006B668A /* NGCEventViewController.mm in Sources */,
 				A13370C122AEF7F000FA3768 /* NAVAudioEngine.mm in Sources */,
 				A1CE2B79228EB96000D9B3B8 /* NNSParagraphStyle.mm in Sources */,
 				A1CE2B62228E847500D9B3B8 /* NGifManager.mm in Sources */,
@@ -9520,6 +9676,7 @@
 				A1678C5C22D4AFF100E1CF52 /* NVNRequest.mm in Sources */,
 				A1678CE922D50EE500E1CF52 /* NARCollaborationData.mm in Sources */,
 				A192700D22C12F5F008F16AE /* NMTLLibrary.mm in Sources */,
+				A159DEE522EB3106006B668A /* NGCExtendedGamepad.mm in Sources */,
 				A10BD04D228F6B5400184286 /* NUINavigationItem.mm in Sources */,
 				A108632F22C496EF001A15A9 /* NAVAudioUnit.mm in Sources */,
 				A15878A622CDC77000847196 /* NUITableViewDataSourcePrefetching.mm in Sources */,
@@ -9530,6 +9687,7 @@
 				A15878B322CDCCDB00847196 /* NUIDragInteraction.mm in Sources */,
 				A1574E9B22B8108F006CC5F2 /* NNSTimeZone.mm in Sources */,
 				A1926F4C22C0E286008F16AE /* NSCNPhysicsBallSocketJoint.mm in Sources */,
+				A159DEE722EB3106006B668A /* NGCControllerElement.mm in Sources */,
 				A1D4989522BB4790009AC951 /* NUIInputView.mm in Sources */,
 				A1678CF722D5109C00E1CF52 /* NARSessionObserver.mm in Sources */,
 				A18F1E73228A478600A42754 /* NSCNNode.mm in Sources */,
@@ -9606,6 +9764,7 @@
 				A108633A22C49FB7001A15A9 /* NAVAudioUnitReverb.mm in Sources */,
 				A1D672BB22699DB900562A42 /* NUITabBarController.mm in Sources */,
 				A1CE2B6D228EB20800D9B3B8 /* NNSAttributedString.mm in Sources */,
+				A159DEBD22EAF926006B668A /* NUIWindowScene.mm in Sources */,
 				A1E5849622B1DD1000A967EF /* NUISplitViewController.mm in Sources */,
 				A192702D22C1344E008F16AE /* NMTLTileRenderPipelineColorAttachmentDescriptorArray.mm in Sources */,
 				A1926F7822C105F1008F16AE /* NSKRenderer.mm in Sources */,
@@ -9626,6 +9785,7 @@
 				A1926F2022C0C38E008F16AE /* NCIBlendKernel.mm in Sources */,
 				A1EE7D78229D8EEF002B53FF /* NSCNSphere.mm in Sources */,
 				A1B2057B22979FD3006CA4C6 /* NUIPopoverPresentationControllerDelegate.mm in Sources */,
+				A159DEE622EB3106006B668A /* NGCControllerDirectionPad.mm in Sources */,
 				A1B5ABD1227D112E004B3CB2 /* NCABasicAnimation.mm in Sources */,
 				A199AEDB22884F3E003C1DC4 /* NUISlider.mm in Sources */,
 				A1926F4F22C0E286008F16AE /* NSCNPhysicsHingeJoint.mm in Sources */,
@@ -9702,6 +9862,7 @@
 				A19270D622C18EFF008F16AE /* NMTLPipelineBufferDescriptor.mm in Sources */,
 				A134E28122D033EB00BAB748 /* NCGPattern.mm in Sources */,
 				A1678CA822D4B91B00E1CF52 /* NVNImageHomographicAlignmentObservation.mm in Sources */,
+				A159DEC322EB0CA7006B668A /* NGCController.mm in Sources */,
 				A1E2D7BB226A5E0200FA1562 /* LoginViewController.swift in Sources */,
 				A1D4988522BB4613009AC951 /* NUITextInputAssistantItem.mm in Sources */,
 				A192700922C12F5F008F16AE /* NMTLVertexAttribute.mm in Sources */,
@@ -9742,6 +9903,7 @@
 				A19270F322C2E27D008F16AE /* NNSMessagePort.mm in Sources */,
 				A1D4987D22BB3EF0009AC951 /* NNSOutputStream.mm in Sources */,
 				A174A48322B14A2100415AD8 /* NCAGradientLayer.mm in Sources */,
+				A159DEB622EAEA87006B668A /* NIOHIDManager.mm in Sources */,
 				A1678CAB22D4B91B00E1CF52 /* NVNTextObservation.mm in Sources */,
 				A13768EC2288396400CDB13B /* NCLHeading.mm in Sources */,
 				A19270F122C2E27D008F16AE /* NNSMachPort.mm in Sources */,
@@ -9773,6 +9935,7 @@
 				A192709722C15B4C008F16AE /* NMTLVertexAttributeDescriptor.mm in Sources */,
 				A158792F22CEE5D200847196 /* NUITimingCurveProvider.mm in Sources */,
 				A1678CE522D50E8600E1CF52 /* NARRaycastResult.mm in Sources */,
+				A159DEE422EB3106006B668A /* NGCControllerAxisInput.mm in Sources */,
 				A156284522DF226800969CF7 /* NAUComponent.mm in Sources */,
 				A1EE7D80229D97C0002B53FF /* NSCNFloor.mm in Sources */,
 				A19F39FC22AF678500606332 /* NMDLTextureFilter.mm in Sources */,
@@ -9810,6 +9973,7 @@
 				21C872CF226A87C500B5192B /* NNSUserDefaults.mm in Sources */,
 				A133702D22AAF29C00FA3768 /* NNSStream.mm in Sources */,
 				A15878E322CDEA4200847196 /* NUIDragSession.mm in Sources */,
+				A159DEE322EB3106006B668A /* NGCControllerButtonInput.mm in Sources */,
 				A13370CD22AEFB3B00FA3768 /* NAVAudioConnectionPoint.mm in Sources */,
 				A1678CA222D4B91B00E1CF52 /* NVNFeaturePrintObservation.mm in Sources */,
 				A1926FD822C128E4008F16AE /* NMTLHeapDescriptor.mm in Sources */,

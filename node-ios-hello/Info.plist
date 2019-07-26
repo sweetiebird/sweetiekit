@@ -83,6 +83,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>SweetieKit supports game controller input (PS4, XBox 360, etc).</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To use the camera.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -93,6 +95,8 @@
 	<string>SweetieKit uses the Microphone for audio input.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To save screenshots.</string>
+	<key>NSSystemAdministrationUsageDescription</key>
+	<string>SweetieKit uses keyboard input.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoMono-Medium.ttf</string>
@@ -104,6 +108,8 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
+		<string>external-accessory</string>
 		<string>fetch</string>
 		<string>location</string>
 	</array>
