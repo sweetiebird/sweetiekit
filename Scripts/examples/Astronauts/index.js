@@ -97,11 +97,10 @@ function makeDemo(navigation, dvc) {
             x: 0,
             y: player.node.size.height,
           };
-          console.log(force);
           player.jump(force);
         } else {
-          console.log(joystickKnob.position);
-          player.jump(joystickKnob.position);
+          const { x, y } = joystickKnob.position;
+          player.jump({ x, y: y + 30 });
         }
       }
     }
@@ -199,8 +198,8 @@ function makeDemo(navigation, dvc) {
     joystick.addChild(joystickKnob);
     joystick.addChild(joystickArrows);
 
-    joystick.userInteractionEnabled = true;
-    joystickArrows.userInteractionEnabled = true;
+    joystick.isUserInteractionEnabled = true;
+    joystickArrows.isUserInteractionEnabled = true;
 
     joystickArrows.touchesMovedWithEvent = touchesMoved;
     joystickArrows.touchesEndedWithEvent = touchesEnded;
@@ -305,9 +304,11 @@ function makeDemo(navigation, dvc) {
 
     contactDel = makeDelegate();
     skView = makeView(demoVC);
+    skView.multipleTouchEnabled = true;
 
     scene.physicsWorld.contactDelegate = contactDel;
     demoVC.view.addSubview(skView);
+    demoVC.view.multipleTouchEnabled = true;
 
     setConstraints(demoVC);
     setPhysicsBodies();
