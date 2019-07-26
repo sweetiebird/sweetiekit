@@ -1115,6 +1115,8 @@ NAN_METHOD(NClass::New) {
 #include "NUIFont.h"
 #include "NUISlider.h"
 #include "NUIApplication.h"
+#include "NUIScene.h"
+#include "NUIWindowScene.h"
 #include "NUIWindow.h"
 #include "NUIScreen.h"
 #include "NUIScreenMode.h"
@@ -1291,6 +1293,17 @@ NAN_METHOD(NClass::New) {
 #include "NUILexiconEntry.h"
 #include "NUIKitGlobals.h"
 #include "NUIDictationPhrase.h"
+
+#include "NIOHIDManager.h"
+
+@import GameController;
+#include "NGCController.h"
+#include "NGCControllerElement.h"
+#include "NGCControllerAxisInput.h"
+#include "NGCControllerButtonInput.h"
+#include "NGCControllerDirectionPad.h"
+#include "NGCEventViewController.h"
+#include "NGCExtendedGamepad.h"
 
 #include "NMTLPixelFormat.h"
 
@@ -1830,6 +1843,8 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_TYPE(UIAlertAction);
     JS_EXPORT_TYPE(UIApplication);
     JS_EXPORT_TYPE(UIResponder);
+    JS_EXPORT_TYPE(UIScene);
+    JS_EXPORT_TYPE(UIWindowScene);
     JS_EXPORT_TYPE(UIViewController);
     JS_EXPORT_PROTOCOL(UITimingCurveProvider);
     JS_EXPORT_TYPE(UICubicTimingParameters);
@@ -1978,7 +1993,21 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
     JS_EXPORT_PROTOCOL(UINavigationBarDelegate);
     JS_EXPORT_TYPE(UINavigationBar);
     JS_EXPORT_TYPE(UINavigationItem);
+
+    // IOKit
+
+    JS_EXPORT_GLOBALS(IOHIDManager);
     
+    // GameController
+
+    JS_EXPORT_TYPE(GCController);
+    JS_EXPORT_TYPE(GCControllerElement);
+    JS_EXPORT_TYPE(GCControllerAxisInput);
+    JS_EXPORT_TYPE(GCControllerButtonInput);
+    JS_EXPORT_TYPE(GCControllerDirectionPad);
+    JS_EXPORT_TYPE(GCEventViewController);
+    JS_EXPORT_TYPE(GCExtendedGamepad);
+
     // WebKit
 
     JS_EXPORT_TYPE(WKWebView);
@@ -2961,6 +2990,16 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(WKNavigation);
       JS_RETURN_TYPE(WKWebView);
 
+      // GameController
+
+      JS_RETURN_TYPE(GCExtendedGamepad);
+      JS_RETURN_TYPE(GCEventViewController);
+      JS_RETURN_TYPE(GCControllerDirectionPad);
+      JS_RETURN_TYPE(GCControllerButtonInput);
+      JS_RETURN_TYPE(GCControllerAxisInput);
+      JS_RETURN_TYPE(GCControllerElement);
+      JS_RETURN_TYPE(GCController);
+
       // UIKit
 
       JS_RETURN_TYPE(UICubicTimingParameters);
@@ -3092,12 +3131,14 @@ Nan::Persistent<FunctionTemplate>& NNSObject::GetNSObjectType(NSObject* obj, Nan
       JS_RETURN_TYPE(UIBezierPath);
       JS_RETURN_TYPE(UIMotionEffect);
       JS_RETURN_TYPE(UILayoutGuide);
-      JS_RETURN_TYPE(UIApplication);
       JS_RETURN_TYPE(UIPress);
       JS_RETURN_TYPE(UITouch);
       JS_RETURN_TYPE(UIPressesEvent);
       JS_RETURN_TYPE(UIEvent);
+      JS_RETURN_TYPE(UIWindowScene);
+      JS_RETURN_TYPE(UIScene);
       JS_RETURN_TYPE(UIResponder);
+      JS_RETURN_TYPE(UIApplication);
       JS_RETURN_TYPE(UIAlertAction);
       JS_RETURN_TYPE(UILexiconEntry);
       JS_RETURN_TYPE(UILexicon);
