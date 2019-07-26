@@ -130,21 +130,24 @@ JS_INIT_CLASS_END(SKAction, NSObject);
 
 NAN_METHOD(NSKAction::New) {
   JS_RECONSTRUCT(SKAction);
-
-  Local<Object> obj = info.This();
-
-  NSKAction *ui = new NSKAction();
-
-  if (info[0]->IsExternal()) {
-    ui->SetNSObject((__bridge SKAction *)(info[0].As<External>()->Value()));
-  } else {
-    @autoreleasepool {
-      ui->SetNSObject([[SKAction alloc] init]);
+  @autoreleasepool {
+    SKAction* self = nullptr;
+    
+    if (info[0]->IsExternal()) {
+      self = (__bridge SKAction *)(info[0].As<External>()->Value());
+    } else if (info.Length() <= 0) {
+      self = [[SKAction alloc] init];
+    }
+    if (self) {
+      NSKAction *wrapper = new NSKAction();
+      wrapper->SetNSObject(self);
+      Local<Object> obj(info.This());
+      wrapper->Wrap(obj);
+      JS_SET_RETURN(obj);
+    } else {
+      Nan::ThrowError("SKAction::New: invalid arguments");
     }
   }
-  ui->Wrap(obj);
-
-  JS_SET_RETURN(obj);
 }
 
 NAN_METHOD(NSKAction::moveByDuration) {
