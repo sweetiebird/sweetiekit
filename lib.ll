@@ -601,16 +601,22 @@
 (define-global sdk* "iPhoneOS")
 
 (define-global ios-header-path (framework type subframework)
-  (with r (cat xcode-path* "Contents/Developer/Platforms/" sdk* ".platform/Developer/SDKs/" sdk* ".sdk/System/Library/Frameworks/")
-    (cat! r framework)
-    (when subframework
-      (cat! r ".framework/Frameworks/" subframework))
-    (cat! r ".framework/Headers/")
-    (let-when i (search type "_")
-      (set type (clip type (+ i 1)))
-      (when (str-ends? type "_t")
-        (set type (clip type 0 (- (edge type) 1)))))
-    (cat! r type ".h")))
+  (let (uimac (= sdk* "uikitformac")
+        sdk (if uimac "MacOSX" sdk*))
+    (with r xcode-path*
+      (cat! r "Contents/Developer/Platforms/" sdk ".platform/")
+      (cat! r "Developer/SDKs/" sdk ".sdk/")
+      (when uimac
+        (cat! r "System/iOSSupport/"))
+      (cat! r "System/Library/Frameworks/" framework ".framework/")
+      (when subframework
+        (cat! r "Frameworks/" subframework))
+      (cat! r "Headers/")
+      (let-when i (search type "_")
+        (set type (clip type (+ i 1)))
+        (when (str-ends? type "_t")
+          (set type (clip type 0 (- (edge type) 1)))))
+      (cat! r type ".h"))))
 
  
 (define-global apple-framework-prefixes*
