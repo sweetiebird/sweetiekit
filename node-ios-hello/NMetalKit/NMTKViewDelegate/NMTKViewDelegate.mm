@@ -56,14 +56,14 @@ DELEGATE_PROTOCOL_PROP(MTKViewDelegate, drawInMTKView);
 @implementation MTKViewDelegateType
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
 {
-  call_delegate_async(noop(), mtkViewDrawableSizeWillChange,
+  call_delegate(noop(), mtkViewDrawableSizeWillChange,
     js_value_MTKView(view),
     js_value_CGSize(size));
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
-  call_delegate_async(noop(), drawInMTKView,
+  call_delegate(noop(), drawInMTKView,
     js_value_MTKView(view));
 }
 

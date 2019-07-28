@@ -1403,6 +1403,7 @@ NAN_METHOD(NClass::New) {
 #include "NMTLPipelineBufferDescriptor.h" // : NSObject <NSCopying>
 #include "NMTLPipelineBufferDescriptorArray.h" // : NSObject
 
+#include "NMTKModel.h"
 #include "NMTKView.h"
 #include "NMTKViewDelegate.h"
 
@@ -2479,6 +2480,7 @@ void NNSObject::RegisterTypes(Local<Object> exports) {
 
     // MetalKit
     
+    JS_EXPORT_GLOBALS(MTKModel);
     JS_EXPORT_TYPE(MTKView);
     JS_EXPORT_TYPE(MTKViewDelegate);
     

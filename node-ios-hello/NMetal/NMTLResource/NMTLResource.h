@@ -26,6 +26,10 @@
 #define to_value_MTLStorageMode(x) TO_ENUM(MTLStorageMode, NSUInteger, x)
 #define is_value_MTLStorageMode(x) IS_ENUM(MTLStorageMode, NSUInteger, x)
 
+#define js_value_MTLHazardTrackingMode(x) JS_ENUM(MTLHazardTrackingMode, NSUInteger, x)
+#define to_value_MTLHazardTrackingMode(x) TO_ENUM(MTLHazardTrackingMode, NSUInteger, x)
+#define is_value_MTLHazardTrackingMode(x) IS_ENUM(MTLHazardTrackingMode, NSUInteger, x)
+
 #define js_value_MTLResourceOptions(x) JS_ENUM(MTLResourceOptions, NSUInteger, x)
 #define to_value_MTLResourceOptions(x) TO_ENUM(MTLResourceOptions, NSUInteger, x)
 #define is_value_MTLResourceOptions(x) IS_ENUM(MTLResourceOptions, NSUInteger, x)

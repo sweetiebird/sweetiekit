@@ -185,6 +185,20 @@ JS_INIT_PROTOCOL(MTLResource, NSObject);
     JS_ASSIGN_ENUM(MTLResourceOptionCPUCacheModeWriteCombined, NSUInteger); // = MTLResourceCPUCacheModeWriteCombined,
   //} API_AVAILABLE(macos(10.11), ios(8.0));
 
+  if (@available(iOS 13.0, *)) {
+    /*!
+     @enum MTLHazardTrackingMode
+     @abstract Describes how hazard tracking is performed.
+     @constant MTLHazardTrackingModeDefault The default hazard tracking mode for the context. Refer to the usage of the field for semantics.
+     @constant MTLHazardTrackingModeUntracked Do not perform hazard tracking.
+     @constant MTLHazardTrackingModeTracked Do perform hazard tracking.
+    */
+    //typedef NS_ENUM(NSUInteger, MTLHazardTrackingMode) {
+      JS_ASSIGN_ENUM(MTLHazardTrackingModeDefault, NSUInteger); //  = 0,
+      JS_ASSIGN_ENUM(MTLHazardTrackingModeUntracked, NSUInteger); //  = 1,
+      JS_ASSIGN_ENUM(MTLHazardTrackingModeTracked, NSUInteger); //  = 2,
+    //} API_AVAILABLE(macos(10.15), ios(13.0));
+  }
 
 JS_INIT_PROTOCOL_END(MTLResource, NSObject);
 

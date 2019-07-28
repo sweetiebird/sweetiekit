@@ -15,7 +15,24 @@
 #define is_value_MTLTextureDescriptor(x) is_value_wrapper(x, MTLTextureDescriptor)
 
 JS_WRAP_CLASS(MTLTextureDescriptor, NSObject);
-  // TODO: declare MTLTextureDescriptor methods and properties
+  JS_STATIC_METHOD(texture2DDescriptorWithPixelFormatWidthHeightMipmapped);
+  JS_STATIC_METHOD(textureCubeDescriptorWithPixelFormatSizeMipmapped);
+  JS_STATIC_METHOD(textureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage);
+  JS_PROP(textureType);
+  JS_PROP(pixelFormat);
+  JS_PROP(width);
+  JS_PROP(height);
+  JS_PROP(depth);
+  JS_PROP(mipmapLevelCount);
+  JS_PROP(sampleCount);
+  JS_PROP(arrayLength);
+  JS_PROP(resourceOptions);
+  JS_PROP(cpuCacheMode);
+  JS_PROP(storageMode);
+  JS_PROP(hazardTrackingMode);
+  JS_PROP(usage);
+  JS_PROP(allowGPUOptimizedContents);
+  JS_PROP(swizzle);
 JS_WRAP_CLASS_END(MTLTextureDescriptor);
 
 #endif /* NMTLTextureDescriptor_h */
