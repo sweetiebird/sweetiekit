@@ -158,6 +158,8 @@ NAN_METHOD(NMTLDevice::New) {
     } else if (info.Length() >= 1 && is_value_protocol< id<MTLDevice> >(info[0])) {
       JS_UNWRAPPED_PROTOCOL(info[0], MTLDevice, value);
       self = value;
+    } else if (info.Length() == 0) {
+      self = ::MTLCreateSystemDefaultDevice();
     }
     if (self) {
       NMTLDevice *wrapper = new NMTLDevice();
