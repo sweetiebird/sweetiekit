@@ -78,7 +78,7 @@ fragment half4 basic_fragment() {
   target.callback = (timer) => {
     FPSUpdate();
     drawable = metalLayer.nextDrawable();
-    if (drawable) {
+    if (drawable && drawable.texture) {
       renderPassDescriptor = MTLRenderPassDescriptor();
       renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).texture = drawable.texture;
       renderPassDescriptor.colorAttachments.objectAtIndexedSubscript(0).loadAction = MTLLoadActionClear;
@@ -95,6 +95,9 @@ fragment half4 basic_fragment() {
   };
   timer = CADisplayLink.displayLinkWithTargetSelector(target, target.selector);
   timer.addToRunLoopForMode(NSRunLoop.mainRunLoop, NSDefaultRunLoopMode);
+  view.viewDidDisappear = () => {
+    timer.removeFromRunLoopForMode(NSRunLoop.mainRunLoop, NSDefaultRunLoopMode);
+  };
 }
 
 module.exports = make;
