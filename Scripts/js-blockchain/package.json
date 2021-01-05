@@ -9,7 +9,7 @@
   "author": "Emily Kolar <emkolar@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-preset-env": "^1.6.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
